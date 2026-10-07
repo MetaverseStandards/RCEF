@@ -32,6 +32,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+      - name: Verify locked shared commit
+        run: |
+          python - <<'PYCODE'
+          import json, subprocess
+          from pathlib import Path
+          expected = json.loads(Path("evidence/tooling.lock.json").read_text())["git_commit"]
+          actual = subprocess.check_output(["git", "-C", "../.ci-tools", "rev-parse", "HEAD"], text=True).strip()
+          if actual != expected:
+              raise SystemExit(f"Shared dependency differs from lock: expected {expected}, got {actual}")
+          PYCODE
+        working-directory: RCEF
       - run: python -B check.py --tools-path ../.ci-tools
         working-directory: RCEF
       - run: python -B tests/test_parity.py --tools-path ../.ci-tools
