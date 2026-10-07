@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[mappings]]
+id = "survey.ambiguous"
+rules = [{ "id" = "survey.mediapipe_arkit.blink", "inputs" = ["mediapipe.label.eyeBlinkLeft"], "outputs" = ["rcef.arkit.coefficient.eyeBlinkLeft"], "operator" = { "id" = "identity" }, "disposition" = "unresolved", "assumptions" = ["Names alone cannot establish model/provider calibration."], "evidence" = ["mediapipe", "apple_blendshapes"], "evidence_status" = "unresolved", "loss_annotations" = [] }]

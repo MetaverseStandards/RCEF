@@ -1,0 +1,102 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "fixture.brow.left"
+label = "brow.left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "fixture.brow.v1"
+disposition = "mapped"
+evidence = ["rcef_definitions"]
+evidence_status = "verified_current"
+native_id = "brow.left"
+surface = "fixture"
+side = "shared"
+metadata = { "inventory_ordinal" = 0, "reason" = "Original executable numerical fixture.", "definition" = "Synthetic independent left activation.", "mapping_quality" = "approximate" }
+region = "brow"
+
+[[signals]]
+id = "fixture.brow.right"
+label = "brow.right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "fixture.brow.v1"
+disposition = "mapped"
+evidence = ["rcef_definitions"]
+evidence_status = "verified_current"
+native_id = "brow.right"
+surface = "fixture"
+side = "shared"
+metadata = { "inventory_ordinal" = 1, "reason" = "Original executable numerical fixture.", "definition" = "Synthetic independent right activation.", "mapping_quality" = "approximate" }
+region = "brow"
+
+[[signals]]
+id = "fixture.brow.shared"
+label = "brow.shared"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "fixture.brow.v1"
+disposition = "mapped"
+evidence = ["rcef_definitions"]
+evidence_status = "verified_current"
+native_id = "brow.shared"
+surface = "fixture"
+side = "shared"
+metadata = { "inventory_ordinal" = 2, "reason" = "Original executable numerical fixture.", "definition" = "Synthetic shared activation; independent sides are irrecoverable.", "mapping_quality" = "approximate" }
+coupling = "bilateral_shared"
+region = "brow"
+
+[[signals]]
+id = "fixture.affine.signed"
+label = "affine.signed"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "fixture.signed.v1"
+disposition = "mapped"
+evidence = ["rcef_definitions"]
+evidence_status = "verified_current"
+native_id = "affine.signed"
+surface = "fixture"
+side = "shared"
+metadata = { "inventory_ordinal" = 3, "reason" = "Original executable numerical fixture.", "definition" = "Synthetic signed scalar; -1/0/1 marks low/mid/high.", "mapping_quality" = "exact" }
+region = "other"
+
+[[signals]]
+id = "fixture.affine.unit"
+label = "affine.unit"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "fixture.unit.v1"
+disposition = "mapped"
+evidence = ["rcef_definitions"]
+evidence_status = "verified_current"
+native_id = "affine.unit"
+surface = "fixture"
+side = "shared"
+metadata = { "inventory_ordinal" = 4, "reason" = "Original executable numerical fixture.", "definition" = "Synthetic unit scalar; 0/0.5/1 marks the same low/mid/high.", "mapping_quality" = "exact" }
+region = "other"
+
+[[profiles]]
+id = "fixture"
+label = "Original affine and bilateral scalar fixtures"
+signal_ids = ["fixture.brow.left", "fixture.brow.right", "fixture.brow.shared", "fixture.affine.signed", "fixture.affine.unit"]
+evidence = ["rcef_definitions"]
+metadata = { "selected_count" = 0 }
+
+[[profiles]]
+id = "fixture.source"
+label = "Original fixture input channels"
+signal_ids = ["fixture.brow.left", "fixture.brow.right", "fixture.affine.signed"]
+evidence = ["rcef_definitions"]
+
+[[profiles]]
+id = "fixture.target"
+label = "Original fixture output channels"
+signal_ids = ["fixture.brow.shared", "fixture.affine.unit"]
+evidence = ["rcef_definitions"]

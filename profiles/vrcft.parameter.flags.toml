@@ -1,0 +1,57 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "vrcft.parameter.flags.EyeTrackingActive"
+label = "EyeTrackingActive"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.flags: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "EyeTrackingActive"
+surface = "vrcft.parameter.flags"
+side = "shared"
+metadata = { "inventory_ordinal" = 0, "reason" = "Tracking activity flag; boolean surface excluded from scalar wire execution.", "native_parameter" = "EyeTrackingActive", "source_display_label" = "EyeTrackingActive", "table_index" = 15, "native_value_type" = "boolean", "prefixes_allowed" = true, "sent_on" = "load or tracking module state change" }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.flags.ExpressionTrackingActive"
+label = "ExpressionTrackingActive"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.flags: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "ExpressionTrackingActive"
+surface = "vrcft.parameter.flags"
+side = "shared"
+metadata = { "inventory_ordinal" = 1, "reason" = "Tracking activity flag; boolean surface excluded from scalar wire execution.", "native_parameter" = "ExpressionTrackingActive", "source_display_label" = "ExpressionTrackingActive", "table_index" = 15, "native_value_type" = "boolean", "prefixes_allowed" = true, "sent_on" = "load or tracking module state change" }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.flags.LipTrackingActive"
+label = "LipTrackingActive"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.flags: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "LipTrackingActive"
+surface = "vrcft.parameter.flags"
+side = "shared"
+metadata = { "inventory_ordinal" = 2, "reason" = "Tracking activity flag; boolean surface excluded from scalar wire execution.", "native_parameter" = "LipTrackingActive", "source_display_label" = "LipTrackingActive", "table_index" = 15, "native_value_type" = "boolean", "prefixes_allowed" = true, "sent_on" = "load or tracking module state change" }
+region = "mouth"
+
+[[profiles]]
+id = "vrcft.parameter.flags"
+label = "VRCFT 3 public tracking activity flags"
+signal_ids = ["vrcft.parameter.flags.EyeTrackingActive", "vrcft.parameter.flags.ExpressionTrackingActive", "vrcft.parameter.flags.LipTrackingActive"]
+evidence = ["vrcft_parameters"]
+metadata = { "selected_count" = 3 }

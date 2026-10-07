@@ -1,0 +1,1522 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "vrcft.transport.EyeSquintRight"
+label = "EyeSquintRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "EyeSquintRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 0, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 14, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.transport.EyeSquintLeft"
+label = "EyeSquintLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "EyeSquintLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 1, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 15, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.transport.EyeWideRight"
+label = "EyeWideRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "EyeWideRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 2, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 16, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.transport.EyeWideLeft"
+label = "EyeWideLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "EyeWideLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 3, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 17, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.transport.BrowPinchRight"
+label = "BrowPinchRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "BrowPinchRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 4, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 18, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "vrcft.transport.BrowPinchLeft"
+label = "BrowPinchLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "BrowPinchLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 5, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 19, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "vrcft.transport.BrowLowererRight"
+label = "BrowLowererRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "BrowLowererRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 6, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 20, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "vrcft.transport.BrowLowererLeft"
+label = "BrowLowererLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "BrowLowererLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 7, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 21, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "vrcft.transport.BrowInnerUpRight"
+label = "BrowInnerUpRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "BrowInnerUpRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 8, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 22, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "vrcft.transport.BrowInnerUpLeft"
+label = "BrowInnerUpLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "BrowInnerUpLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 9, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 23, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "vrcft.transport.BrowOuterUpRight"
+label = "BrowOuterUpRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "BrowOuterUpRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 10, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 24, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "vrcft.transport.BrowOuterUpLeft"
+label = "BrowOuterUpLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "BrowOuterUpLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 11, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 25, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "vrcft.transport.NasalDilationRight"
+label = "NasalDilationRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "NasalDilationRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 12, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 26, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "nose"
+
+[[signals]]
+id = "vrcft.transport.NasalDilationLeft"
+label = "NasalDilationLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "NasalDilationLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 13, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 27, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "nose"
+
+[[signals]]
+id = "vrcft.transport.NasalConstrictRight"
+label = "NasalConstrictRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "NasalConstrictRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 14, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 28, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "nose"
+
+[[signals]]
+id = "vrcft.transport.NasalConstrictLeft"
+label = "NasalConstrictLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "NasalConstrictLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 15, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 29, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "nose"
+
+[[signals]]
+id = "vrcft.transport.CheekSquintRight"
+label = "CheekSquintRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "CheekSquintRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 16, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 30, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "cheek"
+
+[[signals]]
+id = "vrcft.transport.CheekSquintLeft"
+label = "CheekSquintLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "CheekSquintLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 17, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 31, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "cheek"
+
+[[signals]]
+id = "vrcft.transport.CheekPuffRight"
+label = "CheekPuffRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "CheekPuffRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 18, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 32, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "cheek"
+
+[[signals]]
+id = "vrcft.transport.CheekPuffLeft"
+label = "CheekPuffLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "CheekPuffLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 19, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 33, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "cheek"
+
+[[signals]]
+id = "vrcft.transport.CheekSuckRight"
+label = "CheekSuckRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "CheekSuckRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 20, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 34, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "cheek"
+
+[[signals]]
+id = "vrcft.transport.CheekSuckLeft"
+label = "CheekSuckLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "CheekSuckLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 21, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 35, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "cheek"
+
+[[signals]]
+id = "vrcft.transport.JawOpen"
+label = "JawOpen"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "JawOpen"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 22, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 36, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "jaw"
+
+[[signals]]
+id = "vrcft.transport.JawRight"
+label = "JawRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "JawRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 23, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 37, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "jaw"
+
+[[signals]]
+id = "vrcft.transport.JawLeft"
+label = "JawLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "JawLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 24, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 38, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "jaw"
+
+[[signals]]
+id = "vrcft.transport.JawForward"
+label = "JawForward"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "JawForward"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 25, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 39, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "jaw"
+
+[[signals]]
+id = "vrcft.transport.JawBackward"
+label = "JawBackward"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "JawBackward"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 26, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 40, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "jaw"
+
+[[signals]]
+id = "vrcft.transport.JawClench"
+label = "JawClench"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "JawClench"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 27, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 41, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "jaw"
+
+[[signals]]
+id = "vrcft.transport.JawMandibleRaise"
+label = "JawMandibleRaise"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "JawMandibleRaise"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 28, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 42, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "jaw"
+
+[[signals]]
+id = "vrcft.transport.MouthClosed"
+label = "MouthClosed"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthClosed"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 29, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 43, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.transport.LipSuckUpperRight"
+label = "LipSuckUpperRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipSuckUpperRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 30, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 44, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipSuckUpperLeft"
+label = "LipSuckUpperLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipSuckUpperLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 31, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 45, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipSuckLowerRight"
+label = "LipSuckLowerRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipSuckLowerRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 32, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 46, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipSuckLowerLeft"
+label = "LipSuckLowerLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipSuckLowerLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 33, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 47, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipSuckCornerRight"
+label = "LipSuckCornerRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipSuckCornerRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 34, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 48, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipSuckCornerLeft"
+label = "LipSuckCornerLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipSuckCornerLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 35, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 49, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipFunnelUpperRight"
+label = "LipFunnelUpperRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipFunnelUpperRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 36, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 50, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipFunnelUpperLeft"
+label = "LipFunnelUpperLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipFunnelUpperLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 37, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 51, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipFunnelLowerRight"
+label = "LipFunnelLowerRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipFunnelLowerRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 38, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 52, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipFunnelLowerLeft"
+label = "LipFunnelLowerLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipFunnelLowerLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 39, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 53, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipPuckerUpperRight"
+label = "LipPuckerUpperRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipPuckerUpperRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 40, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 54, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipPuckerUpperLeft"
+label = "LipPuckerUpperLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipPuckerUpperLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 41, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 55, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipPuckerLowerRight"
+label = "LipPuckerLowerRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipPuckerLowerRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 42, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 56, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.LipPuckerLowerLeft"
+label = "LipPuckerLowerLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "LipPuckerLowerLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 43, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 57, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthUpperUpRight"
+label = "MouthUpperUpRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthUpperUpRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 44, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 58, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthUpperUpLeft"
+label = "MouthUpperUpLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthUpperUpLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 45, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 59, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthUpperDeepenRight"
+label = "MouthUpperDeepenRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthUpperDeepenRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 46, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 60, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthUpperDeepenLeft"
+label = "MouthUpperDeepenLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthUpperDeepenLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 47, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 61, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.NoseSneerRight"
+label = "NoseSneerRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "NoseSneerRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 48, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 62, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "nose"
+
+[[signals]]
+id = "vrcft.transport.NoseSneerLeft"
+label = "NoseSneerLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "NoseSneerLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 49, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 63, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "nose"
+
+[[signals]]
+id = "vrcft.transport.MouthLowerDownRight"
+label = "MouthLowerDownRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthLowerDownRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 50, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 64, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthLowerDownLeft"
+label = "MouthLowerDownLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthLowerDownLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 51, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 65, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthUpperRight"
+label = "MouthUpperRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthUpperRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 52, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 66, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthUpperLeft"
+label = "MouthUpperLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthUpperLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 53, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 67, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthLowerRight"
+label = "MouthLowerRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthLowerRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 54, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 68, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthLowerLeft"
+label = "MouthLowerLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthLowerLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 55, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 69, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthCornerPullRight"
+label = "MouthCornerPullRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthCornerPullRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 56, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 70, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthCornerPullLeft"
+label = "MouthCornerPullLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthCornerPullLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 57, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 71, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthCornerSlantRight"
+label = "MouthCornerSlantRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthCornerSlantRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 58, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 72, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthCornerSlantLeft"
+label = "MouthCornerSlantLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthCornerSlantLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 59, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 73, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthFrownRight"
+label = "MouthFrownRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthFrownRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 60, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 74, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthFrownLeft"
+label = "MouthFrownLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthFrownLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 61, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 75, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthStretchRight"
+label = "MouthStretchRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthStretchRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 62, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 76, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthStretchLeft"
+label = "MouthStretchLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthStretchLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 63, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 77, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthDimpleRight"
+label = "MouthDimpleRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthDimpleRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 64, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 78, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthDimpleLeft"
+label = "MouthDimpleLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthDimpleLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 65, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 79, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthRaiserUpper"
+label = "MouthRaiserUpper"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthRaiserUpper"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 66, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 80, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthRaiserLower"
+label = "MouthRaiserLower"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthRaiserLower"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 67, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 81, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthPressRight"
+label = "MouthPressRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthPressRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 68, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 82, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthPressLeft"
+label = "MouthPressLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthPressLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 69, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 83, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthTightenerRight"
+label = "MouthTightenerRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthTightenerRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 70, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 84, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.MouthTightenerLeft"
+label = "MouthTightenerLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "MouthTightenerLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 71, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 85, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "vrcft.transport.TongueOut"
+label = "TongueOut"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueOut"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 72, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 86, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueUp"
+label = "TongueUp"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueUp"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 73, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 87, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueDown"
+label = "TongueDown"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueDown"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 74, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 88, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueRight"
+label = "TongueRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 75, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 89, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueLeft"
+label = "TongueLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 76, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 90, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueRoll"
+label = "TongueRoll"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueRoll"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 77, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 91, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueBendDown"
+label = "TongueBendDown"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueBendDown"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 78, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 92, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueCurlUp"
+label = "TongueCurlUp"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueCurlUp"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 79, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 93, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueSquish"
+label = "TongueSquish"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueSquish"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 80, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 94, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueFlat"
+label = "TongueFlat"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueFlat"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 81, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 95, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueTwistRight"
+label = "TongueTwistRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueTwistRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 82, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 96, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.TongueTwistLeft"
+label = "TongueTwistLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "TongueTwistLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 83, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 97, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "tongue"
+
+[[signals]]
+id = "vrcft.transport.SoftPalateClose"
+label = "SoftPalateClose"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "SoftPalateClose"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 84, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 98, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "other"
+
+[[signals]]
+id = "vrcft.transport.ThroatSwallow"
+label = "ThroatSwallow"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "ThroatSwallow"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 85, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 99, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "other"
+
+[[signals]]
+id = "vrcft.transport.NeckFlexRight"
+label = "NeckFlexRight"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "NeckFlexRight"
+surface = "vrcft.transport"
+side = "right"
+metadata = { "native_index" = 86, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 100, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "other"
+
+[[signals]]
+id = "vrcft.transport.NeckFlexLeft"
+label = "NeckFlexLeft"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "NeckFlexLeft"
+surface = "vrcft.transport"
+side = "left"
+metadata = { "native_index" = 87, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 101, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "other"
+
+[[signals]]
+id = "vrcft.transport.Max"
+label = "Max"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.transport: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_enum", "vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Max"
+surface = "vrcft.transport"
+side = "shared"
+metadata = { "native_index" = 88, "reason" = "Enum sentinel; allocated storage is not an expression.", "selected" = false, "serialized_byte_offset" = 102, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
+native_default = 0.0
+region = "other"
+
+[[profiles]]
+id = "vrcft.transport"
+label = "VRCFT 88 transport expressions"
+signal_ids = ["vrcft.transport.EyeSquintRight", "vrcft.transport.EyeSquintLeft", "vrcft.transport.EyeWideRight", "vrcft.transport.EyeWideLeft", "vrcft.transport.BrowPinchRight", "vrcft.transport.BrowPinchLeft", "vrcft.transport.BrowLowererRight", "vrcft.transport.BrowLowererLeft", "vrcft.transport.BrowInnerUpRight", "vrcft.transport.BrowInnerUpLeft", "vrcft.transport.BrowOuterUpRight", "vrcft.transport.BrowOuterUpLeft", "vrcft.transport.NasalDilationRight", "vrcft.transport.NasalDilationLeft", "vrcft.transport.NasalConstrictRight", "vrcft.transport.NasalConstrictLeft", "vrcft.transport.CheekSquintRight", "vrcft.transport.CheekSquintLeft", "vrcft.transport.CheekPuffRight", "vrcft.transport.CheekPuffLeft", "vrcft.transport.CheekSuckRight", "vrcft.transport.CheekSuckLeft", "vrcft.transport.JawOpen", "vrcft.transport.JawRight", "vrcft.transport.JawLeft", "vrcft.transport.JawForward", "vrcft.transport.JawBackward", "vrcft.transport.JawClench", "vrcft.transport.JawMandibleRaise", "vrcft.transport.MouthClosed", "vrcft.transport.LipSuckUpperRight", "vrcft.transport.LipSuckUpperLeft", "vrcft.transport.LipSuckLowerRight", "vrcft.transport.LipSuckLowerLeft", "vrcft.transport.LipSuckCornerRight", "vrcft.transport.LipSuckCornerLeft", "vrcft.transport.LipFunnelUpperRight", "vrcft.transport.LipFunnelUpperLeft", "vrcft.transport.LipFunnelLowerRight", "vrcft.transport.LipFunnelLowerLeft", "vrcft.transport.LipPuckerUpperRight", "vrcft.transport.LipPuckerUpperLeft", "vrcft.transport.LipPuckerLowerRight", "vrcft.transport.LipPuckerLowerLeft", "vrcft.transport.MouthUpperUpRight", "vrcft.transport.MouthUpperUpLeft", "vrcft.transport.MouthUpperDeepenRight", "vrcft.transport.MouthUpperDeepenLeft", "vrcft.transport.NoseSneerRight", "vrcft.transport.NoseSneerLeft", "vrcft.transport.MouthLowerDownRight", "vrcft.transport.MouthLowerDownLeft", "vrcft.transport.MouthUpperRight", "vrcft.transport.MouthUpperLeft", "vrcft.transport.MouthLowerRight", "vrcft.transport.MouthLowerLeft", "vrcft.transport.MouthCornerPullRight", "vrcft.transport.MouthCornerPullLeft", "vrcft.transport.MouthCornerSlantRight", "vrcft.transport.MouthCornerSlantLeft", "vrcft.transport.MouthFrownRight", "vrcft.transport.MouthFrownLeft", "vrcft.transport.MouthStretchRight", "vrcft.transport.MouthStretchLeft", "vrcft.transport.MouthDimpleRight", "vrcft.transport.MouthDimpleLeft", "vrcft.transport.MouthRaiserUpper", "vrcft.transport.MouthRaiserLower", "vrcft.transport.MouthPressRight", "vrcft.transport.MouthPressLeft", "vrcft.transport.MouthTightenerRight", "vrcft.transport.MouthTightenerLeft", "vrcft.transport.TongueOut", "vrcft.transport.TongueUp", "vrcft.transport.TongueDown", "vrcft.transport.TongueRight", "vrcft.transport.TongueLeft", "vrcft.transport.TongueRoll", "vrcft.transport.TongueBendDown", "vrcft.transport.TongueCurlUp", "vrcft.transport.TongueSquish", "vrcft.transport.TongueFlat", "vrcft.transport.TongueTwistRight", "vrcft.transport.TongueTwistLeft", "vrcft.transport.SoftPalateClose", "vrcft.transport.ThroatSwallow", "vrcft.transport.NeckFlexRight", "vrcft.transport.NeckFlexLeft", "vrcft.transport.Max"]
+evidence = ["vrcft_enum", "vrcft_data"]
+metadata = { "selected_count" = 88, "serialized_length" = 102, "expression_offset" = 14, "eye_bytes_written" = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], "eye_bytes_reserved" = [10, 11, 12, 13], "legacy_SRanipal_LipShape_v2" = "excluded from selected transport; internal compatibility enum, not UnifiedExpressions" }

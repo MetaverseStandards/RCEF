@@ -1,0 +1,332 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "vrcft.eye.Left.Gaze.x"
+label = "Left.Gaze.x"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Left.Gaze.x"
+disposition = "unresolved"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Left.Gaze.x"
+surface = "vrcft.eye"
+side = "left"
+metadata = { "inventory_ordinal" = 0, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "native_field" = "Gaze.x", "combination" = "raw storage", "unit_status" = "unresolved" }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.eye.Left.Gaze.y"
+label = "Left.Gaze.y"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Left.Gaze.y"
+disposition = "unresolved"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Left.Gaze.y"
+surface = "vrcft.eye"
+side = "left"
+metadata = { "inventory_ordinal" = 1, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "native_field" = "Gaze.y", "combination" = "raw storage", "unit_status" = "unresolved" }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.eye.Left.Openness"
+label = "Left.Openness"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Left.Openness"
+disposition = "mapped"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Left.Openness"
+surface = "vrcft.eye"
+side = "left"
+metadata = { "inventory_ordinal" = 2, "reason" = "Identity preserves this explicitly declared provider calibration.", "native_field" = "Openness", "combination" = "raw storage", "unit_status" = "verified_current", "initialization_is_measured_neutral" = false, "mapping_quality" = "exact" }
+native_default = 1.0
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.eye.Left.PupilDiameter_MM"
+label = "Left.PupilDiameter_MM"
+value_type = "scalar"
+units = "mm"
+domain = {}
+calibration = "vrcft.eye.storage.v1:Left.PupilDiameter_MM"
+disposition = "mapped"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Left.PupilDiameter_MM"
+surface = "vrcft.eye"
+side = "left"
+metadata = { "inventory_ordinal" = 3, "reason" = "Identity preserves this explicitly declared provider calibration.", "native_field" = "PupilDiameter_MM", "combination" = "raw storage", "unit_status" = "verified_current", "mapping_quality" = "exact" }
+region = "pupil"
+
+[[signals]]
+id = "vrcft.eye.Right.Gaze.x"
+label = "Right.Gaze.x"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Right.Gaze.x"
+disposition = "unresolved"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Right.Gaze.x"
+surface = "vrcft.eye"
+side = "right"
+metadata = { "inventory_ordinal" = 4, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "native_field" = "Gaze.x", "combination" = "raw storage", "unit_status" = "unresolved" }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.eye.Right.Gaze.y"
+label = "Right.Gaze.y"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Right.Gaze.y"
+disposition = "unresolved"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Right.Gaze.y"
+surface = "vrcft.eye"
+side = "right"
+metadata = { "inventory_ordinal" = 5, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "native_field" = "Gaze.y", "combination" = "raw storage", "unit_status" = "unresolved" }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.eye.Right.Openness"
+label = "Right.Openness"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Right.Openness"
+disposition = "mapped"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Right.Openness"
+surface = "vrcft.eye"
+side = "right"
+metadata = { "inventory_ordinal" = 6, "reason" = "Identity preserves this explicitly declared provider calibration.", "native_field" = "Openness", "combination" = "raw storage", "unit_status" = "verified_current", "initialization_is_measured_neutral" = false, "mapping_quality" = "exact" }
+native_default = 1.0
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.eye.Right.PupilDiameter_MM"
+label = "Right.PupilDiameter_MM"
+value_type = "scalar"
+units = "mm"
+domain = {}
+calibration = "vrcft.eye.storage.v1:Right.PupilDiameter_MM"
+disposition = "mapped"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Right.PupilDiameter_MM"
+surface = "vrcft.eye"
+side = "right"
+metadata = { "inventory_ordinal" = 7, "reason" = "Identity preserves this explicitly declared provider calibration.", "native_field" = "PupilDiameter_MM", "combination" = "raw storage", "unit_status" = "verified_current", "mapping_quality" = "exact" }
+region = "pupil"
+
+[[signals]]
+id = "vrcft.eye.Combined.Gaze.x"
+label = "Combined.Gaze.x"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Combined.Gaze.x"
+disposition = "unresolved"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Combined.Gaze.x"
+surface = "vrcft.eye"
+side = "shared"
+metadata = { "inventory_ordinal" = 8, "reason" = "Combined eye computation needs state/validity policy; no execution rule inferred.", "native_field" = "Gaze.x", "combination" = "unconditional arithmetic average", "unit_status" = "unresolved" }
+coupling = "bilateral_shared"
+region = "gaze"
+
+[[signals]]
+id = "vrcft.eye.Combined.Gaze.y"
+label = "Combined.Gaze.y"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Combined.Gaze.y"
+disposition = "unresolved"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Combined.Gaze.y"
+surface = "vrcft.eye"
+side = "shared"
+metadata = { "inventory_ordinal" = 9, "reason" = "Combined eye computation needs state/validity policy; no execution rule inferred.", "native_field" = "Gaze.y", "combination" = "unconditional arithmetic average", "unit_status" = "unresolved" }
+coupling = "bilateral_shared"
+region = "gaze"
+
+[[signals]]
+id = "vrcft.eye.Combined.Openness"
+label = "Combined.Openness"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Combined.Openness"
+disposition = "unresolved"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Combined.Openness"
+surface = "vrcft.eye"
+side = "shared"
+metadata = { "inventory_ordinal" = 10, "reason" = "Combined eye computation needs state/validity policy; no execution rule inferred.", "native_field" = "Openness", "combination" = "unconditional arithmetic average", "unit_status" = "verified_current", "initialization_is_measured_neutral" = false }
+native_default = 1.0
+coupling = "bilateral_shared"
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.eye.Combined.PupilDiameter_MM"
+label = "Combined.PupilDiameter_MM"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.eye.storage.v1:Combined.PupilDiameter_MM"
+disposition = "unresolved"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "Combined.PupilDiameter_MM"
+surface = "vrcft.eye"
+side = "shared"
+metadata = { "inventory_ordinal" = 11, "reason" = "Combined eye computation needs state/validity policy; no execution rule inferred.", "native_field" = "PupilDiameter_MM", "combination" = "unconditional arithmetic average", "unit_status" = "verified_current", "actual_quantity" = "normalized dilation", "dynamic_extrema" = true, "nan_recovery" = 0.5, "raw_diameter_unit" = "mm", "normalization_execution" = "unsupported" }
+coupling = "bilateral_shared"
+region = "pupil"
+
+[[signals]]
+id = "vrcft.eye.reservedByte10"
+label = "reservedByte10"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "reservedByte10"
+surface = "vrcft.eye"
+side = "shared"
+metadata = { "inventory_ordinal" = 10, "reason" = "EyeByteCount reserves storage not written by UnifiedEyeData.CopyTo.", "native_value_type" = "byte", "selected" = false }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.eye.reservedByte11"
+label = "reservedByte11"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "reservedByte11"
+surface = "vrcft.eye"
+side = "shared"
+metadata = { "inventory_ordinal" = 11, "reason" = "EyeByteCount reserves storage not written by UnifiedEyeData.CopyTo.", "native_value_type" = "byte", "selected" = false }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.eye.reservedByte12"
+label = "reservedByte12"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "reservedByte12"
+surface = "vrcft.eye"
+side = "shared"
+metadata = { "inventory_ordinal" = 12, "reason" = "EyeByteCount reserves storage not written by UnifiedEyeData.CopyTo.", "native_value_type" = "byte", "selected" = false }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.eye.reservedByte13"
+label = "reservedByte13"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.eye: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "reservedByte13"
+surface = "vrcft.eye"
+side = "shared"
+metadata = { "inventory_ordinal" = 13, "reason" = "EyeByteCount reserves storage not written by UnifiedEyeData.CopyTo.", "native_value_type" = "byte", "selected" = false }
+region = "eyelid"
+
+[[profiles]]
+id = "vrcft.eye"
+label = "VRCFT raw/combined eye data and reserved bytes"
+signal_ids = ["vrcft.eye.Left.Gaze.x", "vrcft.eye.Left.Gaze.y", "vrcft.eye.Left.Openness", "vrcft.eye.Left.PupilDiameter_MM", "vrcft.eye.Right.Gaze.x", "vrcft.eye.Right.Gaze.y", "vrcft.eye.Right.Openness", "vrcft.eye.Right.PupilDiameter_MM", "vrcft.eye.Combined.Gaze.x", "vrcft.eye.Combined.Gaze.y", "vrcft.eye.Combined.Openness", "vrcft.eye.Combined.PupilDiameter_MM", "vrcft.eye.reservedByte10", "vrcft.eye.reservedByte11", "vrcft.eye.reservedByte12", "vrcft.eye.reservedByte13", "vrcft.eye._maxDilation", "vrcft.eye._minDilation", "vrcft.eye._leftDiameter", "vrcft.eye._rightDiameter"]
+evidence = ["vrcft_data"]
+metadata = { "selected_count" = 12, "combined_gaze_documentation_conflicts_with_code" = true, "raw_gaze_units" = "unresolved" }
+
+[[signals]]
+id = "vrcft.eye._maxDilation"
+label = "_maxDilation"
+value_type = "scalar"
+units = "mm"
+domain = {}
+calibration = "vrcft.eye.normalization-state.v1"
+disposition = "excluded"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "_maxDilation"
+surface = "vrcft.eye"
+native_default = 0.0
+metadata = { selected = false, reason = "State field for combined pupil normalization; not an independently tracked expression. Initialization is not measured neutral." }
+
+[[signals]]
+id = "vrcft.eye._minDilation"
+label = "_minDilation"
+value_type = "scalar"
+units = "mm"
+domain = {}
+calibration = "vrcft.eye.normalization-state.v1"
+disposition = "excluded"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "_minDilation"
+surface = "vrcft.eye"
+native_default = 999.0
+metadata = { selected = false, reason = "State field for combined pupil normalization; not an independently tracked expression. Initialization is not measured neutral." }
+
+[[signals]]
+id = "vrcft.eye._leftDiameter"
+label = "_leftDiameter"
+value_type = "scalar"
+units = "mm"
+domain = {}
+calibration = "vrcft.eye.normalization-state.v1"
+disposition = "excluded"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "_leftDiameter"
+surface = "vrcft.eye"
+native_default = 0.0
+metadata = { selected = false, reason = "State field for combined pupil normalization; not an independently tracked expression. Initialization is not measured neutral." }
+
+[[signals]]
+id = "vrcft.eye._rightDiameter"
+label = "_rightDiameter"
+value_type = "scalar"
+units = "mm"
+domain = {}
+calibration = "vrcft.eye.normalization-state.v1"
+disposition = "excluded"
+evidence = ["vrcft_data"]
+evidence_status = "verified_current"
+native_id = "_rightDiameter"
+surface = "vrcft.eye"
+native_default = 0.0
+metadata = { selected = false, reason = "State field for combined pupil normalization; not an independently tracked expression. Initialization is not measured neutral." }

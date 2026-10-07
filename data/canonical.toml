@@ -1,0 +1,329 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "rcef.arkit.coefficient.eyeBlinkLeft"
+label = "RCEF eyeBlinkLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "arkit.coefficient.v1:eyeBlinkLeft: face-relative native neutral-to-maximum coefficient"
+disposition = "mapped"
+evidence = ["apple_blendshapes", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "Tracks how far the face-left lids have closed on the Apple coefficient scale. Zero denotes native neutral and one its native maximum; the calibration belongs to this provider. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "arkit.coefficient.eyeBlinkLeft" }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.arkit.coefficient.eyeBlinkRight"
+label = "RCEF eyeBlinkRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "arkit.coefficient.v1:eyeBlinkRight: face-relative native neutral-to-maximum coefficient"
+disposition = "mapped"
+evidence = ["apple_blendshapes", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "Tracks how far the face-right lids have closed on the Apple coefficient scale. Zero denotes native neutral and one its native maximum; the calibration belongs to this provider. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "arkit.coefficient.eyeBlinkRight" }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.arkit.coefficient.jawForward"
+label = "RCEF jawForward"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "arkit.coefficient.v1:jawForward: face-relative native neutral-to-maximum coefficient"
+disposition = "mapped"
+evidence = ["apple_blendshapes", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "Tracks lower-jaw advancement on the Apple coefficient scale, without inferring distance. Zero denotes native neutral and one its native maximum; the calibration belongs to this provider. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "arkit.coefficient.jawForward" }
+region = "jaw"
+
+[[signals]]
+id = "rcef.arkit.coefficient.jawOpen"
+label = "RCEF jawOpen"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "arkit.coefficient.v1:jawOpen: face-relative native neutral-to-maximum coefficient"
+disposition = "mapped"
+evidence = ["apple_blendshapes", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "Tracks jaw opening on the Apple coefficient scale, without inferring a rotation angle. Zero denotes native neutral and one its native maximum; the calibration belongs to this provider. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "arkit.coefficient.jawOpen" }
+region = "jaw"
+
+[[signals]]
+id = "rcef.arkit.coefficient.browDownLeft"
+label = "RCEF browDownLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "arkit.coefficient.v1:browDownLeft: face-relative native neutral-to-maximum coefficient"
+disposition = "mapped"
+evidence = ["apple_blendshapes", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "Tracks lowering of the face-left outer brow on the Apple coefficient scale. Zero denotes native neutral and one its native maximum; the calibration belongs to this provider. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "arkit.coefficient.browDownLeft" }
+region = "brow"
+
+[[signals]]
+id = "rcef.arkit.coefficient.browDownRight"
+label = "RCEF browDownRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "arkit.coefficient.v1:browDownRight: face-relative native neutral-to-maximum coefficient"
+disposition = "mapped"
+evidence = ["apple_blendshapes", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "Tracks lowering of the face-right outer brow on the Apple coefficient scale. Zero denotes native neutral and one its native maximum; the calibration belongs to this provider. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "arkit.coefficient.browDownRight" }
+region = "brow"
+
+[[signals]]
+id = "rcef.arkit.coefficient.browInnerUp"
+label = "RCEF browInnerUp"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "arkit.coefficient.v1:browInnerUp: face-relative native neutral-to-maximum coefficient"
+disposition = "mapped"
+evidence = ["apple_blendshapes", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "shared"
+coupling = "bilateral_shared"
+neutral = 0.0
+metadata = { "definition" = "Tracks the paired inner-brow lift on the Apple coefficient scale; individual inner sides cannot be recovered. Zero denotes native neutral and one its native maximum; the calibration belongs to this provider. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "arkit.coefficient.browInnerUp" }
+region = "brow"
+
+[[signals]]
+id = "rcef.arkit.coefficient.browOuterUpLeft"
+label = "RCEF browOuterUpLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "arkit.coefficient.v1:browOuterUpLeft: face-relative native neutral-to-maximum coefficient"
+disposition = "mapped"
+evidence = ["apple_blendshapes", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "Tracks lifting of the face-left outer brow on the Apple coefficient scale. Zero denotes native neutral and one its native maximum; the calibration belongs to this provider. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "arkit.coefficient.browOuterUpLeft" }
+region = "brow"
+
+[[signals]]
+id = "rcef.arkit.coefficient.browOuterUpRight"
+label = "RCEF browOuterUpRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "arkit.coefficient.v1:browOuterUpRight: face-relative native neutral-to-maximum coefficient"
+disposition = "mapped"
+evidence = ["apple_blendshapes", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "Tracks lifting of the face-right outer brow on the Apple coefficient scale. Zero denotes native neutral and one its native maximum; the calibration belongs to this provider. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "arkit.coefficient.browOuterUpRight" }
+region = "brow"
+
+[[signals]]
+id = "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"
+label = "RCEF XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB: native direction-specific angle fraction; maximum angle unspecified"
+disposition = "mapped"
+evidence = ["xr_registry", "xr_fb2", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "left"
+coupling = "opposing_direction_exclusive"
+neutral = 0.0
+metadata = { "definition" = "Scalar recording of the FB2 direction-specific native eye rotation fraction. 0 is forward; 1 is its native direction maximum. No angle in radians is inferred. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB" }
+region = "gaze"
+
+[[signals]]
+id = "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"
+label = "RCEF XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB: native direction-specific angle fraction; maximum angle unspecified"
+disposition = "mapped"
+evidence = ["xr_registry", "xr_fb2", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "right"
+coupling = "opposing_direction_exclusive"
+neutral = 0.0
+metadata = { "definition" = "Scalar recording of the FB2 direction-specific native eye rotation fraction. 0 is forward; 1 is its native direction maximum. No angle in radians is inferred. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB" }
+region = "gaze"
+
+[[signals]]
+id = "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"
+label = "RCEF XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB: native direction-specific angle fraction; maximum angle unspecified"
+disposition = "mapped"
+evidence = ["xr_registry", "xr_fb2", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "left"
+coupling = "opposing_direction_exclusive"
+neutral = 0.0
+metadata = { "definition" = "Scalar recording of the FB2 direction-specific native eye rotation fraction. 0 is forward; 1 is its native direction maximum. No angle in radians is inferred. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB" }
+region = "gaze"
+
+[[signals]]
+id = "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"
+label = "RCEF XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB: native direction-specific angle fraction; maximum angle unspecified"
+disposition = "mapped"
+evidence = ["xr_registry", "xr_fb2", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "right"
+coupling = "opposing_direction_exclusive"
+neutral = 0.0
+metadata = { "definition" = "Scalar recording of the FB2 direction-specific native eye rotation fraction. 0 is forward; 1 is its native direction maximum. No angle in radians is inferred. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB" }
+region = "gaze"
+
+[[signals]]
+id = "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"
+label = "RCEF XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB: native direction-specific angle fraction; maximum angle unspecified"
+disposition = "mapped"
+evidence = ["xr_registry", "xr_fb2", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "left"
+coupling = "opposing_direction_exclusive"
+neutral = 0.0
+metadata = { "definition" = "Scalar recording of the FB2 direction-specific native eye rotation fraction. 0 is forward; 1 is its native direction maximum. No angle in radians is inferred. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB" }
+region = "gaze"
+
+[[signals]]
+id = "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"
+label = "RCEF XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB: native direction-specific angle fraction; maximum angle unspecified"
+disposition = "mapped"
+evidence = ["xr_registry", "xr_fb2", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "right"
+coupling = "opposing_direction_exclusive"
+neutral = 0.0
+metadata = { "definition" = "Scalar recording of the FB2 direction-specific native eye rotation fraction. 0 is forward; 1 is its native direction maximum. No angle in radians is inferred. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB" }
+region = "gaze"
+
+[[signals]]
+id = "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"
+label = "RCEF XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB: native direction-specific angle fraction; maximum angle unspecified"
+disposition = "mapped"
+evidence = ["xr_registry", "xr_fb2", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "left"
+coupling = "opposing_direction_exclusive"
+neutral = 0.0
+metadata = { "definition" = "Scalar recording of the FB2 direction-specific native eye rotation fraction. 0 is forward; 1 is its native direction maximum. No angle in radians is inferred. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB" }
+region = "gaze"
+
+[[signals]]
+id = "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"
+label = "RCEF XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB: native direction-specific angle fraction; maximum angle unspecified"
+disposition = "mapped"
+evidence = ["xr_registry", "xr_fb2", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "right"
+coupling = "opposing_direction_exclusive"
+neutral = 0.0
+metadata = { "definition" = "Scalar recording of the FB2 direction-specific native eye rotation fraction. 0 is forward; 1 is its native direction maximum. No angle in radians is inferred. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB" }
+region = "gaze"
+
+[[signals]]
+id = "rcef.vrcft.eye.Left.Openness"
+label = "RCEF Left.Openness"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Left.Openness"
+disposition = "mapped"
+evidence = ["vrcft_data", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "left"
+metadata = { "definition" = "Scalar recording of VRCFT Left.Openness. Raw openness storage value; initialization 1 is retained separately from measured neutral. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "vrcft.eye.Left.Openness" }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.vrcft.eye.Left.PupilDiameter_MM"
+label = "RCEF Left.PupilDiameter_MM"
+value_type = "scalar"
+units = "mm"
+domain = {}
+calibration = "vrcft.eye.storage.v1:Left.PupilDiameter_MM"
+disposition = "mapped"
+evidence = ["vrcft_data", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "left"
+metadata = { "definition" = "Scalar recording of VRCFT Left.PupilDiameter_MM. Physical diameter in millimetres; no conversion to normalized combined dilation. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "vrcft.eye.Left.PupilDiameter_MM" }
+region = "pupil"
+
+[[signals]]
+id = "rcef.vrcft.eye.Right.Openness"
+label = "RCEF Right.Openness"
+value_type = "scalar"
+units = "1"
+domain = {  }
+calibration = "vrcft.eye.storage.v1:Right.Openness"
+disposition = "mapped"
+evidence = ["vrcft_data", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "right"
+metadata = { "definition" = "Scalar recording of VRCFT Right.Openness. Raw openness storage value; initialization 1 is retained separately from measured neutral. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "vrcft.eye.Right.Openness" }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.vrcft.eye.Right.PupilDiameter_MM"
+label = "RCEF Right.PupilDiameter_MM"
+value_type = "scalar"
+units = "mm"
+domain = {}
+calibration = "vrcft.eye.storage.v1:Right.PupilDiameter_MM"
+disposition = "mapped"
+evidence = ["vrcft_data", "rcef_definitions"]
+evidence_status = "verified_current"
+side = "right"
+metadata = { "definition" = "Scalar recording of VRCFT Right.PupilDiameter_MM. Physical diameter in millimetres; no conversion to normalized combined dilation. Only the native scalar is represented; validity must be provided separately.", "reason" = "Canonical scalar projection with provider-specific calibration.", "mapping_quality" = "exact", "provider_basis" = "vrcft.eye.Right.PupilDiameter_MM" }
+region = "pupil"
+
+[[profiles]]
+id = "rcef.canonical"
+label = "RCEF provider-calibrated canonical scalar projections"
+signal_ids = ["rcef.arkit.coefficient.eyeBlinkLeft", "rcef.arkit.coefficient.eyeBlinkRight", "rcef.arkit.coefficient.jawForward", "rcef.arkit.coefficient.jawOpen", "rcef.arkit.coefficient.browDownLeft", "rcef.arkit.coefficient.browDownRight", "rcef.arkit.coefficient.browInnerUp", "rcef.arkit.coefficient.browOuterUpLeft", "rcef.arkit.coefficient.browOuterUpRight", "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB", "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB", "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB", "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB", "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB", "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB", "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB", "rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB", "rcef.vrcft.eye.Left.Openness", "rcef.vrcft.eye.Left.PupilDiameter_MM", "rcef.vrcft.eye.Right.Openness", "rcef.vrcft.eye.Right.PupilDiameter_MM"]
+evidence = ["rcef_definitions"]
+metadata = { "definition_scope" = "provider calibrated; never universal anatomy" }

@@ -1,0 +1,309 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META"
+label = "XR_FACE_TRACKING_VISEME_SIL_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_SIL_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 0, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = true }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META"
+label = "XR_FACE_TRACKING_VISEME_PP_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_PP_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 1, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META"
+label = "XR_FACE_TRACKING_VISEME_FF_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_FF_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 2, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META"
+label = "XR_FACE_TRACKING_VISEME_TH_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_TH_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 3, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META"
+label = "XR_FACE_TRACKING_VISEME_DD_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_DD_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 4, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META"
+label = "XR_FACE_TRACKING_VISEME_KK_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_KK_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 5, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META"
+label = "XR_FACE_TRACKING_VISEME_CH_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_CH_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 6, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META"
+label = "XR_FACE_TRACKING_VISEME_SS_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_SS_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 7, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"
+label = "XR_FACE_TRACKING_VISEME_NN_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_NN_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 8, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"
+label = "XR_FACE_TRACKING_VISEME_RR_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_RR_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 9, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META"
+label = "XR_FACE_TRACKING_VISEME_AA_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_AA_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 10, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_E_META"
+label = "XR_FACE_TRACKING_VISEME_E_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_E_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 11, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META"
+label = "XR_FACE_TRACKING_VISEME_IH_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_IH_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 12, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META"
+label = "XR_FACE_TRACKING_VISEME_OH_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_OH_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 13, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[signals]]
+id = "openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"
+label = "XR_FACE_TRACKING_VISEME_OU_META"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "openxr.visemes: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["xr_registry", "xr_visemes"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_VISEME_OU_META"
+surface = "openxr.visemes"
+side = "shared"
+metadata = { "native_index" = 14, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+validity = "isValid"
+confidence = "not provided"
+time = "XrTime from result; explicit seconds conversion required"
+coupling = "probability_simplex"
+region = "other"
+
+[[profiles]]
+id = "openxr.visemes"
+label = "XrFaceTrackingVisemeMETA"
+signal_ids = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_E_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"]
+evidence = ["xr_registry", "xr_visemes"]
+metadata = { "selected_count" = 15, "optional_feature" = true, "numeric_domain_status" = "verified_current", "data_source_negotiation" = false }

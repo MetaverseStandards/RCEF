@@ -1,0 +1,723 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "godot.blended.FT_EYE_CLOSED"
+label = "FT_EYE_CLOSED"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_EYE_CLOSED"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 102, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "eyelid"
+
+[[signals]]
+id = "godot.blended.FT_EYE_WIDE"
+label = "FT_EYE_WIDE"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_EYE_WIDE"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 103, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "eyelid"
+
+[[signals]]
+id = "godot.blended.FT_EYE_SQUINT"
+label = "FT_EYE_SQUINT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_EYE_SQUINT"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 104, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "eyelid"
+
+[[signals]]
+id = "godot.blended.FT_EYE_DILATION"
+label = "FT_EYE_DILATION"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_EYE_DILATION"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 105, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "pupil"
+
+[[signals]]
+id = "godot.blended.FT_EYE_CONSTRICT"
+label = "FT_EYE_CONSTRICT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_EYE_CONSTRICT"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 106, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "eyelid"
+
+[[signals]]
+id = "godot.blended.FT_BROW_DOWN_RIGHT"
+label = "FT_BROW_DOWN_RIGHT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_BROW_DOWN_RIGHT"
+surface = "godot.blended"
+side = "right"
+metadata = { "native_index" = 107, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "godot.blended.FT_BROW_DOWN_LEFT"
+label = "FT_BROW_DOWN_LEFT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_BROW_DOWN_LEFT"
+surface = "godot.blended"
+side = "left"
+metadata = { "native_index" = 108, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "godot.blended.FT_BROW_DOWN"
+label = "FT_BROW_DOWN"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_BROW_DOWN"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 109, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "godot.blended.FT_BROW_UP_RIGHT"
+label = "FT_BROW_UP_RIGHT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_BROW_UP_RIGHT"
+surface = "godot.blended"
+side = "right"
+metadata = { "native_index" = 110, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "godot.blended.FT_BROW_UP_LEFT"
+label = "FT_BROW_UP_LEFT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_BROW_UP_LEFT"
+surface = "godot.blended"
+side = "left"
+metadata = { "native_index" = 111, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "godot.blended.FT_BROW_UP"
+label = "FT_BROW_UP"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_BROW_UP"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 112, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "brow"
+
+[[signals]]
+id = "godot.blended.FT_NOSE_SNEER"
+label = "FT_NOSE_SNEER"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_NOSE_SNEER"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 113, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "nose"
+
+[[signals]]
+id = "godot.blended.FT_NASAL_DILATION"
+label = "FT_NASAL_DILATION"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_NASAL_DILATION"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 114, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "nose"
+
+[[signals]]
+id = "godot.blended.FT_NASAL_CONSTRICT"
+label = "FT_NASAL_CONSTRICT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_NASAL_CONSTRICT"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 115, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "nose"
+
+[[signals]]
+id = "godot.blended.FT_CHEEK_PUFF"
+label = "FT_CHEEK_PUFF"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_CHEEK_PUFF"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 116, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "cheek"
+
+[[signals]]
+id = "godot.blended.FT_CHEEK_SUCK"
+label = "FT_CHEEK_SUCK"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_CHEEK_SUCK"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 117, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "cheek"
+
+[[signals]]
+id = "godot.blended.FT_CHEEK_SQUINT"
+label = "FT_CHEEK_SQUINT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_CHEEK_SQUINT"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 118, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "cheek"
+
+[[signals]]
+id = "godot.blended.FT_LIP_SUCK_UPPER"
+label = "FT_LIP_SUCK_UPPER"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_LIP_SUCK_UPPER"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 119, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_LIP_SUCK_LOWER"
+label = "FT_LIP_SUCK_LOWER"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_LIP_SUCK_LOWER"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 120, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_LIP_SUCK"
+label = "FT_LIP_SUCK"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_LIP_SUCK"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 121, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_LIP_FUNNEL_UPPER"
+label = "FT_LIP_FUNNEL_UPPER"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_LIP_FUNNEL_UPPER"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 122, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_LIP_FUNNEL_LOWER"
+label = "FT_LIP_FUNNEL_LOWER"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_LIP_FUNNEL_LOWER"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 123, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_LIP_FUNNEL"
+label = "FT_LIP_FUNNEL"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_LIP_FUNNEL"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 124, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_LIP_PUCKER_UPPER"
+label = "FT_LIP_PUCKER_UPPER"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_LIP_PUCKER_UPPER"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 125, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_LIP_PUCKER_LOWER"
+label = "FT_LIP_PUCKER_LOWER"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_LIP_PUCKER_LOWER"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 126, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_LIP_PUCKER"
+label = "FT_LIP_PUCKER"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_LIP_PUCKER"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 127, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_UPPER_UP"
+label = "FT_MOUTH_UPPER_UP"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_UPPER_UP"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 128, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_LOWER_DOWN"
+label = "FT_MOUTH_LOWER_DOWN"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_LOWER_DOWN"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 129, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_OPEN"
+label = "FT_MOUTH_OPEN"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_OPEN"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 130, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_RIGHT"
+label = "FT_MOUTH_RIGHT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_RIGHT"
+surface = "godot.blended"
+side = "right"
+metadata = { "native_index" = 131, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_LEFT"
+label = "FT_MOUTH_LEFT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_LEFT"
+surface = "godot.blended"
+side = "left"
+metadata = { "native_index" = 132, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_SMILE_RIGHT"
+label = "FT_MOUTH_SMILE_RIGHT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_SMILE_RIGHT"
+surface = "godot.blended"
+side = "right"
+metadata = { "native_index" = 133, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_SMILE_LEFT"
+label = "FT_MOUTH_SMILE_LEFT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_SMILE_LEFT"
+surface = "godot.blended"
+side = "left"
+metadata = { "native_index" = 134, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_SMILE"
+label = "FT_MOUTH_SMILE"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_SMILE"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 135, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_SAD_RIGHT"
+label = "FT_MOUTH_SAD_RIGHT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_SAD_RIGHT"
+surface = "godot.blended"
+side = "right"
+metadata = { "native_index" = 136, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_SAD_LEFT"
+label = "FT_MOUTH_SAD_LEFT"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_SAD_LEFT"
+surface = "godot.blended"
+side = "left"
+metadata = { "native_index" = 137, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_SAD"
+label = "FT_MOUTH_SAD"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_SAD"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 138, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_STRETCH"
+label = "FT_MOUTH_STRETCH"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_STRETCH"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 139, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_DIMPLE"
+label = "FT_MOUTH_DIMPLE"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_DIMPLE"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 140, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_TIGHTENER"
+label = "FT_MOUTH_TIGHTENER"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_TIGHTENER"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 141, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MOUTH_PRESS"
+label = "FT_MOUTH_PRESS"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MOUTH_PRESS"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 142, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "mouth"
+
+[[signals]]
+id = "godot.blended.FT_MAX"
+label = "FT_MAX"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "godot.blended: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["godot_enum", "godot_setters"]
+evidence_status = "verified_current"
+native_id = "FT_MAX"
+surface = "godot.blended"
+side = "shared"
+metadata = { "native_index" = 143, "reason" = "Maximum sentinel; not a sampled blend shape.", "selected" = false, "setters_clamp" = false, "native_spelling_retained" = true }
+native_default = 0.0
+region = "other"
+
+[[profiles]]
+id = "godot.blended"
+label = "godot.blended"
+signal_ids = ["godot.blended.FT_EYE_CLOSED", "godot.blended.FT_EYE_WIDE", "godot.blended.FT_EYE_SQUINT", "godot.blended.FT_EYE_DILATION", "godot.blended.FT_EYE_CONSTRICT", "godot.blended.FT_BROW_DOWN_RIGHT", "godot.blended.FT_BROW_DOWN_LEFT", "godot.blended.FT_BROW_DOWN", "godot.blended.FT_BROW_UP_RIGHT", "godot.blended.FT_BROW_UP_LEFT", "godot.blended.FT_BROW_UP", "godot.blended.FT_NOSE_SNEER", "godot.blended.FT_NASAL_DILATION", "godot.blended.FT_NASAL_CONSTRICT", "godot.blended.FT_CHEEK_PUFF", "godot.blended.FT_CHEEK_SUCK", "godot.blended.FT_CHEEK_SQUINT", "godot.blended.FT_LIP_SUCK_UPPER", "godot.blended.FT_LIP_SUCK_LOWER", "godot.blended.FT_LIP_SUCK", "godot.blended.FT_LIP_FUNNEL_UPPER", "godot.blended.FT_LIP_FUNNEL_LOWER", "godot.blended.FT_LIP_FUNNEL", "godot.blended.FT_LIP_PUCKER_UPPER", "godot.blended.FT_LIP_PUCKER_LOWER", "godot.blended.FT_LIP_PUCKER", "godot.blended.FT_MOUTH_UPPER_UP", "godot.blended.FT_MOUTH_LOWER_DOWN", "godot.blended.FT_MOUTH_OPEN", "godot.blended.FT_MOUTH_RIGHT", "godot.blended.FT_MOUTH_LEFT", "godot.blended.FT_MOUTH_SMILE_RIGHT", "godot.blended.FT_MOUTH_SMILE_LEFT", "godot.blended.FT_MOUTH_SMILE", "godot.blended.FT_MOUTH_SAD_RIGHT", "godot.blended.FT_MOUTH_SAD_LEFT", "godot.blended.FT_MOUTH_SAD", "godot.blended.FT_MOUTH_STRETCH", "godot.blended.FT_MOUTH_DIMPLE", "godot.blended.FT_MOUTH_TIGHTENER", "godot.blended.FT_MOUTH_PRESS", "godot.blended.FT_MAX"]
+evidence = ["godot_enum", "godot_setters"]
+metadata = { "selected_count" = 41 }

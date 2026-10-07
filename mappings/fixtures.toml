@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[mappings]]
+id = "fixture.affine"
+rules = [{ "id" = "fixture.affine.convert", "inputs" = ["fixture.affine.signed"], "outputs" = ["fixture.affine.unit"], "operator" = { "id" = "affine", "scale" = 0.5, "offset" = 0.5 }, "disposition" = "mapped", "mapping_quality" = "exact", "assumptions" = ["Original fixture states matching low/mid/high at -1/0/1 and 0/0.5/1; explicit basis conversion."], "evidence" = ["rcef_definitions"], "evidence_status" = "verified_current", "loss_annotations" = [] }]
+
+[[mappings]]
+id = "fixture.bilateral"
+rules = [{ "id" = "fixture.brow.collapse", "inputs" = ["fixture.brow.left", "fixture.brow.right"], "outputs" = ["fixture.brow.shared"], "operator" = { "id" = "weighted_sum", "weights" = [0.5, 0.5] }, "disposition" = "mapped", "mapping_quality" = "approximate", "coupling" = "bilateral_shared", "assumptions" = ["Original synthetic channels share a declared normalized scale; arithmetic mean chosen for this fixture only."], "evidence" = ["rcef_definitions"], "evidence_status" = "verified_current", "loss_annotations" = [{ "category" = "signal", "effect" = "approximated", "reason" = "asymmetry irrecoverable", "refs" = ["fixture.brow.left", "fixture.brow.right", "fixture.brow.shared"], "units" = "1" }, { "category" = "geometry", "effect" = "unknown", "reason" = "No geometry evaluated by scalar fixture.", "refs" = ["fixture.brow.shared"] }] }]

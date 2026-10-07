@@ -1,0 +1,859 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "roblox.control.ChinRaiser"
+label = "ChinRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:ChinRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "ChinRaiser"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 0, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = true, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.ChinRaiserUpperLip"
+label = "ChinRaiserUpperLip"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:ChinRaiserUpperLip: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "ChinRaiserUpperLip"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 1, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = true, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.Corrugator"
+label = "Corrugator"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:Corrugator: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "Corrugator"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 2, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "other"
+
+[[signals]]
+id = "roblox.control.EyesLookDown"
+label = "EyesLookDown"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:EyesLookDown: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "EyesLookDown"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 3, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = true, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "gaze"
+
+[[signals]]
+id = "roblox.control.EyesLookLeft"
+label = "EyesLookLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:EyesLookLeft: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "EyesLookLeft"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 4, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = false, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "gaze"
+
+[[signals]]
+id = "roblox.control.EyesLookRight"
+label = "EyesLookRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:EyesLookRight: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "EyesLookRight"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 5, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = false, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "gaze"
+
+[[signals]]
+id = "roblox.control.EyesLookUp"
+label = "EyesLookUp"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:EyesLookUp: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "EyesLookUp"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 6, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = false, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "gaze"
+
+[[signals]]
+id = "roblox.control.FlatPucker"
+label = "FlatPucker"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:FlatPucker: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "FlatPucker"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 7, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "other"
+
+[[signals]]
+id = "roblox.control.Funneler"
+label = "Funneler"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:Funneler: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "Funneler"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 8, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "other"
+
+[[signals]]
+id = "roblox.control.JawDrop"
+label = "JawDrop"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:JawDrop: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "JawDrop"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 9, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = true, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "jaw"
+
+[[signals]]
+id = "roblox.control.JawLeft"
+label = "JawLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:JawLeft: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "JawLeft"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 10, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "jaw"
+
+[[signals]]
+id = "roblox.control.JawRight"
+label = "JawRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:JawRight: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "JawRight"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 11, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "jaw"
+
+[[signals]]
+id = "roblox.control.LeftBrowLowerer"
+label = "LeftBrowLowerer"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftBrowLowerer: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftBrowLowerer"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 12, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "brow"
+
+[[signals]]
+id = "roblox.control.LeftCheekPuff"
+label = "LeftCheekPuff"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftCheekPuff: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftCheekPuff"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 13, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "cheek"
+
+[[signals]]
+id = "roblox.control.LeftCheekRaiser"
+label = "LeftCheekRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftCheekRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftCheekRaiser"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 14, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = true, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "cheek"
+
+[[signals]]
+id = "roblox.control.LeftDimpler"
+label = "LeftDimpler"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftDimpler: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftDimpler"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 15, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "other"
+
+[[signals]]
+id = "roblox.control.LeftEyeClosed"
+label = "LeftEyeClosed"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftEyeClosed: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftEyeClosed"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 16, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = true, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "eyelid"
+
+[[signals]]
+id = "roblox.control.LeftEyeUpperLidRaiser"
+label = "LeftEyeUpperLidRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftEyeUpperLidRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftEyeUpperLidRaiser"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 17, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "eyelid"
+
+[[signals]]
+id = "roblox.control.LeftInnerBrowRaiser"
+label = "LeftInnerBrowRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftInnerBrowRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftInnerBrowRaiser"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 18, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = true, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "brow"
+
+[[signals]]
+id = "roblox.control.LeftLipCornerDown"
+label = "LeftLipCornerDown"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftLipCornerDown: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftLipCornerDown"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 19, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = true, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.LeftLipCornerPuller"
+label = "LeftLipCornerPuller"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftLipCornerPuller: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftLipCornerPuller"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 20, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = true, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.LeftLipStretcher"
+label = "LeftLipStretcher"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftLipStretcher: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftLipStretcher"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 21, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = false, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.LeftLowerLipDepressor"
+label = "LeftLowerLipDepressor"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftLowerLipDepressor: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftLowerLipDepressor"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 22, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = true, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.LeftNoseWrinkler"
+label = "LeftNoseWrinkler"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftNoseWrinkler: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftNoseWrinkler"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 23, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "nose"
+
+[[signals]]
+id = "roblox.control.LeftOuterBrowRaiser"
+label = "LeftOuterBrowRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftOuterBrowRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftOuterBrowRaiser"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 24, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "brow"
+
+[[signals]]
+id = "roblox.control.LeftUpperLipRaiser"
+label = "LeftUpperLipRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LeftUpperLipRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LeftUpperLipRaiser"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 25, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = false, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.LipPresser"
+label = "LipPresser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LipPresser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LipPresser"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 26, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.LipsTogether"
+label = "LipsTogether"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LipsTogether: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LipsTogether"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 27, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = false, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.LowerLipSuck"
+label = "LowerLipSuck"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:LowerLipSuck: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "LowerLipSuck"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 28, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.MouthLeft"
+label = "MouthLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:MouthLeft: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "MouthLeft"
+surface = "roblox.control"
+side = "left"
+metadata = { "inventory_ordinal" = 29, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.MouthRight"
+label = "MouthRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:MouthRight: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "MouthRight"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 30, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.Pucker"
+label = "Pucker"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:Pucker: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "Pucker"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 31, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = true, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "other"
+
+[[signals]]
+id = "roblox.control.RightBrowLowerer"
+label = "RightBrowLowerer"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightBrowLowerer: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightBrowLowerer"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 32, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "brow"
+
+[[signals]]
+id = "roblox.control.RightCheekPuff"
+label = "RightCheekPuff"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightCheekPuff: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightCheekPuff"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 33, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "cheek"
+
+[[signals]]
+id = "roblox.control.RightCheekRaiser"
+label = "RightCheekRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightCheekRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightCheekRaiser"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 34, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = true, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "cheek"
+
+[[signals]]
+id = "roblox.control.RightDimpler"
+label = "RightDimpler"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightDimpler: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightDimpler"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 35, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "other"
+
+[[signals]]
+id = "roblox.control.RightEyeClosed"
+label = "RightEyeClosed"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightEyeClosed: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightEyeClosed"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 36, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = true, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "eyelid"
+
+[[signals]]
+id = "roblox.control.RightEyeUpperLidRaiser"
+label = "RightEyeUpperLidRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightEyeUpperLidRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightEyeUpperLidRaiser"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 37, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "eyelid"
+
+[[signals]]
+id = "roblox.control.RightInnerBrowRaiser"
+label = "RightInnerBrowRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightInnerBrowRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightInnerBrowRaiser"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 38, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = true, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "brow"
+
+[[signals]]
+id = "roblox.control.RightLipCornerDown"
+label = "RightLipCornerDown"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightLipCornerDown: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightLipCornerDown"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 39, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = true, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.RightLipCornerPuller"
+label = "RightLipCornerPuller"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightLipCornerPuller: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightLipCornerPuller"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 40, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = true, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.RightLipStretcher"
+label = "RightLipStretcher"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightLipStretcher: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightLipStretcher"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 41, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = false, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.RightLowerLipDepressor"
+label = "RightLowerLipDepressor"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightLowerLipDepressor: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightLowerLipDepressor"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 42, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = true, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.RightNoseWrinkler"
+label = "RightNoseWrinkler"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightNoseWrinkler: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightNoseWrinkler"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 43, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "nose"
+
+[[signals]]
+id = "roblox.control.RightOuterBrowRaiser"
+label = "RightOuterBrowRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightOuterBrowRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightOuterBrowRaiser"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 44, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "brow"
+
+[[signals]]
+id = "roblox.control.RightUpperLipRaiser"
+label = "RightUpperLipRaiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:RightUpperLipRaiser: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "RightUpperLipRaiser"
+surface = "roblox.control"
+side = "right"
+metadata = { "inventory_ordinal" = 45, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = true, "required_list_B" = false, "requirement_status" = "unresolved", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[signals]]
+id = "roblox.control.TongueDown"
+label = "TongueDown"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:TongueDown: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "TongueDown"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 46, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "tongue"
+
+[[signals]]
+id = "roblox.control.TongueOut"
+label = "TongueOut"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:TongueOut: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "TongueOut"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 47, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "tongue"
+
+[[signals]]
+id = "roblox.control.TongueUp"
+label = "TongueUp"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:TongueUp: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "TongueUp"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 48, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "tongue"
+
+[[signals]]
+id = "roblox.control.UpperLipSuck"
+label = "UpperLipSuck"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "roblox.FaceControls:UpperLipSuck: asset-specific joint pose mapping"
+disposition = "unresolved"
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+evidence_status = "verified_current"
+native_id = "UpperLipSuck"
+surface = "roblox.control"
+side = "shared"
+metadata = { "inventory_ordinal" = 49, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "required_list_A" = false, "required_list_B" = false, "requirement_status" = "agrees_in_two_lists", "neutral_frame" = 0, "corrective_execution" = "unsupported; pose/joint data required" }
+coupling = "asset_specific_correctives"
+region = "mouth"
+
+[[profiles]]
+id = "roblox.control"
+label = "Roblox 50 controls"
+signal_ids = ["roblox.control.ChinRaiser", "roblox.control.ChinRaiserUpperLip", "roblox.control.Corrugator", "roblox.control.EyesLookDown", "roblox.control.EyesLookLeft", "roblox.control.EyesLookRight", "roblox.control.EyesLookUp", "roblox.control.FlatPucker", "roblox.control.Funneler", "roblox.control.JawDrop", "roblox.control.JawLeft", "roblox.control.JawRight", "roblox.control.LeftBrowLowerer", "roblox.control.LeftCheekPuff", "roblox.control.LeftCheekRaiser", "roblox.control.LeftDimpler", "roblox.control.LeftEyeClosed", "roblox.control.LeftEyeUpperLidRaiser", "roblox.control.LeftInnerBrowRaiser", "roblox.control.LeftLipCornerDown", "roblox.control.LeftLipCornerPuller", "roblox.control.LeftLipStretcher", "roblox.control.LeftLowerLipDepressor", "roblox.control.LeftNoseWrinkler", "roblox.control.LeftOuterBrowRaiser", "roblox.control.LeftUpperLipRaiser", "roblox.control.LipPresser", "roblox.control.LipsTogether", "roblox.control.LowerLipSuck", "roblox.control.MouthLeft", "roblox.control.MouthRight", "roblox.control.Pucker", "roblox.control.RightBrowLowerer", "roblox.control.RightCheekPuff", "roblox.control.RightCheekRaiser", "roblox.control.RightDimpler", "roblox.control.RightEyeClosed", "roblox.control.RightEyeUpperLidRaiser", "roblox.control.RightInnerBrowRaiser", "roblox.control.RightLipCornerDown", "roblox.control.RightLipCornerPuller", "roblox.control.RightLipStretcher", "roblox.control.RightLowerLipDepressor", "roblox.control.RightNoseWrinkler", "roblox.control.RightOuterBrowRaiser", "roblox.control.RightUpperLipRaiser", "roblox.control.TongueDown", "roblox.control.TongueOut", "roblox.control.TongueUp", "roblox.control.UpperLipSuck"]
+evidence = ["roblox_controls", "roblox_requirements", "roblox_authoring", "roblox_poses"]
+metadata = { "selected_count" = 50, "required_pose_list_A" = ["EyesLookDown", "EyesLookLeft", "EyesLookRight", "EyesLookUp", "JawDrop", "LeftEyeClosed", "LeftLipCornerPuller", "LeftLipStretcher", "LeftLowerLipDepressor", "LeftUpperLipRaiser", "LipsTogether", "Pucker", "RightEyeClosed", "RightLipCornerPuller", "RightLipStretcher", "RightLowerLipDepressor", "RightUpperLipRaiser"], "required_pose_list_B" = ["LeftEyeClosed", "RightEyeClosed", "EyesLookDown", "JawDrop", "Pucker", "LeftLipCornerPuller", "RightLipCornerPuller", "ChinRaiser", "ChinRaiserUpperLip", "LeftCheekRaiser", "RightCheekRaiser", "LeftInnerBrowRaiser", "RightInnerBrowRaiser", "LeftLipCornerDown", "RightLipCornerDown", "LeftLowerLipDepressor", "RightLowerLipDepressor"], "required_pose_authority" = "unresolved", "mapping_fields" = ["RootFaceJoint", "FrameN"], "corrective_combinations" = "2 or 3 named poses; underscore separated" }

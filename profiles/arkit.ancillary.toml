@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "arkit.ancillary.leftEyeTransform"
+label = "leftEyeTransform"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "arkit.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["apple_eye"]
+evidence_status = "verified_current"
+native_id = "leftEyeTransform"
+surface = "arkit.ancillary"
+side = "shared"
+metadata = { "inventory_ordinal" = 0, "reason" = "4x4 eye transform is inventoried; scalar wire v1 does not execute transforms.", "native_value_type" = "matrix4x4" }
+region = "eyelid"
+
+[[profiles]]
+id = "arkit.ancillary"
+label = "ARKit ancillary transform surface"
+signal_ids = ["arkit.ancillary.leftEyeTransform", "arkit.ancillary.init_rawValue"]
+evidence = ["apple_eye"]
+metadata = { "selected_count" = 0 }
+
+[[signals]]
+id = "arkit.ancillary.init_rawValue"
+label = "init(rawValue:)"
+value_type = "scalar"
+units = "unknown"
+domain = {}
+calibration = "arkit.constructor: not a numeric expression basis"
+disposition = "excluded"
+evidence = ["apple_blendshapes"]
+evidence_status = "verified_current"
+native_id = "init(rawValue:)"
+surface = "arkit.ancillary"
+metadata = { reason = "Constructor accepts arbitrary keys; not one of the 52 named coefficients.", native_value_type = "constructor", selected = false }

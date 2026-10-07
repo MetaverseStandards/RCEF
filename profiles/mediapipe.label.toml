@@ -1,0 +1,857 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "mediapipe.label._neutral"
+label = "_neutral"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "_neutral"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 0, "reason" = "Reserved neutral model output; implementation directs ignoring it.", "selected" = true }
+region = "other"
+
+[[signals]]
+id = "mediapipe.label.browDownLeft"
+label = "browDownLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "browDownLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 1, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.label.browDownRight"
+label = "browDownRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "browDownRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 2, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.label.browInnerUp"
+label = "browInnerUp"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "browInnerUp"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 3, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.label.browOuterUpLeft"
+label = "browOuterUpLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "browOuterUpLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 4, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.label.browOuterUpRight"
+label = "browOuterUpRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "browOuterUpRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 5, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.label.cheekPuff"
+label = "cheekPuff"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "cheekPuff"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 6, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "cheek"
+
+[[signals]]
+id = "mediapipe.label.cheekSquintLeft"
+label = "cheekSquintLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "cheekSquintLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 7, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "cheek"
+
+[[signals]]
+id = "mediapipe.label.cheekSquintRight"
+label = "cheekSquintRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "cheekSquintRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 8, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "cheek"
+
+[[signals]]
+id = "mediapipe.label.eyeBlinkLeft"
+label = "eyeBlinkLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeBlinkLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 9, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.label.eyeBlinkRight"
+label = "eyeBlinkRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeBlinkRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 10, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.label.eyeLookDownLeft"
+label = "eyeLookDownLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeLookDownLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 11, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.label.eyeLookDownRight"
+label = "eyeLookDownRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeLookDownRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 12, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.label.eyeLookInLeft"
+label = "eyeLookInLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeLookInLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 13, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.label.eyeLookInRight"
+label = "eyeLookInRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeLookInRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 14, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.label.eyeLookOutLeft"
+label = "eyeLookOutLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeLookOutLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 15, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.label.eyeLookOutRight"
+label = "eyeLookOutRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeLookOutRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 16, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.label.eyeLookUpLeft"
+label = "eyeLookUpLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeLookUpLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 17, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.label.eyeLookUpRight"
+label = "eyeLookUpRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeLookUpRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 18, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.label.eyeSquintLeft"
+label = "eyeSquintLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeSquintLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 19, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.label.eyeSquintRight"
+label = "eyeSquintRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeSquintRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 20, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.label.eyeWideLeft"
+label = "eyeWideLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeWideLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 21, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.label.eyeWideRight"
+label = "eyeWideRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "eyeWideRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 22, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.label.jawForward"
+label = "jawForward"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "jawForward"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 23, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "mediapipe.label.jawLeft"
+label = "jawLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "jawLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 24, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "mediapipe.label.jawOpen"
+label = "jawOpen"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "jawOpen"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 25, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "mediapipe.label.jawRight"
+label = "jawRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "jawRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 26, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "mediapipe.label.mouthClose"
+label = "mouthClose"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthClose"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 27, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthDimpleLeft"
+label = "mouthDimpleLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthDimpleLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 28, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthDimpleRight"
+label = "mouthDimpleRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthDimpleRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 29, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthFrownLeft"
+label = "mouthFrownLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthFrownLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 30, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthFrownRight"
+label = "mouthFrownRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthFrownRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 31, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthFunnel"
+label = "mouthFunnel"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthFunnel"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 32, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthLeft"
+label = "mouthLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 33, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthLowerDownLeft"
+label = "mouthLowerDownLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthLowerDownLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 34, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthLowerDownRight"
+label = "mouthLowerDownRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthLowerDownRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 35, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthPressLeft"
+label = "mouthPressLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthPressLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 36, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthPressRight"
+label = "mouthPressRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthPressRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 37, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthPucker"
+label = "mouthPucker"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthPucker"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 38, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthRight"
+label = "mouthRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 39, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthRollLower"
+label = "mouthRollLower"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthRollLower"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 40, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthRollUpper"
+label = "mouthRollUpper"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthRollUpper"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 41, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthShrugLower"
+label = "mouthShrugLower"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthShrugLower"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 42, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthShrugUpper"
+label = "mouthShrugUpper"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthShrugUpper"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = 43, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthSmileLeft"
+label = "mouthSmileLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthSmileLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 44, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthSmileRight"
+label = "mouthSmileRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthSmileRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 45, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthStretchLeft"
+label = "mouthStretchLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthStretchLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 46, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthStretchRight"
+label = "mouthStretchRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthStretchRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 47, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthUpperUpLeft"
+label = "mouthUpperUpLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthUpperUpLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 48, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.mouthUpperUpRight"
+label = "mouthUpperUpRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "mouthUpperUpRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 49, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.label.noseSneerLeft"
+label = "noseSneerLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "noseSneerLeft"
+surface = "mediapipe.label"
+side = "left"
+metadata = { "inventory_ordinal" = 50, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "nose"
+
+[[signals]]
+id = "mediapipe.label.noseSneerRight"
+label = "noseSneerRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "noseSneerRight"
+surface = "mediapipe.label"
+side = "right"
+metadata = { "inventory_ordinal" = 51, "reason" = "Label match supplies no model calibration or ARKit equivalence.", "selected" = true }
+region = "nose"
+
+[[signals]]
+id = "mediapipe.label.tongueOut.absent"
+label = "tongueOut.absent"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "mediapipe.label: native basis; no canonical calibration established"
+disposition = "unsupported"
+evidence = ["mediapipe"]
+evidence_status = "verified_current"
+native_id = "tongueOut.absent"
+surface = "mediapipe.label"
+side = "shared"
+metadata = { "inventory_ordinal" = -1, "reason" = "Selected label list has no tongueOut channel.", "selected" = false }
+region = "tongue"
+
+[[profiles]]
+id = "mediapipe.label"
+label = "MediaPipe 52 labels"
+signal_ids = ["mediapipe.label._neutral", "mediapipe.label.browDownLeft", "mediapipe.label.browDownRight", "mediapipe.label.browInnerUp", "mediapipe.label.browOuterUpLeft", "mediapipe.label.browOuterUpRight", "mediapipe.label.cheekPuff", "mediapipe.label.cheekSquintLeft", "mediapipe.label.cheekSquintRight", "mediapipe.label.eyeBlinkLeft", "mediapipe.label.eyeBlinkRight", "mediapipe.label.eyeLookDownLeft", "mediapipe.label.eyeLookDownRight", "mediapipe.label.eyeLookInLeft", "mediapipe.label.eyeLookInRight", "mediapipe.label.eyeLookOutLeft", "mediapipe.label.eyeLookOutRight", "mediapipe.label.eyeLookUpLeft", "mediapipe.label.eyeLookUpRight", "mediapipe.label.eyeSquintLeft", "mediapipe.label.eyeSquintRight", "mediapipe.label.eyeWideLeft", "mediapipe.label.eyeWideRight", "mediapipe.label.jawForward", "mediapipe.label.jawLeft", "mediapipe.label.jawOpen", "mediapipe.label.jawRight", "mediapipe.label.mouthClose", "mediapipe.label.mouthDimpleLeft", "mediapipe.label.mouthDimpleRight", "mediapipe.label.mouthFrownLeft", "mediapipe.label.mouthFrownRight", "mediapipe.label.mouthFunnel", "mediapipe.label.mouthLeft", "mediapipe.label.mouthLowerDownLeft", "mediapipe.label.mouthLowerDownRight", "mediapipe.label.mouthPressLeft", "mediapipe.label.mouthPressRight", "mediapipe.label.mouthPucker", "mediapipe.label.mouthRight", "mediapipe.label.mouthRollLower", "mediapipe.label.mouthRollUpper", "mediapipe.label.mouthShrugLower", "mediapipe.label.mouthShrugUpper", "mediapipe.label.mouthSmileLeft", "mediapipe.label.mouthSmileRight", "mediapipe.label.mouthStretchLeft", "mediapipe.label.mouthStretchRight", "mediapipe.label.mouthUpperUpLeft", "mediapipe.label.mouthUpperUpRight", "mediapipe.label.noseSneerLeft", "mediapipe.label.noseSneerRight", "mediapipe.label.tongueOut.absent"]
+evidence = ["mediapipe"]
+metadata = { "selected_count" = 52, "model_calibration" = "unresolved", "coefficients_returned_unfiltered" = true }

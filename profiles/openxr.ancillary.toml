@@ -1,0 +1,169 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_CONFIDENCE_LOWER_FACE_FB"
+label = "XR_FACE_CONFIDENCE_LOWER_FACE_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_CONFIDENCE_LOWER_FACE_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 0, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceConfidenceFB" }
+region = "other"
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_CONFIDENCE_UPPER_FACE_FB"
+label = "XR_FACE_CONFIDENCE_UPPER_FACE_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_CONFIDENCE_UPPER_FACE_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 1, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceConfidenceFB" }
+region = "other"
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_CONFIDENCE_COUNT_FB"
+label = "XR_FACE_CONFIDENCE_COUNT_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_CONFIDENCE_COUNT_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 2, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceConfidenceFB" }
+region = "other"
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_CONFIDENCE2_LOWER_FACE_FB"
+label = "XR_FACE_CONFIDENCE2_LOWER_FACE_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_CONFIDENCE2_LOWER_FACE_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 0, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceConfidence2FB" }
+region = "other"
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_CONFIDENCE2_UPPER_FACE_FB"
+label = "XR_FACE_CONFIDENCE2_UPPER_FACE_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_CONFIDENCE2_UPPER_FACE_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 1, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceConfidence2FB" }
+region = "other"
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_CONFIDENCE2_COUNT_FB"
+label = "XR_FACE_CONFIDENCE2_COUNT_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_CONFIDENCE2_COUNT_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 2, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceConfidence2FB" }
+region = "other"
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_TRACKING_DATA_SOURCE2_VISUAL_FB"
+label = "XR_FACE_TRACKING_DATA_SOURCE2_VISUAL_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_DATA_SOURCE2_VISUAL_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 0, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceTrackingDataSource2FB" }
+region = "other"
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_TRACKING_DATA_SOURCE2_AUDIO_FB"
+label = "XR_FACE_TRACKING_DATA_SOURCE2_AUDIO_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_TRACKING_DATA_SOURCE2_AUDIO_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 1, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceTrackingDataSource2FB" }
+region = "other"
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_EXPRESSION_SET_DEFAULT_FB"
+label = "XR_FACE_EXPRESSION_SET_DEFAULT_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_EXPRESSION_SET_DEFAULT_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 0, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceExpressionSetFB" }
+region = "other"
+
+[[signals]]
+id = "openxr.ancillary.XR_FACE_EXPRESSION_SET2_DEFAULT_FB"
+label = "XR_FACE_EXPRESSION_SET2_DEFAULT_FB"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "openxr.ancillary: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["xr_registry"]
+evidence_status = "verified_current"
+native_id = "XR_FACE_EXPRESSION_SET2_DEFAULT_FB"
+surface = "openxr.ancillary"
+side = "shared"
+metadata = { "native_index" = 0, "reason" = "Configuration/confidence region enum; not an expression amplitude.", "native_enum" = "XrFaceExpressionSet2FB" }
+region = "other"
+
+[[profiles]]
+id = "openxr.ancillary"
+label = "OpenXR confidence/negotiation enums"
+signal_ids = ["openxr.ancillary.XR_FACE_CONFIDENCE_LOWER_FACE_FB", "openxr.ancillary.XR_FACE_CONFIDENCE_UPPER_FACE_FB", "openxr.ancillary.XR_FACE_CONFIDENCE_COUNT_FB", "openxr.ancillary.XR_FACE_CONFIDENCE2_LOWER_FACE_FB", "openxr.ancillary.XR_FACE_CONFIDENCE2_UPPER_FACE_FB", "openxr.ancillary.XR_FACE_CONFIDENCE2_COUNT_FB", "openxr.ancillary.XR_FACE_TRACKING_DATA_SOURCE2_VISUAL_FB", "openxr.ancillary.XR_FACE_TRACKING_DATA_SOURCE2_AUDIO_FB", "openxr.ancillary.XR_FACE_EXPRESSION_SET_DEFAULT_FB", "openxr.ancillary.XR_FACE_EXPRESSION_SET2_DEFAULT_FB"]
+evidence = ["xr_registry"]
+metadata = { "selected_count" = 0 }

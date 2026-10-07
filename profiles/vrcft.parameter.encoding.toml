@@ -1,0 +1,121 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "vrcft.parameter.encoding.ParameterNegative"
+label = "ParameterNegative"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.encoding: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_binary"]
+evidence_status = "verified_current"
+native_id = "ParameterNegative"
+surface = "vrcft.parameter.encoding"
+side = "shared"
+metadata = { "inventory_ordinal" = 0, "reason" = "Public encoding scheme or explicit example; boolean bit/sign operations are outside scalar v1.", "native_value_type" = "boolean bit/sign family", "numeric_parameter_bindings" = "unresolved; abstract Parameter placeholder is not an instantiated avatar channel", "normalization_denominator_conflict" = "text gives 2^N-1 range and 1/2^N bit values; do not execute" }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.encoding.Parameter1"
+label = "Parameter1"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.encoding: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_binary"]
+evidence_status = "verified_current"
+native_id = "Parameter1"
+surface = "vrcft.parameter.encoding"
+side = "shared"
+metadata = { "inventory_ordinal" = 1, "reason" = "Public encoding scheme or explicit example; boolean bit/sign operations are outside scalar v1.", "native_value_type" = "boolean bit/sign family", "numeric_parameter_bindings" = "unresolved; abstract Parameter placeholder is not an instantiated avatar channel", "normalization_denominator_conflict" = "text gives 2^N-1 range and 1/2^N bit values; do not execute" }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.encoding.Parameter2"
+label = "Parameter2"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.encoding: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_binary"]
+evidence_status = "verified_current"
+native_id = "Parameter2"
+surface = "vrcft.parameter.encoding"
+side = "shared"
+metadata = { "inventory_ordinal" = 2, "reason" = "Public encoding scheme or explicit example; boolean bit/sign operations are outside scalar v1.", "native_value_type" = "boolean bit/sign family", "numeric_parameter_bindings" = "unresolved; abstract Parameter placeholder is not an instantiated avatar channel", "normalization_denominator_conflict" = "text gives 2^N-1 range and 1/2^N bit values; do not execute" }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.encoding.Parameter4"
+label = "Parameter4"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.encoding: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_binary"]
+evidence_status = "verified_current"
+native_id = "Parameter4"
+surface = "vrcft.parameter.encoding"
+side = "shared"
+metadata = { "inventory_ordinal" = 3, "reason" = "Public encoding scheme or explicit example; boolean bit/sign operations are outside scalar v1.", "native_value_type" = "boolean bit/sign family", "numeric_parameter_bindings" = "unresolved; abstract Parameter placeholder is not an instantiated avatar channel", "normalization_denominator_conflict" = "text gives 2^N-1 range and 1/2^N bit values; do not execute" }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.encoding.Parameter8"
+label = "Parameter8"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.encoding: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_binary"]
+evidence_status = "verified_current"
+native_id = "Parameter8"
+surface = "vrcft.parameter.encoding"
+side = "shared"
+metadata = { "inventory_ordinal" = 4, "reason" = "Public encoding scheme or explicit example; boolean bit/sign operations are outside scalar v1.", "native_value_type" = "boolean bit/sign family", "numeric_parameter_bindings" = "unresolved; abstract Parameter placeholder is not an instantiated avatar channel", "normalization_denominator_conflict" = "text gives 2^N-1 range and 1/2^N bit values; do not execute" }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.encoding.Parameterx"
+label = "Parameterx"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.encoding: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_binary"]
+evidence_status = "verified_current"
+native_id = "Parameterx"
+surface = "vrcft.parameter.encoding"
+side = "shared"
+metadata = { "inventory_ordinal" = 5, "reason" = "Public encoding scheme or explicit example; boolean bit/sign operations are outside scalar v1.", "native_value_type" = "boolean bit/sign family", "numeric_parameter_bindings" = "unresolved; abstract Parameter placeholder is not an instantiated avatar channel", "normalization_denominator_conflict" = "text gives 2^N-1 range and 1/2^N bit values; do not execute" }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.encoding.JawForward1"
+label = "JawForward1"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.parameter.encoding: native basis; no canonical calibration established"
+disposition = "excluded"
+evidence = ["vrcft_binary"]
+evidence_status = "verified_current"
+native_id = "JawForward1"
+surface = "vrcft.parameter.encoding"
+side = "shared"
+metadata = { "inventory_ordinal" = 6, "reason" = "Public encoding scheme or explicit example; boolean bit/sign operations are outside scalar v1.", "native_value_type" = "boolean bit/sign family", "numeric_parameter_bindings" = "unresolved; abstract Parameter placeholder is not an instantiated avatar channel", "normalization_denominator_conflict" = "text gives 2^N-1 range and 1/2^N bit values; do not execute" }
+region = "jaw"
+
+[[profiles]]
+id = "vrcft.parameter.encoding"
+label = "VRCFT binary encoding surface"
+signal_ids = ["vrcft.parameter.encoding.ParameterNegative", "vrcft.parameter.encoding.Parameter1", "vrcft.parameter.encoding.Parameter2", "vrcft.parameter.encoding.Parameter4", "vrcft.parameter.encoding.Parameter8", "vrcft.parameter.encoding.Parameterx", "vrcft.parameter.encoding.JawForward1"]
+evidence = ["vrcft_binary"]
+metadata = { "selected_count" = 0 }

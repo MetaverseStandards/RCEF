@@ -1,0 +1,288 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[evidence]]
+id = "rcsf_readme"
+claim = "Pinned survey/authoring baseline and provider presentation; historical parity reference."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/MetaverseStandards/RCSF/f6c3ea8a00d4901496326b4a6fe6a24913a563c6/README.md"
+retrieved = "2026-10-07"
+sha256 = "a4726117f9de285a8ab66651b6e33f31195c67f55a9db72c028b3d60a6100ce1"
+locator = "README sections"
+revision = "f6c3ea8a00d4901496326b4a6fe6a24913a563c6"
+
+[[evidence]]
+id = "rcsf_checker"
+claim = "Pinned baseline checker provides table join and comparison behavior; no runtime evaluator claim."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/MetaverseStandards/RCSF/f6c3ea8a00d4901496326b4a6fe6a24913a563c6/join_csv.py"
+retrieved = "2026-10-07"
+sha256 = "a49573c0d18a1bfc52d9f9f5cbff669c978295f11c442ba00fa2c359cab21e47"
+locator = "join_csv.py"
+revision = "f6c3ea8a00d4901496326b4a6fe6a24913a563c6"
+
+[[evidence]]
+id = "apple_blendshapes"
+claim = "52 coefficient identifiers; native coefficient domain 0..1 and face-relative sides."
+status = "verified_current"
+url = "https://developer.apple.com/tutorials/data/documentation/arkit/arfaceanchor/blendshapelocation.json"
+retrieved = "2026-10-07"
+sha256 = "50691c512eedecaa3e54b73f313816409ff47b8b1bd3628460ca2c096903009b"
+locator = "topicSections except initializer; Discussion"
+revision = "retrieval-digest"
+license = "reference only; source prose not redistributed"
+
+[[evidence]]
+id = "apple_eye"
+claim = "Eye pose is a transform, a separate interface from eyelid movement coefficients."
+status = "verified_current"
+url = "https://developer.apple.com/tutorials/data/documentation/arkit/arfaceanchor/lefteyetransform.json"
+retrieved = "2026-10-07"
+sha256 = "74d13ebf8d550d9052e6d0f051c763d72b5c8e32ec2ce325a725271964cb918e"
+locator = "declarations and Discussion"
+revision = "retrieval-digest"
+license = "reference only; source prose not redistributed"
+
+[[evidence]]
+id = "mediapipe"
+claim = "kBlendshapeNames contains 52 labels including _neutral and excluding tongueOut; scores returned without threshold filtering."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/google-ai-edge/mediapipe/f6988c4769278bde600efd488dfc8645432dc92b/mediapipe/tasks/cc/vision/face_landmarker/face_blendshapes_graph.cc"
+retrieved = "2026-10-07"
+sha256 = "a3826ad2738315f1e046b36fd883825980e151db677e53d21ff35eaff64e4bd3"
+locator = "kBlendshapeNames; ConvertTensorToBlendshapes"
+revision = "f6988c4769278bde600efd488dfc8645432dc92b"
+
+[[evidence]]
+id = "xr_fb"
+claim = "FB weight ordering, separate eye-following validity, upper/lower confidence and XrTime; numeric weight bounds not explicit here."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/chapters/extensions/fb/fb_face_tracking.adoc"
+retrieved = "2026-10-07"
+sha256 = "2676aa103e48595031d368ef3a7301a9c2b006f1d6eee9f1eca03f3132a78cb9"
+locator = "XrFaceExpressionWeightsFB; XrFaceExpressionStatusFB; confidence areas"
+revision = "5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d"
+license = "CC-BY-4.0"
+
+[[evidence]]
+id = "xr_fb2"
+claim = "FB2 0..1 weights, tongue entries, two validity flags, confidence/time/data source and directional rotation fractions."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/chapters/extensions/fb/fb_face_tracking2.adoc"
+retrieved = "2026-10-07"
+sha256 = "db7c6e3a0dee91f5bc7397830405e8596fe19e5eafc7608912b807163ab9a2ef"
+locator = "XrFaceExpressionWeights2FB; Conventions of facial expressions; eye rotation paragraph"
+revision = "5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d"
+license = "CC-BY-4.0"
+
+[[evidence]]
+id = "xr_visemes"
+claim = "Optional FB2-dependent extension; 15 probabilities including silence; valid sum 1 and independent validity."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/chapters/extensions/meta/meta_face_tracking_visemes.adoc"
+retrieved = "2026-10-07"
+sha256 = "4d1f4ccf48364f0ff37bf68496ac939521dcb6fe64f797e8201b05e159f00678"
+locator = "Overview; XrFaceTrackingVisemesMETA; XrFaceTrackingVisemeMETA"
+revision = "5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d"
+license = "CC-BY-4.0"
+
+[[evidence]]
+id = "xr_registry"
+claim = "Exact FB63, FB2 70 and META15 identifiers and indices plus count sentinels and negotiation enums."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/registry/xr.xml"
+retrieved = "2026-10-07"
+sha256 = "e9b6b0bb9e5100c56467ec80ae30b78ff36b4dcc8a332c269fa5e3e8429ed0aa"
+locator = "enums XrFaceExpressionFB, XrFaceExpression2FB, XrFaceTrackingVisemeMETA"
+revision = "5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d"
+license = "source license retained; identifiers extracted as facts"
+
+[[evidence]]
+id = "vrcft_enum"
+claim = "UnifiedExpressions has 88 active transport names and Max sentinel; commented eye names use a separate structure."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/benaclejames/VRCFaceTracking/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Expressions/UnifiedExpressions.cs"
+retrieved = "2026-10-07"
+sha256 = "0db0ebbdcc4a9d325e28d0386daf7d099da44ab549d84140df505d08035c67e2"
+locator = "UnifiedExpressions enum before SRanipal_LipShape_v2"
+revision = "6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35"
+license = "Apache-2.0"
+
+[[evidence]]
+id = "vrcft_data"
+claim = "Raw single-eye Gaze, pupil millimetres and openness initialization 1; combined normalization/averaging, recovery 0.5, byte clamping/quantization and reserved bytes."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/benaclejames/VRCFaceTracking/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Data/UnifiedData.cs"
+retrieved = "2026-10-07"
+sha256 = "9517612c1bdf60e61ce4e0309d1c14592cd4e2ce0a467a87562945d68dc36412"
+locator = "UnifiedSingleEyeData; UnifiedEyeData.Combined/CopyTo; UnifiedTrackingData.CopyTo"
+revision = "6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35"
+license = "Apache-2.0"
+
+[[evidence]]
+id = "vrcft_license"
+claim = "Pinned VRCFT repository source license is Apache-2.0."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/benaclejames/VRCFaceTracking/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/LICENSE"
+retrieved = "2026-10-07"
+sha256 = "ee667e443a1119a143331d985b8aa9daa770f2f2068cb7bb9e0d36d9802b705c"
+locator = "LICENSE"
+revision = "6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35"
+license = "Apache-2.0"
+
+[[evidence]]
+id = "vrcft_artist"
+claim = "Artist tables contain 102 base and 42 blended names; component lists, unsupported footnotes and side/direction contradictions retained."
+status = "verified_current"
+url = "https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/unified-blendshapes"
+retrieved = "2026-10-07"
+sha256 = "10f91ba8ed0c534139d3a1860b52f58978da80b401825896bfeb92af34c2a245"
+locator = "#ue-base-shapes; #ue-blended-shapes; footnote 1"
+revision = "retrieval-digest"
+
+[[evidence]]
+id = "godot_enum"
+claim = "BlendShapeEntry declares 102 base and 41 blended names plus FT_MAX; enum availability is not device support."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/godotengine/godot/e7b12e749220a75ef87e800e080bd2732ad46854/servers/xr/xr_face_tracker.h"
+retrieved = "2026-10-07"
+sha256 = "e8d4144834598faa862262c41e246d932e07be5d52d9116042a75618c683a2a3"
+locator = "BlendShapeEntry"
+revision = "e7b12e749220a75ef87e800e080bd2732ad46854"
+license = "MIT"
+
+[[evidence]]
+id = "godot_setters"
+claim = "Godot initializes array to zero and setters store supplied values without numeric clamping."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/godotengine/godot/e7b12e749220a75ef87e800e080bd2732ad46854/servers/xr/xr_face_tracker.cpp"
+retrieved = "2026-10-07"
+sha256 = "4f01af298dba233495893d5e6cc9bd5facfd7f6952ac4cb08ad6837af5a2bebf"
+locator = "set_blend_shape; set_blend_shapes; header array initialization"
+revision = "e7b12e749220a75ef87e800e080bd2732ad46854"
+license = "MIT"
+
+[[evidence]]
+id = "vrm_expressions"
+claim = "18 optional presets; model-specific bindings, isBinary >0.5, procedural overrides and custom names."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/specification/VRMC_vrm-1.0/expressions.md"
+retrieved = "2026-10-07"
+sha256 = "e1d27d4717de6625189d01abbe77c46550ac71d4f1caed7ed5dccad1a6ebd0c9"
+locator = "Preset Expressions; Expression; Procedural override; binding tables"
+revision = "94e82dd346fa6cf0337c4421728640e5252dd38e"
+license = "reference only; source prose not redistributed"
+
+[[evidence]]
+id = "vrm_lookat"
+claim = "LookAt bone/expression surfaces and range maps are model-specific; one line of sight cannot express independent divergent eyes."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/specification/VRMC_vrm-1.0/lookAt.md"
+retrieved = "2026-10-07"
+sha256 = "859e7c5d1d56ee7b0d795826c1bd70df628e8fe337392f808e788a7dbc714ee8"
+locator = "Overview; RangeMap; Interpretation when type is expression"
+revision = "94e82dd346fa6cf0337c4421728640e5252dd38e"
+license = "reference only; source prose not redistributed"
+
+[[evidence]]
+id = "roblox_controls"
+claim = "50 float FaceControls in domain 0..1; joint mapping and 17 required pose list A."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/Roblox/creator-docs/a0fce044c480e8c580dc99b0645d127ad83a3873/content/en-us/reference/engine/classes/FaceControls.yaml"
+retrieved = "2026-10-07"
+sha256 = "ef2e9dd53dac6acc5deaf1f2b633fbbf1b24530c932c910755c16ae9de4c208b"
+locator = "properties; Animatable Heads in the Marketplace"
+revision = "a0fce044c480e8c580dc99b0645d127ad83a3873"
+license = "CC-BY-4.0"
+
+[[evidence]]
+id = "roblox_requirements"
+claim = "Different 17 required poses list B and 5 validation actions; authority conflict unresolved."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/Roblox/creator-docs/a0fce044c480e8c580dc99b0645d127ad83a3873/content/en-us/avatar/dynamic-heads/specifications.md"
+retrieved = "2026-10-07"
+sha256 = "37e9e1bfba7448ec72a12eb8e4e7b00240fbd2eb54e46d34712dcf57e1c262c9"
+locator = "#facs-poses"
+revision = "a0fce044c480e8c580dc99b0645d127ad83a3873"
+license = "CC-BY-4.0"
+
+[[evidence]]
+id = "roblox_authoring"
+claim = "Neutral Frame 0, named pose-to-joint mappings and combination corrective differences; host execution deferred."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/Roblox/creator-docs/a0fce044c480e8c580dc99b0645d127ad83a3873/content/en-us/art/characters/facial-animation/create-basic-heads.md"
+retrieved = "2026-10-07"
+sha256 = "2b156475fab59d86a81a12995c5e68ab630c769c1d5e1e550072f99ba8399f28"
+locator = "#posing; #combination-poses; #map-each-pose"
+revision = "a0fce044c480e8c580dc99b0645d127ad83a3873"
+license = "CC-BY-4.0"
+
+[[evidence]]
+id = "roblox_poses"
+claim = "50 pose headings cross-check FaceControls identifiers and include list B required-pose notices."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/Roblox/creator-docs/a0fce044c480e8c580dc99b0645d127ad83a3873/content/en-us/avatar/dynamic-heads/facs-poses-reference.md"
+retrieved = "2026-10-07"
+sha256 = "6c7ed3b647e5bdf0720cdf964ae3c99be789166f60543187ef1887eec4f283a2"
+locator = "pose headings"
+revision = "a0fce044c480e8c580dc99b0645d127ad83a3873"
+license = "CC-BY-4.0"
+
+[[evidence]]
+id = "roblox_license"
+claim = "Roblox creator documentation source license is CC-BY-4.0."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/Roblox/creator-docs/a0fce044c480e8c580dc99b0645d127ad83a3873/LICENSE"
+retrieved = "2026-10-07"
+sha256 = "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+locator = "LICENSE"
+revision = "a0fce044c480e8c580dc99b0645d127ad83a3873"
+license = "CC-BY-4.0"
+
+[[evidence]]
+id = "gltf_morph"
+claim = "Morph weight coefficients are not generally limited to 0..1; relative Basis and defaults are separate from tracked signals."
+status = "verified_current"
+url = "https://raw.githubusercontent.com/KhronosGroup/glTF/8e691206fa2e981fc3b8c8bc57e671595576c971/specification/2.0/Specification.adoc"
+retrieved = "2026-10-07"
+sha256 = "c305d1b0ea93c7eb101059db09ae4687c56fe5388c6655cd9bf83d44b2932664"
+locator = "#morph-targets; #applying-morph-targets"
+revision = "8e691206fa2e981fc3b8c8bc57e671595576c971"
+
+[[evidence]]
+id = "vrcft_parameters"
+claim = "127 publicly listed parameter rows: 124 numeric parameters and 3 activity flags; optional prefixes, units and compositions."
+status = "verified_current"
+url = "https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/parameters"
+retrieved = "2026-10-07"
+sha256 = "1f0b92e5955ef08fd772da3624cc492cf2cd6a6242fd63a7452087abf86678c2"
+locator = "16 parameter tables; Tracking Active Parameters"
+revision = "retrieval-digest"
+
+[[evidence]]
+id = "vrcft_float"
+claim = "Float avatar parameter surface; documentation does not establish physical calibration equivalence."
+status = "verified_current"
+url = "https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/parameters/types/float"
+retrieved = "2026-10-07"
+sha256 = "54b585f8f9170da70caa3a679fbe120ba76204fe406106130b61ccd3f742df5e"
+locator = "Float Parameters"
+revision = "retrieval-digest"
+
+[[evidence]]
+id = "vrcft_binary"
+claim = "Binary parameter encoding surface and sign parameter evidence; numeric transforms remain non-executable inventory."
+status = "verified_current"
+url = "https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/parameters/types/binary"
+retrieved = "2026-10-07"
+sha256 = "9d8dae1b944d8cd877147800517a11ea9a7e2dd04344e63861df9248e4686c68"
+locator = "Binary Parameters"
+revision = "retrieval-digest"
+
+[[evidence]]
+id = "rcef_definitions"
+claim = "Original provider-calibrated scalar projections and synthetic affine/bilateral fixture definitions; no cross-provider equivalence."
+status = "verified_current"
+license = "CC-BY-SA-4.0"
+authorship = "RCEF contributors (2026)"
+locator = "data/canonical.toml; fixtures/mapping_samples.json"

@@ -1,0 +1,1641 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "vrcft.artist.base.EyeLookOutRight"
+label = "EyeLookOutRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeLookOutRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 0, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeLookOutRight", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.artist.base.EyeLookInRight"
+label = "EyeLookInRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeLookInRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 1, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeLookInRight", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.artist.base.EyeLookUpRight"
+label = "EyeLookUpRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeLookUpRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 2, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeLookUpRight", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.artist.base.EyeLookDownRight"
+label = "EyeLookDownRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeLookDownRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 3, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeLookDownRight", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.artist.base.EyeLookOutLeft"
+label = "EyeLookOutLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeLookOutLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 4, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeLookOutLeft", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.artist.base.EyeLookInLeft"
+label = "EyeLookInLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeLookInLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 5, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeLookInLeft", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.artist.base.EyeLookUpLeft"
+label = "EyeLookUpLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeLookUpLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 6, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeLookUpLeft", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.artist.base.EyeLookDownLeft"
+label = "EyeLookDownLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeLookDownLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 7, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeLookDownLeft", "selected" = true }
+region = "gaze"
+
+[[signals]]
+id = "vrcft.artist.base.EyeClosedRight"
+label = "EyeClosedRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeClosedRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 8, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeClosedRight", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.artist.base.EyeClosedLeft"
+label = "EyeClosedLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeClosedLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 9, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeClosedLeft", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.artist.base.EyeSquintRight"
+label = "EyeSquintRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeSquintRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 10, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeSquintRight", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.artist.base.EyeSquintLeft"
+label = "EyeSquintLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeSquintLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 11, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeSquintLeft", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.artist.base.EyeWideRight"
+label = "EyeWideRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeWideRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 12, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeWideRight", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.artist.base.EyeWideLeft"
+label = "EyeWideLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeWideLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 13, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeWideLeft", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.artist.base.EyeDilationRight"
+label = "EyeDilationRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeDilationRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 14, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeDilationRight", "selected" = true }
+region = "pupil"
+
+[[signals]]
+id = "vrcft.artist.base.EyeDilationLeft"
+label = "EyeDilationLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeDilationLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 15, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeDilationLeft", "selected" = true }
+region = "pupil"
+
+[[signals]]
+id = "vrcft.artist.base.EyeConstrictRight"
+label = "EyeConstrictRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeConstrictRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 16, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeConstrictRight", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.artist.base.EyeConstrictLeft"
+label = "EyeConstrictLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "EyeConstrictLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 17, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "EyeConstrictLeft", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.artist.base.BrowPinchRight"
+label = "BrowPinchRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "BrowPinchRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 18, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "BrowPinchRight", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.artist.base.BrowPinchLeft"
+label = "BrowPinchLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "BrowPinchLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 19, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "BrowPinchLeft", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.artist.base.BrowLowererRight"
+label = "BrowLowererRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "BrowLowererRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 20, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "BrowLowererRight", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.artist.base.BrowLowererLeft"
+label = "BrowLowererLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "BrowLowererLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 21, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "BrowLowererLeft", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.artist.base.BrowInnerUpRight"
+label = "BrowInnerUpRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "BrowInnerUpRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 22, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "BrowInnerUpRight", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.artist.base.BrowInnerUpLeft"
+label = "BrowInnerUpLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "BrowInnerUpLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 23, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "BrowInnerUpLeft", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.artist.base.BrowOuterUpRight"
+label = "BrowOuterUpRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "BrowOuterUpRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 24, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "BrowOuterUpRight", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.artist.base.BrowOuterUpLeft"
+label = "BrowOuterUpLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "BrowOuterUpLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 25, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "BrowOuterUpLeft", "selected" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.artist.base.NoseSneerRight"
+label = "NoseSneerRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "NoseSneerRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 26, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "NoseSneerRight", "selected" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.artist.base.NoseSneerLeft"
+label = "NoseSneerLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "NoseSneerLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 27, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "NoseSneerLeft", "selected" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.artist.base.NasalDilationRight"
+label = "NasalDilationRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "NasalDilationRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 28, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "NasalDilationRight", "selected" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.artist.base.NasalDilationLeft"
+label = "NasalDilationLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "NasalDilationLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 29, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "NasalDilationLeft", "selected" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.artist.base.NasalConstrictRight"
+label = "NasalConstrictRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "NasalConstrictRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 30, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "NasalConstrictRight", "selected" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.artist.base.NasalConstrictLeft"
+label = "NasalConstrictLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "NasalConstrictLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 31, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "NasalConstrictLeft", "selected" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.artist.base.CheekSquintRight"
+label = "CheekSquintRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "CheekSquintRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 32, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "CheekSquintRight", "selected" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.artist.base.CheekSquintLeft"
+label = "CheekSquintLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "CheekSquintLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 33, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "CheekSquintLeft", "selected" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.artist.base.CheekPuffRight"
+label = "CheekPuffRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "CheekPuffRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 34, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "CheekPuffRight", "selected" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.artist.base.CheekPuffLeft"
+label = "CheekPuffLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "CheekPuffLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 35, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "CheekPuffLeft", "selected" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.artist.base.CheekSuckRight"
+label = "CheekSuckRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "CheekSuckRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 36, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "CheekSuckRight", "selected" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.artist.base.CheekSuckLeft"
+label = "CheekSuckLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "CheekSuckLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 37, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "CheekSuckLeft", "selected" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.artist.base.JawOpen"
+label = "JawOpen"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "JawOpen"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 38, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "JawOpen", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.artist.base.MouthClosed"
+label = "MouthClosed"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthClosed"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 39, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthClosed", "selected" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.artist.base.JawRight"
+label = "JawRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "JawRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 40, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "JawRight", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.artist.base.JawLeft"
+label = "JawLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "JawLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 41, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "JawLeft", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.artist.base.JawForward"
+label = "JawForward"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "JawForward"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 42, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "JawForward", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.artist.base.JawBackward"
+label = "JawBackward"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "JawBackward"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 43, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "JawBackward", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.artist.base.JawClench"
+label = "JawClench"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "JawClench"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 44, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "JawClench", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.artist.base.JawMandibleRaise"
+label = "JawMandibleRaise"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "JawMandibleRaise"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 45, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "JawMandibleRaise", "selected" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.artist.base.LipSuckUpperRight"
+label = "LipSuckUpperRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipSuckUpperRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 46, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipSuckUpperRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipSuckUpperLeft"
+label = "LipSuckUpperLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipSuckUpperLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 47, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipSuckUpperLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipSuckLowerRight"
+label = "LipSuckLowerRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipSuckLowerRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 48, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipSuckLowerRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipSuckLowerLeft"
+label = "LipSuckLowerLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipSuckLowerLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 49, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipSuckLowerLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipSuckCornerRight"
+label = "LipSuckCornerRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipSuckCornerRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 50, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipSuckCornerRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipSuckCornerLeft"
+label = "LipSuckCornerLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipSuckCornerLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 51, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipSuckCornerLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipFunnelUpperRight"
+label = "LipFunnelUpperRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipFunnelUpperRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 52, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipFunnelUpperRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipFunnelUpperLeft"
+label = "LipFunnelUpperLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipFunnelUpperLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 53, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipFunnelUpperLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipFunnelLowerRight"
+label = "LipFunnelLowerRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipFunnelLowerRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 54, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipFunnelLowerRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipFunnelLowerLeft"
+label = "LipFunnelLowerLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipFunnelLowerLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 55, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipFunnelLowerLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipPuckerUpperRight"
+label = "LipPuckerUpperRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipPuckerUpperRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 56, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipPuckerUpperRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipPuckerUpperLeft"
+label = "LipPuckerUpperLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipPuckerUpperLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 57, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipPuckerUpperLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipPuckerLowerRight"
+label = "LipPuckerLowerRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipPuckerLowerRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 58, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipPuckerLowerRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.LipPuckerLowerLeft"
+label = "LipPuckerLowerLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "LipPuckerLowerLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 59, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "LipPuckerLowerLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthUpperUpRight"
+label = "MouthUpperUpRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthUpperUpRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 60, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthUpperUpRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthUpperUpLeft"
+label = "MouthUpperUpLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthUpperUpLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 61, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthUpperUpLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthLowerDownRight"
+label = "MouthLowerDownRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthLowerDownRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 62, "reason" = "Native name indicates down while artist wording indicates up; direction unresolved.", "source_display_label" = "MouthLowerDownRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthLowerDownLeft"
+label = "MouthLowerDownLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthLowerDownLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 63, "reason" = "Native name indicates down while artist wording indicates up; direction unresolved.", "source_display_label" = "MouthLowerDownLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthUpperDeepenRight"
+label = "MouthUpperDeepenRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthUpperDeepenRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 64, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthUpperDeepenRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthUpperDeepenLeft"
+label = "MouthUpperDeepenLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthUpperDeepenLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 65, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthUpperDeepenLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthUpperRight"
+label = "MouthUpperRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthUpperRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 66, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthUpperRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthUpperLeft"
+label = "MouthUpperLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthUpperLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 67, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthUpperLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthLowerRight"
+label = "MouthLowerRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthLowerRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 68, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthLowerRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthLowerLeft"
+label = "MouthLowerLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthLowerLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 69, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthLowerLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthCornerPullRight"
+label = "MouthCornerPullRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthCornerPullRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 70, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthCornerPullRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthCornerPullLeft"
+label = "MouthCornerPullLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthCornerPullLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 71, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthCornerPullLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthCornerSlantRight"
+label = "MouthCornerSlantRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthCornerSlantRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 72, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthCornerSlantRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthCornerSlantLeft"
+label = "MouthCornerSlantLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthCornerSlantLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 73, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthCornerSlantLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthFrownRight"
+label = "MouthFrownRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthFrownRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 74, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthFrownRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthFrownLeft"
+label = "MouthFrownLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthFrownLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 75, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthFrownLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthStretchRight"
+label = "MouthStretchRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthStretchRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 76, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthStretchRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthStretchLeft"
+label = "MouthStretchLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthStretchLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 77, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthStretchLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthDimpleRight"
+label = "MouthDimpleRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthDimpleRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 78, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthDimpleRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthDimpleLeft"
+label = "MouthDimpleLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthDimpleLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 79, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthDimpleLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthRaiserUpper"
+label = "MouthRaiserUpper"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthRaiserUpper"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 80, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthRaiserUpper", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthRaiserLower"
+label = "MouthRaiserLower"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthRaiserLower"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 81, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthRaiserLower", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthPressRight"
+label = "MouthPressRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthPressRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 82, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthPressRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthPressLeft"
+label = "MouthPressLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthPressLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 83, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthPressLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthTightenerRight"
+label = "MouthTightenerRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthTightenerRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 84, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthTightenerRight", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.MouthTightenerLeft"
+label = "MouthTightenerLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "MouthTightenerLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 85, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthTightenerLeft", "selected" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.artist.base.TongueOut"
+label = "TongueOut"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueOut"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 86, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueOut", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueUp"
+label = "TongueUp"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueUp"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 87, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueUp", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueDown"
+label = "TongueDown"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueDown"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 88, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueDown", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueRight"
+label = "TongueRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 89, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueRight", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueLeft"
+label = "TongueLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 90, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueLeft", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueRoll"
+label = "TongueRoll"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueRoll"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 91, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueRoll", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueBendDown"
+label = "TongueBendDown"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueBendDown"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 92, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueBendDown", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueCurlUp"
+label = "TongueCurlUp"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueCurlUp"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 93, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueCurlUp", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueSquish"
+label = "TongueSquish"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueSquish"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 94, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueSquish", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueFlat"
+label = "TongueFlat"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueFlat"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 95, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueFlat", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueTwistRight"
+label = "TongueTwistRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueTwistRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 96, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueTwistRight", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.TongueTwistLeft"
+label = "TongueTwistLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "TongueTwistLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 97, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "TongueTwistLeft", "selected" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.artist.base.SoftPalateClose"
+label = "SoftPalateClose"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unsupported"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "SoftPalateClose"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 98, "reason" = "Public artist footnote marks this entry unused by all interfaces at retrieval; retained as vocabulary.", "source_display_label" = "SoftPalateClose¹", "selected" = true }
+region = "other"
+
+[[signals]]
+id = "vrcft.artist.base.ThroatSwallow"
+label = "ThroatSwallow"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unsupported"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "ThroatSwallow"
+surface = "vrcft.artist.base"
+side = "shared"
+metadata = { "inventory_ordinal" = 99, "reason" = "Public artist footnote marks this entry unused by all interfaces at retrieval; retained as vocabulary.", "source_display_label" = "ThroatSwallow¹", "selected" = true }
+region = "other"
+
+[[signals]]
+id = "vrcft.artist.base.NeckFlexRight"
+label = "NeckFlexRight"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unsupported"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "NeckFlexRight"
+surface = "vrcft.artist.base"
+side = "right"
+metadata = { "inventory_ordinal" = 100, "reason" = "Public artist footnote marks this entry unused by all interfaces at retrieval; retained as vocabulary.", "source_display_label" = "NeckFlexRight¹", "selected" = true }
+region = "other"
+
+[[signals]]
+id = "vrcft.artist.base.NeckFlexLeft"
+label = "NeckFlexLeft"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "vrcft.artist.base: native basis; no canonical calibration established"
+disposition = "unsupported"
+evidence = ["vrcft_artist"]
+evidence_status = "verified_current"
+native_id = "NeckFlexLeft"
+surface = "vrcft.artist.base"
+side = "left"
+metadata = { "inventory_ordinal" = 101, "reason" = "Public artist footnote marks this entry unused by all interfaces at retrieval; retained as vocabulary.", "source_display_label" = "NeckFlexLeft¹", "selected" = true }
+region = "other"
+
+[[profiles]]
+id = "vrcft.artist.base"
+label = "vrcft.artist.base"
+signal_ids = ["vrcft.artist.base.EyeLookOutRight", "vrcft.artist.base.EyeLookInRight", "vrcft.artist.base.EyeLookUpRight", "vrcft.artist.base.EyeLookDownRight", "vrcft.artist.base.EyeLookOutLeft", "vrcft.artist.base.EyeLookInLeft", "vrcft.artist.base.EyeLookUpLeft", "vrcft.artist.base.EyeLookDownLeft", "vrcft.artist.base.EyeClosedRight", "vrcft.artist.base.EyeClosedLeft", "vrcft.artist.base.EyeSquintRight", "vrcft.artist.base.EyeSquintLeft", "vrcft.artist.base.EyeWideRight", "vrcft.artist.base.EyeWideLeft", "vrcft.artist.base.EyeDilationRight", "vrcft.artist.base.EyeDilationLeft", "vrcft.artist.base.EyeConstrictRight", "vrcft.artist.base.EyeConstrictLeft", "vrcft.artist.base.BrowPinchRight", "vrcft.artist.base.BrowPinchLeft", "vrcft.artist.base.BrowLowererRight", "vrcft.artist.base.BrowLowererLeft", "vrcft.artist.base.BrowInnerUpRight", "vrcft.artist.base.BrowInnerUpLeft", "vrcft.artist.base.BrowOuterUpRight", "vrcft.artist.base.BrowOuterUpLeft", "vrcft.artist.base.NoseSneerRight", "vrcft.artist.base.NoseSneerLeft", "vrcft.artist.base.NasalDilationRight", "vrcft.artist.base.NasalDilationLeft", "vrcft.artist.base.NasalConstrictRight", "vrcft.artist.base.NasalConstrictLeft", "vrcft.artist.base.CheekSquintRight", "vrcft.artist.base.CheekSquintLeft", "vrcft.artist.base.CheekPuffRight", "vrcft.artist.base.CheekPuffLeft", "vrcft.artist.base.CheekSuckRight", "vrcft.artist.base.CheekSuckLeft", "vrcft.artist.base.JawOpen", "vrcft.artist.base.MouthClosed", "vrcft.artist.base.JawRight", "vrcft.artist.base.JawLeft", "vrcft.artist.base.JawForward", "vrcft.artist.base.JawBackward", "vrcft.artist.base.JawClench", "vrcft.artist.base.JawMandibleRaise", "vrcft.artist.base.LipSuckUpperRight", "vrcft.artist.base.LipSuckUpperLeft", "vrcft.artist.base.LipSuckLowerRight", "vrcft.artist.base.LipSuckLowerLeft", "vrcft.artist.base.LipSuckCornerRight", "vrcft.artist.base.LipSuckCornerLeft", "vrcft.artist.base.LipFunnelUpperRight", "vrcft.artist.base.LipFunnelUpperLeft", "vrcft.artist.base.LipFunnelLowerRight", "vrcft.artist.base.LipFunnelLowerLeft", "vrcft.artist.base.LipPuckerUpperRight", "vrcft.artist.base.LipPuckerUpperLeft", "vrcft.artist.base.LipPuckerLowerRight", "vrcft.artist.base.LipPuckerLowerLeft", "vrcft.artist.base.MouthUpperUpRight", "vrcft.artist.base.MouthUpperUpLeft", "vrcft.artist.base.MouthLowerDownRight", "vrcft.artist.base.MouthLowerDownLeft", "vrcft.artist.base.MouthUpperDeepenRight", "vrcft.artist.base.MouthUpperDeepenLeft", "vrcft.artist.base.MouthUpperRight", "vrcft.artist.base.MouthUpperLeft", "vrcft.artist.base.MouthLowerRight", "vrcft.artist.base.MouthLowerLeft", "vrcft.artist.base.MouthCornerPullRight", "vrcft.artist.base.MouthCornerPullLeft", "vrcft.artist.base.MouthCornerSlantRight", "vrcft.artist.base.MouthCornerSlantLeft", "vrcft.artist.base.MouthFrownRight", "vrcft.artist.base.MouthFrownLeft", "vrcft.artist.base.MouthStretchRight", "vrcft.artist.base.MouthStretchLeft", "vrcft.artist.base.MouthDimpleRight", "vrcft.artist.base.MouthDimpleLeft", "vrcft.artist.base.MouthRaiserUpper", "vrcft.artist.base.MouthRaiserLower", "vrcft.artist.base.MouthPressRight", "vrcft.artist.base.MouthPressLeft", "vrcft.artist.base.MouthTightenerRight", "vrcft.artist.base.MouthTightenerLeft", "vrcft.artist.base.TongueOut", "vrcft.artist.base.TongueUp", "vrcft.artist.base.TongueDown", "vrcft.artist.base.TongueRight", "vrcft.artist.base.TongueLeft", "vrcft.artist.base.TongueRoll", "vrcft.artist.base.TongueBendDown", "vrcft.artist.base.TongueCurlUp", "vrcft.artist.base.TongueSquish", "vrcft.artist.base.TongueFlat", "vrcft.artist.base.TongueTwistRight", "vrcft.artist.base.TongueTwistLeft", "vrcft.artist.base.SoftPalateClose", "vrcft.artist.base.ThroatSwallow", "vrcft.artist.base.NeckFlexRight", "vrcft.artist.base.NeckFlexLeft"]
+evidence = ["vrcft_artist"]
+metadata = { "selected_count" = 102 }

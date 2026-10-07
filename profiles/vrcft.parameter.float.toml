@@ -1,0 +1,2029 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeLeftX"
+label = "v2/EyeLeftX"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeLeftX"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 0, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeLeftX", "source_display_label" = "v2/EyeLeftX", "table_index" = 0, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeLeftY"
+label = "v2/EyeLeftY"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeLeftY"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 1, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeLeftY", "source_display_label" = "v2/EyeLeftY", "table_index" = 0, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeRightX"
+label = "v2/EyeRightX"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeRightX"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 2, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeRightX", "source_display_label" = "v2/EyeRightX", "table_index" = 0, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeRightY"
+label = "v2/EyeRightY"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeRightY"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 3, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeRightY", "source_display_label" = "v2/EyeRightY", "table_index" = 0, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeLidRight"
+label = "v2/EyeLidRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeLidRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 4, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeLidRight", "source_display_label" = "v2/EyeLidRight", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true, "openness_widen_boundary" = 0.75 }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeLidLeft"
+label = "v2/EyeLidLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeLidLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 5, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeLidLeft", "source_display_label" = "v2/EyeLidLeft", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true, "openness_widen_boundary" = 0.75 }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeLid"
+label = "v2/EyeLid"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeLid"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 6, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeLid", "source_display_label" = "v2/EyeLid", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true, "openness_widen_boundary" = 0.75 }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeSquintRight"
+label = "v2/EyeSquintRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeSquintRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 7, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeSquintRight", "source_display_label" = "v2/EyeSquintRight", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeSquintLeft"
+label = "v2/EyeSquintLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeSquintLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 8, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeSquintLeft", "source_display_label" = "v2/EyeSquintLeft", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeSquint"
+label = "v2/EyeSquint"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeSquint"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 9, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeSquint", "source_display_label" = "v2/EyeSquint", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.PupilDilation"
+label = "v2/PupilDilation"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/PupilDilation"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 10, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/PupilDilation", "source_display_label" = "v2/PupilDilation", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "pupil"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.PupilDiameterRight"
+label = "v2/PupilDiameterRight"
+value_type = "scalar"
+units = "cm"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/PupilDiameterRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 11, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/PupilDiameterRight", "source_display_label" = "v2/PupilDiameterRight", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true, "unit_basis" = "public parameter documentation cm; raw storage is mm and combined raw-name field is normalized; no identity inferred" }
+region = "pupil"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.PupilDiameterLeft"
+label = "v2/PupilDiameterLeft"
+value_type = "scalar"
+units = "cm"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/PupilDiameterLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 12, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/PupilDiameterLeft", "source_display_label" = "v2/PupilDiameterLeft", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true, "unit_basis" = "public parameter documentation cm; raw storage is mm and combined raw-name field is normalized; no identity inferred" }
+region = "pupil"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.PupilDiameter"
+label = "v2/PupilDiameter"
+value_type = "scalar"
+units = "cm"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/PupilDiameter"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 13, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/PupilDiameter", "source_display_label" = "v2/PupilDiameter", "table_index" = 1, "native_value_type" = "float", "prefixes_allowed" = true, "unit_basis" = "public parameter documentation cm; raw storage is mm and combined raw-name field is normalized; no identity inferred" }
+region = "pupil"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowPinchRight"
+label = "v2/BrowPinchRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowPinchRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 14, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowPinchRight", "source_display_label" = "v2/BrowPinchRight", "table_index" = 2, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowPinchLeft"
+label = "v2/BrowPinchLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowPinchLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 15, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowPinchLeft", "source_display_label" = "v2/BrowPinchLeft", "table_index" = 2, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowLowererRight"
+label = "v2/BrowLowererRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowLowererRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 16, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowLowererRight", "source_display_label" = "v2/BrowLowererRight", "table_index" = 2, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowLowererLeft"
+label = "v2/BrowLowererLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowLowererLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 17, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowLowererLeft", "source_display_label" = "v2/BrowLowererLeft", "table_index" = 2, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowInnerUpRight"
+label = "v2/BrowInnerUpRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowInnerUpRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 18, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowInnerUpRight", "source_display_label" = "v2/BrowInnerUpRight", "table_index" = 2, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowInnerUpLeft"
+label = "v2/BrowInnerUpLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowInnerUpLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 19, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowInnerUpLeft", "source_display_label" = "v2/BrowInnerUpLeft", "table_index" = 2, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowOuterUpRight"
+label = "v2/BrowOuterUpRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowOuterUpRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 20, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowOuterUpRight", "source_display_label" = "v2/BrowOuterUpRight", "table_index" = 2, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowOuterUpLeft"
+label = "v2/BrowOuterUpLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowOuterUpLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 21, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowOuterUpLeft", "source_display_label" = "v2/BrowOuterUpLeft", "table_index" = 2, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.NoseSneerRight"
+label = "v2/NoseSneerRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/NoseSneerRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 22, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/NoseSneerRight", "source_display_label" = "v2/NoseSneerRight", "table_index" = 3, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.NoseSneerLeft"
+label = "v2/NoseSneerLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/NoseSneerLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 23, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/NoseSneerLeft", "source_display_label" = "v2/NoseSneerLeft", "table_index" = 3, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.NasalDilationRight"
+label = "v2/NasalDilationRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/NasalDilationRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 24, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/NasalDilationRight", "source_display_label" = "v2/NasalDilationRight", "table_index" = 3, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.NasalDilationLeft"
+label = "v2/NasalDilationLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/NasalDilationLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 25, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/NasalDilationLeft", "source_display_label" = "v2/NasalDilationLeft", "table_index" = 3, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.NasalConstrictRight"
+label = "v2/NasalConstrictRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/NasalConstrictRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 26, "reason" = "Public parameter wording swaps side labels; side remains unresolved.", "native_parameter" = "v2/NasalConstrictRight", "source_display_label" = "v2/NasalConstrictRight", "table_index" = 3, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.NasalConstrictLeft"
+label = "v2/NasalConstrictLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/NasalConstrictLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 27, "reason" = "Public parameter wording swaps side labels; side remains unresolved.", "native_parameter" = "v2/NasalConstrictLeft", "source_display_label" = "v2/NasalConstrictLeft", "table_index" = 3, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "nose"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.CheekSquintRight"
+label = "v2/CheekSquintRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/CheekSquintRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 28, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/CheekSquintRight", "source_display_label" = "v2/CheekSquintRight", "table_index" = 4, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.CheekSquintLeft"
+label = "v2/CheekSquintLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/CheekSquintLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 29, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/CheekSquintLeft", "source_display_label" = "v2/CheekSquintLeft", "table_index" = 4, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.CheekPuffSuckRight"
+label = "v2/CheekPuffSuckRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/CheekPuffSuckRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 30, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/CheekPuffSuckRight", "source_display_label" = "v2/CheekPuffSuckRight", "table_index" = 4, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.CheekPuffSuckLeft"
+label = "v2/CheekPuffSuckLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/CheekPuffSuckLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 31, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/CheekPuffSuckLeft", "source_display_label" = "v2/CheekPuffSuckLeft", "table_index" = 4, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "cheek"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.JawOpen"
+label = "v2/JawOpen"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/JawOpen"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 32, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/JawOpen", "source_display_label" = "v2/JawOpen", "table_index" = 5, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthClosed"
+label = "v2/MouthClosed"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthClosed"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 33, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthClosed", "source_display_label" = "v2/MouthClosed", "table_index" = 5, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.JawX"
+label = "v2/JawX"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/JawX"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 34, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/JawX", "source_display_label" = "v2/JawX", "table_index" = 5, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.JawZ"
+label = "v2/JawZ"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/JawZ"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 35, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/JawZ", "source_display_label" = "v2/JawZ", "table_index" = 5, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.JawClench"
+label = "v2/JawClench"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/JawClench"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 36, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/JawClench", "source_display_label" = "v2/JawClench1", "table_index" = 5, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.JawMandibleRaise"
+label = "v2/JawMandibleRaise"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/JawMandibleRaise"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 37, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/JawMandibleRaise", "source_display_label" = "v2/JawMandibleRaise1", "table_index" = 5, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "jaw"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipSuckUpperRight"
+label = "v2/LipSuckUpperRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipSuckUpperRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 38, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipSuckUpperRight", "source_display_label" = "v2/LipSuckUpperRight", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipSuckUpperLeft"
+label = "v2/LipSuckUpperLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipSuckUpperLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 39, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipSuckUpperLeft", "source_display_label" = "v2/LipSuckUpperLeft", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipSuckLowerRight"
+label = "v2/LipSuckLowerRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipSuckLowerRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 40, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipSuckLowerRight", "source_display_label" = "v2/LipSuckLowerRight", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipSuckLowerLeft"
+label = "v2/LipSuckLowerLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipSuckLowerLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 41, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipSuckLowerLeft", "source_display_label" = "v2/LipSuckLowerLeft", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipSuckCornerRight"
+label = "v2/LipSuckCornerRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipSuckCornerRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 42, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipSuckCornerRight", "source_display_label" = "v2/LipSuckCornerRight", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipSuckCornerLeft"
+label = "v2/LipSuckCornerLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipSuckCornerLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 43, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipSuckCornerLeft", "source_display_label" = "v2/LipSuckCornerLeft", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipFunnelUpperRight"
+label = "v2/LipFunnelUpperRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipFunnelUpperRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 44, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipFunnelUpperRight", "source_display_label" = "v2/LipFunnelUpperRight", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipFunnelUpperLeft"
+label = "v2/LipFunnelUpperLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipFunnelUpperLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 45, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipFunnelUpperLeft", "source_display_label" = "v2/LipFunnelUpperLeft", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipFunnelLowerRight"
+label = "v2/LipFunnelLowerRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipFunnelLowerRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 46, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipFunnelLowerRight", "source_display_label" = "v2/LipFunnelLowerRight", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipFunnelLowerLeft"
+label = "v2/LipFunnelLowerLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipFunnelLowerLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 47, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipFunnelLowerLeft", "source_display_label" = "v2/LipFunnelLowerLeft", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipPuckerUpperRight"
+label = "v2/LipPuckerUpperRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipPuckerUpperRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 48, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipPuckerUpperRight", "source_display_label" = "v2/LipPuckerUpperRight", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipPuckerUpperLeft"
+label = "v2/LipPuckerUpperLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipPuckerUpperLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 49, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipPuckerUpperLeft", "source_display_label" = "v2/LipPuckerUpperLeft", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipPuckerLowerRight"
+label = "v2/LipPuckerLowerRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipPuckerLowerRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 50, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipPuckerLowerRight", "source_display_label" = "v2/LipPuckerLowerRight", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipPuckerLowerLeft"
+label = "v2/LipPuckerLowerLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipPuckerLowerLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 51, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipPuckerLowerLeft", "source_display_label" = "v2/LipPuckerLowerLeft", "table_index" = 6, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthUpperUpRight"
+label = "v2/MouthUpperUpRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthUpperUpRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 52, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthUpperUpRight", "source_display_label" = "v2/MouthUpperUpRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthUpperUpLeft"
+label = "v2/MouthUpperUpLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthUpperUpLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 53, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthUpperUpLeft", "source_display_label" = "v2/MouthUpperUpLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthLowerDownRight"
+label = "v2/MouthLowerDownRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthLowerDownRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 54, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthLowerDownRight", "source_display_label" = "v2/MouthLowerDownRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthLowerDownLeft"
+label = "v2/MouthLowerDownLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthLowerDownLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 55, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthLowerDownLeft", "source_display_label" = "v2/MouthLowerDownLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthUpperDeepenRight"
+label = "v2/MouthUpperDeepenRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthUpperDeepenRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 56, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthUpperDeepenRight", "source_display_label" = "v2/MouthUpperDeepenRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthUpperDeepenLeft"
+label = "v2/MouthUpperDeepenLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthUpperDeepenLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 57, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthUpperDeepenLeft", "source_display_label" = "v2/MouthUpperDeepenLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthUpperX"
+label = "v2/MouthUpperX"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthUpperX"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 58, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthUpperX", "source_display_label" = "v2/MouthUpperX", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthLowerX"
+label = "v2/MouthLowerX"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthLowerX"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 59, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthLowerX", "source_display_label" = "v2/MouthLowerX", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthCornerPullRight"
+label = "v2/MouthCornerPullRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthCornerPullRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 60, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthCornerPullRight", "source_display_label" = "v2/MouthCornerPullRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthCornerPullLeft"
+label = "v2/MouthCornerPullLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthCornerPullLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 61, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthCornerPullLeft", "source_display_label" = "v2/MouthCornerPullLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthCornerSlantRight"
+label = "v2/MouthCornerSlantRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthCornerSlantRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 62, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthCornerSlantRight", "source_display_label" = "v2/MouthCornerSlantRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthCornerSlantLeft"
+label = "v2/MouthCornerSlantLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthCornerSlantLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 63, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthCornerSlantLeft", "source_display_label" = "v2/MouthCornerSlantLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthDimpleRight"
+label = "v2/MouthDimpleRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthDimpleRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 64, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthDimpleRight", "source_display_label" = "v2/MouthDimpleRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthDimpleLeft"
+label = "v2/MouthDimpleLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthDimpleLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 65, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthDimpleLeft", "source_display_label" = "v2/MouthDimpleLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthFrownRight"
+label = "v2/MouthFrownRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthFrownRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 66, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthFrownRight", "source_display_label" = "v2/MouthFrownRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthFrownLeft"
+label = "v2/MouthFrownLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthFrownLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 67, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthFrownLeft", "source_display_label" = "v2/MouthFrownLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthStretchRight"
+label = "v2/MouthStretchRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthStretchRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 68, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthStretchRight", "source_display_label" = "v2/MouthStretchRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthStretchLeft"
+label = "v2/MouthStretchLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthStretchLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 69, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthStretchLeft", "source_display_label" = "v2/MouthStretchLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthRaiserUpper"
+label = "v2/MouthRaiserUpper"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthRaiserUpper"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 70, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthRaiserUpper", "source_display_label" = "v2/MouthRaiserUpper", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthRaiserLower"
+label = "v2/MouthRaiserLower"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthRaiserLower"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 71, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthRaiserLower", "source_display_label" = "v2/MouthRaiserLower", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthPressRight"
+label = "v2/MouthPressRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthPressRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 72, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthPressRight", "source_display_label" = "v2/MouthPressRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthPressLeft"
+label = "v2/MouthPressLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthPressLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 73, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthPressLeft", "source_display_label" = "v2/MouthPressLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthTightenerRight"
+label = "v2/MouthTightenerRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthTightenerRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 74, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthTightenerRight", "source_display_label" = "v2/MouthTightenerRight", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthTightenerLeft"
+label = "v2/MouthTightenerLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthTightenerLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 75, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthTightenerLeft", "source_display_label" = "v2/MouthTightenerLeft", "table_index" = 7, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.TongueOut"
+label = "v2/TongueOut"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/TongueOut"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 76, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/TongueOut", "source_display_label" = "v2/TongueOut", "table_index" = 8, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.TongueX"
+label = "v2/TongueX"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/TongueX"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 77, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/TongueX", "source_display_label" = "v2/TongueX", "table_index" = 8, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.TongueY"
+label = "v2/TongueY"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/TongueY"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 78, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/TongueY", "source_display_label" = "v2/TongueY", "table_index" = 8, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.TongueRoll"
+label = "v2/TongueRoll"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/TongueRoll"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 79, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/TongueRoll", "source_display_label" = "v2/TongueRoll", "table_index" = 8, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.TongueArchY"
+label = "v2/TongueArchY"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/TongueArchY"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 80, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/TongueArchY", "source_display_label" = "v2/TongueArchY", "table_index" = 8, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.TongueShape"
+label = "v2/TongueShape"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/TongueShape"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 81, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/TongueShape", "source_display_label" = "v2/TongueShape", "table_index" = 8, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.TongueTwistRight"
+label = "v2/TongueTwistRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/TongueTwistRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 82, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/TongueTwistRight", "source_display_label" = "v2/TongueTwistRight", "table_index" = 8, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.TongueTwistLeft"
+label = "v2/TongueTwistLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/TongueTwistLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 83, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/TongueTwistLeft", "source_display_label" = "v2/TongueTwistLeft", "table_index" = 8, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "tongue"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.SoftPalateClose"
+label = "v2/SoftPalateClose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/SoftPalateClose"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 84, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/SoftPalateClose", "source_display_label" = "v2/SoftPalateClose", "table_index" = 9, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.ThroatSwallow"
+label = "v2/ThroatSwallow"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/ThroatSwallow"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 85, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/ThroatSwallow", "source_display_label" = "v2/ThroatSwallow", "table_index" = 9, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.NeckFlexRight"
+label = "v2/NeckFlexRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/NeckFlexRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 86, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/NeckFlexRight", "source_display_label" = "v2/NeckFlexRight", "table_index" = 9, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.NeckFlexLeft"
+label = "v2/NeckFlexLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/NeckFlexLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 87, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/NeckFlexLeft", "source_display_label" = "v2/NeckFlexLeft", "table_index" = 9, "native_value_type" = "float", "prefixes_allowed" = true }
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeX"
+label = "v2/EyeX"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeX"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 88, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeX", "source_display_label" = "v2/EyeX", "table_index" = 10, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.EyeY"
+label = "v2/EyeY"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/EyeY"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 89, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeY", "source_display_label" = "v2/EyeY", "table_index" = 10, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "eyelid"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowDownRight"
+label = "v2/BrowDownRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowDownRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 90, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowDownRight", "source_display_label" = "v2/BrowDownRight", "table_index" = 11, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowDownLeft"
+label = "v2/BrowDownLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowDownLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 91, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowDownLeft", "source_display_label" = "v2/BrowDownLeft", "table_index" = 11, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowOuterUp"
+label = "v2/BrowOuterUp"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowOuterUp"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 92, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowOuterUp", "source_display_label" = "v2/BrowOuterUp", "table_index" = 11, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowInnerUp"
+label = "v2/BrowInnerUp"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowInnerUp"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 93, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowInnerUp", "source_display_label" = "v2/BrowInnerUp", "table_index" = 11, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowUp"
+label = "v2/BrowUp"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowUp"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 94, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowUp", "source_display_label" = "v2/BrowUp", "table_index" = 11, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowExpressionRight"
+label = "v2/BrowExpressionRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowExpressionRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 95, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowExpressionRight", "source_display_label" = "v2/BrowExpressionRight", "table_index" = 11, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowExpressionLeft"
+label = "v2/BrowExpressionLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowExpressionLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 96, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowExpressionLeft", "source_display_label" = "v2/BrowExpressionLeft", "table_index" = 11, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.BrowExpression"
+label = "v2/BrowExpression"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/BrowExpression"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 97, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/BrowExpression", "source_display_label" = "v2/BrowExpression", "table_index" = 11, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "brow"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthX"
+label = "v2/MouthX"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthX"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 98, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthX", "source_display_label" = "v2/MouthX", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthUpperUp"
+label = "v2/MouthUpperUp"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthUpperUp"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 99, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthUpperUp", "source_display_label" = "v2/MouthUpperUp", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthLowerDown"
+label = "v2/MouthLowerDown"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthLowerDown"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 100, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthLowerDown", "source_display_label" = "v2/MouthLowerDown", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthOpen"
+label = "v2/MouthOpen"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthOpen"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 101, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthOpen", "source_display_label" = "v2/MouthOpen", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthSmileRight"
+label = "v2/MouthSmileRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthSmileRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 102, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthSmileRight", "source_display_label" = "v2/MouthSmileRight", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthSmileLeft"
+label = "v2/MouthSmileLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthSmileLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 103, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthSmileLeft", "source_display_label" = "v2/MouthSmileLeft", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthSadRight"
+label = "v2/MouthSadRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthSadRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 104, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthSadRight", "source_display_label" = "v2/MouthSadRight", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.MouthSadLeft"
+label = "v2/MouthSadLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/MouthSadLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 105, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthSadLeft", "source_display_label" = "v2/MouthSadLeft", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.SmileFrownRight"
+label = "v2/SmileFrownRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/SmileFrownRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 106, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/SmileFrownRight", "source_display_label" = "v2/SmileFrownRight", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.SmileFrownLeft"
+label = "v2/SmileFrownLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/SmileFrownLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 107, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/SmileFrownLeft", "source_display_label" = "v2/SmileFrownLeft", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.SmileFrown"
+label = "v2/SmileFrown"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/SmileFrown"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 108, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/SmileFrown", "source_display_label" = "v2/SmileFrown", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.SmileSadRight"
+label = "v2/SmileSadRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/SmileSadRight"
+surface = "vrcft.parameter.float"
+side = "right"
+metadata = { "inventory_ordinal" = 109, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/SmileSadRight", "source_display_label" = "v2/SmileSadRight", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.SmileSadLeft"
+label = "v2/SmileSadLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/SmileSadLeft"
+surface = "vrcft.parameter.float"
+side = "left"
+metadata = { "inventory_ordinal" = 110, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/SmileSadLeft", "source_display_label" = "v2/SmileSadLeft", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.SmileSad"
+label = "v2/SmileSad"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/SmileSad"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 111, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/SmileSad", "source_display_label" = "v2/SmileSad", "table_index" = 12, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "other"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipSuckUpper"
+label = "v2/LipSuckUpper"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipSuckUpper"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 112, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipSuckUpper", "source_display_label" = "v2/LipSuckUpper", "table_index" = 13, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipSuckLower"
+label = "v2/LipSuckLower"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipSuckLower"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 113, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipSuckLower", "source_display_label" = "v2/LipSuckLower", "table_index" = 13, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipSuck"
+label = "v2/LipSuck"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipSuck"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 114, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipSuck", "source_display_label" = "v2/LipSuck", "table_index" = 13, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipFunnelUpper"
+label = "v2/LipFunnelUpper"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipFunnelUpper"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 115, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipFunnelUpper", "source_display_label" = "v2/LipFunnelUpper", "table_index" = 13, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipFunnelLower"
+label = "v2/LipFunnelLower"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipFunnelLower"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 116, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipFunnelLower", "source_display_label" = "v2/LipFunnelLower", "table_index" = 13, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipFunnel"
+label = "v2/LipFunnel"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipFunnel"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 117, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipFunnel", "source_display_label" = "v2/LipFunnel", "table_index" = 13, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipPuckerUpper"
+label = "v2/LipPuckerUpper"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipPuckerUpper"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 118, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipPuckerUpper", "source_display_label" = "v2/LipPuckerUpper", "table_index" = 13, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipPuckerLower"
+label = "v2/LipPuckerLower"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipPuckerLower"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 119, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipPuckerLower", "source_display_label" = "v2/LipPuckerLower", "table_index" = 13, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.LipPucker"
+label = "v2/LipPucker"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/LipPucker"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 120, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/LipPucker", "source_display_label" = "v2/LipPucker", "table_index" = 13, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "mouth"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.NoseSneer"
+label = "v2/NoseSneer"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/NoseSneer"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 121, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/NoseSneer", "source_display_label" = "v2/NoseSneer", "table_index" = 14, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "nose"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.CheekSquint"
+label = "v2/CheekSquint"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/CheekSquint"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 122, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/CheekSquint", "source_display_label" = "v2/CheekSquint", "table_index" = 14, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "cheek"
+
+[[signals]]
+id = "vrcft.parameter.float.v2.CheekPuffSuck"
+label = "v2/CheekPuffSuck"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "vrcft.parameter.float: native basis; no canonical calibration established"
+disposition = "unresolved"
+evidence = ["vrcft_parameters", "vrcft_float"]
+evidence_status = "verified_current"
+native_id = "v2/CheekPuffSuck"
+surface = "vrcft.parameter.float"
+side = "shared"
+metadata = { "inventory_ordinal" = 123, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/CheekPuffSuck", "source_display_label" = "v2/CheekPuffSuck", "table_index" = 14, "native_value_type" = "float", "prefixes_allowed" = true }
+coupling = "composite"
+region = "cheek"
+
+[[profiles]]
+id = "vrcft.parameter.float"
+label = "VRCFT 124 public numeric avatar parameters"
+signal_ids = ["vrcft.parameter.float.v2.EyeLeftX", "vrcft.parameter.float.v2.EyeLeftY", "vrcft.parameter.float.v2.EyeRightX", "vrcft.parameter.float.v2.EyeRightY", "vrcft.parameter.float.v2.EyeLidRight", "vrcft.parameter.float.v2.EyeLidLeft", "vrcft.parameter.float.v2.EyeLid", "vrcft.parameter.float.v2.EyeSquintRight", "vrcft.parameter.float.v2.EyeSquintLeft", "vrcft.parameter.float.v2.EyeSquint", "vrcft.parameter.float.v2.PupilDilation", "vrcft.parameter.float.v2.PupilDiameterRight", "vrcft.parameter.float.v2.PupilDiameterLeft", "vrcft.parameter.float.v2.PupilDiameter", "vrcft.parameter.float.v2.BrowPinchRight", "vrcft.parameter.float.v2.BrowPinchLeft", "vrcft.parameter.float.v2.BrowLowererRight", "vrcft.parameter.float.v2.BrowLowererLeft", "vrcft.parameter.float.v2.BrowInnerUpRight", "vrcft.parameter.float.v2.BrowInnerUpLeft", "vrcft.parameter.float.v2.BrowOuterUpRight", "vrcft.parameter.float.v2.BrowOuterUpLeft", "vrcft.parameter.float.v2.NoseSneerRight", "vrcft.parameter.float.v2.NoseSneerLeft", "vrcft.parameter.float.v2.NasalDilationRight", "vrcft.parameter.float.v2.NasalDilationLeft", "vrcft.parameter.float.v2.NasalConstrictRight", "vrcft.parameter.float.v2.NasalConstrictLeft", "vrcft.parameter.float.v2.CheekSquintRight", "vrcft.parameter.float.v2.CheekSquintLeft", "vrcft.parameter.float.v2.CheekPuffSuckRight", "vrcft.parameter.float.v2.CheekPuffSuckLeft", "vrcft.parameter.float.v2.JawOpen", "vrcft.parameter.float.v2.MouthClosed", "vrcft.parameter.float.v2.JawX", "vrcft.parameter.float.v2.JawZ", "vrcft.parameter.float.v2.JawClench", "vrcft.parameter.float.v2.JawMandibleRaise", "vrcft.parameter.float.v2.LipSuckUpperRight", "vrcft.parameter.float.v2.LipSuckUpperLeft", "vrcft.parameter.float.v2.LipSuckLowerRight", "vrcft.parameter.float.v2.LipSuckLowerLeft", "vrcft.parameter.float.v2.LipSuckCornerRight", "vrcft.parameter.float.v2.LipSuckCornerLeft", "vrcft.parameter.float.v2.LipFunnelUpperRight", "vrcft.parameter.float.v2.LipFunnelUpperLeft", "vrcft.parameter.float.v2.LipFunnelLowerRight", "vrcft.parameter.float.v2.LipFunnelLowerLeft", "vrcft.parameter.float.v2.LipPuckerUpperRight", "vrcft.parameter.float.v2.LipPuckerUpperLeft", "vrcft.parameter.float.v2.LipPuckerLowerRight", "vrcft.parameter.float.v2.LipPuckerLowerLeft", "vrcft.parameter.float.v2.MouthUpperUpRight", "vrcft.parameter.float.v2.MouthUpperUpLeft", "vrcft.parameter.float.v2.MouthLowerDownRight", "vrcft.parameter.float.v2.MouthLowerDownLeft", "vrcft.parameter.float.v2.MouthUpperDeepenRight", "vrcft.parameter.float.v2.MouthUpperDeepenLeft", "vrcft.parameter.float.v2.MouthUpperX", "vrcft.parameter.float.v2.MouthLowerX", "vrcft.parameter.float.v2.MouthCornerPullRight", "vrcft.parameter.float.v2.MouthCornerPullLeft", "vrcft.parameter.float.v2.MouthCornerSlantRight", "vrcft.parameter.float.v2.MouthCornerSlantLeft", "vrcft.parameter.float.v2.MouthDimpleRight", "vrcft.parameter.float.v2.MouthDimpleLeft", "vrcft.parameter.float.v2.MouthFrownRight", "vrcft.parameter.float.v2.MouthFrownLeft", "vrcft.parameter.float.v2.MouthStretchRight", "vrcft.parameter.float.v2.MouthStretchLeft", "vrcft.parameter.float.v2.MouthRaiserUpper", "vrcft.parameter.float.v2.MouthRaiserLower", "vrcft.parameter.float.v2.MouthPressRight", "vrcft.parameter.float.v2.MouthPressLeft", "vrcft.parameter.float.v2.MouthTightenerRight", "vrcft.parameter.float.v2.MouthTightenerLeft", "vrcft.parameter.float.v2.TongueOut", "vrcft.parameter.float.v2.TongueX", "vrcft.parameter.float.v2.TongueY", "vrcft.parameter.float.v2.TongueRoll", "vrcft.parameter.float.v2.TongueArchY", "vrcft.parameter.float.v2.TongueShape", "vrcft.parameter.float.v2.TongueTwistRight", "vrcft.parameter.float.v2.TongueTwistLeft", "vrcft.parameter.float.v2.SoftPalateClose", "vrcft.parameter.float.v2.ThroatSwallow", "vrcft.parameter.float.v2.NeckFlexRight", "vrcft.parameter.float.v2.NeckFlexLeft", "vrcft.parameter.float.v2.EyeX", "vrcft.parameter.float.v2.EyeY", "vrcft.parameter.float.v2.BrowDownRight", "vrcft.parameter.float.v2.BrowDownLeft", "vrcft.parameter.float.v2.BrowOuterUp", "vrcft.parameter.float.v2.BrowInnerUp", "vrcft.parameter.float.v2.BrowUp", "vrcft.parameter.float.v2.BrowExpressionRight", "vrcft.parameter.float.v2.BrowExpressionLeft", "vrcft.parameter.float.v2.BrowExpression", "vrcft.parameter.float.v2.MouthX", "vrcft.parameter.float.v2.MouthUpperUp", "vrcft.parameter.float.v2.MouthLowerDown", "vrcft.parameter.float.v2.MouthOpen", "vrcft.parameter.float.v2.MouthSmileRight", "vrcft.parameter.float.v2.MouthSmileLeft", "vrcft.parameter.float.v2.MouthSadRight", "vrcft.parameter.float.v2.MouthSadLeft", "vrcft.parameter.float.v2.SmileFrownRight", "vrcft.parameter.float.v2.SmileFrownLeft", "vrcft.parameter.float.v2.SmileFrown", "vrcft.parameter.float.v2.SmileSadRight", "vrcft.parameter.float.v2.SmileSadLeft", "vrcft.parameter.float.v2.SmileSad", "vrcft.parameter.float.v2.LipSuckUpper", "vrcft.parameter.float.v2.LipSuckLower", "vrcft.parameter.float.v2.LipSuck", "vrcft.parameter.float.v2.LipFunnelUpper", "vrcft.parameter.float.v2.LipFunnelLower", "vrcft.parameter.float.v2.LipFunnel", "vrcft.parameter.float.v2.LipPuckerUpper", "vrcft.parameter.float.v2.LipPuckerLower", "vrcft.parameter.float.v2.LipPucker", "vrcft.parameter.float.v2.NoseSneer", "vrcft.parameter.float.v2.CheekSquint", "vrcft.parameter.float.v2.CheekPuffSuck"]
+evidence = ["vrcft_parameters", "vrcft_float"]
+metadata = { "selected_count" = 124, "unlisted_parameters" = "excluded; not guessed" }

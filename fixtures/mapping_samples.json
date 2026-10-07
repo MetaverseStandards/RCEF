@@ -1,0 +1,52 @@
+{
+  "license": "CC-BY-SA-4.0",
+  "authorship": "RCEF contributors (2026)",
+  "affine": [
+    {
+      "input": -1.0,
+      "expected": 0.0
+    },
+    {
+      "input": 0.0,
+      "expected": 0.5
+    },
+    {
+      "input": 1.0,
+      "expected": 1.0
+    }
+  ],
+  "bilateral": [
+    {
+      "input": [
+        1.0,
+        0.0
+      ],
+      "expected": 0.5
+    },
+    {
+      "input": [
+        0.0,
+        1.0
+      ],
+      "expected": 0.5
+    },
+    {
+      "input": [
+        0.0,
+        0.0
+      ],
+      "expected": 0.0
+    },
+    {
+      "input": [
+        1.0,
+        1.0
+      ],
+      "expected": 1.0
+    }
+  ],
+  "identity": {
+    "input": 0.25,
+    "expected": 0.25
+  }
+}

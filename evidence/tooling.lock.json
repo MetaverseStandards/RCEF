@@ -1,0 +1,23 @@
+{
+  "dependency": "msf_tools",
+  "file_sha256": {
+    "__init__.py": "0a803a12ba8d7a1867cec0140f52b41f242b425adcef624da8234a88afcd8c02",
+    "__main__.py": "8ba25604453e1073429d6b3f11364fb7698e94dacb945fa853ad26555cfd01fc",
+    "authoring.py": "559a38349709bee88db0b628b92ec621be3c63457942f367069b7f772c5f5cad",
+    "cli.py": "dddb0cfe82546cf54a7e75f1cd021eb25d9f09e9f60baf4bcff9dd575612a43d",
+    "common.py": "adca1c428fa80e0c3d055fbcf05fe3f140119a045eed1759133caa94455ab76e",
+    "geometry.py": "fa09191457fe8b054db6085426c3a890edeae098145d427614025ab2b3f38ce8",
+    "mapping.py": "89c6d196ae6c9c9b4707f1f59740a0d69e9df8b7bbec021671bac4d8fd825a58",
+    "math3d.py": "1647a0055d4bcb5a81092b2179df3b6081cd0717af44aff6fb0e148b8ac28065",
+    "pack.py": "94316a907d548547194cb80d0c3530c8b5d622de137852e95ee90fd8b4190838",
+    "report.py": "37ec87806c02b00c7a9dd98552331c7e4599eb990d9602365b529f2d8722b831",
+    "snapshot.py": "37fbe680242c41348297657f14e374646b8b2aaac848e2c3a9c56c9521a6d5de"
+  },
+  "fingerprint_algorithm": "SHA256 of UTF8 json.dumps(file_sha256,sort_keys=True), default separators",
+  "git_commit": "acf869d3d7b05d8e9653284bc9a0197412519c75",
+  "operator_version": "1.0",
+  "package_version": "0.1.0",
+  "schema_version": "1.0",
+  "source_fingerprint_sha256": "f74e5efacb844bbc2a60bf77a60824383387d5f565f81a8a551b9dd18dace82e",
+  "status": "tested immutable local Git commit; shared remote publisher not selected"
+}
