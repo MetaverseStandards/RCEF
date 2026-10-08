@@ -13,9 +13,9 @@ evidence = ["apple_eye"]
 evidence_status = "verified_current"
 native_id = "leftEyeTransform"
 surface = "arkit.ancillary"
-side = "shared"
+side = "left"
 metadata = { "inventory_ordinal" = 0, "reason" = "4x4 eye transform is inventoried; scalar wire v1 does not execute transforms.", "native_value_type" = "matrix4x4" }
-region = "eyelid"
+region = "gaze"
 
 [[profiles]]
 id = "arkit.ancillary"

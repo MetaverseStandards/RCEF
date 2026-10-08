@@ -13,9 +13,9 @@ evidence = ["vrcft_parameters", "vrcft_float"]
 evidence_status = "verified_current"
 native_id = "v2/EyeLeftX"
 surface = "vrcft.parameter.float"
-side = "shared"
+side = "left"
 metadata = { "inventory_ordinal" = 0, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeLeftX", "source_display_label" = "v2/EyeLeftX", "table_index" = 0, "native_value_type" = "float", "prefixes_allowed" = true }
-region = "eyelid"
+region = "gaze"
 
 [[signals]]
 id = "vrcft.parameter.float.v2.EyeLeftY"
@@ -29,9 +29,9 @@ evidence = ["vrcft_parameters", "vrcft_float"]
 evidence_status = "verified_current"
 native_id = "v2/EyeLeftY"
 surface = "vrcft.parameter.float"
-side = "shared"
+side = "left"
 metadata = { "inventory_ordinal" = 1, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeLeftY", "source_display_label" = "v2/EyeLeftY", "table_index" = 0, "native_value_type" = "float", "prefixes_allowed" = true }
-region = "eyelid"
+region = "gaze"
 
 [[signals]]
 id = "vrcft.parameter.float.v2.EyeRightX"
@@ -45,9 +45,9 @@ evidence = ["vrcft_parameters", "vrcft_float"]
 evidence_status = "verified_current"
 native_id = "v2/EyeRightX"
 surface = "vrcft.parameter.float"
-side = "shared"
+side = "right"
 metadata = { "inventory_ordinal" = 2, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeRightX", "source_display_label" = "v2/EyeRightX", "table_index" = 0, "native_value_type" = "float", "prefixes_allowed" = true }
-region = "eyelid"
+region = "gaze"
 
 [[signals]]
 id = "vrcft.parameter.float.v2.EyeRightY"
@@ -61,9 +61,9 @@ evidence = ["vrcft_parameters", "vrcft_float"]
 evidence_status = "verified_current"
 native_id = "v2/EyeRightY"
 surface = "vrcft.parameter.float"
-side = "shared"
+side = "right"
 metadata = { "inventory_ordinal" = 3, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeRightY", "source_display_label" = "v2/EyeRightY", "table_index" = 0, "native_value_type" = "float", "prefixes_allowed" = true }
-region = "eyelid"
+region = "gaze"
 
 [[signals]]
 id = "vrcft.parameter.float.v2.EyeLidRight"
@@ -543,7 +543,7 @@ native_id = "v2/MouthClosed"
 surface = "vrcft.parameter.float"
 side = "shared"
 metadata = { "inventory_ordinal" = 33, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/MouthClosed", "source_display_label" = "v2/MouthClosed", "table_index" = 5, "native_value_type" = "float", "prefixes_allowed" = true }
-region = "eyelid"
+region = "mouth"
 
 [[signals]]
 id = "vrcft.parameter.float.v2.JawX"
@@ -1424,7 +1424,7 @@ surface = "vrcft.parameter.float"
 side = "shared"
 metadata = { "inventory_ordinal" = 88, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeX", "source_display_label" = "v2/EyeX", "table_index" = 10, "native_value_type" = "float", "prefixes_allowed" = true }
 coupling = "composite"
-region = "eyelid"
+region = "gaze"
 
 [[signals]]
 id = "vrcft.parameter.float.v2.EyeY"
@@ -1441,7 +1441,7 @@ surface = "vrcft.parameter.float"
 side = "shared"
 metadata = { "inventory_ordinal" = 89, "reason" = "Public avatar parameter surface; no equivalence with transport or artist calibration established.", "native_parameter" = "v2/EyeY", "source_display_label" = "v2/EyeY", "table_index" = 10, "native_value_type" = "float", "prefixes_allowed" = true }
 coupling = "composite"
-region = "eyelid"
+region = "gaze"
 
 [[signals]]
 id = "vrcft.parameter.float.v2.BrowDownRight"

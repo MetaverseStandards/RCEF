@@ -2,7 +2,17 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-Edit TOML authoring, then run `python3 -B check.py --tools-path ../msf-tools --write`, review all generated diffs and run `python3 -B tests/test_parity.py --tools-path ../msf-tools`. The separately maintained shared tooling owns rendering, validation and evaluation algorithms. Use a reviewed dependency revision recorded in `evidence/tooling.lock.json`.
+Edit TOML authoring, then run the following from the RCEF checkout, selecting the reviewed shared checkout in the first line:
+
+```sh
+export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
+export PYTHONPATH="$MSF_TOOLS_PATH"
+python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
+python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
+python3 -B -m unittest discover -s tests -v
+```
+
+Review all generated diffs. Acceptance requires both the drift check and discovery of every `tests/test_*.py` file, including metadata, scalar parity and the published gate regression. Both environment variables select the same shared checkout for discovery and its subprocess tests. The separately maintained shared tooling owns rendering, validation and evaluation algorithms. Use a reviewed dependency revision recorded in `evidence/tooling.lock.json`.
 
 New or changed provider entries need a public primary source, exact revision or retrieval/content digest, locator, original summary, units/domain/calibration evidence and explicit disposition. Documentation positions are inventory ordinals unless the source defines a native index. Preserve source contradictions and unresolved mappings. Names alone do not justify cross-provider identities.
 

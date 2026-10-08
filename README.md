@@ -13,10 +13,14 @@ The canonical subset has 21 explicitly provider-calibrated scalar projections sp
 Python 3.11+ and `msf_tools` are required. Install the separately maintained shared tools, or supply an explicit local checkout:
 
 ```sh
-python3 -B check.py --tools-path ../msf-tools --write
-python3 -B check.py --tools-path ../msf-tools
-python3 -B tests/test_parity.py --tools-path ../msf-tools
+export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
+export PYTHONPATH="$MSF_TOOLS_PATH"
+python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
+python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
+python3 -B -m unittest discover -s tests -v
 ```
+
+Run these commands from the RCEF checkout. Select the reviewed shared checkout in the first line. Acceptance requires both the drift check and unittest discovery, which runs every `tests/test_*.py` file, including metadata, scalar parity and the published gate regression. Both environment variables select that same checkout during discovery and its subprocess tests.
 
 The tested immutable dependency commit and source fingerprints are in [tooling.lock.json](evidence/tooling.lock.json). Check out that commit before using a local tools path. Without `--tools-path`, the installed package is used. The wrapper delegates to `python3 -B -m msf_tools check AUTHORING --pack PATH --csv PATH [--write]`. No automatic cloning or source download occurs during checking.
 

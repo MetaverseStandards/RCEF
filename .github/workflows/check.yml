@@ -16,6 +16,9 @@ permissions:
 jobs:
   parity:
     runs-on: ubuntu-latest
+    env:
+      MSF_TOOLS_PATH: ${{ github.workspace }}/.ci-tools
+      PYTHONPATH: ${{ github.workspace }}/.ci-tools
     strategy:
       matrix:
         python: ['3.11', '3.12']
@@ -45,5 +48,5 @@ jobs:
         working-directory: RCEF
       - run: python -B check.py --tools-path ../.ci-tools
         working-directory: RCEF
-      - run: python -B tests/test_parity.py --tools-path ../.ci-tools
+      - run: python -B -m unittest discover -s tests -v
         working-directory: RCEF

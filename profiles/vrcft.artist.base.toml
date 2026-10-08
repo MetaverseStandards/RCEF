@@ -639,7 +639,7 @@ native_id = "MouthClosed"
 surface = "vrcft.artist.base"
 side = "shared"
 metadata = { "inventory_ordinal" = 39, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthClosed", "selected" = true }
-region = "eyelid"
+region = "mouth"
 
 [[signals]]
 id = "vrcft.artist.base.JawRight"
