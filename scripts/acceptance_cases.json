@@ -1,0 +1,92 @@
+{
+  "license": "CC-BY-SA-4.0",
+  "authorship": "RCEF contributors (2026)",
+  "contract": "CONTRACT_03; accepted readiness21 groups; recursive gate controls run in the full gate only.",
+  "groups": [
+    "SEM-01",
+    "SEM-02",
+    "SEM-03",
+    "SEM-04",
+    "SEM-05",
+    "SEM-06",
+    "SEM-07",
+    "SEM-08",
+    "DER-01",
+    "DER-02",
+    "DER-03",
+    "FR-01",
+    "FR-02",
+    "FR-03",
+    "NAT-01",
+    "NAT-02",
+    "NAT-03",
+    "NAT-04",
+    "NAT-05",
+    "NAT-06",
+    "NAT-07"
+  ],
+  "required_methods": {
+    "test_gate.py": [
+      "test_gate.Gate.test_published_gates_reject_coherent_wrong_metadata"
+    ],
+    "test_hardening.py": [
+      "test_hardening.Hardening.test_sem01_literal_identities_and_63_single_direction_comparisons",
+      "test_hardening.Hardening.test_sem02_each_empty_own_evidence_refuses_execution",
+      "test_hardening.Hardening.test_sem03_all_27_status_combinations",
+      "test_hardening.Hardening.test_sem03_each_input_intermediate_output_and_zero_weight_isolated",
+      "test_hardening.Hardening.test_sem04_rf12_at_three_locations",
+      "test_hardening.Hardening.test_sem04_mr12_both_orders_and_both_correct_positives",
+      "test_hardening.Hardening.test_sem04_all_bad_reference_order_and_proposed_rule_current_endpoints",
+      "test_hardening.Hardening.test_sem04_unknown_missing_and_invalid_status_structural_controls",
+      "test_hardening.Hardening.test_sem05_identity_neutral_side_presence_value_and_null",
+      "test_hardening.Hardening.test_sem06_coupling_presence_and_values",
+      "test_hardening.Hardening.test_sem07_literal_audit_rejects_paired_relabels_and_invented_neutral",
+      "test_hardening.Hardening.test_sem08_existing_identity_basis_domain_and_units",
+      "test_hardening.Hardening.test_der01_affine_and_bilateral_literal_outputs_and_losses",
+      "test_hardening.Hardening.test_der02_declared_loss_assumptions_and_allowed_numerical_changes",
+      "test_hardening.Hardening.test_der03_proposed_mixed_basis_retains_statuses_and_losses",
+      "test_hardening.Hardening.test_fr01_empty_and_missing_top_level_fields",
+      "test_hardening.Hardening.test_fr02_explicit_validity_and_paired_values",
+      "test_hardening.Hardening.test_fr03_timestamp_types_nonfinite_giant_and_domain"
+    ],
+    "test_metadata.py": [
+      "test_metadata.Metadata.test_primary_metadata_rows_in_authoring",
+      "test_metadata.Metadata.test_primary_metadata_rows_in_generated_pack",
+      "test_metadata.Metadata.test_only_reviewed_fields_change",
+      "test_metadata.Metadata.test_version_axes_and_rendered_bytes",
+      "test_metadata.Metadata.test_inventory_counts_names_and_order",
+      "test_metadata.Metadata.test_matrix_exclusion_and_unedited_direction_controls",
+      "test_metadata.Metadata.test_all_21_native_scalar_bases",
+      "test_metadata.Metadata.test_63_independent_scalar_endpoints",
+      "test_metadata.Metadata.test_csv_coverage_and_checksums_preservation"
+    ],
+    "test_native_consumer.py": [
+      "test_native_consumer.NativeConsumer.test_nat01_full_vector_and_integer_numeric_inputs",
+      "test_native_consumer.NativeConsumer.test_nat02_strict_types_setter_timing_and_atomic_state",
+      "test_native_consumer.NativeConsumer.test_nat03_shape_bindings_writers_and_instruction_order",
+      "test_native_consumer.NativeConsumer.test_nat04_large_finite_nonfinite_and_overflow",
+      "test_native_consumer.NativeConsumer.test_nat05_all_slots_placeholders_and_required_validity",
+      "test_native_consumer.NativeConsumer.test_nat06_caller_outer_nested_and_return_copies",
+      "test_native_consumer.NativeConsumer.test_nat06_old_getters_survive_vector_replacement_and_clear",
+      "test_native_consumer.NativeConsumer.test_nat07_matrix_order_storage_and_original_projective_refusal",
+      "test_native_consumer.NativeConsumer.test_nat07_huge_axes_nonfinite_and_multiply_overflow"
+    ],
+    "test_parity.py": [
+      "test_parity.Parity.test_affine_analytical_endpoints_and_midpoint",
+      "test_parity.Parity.test_bilateral_loss_opt_in_and_irrecoverable_asymmetry",
+      "test_parity.Parity.test_all_provider_identities_share_explicit_calibration",
+      "test_parity.Parity.test_unresolved_cross_provider_refused",
+      "test_parity.Parity.test_invalid_missing_boolean_nonfinite_and_domain_samples",
+      "test_parity.Parity.test_output_domain_checked_without_clamping",
+      "test_parity.Parity.test_strict_authoring_duplicate_unknown_reference_and_operator",
+      "test_parity.Parity.test_output_drift_missing_extra_modified_and_reordered",
+      "test_parity.Parity.test_inventory_source_counts_and_semantic_constraints",
+      "test_parity.Parity.test_coverage_contains_all_evidence_and_partitions"
+    ],
+    "test_qualification_gate.py": [
+      "test_qualification_gate.QualificationGate.test_copied_public_gate_exercises_direct_new_qualification_probe",
+      "test_qualification_gate.QualificationGate.test_configured_public_gate_refuses_controlled_native_skip",
+      "test_qualification_gate.QualificationGate.test_configured_public_gate_refuses_omitted_required_method"
+    ]
+  }
+}

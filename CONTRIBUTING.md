@@ -9,10 +9,10 @@ export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
 export PYTHONPATH="$MSF_TOOLS_PATH"
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
-python3 -B -m unittest discover -s tests -v
+python3 -B scripts/run_acceptance.py --tools-path "$MSF_TOOLS_PATH"
 ```
 
-Review all generated diffs. Acceptance requires both the drift check and discovery of every `tests/test_*.py` file, including metadata, scalar parity and the published gate regression. Both environment variables select the same shared checkout for discovery and its subprocess tests. The separately maintained shared tooling owns rendering, validation and evaluation algorithms. Use a reviewed dependency revision recorded in `evidence/tooling.lock.json`.
+Review all generated diffs. Acceptance requires the drift check and the qualification runner, which discovers every `tests/test_*.py` file and checks the pinned required methods. An unconfigured native run explicitly reports native unqualified; a configured `MSF_NATIVE_PATH` requires its accepted `MSF_NATIVE_SHA256` and zero skips. Use the binding artifact for the exact interpreter. Tests preserve declared storage/arithmetic scope; provider-frame and physiological admission remain separate. Both environment variables select the same shared checkout for discovery and its subprocess tests. The separately maintained shared tooling owns rendering, validation and evaluation algorithms. For local R-HARD qualification, use the accepted source archive and runtime-specific native artifact recorded in the reviewed consumer draft. The earlier `evidence/tooling.lock.json` remains pending separate R-DEP verifier and lock integration.
 
 New or changed provider entries need a public primary source, exact revision or retrieval/content digest, locator, original summary, units/domain/calibration evidence and explicit disposition. Documentation positions are inventory ordinals unless the source defines a native index. Preserve source contradictions and unresolved mappings. Names alone do not justify cross-provider identities.
 

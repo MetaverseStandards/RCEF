@@ -37,17 +37,17 @@ class Gate(unittest.TestCase):
             checkout = workspace / 'RCEF'
             checkout.mkdir()
             for name in ('pack.toml', 'check.py', 'data', 'profiles', 'mappings',
-                         'evidence', 'fixtures', 'generated'):
+                         'evidence', 'fixtures', 'generated', 'scripts'):
                 source = ROOT / name
                 if source.is_dir():
                     shutil.copytree(source, checkout / name)
                 else:
                     shutil.copy2(source, checkout / name)
-            (checkout / 'tests').mkdir()
-            # The fixture runs the 19 semantic/parity methods. Leaving this
-            # integration test outside the copy prevents recursive gate probes.
-            for name in ('test_metadata.py', 'test_parity.py'):
-                shutil.copy2(ROOT / 'tests' / name, checkout / 'tests' / name)
+            shutil.copytree(ROOT / 'tests', checkout / 'tests',
+                            ignore=shutil.ignore_patterns('__pycache__', 'test_gate.py',
+                                                         'test_qualification_gate.py'))
+            # The copied public commands exercise all nonrecursive suites. The
+            # parent discovery runs these integration controls exactly once.
             for name in ('msf-tools', '.ci-tools'):
                 (workspace / name).symlink_to(tools, target_is_directory=True)
             binaries = workspace / 'bin'
@@ -73,6 +73,8 @@ class Gate(unittest.TestCase):
                 script = '\n'.join(blocks) if blocks else '\n'.join(
                     re.findall(r'`(python3 -B [^`]+)`', text))
                 self.assertTrue(script, f'{name} must publish executable local commands')
+                script = script.replace('scripts/run_acceptance.py',
+                                        'scripts/run_acceptance.py --qualification-only')
                 gates.append((name, script, environment))
 
             def run(name, script, selected_environment):
@@ -125,8 +127,8 @@ class Gate(unittest.TestCase):
                                         f'{name} accepted all eleven metadata defects')
                     self.assertIn('test_primary_metadata_rows_in_authoring', result.stdout)
                     self.assertIn('test_primary_metadata_rows_in_generated_pack', result.stdout)
-                    self.assertRegex(result.stdout, r'Ran 19 tests\b')
-                    self.assertIn('FAILED (failures=22)', result.stdout)
+                    self.assertRegex(result.stdout, r'Ran 46 tests\b')
+                    self.assertRegex(result.stdout, r'FAILED \(failures=22(?:, skipped=9)?\)')
 
 
 if __name__ == '__main__':

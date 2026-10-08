@@ -17,12 +17,16 @@ export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
 export PYTHONPATH="$MSF_TOOLS_PATH"
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
-python3 -B -m unittest discover -s tests -v
+python3 -B scripts/run_acceptance.py --tools-path "$MSF_TOOLS_PATH"
 ```
 
-Run these commands from the RCEF checkout. Select the reviewed shared checkout in the first line. Acceptance requires both the drift check and unittest discovery, which runs every `tests/test_*.py` file, including metadata, scalar parity and the published gate regression. Both environment variables select that same checkout during discovery and its subprocess tests.
+Run these commands from the RCEF checkout. Select the reviewed shared checkout in the first line. Acceptance requires the drift check and the qualification runner. The runner discovers every `tests/test_*.py` file and requires the pinned metadata, scalar parity, hardening, native and gate methods in [acceptance_cases.json](scripts/acceptance_cases.json). It refuses missing or unexecuted required methods.
 
-The tested immutable dependency commit and source fingerprints are in [tooling.lock.json](evidence/tooling.lock.json). Check out that commit before using a local tools path. Without `--tools-path`, the installed package is used. The wrapper delegates to `python3 -B -m msf_tools check AUTHORING --pack PATH --csv PATH [--write]`. No automatic cloning or source download occurs during checking.
+Native tests explicitly skip when no native artifact is configured; that run reports native unqualified. For a reviewed native pilot, set `MSF_NATIVE_PATH` to the binding directory for the running interpreter and `MSF_NATIVE_SHA256` to its accepted module digest. Any configured native run requires the actual module at that origin, matching digest, every required method and zero skips. An explicit invocation is `python3 -B scripts/run_acceptance.py --tools-path "$MSF_TOOLS_PATH" --native-path "$MSF_NATIVE_PATH" --native-sha256 "$MSF_NATIVE_SHA256" --require-native`. The admitted local pilot uses full numeric slot vectors; asset APIs and evidence compilation stay in Python. The H4 build source and the separately selected H6 Python source are recorded independently in the consumer evidence; no installed or release-wheel admission is supplied here.
+
+The 21 provider identities and 63 scalar comparisons preserve declared storage and provider-specific assumptions. FB2 direction tests activate one direction at a time. Raw pupil fields and native defaults do not establish physical measurement, calibrated neutral or cross-provider equivalence. Provider frame context, device/capture/physiology and installed dependency verification remain separate gates.
+
+The existing [tooling.lock.json](evidence/tooling.lock.json) retains the earlier dependency pending separate R-DEP verifier and lock integration. For local R-HARD qualification, select the accepted source archive and per-runtime H4 bindings recorded in the reviewed consumer draft. Path selection and the native digest gate do not establish installed-package admission. Without `--tools-path`, the rendering wrapper uses the installed package; the qualification runner requires an explicit tools path or `MSF_TOOLS_PATH`. The wrapper delegates to `python3 -B -m msf_tools check AUTHORING --pack PATH --csv PATH [--write]`. No automatic cloning or source download occurs during checking.
 
 Outputs are `generated/rcef.pack.json`, `rcef_mapping.csv`, `coverage.json`, and `SHA256SUMS`. JSON uses the shared sorted-key, indented stdlib encoding with UTF-8 and final LF, finite numbers and normalized negative zero. Arrays retain authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All bytes are rendered and validated before each file is atomically replaced; several replacements are not one transaction.
 
