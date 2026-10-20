@@ -1,0 +1,591 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nominated R-PROV profile metadata; schema artifact revision2; data format1",
+  "description": "Private additive nomination using only the current profile metadata boundary. This schema is an input document, not installed SDK validation or an executable profile definition. source_binding_file is relative to packet root; fixture_refs are relative to the containing profile-input file; context_binding is a JSON pointer inside that profile. Each quantity inherits validity/frame/history/reset/rights from exactly that context. Composite preparation types describe passive JSON operands; current signal type remains scalar.",
+  "$defs": {
+    "source_span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ref",
+        "first_line",
+        "last_line"
+      ],
+      "properties": {
+        "source_ref": {
+          "type": "string"
+        },
+        "first_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "last_line": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "quantity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input_key",
+        "source_name",
+        "source_type",
+        "preparation_type",
+        "role",
+        "unit",
+        "domain",
+        "side",
+        "locators",
+        "source_spans",
+        "context_binding"
+      ],
+      "properties": {
+        "input_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "preparation_type": {
+          "type": "string",
+          "enum": [
+            "JSON finite number",
+            "JSON number array",
+            "JSON boolean",
+            "JSON object",
+            "JSON uint8 array",
+            "JSON symbolic source expectation"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "basis"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": [
+                "cm",
+                "mm",
+                "1",
+                "unknown",
+                "byte",
+                "mixed"
+              ]
+            },
+            "basis": {
+              "type": "string"
+            }
+          }
+        },
+        "domain": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "minimum",
+            "maximum",
+            "finite_guaranteed",
+            "basis"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "documented",
+                "storage_projection",
+                "source_expression",
+                "state",
+                "lineage",
+                "byte_transport"
+              ]
+            },
+            "minimum": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "maximum": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "finite_guaranteed": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "basis": {
+              "type": "string"
+            }
+          }
+        },
+        "side": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right",
+            "shared",
+            "not_applicable"
+          ]
+        },
+        "locators": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "source_spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/source_span"
+          }
+        },
+        "context_binding": {
+          "const": "#/metadata/rprov_input_contract/context"
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "validity",
+        "frame",
+        "history",
+        "reset",
+        "rights_refs",
+        "source_binding_file",
+        "unknowns"
+      ],
+      "properties": {
+        "validity": {
+          "type": "object",
+          "required": [
+            "observation_admitted",
+            "source_policy",
+            "required_future_binding"
+          ],
+          "properties": {
+            "observation_admitted": {
+              "const": false
+            },
+            "source_policy": {
+              "type": "string"
+            },
+            "required_future_binding": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "frame": {
+          "type": "object",
+          "required": [
+            "scope",
+            "clock",
+            "timestamp",
+            "coordinate_system",
+            "physical_capture_admitted"
+          ],
+          "properties": {
+            "scope": {
+              "type": "string"
+            },
+            "clock": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "timestamp": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "coordinate_system": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "physical_capture_admitted": {
+              "const": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "history": {
+          "type": "object",
+          "required": [
+            "state_fields",
+            "initial_values",
+            "call_order",
+            "lineage"
+          ],
+          "properties": {
+            "state_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "initial_values": {
+              "type": "object"
+            },
+            "call_order": {
+              "type": "string"
+            },
+            "lineage": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "reset": {
+          "type": "object",
+          "required": [
+            "source_reset_bound",
+            "fixture_reset",
+            "operational_reset"
+          ],
+          "properties": {
+            "source_reset_bound": {
+              "const": false
+            },
+            "fixture_reset": {
+              "type": "string"
+            },
+            "operational_reset": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "rights_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "source_binding_file": {
+          "const": "SOURCE_RIGHTS_BINDINGS.json"
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rprov_input_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_version",
+        "status",
+        "role_id",
+        "owner",
+        "source_refs",
+        "quantities",
+        "context",
+        "fixture_refs",
+        "executable",
+        "operators"
+      ],
+      "properties": {
+        "contract_version": {
+          "const": 1
+        },
+        "status": {
+          "const": "nominated_separate_input"
+        },
+        "role_id": {
+          "enum": [
+            "VRCFT-DOC-CM",
+            "VRCFT-RAW-PUPIL",
+            "VRCFT-GETTER-CM",
+            "VRCFT-COMBINED-STATE",
+            "VRCFT-ADJUSTED",
+            "VRCFT-BYTE-TRANSPORT"
+          ]
+        },
+        "owner": {
+          "type": "string"
+        },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "quantities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/quantity"
+          }
+        },
+        "context": {
+          "$ref": "#/$defs/context"
+        },
+        "fixture_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "executable": {
+          "const": false
+        },
+        "operators": {
+          "type": "array",
+          "maxItems": 0
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "label",
+    "signal_ids",
+    "metadata"
+  ],
+  "properties": {
+    "id": {
+      "enum": [
+        "rprov.vrcft.documented.parameters.source09GE",
+        "rprov.vrcft.raw.source09GE",
+        "rprov.vrcft.getter.source09GE",
+        "rprov.vrcft.combined.state.source09GE",
+        "rprov.vrcft.adjusted.source09GE",
+        "rprov.vrcft.eye.bytes.source09GE"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signal_ids": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rprov_input_contract"
+      ],
+      "properties": {
+        "rprov_input_contract": {
+          "$ref": "#/$defs/rprov_input_contract"
+        }
+      }
+    }
+  },
+  "$id": "urn:rcef:rprov-profile-metadata-contract:schema:revision2:format1",
+  "$comment": "schema_artifact_revision=2. Data contract_version remains 1: operands and shape are unchanged. Explicit opt-in means selecting this schema artifact and SHA-256, outside any SDK automatic behavior. Only the six ID/role relations are added here. Key uniqueness, ordered/in-range spans and source/fixture/oracle/rights joins are declared separately in DRAFT.json; they are not JSON Schema cross-field claims.",
+  "oneOf": [
+    {
+      "required": [
+        "id",
+        "metadata"
+      ],
+      "properties": {
+        "id": {
+          "const": "rprov.vrcft.documented.parameters.source09GE"
+        },
+        "metadata": {
+          "required": [
+            "rprov_input_contract"
+          ],
+          "properties": {
+            "rprov_input_contract": {
+              "required": [
+                "role_id"
+              ],
+              "properties": {
+                "role_id": {
+                  "const": "VRCFT-DOC-CM"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "required": [
+        "id",
+        "metadata"
+      ],
+      "properties": {
+        "id": {
+          "const": "rprov.vrcft.raw.source09GE"
+        },
+        "metadata": {
+          "required": [
+            "rprov_input_contract"
+          ],
+          "properties": {
+            "rprov_input_contract": {
+              "required": [
+                "role_id"
+              ],
+              "properties": {
+                "role_id": {
+                  "const": "VRCFT-RAW-PUPIL"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "required": [
+        "id",
+        "metadata"
+      ],
+      "properties": {
+        "id": {
+          "const": "rprov.vrcft.getter.source09GE"
+        },
+        "metadata": {
+          "required": [
+            "rprov_input_contract"
+          ],
+          "properties": {
+            "rprov_input_contract": {
+              "required": [
+                "role_id"
+              ],
+              "properties": {
+                "role_id": {
+                  "const": "VRCFT-GETTER-CM"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "required": [
+        "id",
+        "metadata"
+      ],
+      "properties": {
+        "id": {
+          "const": "rprov.vrcft.combined.state.source09GE"
+        },
+        "metadata": {
+          "required": [
+            "rprov_input_contract"
+          ],
+          "properties": {
+            "rprov_input_contract": {
+              "required": [
+                "role_id"
+              ],
+              "properties": {
+                "role_id": {
+                  "const": "VRCFT-COMBINED-STATE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "required": [
+        "id",
+        "metadata"
+      ],
+      "properties": {
+        "id": {
+          "const": "rprov.vrcft.adjusted.source09GE"
+        },
+        "metadata": {
+          "required": [
+            "rprov_input_contract"
+          ],
+          "properties": {
+            "rprov_input_contract": {
+              "required": [
+                "role_id"
+              ],
+              "properties": {
+                "role_id": {
+                  "const": "VRCFT-ADJUSTED"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "required": [
+        "id",
+        "metadata"
+      ],
+      "properties": {
+        "id": {
+          "const": "rprov.vrcft.eye.bytes.source09GE"
+        },
+        "metadata": {
+          "required": [
+            "rprov_input_contract"
+          ],
+          "properties": {
+            "rprov_input_contract": {
+              "required": [
+                "role_id"
+              ],
+              "properties": {
+                "role_id": {
+                  "const": "VRCFT-BYTE-TRANSPORT"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
