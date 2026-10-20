@@ -21,3 +21,20 @@ provider or runtime qualification are separate work.
 
 Source artifact SHA-256:
 `3f4d13f20d094ec6349390ac0ea273a975eeffe0a3923df90c08ce7c482fd8cc`.
+
+## Qualification skip contract proposal
+
+`qualification-skip.contract.json` preserves the independently reviewed passive
+revision 2 proposal. It names the required methods. Its skip allowlists contain
+11 methods for the unconfigured full 50-method parent and 9 for the original
+46-method subset; these are eligible IDs, not required skip counts. Configured
+native execution permits no skips. An explicitly requested but missing
+or invalid native artifact requires refusal.
+
+This document binds the recorded acceptance manifest and source hashes. Its
+`DRAFT_PASSIVE_DATA_FOR_ASHA_ROOT_REVIEW` status is retained from the sealed
+source artifact. It is available for local preparation; the acceptance runner
+does not consume it. It establishes no native execution or coverage result.
+
+Source artifact SHA-256:
+`055cf17f5d8e7a86ddca5a106b72cde396659d748ee2c0610ee2254c45c54cea`.
