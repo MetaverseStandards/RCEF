@@ -30,6 +30,16 @@ The existing [tooling.lock.json](evidence/tooling.lock.json) retains the earlier
 
 Outputs are `generated/rcef.pack.json`, `rcef_mapping.csv`, `coverage.json`, and `SHA256SUMS`. JSON uses the shared sorted-key, indented stdlib encoding with UTF-8 and final LF, finite numbers and normalized negative zero. Arrays retain authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All bytes are rendered and validated before each file is atomically replaced; several replacements are not one transaction.
 
+## Readable inventories and mappings
+
+The checker also generates and checks [readable reports](reports/inventory.md):
+
+- [Inventory Markdown](reports/inventory.md) and [CSV](reports/inventory.csv): every signal and profile membership, including excluded, unsupported and unresolved records. Native names, indices, ranges, calibration, evidence and reasons stay visible. Native defaults and calibrated neutral values remain separate.
+- [Mapping Markdown](reports/mappings.md) and [CSV](reports/mappings.csv): every authored directional rule with its operator, status, assumptions and loss annotations.
+- [Canonical correspondence Markdown](reports/canonical_correspondence.md) and [CSV](reports/canonical_correspondence.csv): a comparison table using authored rules only. A dash means no authored rule; unresolved relationships remain labeled. These tables do not establish cross-provider or anatomical equivalence.
+
+These reports are derived from `generated/rcef.pack.json`; edit the authoritative TOML and run `check.py --write` to update them. `check.py` checks both shared outputs and readable reports. To check or regenerate only the presentation files with Python's standard library, use `python3 -B scripts/export_reports.py` or add `--write`. Each Markdown report binds the consumed pack bytes by SHA-256, and `reports/SHA256SUMS` binds all six presentation files. Existing `generated/SHA256SUMS` and generated mapping bytes retain their original contract. Publication uses atomic replacement per file and is not a transaction across all files. Report generation adds no third-party dependency; data and documentation retain their existing CC BY-SA 4.0 license and attribution.
+
 See [survey](survey.md), [proposal](proposal.md), [references](references.md), [source evidence](evidence/sources.toml), [review](REVIEW.md), and [notices](THIRD_PARTY_NOTICES.md). `scripts/verify_sources.py` optionally checks exact public source digests and saves source bytes only to an explicit cache outside this repository. `scripts/audit_inventories.py --cache CACHE` then compares exact selected names, order and genuine enum indices against those verified bytes.
 
 Read [CONTRIBUTING](CONTRIBUTING.md) and [GOVERNANCE](GOVERNANCE.md) before extending or releasing the inventory.

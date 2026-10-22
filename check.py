@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Delegate all pack rendering and drift checking to installed msf_tools."""
+"""Check the shared pack and its readable RCEF reports."""
 from __future__ import annotations
 import argparse
 from pathlib import Path
@@ -30,7 +30,14 @@ def main() -> int:
                '--csv', str(root / 'generated' / 'rcef_mapping.csv')]
     if args.write:
         command.append('--write')
-    return subprocess.run(command, check=False).returncode
+    status = subprocess.run(command, check=False).returncode
+    if status:
+        return status
+    reports = [sys.executable, '-B', str(root / 'scripts/export_reports.py'),
+               '--root', str(root)]
+    if args.write:
+        reports.append('--write')
+    return subprocess.run(reports, check=False).returncode
 
 
 if __name__ == '__main__':
