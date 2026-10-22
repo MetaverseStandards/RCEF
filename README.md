@@ -12,13 +12,26 @@ The canonical subset has 21 explicitly provider-calibrated scalar projections sp
 
 Python 3.11+ and `msf_tools` are required. Install the separately maintained shared tools, or supply an explicit local checkout:
 
+<!-- RCEF:BEGIN GENERATE -->
 ```sh
 export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
 export PYTHONPATH="$MSF_TOOLS_PATH"
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
+```
+<!-- RCEF:END GENERATE -->
+
+Review the generated diffs, then check existing outputs without writing:
+
+<!-- RCEF:BEGIN ACCEPTANCE -->
+```sh
+export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
+export PYTHONPATH="$MSF_TOOLS_PATH"
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
 python3 -B scripts/run_acceptance.py --tools-path "$MSF_TOOLS_PATH"
+python -B -m unittest discover -s tests -p acceptance_runner_regressions.py -v
+python -B -m unittest discover -s tests -p acceptance_gate_regressions.py -v
 ```
+<!-- RCEF:END ACCEPTANCE -->
 
 Run these commands from the RCEF checkout. Select the reviewed shared checkout in the first line. Acceptance requires the drift check and the qualification runner. The runner discovers every `tests/test_*.py` file and requires the pinned metadata, scalar parity, hardening, native and gate methods in [acceptance_cases.json](scripts/acceptance_cases.json). It refuses missing or unexecuted required methods.
 
@@ -51,3 +64,5 @@ Read [CONTRIBUTING](CONTRIBUTING.md) and [GOVERNANCE](GOVERNANCE.md) before exte
 ## Licenses
 
 Original code: [MIT](LICENSES/MIT.txt). Original data, documentation and fixtures: [CC-BY-SA-4.0](LICENSES/CC-BY-SA-4.0.txt), attribution to RCEF contributors (2026). Inherited source licenses and provenance are retained in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Referenced provider documentation is not relicensed by RCEF.
+
+The runner observes complete unittest callbacks for every selected original and addition. The two explicit regression commands provide development feedback and do not establish full qualification. Copied gate recipes retain the source files and use `--qualification-only` for the original46 plus leaf additions. `--observe-gate-control` selects the original Gate plus all gate-file additions, emits a separate `scope=gate-control` observation, and is mutually exclusive with `--qualification-only`. Public acceptance uses the default original50 plus every discovered addition. Actual full, copied120/240, source, cost, native, installed and host gates remain required.

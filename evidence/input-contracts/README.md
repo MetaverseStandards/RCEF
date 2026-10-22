@@ -33,8 +33,20 @@ or invalid native artifact requires refusal.
 
 This document binds the recorded acceptance manifest and source hashes. Its
 `DRAFT_PASSIVE_DATA_FOR_ASHA_ROOT_REVIEW` status is retained from the sealed
-source artifact. It is available for local preparation; the acceptance runner
-does not consume it. It establishes no native execution or coverage result.
+source artifact, including its historical implementation status. The acceptance
+runner now consumes the original manifest and this skip contract once each,
+refuses changed metadata, and checks current copied source when admitting an
+unconfigured skip. The 50/46 original methods and 21 groups stay fixed; selected
+additions execute and participate in lifecycle agreement separately. Every selected
+method must record successful delegation in start, one parent terminal, stop order;
+the reported test count must equal the selected count. Failure events remain in
+diagnostics and require refusal. Historical
+runner/source-root bindings remain provenance. Consumption alone establishes no
+native execution or coverage result.
 
 Source artifact SHA-256:
 `055cf17f5d8e7a86ddca5a106b72cde396659d748ee2c0610ee2254c45c54cea`.
+
+## R2 qualification source successor
+
+`qualification-skip.r2-bindings.json` is mandatory and independently pinned by `R2_BINDINGS_SHA256` in the current runner. It references the unchanged original acceptance manifest and sealed skip contract. Its only overrides are the qualification source bytes, regular type, mode and the two original control decorator/method locators. Reasons, conditions, original50/46, ordered21 groups, eligible11/9/configured0 and the native source pin remain unchanged. The three metadata buffers are consumed once each. There is no runtime-generated binding or missing-sidecar fallback.

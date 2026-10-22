@@ -48,5 +48,9 @@ jobs:
         working-directory: RCEF
       - run: python -B check.py --tools-path ../.ci-tools
         working-directory: RCEF
-      - run: python -B -m unittest discover -s tests -v
+      - run: python -B scripts/run_acceptance.py --tools-path ../.ci-tools
+        working-directory: RCEF
+      - run: python -B -m unittest discover -s tests -p acceptance_runner_regressions.py -v
+        working-directory: RCEF
+      - run: python -B -m unittest discover -s tests -p acceptance_gate_regressions.py -v
         working-directory: RCEF

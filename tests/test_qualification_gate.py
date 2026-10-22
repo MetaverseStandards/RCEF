@@ -5,12 +5,12 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-import re
-import shutil
 import subprocess
 import sys
 import tempfile
 import unittest
+
+from gate_recipes import document_recipe, gate_record, source_complete_fixture
 
 ROOT = Path(__file__).resolve().parents[1]
 PROBE = 'RCEF_QUALIFICATION_PROBE_EXECUTED'
@@ -18,21 +18,7 @@ PROBE = 'RCEF_QUALIFICATION_PROBE_EXECUTED'
 
 class QualificationGate(unittest.TestCase):
     def fixture(self, workspace):
-        checkout = workspace / 'RCEF'; checkout.mkdir()
-        for name in ('pack.toml', 'check.py', 'data', 'profiles', 'mappings', 'evidence',
-                     'fixtures', 'generated', 'scripts', 'tests', 'README.md', 'CONTRIBUTING.md', '.github'):
-            source = ROOT / name
-            if source.is_dir():
-                shutil.copytree(source, checkout / name, ignore=shutil.ignore_patterns('__pycache__', 'test_qualification_gate.py'))
-            else: shutil.copy2(source, checkout / name)
-        tools = Path(os.environ['MSF_TOOLS_PATH']).resolve(strict=True)
-        for name in ('msf-tools', '.ci-tools'): (workspace / name).symlink_to(tools, target_is_directory=True)
-        binaries = workspace / 'bin'; binaries.mkdir()
-        for name in ('python', 'python3'): (binaries / name).symlink_to(sys.executable)
-        env = os.environ.copy(); env.pop('PYTHONPATH', None)
-        env['PATH'] = str(binaries) + os.pathsep + env['PATH']
-        env['PYTHONDONTWRITEBYTECODE'] = '1'
-        return checkout, env
+        return source_complete_fixture(ROOT, workspace)
 
     def run_command(self, checkout, env, argv):
         r = subprocess.run(argv, cwd=checkout, env=env, text=True, stdout=subprocess.PIPE,
@@ -42,9 +28,7 @@ class QualificationGate(unittest.TestCase):
 
     @staticmethod
     def public_script(checkout):
-        blocks = re.findall(r'```sh\n(.*?)```', (checkout / 'README.md').read_text(), re.DOTALL)
-        return '\n'.join(blocks).replace('scripts/run_acceptance.py',
-                                         'scripts/run_acceptance.py --qualification-only')
+        return document_recipe((checkout / 'README.md').read_text(), subset=True)
 
     def test_copied_public_gate_exercises_direct_new_qualification_probe(self):
         with tempfile.TemporaryDirectory(prefix='rcef-coverage-') as tmp:
@@ -57,17 +41,26 @@ class QualificationGate(unittest.TestCase):
             direct = self.run_command(checkout, env, [sys.executable, '-B', '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_hardening.py', '-v'])
             self.assertNotEqual(direct.returncode, 0)
             self.assertIn(PROBE, direct.stdout)
-            copied = self.run_command(checkout, env, [sys.executable, '-B', '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_gate.py', '-v'])
+            copied = self.run_command(checkout, env, [sys.executable, '-B', 'scripts/run_acceptance.py',
+                                                       '--observe-gate-control', '--tools-path', env['MSF_TOOLS_PATH']])
             self.assertNotEqual(copied.returncode, 0, 'copied public gate omitted the new qualification probe')
             self.assertIn(PROBE, copied.stdout)
+            selected_ids = [
+                'test_gate.Gate.test_published_gates_reject_coherent_wrong_metadata',
+                'test_gate.Gate.test_published_workflow_refuses_wrong_shared_commit',
+                'test_gate.Gate.test_published_acceptance_gates_refuse_generated_drift',
+                'test_gate.Gate.test_published_gates_refuse_semantic_skip',
+            ]
+            record = gate_record(copied.stdout, copied.returncode, selected_ids)
+            self.assertEqual(record['observation'], 'REFUSE')
+            self.assertEqual(record['tests_run'], 4)
+            self.assertNotEqual(record.get('qualification'), 'PASS')
 
     @unittest.skipUnless(os.environ.get('MSF_NATIVE_PATH'), 'native skip control requires configured artifact')
     def test_configured_public_gate_refuses_controlled_native_skip(self):
         with tempfile.TemporaryDirectory(prefix='rcef-skip-') as tmp:
             checkout, env = self.fixture(Path(tmp)); env['RCEF_REQUIRE_NATIVE'] = '1'
-            # Isolate required native coverage; the public copied-gate regression
-            # has its own test above and would make this subprocess recursive.
-            (checkout / 'tests/test_gate.py').unlink()
+            # Keep gate source fixtures; the copied recipe selects only leaf execution.
             p = checkout / 'tests/test_native_consumer.py'
             s = p.read_text(); marker = '    def test_nat01_full_vector_and_integer_numeric_inputs(self):'
             self.assertEqual(s.count(marker), 1)
@@ -86,7 +79,6 @@ class QualificationGate(unittest.TestCase):
     def test_configured_public_gate_refuses_omitted_required_method(self):
         with tempfile.TemporaryDirectory(prefix='rcef-omitted-') as tmp:
             checkout, env = self.fixture(Path(tmp)); env['RCEF_REQUIRE_NATIVE'] = '1'
-            (checkout / 'tests/test_gate.py').unlink()
             p = checkout / 'tests/test_native_consumer.py'
             s = p.read_text(); marker = 'def test_nat01_full_vector_and_integer_numeric_inputs('
             self.assertEqual(s.count(marker), 1)

@@ -3,16 +3,18 @@
 """Execute the published gates against coherent metadata regressions."""
 from __future__ import annotations
 
+from collections import Counter
 import json
 import os
 from pathlib import Path
 import re
-import shutil
 import subprocess
 import sys
 import tempfile
 import tomllib
 import unittest
+
+from gate_recipes import document_recipe, workflow_recipe, source_complete_fixture
 
 ROOT = Path(__file__).resolve().parents[1]
 WRONG_ROWS = {
@@ -34,47 +36,18 @@ class Gate(unittest.TestCase):
         tools = Path(os.environ['MSF_TOOLS_PATH']).resolve(strict=True)
         with tempfile.TemporaryDirectory(prefix='rcef-gate-') as temporary:
             workspace = Path(temporary)
-            checkout = workspace / 'RCEF'
-            checkout.mkdir()
-            for name in ('pack.toml', 'check.py', 'data', 'profiles', 'mappings',
-                         'evidence', 'fixtures', 'generated', 'scripts'):
-                source = ROOT / name
-                if source.is_dir():
-                    shutil.copytree(source, checkout / name)
-                else:
-                    shutil.copy2(source, checkout / name)
-            shutil.copytree(ROOT / 'tests', checkout / 'tests',
-                            ignore=shutil.ignore_patterns('__pycache__', 'test_gate.py',
-                                                         'test_qualification_gate.py'))
-            # The copied public commands exercise all nonrecursive suites. The
-            # parent discovery runs these integration controls exactly once.
-            for name in ('msf-tools', '.ci-tools'):
-                (workspace / name).symlink_to(tools, target_is_directory=True)
-            binaries = workspace / 'bin'
-            binaries.mkdir()
-            for name in ('python', 'python3'):
-                (binaries / name).symlink_to(sys.executable)
-            environment = os.environ.copy()
-            environment.pop('PYTHONPATH', None)
-            environment['PATH'] = str(binaries) + os.pathsep + environment['PATH']
-            environment['PYTHONDONTWRITEBYTECODE'] = '1'
+            checkout, environment = source_complete_fixture(ROOT, workspace)
 
             workflow = (ROOT / '.github/workflows/check.yml').read_text()
-            commands = re.findall(r'^      - run: (.+)$', workflow, re.MULTILINE)
+            recipe = workflow_recipe(workflow, workspace, environment, subset=True)
+            commands = recipe['script'].splitlines()
             self.assertTrue(commands, 'workflow must have executable gate steps')
-            workflow_environment = environment.copy()
-            for key, value in re.findall(r'^      (MSF_TOOLS_PATH|PYTHONPATH): (.+)$',
-                                         workflow, re.MULTILINE):
-                workflow_environment[key] = value.replace('${{ github.workspace }}', str(workspace))
-            gates = [('workflow', '\n'.join(commands), workflow_environment)]
+            self.assertEqual(recipe['cwd'], checkout)
+            gates = [('workflow', recipe['script'], recipe['env'])]
             for name in ('README.md', 'CONTRIBUTING.md'):
                 text = (ROOT / name).read_text()
-                blocks = re.findall(r'```sh\n(.*?)```', text, re.DOTALL)
-                script = '\n'.join(blocks) if blocks else '\n'.join(
-                    re.findall(r'`(python3 -B [^`]+)`', text))
+                script = document_recipe(text, subset=True)
                 self.assertTrue(script, f'{name} must publish executable local commands')
-                script = script.replace('scripts/run_acceptance.py',
-                                        'scripts/run_acceptance.py --qualification-only')
                 gates.append((name, script, environment))
 
             def run(name, script, selected_environment):
@@ -92,6 +65,8 @@ class Gate(unittest.TestCase):
                 result = run(name + ' current', script, selected_environment)
                 self.assertEqual(result.returncode, 0, result.stdout)
 
+            leaf_ids = self.leaf_methods()
+            self.assertGreaterEqual(len(leaf_ids), 46)
             edited = 0
             for filename, identities in WRONG_ROWS.items():
                 path = checkout / 'profiles' / filename
@@ -127,8 +102,153 @@ class Gate(unittest.TestCase):
                                         f'{name} accepted all eleven metadata defects')
                     self.assertIn('test_primary_metadata_rows_in_authoring', result.stdout)
                     self.assertIn('test_primary_metadata_rows_in_generated_pack', result.stdout)
-                    self.assertRegex(result.stdout, r'Ran 46 tests\b')
+                    # Preserve the original46 oracle when no leaf additions
+                    # exist; the current tree also selects readable-report tests.
+                    if len(leaf_ids) == 46:
+                        self.assertRegex(result.stdout, r'Ran 46 tests\b')
+                    else:
+                        self.assertRegex(result.stdout, rf'Ran {len(leaf_ids)} tests\b')
                     self.assertRegex(result.stdout, r'FAILED \(failures=22(?:, skipped=9)?\)')
+                    record = self.qualification_record(result.stdout)
+                    self.assertEqual(record['qualification'], 'REFUSE')
+                    self.assertEqual(len(record['required_methods']), 46)
+                    if len(leaf_ids) == 46:
+                        self.assertEqual(record['tests_run'], 46)
+                    else:
+                        self.assertEqual(record['tests_run'], len(leaf_ids))
+                    self.assertEqual(Counter(record['executed_methods']), Counter(leaf_ids),
+                                     'leaf execution differs from independent discovery')
+                    self.assertEqual(record['failures'], 22)
+                    self.assertEqual(record['errors'], 0)
+                    self.assertEqual(len(record['skips']), 0 if os.environ.get('MSF_NATIVE_PATH') else 9)
+
+
+    def leaf_methods(self):
+        """Independently discover the original46 plus all current leaf additions."""
+        suite = unittest.defaultTestLoader.discover(str(ROOT / 'tests'), pattern='test_*.py')
+        pending, identifiers = [suite], []
+        while pending:
+            item = pending.pop()
+            if isinstance(item, unittest.TestSuite):
+                pending.extend(item)
+            elif item.id().split('.')[0] not in {'test_gate', 'test_qualification_gate'}:
+                identifiers.append(item.id())
+        self.assertEqual(len(set(identifiers)), len(identifiers), 'duplicate independently discovered leaf')
+        return tuple(sorted(identifiers))
+
+    def published_recipes(self, workspace, environment):
+        recipe = workflow_recipe((ROOT / '.github/workflows/check.yml').read_text(),
+                                 workspace, environment, subset=True)
+        gates = [('workflow', recipe['script'], recipe['env'])]
+        for name in ('README.md', 'CONTRIBUTING.md'):
+            gates.append((name, document_recipe((ROOT / name).read_text(), subset=True), environment))
+        return gates
+
+    def run_recipe(self, checkout, environment, script):
+        result = subprocess.run(['/bin/sh', '-c', 'set -e\n' + script], cwd=checkout,
+                                env=environment, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                text=True, check=False, timeout=120)
+        print(f'GATE_CONTROL cwd={checkout} exit={result.returncode}\n{script}\n{result.stdout}', flush=True)
+        return result
+
+    def qualification_record(self, output):
+        records = []
+        for line in output.splitlines():
+            try:
+                record = json.loads(line)
+            except ValueError:
+                continue
+            if isinstance(record, dict) and 'qualification' in record:
+                records.append(record)
+        self.assertTrue(records, 'public leaf must emit its own qualification record')
+        return records[-1]
+
+    def test_published_workflow_refuses_wrong_shared_commit(self):
+        with tempfile.TemporaryDirectory(prefix='rcef-lock-') as temporary:
+            workspace = Path(temporary)
+            checkout, environment = source_complete_fixture(ROOT, workspace)
+            _, script, selected_environment = self.published_recipes(workspace, environment)[0]
+            current = self.run_recipe(checkout, selected_environment, script)
+            self.assertEqual(current.returncode, 0, current.stdout)
+            path = checkout / 'evidence/tooling.lock.json'
+            lock = json.loads(path.read_text())
+            lock['git_commit'] = '0' * 40
+            path.write_text(json.dumps(lock, indent=2) + '\n')
+            marker = 'RCEF_WORKLOAD_AFTER_LOCK_STARTED'
+            drift = 'python -B check.py --tools-path ../.ci-tools'
+            self.assertEqual(script.count(drift), 1)
+            instrumented = script.replace(drift, f'echo {marker}\n' + drift)
+            wrong = self.run_recipe(checkout, selected_environment, instrumented)
+            self.assertNotEqual(wrong.returncode, 0, wrong.stdout)
+            self.assertIn('Shared dependency differs from lock:', wrong.stdout)
+            self.assertNotIn(marker, wrong.stdout)
+            self.assertNotIn('Ran ', wrong.stdout)
+
+    def test_published_acceptance_gates_refuse_generated_drift(self):
+        with tempfile.TemporaryDirectory(prefix='rcef-drift-') as temporary:
+            workspace = Path(temporary)
+            checkout, environment = source_complete_fixture(ROOT, workspace)
+            gates = self.published_recipes(workspace, environment)
+            tools = Path(os.environ['MSF_TOOLS_PATH']).resolve(strict=True)
+            generation = f'python3 -B check.py --tools-path "{tools}" --write'
+            rendered = self.run_recipe(checkout, environment, generation)
+            self.assertEqual(rendered.returncode, 0, rendered.stdout)
+            for name, script, selected_environment in gates:
+                current = self.run_recipe(checkout, selected_environment, script)
+                self.assertEqual(current.returncode, 0, f'{name}: {current.stdout}')
+            path = checkout / 'generated/rcef.pack.json'
+            path.write_bytes(path.read_bytes() + b' ')
+            tampered = path.read_bytes()
+            direct = self.run_recipe(checkout, environment,
+                                     f'python3 -B check.py --tools-path "{tools}"')
+            self.assertNotEqual(direct.returncode, 0, direct.stdout)
+            self.assertEqual(path.read_bytes(), tampered)
+            for name, script, selected_environment in gates:
+                with self.subTest(gate=name):
+                    self.assertNotIn('--write', script)
+                    refused = self.run_recipe(checkout, selected_environment, script)
+                    self.assertNotEqual(refused.returncode, 0, refused.stdout)
+                    self.assertNotIn('Ran ', refused.stdout)
+                    self.assertEqual(path.read_bytes(), tampered)
+
+    def test_published_gates_refuse_semantic_skip(self):
+        with tempfile.TemporaryDirectory(prefix='rcef-semantic-skip-') as temporary:
+            workspace = Path(temporary)
+            checkout, environment = source_complete_fixture(ROOT, workspace)
+            gates = self.published_recipes(workspace, environment)
+            for name, script, selected_environment in gates:
+                current = self.run_recipe(checkout, selected_environment, script)
+                self.assertEqual(current.returncode, 0, f'{name}: {current.stdout}')
+            leaf_ids = self.leaf_methods()
+            method = 'test_sem01_literal_identities_and_63_single_direction_comparisons'
+            identifier = 'test_hardening.Hardening.' + method
+            reason = 'controlled unauthorized semantic skip'
+            path = checkout / 'tests/test_hardening.py'
+            source = path.read_text()
+            marker = f'    def {method}(self):'
+            self.assertEqual(source.count(marker), 1)
+            path.write_text(source.replace(marker, f'    @unittest.skip({reason!r})\n' + marker))
+            direct = self.run_recipe(checkout, environment,
+                f'python3 -B -m unittest discover -s tests -p test_hardening.py -k {method} -v')
+            self.assertEqual(direct.returncode, 0, direct.stdout)
+            self.assertIn(reason, direct.stdout)
+            self.assertIn('skipped=1', direct.stdout)
+            for name, script, selected_environment in gates:
+                with self.subTest(gate=name):
+                    public = self.run_recipe(checkout, selected_environment, script)
+                    self.assertNotEqual(public.returncode, 0, public.stdout)
+                    self.assertIn(identifier, public.stdout)
+                    self.assertIn(reason, public.stdout)
+                    record = self.qualification_record(public.stdout)
+                    self.assertEqual(record['qualification'], 'REFUSE')
+                    self.assertEqual(len(record['required_methods']), 46)
+                    if len(leaf_ids) == 46:
+                        self.assertEqual(record['tests_run'], 46)
+                    else:
+                        self.assertEqual(record['tests_run'], len(leaf_ids))
+                    self.assertEqual(Counter(record['executed_methods']), Counter(leaf_ids),
+                                     'leaf execution differs from independent discovery')
+                    self.assertIn([identifier, reason], record['skips'])
 
 
 if __name__ == '__main__':

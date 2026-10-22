@@ -4,13 +4,26 @@ Original documentation: CC-BY-SA-4.0.
 
 Edit TOML authoring, then run the following from the RCEF checkout, selecting the reviewed shared checkout in the first line:
 
+<!-- RCEF:BEGIN GENERATE -->
 ```sh
 export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
 export PYTHONPATH="$MSF_TOOLS_PATH"
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
+```
+<!-- RCEF:END GENERATE -->
+
+Review the generated diffs, then check existing outputs without writing:
+
+<!-- RCEF:BEGIN ACCEPTANCE -->
+```sh
+export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
+export PYTHONPATH="$MSF_TOOLS_PATH"
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
 python3 -B scripts/run_acceptance.py --tools-path "$MSF_TOOLS_PATH"
+python -B -m unittest discover -s tests -p acceptance_runner_regressions.py -v
+python -B -m unittest discover -s tests -p acceptance_gate_regressions.py -v
 ```
+<!-- RCEF:END ACCEPTANCE -->
 
 Review all generated diffs. Acceptance requires the drift check and the qualification runner, which discovers every `tests/test_*.py` file and checks the pinned required methods. An unconfigured native run explicitly reports native unqualified; a configured `MSF_NATIVE_PATH` requires its accepted `MSF_NATIVE_SHA256` and zero skips. Use the binding artifact for the exact interpreter. Tests preserve declared storage/arithmetic scope; provider-frame and physiological admission remain separate. Both environment variables select the same shared checkout for discovery and its subprocess tests. The separately maintained shared tooling owns rendering, validation and evaluation algorithms. For local R-HARD qualification, use the accepted source archive and runtime-specific native artifact recorded in the reviewed consumer draft. The earlier `evidence/tooling.lock.json` remains pending separate R-DEP verifier and lock integration.
 
@@ -21,3 +34,5 @@ Every mapped rule states its assumptions, quality and losses. Keep native defaul
 Changes should include the affected evidence, generated artifacts, test results and remaining limitations. Review semantics and calibration separately from executable correctness. A proposal changes neither the wire contract nor support claims until its review and gates pass.
 
 The manual GitHub workflow takes a shared repository and immutable commit. Configure a token only when that dependency is private. Local commands remain the verified workflow while shared tooling is local.
+
+The runner observes complete unittest callbacks for every selected original and addition. The two explicit regression commands provide development feedback and do not establish full qualification. Copied gate recipes retain the source files and use `--qualification-only` for the original46 plus leaf additions. `--observe-gate-control` selects the original Gate plus all gate-file additions, emits a separate `scope=gate-control` observation, and is mutually exclusive with `--qualification-only`. Public acceptance uses the default original50 plus every discovered addition. Actual full, copied120/240, source, cost, native, installed and host gates remain required.
