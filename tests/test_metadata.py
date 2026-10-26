@@ -9,6 +9,7 @@ import hashlib
 import io
 import json
 from pathlib import Path
+import sys
 import unittest
 
 import msf_tools as msf
@@ -34,6 +35,30 @@ ROWS = (
 )
 DISPOSITIONS = {'mapped', 'unresolved', 'excluded', 'unsupported'}
 CSV_FIELDS = ['id', 'label', 'value_type', 'units', 'disposition', 'evidence_status']
+INVENTORY_SNAPSHOT = ROOT / 'tests/fixtures/inventory_snapshot.csv'
+# Disposition is left out on purpose: mapping work changes dispositions, while
+# the inventory itself should only change through a reviewed data correction.
+SNAPSHOT_FIELDS = ['id', 'native_id', 'label', 'units', 'min', 'max', 'native_index', 'inventory_ordinal',
+                   'region', 'side', 'coupling', 'calibration']
+
+
+def inventory_rows(document):
+    """One row per signal, in authoring order, with an empty cell for an absent value."""
+    def cell(value):
+        return '' if value is None else value if isinstance(value, str) else json.dumps(value)
+    rows = []
+    for s in document['signals']:
+        values = {**s, **s.get('domain', {}), **{k: s.get('metadata', {}).get(k)
+                                               for k in ('native_index', 'inventory_ordinal')}}
+        rows.append([cell(values.get(field)) for field in SNAPSHOT_FIELDS])
+    return rows
+
+
+def write_inventory_snapshot(document):
+    with INVENTORY_SNAPSHOT.open('w', encoding='utf-8', newline='') as handle:
+        writer = csv.writer(handle, lineterminator='\n')
+        writer.writerow(SNAPSHOT_FIELDS)
+        writer.writerows(inventory_rows(document))
 
 # Exact admitted native subset, independent of the mapping's declared rules.
 IDENTITIES = (
@@ -113,6 +138,15 @@ class Metadata(unittest.TestCase):
                          [[r['id'] for r in m['rules']] for m in document['mappings']])
         self.assertEqual(self.ok(msf.compile_pack(self.ok(msf.validate_authoring(document)))).to_bytes(),
                          self.pack.to_bytes())
+
+    def test_inventory_matches_reviewed_snapshot(self):
+        with INVENTORY_SNAPSHOT.open(encoding='utf-8', newline='') as handle:
+            expected = list(csv.reader(handle))
+        self.assertEqual(expected[0], SNAPSHOT_FIELDS)
+        actual = inventory_rows(self.authoring)
+        self.assertEqual([r[0] for r in actual], [r[0] for r in expected[1:]], 'signal IDs or order changed')
+        for row, wanted in zip(actual, expected[1:]):
+            self.assertEqual(dict(zip(SNAPSHOT_FIELDS, row)), dict(zip(SNAPSHOT_FIELDS, wanted)), row[0])
 
     def test_version_axes_and_rendered_bytes(self):
         self.assertEqual(self.authoring['data_version'], self.generated['data_version'])
@@ -244,4 +278,8 @@ class Metadata(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    if sys.argv[1:] == ['--write-inventory-snapshot']:
+        # After a reviewed data correction: rewrite the snapshot, then review its diff.
+        write_inventory_snapshot(msf.load_authoring(ROOT).value.to_dict())
+    else:
+        unittest.main(verbosity=2)
