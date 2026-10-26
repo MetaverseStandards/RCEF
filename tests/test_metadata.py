@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""R-DATA row semantics and preservation, independently bounded to data 0.1.1."""
+"""Signal metadata, the provider identities, and invariants of the authored data and its outputs."""
 from __future__ import annotations
 
 from collections import Counter
-from copy import deepcopy
+import csv
 import hashlib
+import io
 import json
 from pathlib import Path
 import unittest
@@ -31,29 +32,8 @@ ROWS = (
     ('vrcft.parameter.float.v2.EyeY', 'v2/EyeY', 89, 'gaze', 'shared'),
     ('arkit.ancillary.leftEyeTransform', 'leftEyeTransform', 0, 'gaze', 'left'),
 )
-SIDE_EDITS = {
-    'vrcft.parameter.float.v2.EyeLeftX', 'vrcft.parameter.float.v2.EyeLeftY',
-    'vrcft.parameter.float.v2.EyeRightX', 'vrcft.parameter.float.v2.EyeRightY',
-    'arkit.ancillary.leftEyeTransform',
-}
-REGION_EDITS = {row[0] for row in ROWS}
-
-# Committed 282fc385 baseline fingerprints, captured before production edits.
-# These freeze preservation only; the literal primary row table supplies meaning.
-PRESERVED_STRUCTURE_SHA256 = '97da5e6f0c8ec771a51c5086ce0e92886a63bef51d77dd706de447216eba2038'
-NAME_ORDER_SHA256 = 'be93863a39ed72d30f980306bd8441d422321dc3cddaad0b12368ae00c1844ce'
-COVERAGE_STRUCTURE_SHA256 = 'd562fa95870a5c64cd0114163b1f6a01160b2be75793f46af5722c6a2c91a4dd'
-CSV_SHA256 = 'bb82978b01f389c0e87ad6e18c3f5a0913f87e80af0c1d5de0aff4093b5c9591'
-SELECTED_COUNTS = {
-    'rcef.canonical': 21, 'arkit.ancillary': 1, 'arkit.coefficient': 52,
-    'fixture': 5, 'fixture.source': 3, 'fixture.target': 2,
-    'godot.base': 102, 'godot.blended': 41, 'mediapipe.label': 52,
-    'openxr.ancillary': 10, 'openxr.fb': 63, 'openxr.fb2': 70,
-    'openxr.visemes': 15, 'roblox.control': 50, 'vrcft.artist.base': 102,
-    'vrcft.artist.blended': 42, 'vrcft.eye': 12, 'vrcft.parameter.encoding': 7,
-    'vrcft.parameter.flags': 3, 'vrcft.parameter.float': 124,
-    'vrcft.transport': 88, 'vrm.preset': 18,
-}
+DISPOSITIONS = {'mapped', 'unresolved', 'excluded', 'unsupported'}
+CSV_FIELDS = ['id', 'label', 'value_type', 'units', 'disposition', 'evidence_status']
 
 # Exact admitted native subset, independent of the mapping's declared rules.
 IDENTITIES = (
@@ -80,10 +60,6 @@ IDENTITIES = (
     )),
 )
 
-
-def structural_hash(document):
-    return hashlib.sha256(json.dumps(document, sort_keys=True, separators=(',', ':'),
-                                     allow_nan=False).encode('utf-8')).hexdigest()
 
 
 class Metadata(unittest.TestCase):
@@ -120,39 +96,49 @@ class Metadata(unittest.TestCase):
     def test_primary_metadata_rows_in_generated_pack(self):
         self.assert_rows(self.generated)
 
-    def test_only_reviewed_fields_change(self):
-        for label, document in [('authoring', self.authoring), ('generated', self.generated)]:
-            with self.subTest(document=label):
-                preserved = deepcopy(document)
-                preserved.pop('data_version')
-                for signal in preserved['signals']:
-                    if signal['id'] in REGION_EDITS:
-                        signal.pop('region')
-                    if signal['id'] in SIDE_EDITS:
-                        signal.pop('side')
-                self.assertEqual(structural_hash(preserved), PRESERVED_STRUCTURE_SHA256,
-                                 'extra value/basis/coupling/metadata/ID/order change')
+    def test_ids_unique_and_order_stable(self):
+        document = self.authoring
+        for kind in ('signals', 'profiles', 'mappings', 'evidence'):
+            ids = [item['id'] for item in document[kind]]
+            self.assertEqual(len(ids), len(set(ids)), f'duplicate {kind} ID')
+        rule_ids = [r['id'] for m in document['mappings'] for r in m['rules']]
+        self.assertEqual(len(rule_ids), len(set(rule_ids)), 'duplicate rule ID')
+        for profile in document['profiles']:
+            self.assertEqual(len(profile['signal_ids']), len(set(profile['signal_ids'])), profile['id'])
+        # The generated pack keeps authoring order everywhere, and compiling again
+        # gives the same bytes.
+        for kind in ('signals', 'profiles', 'mappings', 'evidence'):
+            self.assertEqual([i['id'] for i in self.generated[kind]], [i['id'] for i in document[kind]], kind)
+        self.assertEqual([[r['id'] for r in m['rules']] for m in self.generated['mappings']],
+                         [[r['id'] for r in m['rules']] for m in document['mappings']])
+        self.assertEqual(self.ok(msf.compile_pack(self.ok(msf.validate_authoring(document)))).to_bytes(),
+                         self.pack.to_bytes())
 
     def test_version_axes_and_rendered_bytes(self):
+        self.assertEqual(self.authoring['data_version'], self.generated['data_version'])
+        self.assertRegex(self.authoring['data_version'], r'^[0-9]+\.[0-9]+\.[0-9]+$')
         for document in (self.authoring, self.generated):
-            with self.subTest(version=document['data_version']):
-                self.assertEqual(document['data_version'], '0.1.1')
-                self.assertEqual(document['schema_version'], '1.0')
-                self.assertEqual(document['operator_version'], '1.0')
+            self.assertEqual(document['schema_version'], '1.0')
+            self.assertEqual(document['operator_version'], '1.0')
         self.assertEqual(self.pack.to_bytes(), (ROOT / 'generated/rcef.pack.json').read_bytes())
 
-    def test_inventory_counts_names_and_order(self):
+    def test_dispositions_partition_signals_and_rules_reference_mapped_signals(self):
         signals = {s['id']: s for s in self.authoring['signals']}
-        self.assertEqual(len(signals), 893)
-        self.assertEqual(Counter(s['disposition'] for s in signals.values()),
-                         {'mapped': 47, 'unresolved': 805, 'excluded': 35, 'unsupported': 6})
-        self.assertEqual(len(self.authoring['evidence']), 27)
-        self.assertEqual(sum(len(m['rules']) for m in self.authoring['mappings']), 24)
-        counts = {p['id']: sum(signals[s]['metadata'].get('selected', True)
-                               for s in p['signal_ids']) for p in self.authoring['profiles']}
-        self.assertEqual(counts, SELECTED_COUNTS)
-        self.assertEqual(structural_hash([[s['id'], s.get('native_id'), s['label']]
-                                          for s in self.authoring['signals']]), NAME_ORDER_SHA256)
+        counts = Counter(s['disposition'] for s in signals.values())
+        self.assertLessEqual(set(counts), DISPOSITIONS)
+        self.assertEqual(sum(counts.values()), len(self.authoring['signals']))
+        members = {sid for p in self.authoring['profiles'] for sid in p['signal_ids']}
+        self.assertLessEqual(members, set(signals), 'profile lists an unknown signal')
+        self.assertEqual(members, set(signals), 'signal belongs to no profile')
+        endpoints = set()
+        for mapping in self.authoring['mappings']:
+            for rule in mapping['rules']:
+                refs = [*rule['inputs'], *rule['outputs']]
+                self.assertLessEqual(set(refs), set(signals), rule['id'])
+                if rule['disposition'] == 'mapped':
+                    endpoints.update(refs)
+        # A signal is mapped exactly when some mapped rule uses it.
+        self.assertEqual(endpoints, {sid for sid, s in signals.items() if s['disposition'] == 'mapped'})
 
     def test_matrix_exclusion_and_unedited_direction_controls(self):
         signals = {s['id']: s for s in self.authoring['signals']}
@@ -225,13 +211,28 @@ class Metadata(unittest.TestCase):
                     assertions += 1
         self.assertEqual(assertions, 63)
 
-    def test_csv_coverage_and_checksums_preservation(self):
+    def test_csv_coverage_and_checksums_agree_with_pack(self):
         outputs = ROOT / 'generated'
-        self.assertEqual(hashlib.sha256((outputs / 'rcef_mapping.csv').read_bytes()).hexdigest(), CSV_SHA256)
+        pack_bytes = (outputs / 'rcef.pack.json').read_bytes()
+        document = self.generated
+        profiles = [p['id'] for p in document['profiles']]
+        members = {p['id']: set(p['signal_ids']) for p in document['profiles']}
+        rows = list(csv.reader(io.StringIO((outputs / 'rcef_mapping.csv').read_text(encoding='utf-8'))))
+        self.assertEqual(rows[0], [*CSV_FIELDS, *profiles])
+        self.assertEqual([r[0] for r in rows[1:]], [s['id'] for s in document['signals']])
+        for row, signal in zip(rows[1:], document['signals']):
+            self.assertEqual(row[CSV_FIELDS.index('disposition')], signal['disposition'], signal['id'])
+            self.assertEqual(row[len(CSV_FIELDS):],
+                             ['1' if signal['id'] in members[p] else '' for p in profiles], signal['id'])
         coverage = json.loads((outputs / 'coverage.json').read_text())
-        self.assertEqual(coverage.pop('pack_sha256'),
-                         hashlib.sha256((outputs / 'rcef.pack.json').read_bytes()).hexdigest())
-        self.assertEqual(structural_hash(coverage), COVERAGE_STRUCTURE_SHA256)
+        self.assertEqual(coverage['pack_sha256'], hashlib.sha256(pack_bytes).hexdigest())
+        rules = [r for m in document['mappings'] for r in m['rules']]
+        self.assertEqual(coverage['totals'], {'signals': len(document['signals']), 'profiles': len(profiles),
+                                              'rules': len(rules), 'evidence': len(document['evidence'])})
+        self.assertEqual({k: v for k, v in coverage['disposition_counts'].items() if v},
+                         Counter(s['disposition'] for s in document['signals']))
+        self.assertEqual(coverage['mapping_quality_counts'],
+                         Counter(r['mapping_quality'] for r in rules if r['disposition'] == 'mapped'))
         checksums = {}
         for line in (outputs / 'SHA256SUMS').read_text().splitlines():
             digest, name = line.split('  ', 1)

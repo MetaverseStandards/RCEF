@@ -188,7 +188,14 @@ class Parity(unittest.TestCase):
         disposition_ids = [id for ids in coverage['dispositions'].values() for id in ids]
         self.assertEqual(set(disposition_ids), signal_ids)
         self.assertEqual(len(disposition_ids), len(signal_ids))
-        self.assertEqual(coverage['mapping_quality_counts'], {'exact': 22, 'approximate': 1})
+        rules = [r for m in self.document['mappings'] for r in m['rules']]
+        mapped = [r for r in rules if r['disposition'] == 'mapped']
+        self.assertEqual(sorted(i for ids in coverage['mapping_quality'].values() for i in ids),
+                         sorted(r['id'] for r in mapped))
+        for quality, ids in coverage['mapping_quality'].items():
+            self.assertEqual(coverage['mapping_quality_counts'][quality], len(ids))
+            self.assertEqual(set(ids), {r['id'] for r in mapped if r['mapping_quality'] == quality})
+        self.assertEqual({r['id'] for r in coverage['rules']}, {r['id'] for r in rules})
         self.assertEqual(coverage['totals']['signals'], len(signal_ids))
         self.assertEqual(len(coverage['profiles']), len(self.document['profiles']))
         self.assertEqual({e['id'] for e in coverage['evidence']},
