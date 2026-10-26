@@ -10,28 +10,31 @@ The canonical subset has 21 explicitly provider-calibrated scalar projections sp
 
 ## Generate and check
 
-Python 3.11+ and `msf_tools` are required. Install the separately maintained shared tools, or supply an explicit local checkout:
+Python 3.11+ and the separately maintained `msf-tools` package are required. Install msf-tools at the commit recorded as `git_commit` in [tooling.lock.json](evidence/tooling.lock.json), from GitHub or from a local checkout, into the Python you use for RCEF:
 
 ```sh
-export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
-export PYTHONPATH="$MSF_TOOLS_PATH"
-python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
+python3 -m pip install "git+https://github.com/Kjakubzak/msf-tools@COMMIT"
+# or: python3 -m pip install "git+file://$(cd ../msf-tools && pwd -P)@COMMIT"
+```
+
+Then regenerate the outputs:
+
+```sh
+python3 -B check.py --write
 ```
 
 Review the generated diffs, then check existing outputs without writing and run the tests:
 
 ```sh
-export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
-export PYTHONPATH="$MSF_TOOLS_PATH"
-python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
+python3 -B check.py
 python3 -B -m unittest discover -s tests
 ```
 
-Run these commands from the RCEF checkout, selecting the shared checkout in the first line.
+Run these commands from the RCEF checkout.
 
 The 21 provider identities and 63 scalar comparisons preserve declared storage and provider-specific assumptions. FB2 direction tests activate one direction at a time. Raw pupil fields and native defaults do not establish physical measurement, calibrated neutral or cross-provider equivalence. Provider frame context, device/capture/physiology and installed dependency verification remain separate gates.
 
-The existing [tooling.lock.json](evidence/tooling.lock.json) retains the earlier dependency pending separate R-DEP verifier and lock integration. Without `--tools-path`, the rendering wrapper uses the installed package. The wrapper delegates to `python3 -B -m msf_tools check AUTHORING --pack PATH --csv PATH [--write]`. No automatic cloning or source download occurs during checking.
+`check.py` uses the installed package. The lock records its commit, version and a SHA-256 for every installed package file. The wrapper delegates to `python3 -B -m msf_tools check AUTHORING --pack PATH --csv PATH [--write]`. No automatic cloning or source download occurs during checking.
 
 Outputs are `generated/rcef.pack.json`, `rcef_mapping.csv`, `coverage.json`, and `SHA256SUMS`. JSON uses the shared sorted-key, indented stdlib encoding with UTF-8 and final LF, finite numbers and normalized negative zero. Arrays retain authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All bytes are rendered and validated before each file is atomically replaced; several replacements are not one transaction.
 

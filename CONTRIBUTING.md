@@ -2,24 +2,27 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-Edit TOML authoring, then run the following from the RCEF checkout, selecting the reviewed shared checkout in the first line:
+Edit TOML authoring, then work from the RCEF checkout. Install msf-tools at the commit recorded as `git_commit` in [tooling.lock.json](evidence/tooling.lock.json), from GitHub or from a local checkout, into the Python you use for RCEF:
 
 ```sh
-export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
-export PYTHONPATH="$MSF_TOOLS_PATH"
-python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
+python3 -m pip install "git+https://github.com/Kjakubzak/msf-tools@COMMIT"
+# or: python3 -m pip install "git+file://$(cd ../msf-tools && pwd -P)@COMMIT"
+```
+
+Then regenerate the outputs:
+
+```sh
+python3 -B check.py --write
 ```
 
 Review the generated diffs, then check existing outputs without writing and run the tests:
 
 ```sh
-export MSF_TOOLS_PATH="$(cd ../msf-tools && pwd -P)"
-export PYTHONPATH="$MSF_TOOLS_PATH"
-python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
+python3 -B check.py
 python3 -B -m unittest discover -s tests
 ```
 
-Review all generated diffs. Tests preserve declared storage/arithmetic scope; provider-frame and physiological admission remain separate. Both environment variables select the same shared checkout for the tests and their subprocesses. The separately maintained shared tooling owns rendering, validation and evaluation algorithms. The earlier `evidence/tooling.lock.json` remains pending separate R-DEP verifier and lock integration.
+Review all generated diffs. Tests preserve declared storage/arithmetic scope; provider-frame and physiological admission remain separate. The tests and their subprocesses use the installed msf-tools. The separately maintained shared tooling owns rendering, validation and evaluation algorithms.
 
 New or changed provider entries need a public primary source, exact revision or retrieval/content digest, locator, original summary, units/domain/calibration evidence and explicit disposition. Documentation positions are inventory ordinals unless the source defines a native index. Preserve source contradictions and unresolved mappings. Names alone do not justify cross-provider identities.
 
@@ -27,4 +30,4 @@ Every mapped rule states its assumptions, quality and losses. Keep native defaul
 
 Changes should include the affected evidence, generated artifacts, test results and remaining limitations. Review semantics and calibration separately from executable correctness. A proposal changes neither the wire contract nor support claims until its review and gates pass.
 
-The manual GitHub workflow takes a shared repository and immutable commit. Configure a token only when that dependency is private. Local commands remain the verified workflow while shared tooling is local.
+The GitHub workflow runs on every push and pull request, and can be started by hand. It installs msf-tools from `Kjakubzak/msf-tools` at the locked commit, using the read-only `MSF_TOOLS_TOKEN` repository secret, then runs `check.py` and the tests on Python 3.11 and 3.12.

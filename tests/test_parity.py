@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MIT
 """Consumer acceptance tests: independent scalar expectations and authoring refusal."""
 from __future__ import annotations
-import argparse
 from copy import deepcopy
 import json
 from pathlib import Path
@@ -12,13 +11,9 @@ import sys
 import tempfile
 import unittest
 
-ROOT = Path(__file__).resolve().parents[1]
-parser = argparse.ArgumentParser(add_help=False)
-parser.add_argument('--tools-path', type=Path)
-args, remaining = parser.parse_known_args()
-if args.tools_path:
-    sys.path.insert(0, str(args.tools_path.resolve(strict=True)))
 import msf_tools as msf
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class Parity(unittest.TestCase):
@@ -133,11 +128,8 @@ class Parity(unittest.TestCase):
                 source = ROOT / name
                 if source.is_dir(): shutil.copytree(source, path / name)
                 else: shutil.copy2(source, path / name)
-            tool_root = Path(msf.__file__).resolve().parent.parent
-            runner = [sys.executable, '-B', '-c',
-                      'import runpy,sys;sys.path.insert(0,sys.argv.pop(1));'
-                      'sys.argv[0]="msf_tools";runpy.run_module("msf_tools",run_name="__main__")',
-                      str(tool_root), 'check', str(path), '--pack', str(path / 'generated/rcef.pack.json'),
+            runner = [sys.executable, '-B', '-m', 'msf_tools', 'check', str(path),
+                      '--pack', str(path / 'generated/rcef.pack.json'),
                       '--csv', str(path / 'generated/rcef_mapping.csv')]
             def run(write=False):
                 return subprocess.run(runner + (['--write'] if write else []), capture_output=True)
@@ -206,4 +198,4 @@ class Parity(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(argv=[sys.argv[0], *remaining], verbosity=2)
+    unittest.main(verbosity=2)

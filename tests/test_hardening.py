@@ -5,15 +5,12 @@ from __future__ import annotations
 
 from copy import deepcopy
 import json
-import os
 from pathlib import Path
-import sys
 import unittest
 
-ROOT = Path(__file__).resolve().parents[1]
-TOOLS = Path(os.environ['MSF_TOOLS_PATH']).resolve(strict=True)
-sys.path.insert(0, str(TOOLS))
 import msf_tools as msf
+
+ROOT = Path(__file__).resolve().parents[1]
 
 C, P, U = 'verified_current', 'proposed', 'unresolved'
 SOURCE = 'arkit.coefficient.eyeBlinkLeft'
@@ -43,8 +40,6 @@ RF_ROWS = (
 class Hardening(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        if Path(msf.__file__).resolve().parent.parent != TOOLS:
-            raise AssertionError(f'unexpected shared import: {msf.__file__}')
         loaded = msf.load_authoring(ROOT)
         if not loaded.ok:
             raise AssertionError(loaded.report.to_dict())

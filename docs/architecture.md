@@ -289,28 +289,19 @@ JSON uses sorted object keys, indent=2, UTF-8 with final LF, finite numbers and 
 These are suggested commands for an authorized author in an RCEF checkout using Python 3.11+. They were not executed for this report.
 
 1. Identify the affected signal/profile/rule and its exact evidence IDs. Edit the authoritative TOML, retain unresolved facts, and update evidence locators/digests where appropriate. Keep measured neutral, storage defaults and actual sample validity distinct.
-2. Select the reviewed MSF dependency. `check.py` without `--tools-path` imports the installed `msf_tools` with the running interpreter. `--tools-path` explicitly prepends a checkout containing `msf_tools/__init__.py` for that invocation; it does not install, clone, download or verify release-package provenance. `check.py` does not select the checkout from `MSF_TOOLS_PATH` automatically.
+2. Install msf-tools at the commit recorded in `evidence/tooling.lock.json`. `check.py` runs the installed `msf_tools` with the running interpreter; it does not install, clone or download anything.
 3. Regenerate, review changed generated/presentation bytes, and check again. `--write` is regeneration; the default invocation is byte drift checking, not full qualification.
 4. Run the tests with the same selected tools. Keep device/capture and calibration gates separate.
 
-Installed-package rendering/checking:
+Rendering, checking and tests:
 
 ```sh
 python3 -B check.py --write
 python3 -B check.py
-```
-
-Explicit sibling checkout for rendering and tests (choose the reviewed checkout first):
-
-```sh
-export MSF_TOOLS_PATH="../msf-tools"
-export PYTHONPATH="$MSF_TOOLS_PATH"
-python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
-python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
 python3 -B -m unittest discover -s tests
 ```
 
-`PYTHONPATH` selects the same tools for the tests and their subprocesses. Merely generating matching bytes does not run those tests.
+Merely generating matching bytes does not run the tests.
 
 `check.py` first delegates to `msf_tools check` for the pack, CSV, coverage and generated checksums. If that fails, it stops before presentation export. On shared success it runs the RCEF presentation exporter with the same write/check choice. For presentation-only regeneration/checking of an existing pack:
 

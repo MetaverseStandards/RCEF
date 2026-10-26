@@ -3,25 +3,16 @@
 """R-DATA row semantics and preservation, independently bounded to data 0.1.1."""
 from __future__ import annotations
 
-import argparse
 from collections import Counter
 from copy import deepcopy
 import hashlib
 import json
-import os
 from pathlib import Path
-import sys
 import unittest
 
-ROOT = Path(__file__).resolve().parents[1]
-parser = argparse.ArgumentParser(add_help=False)
-parser.add_argument('--tools-path', type=Path, default=os.environ.get('MSF_TOOLS_PATH'))
-args, remaining = parser.parse_known_args()
-if args.tools_path is None:
-    parser.error('select the shared checkout with --tools-path or MSF_TOOLS_PATH')
-TOOLS = Path(args.tools_path).resolve(strict=True)
-sys.path.insert(0, str(TOOLS))
 import msf_tools as msf
+
+ROOT = Path(__file__).resolve().parents[1]
 
 # Literal F-9/F-10/F-18 and reviewed A-03 expectations. The gaze parameter
 # documentation and actual EParam getters distinguish anatomy from direction;
@@ -98,8 +89,6 @@ def structural_hash(document):
 class Metadata(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        if Path(msf.__file__).resolve().parent.parent != TOOLS:
-            raise AssertionError(f'unexpected shared import: {msf.__file__}')
         loaded = msf.load_authoring(ROOT)
         if loaded.value is None:
             raise AssertionError(loaded.report.to_dict())
@@ -254,4 +243,4 @@ class Metadata(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(argv=[sys.argv[0], *remaining], verbosity=2)
+    unittest.main(verbosity=2)
