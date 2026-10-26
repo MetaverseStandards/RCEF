@@ -24,8 +24,16 @@ class Parity(unittest.TestCase):
             raise AssertionError(loaded.report.to_dict())
         cls.document = loaded.value.to_dict()
         cls.pack = msf.compile_pack(loaded.value).value
-        cls.source = msf.profile_snapshot(cls.pack, 'fixture.source').value
-        cls.target = msf.profile_snapshot(cls.pack, 'fixture.target').value
+        # msf-tools rechecks the whole pack on every evaluation. The fixture
+        # mappings are evaluated many times, so they use a pack holding only them.
+        fixtures = deepcopy(cls.document)
+        fixtures['profiles'] = [p for p in fixtures['profiles'] if p['id'] in ('fixture.source', 'fixture.target')]
+        kept = {s for p in fixtures['profiles'] for s in p['signal_ids']}
+        fixtures['signals'] = [s for s in fixtures['signals'] if s['id'] in kept]
+        fixtures['mappings'] = [m for m in fixtures['mappings'] if m['id'] in ('fixture.affine', 'fixture.bilateral')]
+        cls.fixture_pack = msf.compile_pack(msf.validate_authoring(fixtures).value).value
+        cls.source = msf.profile_snapshot(cls.fixture_pack, 'fixture.source').value
+        cls.target = msf.profile_snapshot(cls.fixture_pack, 'fixture.target').value
         cls.fixtures = json.loads((ROOT / 'fixtures/mapping_samples.json').read_text())
 
     def ok(self, result):
@@ -41,7 +49,7 @@ class Parity(unittest.TestCase):
             self.assertIn(code, codes)
 
     def compile(self, mapping, approximation=False):
-        return msf.compile_mapping(self.pack, self.source, self.target, mapping,
+        return msf.compile_mapping(self.fixture_pack, self.source, self.target, mapping,
                                    allow_approximation=approximation)
 
     def frame(self, values, validity=None):
