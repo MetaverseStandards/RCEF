@@ -136,7 +136,7 @@ class Parity(unittest.TestCase):
                 source = ROOT / name
                 if source.is_dir(): shutil.copytree(source, path / name)
                 else: shutil.copy2(source, path / name)
-            runner = [sys.executable, '-B', '-m', 'msf_tools', 'check', str(path),
+            runner = [sys.executable, '-B', '-P', '-m', 'msf_tools', 'check', str(path),
                       '--pack', str(path / 'generated/rcef.pack.json'),
                       '--csv', str(path / 'generated/rcef_mapping.csv')]
             def run(write=False):

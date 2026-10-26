@@ -157,6 +157,19 @@ class LockVerification(unittest.TestCase):
         self.assertFalse(ran, 'msf-tools ran despite the commit mismatch')
         self.assertIn(OTHER_COMMIT, result.stderr)
 
+    def test_package_in_working_directory_cannot_replace_the_verified_one(self):
+        foreign = self.temp / 'cwd' / 'msf_tools'
+        foreign.mkdir(parents=True)
+        (foreign / '__init__.py').write_text('')
+        (foreign / '__main__.py').write_text(FAKE_MAIN)
+        marker = self.temp / 'marker'
+        env = plain_env()
+        env['RCEF_TEST_MARKER'] = str(marker)
+        result = subprocess.run([sys.executable, '-B', str(ROOT / 'check.py')], cwd=foreign.parent, env=env,
+                                capture_output=True, text=True, timeout=60)
+        self.assertFalse(marker.exists(), 'msf_tools from the working directory ran')
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_check_refuses_tampered_package_before_any_work(self):
         result, ran = self.run_check(self.site)
         self.assertNotEqual(result.returncode, 0)

@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parent
 LOCK = ROOT / 'evidence' / 'tooling.lock.json'
@@ -129,19 +130,23 @@ def main() -> int:
         print(f'Install {DISTRIBUTION} at commit {commit}. To adopt a reviewed new version '
               'instead, install it and run check.py --update-lock.', file=sys.stderr)
         return 2
-    command = [sys.executable, '-B', '-m', PACKAGE, 'check', str(ROOT),
-               '--pack', str(ROOT / 'generated' / 'rcef.pack.json'),
-               '--csv', str(ROOT / 'generated' / 'rcef_mapping.csv')]
-    if args.write:
-        command.append('--write')
-    status = subprocess.run(command, check=False).returncode
+    # -P keeps the caller's working directory off the import path, so the
+    # subprocess imports the msf_tools verified above. An empty bytecode cache
+    # makes it run the verified source rather than any cached .pyc files.
+    with tempfile.TemporaryDirectory(prefix='rcef-pycache-') as cache:
+        command = [sys.executable, '-B', '-P', '-X', f'pycache_prefix={cache}', '-m', PACKAGE,
+                   'check', str(ROOT), '--pack', str(ROOT / 'generated' / 'rcef.pack.json'),
+                   '--csv', str(ROOT / 'generated' / 'rcef_mapping.csv')]
+        if args.write:
+            command.append('--write')
+        status = subprocess.run(command, check=False, cwd=ROOT).returncode
     if status:
         return status
-    reports = [sys.executable, '-B', str(ROOT / 'scripts/export_reports.py'),
+    reports = [sys.executable, '-B', '-P', str(ROOT / 'scripts/export_reports.py'),
                '--root', str(ROOT)]
     if args.write:
         reports.append('--write')
-    return subprocess.run(reports, check=False).returncode
+    return subprocess.run(reports, check=False, cwd=ROOT).returncode
 
 
 if __name__ == '__main__':
