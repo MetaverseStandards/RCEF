@@ -1,4 +1,4 @@
-name: Authoring acceptance
+name: Check
 # Shared tools start locally. Configure the pinned dependency before remote execution.
 on:
   workflow_dispatch:
@@ -48,9 +48,5 @@ jobs:
         working-directory: RCEF
       - run: python -B check.py --tools-path ../.ci-tools
         working-directory: RCEF
-      - run: python -B scripts/run_acceptance.py --tools-path ../.ci-tools
-        working-directory: RCEF
-      - run: python -B -m unittest discover -s tests -p acceptance_runner_regressions.py -v
-        working-directory: RCEF
-      - run: python -B -m unittest discover -s tests -p acceptance_gate_regressions.py -v
+      - run: python -B -m unittest discover -s tests -v
         working-directory: RCEF

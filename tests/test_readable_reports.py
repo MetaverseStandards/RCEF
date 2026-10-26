@@ -186,10 +186,4 @@ class ReadableReports(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # Keep the acceptance runner's explicit tooling option compatible; these
-    # presentation tests use stdlib only and do not load that dependency.
-    import argparse
-    parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('--tools-path')
-    _, remaining = parser.parse_known_args()
-    unittest.main(argv=[sys.argv[0], *remaining])
+    unittest.main()

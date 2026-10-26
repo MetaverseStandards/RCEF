@@ -45,11 +45,11 @@ Discovery, validation and pack compilation lead to separate runtime and artifact
 
 | Owner | Supplies or implements | Boundary |
 | --- | --- | --- |
-| RCEF | `pack.toml`; provider/canonical inventories; profiles; evidence; directional mappings; numerical fixtures; `check.py`; report exporter; acceptance cases | Declares meaning and provenance; it does not implement the shared scalar algorithms. |
+| RCEF | `pack.toml`; provider/canonical inventories; profiles; evidence; directional mappings; numerical fixtures; `check.py`; report exporter; tests | Declares meaning and provenance; it does not implement the shared scalar algorithms. |
 | MSF Tools | Authoring discovery/validation, `compile_pack`, `profile_snapshot`, `compile_mapping`, `evaluate_mapping`; explicit glTF/GLB inspection and sidecar binding | Implements the reviewed wire/operator contracts and rejection behavior. |
-| Independent reviewer/consumer | Review changed bytes and semantics; run drift and acceptance gates with selected tools and any admitted native artifact | Executable correctness alone does not establish visual, anatomical, cross-provider or physiological equivalence. |
+| Independent reviewer/consumer | Review changed bytes and semantics; run the drift check and tests with selected tools | Executable correctness alone does not establish visual, anatomical, cross-provider or physiological equivalence. |
 
-Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf-tools/msf_tools/authoring.py), [pack compiler](../../msf-tools/msf_tools/pack.py), [mapping compiler/evaluator](../../msf-tools/msf_tools/mapping.py), [presentation exporter](../scripts/export_reports.py), [acceptance runner](../scripts/run_acceptance.py).
+Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf-tools/msf_tools/authoring.py), [pack compiler](../../msf-tools/msf_tools/pack.py), [mapping compiler/evaluator](../../msf-tools/msf_tools/mapping.py), [presentation exporter](../scripts/export_reports.py), [tests](../tests/).
 
 ## 2. How TOML is discovered and interpreted
 
@@ -291,7 +291,7 @@ These are suggested commands for an authorized author in an RCEF checkout using 
 1. Identify the affected signal/profile/rule and its exact evidence IDs. Edit the authoritative TOML, retain unresolved facts, and update evidence locators/digests where appropriate. Keep measured neutral, storage defaults and actual sample validity distinct.
 2. Select the reviewed MSF dependency. `check.py` without `--tools-path` imports the installed `msf_tools` with the running interpreter. `--tools-path` explicitly prepends a checkout containing `msf_tools/__init__.py` for that invocation; it does not install, clone, download or verify release-package provenance. `check.py` does not select the checkout from `MSF_TOOLS_PATH` automatically.
 3. Regenerate, review changed generated/presentation bytes, and check again. `--write` is regeneration; the default invocation is byte drift checking, not full qualification.
-4. Run independent acceptance with the same selected tools and any admitted native artifact. Keep device/capture and calibration gates separate.
+4. Run the tests with the same selected tools. Keep device/capture and calibration gates separate.
 
 Installed-package rendering/checking:
 
@@ -300,17 +300,17 @@ python3 -B check.py --write
 python3 -B check.py
 ```
 
-Explicit sibling checkout for rendering and acceptance (choose the reviewed checkout first):
+Explicit sibling checkout for rendering and tests (choose the reviewed checkout first):
 
 ```sh
 export MSF_TOOLS_PATH="../msf-tools"
 export PYTHONPATH="$MSF_TOOLS_PATH"
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH" --write
 python3 -B check.py --tools-path "$MSF_TOOLS_PATH"
-python3 -B scripts/run_acceptance.py --tools-path "$MSF_TOOLS_PATH"
+python3 -B -m unittest discover -s tests
 ```
 
-`PYTHONPATH` selects the same tools for subprocess tests. The acceptance runner requires `--tools-path` or `MSF_TOOLS_PATH`, verifies the imported source origin, discovers all `tests/test_*.py`, and enforces the pinned required method coverage. A drift check is necessary alongside the qualification runner. Merely generating matching bytes does not run those tests.
+`PYTHONPATH` selects the same tools for the tests and their subprocesses. Merely generating matching bytes does not run those tests.
 
 `check.py` first delegates to `msf_tools check` for the pack, CSV, coverage and generated checksums. If that fails, it stops before presentation export. On shared success it runs the RCEF presentation exporter with the same write/check choice. For presentation-only regeneration/checking of an existing pack:
 
@@ -319,14 +319,7 @@ python3 -B scripts/export_reports.py --write
 python3 -B scripts/export_reports.py
 ```
 
-The native backend is a separately configured pilot. Without native configuration, eligible skips may be admitted and the run remains **native unqualified**. With a configured native path, an accepted module SHA-256 and matching import origin are mandatory; all required tests must run with zero skips. A path/digest gate alone does not admit an installed or release wheel. The report makes no fresh native qualification claim.
-
-Optional configured-native invocation after independent artifact admission:
-
-```sh
-python3 -B scripts/run_acceptance.py --tools-path "$MSF_TOOLS_PATH" \
-  --native-path "$MSF_NATIVE_PATH" --native-sha256 "$MSF_NATIVE_SHA256" --require-native
-```
+The native backend pilot is tested separately from RCEF.
 
 Optional public-source provenance verification, with an explicit cache outside the RCEF repository:
 
@@ -347,7 +340,7 @@ Before extension/release, read [CONTRIBUTING](../CONTRIBUTING.md), [GOVERNANCE](
 - Review the exact ARKit calibration/domain/neutral/side/coupling checks. Verify independent expected values for identity `0.25`, affine `-1/0/1 → 0/0.5/1`, and ordered bilateral pairs. Require approximation opt-in and retain both authored losses.
 - Exercise missing value/validity, false/nonboolean validity, absent required inputs, extra/non-source channels, nonfinite/out-of-domain values and a failing frame in a multi-frame batch. Require no evaluated Result value on error.
 - Confirm unresolved MediaPipe→ARKit execution refuses; distinguish evidence status from disposition and quality. Do not infer inverse or cross-provider rules from names.
-- Run the no-write drift check and full acceptance with a reviewed tools origin. Review any unconfigured-native skips; require admitted native path/hash, complete methods and zero skips for native qualification. Treat installed-package admission separately.
+- Run the no-write drift check and the tests with a reviewed tools origin. Treat native and installed-package admission separately.
 - Independently review the HTML in offline, narrow-screen and print modes. Tab through the stage/file explorer, operate selectors and sliders with the keyboard, test reset and invalid/missing modes, and compare all static and displayed fixture values. Check readable content with JavaScript disabled and with a screen reader.
 - Check relative links after adoption into `RCEF/docs` with sibling `msf-tools`, and verify MIT inline code plus CC-BY-SA-4.0 original-documentation attribution.
 

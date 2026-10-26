@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: MIT
 """Render readable reports from generated/rcef.pack.json; check drift by default.
 
-This is a presentation exporter. Authoring validation and runtime qualification
-remain the responsibility of the shared checker and acceptance runner.
+This is a presentation exporter. Authoring validation and runtime behaviour
+remain the responsibility of the shared checker and the tests.
 """
 import argparse
 from collections import Counter
