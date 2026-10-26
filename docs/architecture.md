@@ -23,7 +23,7 @@ Five fixture signals occur in both the aggregate fixture profile and its source/
 
 Signal dispositions total 47 mapped, 805 unresolved, 6 unsupported and 35 excluded. Rules total 23 mapped (22 exact, 1 approximate) and 1 unresolved. A `mapped` signal does not guarantee that every requested mapping or frame can execute.
 
-**Verification boundary:** this report was derived by static inspection and standard-library data parsing. The product compiler, evaluator, acceptance suites and browser controls were not executed to produce it. Implemented source behavior is described below; a fresh qualification result, installed dependency admission, device/capture validity and physiological calibration remain separate evidence requirements.
+**Verification boundary:** this report was derived by static inspection and standard-library data parsing. The product compiler, evaluator, acceptance suites and browser controls were not executed to produce it. Implemented source behavior is described below; a fresh qualification result, device/capture validity and physiological calibration remain separate evidence requirements.
 
 ## 1. Architecture and ownership
 
@@ -331,7 +331,7 @@ Before extension/release, read [CONTRIBUTING](../CONTRIBUTING.md), [GOVERNANCE](
 - Review the exact ARKit calibration/domain/neutral/side/coupling checks. Verify independent expected values for identity `0.25`, affine `-1/0/1 → 0/0.5/1`, and ordered bilateral pairs. Require approximation opt-in and retain both authored losses.
 - Exercise missing value/validity, false/nonboolean validity, absent required inputs, extra/non-source channels, nonfinite/out-of-domain values and a failing frame in a multi-frame batch. Require no evaluated Result value on error.
 - Confirm unresolved MediaPipe→ARKit execution refuses; distinguish evidence status from disposition and quality. Do not infer inverse or cross-provider rules from names.
-- Run the no-write drift check and the tests with a reviewed tools origin. Treat native and installed-package admission separately.
+- Run the no-write drift check and the tests. `check.py` first verifies the installed msf-tools against `evidence/tooling.lock.json`. Treat native backend testing separately.
 - Independently review the HTML in offline, narrow-screen and print modes. Tab through the stage/file explorer, operate selectors and sliders with the keyboard, test reset and invalid/missing modes, and compare all static and displayed fixture values. Check readable content with JavaScript disabled and with a screen reader.
 - Check relative links after adoption into `RCEF/docs` with sibling `msf-tools`, and verify MIT inline code plus CC-BY-SA-4.0 original-documentation attribution.
 
