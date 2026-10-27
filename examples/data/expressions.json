@@ -18,7 +18,7 @@
   "D": 0.8,
   "E": 1.0
  },
- "au_channels_note": "AU -> FB2 channel. FB2 channel names are the FACS action-unit names (AU); the FB2 specification gives no AU numbers, so this is a name correspondence. A bilateral AU sets every side of the channel equally; \"L12\" or \"R12\" sets one side. AU 30 has a direction instead of a side.",
+ "au_channels_note": "AU -> FB2 channel. FB2 channel names are the FACS action-unit names (AU); the FB2 specification gives no AU numbers, so this is a name correspondence. A bilateral AU sets every side of the channel equally; \"L12\" or \"R12\" sets one side. AU 30 has a direction instead of a side. AU 17 (chin raiser) maps to CHIN_RAISER_B only: FB2 describes CHIN_RAISER_T as the upper-lip motion the chin raiser induces, so the top channel is not set separately.",
  "au_channels": {
   "1": "INNER_BROW_RAISER",
   "2": "OUTER_BROW_RAISER",

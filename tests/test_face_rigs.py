@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 
 try:
@@ -14,6 +15,7 @@ except ModuleNotFoundError:  # run by file path from the repository root
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'examples'))
 import face_pipeline  # noqa: E402
+import make_expression_frames  # noqa: E402
 import ict_facekit  # noqa: E402
 import rcef_translate  # noqa: E402
 import rigs  # noqa: E402
@@ -83,6 +85,16 @@ class VrmPresets(unittest.TestCase):
         _, labels = vrm_presets.morph_weights(self.EXPRESSIONS, {'happy': 0.2, 'lookUp': 0.3, 'oh': 0.1})
         self.assertEqual(labels, ['happy: overrideMouth not applied', 'lookUp: no morph target binds on this model',
                                   'oh: this model has no such expression'])
+
+
+class FacsPanel(unittest.TestCase):
+    def test_a_wink_uses_the_one_sided_closed_eye_when_there_is_no_wink_shape(self):
+        library = make_expression_frames.library()
+        wink = next(e for e in library['expressions'] if e['name'] == 'wink left')
+        weights, notes = face_pipeline.facs_weights(SimpleNamespace(targets=ROCKETBOX_LIKE), wink, 1.0, library)
+        self.assertEqual({ROCKETBOX_LIKE[i]: w for i, w in weights.items()}, {'AU_43_L_EyeClosed': 1.0})
+        self.assertIn('FACS panel: Rocketbox has no AU 46 (wink) shape; AU L46 is shown as AU 43 (eyes closed) on that side',
+                      notes)
 
 
 class VowelPresets(unittest.TestCase):

@@ -138,6 +138,13 @@ def facs_weights(rig, expression: dict | None, amount: float, library: dict) -> 
     weights, notes = {}, []
     for key, value in expression['aus'].items():
         found = rigs.facs_targets(rig.targets, key)
+        side, au = (key[0], key[1:]) if key[0] in 'LR' else ('', key)
+        if found is None and au == '46':
+            # A wink is one eye closing; Rocketbox has one-sided AU 43 shapes but no AU 46.
+            found = rigs.facs_targets(rig.targets, side + '43')
+            if found:
+                notes.append(f'FACS panel: Rocketbox has no AU 46 (wink) shape; AU {key} is shown as AU 43 '
+                             '(eyes closed) on that side')
         if found is None:
             notes.append(f'FACS panel: Rocketbox has no AU {key} shape')
             continue
