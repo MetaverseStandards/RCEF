@@ -79,6 +79,28 @@ def _references(value, known, kind):
     return value
 
 
+def _number(value):
+    return f'{value:g}'
+
+
+def _formula(rule, signals):
+    """The rule as plain arithmetic over short signal names, e.g. y = 0.5·L + 0.5·R."""
+    def name(sid):
+        return signals[sid].get('native_id') or sid.rsplit('.', 1)[-1]
+    operator, inputs = rule['operator'], [name(sid) for sid in rule['inputs']]
+    if operator['id'] == 'identity':
+        terms = inputs[0]
+    elif operator['id'] == 'affine':
+        terms = f'{_number(operator["scale"])}·{inputs[0]}'
+        if operator['offset']:
+            terms += f' + {_number(operator["offset"])}'
+    elif operator['id'] == 'weighted_sum':
+        terms = ' + '.join(f'{_number(w)}·{x}' for w, x in zip(operator['weights'], inputs))
+    else:
+        terms = _json(operator)
+    return f'{name(rule["outputs"][0])} = {terms}'
+
+
 def _decode(raw):
     def pairs(items):
         value = {}
@@ -210,6 +232,24 @@ def render(raw):
     mapping_text = '# RCEF authored mappings\n\n' + notice
     mapping_text += ('Rules preserve their declared direction, status, assumptions and losses. '
                      'Unresolved rules are inventory records; they are not executable correspondences.\n\n')
+    member_of = {}
+    for profile in profiles.values():
+        for sid in profile['signal_ids']:
+            member_of.setdefault(sid, profile['id'])
+
+    def sides(sids):
+        return ' + '.join(dict.fromkeys(member_of.get(sid, 'unassigned') for sid in sids))
+    proposed = [[mapping['id'], rule['id'], f'{sides(rule["inputs"])} → {sides(rule["outputs"])}',
+                 _formula(rule, signals), '; '.join(x['reason'] for x in rule.get('loss_annotations', [])),
+                 rule['evidence_status']]
+                for mapping in mappings.values() for rule in mapping['rules']
+                if rule.get('evidence_status') == 'proposed']
+    if proposed:
+        mapping_text += ('## Proposed rules\n\n'
+                         'Proposed rules translate between providers. Each formula assumes the calibration '
+                         'stated in its rule below; losses list what the translation cannot carry.\n\n')
+        mapping_text += _table(['Mapping', 'Rule', 'Source → target', 'Formula', 'Losses', 'Evidence status'],
+                               proposed) + '\n'
     for mapping in mappings.values():
         mapping_text += '## ' + _cell(mapping['id']) + '\n\n'
         for rule in mapping['rules']:
