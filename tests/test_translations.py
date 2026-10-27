@@ -131,6 +131,12 @@ class Translations(unittest.TestCase):
             else:
                 self.assertIsNone(result.value)
                 self.assertEqual({d.code for d in result.report.diagnostics}, {'E_INVALID_SAMPLE'})
+        # msf-tools refuses any supplied channel marked invalid, even one the mapping
+        # does not use, so consumers must give each mapping only its own inputs.
+        result = self.run_frame('fb2.to_arkit', values, validity)
+        self.assertIsNone(result.value)
+        self.assertEqual({d.code for d in result.report.diagnostics}, {'E_INVALID_SAMPLE'})
+        self.assertEqual({d.ref.rsplit('/', 1)[-1] for d in result.report.diagnostics}, gaze)
 
     def test_translations_need_the_approximation_opt_in(self):
         for mapping, (source, target) in MAPPINGS.items():
