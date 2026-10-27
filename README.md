@@ -8,7 +8,7 @@ Selected inventories: ARKit 52, MediaPipe 52, OpenXR FB 63 and FB2 70, optional 
 
 The canonical subset has 21 explicitly provider-calibrated scalar projections spanning blink, jaw, brow, directional gaze and physical pupil diameter. Executable identities preserve the stated provider basis. General calibration ambiguity is unresolved. Original affine and lossy bilateral fixtures demonstrate the shared runtime without claiming visual equivalence.
 
-Data 0.4.0 has 191 cross-provider rules: FB2 to all 52 ARKit coefficients and back (face and, separately, gaze), ARKit to VRCFaceTracking Unified Expressions, FB2 eye closure to VRM per-eye blinks, and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
+Data 0.4.0 has 187 cross-provider mappings, plus 4 internal steps in the ARKit → FB2 gaze map that take each eye's opposing ARKit gaze directions to one intermediate difference: FB2 to all 52 ARKit coefficients and back (face and, separately, gaze), ARKit to VRCFaceTracking Unified Expressions, FB2 eye closure to VRM per-eye blinks, and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
 
 ## Expression sets and where they come from
 
