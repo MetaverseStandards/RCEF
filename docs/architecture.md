@@ -101,7 +101,7 @@ id = "rcef.parity"
 license = "CC-BY-SA-4.0"
 ```
 
-The merged document needs all five keys and the four arrays. msf-tools 0.3.0 accepts schema versions `"1.0"` and `"1.1"`, and operator versions `"1.0"` and `"1.1"`. Operators 1.1 add `piecewise_linear`; a rule that uses it under operators 1.0 is refused. Schema 1.1 adds the evidence status `calibrated_software`; RCEF uses schema 1.0. `data_version` has its own version number, and it must be a semantic version: three numbers, with an optional prerelease suffix. Do not invent operators or extra root keys.
+The merged document needs all five keys and the four arrays. msf-tools 0.3.0 accepts schema versions `"1.0"` and `"1.1"`, and operator versions `"1.0"` and `"1.1"`. Operators 1.1 add `piecewise_linear`; a mapping that uses it under operators 1.0 is refused. Schema 1.1 adds the evidence status `calibrated_software`; RCEF uses schema 1.0. `data_version` has its own version number, and it must be a semantic version: three numbers, with an optional prerelease suffix. Do not invent operators or extra root keys.
 
 ### Arrays, tables and references
 
@@ -111,7 +111,7 @@ The merged document needs all five keys and the four arrays. msf-tools 0.3.0 acc
 - TOML dotted **keys** make nested objects. Dots inside a string **ID** are only characters. `"arkit.coefficient.eyeBlinkLeft"` must be written exactly; if you change `Left` to `left`, it is a different ID.
 - IDs are non-blank strings. They are case sensitive and are not trimmed or normalized. Signal, profile, map and evidence IDs are unique within their category. Rule IDs are unique across all maps. Arrays of string references refuse duplicate entries.
 - Profile `signal_ids`, rule `inputs` and `outputs`, and evidence references must name existing records. `label`, `native_id`, `region`, `side` and a similar-sounding anatomy are not references.
-- JSON object keys are sorted when written; arrays keep the authoring order. Profile column order follows profile order. Weighted-sum weights follow input order. Compilation repeatedly takes all rules whose inputs are ready, in authored order. So dependencies run first, and authored order is kept within each batch. Independent rules in different batches can change their relative order.
+- JSON object keys are sorted when written; arrays keep the authoring order. Profile column order follows profile order. Weighted-sum weights follow input order. Compilation repeatedly takes all mappings whose inputs are ready, in authored order. So dependencies run first, and authored order is kept within each batch. Independent rules in different batches can change their relative order.
 
 Parsing is strict UTF-8 with `tomllib.loads`. TOML syntax errors and duplicate keys are reported before schema checks. The msf-tools validator refuses unknown keys, missing keys, invalid enums, duplicate IDs, references to records that do not exist, and invalid numbers or domains. The document must be JSON-compatible: TOML dates and times are not accepted as values, and NaN, infinity and booleans are refused as scalars. The pipeline never executes text from TOML, and it does not infer conversions from provider names.
 
@@ -233,7 +233,7 @@ The runtime starts at `0.0`, multiplies each input by its weight, and adds the t
 
 ### Gaze difference and piecewise-linear split
 
-`arkit_gaze.to_fb2` builds FB2's rule that only one of two opposing gaze directions is non-zero. For each eye and axis, a `weighted_sum` with weights `[1.0, -1.0]` takes ARKit in minus out (or up minus down). The result goes to an RCEF intermediate signal, for example `rcef.intermediate.arkit_gaze_in_minus_out_L`, with domain `[-1,1]`. Two one-sided `piecewise_linear` mappings then split that difference into the two FB2 directions:
+`arkit_gaze.to_fb2` builds FB2's requirement that only one of two opposing gaze directions is non-zero. For each eye and axis, a `weighted_sum` with weights `[1.0, -1.0]` takes ARKit in minus out (or up minus down). The result goes to an RCEF intermediate signal, for example `rcef.intermediate.arkit_gaze_in_minus_out_L`, with domain `[-1,1]`. Two one-sided `piecewise_linear` mappings then split that difference into the two FB2 directions:
 
 | Mapping | Knots | Difference -0.5 | 0 | 0.5 |
 | --- | --- | ---: | ---: | ---: |
@@ -258,7 +258,7 @@ flowchart LR
 
 ### Map compilation is stricter than inventory validation
 
-An unresolved inventory that is well formed can compile into a pack. A requested map needs mapped signals and rules, non-empty evidence of its own, compatible endpoint evidence and compatible channel declarations. A `verified_current` mapping needs `verified_current` endpoints. A `proposed` mapping can use `verified_current` or `proposed` endpoints. In the same way, `verified_current` records need `verified_current` evidence references, and `proposed` records can use either. Unresolved evidence on any part of the map refuses execution. Inventory that the map does not use stays visible. The approximation opt-in does not bypass these checks.
+An unresolved inventory that is well formed can compile into a pack. A requested map needs mapped signals and mappings, non-empty evidence of its own, compatible endpoint evidence and compatible channel declarations. A `verified_current` mapping needs `verified_current` endpoints. A `proposed` mapping can use `verified_current` or `proposed` endpoints. In the same way, `verified_current` records need `verified_current` evidence references, and `proposed` records can use either. Unresolved evidence on any part of the map refuses execution. Inventory that the map does not use stays visible. The approximation opt-in does not bypass these checks.
 
 Compilation refuses unknown channels, more than one writer for a signal, an output that is also a source channel, and dependency cycles. Intermediate outputs can stay virtual. Terminal outputs must be in the target snapshot. A `piecewise_linear` mapping's first and last knots must be its input's domain bounds. A change of units needs explicit affine coefficients and assumptions. A non-identity mapping with a changed basis, or with a declared approximation or loss, needs written assumptions. The validator does not prove that those assumptions are correct.
 
