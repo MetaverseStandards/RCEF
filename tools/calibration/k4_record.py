@@ -10,12 +10,15 @@ import tempfile
 
 import k4_mediapipe as k
 import check
+import provenance
 
 RECORD_ID = 'mediapipe.ict-response'
 RECORD = k.ROOT / 'calibration' / f'{RECORD_ID}.cal'
 LEDGER = k.ROOT / 'calibration' / 'FREEZES'
 RULES = k.ROOT / 'tools/calibration/results/mediapipe_arkit.rules'
 HELD_OUT_CONDITIONS = 20
+# The code a record's held-out run must match; results/ holds outputs, not code.
+CODE = ['tools/calibration', 'tools/render', ':(exclude)tools/calibration/results']
 BOUNDS = {'median': 0.05, 'p95': 0.15, 'neutral': 0.03}
 CELLS = {'ict': 'ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)',
          'rocketbox-male': 'Rocketbox Male_Adult_01 (a rig not used in training)'}
@@ -141,6 +144,8 @@ def heldout(args) -> int:
     if problems:
         raise SystemExit('\n'.join(problems))
     record = check.load_record(RECORD)
+    if problem := provenance.code_problem(k.ROOT, record['code_commit'], CODE):
+        raise SystemExit(problem)
     if k.sha256(renderer(args)) != record['renderer']['binary_sha256']:
         raise SystemExit('this is not the renderer binary the record names')
     seeds = check.held_out_seeds(record)
