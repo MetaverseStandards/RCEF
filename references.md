@@ -344,14 +344,14 @@ Unified Expressions shape descriptions; MouthClosed closes the mouth in relation
 
 ## vrcft_code_parameters
 
-VRCFaceTracking computes the combined brow-inner and cheek-puff parameters as the mean of the left and right shapes.
+VRCFaceTracking computes combined parameters (brow inner up, cheek puff, lip suck, lip funnel, lip pucker) as the mean of their Unified Expressions parts.
 
 - Source: [vrcft_code_parameters](https://raw.githubusercontent.com/benaclejames/VRCFaceTracking/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Expressions/UnifiedExpressionsParameters.cs)
 - Revision: `6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35`
 - Retrieved: 2026-10-26
 - SHA-256: `f00131c515a8778cc1372aa79372eb3c1171cca46307c8d16b507ccdcf42c9eb`
 - License or terms: Apache-2.0
-- Locator: v2/BrowInnerUp; v2/CheekPuffSuck
+- Locator: v2/BrowInnerUp; v2/CheekPuffSuck; v2/LipSuckUpper, LipSuckLower; v2/LipFunnel; v2/LipPucker
 
 ## godot_vendors_fb2
 
@@ -385,3 +385,14 @@ ICT-FaceKit relates FACS action units to ARKit-named shapes, with brow-inner and
 - SHA-256: `614116987854431bbdadbf7772f7352edeeca55580f62021dccb78aaf76febf6`
 - License or terms: MIT
 - Locator: FACS unit table
+
+## vrcft_simple_expressions
+
+VRCFaceTracking defines its simple BrowDown as 0.75 BrowLowerer + 0.25 BrowPinch and MouthSmile as 0.8 MouthCornerPull + 0.2 MouthCornerSlant.
+
+- Source: [vrcft_simple_expressions](https://raw.githubusercontent.com/benaclejames/VRCFaceTracking/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Expressions/UnifiedSimpleExpressions.cs)
+- Revision: `6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35`
+- Retrieved: 2026-10-26
+- SHA-256: `662030f71b3ea1cb1e248c0b89e2f28861c714152874bfd4dc5a02ae96006a22`
+- License or terms: Apache-2.0
+- Locator: UnifiedSimpleExpressions enum comments; UnifiedSimplifier.ExpressionMap BrowDown and MouthSmile entries

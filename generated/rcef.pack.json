@@ -340,10 +340,10 @@
       "url": "https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/_unified-shape-table.mdx"
     },
     {
-      "claim": "VRCFaceTracking computes the combined brow-inner and cheek-puff parameters as the mean of the left and right shapes.",
+      "claim": "VRCFaceTracking computes combined parameters (brow inner up, cheek puff, lip suck, lip funnel, lip pucker) as the mean of their Unified Expressions parts.",
       "id": "vrcft_code_parameters",
       "license": "Apache-2.0",
-      "locator": "v2/BrowInnerUp; v2/CheekPuffSuck",
+      "locator": "v2/BrowInnerUp; v2/CheekPuffSuck; v2/LipSuckUpper, LipSuckLower; v2/LipFunnel; v2/LipPucker",
       "retrieved": "2026-10-26",
       "revision": "6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35",
       "sha256": "f00131c515a8778cc1372aa79372eb3c1171cca46307c8d16b507ccdcf42c9eb",
@@ -382,6 +382,17 @@
       "sha256": "614116987854431bbdadbf7772f7352edeeca55580f62021dccb78aaf76febf6",
       "status": "verified_current",
       "url": "https://raw.githubusercontent.com/USC-ICT/ICT-FaceKit/da5f95a607f5e6b37755b38d3385d7f2853732e5/README.md"
+    },
+    {
+      "claim": "VRCFaceTracking defines its simple BrowDown as 0.75 BrowLowerer + 0.25 BrowPinch and MouthSmile as 0.8 MouthCornerPull + 0.2 MouthCornerSlant.",
+      "id": "vrcft_simple_expressions",
+      "license": "Apache-2.0",
+      "locator": "UnifiedSimpleExpressions enum comments; UnifiedSimplifier.ExpressionMap BrowDown and MouthSmile entries",
+      "retrieved": "2026-10-26",
+      "revision": "6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35",
+      "sha256": "662030f71b3ea1cb1e248c0b89e2f28861c714152874bfd4dc5a02ae96006a22",
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/benaclejames/VRCFaceTracking/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Expressions/UnifiedSimpleExpressions.cs"
     }
   ],
   "id": "rcef.parity",

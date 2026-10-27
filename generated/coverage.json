@@ -3143,10 +3143,10 @@
       "url": "https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/_unified-shape-table.mdx"
     },
     {
-      "claim": "VRCFaceTracking computes the combined brow-inner and cheek-puff parameters as the mean of the left and right shapes.",
+      "claim": "VRCFaceTracking computes combined parameters (brow inner up, cheek puff, lip suck, lip funnel, lip pucker) as the mean of their Unified Expressions parts.",
       "id": "vrcft_code_parameters",
       "license": "Apache-2.0",
-      "locator": "v2/BrowInnerUp; v2/CheekPuffSuck",
+      "locator": "v2/BrowInnerUp; v2/CheekPuffSuck; v2/LipSuckUpper, LipSuckLower; v2/LipFunnel; v2/LipPucker",
       "profile_ids": [],
       "retrieved": "2026-10-26",
       "revision": "6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35",
@@ -3239,6 +3239,20 @@
       "signal_ids": [],
       "status": "verified_current",
       "url": "https://raw.githubusercontent.com/USC-ICT/ICT-FaceKit/da5f95a607f5e6b37755b38d3385d7f2853732e5/README.md"
+    },
+    {
+      "claim": "VRCFaceTracking defines its simple BrowDown as 0.75 BrowLowerer + 0.25 BrowPinch and MouthSmile as 0.8 MouthCornerPull + 0.2 MouthCornerSlant.",
+      "id": "vrcft_simple_expressions",
+      "license": "Apache-2.0",
+      "locator": "UnifiedSimpleExpressions enum comments; UnifiedSimplifier.ExpressionMap BrowDown and MouthSmile entries",
+      "profile_ids": [],
+      "retrieved": "2026-10-26",
+      "revision": "6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35",
+      "rule_ids": [],
+      "sha256": "662030f71b3ea1cb1e248c0b89e2f28861c714152874bfd4dc5a02ae96006a22",
+      "signal_ids": [],
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/benaclejames/VRCFaceTracking/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Expressions/UnifiedSimpleExpressions.cs"
     }
   ],
   "mapping_quality": {
@@ -3293,7 +3307,7 @@
     "approximate": 20,
     "exact": 22
   },
-  "pack_sha256": "7f357c57a83ae9f95641cd3070a607f878a035b0254d9d8716b2eb54ee025714",
+  "pack_sha256": "9e7450b57f365d665a926f3a95ae596d89325ef861cd6da2fa0440d0ca473c24",
   "profiles": [
     {
       "count": 21,
@@ -15811,7 +15825,7 @@
     }
   ],
   "totals": {
-    "evidence": 35,
+    "evidence": 36,
     "profiles": 22,
     "rules": 43,
     "signals": 893
