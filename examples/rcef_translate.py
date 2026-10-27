@@ -52,6 +52,8 @@ class Translator:
             self.mappings[mapping] = result.value
         rules = {m['id']: m['rules'] for m in self.pack.document['mappings']}
         self.outputs = [o for m in mappings for r in rules[m] for o in r['outputs']]
+        self.outputs_of = {m: [o for r in rules[m] for o in r['outputs']] for m in mappings}
+        self.exclusive = {}
         self.inputs = {i for m in self.mappings.values() for i in m.required_inputs}
 
     def signal_id(self, name: str) -> str:
@@ -64,8 +66,9 @@ class Translator:
         return sid.rsplit('.', 1)[-1]
 
     def valid(self, sid: str, flags: dict[str, bool]) -> bool:
-        """A signal's validity is the AND of the provider flags its record names."""
-        return all(flags[name.strip()] for name in self.signals[sid]['validity'].split(' AND '))
+        """A signal's validity is the AND of the provider flags its record names; ARKit names none."""
+        validity = self.signals[sid].get('validity')
+        return all(flags[name.strip()] for name in validity.split(' AND ')) if validity else True
 
     def read(self, path: Path) -> list[dict]:
         with path.open(encoding='utf-8', newline='') as handle:
@@ -91,6 +94,17 @@ class Translator:
             samples = [{'timestamp': f['time'], 'values': {i: f['values'][i] for i in inputs},
                         'validity': {i: self.valid(i, f['flags']) for i in inputs}} for f in frames]
             self._evaluate(mapping, compiled, samples, list(range(len(samples))), results)
+        for mapping, pairs in self.exclusive.items():
+            # FB2 allows only one of two opposing gaze weights to be non-zero; no
+            # msf-tools operator can enforce that, so such a frame is refused here.
+            for result in results:
+                clash = [(a, b) for a, b in pairs if result['values'].get(a) and result['values'].get(b)]
+                if clash:
+                    for output in self.outputs_of[mapping]:
+                        result['values'].pop(output, None)
+                    result['refused'] += [f'{mapping}: would set opposing FB2 gaze weights {self.short(a)} and '
+                                          f'{self.short(b)} together; FB2 allows only one of a pair to be non-zero'
+                                          for a, b in clash]
         for frame, result in zip(frames, results):
             result['dropped'] = sorted(self.short(s) for s, v in frame['values'].items()
                                        if v != 0 and s not in self.inputs)
@@ -135,6 +149,16 @@ class Translator:
 def fb2_to_arkit(root: Path = ROOT, **options) -> Translator:
     return Translator('openxr.fb2', 'arkit.coefficient', ['fb2.to_arkit', 'fb2_gaze.to_arkit'],
                       'openxr.fb2.XR_FACE_EXPRESSION2_', '_FB', root, **options)
+
+
+def arkit_to_fb2(root: Path = ROOT, **options) -> Translator:
+    translator = Translator('arkit.coefficient', 'openxr.fb2', ['arkit.to_fb2', 'arkit_gaze.to_fb2'],
+                            'openxr.fb2.XR_FACE_EXPRESSION2_', '_FB', root, **options)
+    # Opposing FB2 gaze weights (left/right and up/down, per eye).
+    translator.exclusive['arkit_gaze.to_fb2'] = [
+        (translator.signal_id(f'EYES_LOOK_{a}_{side}'), translator.signal_id(f'EYES_LOOK_{b}_{side}'))
+        for side in 'LR' for a, b in (('LEFT', 'RIGHT'), ('UP', 'DOWN'))]
+    return translator
 
 
 def visemes_to_vrm(root: Path = ROOT, **options) -> Translator:

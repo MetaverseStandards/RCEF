@@ -15,6 +15,13 @@ its calibration assumption and losses and cites at least two public sources.
   ARKit coefficient for the FB2 channel, though VRCFaceTracking pairs the FB2
   channel with its Unified shape and the definitions agree.
 
+- `arkit.to_fb2` (52 rules) and `arkit_gaze.to_fb2` (8 rules) read the FB2 ->
+  ARKit routes back. A coefficient FB2 splits into parts (browInnerUp,
+  cheekPuff, mouthPucker, mouthRollUpper, mouthRollLower, mouthFunnel) is
+  copied to each part, so FB2 -> ARKit returns it exactly; those rules declare
+  that the symmetry is invented. The gaze rules declare that FB2 requires
+  opposing directions to be exclusive and that no operator can enforce it.
+
 The signals these rules use for the first time become `mapped`. The demo
 frames move every channel an FB2 rule reads on its own.
 

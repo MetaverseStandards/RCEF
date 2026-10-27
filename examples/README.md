@@ -42,6 +42,8 @@ How it works (see `examples/rcef_translate.py`):
 - Each mapping gets only its own `required_inputs`. msf-tools refuses a frame if any channel it is given is marked invalid, even one the mapping does not use. If each mapping were given the whole FB2 frame, invalid gaze would also stop the face.
 - Each input's validity is the AND of the provider flags its signal record names, for example `isValid AND isEyeFollowingBlendshapesValid` for gaze.
 
+`rcef_translate.arkit_to_fb2()` goes the other way, ARKit to FB2, with RCEF's inverse rules. FB2 allows only one of two opposing gaze weights (left/right, up/down) to be non-zero, and no msf-tools operator can enforce that, so a frame whose ARKit gaze would set both is refused for gaze, with a `refused` label naming the pair; the face weights still come through.
+
 ## 3. Translate META visemes to VRM
 
 ```sh

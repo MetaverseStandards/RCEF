@@ -23,8 +23,11 @@ MAPPINGS = {
     'fb2.to_arkit': ('openxr.fb2', 'arkit.coefficient'),
     'fb2_gaze.to_arkit': ('openxr.fb2', 'arkit.coefficient'),
     'visemes.to_vrm': ('openxr.visemes', 'vrm.preset'),
+    'arkit.to_fb2': ('arkit.coefficient', 'openxr.fb2'),
+    'arkit_gaze.to_fb2': ('arkit.coefficient', 'openxr.fb2'),
 }
-KIND = {'fb2_to_arkit': ('fb2.to_arkit', 'fb2_gaze.to_arkit'), 'visemes_to_vrm': ('visemes.to_vrm',)}
+KIND = {'fb2_to_arkit': ('fb2.to_arkit', 'fb2_gaze.to_arkit'), 'visemes_to_vrm': ('visemes.to_vrm',),
+        'arkit_to_fb2': ('arkit.to_fb2', 'arkit_gaze.to_fb2')}
 SIDED = ('Left', 'Right', '_L_FB', '_R_FB')
 
 
@@ -173,11 +176,38 @@ class Translations(unittest.TestCase):
             with self.subTest(kind):
                 swapped = set()
                 for mapping in KIND[kind]:
-                    keys = [side_free(o) for o in self.outputs(mapping)]
-                    swapped |= {o for o in self.outputs(mapping) if keys.count(side_free(o)) == 2}
+                    pairs = {}
+                    for rule in self.rules(mapping):
+                        pairs.setdefault(side_free(rule['outputs'][0]), []).append(rule)
+                    # A copied composite feeds both sides from one input; swapping changes nothing there.
+                    swapped |= {r['outputs'][0] for pair in pairs.values() if len(pair) == 2
+                                and pair[0]['inputs'] != pair[1]['inputs'] for r in pair}
                 self.assertTrue(swapped)
                 matches = self.check_whole_frames(kind, self.changed_copies(kind, swap))
                 self.assertEqual(sorted(o for o in swapped if matches[o]), [])
+
+    def test_fb2_to_arkit_after_arkit_to_fb2_returns_every_coefficient(self):
+        frames = self.whole_frames('arkit_to_fb2')
+        for frame in frames:
+            fb2 = {}
+            for mapping in KIND['arkit_to_fb2']:
+                inputs = self.inputs(mapping)
+                values, = self.evaluate(mapping, [{k: v for k, v in frame['inputs'].items() if k in inputs}])
+                fb2.update(values)
+            arkit = {}
+            for mapping in KIND['fb2_to_arkit']:
+                values, = self.evaluate(mapping, [{k: v for k, v in fb2.items() if k in self.inputs(mapping)}])
+                arkit.update(values)
+            self.assertEqual(arkit, frame['inputs'])
+
+    def test_inverse_gaze_declares_that_fb2_exclusivity_cannot_be_enforced(self):
+        rules = self.rules('arkit_gaze.to_fb2')
+        self.assertEqual(len(rules), 8)
+        for rule in rules:
+            with self.subTest(rule['id']):
+                self.assertTrue(any('exclusive' in loss['reason'] and 'operator gap' in loss['reason']
+                                    for loss in rule['loss_annotations']))
+        self.assertFalse(self.inputs('arkit_gaze.to_fb2') & self.inputs('arkit.to_fb2'))
 
     def test_viseme_rules_match_source_derived_vectors_and_drop_consonants(self):
         case, = (c for c in self.goldens['cases'] if c['mapping_kind'] == 'visemes_to_vrm')

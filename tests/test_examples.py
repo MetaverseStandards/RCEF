@@ -134,6 +134,25 @@ def side_free(sid):
     return re.sub(r'(Left|Right)$', '#', sid)
 
 
+class ArkitToFb2(unittest.TestCase):
+    def test_frames_that_would_break_fb2_gaze_exclusivity_are_refused(self):
+        translator = rcef_translate.arkit_to_fb2(pack=shared_pack.pack(), compiled={
+            m: shared_pack.mapping(m, 'arkit.coefficient', 'openxr.fb2') for m in ('arkit.to_fb2', 'arkit_gaze.to_fb2')})
+        zero = dict.fromkeys(translator.inputs, 0.0)
+        frames = [{'time': 0.0, 'segment': 'both ways', 'flags': {}, 'labels': {},
+                   'values': {**zero, 'arkit.coefficient.eyeLookInLeft': 0.5, 'arkit.coefficient.eyeLookOutLeft': 0.25,
+                              'arkit.coefficient.jawOpen': 0.75}},
+                  {'time': 0.1, 'segment': 'one way', 'flags': {}, 'labels': {},
+                   'values': {**zero, 'arkit.coefficient.eyeLookInLeft': 0.5}}]
+        both, one = translator.translate(frames)
+        self.assertEqual(both['values'][FB2('JAW_DROP')], 0.75)
+        self.assertNotIn(FB2('EYES_LOOK_RIGHT_L'), both['values'])
+        self.assertEqual(both['refused'], ['arkit_gaze.to_fb2: would set opposing FB2 gaze weights EYES_LOOK_LEFT_L and '
+                                           'EYES_LOOK_RIGHT_L together; FB2 allows only one of a pair to be non-zero'])
+        self.assertEqual(one['values'][FB2('EYES_LOOK_RIGHT_L')], 0.5)
+        self.assertEqual(one['refused'], [])
+
+
 class Fb2Oracles(unittest.TestCase):
     """The face pipeline's weight oracles catch every wrong FB2 rule on the demo frames.
 
