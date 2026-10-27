@@ -12,7 +12,7 @@ RCEF translates 52 ARKit coefficients from FB2. Weight disagreements with Godot:
 ## Every difference from Godot
 
 - **browInnerUp** (`fb2.to_arkit`): Godot has no route; RCEF follows VRCFT's average (0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R).
-- **mouthClose** (meaning, not weights): FB2 LIPS_TOWARD closes the lips "regardless of the position of the jaw"; Unified Expressions MouthClosed closes the mouth "in relation to JawOpen" and SRanipal requires Jaw_Open to be inactive. Godot and VRCFT both copy the value directly, as RCEF does.
+- **mouthClose** (meaning, not weights): FB2 LIPS_TOWARD closes the lips "regardless of the position of the jaw"; VRCFT's Unified Expressions table defines MouthClosed relative to JawOpen (`vrcft_docs_shapes`), and SRanipal requires Jaw_Open to be inactive. Godot and VRCFT both copy the value directly, as RCEF does.
 - **mouthShrugUpper** (meaning, not weights): ICT-FaceKit relates mouthShrugUpper to FACS AU10 (upper lip raiser), while Godot, VRCFT and RCEF use FB2 CHIN_RAISER_T; FB2 has separate UPPER_LIP_RAISER_L/R weights.
 - **jawOpen** (meaning, not weights): ICT-FaceKit relates jawOpen to FACS AU27 (mouth stretch); FB2 JAW_DROP is the jaw drop.
 - **mouthUpperUpLeft, mouthUpperUpRight** (meaning, not weights): ICT-FaceKit relates mouthUpperUp to FACS AU11 (nasolabial deepener); Godot, VRCFT and RCEF use FB2 UPPER_LIP_RAISER, named after AU10.

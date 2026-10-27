@@ -330,7 +330,7 @@ license = "reference only; source prose not redistributed"
 
 [[evidence]]
 id = "vrcft_docs_shapes"
-claim = "Unified Expressions shape descriptions; MouthClosed closes the mouth in relation to JawOpen."
+claim = "Unified Expressions shape descriptions; MouthClosed is defined relative to JawOpen."
 status = "verified_current"
 url = "https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/_unified-shape-table.mdx"
 retrieved = "2026-10-26"

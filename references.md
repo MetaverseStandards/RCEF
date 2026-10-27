@@ -333,7 +333,7 @@ VRCFT overview table across Unified Expressions, ARKit, SRanipal and Meta Moveme
 
 ## vrcft_docs_shapes
 
-Unified Expressions shape descriptions; MouthClosed closes the mouth in relation to JawOpen.
+Unified Expressions shape descriptions; MouthClosed is defined relative to JawOpen.
 
 - Source: [vrcft_docs_shapes](https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/_unified-shape-table.mdx)
 - Revision: `3036f4668322f2364a918a885dc3a72c828359f3`

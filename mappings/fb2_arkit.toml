@@ -71,7 +71,7 @@ evidence_status = "proposed"
 assumptions = [
   "FB2 LIPS_TOWARD corresponds to ARKit mouthClose.",
   "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
-  "FB2 closes the lips regardless of the jaw position; Unified Expressions closes the mouth in relation to JawOpen and SRanipal requires Jaw_Open to be inactive. The value is copied without compensating for the jaw.",
+  "FB2 closes the lips regardless of the jaw position; Unified Expressions defines MouthClosed relative to JawOpen and SRanipal requires Jaw_Open to be inactive. The value is copied without compensating for the jaw.",
 ]
 evidence = ["xr_fb2", "apple_blendshapes", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_shapes", "vrcft_docs_overview"]
 loss_annotations = [

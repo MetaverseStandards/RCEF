@@ -329,7 +329,7 @@
       "url": "https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/compatibility/overview.mdx"
     },
     {
-      "claim": "Unified Expressions shape descriptions; MouthClosed closes the mouth in relation to JawOpen.",
+      "claim": "Unified Expressions shape descriptions; MouthClosed is defined relative to JawOpen.",
       "id": "vrcft_docs_shapes",
       "license": "reference only; source prose not redistributed",
       "locator": "MouthClosed row",
@@ -7325,7 +7325,7 @@
           "assumptions": [
             "FB2 LIPS_TOWARD corresponds to ARKit mouthClose.",
             "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "FB2 closes the lips regardless of the jaw position; Unified Expressions closes the mouth in relation to JawOpen and SRanipal requires Jaw_Open to be inactive. The value is copied without compensating for the jaw."
+            "FB2 closes the lips regardless of the jaw position; Unified Expressions defines MouthClosed relative to JawOpen and SRanipal requires Jaw_Open to be inactive. The value is copied without compensating for the jaw."
           ],
           "disposition": "mapped",
           "evidence": [

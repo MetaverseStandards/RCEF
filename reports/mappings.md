@@ -2,7 +2,7 @@
 
 Pack: rcef.parity; data version: 0.4.0.
 
-Generated from rcef.pack.json; SHA-256: 4f7a15f88b775854365e116998568eec96af147223a7041d15df320b525e48c0.
+Generated from rcef.pack.json; SHA-256: 630d37a5b01e4983f8e5cbcbd54d8268abeffb09248ea793d4842bd2df5cd4f7.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
 
@@ -2649,7 +2649,7 @@ Assumptions:
 
 - FB2 LIPS_TOWARD corresponds to ARKit mouthClose.
 - FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.
-- FB2 closes the lips regardless of the jaw position; Unified Expressions closes the mouth in relation to JawOpen and SRanipal requires Jaw_Open to be inactive. The value is copied without compensating for the jaw.
+- FB2 closes the lips regardless of the jaw position; Unified Expressions defines MouthClosed relative to JawOpen and SRanipal requires Jaw_Open to be inactive. The value is copied without compensating for the jaw.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB","arkit.coefficient.mouthClose"],"units":"1"},{"category":"signal","effect":"approximated","reason":"jaw-relative versus jaw-independent lip closure","refs":["openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB","arkit.coefficient.mouthClose"],"units":"1"}]
 

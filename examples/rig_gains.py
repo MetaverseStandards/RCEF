@@ -692,6 +692,10 @@ def export(args) -> int:
                  'Rocketbox Female weight that moves her face about as much. It calibrates how two example rigs render '
                  'ARKit names, not any tracker; it is not a provider claim and not pack data. Shapes under '
                  'not_normalised failed their held-out evaluation and are left unchanged.'),
+        'licence': 'CC-BY-SA-4.0',
+        'credit': ['ICT-FaceKit (c) 2020 USC Institute for Creative Technologies, MIT license',
+                   'Microsoft Rocketbox avatar library (c) 2020 Microsoft, MIT license; ARKit shapes by Fang Ma and '
+                   'Matias Volonte'],
         'record': f'calibration/{record["id"]}.cal',
         'frozen_sha256': record['held_out']['frozen_sha256'],
         'reference_rig': 'ict', 'rig': 'rocketbox-female',
