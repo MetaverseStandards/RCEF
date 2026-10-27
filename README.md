@@ -133,7 +133,7 @@ The outputs are `generated/rcef.pack.json`, `rcef_mapping.csv`, `coverage.json`,
 
 ## Architecture and TOML guide
 
-The [Markdown guide](docs/architecture.md) explains what `check.py` does, how TOML is discovered and validated, how maps compile and run in memory, the generated reports, and worked examples of each operator. The [visual architecture report](docs/architecture.html), [standalone diagram](docs/architecture.svg) and [TOML file index](docs/toml-index.csv) describe data 0.1.1 and are out of date.
+The [Markdown guide](docs/architecture.md) explains what `check.py` does, how TOML is discovered and validated, how maps compile and run in memory, the generated reports, and worked examples of each operator. The [visual architecture report](docs/architecture.html), [standalone diagram](docs/architecture.svg) and [TOML file index](docs/toml-index.csv) describe the same data 0.4.0 tree as the guide.
 
 ## Readable inventories and mappings
 
