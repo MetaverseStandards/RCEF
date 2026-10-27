@@ -1,35 +1,42 @@
 # SPDX-License-Identifier: MIT
-"""The translation examples on the committed demo frames."""
+"""The translation examples on the committed demo frames, run in process on the shared pack."""
 import csv
 from pathlib import Path
-import subprocess
 import sys
 import tempfile
 import unittest
 
+try:
+    import shared_pack
+except ModuleNotFoundError:  # run by file path from the repository root
+    from tests import shared_pack
+
 ROOT = Path(__file__).resolve().parents[1]
-FB2 = 'openxr.fb2.XR_FACE_EXPRESSION2_{}_FB'.format
-ARKIT = 'arkit.coefficient.{}'.format
+sys.path.insert(0, str(ROOT / 'examples'))
+import rcef_translate  # noqa: E402
 
 
-def run_example(script, source):
+def translate(translator, source):
+    """Translate a frames CSV and read back the CSV the example writes."""
+    results = translator.translate(translator.read(source))
     with tempfile.TemporaryDirectory(prefix='rcef-example-') as tmp:
         out = Path(tmp) / 'out.csv'
-        result = subprocess.run([sys.executable, '-B', str(ROOT / 'examples' / script), str(source), str(out)],
-                                capture_output=True, text=True, timeout=120)
-        if result.returncode:
-            raise AssertionError(result.stderr)
+        translator.write(results, out)
         with out.open(encoding='utf-8', newline='') as handle:
             return list(csv.DictReader(handle))
+
+
+def read(source):
+    with source.open(encoding='utf-8', newline='') as handle:
+        return list(csv.DictReader(handle))
 
 
 class Fb2Example(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         source = ROOT / 'examples/data/fb2_demo_frames.csv'
-        with source.open(encoding='utf-8', newline='') as handle:
-            cls.inputs = list(csv.DictReader(handle))
-        cls.rows = run_example('translate_fb2_to_arkit.py', source)
+        cls.inputs = read(source)
+        cls.rows = translate(rcef_translate.fb2_to_arkit(pack=shared_pack.pack()), source)
 
     def frames(self, segment):
         return [(i, o) for i, o in zip(self.inputs, self.rows) if i['segment'] == segment]
@@ -73,9 +80,8 @@ class Fb2Example(unittest.TestCase):
 class VisemeExample(unittest.TestCase):
     def test_vowels_pass_through_and_consonants_are_dropped(self):
         source = ROOT / 'examples/data/viseme_demo_frames.csv'
-        with source.open(encoding='utf-8', newline='') as handle:
-            inputs = list(csv.DictReader(handle))
-        rows = run_example('translate_visemes_to_vrm.py', source)
+        inputs = read(source)
+        rows = translate(rcef_translate.visemes_to_vrm(pack=shared_pack.pack()), source)
         self.assertEqual(len(rows), len(inputs))
         for source_row, output in zip(inputs, rows):
             if source_row['isValid'] == '0':

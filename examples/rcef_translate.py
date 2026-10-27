@@ -14,16 +14,20 @@ import msf_tools as msf
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def load_pack(document: dict) -> msf.Pack:
+    """Validate and compile a pack document, such as generated/rcef.pack.json."""
+    validated = msf.validate_authoring(document)
+    if not validated.ok:
+        raise SystemExit(validated.report.to_dict())
+    return msf.compile_pack(validated.value).value
+
+
 class Translator:
     """The compiled RCEF mappings from one source profile to one target profile."""
 
     def __init__(self, source: str, target: str, mappings: list[str], prefix: str, suffix: str,
-                 root: Path = ROOT):
-        # The published pack is the consumer-facing artifact, so it is what we load.
-        validated = msf.validate_authoring(json.loads((root / 'generated/rcef.pack.json').read_text(encoding='utf-8')))
-        if not validated.ok:
-            raise SystemExit(validated.report.to_dict())
-        self.pack = msf.compile_pack(validated.value).value
+                 root: Path = ROOT, pack: msf.Pack | None = None):
+        self.pack = pack or load_pack(json.loads((root / 'generated/rcef.pack.json').read_text(encoding='utf-8')))
         self.signals = {s['id']: s for s in self.pack.document['signals']}
         source_snapshot = msf.profile_snapshot(self.pack, source).value
         target_snapshot = msf.profile_snapshot(self.pack, target).value
@@ -72,15 +76,7 @@ class Translator:
             inputs = sorted(compiled.required_inputs)
             samples = [{'timestamp': f['time'], 'values': {i: f['values'][i] for i in inputs},
                         'validity': {i: self.valid(i, f['flags']) for i in inputs}} for f in frames]
-            # Frames are independent, so consecutive frames with the same validity go
-            # in one call; a failed call is retried frame by frame to place the refusals.
-            start = 0
-            while start < len(samples):
-                end = start + 1
-                while end < len(samples) and samples[end]['validity'] == samples[start]['validity']:
-                    end += 1
-                self._evaluate(mapping, compiled, samples, range(start, end), results)
-                start = end
+            self._evaluate(mapping, compiled, samples, list(range(len(samples))), results)
         for frame, result in zip(frames, results):
             result['dropped'] = sorted(self.short(s) for s, v in frame['values'].items()
                                        if v != 0 and s not in self.inputs)
@@ -92,13 +88,24 @@ class Translator:
             for i, sample in zip(span, outcome.value.samples):
                 results[i]['values'].update(sample['values'])
             return
-        if len(span) > 1:
-            for i in span:
-                self._evaluate(mapping, compiled, samples, range(i, i + 1), results)
-            return
-        codes = sorted({d.code for d in outcome.report.diagnostics})
-        refs = sorted({self.short(d.ref.rsplit('/', 1)[-1]) for d in outcome.report.diagnostics})
-        results[span[0]]['refused'].append(f'{mapping}: {", ".join(codes)} on {len(refs)} inputs ({", ".join(refs)})')
+        # A failed call returns no values, but every error names its sample
+        # ("/samples/<n>/..."), so the refused frames are labelled and the rest
+        # evaluated again without them.
+        refusals = {}
+        for diagnostic in outcome.report.diagnostics:
+            if diagnostic.severity != 'error':
+                continue
+            parts = diagnostic.ref.split('/')
+            if len(parts) < 3 or parts[1] != 'samples':
+                raise SystemExit(outcome.report.to_dict())
+            refusals.setdefault(span[int(parts[2])], []).append(diagnostic)
+        for i, diagnostics in refusals.items():
+            codes = sorted({d.code for d in diagnostics})
+            refs = sorted({self.short(d.ref.rsplit('/', 1)[-1]) for d in diagnostics})
+            results[i]['refused'].append(f'{mapping}: {", ".join(codes)} on {len(refs)} inputs ({", ".join(refs)})')
+        rest = [i for i in span if i not in refusals]
+        if rest:
+            self._evaluate(mapping, compiled, samples, rest, results)
 
     def write(self, results: list[dict], path: Path) -> None:
         columns = [self.short(o) for o in self.outputs]
@@ -111,11 +118,11 @@ class Translator:
                                  '; '.join(r['refused']), ' '.join(r['dropped'])])
 
 
-def fb2_to_arkit(root: Path = ROOT) -> Translator:
+def fb2_to_arkit(root: Path = ROOT, pack: msf.Pack | None = None) -> Translator:
     return Translator('openxr.fb2', 'arkit.coefficient', ['fb2.to_arkit', 'fb2_gaze.to_arkit'],
-                      'openxr.fb2.XR_FACE_EXPRESSION2_', '_FB', root)
+                      'openxr.fb2.XR_FACE_EXPRESSION2_', '_FB', root, pack)
 
 
-def visemes_to_vrm(root: Path = ROOT) -> Translator:
+def visemes_to_vrm(root: Path = ROOT, pack: msf.Pack | None = None) -> Translator:
     return Translator('openxr.visemes', 'vrm.preset', ['visemes.to_vrm'],
-                      'openxr.visemes.XR_FACE_TRACKING_VISEME_', '_META', root)
+                      'openxr.visemes.XR_FACE_TRACKING_VISEME_', '_META', root, pack)
