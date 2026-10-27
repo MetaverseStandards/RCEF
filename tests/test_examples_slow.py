@@ -4,7 +4,7 @@
 Skipped unless RCEF_SLOW_TESTS=1. Set RCEF_ICT_CACHE (ICT-FaceKit, about 46 MB)
 and RCEF_RIG_CACHE (Rocketbox and the VRM sample, about 15 MB) to directories
 outside the repository; the files are fetched on first use. Each class is
-skipped if its cache variable is unset. All of it takes about six minutes.
+skipped if its cache variable is unset. All of it takes about ten minutes.
 """
 import csv
 import json
@@ -98,13 +98,15 @@ class FacePipeline(unittest.TestCase):
                 self.assertEqual((self.out / frame[key]).stat().st_size, vertices * 12, (frame['frame'], key))
 
 
-@unittest.skipUnless(SLOW and RIG_CACHE, 'slow tier: set RCEF_SLOW_TESTS=1 and RCEF_RIG_CACHE')
-class RocketboxFace(unittest.TestCase):
+class RocketboxFace:
+    """Run once per Rocketbox identity; the subclasses name the rig."""
+    RIG = ''
+
     @classmethod
     def setUpClass(cls):
         cls.temp = tempfile.TemporaryDirectory(prefix='rcef-rocketbox-')
         cls.out = Path(cls.temp.name)
-        cls.process = run('face_pipeline.py', '--rig', 'rocketbox-female', '--cache', RIG_CACHE, '--out', str(cls.out))
+        cls.process = run('face_pipeline.py', '--rig', cls.RIG, '--cache', RIG_CACHE, '--out', str(cls.out))
         cls.inputs = read(ROOT / 'examples/data/fb2_expression_frames.csv')
         cls.manifest = json.loads((cls.out / 'frames.json').read_text()) if not cls.process.returncode else None
 
@@ -141,6 +143,43 @@ class RocketboxFace(unittest.TestCase):
                 self.assertEqual((self.out / frame[key]).stat().st_size, vertices * 12, (frame['frame'], key))
 
 
+    def test_a_wink_is_shown_with_the_one_sided_closed_eye_on_the_facs_panel(self):
+        wink = next(f for f in self.manifest['frames'] if f['segment'] == 'wink left' and f['phase'] == 'hold')
+        self.assertTrue(any('shown as AU 43' in note for note in wink['facs_labels']))
+
+
+@unittest.skipUnless(SLOW and RIG_CACHE, 'slow tier: set RCEF_SLOW_TESTS=1 and RCEF_RIG_CACHE')
+class RocketboxFemaleFace(RocketboxFace, unittest.TestCase):
+    RIG = 'rocketbox-female'
+
+
+@unittest.skipUnless(SLOW and RIG_CACHE, 'slow tier: set RCEF_SLOW_TESTS=1 and RCEF_RIG_CACHE')
+class RocketboxMaleFace(RocketboxFace, unittest.TestCase):
+    RIG = 'rocketbox-male'
+
+
+@unittest.skipUnless(SLOW and os.environ.get('RCEF_ICT_CACHE'), 'slow tier: set RCEF_SLOW_TESTS=1 and RCEF_ICT_CACHE')
+class IctExpressions(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.temp = tempfile.TemporaryDirectory(prefix='rcef-ict-expr-')
+        cls.out = Path(cls.temp.name)
+        cls.process = run('face_pipeline.py', '--rig', 'ict', '--cache', os.environ['RCEF_ICT_CACHE'], '--out', str(cls.out))
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.temp.cleanup()
+
+    def test_every_oracle_passes_on_every_expression_frame(self):
+        self.assertEqual(self.process.returncode, 0, self.process.stdout + self.process.stderr)
+        manifest = json.loads((self.out / 'frames.json').read_text())
+        self.assertEqual(len(manifest['frames']), len(read(ROOT / 'examples/data/fb2_expression_frames.csv')))
+        self.assertTrue(all(f['oracles_pass'] for f in manifest['frames']))
+        self.assertIn(('happiness', 'hold'), {(f['segment'], f['phase']) for f in manifest['frames']})
+        statuses = {r['status'] for r in read(self.out / 'residuals.csv')}
+        self.assertIn('averaged pair, within half the L/R difference', statuses)
+
+
 @unittest.skipUnless(SLOW and RIG_CACHE, 'slow tier: set RCEF_SLOW_TESTS=1 and RCEF_RIG_CACHE')
 class Visemes(unittest.TestCase):
     @classmethod
@@ -148,7 +187,7 @@ class Visemes(unittest.TestCase):
         cls.temp = tempfile.TemporaryDirectory(prefix='rcef-visemes-')
         cls.out = Path(cls.temp.name)
         cls.runs = {rig: run('viseme_pipeline.py', '--rig', rig, '--cache', RIG_CACHE, '--out', str(cls.out / rig))
-                    for rig in ('vrm-twist', 'rocketbox-female')}
+                    for rig in ('vrm-twist', 'rocketbox-female', 'rocketbox-male')}
 
     @classmethod
     def tearDownClass(cls):
@@ -163,11 +202,13 @@ class Visemes(unittest.TestCase):
         self.assertIn('not calibration', manifest['caption'])
 
     def test_rocketbox_speaks_with_its_own_viseme_shapes(self):
-        process = self.runs['rocketbox-female']
-        self.assertEqual(process.returncode, 0, process.stdout + process.stderr)
-        manifest = json.loads((self.out / 'rocketbox-female/frames.json').read_text())
-        self.assertEqual({f['segment'] for f in manifest['frames']}, {'', 'bed', 'car', 'toe', 'book'})
-        self.assertEqual(manifest['panels'], ['direct'])
+        for rig in ('rocketbox-female', 'rocketbox-male'):
+            with self.subTest(rig):
+                process = self.runs[rig]
+                self.assertEqual(process.returncode, 0, process.stdout + process.stderr)
+                manifest = json.loads((self.out / rig / 'frames.json').read_text())
+                self.assertEqual({f['segment'] for f in manifest['frames']}, {'', 'bed', 'car', 'toe', 'book'})
+                self.assertEqual(manifest['panels'], ['direct'])
 
 
 if __name__ == '__main__':

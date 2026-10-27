@@ -124,7 +124,7 @@ The frames (`examples/data/viseme_talk_frames.csv`) say "bed car toe book", the 
 
 Outputs go to `~/.cache/rcef-examples/visemes/RIG`, in the same format as section 4.
 
-To run the pipelines as tests (the slow tier, not part of the default suite; about six minutes):
+To run the pipelines as tests (the slow tier, not part of the default suite; about ten minutes):
 
 ```sh
 RCEF_SLOW_TESTS=1 RCEF_ICT_CACHE=~/.cache/rcef-ict-facekit RCEF_RIG_CACHE=~/.cache/rcef-face-rigs \
