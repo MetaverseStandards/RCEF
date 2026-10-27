@@ -20,6 +20,10 @@ rcef.vrcft.eye.Left.Openness,,RCEF Left.Openness,1,,,,,eyelid,left,,vrcft.eye.st
 rcef.vrcft.eye.Left.PupilDiameter_MM,,RCEF Left.PupilDiameter_MM,mm,,,,,pupil,left,,vrcft.eye.storage.v1:Left.PupilDiameter_MM
 rcef.vrcft.eye.Right.Openness,,RCEF Right.Openness,1,,,,,eyelid,right,,vrcft.eye.storage.v1:Right.Openness
 rcef.vrcft.eye.Right.PupilDiameter_MM,,RCEF Right.PupilDiameter_MM,mm,,,,,pupil,right,,vrcft.eye.storage.v1:Right.PupilDiameter_MM
+rcef.intermediate.arkit_gaze_in_minus_out_L,,RCEF ARKit eyeLookInLeft minus eyeLookOutLeft,1,-1.0,1.0,,,gaze,left,,rcef.intermediate.v1:arkit_gaze_in_minus_out_L: ARKit eyeLookInLeft minus eyeLookOutLeft on ARKit's coefficient scale
+rcef.intermediate.arkit_gaze_up_minus_down_L,,RCEF ARKit eyeLookUpLeft minus eyeLookDownLeft,1,-1.0,1.0,,,gaze,left,,rcef.intermediate.v1:arkit_gaze_up_minus_down_L: ARKit eyeLookUpLeft minus eyeLookDownLeft on ARKit's coefficient scale
+rcef.intermediate.arkit_gaze_in_minus_out_R,,RCEF ARKit eyeLookInRight minus eyeLookOutRight,1,-1.0,1.0,,,gaze,right,,rcef.intermediate.v1:arkit_gaze_in_minus_out_R: ARKit eyeLookInRight minus eyeLookOutRight on ARKit's coefficient scale
+rcef.intermediate.arkit_gaze_up_minus_down_R,,RCEF ARKit eyeLookUpRight minus eyeLookDownRight,1,-1.0,1.0,,,gaze,right,,rcef.intermediate.v1:arkit_gaze_up_minus_down_R: ARKit eyeLookUpRight minus eyeLookDownRight on ARKit's coefficient scale
 arkit.ancillary.leftEyeTransform,leftEyeTransform,leftEyeTransform,unknown,,,,0,gaze,left,,arkit.ancillary: native basis; no canonical calibration established
 arkit.ancillary.init_rawValue,init(rawValue:),init(rawValue:),unknown,,,,,,,,arkit.constructor: not a numeric expression basis
 arkit.coefficient.eyeBlinkLeft,eyeBlinkLeft,eyeBlinkLeft,1,0.0,1.0,,0,eyelid,left,,arkit.coefficient.v1:eyeBlinkLeft: face-relative native neutral-to-maximum coefficient

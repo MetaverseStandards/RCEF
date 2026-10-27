@@ -2,7 +2,29 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-## Unreleased
+## Data 0.4.0 — unreleased
+
+Adopt msf-tools operators 1.1 (`operator_version = "1.1"`) and build FB2's
+gaze exclusivity into the data.
+
+- `arkit_gaze.to_fb2` now has 12 rules. For each eye, a weighted sum takes
+  ARKit in minus out (and up minus down), and two one-sided
+  `piecewise_linear` splits turn each difference into the two opposing FB2
+  directions. FB2 allows only one of a pair to be non-zero, and a split is
+  exactly zero on its flat side, so the pair can never both be non-zero.
+  When ARKit sets both directions, only their difference is kept; this is
+  declared as a loss. The example translator no longer refuses such frames.
+- New `rcef.intermediate` profile (4 signals) for those differences, in
+  `data/intermediate.toml`.
+- The msf-tools lock moves to 0.3.0 (commit `e799dfb`), which provides
+  operators 1.1. It records the hash of the `py3-none-any` wheel built
+  from that commit; the 0.2.0.dev0 lock is kept as
+  `evidence/tooling.lock.previous.json`.
+- VRCFaceTracking's signed eye gaze is not split into FB2 directions: its
+  units and range are unresolved in RCEF's inventory, and `piecewise_linear`
+  needs a declared range.
+
+## Calibration and examples — unreleased
 
 - First calibration record, `calibration/rig-gains.ict-rocketbox-female.cal`
   (software-only; not a measurement of any tracker): one monotone curve per

@@ -152,7 +152,7 @@ class Metadata(unittest.TestCase):
         self.assertRegex(self.authoring['data_version'], r'^[0-9]+\.[0-9]+\.[0-9]+$')
         for document in (self.authoring, self.generated):
             self.assertEqual(document['schema_version'], '1.0')
-            self.assertEqual(document['operator_version'], '1.0')
+            self.assertEqual(document['operator_version'], '1.1')
         self.assertEqual(self.pack.to_bytes(), (ROOT / 'generated/rcef.pack.json').read_bytes())
 
     def test_dispositions_partition_signals_and_rules_reference_mapped_signals(self):

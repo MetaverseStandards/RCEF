@@ -1,18 +1,19 @@
 # RCEF expression inventory
 
-Pack: rcef.parity; data version: 0.3.0.
+Pack: rcef.parity; data version: 0.4.0.
 
-Generated from rcef.pack.json; SHA-256: 0044a27b4dce891dfed5318f13f0b9eac0f716d24cf326d207c1055de0e009f1.
+Generated from rcef.pack.json; SHA-256: 4f7a15f88b775854365e116998568eec96af147223a7041d15df320b525e48c0.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
 
-945 distinct signals; 23 profiles; 950 inventory rows (one per profile membership, plus unassigned signals).
+949 distinct signals; 24 profiles; 954 inventory rows (one per profile membership, plus unassigned signals).
 
 Native defaults and calibrated neutral values are separate. Blank CSV values are absent in the pack; an unknown range remains unknown. Status describes the authored record.
 
 | Profile | Description | Signals | Mapped | Unresolved | Excluded | Unsupported |
 | --- | --- | --- | --- | --- | --- | --- |
 | rcef.canonical | RCEF provider-calibrated canonical scalar projections | 21 | 21 | 0 | 0 | 0 |
+| rcef.intermediate | RCEF intermediate values inside translations | 4 | 4 | 0 | 0 | 0 |
 | arkit.ancillary | ARKit ancillary transform surface | 2 | 0 | 0 | 2 | 0 |
 | arkit.coefficient | ARKit 52 coefficients | 52 | 52 | 0 | 0 | 0 |
 | fixture | Original affine and bilateral scalar fixtures | 5 | 5 | 0 | 0 | 0 |
@@ -61,6 +62,15 @@ Native defaults and calibrated neutral values are separate. Blank CSV values are
 | rcef.vrcft.eye.Left.PupilDiameter_MM | RCEF Left.PupilDiameter_MM |  | left | mm | unknown | mapped | Canonical scalar projection with provider-specific calibration.<br>Scalar recording of VRCFT Left.PupilDiameter_MM. Physical diameter in millimetres; no conversion to normalized combined dilation. Only the native scalar is represented; validity must be provided separately.<br>Calibration: vrcft.eye.storage.v1:Left.PupilDiameter_MM<br>Evidence: vrcft_data, rcef_definitions |
 | rcef.vrcft.eye.Right.Openness | RCEF Right.Openness |  | right | 1 | unknown | mapped | Canonical scalar projection with provider-specific calibration.<br>Scalar recording of VRCFT Right.Openness. Raw openness storage value; initialization 1 is retained separately from measured neutral. Only the native scalar is represented; validity must be provided separately.<br>Calibration: vrcft.eye.storage.v1:Right.Openness<br>Evidence: vrcft_data, rcef_definitions |
 | rcef.vrcft.eye.Right.PupilDiameter_MM | RCEF Right.PupilDiameter_MM |  | right | mm | unknown | mapped | Canonical scalar projection with provider-specific calibration.<br>Scalar recording of VRCFT Right.PupilDiameter_MM. Physical diameter in millimetres; no conversion to normalized combined dilation. Only the native scalar is represented; validity must be provided separately.<br>Calibration: vrcft.eye.storage.v1:Right.PupilDiameter_MM<br>Evidence: vrcft_data, rcef_definitions |
+
+## rcef.intermediate: RCEF intermediate values inside translations
+
+| Signal | Name | Native index | Side | Units | Native range | Status | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| rcef.intermediate.arkit_gaze_in_minus_out_L | RCEF ARKit eyeLookInLeft minus eyeLookOutLeft |  | left | 1 | -1.0 to 1.0 | mapped | Intermediate value of a proposed approximate translation.<br>The left eye's ARKit gaze toward the nose minus away from it, from -1 to 1. Computed inside arkit_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.<br>Calibration: rcef.intermediate.v1:arkit_gaze_in_minus_out_L: ARKit eyeLookInLeft minus eyeLookOutLeft on ARKit's coefficient scale<br>Neutral: 0.0<br>Evidence: apple_blendshapes, xr_fb2 |
+| rcef.intermediate.arkit_gaze_up_minus_down_L | RCEF ARKit eyeLookUpLeft minus eyeLookDownLeft |  | left | 1 | -1.0 to 1.0 | mapped | Intermediate value of a proposed approximate translation.<br>The left eye's ARKit gaze up minus down, from -1 to 1. Computed inside arkit_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.<br>Calibration: rcef.intermediate.v1:arkit_gaze_up_minus_down_L: ARKit eyeLookUpLeft minus eyeLookDownLeft on ARKit's coefficient scale<br>Neutral: 0.0<br>Evidence: apple_blendshapes, xr_fb2 |
+| rcef.intermediate.arkit_gaze_in_minus_out_R | RCEF ARKit eyeLookInRight minus eyeLookOutRight |  | right | 1 | -1.0 to 1.0 | mapped | Intermediate value of a proposed approximate translation.<br>The right eye's ARKit gaze toward the nose minus away from it, from -1 to 1. Computed inside arkit_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.<br>Calibration: rcef.intermediate.v1:arkit_gaze_in_minus_out_R: ARKit eyeLookInRight minus eyeLookOutRight on ARKit's coefficient scale<br>Neutral: 0.0<br>Evidence: apple_blendshapes, xr_fb2 |
+| rcef.intermediate.arkit_gaze_up_minus_down_R | RCEF ARKit eyeLookUpRight minus eyeLookDownRight |  | right | 1 | -1.0 to 1.0 | mapped | Intermediate value of a proposed approximate translation.<br>The right eye's ARKit gaze up minus down, from -1 to 1. Computed inside arkit_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.<br>Calibration: rcef.intermediate.v1:arkit_gaze_up_minus_down_R: ARKit eyeLookUpRight minus eyeLookDownRight on ARKit's coefficient scale<br>Neutral: 0.0<br>Evidence: apple_blendshapes, xr_fb2 |
 
 ## arkit.ancillary: ARKit ancillary transform surface
 

@@ -422,6 +422,14 @@ def vrm_blinks(texts) -> list[dict]:
     return pairs
 
 
+def exclusive_line(lines: list[str]) -> int:
+    """The line of the FB2 spec saying only one of two opposing gaze directions is non-zero."""
+    found = [n for n, line in enumerate(lines, 1) if 'only one of the pair' in line]
+    if len(found) != 1:
+        raise SystemExit('the FB2 spec no longer states gaze exclusivity on one line')
+    return found[0]
+
+
 def distinct(names: list[str], flip: bool = False) -> dict[str, float]:
     """A different exact value for every input (k/128), so no two inputs can be confused."""
     return {n: (1.0 - (k + 1) / 128 if flip else (k + 1) / 128) for k, n in enumerate(sorted(names))}
@@ -484,9 +492,14 @@ def main() -> int:
                                    for r in routes},
                       'sources': cite([c for r in routes for c in r['cites']])})
         arkit_values = distinct([r['arkit'] for r in routes], flip)
+        # FB2 allows only one of two opposing gaze directions to be non-zero, so
+        # each frame sets one ARKit direction of each pair, the other frame the other.
+        for side in 'LR':
+            for pair in (('LEFT', 'RIGHT'), ('UP', 'DOWN')):
+                arkit_values[owner[f'EYES_LOOK_{pair[0 if flip else 1]}_{side}']] = 0.0
         cases.append({'mapping_kind': 'arkit_to_fb2', 'inputs': {ARKIT.format(a): v for a, v in arkit_values.items()},
                       'expected': {FB2.format(n): arkit_values[owner[n]] for n in fb2_inputs},
-                      'sources': cite([c for r in routes for c in r['cites']])})
+                      'sources': cite([c for r in routes for c in r['cites']] + [('xr_fb2', exclusive_line(texts['xr_fb2']))])})
         ue_values = distinct([r['arkit'] for r in unified_routes], flip)
         cases.append({'mapping_kind': 'arkit_to_ue', 'inputs': {ARKIT.format(a): v for a, v in ue_values.items()},
                       'expected': {UE.format(o): ue_values[r['arkit']] for r in unified_routes for o in r['outputs']},

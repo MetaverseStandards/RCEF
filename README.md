@@ -8,7 +8,7 @@ Selected inventories: ARKit 52, MediaPipe 52, OpenXR FB 63 and FB2 70, optional 
 
 The canonical subset has 21 explicitly provider-calibrated scalar projections spanning blink, jaw, brow, directional gaze and physical pupil diameter. Executable identities preserve the stated provider basis. General calibration ambiguity is unresolved. Original affine and lossy bilateral fixtures demonstrate the shared runtime without claiming visual equivalence.
 
-Data 0.3.0 has 187 cross-provider rules: FB2 to all 52 ARKit coefficients and back (face and, separately, gaze), ARKit to VRCFaceTracking Unified Expressions, FB2 eye closure to VRM per-eye blinks, and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
+Data 0.4.0 has 187 cross-provider mappings, plus 4 internal steps in the ARKit → FB2 gaze map that take each eye's opposing ARKit gaze directions to one intermediate difference: FB2 to all 52 ARKit coefficients and back (face and, separately, gaze), ARKit to VRCFaceTracking Unified Expressions, FB2 eye closure to VRM per-eye blinks, and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
 
 ## Expression sets and where they come from
 
@@ -26,7 +26,7 @@ How to read this: each row is one group of rules that turns values from the sour
 | [`fb2.to_arkit`](reports/mappings.md#fb2to_arkit) | `openxr.fb2` → `arkit.coefficient` | 44 | proposed |
 | [`fb2_gaze.to_arkit`](reports/mappings.md#fb2_gazeto_arkit) | `openxr.fb2` → `arkit.coefficient` | 8 | proposed |
 | [`arkit.to_fb2`](reports/mappings.md#arkitto_fb2) | `arkit.coefficient` → `openxr.fb2` | 52 | proposed |
-| [`arkit_gaze.to_fb2`](reports/mappings.md#arkit_gazeto_fb2) | `arkit.coefficient` → `openxr.fb2` | 8 | proposed |
+| [`arkit_gaze.to_fb2`](reports/mappings.md#arkit_gazeto_fb2) | `arkit.coefficient` → `openxr.fb2` | 12 | proposed |
 | [`arkit.to_vrcft_artist`](reports/mappings.md#arkitto_vrcft_artist) | `arkit.coefficient` → `vrcft.artist.base` | 68 | proposed |
 | [`fb2.to_vrm`](reports/mappings.md#fb2to_vrm) | `openxr.fb2` → `vrm.preset` | 2 | proposed |
 | [`visemes.to_vrm`](reports/mappings.md#visemesto_vrm) | `openxr.visemes` → `vrm.preset` | 5 | proposed |
@@ -71,7 +71,7 @@ How to read this: start with the Role column. Source and target sets have execut
 
 The Signals column counts every inventory row, including count sentinels and rows recorded as absent, so it can be higher than the counts in Contents above: FB2 has 70 weights plus `COUNT` (71), FB has 63 plus `COUNT` and an absent tongue row (65), the VRCFT transport enum has 88 plus `Max` (89), and MediaPipe has its 52 labels plus an absent `tongueOut` row (53).
 
-RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.toml](data/canonical.toml); it is the target of the three `*.to_canonical` mappings.
+RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.toml](data/canonical.toml); it is the target of the three `*.to_canonical` mappings. RCEF's intermediate values, `rcef.intermediate` (4 signals), are in [data/intermediate.toml](data/intermediate.toml): each is the signed difference of two opposing ARKit gaze directions, computed inside `arkit_gaze.to_fb2` and never read or written by a provider.
 
 ¹ Apple's documentation pages build their content with JavaScript; without it the page is an empty shell. The pinned source is Apple's JSON data for the same page.
 
@@ -105,14 +105,21 @@ The 21 provider identities and 63 scalar comparisons preserve declared storage a
 
 With [uv](https://docs.astral.sh/uv/) (environments made by `uv venv` have no pip), use `uv pip install --python PATH/TO/python ...` with the same requirement.
 
-To install a built msf-tools wheel instead, pin it by hash. This works only for msf-tools builds that include `msf_tools/_build_info.json`, which records the source commit; a wheel install has no Git record, and `check.py` refuses an install whose commit it cannot tell. No released msf-tools writes that file yet, so until one does, use the Git install above. The lock's `wheels.TAG.sha256` is the hash to use for the wheel with that tag (`py3-none-any`, or later `cp311-cp311-...` and `cp312-abi3-...`):
+To install a built msf-tools wheel instead, pin it by hash. This works only for msf-tools builds that include `msf_tools/_build_info.json`, which records the source commit; a wheel install has no Git record, and `check.py` refuses an install whose commit it cannot tell. msf-tools 0.3.0 and later write it. The lock's `wheels.TAG.sha256` is the hash to use for the wheel with that tag (`py3-none-any`, or later `cp311-cp311-...` and `cp312-abi3-...`). A wheel stores file times, so to get the same bytes, build it from a clean clone at the locked commit with `SOURCE_DATE_EPOCH` set to that commit's time. A different setuptools can still change the bytes; the lock's per-file hashes check the installed package either way.
+
+```sh
+git clone https://github.com/Kjakubzak/msf-tools && cd msf-tools && git checkout COMMIT
+SOURCE_DATE_EPOCH=$(git log -1 --format=%ct) uv build --wheel
+```
+
+Then install it:
 
 ```sh
 echo "msf-tools @ file:///path/to/msf_tools-VERSION-TAG.whl --hash=sha256:SHA256" > msf-tools.txt
 uv pip install --python PATH/TO/python --require-hashes -r msf-tools.txt
 ```
 
-`check.py` uses the installed package. The lock (format 2) records msf-tools' commit and version, and one entry per wheel tag with that wheel's SHA-256 when known and a SHA-256 for every installed file in the `msf_tools` package, not only the Python files. One lock serves several Pythons: each install is checked against the entry for its own tag (read from its `WHEEL` file). Before doing anything else, `check.py` verifies that the installed package was built from the locked commit (from `msf_tools/_build_info.json`, or failing that from a Git install's `direct_url.json`; if both name a commit and they differ, it refuses), that its tag has an entry, and that every file in the package directory, whatever its type, matches both its `RECORD` entry and the lock; bytecode caches are ignored. On any difference it lists the problems and exits non-zero. The wheel hash is compared after installation only where the installer recorded it; uv does not, so for uv installs it is enforced by `--require-hashes` at install time. The lock's `source` URL is informational: the commit and file hashes identify the package, so local `file://` installs are accepted. To adopt a reviewed new msf-tools version, install it and run `python3 -B check.py --update-lock` (add `--wheel PATH` to record the sha256 of the wheel file you installed; `check.py` first confirms it holds the installed files). Run it once from each Python whose tag you support: entries for the same commit and version are merged. When the commit or version changes, the old lock is kept as [tooling.lock.previous.json](evidence/tooling.lock.previous.json). To roll back, copy that file over `tooling.lock.json`, install msf-tools at its commit, and use the `check.py` from the same RCEF commit as that lock (the previous lock is format 1, which this `check.py` refuses). The wrapper delegates to `python3 -B -m msf_tools check AUTHORING --pack PATH --csv PATH [--write]`. No automatic cloning or source download occurs during checking.
+`check.py` uses the installed package. The lock (format 2) records msf-tools' commit and version, and one entry per wheel tag with that wheel's SHA-256 when known and a SHA-256 for every installed file in the `msf_tools` package, not only the Python files. One lock serves several Pythons: each install is checked against the entry for its own tag (read from its `WHEEL` file). Before doing anything else, `check.py` verifies that the installed package was built from the locked commit (from `msf_tools/_build_info.json`, or failing that from a Git install's `direct_url.json`; if both name a commit and they differ, it refuses), that its tag has an entry, and that every file in the package directory, whatever its type, matches both its `RECORD` entry and the lock; bytecode caches are ignored. On any difference it lists the problems and exits non-zero. The wheel hash is compared after installation only where the installer recorded it; uv does not, so for uv installs it is enforced by `--require-hashes` at install time. The lock's `source` URL is informational: the commit and file hashes identify the package, so local `file://` installs are accepted. To adopt a reviewed new msf-tools version, install it and run `python3 -B check.py --update-lock` (add `--wheel PATH` to record the sha256 of the wheel file you installed; `check.py` first confirms it holds the installed files). Run it once from each Python whose tag you support: entries for the same commit and version are merged. When the commit or version changes, the old lock is kept as [tooling.lock.previous.json](evidence/tooling.lock.previous.json). To roll back, copy that file over `tooling.lock.json`, install msf-tools at its commit, and use the `check.py` from the same RCEF commit as that lock. The wrapper delegates to `python3 -B -m msf_tools check AUTHORING --pack PATH --csv PATH [--write]`. No automatic cloning or source download occurs during checking.
 
 After verifying msf-tools and before running it, `check.py` also validates the software-only calibration records in [calibration/](calibration/README.md) and refuses any rule that cites one unless its knots are exactly the record's frozen knots. The renderer those fits use is in [tools/render/](tools/render/README.md).
 
