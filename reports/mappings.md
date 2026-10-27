@@ -2,7 +2,7 @@
 
 Pack: rcef.parity; data version: 0.3.0.
 
-Generated from rcef.pack.json; SHA-256: a7ed3037bfb507976808714ef07a26a83ca4b06b4238a4eed55c075479af5895.
+Generated from rcef.pack.json; SHA-256: 92378ef525a07e122ec88461ff6148b49930d093137e7fe93853d226b2fad1b5.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
 
@@ -74,6 +74,74 @@ Proposed rules translate between providers. Each formula assumes the calibration
 | arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_RIGHT_R | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB = 1·eyeLookOutRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
 | arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_UP_L | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB = 1·eyeLookUpLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
 | arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_UP_R | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB = 1·eyeLookUpRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.BrowLowererLeft | arkit.coefficient → vrcft.artist.base | BrowLowererLeft = 1·browDownLeft | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.BrowPinchLeft | arkit.coefficient → vrcft.artist.base | BrowPinchLeft = 1·browDownLeft | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.BrowLowererRight | arkit.coefficient → vrcft.artist.base | BrowLowererRight = 1·browDownRight | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.BrowPinchRight | arkit.coefficient → vrcft.artist.base | BrowPinchRight = 1·browDownRight | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.BrowInnerUpRight | arkit.coefficient → vrcft.artist.base | BrowInnerUpRight = 1·browInnerUp | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.BrowInnerUpLeft | arkit.coefficient → vrcft.artist.base | BrowInnerUpLeft = 1·browInnerUp | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.BrowOuterUpLeft | arkit.coefficient → vrcft.artist.base | BrowOuterUpLeft = 1·browOuterUpLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.BrowOuterUpRight | arkit.coefficient → vrcft.artist.base | BrowOuterUpRight = 1·browOuterUpRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.CheekPuffRight | arkit.coefficient → vrcft.artist.base | CheekPuffRight = 1·cheekPuff | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.CheekPuffLeft | arkit.coefficient → vrcft.artist.base | CheekPuffLeft = 1·cheekPuff | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.CheekSquintLeft | arkit.coefficient → vrcft.artist.base | CheekSquintLeft = 1·cheekSquintLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.CheekSquintRight | arkit.coefficient → vrcft.artist.base | CheekSquintRight = 1·cheekSquintRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeClosedLeft | arkit.coefficient → vrcft.artist.base | EyeClosedLeft = 1·eyeBlinkLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeClosedRight | arkit.coefficient → vrcft.artist.base | EyeClosedRight = 1·eyeBlinkRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeLookDownLeft | arkit.coefficient → vrcft.artist.base | EyeLookDownLeft = 1·eyeLookDownLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeLookDownRight | arkit.coefficient → vrcft.artist.base | EyeLookDownRight = 1·eyeLookDownRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeLookInLeft | arkit.coefficient → vrcft.artist.base | EyeLookInLeft = 1·eyeLookInLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeLookInRight | arkit.coefficient → vrcft.artist.base | EyeLookInRight = 1·eyeLookInRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeLookOutLeft | arkit.coefficient → vrcft.artist.base | EyeLookOutLeft = 1·eyeLookOutLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeLookOutRight | arkit.coefficient → vrcft.artist.base | EyeLookOutRight = 1·eyeLookOutRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeLookUpLeft | arkit.coefficient → vrcft.artist.base | EyeLookUpLeft = 1·eyeLookUpLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeLookUpRight | arkit.coefficient → vrcft.artist.base | EyeLookUpRight = 1·eyeLookUpRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeSquintLeft | arkit.coefficient → vrcft.artist.base | EyeSquintLeft = 1·eyeSquintLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeSquintRight | arkit.coefficient → vrcft.artist.base | EyeSquintRight = 1·eyeSquintRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeWideLeft | arkit.coefficient → vrcft.artist.base | EyeWideLeft = 1·eyeWideLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.EyeWideRight | arkit.coefficient → vrcft.artist.base | EyeWideRight = 1·eyeWideRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.JawForward | arkit.coefficient → vrcft.artist.base | JawForward = 1·jawForward | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.JawLeft | arkit.coefficient → vrcft.artist.base | JawLeft = 1·jawLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.JawOpen | arkit.coefficient → vrcft.artist.base | JawOpen = 1·jawOpen | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.JawRight | arkit.coefficient → vrcft.artist.base | JawRight = 1·jawRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthClosed | arkit.coefficient → vrcft.artist.base | MouthClosed = 1·mouthClose | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthDimpleLeft | arkit.coefficient → vrcft.artist.base | MouthDimpleLeft = 1·mouthDimpleLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthDimpleRight | arkit.coefficient → vrcft.artist.base | MouthDimpleRight = 1·mouthDimpleRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthFrownLeft | arkit.coefficient → vrcft.artist.base | MouthFrownLeft = 1·mouthFrownLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthFrownRight | arkit.coefficient → vrcft.artist.base | MouthFrownRight = 1·mouthFrownRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipFunnelUpperRight | arkit.coefficient → vrcft.artist.base | LipFunnelUpperRight = 1·mouthFunnel | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipFunnelUpperLeft | arkit.coefficient → vrcft.artist.base | LipFunnelUpperLeft = 1·mouthFunnel | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipFunnelLowerRight | arkit.coefficient → vrcft.artist.base | LipFunnelLowerRight = 1·mouthFunnel | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipFunnelLowerLeft | arkit.coefficient → vrcft.artist.base | LipFunnelLowerLeft = 1·mouthFunnel | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthUpperLeft | arkit.coefficient → vrcft.artist.base | MouthUpperLeft = 1·mouthLeft | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthLowerLeft | arkit.coefficient → vrcft.artist.base | MouthLowerLeft = 1·mouthLeft | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthLowerDownLeft | arkit.coefficient → vrcft.artist.base | MouthLowerDownLeft = 1·mouthLowerDownLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthLowerDownRight | arkit.coefficient → vrcft.artist.base | MouthLowerDownRight = 1·mouthLowerDownRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthPressLeft | arkit.coefficient → vrcft.artist.base | MouthPressLeft = 1·mouthPressLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthPressRight | arkit.coefficient → vrcft.artist.base | MouthPressRight = 1·mouthPressRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipPuckerUpperRight | arkit.coefficient → vrcft.artist.base | LipPuckerUpperRight = 1·mouthPucker | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipPuckerUpperLeft | arkit.coefficient → vrcft.artist.base | LipPuckerUpperLeft = 1·mouthPucker | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipPuckerLowerRight | arkit.coefficient → vrcft.artist.base | LipPuckerLowerRight = 1·mouthPucker | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipPuckerLowerLeft | arkit.coefficient → vrcft.artist.base | LipPuckerLowerLeft = 1·mouthPucker | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthUpperRight | arkit.coefficient → vrcft.artist.base | MouthUpperRight = 1·mouthRight | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthLowerRight | arkit.coefficient → vrcft.artist.base | MouthLowerRight = 1·mouthRight | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipSuckLowerRight | arkit.coefficient → vrcft.artist.base | LipSuckLowerRight = 1·mouthRollLower | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipSuckLowerLeft | arkit.coefficient → vrcft.artist.base | LipSuckLowerLeft = 1·mouthRollLower | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipSuckUpperRight | arkit.coefficient → vrcft.artist.base | LipSuckUpperRight = 1·mouthRollUpper | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.LipSuckUpperLeft | arkit.coefficient → vrcft.artist.base | LipSuckUpperLeft = 1·mouthRollUpper | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthRaiserLower | arkit.coefficient → vrcft.artist.base | MouthRaiserLower = 1·mouthShrugLower | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthRaiserUpper | arkit.coefficient → vrcft.artist.base | MouthRaiserUpper = 1·mouthShrugUpper | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthCornerPullLeft | arkit.coefficient → vrcft.artist.base | MouthCornerPullLeft = 1·mouthSmileLeft | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthCornerSlantLeft | arkit.coefficient → vrcft.artist.base | MouthCornerSlantLeft = 1·mouthSmileLeft | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthCornerPullRight | arkit.coefficient → vrcft.artist.base | MouthCornerPullRight = 1·mouthSmileRight | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthCornerSlantRight | arkit.coefficient → vrcft.artist.base | MouthCornerSlantRight = 1·mouthSmileRight | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthStretchLeft | arkit.coefficient → vrcft.artist.base | MouthStretchLeft = 1·mouthStretchLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthStretchRight | arkit.coefficient → vrcft.artist.base | MouthStretchRight = 1·mouthStretchRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthUpperUpLeft | arkit.coefficient → vrcft.artist.base | MouthUpperUpLeft = 1·mouthUpperUpLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.MouthUpperUpRight | arkit.coefficient → vrcft.artist.base | MouthUpperUpRight = 1·mouthUpperUpRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.NoseSneerLeft | arkit.coefficient → vrcft.artist.base | NoseSneerLeft = 1·noseSneerLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.NoseSneerRight | arkit.coefficient → vrcft.artist.base | NoseSneerRight = 1·noseSneerRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
+| arkit.to_vrcft_artist | arkit_vrcft_artist.TongueOut | arkit.coefficient → vrcft.artist.base | TongueOut = 1·tongueOut | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; both are extension shapes with no stated length | proposed |
 | fb2.to_arkit | fb2_arkit.eyeBlinkLeft | openxr.fb2 → arkit.coefficient | eyeBlinkLeft = 1·XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
 | fb2.to_arkit | fb2_arkit.eyeBlinkRight | openxr.fb2 → arkit.coefficient | eyeBlinkRight = 1·XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
 | fb2.to_arkit | fb2_arkit.jawOpen | openxr.fb2 → arkit.coefficient | jawOpen = 1·XR_FACE_EXPRESSION2_JAW_DROP_FB | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
@@ -1228,6 +1296,1094 @@ Assumptions:
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookUpRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["arkit.coefficient.eyeLookUpRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["arkit.coefficient.eyeLookUpRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)","refs":["arkit.coefficient.eyeLookUpRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"}]
 
 Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, ict_facekit
+
+## arkit.to_vrcft_artist
+
+### arkit_vrcft_artist.BrowLowererLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.browDownLeft | vrcft.artist.base.BrowLowererLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit browDownLeft is a blended Unified Expressions shape; BrowLowererLeft is set to the ARKit value, as is BrowPinchLeft. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererLeft + 0.25 x BrowPinchLeft; the weights sum to 1, so copying the ARKit value into both parts gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.browDownLeft","vrcft.artist.base.BrowLowererLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.browDownLeft","vrcft.artist.base.BrowLowererLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions
+
+### arkit_vrcft_artist.BrowPinchLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.browDownLeft | vrcft.artist.base.BrowPinchLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit browDownLeft is a blended Unified Expressions shape; BrowPinchLeft is set to the ARKit value, as is BrowLowererLeft. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererLeft + 0.25 x BrowPinchLeft; the weights sum to 1, so copying the ARKit value into both parts gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.browDownLeft","vrcft.artist.base.BrowPinchLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.browDownLeft","vrcft.artist.base.BrowPinchLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions
+
+### arkit_vrcft_artist.BrowLowererRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.browDownRight | vrcft.artist.base.BrowLowererRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit browDownRight is a blended Unified Expressions shape; BrowLowererRight is set to the ARKit value, as is BrowPinchRight. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererRight + 0.25 x BrowPinchRight; the weights sum to 1, so copying the ARKit value into both parts gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.browDownRight","vrcft.artist.base.BrowLowererRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.browDownRight","vrcft.artist.base.BrowLowererRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions
+
+### arkit_vrcft_artist.BrowPinchRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.browDownRight | vrcft.artist.base.BrowPinchRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit browDownRight is a blended Unified Expressions shape; BrowPinchRight is set to the ARKit value, as is BrowLowererRight. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererRight + 0.25 x BrowPinchRight; the weights sum to 1, so copying the ARKit value into both parts gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.browDownRight","vrcft.artist.base.BrowPinchRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.browDownRight","vrcft.artist.base.BrowPinchRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions
+
+### arkit_vrcft_artist.BrowInnerUpRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.browInnerUp | vrcft.artist.base.BrowInnerUpRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit browInnerUp is a blended Unified Expressions shape; BrowInnerUpRight is set to the ARKit value, as is BrowInnerUpLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.browInnerUp","vrcft.artist.base.BrowInnerUpRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.browInnerUp","vrcft.artist.base.BrowInnerUpRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.BrowInnerUpLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.browInnerUp | vrcft.artist.base.BrowInnerUpLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit browInnerUp is a blended Unified Expressions shape; BrowInnerUpLeft is set to the ARKit value, as is BrowInnerUpRight. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.browInnerUp","vrcft.artist.base.BrowInnerUpLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.browInnerUp","vrcft.artist.base.BrowInnerUpLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.BrowOuterUpLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.browOuterUpLeft | vrcft.artist.base.BrowOuterUpLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit browOuterUpLeft corresponds to Unified Expressions BrowOuterUpLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.browOuterUpLeft","vrcft.artist.base.BrowOuterUpLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.BrowOuterUpRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.browOuterUpRight | vrcft.artist.base.BrowOuterUpRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit browOuterUpRight corresponds to Unified Expressions BrowOuterUpRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.browOuterUpRight","vrcft.artist.base.BrowOuterUpRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.CheekPuffRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.cheekPuff | vrcft.artist.base.CheekPuffRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit cheekPuff is a blended Unified Expressions shape; CheekPuffRight is set to the ARKit value, as is CheekPuffLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.cheekPuff","vrcft.artist.base.CheekPuffRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.cheekPuff","vrcft.artist.base.CheekPuffRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.CheekPuffLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.cheekPuff | vrcft.artist.base.CheekPuffLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit cheekPuff is a blended Unified Expressions shape; CheekPuffLeft is set to the ARKit value, as is CheekPuffRight. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.cheekPuff","vrcft.artist.base.CheekPuffLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.cheekPuff","vrcft.artist.base.CheekPuffLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.CheekSquintLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.cheekSquintLeft | vrcft.artist.base.CheekSquintLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit cheekSquintLeft corresponds to Unified Expressions CheekSquintLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.cheekSquintLeft","vrcft.artist.base.CheekSquintLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.CheekSquintRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.cheekSquintRight | vrcft.artist.base.CheekSquintRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit cheekSquintRight corresponds to Unified Expressions CheekSquintRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.cheekSquintRight","vrcft.artist.base.CheekSquintRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeClosedLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeBlinkLeft | vrcft.artist.base.EyeClosedLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeBlinkLeft corresponds to Unified Expressions EyeClosedLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeBlinkLeft","vrcft.artist.base.EyeClosedLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeClosedRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeBlinkRight | vrcft.artist.base.EyeClosedRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeBlinkRight corresponds to Unified Expressions EyeClosedRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeBlinkRight","vrcft.artist.base.EyeClosedRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeLookDownLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookDownLeft | vrcft.artist.base.EyeLookDownLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookDownLeft corresponds to Unified Expressions EyeLookDownLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookDownLeft","vrcft.artist.base.EyeLookDownLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle","refs":["arkit.coefficient.eyeLookDownLeft","vrcft.artist.base.EyeLookDownLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeLookDownRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookDownRight | vrcft.artist.base.EyeLookDownRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookDownRight corresponds to Unified Expressions EyeLookDownRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookDownRight","vrcft.artist.base.EyeLookDownRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle","refs":["arkit.coefficient.eyeLookDownRight","vrcft.artist.base.EyeLookDownRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeLookInLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookInLeft | vrcft.artist.base.EyeLookInLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookInLeft corresponds to Unified Expressions EyeLookInLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookInLeft","vrcft.artist.base.EyeLookInLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle","refs":["arkit.coefficient.eyeLookInLeft","vrcft.artist.base.EyeLookInLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeLookInRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookInRight | vrcft.artist.base.EyeLookInRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookInRight corresponds to Unified Expressions EyeLookInRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookInRight","vrcft.artist.base.EyeLookInRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle","refs":["arkit.coefficient.eyeLookInRight","vrcft.artist.base.EyeLookInRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeLookOutLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookOutLeft | vrcft.artist.base.EyeLookOutLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookOutLeft corresponds to Unified Expressions EyeLookOutLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookOutLeft","vrcft.artist.base.EyeLookOutLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle","refs":["arkit.coefficient.eyeLookOutLeft","vrcft.artist.base.EyeLookOutLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeLookOutRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookOutRight | vrcft.artist.base.EyeLookOutRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookOutRight corresponds to Unified Expressions EyeLookOutRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookOutRight","vrcft.artist.base.EyeLookOutRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle","refs":["arkit.coefficient.eyeLookOutRight","vrcft.artist.base.EyeLookOutRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeLookUpLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookUpLeft | vrcft.artist.base.EyeLookUpLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookUpLeft corresponds to Unified Expressions EyeLookUpLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookUpLeft","vrcft.artist.base.EyeLookUpLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle","refs":["arkit.coefficient.eyeLookUpLeft","vrcft.artist.base.EyeLookUpLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeLookUpRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookUpRight | vrcft.artist.base.EyeLookUpRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookUpRight corresponds to Unified Expressions EyeLookUpRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookUpRight","vrcft.artist.base.EyeLookUpRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle","refs":["arkit.coefficient.eyeLookUpRight","vrcft.artist.base.EyeLookUpRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeSquintLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeSquintLeft | vrcft.artist.base.EyeSquintLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeSquintLeft corresponds to Unified Expressions EyeSquintLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeSquintLeft","vrcft.artist.base.EyeSquintLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeSquintRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeSquintRight | vrcft.artist.base.EyeSquintRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeSquintRight corresponds to Unified Expressions EyeSquintRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeSquintRight","vrcft.artist.base.EyeSquintRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeWideLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeWideLeft | vrcft.artist.base.EyeWideLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeWideLeft corresponds to Unified Expressions EyeWideLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeWideLeft","vrcft.artist.base.EyeWideLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.EyeWideRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeWideRight | vrcft.artist.base.EyeWideRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeWideRight corresponds to Unified Expressions EyeWideRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeWideRight","vrcft.artist.base.EyeWideRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.JawForward
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.jawForward | vrcft.artist.base.JawForward | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit jawForward corresponds to Unified Expressions JawForward (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.jawForward","vrcft.artist.base.JawForward"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.JawLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.jawLeft | vrcft.artist.base.JawLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit jawLeft corresponds to Unified Expressions JawLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.jawLeft","vrcft.artist.base.JawLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.JawOpen
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.jawOpen | vrcft.artist.base.JawOpen | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit jawOpen corresponds to Unified Expressions JawOpen (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.jawOpen","vrcft.artist.base.JawOpen"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.JawRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.jawRight | vrcft.artist.base.JawRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit jawRight corresponds to Unified Expressions JawRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.jawRight","vrcft.artist.base.JawRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthClosed
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthClose | vrcft.artist.base.MouthClosed | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthClose corresponds to Unified Expressions MouthClosed (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthClose","vrcft.artist.base.MouthClosed"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthDimpleLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthDimpleLeft | vrcft.artist.base.MouthDimpleLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthDimpleLeft corresponds to Unified Expressions MouthDimpleLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthDimpleLeft","vrcft.artist.base.MouthDimpleLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthDimpleRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthDimpleRight | vrcft.artist.base.MouthDimpleRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthDimpleRight corresponds to Unified Expressions MouthDimpleRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthDimpleRight","vrcft.artist.base.MouthDimpleRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthFrownLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthFrownLeft | vrcft.artist.base.MouthFrownLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthFrownLeft corresponds to Unified Expressions MouthFrownLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthFrownLeft","vrcft.artist.base.MouthFrownLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthFrownRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthFrownRight | vrcft.artist.base.MouthFrownRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthFrownRight corresponds to Unified Expressions MouthFrownRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthFrownRight","vrcft.artist.base.MouthFrownRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.LipFunnelUpperRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthFunnel | vrcft.artist.base.LipFunnelUpperRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthFunnel is a blended Unified Expressions shape; LipFunnelUpperRight is set to the ARKit value, as is LipFunnelUpperLeft, LipFunnelLowerRight, LipFunnelLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthFunnel","vrcft.artist.base.LipFunnelUpperRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthFunnel","vrcft.artist.base.LipFunnelUpperRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.LipFunnelUpperLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthFunnel | vrcft.artist.base.LipFunnelUpperLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthFunnel is a blended Unified Expressions shape; LipFunnelUpperLeft is set to the ARKit value, as is LipFunnelUpperRight, LipFunnelLowerRight, LipFunnelLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthFunnel","vrcft.artist.base.LipFunnelUpperLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthFunnel","vrcft.artist.base.LipFunnelUpperLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.LipFunnelLowerRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthFunnel | vrcft.artist.base.LipFunnelLowerRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthFunnel is a blended Unified Expressions shape; LipFunnelLowerRight is set to the ARKit value, as is LipFunnelUpperRight, LipFunnelUpperLeft, LipFunnelLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthFunnel","vrcft.artist.base.LipFunnelLowerRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthFunnel","vrcft.artist.base.LipFunnelLowerRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.LipFunnelLowerLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthFunnel | vrcft.artist.base.LipFunnelLowerLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthFunnel is a blended Unified Expressions shape; LipFunnelLowerLeft is set to the ARKit value, as is LipFunnelUpperRight, LipFunnelUpperLeft, LipFunnelLowerRight. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthFunnel","vrcft.artist.base.LipFunnelLowerLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthFunnel","vrcft.artist.base.LipFunnelLowerLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.MouthUpperLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthLeft | vrcft.artist.base.MouthUpperLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthLeft is a blended Unified Expressions shape; MouthUpperLeft is set to the ARKit value, as is MouthLowerLeft. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_LEFT with the blended shape.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- FLAGGED: VRCFaceTracking's ARKit table has no mouthLeft row; only Godot names the ARKit coefficient for the blended Unified shape.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthLeft","vrcft.artist.base.MouthUpperLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthLeft","vrcft.artist.base.MouthUpperLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_movement
+
+### arkit_vrcft_artist.MouthLowerLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthLeft | vrcft.artist.base.MouthLowerLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthLeft is a blended Unified Expressions shape; MouthLowerLeft is set to the ARKit value, as is MouthUpperLeft. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_LEFT with the blended shape.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- FLAGGED: VRCFaceTracking's ARKit table has no mouthLeft row; only Godot names the ARKit coefficient for the blended Unified shape.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthLeft","vrcft.artist.base.MouthLowerLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthLeft","vrcft.artist.base.MouthLowerLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_movement
+
+### arkit_vrcft_artist.MouthLowerDownLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthLowerDownLeft | vrcft.artist.base.MouthLowerDownLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthLowerDownLeft corresponds to Unified Expressions MouthLowerDownLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthLowerDownLeft","vrcft.artist.base.MouthLowerDownLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthLowerDownRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthLowerDownRight | vrcft.artist.base.MouthLowerDownRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthLowerDownRight corresponds to Unified Expressions MouthLowerDownRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthLowerDownRight","vrcft.artist.base.MouthLowerDownRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthPressLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthPressLeft | vrcft.artist.base.MouthPressLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthPressLeft corresponds to Unified Expressions MouthPressLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthPressLeft","vrcft.artist.base.MouthPressLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthPressRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthPressRight | vrcft.artist.base.MouthPressRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthPressRight corresponds to Unified Expressions MouthPressRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthPressRight","vrcft.artist.base.MouthPressRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.LipPuckerUpperRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthPucker | vrcft.artist.base.LipPuckerUpperRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthPucker is a blended Unified Expressions shape; LipPuckerUpperRight is set to the ARKit value, as is LipPuckerUpperLeft, LipPuckerLowerRight, LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthPucker","vrcft.artist.base.LipPuckerUpperRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthPucker","vrcft.artist.base.LipPuckerUpperRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.LipPuckerUpperLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthPucker | vrcft.artist.base.LipPuckerUpperLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthPucker is a blended Unified Expressions shape; LipPuckerUpperLeft is set to the ARKit value, as is LipPuckerUpperRight, LipPuckerLowerRight, LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthPucker","vrcft.artist.base.LipPuckerUpperLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthPucker","vrcft.artist.base.LipPuckerUpperLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.LipPuckerLowerRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthPucker | vrcft.artist.base.LipPuckerLowerRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthPucker is a blended Unified Expressions shape; LipPuckerLowerRight is set to the ARKit value, as is LipPuckerUpperRight, LipPuckerUpperLeft, LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthPucker","vrcft.artist.base.LipPuckerLowerRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthPucker","vrcft.artist.base.LipPuckerLowerRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.LipPuckerLowerLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthPucker | vrcft.artist.base.LipPuckerLowerLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthPucker is a blended Unified Expressions shape; LipPuckerLowerLeft is set to the ARKit value, as is LipPuckerUpperRight, LipPuckerUpperLeft, LipPuckerLowerRight. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthPucker","vrcft.artist.base.LipPuckerLowerLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthPucker","vrcft.artist.base.LipPuckerLowerLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.MouthUpperRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthRight | vrcft.artist.base.MouthUpperRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthRight is a blended Unified Expressions shape; MouthUpperRight is set to the ARKit value, as is MouthLowerRight. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_RIGHT with the blended shape.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- FLAGGED: VRCFaceTracking's ARKit table has no mouthRight row; only Godot names the ARKit coefficient for the blended Unified shape.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthRight","vrcft.artist.base.MouthUpperRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthRight","vrcft.artist.base.MouthUpperRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_movement
+
+### arkit_vrcft_artist.MouthLowerRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthRight | vrcft.artist.base.MouthLowerRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthRight is a blended Unified Expressions shape; MouthLowerRight is set to the ARKit value, as is MouthUpperRight. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_RIGHT with the blended shape.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- FLAGGED: VRCFaceTracking's ARKit table has no mouthRight row; only Godot names the ARKit coefficient for the blended Unified shape.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthRight","vrcft.artist.base.MouthLowerRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthRight","vrcft.artist.base.MouthLowerRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_movement
+
+### arkit_vrcft_artist.LipSuckLowerRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthRollLower | vrcft.artist.base.LipSuckLowerRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthRollLower is a blended Unified Expressions shape; LipSuckLowerRight is set to the ARKit value, as is LipSuckLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthRollLower","vrcft.artist.base.LipSuckLowerRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthRollLower","vrcft.artist.base.LipSuckLowerRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.LipSuckLowerLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthRollLower | vrcft.artist.base.LipSuckLowerLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthRollLower is a blended Unified Expressions shape; LipSuckLowerLeft is set to the ARKit value, as is LipSuckLowerRight. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthRollLower","vrcft.artist.base.LipSuckLowerLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthRollLower","vrcft.artist.base.LipSuckLowerLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.LipSuckUpperRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthRollUpper | vrcft.artist.base.LipSuckUpperRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthRollUpper is a blended Unified Expressions shape; LipSuckUpperRight is set to the ARKit value, as is LipSuckUpperLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthRollUpper","vrcft.artist.base.LipSuckUpperRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthRollUpper","vrcft.artist.base.LipSuckUpperRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.LipSuckUpperLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthRollUpper | vrcft.artist.base.LipSuckUpperLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthRollUpper is a blended Unified Expressions shape; LipSuckUpperLeft is set to the ARKit value, as is LipSuckUpperRight. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthRollUpper","vrcft.artist.base.LipSuckUpperLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthRollUpper","vrcft.artist.base.LipSuckUpperLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters
+
+### arkit_vrcft_artist.MouthRaiserLower
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthShrugLower | vrcft.artist.base.MouthRaiserLower | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthShrugLower corresponds to Unified Expressions MouthRaiserLower (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthShrugLower","vrcft.artist.base.MouthRaiserLower"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthRaiserUpper
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthShrugUpper | vrcft.artist.base.MouthRaiserUpper | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthShrugUpper corresponds to Unified Expressions MouthRaiserUpper (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthShrugUpper","vrcft.artist.base.MouthRaiserUpper"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthCornerPullLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthSmileLeft | vrcft.artist.base.MouthCornerPullLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthSmileLeft is a blended Unified Expressions shape; MouthCornerPullLeft is set to the ARKit value, as is MouthCornerSlantLeft. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullLeft + 0.2 x MouthCornerSlantLeft; the weights sum to 1, so copying the ARKit value into both parts gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthSmileLeft","vrcft.artist.base.MouthCornerPullLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthSmileLeft","vrcft.artist.base.MouthCornerPullLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions
+
+### arkit_vrcft_artist.MouthCornerSlantLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthSmileLeft | vrcft.artist.base.MouthCornerSlantLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthSmileLeft is a blended Unified Expressions shape; MouthCornerSlantLeft is set to the ARKit value, as is MouthCornerPullLeft. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullLeft + 0.2 x MouthCornerSlantLeft; the weights sum to 1, so copying the ARKit value into both parts gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthSmileLeft","vrcft.artist.base.MouthCornerSlantLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthSmileLeft","vrcft.artist.base.MouthCornerSlantLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions
+
+### arkit_vrcft_artist.MouthCornerPullRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthSmileRight | vrcft.artist.base.MouthCornerPullRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthSmileRight is a blended Unified Expressions shape; MouthCornerPullRight is set to the ARKit value, as is MouthCornerSlantRight. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullRight + 0.2 x MouthCornerSlantRight; the weights sum to 1, so copying the ARKit value into both parts gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthSmileRight","vrcft.artist.base.MouthCornerPullRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthSmileRight","vrcft.artist.base.MouthCornerPullRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions
+
+### arkit_vrcft_artist.MouthCornerSlantRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthSmileRight | vrcft.artist.base.MouthCornerSlantRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthSmileRight is a blended Unified Expressions shape; MouthCornerSlantRight is set to the ARKit value, as is MouthCornerPullRight. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullRight + 0.2 x MouthCornerSlantRight; the weights sum to 1, so copying the ARKit value into both parts gives it back.
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal","refs":["arkit.coefficient.mouthSmileRight","vrcft.artist.base.MouthCornerSlantRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthSmileRight","vrcft.artist.base.MouthCornerSlantRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions
+
+### arkit_vrcft_artist.MouthStretchLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthStretchLeft | vrcft.artist.base.MouthStretchLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthStretchLeft corresponds to Unified Expressions MouthStretchLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthStretchLeft","vrcft.artist.base.MouthStretchLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthStretchRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthStretchRight | vrcft.artist.base.MouthStretchRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthStretchRight corresponds to Unified Expressions MouthStretchRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthStretchRight","vrcft.artist.base.MouthStretchRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthUpperUpLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthUpperUpLeft | vrcft.artist.base.MouthUpperUpLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthUpperUpLeft corresponds to Unified Expressions MouthUpperUpLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthUpperUpLeft","vrcft.artist.base.MouthUpperUpLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.MouthUpperUpRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.mouthUpperUpRight | vrcft.artist.base.MouthUpperUpRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit mouthUpperUpRight corresponds to Unified Expressions MouthUpperUpRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.mouthUpperUpRight","vrcft.artist.base.MouthUpperUpRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.NoseSneerLeft
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.noseSneerLeft | vrcft.artist.base.NoseSneerLeft | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit noseSneerLeft corresponds to Unified Expressions NoseSneerLeft (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.noseSneerLeft","vrcft.artist.base.NoseSneerLeft"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.NoseSneerRight
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.noseSneerRight | vrcft.artist.base.NoseSneerRight | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit noseSneerRight corresponds to Unified Expressions NoseSneerRight (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+- Both name sides from the subject's own face (ARKit coefficients are face-relative; Unified Expressions shapes name the avatar's own side).
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.noseSneerRight","vrcft.artist.base.NoseSneerRight"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
+
+### arkit_vrcft_artist.TongueOut
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.tongueOut | vrcft.artist.base.TongueOut | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- ARKit tongueOut corresponds to Unified Expressions TongueOut (VRCFaceTracking ARKit table; Godot face-modifier name table).
+- ARKit neutral (0) and maximum (1) are taken to equal the Unified Expressions shape at rest (0) and fully applied (1), linear in between; neither publishes its gain curve or full-activation pose.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.tongueOut","vrcft.artist.base.TongueOut"],"units":"1"},{"category":"signal","effect":"approximated","reason":"both are extension shapes with no stated length","refs":["arkit.coefficient.tongueOut","vrcft.artist.base.TongueOut"],"units":"1"}]
+
+Evidence: apple_blendshapes, vrcft_artist, godot_face_modifier, vrcft_docs_arkit
 
 ## fb2.to_canonical
 

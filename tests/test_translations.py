@@ -25,9 +25,10 @@ MAPPINGS = {
     'visemes.to_vrm': ('openxr.visemes', 'vrm.preset'),
     'arkit.to_fb2': ('arkit.coefficient', 'openxr.fb2'),
     'arkit_gaze.to_fb2': ('arkit.coefficient', 'openxr.fb2'),
+    'arkit.to_vrcft_artist': ('arkit.coefficient', 'vrcft.artist.base'),
 }
 KIND = {'fb2_to_arkit': ('fb2.to_arkit', 'fb2_gaze.to_arkit'), 'visemes_to_vrm': ('visemes.to_vrm',),
-        'arkit_to_fb2': ('arkit.to_fb2', 'arkit_gaze.to_fb2')}
+        'arkit_to_fb2': ('arkit.to_fb2', 'arkit_gaze.to_fb2'), 'arkit_to_ue': ('arkit.to_vrcft_artist',)}
 SIDED = ('Left', 'Right', '_L_FB', '_R_FB')
 
 
@@ -208,6 +209,20 @@ class Translations(unittest.TestCase):
                 self.assertTrue(any('exclusive' in loss['reason'] and 'operator gap' in loss['reason']
                                     for loss in rule['loss_annotations']))
         self.assertFalse(self.inputs('arkit_gaze.to_fb2') & self.inputs('arkit.to_fb2'))
+
+    def test_vrcft_composites_of_the_copied_parts_return_the_arkit_value(self):
+        # VRCFT's BrowDown is 0.75 BrowLowerer + 0.25 BrowPinch and its MouthSmile 0.8
+        # CornerPull + 0.2 CornerSlant; its other blended shapes are means of their parts.
+        frame = self.whole_frames('arkit_to_ue')[0]
+        values, = self.evaluate('arkit.to_vrcft_artist', [frame['inputs']])
+        ue = 'vrcft.artist.base.{}'.format
+        for side in ('Left', 'Right'):
+            down = 0.75 * values[ue(f'BrowLowerer{side}')] + 0.25 * values[ue(f'BrowPinch{side}')]
+            smile = 0.8 * values[ue(f'MouthCornerPull{side}')] + 0.2 * values[ue(f'MouthCornerSlant{side}')]
+            self.assertAlmostEqual(down, frame['inputs'][f'arkit.coefficient.browDown{side}'], places=12)
+            self.assertAlmostEqual(smile, frame['inputs'][f'arkit.coefficient.mouthSmile{side}'], places=12)
+        funnel = sum(values[ue(f'LipFunnel{p}')] for p in ('UpperLeft', 'UpperRight', 'LowerLeft', 'LowerRight')) / 4
+        self.assertEqual(funnel, frame['inputs']['arkit.coefficient.mouthFunnel'])
 
     def test_viseme_rules_match_source_derived_vectors_and_drop_consonants(self):
         case, = (c for c in self.goldens['cases'] if c['mapping_kind'] == 'visemes_to_vrm')
