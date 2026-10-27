@@ -4,6 +4,7 @@
     {
       "claim": "Pinned survey/authoring baseline and provider presentation; historical parity reference.",
       "id": "rcsf_readme",
+      "license": "CC-BY-SA-4.0 (stated in the README)",
       "locator": "README sections",
       "retrieved": "2026-10-07",
       "revision": "f6c3ea8a00d4901496326b4a6fe6a24913a563c6",
@@ -14,6 +15,7 @@
     {
       "claim": "Pinned baseline checker provides table join and comparison behavior; no runtime evaluator claim.",
       "id": "rcsf_checker",
+      "license": "no file-level notice; the RCSF README states CC-BY-SA-4.0; cited, not copied",
       "locator": "join_csv.py",
       "retrieved": "2026-10-07",
       "revision": "f6c3ea8a00d4901496326b4a6fe6a24913a563c6",
@@ -46,6 +48,7 @@
     {
       "claim": "kBlendshapeNames contains 52 labels including _neutral and excluding tongueOut; scores returned without threshold filtering.",
       "id": "mediapipe",
+      "license": "Apache-2.0",
       "locator": "kBlendshapeNames; ConvertTensorToBlendshapes",
       "retrieved": "2026-10-07",
       "revision": "f6988c4769278bde600efd488dfc8645432dc92b",
@@ -89,7 +92,7 @@
     {
       "claim": "Exact FB63, FB2 70 and META15 identifiers and indices plus count sentinels and negotiation enums.",
       "id": "xr_registry",
-      "license": "source license retained; identifiers extracted as facts",
+      "license": "Apache-2.0 OR MIT (SPDX header of xr.xml); identifiers extracted as facts",
       "locator": "enums XrFaceExpressionFB, XrFaceExpression2FB, XrFaceTrackingVisemeMETA",
       "retrieved": "2026-10-07",
       "revision": "5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d",
@@ -133,6 +136,7 @@
     {
       "claim": "Artist tables contain 102 base and 42 blended names; component lists, unsupported footnotes and side/direction contradictions retained.",
       "id": "vrcft_artist",
+      "license": "documentation with no published license; reference only, source prose not redistributed",
       "locator": "#ue-base-shapes; #ue-blended-shapes; footnote 1",
       "retrieved": "2026-10-07",
       "revision": "retrieval-digest",
@@ -242,6 +246,7 @@
     {
       "claim": "Morph weight coefficients are not generally limited to 0..1; relative Basis and defaults are separate from tracked signals.",
       "id": "gltf_morph",
+      "license": "CC-BY-4.0 (SPDX header of Specification.adoc)",
       "locator": "#morph-targets; #applying-morph-targets",
       "retrieved": "2026-10-07",
       "revision": "8e691206fa2e981fc3b8c8bc57e671595576c971",
@@ -252,6 +257,7 @@
     {
       "claim": "127 publicly listed parameter rows: 124 numeric parameters and 3 activity flags; optional prefixes, units and compositions.",
       "id": "vrcft_parameters",
+      "license": "documentation with no published license; reference only, source prose not redistributed",
       "locator": "16 parameter tables; Tracking Active Parameters",
       "retrieved": "2026-10-07",
       "revision": "retrieval-digest",
@@ -262,6 +268,7 @@
     {
       "claim": "Float avatar parameter surface; documentation does not establish physical calibration equivalence.",
       "id": "vrcft_float",
+      "license": "documentation with no published license; reference only, source prose not redistributed",
       "locator": "Float Parameters",
       "retrieved": "2026-10-07",
       "revision": "retrieval-digest",
@@ -272,6 +279,7 @@
     {
       "claim": "Binary parameter encoding surface and sign parameter evidence; numeric transforms remain non-executable inventory.",
       "id": "vrcft_binary",
+      "license": "documentation with no published license; reference only, source prose not redistributed",
       "locator": "Binary Parameters",
       "retrieved": "2026-10-07",
       "revision": "retrieval-digest",

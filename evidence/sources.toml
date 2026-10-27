@@ -10,6 +10,7 @@ retrieved = "2026-10-07"
 sha256 = "a4726117f9de285a8ab66651b6e33f31195c67f55a9db72c028b3d60a6100ce1"
 locator = "README sections"
 revision = "f6c3ea8a00d4901496326b4a6fe6a24913a563c6"
+license = "CC-BY-SA-4.0 (stated in the README)"
 
 [[evidence]]
 id = "rcsf_checker"
@@ -20,6 +21,7 @@ retrieved = "2026-10-07"
 sha256 = "a49573c0d18a1bfc52d9f9f5cbff669c978295f11c442ba00fa2c359cab21e47"
 locator = "join_csv.py"
 revision = "f6c3ea8a00d4901496326b4a6fe6a24913a563c6"
+license = "no file-level notice; the RCSF README states CC-BY-SA-4.0; cited, not copied"
 
 [[evidence]]
 id = "apple_blendshapes"
@@ -52,6 +54,7 @@ retrieved = "2026-10-07"
 sha256 = "a3826ad2738315f1e046b36fd883825980e151db677e53d21ff35eaff64e4bd3"
 locator = "kBlendshapeNames; ConvertTensorToBlendshapes"
 revision = "f6988c4769278bde600efd488dfc8645432dc92b"
+license = "Apache-2.0"
 
 [[evidence]]
 id = "xr_fb"
@@ -95,7 +98,7 @@ retrieved = "2026-10-07"
 sha256 = "e9b6b0bb9e5100c56467ec80ae30b78ff36b4dcc8a332c269fa5e3e8429ed0aa"
 locator = "enums XrFaceExpressionFB, XrFaceExpression2FB, XrFaceTrackingVisemeMETA"
 revision = "5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d"
-license = "source license retained; identifiers extracted as facts"
+license = "Apache-2.0 OR MIT (SPDX header of xr.xml); identifiers extracted as facts"
 
 [[evidence]]
 id = "vrcft_enum"
@@ -139,6 +142,7 @@ retrieved = "2026-10-07"
 sha256 = "10f91ba8ed0c534139d3a1860b52f58978da80b401825896bfeb92af34c2a245"
 locator = "#ue-base-shapes; #ue-blended-shapes; footnote 1"
 revision = "retrieval-digest"
+license = "documentation with no published license; reference only, source prose not redistributed"
 
 [[evidence]]
 id = "godot_enum"
@@ -248,6 +252,7 @@ retrieved = "2026-10-07"
 sha256 = "c305d1b0ea93c7eb101059db09ae4687c56fe5388c6655cd9bf83d44b2932664"
 locator = "#morph-targets; #applying-morph-targets"
 revision = "8e691206fa2e981fc3b8c8bc57e671595576c971"
+license = "CC-BY-4.0 (SPDX header of Specification.adoc)"
 
 [[evidence]]
 id = "vrcft_parameters"
@@ -258,6 +263,7 @@ retrieved = "2026-10-07"
 sha256 = "1f0b92e5955ef08fd772da3624cc492cf2cd6a6242fd63a7452087abf86678c2"
 locator = "16 parameter tables; Tracking Active Parameters"
 revision = "retrieval-digest"
+license = "documentation with no published license; reference only, source prose not redistributed"
 
 [[evidence]]
 id = "vrcft_float"
@@ -268,6 +274,7 @@ retrieved = "2026-10-07"
 sha256 = "54b585f8f9170da70caa3a679fbe120ba76204fe406106130b61ccd3f742df5e"
 locator = "Float Parameters"
 revision = "retrieval-digest"
+license = "documentation with no published license; reference only, source prose not redistributed"
 
 [[evidence]]
 id = "vrcft_binary"
@@ -278,6 +285,7 @@ retrieved = "2026-10-07"
 sha256 = "9d8dae1b944d8cd877147800517a11ea9a7e2dd04344e63861df9248e4686c68"
 locator = "Binary Parameters"
 revision = "retrieval-digest"
+license = "documentation with no published license; reference only, source prose not redistributed"
 
 [[evidence]]
 id = "rcef_definitions"
