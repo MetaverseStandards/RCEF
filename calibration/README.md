@@ -59,6 +59,8 @@ A record can recompute its own hash, so the hash alone does not stop anyone re-r
 
 Lines are only ever added at the end, so dates never go backwards. Versions of an id start at `v1` and go up by one; every version after the first carries a reason of at least three words. `check.py` refuses a record unless its `version` is the latest in the ledger for its id and its frozen hash is the one recorded there. So changing anything frozen, a knot or a bound for example, needs a new ledger line with a reason, which is visible in review.
 
+Until its results exist, a record's frozen part is committed as `pending/<id>.cal` next to its ledger line; `check.py` reads only `*.cal` files directly in this folder, so a record without cells does not fail the checkout. The results commit moves it here and adds `cells`, changing nothing else.
+
 What this guarantees: the ledger line for a freeze is committed before the results, and Git history shows that it came first and that it never changed afterwards. It does not prove that nobody looked at held-out data before freezing, and `check.py` cannot see Git history; the order is checked in review. The metrics in `cells` are deliberately not hashed and are not self-proving: they are trusted only because they can be reproduced. The record pins everything needed to do that: the code commit, the input asset hashes, the renderer's source and binary hashes with its OS and GPU, and the seeds.
 
 ## Rules that cite a record
