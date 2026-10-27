@@ -160,6 +160,24 @@ class Fb2Oracles(unittest.TestCase):
         self.assertTrue(statuses['exact (moving)'])
         self.assertTrue(all(c['direct'] or c['translated'] for c in statuses['exact (moving)']))
 
+    def test_every_shape_has_a_frame_where_its_own_input_moves(self):
+        still = set(ict_facekit.SHAPES)
+        for frame, result in zip(self.frames, self.results):
+            still -= {c['target'] for c in face_pipeline.check_channels(self.translator, frame, result,
+                                                                       ict_facekit.SHAPES) if c['direct']}
+        self.assertEqual(still, set())
+
+    def test_dropping_either_side_of_an_averaged_rule_fails(self):
+        def drop(rule_id, side):
+            def change(rules):
+                rules[rule_id]['operator']['weights'][side] = 0.0
+            return change
+        for name in ('browInnerUp', 'cheekPuff'):
+            for side in (0, 1):
+                with self.subTest(name=name, side=side):
+                    rule_id = f'fb2_arkit.{name}'
+                    self.assertTrue(self.failing_frames_after(rule_id, drop(rule_id, side)))
+
     def test_halving_any_rule_fails(self):
         self.assertEqual(len(self.mapping_of), 14)
 

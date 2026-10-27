@@ -260,7 +260,7 @@ def write_report(out: Path, rows: list[dict], manifest: list[dict], targets: lis
     worst_exact = max((r['residual'] for r in rows if r['status'] == 'exact (moving)'), default=0.0)
     moving = {t: 0 for t in targets}
     for r in rows:
-        moving[r['target']] += bool(r['direct'] or r['translated'])
+        moving[r['target']] += bool(r['direct'])
     drives = {r['target']: (r['arkit'], r['fb2']) for r in rows}
     lines = ['# RCEF FB2 → ARKit on ICT-FaceKit: residual report', '', f'**{CAPTION}**', '',
              f'{len(manifest)} frames, {len(targets)} ICT-FaceKit shapes. Direct weights come from the Godot and VRCFT '
@@ -277,7 +277,8 @@ def write_report(out: Path, rows: list[dict], manifest: list[dict], targets: lis
     lines += ['', '"At rest in both paths" counts channels that are zero in both the direct and the translated '
               'weights. They cannot fail, so they are not counted as exact.', '',
               '## Frames in which each shape moves', '',
-              'A rule is only tested where its shape moves; every shape should move in some frame.', '',
+              'Frames in which the FB2 input that drives the shape directly is not zero. A rule is only tested '
+              'where its shape moves; every shape should move in some frame.', '',
               '| ICT-FaceKit shape | ARKit | FB2 (direct) | Frames moving |', '|---|---|---|---|']
     lines += [f'| {t} | {drives[t][0]} | {drives[t][1]} | {moving[t]} |' for t in targets]
     lines += ['', '## Per frame', '', '| Frame | Time | Segment | Max vertex difference | Bound | Oracles | Labels |',
