@@ -90,8 +90,13 @@ class ReadmeSources(unittest.TestCase):
             self.assertEqual(mapping_id.group(2), mapping_id.group(1).replace('.', ''))
             source, target = re.match(r'`([^`]+)` → `([^`]+)`', row[1]).groups()
             listed[mapping_id.group(1)] = (source, target, int(row[2]), row[3].split(' (')[0])
-        self.assertEqual(set(listed), {m['id'] for m in self.pack['mappings']})
-        for mapping in self.pack['mappings']:
+        # Synthetic test maps and unresolved maps are left out of the table.
+        fixture = self.members['fixture.source'] | self.members['fixture.target']
+        shown = [m for m in self.pack['mappings']
+                 if any(r['disposition'] == 'mapped' for r in m['rules'])
+                 and not {s for r in m['rules'] for s in r['inputs'] + r['outputs']} <= fixture]
+        self.assertEqual(set(listed), {m['id'] for m in shown})
+        for mapping in shown:
             with self.subTest(mapping=mapping['id']):
                 source, target, count, status = listed[mapping['id']]
                 rules = mapping['rules']

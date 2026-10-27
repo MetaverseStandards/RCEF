@@ -16,7 +16,7 @@ The Mappings table shows what translates to what; the Expression sets table belo
 
 ### Mappings
 
-How to read this: each row is one group of rules that turns values from the source set into the target set. `verified_current` means the rule restates a verified source fact (provider-to-canonical copies and RCEF's synthetic fixtures); `proposed` means a source-backed but approximate cross-provider translation that compiles only with the approximation opt-in; `unresolved` means recorded but not executable. Every rule, with its assumptions, losses and evidence, is in [reports/mappings.md](reports/mappings.md).
+How to read this: each row is one group of rules that turns values from the source set into the target set. `verified_current` means the rule restates a verified source fact (provider-to-canonical copies); `proposed` means a source-backed but approximate cross-provider translation that compiles only with the approximation opt-in. Every rule, with its assumptions, losses and evidence, is in [reports/mappings.md](reports/mappings.md). That report also lists the maps this table leaves out: RCEF's synthetic test maps (`fixture.affine`, `fixture.bilateral`) and `survey.ambiguous`, which is recorded but not executable.
 
 | Mapping | Source set → target set | Rules | Evidence status |
 |---|---|---|---|
@@ -30,9 +30,6 @@ How to read this: each row is one group of rules that turns values from the sour
 | [`arkit.to_vrcft_artist`](reports/mappings.md#arkitto_vrcft_artist) | `arkit.coefficient` → `vrcft.artist.base` | 68 | proposed |
 | [`fb2.to_vrm`](reports/mappings.md#fb2to_vrm) | `openxr.fb2` → `vrm.preset` | 2 | proposed |
 | [`visemes.to_vrm`](reports/mappings.md#visemesto_vrm) | `openxr.visemes` → `vrm.preset` | 5 | proposed |
-| [`fixture.affine`](reports/mappings.md#fixtureaffine) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
-| [`fixture.bilateral`](reports/mappings.md#fixturebilateral) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
-| [`survey.ambiguous`](reports/mappings.md#surveyambiguous) | `mediapipe.label` → `rcef.canonical` | 1 | unresolved (not executable) |
 
 Not translated yet, and why:
 
