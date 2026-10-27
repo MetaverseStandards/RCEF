@@ -15,9 +15,10 @@ it is set).
 - The VRM sample has the five vowel presets. RCEF's visemes.to_vrm rules
   translate the frames, and vrm_presets.py turns the presets into morph
   weights through the model's own binds ("translated"). The same binds driven
-  from the VRM preset names of the five vowels give "direct"; the two morph
-  weight vectors must agree within 1e-9. Consonants have no VRM preset and
-  are labelled as dropped.
+  through the vowel pairs scripts/derive_fb2_goldens.py read from the pinned
+  sources (tests/fixtures/fb2_goldens.json) give "direct", independent of
+  RCEF's rules; the two morph weight vectors must agree within 1e-9.
+  Consonants have no VRM preset and are labelled as dropped.
 """
 from __future__ import annotations
 import argparse
@@ -35,8 +36,12 @@ import vrm_presets
 
 HERE = Path(__file__).resolve().parent
 TOLERANCE = 1e-9
-# The VRM 1.0 preset table names the five vowel presets; META names the same vowels.
-VOWEL_PRESETS = {'AA': 'aa', 'E': 'ee', 'IH': 'ih', 'OH': 'oh', 'OU': 'ou'}
+GOLDENS = HERE.parent / 'tests/fixtures/fb2_goldens.json'
+
+
+def vowel_presets(path: Path = GOLDENS) -> dict[str, str]:
+    """META vowel -> VRM preset, as scripts/derive_fb2_goldens.py read them from the pinned VRM and META texts."""
+    return {p['viseme']: p['vrm'] for p in json.loads(path.read_text(encoding='utf-8'))['viseme_pairs']}
 CAPTION = ('Phoneme-label correspondence, not calibration: no published table maps META visemes to VRM presets, and '
            'each model authors its own shapes.')
 
@@ -86,6 +91,7 @@ def main(argv=None) -> int:
     if translated[0] is not None:
         translator.write(translated, out / 'visemes_to_vrm.csv')
     expressions = vrm_presets.presets(rig.snapshot.to_dict()['document']) if vrm else {}
+    pairs = vowel_presets()
     if not vrm and len(rig.visemes) != len(rigs.META_VISEME_ORDER):
         raise SystemExit(f'{rig.name}: expected a shape for each of the 15 META visemes')
     indices = rig.indices()
@@ -118,7 +124,7 @@ def main(argv=None) -> int:
         if vrm:
             valid = all(translator.valid(sid, frame['flags']) for sid in frame['values'])
             direct_w, _ = vrm_presets.morph_weights(
-                expressions, {VOWEL_PRESETS[v]: w for v, w in values.items() if v in VOWEL_PRESETS and valid})
+                expressions, {pairs[v]: w for v, w in values.items() if v in pairs and valid})
             translated_w, labels = vrm_presets.morph_weights(
                 expressions, {translator.short(sid): w for sid, w in result['values'].items()})
             difference = max_difference(direct_w, translated_w)

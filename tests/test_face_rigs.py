@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: MIT
 """Rig naming and the face pipeline's weight oracles on rigs with all 52 ARKit shapes (no mesh needed)."""
+import json
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 
 try:
@@ -15,6 +17,7 @@ import face_pipeline  # noqa: E402
 import ict_facekit  # noqa: E402
 import rcef_translate  # noqa: E402
 import rigs  # noqa: E402
+import viseme_pipeline  # noqa: E402
 import vrm_presets  # noqa: E402
 
 ARKIT_52 = list(face_pipeline.source_routes())
@@ -80,6 +83,16 @@ class VrmPresets(unittest.TestCase):
         _, labels = vrm_presets.morph_weights(self.EXPRESSIONS, {'happy': 0.2, 'lookUp': 0.3, 'oh': 0.1})
         self.assertEqual(labels, ['happy: overrideMouth not applied', 'lookUp: no morph target binds on this model',
                                   'oh: this model has no such expression'])
+
+
+class VowelPresets(unittest.TestCase):
+    def test_the_direct_vrm_path_reads_the_source_derived_pairs(self):
+        pairs = json.loads((ROOT / 'tests/fixtures/fb2_goldens.json').read_text(encoding='utf-8'))['viseme_pairs']
+        self.assertEqual(viseme_pipeline.vowel_presets(), {p['viseme']: p['vrm'] for p in pairs})
+        with tempfile.TemporaryDirectory(prefix='rcef-pairs-') as tmp:
+            path = Path(tmp) / 'goldens.json'
+            path.write_text(json.dumps({'viseme_pairs': [{'viseme': 'AA', 'vrm': 'oh'}]}), encoding='utf-8')
+            self.assertEqual(viseme_pipeline.vowel_presets(path), {'AA': 'oh'})
 
 
 class FullArkitRig(unittest.TestCase):
