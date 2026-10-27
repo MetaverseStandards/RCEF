@@ -1,0 +1,1731 @@
+{
+ "cases": [
+  {
+   "expected": {
+    "arkit.coefficient.browDownLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L272",
+    "godot_vendors_fb2:L311"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browDownLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L272",
+    "godot_vendors_fb2:L311"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browDownRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L270",
+    "godot_vendors_fb2:L310"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browDownRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L270",
+    "godot_vendors_fb2:L310"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browInnerUp": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB": 0.25,
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB": 0.75
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "vrcft_docs_arkit:L41",
+    "vrcft_code_parameters:L87",
+    "vrcft_code_parameters:L88",
+    "godot_face_modifier:L102",
+    "godot_vendors_fb2:L224",
+    "godot_face_modifier:L100",
+    "godot_vendors_fb2:L223"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browInnerUp": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB": 1.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB": 0.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "vrcft_docs_arkit:L41",
+    "vrcft_code_parameters:L87",
+    "vrcft_code_parameters:L88",
+    "godot_face_modifier:L102",
+    "godot_vendors_fb2:L224",
+    "godot_face_modifier:L100",
+    "godot_vendors_fb2:L223"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browInnerUp": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB": 0.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "vrcft_docs_arkit:L41",
+    "vrcft_code_parameters:L87",
+    "vrcft_code_parameters:L88",
+    "godot_face_modifier:L102",
+    "godot_vendors_fb2:L224",
+    "godot_face_modifier:L100",
+    "godot_vendors_fb2:L223"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browInnerUp": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB": 0.5,
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB": 0.5
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "vrcft_docs_arkit:L41",
+    "vrcft_code_parameters:L87",
+    "vrcft_code_parameters:L88",
+    "godot_face_modifier:L102",
+    "godot_vendors_fb2:L224",
+    "godot_face_modifier:L100",
+    "godot_vendors_fb2:L223"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browInnerUp": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB": 0.125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB": 0.875
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "vrcft_docs_arkit:L41",
+    "vrcft_code_parameters:L87",
+    "vrcft_code_parameters:L88",
+    "godot_face_modifier:L102",
+    "godot_vendors_fb2:L224",
+    "godot_face_modifier:L100",
+    "godot_vendors_fb2:L223"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browOuterUpLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L106",
+    "godot_vendors_fb2:L226"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browOuterUpLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L106",
+    "godot_vendors_fb2:L226"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browOuterUpRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L104",
+    "godot_vendors_fb2:L225"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.browOuterUpRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L104",
+    "godot_vendors_fb2:L225"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.cheekPuff": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB": 0.25,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB": 0.75
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L288",
+    "godot_vendors_fb2:L235",
+    "godot_vendors_fb2:L236",
+    "godot_vendors_fb2:L319"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.cheekPuff": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB": 1.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB": 0.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L288",
+    "godot_vendors_fb2:L235",
+    "godot_vendors_fb2:L236",
+    "godot_vendors_fb2:L319"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.cheekPuff": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB": 0.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L288",
+    "godot_vendors_fb2:L235",
+    "godot_vendors_fb2:L236",
+    "godot_vendors_fb2:L319"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.cheekPuff": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB": 0.5,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB": 0.5
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L288",
+    "godot_vendors_fb2:L235",
+    "godot_vendors_fb2:L236",
+    "godot_vendors_fb2:L319"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.cheekPuff": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB": 0.125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB": 0.875
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L288",
+    "godot_vendors_fb2:L235",
+    "godot_vendors_fb2:L236",
+    "godot_vendors_fb2:L319"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.cheekSquintLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L122",
+    "godot_vendors_fb2:L234"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.cheekSquintLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L122",
+    "godot_vendors_fb2:L234"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.cheekSquintRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L120",
+    "godot_vendors_fb2:L233"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.cheekSquintRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L120",
+    "godot_vendors_fb2:L233"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeBlinkLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L74",
+    "godot_vendors_fb2:L210"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeBlinkLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L74",
+    "godot_vendors_fb2:L210"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeBlinkRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L72",
+    "godot_vendors_fb2:L209"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeBlinkRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L72",
+    "godot_vendors_fb2:L209"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookDownLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L70",
+    "godot_vendors_fb2:L208"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookDownLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L70",
+    "godot_vendors_fb2:L208"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookDownRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L62",
+    "godot_vendors_fb2:L204"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookDownRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L62",
+    "godot_vendors_fb2:L204"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookInLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L66",
+    "godot_vendors_fb2:L206"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookInLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L66",
+    "godot_vendors_fb2:L206"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookInRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L58",
+    "godot_vendors_fb2:L202"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookInRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L58",
+    "godot_vendors_fb2:L202"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookOutLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L64",
+    "godot_vendors_fb2:L205"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookOutLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L64",
+    "godot_vendors_fb2:L205"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookOutRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L56",
+    "godot_vendors_fb2:L201"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookOutRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L56",
+    "godot_vendors_fb2:L201"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookUpLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L68",
+    "godot_vendors_fb2:L207"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookUpLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L68",
+    "godot_vendors_fb2:L207"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookUpRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L60",
+    "godot_vendors_fb2:L203"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeLookUpRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L60",
+    "godot_vendors_fb2:L203"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeSquintLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L78",
+    "godot_vendors_fb2:L212"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeSquintLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L78",
+    "godot_vendors_fb2:L212"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeSquintRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L76",
+    "godot_vendors_fb2:L211"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeSquintRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L76",
+    "godot_vendors_fb2:L211"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeWideLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L82",
+    "godot_vendors_fb2:L214"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeWideLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L82",
+    "godot_vendors_fb2:L214"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeWideRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L80",
+    "godot_vendors_fb2:L213"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.eyeWideRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L80",
+    "godot_vendors_fb2:L213"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.jawForward": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L140",
+    "godot_vendors_fb2:L243"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.jawForward": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L140",
+    "godot_vendors_fb2:L243"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.jawLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L138",
+    "godot_vendors_fb2:L242"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.jawLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L138",
+    "godot_vendors_fb2:L242"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.jawOpen": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L132",
+    "godot_vendors_fb2:L239"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.jawOpen": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L132",
+    "godot_vendors_fb2:L239"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.jawRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L136",
+    "godot_vendors_fb2:L241"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.jawRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L136",
+    "godot_vendors_fb2:L241"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthClose": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L134",
+    "godot_vendors_fb2:L240"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthClose": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L134",
+    "godot_vendors_fb2:L240"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthDimpleLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L214",
+    "godot_vendors_fb2:L280"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthDimpleLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L214",
+    "godot_vendors_fb2:L280"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthDimpleRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L212",
+    "godot_vendors_fb2:L279"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthDimpleRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L212",
+    "godot_vendors_fb2:L279"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthFrownLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L206",
+    "godot_vendors_fb2:L276"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthFrownLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L206",
+    "godot_vendors_fb2:L276"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthFrownRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L204",
+    "godot_vendors_fb2:L275"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthFrownRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L204",
+    "godot_vendors_fb2:L275"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L320",
+    "godot_vendors_fb2:L335"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L320",
+    "godot_vendors_fb2:L335"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthLowerDownLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L182",
+    "godot_vendors_fb2:L264"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthLowerDownLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L182",
+    "godot_vendors_fb2:L264"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthLowerDownRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L180",
+    "godot_vendors_fb2:L263"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthLowerDownRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L180",
+    "godot_vendors_fb2:L263"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthPressLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L222",
+    "godot_vendors_fb2:L284"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthPressLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L222",
+    "godot_vendors_fb2:L284"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthPressRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L220",
+    "godot_vendors_fb2:L283"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthPressRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L220",
+    "godot_vendors_fb2:L283"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthPucker": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB": 0.25,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB": 0.75
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L310",
+    "godot_vendors_fb2:L257",
+    "godot_vendors_fb2:L258",
+    "godot_vendors_fb2:L259",
+    "godot_vendors_fb2:L260",
+    "godot_vendors_fb2:L328",
+    "godot_vendors_fb2:L329",
+    "godot_vendors_fb2:L330"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthPucker": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB": 1.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB": 0.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L310",
+    "godot_vendors_fb2:L257",
+    "godot_vendors_fb2:L258",
+    "godot_vendors_fb2:L259",
+    "godot_vendors_fb2:L260",
+    "godot_vendors_fb2:L328",
+    "godot_vendors_fb2:L329",
+    "godot_vendors_fb2:L330"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthPucker": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB": 0.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L310",
+    "godot_vendors_fb2:L257",
+    "godot_vendors_fb2:L258",
+    "godot_vendors_fb2:L259",
+    "godot_vendors_fb2:L260",
+    "godot_vendors_fb2:L328",
+    "godot_vendors_fb2:L329",
+    "godot_vendors_fb2:L330"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthPucker": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB": 0.5,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB": 0.5
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L310",
+    "godot_vendors_fb2:L257",
+    "godot_vendors_fb2:L258",
+    "godot_vendors_fb2:L259",
+    "godot_vendors_fb2:L260",
+    "godot_vendors_fb2:L328",
+    "godot_vendors_fb2:L329",
+    "godot_vendors_fb2:L330"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthPucker": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB": 0.125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB": 0.875
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L310",
+    "godot_vendors_fb2:L257",
+    "godot_vendors_fb2:L258",
+    "godot_vendors_fb2:L259",
+    "godot_vendors_fb2:L260",
+    "godot_vendors_fb2:L328",
+    "godot_vendors_fb2:L329",
+    "godot_vendors_fb2:L330"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L318",
+    "godot_vendors_fb2:L334"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L318",
+    "godot_vendors_fb2:L334"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollLower": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB": 0.25,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB": 0.75
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L296",
+    "godot_vendors_fb2:L249",
+    "godot_vendors_fb2:L250",
+    "godot_vendors_fb2:L323"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollLower": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB": 1.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB": 0.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L296",
+    "godot_vendors_fb2:L249",
+    "godot_vendors_fb2:L250",
+    "godot_vendors_fb2:L323"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollLower": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB": 0.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L296",
+    "godot_vendors_fb2:L249",
+    "godot_vendors_fb2:L250",
+    "godot_vendors_fb2:L323"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollLower": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB": 0.5,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB": 0.5
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L296",
+    "godot_vendors_fb2:L249",
+    "godot_vendors_fb2:L250",
+    "godot_vendors_fb2:L323"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollLower": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB": 0.125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB": 0.875
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L296",
+    "godot_vendors_fb2:L249",
+    "godot_vendors_fb2:L250",
+    "godot_vendors_fb2:L323"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollUpper": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB": 0.25,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB": 0.75
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L294",
+    "godot_vendors_fb2:L247",
+    "godot_vendors_fb2:L248",
+    "godot_vendors_fb2:L322"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollUpper": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB": 1.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB": 0.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L294",
+    "godot_vendors_fb2:L247",
+    "godot_vendors_fb2:L248",
+    "godot_vendors_fb2:L322"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollUpper": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB": 0.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L294",
+    "godot_vendors_fb2:L247",
+    "godot_vendors_fb2:L248",
+    "godot_vendors_fb2:L322"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollUpper": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB": 0.5,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB": 0.5
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L294",
+    "godot_vendors_fb2:L247",
+    "godot_vendors_fb2:L248",
+    "godot_vendors_fb2:L322"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthRollUpper": 0.5
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB": 0.125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB": 0.875
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L294",
+    "godot_vendors_fb2:L247",
+    "godot_vendors_fb2:L248",
+    "godot_vendors_fb2:L322"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthShrugLower": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L218",
+    "godot_vendors_fb2:L282"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthShrugLower": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L218",
+    "godot_vendors_fb2:L282"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthShrugUpper": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L216",
+    "godot_vendors_fb2:L281"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthShrugUpper": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L216",
+    "godot_vendors_fb2:L281"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthSmileLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L324",
+    "godot_vendors_fb2:L337"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthSmileLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L324",
+    "godot_vendors_fb2:L337"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthSmileRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L322",
+    "godot_vendors_fb2:L336"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthSmileRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L322",
+    "godot_vendors_fb2:L336"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthStretchLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L210",
+    "godot_vendors_fb2:L278"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthStretchLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L210",
+    "godot_vendors_fb2:L278"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthStretchRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L208",
+    "godot_vendors_fb2:L277"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthStretchRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L208",
+    "godot_vendors_fb2:L277"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthUpperUpLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L178",
+    "godot_vendors_fb2:L262"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthUpperUpLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L178",
+    "godot_vendors_fb2:L262"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthUpperUpRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L176",
+    "godot_vendors_fb2:L261"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthUpperUpRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L176",
+    "godot_vendors_fb2:L261"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.noseSneerLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L110",
+    "godot_vendors_fb2:L228"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.noseSneerLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L110",
+    "godot_vendors_fb2:L228"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.noseSneerRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L108",
+    "godot_vendors_fb2:L227"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.noseSneerRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L108",
+    "godot_vendors_fb2:L227"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.tongueOut": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L228",
+    "godot_vendors_fb2:L287"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.tongueOut": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L228",
+    "godot_vendors_fb2:L287"
+   ]
+  },
+  {
+   "expected": {
+    "vrm.preset.aa": 0.25,
+    "vrm.preset.ee": 0.1875,
+    "vrm.preset.ih": 0.125,
+    "vrm.preset.oh": 0.0625,
+    "vrm.preset.ou": 0.03125
+   },
+   "inputs": {
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META": 0.25,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META": 0.0,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META": 0.0,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_E_META": 0.1875,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META": 0.0,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META": 0.125,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META": 0.0,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META": 0.0,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META": 0.0625,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META": 0.03125,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META": 0.0,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META": 0.0,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META": 0.0,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META": 0.34375,
+    "openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META": 0.0
+   },
+   "mapping_kind": "visemes_to_vrm",
+   "sources": [
+    "vrm_expressions:L163",
+    "xr_visemes:L212",
+    "vrm_expressions:L164",
+    "xr_visemes:L226",
+    "vrm_expressions:L165",
+    "xr_visemes:L240",
+    "vrm_expressions:L166",
+    "xr_visemes:L219",
+    "vrm_expressions:L167",
+    "xr_visemes:L233"
+   ]
+  }
+ ],
+ "generated_by": "scripts/derive_fb2_goldens.py",
+ "sources": {
+  "apple_blendshapes": "c7a074ab7e8b14bfe15d727a8a856a8bdf8f83cb84f1b08d0f8b4a2b458300e3",
+  "godot_face_modifier": "6b2c8305a0d8067f6a8f1e90544cbcab6895a0d0207b8a3c3e0ff4fe51db918d",
+  "godot_vendors_fb2": "fd53cd284527bc544ff51eb60ed1aef28fce0a5a22c0b9a74a28454f91d65789",
+  "vrcft_code_parameters": "f00131c515a8778cc1372aa79372eb3c1171cca46307c8d16b507ccdcf42c9eb",
+  "vrcft_docs_arkit": "fa0c5218c2d4350b605e189386e59960f45212beceef18ded56bae6357a2266d",
+  "vrm_expressions": "e1d27d4717de6625189d01abbe77c46550ac71d4f1caed7ed5dccad1a6ebd0c9",
+  "xr_visemes": "4d1f4ccf48364f0ff37bf68496ac939521dcb6fe64f797e8201b05e159f00678"
+ },
+ "viseme_pairs": [
+  {
+   "basis": "same name",
+   "sources": [
+    "vrm_expressions:L163",
+    "xr_visemes:L212"
+   ],
+   "viseme": "AA",
+   "vrm": "aa"
+  },
+  {
+   "basis": "same name",
+   "sources": [
+    "vrm_expressions:L164",
+    "xr_visemes:L226"
+   ],
+   "viseme": "IH",
+   "vrm": "ih"
+  },
+  {
+   "basis": "same name",
+   "sources": [
+    "vrm_expressions:L165",
+    "xr_visemes:L240"
+   ],
+   "viseme": "OU",
+   "vrm": "ou"
+  },
+  {
+   "basis": "VRM remark \"eh\" and META phoneme \"e\"",
+   "sources": [
+    "vrm_expressions:L166",
+    "xr_visemes:L219"
+   ],
+   "viseme": "E",
+   "vrm": "ee"
+  },
+  {
+   "basis": "same name",
+   "sources": [
+    "vrm_expressions:L167",
+    "xr_visemes:L233"
+   ],
+   "viseme": "OH",
+   "vrm": "oh"
+  }
+ ]
+}
