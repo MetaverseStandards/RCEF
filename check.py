@@ -33,12 +33,25 @@ def direct_url(dist: metadata.Distribution) -> dict:
     return json.loads(text) if text else {}
 
 
+def recorded_commits(dist: metadata.Distribution) -> tuple[str | None, str | None]:
+    """The commit in the package's own build record, and the commit a Git install's direct_url names."""
+    build = Path(dist.locate_file(BUILD_INFO))
+    built = json.loads(build.read_text(encoding='utf-8')).get('commit') if build.is_file() else None
+    return built, direct_url(dist).get('vcs_info', {}).get('commit_id')
+
+
+def commit_conflict(dist: metadata.Distribution) -> str | None:
+    built, vcs = recorded_commits(dist)
+    if built and vcs and built != vcs:
+        return (f'installed {DISTRIBUTION} has {BUILD_INFO} naming commit {built}, '
+                f'but its direct_url.json names commit {vcs}')
+    return None
+
+
 def installed_commit(dist: metadata.Distribution) -> str | None:
     """The source commit: from the package's own build record, else from a Git install's direct_url."""
-    build = Path(dist.locate_file(BUILD_INFO))
-    if build.is_file():
-        return json.loads(build.read_text(encoding='utf-8')).get('commit')
-    return direct_url(dist).get('vcs_info', {}).get('commit_id')
+    built, vcs = recorded_commits(dist)
+    return built or vcs
 
 
 def installed_tags(dist: metadata.Distribution) -> list[str]:
@@ -104,6 +117,8 @@ def wheel_file_sha256(dist: metadata.Distribution, wheel: Path) -> str:
 
 
 def lock_for(dist: metadata.Distribution, wheel: Path | None = None) -> dict:
+    if conflict := commit_conflict(dist):
+        raise ValueError(conflict)
     commit = installed_commit(dist)
     if not commit:
         raise ValueError(f'{DISTRIBUTION} records no source commit (no {BUILD_INFO} and no Git direct_url.json)')
@@ -140,7 +155,9 @@ def verify_installed(lock: dict, dist: metadata.Distribution) -> list[str]:
         return [f'the lock is format {lock.get("lock_version", 1)}, but this check.py reads format {LOCK_VERSION}']
     problems = []
     commit = installed_commit(dist)
-    if commit != lock['git_commit']:
+    if conflict := commit_conflict(dist):
+        problems.append(conflict)
+    elif commit != lock['git_commit']:
         problems.append(f"installed {DISTRIBUTION} is from commit {commit or '(none recorded)'}, "
                         f"but the lock requires {lock['git_commit']}")
     if dist.version != lock['package_version']:

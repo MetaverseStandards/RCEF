@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 """How RCEF finds and checks its msf-tools dependency."""
 import base64
+from copy import deepcopy
 import hashlib
 import importlib.util
 from importlib import metadata
@@ -204,7 +205,7 @@ class LockVerification(unittest.TestCase):
         self.assertEqual((lock['git_commit'], sorted(lock['wheels'])), (OTHER_COMMIT, [CP312]))
 
     def test_build_info_commit_is_the_source_commit_when_present(self):
-        site = fake_site(self.temp / 'built', LOCKED_COMMIT, build_info=OTHER_COMMIT)
+        site = fake_site(self.temp / 'built', None, build_info=OTHER_COMMIT, vcs=False)
         self.assertEqual(check.lock_for(distribution(site))['git_commit'], OTHER_COMMIT)
         problems = check.verify_installed(self.lock, distribution(site))
         self.assertTrue(any(OTHER_COMMIT in p for p in problems), problems)
@@ -212,6 +213,17 @@ class LockVerification(unittest.TestCase):
         lock = check.lock_for(distribution(plain))
         self.assertEqual(lock['git_commit'], LOCKED_COMMIT)
         self.assertEqual(check.verify_installed(lock, distribution(plain)), [])
+
+    def test_build_info_and_git_commits_that_disagree_are_refused(self):
+        site = fake_site(self.temp / 'both', OTHER_COMMIT, build_info=LOCKED_COMMIT)
+        lock = deepcopy(self.lock)
+        lock['wheels'][PURE]['files'] = check.recorded_files(distribution(site))
+        problems = check.verify_installed(lock, distribution(site))
+        self.assertEqual(len(problems), 1, problems)
+        self.assertIn(OTHER_COMMIT, problems[0])
+        self.assertIn('_build_info.json', problems[0])
+        with self.assertRaises(ValueError):
+            check.lock_for(distribution(site))
 
     def test_wheel_hash_is_recorded_and_checked_when_the_installer_knows_it(self):
         info = next(self.site.glob('*.dist-info'))
