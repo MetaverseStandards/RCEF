@@ -1,8 +1,8 @@
 {
   "disposition_counts": {
-    "excluded": 35,
+    "excluded": 36,
     "mapped": 222,
-    "unresolved": 630,
+    "unresolved": 681,
     "unsupported": 6
   },
   "dispositions": {
@@ -11,6 +11,7 @@
       "arkit.ancillary.init_rawValue",
       "godot.blended.FT_MAX",
       "mediapipe.label._neutral",
+      "mediapipe.score._neutral",
       "openxr.ancillary.XR_FACE_CONFIDENCE_LOWER_FACE_FB",
       "openxr.ancillary.XR_FACE_CONFIDENCE_UPPER_FACE_FB",
       "openxr.ancillary.XR_FACE_CONFIDENCE_COUNT_FB",
@@ -462,6 +463,57 @@
       "mediapipe.label.mouthUpperUpRight",
       "mediapipe.label.noseSneerLeft",
       "mediapipe.label.noseSneerRight",
+      "mediapipe.score.browDownLeft",
+      "mediapipe.score.browDownRight",
+      "mediapipe.score.browInnerUp",
+      "mediapipe.score.browOuterUpLeft",
+      "mediapipe.score.browOuterUpRight",
+      "mediapipe.score.cheekPuff",
+      "mediapipe.score.cheekSquintLeft",
+      "mediapipe.score.cheekSquintRight",
+      "mediapipe.score.eyeBlinkLeft",
+      "mediapipe.score.eyeBlinkRight",
+      "mediapipe.score.eyeLookDownLeft",
+      "mediapipe.score.eyeLookDownRight",
+      "mediapipe.score.eyeLookInLeft",
+      "mediapipe.score.eyeLookInRight",
+      "mediapipe.score.eyeLookOutLeft",
+      "mediapipe.score.eyeLookOutRight",
+      "mediapipe.score.eyeLookUpLeft",
+      "mediapipe.score.eyeLookUpRight",
+      "mediapipe.score.eyeSquintLeft",
+      "mediapipe.score.eyeSquintRight",
+      "mediapipe.score.eyeWideLeft",
+      "mediapipe.score.eyeWideRight",
+      "mediapipe.score.jawForward",
+      "mediapipe.score.jawLeft",
+      "mediapipe.score.jawOpen",
+      "mediapipe.score.jawRight",
+      "mediapipe.score.mouthClose",
+      "mediapipe.score.mouthDimpleLeft",
+      "mediapipe.score.mouthDimpleRight",
+      "mediapipe.score.mouthFrownLeft",
+      "mediapipe.score.mouthFrownRight",
+      "mediapipe.score.mouthFunnel",
+      "mediapipe.score.mouthLeft",
+      "mediapipe.score.mouthLowerDownLeft",
+      "mediapipe.score.mouthLowerDownRight",
+      "mediapipe.score.mouthPressLeft",
+      "mediapipe.score.mouthPressRight",
+      "mediapipe.score.mouthPucker",
+      "mediapipe.score.mouthRight",
+      "mediapipe.score.mouthRollLower",
+      "mediapipe.score.mouthRollUpper",
+      "mediapipe.score.mouthShrugLower",
+      "mediapipe.score.mouthShrugUpper",
+      "mediapipe.score.mouthSmileLeft",
+      "mediapipe.score.mouthSmileRight",
+      "mediapipe.score.mouthStretchLeft",
+      "mediapipe.score.mouthStretchRight",
+      "mediapipe.score.mouthUpperUpLeft",
+      "mediapipe.score.mouthUpperUpRight",
+      "mediapipe.score.noseSneerLeft",
+      "mediapipe.score.noseSneerRight",
       "openxr.fb.XR_FACE_EXPRESSION_BROW_LOWERER_L_FB",
       "openxr.fb.XR_FACE_EXPRESSION_BROW_LOWERER_R_FB",
       "openxr.fb.XR_FACE_EXPRESSION_CHEEK_PUFF_L_FB",
@@ -1231,7 +1283,8 @@
       "license": "Apache-2.0",
       "locator": "kBlendshapeNames; ConvertTensorToBlendshapes",
       "profile_ids": [
-        "mediapipe.label"
+        "mediapipe.label",
+        "mediapipe.score"
       ],
       "retrieved": "2026-10-07",
       "revision": "f6988c4769278bde600efd488dfc8645432dc92b",
@@ -1292,7 +1345,59 @@
         "mediapipe.label.mouthUpperUpRight",
         "mediapipe.label.noseSneerLeft",
         "mediapipe.label.noseSneerRight",
-        "mediapipe.label.tongueOut.absent"
+        "mediapipe.label.tongueOut.absent",
+        "mediapipe.score._neutral",
+        "mediapipe.score.browDownLeft",
+        "mediapipe.score.browDownRight",
+        "mediapipe.score.browInnerUp",
+        "mediapipe.score.browOuterUpLeft",
+        "mediapipe.score.browOuterUpRight",
+        "mediapipe.score.cheekPuff",
+        "mediapipe.score.cheekSquintLeft",
+        "mediapipe.score.cheekSquintRight",
+        "mediapipe.score.eyeBlinkLeft",
+        "mediapipe.score.eyeBlinkRight",
+        "mediapipe.score.eyeLookDownLeft",
+        "mediapipe.score.eyeLookDownRight",
+        "mediapipe.score.eyeLookInLeft",
+        "mediapipe.score.eyeLookInRight",
+        "mediapipe.score.eyeLookOutLeft",
+        "mediapipe.score.eyeLookOutRight",
+        "mediapipe.score.eyeLookUpLeft",
+        "mediapipe.score.eyeLookUpRight",
+        "mediapipe.score.eyeSquintLeft",
+        "mediapipe.score.eyeSquintRight",
+        "mediapipe.score.eyeWideLeft",
+        "mediapipe.score.eyeWideRight",
+        "mediapipe.score.jawForward",
+        "mediapipe.score.jawLeft",
+        "mediapipe.score.jawOpen",
+        "mediapipe.score.jawRight",
+        "mediapipe.score.mouthClose",
+        "mediapipe.score.mouthDimpleLeft",
+        "mediapipe.score.mouthDimpleRight",
+        "mediapipe.score.mouthFrownLeft",
+        "mediapipe.score.mouthFrownRight",
+        "mediapipe.score.mouthFunnel",
+        "mediapipe.score.mouthLeft",
+        "mediapipe.score.mouthLowerDownLeft",
+        "mediapipe.score.mouthLowerDownRight",
+        "mediapipe.score.mouthPressLeft",
+        "mediapipe.score.mouthPressRight",
+        "mediapipe.score.mouthPucker",
+        "mediapipe.score.mouthRight",
+        "mediapipe.score.mouthRollLower",
+        "mediapipe.score.mouthRollUpper",
+        "mediapipe.score.mouthShrugLower",
+        "mediapipe.score.mouthShrugUpper",
+        "mediapipe.score.mouthSmileLeft",
+        "mediapipe.score.mouthSmileRight",
+        "mediapipe.score.mouthStretchLeft",
+        "mediapipe.score.mouthStretchRight",
+        "mediapipe.score.mouthUpperUpLeft",
+        "mediapipe.score.mouthUpperUpRight",
+        "mediapipe.score.noseSneerLeft",
+        "mediapipe.score.noseSneerRight"
       ],
       "status": "verified_current",
       "url": "https://raw.githubusercontent.com/google-ai-edge/mediapipe/f6988c4769278bde600efd488dfc8645432dc92b/mediapipe/tasks/cc/vision/face_landmarker/face_blendshapes_graph.cc"
@@ -4203,6 +4308,87 @@
       "signal_ids": [],
       "status": "verified_current",
       "url": "https://raw.githubusercontent.com/benaclejames/VRCFaceTracking/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Expressions/UnifiedSimpleExpressions.cs"
+    },
+    {
+      "claim": "MediaPipe's Blendshape V2 model card: 52 blendshape coefficients in [0, 1] predicted from 146 FaceMesh landmarks; licensed under Apache License 2.0; trained on lab-captured multi-view reconstructions of human subjects with blendshapes transferred from an artist-designed canonical mesh.",
+      "id": "mediapipe_blendshape_card",
+      "license": "Apache-2.0",
+      "locator": "Model specifications (Output(s)); Licensed under; Factors and subgroups (Instrumentation, Environments); Appendix (list of predicted blendshapes)",
+      "profile_ids": [
+        "mediapipe.score"
+      ],
+      "retrieved": "2026-10-27",
+      "rule_ids": [],
+      "sha256": "c8e9cf60a39998f4b341740623917590e050d1c97004e2de4568d84e026445ae",
+      "signal_ids": [
+        "mediapipe.score._neutral",
+        "mediapipe.score.browDownLeft",
+        "mediapipe.score.browDownRight",
+        "mediapipe.score.browInnerUp",
+        "mediapipe.score.browOuterUpLeft",
+        "mediapipe.score.browOuterUpRight",
+        "mediapipe.score.cheekPuff",
+        "mediapipe.score.cheekSquintLeft",
+        "mediapipe.score.cheekSquintRight",
+        "mediapipe.score.eyeBlinkLeft",
+        "mediapipe.score.eyeBlinkRight",
+        "mediapipe.score.eyeLookDownLeft",
+        "mediapipe.score.eyeLookDownRight",
+        "mediapipe.score.eyeLookInLeft",
+        "mediapipe.score.eyeLookInRight",
+        "mediapipe.score.eyeLookOutLeft",
+        "mediapipe.score.eyeLookOutRight",
+        "mediapipe.score.eyeLookUpLeft",
+        "mediapipe.score.eyeLookUpRight",
+        "mediapipe.score.eyeSquintLeft",
+        "mediapipe.score.eyeSquintRight",
+        "mediapipe.score.eyeWideLeft",
+        "mediapipe.score.eyeWideRight",
+        "mediapipe.score.jawForward",
+        "mediapipe.score.jawLeft",
+        "mediapipe.score.jawOpen",
+        "mediapipe.score.jawRight",
+        "mediapipe.score.mouthClose",
+        "mediapipe.score.mouthDimpleLeft",
+        "mediapipe.score.mouthDimpleRight",
+        "mediapipe.score.mouthFrownLeft",
+        "mediapipe.score.mouthFrownRight",
+        "mediapipe.score.mouthFunnel",
+        "mediapipe.score.mouthLeft",
+        "mediapipe.score.mouthLowerDownLeft",
+        "mediapipe.score.mouthLowerDownRight",
+        "mediapipe.score.mouthPressLeft",
+        "mediapipe.score.mouthPressRight",
+        "mediapipe.score.mouthPucker",
+        "mediapipe.score.mouthRight",
+        "mediapipe.score.mouthRollLower",
+        "mediapipe.score.mouthRollUpper",
+        "mediapipe.score.mouthShrugLower",
+        "mediapipe.score.mouthShrugUpper",
+        "mediapipe.score.mouthSmileLeft",
+        "mediapipe.score.mouthSmileRight",
+        "mediapipe.score.mouthStretchLeft",
+        "mediapipe.score.mouthStretchRight",
+        "mediapipe.score.mouthUpperUpLeft",
+        "mediapipe.score.mouthUpperUpRight",
+        "mediapipe.score.noseSneerLeft",
+        "mediapipe.score.noseSneerRight"
+      ],
+      "status": "verified_current",
+      "url": "https://storage.googleapis.com/mediapipe-assets/Model%20Card%20Blendshape%20V2.pdf"
+    },
+    {
+      "claim": "MediaPipe Face Landmarker model bundle (float16, version 1), holding face_detector, face_landmarks_detector and face_blendshapes models.",
+      "id": "mediapipe_face_landmarker",
+      "license": "Apache-2.0",
+      "locator": "face_blendshapes.tflite in the bundle",
+      "profile_ids": [],
+      "retrieved": "2026-10-27",
+      "rule_ids": [],
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+      "signal_ids": [],
+      "status": "verified_current",
+      "url": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task"
     }
   ],
   "mapping_quality": {
@@ -4425,7 +4611,7 @@
     "approximate": 188,
     "exact": 22
   },
-  "pack_sha256": "75c5a91b1efe5f8ce9295806a9fcbed410212e33edd1b40f52b2638da8a547b0",
+  "pack_sha256": "0044a27b4dce891dfed5318f13f0b9eac0f716d24cf326d207c1055de0e009f1",
   "profiles": [
     {
       "count": 21,
@@ -5486,6 +5672,139 @@
         "mediapipe.label.noseSneerLeft",
         "mediapipe.label.noseSneerRight",
         "mediapipe.label.tongueOut.absent"
+      ]
+    },
+    {
+      "count": 52,
+      "disposition_counts": {
+        "excluded": 1,
+        "mapped": 0,
+        "unresolved": 51,
+        "unsupported": 0
+      },
+      "dispositions": {
+        "excluded": [
+          "mediapipe.score._neutral"
+        ],
+        "mapped": [],
+        "unresolved": [
+          "mediapipe.score.browDownLeft",
+          "mediapipe.score.browDownRight",
+          "mediapipe.score.browInnerUp",
+          "mediapipe.score.browOuterUpLeft",
+          "mediapipe.score.browOuterUpRight",
+          "mediapipe.score.cheekPuff",
+          "mediapipe.score.cheekSquintLeft",
+          "mediapipe.score.cheekSquintRight",
+          "mediapipe.score.eyeBlinkLeft",
+          "mediapipe.score.eyeBlinkRight",
+          "mediapipe.score.eyeLookDownLeft",
+          "mediapipe.score.eyeLookDownRight",
+          "mediapipe.score.eyeLookInLeft",
+          "mediapipe.score.eyeLookInRight",
+          "mediapipe.score.eyeLookOutLeft",
+          "mediapipe.score.eyeLookOutRight",
+          "mediapipe.score.eyeLookUpLeft",
+          "mediapipe.score.eyeLookUpRight",
+          "mediapipe.score.eyeSquintLeft",
+          "mediapipe.score.eyeSquintRight",
+          "mediapipe.score.eyeWideLeft",
+          "mediapipe.score.eyeWideRight",
+          "mediapipe.score.jawForward",
+          "mediapipe.score.jawLeft",
+          "mediapipe.score.jawOpen",
+          "mediapipe.score.jawRight",
+          "mediapipe.score.mouthClose",
+          "mediapipe.score.mouthDimpleLeft",
+          "mediapipe.score.mouthDimpleRight",
+          "mediapipe.score.mouthFrownLeft",
+          "mediapipe.score.mouthFrownRight",
+          "mediapipe.score.mouthFunnel",
+          "mediapipe.score.mouthLeft",
+          "mediapipe.score.mouthLowerDownLeft",
+          "mediapipe.score.mouthLowerDownRight",
+          "mediapipe.score.mouthPressLeft",
+          "mediapipe.score.mouthPressRight",
+          "mediapipe.score.mouthPucker",
+          "mediapipe.score.mouthRight",
+          "mediapipe.score.mouthRollLower",
+          "mediapipe.score.mouthRollUpper",
+          "mediapipe.score.mouthShrugLower",
+          "mediapipe.score.mouthShrugUpper",
+          "mediapipe.score.mouthSmileLeft",
+          "mediapipe.score.mouthSmileRight",
+          "mediapipe.score.mouthStretchLeft",
+          "mediapipe.score.mouthStretchRight",
+          "mediapipe.score.mouthUpperUpLeft",
+          "mediapipe.score.mouthUpperUpRight",
+          "mediapipe.score.noseSneerLeft",
+          "mediapipe.score.noseSneerRight"
+        ],
+        "unsupported": []
+      },
+      "id": "mediapipe.score",
+      "mapping_quality": {
+        "approximate": [],
+        "exact": []
+      },
+      "mapping_quality_counts": {
+        "approximate": 0,
+        "exact": 0
+      },
+      "metadata": {},
+      "signal_ids": [
+        "mediapipe.score._neutral",
+        "mediapipe.score.browDownLeft",
+        "mediapipe.score.browDownRight",
+        "mediapipe.score.browInnerUp",
+        "mediapipe.score.browOuterUpLeft",
+        "mediapipe.score.browOuterUpRight",
+        "mediapipe.score.cheekPuff",
+        "mediapipe.score.cheekSquintLeft",
+        "mediapipe.score.cheekSquintRight",
+        "mediapipe.score.eyeBlinkLeft",
+        "mediapipe.score.eyeBlinkRight",
+        "mediapipe.score.eyeLookDownLeft",
+        "mediapipe.score.eyeLookDownRight",
+        "mediapipe.score.eyeLookInLeft",
+        "mediapipe.score.eyeLookInRight",
+        "mediapipe.score.eyeLookOutLeft",
+        "mediapipe.score.eyeLookOutRight",
+        "mediapipe.score.eyeLookUpLeft",
+        "mediapipe.score.eyeLookUpRight",
+        "mediapipe.score.eyeSquintLeft",
+        "mediapipe.score.eyeSquintRight",
+        "mediapipe.score.eyeWideLeft",
+        "mediapipe.score.eyeWideRight",
+        "mediapipe.score.jawForward",
+        "mediapipe.score.jawLeft",
+        "mediapipe.score.jawOpen",
+        "mediapipe.score.jawRight",
+        "mediapipe.score.mouthClose",
+        "mediapipe.score.mouthDimpleLeft",
+        "mediapipe.score.mouthDimpleRight",
+        "mediapipe.score.mouthFrownLeft",
+        "mediapipe.score.mouthFrownRight",
+        "mediapipe.score.mouthFunnel",
+        "mediapipe.score.mouthLeft",
+        "mediapipe.score.mouthLowerDownLeft",
+        "mediapipe.score.mouthLowerDownRight",
+        "mediapipe.score.mouthPressLeft",
+        "mediapipe.score.mouthPressRight",
+        "mediapipe.score.mouthPucker",
+        "mediapipe.score.mouthRight",
+        "mediapipe.score.mouthRollLower",
+        "mediapipe.score.mouthRollUpper",
+        "mediapipe.score.mouthShrugLower",
+        "mediapipe.score.mouthShrugUpper",
+        "mediapipe.score.mouthSmileLeft",
+        "mediapipe.score.mouthSmileRight",
+        "mediapipe.score.mouthStretchLeft",
+        "mediapipe.score.mouthStretchRight",
+        "mediapipe.score.mouthUpperUpLeft",
+        "mediapipe.score.mouthUpperUpRight",
+        "mediapipe.score.noseSneerLeft",
+        "mediapipe.score.noseSneerRight"
       ]
     },
     {
@@ -19867,6 +20186,474 @@
     },
     {
       "disposition": "excluded",
+      "id": "mediapipe.score._neutral",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Reserved neutral model output; MediaPipe's own code directs ignoring it.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.browDownLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.browDownRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.browInnerUp",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.browOuterUpLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.browOuterUpRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.cheekPuff",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.cheekSquintLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.cheekSquintRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeBlinkLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeBlinkRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeLookDownLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeLookDownRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeLookInLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeLookInRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeLookOutLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeLookOutRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeLookUpLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeLookUpRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeSquintLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeSquintRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeWideLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.eyeWideRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.jawForward",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.jawLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.jawOpen",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.jawRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthClose",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthDimpleLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthDimpleRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthFrownLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthFrownRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthFunnel",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthLowerDownLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthLowerDownRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthPressLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthPressRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthPucker",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthRollLower",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthRollUpper",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthShrugLower",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthShrugUpper",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthSmileLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthSmileRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthStretchLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthStretchRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthUpperUpLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.mouthUpperUpRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.noseSneerLeft",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "unresolved",
+      "id": "mediapipe.score.noseSneerRight",
+      "profiles": [
+        "mediapipe.score"
+      ],
+      "reason": "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only.",
+      "rules": []
+    },
+    {
+      "disposition": "excluded",
       "id": "openxr.ancillary.XR_FACE_CONFIDENCE_LOWER_FACE_FB",
       "profiles": [
         "openxr.ancillary"
@@ -25769,9 +26556,9 @@
     }
   ],
   "totals": {
-    "evidence": 36,
-    "profiles": 22,
+    "evidence": 38,
+    "profiles": 23,
     "rules": 211,
-    "signals": 893
+    "signals": 945
   }
 }

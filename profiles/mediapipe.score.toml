@@ -1,0 +1,840 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+
+[[signals]]
+id = "mediapipe.score._neutral"
+label = "_neutral"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "excluded"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "_neutral"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 0, "reason" = "Reserved neutral model output; MediaPipe's own code directs ignoring it." }
+region = "other"
+
+[[signals]]
+id = "mediapipe.score.browDownLeft"
+label = "browDownLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "browDownLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 1, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.score.browDownRight"
+label = "browDownRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "browDownRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 2, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.score.browInnerUp"
+label = "browInnerUp"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "browInnerUp"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 3, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.score.browOuterUpLeft"
+label = "browOuterUpLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "browOuterUpLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 4, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.score.browOuterUpRight"
+label = "browOuterUpRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "browOuterUpRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 5, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "brow"
+
+[[signals]]
+id = "mediapipe.score.cheekPuff"
+label = "cheekPuff"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "cheekPuff"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 6, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "cheek"
+
+[[signals]]
+id = "mediapipe.score.cheekSquintLeft"
+label = "cheekSquintLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "cheekSquintLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 7, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "cheek"
+
+[[signals]]
+id = "mediapipe.score.cheekSquintRight"
+label = "cheekSquintRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "cheekSquintRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 8, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "cheek"
+
+[[signals]]
+id = "mediapipe.score.eyeBlinkLeft"
+label = "eyeBlinkLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeBlinkLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 9, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.score.eyeBlinkRight"
+label = "eyeBlinkRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeBlinkRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 10, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.score.eyeLookDownLeft"
+label = "eyeLookDownLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeLookDownLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 11, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.score.eyeLookDownRight"
+label = "eyeLookDownRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeLookDownRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 12, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.score.eyeLookInLeft"
+label = "eyeLookInLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeLookInLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 13, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.score.eyeLookInRight"
+label = "eyeLookInRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeLookInRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 14, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.score.eyeLookOutLeft"
+label = "eyeLookOutLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeLookOutLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 15, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.score.eyeLookOutRight"
+label = "eyeLookOutRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeLookOutRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 16, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.score.eyeLookUpLeft"
+label = "eyeLookUpLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeLookUpLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 17, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.score.eyeLookUpRight"
+label = "eyeLookUpRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeLookUpRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 18, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "gaze"
+
+[[signals]]
+id = "mediapipe.score.eyeSquintLeft"
+label = "eyeSquintLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeSquintLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 19, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.score.eyeSquintRight"
+label = "eyeSquintRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeSquintRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 20, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.score.eyeWideLeft"
+label = "eyeWideLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeWideLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 21, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.score.eyeWideRight"
+label = "eyeWideRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "eyeWideRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 22, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "eyelid"
+
+[[signals]]
+id = "mediapipe.score.jawForward"
+label = "jawForward"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "jawForward"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 23, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "jaw"
+
+[[signals]]
+id = "mediapipe.score.jawLeft"
+label = "jawLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "jawLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 24, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "jaw"
+
+[[signals]]
+id = "mediapipe.score.jawOpen"
+label = "jawOpen"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "jawOpen"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 25, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "jaw"
+
+[[signals]]
+id = "mediapipe.score.jawRight"
+label = "jawRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "jawRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 26, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "jaw"
+
+[[signals]]
+id = "mediapipe.score.mouthClose"
+label = "mouthClose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthClose"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 27, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthDimpleLeft"
+label = "mouthDimpleLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthDimpleLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 28, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthDimpleRight"
+label = "mouthDimpleRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthDimpleRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 29, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthFrownLeft"
+label = "mouthFrownLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthFrownLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 30, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthFrownRight"
+label = "mouthFrownRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthFrownRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 31, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthFunnel"
+label = "mouthFunnel"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthFunnel"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 32, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthLeft"
+label = "mouthLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 33, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthLowerDownLeft"
+label = "mouthLowerDownLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthLowerDownLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 34, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthLowerDownRight"
+label = "mouthLowerDownRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthLowerDownRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 35, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthPressLeft"
+label = "mouthPressLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthPressLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 36, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthPressRight"
+label = "mouthPressRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthPressRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 37, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthPucker"
+label = "mouthPucker"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthPucker"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 38, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthRight"
+label = "mouthRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 39, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthRollLower"
+label = "mouthRollLower"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthRollLower"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 40, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthRollUpper"
+label = "mouthRollUpper"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthRollUpper"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 41, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthShrugLower"
+label = "mouthShrugLower"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthShrugLower"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 42, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthShrugUpper"
+label = "mouthShrugUpper"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthShrugUpper"
+surface = "mediapipe.score"
+side = "shared"
+metadata = { "inventory_ordinal" = 43, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthSmileLeft"
+label = "mouthSmileLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthSmileLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 44, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthSmileRight"
+label = "mouthSmileRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthSmileRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 45, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthStretchLeft"
+label = "mouthStretchLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthStretchLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 46, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthStretchRight"
+label = "mouthStretchRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthStretchRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 47, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthUpperUpLeft"
+label = "mouthUpperUpLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthUpperUpLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 48, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.mouthUpperUpRight"
+label = "mouthUpperUpRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "mouthUpperUpRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 49, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "mouth"
+
+[[signals]]
+id = "mediapipe.score.noseSneerLeft"
+label = "noseSneerLeft"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "noseSneerLeft"
+surface = "mediapipe.score"
+side = "left"
+metadata = { "inventory_ordinal" = 50, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "nose"
+
+[[signals]]
+id = "mediapipe.score.noseSneerRight"
+label = "noseSneerRight"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "mediapipe.score.v1: Face Landmarker blendshape score in [0, 1], the model's output; no provider calibration"
+disposition = "unresolved"
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
+evidence_status = "verified_current"
+native_id = "noseSneerRight"
+surface = "mediapipe.score"
+side = "right"
+metadata = { "inventory_ordinal" = 51, "reason" = "Model output score; how it relates to an ARKit coefficient is what a calibration record measures, for renders only." }
+region = "nose"
+
+[[profiles]]
+id = "mediapipe.score"
+label = "MediaPipe Face Landmarker blendshape scores, as numbers in [0, 1]"
+signal_ids = ["mediapipe.score._neutral", "mediapipe.score.browDownLeft", "mediapipe.score.browDownRight", "mediapipe.score.browInnerUp", "mediapipe.score.browOuterUpLeft", "mediapipe.score.browOuterUpRight", "mediapipe.score.cheekPuff", "mediapipe.score.cheekSquintLeft", "mediapipe.score.cheekSquintRight", "mediapipe.score.eyeBlinkLeft", "mediapipe.score.eyeBlinkRight", "mediapipe.score.eyeLookDownLeft", "mediapipe.score.eyeLookDownRight", "mediapipe.score.eyeLookInLeft", "mediapipe.score.eyeLookInRight", "mediapipe.score.eyeLookOutLeft", "mediapipe.score.eyeLookOutRight", "mediapipe.score.eyeLookUpLeft", "mediapipe.score.eyeLookUpRight", "mediapipe.score.eyeSquintLeft", "mediapipe.score.eyeSquintRight", "mediapipe.score.eyeWideLeft", "mediapipe.score.eyeWideRight", "mediapipe.score.jawForward", "mediapipe.score.jawLeft", "mediapipe.score.jawOpen", "mediapipe.score.jawRight", "mediapipe.score.mouthClose", "mediapipe.score.mouthDimpleLeft", "mediapipe.score.mouthDimpleRight", "mediapipe.score.mouthFrownLeft", "mediapipe.score.mouthFrownRight", "mediapipe.score.mouthFunnel", "mediapipe.score.mouthLeft", "mediapipe.score.mouthLowerDownLeft", "mediapipe.score.mouthLowerDownRight", "mediapipe.score.mouthPressLeft", "mediapipe.score.mouthPressRight", "mediapipe.score.mouthPucker", "mediapipe.score.mouthRight", "mediapipe.score.mouthRollLower", "mediapipe.score.mouthRollUpper", "mediapipe.score.mouthShrugLower", "mediapipe.score.mouthShrugUpper", "mediapipe.score.mouthSmileLeft", "mediapipe.score.mouthSmileRight", "mediapipe.score.mouthStretchLeft", "mediapipe.score.mouthStretchRight", "mediapipe.score.mouthUpperUpLeft", "mediapipe.score.mouthUpperUpRight", "mediapipe.score.noseSneerLeft", "mediapipe.score.noseSneerRight"]
+evidence = ["mediapipe", "mediapipe_blendshape_card"]
