@@ -26,9 +26,9 @@
       "id": "apple_blendshapes",
       "license": "reference only; source prose not redistributed",
       "locator": "topicSections except initializer; Discussion",
-      "retrieved": "2026-10-07",
+      "retrieved": "2026-10-26",
       "revision": "retrieval-digest",
-      "sha256": "50691c512eedecaa3e54b73f313816409ff47b8b1bd3628460ca2c096903009b",
+      "sha256": "c7a074ab7e8b14bfe15d727a8a856a8bdf8f83cb84f1b08d0f8b4a2b458300e3",
       "status": "verified_current",
       "url": "https://developer.apple.com/tutorials/data/documentation/arkit/arfaceanchor/blendshapelocation.json"
     },
@@ -37,9 +37,9 @@
       "id": "apple_eye",
       "license": "reference only; source prose not redistributed",
       "locator": "declarations and Discussion",
-      "retrieved": "2026-10-07",
+      "retrieved": "2026-10-26",
       "revision": "retrieval-digest",
-      "sha256": "74d13ebf8d550d9052e6d0f051c763d72b5c8e32ec2ce325a725271964cb918e",
+      "sha256": "637d94fc9a384aaadd68c5f4e6a3c3e1d2837fb09b1b0a6dfb2471546b7c37e0",
       "status": "verified_current",
       "url": "https://developer.apple.com/tutorials/data/documentation/arkit/arfaceanchor/lefteyetransform.json"
     },
@@ -286,6 +286,94 @@
       "license": "CC-BY-SA-4.0",
       "locator": "data/canonical.toml; fixtures/mapping_samples.json",
       "status": "verified_current"
+    },
+    {
+      "claim": "VRCFT documentation table relating Unified Expressions shapes to ARKit coefficients by name.",
+      "id": "vrcft_docs_arkit",
+      "license": "reference only; source prose not redistributed",
+      "locator": "ARKit Comparison table",
+      "retrieved": "2026-10-26",
+      "revision": "3036f4668322f2364a918a885dc3a72c828359f3",
+      "sha256": "fa0c5218c2d4350b605e189386e59960f45212beceef18ded56bae6357a2266d",
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/compatibility/arkit.mdx"
+    },
+    {
+      "claim": "VRCFT documentation table relating Unified Expressions shapes to Meta Movement (FB2) weights by name; contains known side and spelling errors.",
+      "id": "vrcft_docs_movement",
+      "license": "reference only; source prose not redistributed",
+      "locator": "Meta Movement comparison table",
+      "retrieved": "2026-10-26",
+      "revision": "3036f4668322f2364a918a885dc3a72c828359f3",
+      "sha256": "d20c3f2e4c02eeb702137e87ceeab007b3b00ea960527747616ad61a3d3f603a",
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/compatibility/meta-movement.mdx"
+    },
+    {
+      "claim": "VRCFT overview table across Unified Expressions, ARKit, SRanipal and Meta Movement; bold rows are blended shapes; SRanipal mouth closure negates jaw open.",
+      "id": "vrcft_docs_overview",
+      "license": "reference only; source prose not redistributed",
+      "locator": "Standard Comparison Table; legend",
+      "retrieved": "2026-10-26",
+      "revision": "3036f4668322f2364a918a885dc3a72c828359f3",
+      "sha256": "1b0044b39e4a1b44dca46678ad3c34464f76a3b2fa086ba72e417ce4eafae80b",
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/compatibility/overview.mdx"
+    },
+    {
+      "claim": "Unified Expressions shape descriptions; MouthClosed closes the mouth in relation to JawOpen.",
+      "id": "vrcft_docs_shapes",
+      "license": "reference only; source prose not redistributed",
+      "locator": "MouthClosed row",
+      "retrieved": "2026-10-26",
+      "revision": "3036f4668322f2364a918a885dc3a72c828359f3",
+      "sha256": "208dce0a6bfdb9e5139de3933c26b0a4f0a5cefb9030d60023f17024cabc2dcb",
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/_unified-shape-table.mdx"
+    },
+    {
+      "claim": "VRCFaceTracking computes the combined brow-inner and cheek-puff parameters as the mean of the left and right shapes.",
+      "id": "vrcft_code_parameters",
+      "license": "Apache-2.0",
+      "locator": "v2/BrowInnerUp; v2/CheekPuffSuck",
+      "retrieved": "2026-10-26",
+      "revision": "6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35",
+      "sha256": "f00131c515a8778cc1372aa79372eb3c1171cca46307c8d16b507ccdcf42c9eb",
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/benaclejames/VRCFaceTracking/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Expressions/UnifiedExpressionsParameters.cs"
+    },
+    {
+      "claim": "Godot OpenXR vendors plugin maps FB2 weights to Godot face-tracker shapes, directly or as the mean of two shapes.",
+      "id": "godot_vendors_fb2",
+      "license": "MIT",
+      "locator": "average(); weight mapping block",
+      "retrieved": "2026-10-26",
+      "revision": "b0654f162448ddf1519eb2826b5b69dda10900b9",
+      "sha256": "fd53cd284527bc544ff51eb60ed1aef28fce0a5a22c0b9a74a28454f91d65789",
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/GodotVR/godot_openxr_vendors/b0654f162448ddf1519eb2826b5b69dda10900b9/plugin/src/main/cpp/extensions/openxr_fb_face_tracking_extension.cpp"
+    },
+    {
+      "claim": "Godot blend-shape name table relating face-tracker shapes to Unified Expressions, ARKit, SRanipal and Meta names.",
+      "id": "godot_face_modifier",
+      "license": "MIT",
+      "locator": "find_face_blend_shape blend_map",
+      "retrieved": "2026-10-26",
+      "revision": "e7b12e749220a75ef87e800e080bd2732ad46854",
+      "sha256": "6b2c8305a0d8067f6a8f1e90544cbcab6895a0d0207b8a3c3e0ff4fe51db918d",
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/e7b12e749220a75ef87e800e080bd2732ad46854/scene/3d/xr/xr_face_modifier_3d.cpp"
+    },
+    {
+      "claim": "ICT-FaceKit relates FACS action units to ARKit-named shapes, with brow-inner and cheek-puff split per side.",
+      "id": "ict_facekit",
+      "license": "MIT",
+      "locator": "FACS unit table",
+      "retrieved": "2026-10-26",
+      "revision": "da5f95a607f5e6b37755b38d3385d7f2853732e5",
+      "sha256": "614116987854431bbdadbf7772f7352edeeca55580f62021dccb78aaf76febf6",
+      "status": "verified_current",
+      "url": "https://raw.githubusercontent.com/USC-ICT/ICT-FaceKit/da5f95a607f5e6b37755b38d3385d7f2853732e5/README.md"
     }
   ],
   "id": "rcef.parity",
