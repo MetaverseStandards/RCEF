@@ -4,7 +4,7 @@
 
 ## Build
 
-macOS with the Xcode command line tools (Swift 5.9 or later; SceneKit and Metal are part of macOS):
+macOS with the Xcode command line tools (SceneKit and Metal are part of macOS; last built with Apple Swift 6.3.3 on macOS 27):
 
 ```sh
 swiftc -O -o meshrender tools/render/meshrender.swift
