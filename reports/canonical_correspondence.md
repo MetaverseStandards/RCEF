@@ -1,8 +1,8 @@
 # RCEF canonical correspondences
 
-Pack: rcef.parity; data version: 0.3.0.
+Pack: rcef.parity; data version: 0.4.0.
 
-Generated from rcef.pack.json; SHA-256: 75c5a91b1efe5f8ce9295806a9fcbed410212e33edd1b40f52b2638da8a547b0.
+Generated from rcef.pack.json; SHA-256: 57905b94936eb52f339a3bb5bf13daa6c148b1ba801373ae1a7f33ec3dab52ef.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
 

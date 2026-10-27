@@ -56,9 +56,14 @@ class Goldens(unittest.TestCase):
             with self.subTest(kind):
                 self.assertEqual(len(frames), 2)
                 for frame in frames:
-                    values = list(frame['inputs'].values())
+                    # FB2 allows only one of two opposing gaze directions to be non-zero, so
+                    # the inverse frames leave one ARKit direction of each pair at zero.
+                    values = [v for v in frame['inputs'].values() if v or kind != 'arkit_to_fb2']
                     self.assertEqual(len(set(values)), len(values))
                     self.assertTrue(all(0 < v < 1 for v in values))
+                at_rest = [{k for k, v in f['inputs'].items() if not v} for f in frames]
+                self.assertEqual(len(at_rest[0]), 4 if kind == 'arkit_to_fb2' else 0)
+                self.assertFalse(at_rest[0] & at_rest[1], 'every input moves in one of the frames')
 
 
 if __name__ == '__main__':

@@ -42,6 +42,8 @@ def halve(rules):
         operator = rule['operator']
         if operator['id'] == 'affine':
             operator['scale'] *= 0.5
+        elif operator['id'] == 'piecewise_linear':
+            operator['knots'] = [[x, y * 0.5] for x, y in operator['knots']]
         else:
             operator['weights'] = [w * 0.5 for w in operator['weights']]
 
@@ -58,10 +60,14 @@ class Translations(unittest.TestCase):
         return next(m['rules'] for m in self.document['mappings'] if m['id'] == mapping)
 
     def inputs(self, mapping):
-        return {i for rule in self.rules(mapping) for i in rule['inputs']}
+        """The mapping's source signals, not values it computes for itself."""
+        written = {o for rule in self.rules(mapping) for o in rule['outputs']}
+        return {i for rule in self.rules(mapping) for i in rule['inputs']} - written
 
     def outputs(self, mapping):
-        return {o for rule in self.rules(mapping) for o in rule['outputs']}
+        """The mapping's target signals, not values it computes on the way."""
+        read = {i for rule in self.rules(mapping) for i in rule['inputs']}
+        return {o for rule in self.rules(mapping) for o in rule['outputs']} - read
 
     def run_frame(self, mapping, values, validity=None):
         frame = {'timestamp': 0.0, 'values': values,
@@ -222,12 +228,28 @@ class Translations(unittest.TestCase):
                 arkit.update(values)
             self.assertEqual(arkit, frame['inputs'])
 
-    def test_inverse_gaze_declares_that_fb2_exclusivity_cannot_be_enforced(self):
-        rules = self.rules('arkit_gaze.to_fb2')
-        self.assertEqual(len(rules), 8)
-        for rule in rules:
+    def test_inverse_gaze_never_sets_both_opposing_fb2_directions(self):
+        # FB2 allows only one of two opposing gaze directions to be non-zero
+        # (xr_fb2 lines 648-649). Each pair comes from one signed difference split
+        # into its two sides, so when ARKit sets both directions only the net is kept.
+        fb2 = 'openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_{}_{}_FB'.format
+        ak = 'arkit.coefficient.eyeLook{}{}'.format
+        pairs = [(ak('In', 'Left'), ak('Out', 'Left'), fb2('RIGHT', 'L'), fb2('LEFT', 'L')),
+                 (ak('In', 'Right'), ak('Out', 'Right'), fb2('LEFT', 'R'), fb2('RIGHT', 'R')),
+                 (ak('Up', 'Left'), ak('Down', 'Left'), fb2('UP', 'L'), fb2('DOWN', 'L')),
+                 (ak('Up', 'Right'), ak('Down', 'Right'), fb2('UP', 'R'), fb2('DOWN', 'R'))]
+        steps = [k / 8 for k in range(9)]
+        frames = [{a: x, b: y} for a, b, _, _ in pairs for x in steps for y in steps]
+        for frame, values in zip(frames, self.evaluate('arkit_gaze.to_fb2', frames)):
+            for a, b, toward_a, toward_b in pairs:
+                if a in frame:
+                    with self.subTest(frame=frame):
+                        self.assertFalse(values[toward_a] and values[toward_b])
+                        self.assertEqual((values[toward_a], values[toward_b]),
+                                         (max(frame[a] - frame[b], 0.0), max(frame[b] - frame[a], 0.0)))
+        for rule in self.rules('arkit_gaze.to_fb2'):
             with self.subTest(rule['id']):
-                self.assertTrue(any('exclusive' in loss['reason'] and 'operator gap' in loss['reason']
+                self.assertTrue(any('only their difference is kept' in loss['reason']
                                     for loss in rule['loss_annotations']))
         self.assertFalse(self.inputs('arkit_gaze.to_fb2') & self.inputs('arkit.to_fb2'))
 
@@ -264,7 +286,16 @@ class Translations(unittest.TestCase):
                 signals = rule['inputs'] + rule['outputs']
                 fb2 = {re.sub(r'^openxr\.fb2\.XR_FACE_EXPRESSION2_|_FB$', '', sid) for sid in signals
                        if sid.startswith('openxr.fb2.')}
-                arkit, = {sid.rsplit('.', 1)[1] for sid in signals if sid.startswith('arkit.coefficient.')}
+                arkit = {sid.rsplit('.', 1)[1] for sid in signals if sid.startswith('arkit.coefficient.')}
+                if not arkit:
+                    # A split of a computed difference: its ARKit direction is the
+                    # difference's first input on the rising side, the second on the falling side.
+                    maker = next(r for r in self.rules(mapping) if r['outputs'] == rule['inputs'])
+                    rising = rule['operator']['knots'][-1][1] > rule['operator']['knots'][0][1]
+                    arkit = {maker['inputs'][0 if rising else 1].rsplit('.', 1)[1]}
+                if not fb2:
+                    continue
+                arkit, = arkit
                 with self.subTest(rule=rule['id']):
                     if 'vrcft_docs_movement' in rule['evidence']:
                         self.assertLessEqual(fb2, set(labels['vrcft_docs_movement']))

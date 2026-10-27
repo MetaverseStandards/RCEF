@@ -8,7 +8,7 @@ Selected inventories: ARKit 52, MediaPipe 52, OpenXR FB 63 and FB2 70, optional 
 
 The canonical subset has 21 explicitly provider-calibrated scalar projections spanning blink, jaw, brow, directional gaze and physical pupil diameter. Executable identities preserve the stated provider basis. General calibration ambiguity is unresolved. Original affine and lossy bilateral fixtures demonstrate the shared runtime without claiming visual equivalence.
 
-Data 0.3.0 has 187 cross-provider rules: FB2 to all 52 ARKit coefficients and back (face and, separately, gaze), ARKit to VRCFaceTracking Unified Expressions, FB2 eye closure to VRM per-eye blinks, and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
+Data 0.4.0 has 191 cross-provider rules: FB2 to all 52 ARKit coefficients and back (face and, separately, gaze), ARKit to VRCFaceTracking Unified Expressions, FB2 eye closure to VRM per-eye blinks, and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
 
 ## Expression sets and where they come from
 
@@ -26,7 +26,7 @@ How to read this: each row is one group of rules that turns values from the sour
 | [`fb2.to_arkit`](reports/mappings.md#fb2to_arkit) | `openxr.fb2` → `arkit.coefficient` | 44 | proposed |
 | [`fb2_gaze.to_arkit`](reports/mappings.md#fb2_gazeto_arkit) | `openxr.fb2` → `arkit.coefficient` | 8 | proposed |
 | [`arkit.to_fb2`](reports/mappings.md#arkitto_fb2) | `arkit.coefficient` → `openxr.fb2` | 52 | proposed |
-| [`arkit_gaze.to_fb2`](reports/mappings.md#arkit_gazeto_fb2) | `arkit.coefficient` → `openxr.fb2` | 8 | proposed |
+| [`arkit_gaze.to_fb2`](reports/mappings.md#arkit_gazeto_fb2) | `arkit.coefficient` → `openxr.fb2` | 12 | proposed |
 | [`arkit.to_vrcft_artist`](reports/mappings.md#arkitto_vrcft_artist) | `arkit.coefficient` → `vrcft.artist.base` | 68 | proposed |
 | [`fb2.to_vrm`](reports/mappings.md#fb2to_vrm) | `openxr.fb2` → `vrm.preset` | 2 | proposed |
 | [`visemes.to_vrm`](reports/mappings.md#visemesto_vrm) | `openxr.visemes` → `vrm.preset` | 5 | proposed |
@@ -70,7 +70,7 @@ How to read this: start with the Role column. Source and target sets have execut
 
 The Signals column counts every inventory row, including count sentinels and rows recorded as absent, so it can be higher than the counts in Contents above: FB2 has 70 weights plus `COUNT` (71), FB has 63 plus `COUNT` and an absent tongue row (65), the VRCFT transport enum has 88 plus `Max` (89), and MediaPipe has its 52 labels plus an absent `tongueOut` row (53).
 
-RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.toml](data/canonical.toml); it is the target of the three `*.to_canonical` mappings.
+RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.toml](data/canonical.toml); it is the target of the three `*.to_canonical` mappings. RCEF's intermediate values, `rcef.intermediate` (4 signals), are in [data/intermediate.toml](data/intermediate.toml): each is the signed difference of two opposing ARKit gaze directions, computed inside `arkit_gaze.to_fb2` and never read or written by a provider.
 
 ¹ Apple's documentation pages build their content with JavaScript; without it the page is an empty shell. The pinned source is Apple's JSON data for the same page.
 
