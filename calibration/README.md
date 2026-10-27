@@ -2,11 +2,15 @@
 
 Each file here records one software-only calibration fit: how it was made, from what, the bounds it had to meet, and how it did on data it was not fitted to. A rule whose curve comes from a fit cites the record, and `check.py` refuses the checkout unless that rule's knots are exactly the record's frozen knots and every held-out cell for its channel passed.
 
-No record is published yet. The format is exercised by the test fixtures in [tests/fixtures/calibration/](../tests/fixtures/calibration/), whose numbers are invented.
+Records:
+
+- [mediapipe.ict-response](mediapipe.ict-response.cal): MediaPipe's response to untextured ICT renders. A negative result: 25 of MediaPipe's 51 ARKit-named scores rose enough in training to fit a curve, and none met its bounds on held-out ICT identities or on Rocketbox Male, so no rule cites it. Made with [tools/calibration](../tools/calibration/README.md).
+
+The format is also exercised by the test fixtures in [tests/fixtures/calibration/](../tests/fixtures/calibration/), whose numbers are invented.
 
 ## Status: software-only
 
-Records are `calibrated_software`: fitted to renders of example rigs, with no people and no biometric data. Like `proposed`, this never means `verified_current`. `calibrated_measured` is reserved for physical capture and is refused for now. A software fit can say how a model or rig responds to renders; it says nothing about a real tracker's response to a real face (tracker gains, gaze angles, pupils, tongue, differences between people, latency, or what confidence values mean). Every record says so in its `scope` field.
+Records are `calibrated_software`: fitted to renders of example rigs, with no people and no biometric data. Like `proposed`, this never means `verified_current`. `calibrated_measured` is reserved for physical capture, designed but not run in [docs/calibration/physical-protocol.md](../docs/calibration/physical-protocol.md), and is refused for now. A software fit can say how a model or rig responds to renders; it says nothing about a real tracker's response to a real face (tracker gains, gaze angles, pupils, tongue, differences between people, latency, or what confidence values mean). Every record says so in its `scope` field.
 
 ## Files
 
@@ -15,7 +19,7 @@ Records are `calibrated_software`: fitted to renders of example rigs, with no pe
 
 ## Fields
 
-Every field is required, except `scan_origin` where noted, and no others are allowed. Dates, if any, are written as text, not as TOML dates.
+Every field is required, except `scan_origin` where noted and `cells`, and no others are allowed. A record without `cells` is a pre-registration: its frozen part and ledger line are committed before the held-out run, and the cells are added afterwards. No rule may cite it until then. Dates, if any, are written as text, not as TOML dates.
 
 | Field | Type | Meaning |
 |---|---|---|
