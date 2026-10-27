@@ -1178,7 +1178,8 @@
           "assumptions": [
             "ARKit eyeSquintLeft corresponds to FB2 LID_TIGHTENER_L; this is the FB2 -> ARKit rule read back.",
             "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye')."
+            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_SQUINT_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -1186,8 +1187,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",
@@ -1221,7 +1220,8 @@
           "assumptions": [
             "ARKit eyeSquintRight corresponds to FB2 LID_TIGHTENER_R; this is the FB2 -> ARKit rule read back.",
             "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye')."
+            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_SQUINT_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -1229,8 +1229,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",
@@ -1264,7 +1262,8 @@
           "assumptions": [
             "ARKit eyeWideLeft corresponds to FB2 UPPER_LID_RAISER_L; this is the FB2 -> ARKit rule read back.",
             "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye')."
+            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_WIDEN_L, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -1272,8 +1271,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",
@@ -1307,7 +1304,8 @@
           "assumptions": [
             "ARKit eyeWideRight corresponds to FB2 UPPER_LID_RAISER_R; this is the FB2 -> ARKit rule read back.",
             "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye')."
+            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_WIDEN_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -1315,8 +1313,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",
@@ -1990,7 +1986,8 @@
           "assumptions": [
             "ARKit mouthLowerDownLeft corresponds to FB2 LOWER_LIP_DEPRESSOR_L; this is the FB2 -> ARKit rule read back.",
             "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye')."
+            "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled LOWER_LIP_DEPRESSER_L, a misspelling (not counted: typo), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -1998,8 +1995,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",
@@ -7674,7 +7669,8 @@
           "assumptions": [
             "FB2 LID_TIGHTENER_L corresponds to ARKit eyeSquintLeft.",
             "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative).",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_SQUINT_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -7682,8 +7678,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",
@@ -7717,7 +7711,8 @@
           "assumptions": [
             "FB2 LID_TIGHTENER_R corresponds to ARKit eyeSquintRight.",
             "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative).",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_SQUINT_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -7725,8 +7720,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",
@@ -7760,7 +7753,8 @@
           "assumptions": [
             "FB2 UPPER_LID_RAISER_L corresponds to ARKit eyeWideLeft.",
             "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative).",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_WIDEN_L, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -7768,8 +7762,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",
@@ -7803,7 +7795,8 @@
           "assumptions": [
             "FB2 UPPER_LID_RAISER_R corresponds to ARKit eyeWideRight.",
             "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative).",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_WIDEN_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -7811,8 +7804,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",
@@ -8254,7 +8245,8 @@
           "assumptions": [
             "FB2 LOWER_LIP_DEPRESSOR_L corresponds to ARKit mouthLowerDownLeft.",
             "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
-            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative).",
+            "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled LOWER_LIP_DEPRESSER_L, a misspelling (not counted: typo), and without that row its ARKit table does not reach FB2."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -8262,8 +8254,6 @@
             "apple_blendshapes",
             "godot_vendors_fb2",
             "godot_face_modifier",
-            "vrcft_docs_arkit",
-            "vrcft_docs_movement",
             "ict_facekit"
           ],
           "evidence_status": "proposed",

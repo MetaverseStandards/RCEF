@@ -239,8 +239,9 @@ assumptions = [
   "ARKit eyeSquintLeft corresponds to FB2 LID_TIGHTENER_L; this is the FB2 -> ARKit rule read back.",
   "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
   "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_SQUINT_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2.",
 ]
-evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeSquintLeft", "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB"], "units" = "1" },
 ]
@@ -257,8 +258,9 @@ assumptions = [
   "ARKit eyeSquintRight corresponds to FB2 LID_TIGHTENER_R; this is the FB2 -> ARKit rule read back.",
   "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
   "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_SQUINT_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2.",
 ]
-evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeSquintRight", "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB"], "units" = "1" },
 ]
@@ -275,8 +277,9 @@ assumptions = [
   "ARKit eyeWideLeft corresponds to FB2 UPPER_LID_RAISER_L; this is the FB2 -> ARKit rule read back.",
   "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
   "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_WIDEN_L, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2.",
 ]
-evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeWideLeft", "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB"], "units" = "1" },
 ]
@@ -293,8 +296,9 @@ assumptions = [
   "ARKit eyeWideRight corresponds to FB2 UPPER_LID_RAISER_R; this is the FB2 -> ARKit rule read back.",
   "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
   "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_WIDEN_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2.",
 ]
-evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeWideRight", "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB"], "units" = "1" },
 ]
@@ -565,8 +569,9 @@ assumptions = [
   "ARKit mouthLowerDownLeft corresponds to FB2 LOWER_LIP_DEPRESSOR_L; this is the FB2 -> ARKit rule read back.",
   "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
   "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled LOWER_LIP_DEPRESSER_L, a misspelling (not counted: typo), and without that row its ARKit table does not reach FB2.",
 ]
-evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthLowerDownLeft", "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB"], "units" = "1" },
 ]

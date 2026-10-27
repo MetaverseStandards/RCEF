@@ -6,6 +6,7 @@ scripts/derive_fb2_goldens.py derives from the pinned Godot, VRCFT, META and
 VRM sources without reading RCEF's mapping data.
 """
 from copy import deepcopy
+import csv
 import json
 import os
 from pathlib import Path
@@ -249,6 +250,27 @@ class Translations(unittest.TestCase):
         # three would close the eyes twice over.
         self.assertEqual({r['inputs'][0].split('EXPRESSION2_')[1]: r['outputs'][0] for r in self.rules('fb2.to_vrm')},
                          {'EYES_CLOSED_L_FB': 'vrm.preset.blinkLeft', 'EYES_CLOSED_R_FB': 'vrm.preset.blinkRight'})
+
+    def test_vrcft_tables_are_cited_only_where_they_name_the_rules_own_signals(self):
+        # VRCFT's Movement table writes some FB names that OpenXR does not define
+        # (EYES_SQUINT_R on the LID_TIGHTENER_L row) or misspells them; such a row is
+        # not evidence, and without it VRCFT's ARKit table does not reach FB2 either.
+        labels = self.goldens['vrcft_labels']
+        arkit_names = {n[0].lower() + n[1:] for n in labels['vrcft_docs_arkit']}
+        with (ROOT / 'tests/fixtures/godot_fb2_rules.csv').open(encoding='utf-8', newline='') as handle:
+            derived = {r['arkit']: r['sources'] + ';' + r['second_source_lines'] for r in csv.DictReader(handle)}
+        for mapping in ('fb2.to_arkit', 'fb2_gaze.to_arkit', 'arkit.to_fb2', 'arkit_gaze.to_fb2'):
+            for rule in self.rules(mapping):
+                signals = rule['inputs'] + rule['outputs']
+                fb2 = {re.sub(r'^openxr\.fb2\.XR_FACE_EXPRESSION2_|_FB$', '', sid) for sid in signals
+                       if sid.startswith('openxr.fb2.')}
+                arkit, = {sid.rsplit('.', 1)[1] for sid in signals if sid.startswith('arkit.coefficient.')}
+                with self.subTest(rule=rule['id']):
+                    if 'vrcft_docs_movement' in rule['evidence']:
+                        self.assertLessEqual(fb2, set(labels['vrcft_docs_movement']))
+                    if 'vrcft_docs_arkit' in rule['evidence']:
+                        self.assertIn(arkit, arkit_names)
+                        self.assertIn('vrcft_docs_arkit:', derived[arkit], 'the derivation does not count this row')
 
     def test_viseme_rules_match_source_derived_vectors_and_drop_consonants(self):
         case, = (c for c in self.goldens['cases'] if c['mapping_kind'] == 'visemes_to_vrm')

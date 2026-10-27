@@ -513,6 +513,10 @@ def main() -> int:
                                  for r in unified_routes],
               'blink_pairs': [{k: v for k, v in p.items() if k != 'cites'} | {'sources': cite(p['cites'])}
                               for p in blinks],
+              # The FB or ARKit name on each row of VRCFT's two tables, exactly as written,
+              # so a rule citing a table can be checked to name a signal it really lists.
+              'vrcft_labels': {name: sorted({other for _, other, _, _ in vrcft_table(texts[name])})
+                               for name in ('vrcft_docs_arkit', 'vrcft_docs_movement')},
               'cases': cases}
     (ROOT / 'tests/fixtures/fb2_goldens.json').write_text(json.dumps(output, indent=1, sort_keys=True) + '\n',
                                                           encoding='utf-8')
