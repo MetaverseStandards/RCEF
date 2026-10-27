@@ -396,3 +396,23 @@ VRCFaceTracking defines its simple BrowDown as 0.75 BrowLowerer + 0.25 BrowPinch
 - SHA-256: `662030f71b3ea1cb1e248c0b89e2f28861c714152874bfd4dc5a02ae96006a22`
 - License or terms: Apache-2.0
 - Locator: UnifiedSimpleExpressions enum comments; UnifiedSimplifier.ExpressionMap BrowDown and MouthSmile entries
+
+## mediapipe_blendshape_card
+
+MediaPipe's Blendshape V2 model card: 52 blendshape coefficients in [0, 1] predicted from 146 FaceMesh landmarks; licensed under Apache License 2.0; trained on lab-captured multi-view reconstructions of human subjects with blendshapes transferred from an artist-designed canonical mesh.
+
+- Source: [mediapipe_blendshape_card](https://storage.googleapis.com/mediapipe-assets/Model%20Card%20Blendshape%20V2.pdf)
+- Retrieved: 2026-10-27
+- SHA-256: `c8e9cf60a39998f4b341740623917590e050d1c97004e2de4568d84e026445ae`
+- License or terms: Apache-2.0
+- Locator: Model specifications (Output(s)); Licensed under; Factors and subgroups (Instrumentation, Environments); Appendix (list of predicted blendshapes)
+
+## mediapipe_face_landmarker
+
+MediaPipe Face Landmarker model bundle (float16, version 1), holding face_detector, face_landmarks_detector and face_blendshapes models.
+
+- Source: [mediapipe_face_landmarker](https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task)
+- Retrieved: 2026-10-27
+- SHA-256: `64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff`
+- License or terms: Apache-2.0
+- Locator: face_blendshapes.tflite in the bundle
