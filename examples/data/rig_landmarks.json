@@ -1,0 +1,385 @@
+{
+ "format": "rcef.example.rig_landmarks/1",
+ "description": "Corresponding surface landmarks on ICT-FaceKit (generic neutral topology) and Microsoft Rocketbox Female_Adult_01 (facial FBX, as msf_tools.evaluate_geometry orders its vertices), used by rig_gains.py to compare how the two rigs move for the same ARKit shape. Indices are 0-based vertex indices.",
+ "conventions": {
+  "ict": "centimetres; y up; faces +z; the face's own left is +x",
+  "rocketbox_female": "metres; z up; faces -y; the face's own left is +x",
+  "IOD": "distance between the two eyeball centres along the left axis; eyeball centre = mean of the eyeball's vertices",
+  "frontal snap": "the front-facing skin vertex (normal . forward > 0.25) nearest to a point in the left/up plane, the most forward one within 0.02 IOD of the nearest distance",
+  "midline profile": "skin vertices within 0.03 IOD of the midline that lie within 0.02 IOD of the most forward such vertex within 0.08 IOD above or below them"
+ },
+ "transfer": "Rocketbox brows (Multi-PIE 17, 19, 21, 22, 24, 26) are offsets from the eye-corner midpoint in units of the eye width (corner distance), copied from ICT; alae (31, 35) are offsets from nose_tip and jaw points (6, 10) offsets from chin, in IOD units; each then frontal-snapped on Rocketbox. Rocketbox has no brow geometry, so its brow points are placements, not features.",
+ "tooling": "Rules were applied with a numpy script outside the repository (msf _viz/k3/pick2.py); the hand picks were made on labelled renders and every landmark was checked on frontal, 3/4 and profile overlays of both rigs. The indices below are the frozen result.",
+ "landmarks": {
+  "ala_L": {
+   "ict": 3360,
+   "rocketbox_female": 2275,
+   "provenance": {
+    "ict": "Multi-PIE 68 #35 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #35 (see transfer)"
+   }
+  },
+  "ala_R": {
+   "ict": 1140,
+   "rocketbox_female": 1922,
+   "provenance": {
+    "ict": "Multi-PIE 68 #31 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #31 (see transfer)"
+   }
+  },
+  "brow_in_L": {
+   "ict": 3615,
+   "rocketbox_female": 2214,
+   "provenance": {
+    "ict": "Multi-PIE 68 #22 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #22 (see transfer)"
+   }
+  },
+  "brow_in_R": {
+   "ict": 1401,
+   "rocketbox_female": 1756,
+   "provenance": {
+    "ict": "Multi-PIE 68 #21 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #21 (see transfer)"
+   }
+  },
+  "brow_mid_L": {
+   "ict": 4114,
+   "rocketbox_female": 2227,
+   "provenance": {
+    "ict": "Multi-PIE 68 #24 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #24 (see transfer)"
+   }
+  },
+  "brow_mid_R": {
+   "ict": 1914,
+   "rocketbox_female": 1766,
+   "provenance": {
+    "ict": "Multi-PIE 68 #19 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #19 (see transfer)"
+   }
+  },
+  "brow_out_L": {
+   "ict": 2509,
+   "rocketbox_female": 2160,
+   "provenance": {
+    "ict": "Multi-PIE 68 #26 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #26 (see transfer)"
+   }
+  },
+  "brow_out_R": {
+   "ict": 268,
+   "rocketbox_female": 1717,
+   "provenance": {
+    "ict": "Multi-PIE 68 #17 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #17 (see transfer)"
+   }
+  },
+  "cheek_mid_L": {
+   "ict": 2270,
+   "rocketbox_female": 2185,
+   "provenance": {
+    "ict": "rule: frontal snap of the midpoint of the outer eye corner and the mouth corner",
+    "rocketbox_female": "rule: frontal snap of the midpoint of the outer eye corner and the mouth corner"
+   }
+  },
+  "cheek_mid_R": {
+   "ict": 29,
+   "rocketbox_female": 1918,
+   "provenance": {
+    "ict": "rule: frontal snap of the midpoint of the outer eye corner and the mouth corner",
+    "rocketbox_female": "rule: frontal snap of the midpoint of the outer eye corner and the mouth corner"
+   }
+  },
+  "cheek_up_L": {
+   "ict": 3352,
+   "rocketbox_female": 2245,
+   "provenance": {
+    "ict": "rule: frontal snap of the eye-corner midpoint moved 0.35 IOD down",
+    "rocketbox_female": "rule: frontal snap of the eye-corner midpoint moved 0.35 IOD down"
+   }
+  },
+  "cheek_up_R": {
+   "ict": 1132,
+   "rocketbox_female": 1917,
+   "provenance": {
+    "ict": "rule: frontal snap of the eye-corner midpoint moved 0.35 IOD down",
+    "rocketbox_female": "rule: frontal snap of the eye-corner midpoint moved 0.35 IOD down"
+   }
+  },
+  "chin": {
+   "ict": 968,
+   "rocketbox_female": 2121,
+   "provenance": {
+    "ict": "rule: going down the midline profile from ll_mid, the first local maximum of forwardness after the first local minimum (labiomental fold)",
+    "rocketbox_female": "rule: going down the midline profile from ll_mid, the first local maximum of forwardness after the first local minimum (labiomental fold)"
+   }
+  },
+  "corner_in_L": {
+   "ict": 3742,
+   "rocketbox_female": 2398,
+   "provenance": {
+    "ict": "Multi-PIE 68 #42 (ICT README)",
+    "rocketbox_female": "hand-picked from labelled close-ups"
+   }
+  },
+  "corner_in_R": {
+   "ict": 1528,
+   "rocketbox_female": 1883,
+   "provenance": {
+    "ict": "Multi-PIE 68 #39 (ICT README)",
+    "rocketbox_female": "hand-picked from labelled close-ups"
+   }
+  },
+  "corner_out_L": {
+   "ict": 3721,
+   "rocketbox_female": 2384,
+   "provenance": {
+    "ict": "Multi-PIE 68 #45 (ICT README)",
+    "rocketbox_female": "hand-picked from labelled close-ups"
+   }
+  },
+  "corner_out_R": {
+   "ict": 1507,
+   "rocketbox_female": 1877,
+   "provenance": {
+    "ict": "Multi-PIE 68 #36 (ICT README)",
+    "rocketbox_female": "hand-picked from labelled close-ups"
+   }
+  },
+  "iris_L": {
+   "ict": 21458,
+   "rocketbox_female": 2607,
+   "provenance": {
+    "ict": "rule: the most forward vertex of the eyeball",
+    "rocketbox_female": "rule: the most forward vertex of the eyeball"
+   }
+  },
+  "iris_R": {
+   "ict": 23028,
+   "rocketbox_female": 2115,
+   "provenance": {
+    "ict": "rule: the most forward vertex of the eyeball",
+    "rocketbox_female": "rule: the most forward vertex of the eyeball"
+   }
+  },
+  "jaw_L": {
+   "ict": 4390,
+   "rocketbox_female": 2128,
+   "provenance": {
+    "ict": "Multi-PIE 68 #10 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #10 (see transfer)"
+   }
+  },
+  "jaw_R": {
+   "ict": 2199,
+   "rocketbox_female": 1953,
+   "provenance": {
+    "ict": "Multi-PIE 68 #6 (ICT README)",
+    "rocketbox_female": "transferred from ICT Multi-PIE 68 #6 (see transfer)"
+   }
+  },
+  "lid_lo_L": {
+   "ict": 3730,
+   "rocketbox_female": 2387,
+   "provenance": {
+    "ict": "rule: as lid_up, the highest one at or below the corner midpoint",
+    "rocketbox_female": "rule: as lid_up, the highest one at or below the corner midpoint"
+   }
+  },
+  "lid_lo_R": {
+   "ict": 1516,
+   "rocketbox_female": 1879,
+   "provenance": {
+    "ict": "rule: as lid_up, the highest one at or below the corner midpoint",
+    "rocketbox_female": "rule: as lid_up, the highest one at or below the corner midpoint"
+   }
+  },
+  "lid_up_L": {
+   "ict": 3753,
+   "rocketbox_female": 2377,
+   "provenance": {
+    "ict": "rule: among skin vertices within 0.03 IOD laterally of the eye-corner midpoint and more than 0.6 eyeball radii in front of the eyeball centre (sphere fit), the lowest one above the corner midpoint",
+    "rocketbox_female": "rule: among skin vertices within 0.03 IOD laterally of the eye-corner midpoint and more than 0.6 eyeball radii in front of the eyeball centre (sphere fit), the lowest one above the corner midpoint"
+   }
+  },
+  "lid_up_R": {
+   "ict": 1539,
+   "rocketbox_female": 1875,
+   "provenance": {
+    "ict": "rule: among skin vertices within 0.03 IOD laterally of the eye-corner midpoint and more than 0.6 eyeball radii in front of the eyeball centre (sphere fit), the lowest one above the corner midpoint",
+    "rocketbox_female": "rule: among skin vertices within 0.03 IOD laterally of the eye-corner midpoint and more than 0.6 eyeball radii in front of the eyeball centre (sphere fit), the lowest one above the corner midpoint"
+   }
+  },
+  "ll_L": {
+   "ict": 6474,
+   "rocketbox_female": 2446,
+   "provenance": {
+    "ict": "rule: frontal snap of the point at half the mouth corner's lateral offset, at the height of ll_mid",
+    "rocketbox_female": "rule: frontal snap of the point at half the mouth corner's lateral offset, at the height of ll_mid"
+   }
+  },
+  "ll_R": {
+   "ict": 5970,
+   "rocketbox_female": 1980,
+   "provenance": {
+    "ict": "rule: frontal snap of the point at half the mouth corner's lateral offset, at the height of ll_mid",
+    "rocketbox_female": "rule: frontal snap of the point at half the mouth corner's lateral offset, at the height of ll_mid"
+   }
+  },
+  "ll_mid": {
+   "ict": 5945,
+   "rocketbox_female": 2318,
+   "provenance": {
+    "ict": "rule: the most forward midline-profile vertex from stomion_lo to 0.35 IOD below it",
+    "rocketbox_female": "rule: the most forward midline-profile vertex from stomion_lo to 0.35 IOD below it"
+   }
+  },
+  "mouth_L": {
+   "ict": 6213,
+   "rocketbox_female": 2329,
+   "provenance": {
+    "ict": "Multi-PIE 68 #54 (ICT README)",
+    "rocketbox_female": "hand-picked from labelled close-ups"
+   }
+  },
+  "mouth_R": {
+   "ict": 5708,
+   "rocketbox_female": 1964,
+   "provenance": {
+    "ict": "Multi-PIE 68 #48 (ICT README)",
+    "rocketbox_female": "hand-picked from labelled close-ups"
+   }
+  },
+  "nose_tip": {
+   "ict": 4841,
+   "rocketbox_female": 2260,
+   "provenance": {
+    "ict": "rule: the most forward skin vertex within 0.1 IOD of the midline, between the eye line and 1.2 IOD below it",
+    "rocketbox_female": "rule: the most forward skin vertex within 0.1 IOD of the midline, between the eye line and 1.2 IOD below it"
+   }
+  },
+  "stomion_lo": {
+   "ict": 5516,
+   "rocketbox_female": 2327,
+   "provenance": {
+    "ict": "rule: the lower vertex of that pair",
+    "rocketbox_female": "rule: the lower vertex of that pair"
+   }
+  },
+  "stomion_up": {
+   "ict": 5523,
+   "rocketbox_female": 2328,
+   "provenance": {
+    "ict": "rule: on the midline profile (below), the upper vertex of the consecutive pair across which the jawOpen displacement jumps most",
+    "rocketbox_female": "rule: on the midline profile (below), the upper vertex of the consecutive pair across which the jawOpen displacement jumps most"
+   }
+  },
+  "subnasale": {
+   "ict": 2189,
+   "rocketbox_female": 2209,
+   "provenance": {
+    "ict": "rule: the least forward midline-profile vertex between nose_tip and stomion_up",
+    "rocketbox_female": "rule: the least forward midline-profile vertex between nose_tip and stomion_up"
+   }
+  },
+  "ul_L": {
+   "ict": 6273,
+   "rocketbox_female": 2312,
+   "provenance": {
+    "ict": "rule: frontal snap of the point at half the mouth corner's lateral offset, at the height of ul_mid",
+    "rocketbox_female": "rule: frontal snap of the point at half the mouth corner's lateral offset, at the height of ul_mid"
+   }
+  },
+  "ul_R": {
+   "ict": 5768,
+   "rocketbox_female": 1838,
+   "provenance": {
+    "ict": "rule: frontal snap of the point at half the mouth corner's lateral offset, at the height of ul_mid",
+    "rocketbox_female": "rule: frontal snap of the point at half the mouth corner's lateral offset, at the height of ul_mid"
+   }
+  },
+  "ul_mid": {
+   "ict": 5525,
+   "rocketbox_female": 2319,
+   "provenance": {
+    "ict": "rule: the most forward midline-profile vertex between subnasale and stomion_up",
+    "rocketbox_female": "rule: the most forward midline-profile vertex between subnasale and stomion_up"
+   }
+  }
+ },
+ "regions": {
+  "brows": [
+   "brow_out_R",
+   "brow_mid_R",
+   "brow_in_R",
+   "brow_in_L",
+   "brow_mid_L",
+   "brow_out_L",
+   "lid_up_R",
+   "lid_up_L"
+  ],
+  "eyes": [
+   "corner_out_R",
+   "corner_in_R",
+   "lid_up_R",
+   "lid_lo_R",
+   "corner_out_L",
+   "corner_in_L",
+   "lid_up_L",
+   "lid_lo_L",
+   "cheek_up_R",
+   "cheek_up_L"
+  ],
+  "gaze": [
+   "iris_R",
+   "iris_L",
+   "lid_up_R",
+   "lid_lo_R",
+   "lid_up_L",
+   "lid_lo_L"
+  ],
+  "cheeks": [
+   "cheek_mid_R",
+   "cheek_mid_L",
+   "cheek_up_R",
+   "cheek_up_L",
+   "mouth_R",
+   "mouth_L",
+   "lid_lo_R",
+   "lid_lo_L"
+  ],
+  "nose": [
+   "nose_tip",
+   "subnasale",
+   "ala_R",
+   "ala_L",
+   "ul_R",
+   "ul_L",
+   "corner_in_R",
+   "corner_in_L"
+  ],
+  "mouth": [
+   "mouth_R",
+   "mouth_L",
+   "ul_mid",
+   "ll_mid",
+   "stomion_up",
+   "stomion_lo",
+   "ul_R",
+   "ul_L",
+   "ll_R",
+   "ll_L"
+  ],
+  "jaw": [
+   "chin",
+   "jaw_R",
+   "jaw_L",
+   "ll_mid",
+   "stomion_up",
+   "stomion_lo",
+   "mouth_R",
+   "mouth_L"
+  ]
+ }
+}

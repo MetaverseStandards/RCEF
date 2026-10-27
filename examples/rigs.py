@@ -12,8 +12,10 @@ pinned SHA-256 and loaded with msf_tools.inspect_asset; none is committed.
   modification allowed, credit not required): VRM 1.0 expression presets.
 """
 from __future__ import annotations
+import argparse
 from dataclasses import dataclass, field
 import hashlib
+import json
 from pathlib import Path
 import re
 import struct
@@ -47,6 +49,8 @@ ROCKETBOX_CREDIT = 'Microsoft Rocketbox avatar library (c) 2020 Microsoft, MIT l
 ROCKETBOX_VISEMES = {'Sil': 'SIL', 'PP': 'PP', 'FF': 'FF', 'TH': 'TH', 'DD': 'DD', 'KK': 'KK', 'CH': 'CH',
                      'SS': 'SS', 'nn': 'NN', 'RR': 'RR', 'aa': 'AA', 'E': 'E', 'I': 'IH', 'O': 'OH', 'U': 'OU'}
 META_VISEME_ORDER = ['SIL', 'PP', 'FF', 'TH', 'DD', 'KK', 'CH', 'SS', 'NN', 'RR', 'AA', 'E', 'IH', 'OH', 'OU']
+# Rig gains (rig_gains.py, calibration record rig-gains.ict-rocketbox-female): a rendering correction, not pack data.
+GAINS = Path(__file__).resolve().parent / 'data/rig_gains.json'
 
 
 @dataclass
@@ -196,3 +200,62 @@ def triangle_indices(snapshot) -> list[int]:
             out += [base + v for v in values]
             base += count
     return out
+
+
+def piecewise_linear(knots: list[list[float]], x: float) -> float:
+    """The piecewise-linear curve through `knots` ([input, output] pairs, increasing inputs) at x, held at the end
+    knots' outputs outside their range."""
+    if x <= knots[0][0]:
+        return knots[0][1]
+    for (x0, y0), (x1, y1) in zip(knots, knots[1:]):
+        if x <= x1:
+            return y0 + (y1 - y0) * ((x - x0) / (x1 - x0))
+    return knots[-1][1]
+
+
+def normalised(weights: dict[str, float], path: Path = GAINS) -> dict[str, float]:
+    """ARKit weights for Rocketbox Female such that each shape moves her face about as much as the same weight moves
+    ICT-FaceKit's, where the held-out evaluation passed; other shapes are returned unchanged. A rendering correction
+    between two example rigs, not a statement about any tracker or provider."""
+    curves = json.loads(path.read_text(encoding='utf-8'))['curves']
+    return {name: piecewise_linear(curves[name], w) if name in curves else w for name, w in weights.items()}
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description='Pose a rig with ARKit weights and write its positions '
+                                                 '(little-endian float32 xyz) and triangle indices (uint32).')
+    parser.add_argument('--rig', required=True, choices=['ict', 'rocketbox-female', 'rocketbox-male'])
+    parser.add_argument('--cache', type=Path, required=True, help='directory for the rig files')
+    parser.add_argument('--set', action='append', default=[], metavar='NAME=WEIGHT', help='an ARKit weight, repeatable')
+    parser.add_argument('--normalise', action='store_true',
+                        help=f'map the weights through {GAINS.name} first (rocketbox-female only)')
+    parser.add_argument('--out', type=Path, required=True, help='output stem: writes STEM.f32 and STEM.u32')
+    args = parser.parse_args(argv)
+    weights = {name: float(value) for name, value in (item.split('=', 1) for item in args.set)}
+    if args.normalise:
+        if args.rig != 'rocketbox-female':
+            parser.error('rig gains exist only for rocketbox-female (reference: ict)')
+        weights = normalised(weights)
+    rig = load(args.rig, args.cache)
+    by_name = {}
+    for index, name, half in rig.shapes:
+        by_name.setdefault(name, []).append(index)
+    unknown = sorted(set(weights) - set(by_name))
+    if unknown:
+        parser.error(f'{args.rig} has no ARKit shape {", ".join(unknown)}')
+    vector = [0.0] * len(rig.targets)
+    for name, w in weights.items():
+        for index in by_name[name]:
+            vector[index] = w
+    geometry = require(msf.evaluate_geometry(rig.snapshot, morph_weights={rig.node: vector}))
+    positions = [c for instance in geometry.instances for primitive in instance['primitives']
+                 for p in primitive['positions'] for c in p]
+    args.out.with_suffix('.f32').write_bytes(struct.pack(f'<{len(positions)}f', *positions))
+    indices = rig.indices()
+    args.out.with_suffix('.u32').write_bytes(struct.pack(f'<{len(indices)}I', *indices))
+    print(json.dumps({'rig': args.rig, 'weights': weights, 'normalised': args.normalise}))
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

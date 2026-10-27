@@ -134,3 +134,25 @@ RCEF_SLOW_TESTS=1 RCEF_ICT_CACHE=~/.cache/rcef-ict-facekit RCEF_RIG_CACHE=~/.cac
 ```
 
 With `RCEF_SLOW_TESTS=1`, `tests/test_translations.py` also halves each translation rule on its own and checks that only its output changes (about half a minute).
+
+## 6. Rig gains: how strongly two rigs render the same ARKit name
+
+Sections 4 and 5 assume equal weights mean equal expressions. Between two example rigs that assumption can be tested in software. `examples/rig_gains.py` fits, for each ARKit shape that ICT-FaceKit and Rocketbox Female both have (51; ICT has no `tongueOut`), a monotone curve from an ICT weight to the Rocketbox Female weight that moves her face about as much, and evaluates it on an ICT identity it was not fitted to. It follows the calibration-record protocol in [calibration/README.md](../calibration/README.md); the record is `calibration/rig-gains.ict-rocketbox-female.cal`.
+
+This calibrates how two example rigs render ARKit names, with ICT-FaceKit as the reference by choice. It is not a measurement of any tracker, not a provider claim and not pack data. Rocketbox Male is never loaded: it is reserved as an unseen rig for a later method.
+
+```sh
+swiftc -O -o /tmp/meshrender tools/render/meshrender.swift
+python examples/rig_gains.py fit --ict-cache DIR --rig-cache DIR --renderer /tmp/meshrender --work /tmp/k3 --out fit.json
+python examples/rig_gains.py evaluate --record calibration/rig-gains.ict-rocketbox-female.cal \
+  --ict-cache DIR --rig-cache DIR --renderer /tmp/meshrender --work /tmp/k3 --out cells.json
+python examples/rig_gains.py export --record calibration/rig-gains.ict-rocketbox-female.cal --out examples/data/rig_gains.json
+```
+
+The ICT cache needs ICT-FaceKit's 53 expression shapes and its first ten identity modes (`ict_facekit.CALIBRATION_FILES`, about 160 MB, fetched and checked on first use). The identity modes are principal components of light-stage scans of real people; they are used only as geometry.
+
+**How motion is compared.** The landmarks in `examples/data/rig_landmarks.json` (37 per rig: Multi-PIE 68 points on ICT, hand-picked or rule-based counterparts on Rocketbox, each with its provenance) are painted as small coloured markers on otherwise black meshes and rendered unlit with `tools/render/meshrender`, from jittered cameras framed by each rig's own eye distance. A marker's position is its colour centroid in the image, so markers hidden by a lid or a lip drop out. For each ICT pose, the best Rocketbox weight is the one whose marker displacements are nearest to ICT's. The curve's knots at ICT weights 0.25, 0.5, 0.75 and 1 are the medians over 24 training conditions (8 ICT identities, 3 cameras), made non-decreasing. The module docstring gives every constant and failure rule.
+
+**Results are per shape.** A shape passes if, on the held-out identity, the curve's error is within the record's bounds and the expected response is detected in every condition. A condition is a failure if Rocketbox at its best weight explains less than half of ICT's motion (the shapes move different regions or directions), or if Rocketbox cannot reach ICT's motion at weight 1. A monotone curve cannot fix either, so those shapes are published as failed rather than forced.
+
+`examples/data/rig_gains.json` holds the curves of the shapes that passed and lists the others. `python examples/rigs.py --rig rocketbox-female --cache DIR --set mouthSmileLeft=0.6 --normalise --out pose` poses Rocketbox Female through it; without `--normalise` the weights are used as they are.
