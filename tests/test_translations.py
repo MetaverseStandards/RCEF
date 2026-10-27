@@ -7,6 +7,7 @@ VRM sources without reading RCEF's mapping data.
 """
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 import re
 import unittest
@@ -32,6 +33,16 @@ KIND = {'fb2_to_arkit': ('fb2.to_arkit', 'fb2_gaze.to_arkit'), 'visemes_to_vrm':
         'arkit_to_fb2': ('arkit.to_fb2', 'arkit_gaze.to_fb2'), 'arkit_to_ue': ('arkit.to_vrcft_artist',),
         'fb2_to_vrm': ('fb2.to_vrm',)}
 SIDED = ('Left', 'Right', '_L_FB', '_R_FB')
+SLOW = os.environ.get('RCEF_SLOW_TESTS') == '1'
+
+
+def halve(rules):
+    for rule in rules:
+        operator = rule['operator']
+        if operator['id'] == 'affine':
+            operator['scale'] *= 0.5
+        else:
+            operator['weights'] = [w * 0.5 for w in operator['weights']]
 
 
 class Translations(unittest.TestCase):
@@ -120,10 +131,10 @@ class Translations(unittest.TestCase):
                 self.assertEqual(set(matches), expected)
                 self.assertEqual([o for o, ok in matches.items() if not ok], [])
 
-    def changed_copies(self, kind, change):
-        """Each mapping of `kind` compiled from a small copy of the pack in which `change` has edited every rule."""
+    def changed_copies(self, kind, change, only=None):
+        """Each mapping of `kind` (or just `only`) compiled from a small copy of the pack in which `change` has edited its rules."""
         compiled = {}
-        for mapping in KIND[kind]:
+        for mapping in [only] if only else KIND[kind]:
             source, target = MAPPINGS[mapping]
             document = deepcopy(self.document)
             rules = next(m for m in document['mappings'] if m['id'] == mapping)['rules']
@@ -148,19 +159,26 @@ class Translations(unittest.TestCase):
     def test_halving_every_rule_changes_every_output(self):
         # Each rule writes one output and reads no other rule's output, so halving
         # them all at once and checking each output is the same as halving one at a time.
-        def halve(rules):
-            for rule in rules:
-                operator = rule['operator']
-                if operator['id'] == 'affine':
-                    operator['scale'] *= 0.5
-                else:
-                    operator['weights'] = [w * 0.5 for w in operator['weights']]
         for kind in KIND:
             if kind == 'visemes_to_vrm':
                 continue
             with self.subTest(kind):
                 matches = self.check_whole_frames(kind, self.changed_copies(kind, halve))
                 self.assertEqual([o for o, ok in matches.items() if ok], [])
+
+    @unittest.skipUnless(SLOW, 'slow tier: set RCEF_SLOW_TESTS=1')
+    def test_halving_any_one_rule_changes_its_output_and_no_other(self):
+        for kind in KIND:
+            if kind == 'visemes_to_vrm':
+                continue
+            for mapping in KIND[kind]:
+                for rule in self.rules(mapping):
+                    with self.subTest(rule=rule['id']):
+                        def change(rules, target=rule['id']):
+                            halve([r for r in rules if r['id'] == target])
+                        compiled = {**self.compiled, **self.changed_copies(kind, change, mapping)}
+                        matches = self.check_whole_frames(kind, compiled)
+                        self.assertEqual([o for o, ok in matches.items() if not ok], rule['outputs'])
 
     def test_swapping_every_left_and_right_rule_changes_both_outputs(self):
         def side_free(sid):
