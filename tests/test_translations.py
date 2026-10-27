@@ -164,8 +164,9 @@ class Translations(unittest.TestCase):
         return compiled
 
     def test_halving_every_rule_changes_every_output(self):
-        # Each rule writes one output and reads no other rule's output, so halving
-        # them all at once and checking each output is the same as halving one at a time.
+        # Each rule writes one output, and only the gaze splits read another rule's
+        # output (one difference each), so halving them all at once and checking each
+        # output stands in for halving one at a time; the slow tier does that too.
         for kind in KIND:
             if kind == 'visemes_to_vrm':
                 continue
@@ -185,7 +186,10 @@ class Translations(unittest.TestCase):
                             halve([r for r in rules if r['id'] == target])
                         compiled = {**self.compiled, **self.changed_copies(kind, change, mapping)}
                         matches = self.check_whole_frames(kind, compiled)
-                        self.assertEqual([o for o, ok in matches.items() if not ok], rule['outputs'])
+                        # A computed difference shows in the target outputs that read it.
+                        expected = [o for r in self.rules(mapping) if r['inputs'] == rule['outputs']
+                                    for o in r['outputs']] or rule['outputs']
+                        self.assertEqual(sorted(o for o, ok in matches.items() if not ok), sorted(expected))
 
     def test_swapping_every_left_and_right_rule_changes_both_outputs(self):
         def side_free(sid):
