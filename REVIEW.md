@@ -16,8 +16,8 @@ Exact selected names/order were audited against digest-verified public bytes: AR
 |---|---|
 | `python3 -B check.py --tools-path ../msf-tools --write` | PASS; four outputs rendered by shared tooling; zero diagnostics |
 | `python3 -B check.py --tools-path ../msf-tools` | PASS; byte-identical outputs |
-| `python3 -B tests/test_parity.py --tools-path ../msf-tools` | PASS: 10 tests, Python3.12.15+meta |
-| `python3.11 -B tests/test_parity.py --tools-path ../msf-tools` | PASS: 10 tests, Python3.11.17 |
+| `python3 -B tests/test_parity.py --tools-path ../msf-tools` | PASS: 10 tests, Python 3.12.15 |
+| `python3.11 -B tests/test_parity.py --tools-path ../msf-tools` | PASS: 10 tests, Python 3.11.17 |
 | `python3.11 -B check.py --tools-path ../msf-tools` | PASS; same pack/csv/coverage/SHA256SUMS bytes as3.12 |
 | Shared `AuthoringTests`, `MappingTests`, `CLITests` from `tests/test_reference.py`, loaded with stdlib unittest | PASS: 13 relevant shared tests; algorithms not copied here |
 | `python3 -B scripts/verify_sources.py --cache CACHE` | PASS: all26 public records re-fetched and SHA256 matched, zero failures |
