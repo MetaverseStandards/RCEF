@@ -1,0 +1,556 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Written by tools/calibration/k4_mediapipe.py. Everything but cells was frozen, and its hash written to
+# calibration/FREEZES, before the held-out run.
+format = "rcef.calibration/1"
+id = "mediapipe.ict-response"
+version = 1
+status = "calibrated_software"
+scope = "software-only; not a measurement of any tracker"
+scan_origin = "ICT-FaceKit's identity modes are principal components of light-stage scans of real people; they are used here only as geometry, through 10 modes drawn from a standard normal."
+method = "inverse_monotone_median_fit: for each channel, the median MediaPipe score at each swept weight over the training conditions, made nondecreasing (pool-adjacent-violators), then inverted to a score-to-weight curve by linear interpolation; a flat stretch keeps its lowest weight; scores below the first or above the last median map to 0 and 1. Cell errors are |curve(score) - weight| over every swept weight of the first conditions held-out conditions; neutral is the median error at weight 0; a condition in which MediaPipe finds no face at any weight is a failure."
+channels = ["mediapipe.score.browDownLeft", "mediapipe.score.browDownRight", "mediapipe.score.browInnerUp", "mediapipe.score.browOuterUpLeft", "mediapipe.score.browOuterUpRight", "mediapipe.score.eyeBlinkLeft", "mediapipe.score.eyeBlinkRight", "mediapipe.score.eyeLookDownLeft", "mediapipe.score.eyeLookDownRight", "mediapipe.score.eyeLookInRight", "mediapipe.score.eyeLookOutLeft", "mediapipe.score.eyeSquintLeft", "mediapipe.score.eyeSquintRight", "mediapipe.score.jawOpen", "mediapipe.score.mouthFunnel", "mediapipe.score.mouthLeft", "mediapipe.score.mouthPressLeft", "mediapipe.score.mouthPucker", "mediapipe.score.mouthRight", "mediapipe.score.mouthRollLower", "mediapipe.score.mouthShrugLower", "mediapipe.score.mouthShrugUpper", "mediapipe.score.mouthSmileLeft", "mediapipe.score.mouthSmileRight", "mediapipe.score.mouthStretchRight"]
+reference_rig = "ICT-FaceKit Light da5f95a: generic neutral head and 53 expression shapes, with identity modes 0-9"
+code_commit = "827e35b2773eb120061af7238cae20ce11ac5341"
+licence = "CC-BY-SA-4.0"
+limitations = [
+  "Software-only: this is MediaPipe's response to untextured ICT renders. It says nothing about MediaPipe on real faces or photographs, or about any tracker.",
+  "MediaPipe's blendshape model learned expressions transferred from an artist-designed base mesh (its model card), and ICT-FaceKit's shapes follow the same artist-made ARKit conventions, so agreement here may partly reflect those shared conventions rather than an independent measurement.",
+  "Each channel was swept alone from a neutral face; combinations of expressions, which change MediaPipe's scores, were not measured.",
+  "Renders are grey Lambert surfaces with no texture, eyelashes, eyebrows or skin detail.",
+  "Held-out ICT identities vary only ICT's first 10 identity modes.",
+  "The curves invert MediaPipe's median response on ICT; a rig with different shapes needs its own check, which is what the Rocketbox cells test.",
+  "No curve was fitted for cheekPuff (the median score rises only 0.000 from weight 0 to 1); cheekSquintLeft (the median score rises only 0.000 from weight 0 to 1); cheekSquintRight (the median score rises only 0.000 from weight 0 to 1); eyeLookInLeft (the median score rises only 0.064 from weight 0 to 1); eyeLookOutRight (the median score rises only 0.050 from weight 0 to 1); eyeLookUpLeft (the median score rises only 0.076 from weight 0 to 1); eyeLookUpRight (the median score rises only 0.047 from weight 0 to 1); eyeWideLeft (the median score rises only 0.004 from weight 0 to 1); eyeWideRight (the median score rises only 0.003 from weight 0 to 1); jawForward (the median score rises only 0.000 from weight 0 to 1); jawLeft (the median score rises only 0.004 from weight 0 to 1); jawRight (the median score rises only 0.000 from weight 0 to 1); mouthClose (the median score rises only 0.000 from weight 0 to 1); mouthDimpleLeft (the median score rises only 0.044 from weight 0 to 1); mouthDimpleRight (the median score rises only 0.032 from weight 0 to 1); mouthFrownLeft (the median score rises only 0.003 from weight 0 to 1); mouthFrownRight (the median score rises only 0.006 from weight 0 to 1); mouthLowerDownLeft (the median score rises only 0.002 from weight 0 to 1); mouthLowerDownRight (the median score rises only 0.002 from weight 0 to 1); mouthPressRight (the median score rises only 0.071 from weight 0 to 1); mouthRollUpper (the median score rises only 0.049 from weight 0 to 1); mouthStretchLeft (the median score rises only 0.071 from weight 0 to 1); mouthUpperUpLeft (the median score rises only 0.040 from weight 0 to 1); mouthUpperUpRight (the median score rises only 0.054 from weight 0 to 1); noseSneerLeft (the median score rises only 0.000 from weight 0 to 1); noseSneerRight (the median score rises only 0.000 from weight 0 to 1).",
+]
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/generic_neutral_mesh.obj"
+sha256 = "eedbc2576d8e5ea57f55255b8f98263213a1efb5431d8bfceed1d7aef10271f9"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/browDown_L.obj"
+sha256 = "d1dcd14fc085a9e258dec62a4bfe4a31d592cce5d8918a3892c20f480653f4c1"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/browDown_R.obj"
+sha256 = "66a2c72ab64999af168795f27182d011f52b90958c402d719d3ec8ff7d1c8939"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/browInnerUp_L.obj"
+sha256 = "81fb1625794ea36fb13303234ce06cef798acfdbc489077e22ae195a705bc92e"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/browInnerUp_R.obj"
+sha256 = "5e66b46cdad89fd1237273db2b885511688cf37636cedfdde432a4844c9109e7"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/browOuterUp_L.obj"
+sha256 = "022d5342687e51351f4cad6dd1abd42c3bb1b752d0b235bdc7fc588ab0d79c90"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/browOuterUp_R.obj"
+sha256 = "1e4722060538b274ed49ed872525d770b5bfd9262b7bce1b6310f49356f5b531"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/cheekPuff_L.obj"
+sha256 = "f53fd2bdeb8e26d0db8a684ab9c095c6bb113b74575dec329facae2799ff18c6"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/cheekPuff_R.obj"
+sha256 = "cd5b5d0f3a653a1fa31abeb65daf8fd6ffdf83a4d1bf22333a469b13b96fa801"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/cheekSquint_L.obj"
+sha256 = "572fe87f2e0cdd0a7ff868b9173d0ff08ee2bc73bf94c17b603f6e5d5b8fbe26"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/cheekSquint_R.obj"
+sha256 = "a9afa0aac432159e89eb54dbbb3139864b8cc1c4208c3c0e9c420d0d8050b99a"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeBlink_L.obj"
+sha256 = "f5ed1c3072a400083b7d4f7f5cb3d73882b7ebb95c3232f957394db8cf7fe19e"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeBlink_R.obj"
+sha256 = "d281ad0af03e89a70abf1214d52c295b3a279c9b35f6795938c4487f467ca003"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeLookDown_L.obj"
+sha256 = "e7da4fa6509af5da25fab1a34255889a68f06b90fd37f65c6c05e5bdbbe2f755"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeLookDown_R.obj"
+sha256 = "ac466de6decf619701f3ee7f80fa7371020d325084b41ad7f4b2840e232abf83"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeLookIn_L.obj"
+sha256 = "1e037332bc059a95d05fcb24728ae297a2d4d268ff0cf623d3647d2a4f86bd31"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeLookIn_R.obj"
+sha256 = "3d64db0e51ad28e76eff56217da401c5ee563b5e76a207cb192046465bbab14a"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeLookOut_L.obj"
+sha256 = "235739695136c40b7a2c3239a100ff75b7bfc271ae195aeb55330848c999c9c8"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeLookOut_R.obj"
+sha256 = "ac10dfa83ccaca7fd76fe96d74f8cbc80582e2ef914d1092827b54f88125650e"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeLookUp_L.obj"
+sha256 = "72ed342df43489a76e9d468df3ca7f48328f41c924af0c03d88fde9905d82848"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeLookUp_R.obj"
+sha256 = "d8ade1cab9f7f0c4ef6ec007f33e9c9df90a58c666b9aac5a784192cd389e899"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeSquint_L.obj"
+sha256 = "ecb8244f083cf55fa9f0277427b8213315176a624d9ac3a09b533c7fbc68917e"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeSquint_R.obj"
+sha256 = "0dffbbc651b9cdbc346ead32ba102051200c72ed8a93e7b33f07149e18390b8a"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeWide_L.obj"
+sha256 = "015a995b0f09783683f5575af7e4c939cd758d194d7ca2e8ffacb9ddbabf0078"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/eyeWide_R.obj"
+sha256 = "4b8207f6013a751ae35affba62cc70bd6b53e046bbe48e8fd5a150450a7789ed"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/jawForward.obj"
+sha256 = "a0126b2926b69540f478e4c48f05e370868050e6c33718e53c2f17e190a3b239"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/jawLeft.obj"
+sha256 = "5af90cd941660fb0116948866414e4321035de754b7ebec787f8144445d2d9e9"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/jawOpen.obj"
+sha256 = "8d84355e10f48b05550980cee385bcd426f4797090da76a20de0535bb2f99f4a"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/jawRight.obj"
+sha256 = "d719335ad69a8f18797501d4728910c7a467aecbbae260923192b1bf242eec97"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthClose.obj"
+sha256 = "4a44b94c269407cf1171483d87d99d2cbdea9c66242aabf2ad0f57cb785aa193"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthDimple_L.obj"
+sha256 = "189f6e01adbf1e13147fe4d505d1f3006e5ce4590ae150064b810274093d29b0"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthDimple_R.obj"
+sha256 = "4cf674b98d6d34a16fab462fbd9ecb2cb5e39ccaf3f50459b9ac7d59fbd6a215"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthFrown_L.obj"
+sha256 = "1bfd720ad024e5805ac8472df170c2c96c09e817e02b66f916057d6e2d31ee9b"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthFrown_R.obj"
+sha256 = "ae3da92fa1dc70010c6bec810338d740287c71b8730694c97876cab5af241f74"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthFunnel.obj"
+sha256 = "d4f1dba04c1af5fc37452c88cc54a72f1133296c26d9abe0f8adb74dc5c2577f"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthLeft.obj"
+sha256 = "01fb69aa8ac07c5762719c9bb2eec5372652c9f1e73509a63d01e7e60e28b885"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthLowerDown_L.obj"
+sha256 = "8847660d51e2a72f2bce6ce9add7d58abab1cef967420db83056891291c0b2de"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthLowerDown_R.obj"
+sha256 = "b5143ed50d41c91d80ddc8b565f6274eaf514509ec6f895797db34ca92a85b68"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthPress_L.obj"
+sha256 = "de2bdaf2fa7199294ff7a281cd8f6647bf5ca9a6f84588bd7f7779fff4c61396"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthPress_R.obj"
+sha256 = "ca8d9973b3231e51b8b76d3e7af7f7f3432959b7c37148fc25e7c643252847b6"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthPucker.obj"
+sha256 = "9929c31025667683809f70df7dce612f72e3acfc7f9e8acb939f6636509dbc5c"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthRight.obj"
+sha256 = "e3faaf5ed51715e77122d76e8187d5ba83ea9f54e15e29c52e64f26c52e66bda"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthRollLower.obj"
+sha256 = "1f577e1129eef4f9e9dc26aa739c6d0f15b27253dee89af3428db6816666e910"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthRollUpper.obj"
+sha256 = "a69ec7407adfd6a5f4c818179bb4604d9e506c07671976f75ac33ef8f54a1bb0"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthShrugLower.obj"
+sha256 = "1eedd7831b0408bdcbc9aefe23b11803c54f81da5fc9be1fe81fc7a5117c0b88"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthShrugUpper.obj"
+sha256 = "2bd3e3f1568366f2fd84717f0f63aee9f56eed4c303fc4f234aadd81d430032c"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthSmile_L.obj"
+sha256 = "91794e73cef330f1c7d1f4541723544708536b39d5dd6ed35fd8f83f676b7af4"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthSmile_R.obj"
+sha256 = "3fb3de3da9f8358edbb933a65ce6e44c25a2501f30dcb240daea725b68adac84"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthStretch_L.obj"
+sha256 = "9187105730bad43023c63e2a91c979091b9289dd8fc1b587885412b8f7a3d2b7"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthStretch_R.obj"
+sha256 = "d985452085a19d6b3da397ca2cd2f938d8e08761d2e684e87640f3639bdf5f6d"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthUpperUp_L.obj"
+sha256 = "d49483aca6cbbb7a559edf4865aec62970560ddf3a0d34e5b208488bff59f722"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/mouthUpperUp_R.obj"
+sha256 = "299e3da0f36ca80c0c74e51900b67bfe6bb5b0101aaf46ce30075064c26a7f02"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/noseSneer_L.obj"
+sha256 = "47c5d66ddc1ba146480f0e43b1084f439e0e7d2af31bcec3e6a3bffc420ffa4d"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/noseSneer_R.obj"
+sha256 = "c384c41331124b9cd4b99c1bbe8aef56318cae2b8db6ff0f573a7347ebbe8caa"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity000.obj"
+sha256 = "918160cf82d541336b4c367cf93199c9827832bde02511b8fbdf9019d6f1a773"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity001.obj"
+sha256 = "325115059deb6691cb2d55da07ae38bb08ce36e4ea146982f294a17513155b3b"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity002.obj"
+sha256 = "e140e8305cd5232def3b94331d08450a13f312e525130fca8eeaa653231decc3"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity003.obj"
+sha256 = "be3481a6bed8953a6d9dd7f811a04bc6d2ab94d1bd76ecfaa6d4cae87a450f9d"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity004.obj"
+sha256 = "a2f411cc763e881cff250eb23c04fe8375b63a05a7dfa0492422e3b943e8a01d"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity005.obj"
+sha256 = "274178eb33e33c555e6024535a51a62ee50050abd4f7014bbc7a4dc90a638c65"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity006.obj"
+sha256 = "c9ae0426ab88b49065c852148f7bcff8cb09253fbee068b78955bd76c19a3e0f"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity007.obj"
+sha256 = "ba38037151277b94e2b6b9b9800275d92d2c0aa8d61057b0718c9d7b90fffc44"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity008.obj"
+sha256 = "b03543b783a15c1d28c5a384cd93657eda915227756780f682bc7370cd94ce1d"
+
+[[inputs]]
+name = "ICT-FaceKit da5f95a FaceXModel/identity009.obj"
+sha256 = "0cbb5ca5db9c61fa91df8d1c04b9b383b40d797032ca3f5a28a234d495e31b54"
+
+[[inputs]]
+name = "MediaPipe face_landmarker.task (float16, version 1)"
+sha256 = "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_01_facial.fbx"
+sha256 = "55771cbbcffb8204dcfe450784c8439ee27bfa48efffc48d325b55ee4bd04388"
+
+[renderer]
+source_sha256 = "8664a0da0e7638d5aa0cfdd79ae62db3db1912020ce85f1924dbef988b77ef82"
+binary_sha256 = "305b3e2e48b44fc8394d62b6ec4e89e549c98298a75410679b05810b33fae0f1"
+compiler = "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)"
+os = "macOS 27.0.1 (arm64)"
+gpu = "Apple M4 Max"
+
+[training]
+conditions = 24
+description = "24 conditions, each on its own ICT identity (10 modes from a standard normal), from seeds rcef.k4.training:0 to :23; head yaw within +-15 degrees, pitch +-10 and roll +-5; camera distance 0.9 to 1.2 of the framing distance and vertical field of view 25 to 35 degrees; key light pitch -0.8 to 0.1 rad and yaw +-0.8 rad, key 600 to 1100 and ambient 150 to 400; grey level 0.55 to 0.85 on a 0.05 to 0.3 background; 512 x 512 renders. Every channel is swept alone at each condition."
+
+[held_out]
+seed_rule = "rcef.calibration.seeds/1"
+count = 20
+frozen_sha256 = "bf10b92b55476dd550fb9882e0c7427d9e4ddda05af0cd3e143ddf05ce62ff22"
+
+[evaluation]
+min_conditions = 20
+
+[evaluation.bounds."mediapipe.score.browDownLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.browDownRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.browInnerUp"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.browOuterUpLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.browOuterUpRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.eyeBlinkLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.eyeBlinkRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.eyeLookDownLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.eyeLookDownRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.eyeLookInRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.eyeLookOutLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.eyeSquintLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.eyeSquintRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.jawOpen"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthFunnel"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthPressLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthPucker"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthRollLower"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthShrugLower"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthShrugUpper"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthSmileLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthSmileRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."mediapipe.score.mouthStretchRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[[curves]]
+input = "mediapipe.score.browDownLeft"
+output = "arkit.coefficient.browDownLeft"
+knots = [[0.0, 0.0], [0.19057, 0.0], [0.245429, 0.2], [0.312228, 0.4], [0.365291, 0.6], [0.393868, 0.8], [0.449015, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.browDownRight"
+output = "arkit.coefficient.browDownRight"
+knots = [[0.0, 0.0], [0.175108, 0.0], [0.243893, 0.2], [0.33798, 0.4], [0.392732, 0.6], [0.472834, 0.8], [0.520426, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.browInnerUp"
+output = "arkit.coefficient.browInnerUp"
+knots = [[0.0, 0.0], [0.02801, 0.0], [0.054305, 0.2], [0.087172, 0.4], [0.148776, 0.6], [0.183204, 0.8], [0.229473, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.browOuterUpLeft"
+output = "arkit.coefficient.browOuterUpLeft"
+knots = [[0.0, 0.0], [0.015627, 0.0], [0.033035, 0.2], [0.078461, 0.4], [0.115713, 0.6], [0.179451, 0.8], [0.323273, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.browOuterUpRight"
+output = "arkit.coefficient.browOuterUpRight"
+knots = [[0.0, 0.0], [0.008819, 0.0], [0.022603, 0.2], [0.040118, 0.4], [0.056183, 0.6], [0.082762, 0.8], [0.124876, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.eyeBlinkLeft"
+output = "arkit.coefficient.eyeBlinkLeft"
+knots = [[0.0, 0.0], [0.153529, 0.0], [0.259145, 0.2], [0.373975, 0.4], [0.499711, 0.6], [0.505334, 0.8], [0.53423, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.eyeBlinkRight"
+output = "arkit.coefficient.eyeBlinkRight"
+knots = [[0.0, 0.0], [0.101638, 0.0], [0.196208, 0.2], [0.316811, 0.4], [0.436895, 0.6], [0.491461, 0.8], [0.497356, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.eyeLookDownLeft"
+output = "arkit.coefficient.eyeLookDownLeft"
+knots = [[0.0, 0.0], [0.050014, 0.0], [0.062893, 0.2], [0.075108, 0.4], [0.103619, 0.6], [0.153856, 0.8], [0.180598, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.eyeLookDownRight"
+output = "arkit.coefficient.eyeLookDownRight"
+knots = [[0.0, 0.0], [0.05426, 0.0], [0.066015, 0.2], [0.081607, 0.4], [0.108754, 0.6], [0.142248, 0.8], [0.188683, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.eyeLookInRight"
+output = "arkit.coefficient.eyeLookInRight"
+knots = [[0.0, 0.0], [0.097135, 0.0], [0.128658, 0.2], [0.130178, 0.4], [0.162745, 0.6], [0.281659, 0.8], [0.368717, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.eyeLookOutLeft"
+output = "arkit.coefficient.eyeLookOutLeft"
+knots = [[0.0, 0.0], [0.213646, 0.0], [0.281995, 0.2], [0.33199, 0.4], [0.381178, 0.6], [0.426397, 0.8], [0.50173, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.eyeSquintLeft"
+output = "arkit.coefficient.eyeSquintLeft"
+knots = [[0.0, 0.0], [0.456319, 0.0], [0.493213, 0.2], [0.535389, 0.4], [0.549792, 0.6], [0.561582, 0.8], [0.592785, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.eyeSquintRight"
+output = "arkit.coefficient.eyeSquintRight"
+knots = [[0.0, 0.0], [0.405541, 0.0], [0.437509, 0.2], [0.465715, 0.4], [0.48709, 0.6], [0.513137, 0.8], [0.533294, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.jawOpen"
+output = "arkit.coefficient.jawOpen"
+knots = [[0.0, 0.0], [0.008295, 0.0], [0.134075, 0.2], [0.390855, 0.4], [0.525956, 0.6], [0.636818, 0.8], [0.676578, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthFunnel"
+output = "arkit.coefficient.mouthFunnel"
+knots = [[0.0, 0.0], [0.000831, 0.0], [0.00447, 0.2], [0.028851, 0.4], [0.119961, 0.6], [0.259879, 0.8], [0.441377, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthLeft"
+output = "arkit.coefficient.mouthLeft"
+knots = [[0.0, 0.0], [0.003494, 0.0], [0.053006, 0.2], [0.196684, 0.4], [0.388034, 0.6], [0.526302, 0.8], [0.683634, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthPressLeft"
+output = "arkit.coefficient.mouthPressLeft"
+knots = [[0.0, 0.0], [0.061984, 0.0], [0.078514, 0.2], [0.134837, 0.4], [0.174841, 0.6], [0.187961, 0.8], [0.223373, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthPucker"
+output = "arkit.coefficient.mouthPucker"
+knots = [[0.0, 0.0], [0.025328, 0.0], [0.039356, 0.2], [0.066592, 0.4], [0.180912, 0.6], [0.377301, 0.8], [0.75346, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthRight"
+output = "arkit.coefficient.mouthRight"
+knots = [[0.0, 0.0], [0.000509, 0.0], [0.005087, 0.2], [0.153972, 0.4], [0.356904, 0.6], [0.501209, 0.8], [0.685996, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthRollLower"
+output = "arkit.coefficient.mouthRollLower"
+knots = [[0.0, 0.0], [0.017349, 0.0], [0.069165, 0.2], [0.149649, 0.4], [0.353112, 0.6], [0.608438, 0.8], [0.643738, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthShrugLower"
+output = "arkit.coefficient.mouthShrugLower"
+knots = [[0.0, 0.0], [0.040021, 0.0], [0.051112, 0.2], [0.16153, 0.4], [0.298161, 0.6], [0.427269, 0.8], [0.548397, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthShrugUpper"
+output = "arkit.coefficient.mouthShrugUpper"
+knots = [[0.0, 0.0], [0.012036, 0.0], [0.023589, 0.2], [0.04291, 0.4], [0.073513, 0.6], [0.129727, 0.8], [0.169508, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthSmileLeft"
+output = "arkit.coefficient.mouthSmileLeft"
+knots = [[0.0, 0.0], [0.000357, 0.0], [0.003257, 0.2], [0.025892, 0.4], [0.095856, 0.6], [0.234502, 0.8], [0.457366, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthSmileRight"
+output = "arkit.coefficient.mouthSmileRight"
+knots = [[0.0, 0.0], [0.000301, 0.0], [0.004192, 0.2], [0.047608, 0.4], [0.168679, 0.6], [0.410208, 0.8], [0.527126, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "mediapipe.score.mouthStretchRight"
+output = "arkit.coefficient.mouthStretchRight"
+knots = [[0.0, 0.0], [0.005405, 0.0], [0.016363, 0.2], [0.040326, 0.4], [0.081536, 0.6], [0.126922, 0.8], [0.214686, 1.0], [1.0, 1.0]]
