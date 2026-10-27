@@ -3,7 +3,9 @@
 # number and hash here is invented to exercise check.py; nothing was measured.
 format = "rcef.calibration/1"
 id = "fixture.jaw-gain"
+version = 1
 status = "calibrated_software"
+scope = "software-only; not a measurement of any tracker"
 method = "landmark_monotone_fit"
 channels = ["fixture.source.jaw"]
 reference_rig = "Fixture rig (synthetic)"
@@ -36,7 +38,15 @@ description = "Jaw at 8 openings from 0.125 to 1 on the fixture rig, 6 jittered 
 [held_out]
 seed_rule = "rcef.calibration.seeds/1"
 count = 24
-frozen_sha256 = "2bb616c65993957e1746df2f2acb7b343c7ced6e112f9237a31ac68217b8dcb8"
+frozen_sha256 = "a0b64c522c27cd70ee641f516c3ffcb18ae01029a6bbdcfb20cae8e98ace6a89"
+
+[evaluation]
+min_conditions = 24
+
+[evaluation.bounds."fixture.source.jaw"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
 
 [[curves]]
 input = "fixture.source.jaw"
@@ -49,6 +59,7 @@ side = "none"
 stimulus = "jaw sweep"
 identity = "fixture identity 1"
 conditions = 24
+failures = 0
 median = 0.012
 p95 = 0.041
 neutral = 0.004

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import base64
 import csv
+import datetime
 import hashlib
 from importlib import metadata
 import importlib.util
@@ -208,9 +209,18 @@ MIN_CONDITIONS = 20
 SHA256 = re.compile(r'[0-9a-f]{64}')
 COMMIT = re.compile(r'[0-9a-f]{40}')
 RECORD_ID = re.compile(r'[a-z0-9][a-z0-9._-]*')
-RECORD_FIELDS = {'format': str, 'id': str, 'status': str, 'method': str, 'channels': list, 'reference_rig': str,
-                 'inputs': list, 'renderer': dict, 'code_commit': str, 'training': dict, 'held_out': dict,
-                 'curves': list, 'cells': list, 'licence': str, 'limitations': list}
+RECORD_FIELDS = {'format': str, 'id': str, 'version': int, 'status': str, 'scope': str, 'method': str,
+                 'channels': list, 'reference_rig': str, 'inputs': list, 'renderer': dict, 'code_commit': str,
+                 'training': dict, 'held_out': dict, 'evaluation': dict, 'curves': list, 'cells': list,
+                 'licence': str, 'limitations': list}
+OPTIONAL_FIELDS = {'scan_origin': str}
+SCOPE = 'software-only; not a measurement of any tracker'
+SCAN_ORIGIN = 'light-stage scans of real people'
+ICT = re.compile(r'\bict\b|identity\d{3}', re.IGNORECASE)
+# A limitation shorter than this is a placeholder, not a statement.
+MIN_LIMITATION_WORDS, MIN_LIMITATION_CHARS = 5, 30
+LEDGER = 'FREEZES'
+LEDGER_LINE = re.compile(r'(\S+) v([1-9][0-9]*) (\S+) (\S+)(?: (.*\S))?')
 
 
 def load_record(path: Path) -> dict:
@@ -261,9 +271,15 @@ def _hashes(table: dict, names: tuple, where: str) -> list[str]:
 
 def record_problems(record: dict, name: str) -> list[str]:
     """Every way a calibration record departs from the format in calibration/README.md."""
-    kinds = {str: 'text', list: 'a list', dict: 'a table'}
-    problems = _fields(record, {k: ((lambda v, t=t: isinstance(v, t) and (t is not str or _text(v))), kinds[t])
-                                for k, t in RECORD_FIELDS.items()}, '')
+    kinds = {str: 'text', list: 'a list', dict: 'a table', int: 'a positive integer'}
+
+    def typed(kind):
+        if kind is int:
+            return lambda v: type(v) is int and v > 0
+        return lambda v: isinstance(v, kind) and (kind is not str or _text(v))
+    fields = {k: (typed(t), kinds[t]) for k, t in RECORD_FIELDS.items()}
+    problems = _fields({k: v for k, v in record.items() if k not in OPTIONAL_FIELDS}, fields, '')
+    problems += [f'{k} must be {kinds[t]}' for k, t in OPTIONAL_FIELDS.items() if k in record and not typed(t)(record[k])]
 
     def get(key, kind):
         return record.get(key) if isinstance(record.get(key), kind) else None
@@ -274,13 +290,23 @@ def record_problems(record: dict, name: str) -> list[str]:
     if 'status' in record and record['status'] != 'calibrated_software':
         problems.append(f'status {record["status"]} is not allowed: records are calibrated_software '
                         '(calibrated_measured is reserved for physical capture)')
+    if 'scope' in record and record['scope'] != SCOPE:
+        problems.append(f'scope must be exactly "{SCOPE}"')
+    uses_ict = any(ICT.search(text) for text in [str(record.get('reference_rig', ''))]
+                   + [str(item.get('name', '')) for item in get('inputs', list) or () if isinstance(item, dict)])
+    if uses_ict and not (_text(record.get('scan_origin')) and SCAN_ORIGIN in record['scan_origin']):
+        problems.append(f'scan_origin must say that ICT-FaceKit identities come from {SCAN_ORIGIN}, since this '
+                        'record uses ICT-FaceKit')
     channels = get('channels', list)
     if channels is not None and (not channels or not all(_text(c) for c in channels)
                                  or len(set(channels)) != len(channels)):
         problems.append('channels must be a non-empty list of distinct signal ids')
     limitations = get('limitations', list)
-    if limitations is not None and (not limitations or not all(_text(x) for x in limitations)):
-        problems.append('limitations must be a non-empty list of statements')
+    if limitations is not None and (not limitations or not all(
+            isinstance(x, str) and len(x.strip()) >= MIN_LIMITATION_CHARS and len(x.split()) >= MIN_LIMITATION_WORDS
+            for x in limitations)):
+        problems.append(f'limitations must be a non-empty list of statements, each at least {MIN_LIMITATION_WORDS} '
+                        f'words and {MIN_LIMITATION_CHARS} characters')
     inputs = get('inputs', list)
     if inputs is not None and not inputs:
         problems.append('inputs must list at least one input asset')
@@ -316,6 +342,24 @@ def record_problems(record: dict, name: str) -> list[str]:
         if frozen and held_out.get('frozen_sha256') != frozen:
             problems.append(f'held_out.frozen_sha256 is not the hash of the frozen part ({frozen}): everything but '
                             'cells is frozen before the held-out seeds are drawn')
+    metric = (lambda v: _number(v) and v >= 0, 'a finite number >= 0')
+    evaluation = get('evaluation', dict)
+    minimum = None
+    if evaluation is not None:
+        problems += _fields(evaluation, {
+            'min_conditions': (lambda v: type(v) is int and v >= MIN_CONDITIONS, f'an integer >= {MIN_CONDITIONS}'),
+            'bounds': (lambda v: isinstance(v, dict), 'a table')}, 'evaluation.')
+        if type(evaluation.get('min_conditions')) is int and evaluation['min_conditions'] >= MIN_CONDITIONS:
+            minimum = evaluation['min_conditions']
+        bounds = evaluation.get('bounds') if isinstance(evaluation.get('bounds'), dict) else {}
+        if channels is not None and set(bounds) != set(channels):
+            problems.append(f'evaluation.bounds must give bounds for exactly the channels: {", ".join(channels)}')
+        for channel, bound in bounds.items():
+            if not isinstance(bound, dict):
+                problems.append(f'evaluation.bounds.{channel} must be a table')
+                continue
+            problems += _fields(bound, {'median': metric, 'p95': metric, 'neutral': metric},
+                                f'evaluation.bounds.{channel}.')
     pairs = set()
     curves = get('curves', list)
     if curves is not None and not curves:
@@ -350,7 +394,7 @@ def record_problems(record: dict, name: str) -> list[str]:
     cells = get('cells', list)
     if cells is not None and not cells:
         problems.append('cells must list at least one cell')
-    metric = (lambda v: _number(v) and v >= 0, 'a finite number >= 0')
+    count = held_out.get('count') if held_out is not None and type(held_out.get('count')) is int else None
     for i, cell in enumerate(cells or ()):
         where = f'cells[{i}].'
         if not isinstance(cell, dict):
@@ -358,14 +402,85 @@ def record_problems(record: dict, name: str) -> list[str]:
             continue
         problems += _fields(cell, {'channel': (_text, 'text'), 'side': (_text, 'text'), 'stimulus': (_text, 'text'),
                                    'identity': (_text, 'text'),
-                                   'conditions': (lambda v: type(v) is int and v >= MIN_CONDITIONS,
-                                                  f'an integer >= {MIN_CONDITIONS}'),
+                                   'conditions': (lambda v: type(v) is int and v >= (minimum or MIN_CONDITIONS),
+                                                  f'an integer >= evaluation.min_conditions'),
+                                   'failures': (lambda v: type(v) is int and v >= 0, 'an integer >= 0'),
                                    'median': metric, 'p95': metric, 'neutral': metric}, where)
+        conditions = cell.get('conditions')
+        if type(conditions) is int and count is not None and conditions > count:
+            problems.append(f'{where}conditions {conditions} is more than held_out.count {count}: each cell uses the '
+                            'first conditions seeds')
+        if type(cell.get('failures')) is int and type(conditions) is int and cell['failures'] > conditions:
+            problems.append(f'{where}failures {cell["failures"]} is more than its conditions {conditions}')
         if channels is not None and _text(cell.get('channel')) and cell['channel'] not in channels:
             problems.append(f'{where}channel {cell["channel"]} is not one of the channels')
         if _number(cell.get('median')) and _number(cell.get('p95')) and cell['median'] > cell['p95']:
             problems.append(f'{where}median {cell["median"]} is above p95 {cell["p95"]}')
     return problems
+
+
+def read_ledger(path: Path) -> tuple[dict, list[str]]:
+    """The freeze ledger as {(id, version): frozen_sha256}, and every way it is malformed."""
+    entries, latest, problems, previous = {}, {}, [], None
+    if not path.is_file():
+        return entries, problems
+    for number, raw in enumerate(path.read_text(encoding='utf-8').splitlines(), 1):
+        line = raw.strip()
+        if not line or line.startswith('#'):
+            continue
+        where = f'{LEDGER} line {number}'
+        match = LEDGER_LINE.fullmatch(line)
+        if not match:
+            problems.append(f'{where} must be "<id> v<version> <frozen_sha256> <date YYYY-MM-DD> [reason]"')
+            continue
+        record_id, version, sha, day, reason = match.groups()
+        version = int(version)
+        if not RECORD_ID.fullmatch(record_id):
+            problems.append(f'{where}: {record_id} is not a record id')
+        if not SHA256.fullmatch(sha):
+            problems.append(f'{where}: {sha} is not a lowercase hex sha256')
+        try:
+            if not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}', day):
+                raise ValueError(day)
+            date = datetime.date.fromisoformat(day)
+        except ValueError:
+            problems.append(f'{where}: {day} is not a date written YYYY-MM-DD')
+            date = None
+        if date and previous and date < previous:
+            problems.append(f'{where}: its date {day} is earlier than the line before; lines are only ever added at '
+                            'the end')
+        previous = date or previous
+        expected = latest.get(record_id, 0) + 1
+        if version != expected:
+            problems.append(f'{where}: {record_id} v{version} should be v{expected}; versions start at v1 and go up '
+                            'by one, and each is frozen once')
+            continue
+        if version > 1 and (reason is None or len(reason.split()) < 3):
+            problems.append(f'{where}: {record_id} v{version} needs a reason for re-freezing, of at least three words')
+        entries[(record_id, version)] = sha
+        latest[record_id] = version
+    return entries, problems
+
+
+def freeze_problem(record: dict, entries: dict) -> str | None:
+    """Why a record's frozen hash is not the latest one the ledger recorded for it, if it is not."""
+    versions = [v for i, v in entries if i == record['id']]
+    frozen = record['held_out']['frozen_sha256']
+    if not versions:
+        return (f'its frozen hash is not in {LEDGER}: add "{record["id"]} v{record["version"]} {frozen} <date>" '
+                'there and commit it before any results')
+    if record['version'] != max(versions):
+        return f'it is v{record["version"]}, but {LEDGER} has frozen v{max(versions)}'
+    if entries[(record['id'], record['version'])] != frozen:
+        return (f'its frozen hash {frozen} is not the one {LEDGER} recorded for v{record["version"]}; changing a '
+                'frozen value needs a new version, with a reason, in the ledger')
+    return None
+
+
+def cell_passes(record: dict, cell: dict) -> bool:
+    """A cell passes if nothing was missed and every error is within the channel's frozen bounds."""
+    bound = record['evaluation']['bounds'][cell['channel']]
+    return cell['failures'] == 0 and all(cell[k] <= bound[k] for k in ('median', 'p95', 'neutral'))
 
 
 def pack_rules(root: Path = ROOT) -> list[dict]:
@@ -386,6 +501,8 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
     paths = sorted(records.iterdir()) if records.is_dir() else []
     problems += [f'{p.name}: calibration records are named *{RECORD_SUFFIX}; msf-tools would read a .toml file '
                  'as pack authoring' for p in paths if p.suffix == '.toml']
+    ledger, found = read_ledger(records / LEDGER)
+    problems += found
     for path in (p for p in paths if p.suffix == RECORD_SUFFIX):
         name = path.name[:-len(RECORD_SUFFIX)]
         try:
@@ -395,6 +512,8 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
             invalid.add(name)
             continue
         found = record_problems(record, name)
+        if not found and (problem := freeze_problem(record, ledger)):
+            found = [problem]
         if found:
             problems.append(f'{path.name}: ' + '; '.join(found))
             invalid.add(name)
@@ -418,6 +537,11 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
                 problems.append(f'{label}, which has no curve from {rule.get("inputs")} to {rule.get("outputs")}')
             elif operator.get('knots') != curve[0]['knots']:
                 problems.append(f'{label}, but its knots are not exactly the frozen knots of that curve')
+            cells = [c for c in valid[cited]['cells'] if [c['channel']] == rule.get('inputs')]
+            if not cells:
+                problems.append(f'{label}, which has no held-out cell for {rule.get("inputs")}')
+            problems += [f'{label}, but its cell for {c["stimulus"]}, {c["identity"]}, side {c["side"]} fails the '
+                         'frozen bounds' for c in cells if not cell_passes(valid[cited], c)]
     return problems
 
 
