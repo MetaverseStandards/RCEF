@@ -154,6 +154,30 @@ class Landmarks(unittest.TestCase):
                 self.assertIn(name[:-1] + 'L', marks)
 
 
+class Provenance(unittest.TestCase):
+    def test_every_record_input_has_a_cache_path(self):
+        sys.path.insert(0, str(ROOT / 'tools/calibration'))
+        spec = importlib.util.spec_from_file_location('k3_heldout', ROOT / 'tools/calibration/k3_heldout.py')
+        k3 = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(k3)
+        record = check.load_record(RECORD_PATH)
+        paths = k3.input_paths(record, ROOT, Path('/ict'), Path('/rigs'))
+        self.assertEqual(len(paths), len(record['inputs']))
+        self.assertIn(Path('/ict/identity009.obj'), paths)
+        self.assertIn(Path('/rigs/Female_Adult_01_facial.fbx'), paths)
+        self.assertEqual(paths[ROOT / 'examples/data/rig_landmarks.json'],
+                         next(i['sha256'] for i in record['inputs'] if i['name'].startswith('RCEF ')))
+
+    def test_the_ict_pins_agree_with_the_calibration_tools(self):
+        tools = json.loads((ROOT / 'tools/calibration/ict_files.json').read_text(encoding='utf-8'))
+        flat = tools.get('files', tools) if isinstance(tools, dict) else {}
+        shared = {Path(k).name: v for k, v in flat.items()} if isinstance(flat, dict) else {}
+        mine = {Path(k).name: v for k, v in ict_facekit.CALIBRATION_FILES.items()}
+        common = set(shared) & set(mine)
+        self.assertTrue(common)
+        self.assertEqual({n: shared[n] for n in common}, {n: mine[n] for n in common})
+
+
 class ReservedRig(unittest.TestCase):
     def test_the_fit_never_loads_rocketbox_male(self):
         source = (ROOT / 'examples/rig_gains.py').read_text(encoding='utf-8')
