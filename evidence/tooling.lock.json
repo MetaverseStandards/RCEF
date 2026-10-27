@@ -1,29 +1,35 @@
 {
+  "lock_version": 2,
   "dependency": "msf-tools",
   "source": "https://github.com/Kjakubzak/msf-tools",
   "git_commit": "746a5fe48e7a303ef6b6b8282568ece6dae2102b",
   "package_version": "0.2.0.dev0",
-  "files": {
-    "msf_tools/__init__.py": "4850dd18440305c9167f7245120d4008ed87313cc0e74c29f9b1940a1cdc894b",
-    "msf_tools/__main__.py": "8ba25604453e1073429d6b3f11364fb7698e94dacb945fa853ad26555cfd01fc",
-    "msf_tools/authoring.py": "5317f33cfbe266c429d0340058347e920bc2cb5244ceb7224c42f2bb613ec1cf",
-    "msf_tools/cli.py": "06855e0206c6181bf707b03f539ba690945a44a92c5244ce8db2dbb4ab247023",
-    "msf_tools/common.py": "c4f377935d84dc8f4899525ebaa80fab670fbdba217b2840b0470ab2c44ecd65",
-    "msf_tools/geometry.py": "bd672da28557eba73c2ed0d3dab83289d902cb3245a9ab40d723eebb97703b7e",
-    "msf_tools/gltf_semantics.py": "4a4dc1069a38e75ddc55980e13550e4d07c7d7e22a52f2bcae9ae595db9dad47",
-    "msf_tools/mapping.py": "18a4a989faf9cd5a6c4a7c6ed782daf3647b351c835aa987fdbbbb997366a242",
-    "msf_tools/math3d.py": "79b9c4ba7577d4a56030bb2632de919c6e5bd403f414bceb6bb4eb2660b84f27",
-    "msf_tools/pack.py": "1bdd1f9c95eb2ba6b6bb4af9c3fa5184709d5c33e6583662bc6b8e19754dd48b",
-    "msf_tools/records.py": "ec7f8bb79aaf76c1a8b57b3caee017707a94b0dee07f6e25cc0a55a5982270e2",
-    "msf_tools/report.py": "9ed4dd9cbe3ed9a364d639e928754ffe3ad15c9ce9397929707c6b0f37577b0d",
-    "msf_tools/snapshot.py": "f3dbaf644ef47516fb209848e903330fa97c8ac2e6cf40f15398a6aa6633e7aa",
-    "msf_tools/sources/__init__.py": "5a464c3434795756b3de9e69252def8f38e964f718b66ba670db3d88450d62ef",
-    "msf_tools/sources/_worker.py": "5d043aecafd8108abb4e8e79397bf215647b3b09f670906a4ef98f73f6e01bba",
-    "msf_tools/sources/fbx.py": "b02bfd88e98fede6e05ca43d50bf246dbf0e83520a9ff7704b080938959bb840",
-    "msf_tools/sources/glb.py": "7fb2c4b513a5f020242e3130872406a36caa98e2e8f46c568ccbbf5ee3829124",
-    "msf_tools/sources/paths.py": "3cf07a20ae4f15fcf2000ad62b211b44284a84cf5729725815b05a2f9e2962ea",
-    "msf_tools/sources/skinning.py": "65603ffa35d6a0cec25d95a093ce0720f120055d0c442f7094ea672c2ea47eba",
-    "msf_tools/sources/transforms.py": "c80a648005a265ffb9658eb69ff43caa4d13a676e80630f846cd2c8f572422a5",
-    "msf_tools/sources/usd.py": "c6093ad14a36132fa65ff147adad4cad2926913990ca8300558eb9c766327e29"
+  "wheels": {
+    "py3-none-any": {
+      "sha256": null,
+      "files": {
+        "msf_tools/__init__.py": "4850dd18440305c9167f7245120d4008ed87313cc0e74c29f9b1940a1cdc894b",
+        "msf_tools/__main__.py": "8ba25604453e1073429d6b3f11364fb7698e94dacb945fa853ad26555cfd01fc",
+        "msf_tools/authoring.py": "5317f33cfbe266c429d0340058347e920bc2cb5244ceb7224c42f2bb613ec1cf",
+        "msf_tools/cli.py": "06855e0206c6181bf707b03f539ba690945a44a92c5244ce8db2dbb4ab247023",
+        "msf_tools/common.py": "c4f377935d84dc8f4899525ebaa80fab670fbdba217b2840b0470ab2c44ecd65",
+        "msf_tools/geometry.py": "bd672da28557eba73c2ed0d3dab83289d902cb3245a9ab40d723eebb97703b7e",
+        "msf_tools/gltf_semantics.py": "4a4dc1069a38e75ddc55980e13550e4d07c7d7e22a52f2bcae9ae595db9dad47",
+        "msf_tools/mapping.py": "18a4a989faf9cd5a6c4a7c6ed782daf3647b351c835aa987fdbbbb997366a242",
+        "msf_tools/math3d.py": "79b9c4ba7577d4a56030bb2632de919c6e5bd403f414bceb6bb4eb2660b84f27",
+        "msf_tools/pack.py": "1bdd1f9c95eb2ba6b6bb4af9c3fa5184709d5c33e6583662bc6b8e19754dd48b",
+        "msf_tools/records.py": "ec7f8bb79aaf76c1a8b57b3caee017707a94b0dee07f6e25cc0a55a5982270e2",
+        "msf_tools/report.py": "9ed4dd9cbe3ed9a364d639e928754ffe3ad15c9ce9397929707c6b0f37577b0d",
+        "msf_tools/snapshot.py": "f3dbaf644ef47516fb209848e903330fa97c8ac2e6cf40f15398a6aa6633e7aa",
+        "msf_tools/sources/__init__.py": "5a464c3434795756b3de9e69252def8f38e964f718b66ba670db3d88450d62ef",
+        "msf_tools/sources/_worker.py": "5d043aecafd8108abb4e8e79397bf215647b3b09f670906a4ef98f73f6e01bba",
+        "msf_tools/sources/fbx.py": "b02bfd88e98fede6e05ca43d50bf246dbf0e83520a9ff7704b080938959bb840",
+        "msf_tools/sources/glb.py": "7fb2c4b513a5f020242e3130872406a36caa98e2e8f46c568ccbbf5ee3829124",
+        "msf_tools/sources/paths.py": "3cf07a20ae4f15fcf2000ad62b211b44284a84cf5729725815b05a2f9e2962ea",
+        "msf_tools/sources/skinning.py": "65603ffa35d6a0cec25d95a093ce0720f120055d0c442f7094ea672c2ea47eba",
+        "msf_tools/sources/transforms.py": "c80a648005a265ffb9658eb69ff43caa4d13a676e80630f846cd2c8f572422a5",
+        "msf_tools/sources/usd.py": "c6093ad14a36132fa65ff147adad4cad2926913990ca8300558eb9c766327e29"
+      }
+    }
   }
 }
