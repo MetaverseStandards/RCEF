@@ -278,7 +278,7 @@ MSF's asset inspection accepts glTF/GLB (JSON glTF aliases `json`/`gltf2`); alia
 | [generated/coverage.json](../generated/coverage.json) | MSF coverage: dispositions, quality partitions, per-profile memberships, evidence and rule uses; binds pack hash. |
 | [generated/SHA256SUMS](../generated/SHA256SUMS) | Exact hashes of pack, matrix CSV and coverage, in that order; excludes itself. |
 | [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 898 membership rows with original names, indices, domains, evidence, neutral/default and reasons. |
-| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: 24 authored directional rules and their status, operators, assumptions and losses. |
+| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: every authored directional rule and its status, operators, assumptions and losses. |
 | [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: 21 canonical projections against authored relationships; a dash means no authored rule. Unresolved relationships remain labeled. |
 | [reports/SHA256SUMS](../reports/SHA256SUMS) | Exact hashes of the six presentation files, sorted by filename; excludes itself. Markdown presentation reports record the consumed pack SHA-256. |
 

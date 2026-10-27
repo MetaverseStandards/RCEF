@@ -13,17 +13,19 @@ import unittest
 
 import msf_tools as msf
 
+try:
+    import shared_pack
+except ModuleNotFoundError:  # run by file path from the repository root
+    from tests import shared_pack
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class Parity(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        loaded = msf.load_authoring(ROOT)
-        if loaded.value is None:
-            raise AssertionError(loaded.report.to_dict())
-        cls.document = loaded.value.to_dict()
-        cls.pack = msf.compile_pack(loaded.value).value
+        cls.document = shared_pack.document()
+        cls.pack = shared_pack.pack()
         # msf-tools rechecks the whole pack on every evaluation. The fixture
         # mappings are evaluated many times, so they use a pack holding only them.
         fixtures = deepcopy(cls.document)

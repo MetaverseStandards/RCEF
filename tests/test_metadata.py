@@ -14,6 +14,11 @@ import unittest
 
 import msf_tools as msf
 
+try:
+    import shared_pack
+except ModuleNotFoundError:  # run by file path from the repository root
+    from tests import shared_pack
+
 ROOT = Path(__file__).resolve().parents[1]
 
 # Literal F-9/F-10/F-18 and reviewed A-03 expectations. The gaze parameter
@@ -90,14 +95,8 @@ IDENTITIES = (
 class Metadata(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        loaded = msf.load_authoring(ROOT)
-        if loaded.value is None:
-            raise AssertionError(loaded.report.to_dict())
-        cls.authoring = loaded.value.to_dict()
-        compiled = msf.compile_pack(loaded.value)
-        if compiled.value is None:
-            raise AssertionError(compiled.report.to_dict())
-        cls.pack = compiled.value
+        cls.authoring = shared_pack.document()
+        cls.pack = shared_pack.pack()
         cls.generated = json.loads((ROOT / 'generated/rcef.pack.json').read_text())
 
     def ok(self, result):

@@ -184,6 +184,36 @@ class ReadableReports(unittest.TestCase):
             relation = next(cell for cell in row[profile].split('; ') if 'coupled.mean' in cell)
             self.assertIn('Left + Partner', relation)
 
+    def test_proposed_rules_are_summarised_first_with_plain_formulas(self):
+        self.write()
+        self.assertNotIn('## Proposed rules', (self.root / 'reports/mappings.md').read_text(encoding='utf-8'))
+        value = fixture()
+        value['signals'].append(dict(value['signals'][1], id='outside.partner',
+                                     native_id='Partner', label='Outside partner'))
+        value['profiles'].append(dict(id='outside', label='Outside', signal_ids=['outside.partner']))
+        loss = dict(category='signal', effect='approximated', reason='asymmetry irrecoverable',
+                    refs=['source.left', 'outside.partner', 'canonical.blink'], units='1')
+        value['mappings'][0]['rules'] += [
+            dict(id='left.scaled', inputs=['source.left'], outputs=['canonical.blink'],
+                 operator={'id': 'affine', 'scale': 0.5, 'offset': 0.25}, disposition='mapped',
+                 mapping_quality='approximate', evidence_status='proposed', assumptions=['Gain assumed'],
+                 loss_annotations=[dict(loss, reason='gain unknown')], evidence=['source']),
+            dict(id='coupled.mean', inputs=['source.left', 'outside.partner'], outputs=['canonical.blink'],
+                 operator={'id': 'weighted_sum', 'weights': [0.5, 0.5]}, disposition='mapped',
+                 mapping_quality='approximate', evidence_status='proposed', assumptions=['Mean'],
+                 loss_annotations=[loss, dict(loss, reason='gain unknown')], evidence=['source'])]
+        self.pack.write_text(json.dumps(value))
+        self.write()
+        text = (self.root / 'reports/mappings.md').read_text(encoding='utf-8')
+        summary, details = text.split('## source.to_canonical', 1)
+        self.assertIn('## Proposed rules', summary)
+        self.assertIn('| source.to_canonical | left.scaled | source → rcef.canonical | blink = 0.5·Left + 0.25 '
+                      '| gain unknown | proposed |', summary)
+        self.assertIn('| source.to_canonical | coupled.mean | source + outside → rcef.canonical | '
+                      'blink = 0.5·Left + 0.5·Partner | asymmetry irrecoverable; gain unknown | proposed |', summary)
+        self.assertNotIn('right.ambiguous', summary)
+        self.assertIn('{"id":"weighted_sum","weights":[0.5,0.5]}', details)
+
 
 if __name__ == '__main__':
     unittest.main()
