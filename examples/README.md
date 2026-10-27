@@ -14,10 +14,12 @@ python3 -m venv .venv
 COMMIT=$(python -c "import json; print(json.load(open('evidence/tooling.lock.json'))['git_commit'])")
 python -m pip install "git+https://github.com/Kjakubzak/msf-tools@$COMMIT"
 # or, from a local checkout: python -m pip install "git+file://$(cd ../msf-tools && pwd -P)@$COMMIT"
+# for the Rocketbox (FBX) rigs, also msf-tools' FBX reader from the same checkout:
+# python -m pip install ../msf-tools/native/ufbx
 python -B check.py
 ```
 
-`check.py` refuses to run unless the installed msf-tools is exactly the locked commit, so a passing check also confirms the install. The examples need nothing else; they use only the Python standard library and msf-tools.
+`check.py` refuses to run unless the installed msf-tools is exactly the locked commit, so a passing check also confirms the install. The examples need nothing else; they use only the Python standard library and msf-tools (with its FBX extra, `msf-tools-ufbx`, for the Rocketbox rigs, which needs a C compiler).
 
 ## 2. Translate FB2 frames to ARKit
 
@@ -50,52 +52,67 @@ This writes `~/.cache/rcef-examples/visemes_to_vrm.csv`; it takes the same optio
 
 The five vowel visemes become VRM `aa`, `ih`, `ou`, `ee` and `oh`. Consonant visemes have no VRM preset, so they appear in `dropped`. This is a phoneme-label correspondence; no published table maps META visemes to VRM.
 
-## 4. Drive a face mesh and compare
+## 4. Drive a face and compare
 
 ```sh
-python examples/face_pipeline.py
+python examples/face_pipeline.py                 # Rocketbox Female_Adult_01, the expression library
+python examples/face_pipeline.py --rig rocketbox-male
+python examples/face_pipeline.py --rig ict --frames examples/data/fb2_demo_frames.csv
 ```
 
-The ICT-FaceKit files go to `~/.cache/rcef-ict-facekit` and the outputs to `~/.cache/rcef-examples/face` (again under `$XDG_CACHE_HOME` when it is set); `--cache DIR` and `--out DIR` choose others.
+Rig files go to `~/.cache/rcef-face-rigs` (`~/.cache/rcef-ict-facekit` for ICT) and the outputs to `~/.cache/rcef-examples/face/RIG` (under `$XDG_CACHE_HOME` when it is set); `--cache DIR` and `--out DIR` choose others. A Rocketbox run takes about three minutes, ICT about one.
 
-This takes about a minute.
+### The faces
 
-1. It downloads 17 files from ICT-FaceKit Light (MIT, USC Institute for Creative Technologies, commit `da5f95a`) into the cache and checks their SHA-256 values. The meshes are not stored in this repository.
-2. It converts the neutral head and the 16 ARKit-named shapes RCEF's rules can drive into one GLB with morph targets: triangulated quads, and each target is the shape minus the neutral. All 53 shapes would need about 4.3 million position components, more than msf-tools' 4 million budget, and sparse accessors don't help because msf-tools counts them at full size.
-3. It writes an msf-tools sidecar binding each shape to its ARKit signal. ICT splits `browInnerUp` and `cheekPuff` into left and right halves, and both halves are bound to the one ARKit coefficient.
-4. For each frame it evaluates the mesh twice with `msf_tools.evaluate_geometry(morph_weights=...)`:
-   - **direct**: the FB2 values routed to the shapes as the Godot and VRCFT sources route them (`tests/fixtures/godot_fb2_rules.csv`), with each brow and cheek half taking its own FB2 side;
-   - **translated**: RCEF's translated ARKit weights.
+| Rig | Source | Shapes used |
+|---|---|---|
+| `rocketbox-female`, `rocketbox-male` | Microsoft Rocketbox `Female_Adult_01_facial.fbx` and `Male_Adult_01_facial.fbx` (MIT, commit `0943055`; ARKit shapes by Fang Ma and Matias Volonte), loaded directly with msf-tools' FBX reader | all 52 ARKit shapes (`AK_*`); its FACS action-unit shapes (`AU_*`) for the comparison panel; its 15 viseme shapes (`AA_VI_*`) |
+| `ict` | ICT-FaceKit Light (MIT, USC Institute for Creative Technologies, commit `da5f95a`), converted to a GLB | the 16 ARKit shapes RCEF's first rules drive; `browInnerUp` and `cheekPuff` are split into halves |
+
+Each file is downloaded on first use and checked against a pinned SHA-256; none is stored in this repository. Rocketbox is a full-body avatar with a small face, so a renderer has to frame the head. All 53 ICT shapes would need about 4.3 million position components, more than msf-tools' 4 million budget, so only the 16 are converted.
+
+### The frames
+
+`examples/data/fb2_expression_frames.csv` comes from `examples/data/expressions.json` through `examples/make_expression_frames.py`. It holds 18 expressions (the seven EMFACS emotions, a compound "happily surprised", brow raise, squint, winks, smirk, pucker, cheek puff, lip suck and jaw sideways) and a gaze sweep, each as FACS action units with the sources that give them. FB2 channels are named after the action units, so the AUs become FB2 weights by name. FACS intensity letters become weights on an assumed linear scale (A = 0.2 … E = 1.0). Each expression ramps in, holds and ramps out, and its frames carry the expression name, the phase (`in`, `hold`, `out`) and the amount. AU 25 (lips part) and AU 27 (mouth stretch) have no FB2 channel; frames that need them say so.
+
+### What is compared
+
+For each frame the rig is evaluated with `msf_tools.evaluate_geometry(morph_weights=...)`:
+
+- **direct**: the FB2 values routed to the ARKit shapes as the Godot and VRCFT sources route them (`tests/fixtures/godot_fb2_rules.csv`), all 52 on Rocketbox. On ICT each brow and cheek half takes its own FB2 side.
+- **translated**: RCEF's translated ARKit weights. A shape no RCEF rule writes yet stays at rest and is named on the frame ("no RCEF rule yet, direct render only"); FB2 channels no rule reads are listed as dropped.
+- **facs** (Rocketbox only): Rocketbox's own FACS action-unit shapes driven with the expression's AUs, beside the translated render with its own difference colours. This is a semantic comparison between two independently authored shape sets, labelled "not an error measure", and never an oracle. AUs Rocketbox has no shape for are named on the frame.
 
 Outputs in the output directory:
 
 | File | Contents |
 |---|---|
 | `fb2_to_arkit.csv` | the translated weights, refusals and dropped channels |
-| `ict_facekit_subset.glb`, `ict_facekit_subset.sidecar.json` | the converted mesh and its bindings |
-| `mesh/indices.u32` | triangle indices, little-endian uint32 |
-| `mesh/direct/NNNN.f32`, `mesh/translated/NNNN.f32` | vertex positions per frame, little-endian float32 xyz |
-| `mesh/difference/NNNN.f32` | per-vertex difference colours, float32 RGB (blue = none, red = `heat_scale` or more) |
-| `frames.json` | every frame's time, segment, files, labels, largest vertex difference and oracle result |
+| `sidecar.json` | the msf-tools sidecar binding each ARKit shape to its ARKit signal |
+| `mesh/indices.u32` | triangle indices of every mesh of the rig, little-endian uint32 |
+| `mesh/direct/NNNN.f32`, `mesh/translated/NNNN.f32`, `mesh/facs/NNNN.f32` | vertex positions per frame, little-endian float32 xyz |
+| `mesh/difference/NNNN.f32`, `mesh/facs_difference/NNNN.f32` | per-vertex difference colours, float32 RGB (blue = none, red = `heat_scale` or more) |
+| `frames.json` | the rig and its credit, the captions, and every frame's time, expression, phase, amount, files, labels, largest vertex difference and oracle result |
 | `residuals.csv`, `residuals.md` | the residual report, per frame and per channel |
 
-The position, index and colour files are in the format of the offscreen renderer used for the msf-tools geometry video, so the frames can be rendered side by side: direct, translated and difference.
+The position, index and colour files are in the format of the offscreen renderer used for the msf-tools geometry video.
 
 The report checks four things:
 
-- Exact rules have residual ≤ 1e-9.
-- Each half of an averaged pair is within |L − R| / 2 of its own side.
-- The largest vertex difference stays within the sum of each residual times that shape's largest vertex move.
-- Refused and dropped channels are labelled on their frame and never shown as a silent zero.
+- Exact rules have residual ≤ 1e-9. On Rocketbox, `browInnerUp` and `cheekPuff` are single shapes, so their averaging rules are exact there too.
+- On ICT, each half of an averaged pair is within |L − R| / 2 of its own side.
+- The largest vertex difference stays within the sum of each residual times that shape's largest vertex move, plus the whole direct movement of shapes no rule writes yet.
+- Refused and dropped channels, and shapes without a rule, are labelled on their frame and never shown as a silent zero.
 
-The pipeline exits non-zero if any oracle fails.
+The pipeline exits non-zero if any oracle fails. `residuals.md` counts channels that are zero in both paths as "at rest in both paths", apart from "exact (moving)", and lists for each shape whether an RCEF rule writes it and in how many frames its FB2 input moves.
 
-`residuals.md` counts channels that are zero in both the direct and the translated weights as "at rest in both paths", apart from "exact (moving)", because a channel at rest cannot fail. It also lists, for each shape, in how many frames the FB2 input that drives it directly is not zero: a rule is only tested where its shape moves.
+The ICT run with `examples/data/fb2_demo_frames.csv` uses frames built so that every one of the 14 FB2 rules is the only thing moving in some frame; `tests/test_examples.py` checks that halving any rule, or swapping a left rule with its right one, makes these oracles fail.
 
-**What this shows and what it doesn't.** It shows that RCEF's rules connect names and meanings the way the public sources do, on one rig. It is not a calibration result: neither provider publishes its gain, so equal weights are assumed to mean equal expressions.
+**What this shows and what it doesn't.** It shows that RCEF's rules connect names and meanings the way the public sources do, on two independently authored rigs. It is not a calibration result: neither provider publishes its gain, so equal weights are assumed to mean equal expressions. No cross-rig equality is expected either.
 
-To run the pipeline as a test (the slow tier, not part of the default suite):
+To run the pipelines as tests (the slow tier, not part of the default suite; about six minutes):
 
 ```sh
-RCEF_SLOW_TESTS=1 RCEF_ICT_CACHE=~/.cache/rcef-ict-facekit python -B -m unittest tests/test_examples_slow.py
+RCEF_SLOW_TESTS=1 RCEF_ICT_CACHE=~/.cache/rcef-ict-facekit RCEF_RIG_CACHE=~/.cache/rcef-face-rigs \
+  python -B -m unittest tests/test_examples_slow.py
 ```

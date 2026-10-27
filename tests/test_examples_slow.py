@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: MIT
-"""Slow tier: run the ICT-FaceKit face pipeline end to end and check its report.
+"""Slow tier: run the face and viseme pipelines end to end and check their reports.
 
-Skipped unless RCEF_SLOW_TESTS=1. Set RCEF_ICT_CACHE to a directory outside
-the repository for the ICT-FaceKit files (fetched on first use, about 46 MB).
-It takes about a minute.
+Skipped unless RCEF_SLOW_TESTS=1. Set RCEF_ICT_CACHE (ICT-FaceKit, about 46 MB)
+and RCEF_RIG_CACHE (Rocketbox and the VRM sample, about 15 MB) to directories
+outside the repository; the files are fetched on first use. Each class is
+skipped if its cache variable is unset. All of it takes about six minutes.
 """
 import csv
 import json
@@ -16,6 +17,17 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 SLOW = os.environ.get('RCEF_SLOW_TESTS') == '1'
+RIG_CACHE = os.environ.get('RCEF_RIG_CACHE')
+
+
+def run(script, *args):
+    return subprocess.run([sys.executable, '-B', str(ROOT / 'examples' / script), *args],
+                          capture_output=True, text=True, timeout=1800)
+
+
+def read(path):
+    with path.open(encoding='utf-8', newline='') as handle:
+        return list(csv.DictReader(handle))
 
 
 @unittest.skipUnless(SLOW and os.environ.get('RCEF_ICT_CACHE'), 'slow tier: set RCEF_SLOW_TESTS=1 and RCEF_ICT_CACHE')
@@ -24,9 +36,8 @@ class FacePipeline(unittest.TestCase):
     def setUpClass(cls):
         cls.temp = tempfile.TemporaryDirectory(prefix='rcef-face-')
         cls.out = Path(cls.temp.name)
-        cls.process = subprocess.run([sys.executable, '-B', str(ROOT / 'examples/face_pipeline.py'),
-                                  '--cache', os.environ['RCEF_ICT_CACHE'], '--out', str(cls.out)],
-                                 capture_output=True, text=True, timeout=1200)
+        cls.process = run('face_pipeline.py', '--rig', 'ict', '--frames', str(ROOT / 'examples/data/fb2_demo_frames.csv'),
+                          '--cache', os.environ['RCEF_ICT_CACHE'], '--out', str(cls.out))
         with (ROOT / 'examples/data/fb2_demo_frames.csv').open(encoding='utf-8', newline='') as handle:
             cls.inputs = list(csv.DictReader(handle))
 
@@ -84,6 +95,49 @@ class FacePipeline(unittest.TestCase):
         self.assertEqual((self.out / manifest['indices']).stat().st_size % 12, 0)
         for frame in manifest['frames'][::17]:
             for key in ('direct', 'translated', 'difference_colors'):
+                self.assertEqual((self.out / frame[key]).stat().st_size, vertices * 12, (frame['frame'], key))
+
+
+@unittest.skipUnless(SLOW and RIG_CACHE, 'slow tier: set RCEF_SLOW_TESTS=1 and RCEF_RIG_CACHE')
+class RocketboxFace(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.temp = tempfile.TemporaryDirectory(prefix='rcef-rocketbox-')
+        cls.out = Path(cls.temp.name)
+        cls.process = run('face_pipeline.py', '--rig', 'rocketbox-female', '--cache', RIG_CACHE, '--out', str(cls.out))
+        cls.inputs = read(ROOT / 'examples/data/fb2_expression_frames.csv')
+        cls.manifest = json.loads((cls.out / 'frames.json').read_text()) if not cls.process.returncode else None
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.temp.cleanup()
+
+    def test_every_oracle_passes_on_every_expression_frame(self):
+        self.assertEqual(self.process.returncode, 0, self.process.stdout + self.process.stderr)
+        self.assertEqual(len(self.manifest['frames']), len(self.inputs))
+        self.assertTrue(all(f['oracles_pass'] for f in self.manifest['frames']))
+        self.assertEqual(len(self.manifest['targets']), 52)
+
+    def test_frames_name_their_expression_phase_and_what_is_not_translated(self):
+        frames = {(f['segment'], f['phase']) for f in self.manifest['frames']}
+        self.assertIn(('anger', 'hold'), frames)
+        self.assertIn(('look down', 'out'), frames)
+        anger = next(f for f in self.manifest['frames'] if f['segment'] == 'anger' and f['phase'] == 'hold')
+        self.assertTrue(any(label.startswith('no RCEF rule yet') and 'browDownLeft' in label for label in anger['labels']))
+        self.assertTrue(any('LIP_TIGHTENER_L' in label for label in anger['labels']))
+        surprise = next(f for f in self.manifest['frames'] if f['segment'] == 'surprise' and f['phase'] == 'hold')
+        self.assertIn('AU 25 (lips part): no FB2 channel', surprise['labels'])
+
+    def test_covered_shapes_are_exact_and_the_facs_panel_is_labelled(self):
+        rows = read(self.out / 'residuals.csv')
+        exact = [r for r in rows if r['status'] == 'exact (moving)']
+        self.assertTrue(exact)
+        self.assertTrue(all(float(r['residual']) <= 1e-9 for r in exact))
+        self.assertIn('browInnerUp', {r['arkit'] for r in exact})
+        self.assertIn('not an error measure', self.manifest['facs_caption'])
+        vertices = self.manifest['vertex_count']
+        for frame in self.manifest['frames'][::37]:
+            for key in ('direct', 'translated', 'facs', 'difference_colors', 'facs_difference_colors'):
                 self.assertEqual((self.out / frame[key]).stat().st_size, vertices * 12, (frame['frame'], key))
 
 
