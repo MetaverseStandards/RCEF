@@ -12,17 +12,37 @@ Data 0.2.0 adds the first 19 cross-provider rules: FB2 to ARKit (face and, separ
 
 ## Expression sets and where they come from
 
-Each file in `profiles/` records one public expression set (or, for `fixture.toml`, RCEF's own synthetic fixtures). The documentation link is the normal web page for that set; the pinned source is the exact revision or retrieval RCEF verified, listed with its SHA-256 in [references.md](references.md) and [evidence/sources.toml](evidence/sources.toml). A **source** set is read by at least one executable mapping, a **target** set is written by one, and an **inventory only** set is recorded but not yet translated.
+The Mappings table shows what translates to what; the Expression sets table below shows where each set comes from. Each file in `profiles/` records one public expression set (or, for `fixture.toml`, RCEF's own synthetic fixtures). The documentation link is the normal web page for that set; the pinned source is the exact revision or retrieval RCEF verified, listed with its SHA-256 in [references.md](references.md) and [evidence/sources.toml](evidence/sources.toml). A **source** set is read by at least one executable mapping, a **target** set is written by one, and an **inventory only** set is recorded but not yet translated.
+
+### Mappings
+
+How to read this: each row is one group of rules that turns values from the source set into the target set. `verified_current` means the rule restates a verified source fact (provider-to-canonical copies and RCEF's synthetic fixtures); `proposed` means a source-backed but approximate cross-provider translation that compiles only with the approximation opt-in; `unresolved` means recorded but not executable. Every rule, with its assumptions, losses and evidence, is in [reports/mappings.md](reports/mappings.md).
+
+| Mapping | Source set → target set | Rules | Evidence status |
+|---|---|---|---|
+| [`arkit.to_canonical`](reports/mappings.md#arkitto_canonical) | `arkit.coefficient` → `rcef.canonical` | 9 | verified_current |
+| [`fb2.to_canonical`](reports/mappings.md#fb2to_canonical) | `openxr.fb2` → `rcef.canonical` | 8 | verified_current |
+| [`vrcft_eye.to_canonical`](reports/mappings.md#vrcft_eyeto_canonical) | `vrcft.eye` → `rcef.canonical` | 4 | verified_current |
+| [`fb2.to_arkit`](reports/mappings.md#fb2to_arkit) | `openxr.fb2` → `arkit.coefficient` | 10 | proposed |
+| [`fb2_gaze.to_arkit`](reports/mappings.md#fb2_gazeto_arkit) | `openxr.fb2` → `arkit.coefficient` | 4 | proposed |
+| [`visemes.to_vrm`](reports/mappings.md#visemesto_vrm) | `openxr.visemes` → `vrm.preset` | 5 | proposed |
+| [`fixture.affine`](reports/mappings.md#fixtureaffine) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
+| [`fixture.bilateral`](reports/mappings.md#fixturebilateral) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
+| [`survey.ambiguous`](reports/mappings.md#surveyambiguous) | `mediapipe.label` → `rcef.canonical` | 1 | unresolved (not executable) |
+
+### Expression sets
+
+How to read this: start with the Role column. Source and target sets have executable rules; inventory-only sets are recorded but not yet translated.
 
 | Profile file | Expression set and revision | Signals | Role in mappings | Documentation | Pinned source | License or terms |
 |---|---|---|---|---|---|---|
-| [`profiles/arkit.ancillary.toml`](profiles/arkit.ancillary.toml) | Apple ARKit `ARFaceAnchor.leftEyeTransform` and the `BlendShapeLocation` raw-value initializer (documentation retrieved 2026-10-26) | 2 | inventory only | [Apple: leftEyeTransform](https://developer.apple.com/documentation/arkit/arfaceanchor/lefteyetransform)¹ | [apple_blendshapes](references.md#apple_blendshapes), [apple_eye](references.md#apple_eye) | Reference only; Apple prose not redistributed |
+| [`profiles/arkit.ancillary.toml`](profiles/arkit.ancillary.toml) | Apple ARKit `ARFaceAnchor.leftEyeTransform` and the `BlendShapeLocation` raw-value initializer (documentation retrieved 2026-10-26) | 2 | inventory only | [Apple: leftEyeTransform](https://developer.apple.com/documentation/arkit/arfaceanchor/lefteyetransform)¹ and [BlendShapeLocation](https://developer.apple.com/documentation/arkit/arfaceanchor/blendshapelocation)¹ | [apple_blendshapes](references.md#apple_blendshapes), [apple_eye](references.md#apple_eye) | Reference only; Apple prose not redistributed |
 | [`profiles/arkit.coefficient.toml`](profiles/arkit.coefficient.toml) | Apple ARKit `ARFaceAnchor.BlendShapeLocation`, 52 coefficients (documentation retrieved 2026-10-26) | 52 | source and target | [Apple: BlendShapeLocation](https://developer.apple.com/documentation/arkit/arfaceanchor/blendshapelocation)¹ | [apple_blendshapes](references.md#apple_blendshapes) | Reference only; Apple prose not redistributed |
 | [`profiles/fixture.toml`](profiles/fixture.toml) | RCEF original synthetic fixtures (profiles `fixture`, `fixture.source`, `fixture.target`) | 5 | source and target (synthetic) | [fixtures/mapping_samples.json](fixtures/mapping_samples.json) | [rcef_definitions](references.md#rcef_definitions) | CC-BY-SA-4.0 (original RCEF work) |
 | [`profiles/godot.base.toml`](profiles/godot.base.toml) | Godot `XRFaceTracker` base blend shapes (`BlendShapeEntry`), Godot `e7b12e7` | 102 | inventory only | [Godot: XRFaceTracker](https://docs.godotengine.org/en/stable/classes/class_xrfacetracker.html) | [godot_enum](references.md#godot_enum), [godot_setters](references.md#godot_setters) | MIT |
 | [`profiles/godot.blended.toml`](profiles/godot.blended.toml) | Godot `XRFaceTracker` blended blend shapes (`BlendShapeEntry`), Godot `e7b12e7` | 42 | inventory only | [Godot: XRFaceTracker](https://docs.godotengine.org/en/stable/classes/class_xrfacetracker.html) | [godot_enum](references.md#godot_enum), [godot_setters](references.md#godot_setters) | MIT |
 | [`profiles/mediapipe.label.toml`](profiles/mediapipe.label.toml) | MediaPipe Face Landmarker blendshape labels (`kBlendshapeNames`), MediaPipe `f6988c4` | 53 | inventory only (its one rule is unresolved) | [Google: Face landmark detection guide](https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker) | [mediapipe](references.md#mediapipe) | Apache-2.0 upstream; names used as facts |
-| [`profiles/openxr.ancillary.toml`](profiles/openxr.ancillary.toml) | OpenXR `XR_FB_face_tracking` and `XR_FB_face_tracking2` confidence, data-source and expression-set enums, OpenXR-Docs `5a82d45` | 10 | inventory only | [OpenXR: XR_FB_face_tracking2](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_face_tracking2) | [xr_registry](references.md#xr_registry) | Registry terms retained upstream; identifiers used as facts |
+| [`profiles/openxr.ancillary.toml`](profiles/openxr.ancillary.toml) | OpenXR `XR_FB_face_tracking` and `XR_FB_face_tracking2` confidence, data-source and expression-set enums, OpenXR-Docs `5a82d45` | 10 | inventory only | [OpenXR: XR_FB_face_tracking2](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_face_tracking2) | [xr_registry](references.md#xr_registry) | Apache-2.0 OR MIT (`xr.xml`); identifiers used as facts |
 | [`profiles/openxr.fb.toml`](profiles/openxr.fb.toml) | OpenXR `XR_FB_face_tracking` (`XrFaceExpressionFB`), OpenXR-Docs `5a82d45` | 65 | inventory only | [OpenXR: XR_FB_face_tracking](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_face_tracking) | [xr_fb](references.md#xr_fb), [xr_registry](references.md#xr_registry) | CC-BY-4.0 (extension text) |
 | [`profiles/openxr.fb2.toml`](profiles/openxr.fb2.toml) | OpenXR `XR_FB_face_tracking2` (`XrFaceExpression2FB`), OpenXR-Docs `5a82d45` | 71 | source | [OpenXR: XR_FB_face_tracking2](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_face_tracking2) | [xr_fb2](references.md#xr_fb2), [xr_registry](references.md#xr_registry) | CC-BY-4.0 (extension text) |
 | [`profiles/openxr.visemes.toml`](profiles/openxr.visemes.toml) | META visemes: OpenXR `XR_META_face_tracking_visemes` (`XrFaceTrackingVisemeMETA`), OpenXR-Docs `5a82d45` | 15 | source | [OpenXR: XR_META_face_tracking_visemes](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_META_face_tracking_visemes) | [xr_registry](references.md#xr_registry), [xr_visemes](references.md#xr_visemes) | CC-BY-4.0 (extension text) |
@@ -36,27 +56,13 @@ Each file in `profiles/` records one public expression set (or, for `fixture.tom
 | [`profiles/vrcft.transport.toml`](profiles/vrcft.transport.toml) | VRCFaceTracking Unified Expressions transport enum (`UnifiedExpressions.cs`), VRCFaceTracking `6432e6a` | 89 | inventory only | [GitHub: UnifiedExpressions.cs at 6432e6a](https://github.com/benaclejames/VRCFaceTracking/blob/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Expressions/UnifiedExpressions.cs) | [vrcft_data](references.md#vrcft_data), [vrcft_enum](references.md#vrcft_enum) | Apache-2.0 |
 | [`profiles/vrm.preset.toml`](profiles/vrm.preset.toml) | VRM 1.0 expression presets (`VRMC_vrm` expressions and lookAt), vrm-specification `94e82dd` | 18 | target | [GitHub: VRM 1.0 expressions.md at 94e82dd](https://github.com/vrm-c/vrm-specification/blob/94e82dd346fa6cf0337c4421728640e5252dd38e/specification/VRMC_vrm-1.0/expressions.md) | [vrm_expressions](references.md#vrm_expressions), [vrm_lookat](references.md#vrm_lookat) | Reference only; redistribution of specification prose unresolved |
 
+The Signals column counts every inventory row, including count sentinels and rows recorded as absent, so it can be higher than the counts in Contents above: FB2 has 70 weights plus `COUNT` (71), FB has 63 plus `COUNT` and an absent tongue row (65), the VRCFT transport enum has 88 plus `Max` (89), and MediaPipe has its 52 labels plus an absent `tongueOut` row (53).
+
 RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.toml](data/canonical.toml); it is the target of the three `*.to_canonical` mappings.
 
 ¹ Apple's documentation pages build their content with JavaScript; without it the page is an empty shell. The pinned source is Apple's JSON data for the same page.
 
 ² create.roblox.com answered scripted checks with HTTP 502 on 2026-10-26, though it may work in a browser. The same reference is in the Roblox creator-docs repository as [FaceControls.yaml at a0fce04](https://github.com/Roblox/creator-docs/blob/a0fce044c480e8c580dc99b0645d127ad83a3873/content/en-us/reference/engine/classes/FaceControls.yaml).
-
-### Mappings
-
-Every rule, with its assumptions, losses and evidence, is listed in [reports/mappings.md](reports/mappings.md). **Proposed** rules are approximate cross-provider translations that compile only with the approximation opt-in.
-
-| Mapping | Source set → target set | Rules | Evidence status |
-|---|---|---|---|
-| [`arkit.to_canonical`](reports/mappings.md#arkitto_canonical) | `arkit.coefficient` → `rcef.canonical` | 9 | verified_current |
-| [`fb2.to_canonical`](reports/mappings.md#fb2to_canonical) | `openxr.fb2` → `rcef.canonical` | 8 | verified_current |
-| [`vrcft_eye.to_canonical`](reports/mappings.md#vrcft_eyeto_canonical) | `vrcft.eye` → `rcef.canonical` | 4 | verified_current |
-| [`fb2.to_arkit`](reports/mappings.md#fb2to_arkit) | `openxr.fb2` → `arkit.coefficient` | 10 | proposed |
-| [`fb2_gaze.to_arkit`](reports/mappings.md#fb2_gazeto_arkit) | `openxr.fb2` → `arkit.coefficient` | 4 | proposed |
-| [`visemes.to_vrm`](reports/mappings.md#visemesto_vrm) | `openxr.visemes` → `vrm.preset` | 5 | proposed |
-| [`fixture.affine`](reports/mappings.md#fixtureaffine) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
-| [`fixture.bilateral`](reports/mappings.md#fixturebilateral) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
-| [`survey.ambiguous`](reports/mappings.md#surveyambiguous) | `mediapipe.label` → `rcef.canonical` | 1 | unresolved (not executable) |
 
 ## Generate and check
 

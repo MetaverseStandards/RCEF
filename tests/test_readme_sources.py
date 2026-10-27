@@ -20,8 +20,8 @@ class ReadmeSources(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         readme = (ROOT / 'README.md').read_text(encoding='utf-8')
-        cls.sets = table_rows(readme, '## Expression sets and where they come from', '### Mappings')
-        cls.mappings = table_rows(readme, '### Mappings', '## Generate and check')
+        cls.mappings = table_rows(readme, '### Mappings', '### Expression sets')
+        cls.sets = table_rows(readme, '### Expression sets', '## Generate and check')
         cls.evidence = {r['id']: r for r in
                         tomllib.loads((ROOT / 'evidence/sources.toml').read_text(encoding='utf-8'))['evidence']}
         cls.files = {p.name: tomllib.loads(p.read_text(encoding='utf-8')) for p in (ROOT / 'profiles').glob('*.toml')}
