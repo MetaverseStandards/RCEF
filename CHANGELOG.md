@@ -16,6 +16,10 @@ gaze exclusivity into the data.
   declared as a loss. The example translator no longer refuses such frames.
 - New `rcef.intermediate` profile (4 signals) for those differences, in
   `data/intermediate.toml`.
+- The msf-tools lock moves to 0.3.0 (commit `e799dfb`), which provides
+  operators 1.1. It records the hash of the `py3-none-any` wheel built
+  from that commit; the 0.2.0.dev0 lock is kept as
+  `evidence/tooling.lock.previous.json`.
 - VRCFaceTracking's signed eye gaze is not split into FB2 directions: its
   units and range are unresolved in RCEF's inventory, and `piecewise_linear`
   needs a declared range.
