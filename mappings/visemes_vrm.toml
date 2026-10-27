@@ -1,0 +1,107 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+# Proposed META viseme -> VRM 1.0 lip-sync preset translations.
+
+[[mappings]]
+id = "visemes.to_vrm"
+
+[[mappings.rules]]
+id = "visemes_vrm.aa"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META"]
+outputs = ["vrm.preset.aa"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "META viseme AA corresponds to VRM preset aa (META \"A:\" as in car; VRM remark \"aa\").",
+  "Phoneme-label correspondence only; no published table maps META visemes to VRM presets.",
+  "META viseme probability (0 to 1) is used directly as the VRM expression weight (0 to 1).",
+  "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["xr_visemes", "vrm_expressions"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant visemes are dropped, so outputs no longer sum to 1", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META", "vrm.preset.aa"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "a viseme probability becomes an asset-authored expression weight", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META", "vrm.preset.aa"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_vrm.ih"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META"]
+outputs = ["vrm.preset.ih"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "META viseme IH corresponds to VRM preset ih (META \"ih\" as in tip; VRM remark \"i\").",
+  "Phoneme-label correspondence only; no published table maps META visemes to VRM presets.",
+  "META viseme probability (0 to 1) is used directly as the VRM expression weight (0 to 1).",
+  "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["xr_visemes", "vrm_expressions"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant visemes are dropped, so outputs no longer sum to 1", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META", "vrm.preset.ih"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "a viseme probability becomes an asset-authored expression weight", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META", "vrm.preset.ih"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "vowel quality differs: META IH is the vowel in \"tip\", VRM ih is remarked \"i\"", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META", "vrm.preset.ih"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_vrm.ou"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"]
+outputs = ["vrm.preset.ou"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "META viseme OU corresponds to VRM preset ou (META \"ou\" as in book; VRM remark \"u\").",
+  "Phoneme-label correspondence only; no published table maps META visemes to VRM presets.",
+  "META viseme probability (0 to 1) is used directly as the VRM expression weight (0 to 1).",
+  "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["xr_visemes", "vrm_expressions"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant visemes are dropped, so outputs no longer sum to 1", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META", "vrm.preset.ou"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "a viseme probability becomes an asset-authored expression weight", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META", "vrm.preset.ou"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_vrm.ee"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_E_META"]
+outputs = ["vrm.preset.ee"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "META viseme E corresponds to VRM preset ee (META \"e\" as in bed; VRM remark \"eh\").",
+  "Phoneme-label correspondence only; no published table maps META visemes to VRM presets.",
+  "META viseme probability (0 to 1) is used directly as the VRM expression weight (0 to 1).",
+  "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["xr_visemes", "vrm_expressions"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant visemes are dropped, so outputs no longer sum to 1", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_E_META", "vrm.preset.ee"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "a viseme probability becomes an asset-authored expression weight", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_E_META", "vrm.preset.ee"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_vrm.oh"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META"]
+outputs = ["vrm.preset.oh"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "META viseme OH corresponds to VRM preset oh (META \"oh\" as in toe; VRM remark \"oh\").",
+  "Phoneme-label correspondence only; no published table maps META visemes to VRM presets.",
+  "META viseme probability (0 to 1) is used directly as the VRM expression weight (0 to 1).",
+  "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["xr_visemes", "vrm_expressions"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant visemes are dropped, so outputs no longer sum to 1", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META", "vrm.preset.oh"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "a viseme probability becomes an asset-authored expression weight", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META", "vrm.preset.oh"], "units" = "1" },
+]

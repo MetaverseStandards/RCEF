@@ -208,13 +208,13 @@ value_type = "scalar"
 units = "probability"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.visemes: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_visemes"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_TRACKING_VISEME_AA_META"
 surface = "openxr.visemes"
 side = "shared"
-metadata = { "native_index" = 10, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+metadata = { "native_index" = 10, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
 validity = "isValid"
 confidence = "not provided"
 time = "XrTime from result; explicit seconds conversion required"
@@ -228,13 +228,13 @@ value_type = "scalar"
 units = "probability"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.visemes: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_visemes"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_TRACKING_VISEME_E_META"
 surface = "openxr.visemes"
 side = "shared"
-metadata = { "native_index" = 11, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+metadata = { "native_index" = 11, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
 validity = "isValid"
 confidence = "not provided"
 time = "XrTime from result; explicit seconds conversion required"
@@ -248,13 +248,13 @@ value_type = "scalar"
 units = "probability"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.visemes: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_visemes"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_TRACKING_VISEME_IH_META"
 surface = "openxr.visemes"
 side = "shared"
-metadata = { "native_index" = 12, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+metadata = { "native_index" = 12, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
 validity = "isValid"
 confidence = "not provided"
 time = "XrTime from result; explicit seconds conversion required"
@@ -268,13 +268,13 @@ value_type = "scalar"
 units = "probability"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.visemes: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_visemes"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_TRACKING_VISEME_OH_META"
 surface = "openxr.visemes"
 side = "shared"
-metadata = { "native_index" = 13, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+metadata = { "native_index" = 13, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
 validity = "isValid"
 confidence = "not provided"
 time = "XrTime from result; explicit seconds conversion required"
@@ -288,13 +288,13 @@ value_type = "scalar"
 units = "probability"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.visemes: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_visemes"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_TRACKING_VISEME_OU_META"
 surface = "openxr.visemes"
 side = "shared"
-metadata = { "native_index" = 14, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
+metadata = { "native_index" = 14, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "selected" = true, "optional_feature" = true, "depends_on" = "XR_FB_face_tracking2", "valid_sum" = 1.0, "invalid_array_zero" = true, "silence_valid" = false }
 validity = "isValid"
 confidence = "not provided"
 time = "XrTime from result; explicit seconds conversion required"

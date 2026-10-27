@@ -42,13 +42,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:eyeLookInLeft: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "eyeLookInLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 2, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 2, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -59,13 +59,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:eyeLookOutLeft: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "eyeLookOutLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 3, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 3, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -161,13 +161,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:eyeLookInRight: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "eyeLookInRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 9, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 9, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -178,13 +178,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:eyeLookOutRight: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "eyeLookOutRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 10, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 10, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -314,13 +314,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:mouthClose: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "mouthClose"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 18, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 18, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -399,13 +399,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:mouthSmileLeft: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "mouthSmileLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 23, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 23, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -416,13 +416,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:mouthSmileRight: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "mouthSmileRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 24, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 24, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -569,13 +569,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:mouthShrugLower: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "mouthShrugLower"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 33, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 33, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -586,13 +586,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:mouthShrugUpper: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "mouthShrugUpper"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 34, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 34, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -791,13 +791,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "arkit.coefficient.v1:cheekPuff: face-relative native neutral-to-maximum coefficient"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["apple_blendshapes"]
 evidence_status = "verified_current"
 native_id = "cheekPuff"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 46, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
+metadata = { "inventory_ordinal" = 46, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "cheek"
 coupling = "bilateral_shared"

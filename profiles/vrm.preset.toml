@@ -93,13 +93,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "vrm1.preset:aa: asset-authored binding weights"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["vrm_expressions", "vrm_lookat"]
 evidence_status = "verified_current"
 native_id = "aa"
 surface = "vrm.preset"
 side = "shared"
-metadata = { "inventory_ordinal" = 5, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
+metadata = { "inventory_ordinal" = 5, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
 coupling = "asset_specific"
 region = "other"
 
@@ -110,13 +110,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "vrm1.preset:ih: asset-authored binding weights"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["vrm_expressions", "vrm_lookat"]
 evidence_status = "verified_current"
 native_id = "ih"
 surface = "vrm.preset"
 side = "shared"
-metadata = { "inventory_ordinal" = 6, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
+metadata = { "inventory_ordinal" = 6, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
 coupling = "asset_specific"
 region = "other"
 
@@ -127,13 +127,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "vrm1.preset:ou: asset-authored binding weights"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["vrm_expressions", "vrm_lookat"]
 evidence_status = "verified_current"
 native_id = "ou"
 surface = "vrm.preset"
 side = "shared"
-metadata = { "inventory_ordinal" = 7, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
+metadata = { "inventory_ordinal" = 7, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
 coupling = "asset_specific"
 region = "other"
 
@@ -144,13 +144,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "vrm1.preset:ee: asset-authored binding weights"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["vrm_expressions", "vrm_lookat"]
 evidence_status = "verified_current"
 native_id = "ee"
 surface = "vrm.preset"
 side = "shared"
-metadata = { "inventory_ordinal" = 8, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
+metadata = { "inventory_ordinal" = 8, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
 coupling = "asset_specific"
 region = "other"
 
@@ -161,13 +161,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "vrm1.preset:oh: asset-authored binding weights"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["vrm_expressions", "vrm_lookat"]
 evidence_status = "verified_current"
 native_id = "oh"
 surface = "vrm.preset"
 side = "shared"
-metadata = { "inventory_ordinal" = 9, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
+metadata = { "inventory_ordinal" = 9, "reason" = "Native identifier evidenced; used by the proposed approximate translation visemes.to_vrm; calibration correspondence is assumed, not measured.", "optional" = true, "bindings" = ["morphTargetBinds", "materialColorBinds", "textureTransformBinds"], "isBinary_threshold" = 0.5, "isBinary_comparison" = ">", "binary_boundary_inputs" = [0.49, 0.5, 0.51], "binary_boundary_outputs" = [0.0, 0.0, 1.0], "override_fields" = ["overrideMouth", "overrideBlink", "overrideLookAt"], "override_modes" = ["none", "block", "blend"], "native_clamp" = "specified by VRM; not implicit in RCEF rules", "morph_binding_fields" = ["node", "index", "weight"], "morph_binding_weight_domain" = [0.0, 1.0], "material_binding_fields" = ["material", "type", "targetValue"], "material_target_value_components" = 4, "material_color_types" = ["color", "emissionColor", "shadeColor", "matcapColor", "rimColor", "outlineColor"], "texture_binding_fields" = ["material", "scale", "offset"], "texture_scale_default" = [1.0, 1.0], "texture_offset_default" = [0.0, 0.0], "override_binary_source_uses_binary_output" = true, "overridden_binary_suppressed_if_effect_positive" = true, "custom_override_scope" = "application-defined", "lookat_range_fields" = ["inputMaxValue", "outputScale"], "lookat_expression_horizontal_map" = "rangeMapHorizontalOuter" }
 coupling = "asset_specific"
 region = "other"
 

@@ -2,6 +2,33 @@
 
 Original documentation: CC-BY-SA-4.0.
 
+## Data 0.2.0 — 2026-10-26
+
+Add the first cross-provider translations. All 19 rules are proposed and
+approximate: they compile only with the approximation opt-in, and each one
+states its calibration assumption and losses and cites at least two public
+sources.
+
+- `fb2.to_arkit` (10 rules): blink left/right, jaw open, mouth close, brow
+  inner up (mean of left and right), cheek puff (mean of left and right),
+  smile left/right, shrug upper/lower.
+- `fb2_gaze.to_arkit` (4 rules): horizontal gaze in/out for each eye. This
+  is a separate mapping because FB2 can report the face valid while eye
+  following is not.
+- `visemes.to_vrm` (5 rules): META visemes AA, IH, OU, E, OH to VRM aa, ih,
+  ou, ee, oh. This is a phoneme-label correspondence; no published table maps
+  META visemes to VRM.
+
+The 32 signals these rules use for the first time become `mapped`. ARKit
+cheekPuff gains `bilateral_shared` coupling. New evidence records cover the
+Godot OpenXR vendors plugin, Godot's face-modifier name table, the VRCFT
+compatibility tables and parameter code, and ICT-FaceKit. The Apple
+documentation pins are refreshed after Apple re-rendered those pages.
+
+Deferred: vertical gaze (FB2 EYES_LOOK_UP/DOWN to ARKit eyeLookUp/Down),
+which is equally well sourced, and signed-to-one-sided splits and curves,
+which need new msf-tools operators.
+
 ## Data 0.1.1 — 2026-10-07
 
 Correct eleven records using the pinned primary definitions:

@@ -8,6 +8,8 @@ Selected inventories: ARKit 52, MediaPipe 52, OpenXR FB 63 and FB2 70, optional 
 
 The canonical subset has 21 explicitly provider-calibrated scalar projections spanning blink, jaw, brow, directional gaze and physical pupil diameter. Executable identities preserve the stated provider basis. General calibration ambiguity is unresolved. Original affine and lossy bilateral fixtures demonstrate the shared runtime without claiming visual equivalence.
 
+Data 0.2.0 adds the first 19 cross-provider rules: FB2 to ARKit (face and, separately, horizontal gaze) and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
+
 ## Generate and check
 
 Python 3.11+ and the separately maintained `msf-tools` package are required. Install msf-tools at the commit recorded as `git_commit` in [tooling.lock.json](evidence/tooling.lock.json), from GitHub or from a local checkout, into the Python you use for RCEF:
