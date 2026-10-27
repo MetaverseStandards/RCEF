@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# RCEF calibration record (format: calibration/README.md). TEST FIXTURE: every
+# number and hash here is invented to exercise check.py; nothing was measured.
+format = "rcef.calibration/1"
+id = "fixture.jaw-gain"
+status = "calibrated_software"
+method = "landmark_monotone_fit"
+channels = ["fixture.source.jaw"]
+reference_rig = "Fixture rig (synthetic)"
+code_commit = "0123456789abcdef0123456789abcdef01234567"
+licence = "CC-BY-SA-4.0"
+limitations = [
+  "Synthetic test fixture; it describes no real fit.",
+  "Software renders only: says nothing about any tracker's response to a real face.",
+]
+
+[[inputs]]
+name = "fixture-rig.glb"
+sha256 = "1111111111111111111111111111111111111111111111111111111111111111"
+
+[[inputs]]
+name = "fixture-identity-modes.npz"
+sha256 = "2222222222222222222222222222222222222222222222222222222222222222"
+
+[renderer]
+source_sha256 = "3333333333333333333333333333333333333333333333333333333333333333"
+binary_sha256 = "4444444444444444444444444444444444444444444444444444444444444444"
+compiler = "Apple Swift 6.3.3"
+os = "macOS 27.0.1 (arm64)"
+gpu = "Apple M4 Max"
+
+[training]
+conditions = 48
+description = "Jaw at 8 openings from 0.125 to 1 on the fixture rig, 6 jittered camera and light conditions each."
+
+[held_out]
+seed_rule = "rcef.calibration.seeds/1"
+count = 24
+frozen_sha256 = "2bb616c65993957e1746df2f2acb7b343c7ced6e112f9237a31ac68217b8dcb8"
+
+[[curves]]
+input = "fixture.source.jaw"
+output = "fixture.target.jaw"
+knots = [[0.0, 0.0], [0.25, 0.18], [0.5, 0.41], [1.0, 1.0]]
+
+[[cells]]
+channel = "fixture.source.jaw"
+side = "none"
+stimulus = "jaw sweep"
+identity = "fixture identity 1"
+conditions = 24
+median = 0.012
+p95 = 0.041
+neutral = 0.004
