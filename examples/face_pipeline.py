@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: MIT
 """Drive the ICT-FaceKit face with FB2 frames, directly and through RCEF, and compare.
 
-Usage: python examples/face_pipeline.py --cache DIR --out DIR [--frames CSV]
+Usage: python examples/face_pipeline.py [--cache DIR] [--out DIR] [--frames CSV]
+
+The ICT-FaceKit files go to ~/.cache/rcef-ict-facekit and the outputs to
+~/.cache/rcef-examples/face ($XDG_CACHE_HOME instead of ~/.cache when it is
+set), so nothing is written into the checkout unless asked.
 
 For every frame of the FB2 input this builds two sets of ICT-FaceKit morph
 weights and evaluates both with msf_tools.evaluate_geometry:
@@ -155,12 +159,19 @@ def write_f32(path: Path, values) -> None:
     path.write_bytes(struct.pack(f'<{len(flat)}f', *flat))
 
 
-def main(argv=None) -> int:
+def arguments(argv=None) -> argparse.Namespace:
+    cache = rcef_translate.cache_home()
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('--cache', type=Path, required=True, help='directory for the ICT-FaceKit files (outside the repository)')
-    parser.add_argument('--out', type=Path, required=True, help='output directory')
+    parser.add_argument('--cache', type=Path, default=cache / 'rcef-ict-facekit',
+                        help='directory for the ICT-FaceKit files (default: %(default)s)')
+    parser.add_argument('--out', type=Path, default=cache / 'rcef-examples/face',
+                        help='output directory (default: %(default)s)')
     parser.add_argument('--frames', type=Path, default=HERE / 'data/fb2_demo_frames.csv')
-    args = parser.parse_args(argv)
+    return parser.parse_args(argv)
+
+
+def main(argv=None) -> int:
+    args = arguments(argv)
     out = args.out
     for sub in ('mesh/direct', 'mesh/translated', 'mesh/difference'):
         (out / sub).mkdir(parents=True, exist_ok=True)

@@ -7,11 +7,17 @@ face_pipeline.py. Only the public msf-tools API is used.
 from __future__ import annotations
 import csv
 import json
+import os
 from pathlib import Path
 
 import msf_tools as msf
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def cache_home() -> Path:
+    """$XDG_CACHE_HOME, or ~/.cache: where the examples write by default, outside the checkout."""
+    return Path(os.environ.get('XDG_CACHE_HOME') or Path.home() / '.cache')
 
 
 def load_pack(document: dict) -> msf.Pack:

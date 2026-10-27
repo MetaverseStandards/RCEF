@@ -1,12 +1,16 @@
 # SPDX-License-Identifier: MIT
 """The translation examples on the committed demo frames, run in process on the shared pack."""
+import contextlib
 import copy
 import csv
+import io
 import json
+import os
 from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 try:
     import shared_pack
@@ -18,6 +22,7 @@ sys.path.insert(0, str(ROOT / 'examples'))
 import face_pipeline  # noqa: E402
 import ict_facekit  # noqa: E402
 import rcef_translate  # noqa: E402
+import translate_visemes_to_vrm  # noqa: E402
 
 
 def compiled():
@@ -196,6 +201,20 @@ class VisemeExample(unittest.TestCase):
                 self.assertEqual(float(output[preset]), float(source_row[viseme]))
             if float(source_row['PP']) > 0:
                 self.assertIn('PP', output['dropped'])
+
+
+class DefaultOutputs(unittest.TestCase):
+    def test_examples_write_outside_the_checkout_by_default(self):
+        shared = rcef_translate.visemes_to_vrm(pack=shared_pack.pack(), compiled=compiled())
+        with tempfile.TemporaryDirectory(prefix='rcef-cache-') as tmp, \
+                mock.patch.dict(os.environ, {'XDG_CACHE_HOME': tmp}), \
+                mock.patch.object(rcef_translate, 'visemes_to_vrm', lambda: shared), \
+                contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(translate_visemes_to_vrm.main([]), 0)
+            self.assertTrue((Path(tmp) / 'rcef-examples/visemes_to_vrm.csv').is_file())
+            args = face_pipeline.arguments([])
+            self.assertEqual(args.out, Path(tmp) / 'rcef-examples/face')
+            self.assertEqual(args.cache, Path(tmp) / 'rcef-ict-facekit')
 
 
 if __name__ == '__main__':

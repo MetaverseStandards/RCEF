@@ -22,8 +22,10 @@ python -B check.py
 ## 2. Translate FB2 frames to ARKit
 
 ```sh
-python examples/translate_fb2_to_arkit.py examples/data/fb2_demo_frames.csv fb2_to_arkit.csv
+python examples/translate_fb2_to_arkit.py
 ```
+
+This reads `examples/data/fb2_demo_frames.csv` and writes `~/.cache/rcef-examples/fb2_to_arkit.csv` (under `$XDG_CACHE_HOME` instead of `~/.cache` when it is set), so nothing lands in the checkout. To choose the files, pass them: `python examples/translate_fb2_to_arkit.py INPUT.csv OUTPUT.csv`.
 
 The input has one row per frame: `time`, a `segment` label, all 70 FB2 weights, and FB2's two validity flags, `isValid` and `isEyeFollowingBlendshapesValid`. The output has the 14 ARKit weights that RCEF's rules produce, plus two columns:
 
@@ -41,16 +43,20 @@ How it works (see `examples/rcef_translate.py`):
 ## 3. Translate META visemes to VRM
 
 ```sh
-python examples/translate_visemes_to_vrm.py examples/data/viseme_demo_frames.csv visemes_to_vrm.csv
+python examples/translate_visemes_to_vrm.py
 ```
+
+This writes `~/.cache/rcef-examples/visemes_to_vrm.csv`; it takes the same optional input and output paths.
 
 The five vowel visemes become VRM `aa`, `ih`, `ou`, `ee` and `oh`. Consonant visemes have no VRM preset, so they appear in `dropped`. This is a phoneme-label correspondence; no published table maps META visemes to VRM.
 
 ## 4. Drive a face mesh and compare
 
 ```sh
-python examples/face_pipeline.py --cache ~/.cache/rcef-ict-facekit --out out/face
+python examples/face_pipeline.py
 ```
+
+The ICT-FaceKit files go to `~/.cache/rcef-ict-facekit` and the outputs to `~/.cache/rcef-examples/face` (again under `$XDG_CACHE_HOME` when it is set); `--cache DIR` and `--out DIR` choose others.
 
 This takes about a minute.
 
@@ -61,7 +67,7 @@ This takes about a minute.
    - **direct**: the FB2 values routed to the shapes as the Godot and VRCFT sources route them (`tests/fixtures/godot_fb2_rules.csv`), with each brow and cheek half taking its own FB2 side;
    - **translated**: RCEF's translated ARKit weights.
 
-Outputs in `out/face/`:
+Outputs in the output directory:
 
 | File | Contents |
 |---|---|
