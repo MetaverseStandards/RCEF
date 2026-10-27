@@ -1,10 +1,10 @@
 # Facial action unit datasets: desk review
 
-Could RCEF use public facial action unit (AU) datasets to calibrate or check its rules? This is a desk review only: no dataset was requested, downloaded or opened. Web access was blocked while it was written, so every statement about current licence terms below is from memory and marked **unverified**; check each dataset's current agreement before relying on it.
+Could RCEF use public facial action unit (AU) datasets to calibrate or check its mappings? This is a desk review only: no dataset was requested, downloaded or opened. Web access was blocked while it was written, so every statement below about current licence terms is from memory and marked **unverified**. Check each dataset's current agreement before you rely on it.
 
 ## Default: do not use them in published data
 
-RCEF publishes its data under CC BY-SA 4.0, which lets anyone reuse it, commercially or not, as long as they credit it and share alike. The datasets below are, as far as is known, released only under research agreements that forbid commercial use and redistribution. Numbers fitted to them and published in RCEF could carry those restrictions into a CC BY-SA release, which would conflict with it. So RCEF does not use them in any published rule or record unless a dataset's terms are checked and are compatible.
+RCEF publishes its data under CC BY-SA 4.0. That licence lets anyone reuse the data, commercially or not, if they give credit and share alike. As far as is known, the datasets below are released only under research agreements that forbid commercial use and redistribution. Numbers fitted to them and published in RCEF could carry those restrictions into a CC BY-SA release, which would conflict with it. So RCEF does not use them in any published mapping or record unless a dataset's terms are checked and are compatible.
 
 ## Datasets
 
@@ -14,7 +14,7 @@ RCEF publishes its data under CC BY-SA 4.0, which lets anyone reuse it, commerci
 | BP4D-Spontaneous (Binghamton–Pittsburgh) | 3D and 2D video of spontaneous expressions, with AU occurrence and some intensity codes | Released under a signed licence agreement, academic research only; commercial use under separate terms | Not for published data |
 | UNBC-McMaster Shoulder Pain Expression Archive | Video of people with shoulder pain moving their arm, with AU codes and pain scores | Released under a research-use agreement; non-commercial | Not for published data; pain faces are also a narrow and sensitive sample |
 
-All three record identifiable people's faces. Even research use would bring the consent, retention and data-protection questions in [physical-protocol.md](physical-protocol.md).
+All three record the faces of people who can be identified. Even research use would raise the consent, retention and data-protection questions in [physical-protocol.md](physical-protocol.md).
 
 ## What would change the default
 
