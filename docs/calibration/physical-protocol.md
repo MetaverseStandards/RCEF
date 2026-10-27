@@ -30,22 +30,25 @@ It would not establish anything about people the sample does not represent, abou
 
 A calibrated eye tracker that reports pupil diameter in millimetres runs alongside the tracker under test, under controlled light steps. The instrument's own calibration certificate or procedure is recorded. No pupil claim is made from cameras alone.
 
-## Clock sync
+## Clock sync, per device
 
-- A flash event at the start and end of each recording (a screen flash visible to every camera, plus its timestamp on the controlling machine) gives each device's offset and drift.
-- A jaw-open cross-correlation then refines the alignment: jaw opening is large and visible to every tracker, so the lag that best lines up the jaw signals is checked against the flash offset. If the two disagree by more than one frame, the recording is not used.
-- The remaining sync error is reported with the results.
+Each pairing gets a sync event that both of its devices can actually sense.
+
+- **R-CAP1 needs none.** ARKit and MediaPipe read the same camera frames, so they share ARKit's frame timestamps.
+- **R-CAP2, Quest Pro and iPhone (headset on).** The Quest Pro's face cameras face inward and its FB2 output is weights only, so it cannot see a screen flash; the headset also hides the eyes from the iPhone, so blinks are no use here. Instead the participant makes three cued, sharp jaw-open pulses at the start and three at the end of each recording. Both devices report jaw opening, so the lag that best lines up the two jaw signals around each set of pulses gives the offset, and the start and end sets give the drift. If the jaw signals around the pulses still disagree by more than one frame after alignment, the recording is not used. The remaining error is reported with the results.
+- **R-CAP2, upper face (headset off).** Only the iPhone records, so there is nothing to sync between devices; prompts are matched by the controlling machine's timestamps.
+- **R-CAP3, pupil.** The instrument does not report jaw movement, so its sync events are its own light steps: the light controller logs each step's time, and the pupil constriction that follows is seen by both the instrument and the tracker under test. Step onsets align the two, and the error is reported in the same way.
 
 ## Participants
 
-- Typical studies of this kind use 10 to 30 participants. The number, and how participants are chosen to cover face shape, skin tone, age, glasses and facial hair, is fixed before recruiting and written into the record's frozen part.
+- The number of participants, the reason for it, and how participants are chosen to cover face shape, skin tone, age, glasses and facial hair are fixed before recruiting and written into the record's frozen part.
 - Results are held out by participant, not by frame: participants used to fit a curve are never used to test it.
 
 ## Consent, law and retention
 
 This is a list of what review must cover, not legal advice.
 
-- **Consent:** informed, written, specific to this study, withdrawable at any time, with a plain description of what is kept.
+- **Consent:** informed, written, specific to this study, with a plain description of what is kept. A participant can withdraw and have their data deleted until the code-to-person key is destroyed at the end of their session; after that their data can no longer be told apart from anyone else's and cannot be removed. The consent text says this.
 - **DPIA:** a data protection impact assessment before any capture.
 - **GDPR Article 9:** face geometry processed this way may be special-category (biometric) data; the legal basis and safeguards must be settled first.
 - **BIPA (Illinois) and similar laws:** a written retention and destruction policy, written consent before collection, and no sale or sharing of biometric data.
