@@ -196,7 +196,10 @@ def rules_text(record: dict, passing: list[str]) -> str:
     lines = ['# SPDX-License-Identifier: CC-BY-SA-4.0',
              '# Pending: these rules need msf-tools operators 1.1 (piecewise_linear) and move to',
              '# mappings/mediapipe_arkit.toml once RCEF adopts it. TOML; not named .toml so msf-tools does not read it yet.',
-             '', '[[mappings]]', 'id = "mediapipe.to_arkit"', '']
+             '']
+    if not passing:
+        return '\n'.join(lines + ['# No channel passed every held-out cell, so there are no rules.', ''])
+    lines += ['[[mappings]]', 'id = "mediapipe.to_arkit"', '']
     for channel in passing:
         source, target = f'mediapipe.score.{channel}', f'arkit.coefficient.{channel}'
         lines += ['[[mappings.rules]]', f'id = "mediapipe_arkit.{channel}"', f'inputs = [{q(source)}]',
@@ -225,4 +228,4 @@ def read_rules() -> list[dict]:
     import tomllib
     if not RULES.exists():
         return []
-    return [r for m in tomllib.loads(RULES.read_text(encoding='utf-8')).get('mappings', []) for r in m['rules']]
+    return [r for m in tomllib.loads(RULES.read_text(encoding='utf-8')).get('mappings', []) for r in m.get('rules', [])]
