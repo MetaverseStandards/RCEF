@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Translate a CSV of frames with RCEF's FB2 -> ARKit mappings into ARKit weights.
+"""Translate a CSV of frames with RCEF's FB2 -> ARKit maps into ARKit weights.
 
 Usage: python examples/translate_fb2_to_arkit.py [INPUT.csv [OUTPUT.csv]]
 
@@ -10,8 +10,8 @@ OUTPUT defaults to ~/.cache/rcef-examples/fb2_to_arkit.csv ($XDG_CACHE_HOME inst
 Input columns: time, segment (a free label), one column per provider channel
 and one 0/1 column per provider validity flag. Output columns: time, segment,
 one column per translated ARKit weight (empty when refused), "refused"
-(which mapping refused the frame and why) and "dropped" (non-zero inputs that
-no RCEF rule reads).
+(which map refused the frame and why) and "dropped" (non-zero inputs that
+no RCEF mapping reads).
 """
 from pathlib import Path
 import sys

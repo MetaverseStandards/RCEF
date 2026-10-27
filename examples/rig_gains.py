@@ -4,7 +4,7 @@
 The same ARKit name moves two independently authored rigs by different amounts. For each shape both rigs have,
 this fits a curve from an ICT-FaceKit weight to the Rocketbox Female weight whose motion matches best, measured
 on rendered stimuli, and evaluates it on a held-out ICT identity. It calibrates how two example rigs render
-ARKit names; it says nothing about any tracker, and the result is a rendering correction for RCEF's face
+ARKit names. It says nothing about any tracker. The result is a rendering correction for RCEF's face
 examples, not a provider claim and not pack data. Rocketbox Male is reserved for a later method and is never
 loaded here.
 

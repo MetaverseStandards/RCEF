@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Translate a CSV of frames with RCEF's META viseme -> VRM mappings into VRM weights.
+"""Translate a CSV of frames with RCEF's META viseme -> VRM map into VRM weights.
 
 Usage: python examples/translate_visemes_to_vrm.py [INPUT.csv [OUTPUT.csv]]
 
@@ -10,8 +10,8 @@ OUTPUT defaults to ~/.cache/rcef-examples/visemes_to_vrm.csv ($XDG_CACHE_HOME in
 Input columns: time, segment (a free label), one column per provider channel
 and one 0/1 column per provider validity flag. Output columns: time, segment,
 one column per translated VRM weight (empty when refused), "refused"
-(which mapping refused the frame and why) and "dropped" (non-zero inputs that
-no RCEF rule reads).
+(which map refused the frame and why) and "dropped" (non-zero inputs that
+no RCEF mapping reads).
 """
 from pathlib import Path
 import sys

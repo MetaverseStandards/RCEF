@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-"""Translate provider frames with RCEF's mappings through the msf-tools public API.
+"""Translate provider frames with RCEF's maps through the msf-tools public API.
 
-Used by translate_fb2_to_arkit.py, translate_visemes_to_vrm.py and
-face_pipeline.py. Only the public msf-tools API is used.
+Used by translate_fb2_to_arkit.py, translate_visemes_to_vrm.py,
+face_pipeline.py and viseme_pipeline.py.
 """
 from __future__ import annotations
 import csv
@@ -29,11 +29,11 @@ def load_pack(document: dict) -> msf.Pack:
 
 
 class Translator:
-    """The compiled RCEF mappings from one source profile to one target profile."""
+    """The compiled RCEF maps from one source profile to one target profile."""
 
     def __init__(self, source: str, target: str, mappings: list[str], prefix: str, suffix: str,
                  root: Path = ROOT, pack: msf.Pack | None = None, compiled: dict | None = None):
-        """`pack` replaces the published pack; `compiled` holds mappings already compiled from it."""
+        """`pack` replaces the published pack; `compiled` holds maps already compiled from it."""
         self.pack = pack or load_pack(json.loads((root / 'generated/rcef.pack.json').read_text(encoding='utf-8')))
         self.signals = {s['id']: s for s in self.pack.document['signals']}
         self.prefix, self.suffix = prefix, suffix
@@ -44,14 +44,14 @@ class Translator:
                 continue
             snapshots = snapshots or (msf.profile_snapshot(self.pack, source).value,
                                       msf.profile_snapshot(self.pack, target).value)
-            # RCEF's cross-provider rules are proposed approximations, so they compile
+            # RCEF's cross-provider mappings are proposed approximations, so they compile
             # only with the approximation opt-in.
             result = msf.compile_mapping(self.pack, *snapshots, mapping, True)
             if not result.ok:
                 raise SystemExit(result.report.to_dict())
             self.mappings[mapping] = result.value
         rules = {m['id']: m['rules'] for m in self.pack.document['mappings']}
-        # Values a mapping computes for its own later rules are not outputs.
+        # Values a map computes for its own later mappings are not outputs.
         computed = {i for m in mappings for r in rules[m] for i in r['inputs']}
         self.outputs = [o for m in mappings for r in rules[m] for o in r['outputs'] if o not in computed]
         self.inputs = {i for m in self.mappings.values() for i in m.required_inputs}
@@ -84,12 +84,12 @@ class Translator:
                  'flags': {f: r[f] == '1' for f in flags}, 'labels': {c: r[c] for c in labels}} for r in rows]
 
     def translate(self, frames: list[dict]) -> list[dict]:
-        """Per frame: output values, refusals by mapping, and non-zero inputs no rule reads."""
+        """Per frame: output values, refusals by map, and non-zero inputs no mapping reads."""
         results = [{'time': f['time'], 'segment': f['segment'], 'values': {}, 'refused': [], 'dropped': []}
                    for f in frames]
         for mapping, compiled in self.mappings.items():
             # msf-tools refuses a frame if any channel it is given is marked invalid,
-            # even one the mapping does not read, so each mapping gets only its own inputs.
+            # even one the map does not read, so each map gets only its own inputs.
             inputs = sorted(compiled.required_inputs)
             samples = [{'timestamp': f['time'], 'values': {i: f['values'][i] for i in inputs},
                         'validity': {i: self.valid(i, f['flags']) for i in inputs}} for f in frames]
