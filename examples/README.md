@@ -132,3 +132,5 @@ To run the pipelines as tests (the slow tier, not part of the default suite; abo
 RCEF_SLOW_TESTS=1 RCEF_ICT_CACHE=~/.cache/rcef-ict-facekit RCEF_RIG_CACHE=~/.cache/rcef-face-rigs \
   python -B -m unittest tests/test_examples_slow.py
 ```
+
+With `RCEF_SLOW_TESTS=1`, `tests/test_translations.py` also halves each translation rule on its own and checks that only its output changes (about half a minute).
