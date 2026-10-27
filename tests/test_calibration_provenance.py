@@ -56,5 +56,37 @@ class CodeCommit(unittest.TestCase):
         self.assertIn('not a commit', self.problem('0' * 40))
 
 
+class LoadedCode(unittest.TestCase):
+    """The code a run depends on is every repository module it has imported, wherever it lives."""
+
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory(prefix='rcef-prov-')
+        self.addCleanup(temp.cleanup)
+        self.repo = Path(temp.name).resolve()
+        self.git = CodeCommit.git.__get__(self)
+        self.commit = CodeCommit.commit.__get__(self)
+        self.git('init', '-q')
+        (self.repo / 'examples').mkdir()
+        (self.repo / 'tools').mkdir()
+        (self.repo / 'examples/rcef_prov_helper.py').write_text('SCALE = 1\n')
+        (self.repo / 'tools/rcef_prov_tool.py').write_text('import rcef_prov_helper\n')
+        self.code = self.commit('harness')
+        for name in ('examples', 'tools'):
+            sys.path.insert(0, str(self.repo / name))
+            self.addCleanup(sys.path.remove, str(self.repo / name))
+        import rcef_prov_tool  # noqa: F401
+        self.addCleanup(sys.modules.pop, 'rcef_prov_tool')
+        self.addCleanup(sys.modules.pop, 'rcef_prov_helper')
+
+    def test_imported_modules_inside_the_repository_are_the_code(self):
+        self.assertEqual(provenance.loaded_files(self.repo), ['examples/rcef_prov_helper.py', 'tools/rcef_prov_tool.py'])
+
+    def test_a_changed_helper_outside_tools_is_refused(self):
+        (self.repo / 'examples/rcef_prov_helper.py').write_text('SCALE = 2\n')
+        self.commit('change the helper')
+        problem = provenance.code_problem(self.repo, self.code, provenance.loaded_files(self.repo))
+        self.assertIn('examples/rcef_prov_helper.py', problem)
+
+
 if __name__ == '__main__':
     unittest.main()

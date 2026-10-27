@@ -3,6 +3,7 @@
 from __future__ import annotations
 from pathlib import Path
 import subprocess
+import sys
 
 
 def _git(repo: Path, *args: str) -> subprocess.CompletedProcess:
@@ -28,3 +29,20 @@ def code_problem(repo: Path, code_commit: str, paths: list[str]) -> str | None:
     if dirty:
         return f'uncommitted changes to the code the record names:\n{dirty}'
     return None
+
+
+def loaded_files(repo: Path) -> list[str]:
+    """Repository-relative paths of every imported module whose file is inside `repo`.
+
+    Taken after the run's imports, this is the repository code the run depends
+    on, wherever it lives (check.py, examples/, tools/), without a list to keep.
+    """
+    root = Path(repo).resolve()
+    files = set()
+    for module in list(sys.modules.values()):
+        path = getattr(module, '__file__', None)
+        if path:
+            path = Path(path).resolve()
+            if path.is_relative_to(root):
+                files.add(path.relative_to(root).as_posix())
+    return sorted(files)

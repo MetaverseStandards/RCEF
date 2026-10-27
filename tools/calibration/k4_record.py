@@ -17,8 +17,6 @@ RECORD = k.ROOT / 'calibration' / f'{RECORD_ID}.cal'
 LEDGER = k.ROOT / 'calibration' / 'FREEZES'
 RULES = k.ROOT / 'tools/calibration/results/mediapipe_arkit.rules'
 HELD_OUT_CONDITIONS = 20
-# The code a record's held-out run must match; results/ holds outputs, not code.
-CODE = ['tools/calibration', 'tools/render', ':(exclude)tools/calibration/results']
 BOUNDS = {'median': 0.05, 'p95': 0.15, 'neutral': 0.03}
 CELLS = {'ict': 'ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)',
          'rocketbox-male': 'Rocketbox Male_Adult_01 (a rig not used in training)'}
@@ -139,13 +137,19 @@ def freeze(args) -> int:
 
 def heldout(args) -> int:
     """Render and score the held-out conditions; refuses unless the frozen record and its ledger line are committed."""
-    require_committed(RECORD, LEDGER, k.ROOT / 'tools/calibration', k.ROOT / 'tools/render')
+    require_committed(RECORD, LEDGER)
+    problems = check.verify_environment()
+    if problems:
+        raise SystemExit('the installed msf-tools is not the locked build:\n' + '\n'.join(problems))
     problems = check.calibration_problems(RECORD.parent, [])
     if problems:
         raise SystemExit('\n'.join(problems))
     record = check.load_record(RECORD)
-    if problem := provenance.code_problem(k.ROOT, record['code_commit'], CODE):
+    import rigs  # noqa: F401  (Rocketbox and ICT geometry; imported now so the code check covers it)
+    code = provenance.loaded_files(k.ROOT) + ['tools/render']
+    if problem := provenance.code_problem(k.ROOT, record['code_commit'], code):
         raise SystemExit(problem)
+    print(f'code as at {record["code_commit"][:12]}: {", ".join(code)}')
     if k.sha256(renderer(args)) != record['renderer']['binary_sha256']:
         raise SystemExit('this is not the renderer binary the record names')
     seeds = check.held_out_seeds(record)
@@ -157,7 +161,10 @@ def heldout(args) -> int:
         with tempfile.TemporaryDirectory(prefix='rcef-k4-') as work:
             out[rig.name] = {'conditions': conditions,
                              'results': k.sweep_runs(rig, conditions, channels, renderer(args), scorer, Path(work))}
-    save(args.out / 'heldout.json', out)
+    unchecked = sorted(set(provenance.loaded_files(k.ROOT)) - set(code))
+    if unchecked:
+        raise SystemExit(f'the run imported repository code that was not checked first: {", ".join(unchecked)}')
+    save(args.out / 'heldout.json', {**out, 'code_commit': record['code_commit'], 'code_files': code})
     return 0
 
 
