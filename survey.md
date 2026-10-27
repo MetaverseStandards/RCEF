@@ -19,11 +19,11 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 | VRM 1.0 presets | 18 | All optional and asset-authored; morph/material/texture bindings, thresholds, overrides and LookAt metadata preserved. |
 | Roblox FaceControls | 50 | Native 0..1 but asset-specific joint poses/correctives. Neutral Frame 0 and requirement conflicts retained. |
 
-Sources and exact digests are in [sources.toml](evidence/sources.toml). The generated coverage groups every signal by disposition and every mapped mapping by quality. Profile and signal metadata tell selected entries apart from ancillary records. Every evidence source appears in coverage, even if it supports only unresolved or excluded records.
+Sources and exact digests are in [sources.toml](evidence/sources.toml). The generated coverage groups every signal by disposition and every mapping with disposition `mapped` by quality. Profile and signal metadata tell selected entries apart from ancillary records. Every evidence source appears in coverage, even if it supports only unresolved or excluded records.
 
 ## Semantics that remain distinct
 
-`mapped`, `unsupported`, `unresolved` and `excluded` are dispositions. Only mapped mappings have a mapping quality. Evidence status describes verification, separately from execution. A verified native identifier can still have an unresolved canonical mapping.
+`mapped`, `unsupported`, `unresolved` and `excluded` are dispositions. Only mappings with disposition `mapped` have a mapping quality. Evidence status describes verification, separately from execution. A verified native identifier can still have an unresolved canonical mapping.
 
 A tracking validity flag is not a neutral coefficient. VRCFT openness starts at 1, but that is not a measured neutral. The raw `PupilDiameter_MM` fields hold millimetres. The combined method, however, puts normalized dilation in a field with the same name, and it replaces NaN with 0.5. The pinned implementation always averages combined gaze, although the documentation describes behaviour that depends on validity. No scalar identity implements behaviour with state like this.
 

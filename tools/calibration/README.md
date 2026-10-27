@@ -27,7 +27,7 @@ Do these steps in this order:
    - every repository file that the run imports, `ict_files.json` and the renderer source are exactly as at the record's `code_commit`. The file list comes from the loaded modules, so `check.py` and `examples/` count too.
 
    The step prints that file list and saves it with the scores. To reproduce a published record, check out its freeze commit. The step then renders 20 held-out conditions from the seeds that the record's frozen hash sets. They use new ICT identities, and Rocketbox Male, which training never used.
-5. `evaluate` adds the cells to the record. It writes a rule for each channel whose cells all pass to [results/mediapipe_arkit.rules](results/). For the published record no channel passed, so that file has no rules and no mapping cites the record.
+5. `evaluate` adds the cells to the record. It writes a mapping for each channel whose cells all pass to [results/mediapipe_arkit.rules](results/). For the published record no channel passed, so that file has no mappings and no mapping cites the record.
 
 Renders and scores go to `~/.cache/rcef-k4`. A run takes a few minutes on an Apple M-series Mac.
 
