@@ -26,7 +26,7 @@ gaze exclusivity into the data.
 
 ## Calibration and examples — unreleased
 
-- First calibration record, `calibration/rig-gains.ict-rocketbox-female.cal`
+- Calibration record `calibration/rig-gains.ict-rocketbox-female.cal`
   (software-only; not a measurement of any tracker): one monotone curve per
   ARKit shape from an ICT-FaceKit weight to the Rocketbox Female weight whose
   rendered landmark motion matches, fitted on 8 ICT identities and evaluated
