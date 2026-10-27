@@ -1,0 +1,21 @@
+{
+  "dependency": "msf-tools",
+  "source": "https://github.com/Kjakubzak/msf-tools",
+  "git_commit": "e6a63d94480783fdf3b85eccc7c0b7d80bb551d0",
+  "package_version": "0.1.1",
+  "files": {
+    "msf_tools/__init__.py": "a33ac279fbf342a9450e073708cab32db3054c157ae3f1d66a365d0410816d4b",
+    "msf_tools/__main__.py": "8ba25604453e1073429d6b3f11364fb7698e94dacb945fa853ad26555cfd01fc",
+    "msf_tools/authoring.py": "e4e61d4c4068c5515b330c50b879df6bc14ef4c658fac155a9de5c1f18139f5a",
+    "msf_tools/cli.py": "dddb0cfe82546cf54a7e75f1cd021eb25d9f09e9f60baf4bcff9dd575612a43d",
+    "msf_tools/common.py": "65183bae311ee31aab7182bf1c4042e9a83208114e1b0a7e43cd22a925ecd1bc",
+    "msf_tools/geometry.py": "07cad035063667cd4a58029e2ba834a8eb2cde5bb98f82da8ca79a958fee0532",
+    "msf_tools/gltf_semantics.py": "4a4dc1069a38e75ddc55980e13550e4d07c7d7e22a52f2bcae9ae595db9dad47",
+    "msf_tools/mapping.py": "ab897aed89e7a45b2cabd9ac4f8dcef67c337dd3801af71e1e7d8e299ae9c4c5",
+    "msf_tools/math3d.py": "f8bfdd994ebb4df455d0db84e056050d03413b8a4e94f017aab89679ff04cbe4",
+    "msf_tools/pack.py": "1bdd1f9c95eb2ba6b6bb4af9c3fa5184709d5c33e6583662bc6b8e19754dd48b",
+    "msf_tools/records.py": "ec7f8bb79aaf76c1a8b57b3caee017707a94b0dee07f6e25cc0a55a5982270e2",
+    "msf_tools/report.py": "9ed4dd9cbe3ed9a364d639e928754ffe3ad15c9ce9397929707c6b0f37577b0d",
+    "msf_tools/snapshot.py": "3298f94fafab4e61933114e7692bb1c260bad3d9e88dcf9c6093329187c24cd8"
+  }
+}

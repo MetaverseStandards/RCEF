@@ -1,49 +1,30 @@
-name: Authoring acceptance
-# Shared tools start locally. Configure the pinned dependency before remote execution.
+name: Check
 on:
+  push:
+  pull_request:
   workflow_dispatch:
-    inputs:
-      tools_repository:
-        description: Shared tools repository (owner/name)
-        required: true
-        type: string
-      tools_ref:
-        description: Reviewed immutable shared tools commit SHA
-        required: true
-        type: string
 permissions:
   contents: read
 jobs:
-  parity:
+  check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python: ['3.11', '3.12']
     steps:
       - uses: actions/checkout@v4
-        with:
-          path: RCEF
-      - uses: actions/checkout@v4
-        with:
-          repository: ${{ inputs.tools_repository }}
-          ref: ${{ inputs.tools_ref }}
-          path: .ci-tools
-          token: ${{ secrets.MSF_TOOLS_TOKEN || github.token }}
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - name: Verify locked shared commit
+      - name: Install msf-tools at the locked commit
+        env:
+          MSF_TOOLS_TOKEN: ${{ secrets.MSF_TOOLS_TOKEN }}
         run: |
-          python - <<'PYCODE'
-          import json, subprocess
-          from pathlib import Path
-          expected = json.loads(Path("evidence/tooling.lock.json").read_text())["git_commit"]
-          actual = subprocess.check_output(["git", "-C", "../.ci-tools", "rev-parse", "HEAD"], text=True).strip()
-          if actual != expected:
-              raise SystemExit(f"Shared dependency differs from lock: expected {expected}, got {actual}")
-          PYCODE
-        working-directory: RCEF
-      - run: python -B check.py --tools-path ../.ci-tools
-        working-directory: RCEF
-      - run: python -B tests/test_parity.py --tools-path ../.ci-tools
-        working-directory: RCEF
+          # The token stays in git's URL rewrite, so it is never written into the
+          # installed package's direct_url.json.
+          git config --global url."https://x-access-token:${MSF_TOOLS_TOKEN}@github.com/".insteadOf "https://github.com/"
+          commit=$(python -c "import json; print(json.load(open('evidence/tooling.lock.json'))['git_commit'])")
+          python -m pip install "git+https://github.com/Kjakubzak/msf-tools@${commit}"
+          git config --global --unset-all url."https://x-access-token:${MSF_TOOLS_TOKEN}@github.com/".insteadOf
+      - run: python -B check.py
+      - run: python -B -m unittest discover -s tests -v

@@ -679,7 +679,7 @@ surface = "godot.base"
 side = "shared"
 metadata = { "native_index" = 39, "reason" = "Enum/store contract supplies no numeric calibration or device availability.", "selected" = true, "setters_clamp" = false, "native_spelling_retained" = true }
 native_default = 0.0
-region = "eyelid"
+region = "mouth"
 
 [[signals]]
 id = "godot.base.FT_JAW_RIGHT"

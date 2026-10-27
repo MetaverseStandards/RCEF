@@ -1,0 +1,28 @@
+path,role,table_kinds,signals,profiles,membership_rows,mappings,rules,evidence,canonical_signals,bytes,sha256,license
+data/canonical.toml,canonical signals and profile,[[signals]]; [[profiles]],21,1,21,0,0,0,21,19997,a17ca42cc6c3ddd749874ef9e43040429bdd1c917a913e235deb3f5f171fe060,CC-BY-SA-4.0
+evidence/sources.toml,source evidence,[[evidence]],0,0,0,0,0,27,0,14496,40e9dda66e9ef4ee62f726ee259189a17c6c45830918639e0aa9ae57e9794564,CC-BY-SA-4.0
+mappings/arkit.toml,directional mapping rules,[[mappings]],0,0,0,1,9,0,0,5768,6f517ea1fcf885a241ad8c0ea41fa2d9fb3160564ea25adf796da7eb50ac8084,CC-BY-SA-4.0
+mappings/fb2.toml,directional mapping rules,[[mappings]],0,0,0,1,8,0,0,5932,7ab5e6a63225de33b4ae456aded73a0f911ffd9248c6264023f95b24c1d62736,CC-BY-SA-4.0
+mappings/fixtures.toml,directional mapping rules,[[mappings]],0,0,0,2,2,0,0,1498,462f25e45738f467321c38ad55d5bd415b08b61ed3081fa8701546b446e4ae2c,CC-BY-SA-4.0
+mappings/unresolved.toml,directional mapping rules,[[mappings]],0,0,0,1,1,0,0,557,0b58fd4b3cc4a37bc13fae09f8af85791a935fd5d1c5b2793615fa325573626d,CC-BY-SA-4.0
+mappings/vrcft_eye.toml,directional mapping rules,[[mappings]],0,0,0,1,4,0,0,2410,84e468d3c83f9e32dd1e38f9fb34091dead17d1afb64f8fbcd29340af74cfca5,CC-BY-SA-4.0
+pack.toml,pack metadata,root scalar keys,0,0,0,0,0,0,0,155,666ef52bf21edd31236741eec6b5866a12d0a6ad1439ec971da1372aaa5c98e9,CC-BY-SA-4.0
+profiles/arkit.ancillary.toml,signal inventory and profiles,[[signals]]; [[profiles]],2,1,2,0,0,0,0,1402,a7b435367d4cbfb14e016fad446d03f26620b6425d08b426976d653edd2641f8,CC-BY-SA-4.0
+profiles/arkit.coefficient.toml,signal inventory and profiles,[[signals]]; [[profiles]],52,1,52,0,0,0,0,33393,959bc60a0191ec8b1ce9999c302fa84bf41a11849ade0796924cf0fa1bf99a4a,CC-BY-SA-4.0
+profiles/fixture.toml,signal inventory and profiles,[[signals]]; [[profiles]],5,3,10,0,0,0,0,3443,28dafdb3bf68864a0317a9d193e4bb228cdbfe2bb2ac2afcd012857e605fbba3,CC-BY-SA-4.0
+profiles/godot.base.toml,signal inventory and profiles,[[signals]]; [[profiles]],102,1,102,0,0,0,0,68903,9c09fdabb720ebaa9d3bc7c63b16d790b0c0ca91f55e3b50debc0edf08b3f591,CC-BY-SA-4.0
+profiles/godot.blended.toml,signal inventory and profiles,[[signals]]; [[profiles]],42,1,42,0,0,0,0,28260,b35e1fcff36833cc51532a28f79286fb68a97332616f2a83dd74204e1927f43e,CC-BY-SA-4.0
+profiles/mediapipe.label.toml,signal inventory and profiles,[[signals]]; [[profiles]],53,1,53,0,0,0,0,29998,0b2d79a7aaa6196b8436354a3935911124bb82e8c115c63cb730851fb8db7b15,CC-BY-SA-4.0
+profiles/openxr.ancillary.toml,signal inventory and profiles,[[signals]]; [[profiles]],10,1,10,0,0,0,0,6902,48c82fdedc8fb8da624090963692dafd31b78647ecb3909940e3e1474c6c6a42,CC-BY-SA-4.0
+profiles/openxr.fb.toml,signal inventory and profiles,[[signals]]; [[profiles]],65,1,65,0,0,0,0,53120,22bc55b88aa55fc244c29bb8b4def6a12fd5809bd699a1b09d20ba7be8e7a3da,CC-BY-SA-4.0
+profiles/openxr.fb2.toml,signal inventory and profiles,[[signals]]; [[profiles]],71,1,71,0,0,0,0,61701,cbf519e7e7e3ee3f09087299dfecd78f8046af8e034e48e1373abf8df96fca1a,CC-BY-SA-4.0
+profiles/openxr.visemes.toml,signal inventory and profiles,[[signals]]; [[profiles]],15,1,15,0,0,0,0,15122,b1b97a1fb4e350b35f8e24ce127036efbcf5a0155b71e330c286b9486dd4f304,CC-BY-SA-4.0
+profiles/roblox.control.toml,signal inventory and profiles,[[signals]]; [[profiles]],50,1,50,0,0,0,0,45108,0ede53622d74ec141767bfd3ec1725f3cfa6fe46045027eb0d1a5eb85ccb4124,CC-BY-SA-4.0
+profiles/vrcft.artist.base.toml,signal inventory and profiles,[[signals]]; [[profiles]],102,1,102,0,0,0,0,66587,b003ded03f089ed45916cb867a4d249f4f3769d01396b90934112c2ddf8aac52,CC-BY-SA-4.0
+profiles/vrcft.artist.blended.toml,signal inventory and profiles,[[signals]]; [[profiles]],42,1,42,0,0,0,0,33651,74e1ba510161a1685c0dd79fc837f01860e1485ec5ed86d59900d5bd1302baa4,CC-BY-SA-4.0
+profiles/vrcft.eye.toml,signal inventory and profiles,[[signals]]; [[profiles]],20,1,20,0,0,0,0,12759,610bb1755642604d52924fb53486709d8899c3b52f6a55831fdaed8c62245651,CC-BY-SA-4.0
+profiles/vrcft.parameter.encoding.toml,signal inventory and profiles,[[signals]]; [[profiles]],7,1,7,0,0,0,0,6345,11d58ecfb13f65dcc2834accbbf9880fdddfe844572eccc06542976572415eda,CC-BY-SA-4.0
+profiles/vrcft.parameter.flags.toml,signal inventory and profiles,[[signals]]; [[profiles]],3,1,3,0,0,0,0,2833,f99cc843cf03d2d2dfdf02e2cc88ee667853e3dfb20eeb13dcc36c7b714a5630,CC-BY-SA-4.0
+profiles/vrcft.parameter.float.toml,signal inventory and profiles,[[signals]]; [[profiles]],124,1,124,0,0,0,0,103060,eaa91ac3579e46ad674f1df1a5608660ebd74fd1d87222a372f6f1129384ebb5,CC-BY-SA-4.0
+profiles/vrcft.transport.toml,signal inventory and profiles,[[signals]]; [[profiles]],89,1,89,0,0,0,0,65108,4f010d5c8f9117f4b6d578af7f86bd1172747208c6221082643c6b6a82b1b41d,CC-BY-SA-4.0
+profiles/vrm.preset.toml,signal inventory and profiles,[[signals]]; [[profiles]],18,1,18,0,0,0,0,31700,e489d2a3445afae7240a1ca65255e3272b47f2b674ea50c1ba7e95d90daadfa6,CC-BY-SA-4.0

@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MIT
 """Consumer acceptance tests: independent scalar expectations and authoring refusal."""
 from __future__ import annotations
-import argparse
 from copy import deepcopy
 import json
 from pathlib import Path
@@ -12,13 +11,9 @@ import sys
 import tempfile
 import unittest
 
-ROOT = Path(__file__).resolve().parents[1]
-parser = argparse.ArgumentParser(add_help=False)
-parser.add_argument('--tools-path', type=Path)
-args, remaining = parser.parse_known_args()
-if args.tools_path:
-    sys.path.insert(0, str(args.tools_path.resolve(strict=True)))
 import msf_tools as msf
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class Parity(unittest.TestCase):
@@ -29,8 +24,16 @@ class Parity(unittest.TestCase):
             raise AssertionError(loaded.report.to_dict())
         cls.document = loaded.value.to_dict()
         cls.pack = msf.compile_pack(loaded.value).value
-        cls.source = msf.profile_snapshot(cls.pack, 'fixture.source').value
-        cls.target = msf.profile_snapshot(cls.pack, 'fixture.target').value
+        # msf-tools rechecks the whole pack on every evaluation. The fixture
+        # mappings are evaluated many times, so they use a pack holding only them.
+        fixtures = deepcopy(cls.document)
+        fixtures['profiles'] = [p for p in fixtures['profiles'] if p['id'] in ('fixture.source', 'fixture.target')]
+        kept = {s for p in fixtures['profiles'] for s in p['signal_ids']}
+        fixtures['signals'] = [s for s in fixtures['signals'] if s['id'] in kept]
+        fixtures['mappings'] = [m for m in fixtures['mappings'] if m['id'] in ('fixture.affine', 'fixture.bilateral')]
+        cls.fixture_pack = msf.compile_pack(msf.validate_authoring(fixtures).value).value
+        cls.source = msf.profile_snapshot(cls.fixture_pack, 'fixture.source').value
+        cls.target = msf.profile_snapshot(cls.fixture_pack, 'fixture.target').value
         cls.fixtures = json.loads((ROOT / 'fixtures/mapping_samples.json').read_text())
 
     def ok(self, result):
@@ -46,7 +49,7 @@ class Parity(unittest.TestCase):
             self.assertIn(code, codes)
 
     def compile(self, mapping, approximation=False):
-        return msf.compile_mapping(self.pack, self.source, self.target, mapping,
+        return msf.compile_mapping(self.fixture_pack, self.source, self.target, mapping,
                                    allow_approximation=approximation)
 
     def frame(self, values, validity=None):
@@ -133,11 +136,8 @@ class Parity(unittest.TestCase):
                 source = ROOT / name
                 if source.is_dir(): shutil.copytree(source, path / name)
                 else: shutil.copy2(source, path / name)
-            tool_root = Path(msf.__file__).resolve().parent.parent
-            runner = [sys.executable, '-B', '-c',
-                      'import runpy,sys;sys.path.insert(0,sys.argv.pop(1));'
-                      'sys.argv[0]="msf_tools";runpy.run_module("msf_tools",run_name="__main__")',
-                      str(tool_root), 'check', str(path), '--pack', str(path / 'generated/rcef.pack.json'),
+            runner = [sys.executable, '-B', '-P', '-m', 'msf_tools', 'check', str(path),
+                      '--pack', str(path / 'generated/rcef.pack.json'),
                       '--csv', str(path / 'generated/rcef_mapping.csv')]
             def run(write=False):
                 return subprocess.run(runner + (['--write'] if write else []), capture_output=True)
@@ -196,7 +196,14 @@ class Parity(unittest.TestCase):
         disposition_ids = [id for ids in coverage['dispositions'].values() for id in ids]
         self.assertEqual(set(disposition_ids), signal_ids)
         self.assertEqual(len(disposition_ids), len(signal_ids))
-        self.assertEqual(coverage['mapping_quality_counts'], {'exact': 22, 'approximate': 1})
+        rules = [r for m in self.document['mappings'] for r in m['rules']]
+        mapped = [r for r in rules if r['disposition'] == 'mapped']
+        self.assertEqual(sorted(i for ids in coverage['mapping_quality'].values() for i in ids),
+                         sorted(r['id'] for r in mapped))
+        for quality, ids in coverage['mapping_quality'].items():
+            self.assertEqual(coverage['mapping_quality_counts'][quality], len(ids))
+            self.assertEqual(set(ids), {r['id'] for r in mapped if r['mapping_quality'] == quality})
+        self.assertEqual({r['id'] for r in coverage['rules']}, {r['id'] for r in rules})
         self.assertEqual(coverage['totals']['signals'], len(signal_ids))
         self.assertEqual(len(coverage['profiles']), len(self.document['profiles']))
         self.assertEqual({e['id'] for e in coverage['evidence']},
@@ -206,4 +213,4 @@ class Parity(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(argv=[sys.argv[0], *remaining], verbosity=2)
+    unittest.main(verbosity=2)

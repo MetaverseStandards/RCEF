@@ -1,0 +1,894 @@
+id,native_id,label,units,min,max,native_index,inventory_ordinal,region,side,coupling,calibration
+rcef.arkit.coefficient.eyeBlinkLeft,,RCEF eyeBlinkLeft,1,0.0,1.0,,,eyelid,left,,arkit.coefficient.v1:eyeBlinkLeft: face-relative native neutral-to-maximum coefficient
+rcef.arkit.coefficient.eyeBlinkRight,,RCEF eyeBlinkRight,1,0.0,1.0,,,eyelid,right,,arkit.coefficient.v1:eyeBlinkRight: face-relative native neutral-to-maximum coefficient
+rcef.arkit.coefficient.jawForward,,RCEF jawForward,1,0.0,1.0,,,jaw,shared,,arkit.coefficient.v1:jawForward: face-relative native neutral-to-maximum coefficient
+rcef.arkit.coefficient.jawOpen,,RCEF jawOpen,1,0.0,1.0,,,jaw,shared,,arkit.coefficient.v1:jawOpen: face-relative native neutral-to-maximum coefficient
+rcef.arkit.coefficient.browDownLeft,,RCEF browDownLeft,1,0.0,1.0,,,brow,left,,arkit.coefficient.v1:browDownLeft: face-relative native neutral-to-maximum coefficient
+rcef.arkit.coefficient.browDownRight,,RCEF browDownRight,1,0.0,1.0,,,brow,right,,arkit.coefficient.v1:browDownRight: face-relative native neutral-to-maximum coefficient
+rcef.arkit.coefficient.browInnerUp,,RCEF browInnerUp,1,0.0,1.0,,,brow,shared,bilateral_shared,arkit.coefficient.v1:browInnerUp: face-relative native neutral-to-maximum coefficient
+rcef.arkit.coefficient.browOuterUpLeft,,RCEF browOuterUpLeft,1,0.0,1.0,,,brow,left,,arkit.coefficient.v1:browOuterUpLeft: face-relative native neutral-to-maximum coefficient
+rcef.arkit.coefficient.browOuterUpRight,,RCEF browOuterUpRight,1,0.0,1.0,,,brow,right,,arkit.coefficient.v1:browOuterUpRight: face-relative native neutral-to-maximum coefficient
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB,,RCEF XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB,1,0.0,1.0,,,gaze,left,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB: native direction-specific angle fraction; maximum angle unspecified
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB,,RCEF XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB,1,0.0,1.0,,,gaze,right,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB: native direction-specific angle fraction; maximum angle unspecified
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB,,RCEF XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB,1,0.0,1.0,,,gaze,left,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB: native direction-specific angle fraction; maximum angle unspecified
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB,,RCEF XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB,1,0.0,1.0,,,gaze,right,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB: native direction-specific angle fraction; maximum angle unspecified
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB,,RCEF XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB,1,0.0,1.0,,,gaze,left,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB: native direction-specific angle fraction; maximum angle unspecified
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB,,RCEF XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB,1,0.0,1.0,,,gaze,right,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB: native direction-specific angle fraction; maximum angle unspecified
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB,,RCEF XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB,1,0.0,1.0,,,gaze,left,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB: native direction-specific angle fraction; maximum angle unspecified
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB,,RCEF XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB,1,0.0,1.0,,,gaze,right,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB: native direction-specific angle fraction; maximum angle unspecified
+rcef.vrcft.eye.Left.Openness,,RCEF Left.Openness,1,,,,,eyelid,left,,vrcft.eye.storage.v1:Left.Openness
+rcef.vrcft.eye.Left.PupilDiameter_MM,,RCEF Left.PupilDiameter_MM,mm,,,,,pupil,left,,vrcft.eye.storage.v1:Left.PupilDiameter_MM
+rcef.vrcft.eye.Right.Openness,,RCEF Right.Openness,1,,,,,eyelid,right,,vrcft.eye.storage.v1:Right.Openness
+rcef.vrcft.eye.Right.PupilDiameter_MM,,RCEF Right.PupilDiameter_MM,mm,,,,,pupil,right,,vrcft.eye.storage.v1:Right.PupilDiameter_MM
+arkit.ancillary.leftEyeTransform,leftEyeTransform,leftEyeTransform,unknown,,,,0,gaze,left,,arkit.ancillary: native basis; no canonical calibration established
+arkit.ancillary.init_rawValue,init(rawValue:),init(rawValue:),unknown,,,,,,,,arkit.constructor: not a numeric expression basis
+arkit.coefficient.eyeBlinkLeft,eyeBlinkLeft,eyeBlinkLeft,1,0.0,1.0,,0,eyelid,left,,arkit.coefficient.v1:eyeBlinkLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeLookDownLeft,eyeLookDownLeft,eyeLookDownLeft,1,0.0,1.0,,1,gaze,left,,arkit.coefficient.v1:eyeLookDownLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeLookInLeft,eyeLookInLeft,eyeLookInLeft,1,0.0,1.0,,2,gaze,left,,arkit.coefficient.v1:eyeLookInLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeLookOutLeft,eyeLookOutLeft,eyeLookOutLeft,1,0.0,1.0,,3,gaze,left,,arkit.coefficient.v1:eyeLookOutLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeLookUpLeft,eyeLookUpLeft,eyeLookUpLeft,1,0.0,1.0,,4,gaze,left,,arkit.coefficient.v1:eyeLookUpLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeSquintLeft,eyeSquintLeft,eyeSquintLeft,1,0.0,1.0,,5,eyelid,left,,arkit.coefficient.v1:eyeSquintLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeWideLeft,eyeWideLeft,eyeWideLeft,1,0.0,1.0,,6,eyelid,left,,arkit.coefficient.v1:eyeWideLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeBlinkRight,eyeBlinkRight,eyeBlinkRight,1,0.0,1.0,,7,eyelid,right,,arkit.coefficient.v1:eyeBlinkRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeLookDownRight,eyeLookDownRight,eyeLookDownRight,1,0.0,1.0,,8,gaze,right,,arkit.coefficient.v1:eyeLookDownRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeLookInRight,eyeLookInRight,eyeLookInRight,1,0.0,1.0,,9,gaze,right,,arkit.coefficient.v1:eyeLookInRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeLookOutRight,eyeLookOutRight,eyeLookOutRight,1,0.0,1.0,,10,gaze,right,,arkit.coefficient.v1:eyeLookOutRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeLookUpRight,eyeLookUpRight,eyeLookUpRight,1,0.0,1.0,,11,gaze,right,,arkit.coefficient.v1:eyeLookUpRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeSquintRight,eyeSquintRight,eyeSquintRight,1,0.0,1.0,,12,eyelid,right,,arkit.coefficient.v1:eyeSquintRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.eyeWideRight,eyeWideRight,eyeWideRight,1,0.0,1.0,,13,eyelid,right,,arkit.coefficient.v1:eyeWideRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.jawForward,jawForward,jawForward,1,0.0,1.0,,14,jaw,shared,,arkit.coefficient.v1:jawForward: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.jawLeft,jawLeft,jawLeft,1,0.0,1.0,,15,jaw,left,,arkit.coefficient.v1:jawLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.jawRight,jawRight,jawRight,1,0.0,1.0,,16,jaw,right,,arkit.coefficient.v1:jawRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.jawOpen,jawOpen,jawOpen,1,0.0,1.0,,17,jaw,shared,,arkit.coefficient.v1:jawOpen: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthClose,mouthClose,mouthClose,1,0.0,1.0,,18,mouth,shared,,arkit.coefficient.v1:mouthClose: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthFunnel,mouthFunnel,mouthFunnel,1,0.0,1.0,,19,mouth,shared,,arkit.coefficient.v1:mouthFunnel: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthPucker,mouthPucker,mouthPucker,1,0.0,1.0,,20,mouth,shared,,arkit.coefficient.v1:mouthPucker: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthLeft,mouthLeft,mouthLeft,1,0.0,1.0,,21,mouth,left,,arkit.coefficient.v1:mouthLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthRight,mouthRight,mouthRight,1,0.0,1.0,,22,mouth,right,,arkit.coefficient.v1:mouthRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthSmileLeft,mouthSmileLeft,mouthSmileLeft,1,0.0,1.0,,23,mouth,left,,arkit.coefficient.v1:mouthSmileLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthSmileRight,mouthSmileRight,mouthSmileRight,1,0.0,1.0,,24,mouth,right,,arkit.coefficient.v1:mouthSmileRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthFrownLeft,mouthFrownLeft,mouthFrownLeft,1,0.0,1.0,,25,mouth,left,,arkit.coefficient.v1:mouthFrownLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthFrownRight,mouthFrownRight,mouthFrownRight,1,0.0,1.0,,26,mouth,right,,arkit.coefficient.v1:mouthFrownRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthDimpleLeft,mouthDimpleLeft,mouthDimpleLeft,1,0.0,1.0,,27,mouth,left,,arkit.coefficient.v1:mouthDimpleLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthDimpleRight,mouthDimpleRight,mouthDimpleRight,1,0.0,1.0,,28,mouth,right,,arkit.coefficient.v1:mouthDimpleRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthStretchLeft,mouthStretchLeft,mouthStretchLeft,1,0.0,1.0,,29,mouth,left,,arkit.coefficient.v1:mouthStretchLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthStretchRight,mouthStretchRight,mouthStretchRight,1,0.0,1.0,,30,mouth,right,,arkit.coefficient.v1:mouthStretchRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthRollLower,mouthRollLower,mouthRollLower,1,0.0,1.0,,31,mouth,shared,,arkit.coefficient.v1:mouthRollLower: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthRollUpper,mouthRollUpper,mouthRollUpper,1,0.0,1.0,,32,mouth,shared,,arkit.coefficient.v1:mouthRollUpper: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthShrugLower,mouthShrugLower,mouthShrugLower,1,0.0,1.0,,33,mouth,shared,,arkit.coefficient.v1:mouthShrugLower: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthShrugUpper,mouthShrugUpper,mouthShrugUpper,1,0.0,1.0,,34,mouth,shared,,arkit.coefficient.v1:mouthShrugUpper: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthPressLeft,mouthPressLeft,mouthPressLeft,1,0.0,1.0,,35,mouth,left,,arkit.coefficient.v1:mouthPressLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthPressRight,mouthPressRight,mouthPressRight,1,0.0,1.0,,36,mouth,right,,arkit.coefficient.v1:mouthPressRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthLowerDownLeft,mouthLowerDownLeft,mouthLowerDownLeft,1,0.0,1.0,,37,mouth,left,,arkit.coefficient.v1:mouthLowerDownLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthLowerDownRight,mouthLowerDownRight,mouthLowerDownRight,1,0.0,1.0,,38,mouth,right,,arkit.coefficient.v1:mouthLowerDownRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthUpperUpLeft,mouthUpperUpLeft,mouthUpperUpLeft,1,0.0,1.0,,39,mouth,left,,arkit.coefficient.v1:mouthUpperUpLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.mouthUpperUpRight,mouthUpperUpRight,mouthUpperUpRight,1,0.0,1.0,,40,mouth,right,,arkit.coefficient.v1:mouthUpperUpRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.browDownLeft,browDownLeft,browDownLeft,1,0.0,1.0,,41,brow,left,,arkit.coefficient.v1:browDownLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.browDownRight,browDownRight,browDownRight,1,0.0,1.0,,42,brow,right,,arkit.coefficient.v1:browDownRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.browInnerUp,browInnerUp,browInnerUp,1,0.0,1.0,,43,brow,shared,bilateral_shared,arkit.coefficient.v1:browInnerUp: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.browOuterUpLeft,browOuterUpLeft,browOuterUpLeft,1,0.0,1.0,,44,brow,left,,arkit.coefficient.v1:browOuterUpLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.browOuterUpRight,browOuterUpRight,browOuterUpRight,1,0.0,1.0,,45,brow,right,,arkit.coefficient.v1:browOuterUpRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.cheekPuff,cheekPuff,cheekPuff,1,0.0,1.0,,46,cheek,shared,,arkit.coefficient.v1:cheekPuff: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.cheekSquintLeft,cheekSquintLeft,cheekSquintLeft,1,0.0,1.0,,47,cheek,left,,arkit.coefficient.v1:cheekSquintLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.cheekSquintRight,cheekSquintRight,cheekSquintRight,1,0.0,1.0,,48,cheek,right,,arkit.coefficient.v1:cheekSquintRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.noseSneerLeft,noseSneerLeft,noseSneerLeft,1,0.0,1.0,,49,nose,left,,arkit.coefficient.v1:noseSneerLeft: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.noseSneerRight,noseSneerRight,noseSneerRight,1,0.0,1.0,,50,nose,right,,arkit.coefficient.v1:noseSneerRight: face-relative native neutral-to-maximum coefficient
+arkit.coefficient.tongueOut,tongueOut,tongueOut,1,0.0,1.0,,51,tongue,shared,,arkit.coefficient.v1:tongueOut: face-relative native neutral-to-maximum coefficient
+fixture.brow.left,brow.left,brow.left,1,0.0,1.0,,0,brow,shared,,fixture.brow.v1
+fixture.brow.right,brow.right,brow.right,1,0.0,1.0,,1,brow,shared,,fixture.brow.v1
+fixture.brow.shared,brow.shared,brow.shared,1,0.0,1.0,,2,brow,shared,bilateral_shared,fixture.brow.v1
+fixture.affine.signed,affine.signed,affine.signed,1,-1.0,1.0,,3,other,shared,,fixture.signed.v1
+fixture.affine.unit,affine.unit,affine.unit,1,0.0,1.0,,4,other,shared,,fixture.unit.v1
+godot.base.FT_EYE_LOOK_OUT_RIGHT,FT_EYE_LOOK_OUT_RIGHT,FT_EYE_LOOK_OUT_RIGHT,unknown,,,0,,gaze,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_LOOK_IN_RIGHT,FT_EYE_LOOK_IN_RIGHT,FT_EYE_LOOK_IN_RIGHT,unknown,,,1,,gaze,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_LOOK_UP_RIGHT,FT_EYE_LOOK_UP_RIGHT,FT_EYE_LOOK_UP_RIGHT,unknown,,,2,,gaze,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_LOOK_DOWN_RIGHT,FT_EYE_LOOK_DOWN_RIGHT,FT_EYE_LOOK_DOWN_RIGHT,unknown,,,3,,gaze,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_LOOK_OUT_LEFT,FT_EYE_LOOK_OUT_LEFT,FT_EYE_LOOK_OUT_LEFT,unknown,,,4,,gaze,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_LOOK_IN_LEFT,FT_EYE_LOOK_IN_LEFT,FT_EYE_LOOK_IN_LEFT,unknown,,,5,,gaze,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_LOOK_UP_LEFT,FT_EYE_LOOK_UP_LEFT,FT_EYE_LOOK_UP_LEFT,unknown,,,6,,gaze,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_LOOK_DOWN_LEFT,FT_EYE_LOOK_DOWN_LEFT,FT_EYE_LOOK_DOWN_LEFT,unknown,,,7,,gaze,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_CLOSED_RIGHT,FT_EYE_CLOSED_RIGHT,FT_EYE_CLOSED_RIGHT,unknown,,,8,,eyelid,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_CLOSED_LEFT,FT_EYE_CLOSED_LEFT,FT_EYE_CLOSED_LEFT,unknown,,,9,,eyelid,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_SQUINT_RIGHT,FT_EYE_SQUINT_RIGHT,FT_EYE_SQUINT_RIGHT,unknown,,,10,,eyelid,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_SQUINT_LEFT,FT_EYE_SQUINT_LEFT,FT_EYE_SQUINT_LEFT,unknown,,,11,,eyelid,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_WIDE_RIGHT,FT_EYE_WIDE_RIGHT,FT_EYE_WIDE_RIGHT,unknown,,,12,,eyelid,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_WIDE_LEFT,FT_EYE_WIDE_LEFT,FT_EYE_WIDE_LEFT,unknown,,,13,,eyelid,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_DILATION_RIGHT,FT_EYE_DILATION_RIGHT,FT_EYE_DILATION_RIGHT,unknown,,,14,,pupil,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_DILATION_LEFT,FT_EYE_DILATION_LEFT,FT_EYE_DILATION_LEFT,unknown,,,15,,pupil,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_CONSTRICT_RIGHT,FT_EYE_CONSTRICT_RIGHT,FT_EYE_CONSTRICT_RIGHT,unknown,,,16,,eyelid,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_EYE_CONSTRICT_LEFT,FT_EYE_CONSTRICT_LEFT,FT_EYE_CONSTRICT_LEFT,unknown,,,17,,eyelid,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_BROW_PINCH_RIGHT,FT_BROW_PINCH_RIGHT,FT_BROW_PINCH_RIGHT,unknown,,,18,,brow,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_BROW_PINCH_LEFT,FT_BROW_PINCH_LEFT,FT_BROW_PINCH_LEFT,unknown,,,19,,brow,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_BROW_LOWERER_RIGHT,FT_BROW_LOWERER_RIGHT,FT_BROW_LOWERER_RIGHT,unknown,,,20,,brow,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_BROW_LOWERER_LEFT,FT_BROW_LOWERER_LEFT,FT_BROW_LOWERER_LEFT,unknown,,,21,,brow,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_BROW_INNER_UP_RIGHT,FT_BROW_INNER_UP_RIGHT,FT_BROW_INNER_UP_RIGHT,unknown,,,22,,brow,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_BROW_INNER_UP_LEFT,FT_BROW_INNER_UP_LEFT,FT_BROW_INNER_UP_LEFT,unknown,,,23,,brow,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_BROW_OUTER_UP_RIGHT,FT_BROW_OUTER_UP_RIGHT,FT_BROW_OUTER_UP_RIGHT,unknown,,,24,,brow,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_BROW_OUTER_UP_LEFT,FT_BROW_OUTER_UP_LEFT,FT_BROW_OUTER_UP_LEFT,unknown,,,25,,brow,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_NOSE_SNEER_RIGHT,FT_NOSE_SNEER_RIGHT,FT_NOSE_SNEER_RIGHT,unknown,,,26,,nose,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_NOSE_SNEER_LEFT,FT_NOSE_SNEER_LEFT,FT_NOSE_SNEER_LEFT,unknown,,,27,,nose,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_NASAL_DILATION_RIGHT,FT_NASAL_DILATION_RIGHT,FT_NASAL_DILATION_RIGHT,unknown,,,28,,nose,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_NASAL_DILATION_LEFT,FT_NASAL_DILATION_LEFT,FT_NASAL_DILATION_LEFT,unknown,,,29,,nose,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_NASAL_CONSTRICT_RIGHT,FT_NASAL_CONSTRICT_RIGHT,FT_NASAL_CONSTRICT_RIGHT,unknown,,,30,,nose,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_NASAL_CONSTRICT_LEFT,FT_NASAL_CONSTRICT_LEFT,FT_NASAL_CONSTRICT_LEFT,unknown,,,31,,nose,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_CHEEK_SQUINT_RIGHT,FT_CHEEK_SQUINT_RIGHT,FT_CHEEK_SQUINT_RIGHT,unknown,,,32,,cheek,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_CHEEK_SQUINT_LEFT,FT_CHEEK_SQUINT_LEFT,FT_CHEEK_SQUINT_LEFT,unknown,,,33,,cheek,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_CHEEK_PUFF_RIGHT,FT_CHEEK_PUFF_RIGHT,FT_CHEEK_PUFF_RIGHT,unknown,,,34,,cheek,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_CHEEK_PUFF_LEFT,FT_CHEEK_PUFF_LEFT,FT_CHEEK_PUFF_LEFT,unknown,,,35,,cheek,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_CHEEK_SUCK_RIGHT,FT_CHEEK_SUCK_RIGHT,FT_CHEEK_SUCK_RIGHT,unknown,,,36,,cheek,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_CHEEK_SUCK_LEFT,FT_CHEEK_SUCK_LEFT,FT_CHEEK_SUCK_LEFT,unknown,,,37,,cheek,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_JAW_OPEN,FT_JAW_OPEN,FT_JAW_OPEN,unknown,,,38,,jaw,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_CLOSED,FT_MOUTH_CLOSED,FT_MOUTH_CLOSED,unknown,,,39,,mouth,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_JAW_RIGHT,FT_JAW_RIGHT,FT_JAW_RIGHT,unknown,,,40,,jaw,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_JAW_LEFT,FT_JAW_LEFT,FT_JAW_LEFT,unknown,,,41,,jaw,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_JAW_FORWARD,FT_JAW_FORWARD,FT_JAW_FORWARD,unknown,,,42,,jaw,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_JAW_BACKWARD,FT_JAW_BACKWARD,FT_JAW_BACKWARD,unknown,,,43,,jaw,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_JAW_CLENCH,FT_JAW_CLENCH,FT_JAW_CLENCH,unknown,,,44,,jaw,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_JAW_MANDIBLE_RAISE,FT_JAW_MANDIBLE_RAISE,FT_JAW_MANDIBLE_RAISE,unknown,,,45,,jaw,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_SUCK_UPPER_RIGHT,FT_LIP_SUCK_UPPER_RIGHT,FT_LIP_SUCK_UPPER_RIGHT,unknown,,,46,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_SUCK_UPPER_LEFT,FT_LIP_SUCK_UPPER_LEFT,FT_LIP_SUCK_UPPER_LEFT,unknown,,,47,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_SUCK_LOWER_RIGHT,FT_LIP_SUCK_LOWER_RIGHT,FT_LIP_SUCK_LOWER_RIGHT,unknown,,,48,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_SUCK_LOWER_LEFT,FT_LIP_SUCK_LOWER_LEFT,FT_LIP_SUCK_LOWER_LEFT,unknown,,,49,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_SUCK_CORNER_RIGHT,FT_LIP_SUCK_CORNER_RIGHT,FT_LIP_SUCK_CORNER_RIGHT,unknown,,,50,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_SUCK_CORNER_LEFT,FT_LIP_SUCK_CORNER_LEFT,FT_LIP_SUCK_CORNER_LEFT,unknown,,,51,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_FUNNEL_UPPER_RIGHT,FT_LIP_FUNNEL_UPPER_RIGHT,FT_LIP_FUNNEL_UPPER_RIGHT,unknown,,,52,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_FUNNEL_UPPER_LEFT,FT_LIP_FUNNEL_UPPER_LEFT,FT_LIP_FUNNEL_UPPER_LEFT,unknown,,,53,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_FUNNEL_LOWER_RIGHT,FT_LIP_FUNNEL_LOWER_RIGHT,FT_LIP_FUNNEL_LOWER_RIGHT,unknown,,,54,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_FUNNEL_LOWER_LEFT,FT_LIP_FUNNEL_LOWER_LEFT,FT_LIP_FUNNEL_LOWER_LEFT,unknown,,,55,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_PUCKER_UPPER_RIGHT,FT_LIP_PUCKER_UPPER_RIGHT,FT_LIP_PUCKER_UPPER_RIGHT,unknown,,,56,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_PUCKER_UPPER_LEFT,FT_LIP_PUCKER_UPPER_LEFT,FT_LIP_PUCKER_UPPER_LEFT,unknown,,,57,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_PUCKER_LOWER_RIGHT,FT_LIP_PUCKER_LOWER_RIGHT,FT_LIP_PUCKER_LOWER_RIGHT,unknown,,,58,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_LIP_PUCKER_LOWER_LEFT,FT_LIP_PUCKER_LOWER_LEFT,FT_LIP_PUCKER_LOWER_LEFT,unknown,,,59,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_UPPER_UP_RIGHT,FT_MOUTH_UPPER_UP_RIGHT,FT_MOUTH_UPPER_UP_RIGHT,unknown,,,60,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_UPPER_UP_LEFT,FT_MOUTH_UPPER_UP_LEFT,FT_MOUTH_UPPER_UP_LEFT,unknown,,,61,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_LOWER_DOWN_RIGHT,FT_MOUTH_LOWER_DOWN_RIGHT,FT_MOUTH_LOWER_DOWN_RIGHT,unknown,,,62,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_LOWER_DOWN_LEFT,FT_MOUTH_LOWER_DOWN_LEFT,FT_MOUTH_LOWER_DOWN_LEFT,unknown,,,63,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_UPPER_DEEPEN_RIGHT,FT_MOUTH_UPPER_DEEPEN_RIGHT,FT_MOUTH_UPPER_DEEPEN_RIGHT,unknown,,,64,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_UPPER_DEEPEN_LEFT,FT_MOUTH_UPPER_DEEPEN_LEFT,FT_MOUTH_UPPER_DEEPEN_LEFT,unknown,,,65,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_UPPER_RIGHT,FT_MOUTH_UPPER_RIGHT,FT_MOUTH_UPPER_RIGHT,unknown,,,66,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_UPPER_LEFT,FT_MOUTH_UPPER_LEFT,FT_MOUTH_UPPER_LEFT,unknown,,,67,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_LOWER_RIGHT,FT_MOUTH_LOWER_RIGHT,FT_MOUTH_LOWER_RIGHT,unknown,,,68,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_LOWER_LEFT,FT_MOUTH_LOWER_LEFT,FT_MOUTH_LOWER_LEFT,unknown,,,69,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_CORNER_PULL_RIGHT,FT_MOUTH_CORNER_PULL_RIGHT,FT_MOUTH_CORNER_PULL_RIGHT,unknown,,,70,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_CORNER_PULL_LEFT,FT_MOUTH_CORNER_PULL_LEFT,FT_MOUTH_CORNER_PULL_LEFT,unknown,,,71,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_CORNER_SLANT_RIGHT,FT_MOUTH_CORNER_SLANT_RIGHT,FT_MOUTH_CORNER_SLANT_RIGHT,unknown,,,72,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_CORNER_SLANT_LEFT,FT_MOUTH_CORNER_SLANT_LEFT,FT_MOUTH_CORNER_SLANT_LEFT,unknown,,,73,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_FROWN_RIGHT,FT_MOUTH_FROWN_RIGHT,FT_MOUTH_FROWN_RIGHT,unknown,,,74,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_FROWN_LEFT,FT_MOUTH_FROWN_LEFT,FT_MOUTH_FROWN_LEFT,unknown,,,75,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_STRETCH_RIGHT,FT_MOUTH_STRETCH_RIGHT,FT_MOUTH_STRETCH_RIGHT,unknown,,,76,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_STRETCH_LEFT,FT_MOUTH_STRETCH_LEFT,FT_MOUTH_STRETCH_LEFT,unknown,,,77,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_DIMPLE_RIGHT,FT_MOUTH_DIMPLE_RIGHT,FT_MOUTH_DIMPLE_RIGHT,unknown,,,78,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_DIMPLE_LEFT,FT_MOUTH_DIMPLE_LEFT,FT_MOUTH_DIMPLE_LEFT,unknown,,,79,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_RAISER_UPPER,FT_MOUTH_RAISER_UPPER,FT_MOUTH_RAISER_UPPER,unknown,,,80,,mouth,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_RAISER_LOWER,FT_MOUTH_RAISER_LOWER,FT_MOUTH_RAISER_LOWER,unknown,,,81,,mouth,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_PRESS_RIGHT,FT_MOUTH_PRESS_RIGHT,FT_MOUTH_PRESS_RIGHT,unknown,,,82,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_PRESS_LEFT,FT_MOUTH_PRESS_LEFT,FT_MOUTH_PRESS_LEFT,unknown,,,83,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_TIGHTENER_RIGHT,FT_MOUTH_TIGHTENER_RIGHT,FT_MOUTH_TIGHTENER_RIGHT,unknown,,,84,,mouth,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_MOUTH_TIGHTENER_LEFT,FT_MOUTH_TIGHTENER_LEFT,FT_MOUTH_TIGHTENER_LEFT,unknown,,,85,,mouth,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_OUT,FT_TONGUE_OUT,FT_TONGUE_OUT,unknown,,,86,,tongue,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_UP,FT_TONGUE_UP,FT_TONGUE_UP,unknown,,,87,,tongue,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_DOWN,FT_TONGUE_DOWN,FT_TONGUE_DOWN,unknown,,,88,,tongue,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_RIGHT,FT_TONGUE_RIGHT,FT_TONGUE_RIGHT,unknown,,,89,,tongue,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_LEFT,FT_TONGUE_LEFT,FT_TONGUE_LEFT,unknown,,,90,,tongue,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_ROLL,FT_TONGUE_ROLL,FT_TONGUE_ROLL,unknown,,,91,,tongue,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_BLEND_DOWN,FT_TONGUE_BLEND_DOWN,FT_TONGUE_BLEND_DOWN,unknown,,,92,,tongue,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_CURL_UP,FT_TONGUE_CURL_UP,FT_TONGUE_CURL_UP,unknown,,,93,,tongue,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_SQUISH,FT_TONGUE_SQUISH,FT_TONGUE_SQUISH,unknown,,,94,,tongue,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_FLAT,FT_TONGUE_FLAT,FT_TONGUE_FLAT,unknown,,,95,,tongue,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_TWIST_RIGHT,FT_TONGUE_TWIST_RIGHT,FT_TONGUE_TWIST_RIGHT,unknown,,,96,,tongue,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_TONGUE_TWIST_LEFT,FT_TONGUE_TWIST_LEFT,FT_TONGUE_TWIST_LEFT,unknown,,,97,,tongue,left,,godot.base: native basis; no canonical calibration established
+godot.base.FT_SOFT_PALATE_CLOSE,FT_SOFT_PALATE_CLOSE,FT_SOFT_PALATE_CLOSE,unknown,,,98,,other,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_THROAT_SWALLOW,FT_THROAT_SWALLOW,FT_THROAT_SWALLOW,unknown,,,99,,other,shared,,godot.base: native basis; no canonical calibration established
+godot.base.FT_NECK_FLEX_RIGHT,FT_NECK_FLEX_RIGHT,FT_NECK_FLEX_RIGHT,unknown,,,100,,other,right,,godot.base: native basis; no canonical calibration established
+godot.base.FT_NECK_FLEX_LEFT,FT_NECK_FLEX_LEFT,FT_NECK_FLEX_LEFT,unknown,,,101,,other,left,,godot.base: native basis; no canonical calibration established
+godot.blended.FT_EYE_CLOSED,FT_EYE_CLOSED,FT_EYE_CLOSED,unknown,,,102,,eyelid,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_EYE_WIDE,FT_EYE_WIDE,FT_EYE_WIDE,unknown,,,103,,eyelid,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_EYE_SQUINT,FT_EYE_SQUINT,FT_EYE_SQUINT,unknown,,,104,,eyelid,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_EYE_DILATION,FT_EYE_DILATION,FT_EYE_DILATION,unknown,,,105,,pupil,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_EYE_CONSTRICT,FT_EYE_CONSTRICT,FT_EYE_CONSTRICT,unknown,,,106,,eyelid,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_BROW_DOWN_RIGHT,FT_BROW_DOWN_RIGHT,FT_BROW_DOWN_RIGHT,unknown,,,107,,brow,right,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_BROW_DOWN_LEFT,FT_BROW_DOWN_LEFT,FT_BROW_DOWN_LEFT,unknown,,,108,,brow,left,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_BROW_DOWN,FT_BROW_DOWN,FT_BROW_DOWN,unknown,,,109,,brow,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_BROW_UP_RIGHT,FT_BROW_UP_RIGHT,FT_BROW_UP_RIGHT,unknown,,,110,,brow,right,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_BROW_UP_LEFT,FT_BROW_UP_LEFT,FT_BROW_UP_LEFT,unknown,,,111,,brow,left,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_BROW_UP,FT_BROW_UP,FT_BROW_UP,unknown,,,112,,brow,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_NOSE_SNEER,FT_NOSE_SNEER,FT_NOSE_SNEER,unknown,,,113,,nose,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_NASAL_DILATION,FT_NASAL_DILATION,FT_NASAL_DILATION,unknown,,,114,,nose,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_NASAL_CONSTRICT,FT_NASAL_CONSTRICT,FT_NASAL_CONSTRICT,unknown,,,115,,nose,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_CHEEK_PUFF,FT_CHEEK_PUFF,FT_CHEEK_PUFF,unknown,,,116,,cheek,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_CHEEK_SUCK,FT_CHEEK_SUCK,FT_CHEEK_SUCK,unknown,,,117,,cheek,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_CHEEK_SQUINT,FT_CHEEK_SQUINT,FT_CHEEK_SQUINT,unknown,,,118,,cheek,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_LIP_SUCK_UPPER,FT_LIP_SUCK_UPPER,FT_LIP_SUCK_UPPER,unknown,,,119,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_LIP_SUCK_LOWER,FT_LIP_SUCK_LOWER,FT_LIP_SUCK_LOWER,unknown,,,120,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_LIP_SUCK,FT_LIP_SUCK,FT_LIP_SUCK,unknown,,,121,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_LIP_FUNNEL_UPPER,FT_LIP_FUNNEL_UPPER,FT_LIP_FUNNEL_UPPER,unknown,,,122,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_LIP_FUNNEL_LOWER,FT_LIP_FUNNEL_LOWER,FT_LIP_FUNNEL_LOWER,unknown,,,123,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_LIP_FUNNEL,FT_LIP_FUNNEL,FT_LIP_FUNNEL,unknown,,,124,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_LIP_PUCKER_UPPER,FT_LIP_PUCKER_UPPER,FT_LIP_PUCKER_UPPER,unknown,,,125,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_LIP_PUCKER_LOWER,FT_LIP_PUCKER_LOWER,FT_LIP_PUCKER_LOWER,unknown,,,126,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_LIP_PUCKER,FT_LIP_PUCKER,FT_LIP_PUCKER,unknown,,,127,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_UPPER_UP,FT_MOUTH_UPPER_UP,FT_MOUTH_UPPER_UP,unknown,,,128,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_LOWER_DOWN,FT_MOUTH_LOWER_DOWN,FT_MOUTH_LOWER_DOWN,unknown,,,129,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_OPEN,FT_MOUTH_OPEN,FT_MOUTH_OPEN,unknown,,,130,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_RIGHT,FT_MOUTH_RIGHT,FT_MOUTH_RIGHT,unknown,,,131,,mouth,right,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_LEFT,FT_MOUTH_LEFT,FT_MOUTH_LEFT,unknown,,,132,,mouth,left,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_SMILE_RIGHT,FT_MOUTH_SMILE_RIGHT,FT_MOUTH_SMILE_RIGHT,unknown,,,133,,mouth,right,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_SMILE_LEFT,FT_MOUTH_SMILE_LEFT,FT_MOUTH_SMILE_LEFT,unknown,,,134,,mouth,left,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_SMILE,FT_MOUTH_SMILE,FT_MOUTH_SMILE,unknown,,,135,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_SAD_RIGHT,FT_MOUTH_SAD_RIGHT,FT_MOUTH_SAD_RIGHT,unknown,,,136,,mouth,right,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_SAD_LEFT,FT_MOUTH_SAD_LEFT,FT_MOUTH_SAD_LEFT,unknown,,,137,,mouth,left,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_SAD,FT_MOUTH_SAD,FT_MOUTH_SAD,unknown,,,138,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_STRETCH,FT_MOUTH_STRETCH,FT_MOUTH_STRETCH,unknown,,,139,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_DIMPLE,FT_MOUTH_DIMPLE,FT_MOUTH_DIMPLE,unknown,,,140,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_TIGHTENER,FT_MOUTH_TIGHTENER,FT_MOUTH_TIGHTENER,unknown,,,141,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MOUTH_PRESS,FT_MOUTH_PRESS,FT_MOUTH_PRESS,unknown,,,142,,mouth,shared,,godot.blended: native basis; no canonical calibration established
+godot.blended.FT_MAX,FT_MAX,FT_MAX,unknown,,,143,,other,shared,,godot.blended: native basis; no canonical calibration established
+mediapipe.label._neutral,_neutral,_neutral,unknown,,,,0,other,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.browDownLeft,browDownLeft,browDownLeft,unknown,,,,1,brow,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.browDownRight,browDownRight,browDownRight,unknown,,,,2,brow,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.browInnerUp,browInnerUp,browInnerUp,unknown,,,,3,brow,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.browOuterUpLeft,browOuterUpLeft,browOuterUpLeft,unknown,,,,4,brow,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.browOuterUpRight,browOuterUpRight,browOuterUpRight,unknown,,,,5,brow,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.cheekPuff,cheekPuff,cheekPuff,unknown,,,,6,cheek,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.cheekSquintLeft,cheekSquintLeft,cheekSquintLeft,unknown,,,,7,cheek,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.cheekSquintRight,cheekSquintRight,cheekSquintRight,unknown,,,,8,cheek,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeBlinkLeft,eyeBlinkLeft,eyeBlinkLeft,unknown,,,,9,eyelid,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeBlinkRight,eyeBlinkRight,eyeBlinkRight,unknown,,,,10,eyelid,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeLookDownLeft,eyeLookDownLeft,eyeLookDownLeft,unknown,,,,11,gaze,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeLookDownRight,eyeLookDownRight,eyeLookDownRight,unknown,,,,12,gaze,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeLookInLeft,eyeLookInLeft,eyeLookInLeft,unknown,,,,13,gaze,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeLookInRight,eyeLookInRight,eyeLookInRight,unknown,,,,14,gaze,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeLookOutLeft,eyeLookOutLeft,eyeLookOutLeft,unknown,,,,15,gaze,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeLookOutRight,eyeLookOutRight,eyeLookOutRight,unknown,,,,16,gaze,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeLookUpLeft,eyeLookUpLeft,eyeLookUpLeft,unknown,,,,17,gaze,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeLookUpRight,eyeLookUpRight,eyeLookUpRight,unknown,,,,18,gaze,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeSquintLeft,eyeSquintLeft,eyeSquintLeft,unknown,,,,19,eyelid,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeSquintRight,eyeSquintRight,eyeSquintRight,unknown,,,,20,eyelid,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeWideLeft,eyeWideLeft,eyeWideLeft,unknown,,,,21,eyelid,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.eyeWideRight,eyeWideRight,eyeWideRight,unknown,,,,22,eyelid,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.jawForward,jawForward,jawForward,unknown,,,,23,jaw,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.jawLeft,jawLeft,jawLeft,unknown,,,,24,jaw,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.jawOpen,jawOpen,jawOpen,unknown,,,,25,jaw,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.jawRight,jawRight,jawRight,unknown,,,,26,jaw,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthClose,mouthClose,mouthClose,unknown,,,,27,mouth,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthDimpleLeft,mouthDimpleLeft,mouthDimpleLeft,unknown,,,,28,mouth,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthDimpleRight,mouthDimpleRight,mouthDimpleRight,unknown,,,,29,mouth,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthFrownLeft,mouthFrownLeft,mouthFrownLeft,unknown,,,,30,mouth,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthFrownRight,mouthFrownRight,mouthFrownRight,unknown,,,,31,mouth,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthFunnel,mouthFunnel,mouthFunnel,unknown,,,,32,mouth,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthLeft,mouthLeft,mouthLeft,unknown,,,,33,mouth,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthLowerDownLeft,mouthLowerDownLeft,mouthLowerDownLeft,unknown,,,,34,mouth,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthLowerDownRight,mouthLowerDownRight,mouthLowerDownRight,unknown,,,,35,mouth,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthPressLeft,mouthPressLeft,mouthPressLeft,unknown,,,,36,mouth,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthPressRight,mouthPressRight,mouthPressRight,unknown,,,,37,mouth,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthPucker,mouthPucker,mouthPucker,unknown,,,,38,mouth,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthRight,mouthRight,mouthRight,unknown,,,,39,mouth,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthRollLower,mouthRollLower,mouthRollLower,unknown,,,,40,mouth,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthRollUpper,mouthRollUpper,mouthRollUpper,unknown,,,,41,mouth,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthShrugLower,mouthShrugLower,mouthShrugLower,unknown,,,,42,mouth,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthShrugUpper,mouthShrugUpper,mouthShrugUpper,unknown,,,,43,mouth,shared,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthSmileLeft,mouthSmileLeft,mouthSmileLeft,unknown,,,,44,mouth,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthSmileRight,mouthSmileRight,mouthSmileRight,unknown,,,,45,mouth,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthStretchLeft,mouthStretchLeft,mouthStretchLeft,unknown,,,,46,mouth,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthStretchRight,mouthStretchRight,mouthStretchRight,unknown,,,,47,mouth,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthUpperUpLeft,mouthUpperUpLeft,mouthUpperUpLeft,unknown,,,,48,mouth,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.mouthUpperUpRight,mouthUpperUpRight,mouthUpperUpRight,unknown,,,,49,mouth,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.noseSneerLeft,noseSneerLeft,noseSneerLeft,unknown,,,,50,nose,left,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.noseSneerRight,noseSneerRight,noseSneerRight,unknown,,,,51,nose,right,,mediapipe.label: native basis; no canonical calibration established
+mediapipe.label.tongueOut.absent,tongueOut.absent,tongueOut.absent,unknown,,,,-1,tongue,shared,,mediapipe.label: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_CONFIDENCE_LOWER_FACE_FB,XR_FACE_CONFIDENCE_LOWER_FACE_FB,XR_FACE_CONFIDENCE_LOWER_FACE_FB,unknown,,,0,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_CONFIDENCE_UPPER_FACE_FB,XR_FACE_CONFIDENCE_UPPER_FACE_FB,XR_FACE_CONFIDENCE_UPPER_FACE_FB,unknown,,,1,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_CONFIDENCE_COUNT_FB,XR_FACE_CONFIDENCE_COUNT_FB,XR_FACE_CONFIDENCE_COUNT_FB,unknown,,,2,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_CONFIDENCE2_LOWER_FACE_FB,XR_FACE_CONFIDENCE2_LOWER_FACE_FB,XR_FACE_CONFIDENCE2_LOWER_FACE_FB,unknown,,,0,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_CONFIDENCE2_UPPER_FACE_FB,XR_FACE_CONFIDENCE2_UPPER_FACE_FB,XR_FACE_CONFIDENCE2_UPPER_FACE_FB,unknown,,,1,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_CONFIDENCE2_COUNT_FB,XR_FACE_CONFIDENCE2_COUNT_FB,XR_FACE_CONFIDENCE2_COUNT_FB,unknown,,,2,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_TRACKING_DATA_SOURCE2_VISUAL_FB,XR_FACE_TRACKING_DATA_SOURCE2_VISUAL_FB,XR_FACE_TRACKING_DATA_SOURCE2_VISUAL_FB,unknown,,,0,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_TRACKING_DATA_SOURCE2_AUDIO_FB,XR_FACE_TRACKING_DATA_SOURCE2_AUDIO_FB,XR_FACE_TRACKING_DATA_SOURCE2_AUDIO_FB,unknown,,,1,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_EXPRESSION_SET_DEFAULT_FB,XR_FACE_EXPRESSION_SET_DEFAULT_FB,XR_FACE_EXPRESSION_SET_DEFAULT_FB,unknown,,,0,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.ancillary.XR_FACE_EXPRESSION_SET2_DEFAULT_FB,XR_FACE_EXPRESSION_SET2_DEFAULT_FB,XR_FACE_EXPRESSION_SET2_DEFAULT_FB,unknown,,,0,,other,shared,,openxr.ancillary: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_BROW_LOWERER_L_FB,XR_FACE_EXPRESSION_BROW_LOWERER_L_FB,XR_FACE_EXPRESSION_BROW_LOWERER_L_FB,1,,,0,,brow,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_BROW_LOWERER_R_FB,XR_FACE_EXPRESSION_BROW_LOWERER_R_FB,XR_FACE_EXPRESSION_BROW_LOWERER_R_FB,1,,,1,,brow,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_CHEEK_PUFF_L_FB,XR_FACE_EXPRESSION_CHEEK_PUFF_L_FB,XR_FACE_EXPRESSION_CHEEK_PUFF_L_FB,1,,,2,,cheek,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_CHEEK_PUFF_R_FB,XR_FACE_EXPRESSION_CHEEK_PUFF_R_FB,XR_FACE_EXPRESSION_CHEEK_PUFF_R_FB,1,,,3,,cheek,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_CHEEK_RAISER_L_FB,XR_FACE_EXPRESSION_CHEEK_RAISER_L_FB,XR_FACE_EXPRESSION_CHEEK_RAISER_L_FB,1,,,4,,cheek,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_CHEEK_RAISER_R_FB,XR_FACE_EXPRESSION_CHEEK_RAISER_R_FB,XR_FACE_EXPRESSION_CHEEK_RAISER_R_FB,1,,,5,,cheek,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_CHEEK_SUCK_L_FB,XR_FACE_EXPRESSION_CHEEK_SUCK_L_FB,XR_FACE_EXPRESSION_CHEEK_SUCK_L_FB,1,,,6,,cheek,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_CHEEK_SUCK_R_FB,XR_FACE_EXPRESSION_CHEEK_SUCK_R_FB,XR_FACE_EXPRESSION_CHEEK_SUCK_R_FB,1,,,7,,cheek,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_CHIN_RAISER_B_FB,XR_FACE_EXPRESSION_CHIN_RAISER_B_FB,XR_FACE_EXPRESSION_CHIN_RAISER_B_FB,1,,,8,,mouth,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_CHIN_RAISER_T_FB,XR_FACE_EXPRESSION_CHIN_RAISER_T_FB,XR_FACE_EXPRESSION_CHIN_RAISER_T_FB,1,,,9,,mouth,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_DIMPLER_L_FB,XR_FACE_EXPRESSION_DIMPLER_L_FB,XR_FACE_EXPRESSION_DIMPLER_L_FB,1,,,10,,other,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_DIMPLER_R_FB,XR_FACE_EXPRESSION_DIMPLER_R_FB,XR_FACE_EXPRESSION_DIMPLER_R_FB,1,,,11,,other,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_CLOSED_L_FB,XR_FACE_EXPRESSION_EYES_CLOSED_L_FB,XR_FACE_EXPRESSION_EYES_CLOSED_L_FB,1,,,12,,eyelid,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_CLOSED_R_FB,XR_FACE_EXPRESSION_EYES_CLOSED_R_FB,XR_FACE_EXPRESSION_EYES_CLOSED_R_FB,1,,,13,,eyelid,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_LOOK_DOWN_L_FB,XR_FACE_EXPRESSION_EYES_LOOK_DOWN_L_FB,XR_FACE_EXPRESSION_EYES_LOOK_DOWN_L_FB,1,,,14,,gaze,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_LOOK_DOWN_R_FB,XR_FACE_EXPRESSION_EYES_LOOK_DOWN_R_FB,XR_FACE_EXPRESSION_EYES_LOOK_DOWN_R_FB,1,,,15,,gaze,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_LOOK_LEFT_L_FB,XR_FACE_EXPRESSION_EYES_LOOK_LEFT_L_FB,XR_FACE_EXPRESSION_EYES_LOOK_LEFT_L_FB,1,,,16,,gaze,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_LOOK_LEFT_R_FB,XR_FACE_EXPRESSION_EYES_LOOK_LEFT_R_FB,XR_FACE_EXPRESSION_EYES_LOOK_LEFT_R_FB,1,,,17,,gaze,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_LOOK_RIGHT_L_FB,XR_FACE_EXPRESSION_EYES_LOOK_RIGHT_L_FB,XR_FACE_EXPRESSION_EYES_LOOK_RIGHT_L_FB,1,,,18,,gaze,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_LOOK_RIGHT_R_FB,XR_FACE_EXPRESSION_EYES_LOOK_RIGHT_R_FB,XR_FACE_EXPRESSION_EYES_LOOK_RIGHT_R_FB,1,,,19,,gaze,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_LOOK_UP_L_FB,XR_FACE_EXPRESSION_EYES_LOOK_UP_L_FB,XR_FACE_EXPRESSION_EYES_LOOK_UP_L_FB,1,,,20,,gaze,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_EYES_LOOK_UP_R_FB,XR_FACE_EXPRESSION_EYES_LOOK_UP_R_FB,XR_FACE_EXPRESSION_EYES_LOOK_UP_R_FB,1,,,21,,gaze,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_INNER_BROW_RAISER_L_FB,XR_FACE_EXPRESSION_INNER_BROW_RAISER_L_FB,XR_FACE_EXPRESSION_INNER_BROW_RAISER_L_FB,1,,,22,,brow,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_INNER_BROW_RAISER_R_FB,XR_FACE_EXPRESSION_INNER_BROW_RAISER_R_FB,XR_FACE_EXPRESSION_INNER_BROW_RAISER_R_FB,1,,,23,,brow,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_JAW_DROP_FB,XR_FACE_EXPRESSION_JAW_DROP_FB,XR_FACE_EXPRESSION_JAW_DROP_FB,1,,,24,,jaw,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_JAW_SIDEWAYS_LEFT_FB,XR_FACE_EXPRESSION_JAW_SIDEWAYS_LEFT_FB,XR_FACE_EXPRESSION_JAW_SIDEWAYS_LEFT_FB,1,,,25,,jaw,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_JAW_SIDEWAYS_RIGHT_FB,XR_FACE_EXPRESSION_JAW_SIDEWAYS_RIGHT_FB,XR_FACE_EXPRESSION_JAW_SIDEWAYS_RIGHT_FB,1,,,26,,jaw,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_JAW_THRUST_FB,XR_FACE_EXPRESSION_JAW_THRUST_FB,XR_FACE_EXPRESSION_JAW_THRUST_FB,1,,,27,,jaw,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LID_TIGHTENER_L_FB,XR_FACE_EXPRESSION_LID_TIGHTENER_L_FB,XR_FACE_EXPRESSION_LID_TIGHTENER_L_FB,1,,,28,,other,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LID_TIGHTENER_R_FB,XR_FACE_EXPRESSION_LID_TIGHTENER_R_FB,XR_FACE_EXPRESSION_LID_TIGHTENER_R_FB,1,,,29,,other,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_CORNER_DEPRESSOR_L_FB,XR_FACE_EXPRESSION_LIP_CORNER_DEPRESSOR_L_FB,XR_FACE_EXPRESSION_LIP_CORNER_DEPRESSOR_L_FB,1,,,30,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_CORNER_DEPRESSOR_R_FB,XR_FACE_EXPRESSION_LIP_CORNER_DEPRESSOR_R_FB,XR_FACE_EXPRESSION_LIP_CORNER_DEPRESSOR_R_FB,1,,,31,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_CORNER_PULLER_L_FB,XR_FACE_EXPRESSION_LIP_CORNER_PULLER_L_FB,XR_FACE_EXPRESSION_LIP_CORNER_PULLER_L_FB,1,,,32,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_CORNER_PULLER_R_FB,XR_FACE_EXPRESSION_LIP_CORNER_PULLER_R_FB,XR_FACE_EXPRESSION_LIP_CORNER_PULLER_R_FB,1,,,33,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_FUNNELER_LB_FB,XR_FACE_EXPRESSION_LIP_FUNNELER_LB_FB,XR_FACE_EXPRESSION_LIP_FUNNELER_LB_FB,1,,,34,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_FUNNELER_LT_FB,XR_FACE_EXPRESSION_LIP_FUNNELER_LT_FB,XR_FACE_EXPRESSION_LIP_FUNNELER_LT_FB,1,,,35,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_FUNNELER_RB_FB,XR_FACE_EXPRESSION_LIP_FUNNELER_RB_FB,XR_FACE_EXPRESSION_LIP_FUNNELER_RB_FB,1,,,36,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_FUNNELER_RT_FB,XR_FACE_EXPRESSION_LIP_FUNNELER_RT_FB,XR_FACE_EXPRESSION_LIP_FUNNELER_RT_FB,1,,,37,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_PRESSOR_L_FB,XR_FACE_EXPRESSION_LIP_PRESSOR_L_FB,XR_FACE_EXPRESSION_LIP_PRESSOR_L_FB,1,,,38,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_PRESSOR_R_FB,XR_FACE_EXPRESSION_LIP_PRESSOR_R_FB,XR_FACE_EXPRESSION_LIP_PRESSOR_R_FB,1,,,39,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_PUCKER_L_FB,XR_FACE_EXPRESSION_LIP_PUCKER_L_FB,XR_FACE_EXPRESSION_LIP_PUCKER_L_FB,1,,,40,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_PUCKER_R_FB,XR_FACE_EXPRESSION_LIP_PUCKER_R_FB,XR_FACE_EXPRESSION_LIP_PUCKER_R_FB,1,,,41,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_STRETCHER_L_FB,XR_FACE_EXPRESSION_LIP_STRETCHER_L_FB,XR_FACE_EXPRESSION_LIP_STRETCHER_L_FB,1,,,42,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_STRETCHER_R_FB,XR_FACE_EXPRESSION_LIP_STRETCHER_R_FB,XR_FACE_EXPRESSION_LIP_STRETCHER_R_FB,1,,,43,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_SUCK_LB_FB,XR_FACE_EXPRESSION_LIP_SUCK_LB_FB,XR_FACE_EXPRESSION_LIP_SUCK_LB_FB,1,,,44,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_SUCK_LT_FB,XR_FACE_EXPRESSION_LIP_SUCK_LT_FB,XR_FACE_EXPRESSION_LIP_SUCK_LT_FB,1,,,45,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_SUCK_RB_FB,XR_FACE_EXPRESSION_LIP_SUCK_RB_FB,XR_FACE_EXPRESSION_LIP_SUCK_RB_FB,1,,,46,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_SUCK_RT_FB,XR_FACE_EXPRESSION_LIP_SUCK_RT_FB,XR_FACE_EXPRESSION_LIP_SUCK_RT_FB,1,,,47,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_TIGHTENER_L_FB,XR_FACE_EXPRESSION_LIP_TIGHTENER_L_FB,XR_FACE_EXPRESSION_LIP_TIGHTENER_L_FB,1,,,48,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIP_TIGHTENER_R_FB,XR_FACE_EXPRESSION_LIP_TIGHTENER_R_FB,XR_FACE_EXPRESSION_LIP_TIGHTENER_R_FB,1,,,49,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LIPS_TOWARD_FB,XR_FACE_EXPRESSION_LIPS_TOWARD_FB,XR_FACE_EXPRESSION_LIPS_TOWARD_FB,1,,,50,,mouth,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LOWER_LIP_DEPRESSOR_L_FB,XR_FACE_EXPRESSION_LOWER_LIP_DEPRESSOR_L_FB,XR_FACE_EXPRESSION_LOWER_LIP_DEPRESSOR_L_FB,1,,,51,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_LOWER_LIP_DEPRESSOR_R_FB,XR_FACE_EXPRESSION_LOWER_LIP_DEPRESSOR_R_FB,XR_FACE_EXPRESSION_LOWER_LIP_DEPRESSOR_R_FB,1,,,52,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_MOUTH_LEFT_FB,XR_FACE_EXPRESSION_MOUTH_LEFT_FB,XR_FACE_EXPRESSION_MOUTH_LEFT_FB,1,,,53,,mouth,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_MOUTH_RIGHT_FB,XR_FACE_EXPRESSION_MOUTH_RIGHT_FB,XR_FACE_EXPRESSION_MOUTH_RIGHT_FB,1,,,54,,mouth,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_NOSE_WRINKLER_L_FB,XR_FACE_EXPRESSION_NOSE_WRINKLER_L_FB,XR_FACE_EXPRESSION_NOSE_WRINKLER_L_FB,1,,,55,,nose,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_NOSE_WRINKLER_R_FB,XR_FACE_EXPRESSION_NOSE_WRINKLER_R_FB,XR_FACE_EXPRESSION_NOSE_WRINKLER_R_FB,1,,,56,,nose,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_OUTER_BROW_RAISER_L_FB,XR_FACE_EXPRESSION_OUTER_BROW_RAISER_L_FB,XR_FACE_EXPRESSION_OUTER_BROW_RAISER_L_FB,1,,,57,,brow,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_OUTER_BROW_RAISER_R_FB,XR_FACE_EXPRESSION_OUTER_BROW_RAISER_R_FB,XR_FACE_EXPRESSION_OUTER_BROW_RAISER_R_FB,1,,,58,,brow,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_UPPER_LID_RAISER_L_FB,XR_FACE_EXPRESSION_UPPER_LID_RAISER_L_FB,XR_FACE_EXPRESSION_UPPER_LID_RAISER_L_FB,1,,,59,,other,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_UPPER_LID_RAISER_R_FB,XR_FACE_EXPRESSION_UPPER_LID_RAISER_R_FB,XR_FACE_EXPRESSION_UPPER_LID_RAISER_R_FB,1,,,60,,other,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_UPPER_LIP_RAISER_L_FB,XR_FACE_EXPRESSION_UPPER_LIP_RAISER_L_FB,XR_FACE_EXPRESSION_UPPER_LIP_RAISER_L_FB,1,,,61,,mouth,left,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_UPPER_LIP_RAISER_R_FB,XR_FACE_EXPRESSION_UPPER_LIP_RAISER_R_FB,XR_FACE_EXPRESSION_UPPER_LIP_RAISER_R_FB,1,,,62,,mouth,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.XR_FACE_EXPRESSION_COUNT_FB,XR_FACE_EXPRESSION_COUNT_FB,XR_FACE_EXPRESSION_COUNT_FB,1,,,63,,other,shared,,openxr.fb: native basis; no canonical calibration established
+openxr.fb.tongue.absent,tongue.absent,tongue.absent,1,,,-1,,tongue,right,,openxr.fb: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB,XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB,XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB,1,0.0,1.0,0,,brow,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB,XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB,XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB,1,0.0,1.0,1,,brow,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB,XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB,XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB,1,0.0,1.0,2,,cheek,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB,XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB,XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB,1,0.0,1.0,3,,cheek,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB,XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB,XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB,1,0.0,1.0,4,,cheek,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB,XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB,XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB,1,0.0,1.0,5,,cheek,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB,XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB,XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB,1,0.0,1.0,6,,cheek,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB,XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB,XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB,1,0.0,1.0,7,,cheek,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB,XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB,XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB,1,0.0,1.0,8,,mouth,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB,XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB,XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB,1,0.0,1.0,9,,mouth,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB,XR_FACE_EXPRESSION2_DIMPLER_L_FB,XR_FACE_EXPRESSION2_DIMPLER_L_FB,1,0.0,1.0,10,,other,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB,XR_FACE_EXPRESSION2_DIMPLER_R_FB,XR_FACE_EXPRESSION2_DIMPLER_R_FB,1,0.0,1.0,11,,other,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB,XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB,XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB,1,0.0,1.0,12,,eyelid,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB,XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB,XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB,1,0.0,1.0,13,,eyelid,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB,XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB,XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB,1,0.0,1.0,14,,gaze,left,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB: native direction-specific angle fraction; maximum angle unspecified
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB,XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB,XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB,1,0.0,1.0,15,,gaze,right,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB: native direction-specific angle fraction; maximum angle unspecified
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB,XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB,XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB,1,0.0,1.0,16,,gaze,left,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB: native direction-specific angle fraction; maximum angle unspecified
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB,XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB,XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB,1,0.0,1.0,17,,gaze,right,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB: native direction-specific angle fraction; maximum angle unspecified
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB,XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB,XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB,1,0.0,1.0,18,,gaze,left,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB: native direction-specific angle fraction; maximum angle unspecified
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB,XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB,XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB,1,0.0,1.0,19,,gaze,right,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB: native direction-specific angle fraction; maximum angle unspecified
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB,XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB,XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB,1,0.0,1.0,20,,gaze,left,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB: native direction-specific angle fraction; maximum angle unspecified
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB,XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB,XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB,1,0.0,1.0,21,,gaze,right,opposing_direction_exclusive,openxr.fb2.v1:XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB: native direction-specific angle fraction; maximum angle unspecified
+openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB,XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB,XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB,1,0.0,1.0,22,,brow,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB,XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB,XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB,1,0.0,1.0,23,,brow,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB,XR_FACE_EXPRESSION2_JAW_DROP_FB,XR_FACE_EXPRESSION2_JAW_DROP_FB,1,0.0,1.0,24,,jaw,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB,XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB,XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB,1,0.0,1.0,25,,jaw,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB,XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB,XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB,1,0.0,1.0,26,,jaw,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB,XR_FACE_EXPRESSION2_JAW_THRUST_FB,XR_FACE_EXPRESSION2_JAW_THRUST_FB,1,0.0,1.0,27,,jaw,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB,XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB,XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB,1,0.0,1.0,28,,other,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB,XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB,XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB,1,0.0,1.0,29,,other,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB,XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB,XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB,1,0.0,1.0,30,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB,XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB,XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB,1,0.0,1.0,31,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB,XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB,XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB,1,0.0,1.0,32,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB,XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB,XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB,1,0.0,1.0,33,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB,XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB,XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB,1,0.0,1.0,34,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB,XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB,XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB,1,0.0,1.0,35,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB,XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB,XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB,1,0.0,1.0,36,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB,XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB,XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB,1,0.0,1.0,37,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB,XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB,XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB,1,0.0,1.0,38,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB,XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB,XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB,1,0.0,1.0,39,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB,XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB,XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB,1,0.0,1.0,40,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB,XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB,XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB,1,0.0,1.0,41,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB,XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB,XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB,1,0.0,1.0,42,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB,XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB,XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB,1,0.0,1.0,43,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB,XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB,XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB,1,0.0,1.0,44,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB,XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB,XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB,1,0.0,1.0,45,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB,XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB,XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB,1,0.0,1.0,46,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB,XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB,XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB,1,0.0,1.0,47,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB,XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB,XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB,1,0.0,1.0,48,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB,XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB,XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB,1,0.0,1.0,49,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB,XR_FACE_EXPRESSION2_LIPS_TOWARD_FB,XR_FACE_EXPRESSION2_LIPS_TOWARD_FB,1,0.0,1.0,50,,mouth,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB,XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB,XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB,1,0.0,1.0,51,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB,XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB,XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB,1,0.0,1.0,52,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB,XR_FACE_EXPRESSION2_MOUTH_LEFT_FB,XR_FACE_EXPRESSION2_MOUTH_LEFT_FB,1,0.0,1.0,53,,mouth,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB,XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB,XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB,1,0.0,1.0,54,,mouth,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB,XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB,XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB,1,0.0,1.0,55,,nose,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB,XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB,XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB,1,0.0,1.0,56,,nose,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB,XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB,XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB,1,0.0,1.0,57,,brow,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB,XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB,XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB,1,0.0,1.0,58,,brow,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB,XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB,XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB,1,0.0,1.0,59,,other,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB,XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB,XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB,1,0.0,1.0,60,,other,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB,XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB,XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB,1,0.0,1.0,61,,mouth,left,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB,XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB,XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB,1,0.0,1.0,62,,mouth,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB,XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB,XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB,1,0.0,1.0,63,,tongue,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB,XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB,XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB,1,0.0,1.0,64,,tongue,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB,XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB,XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB,1,0.0,1.0,65,,tongue,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB,XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB,XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB,1,0.0,1.0,66,,tongue,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB,XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB,XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB,1,0.0,1.0,67,,tongue,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB,XR_FACE_EXPRESSION2_TONGUE_OUT_FB,XR_FACE_EXPRESSION2_TONGUE_OUT_FB,1,0.0,1.0,68,,tongue,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB,XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB,XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB,1,0.0,1.0,69,,tongue,shared,,openxr.fb2: native basis; no canonical calibration established
+openxr.fb2.XR_FACE_EXPRESSION2_COUNT_FB,XR_FACE_EXPRESSION2_COUNT_FB,XR_FACE_EXPRESSION2_COUNT_FB,1,,,70,,other,right,,openxr.fb2: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META,XR_FACE_TRACKING_VISEME_SIL_META,XR_FACE_TRACKING_VISEME_SIL_META,probability,0.0,1.0,0,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META,XR_FACE_TRACKING_VISEME_PP_META,XR_FACE_TRACKING_VISEME_PP_META,probability,0.0,1.0,1,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META,XR_FACE_TRACKING_VISEME_FF_META,XR_FACE_TRACKING_VISEME_FF_META,probability,0.0,1.0,2,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META,XR_FACE_TRACKING_VISEME_TH_META,XR_FACE_TRACKING_VISEME_TH_META,probability,0.0,1.0,3,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META,XR_FACE_TRACKING_VISEME_DD_META,XR_FACE_TRACKING_VISEME_DD_META,probability,0.0,1.0,4,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META,XR_FACE_TRACKING_VISEME_KK_META,XR_FACE_TRACKING_VISEME_KK_META,probability,0.0,1.0,5,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META,XR_FACE_TRACKING_VISEME_CH_META,XR_FACE_TRACKING_VISEME_CH_META,probability,0.0,1.0,6,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META,XR_FACE_TRACKING_VISEME_SS_META,XR_FACE_TRACKING_VISEME_SS_META,probability,0.0,1.0,7,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META,XR_FACE_TRACKING_VISEME_NN_META,XR_FACE_TRACKING_VISEME_NN_META,probability,0.0,1.0,8,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META,XR_FACE_TRACKING_VISEME_RR_META,XR_FACE_TRACKING_VISEME_RR_META,probability,0.0,1.0,9,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META,XR_FACE_TRACKING_VISEME_AA_META,XR_FACE_TRACKING_VISEME_AA_META,probability,0.0,1.0,10,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_E_META,XR_FACE_TRACKING_VISEME_E_META,XR_FACE_TRACKING_VISEME_E_META,probability,0.0,1.0,11,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META,XR_FACE_TRACKING_VISEME_IH_META,XR_FACE_TRACKING_VISEME_IH_META,probability,0.0,1.0,12,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META,XR_FACE_TRACKING_VISEME_OH_META,XR_FACE_TRACKING_VISEME_OH_META,probability,0.0,1.0,13,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META,XR_FACE_TRACKING_VISEME_OU_META,XR_FACE_TRACKING_VISEME_OU_META,probability,0.0,1.0,14,,other,shared,probability_simplex,openxr.visemes: native basis; no canonical calibration established
+roblox.control.ChinRaiser,ChinRaiser,ChinRaiser,1,0.0,1.0,,0,mouth,shared,asset_specific_correctives,roblox.FaceControls:ChinRaiser: asset-specific joint pose mapping
+roblox.control.ChinRaiserUpperLip,ChinRaiserUpperLip,ChinRaiserUpperLip,1,0.0,1.0,,1,mouth,shared,asset_specific_correctives,roblox.FaceControls:ChinRaiserUpperLip: asset-specific joint pose mapping
+roblox.control.Corrugator,Corrugator,Corrugator,1,0.0,1.0,,2,other,shared,asset_specific_correctives,roblox.FaceControls:Corrugator: asset-specific joint pose mapping
+roblox.control.EyesLookDown,EyesLookDown,EyesLookDown,1,0.0,1.0,,3,gaze,shared,asset_specific_correctives,roblox.FaceControls:EyesLookDown: asset-specific joint pose mapping
+roblox.control.EyesLookLeft,EyesLookLeft,EyesLookLeft,1,0.0,1.0,,4,gaze,left,asset_specific_correctives,roblox.FaceControls:EyesLookLeft: asset-specific joint pose mapping
+roblox.control.EyesLookRight,EyesLookRight,EyesLookRight,1,0.0,1.0,,5,gaze,right,asset_specific_correctives,roblox.FaceControls:EyesLookRight: asset-specific joint pose mapping
+roblox.control.EyesLookUp,EyesLookUp,EyesLookUp,1,0.0,1.0,,6,gaze,shared,asset_specific_correctives,roblox.FaceControls:EyesLookUp: asset-specific joint pose mapping
+roblox.control.FlatPucker,FlatPucker,FlatPucker,1,0.0,1.0,,7,other,shared,asset_specific_correctives,roblox.FaceControls:FlatPucker: asset-specific joint pose mapping
+roblox.control.Funneler,Funneler,Funneler,1,0.0,1.0,,8,other,shared,asset_specific_correctives,roblox.FaceControls:Funneler: asset-specific joint pose mapping
+roblox.control.JawDrop,JawDrop,JawDrop,1,0.0,1.0,,9,jaw,shared,asset_specific_correctives,roblox.FaceControls:JawDrop: asset-specific joint pose mapping
+roblox.control.JawLeft,JawLeft,JawLeft,1,0.0,1.0,,10,jaw,left,asset_specific_correctives,roblox.FaceControls:JawLeft: asset-specific joint pose mapping
+roblox.control.JawRight,JawRight,JawRight,1,0.0,1.0,,11,jaw,right,asset_specific_correctives,roblox.FaceControls:JawRight: asset-specific joint pose mapping
+roblox.control.LeftBrowLowerer,LeftBrowLowerer,LeftBrowLowerer,1,0.0,1.0,,12,brow,left,asset_specific_correctives,roblox.FaceControls:LeftBrowLowerer: asset-specific joint pose mapping
+roblox.control.LeftCheekPuff,LeftCheekPuff,LeftCheekPuff,1,0.0,1.0,,13,cheek,left,asset_specific_correctives,roblox.FaceControls:LeftCheekPuff: asset-specific joint pose mapping
+roblox.control.LeftCheekRaiser,LeftCheekRaiser,LeftCheekRaiser,1,0.0,1.0,,14,cheek,left,asset_specific_correctives,roblox.FaceControls:LeftCheekRaiser: asset-specific joint pose mapping
+roblox.control.LeftDimpler,LeftDimpler,LeftDimpler,1,0.0,1.0,,15,other,left,asset_specific_correctives,roblox.FaceControls:LeftDimpler: asset-specific joint pose mapping
+roblox.control.LeftEyeClosed,LeftEyeClosed,LeftEyeClosed,1,0.0,1.0,,16,eyelid,left,asset_specific_correctives,roblox.FaceControls:LeftEyeClosed: asset-specific joint pose mapping
+roblox.control.LeftEyeUpperLidRaiser,LeftEyeUpperLidRaiser,LeftEyeUpperLidRaiser,1,0.0,1.0,,17,eyelid,left,asset_specific_correctives,roblox.FaceControls:LeftEyeUpperLidRaiser: asset-specific joint pose mapping
+roblox.control.LeftInnerBrowRaiser,LeftInnerBrowRaiser,LeftInnerBrowRaiser,1,0.0,1.0,,18,brow,left,asset_specific_correctives,roblox.FaceControls:LeftInnerBrowRaiser: asset-specific joint pose mapping
+roblox.control.LeftLipCornerDown,LeftLipCornerDown,LeftLipCornerDown,1,0.0,1.0,,19,mouth,left,asset_specific_correctives,roblox.FaceControls:LeftLipCornerDown: asset-specific joint pose mapping
+roblox.control.LeftLipCornerPuller,LeftLipCornerPuller,LeftLipCornerPuller,1,0.0,1.0,,20,mouth,left,asset_specific_correctives,roblox.FaceControls:LeftLipCornerPuller: asset-specific joint pose mapping
+roblox.control.LeftLipStretcher,LeftLipStretcher,LeftLipStretcher,1,0.0,1.0,,21,mouth,left,asset_specific_correctives,roblox.FaceControls:LeftLipStretcher: asset-specific joint pose mapping
+roblox.control.LeftLowerLipDepressor,LeftLowerLipDepressor,LeftLowerLipDepressor,1,0.0,1.0,,22,mouth,left,asset_specific_correctives,roblox.FaceControls:LeftLowerLipDepressor: asset-specific joint pose mapping
+roblox.control.LeftNoseWrinkler,LeftNoseWrinkler,LeftNoseWrinkler,1,0.0,1.0,,23,nose,left,asset_specific_correctives,roblox.FaceControls:LeftNoseWrinkler: asset-specific joint pose mapping
+roblox.control.LeftOuterBrowRaiser,LeftOuterBrowRaiser,LeftOuterBrowRaiser,1,0.0,1.0,,24,brow,left,asset_specific_correctives,roblox.FaceControls:LeftOuterBrowRaiser: asset-specific joint pose mapping
+roblox.control.LeftUpperLipRaiser,LeftUpperLipRaiser,LeftUpperLipRaiser,1,0.0,1.0,,25,mouth,left,asset_specific_correctives,roblox.FaceControls:LeftUpperLipRaiser: asset-specific joint pose mapping
+roblox.control.LipPresser,LipPresser,LipPresser,1,0.0,1.0,,26,mouth,shared,asset_specific_correctives,roblox.FaceControls:LipPresser: asset-specific joint pose mapping
+roblox.control.LipsTogether,LipsTogether,LipsTogether,1,0.0,1.0,,27,mouth,shared,asset_specific_correctives,roblox.FaceControls:LipsTogether: asset-specific joint pose mapping
+roblox.control.LowerLipSuck,LowerLipSuck,LowerLipSuck,1,0.0,1.0,,28,mouth,shared,asset_specific_correctives,roblox.FaceControls:LowerLipSuck: asset-specific joint pose mapping
+roblox.control.MouthLeft,MouthLeft,MouthLeft,1,0.0,1.0,,29,mouth,left,asset_specific_correctives,roblox.FaceControls:MouthLeft: asset-specific joint pose mapping
+roblox.control.MouthRight,MouthRight,MouthRight,1,0.0,1.0,,30,mouth,right,asset_specific_correctives,roblox.FaceControls:MouthRight: asset-specific joint pose mapping
+roblox.control.Pucker,Pucker,Pucker,1,0.0,1.0,,31,other,shared,asset_specific_correctives,roblox.FaceControls:Pucker: asset-specific joint pose mapping
+roblox.control.RightBrowLowerer,RightBrowLowerer,RightBrowLowerer,1,0.0,1.0,,32,brow,right,asset_specific_correctives,roblox.FaceControls:RightBrowLowerer: asset-specific joint pose mapping
+roblox.control.RightCheekPuff,RightCheekPuff,RightCheekPuff,1,0.0,1.0,,33,cheek,right,asset_specific_correctives,roblox.FaceControls:RightCheekPuff: asset-specific joint pose mapping
+roblox.control.RightCheekRaiser,RightCheekRaiser,RightCheekRaiser,1,0.0,1.0,,34,cheek,right,asset_specific_correctives,roblox.FaceControls:RightCheekRaiser: asset-specific joint pose mapping
+roblox.control.RightDimpler,RightDimpler,RightDimpler,1,0.0,1.0,,35,other,right,asset_specific_correctives,roblox.FaceControls:RightDimpler: asset-specific joint pose mapping
+roblox.control.RightEyeClosed,RightEyeClosed,RightEyeClosed,1,0.0,1.0,,36,eyelid,right,asset_specific_correctives,roblox.FaceControls:RightEyeClosed: asset-specific joint pose mapping
+roblox.control.RightEyeUpperLidRaiser,RightEyeUpperLidRaiser,RightEyeUpperLidRaiser,1,0.0,1.0,,37,eyelid,right,asset_specific_correctives,roblox.FaceControls:RightEyeUpperLidRaiser: asset-specific joint pose mapping
+roblox.control.RightInnerBrowRaiser,RightInnerBrowRaiser,RightInnerBrowRaiser,1,0.0,1.0,,38,brow,right,asset_specific_correctives,roblox.FaceControls:RightInnerBrowRaiser: asset-specific joint pose mapping
+roblox.control.RightLipCornerDown,RightLipCornerDown,RightLipCornerDown,1,0.0,1.0,,39,mouth,right,asset_specific_correctives,roblox.FaceControls:RightLipCornerDown: asset-specific joint pose mapping
+roblox.control.RightLipCornerPuller,RightLipCornerPuller,RightLipCornerPuller,1,0.0,1.0,,40,mouth,right,asset_specific_correctives,roblox.FaceControls:RightLipCornerPuller: asset-specific joint pose mapping
+roblox.control.RightLipStretcher,RightLipStretcher,RightLipStretcher,1,0.0,1.0,,41,mouth,right,asset_specific_correctives,roblox.FaceControls:RightLipStretcher: asset-specific joint pose mapping
+roblox.control.RightLowerLipDepressor,RightLowerLipDepressor,RightLowerLipDepressor,1,0.0,1.0,,42,mouth,right,asset_specific_correctives,roblox.FaceControls:RightLowerLipDepressor: asset-specific joint pose mapping
+roblox.control.RightNoseWrinkler,RightNoseWrinkler,RightNoseWrinkler,1,0.0,1.0,,43,nose,right,asset_specific_correctives,roblox.FaceControls:RightNoseWrinkler: asset-specific joint pose mapping
+roblox.control.RightOuterBrowRaiser,RightOuterBrowRaiser,RightOuterBrowRaiser,1,0.0,1.0,,44,brow,right,asset_specific_correctives,roblox.FaceControls:RightOuterBrowRaiser: asset-specific joint pose mapping
+roblox.control.RightUpperLipRaiser,RightUpperLipRaiser,RightUpperLipRaiser,1,0.0,1.0,,45,mouth,right,asset_specific_correctives,roblox.FaceControls:RightUpperLipRaiser: asset-specific joint pose mapping
+roblox.control.TongueDown,TongueDown,TongueDown,1,0.0,1.0,,46,tongue,shared,asset_specific_correctives,roblox.FaceControls:TongueDown: asset-specific joint pose mapping
+roblox.control.TongueOut,TongueOut,TongueOut,1,0.0,1.0,,47,tongue,shared,asset_specific_correctives,roblox.FaceControls:TongueOut: asset-specific joint pose mapping
+roblox.control.TongueUp,TongueUp,TongueUp,1,0.0,1.0,,48,tongue,shared,asset_specific_correctives,roblox.FaceControls:TongueUp: asset-specific joint pose mapping
+roblox.control.UpperLipSuck,UpperLipSuck,UpperLipSuck,1,0.0,1.0,,49,mouth,shared,asset_specific_correctives,roblox.FaceControls:UpperLipSuck: asset-specific joint pose mapping
+vrcft.artist.base.EyeLookOutRight,EyeLookOutRight,EyeLookOutRight,unknown,,,,0,gaze,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeLookInRight,EyeLookInRight,EyeLookInRight,unknown,,,,1,gaze,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeLookUpRight,EyeLookUpRight,EyeLookUpRight,unknown,,,,2,gaze,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeLookDownRight,EyeLookDownRight,EyeLookDownRight,unknown,,,,3,gaze,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeLookOutLeft,EyeLookOutLeft,EyeLookOutLeft,unknown,,,,4,gaze,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeLookInLeft,EyeLookInLeft,EyeLookInLeft,unknown,,,,5,gaze,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeLookUpLeft,EyeLookUpLeft,EyeLookUpLeft,unknown,,,,6,gaze,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeLookDownLeft,EyeLookDownLeft,EyeLookDownLeft,unknown,,,,7,gaze,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeClosedRight,EyeClosedRight,EyeClosedRight,unknown,,,,8,eyelid,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeClosedLeft,EyeClosedLeft,EyeClosedLeft,unknown,,,,9,eyelid,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeSquintRight,EyeSquintRight,EyeSquintRight,unknown,,,,10,eyelid,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeSquintLeft,EyeSquintLeft,EyeSquintLeft,unknown,,,,11,eyelid,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeWideRight,EyeWideRight,EyeWideRight,unknown,,,,12,eyelid,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeWideLeft,EyeWideLeft,EyeWideLeft,unknown,,,,13,eyelid,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeDilationRight,EyeDilationRight,EyeDilationRight,unknown,,,,14,pupil,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeDilationLeft,EyeDilationLeft,EyeDilationLeft,unknown,,,,15,pupil,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeConstrictRight,EyeConstrictRight,EyeConstrictRight,unknown,,,,16,eyelid,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.EyeConstrictLeft,EyeConstrictLeft,EyeConstrictLeft,unknown,,,,17,eyelid,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.BrowPinchRight,BrowPinchRight,BrowPinchRight,unknown,,,,18,brow,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.BrowPinchLeft,BrowPinchLeft,BrowPinchLeft,unknown,,,,19,brow,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.BrowLowererRight,BrowLowererRight,BrowLowererRight,unknown,,,,20,brow,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.BrowLowererLeft,BrowLowererLeft,BrowLowererLeft,unknown,,,,21,brow,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.BrowInnerUpRight,BrowInnerUpRight,BrowInnerUpRight,unknown,,,,22,brow,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.BrowInnerUpLeft,BrowInnerUpLeft,BrowInnerUpLeft,unknown,,,,23,brow,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.BrowOuterUpRight,BrowOuterUpRight,BrowOuterUpRight,unknown,,,,24,brow,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.BrowOuterUpLeft,BrowOuterUpLeft,BrowOuterUpLeft,unknown,,,,25,brow,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.NoseSneerRight,NoseSneerRight,NoseSneerRight,unknown,,,,26,nose,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.NoseSneerLeft,NoseSneerLeft,NoseSneerLeft,unknown,,,,27,nose,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.NasalDilationRight,NasalDilationRight,NasalDilationRight,unknown,,,,28,nose,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.NasalDilationLeft,NasalDilationLeft,NasalDilationLeft,unknown,,,,29,nose,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.NasalConstrictRight,NasalConstrictRight,NasalConstrictRight,unknown,,,,30,nose,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.NasalConstrictLeft,NasalConstrictLeft,NasalConstrictLeft,unknown,,,,31,nose,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.CheekSquintRight,CheekSquintRight,CheekSquintRight,unknown,,,,32,cheek,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.CheekSquintLeft,CheekSquintLeft,CheekSquintLeft,unknown,,,,33,cheek,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.CheekPuffRight,CheekPuffRight,CheekPuffRight,unknown,,,,34,cheek,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.CheekPuffLeft,CheekPuffLeft,CheekPuffLeft,unknown,,,,35,cheek,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.CheekSuckRight,CheekSuckRight,CheekSuckRight,unknown,,,,36,cheek,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.CheekSuckLeft,CheekSuckLeft,CheekSuckLeft,unknown,,,,37,cheek,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.JawOpen,JawOpen,JawOpen,unknown,,,,38,jaw,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthClosed,MouthClosed,MouthClosed,unknown,,,,39,mouth,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.JawRight,JawRight,JawRight,unknown,,,,40,jaw,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.JawLeft,JawLeft,JawLeft,unknown,,,,41,jaw,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.JawForward,JawForward,JawForward,unknown,,,,42,jaw,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.JawBackward,JawBackward,JawBackward,unknown,,,,43,jaw,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.JawClench,JawClench,JawClench,unknown,,,,44,jaw,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.JawMandibleRaise,JawMandibleRaise,JawMandibleRaise,unknown,,,,45,jaw,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipSuckUpperRight,LipSuckUpperRight,LipSuckUpperRight,unknown,,,,46,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipSuckUpperLeft,LipSuckUpperLeft,LipSuckUpperLeft,unknown,,,,47,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipSuckLowerRight,LipSuckLowerRight,LipSuckLowerRight,unknown,,,,48,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipSuckLowerLeft,LipSuckLowerLeft,LipSuckLowerLeft,unknown,,,,49,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipSuckCornerRight,LipSuckCornerRight,LipSuckCornerRight,unknown,,,,50,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipSuckCornerLeft,LipSuckCornerLeft,LipSuckCornerLeft,unknown,,,,51,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipFunnelUpperRight,LipFunnelUpperRight,LipFunnelUpperRight,unknown,,,,52,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipFunnelUpperLeft,LipFunnelUpperLeft,LipFunnelUpperLeft,unknown,,,,53,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipFunnelLowerRight,LipFunnelLowerRight,LipFunnelLowerRight,unknown,,,,54,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipFunnelLowerLeft,LipFunnelLowerLeft,LipFunnelLowerLeft,unknown,,,,55,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipPuckerUpperRight,LipPuckerUpperRight,LipPuckerUpperRight,unknown,,,,56,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipPuckerUpperLeft,LipPuckerUpperLeft,LipPuckerUpperLeft,unknown,,,,57,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipPuckerLowerRight,LipPuckerLowerRight,LipPuckerLowerRight,unknown,,,,58,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.LipPuckerLowerLeft,LipPuckerLowerLeft,LipPuckerLowerLeft,unknown,,,,59,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthUpperUpRight,MouthUpperUpRight,MouthUpperUpRight,unknown,,,,60,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthUpperUpLeft,MouthUpperUpLeft,MouthUpperUpLeft,unknown,,,,61,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthLowerDownRight,MouthLowerDownRight,MouthLowerDownRight,unknown,,,,62,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthLowerDownLeft,MouthLowerDownLeft,MouthLowerDownLeft,unknown,,,,63,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthUpperDeepenRight,MouthUpperDeepenRight,MouthUpperDeepenRight,unknown,,,,64,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthUpperDeepenLeft,MouthUpperDeepenLeft,MouthUpperDeepenLeft,unknown,,,,65,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthUpperRight,MouthUpperRight,MouthUpperRight,unknown,,,,66,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthUpperLeft,MouthUpperLeft,MouthUpperLeft,unknown,,,,67,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthLowerRight,MouthLowerRight,MouthLowerRight,unknown,,,,68,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthLowerLeft,MouthLowerLeft,MouthLowerLeft,unknown,,,,69,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthCornerPullRight,MouthCornerPullRight,MouthCornerPullRight,unknown,,,,70,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthCornerPullLeft,MouthCornerPullLeft,MouthCornerPullLeft,unknown,,,,71,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthCornerSlantRight,MouthCornerSlantRight,MouthCornerSlantRight,unknown,,,,72,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthCornerSlantLeft,MouthCornerSlantLeft,MouthCornerSlantLeft,unknown,,,,73,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthFrownRight,MouthFrownRight,MouthFrownRight,unknown,,,,74,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthFrownLeft,MouthFrownLeft,MouthFrownLeft,unknown,,,,75,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthStretchRight,MouthStretchRight,MouthStretchRight,unknown,,,,76,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthStretchLeft,MouthStretchLeft,MouthStretchLeft,unknown,,,,77,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthDimpleRight,MouthDimpleRight,MouthDimpleRight,unknown,,,,78,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthDimpleLeft,MouthDimpleLeft,MouthDimpleLeft,unknown,,,,79,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthRaiserUpper,MouthRaiserUpper,MouthRaiserUpper,unknown,,,,80,mouth,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthRaiserLower,MouthRaiserLower,MouthRaiserLower,unknown,,,,81,mouth,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthPressRight,MouthPressRight,MouthPressRight,unknown,,,,82,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthPressLeft,MouthPressLeft,MouthPressLeft,unknown,,,,83,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthTightenerRight,MouthTightenerRight,MouthTightenerRight,unknown,,,,84,mouth,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.MouthTightenerLeft,MouthTightenerLeft,MouthTightenerLeft,unknown,,,,85,mouth,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueOut,TongueOut,TongueOut,unknown,,,,86,tongue,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueUp,TongueUp,TongueUp,unknown,,,,87,tongue,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueDown,TongueDown,TongueDown,unknown,,,,88,tongue,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueRight,TongueRight,TongueRight,unknown,,,,89,tongue,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueLeft,TongueLeft,TongueLeft,unknown,,,,90,tongue,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueRoll,TongueRoll,TongueRoll,unknown,,,,91,tongue,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueBendDown,TongueBendDown,TongueBendDown,unknown,,,,92,tongue,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueCurlUp,TongueCurlUp,TongueCurlUp,unknown,,,,93,tongue,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueSquish,TongueSquish,TongueSquish,unknown,,,,94,tongue,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueFlat,TongueFlat,TongueFlat,unknown,,,,95,tongue,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueTwistRight,TongueTwistRight,TongueTwistRight,unknown,,,,96,tongue,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.TongueTwistLeft,TongueTwistLeft,TongueTwistLeft,unknown,,,,97,tongue,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.SoftPalateClose,SoftPalateClose,SoftPalateClose,unknown,,,,98,other,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.ThroatSwallow,ThroatSwallow,ThroatSwallow,unknown,,,,99,other,shared,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.NeckFlexRight,NeckFlexRight,NeckFlexRight,unknown,,,,100,other,right,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.base.NeckFlexLeft,NeckFlexLeft,NeckFlexLeft,unknown,,,,101,other,left,,vrcft.artist.base: native basis; no canonical calibration established
+vrcft.artist.blended.EyeClosed,EyeClosed,EyeClosed,unknown,,,,0,eyelid,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.EyeWide,EyeWide,EyeWide,unknown,,,,1,eyelid,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.EyeSquint,EyeSquint,EyeSquint,unknown,,,,2,eyelid,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.EyeDilation,EyeDilation,EyeDilation,unknown,,,,3,pupil,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.EyeConstrict,EyeConstrict,EyeConstrict,unknown,,,,4,eyelid,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.BrowDownRight,BrowDownRight,BrowDownRight,unknown,,,,5,brow,right,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.BrowDownLeft,BrowDownLeft,BrowDownLeft,unknown,,,,6,brow,left,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.BrowDown,BrowDown,BrowDown,unknown,,,,7,brow,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.BrowInnerUp,BrowInnerUp,BrowInnerUp,unknown,,,,8,brow,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.BrowUpRight,BrowUpRight,BrowUpRight,unknown,,,,9,brow,right,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.BrowUpLeft,BrowUpLeft,BrowUpLeft,unknown,,,,10,brow,left,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.BrowUp,BrowUp,BrowUp,unknown,,,,11,brow,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.NoseSneer,NoseSneer,NoseSneer,unknown,,,,12,nose,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.NasalDilation,NasalDilation,NasalDilation,unknown,,,,13,nose,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.NasalConstrict,NasalConstrict,NasalConstrict,unknown,,,,14,nose,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.CheekPuff,CheekPuff,CheekPuff,unknown,,,,15,cheek,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.CheekSuck,CheekSuck,CheekSuck,unknown,,,,16,cheek,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.CheekSquint,CheekSquint,CheekSquint,unknown,,,,17,cheek,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.LipSuckUpper,LipSuckUpper,LipSuckUpper,unknown,,,,18,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.LipSuckLower,LipSuckLower,LipSuckLower,unknown,,,,19,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.LipSuck,LipSuck,LipSuck,unknown,,,,20,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.LipFunnelUpper,LipFunnelUpper,LipFunnelUpper,unknown,,,,21,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.LipFunnelLower,LipFunnelLower,LipFunnelLower,unknown,,,,22,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.LipFunnel,LipFunnel,LipFunnel,unknown,,,,23,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.LipPuckerUpper,LipPuckerUpper,LipPuckerUpper,unknown,,,,24,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.LipPuckerLower,LipPuckerLower,LipPuckerLower,unknown,,,,25,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.LipPucker,LipPucker,LipPucker,unknown,,,,26,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthUpperUp,MouthUpperUp,MouthUpperUp,unknown,,,,27,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthLowerDown,MouthLowerDown,MouthLowerDown,unknown,,,,28,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthOpen,MouthOpen,MouthOpen,unknown,,,,29,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthRight,MouthRight,MouthRight,unknown,,,,30,mouth,right,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthLeft,MouthLeft,MouthLeft,unknown,,,,31,mouth,left,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthSmileRight,MouthSmileRight,MouthSmileRight,unknown,,,,32,mouth,right,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthSmileLeft,MouthSmileLeft,MouthSmileLeft,unknown,,,,33,mouth,left,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthSmile,MouthSmile,MouthSmile,unknown,,,,34,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthSadRight,MouthSadRight,MouthSadRight,unknown,,,,35,mouth,right,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthSadLeft,MouthSadLeft,MouthSadLeft,unknown,,,,36,mouth,left,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthSad,MouthSad,MouthSad,unknown,,,,37,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthStretch,MouthStretch,MouthStretch,unknown,,,,38,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthDimple,MouthDimple,MouthDimple,unknown,,,,39,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthTightener,MouthTightener,MouthTightener,unknown,,,,40,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.artist.blended.MouthPress,MouthPress,MouthPress,unknown,,,,41,mouth,shared,composite,vrcft.artist.blended: native basis; no canonical calibration established
+vrcft.eye.Left.Gaze.x,Left.Gaze.x,Left.Gaze.x,unknown,,,,0,gaze,left,,vrcft.eye.storage.v1:Left.Gaze.x
+vrcft.eye.Left.Gaze.y,Left.Gaze.y,Left.Gaze.y,unknown,,,,1,gaze,left,,vrcft.eye.storage.v1:Left.Gaze.y
+vrcft.eye.Left.Openness,Left.Openness,Left.Openness,1,,,,2,eyelid,left,,vrcft.eye.storage.v1:Left.Openness
+vrcft.eye.Left.PupilDiameter_MM,Left.PupilDiameter_MM,Left.PupilDiameter_MM,mm,,,,3,pupil,left,,vrcft.eye.storage.v1:Left.PupilDiameter_MM
+vrcft.eye.Right.Gaze.x,Right.Gaze.x,Right.Gaze.x,unknown,,,,4,gaze,right,,vrcft.eye.storage.v1:Right.Gaze.x
+vrcft.eye.Right.Gaze.y,Right.Gaze.y,Right.Gaze.y,unknown,,,,5,gaze,right,,vrcft.eye.storage.v1:Right.Gaze.y
+vrcft.eye.Right.Openness,Right.Openness,Right.Openness,1,,,,6,eyelid,right,,vrcft.eye.storage.v1:Right.Openness
+vrcft.eye.Right.PupilDiameter_MM,Right.PupilDiameter_MM,Right.PupilDiameter_MM,mm,,,,7,pupil,right,,vrcft.eye.storage.v1:Right.PupilDiameter_MM
+vrcft.eye.Combined.Gaze.x,Combined.Gaze.x,Combined.Gaze.x,unknown,,,,8,gaze,shared,bilateral_shared,vrcft.eye.storage.v1:Combined.Gaze.x
+vrcft.eye.Combined.Gaze.y,Combined.Gaze.y,Combined.Gaze.y,unknown,,,,9,gaze,shared,bilateral_shared,vrcft.eye.storage.v1:Combined.Gaze.y
+vrcft.eye.Combined.Openness,Combined.Openness,Combined.Openness,1,,,,10,eyelid,shared,bilateral_shared,vrcft.eye.storage.v1:Combined.Openness
+vrcft.eye.Combined.PupilDiameter_MM,Combined.PupilDiameter_MM,Combined.PupilDiameter_MM,1,0.0,1.0,,11,pupil,shared,bilateral_shared,vrcft.eye.storage.v1:Combined.PupilDiameter_MM
+vrcft.eye.reservedByte10,reservedByte10,reservedByte10,unknown,,,,10,eyelid,shared,,vrcft.eye: native basis; no canonical calibration established
+vrcft.eye.reservedByte11,reservedByte11,reservedByte11,unknown,,,,11,eyelid,shared,,vrcft.eye: native basis; no canonical calibration established
+vrcft.eye.reservedByte12,reservedByte12,reservedByte12,unknown,,,,12,eyelid,shared,,vrcft.eye: native basis; no canonical calibration established
+vrcft.eye.reservedByte13,reservedByte13,reservedByte13,unknown,,,,13,eyelid,shared,,vrcft.eye: native basis; no canonical calibration established
+vrcft.eye._maxDilation,_maxDilation,_maxDilation,mm,,,,,,,,vrcft.eye.normalization-state.v1
+vrcft.eye._minDilation,_minDilation,_minDilation,mm,,,,,,,,vrcft.eye.normalization-state.v1
+vrcft.eye._leftDiameter,_leftDiameter,_leftDiameter,mm,,,,,,,,vrcft.eye.normalization-state.v1
+vrcft.eye._rightDiameter,_rightDiameter,_rightDiameter,mm,,,,,,,,vrcft.eye.normalization-state.v1
+vrcft.parameter.encoding.ParameterNegative,ParameterNegative,ParameterNegative,unknown,,,,0,other,shared,,vrcft.parameter.encoding: native basis; no canonical calibration established
+vrcft.parameter.encoding.Parameter1,Parameter1,Parameter1,unknown,,,,1,other,shared,,vrcft.parameter.encoding: native basis; no canonical calibration established
+vrcft.parameter.encoding.Parameter2,Parameter2,Parameter2,unknown,,,,2,other,shared,,vrcft.parameter.encoding: native basis; no canonical calibration established
+vrcft.parameter.encoding.Parameter4,Parameter4,Parameter4,unknown,,,,3,other,shared,,vrcft.parameter.encoding: native basis; no canonical calibration established
+vrcft.parameter.encoding.Parameter8,Parameter8,Parameter8,unknown,,,,4,other,shared,,vrcft.parameter.encoding: native basis; no canonical calibration established
+vrcft.parameter.encoding.Parameterx,Parameterx,Parameterx,unknown,,,,5,other,shared,,vrcft.parameter.encoding: native basis; no canonical calibration established
+vrcft.parameter.encoding.JawForward1,JawForward1,JawForward1,unknown,,,,6,jaw,shared,,vrcft.parameter.encoding: native basis; no canonical calibration established
+vrcft.parameter.flags.EyeTrackingActive,EyeTrackingActive,EyeTrackingActive,unknown,,,,0,eyelid,shared,,vrcft.parameter.flags: native basis; no canonical calibration established
+vrcft.parameter.flags.ExpressionTrackingActive,ExpressionTrackingActive,ExpressionTrackingActive,unknown,,,,1,other,shared,,vrcft.parameter.flags: native basis; no canonical calibration established
+vrcft.parameter.flags.LipTrackingActive,LipTrackingActive,LipTrackingActive,unknown,,,,2,mouth,shared,,vrcft.parameter.flags: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeLeftX,v2/EyeLeftX,v2/EyeLeftX,1,-1.0,1.0,,0,gaze,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeLeftY,v2/EyeLeftY,v2/EyeLeftY,1,-1.0,1.0,,1,gaze,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeRightX,v2/EyeRightX,v2/EyeRightX,1,-1.0,1.0,,2,gaze,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeRightY,v2/EyeRightY,v2/EyeRightY,1,-1.0,1.0,,3,gaze,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeLidRight,v2/EyeLidRight,v2/EyeLidRight,1,0.0,1.0,,4,eyelid,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeLidLeft,v2/EyeLidLeft,v2/EyeLidLeft,1,0.0,1.0,,5,eyelid,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeLid,v2/EyeLid,v2/EyeLid,1,0.0,1.0,,6,eyelid,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeSquintRight,v2/EyeSquintRight,v2/EyeSquintRight,1,0.0,1.0,,7,eyelid,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeSquintLeft,v2/EyeSquintLeft,v2/EyeSquintLeft,1,0.0,1.0,,8,eyelid,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeSquint,v2/EyeSquint,v2/EyeSquint,1,0.0,1.0,,9,eyelid,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.PupilDilation,v2/PupilDilation,v2/PupilDilation,1,0.0,1.0,,10,pupil,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.PupilDiameterRight,v2/PupilDiameterRight,v2/PupilDiameterRight,cm,0.0,1.0,,11,pupil,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.PupilDiameterLeft,v2/PupilDiameterLeft,v2/PupilDiameterLeft,cm,0.0,1.0,,12,pupil,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.PupilDiameter,v2/PupilDiameter,v2/PupilDiameter,cm,0.0,1.0,,13,pupil,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowPinchRight,v2/BrowPinchRight,v2/BrowPinchRight,1,0.0,1.0,,14,brow,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowPinchLeft,v2/BrowPinchLeft,v2/BrowPinchLeft,1,0.0,1.0,,15,brow,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowLowererRight,v2/BrowLowererRight,v2/BrowLowererRight,1,0.0,1.0,,16,brow,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowLowererLeft,v2/BrowLowererLeft,v2/BrowLowererLeft,1,0.0,1.0,,17,brow,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowInnerUpRight,v2/BrowInnerUpRight,v2/BrowInnerUpRight,1,0.0,1.0,,18,brow,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowInnerUpLeft,v2/BrowInnerUpLeft,v2/BrowInnerUpLeft,1,0.0,1.0,,19,brow,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowOuterUpRight,v2/BrowOuterUpRight,v2/BrowOuterUpRight,1,0.0,1.0,,20,brow,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowOuterUpLeft,v2/BrowOuterUpLeft,v2/BrowOuterUpLeft,1,0.0,1.0,,21,brow,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.NoseSneerRight,v2/NoseSneerRight,v2/NoseSneerRight,1,0.0,1.0,,22,nose,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.NoseSneerLeft,v2/NoseSneerLeft,v2/NoseSneerLeft,1,0.0,1.0,,23,nose,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.NasalDilationRight,v2/NasalDilationRight,v2/NasalDilationRight,1,0.0,1.0,,24,nose,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.NasalDilationLeft,v2/NasalDilationLeft,v2/NasalDilationLeft,1,0.0,1.0,,25,nose,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.NasalConstrictRight,v2/NasalConstrictRight,v2/NasalConstrictRight,1,0.0,1.0,,26,nose,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.NasalConstrictLeft,v2/NasalConstrictLeft,v2/NasalConstrictLeft,1,0.0,1.0,,27,nose,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.CheekSquintRight,v2/CheekSquintRight,v2/CheekSquintRight,1,0.0,1.0,,28,cheek,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.CheekSquintLeft,v2/CheekSquintLeft,v2/CheekSquintLeft,1,0.0,1.0,,29,cheek,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.CheekPuffSuckRight,v2/CheekPuffSuckRight,v2/CheekPuffSuckRight,1,-1.0,1.0,,30,cheek,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.CheekPuffSuckLeft,v2/CheekPuffSuckLeft,v2/CheekPuffSuckLeft,1,-1.0,1.0,,31,cheek,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.JawOpen,v2/JawOpen,v2/JawOpen,1,0.0,1.0,,32,jaw,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthClosed,v2/MouthClosed,v2/MouthClosed,1,0.0,1.0,,33,mouth,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.JawX,v2/JawX,v2/JawX,1,-1.0,1.0,,34,jaw,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.JawZ,v2/JawZ,v2/JawZ,1,-1.0,1.0,,35,jaw,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.JawClench,v2/JawClench,v2/JawClench,1,0.0,1.0,,36,jaw,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.JawMandibleRaise,v2/JawMandibleRaise,v2/JawMandibleRaise,1,0.0,1.0,,37,jaw,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipSuckUpperRight,v2/LipSuckUpperRight,v2/LipSuckUpperRight,1,0.0,1.0,,38,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipSuckUpperLeft,v2/LipSuckUpperLeft,v2/LipSuckUpperLeft,1,0.0,1.0,,39,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipSuckLowerRight,v2/LipSuckLowerRight,v2/LipSuckLowerRight,1,0.0,1.0,,40,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipSuckLowerLeft,v2/LipSuckLowerLeft,v2/LipSuckLowerLeft,1,0.0,1.0,,41,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipSuckCornerRight,v2/LipSuckCornerRight,v2/LipSuckCornerRight,1,0.0,1.0,,42,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipSuckCornerLeft,v2/LipSuckCornerLeft,v2/LipSuckCornerLeft,1,0.0,1.0,,43,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipFunnelUpperRight,v2/LipFunnelUpperRight,v2/LipFunnelUpperRight,1,0.0,1.0,,44,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipFunnelUpperLeft,v2/LipFunnelUpperLeft,v2/LipFunnelUpperLeft,1,0.0,1.0,,45,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipFunnelLowerRight,v2/LipFunnelLowerRight,v2/LipFunnelLowerRight,1,0.0,1.0,,46,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipFunnelLowerLeft,v2/LipFunnelLowerLeft,v2/LipFunnelLowerLeft,1,0.0,1.0,,47,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipPuckerUpperRight,v2/LipPuckerUpperRight,v2/LipPuckerUpperRight,1,0.0,1.0,,48,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipPuckerUpperLeft,v2/LipPuckerUpperLeft,v2/LipPuckerUpperLeft,1,0.0,1.0,,49,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipPuckerLowerRight,v2/LipPuckerLowerRight,v2/LipPuckerLowerRight,1,0.0,1.0,,50,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipPuckerLowerLeft,v2/LipPuckerLowerLeft,v2/LipPuckerLowerLeft,1,0.0,1.0,,51,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthUpperUpRight,v2/MouthUpperUpRight,v2/MouthUpperUpRight,1,0.0,1.0,,52,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthUpperUpLeft,v2/MouthUpperUpLeft,v2/MouthUpperUpLeft,1,0.0,1.0,,53,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthLowerDownRight,v2/MouthLowerDownRight,v2/MouthLowerDownRight,1,0.0,1.0,,54,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthLowerDownLeft,v2/MouthLowerDownLeft,v2/MouthLowerDownLeft,1,0.0,1.0,,55,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthUpperDeepenRight,v2/MouthUpperDeepenRight,v2/MouthUpperDeepenRight,1,0.0,1.0,,56,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthUpperDeepenLeft,v2/MouthUpperDeepenLeft,v2/MouthUpperDeepenLeft,1,0.0,1.0,,57,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthUpperX,v2/MouthUpperX,v2/MouthUpperX,1,-1.0,1.0,,58,mouth,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthLowerX,v2/MouthLowerX,v2/MouthLowerX,1,-1.0,1.0,,59,mouth,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthCornerPullRight,v2/MouthCornerPullRight,v2/MouthCornerPullRight,1,0.0,1.0,,60,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthCornerPullLeft,v2/MouthCornerPullLeft,v2/MouthCornerPullLeft,1,0.0,1.0,,61,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthCornerSlantRight,v2/MouthCornerSlantRight,v2/MouthCornerSlantRight,1,0.0,1.0,,62,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthCornerSlantLeft,v2/MouthCornerSlantLeft,v2/MouthCornerSlantLeft,1,0.0,1.0,,63,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthDimpleRight,v2/MouthDimpleRight,v2/MouthDimpleRight,1,0.0,1.0,,64,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthDimpleLeft,v2/MouthDimpleLeft,v2/MouthDimpleLeft,1,0.0,1.0,,65,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthFrownRight,v2/MouthFrownRight,v2/MouthFrownRight,1,0.0,1.0,,66,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthFrownLeft,v2/MouthFrownLeft,v2/MouthFrownLeft,1,0.0,1.0,,67,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthStretchRight,v2/MouthStretchRight,v2/MouthStretchRight,1,0.0,1.0,,68,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthStretchLeft,v2/MouthStretchLeft,v2/MouthStretchLeft,1,0.0,1.0,,69,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthRaiserUpper,v2/MouthRaiserUpper,v2/MouthRaiserUpper,1,0.0,1.0,,70,mouth,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthRaiserLower,v2/MouthRaiserLower,v2/MouthRaiserLower,1,0.0,1.0,,71,mouth,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthPressRight,v2/MouthPressRight,v2/MouthPressRight,1,0.0,1.0,,72,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthPressLeft,v2/MouthPressLeft,v2/MouthPressLeft,1,0.0,1.0,,73,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthTightenerRight,v2/MouthTightenerRight,v2/MouthTightenerRight,1,0.0,1.0,,74,mouth,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthTightenerLeft,v2/MouthTightenerLeft,v2/MouthTightenerLeft,1,0.0,1.0,,75,mouth,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.TongueOut,v2/TongueOut,v2/TongueOut,1,0.0,1.0,,76,tongue,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.TongueX,v2/TongueX,v2/TongueX,1,-1.0,1.0,,77,tongue,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.TongueY,v2/TongueY,v2/TongueY,1,-1.0,1.0,,78,tongue,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.TongueRoll,v2/TongueRoll,v2/TongueRoll,1,0.0,1.0,,79,tongue,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.TongueArchY,v2/TongueArchY,v2/TongueArchY,1,-1.0,1.0,,80,tongue,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.TongueShape,v2/TongueShape,v2/TongueShape,1,-1.0,1.0,,81,tongue,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.TongueTwistRight,v2/TongueTwistRight,v2/TongueTwistRight,1,0.0,1.0,,82,tongue,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.TongueTwistLeft,v2/TongueTwistLeft,v2/TongueTwistLeft,1,0.0,1.0,,83,tongue,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.SoftPalateClose,v2/SoftPalateClose,v2/SoftPalateClose,1,0.0,1.0,,84,other,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.ThroatSwallow,v2/ThroatSwallow,v2/ThroatSwallow,1,0.0,1.0,,85,other,shared,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.NeckFlexRight,v2/NeckFlexRight,v2/NeckFlexRight,1,0.0,1.0,,86,other,right,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.NeckFlexLeft,v2/NeckFlexLeft,v2/NeckFlexLeft,1,0.0,1.0,,87,other,left,,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeX,v2/EyeX,v2/EyeX,1,-1.0,1.0,,88,gaze,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.EyeY,v2/EyeY,v2/EyeY,1,-1.0,1.0,,89,gaze,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowDownRight,v2/BrowDownRight,v2/BrowDownRight,1,0.0,1.0,,90,brow,right,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowDownLeft,v2/BrowDownLeft,v2/BrowDownLeft,1,0.0,1.0,,91,brow,left,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowOuterUp,v2/BrowOuterUp,v2/BrowOuterUp,1,0.0,1.0,,92,brow,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowInnerUp,v2/BrowInnerUp,v2/BrowInnerUp,1,0.0,1.0,,93,brow,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowUp,v2/BrowUp,v2/BrowUp,1,0.0,1.0,,94,brow,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowExpressionRight,v2/BrowExpressionRight,v2/BrowExpressionRight,1,-1.0,1.0,,95,brow,right,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowExpressionLeft,v2/BrowExpressionLeft,v2/BrowExpressionLeft,1,-1.0,1.0,,96,brow,left,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.BrowExpression,v2/BrowExpression,v2/BrowExpression,1,-1.0,1.0,,97,brow,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthX,v2/MouthX,v2/MouthX,1,-1.0,1.0,,98,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthUpperUp,v2/MouthUpperUp,v2/MouthUpperUp,1,0.0,1.0,,99,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthLowerDown,v2/MouthLowerDown,v2/MouthLowerDown,1,0.0,1.0,,100,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthOpen,v2/MouthOpen,v2/MouthOpen,1,0.0,1.0,,101,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthSmileRight,v2/MouthSmileRight,v2/MouthSmileRight,1,0.0,1.0,,102,mouth,right,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthSmileLeft,v2/MouthSmileLeft,v2/MouthSmileLeft,1,0.0,1.0,,103,mouth,left,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthSadRight,v2/MouthSadRight,v2/MouthSadRight,1,0.0,1.0,,104,mouth,right,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.MouthSadLeft,v2/MouthSadLeft,v2/MouthSadLeft,1,0.0,1.0,,105,mouth,left,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.SmileFrownRight,v2/SmileFrownRight,v2/SmileFrownRight,1,-1.0,1.0,,106,other,right,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.SmileFrownLeft,v2/SmileFrownLeft,v2/SmileFrownLeft,1,-1.0,1.0,,107,other,left,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.SmileFrown,v2/SmileFrown,v2/SmileFrown,1,-1.0,1.0,,108,other,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.SmileSadRight,v2/SmileSadRight,v2/SmileSadRight,1,-1.0,1.0,,109,other,right,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.SmileSadLeft,v2/SmileSadLeft,v2/SmileSadLeft,1,-1.0,1.0,,110,other,left,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.SmileSad,v2/SmileSad,v2/SmileSad,1,-1.0,1.0,,111,other,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipSuckUpper,v2/LipSuckUpper,v2/LipSuckUpper,1,0.0,1.0,,112,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipSuckLower,v2/LipSuckLower,v2/LipSuckLower,1,0.0,1.0,,113,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipSuck,v2/LipSuck,v2/LipSuck,1,0.0,1.0,,114,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipFunnelUpper,v2/LipFunnelUpper,v2/LipFunnelUpper,1,0.0,1.0,,115,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipFunnelLower,v2/LipFunnelLower,v2/LipFunnelLower,1,0.0,1.0,,116,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipFunnel,v2/LipFunnel,v2/LipFunnel,1,0.0,1.0,,117,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipPuckerUpper,v2/LipPuckerUpper,v2/LipPuckerUpper,1,0.0,1.0,,118,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipPuckerLower,v2/LipPuckerLower,v2/LipPuckerLower,1,0.0,1.0,,119,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.LipPucker,v2/LipPucker,v2/LipPucker,1,0.0,1.0,,120,mouth,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.NoseSneer,v2/NoseSneer,v2/NoseSneer,1,0.0,1.0,,121,nose,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.CheekSquint,v2/CheekSquint,v2/CheekSquint,1,0.0,1.0,,122,cheek,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.parameter.float.v2.CheekPuffSuck,v2/CheekPuffSuck,v2/CheekPuffSuck,1,-1.0,1.0,,123,cheek,shared,composite,vrcft.parameter.float: native basis; no canonical calibration established
+vrcft.transport.EyeSquintRight,EyeSquintRight,EyeSquintRight,1,,,0,,eyelid,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.EyeSquintLeft,EyeSquintLeft,EyeSquintLeft,1,,,1,,eyelid,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.EyeWideRight,EyeWideRight,EyeWideRight,1,,,2,,eyelid,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.EyeWideLeft,EyeWideLeft,EyeWideLeft,1,,,3,,eyelid,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.BrowPinchRight,BrowPinchRight,BrowPinchRight,1,,,4,,brow,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.BrowPinchLeft,BrowPinchLeft,BrowPinchLeft,1,,,5,,brow,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.BrowLowererRight,BrowLowererRight,BrowLowererRight,1,,,6,,brow,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.BrowLowererLeft,BrowLowererLeft,BrowLowererLeft,1,,,7,,brow,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.BrowInnerUpRight,BrowInnerUpRight,BrowInnerUpRight,1,,,8,,brow,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.BrowInnerUpLeft,BrowInnerUpLeft,BrowInnerUpLeft,1,,,9,,brow,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.BrowOuterUpRight,BrowOuterUpRight,BrowOuterUpRight,1,,,10,,brow,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.BrowOuterUpLeft,BrowOuterUpLeft,BrowOuterUpLeft,1,,,11,,brow,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.NasalDilationRight,NasalDilationRight,NasalDilationRight,1,,,12,,nose,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.NasalDilationLeft,NasalDilationLeft,NasalDilationLeft,1,,,13,,nose,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.NasalConstrictRight,NasalConstrictRight,NasalConstrictRight,1,,,14,,nose,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.NasalConstrictLeft,NasalConstrictLeft,NasalConstrictLeft,1,,,15,,nose,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.CheekSquintRight,CheekSquintRight,CheekSquintRight,1,,,16,,cheek,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.CheekSquintLeft,CheekSquintLeft,CheekSquintLeft,1,,,17,,cheek,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.CheekPuffRight,CheekPuffRight,CheekPuffRight,1,,,18,,cheek,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.CheekPuffLeft,CheekPuffLeft,CheekPuffLeft,1,,,19,,cheek,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.CheekSuckRight,CheekSuckRight,CheekSuckRight,1,,,20,,cheek,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.CheekSuckLeft,CheekSuckLeft,CheekSuckLeft,1,,,21,,cheek,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.JawOpen,JawOpen,JawOpen,1,,,22,,jaw,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.JawRight,JawRight,JawRight,1,,,23,,jaw,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.JawLeft,JawLeft,JawLeft,1,,,24,,jaw,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.JawForward,JawForward,JawForward,1,,,25,,jaw,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.JawBackward,JawBackward,JawBackward,1,,,26,,jaw,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.JawClench,JawClench,JawClench,1,,,27,,jaw,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.JawMandibleRaise,JawMandibleRaise,JawMandibleRaise,1,,,28,,jaw,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthClosed,MouthClosed,MouthClosed,1,,,29,,mouth,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipSuckUpperRight,LipSuckUpperRight,LipSuckUpperRight,1,,,30,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipSuckUpperLeft,LipSuckUpperLeft,LipSuckUpperLeft,1,,,31,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipSuckLowerRight,LipSuckLowerRight,LipSuckLowerRight,1,,,32,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipSuckLowerLeft,LipSuckLowerLeft,LipSuckLowerLeft,1,,,33,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipSuckCornerRight,LipSuckCornerRight,LipSuckCornerRight,1,,,34,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipSuckCornerLeft,LipSuckCornerLeft,LipSuckCornerLeft,1,,,35,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipFunnelUpperRight,LipFunnelUpperRight,LipFunnelUpperRight,1,,,36,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipFunnelUpperLeft,LipFunnelUpperLeft,LipFunnelUpperLeft,1,,,37,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipFunnelLowerRight,LipFunnelLowerRight,LipFunnelLowerRight,1,,,38,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipFunnelLowerLeft,LipFunnelLowerLeft,LipFunnelLowerLeft,1,,,39,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipPuckerUpperRight,LipPuckerUpperRight,LipPuckerUpperRight,1,,,40,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipPuckerUpperLeft,LipPuckerUpperLeft,LipPuckerUpperLeft,1,,,41,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipPuckerLowerRight,LipPuckerLowerRight,LipPuckerLowerRight,1,,,42,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.LipPuckerLowerLeft,LipPuckerLowerLeft,LipPuckerLowerLeft,1,,,43,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthUpperUpRight,MouthUpperUpRight,MouthUpperUpRight,1,,,44,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthUpperUpLeft,MouthUpperUpLeft,MouthUpperUpLeft,1,,,45,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthUpperDeepenRight,MouthUpperDeepenRight,MouthUpperDeepenRight,1,,,46,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthUpperDeepenLeft,MouthUpperDeepenLeft,MouthUpperDeepenLeft,1,,,47,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.NoseSneerRight,NoseSneerRight,NoseSneerRight,1,,,48,,nose,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.NoseSneerLeft,NoseSneerLeft,NoseSneerLeft,1,,,49,,nose,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthLowerDownRight,MouthLowerDownRight,MouthLowerDownRight,1,,,50,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthLowerDownLeft,MouthLowerDownLeft,MouthLowerDownLeft,1,,,51,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthUpperRight,MouthUpperRight,MouthUpperRight,1,,,52,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthUpperLeft,MouthUpperLeft,MouthUpperLeft,1,,,53,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthLowerRight,MouthLowerRight,MouthLowerRight,1,,,54,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthLowerLeft,MouthLowerLeft,MouthLowerLeft,1,,,55,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthCornerPullRight,MouthCornerPullRight,MouthCornerPullRight,1,,,56,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthCornerPullLeft,MouthCornerPullLeft,MouthCornerPullLeft,1,,,57,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthCornerSlantRight,MouthCornerSlantRight,MouthCornerSlantRight,1,,,58,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthCornerSlantLeft,MouthCornerSlantLeft,MouthCornerSlantLeft,1,,,59,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthFrownRight,MouthFrownRight,MouthFrownRight,1,,,60,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthFrownLeft,MouthFrownLeft,MouthFrownLeft,1,,,61,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthStretchRight,MouthStretchRight,MouthStretchRight,1,,,62,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthStretchLeft,MouthStretchLeft,MouthStretchLeft,1,,,63,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthDimpleRight,MouthDimpleRight,MouthDimpleRight,1,,,64,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthDimpleLeft,MouthDimpleLeft,MouthDimpleLeft,1,,,65,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthRaiserUpper,MouthRaiserUpper,MouthRaiserUpper,1,,,66,,mouth,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthRaiserLower,MouthRaiserLower,MouthRaiserLower,1,,,67,,mouth,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthPressRight,MouthPressRight,MouthPressRight,1,,,68,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthPressLeft,MouthPressLeft,MouthPressLeft,1,,,69,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthTightenerRight,MouthTightenerRight,MouthTightenerRight,1,,,70,,mouth,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.MouthTightenerLeft,MouthTightenerLeft,MouthTightenerLeft,1,,,71,,mouth,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueOut,TongueOut,TongueOut,1,,,72,,tongue,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueUp,TongueUp,TongueUp,1,,,73,,tongue,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueDown,TongueDown,TongueDown,1,,,74,,tongue,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueRight,TongueRight,TongueRight,1,,,75,,tongue,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueLeft,TongueLeft,TongueLeft,1,,,76,,tongue,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueRoll,TongueRoll,TongueRoll,1,,,77,,tongue,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueBendDown,TongueBendDown,TongueBendDown,1,,,78,,tongue,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueCurlUp,TongueCurlUp,TongueCurlUp,1,,,79,,tongue,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueSquish,TongueSquish,TongueSquish,1,,,80,,tongue,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueFlat,TongueFlat,TongueFlat,1,,,81,,tongue,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueTwistRight,TongueTwistRight,TongueTwistRight,1,,,82,,tongue,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.TongueTwistLeft,TongueTwistLeft,TongueTwistLeft,1,,,83,,tongue,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.SoftPalateClose,SoftPalateClose,SoftPalateClose,1,,,84,,other,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.ThroatSwallow,ThroatSwallow,ThroatSwallow,1,,,85,,other,shared,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.NeckFlexRight,NeckFlexRight,NeckFlexRight,1,,,86,,other,right,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.NeckFlexLeft,NeckFlexLeft,NeckFlexLeft,1,,,87,,other,left,,vrcft.transport: native basis; no canonical calibration established
+vrcft.transport.Max,Max,Max,1,,,88,,other,shared,,vrcft.transport: native basis; no canonical calibration established
+vrm.preset.happy,happy,happy,1,0.0,1.0,,0,other,shared,asset_specific,vrm1.preset:happy: asset-authored binding weights
+vrm.preset.angry,angry,angry,1,0.0,1.0,,1,other,shared,asset_specific,vrm1.preset:angry: asset-authored binding weights
+vrm.preset.sad,sad,sad,1,0.0,1.0,,2,other,shared,asset_specific,vrm1.preset:sad: asset-authored binding weights
+vrm.preset.relaxed,relaxed,relaxed,1,0.0,1.0,,3,other,shared,asset_specific,vrm1.preset:relaxed: asset-authored binding weights
+vrm.preset.surprised,surprised,surprised,1,0.0,1.0,,4,other,shared,asset_specific,vrm1.preset:surprised: asset-authored binding weights
+vrm.preset.aa,aa,aa,1,0.0,1.0,,5,other,shared,asset_specific,vrm1.preset:aa: asset-authored binding weights
+vrm.preset.ih,ih,ih,1,0.0,1.0,,6,other,shared,asset_specific,vrm1.preset:ih: asset-authored binding weights
+vrm.preset.ou,ou,ou,1,0.0,1.0,,7,other,shared,asset_specific,vrm1.preset:ou: asset-authored binding weights
+vrm.preset.ee,ee,ee,1,0.0,1.0,,8,other,shared,asset_specific,vrm1.preset:ee: asset-authored binding weights
+vrm.preset.oh,oh,oh,1,0.0,1.0,,9,other,shared,asset_specific,vrm1.preset:oh: asset-authored binding weights
+vrm.preset.blink,blink,blink,1,0.0,1.0,,10,eyelid,shared,asset_specific,vrm1.preset:blink: asset-authored binding weights
+vrm.preset.blinkLeft,blinkLeft,blinkLeft,1,0.0,1.0,,11,eyelid,left,asset_specific,vrm1.preset:blinkLeft: asset-authored binding weights
+vrm.preset.blinkRight,blinkRight,blinkRight,1,0.0,1.0,,12,eyelid,right,asset_specific,vrm1.preset:blinkRight: asset-authored binding weights
+vrm.preset.lookUp,lookUp,lookUp,1,0.0,1.0,,13,gaze,shared,asset_specific,vrm1.preset:lookUp: asset-authored binding weights
+vrm.preset.lookDown,lookDown,lookDown,1,0.0,1.0,,14,gaze,shared,asset_specific,vrm1.preset:lookDown: asset-authored binding weights
+vrm.preset.lookLeft,lookLeft,lookLeft,1,0.0,1.0,,15,gaze,left,asset_specific,vrm1.preset:lookLeft: asset-authored binding weights
+vrm.preset.lookRight,lookRight,lookRight,1,0.0,1.0,,16,gaze,right,asset_specific,vrm1.preset:lookRight: asset-authored binding weights
+vrm.preset.neutral,neutral,neutral,1,0.0,1.0,,17,other,shared,asset_specific,vrm1.preset:neutral: asset-authored binding weights

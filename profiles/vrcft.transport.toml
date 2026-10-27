@@ -509,7 +509,7 @@ surface = "vrcft.transport"
 side = "shared"
 metadata = { "native_index" = 29, "reason" = "Transport enum presence does not establish device availability or canonical calibration.", "selected" = true, "serialized_byte_offset" = 43, "byte_scale" = 255, "byte_clamped" = true, "byte_quantization" = "truncation" }
 native_default = 0.0
-region = "eyelid"
+region = "mouth"
 
 [[signals]]
 id = "vrcft.transport.LipSuckUpperRight"
