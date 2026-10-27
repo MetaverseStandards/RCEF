@@ -60,12 +60,12 @@ class Translations(unittest.TestCase):
         return next(m['rules'] for m in self.document['mappings'] if m['id'] == mapping)
 
     def inputs(self, mapping):
-        """The mapping's source signals, not values it computes for itself."""
+        """The map's source signals, not values it computes for itself."""
         written = {o for rule in self.rules(mapping) for o in rule['outputs']}
         return {i for rule in self.rules(mapping) for i in rule['inputs']} - written
 
     def outputs(self, mapping):
-        """The mapping's target signals, not values it computes on the way."""
+        """The map's target signals, not values it computes on the way."""
         read = {i for rule in self.rules(mapping) for i in rule['inputs']}
         return {o for rule in self.rules(mapping) for o in rule['outputs']} - read
 
@@ -139,7 +139,7 @@ class Translations(unittest.TestCase):
                 self.assertEqual([o for o, ok in matches.items() if not ok], [])
 
     def changed_copies(self, kind, change, only=None):
-        """Each mapping of `kind` (or just `only`) compiled from a small copy of the pack in which `change` has edited its rules."""
+        """Each map of `kind` (or just `only`) compiled from a small copy of the pack in which `change` has edited its rules."""
         compiled = {}
         for mapping in [only] if only else KIND[kind]:
             source, target = MAPPINGS[mapping]
@@ -164,9 +164,10 @@ class Translations(unittest.TestCase):
         return compiled
 
     def test_halving_every_rule_changes_every_output(self):
-        # Each rule writes one output, and only the gaze splits read another rule's
-        # output (one difference each), so halving them all at once and checking each
-        # output stands in for halving one at a time; the slow tier does that too.
+        # Each mapping writes one output, and only the gaze splits read another
+        # mapping's output (one difference each). So halving them all at once and
+        # checking each output stands in for halving one at a time. The slow tier
+        # also halves them one at a time.
         for kind in KIND:
             if kind == 'visemes_to_vrm':
                 continue
@@ -358,8 +359,8 @@ class Translations(unittest.TestCase):
             else:
                 self.assertIsNone(result.value)
                 self.assertEqual({d.code for d in result.report.diagnostics}, {'E_INVALID_SAMPLE'})
-        # msf-tools refuses any supplied channel marked invalid, even one the mapping
-        # does not use, so consumers must give each mapping only its own inputs.
+        # msf-tools refuses any supplied channel marked invalid, even one the map
+        # does not use, so consumers must give each map only its own inputs.
         result = self.run_frame('fb2.to_arkit', values, validity)
         self.assertIsNone(result.value)
         self.assertEqual({d.code for d in result.report.diagnostics}, {'E_INVALID_SAMPLE'})

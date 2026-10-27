@@ -102,7 +102,7 @@ class ReadmeSources(unittest.TestCase):
                 rules = mapping['rules']
                 self.assertEqual(count, len(rules))
                 self.assertEqual({status}, {r['evidence_status'] for r in rules})
-                # Values a mapping computes for its own later rules are RCEF intermediates.
+                # Values a map computes for its own later rules are RCEF intermediates.
                 computed = {s for r in rules for s in r['outputs']} & {s for r in rules for s in r['inputs']}
                 self.assertLessEqual(computed, self.members.get('rcef.intermediate', set()))
                 self.assertLessEqual({s for r in rules for s in r['inputs']} - computed, self.members[source])

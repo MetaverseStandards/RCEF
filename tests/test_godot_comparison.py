@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""RCEF's FB2 -> ARKit rules against the routes in the Godot and VRCFT sources."""
+"""RCEF's FB2 -> ARKit mappings against the routes in the Godot and VRCFT sources."""
 import importlib.util
 import json
 from pathlib import Path

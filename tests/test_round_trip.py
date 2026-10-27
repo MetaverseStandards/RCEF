@@ -106,7 +106,7 @@ class RoundTrip(unittest.TestCase):
                 for frame, returned in zip(frames, back):
                     self.assertEqual(returned, {k: v for k, v in frame.items() if k in one_to_one_inputs})
                 checked += len(rules)
-        self.assertEqual(checked, 51)  # 38 face, 8 gaze, 5 viseme one-to-one rules
+        self.assertEqual(checked, 51)  # 38 face, 8 gaze, 5 viseme one-to-one mappings
 
 
 if __name__ == '__main__':

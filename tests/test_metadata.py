@@ -22,8 +22,8 @@ except ModuleNotFoundError:  # run by file path from the repository root
 ROOT = Path(__file__).resolve().parents[1]
 
 # Literal F-9/F-10/F-18 and reviewed A-03 expectations. The gaze parameter
-# documentation and actual EParam getters distinguish anatomy from direction;
-# Apple's matrix describes eye orientation. No substring classification is used.
+# documentation and the EParam getters tell anatomy apart from direction.
+# Apple's matrix describes eye orientation. Rows are not classified by substring.
 # Entries are (ID, native name/label, inventory position, region, anatomical side).
 ROWS = (
     ('godot.base.FT_MOUTH_CLOSED', 'FT_MOUTH_CLOSED', 39, 'mouth', 'shared'),
@@ -65,7 +65,7 @@ def write_inventory_snapshot(document):
         writer.writerow(SNAPSHOT_FIELDS)
         writer.writerows(inventory_rows(document))
 
-# Exact admitted native subset, independent of the mapping's declared rules.
+# The exact admitted native subset, written independently of each map's rules.
 IDENTITIES = (
     ('arkit.to_canonical', 'arkit.coefficient', (
         ('eyeBlinkLeft', 'eyelid', 'left'), ('eyeBlinkRight', 'eyelid', 'right'),
@@ -181,8 +181,8 @@ class Metadata(unittest.TestCase):
         self.assertEqual(matrix['value_type'], 'scalar')  # Inventory placeholder in scalar wire 1.0.
         self.assertEqual(matrix['domain'], {})
         # Baseline lookLeft/lookRight side labels describe directions, not
-        # unilateral anatomy (F-52). Preserve them in this eleven-row patch;
-        # any taxonomy repair needs its own reviewed data correction.
+        # unilateral anatomy (F-52). This eleven-row patch keeps them. Any
+        # taxonomy repair needs its own reviewed data correction.
         for direction, side in (('lookLeft', 'left'), ('lookRight', 'right'),
                                 ('lookUp', 'shared'), ('lookDown', 'shared')):
             self.assertEqual(signals['vrm.preset.' + direction]['side'], side)

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""Public exporter checks with independently authored presentation expectations."""
+"""The report exporter, checked against expected output written independently of it."""
 import csv
 import hashlib
 import io
