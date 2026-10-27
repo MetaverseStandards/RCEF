@@ -228,12 +228,22 @@ def evaluate(args) -> int:
 
 def rules_text(record: dict, passing: list[str]) -> str:
     knots = {c['input']: c['knots'] for c in record['curves']}
-    lines = ['# SPDX-License-Identifier: CC-BY-SA-4.0',
-             '# Pending: these rules need msf-tools operators 1.1 (piecewise_linear) and move to',
-             '# mappings/mediapipe_arkit.toml once RCEF adopts it. TOML; not named .toml so msf-tools does not read it yet.',
-             '']
     if not passing:
-        return '\n'.join(lines + ['# No channel passed every held-out cell, so there are no rules.', ''])
+        lines = ['# SPDX-License-Identifier: CC-BY-SA-4.0',
+                 f'# Published negative result for calibration record {RECORD_ID}: 0 of',
+                 f"# MediaPipe's {len(k.CHANNELS)} ARKit-named scores pass. {len(knots)} rose enough in training to fit a",
+                 '# curve, and none met its bounds on held-out ICT identities or on Rocketbox Male,',
+                 '# so no mapping cites the record. The file is TOML, but it is not named .toml,',
+                 '# so msf-tools does not read it.',
+                 '',
+                 '# No channel passed every held-out cell, so there are no rules.', '']
+        return '\n'.join(lines)
+    # calibrated_software needs authoring schema 1.1; RCEF's pack.toml is on 1.0.
+    lines = ['# SPDX-License-Identifier: CC-BY-SA-4.0',
+             '# These mappings use evidence_status = "calibrated_software", which needs authoring',
+             '# schema 1.1. They can move to mappings/mediapipe_arkit.toml once pack.toml uses',
+             '# schema 1.1. The file is TOML, but it is not named .toml, so msf-tools does not read it.',
+             '']
     lines += ['[[mappings]]', 'id = "mediapipe.to_arkit"', '']
     for channel in passing:
         source, target = f'mediapipe.score.{channel}', f'arkit.coefficient.{channel}'

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Consumer acceptance tests: independent scalar expectations and authoring refusal."""
+"""Consumer acceptance tests: scalar results against independent expected values, and refusal of bad authoring."""
 from __future__ import annotations
 from copy import deepcopy
 import json
@@ -27,7 +27,7 @@ class Parity(unittest.TestCase):
         cls.document = shared_pack.document()
         cls.pack = shared_pack.pack()
         # msf-tools rechecks the whole pack on every evaluation. The fixture
-        # mappings are evaluated many times, so they use a pack holding only them.
+        # maps are evaluated many times, so they use a pack holding only them.
         fixtures = deepcopy(cls.document)
         fixtures['profiles'] = [p for p in fixtures['profiles'] if p['id'] in ('fixture.source', 'fixture.target')]
         kept = {s for p in fixtures['profiles'] for s in p['signal_ids']}

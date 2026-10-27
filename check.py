@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Check the shared pack and its readable RCEF reports."""
+"""Check the installed msf-tools and the calibration records, then the shared pack and its readable RCEF reports."""
 from __future__ import annotations
 import argparse
 import base64

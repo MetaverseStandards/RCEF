@@ -7,7 +7,7 @@ pinned SHA-256 and loaded with msf_tools.inspect_asset; none is committed.
 - Microsoft Rocketbox (MIT): Female_Adult_01 and Male_Adult_01 "facial" FBX
   files, with Apple's 52 ARKit shapes (AK_*), the 15 Oculus visemes (AA_VI_*)
   and FACS action-unit shapes (AU_*), authored independently of ICT-FaceKit.
-- ICT-FaceKit Light (MIT): the 16 ARKit-named shapes RCEF's rules drove first.
+- ICT-FaceKit Light (MIT): the 16 ARKit-named shapes RCEF's mappings drove first.
 - VRM1_Constraint_Twist_Sample (VRM Public License 1.0, redistribution and
   modification allowed, credit not required): VRM 1.0 expression presets.
 """

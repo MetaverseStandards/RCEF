@@ -2,7 +2,7 @@
 
 Original RCEF code is Copyright (c) 2026 RCEF contributors, MIT. Original RCEF definitions, data arrangement, documentation and numerical fixtures are Copyright (c) 2026 RCEF contributors, CC-BY-SA-4.0. Attribution to RCEF contributors (2026), with a link to this repository when published, is sufficient for original contributions.
 
-Native names, enum values and interface facts are extracted and reorganized; descriptions are original summaries. No provider implementation is copied into RCEF. Exact source bytes used for verification are kept outside the repository. Licenses apply to their respective material; RCEF does not change provider licenses or claim endorsement.
+RCEF extracts and reorganizes native names, enum values and interface facts. Its descriptions are original summaries. No provider implementation is copied into RCEF. The exact source bytes used for verification are kept outside the repository. Each license applies to its own material. RCEF does not change provider licenses or claim endorsement.
 
 | Source / authors | Inherited license or reference treatment | Attribution and change |
 |---|---|---|
@@ -20,8 +20,8 @@ Native names, enum values and interface facts are extracted and reorganized; des
 | USC Institute for Creative Technologies, ICT-FaceKit | MIT | Example data only: vertex indices of landmarks (including its README's Multi-PIE 68 indices) and curves fitted to renders of its shapes and identity modes (`examples/data/rig_landmarks.json`, `examples/data/rig_gains.json`, `calibration/rig-gains.ict-rocketbox-female.cal`). No geometry is committed; files are fetched and hash-checked. Copyright (c) 2020 USC Institute for Creative Technologies. |
 | Microsoft, Microsoft Rocketbox avatar library (ARKit shapes by Fang Ma and Matias Volonte) | MIT | Example data only: landmark vertex indices and fitted curves for Female_Adult_01, as above. No geometry is committed. Copyright (c) 2020 Microsoft. |
 
-RCEF's own landmark choices and fitted curves in `examples/data/rig_landmarks.json` and `examples/data/rig_gains.json` are CC-BY-SA-4.0, with the ICT-FaceKit and Rocketbox credits above. `rig_gains.json` states this in its `licence` and `credit` keys. `rig_landmarks.json` does not have these keys: calibration record `rig-gains.ict-rocketbox-female` pins its SHA-256 as a frozen input, so this notice records its licence instead.
+RCEF's own landmark choices and fitted curves in `examples/data/rig_landmarks.json` and `examples/data/rig_gains.json` are CC-BY-SA-4.0, with the ICT-FaceKit and Rocketbox credits above. `rig_gains.json` states this in its `licence` and `credit` keys. `rig_landmarks.json` does not have these keys, because calibration record `rig-gains.ict-rocketbox-female` pins its SHA-256 as a frozen input. So this notice records its licence instead.
 
-Full source URLs, revisions, claim locators and SHA-256 digests are in [references.md](references.md) and [evidence/sources.toml](evidence/sources.toml). Inherited Apache-2.0 and CC-BY-4.0 license texts are included under `LICENSES/`; MIT and CC-BY-SA-4.0 texts govern original material as described above. The legal code texts retain their own notices.
+The full source URLs, revisions, claim locators and SHA-256 digests are in [references.md](references.md) and [evidence/sources.toml](evidence/sources.toml). The inherited Apache-2.0 and CC-BY-4.0 license texts are in `LICENSES/`. The MIT and CC-BY-SA-4.0 texts govern original material, as described above. The legal code texts keep their own notices.
 
-Restricted FACS manuals, proprietary research, private sessions and internal sources are not sources for this pack. No FACS manual definitions, illustrations or procedures are reproduced. The profile names identify public interfaces without certifying anatomy or interoperability.
+This pack does not use restricted FACS manuals, proprietary research, private sessions or internal sources. It reproduces no definitions, illustrations or procedures from FACS manuals. The profile names identify public interfaces. They do not certify anatomy or interoperability.

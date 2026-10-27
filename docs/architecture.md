@@ -1,161 +1,192 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
-# RCEF architecture: from TOML to explicit scalar rules
+# RCEF architecture: from TOML to explicit scalar mappings
 
-RCEF inventories public expression interfaces and records explicit directional scalar mappings. TOML is the authoritative authoring format. MSF Tools supplies the parser, validator, deterministic pack compiler, mapping compiler and evaluator. RCEF adds its data, numerical fixtures, readable reports and consumer acceptance cases.
+RCEF records public expression interfaces and explicit one-way scalar mappings between them. TOML is the authoritative authoring format. MSF Tools (msf-tools) supplies the parser, the validator, the deterministic pack compiler, the mapping compiler and the evaluator. RCEF adds its data, numerical fixtures, calibration records, readable reports and consumer acceptance tests.
 
-Read the [offline visual report](architecture.html) for the architecture diagram, file explorer and mapping demonstration. Static views are available as [SVG](architecture.svg) and [PNG](architecture.png). The [TOML index](toml-index.csv) lists every authoritative TOML path, table kind, count, byte length and SHA-256. Links in this guide are relative to `RCEF/docs`; shared-tool links assume a sibling `msf-tools` checkout.
+The [offline visual report](architecture.html), the [SVG](architecture.svg) and [PNG](architecture.png) views and the [TOML index](toml-index.csv) were made for data 0.1.1. They have not been updated, so their counts and file lists are out of date. This guide describes the current tree. Links in this guide are relative to `RCEF/docs`. Links to msf-tools assume a sibling `msf-tools` checkout.
 
-## Scope of this report
+## Scope of this guide
 
-This guide describes implemented source in the frozen `rcef.parity` data version **0.1.1**, schema **1.0**, operator **1.0**. Counts were recomputed from all 27 authoritative TOML files, and the merged data equals the supplied generated pack. These are inventory counts, including ancillary, excluded, unsupported and unresolved rows. They are neither selected-interface counts nor tracking-quality measurements.
+This guide describes `rcef.parity` data version **0.4.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-tools 0.3.0 (commit `e799dfb`). The counts below were recomputed with the Python standard library from all 34 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
 
-| Measure | Recomputed total |
+| Measure | Total |
 | --- | ---: |
-| Distinct signal IDs | 893 |
-| Profiles | 22 |
-| Profile membership rows | 898 |
-| Mapping records | 6 |
-| Rules | 24 |
-| Evidence records | 27 |
+| Distinct signal IDs | 949 |
+| Profiles | 24 |
+| Profile membership rows | 954 |
+| Maps (`[[mappings]]` records) | 13 |
+| Mappings (rules) | 215 |
+| Evidence records | 38 |
 | Provider-specific canonical signals | 21 |
+| RCEF intermediate signals | 4 |
 
-Five fixture signals occur in both the aggregate fixture profile and its source/target profiles: 5 distinct signals and 10 memberships. This explains the five-row difference. For example, `godot.blended.toml` contains 42 actual rows while its selected interface has 41; the index counts all actual rows. See the full [inventory](../reports/inventory.md).
+Five fixture signals are in both the aggregate fixture profile and its source and target profiles. That gives 5 distinct signals but 10 memberships, which explains the difference of five rows. Also, `godot.blended.toml` has 42 actual rows, while its selected interface has 41; the counts here include every actual row. See the full [inventory](../reports/inventory.md).
 
-Signal dispositions total 47 mapped, 805 unresolved, 6 unsupported and 35 excluded. Rules total 23 mapped (22 exact, 1 approximate) and 1 unresolved. A `mapped` signal does not guarantee that every requested mapping or frame can execute.
-
-**Verification boundary:** this report was derived by static inspection and standard-library data parsing. The product compiler, evaluator, acceptance suites and browser controls were not executed to produce it. Implemented source behavior is described below; a fresh qualification result, device/capture validity and physiological calibration remain separate evidence requirements.
+Signal dispositions: 226 mapped, 681 unresolved, 6 unsupported and 36 excluded. Mappings: 214 mapped (22 exact, 192 approximate) and 1 unresolved. Operators: 174 `affine`, 22 `identity`, 11 `weighted_sum` and 8 `piecewise_linear`. A `mapped` signal does not guarantee that every requested map or frame can be executed.
 
 ## 1. Architecture and ownership
 
 ```mermaid
 flowchart TD
-    A["RCEF authoritative TOML: 27 files"] --> B["MSF discovery: sorted fragments"]
+    L["check.py: installed msf-tools against tooling.lock.json (format 2)"] --> K["check.py: calibration records, FREEZES and the mappings that cite them"]
+    K --> B["msf-tools discovery: 34 TOML files, sorted"]
     B --> C["Strict UTF-8 TOML parsing; schema, numeric and reference validation"]
     C --> D["compile_pack: immutable validated document and byte hash"]
     D --> E["Generated pack JSON, matrix CSV, coverage and checksums"]
-    D -->|in-memory Pack| F["MSF compile_mapping: explicit source and target snapshots"]
-    P["Virtual profile snapshots OR explicit glTF/GLB sidecar bindings"] --> F
+    D -->|in-memory Pack| F["compile_mapping: explicit source and target snapshots"]
+    P["Virtual profile snapshots OR explicit asset sidecar bindings"] --> F
     F --> G["evaluate_mapping: finite values + boolean validity + seconds"]
     E --> H["RCEF exporter: inventory, mappings, canonical correspondence"]
     G --> I["Independent consumer acceptance and remaining domain gates"]
     H --> I
 ```
 
-Discovery, validation and pack compilation lead to separate runtime and artifact-export paths. The map/evaluate CLI reloads TOML and compiles an in-memory Pack for mapping; it does not read the generated JSON, matrix CSV or coverage files. The presentation exporter reads generated pack JSON directly; it does not consume scalar frames or render evaluated geometry. An evaluation `Report` containing diagnostics/losses is a different object from a readable Markdown/CSV presentation report.
+`check.py` runs two RCEF checks before msf-tools runs. Then discovery, validation and pack compilation lead to two separate paths: one for runtime and one for exported files. The msf-tools map and evaluate commands load the TOML again and compile an in-memory Pack. They do not read the generated JSON, matrix CSV or coverage files. The report exporter reads the generated pack JSON directly. It does not read scalar frames or render geometry. An evaluation `Report`, which holds diagnostics and losses, is a different thing from a readable Markdown or CSV report.
 
 | Owner | Supplies or implements | Boundary |
 | --- | --- | --- |
-| RCEF | `pack.toml`; provider/canonical inventories; profiles; evidence; directional mappings; numerical fixtures; `check.py`; report exporter; tests | Declares meaning and provenance; it does not implement the shared scalar algorithms. |
-| MSF Tools | Authoring discovery/validation, `compile_pack`, `profile_snapshot`, `compile_mapping`, `evaluate_mapping`; explicit glTF/GLB inspection and sidecar binding | Implements the reviewed wire/operator contracts and rejection behavior. |
-| Independent reviewer/consumer | Review changed bytes and semantics; run the drift check and tests with selected tools | Executable correctness alone does not establish visual, anatomical, cross-provider or physiological equivalence. |
+| RCEF | `pack.toml`; provider and canonical inventories; profiles; evidence; directional maps; numerical fixtures; calibration records and `calibration/FREEZES`; `check.py`; report exporter; calibration tools; tests | Declares meaning and provenance. It does not implement the shared scalar algorithms. |
+| MSF Tools | Authoring discovery and validation, `compile_pack`, `profile_snapshot`, `compile_mapping`, `evaluate_mapping`; asset inspection and sidecar binding | Implements the reviewed wire and operator contracts and their refusals. |
+| Independent reviewer or consumer | Review changed bytes and meaning; run the drift check and tests with the locked msf-tools | Executable correctness alone does not show visual, anatomical, cross-provider or physiological equivalence. |
 
-Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf-tools/msf_tools/authoring.py), [pack compiler](../../msf-tools/msf_tools/pack.py), [mapping compiler/evaluator](../../msf-tools/msf_tools/mapping.py), [presentation exporter](../scripts/export_reports.py), [tests](../tests/).
+Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf-tools/msf_tools/authoring.py), [pack compiler](../../msf-tools/msf_tools/pack.py), [mapping compiler and evaluator](../../msf-tools/msf_tools/mapping.py), [report exporter](../scripts/export_reports.py), [calibration tools](../tools/calibration/README.md), [tests](../tests/).
 
-## 2. How TOML is discovered and interpreted
+## 2. What check.py does
 
-`load_authoring` accepts a single TOML file or a directory containing `pack.toml`. A single file must contain the complete authoring document, including all four top-level arrays. Directory loading initializes the four arrays and merges discovered fragments.
+`check.py` runs these steps in order and stops at the first failure.
 
-Directory discovery recursively includes names ending in lowercase `.toml`. It prunes entries whose names begin with `.` and entries named `generated`, rejects symlinks in the visited authoring tree, and globally sorts file paths before merging. Portable fragment checks reject case-insensitive path collisions and reserved filename components. Discovery has resource limits and requires the filesystem capabilities used by the shared tools; source inspection here does not qualify a host.
+1. **Locked msf-tools.** It reads [tooling.lock.json](../evidence/tooling.lock.json), which is lock format 2. The lock records the msf-tools commit and version, and one entry per wheel tag. Each entry has the wheel's SHA-256 (when known) and a SHA-256 for every file in the installed `msf_tools` package. `check.py` refuses unless the installed package was built from the locked commit, its wheel tag has an entry, and every file in the package directory matches both its `RECORD` entry and the lock. It also refuses if `msf_tools` would be imported from somewhere other than that installed distribution. The README gives the full rules.
+2. **Calibration records.** It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. Any mapping that cites a record (evidence id `calibration.<id>`) must use `piecewise_linear` with exactly the record's frozen knots, and every held-out cell for its input channel must pass. This step does not use msf-tools. No mapping in data 0.4.0 cites a record.
+3. **Shared outputs.** It runs `python -B -P -m msf_tools check` on the checkout, with an empty bytecode cache, so that the subprocess imports the verified package. With `--write` it regenerates the pack, the CSV, coverage and checksums. Without it, it checks that they have not drifted.
+4. **Readable reports.** If step 3 passes, it runs [export_reports.py](../scripts/export_reports.py) with the same write or check choice.
 
-**Folder names do not choose a schema.** `profiles/`, `mappings/`, `data/` and `evidence/` describe the repository's organization. The actual top-level keys in each parsed file determine what gets appended. A new TOML file anywhere in the discovered tree participates, including a future TOML example placed under `docs/`. Keep standalone authoring examples outside that tree or inside Markdown code fences.
+`check.py --update-lock` records the installed msf-tools in the lock and exits. It keeps the old lock as `tooling.lock.previous.json` when the commit or version changes.
 
-| Current location | Actual role | Files | Signals | Profiles | Memberships | Mappings / rules | Evidence |
+### Calibration records and the held-out provenance check
+
+A calibration record is a software-only fit, made from renders of example rigs. Its frozen part (everything except `cells`) is hashed, and the hash is written to `calibration/FREEZES` and committed before the held-out run. The held-out seeds come from that hash. Two records exist:
+
+- `mediapipe.ict-response`: a negative result. 25 of MediaPipe's 51 ARKit-named scores could be fitted, and none passed on held-out data.
+- `rig-gains.ict-rocketbox-female`: 3 of 51 ARKit shapes pass; 48 fail and are published as negative results.
+
+The calibration tools in [tools/calibration/](../tools/calibration/README.md) run the held-out step. Before they render anything, [provenance.py](../tools/calibration/provenance.py) checks that the record's `code_commit` is in the checkout's history and that no file the run imports has changed since that commit. The tools also check that every cached input has the SHA-256 the record pins and that the installed msf-tools passes the lock check. `k3_heldout.py` also requires the renderer binary that the record names. `check.py` cannot see Git history, so reviewers check that the ledger line was committed before the results.
+
+## 3. How TOML is discovered and read
+
+`load_authoring` accepts one TOML file or a directory that contains `pack.toml`. A single file must contain the complete authoring document, including all four top-level arrays. When it loads a directory, it starts with four empty arrays and merges the files it finds.
+
+Directory discovery walks the tree and includes every file name that ends in lowercase `.toml`. It skips directories and files whose names begin with `.`, and directories named `generated`. It refuses symlinks in the authoring tree, and it sorts all file paths before it merges them. It also refuses paths that differ only in letter case and reserved file names such as `CON` or `NUL`. Each fragment must be a regular file.
+
+**Folder names do not choose a schema.** `profiles/`, `mappings/`, `data/` and `evidence/` only organize the repository. The top-level keys in each parsed file decide what is added. Any new TOML file in the discovered tree is read, including a TOML example placed under `docs/`. Keep standalone authoring examples outside the tree or inside Markdown code fences. For this reason, calibration records are named `*.cal` and `tools/calibration/results/mediapipe_arkit.rules` is not named `.toml`.
+
+| Location | Role | Files | Signals | Profiles | Memberships | Maps / mappings | Evidence |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [pack.toml](../pack.toml) | Root metadata | 1 | 0 | 0 | 0 | 0 / 0 | 0 |
-| [data/canonical.toml](../data/canonical.toml) | Provider-specific projections and canonical profile | 1 | 21 | 1 | 21 | 0 / 0 | 0 |
-| [profiles/fixture.toml](../profiles/fixture.toml) and provider profile fragments | Signal arrays plus profile arrays | 19 | 872 | 21 | 877 | 0 / 0 | 0 |
-| [mappings/fixtures.toml](../mappings/fixtures.toml) and other mapping fragments | Directional rule arrays | 5 | 0 | 0 | 0 | 6 / 24 | 0 |
-| [evidence/sources.toml](../evidence/sources.toml) | Evidence array | 1 | 0 | 0 | 0 | 0 / 0 | 27 |
+| [data/canonical.toml](../data/canonical.toml) and [data/intermediate.toml](../data/intermediate.toml) | Provider-specific projections and intermediate values, each with its profile | 2 | 25 | 2 | 25 | 0 / 0 | 0 |
+| [profiles/fixture.toml](../profiles/fixture.toml) and the provider profile files | Signal arrays and profile arrays | 20 | 924 | 22 | 929 | 0 / 0 | 0 |
+| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 10 | 0 | 0 | 0 | 13 / 215 | 0 |
+| [evidence/sources.toml](../evidence/sources.toml) | Evidence array | 1 | 0 | 0 | 0 | 0 / 0 | 38 |
 
-The five root metadata keys appear once across a directory. A repeated metadata key is rejected even if its value is identical. Top-level `signals`, `profiles`, `mappings`, `evidence` must be arrays and are appended in file order, preserving each file's array order.
+Each of the five root metadata keys appears once in the whole directory. A repeated metadata key is refused, even if its value is the same. The top-level `signals`, `profiles`, `mappings` and `evidence` must be arrays. They are added in file order, and each file's array order is kept.
 
-### Actual pack metadata and versions
+### Pack metadata and versions
 
-[pack.toml](../pack.toml) contains these five scalar keys; it contains no file-list or parser-option keys:
+[pack.toml](../pack.toml) has these five scalar keys and no others:
 
 ```toml
 schema_version = "1.0"
-data_version = "0.1.1"
-operator_version = "1.0"
+data_version = "0.4.0"
+operator_version = "1.1"
 id = "rcef.parity"
 license = "CC-BY-SA-4.0"
 ```
 
-The merged document requires all five keys and the four arrays. Schema and operator versions currently accept only `"1.0"`; `data_version` is independently versioned and must match the validator's semantic-version spelling (three numeric components, optionally a prerelease suffix). Do not invent version-dependent operators or extra root keys.
+The merged document needs all five keys and the four arrays. msf-tools 0.3.0 accepts schema versions `"1.0"` and `"1.1"`, and operator versions `"1.0"` and `"1.1"`. Operators 1.1 add `piecewise_linear`; a mapping that uses it under operators 1.0 is refused. Schema 1.1 adds the evidence status `calibrated_software`; RCEF uses schema 1.0. `data_version` has its own version number, and it must be a semantic version: three numbers, with an optional prerelease suffix. Do not invent operators or extra root keys.
 
 ### Arrays, tables and references
 
-- `[[signals]]`, `[[profiles]]`, `[[mappings]]`, `[[evidence]]` append records to top-level arrays. `[signals]` would create an object instead and fails the array requirement.
-- `signal_ids = ["a", "b"]` is an ordered string array. `rules = [{...}, {...}]` is an ordered array of inline objects. Repeated `[[mappings.rules]]` tables are the expanded spelling for a mapping's rule array.
-- `domain = { min = 0.0, max = 1.0 }` is a nested object. A `[signals.domain]` table after `[[signals]]` describes the latest signal's domain. Table scope persists: put signal fields before opening its nested tables. `[mappings.rules.operator]` describes the latest rule's operator.
-- TOML dotted **keys** create nested objects. Dots inside a string **ID** are literal characters, not navigation. `"arkit.coefficient.eyeBlinkLeft"` must be referenced exactly; changing `Left` to `left` changes the ID.
-- IDs are nonblank strings, case sensitive, preserved without trimming or normalization. Signal/profile/mapping/evidence IDs are unique within their category; rule IDs are unique across all mappings. String-reference arrays reject duplicate entries.
-- Profile `signal_ids`, rule `inputs`/`outputs` and evidence-reference arrays must name existing records. `label`, `native_id`, `region`, `side` and anatomical resemblance are not reference aliases.
-- JSON object keys are sorted when serialized; arrays retain authoring order. Profile column order follows profile order. Weighted-sum weights match input order. Compilation repeatedly appends all currently dependency-ready rules in authored order. Dependencies execute first; authored order is preserved within each ready batch. Independent rules in different batches may change relative order.
+- `[[signals]]`, `[[profiles]]`, `[[mappings]]` and `[[evidence]]` add records to top-level arrays. `[signals]` would make an object instead, and it fails the array check.
+- `signal_ids = ["a", "b"]` is an ordered array of strings. `rules = [{...}, {...}]` is an ordered array of inline objects. Repeated `[[mappings.rules]]` tables are the long way to write a map's rule array.
+- `domain = { min = 0.0, max = 1.0 }` is a nested object. A `[signals.domain]` table after `[[signals]]` describes the domain of the latest signal. Table scope continues, so put a signal's own fields before you open its nested tables. `[mappings.rules.operator]` describes the latest rule's operator.
+- TOML dotted **keys** make nested objects. Dots inside a string **ID** are only characters. `"arkit.coefficient.eyeBlinkLeft"` must be written exactly; if you change `Left` to `left`, it is a different ID.
+- IDs are non-blank strings. They are case sensitive and are not trimmed or normalized. Signal, profile, map and evidence IDs are unique within their category. Rule IDs are unique across all maps. Arrays of string references refuse duplicate entries.
+- Profile `signal_ids`, rule `inputs` and `outputs`, and evidence references must name existing records. `label`, `native_id`, `region`, `side` and a similar-sounding anatomy are not references.
+- JSON object keys are sorted when written; arrays keep the authoring order. Profile column order follows profile order. Weighted-sum weights follow input order. Compilation repeatedly takes all mappings whose inputs are ready, in authored order. So dependencies run first, and authored order is kept within each batch. Independent rules in different batches can change their relative order.
 
-Parsing is strict UTF-8 via `tomllib.loads`, after bounded parsing preflight. TOML syntax/duplicate-key errors precede schema checks. The MSF validator rejects unknown structural keys, missing keys, invalid enums, duplicate IDs, dangling references and invalid numeric/domain declarations. The document must be JSON-compatible: TOML dates/times are not accepted as typed signal values, and NaN/infinity or boolean scalars are refused. This pipeline does not execute text from TOML or infer conversions from provider names.
+Parsing is strict UTF-8 with `tomllib.loads`. TOML syntax errors and duplicate keys are reported before schema checks. The msf-tools validator refuses unknown keys, missing keys, invalid enums, duplicate IDs, references to records that do not exist, and invalid numbers or domains. The document must be JSON-compatible: TOML dates and times are not accepted as values, and NaN, infinity and booleans are refused as scalars. The pipeline never executes text from TOML, and it does not infer conversions from provider names.
 
-Sources: `load_authoring`, `validate_authoring`, `_authoring_files` in [authoring.py](../../msf-tools/msf_tools/authoring.py); `_scan_directory`, `_toml_text`, `_toml_document` in [common.py](../../msf-tools/msf_tools/common.py).
+Sources: `load_authoring`, `authoring_files`, `_read_fragment` and `validate_authoring` in [authoring.py](../../msf-tools/msf_tools/authoring.py).
 
-## 3. Authoring field reference
+## 4. Authoring field reference
 
-These tables describe the actual strict validator. Opaque format-specific inventory details belong inside `metadata`; arbitrary extra keys elsewhere are not extensions.
+These tables describe the strict validator. Format-specific inventory details go inside `metadata`. Extra keys anywhere else are refused; they are not extensions.
 
 ### Signals
 
 | Fields | Requirement and meaning |
 | --- | --- |
-| `id`, `label` | Required nonblank identity and display name. |
-| `value_type` | Required; currently only `"scalar"`. |
-| `units`, `calibration` | Required nonblank strings; declare quantity and basis explicitly. `"unknown"` units preserve uncertainty; a calibration string is a declaration, not a measurement procedure. |
-| `domain` | Required object with only optional finite `min`, `max`. `{}` declares no bounds; `min <= max` when both present. |
-| `disposition` | Required `mapped`, `unsupported`, `unresolved` or `excluded`. Preserves inventory even when a record cannot execute. |
-| `evidence`, `evidence_status` | Required evidence-ID array (can be empty in inventory) and `verified_current`, `proposed` or `unresolved`. Execution is stricter. |
-| `neutral`, `native_default` | Independently optional finite numbers within domain. Neutral is the stated calibrated reference; native default is storage initialization. Neither is an automatic runtime fallback. |
-| `region`, `side`, `native_id`, `surface`, `time` | Optional nonblank descriptive strings. Time text does not convert a provider clock. |
-| `coupling` | Optional nonblank description or array of unique nonblank descriptions. Does not create a runtime state policy. |
-| `validity` | Optional boolean or nonblank description. Describes the source contract; actual frame validity is supplied separately. |
-| `confidence` | Optional nonblank description or finite number in [0,1]. Does not imply a threshold. |
-| `metadata` | Optional object for explicit inventory details, reasons and definitions; it does not execute. |
+| `id`, `label` | Required, non-blank: identity and display name. |
+| `value_type` | Required; only `"scalar"` for now. |
+| `units`, `calibration` | Required non-blank strings that state the quantity and basis. Units `"unknown"` keep the uncertainty visible. A calibration string is a declaration, not a measurement procedure. |
+| `domain` | Required object with only optional finite `min` and `max`. `{}` declares no bounds. When both are present, `min <= max`. |
+| `disposition` | Required: `mapped`, `unsupported`, `unresolved` or `excluded`. The inventory record stays even when it cannot be executed. |
+| `evidence`, `evidence_status` | Required: an array of evidence IDs (it can be empty in the inventory) and `verified_current`, `proposed` or `unresolved`. Execution is stricter. |
+| `neutral`, `native_default` | Each optional: a finite number within the domain. Neutral is the stated calibrated reference. The native default is the value storage starts with. Neither one is used as a fallback at runtime. |
+| `region`, `side`, `native_id`, `surface`, `time` | Optional non-blank descriptions. Time text does not convert a provider clock. |
+| `coupling` | Optional: one non-blank description or an array of unique non-blank descriptions. It does not create a runtime state policy. |
+| `validity` | Optional: a boolean or a non-blank description. It describes the source contract. Actual frame validity is supplied separately. |
+| `confidence` | Optional: a non-blank description or a finite number in [0,1]. It does not imply a threshold. |
+| `metadata` | Optional object for inventory details, reasons and definitions. It is never executed. |
 
-For the real ARKit left blink input and canonical output: scalar, units `1`, domain `[0,1]`, side `left`, neutral `0.0`, and the same explicit calibration:
+The ARKit left blink input and its canonical output are both scalar, with units `1`, domain `[0,1]`, side `left`, neutral `0.0`, and the same calibration:
 
 `arkit.coefficient.v1:eyeBlinkLeft: face-relative native neutral-to-maximum coefficient`
 
-The input's native ID is `eyeBlinkLeft`. Its canonical counterpart is `rcef.arkit.coefficient.eyeBlinkLeft`; the latter keeps the provider basis. See [ARKit source record](../profiles/arkit.coefficient.toml) and [canonical definitions](../data/canonical.toml).
+The input's native ID is `eyeBlinkLeft`. Its canonical counterpart is `rcef.arkit.coefficient.eyeBlinkLeft`, which keeps the provider basis. See the [ARKit source record](../profiles/arkit.coefficient.toml) and the [canonical definitions](../data/canonical.toml).
 
 ### Profiles and evidence
 
-| Record | Required fields | Optional fields / constraints |
+| Record | Required fields | Optional fields and constraints |
 | --- | --- | --- |
-| Profile | `id`, `label`, `signal_ids` | `evidence`, `metadata`. Membership is an ordered array of signal IDs; it does not duplicate signal definitions. |
-| Evidence | `id`, `claim`, `status` | Exactly `url`, `revision`, `retrieved`, `sha256`, `locator`, `license`, `authorship`; values are nonblank strings. |
-| Public evidence | Evidence fields, HTTPS `url`, `locator`, at least one of `revision` / `retrieved` / `sha256` | A provided digest is exactly 64 lowercase hexadecimal characters. The current source verifier needs digests on the URL records it fetches. |
-| Original evidence | Evidence fields, `license`, `authorship` when no URL | `rcef_definitions` attributes the original provider projections and synthetic fixtures to RCEF contributors (2026), CC-BY-SA-4.0. |
+| Profile | `id`, `label`, `signal_ids` | `evidence`, `metadata`. Membership is an ordered array of signal IDs; it does not repeat the signal definitions. |
+| Evidence | `id`, `claim`, `status` | Only `url`, `revision`, `retrieved`, `sha256`, `locator`, `license`, `authorship`. All values are non-blank strings. |
+| Public evidence | Evidence fields, an HTTPS `url`, `locator`, and at least one of `revision`, `retrieved` or `sha256` | A digest, if given, is exactly 64 lowercase hexadecimal characters. The source verifier needs digests on the URL records it downloads. |
+| Original evidence | Evidence fields, with `license` and `authorship` when there is no URL | `rcef_definitions` credits the original provider projections and synthetic fixtures to RCEF contributors (2026), CC-BY-SA-4.0. |
 
-Example evidence: `apple_blendshapes` claims 52 coefficient identifiers, native 0..1 domain and face-relative sides. It records locator `topicSections except initializer; Discussion`, retrieval `2026-10-07`, revision `retrieval-digest`, and digest `50691c512eedecaa3e54b73f313816409ff47b8b1bd3628460ca2c096903009b`. This binds the cited source bytes; it does not measure a face. See [sources.toml](../evidence/sources.toml).
+Example: evidence `apple_blendshapes` claims 52 coefficient identifiers, a native 0..1 domain and face-relative sides. It records the locator `topicSections except initializer; Discussion`, retrieval `2026-10-26`, revision `retrieval-digest`, and digest `c7a074ab7e8b14bfe15d727a8a856a8bdf8f83cb84f1b08d0f8b4a2b458300e3`. This pins the cited source bytes. It does not measure a face. See [sources.toml](../evidence/sources.toml).
 
-### Mappings, rules and loss annotations
+### Maps, mappings and loss annotations
 
-| Record / fields | Actual contract |
+In the schema a map is a `[[mappings]]` record and each mapping in it is one entry in its `rules` array.
+
+| Record and fields | Contract |
 | --- | --- |
-| Mapping `id`, `rules` | Both required; no additional mapping-level keys. Source/target profiles are selected explicitly at compilation, not declared as mapping fields. |
-| Rule `id`, `inputs`, `outputs`, `operator` | Required; ordered nonempty input/output ID arrays. All operators produce exactly one scalar output. |
-| Rule `disposition`, `assumptions`, `evidence`, `evidence_status`, `loss_annotations` | Required. Assumptions/evidence are string arrays; losses are object arrays. |
-| Rule `mapping_quality` | Required only for mapped rules: `exact` or `approximate`. Forbidden on nonmapped rules. |
-| Rule `coupling` | Optional description or string array, with the same spelling rules as signals. |
-| Loss `category`, `effect`, `reason`, `refs` | Required. Categories: `signal`, `geometry`, `binding`, `animation`, `material`, `metadata`. Effects: `preserved`, `approximated`, `dropped`, `unknown`. `refs` is an explicit string array. |
-| Loss `units`, `bound` | Optional nonblank units, finite nonnegative bound. Do not invent a numerical bound when none is authored. |
+| Map `id`, `rules` | Both required; no other map-level keys. Source and target profiles are chosen at compilation, not declared in the map. |
+| Rule `id`, `inputs`, `outputs`, `operator` | Required; ordered, non-empty arrays of input and output IDs. Every operator has exactly one scalar output. |
+| Rule `disposition`, `assumptions`, `evidence`, `evidence_status`, `loss_annotations` | Required. Assumptions and evidence are string arrays; losses are object arrays. |
+| Rule `mapping_quality` | Required only for mapped rules: `exact` or `approximate`. Not allowed on other rules. |
+| Rule `coupling` | Optional description or string array, with the same rules as for signals. |
+| Loss `category`, `effect`, `reason`, `refs` | Required. Categories: `signal`, `geometry`, `binding`, `animation`, `material`, `metadata`. Effects: `preserved`, `approximated`, `dropped`, `unknown`. `refs` is a string array. |
+| Loss `units`, `bound` | Optional non-blank units and a finite, non-negative bound. Do not invent a numerical bound when none is authored. |
 
-`disposition` answers whether the author has admitted the relationship; `evidence_status` describes its evidence; `mapping_quality` describes the admitted mapping's quality. These are separate fields. Direction is the ordered `inputs → outputs` relationship. A rule does not imply an inverse.
+`disposition` says whether the author has admitted the relationship. `evidence_status` describes its evidence. `mapping_quality` describes the quality of an admitted mapping. These are separate fields. The direction is the ordered relationship from `inputs` to `outputs`. A mapping does not imply an inverse.
 
-Source: `validate_signal`, `validate_rule`, `loss_annotation`, `validate_authoring` in [authoring.py](../../msf-tools/msf_tools/authoring.py).
+Source: `validate_signal`, `validate_rule`, `knots`, `loss_annotation` and `validate_authoring` in [authoring.py](../../msf-tools/msf_tools/authoring.py).
 
-## 4. Exact examples from the implemented operators
+## 5. Examples of each operator
 
-### Real ARKit identity
+There are four operators. All of them have one output.
 
-The following is the existing left-blink rule, expanded into nested tables for readability. It is an excerpt of `arkit.to_canonical`, which contains nine rules; it is not a complete standalone pack. The source stores rules as inline object arrays.
+- `identity`: one input.
+- `affine`: one input, with a finite `scale` and `offset`.
+- `weighted_sum`: N inputs, with exactly N finite weights in input order.
+- `piecewise_linear` (operators 1.1): one input, with `knots`. Knots are at least two `[x, y]` pairs of finite numbers. The x values increase strictly, and the y values are monotone (all non-decreasing or all non-increasing). The first and last x must be the input's declared domain bounds, so the curve is never extrapolated.
+
+The arithmetic uses checked binary64 steps. They refuse non-finite results, and non-zero products or quotients that underflow to zero. Weighted sums add in input order, without compensated summation. Affine multiplication and addition are two separate steps, not a fused multiply-add. `piecewise_linear` finds the segment that holds x and interpolates linearly. It then keeps the result between that segment's two y values, so rounding cannot break monotonicity.
+
+### ARKit identity
+
+This is the left-blink mapping, written out as nested tables so that it is easier to read. It comes from `arkit.to_canonical`, which has nine mappings. It is not a complete pack. The source file stores the rules as inline object arrays.
 
 ```toml
 [[mappings]]
@@ -179,11 +210,11 @@ loss_annotations = []
 id = "identity"
 ```
 
-`y = x`, so a valid `0.25` yields `0.25`. Identity compilation also requires equal units, value type, domain, calibration and equal presence/value of neutral, side and coupling. It preserves this provider coefficient only. See [arkit.toml](../mappings/arkit.toml).
+`y = x`, so a valid `0.25` gives `0.25`. An identity mapping compiles only if the input and output have the same units, value type, domain and calibration, and the same presence and value of neutral, side and coupling. It keeps this provider coefficient only. See [arkit.toml](../mappings/arkit.toml).
 
-### Real affine fixture
+### Affine fixture
 
-`fixture.affine.convert` maps `fixture.affine.signed → fixture.affine.unit` with `{ id = "affine", scale = 0.5, offset = 0.5 }`, mapped/exact, current evidence and no loss annotations. The signed input domain is `[-1,1]` with calibration `fixture.signed.v1`; the output is `[0,1]` with `fixture.unit.v1`. Its authored assumption matches synthetic low/mid/high at -1/0/1 and 0/0.5/1.
+`fixture.affine.convert` maps `fixture.affine.signed → fixture.affine.unit` with `{ id = "affine", scale = 0.5, offset = 0.5 }`. It is mapped and exact, with current evidence and no loss annotations. The signed input has domain `[-1,1]` and calibration `fixture.signed.v1`. The output has domain `[0,1]` and calibration `fixture.unit.v1`. Its authored assumption matches the synthetic low, middle and high points: -1, 0, 1 become 0, 0.5, 1.
 
 | Input x | Binary64 multiply, then add: y = (0.5 × x) + 0.5 |
 | ---: | ---: |
@@ -192,41 +223,50 @@ id = "identity"
 | 1 | 1 |
 | 0.5 | 0.75 |
 
-These values are exactly representable. There is no implicit clamp or inverse mapping. See [fixture rules](../mappings/fixtures.toml), [fixture channels/profiles](../profiles/fixture.toml), and [stored numerical examples](../fixtures/mapping_samples.json).
+These values are exactly representable. There is no hidden clamp and no inverse mapping. See the [fixture maps](../mappings/fixtures.toml), the [fixture channels and profiles](../profiles/fixture.toml), and the [stored numerical examples](../fixtures/mapping_samples.json).
 
-### Real weighted-sum fixture
+### Weighted-sum fixture
 
-`fixture.brow.collapse` maps `[fixture.brow.left, fixture.brow.right] → fixture.brow.shared`, using ordered weights `[0.5,0.5]`. It is mapped/**approximate**, `coupling="bilateral_shared"`, with the authored reason `asymmetry irrecoverable` for signal approximation and `No geometry evaluated by scalar fixture.` for geometry effect `unknown`. No numerical loss bound is authored.
+`fixture.brow.collapse` maps `[fixture.brow.left, fixture.brow.right] → fixture.brow.shared` with the ordered weights `[0.5,0.5]`. It is mapped and **approximate**, with `coupling="bilateral_shared"`. Its signal loss is `approximated`, with the authored reason `asymmetry irrecoverable`. Its geometry loss is `unknown`, with the reason `No geometry evaluated by scalar fixture.` No numerical loss bound is authored.
 
-The runtime starts at `0.0`, multiplies each input by its corresponding weight, and adds each term in input order: `y = (0.0 + 0.5×left) + 0.5×right`. It does not normalize weights. `(1,0)` and `(0,1)` both yield `0.5`; `(0,0)` yields `0`; `(1,1)` yields `1`. Execution requires explicit `allow_approximation=True` (CLI `--allow-approximation`), including for declared losses with effect approximated/dropped/unknown. This synthetic arithmetic mean is not a proposed anatomical or cross-provider mapping.
+The runtime starts at `0.0`, multiplies each input by its weight, and adds the terms in input order: `y = (0.0 + 0.5×left) + 0.5×right`. It does not normalize the weights. `(1,0)` and `(0,1)` both give `0.5`; `(0,0)` gives `0`; `(1,1)` gives `1`. Execution needs `allow_approximation=True` (CLI `--allow-approximation`). Declared losses with effect `approximated`, `dropped` or `unknown` also need it. This synthetic mean is not a proposed anatomical or cross-provider mapping.
 
-Only three operators exist here: `identity` (one input), `affine` (one input, explicit finite scale and offset), `weighted_sum` (N inputs, exactly N finite ordered weights). All have one output. Checked binary64 primitives refuse nonfinite arithmetic and nonzero products that underflow to zero. Weighted sums use ordered addition, not compensated summation; affine multiplication and addition are separate operations, not a fused multiply-add.
+### Gaze difference and piecewise-linear split
 
-Sources: operator dispatch in [mapping.py](../../msf-tools/msf_tools/mapping.py) and `_product`, `_add`, `_sum` in [math3d.py](../../msf-tools/msf_tools/math3d.py). The visual report's sliders restrict inputs to exactly representable dyadic steps and show this fixture arithmetic; they are an explanatory demonstration, not the product evaluator.
+`arkit_gaze.to_fb2` builds FB2's requirement that only one of two opposing gaze directions is non-zero. For each eye and axis, a `weighted_sum` with weights `[1.0, -1.0]` takes ARKit in minus out (or up minus down). The result goes to an RCEF intermediate signal, for example `rcef.intermediate.arkit_gaze_in_minus_out_L`, with domain `[-1,1]`. Two one-sided `piecewise_linear` mappings then split that difference into the two FB2 directions:
 
-## 5. Runtime admission, validity and asset binding
+| Mapping | Knots | Difference -0.5 | 0 | 0.5 |
+| --- | --- | ---: | ---: | ---: |
+| `arkit_fb2.EYES_LOOK_RIGHT_L` | `[[-1.0, 0.0], [0.0, 0.0], [1.0, 1.0]]` | 0 | 0 | 0.5 |
+| `arkit_fb2.EYES_LOOK_LEFT_L` | `[[-1.0, 1.0], [0.0, 0.0], [1.0, 0.0]]` | 0.5 | 0 | 0 |
+
+Each split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero. When ARKit sets both directions, only their difference is kept. Each of these mappings declares that as a loss. The intermediate signals are in the `rcef.intermediate` profile, not in the source or target profile, so they stay virtual inside the compiled map. All 12 mappings in this map are proposed and approximate. See [arkit_fb2.toml](../mappings/arkit_fb2.toml) and [intermediate.toml](../data/intermediate.toml).
+
+Sources: operator dispatch and `_piecewise_linear` in [mapping.py](../../msf-tools/msf_tools/mapping.py), and `_product`, `_add`, `_sub`, `_divide`, `_sum` in [math3d.py](../../msf-tools/msf_tools/math3d.py).
+
+## 6. Runtime admission, validity and asset binding
 
 ```mermaid
 flowchart LR
     P["Validated Pack"] --> C["compile_mapping"]
     V["profile_snapshot: typed virtual channels"] --> C
-    A["inspect_asset: glTF/GLB bytes + verified structural sidecar"] --> C
+    A["inspect_asset: asset bytes + verified structural sidecar"] --> C
     C --> E["evaluate_mapping"]
     S["Frame: timestamp, values, validity"] --> E
     E --> R["Result: outputs + validity OR diagnostics and no value"]
 ```
 
-### Mapping compilation is stricter than inventory validation
+### Map compilation is stricter than inventory validation
 
-A well-formed unresolved inventory can compile into a pack. A requested mapping must have mapped participating signals/rules, nonempty own evidence, compatible endpoint evidence and compatible channel declarations. A current rule requires current endpoints; a proposed rule can use current/proposed endpoints. Current records need current evidence references; proposed records can use current/proposed references. Participating unresolved evidence refuses execution. Unused inventory remains visible. Approximation opt-in does not bypass these checks.
+An unresolved inventory that is well formed can compile into a pack. A requested map needs mapped signals and mappings, non-empty evidence of its own, compatible endpoint evidence and compatible channel declarations. A `verified_current` mapping needs `verified_current` endpoints. A `proposed` mapping can use `verified_current` or `proposed` endpoints. In the same way, `verified_current` records need `verified_current` evidence references, and `proposed` records can use either. Unresolved evidence on any part of the map refuses execution. Inventory that the map does not use stays visible. The approximation opt-in does not bypass these checks.
 
-Compilation rejects unknown channels, multiple writers/competing source drivers and dependency cycles. Compilation repeatedly appends all currently dependency-ready rules in authored order. Dependencies execute first; authored order is preserved within each ready batch. Independent rules in different batches may change relative order. Virtual intermediate outputs are allowed; terminal outputs must be present in the target snapshot. Unit changes require explicit affine coefficients and assumptions. Nonidentity basis changes or declared approximation/loss require an authored derivation; the validator does not prove the derivation's domain meaning.
+Compilation refuses unknown channels, more than one writer for a signal, an output that is also a source channel, and dependency cycles. Intermediate outputs can stay virtual. Terminal outputs must be in the target snapshot. A `piecewise_linear` mapping's first and last knots must be its input's domain bounds. A change of units needs explicit affine coefficients and assumptions. A non-identity mapping with a changed basis, or with a declared approximation or loss, needs written assumptions. The validator does not prove that those assumptions are correct.
 
-[unresolved.toml](../mappings/unresolved.toml) deliberately records `survey.mediapipe_arkit.blink` as unresolved with unresolved evidence status and no quality. Its identity operator spelling does not admit the relationship. The authored reason is that names alone cannot establish model/provider calibration.
+[unresolved.toml](../mappings/unresolved.toml) records `survey.mediapipe_arkit.blink` as unresolved on purpose, with unresolved evidence status and no quality. Its `identity` operator does not admit the relationship. The authored reason is that names alone cannot establish model or provider calibration.
 
-### Actual frame shape and failure behavior
+### Frame shape and failure behaviour
 
-A frame array for the **affine** fixture can contain this actual source channel:
+A frame array for the **affine** fixture can hold this source channel:
 
 ```json
 [
@@ -238,62 +278,62 @@ A frame array for the **affine** fixture can contain this actual source channel:
 ]
 ```
 
-With source `fixture.source`, target `fixture.target` and mapping `fixture.affine`, the derived output is `fixture.affine.unit: 0.5`, validity `true`. Required inputs are the mapping's external inputs; other source-profile channels may be omitted when that mapping does not require them. The stored `mapping_samples.json` is a numerical expectations fixture, not this evaluator frame format. For `arkit.to_canonical`, all nine rule inputs are required; a lone blink value does not run the complete nine-rule mapping.
+With source `fixture.source`, target `fixture.target` and map `fixture.affine`, the output is `fixture.affine.unit: 0.5`, with validity `true`. The required inputs are the map's external inputs. Other source-profile channels can be left out when the map does not need them. The stored `mapping_samples.json` holds expected numbers; it is not in this frame format. For `arkit.to_canonical`, all nine inputs are required, so a blink value alone does not run the nine-mapping map.
 
-| Frame condition | Implemented behavior |
+| Frame condition | Behaviour |
 | --- | --- |
-| Timestamp missing / extra frame keys | Exact frame-key validation refuses the frame. Timestamp must be nonnegative finite seconds, excluding bool. |
-| Supplied value lacks validity (or vice versa), or validity is not a boolean | `E_VALIDITY`. |
-| Required input absent from both objects | `E_MISSING_SAMPLE`. |
-| Finite in-domain input with validity `false`, including a value equal to neutral | `E_INVALID_SAMPLE`; no neutral/default substitution. |
-| Unknown or non-source channel supplied | `E_SAMPLE_REFERENCE`. |
-| Nonfinite, boolean or out-of-domain value | Numeric/domain diagnostic; no clamping. Values are checked before and after operators. |
-| Any frame has an error | The entire Result has `value=None`; callers must check `.ok` and diagnostics. |
-| Valid frames | Output frame order is preserved; written output validity is `true`. No smoothing, resampling or hidden state. |
+| Missing timestamp, or extra frame keys | The frame keys are checked exactly, and the frame is refused. The timestamp must be finite, non-negative seconds, and not a boolean. |
+| A value without validity (or the reverse), or validity that is not a boolean | `E_VALIDITY`. |
+| A required input missing from both objects | `E_MISSING_SAMPLE`. |
+| A finite in-domain input with validity `false`, even one equal to neutral | `E_INVALID_SAMPLE`. Neutral and default values are never substituted. |
+| An unknown or non-source channel | `E_SAMPLE_REFERENCE`. |
+| A non-finite, boolean or out-of-domain value | A numeric or domain diagnostic. There is no clamping. Values are checked before and after each operator. |
+| Any frame has an error | The whole Result has `value=None`. Callers must check `.ok` and the diagnostics. |
+| Valid frames | Output frame order is kept, and each written output has validity `true`. There is no smoothing, resampling or hidden state. |
 
-Signal-level `validity`, `confidence`, `time` are descriptions of a provider contract, not executable expressions. For example, FB2 gaze records state `isValid AND isEyeFollowingBlendshapesValid`, upper/lower confidence with no implied threshold, and `XrTime` requiring explicit conversion to seconds. The caller must supply the actual boolean and time conversion. The `opposing_direction_exclusive` coupling declaration is not a runtime mutual-exclusion check; direction-focused cases should activate one direction at a time.
+The signal fields `validity`, `confidence` and `time` describe a provider contract. They are not executable expressions. For example, the FB2 gaze records state `isValid AND isEyeFollowingBlendshapesValid`, upper and lower region confidences with no implied threshold, and `XrTime`, which needs an explicit conversion to seconds. The caller must supply the actual boolean and convert the time. The `opposing_direction_exclusive` coupling on those records is a declaration, not a runtime check. The ARKit → FB2 gaze map meets it by construction (section 5). Elsewhere, tests that focus on direction should move one direction at a time.
 
 ### Neutral, native defaults and unresolved quantities
 
-ARKit blink declares neutral `0.0`. VRCFT left/right raw openness instead declares `native_default=1.0` and no neutral, with `initialization_is_measured_neutral=false`. Both raw openness identities retain storage meaning. Left/right raw `PupilDiameter_MM` records have units `mm`, unbounded declared domains and storage-specific calibration; this does not qualify the physical measurement.
+ARKit blink declares neutral `0.0`. VRCFT left and right raw openness instead declare `native_default=1.0` and no neutral, with `initialization_is_measured_neutral=false`. Both raw openness identities keep their storage meaning. The left and right raw `PupilDiameter_MM` records have units `mm`, no declared bounds and a storage-specific calibration. This does not qualify the physical measurement.
 
-`vrcft.eye.Combined.PupilDiameter_MM` has units `1`, domain `[0,1]`, metadata quantity `normalized dilation`, dynamic extrema, normalization execution unsupported, and unresolved disposition. Its name must not be treated as millimetres. Combined openness and combined gaze/state policy also remain unresolved. A documented code/documentation contradiction in combined gaze stays visible; this report infers no replacement rule. See [vrcft.eye.toml](../profiles/vrcft.eye.toml), [vrcft_eye mappings](../mappings/vrcft_eye.toml) and [canonical definitions](../data/canonical.toml).
+`vrcft.eye.Combined.PupilDiameter_MM` has units `1`, domain `[0,1]`, metadata `actual_quantity = "normalized dilation"`, dynamic extrema, `normalization_execution = "unsupported"`, and disposition unresolved. Do not read its name as millimetres. Combined openness and the combined gaze and state policy are also unresolved. A documented contradiction between the code and the documentation for combined gaze stays visible. This guide does not infer a replacement mapping. See [vrcft.eye.toml](../profiles/vrcft.eye.toml), the [vrcft_eye map](../mappings/vrcft_eye.toml) and the [canonical definitions](../data/canonical.toml).
 
-The 21 canonical projections comprise 9 ARKit identities, 8 FB2 directional gaze identities and 4 VRCFT raw-eye identities. FB2 values are native direction-specific angle fractions with unspecified maximum angle; no radians are inferred. Canonical does not mean one universal anatomy or interchangeable calibration.
+The 21 canonical projections are 9 ARKit identities, 8 FB2 directional gaze identities and 4 VRCFT raw-eye identities. The FB2 values are native, direction-specific fractions of an angle whose maximum is not specified, so no radians are inferred. "Canonical" does not mean one universal anatomy or one shared calibration.
 
-### Authoring mapping versus asset binding
+### Authoring maps and asset binding
 
-`profile_snapshot(pack, id)` creates typed virtual channels from a named profile. A mapping rule links those signal IDs with arithmetic. An asset binding separately connects a signal to a structural glTF/GLB mesh-instance morph target, using matching `value_type`, `units`, `domain`, `calibration` and a `ref` with `asset_sha256`, `locator`, `node`, `mesh`, `target` and optional `resource_sha256`.
+`profile_snapshot(pack, id)` makes typed virtual channels from a named profile. A mapping connects those signal IDs with arithmetic. An asset binding, on the other hand, connects a signal to a morph target in an asset. For glTF and GLB, the binding names a mesh-instance morph target. It needs a matching `value_type`, `units`, `domain` and `calibration`, and a `ref` with `asset_sha256`, `locator`, `node`, `mesh`, `target` and an optional `resource_sha256`. The locator must agree with `/nodes/{node}/weights/{target}`, the node's mesh and the target index.
 
-The locator must agree with `/nodes/{node}/weights/{target}`, the node's mesh and target index. A sidecar contains `schema_version`, `asset_sha256`, `resource_hashes`, `bindings`, optionally `metadata`; reuse verifies exact asset/consumed resource hashes. Names alone do not bind a target. `annotate_asset` creates a sidecar and leaves original asset bytes unchanged. Asset-based CLI mapping requires explicit sidecars; profile-based scalar fixtures need no asset.
+A sidecar has `schema_version`, `asset_sha256`, `resource_hashes` and `bindings`, and optionally `metadata`. Reuse checks the exact asset hash and the hashes of the resources it reads. Names alone do not bind a target. `annotate_asset` makes a sidecar and does not change the original asset bytes. Asset-based CLI mapping needs explicit sidecars. Profile-based scalar fixtures need no asset.
 
-MSF's asset inspection accepts glTF/GLB (JSON glTF aliases `json`/`gltf2`); aliases are not extra format support. Geometry implementation has a separate limited position/morph/four-influence LBS/animation scope. Provider inventories for VRM, Roblox and other surfaces do not implement loaders for those formats or prove geometry/material/visual equivalence. See [snapshot.py](../../msf-tools/msf_tools/snapshot.py) and [shared reference](../../msf-tools/docs/reference.md).
+msf-tools 0.3.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way, with the optional `msf-tools-ufbx` reader. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf-tools/msf_tools/snapshot.py) and the [shared reference](../../msf-tools/docs/reference.md).
 
-## 6. Generated artifacts and presentation reports
+## 7. Generated files and readable reports
 
-| Artifact | Producer and use |
+| File | Producer and use |
 | --- | --- |
-| [generated/rcef.pack.json](../generated/rcef.pack.json) | MSF `compile_pack` and CLI serialization: complete validated document; immutable API Pack identity hashes canonical bytes. It does not compile executable mapping instructions. |
-| [generated/rcef_mapping.csv](../generated/rcef_mapping.csv) | MSF signal/profile membership matrix: one row per distinct signal, one column per profile. The filename does not make it an executable rule table. |
-| [generated/coverage.json](../generated/coverage.json) | MSF coverage: dispositions, quality partitions, per-profile memberships, evidence and rule uses; binds pack hash. |
-| [generated/SHA256SUMS](../generated/SHA256SUMS) | Exact hashes of pack, matrix CSV and coverage, in that order; excludes itself. |
-| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 898 membership rows with original names, indices, domains, evidence, neutral/default and reasons. |
-| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: every authored directional rule and its status, operators, assumptions and losses. |
-| [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: 21 canonical projections against authored relationships; a dash means no authored rule. Unresolved relationships remain labeled. |
-| [reports/SHA256SUMS](../reports/SHA256SUMS) | Exact hashes of the six presentation files, sorted by filename; excludes itself. Markdown presentation reports record the consumed pack SHA-256. |
+| [generated/rcef.pack.json](../generated/rcef.pack.json) | msf-tools `compile_pack` and CLI output: the complete validated document. The immutable API Pack hashes its canonical bytes. It does not hold compiled map instructions. |
+| [generated/rcef_mapping.csv](../generated/rcef_mapping.csv) | msf-tools signal and profile membership matrix: one row per distinct signal, one column per profile. Despite its name, it is not a table of executable mappings. |
+| [generated/coverage.json](../generated/coverage.json) | msf-tools coverage: dispositions, quality partitions, memberships per profile, evidence and rule uses. It records the pack hash. |
+| [generated/SHA256SUMS](../generated/SHA256SUMS) | Hashes of the pack, the matrix CSV and coverage, in that order. It does not list itself. |
+| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 954 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
+| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 215 authored one-way mappings with their status, operators, assumptions and losses. |
+| [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: the 21 canonical projections against the authored relationships. A dash means no authored mapping. Unresolved relationships stay labeled. |
+| [reports/SHA256SUMS](../reports/SHA256SUMS) | Hashes of the six report files, sorted by file name. It does not list itself. The Markdown reports record the SHA-256 of the pack they read. |
 
-JSON uses sorted object keys, indent=2, UTF-8 with final LF, finite numbers and normalized negative zero. Arrays retain authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All shared output bytes are rendered before file publication. Each file is atomically replaced individually; the four generated files plus seven presentation files are not one transaction. Review all outputs after a failure and rerun the check.
+JSON uses sorted object keys, indent=2, UTF-8 with a final LF, finite numbers and normalized negative zero. Arrays keep the authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All shared output bytes are rendered before any file is written. Each file is replaced atomically on its own. The four generated files and the seven report files are not replaced in one transaction, so after a failure, review all outputs and run the check again.
 
-## 7. Practical edit → regenerate → check → qualify workflow
+## 8. Edit, regenerate, check and qualify
 
-These are suggested commands for an authorized author in an RCEF checkout using Python 3.11+. They were not executed for this report.
+These are suggested steps for an author in an RCEF checkout, with Python 3.11+.
 
-1. Identify the affected signal/profile/rule and its exact evidence IDs. Edit the authoritative TOML, retain unresolved facts, and update evidence locators/digests where appropriate. Keep measured neutral, storage defaults and actual sample validity distinct.
-2. Install msf-tools at the commit recorded in `evidence/tooling.lock.json`. `check.py` runs the installed `msf_tools` with the running interpreter; it does not install, clone or download anything.
-3. Regenerate, review changed generated/presentation bytes, and check again. `--write` is regeneration; the default invocation is byte drift checking, not full qualification.
-4. Run the tests with the same selected tools. Keep device/capture and calibration gates separate.
+1. Find the affected signal, profile or mapping and its exact evidence IDs. Edit the authoritative TOML. Keep unresolved facts, and update evidence locators and digests where needed. Keep measured neutral, storage defaults and actual sample validity separate.
+2. Install msf-tools at the commit recorded in `evidence/tooling.lock.json`. `check.py` runs the installed `msf_tools` with the running interpreter. It does not install, clone or download anything.
+3. Regenerate, review the changed generated and report bytes, and check again. `--write` regenerates. The default run checks for byte drift; it is not a full qualification.
+4. Run the tests with the same msf-tools. Keep device, capture and calibration gates separate.
 
-Rendering, checking and tests:
+Regenerate, check and test:
 
 ```sh
 python3 -B check.py --write
@@ -301,9 +341,9 @@ python3 -B check.py
 python3 -B -m unittest discover -s tests
 ```
 
-Merely generating matching bytes does not run the tests.
+Generating matching bytes does not run the tests. On these repositories, `scripts/ci_local.sh` runs `check.py` and the tests on the local Python 3.11 and 3.12 venvs and prints a summary for the pull request.
 
-`check.py` first delegates to `msf_tools check` for the pack, CSV, coverage and generated checksums. If that fails, it stops before presentation export. On shared success it runs the RCEF presentation exporter with the same write/check choice. For presentation-only regeneration/checking of an existing pack:
+To check or regenerate only the reports for an existing pack:
 
 ```sh
 python3 -B scripts/export_reports.py --write
@@ -312,7 +352,7 @@ python3 -B scripts/export_reports.py
 
 The native backend pilot is tested separately from RCEF.
 
-Optional public-source provenance verification, with an explicit cache outside the RCEF repository:
+Optional check of the public sources, with a cache that you name outside the RCEF repository:
 
 ```sh
 export RCEF_SOURCE_CACHE="../rcef-source-cache"
@@ -321,20 +361,22 @@ python3 -B scripts/verify_sources.py --cache "$RCEF_SOURCE_CACHE"
 python3 -B scripts/audit_inventories.py --cache "$RCEF_SOURCE_CACHE"
 ```
 
-The first command verifies only the named evidence source. The inventory auditor needs the full set of source IDs it uses; populate the complete cache with `verify_sources.py --cache "$RCEF_SOURCE_CACHE"` before auditing all inventories. Digest mismatch requires source review rather than silently accepting new bytes. These optional tools verify source provenance and selected names/order/native indices. They do not establish physiological calibration, capture validity or visual equivalence.
+The first command checks only the named evidence source. The inventory auditor needs every source ID it uses, so fill the cache with `verify_sources.py --cache "$RCEF_SOURCE_CACHE"` before you audit all inventories. If a digest does not match, review the source; do not accept the new bytes without review. These tools check source provenance and the selected names, order and native indices. They do not show physiological calibration, capture validity or visual equivalence.
 
-Before extension/release, read [CONTRIBUTING](../CONTRIBUTING.md), [GOVERNANCE](../GOVERNANCE.md), [references](../references.md) and [third-party notices](../THIRD_PARTY_NOTICES.md).
+To change a calibration record or add one, follow [calibration/README.md](../calibration/README.md) and [tools/calibration/README.md](../tools/calibration/README.md): freeze first, commit the ledger line, then run the held-out step.
 
-## 8. Independent validation checklist
+Before you extend or release the inventory, read [CONTRIBUTING](../CONTRIBUTING.md), [GOVERNANCE](../GOVERNANCE.md), [references](../references.md) and the [third-party notices](../THIRD_PARTY_NOTICES.md).
 
-- Recompute all 27 TOML counts and uniqueness/reference relationships; compare the merged data to the frozen/current pack. Count memberships independently from distinct signals and selected-interface metadata.
-- Review the exact ARKit calibration/domain/neutral/side/coupling checks. Verify independent expected values for identity `0.25`, affine `-1/0/1 → 0/0.5/1`, and ordered bilateral pairs. Require approximation opt-in and retain both authored losses.
-- Exercise missing value/validity, false/nonboolean validity, absent required inputs, extra/non-source channels, nonfinite/out-of-domain values and a failing frame in a multi-frame batch. Require no evaluated Result value on error.
-- Confirm unresolved MediaPipe→ARKit execution refuses; distinguish evidence status from disposition and quality. Do not infer inverse or cross-provider rules from names.
-- Run the no-write drift check and the tests. `check.py` first verifies the installed msf-tools against `evidence/tooling.lock.json`. Treat native backend testing separately.
-- Independently review the HTML in offline, narrow-screen and print modes. Tab through the stage/file explorer, operate selectors and sliders with the keyboard, test reset and invalid/missing modes, and compare all static and displayed fixture values. Check readable content with JavaScript disabled and with a screen reader.
-- Check relative links after adoption into `RCEF/docs` with sibling `msf-tools`, and verify MIT inline code plus CC-BY-SA-4.0 original-documentation attribution.
+## 9. Independent validation checklist
+
+- Recompute the counts from all 34 TOML files, and the uniqueness and reference relationships. Compare the merged data with the current pack. Count memberships separately from distinct signals and from selected-interface metadata.
+- Review the ARKit identity checks for calibration, domain, neutral, side and coupling. Check the independent expected values: identity `0.25`, affine `-1/0/1 → 0/0.5/1`, the ordered bilateral pairs, and the gaze splits. Require the approximation opt-in, and keep every authored loss.
+- Try a missing value or validity, false or non-boolean validity, missing required inputs, extra or non-source channels, non-finite or out-of-domain values, and one failing frame in a batch. Require no Result value on error.
+- Confirm that the unresolved MediaPipe → ARKit mapping refuses to run. Keep evidence status, disposition and quality apart. Do not infer inverse or cross-provider mappings from names.
+- Run the no-write drift check and the tests. `check.py` first checks the installed msf-tools against `evidence/tooling.lock.json`, and then the calibration records against `calibration/FREEZES`. Test the native backend separately.
+- The HTML report, SVG, PNG and TOML index describe data 0.1.1. Before relying on them, update them and review the HTML in offline, narrow-screen and print modes. Tab through the stage and file explorer, operate the selectors and sliders with the keyboard, and test reset and invalid or missing modes. Compare all static and displayed fixture values. Check the content with JavaScript turned off and with a screen reader.
+- Check relative links with a sibling `msf-tools` checkout, and check the MIT notice on inline code and the CC-BY-SA-4.0 attribution on original documentation.
 
 ## Licensing
 
-Original documentation, diagrams and CSV arrangement: **CC BY-SA 4.0**, RCEF contributors (2026). Inline JavaScript in the visual report: **MIT**, RCEF contributors (2026). Referenced provider material retains its own terms; see [licenses](../LICENSES/CC-BY-SA-4.0.txt), [MIT](../LICENSES/MIT.txt) and [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md).
+Original documentation, diagrams and CSV arrangement: **CC BY-SA 4.0**, RCEF contributors (2026). Inline JavaScript in the visual report: **MIT**, RCEF contributors (2026). Referenced provider material keeps its own terms; see [licenses](../LICENSES/CC-BY-SA-4.0.txt), [MIT](../LICENSES/MIT.txt) and [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md).

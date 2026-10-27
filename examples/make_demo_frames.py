@@ -3,22 +3,22 @@
 """Write the synthetic demo input frames in examples/data/.
 
 The frames are original synthetic data (no device capture). Each segment
-exercises one behaviour of the translation:
+tests one behaviour of the translation:
 
 - neutral: everything at rest;
-- jaw sweep: one channel 0 -> 1 -> 0 through a one-to-one rule;
+- jaw sweep: one channel 0 -> 1 -> 0 through a one-to-one mapping;
 - gaze: both eyes look left, then right, one direction at a time; then each
   eye alone in each direction, so a rule reading the wrong eye shows up;
-- asymmetric brows and cheeks: left and right differ, through the averaged rules
+- asymmetric brows and cheeks: left and right differ, through the averaged mappings
   (the cheeks both ways round, so each side drives its own half);
 - lips closed, jaw closed: LIPS_TOWARD with the jaw explicitly at rest;
 - smile, chin raiser and blink: each channel alone (left and right separately),
-  so every rule is the only thing moving at some frame;
+  so every mapping is the only thing moving in some frame;
 - eye following lost: the face stays valid while the gaze weights are invalid
   (FB2 then reports them as zero), during a blink;
 - face lost: the whole frame is invalid;
-- every other channel an RCEF FB2 rule reads, alone and briefly;
-- tongue: a channel with no RCEF rule (TONGUE_TIP_ALVEOLAR), with the jaw half open.
+- every other channel an RCEF FB2 mapping reads, alone and briefly;
+- tongue: a channel with no RCEF mapping (TONGUE_TIP_ALVEOLAR), with the jaw half open.
 
 All values are multiples of 1/16, so sums and halves are exact in binary.
 """
@@ -43,7 +43,7 @@ def names(profile, prefix, suffix):
 
 
 def rule_inputs():
-    """The FB2 channels RCEF's FB2 -> ARKit rules read, in profile order."""
+    """The FB2 channels RCEF's FB2 -> ARKit mappings read, in profile order."""
     pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
     read = {i for m in pack['mappings'] if m['id'] in ('fb2.to_arkit', 'fb2_gaze.to_arkit')
             for r in m['rules'] for i in r['inputs']}
@@ -74,7 +74,7 @@ def fb2_frames():
                            ('chin raiser top', 'CHIN_RAISER_T'), ('chin raiser bottom', 'CHIN_RAISER_B'),
                            ('blink left', 'EYES_CLOSED_L'), ('blink right', 'EYES_CLOSED_R')):
         segments.append((label, [{channel: v} for v in ramp(4)], True, True))
-    # Every other channel an RCEF FB2 rule reads, alone, so each rule is the only one moving somewhere.
+    # Every other channel an RCEF FB2 mapping reads, alone, so each mapping is the only one moving somewhere.
     alone = {[k for k, v in f.items() if v][0] for _, frames, *_ in segments for f in frames
              if len([v for v in f.values() if v]) == 1}
     for channel in rule_inputs():

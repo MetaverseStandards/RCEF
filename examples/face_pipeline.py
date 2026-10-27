@@ -17,9 +17,9 @@ evaluates both with msf_tools.evaluate_geometry:
   route them (tests/fixtures/godot_fb2_rules.csv, derived from the pinned
   source bytes). ICT splits browInnerUp and cheekPuff into halves, so on ICT
   each half takes its own FB2 side.
-- translated: the ARKit weights RCEF's proposed rules produce. A shape no RCEF
-  rule writes yet stays at rest here and is labelled; it is not an oracle
-  failure, but its whole direct movement counts towards the mesh bound.
+- translated: the ARKit weights RCEF's proposed mappings produce. A shape that
+  no RCEF mapping writes yet stays at rest here and is labelled. This is not an
+  oracle failure, but its whole direct movement counts towards the mesh bound.
 
 On the Rocketbox rigs a third render drives Rocketbox's own FACS action-unit
 shapes with the expression's AUs. It is a labelled semantic comparison
@@ -30,9 +30,9 @@ weights, per-frame vertex positions (float32 xyz), one shared triangle index
 file (uint32), per-vertex difference colours (float32 RGB), frames.json
 describing every frame, and a residual report as CSV and Markdown.
 
-This shows name and meaning correspondence on one rig. It says nothing about
-calibration: neither provider publishes its gain, so equal weights are assumed
-to mean equal expressions.
+This shows that names and meanings correspond on one rig. It says nothing
+about calibration: neither provider publishes its gain, so equal weights are
+assumed to mean equal expressions.
 """
 from __future__ import annotations
 import argparse

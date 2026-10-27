@@ -12,15 +12,15 @@ it is set).
 
 - Rocketbox has its own shapes for all 15 META visemes, so the frames drive
   them directly, by name. No translation is involved.
-- The VRM sample has the five vowel presets. RCEF's visemes.to_vrm rules
-  translate the frames, and vrm_presets.py turns the presets into morph
+- The VRM sample has the five vowel presets. RCEF's visemes.to_vrm map
+  translates the frames, and vrm_presets.py turns the presets into morph
   weights through the model's own binds ("translated"). The same binds driven
   through the vowel pairs scripts/derive_fb2_goldens.py read from the pinned
   sources (tests/fixtures/fb2_goldens.json) give "direct", independent of
-  RCEF's rules; the two morph weight vectors must agree within 1e-9.
+  RCEF's mappings. The two morph weight vectors must agree within 1e-9.
   Consonants have no VRM preset and are labelled as dropped.
 - The VRM path then shows the two winks from the expression library
-  (examples/data/fb2_expression_frames.csv): RCEF's fb2.to_vrm rules against
+  (examples/data/fb2_expression_frames.csv): RCEF's fb2.to_vrm map against
   the blink pairs read from the same sources, with the same check.
 """
 from __future__ import annotations

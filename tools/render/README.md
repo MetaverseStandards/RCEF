@@ -1,6 +1,6 @@
 # meshrender
 
-`meshrender.swift` renders plain triangle meshes offscreen with SceneKit on macOS and writes PNGs. RCEF's face examples write meshes in the format it reads (little-endian float32 xyz positions, uint32 triangle indices, optional float32 RGB per vertex), and calibration fits render their stimuli with it. It was written for RCEF and is MIT-licensed like RCEF's other code.
+`meshrender.swift` renders plain triangle meshes offscreen with SceneKit on macOS and writes PNGs. RCEF's face examples write meshes in the format it reads: little-endian float32 xyz positions, uint32 triangle indices and optional float32 RGB per vertex. Calibration fits use it to render their stimuli. It was written for RCEF and has the MIT licence, like RCEF's other code.
 
 ## Build
 
@@ -22,7 +22,7 @@ meshrender jobs.json
 
 ## Version and hashes
 
-The renderer has no version number: its version is the SHA-256 of `meshrender.swift`. A calibration record (see [calibration/README.md](../../calibration/README.md)) stores, under `renderer`:
+The renderer has no version number. The SHA-256 of `meshrender.swift` is its version. A calibration record (see [calibration/README.md](../../calibration/README.md)) stores, under `renderer`:
 
 - `source_sha256`: `shasum -a 256 tools/render/meshrender.swift`, the source that was built;
 - `binary_sha256`: `shasum -a 256 meshrender`, the binary that actually ran;
@@ -30,4 +30,4 @@ The renderer has no version number: its version is the SHA-256 of `meshrender.sw
 - `os`: `sw_vers -productVersion` and the architecture (`uname -m`);
 - `gpu`: the chipset from `system_profiler SPDisplaysDataType`.
 
-Two builds of the same source give different binary hashes (the linker writes a fresh UUID each time), so `binary_sha256` identifies one build, and `source_sha256` is what to rebuild from. Rendered images also depend on the OS and GPU, which is why the record names both.
+Two builds of the same source can give different binary hashes, because the linker can write a new UUID each time. So `binary_sha256` identifies one build, and `source_sha256` is the source to rebuild from. Rendered images also depend on the OS and GPU, so the record names both.

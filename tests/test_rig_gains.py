@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""Rig intensity normalisation (examples/rig_gains.py): its pieces, its landmarks and, once frozen, its record."""
+"""Rig intensity normalisation (examples/rig_gains.py): its pieces, its landmarks and its frozen record."""
 import ast
 from fractions import Fraction
 import importlib.util

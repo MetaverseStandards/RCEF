@@ -4,11 +4,11 @@ Pack: rcef.parity; data version: 0.4.0.
 
 Generated from rcef.pack.json; SHA-256: 630d37a5b01e4983f8e5cbcbd54d8268abeffb09248ea793d4842bd2df5cd4f7.
 
-Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
+Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Provider attribution and source terms are in ../THIRD_PARTY_NOTICES.md.
 
 949 distinct signals; 24 profiles; 954 inventory rows (one per profile membership, plus unassigned signals).
 
-Native defaults and calibrated neutral values are separate. Blank CSV values are absent in the pack; an unknown range remains unknown. Status describes the authored record.
+Native defaults and calibrated neutral values are kept separate. A blank CSV value is absent from the pack. An unknown range stays unknown. Status describes the authored record.
 
 | Profile | Description | Signals | Mapped | Unresolved | Excluded | Unsupported |
 | --- | --- | --- | --- | --- | --- | --- |

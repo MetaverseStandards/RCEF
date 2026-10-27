@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Render readable reports from generated/rcef.pack.json; check drift by default.
+"""Render readable reports from generated/rcef.pack.json, or by default check that they are current.
 
-This is a presentation exporter. Authoring validation and runtime behaviour
-remain the responsibility of the shared checker and the tests.
+This script only presents the pack. The shared checker and the tests check
+the authoring and the runtime behaviour.
 """
 import argparse
 from collections import Counter
@@ -164,8 +164,8 @@ def render(raw):
     notice = (f'Pack: {_cell(pack["id"])}; data version: {_cell(pack["data_version"])}.\n\n'
               f'Generated from rcef.pack.json; SHA-256: {source_hash}.\n\n'
               f'Original RCEF data and arrangement: RCEF contributors (2026), '
-              f'{_cell(pack["license"])}. Existing provider attribution and source terms '
-              'remain in ../THIRD_PARTY_NOTICES.md.\n\n')
+              f'{_cell(pack["license"])}. Provider attribution and source terms '
+              'are in ../THIRD_PARTY_NOTICES.md.\n\n')
     memberships = []
     assigned = set()
     for profile in profiles.values():
@@ -193,8 +193,8 @@ def render(raw):
     text = '# RCEF expression inventory\n\n' + notice
     text += (f'{len(signals)} distinct signals; {len(profiles)} profiles; '
              f'{len(memberships)} inventory rows (one per profile membership, plus unassigned signals).\n\n'
-             'Native defaults and calibrated neutral values are separate. Blank CSV values are absent '
-             'in the pack; an unknown range remains unknown. Status describes the authored record.\n\n')
+             'Native defaults and calibrated neutral values are kept separate. A blank CSV value is absent '
+             'from the pack. An unknown range stays unknown. Status describes the authored record.\n\n')
     summary = []
     for profile in profiles.values():
         counts = Counter(signals[sid]['disposition'] for sid in profile['signal_ids'])
@@ -230,8 +230,8 @@ def render(raw):
     rule_rows = []
     rules_by_output = {}
     mapping_text = '# RCEF authored mappings\n\n' + notice
-    mapping_text += ('Rules preserve their declared direction, status, assumptions and losses. '
-                     'Unresolved rules are inventory records; they are not executable correspondences.\n\n')
+    mapping_text += ('Each mapping keeps its declared direction, status, assumptions and losses. '
+                     'An unresolved mapping is an inventory record. It cannot be executed.\n\n')
     member_of = {}
     for profile in profiles.values():
         for sid in profile['signal_ids']:
@@ -246,9 +246,9 @@ def render(raw):
                 if rule.get('evidence_status') == 'proposed']
     if proposed:
         mapping_text += ('## Proposed rules\n\n'
-                         'Proposed rules translate between providers. Each formula assumes the calibration '
-                         'stated in its rule below; losses list what the translation cannot carry.\n\n')
-        mapping_text += _table(['Mapping', 'Rule', 'Source → target', 'Formula', 'Losses', 'Evidence status'],
+                         'Proposed mappings translate between providers. Each formula assumes the calibration '
+                         'stated with its mapping below. Losses list what the translation cannot carry.\n\n')
+        mapping_text += _table(['Map', 'Mapping', 'Source → target', 'Formula', 'Losses', 'Evidence status'],
                                proposed) + '\n'
     for mapping in mappings.values():
         mapping_text += '## ' + _cell(mapping['id']) + '\n\n'
@@ -270,9 +270,9 @@ def render(raw):
     wide_columns = ['canonical_id', 'label', 'units', 'disposition', *[p['id'] for p in other_profiles]]
     wide_rows = []
     correspondence_text = '# RCEF canonical correspondences\n\n' + notice
-    correspondence_text += ('Only authored rules appear here. A dash means no authored rule. '
-                            'Unresolved rules stay labeled unresolved. A mapped rule preserves its '
-                            'declared provider basis; it does not establish cross-provider or anatomical equality.\n\n')
+    correspondence_text += ('Only authored mappings appear here. A dash means no authored mapping. '
+                            'Unresolved mappings stay labeled unresolved. A mapping with the `mapped` disposition keeps '
+                            'its declared provider basis. It does not show cross-provider or anatomical equality.\n\n')
     for sid in canonical['signal_ids'] if canonical else []:
         signal = signals[sid]
         row = [sid, signal['label'], signal['units'], signal['disposition']]
@@ -290,7 +290,7 @@ def render(raw):
             row.append('; '.join(cells) if cells else '-')
         wide_rows.append(row)
         correspondence_text += '## ' + _cell(signal['label']) + '\n\n' + _cell(sid) + '\n\n'
-        correspondence_text += _table(['Profile', 'Authored relationship'], details) if details else 'No authored rule.\n'
+        correspondence_text += _table(['Profile', 'Authored relationship'], details) if details else 'No authored mapping.\n'
         correspondence_text += '\n'
     outputs = {'inventory.csv': _csv(columns, inventory), 'inventory.md': text,
                'mappings.csv': _csv(rule_columns, rule_rows), 'mappings.md': mapping_text,

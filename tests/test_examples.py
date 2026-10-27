@@ -33,7 +33,7 @@ FULL = face_pipeline.face_targets([(i, a, None) for i, a in enumerate(ARKIT_52)]
 
 
 def compiled():
-    """The example mappings, compiled once from the shared pack."""
+    """The example maps, compiled once from the shared pack."""
     return {m: shared_pack.mapping(m, s, t) for m, s, t in (('fb2.to_arkit', 'openxr.fb2', 'arkit.coefficient'),
                                                           ('fb2_gaze.to_arkit', 'openxr.fb2', 'arkit.coefficient'),
                                                           ('visemes.to_vrm', 'openxr.visemes', 'vrm.preset'))}
@@ -101,7 +101,7 @@ class Fb2Example(unittest.TestCase):
 
 
 def fb2_arkit_document(pack, mapping_ids):
-    """The pack cut down to some FB2 -> ARKit mappings and the records they use.
+    """The pack cut down to some FB2 -> ARKit maps and the records they use.
 
     msf-tools rechecks the whole pack on every call, so the many changed copies
     the oracle tests build stay fast only when the pack is small.
@@ -153,11 +153,11 @@ class ArkitToFb2(unittest.TestCase):
 
 
 class Fb2Oracles(unittest.TestCase):
-    """The face pipeline's weight oracles catch every wrong FB2 rule on the demo frames.
+    """The face pipeline's weight oracles catch every wrong FB2 mapping on the demo frames.
 
-    Each rule writes one coefficient and none reads another rule's output, so
-    changing every rule at once and asking which shapes fail is the same as
-    changing the rules one at a time. Every shape's own input moves alone in
+    Each mapping writes one coefficient and none reads another mapping's output,
+    so changing every mapping at once and asking which shapes fail is the same
+    as changing them one at a time. Every shape's own input moves alone in
     some demo frame, so no change can hide behind another.
     """
     MAPPINGS = ('fb2.to_arkit', 'fb2_gaze.to_arkit')
@@ -167,7 +167,7 @@ class Fb2Oracles(unittest.TestCase):
         cls.pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
         cls.translator = cls.translator_for(fb2_arkit_document(cls.pack, cls.MAPPINGS))
         # A refused frame has no weights to compare, so only fully valid frames
-        # can show a wrong rule; each mapping then needs one evaluation. The
+        # can show a wrong mapping, and each map then needs one evaluation. The
         # ramps go up and back down, so each pose is kept once.
         poses = {}
         for frame in cls.translator.read(ROOT / 'examples/data/fb2_demo_frames.csv'):
@@ -185,7 +185,7 @@ class Fb2Oracles(unittest.TestCase):
                 for c in face_pipeline.check_channels(self.translator, frame, result, targets) if not c['passes']}
 
     def after(self, change):
-        """Translate the demo frames with a copy of both mappings in which `change` has edited the rules."""
+        """Translate the demo frames with a copy of both maps in which `change` has edited the rules."""
         document = fb2_arkit_document(self.pack, self.MAPPINGS)
         document['mappings'] = copy.deepcopy(document['mappings'])
         for mapping in document['mappings']:

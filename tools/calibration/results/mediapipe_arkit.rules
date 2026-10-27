@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
-# Pending: these rules need msf-tools operators 1.1 (piecewise_linear) and move to
-# mappings/mediapipe_arkit.toml once RCEF adopts it. TOML; not named .toml so msf-tools does not read it yet.
+# Published negative result for calibration record mediapipe.ict-response: 0 of
+# MediaPipe's 51 ARKit-named scores pass. 25 rose enough in training to fit a
+# curve, and none met its bounds on held-out ICT identities or on Rocketbox Male,
+# so no mapping cites the record. The file is TOML, but it is not named .toml,
+# so msf-tools does not read it.
 
 # No channel passed every held-out cell, so there are no rules.

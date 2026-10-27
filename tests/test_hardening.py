@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""R-HARD declared storage and arithmetic qualification; no provider-frame claim."""
+"""R-HARD: tests of declared storage and arithmetic. They make no claim about provider frames."""
 from __future__ import annotations
 
 from copy import deepcopy
@@ -23,8 +23,8 @@ TARGET = 'rcef.arkit.coefficient.eyeBlinkLeft'
 RULE = 'arkit.coefficient.eyeBlinkLeft.identity'
 FIXTURE_PROFILES = ('fixture.source', 'fixture.target')
 FIXTURE_MAPPINGS = ('fixture.affine', 'fixture.bilateral')
-# Explicit admitted table from the accepted readiness contract. Locations name
-# the status errors; reference failures are tested separately.
+# The admitted table from the accepted readiness contract. Each row names where
+# the status errors are. Reference failures have their own tests.
 ST_ROWS = (
     ('CCC', ()), ('CCP', ('target',)), ('CCU', ('target',)),
     ('CPC', ('source',)), ('CPP', ('source', 'target')), ('CPU', ('source', 'target')),
@@ -51,7 +51,7 @@ class Hardening(unittest.TestCase):
         # Compiling the full pack takes a large share of the suite's time, so tests
         # that do not edit the document share the suite's one compiled pack.
         # msf-tools rechecks the whole pack on every evaluation, so the fixture
-        # mappings, which many tests evaluate repeatedly, use a pack holding only them.
+        # maps, which many tests evaluate repeatedly, use a pack holding only them.
         cls.pack = shared_pack.pack()
         cls.fixture_pack = cls.compile_pack(cls.only(FIXTURE_PROFILES, FIXTURE_MAPPINGS))
         cls.shared_mappings = {}
@@ -183,8 +183,8 @@ class Hardening(unittest.TestCase):
         for mapping, mapping_compiled in compiled.items():
             rows = [r for r in self.expectations if r['mapping_id'] == mapping]
             peers = [r['input_id'] for r in rows]
-            # One frame per (signal, value), each activating a single signal; frames
-            # are evaluated independently, so one call covers the whole mapping.
+            # One frame per (signal, value), and each frame sets a single signal. Frames
+            # are evaluated independently, so one call covers the whole map.
             cases, frames = [], []
             for row in rows:
                 for value, expected in ((0., 0.), (.25, .25), (1., 1.)):

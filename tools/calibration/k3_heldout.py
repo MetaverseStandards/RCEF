@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT
-"""Run the rig-gain record's held-out evaluation behind the provenance checks of tools/calibration/provenance.py.
+"""Run the rig-gain record's held-out evaluation after the provenance checks in tools/calibration/provenance.py.
 
 examples/rig_gains.py was frozen (record rig-gains.ict-rocketbox-female, code_commit ac0b953) before this check
-existed, and later commits changed check.py and tools/render, so the run happens in a separate checkout of the
-record's freeze commit, given with --checkout; this tool, run from a current checkout, checks it first:
+existed. Later commits changed check.py and tools/render. So the run uses a separate checkout of the record's
+freeze commit, given with --checkout. This tool runs from a current checkout and first checks that:
 
 - the record and its ledger line are committed in that checkout;
 - the msf-tools installed for this interpreter passes that checkout's check.py lock check;
@@ -11,8 +11,9 @@ record's freeze commit, given with --checkout; this tool, run from a current che
 - every repository file the run imports (found from the loaded modules), the landmarks and the renderer source are
   exactly as at code_commit, and the renderer binary is the one the record names.
 
-It then runs rig_gains.py's evaluation in process and says whether its cells equal those published in this
-checkout's calibration/rig-gains.ict-rocketbox-female.cal (same frozen hash required).
+It then runs rig_gains.py's evaluation in this process. It reports whether the cells equal those published in this
+checkout's calibration/rig-gains.ict-rocketbox-female.cal (the frozen hash must be the same).
+
 Usage:
   git worktree add /tmp/k3-freeze 91f57f7
   python tools/calibration/k3_heldout.py --checkout /tmp/k3-freeze --ict-cache DIR --rig-cache DIR \\

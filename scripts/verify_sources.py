@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Fetch public evidence with size/time bounds and verify its recorded digest."""
+"""Download public evidence, with size and time limits, and check it against its recorded digest."""
 from __future__ import annotations
 import argparse
 import hashlib
