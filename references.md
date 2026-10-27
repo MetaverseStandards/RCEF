@@ -12,6 +12,7 @@ Pinned survey/authoring baseline and provider presentation; historical parity re
 - Revision: `f6c3ea8a00d4901496326b4a6fe6a24913a563c6`
 - Retrieved: 2026-10-07
 - SHA-256: `a4726117f9de285a8ab66651b6e33f31195c67f55a9db72c028b3d60a6100ce1`
+- License or terms: CC-BY-SA-4.0 (stated in the README)
 - Locator: README sections
 
 ## rcsf_checker
@@ -22,6 +23,7 @@ Pinned baseline checker provides table join and comparison behavior; no runtime 
 - Revision: `f6c3ea8a00d4901496326b4a6fe6a24913a563c6`
 - Retrieved: 2026-10-07
 - SHA-256: `a49573c0d18a1bfc52d9f9f5cbff669c978295f11c442ba00fa2c359cab21e47`
+- License or terms: no file-level notice; the RCSF README states CC-BY-SA-4.0; cited, not copied
 - Locator: join_csv.py
 
 ## apple_blendshapes
@@ -54,6 +56,7 @@ kBlendshapeNames contains 52 labels including _neutral and excluding tongueOut; 
 - Revision: `f6988c4769278bde600efd488dfc8645432dc92b`
 - Retrieved: 2026-10-07
 - SHA-256: `a3826ad2738315f1e046b36fd883825980e151db677e53d21ff35eaff64e4bd3`
+- License or terms: Apache-2.0
 - Locator: kBlendshapeNames; ConvertTensorToBlendshapes
 
 ## xr_fb
@@ -97,7 +100,7 @@ Exact FB63, FB2 70 and META15 identifiers and indices plus count sentinels and n
 - Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
 - Retrieved: 2026-10-07
 - SHA-256: `e9b6b0bb9e5100c56467ec80ae30b78ff36b4dcc8a332c269fa5e3e8429ed0aa`
-- License or terms: source license retained; identifiers extracted as facts
+- License or terms: Apache-2.0 OR MIT (SPDX header of xr.xml); identifiers extracted as facts
 - Locator: enums XrFaceExpressionFB, XrFaceExpression2FB, XrFaceTrackingVisemeMETA
 
 ## vrcft_enum
@@ -141,6 +144,7 @@ Artist tables contain 102 base and 42 blended names; component lists, unsupporte
 - Revision: `retrieval-digest`
 - Retrieved: 2026-10-07
 - SHA-256: `10f91ba8ed0c534139d3a1860b52f58978da80b401825896bfeb92af34c2a245`
+- License or terms: documentation with no published license; reference only, source prose not redistributed
 - Locator: #ue-base-shapes; #ue-blended-shapes; footnote 1
 
 ## godot_enum
@@ -250,6 +254,7 @@ Morph weight coefficients are not generally limited to 0..1; relative Basis and 
 - Revision: `8e691206fa2e981fc3b8c8bc57e671595576c971`
 - Retrieved: 2026-10-07
 - SHA-256: `c305d1b0ea93c7eb101059db09ae4687c56fe5388c6655cd9bf83d44b2932664`
+- License or terms: CC-BY-4.0 (SPDX header of Specification.adoc)
 - Locator: #morph-targets; #applying-morph-targets
 
 ## vrcft_parameters
@@ -260,6 +265,7 @@ Morph weight coefficients are not generally limited to 0..1; relative Basis and 
 - Revision: `retrieval-digest`
 - Retrieved: 2026-10-07
 - SHA-256: `1f0b92e5955ef08fd772da3624cc492cf2cd6a6242fd63a7452087abf86678c2`
+- License or terms: documentation with no published license; reference only, source prose not redistributed
 - Locator: 16 parameter tables; Tracking Active Parameters
 
 ## vrcft_float
@@ -270,6 +276,7 @@ Float avatar parameter surface; documentation does not establish physical calibr
 - Revision: `retrieval-digest`
 - Retrieved: 2026-10-07
 - SHA-256: `54b585f8f9170da70caa3a679fbe120ba76204fe406106130b61ccd3f742df5e`
+- License or terms: documentation with no published license; reference only, source prose not redistributed
 - Locator: Float Parameters
 
 ## vrcft_binary
@@ -280,6 +287,7 @@ Binary parameter encoding surface and sign parameter evidence; numeric transform
 - Revision: `retrieval-digest`
 - Retrieved: 2026-10-07
 - SHA-256: `9d8dae1b944d8cd877147800517a11ea9a7e2dd04344e63861df9248e4686c68`
+- License or terms: documentation with no published license; reference only, source prose not redistributed
 - Locator: Binary Parameters
 
 ## rcef_definitions
