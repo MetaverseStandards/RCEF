@@ -26,23 +26,27 @@ class Translator:
     """The compiled RCEF mappings from one source profile to one target profile."""
 
     def __init__(self, source: str, target: str, mappings: list[str], prefix: str, suffix: str,
-                 root: Path = ROOT, pack: msf.Pack | None = None):
+                 root: Path = ROOT, pack: msf.Pack | None = None, compiled: dict | None = None):
+        """`pack` replaces the published pack; `compiled` holds mappings already compiled from it."""
         self.pack = pack or load_pack(json.loads((root / 'generated/rcef.pack.json').read_text(encoding='utf-8')))
         self.signals = {s['id']: s for s in self.pack.document['signals']}
-        source_snapshot = msf.profile_snapshot(self.pack, source).value
-        target_snapshot = msf.profile_snapshot(self.pack, target).value
         self.prefix, self.suffix = prefix, suffix
-        self.mappings = {}
+        self.mappings, snapshots = {}, None
         for mapping in mappings:
+            if compiled and mapping in compiled:
+                self.mappings[mapping] = compiled[mapping]
+                continue
+            snapshots = snapshots or (msf.profile_snapshot(self.pack, source).value,
+                                      msf.profile_snapshot(self.pack, target).value)
             # RCEF's cross-provider rules are proposed approximations, so they compile
             # only with the approximation opt-in.
-            result = msf.compile_mapping(self.pack, source_snapshot, target_snapshot, mapping, True)
+            result = msf.compile_mapping(self.pack, *snapshots, mapping, True)
             if not result.ok:
                 raise SystemExit(result.report.to_dict())
             self.mappings[mapping] = result.value
         rules = {m['id']: m['rules'] for m in self.pack.document['mappings']}
         self.outputs = [o for m in mappings for r in rules[m] for o in r['outputs']]
-        self.inputs = {i for compiled in self.mappings.values() for i in compiled.required_inputs}
+        self.inputs = {i for m in self.mappings.values() for i in m.required_inputs}
 
     def signal_id(self, name: str) -> str:
         return f'{self.prefix}{name}{self.suffix}'
@@ -118,11 +122,11 @@ class Translator:
                                  '; '.join(r['refused']), ' '.join(r['dropped'])])
 
 
-def fb2_to_arkit(root: Path = ROOT, pack: msf.Pack | None = None) -> Translator:
+def fb2_to_arkit(root: Path = ROOT, **options) -> Translator:
     return Translator('openxr.fb2', 'arkit.coefficient', ['fb2.to_arkit', 'fb2_gaze.to_arkit'],
-                      'openxr.fb2.XR_FACE_EXPRESSION2_', '_FB', root, pack)
+                      'openxr.fb2.XR_FACE_EXPRESSION2_', '_FB', root, **options)
 
 
-def visemes_to_vrm(root: Path = ROOT, pack: msf.Pack | None = None) -> Translator:
+def visemes_to_vrm(root: Path = ROOT, **options) -> Translator:
     return Translator('openxr.visemes', 'vrm.preset', ['visemes.to_vrm'],
-                      'openxr.visemes.XR_FACE_TRACKING_VISEME_', '_META', root, pack)
+                      'openxr.visemes.XR_FACE_TRACKING_VISEME_', '_META', root, **options)

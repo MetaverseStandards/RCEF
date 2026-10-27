@@ -30,7 +30,7 @@ The input has one row per frame: `time`, a `segment` label, all 70 FB2 weights, 
 - `refused`: which mapping refused the frame and why. For example, when eye following is lost, `fb2_gaze.to_arkit` is refused while the face weights still come through.
 - `dropped`: non-zero inputs that no RCEF rule reads, such as `TONGUE_OUT`.
 
-The demo frames come from `examples/make_demo_frames.py`. They cover a neutral pose, a jaw sweep, gaze left and right, asymmetric brows and cheeks, lost eye following during a blink, a lost face, and a tongue with no rule.
+The demo frames come from `examples/make_demo_frames.py`. They cover a neutral pose, a jaw sweep, gaze left and right with both eyes and then with each eye alone, asymmetric brows and cheeks, closed lips with the jaw closed, each smile, chin raiser and blink channel on its own, lost eye following during a blink, a lost face, and a tongue with no rule. Every one of the 14 FB2 rules is the only thing moving in some frame, so `tests/test_examples.py` can check that halving any rule, or swapping a left rule with its right one, makes the face pipeline's oracles fail.
 
 How it works (see `examples/rcef_translate.py`):
 

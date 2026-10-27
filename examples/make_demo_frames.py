@@ -7,8 +7,12 @@ exercises one behaviour of the translation:
 
 - neutral: everything at rest;
 - jaw sweep: one channel 0 -> 1 -> 0 through a one-to-one rule;
-- gaze: both eyes look left, then right, one direction at a time;
+- gaze: both eyes look left, then right, one direction at a time; then each
+  eye alone in each direction, so a rule reading the wrong eye shows up;
 - asymmetric brows and cheeks: left and right differ, through the averaged rules;
+- lips closed, jaw closed: LIPS_TOWARD with the jaw explicitly at rest;
+- smile, chin raiser and blink: each channel alone (left and right separately),
+  so every rule is the only thing moving at some frame;
 - eye following lost: the face stays valid while the gaze weights are invalid
   (FB2 then reports them as zero), during a blink;
 - face lost: the whole frame is invalid;
@@ -47,8 +51,17 @@ def fb2_frames():
     segments.append(('jaw sweep', [{'JAW_DROP': v} for v in ramp(8)], True, True))
     segments.append(('gaze left', [{'EYES_LOOK_LEFT_L': v, 'EYES_LOOK_LEFT_R': v} for v in ramp(6)], True, True))
     segments.append(('gaze right', [{'EYES_LOOK_RIGHT_L': v, 'EYES_LOOK_RIGHT_R': v} for v in ramp(6)], True, True))
+    for eye, side in (('left', 'L'), ('right', 'R')):
+        for direction in ('left', 'right'):
+            segments.append((f'{eye} eye looks {direction}',
+                             [{f'EYES_LOOK_{direction.upper()}_{side}': v} for v in ramp(4)], True, True))
     segments.append(('asymmetric brows', [{'INNER_BROW_RAISER_L': v, 'INNER_BROW_RAISER_R': 0.25} for v in ramp(6)], True, True))
     segments.append(('asymmetric cheeks', [{'CHEEK_PUFF_L': v, 'CHEEK_PUFF_R': 0.0} for v in ramp(6)], True, True))
+    segments.append(('lips closed, jaw closed', [{'LIPS_TOWARD': v, 'JAW_DROP': 0.0} for v in ramp(4)], True, True))
+    for label, channel in (('smile left', 'LIP_CORNER_PULLER_L'), ('smile right', 'LIP_CORNER_PULLER_R'),
+                           ('chin raiser top', 'CHIN_RAISER_T'), ('chin raiser bottom', 'CHIN_RAISER_B'),
+                           ('blink left', 'EYES_CLOSED_L'), ('blink right', 'EYES_CLOSED_R')):
+        segments.append((label, [{channel: v} for v in ramp(4)], True, True))
     segments.append(('eye following lost', [{'EYES_CLOSED_L': v, 'EYES_CLOSED_R': v} for v in ramp(5)], True, False))
     segments.append(('face lost', [{'JAW_DROP': 0.5}] * 5, False, False))
     segments.append(('tongue', [{'JAW_DROP': 0.5, 'TONGUE_OUT': v} for v in ramp(5)], True, True))

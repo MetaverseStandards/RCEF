@@ -26,6 +26,7 @@ to mean equal expressions.
 from __future__ import annotations
 import argparse
 import csv
+from functools import cache
 import json
 import math
 from pathlib import Path
@@ -53,6 +54,7 @@ def ict_name(arkit: str) -> str:
     return arkit
 
 
+@cache
 def source_routes() -> dict[str, dict[str, float]]:
     """ARKit name -> {FB2 channel: weight}, as derived from the pinned sources."""
     with (ROOT / 'tests/fixtures/godot_fb2_rules.csv').open(encoding='utf-8', newline='') as handle:
@@ -85,18 +87,59 @@ def require(result):
     return result.value
 
 
-def bind(snapshot, translator, targets) -> msf.Sidecar:
-    """Bind each ICT target to the ARKit signal that drives it, as "<signal>:<target>"."""
+def target_signals(translator, targets: list[str]) -> dict[str, str]:
+    """ICT target -> the ARKit signal that drives it; both halves of a split shape share one."""
     by_target = {ict_name(o[len(ARKIT):]): o for o in translator.outputs}
     for arkit, halves in SPLIT.items():
         for half in halves:
             by_target[half] = ARKIT + arkit
+    return {t: by_target[t] for t in targets}
+
+
+def bind(snapshot, translator, targets) -> msf.Sidecar:
+    """Bind each ICT target to the ARKit signal that drives it, as "<signal>:<target>"."""
     bindings = []
-    for index, target in enumerate(targets):
-        signal = translator.signals[by_target[target]]
+    for index, (target, sid) in enumerate(target_signals(translator, targets).items()):
+        signal = translator.signals[sid]
         bindings.append(require(msf.morph_binding(snapshot, {**signal, 'id': f'{signal["id"]}:{target}'}, 0, index)))
     return require(msf.annotate_asset(snapshot, {'bindings': bindings, 'metadata': {
         'note': 'ICT-FaceKit target driven by an ARKit coefficient; both halves of a split shape share one coefficient.'}}))
+
+
+def check_channels(translator, frame: dict, result: dict, targets: list[str]) -> list[dict]:
+    """The weight oracles for one frame, per ICT target, in target order.
+
+    Each entry has the direct and translated weights (None when invalid or
+    refused), the residual, its bound, a status and whether the oracle passes.
+    """
+    drives = direct_inputs(targets)
+    channels = []
+    for target, signal in target_signals(translator, targets).items():
+        fb2 = translator.signal_id(drives[target])
+        direct = frame['values'][fb2] if translator.valid(fb2, frame['flags']) else None
+        value = result['values'].get(signal)
+        arkit = signal[len(ARKIT):]
+        passes = True
+        if value is None:
+            status, residual, bound = 'refused', '', ''
+        elif direct is None:
+            status, residual, bound = 'direct input invalid', '', ''
+        else:
+            residual = abs(value - direct)
+            if arkit in SPLIT:
+                left, right = (frame['values'][translator.signal_id(drives[h])] for h in SPLIT[arkit])
+                bound = abs(left - right) / 2
+                passes = residual <= bound + EXACT_TOLERANCE
+                status = ('averaged pair, within half the L/R difference' if passes
+                          else 'averaged pair, OVER half the L/R difference')
+            else:
+                bound = EXACT_TOLERANCE
+                passes = residual <= bound
+                status = 'exact' if passes else 'exact rule, RESIDUAL OVER 1e-9'
+        channels.append({'target': target, 'arkit': arkit, 'fb2': drives[target], 'direct': direct,
+                         'translated': value, 'residual': residual, 'bound': bound, 'status': status,
+                         'passes': passes})
+    return channels
 
 
 def heat(delta: float, scale: float) -> tuple[float, float, float]:
@@ -131,8 +174,6 @@ def main(argv=None) -> int:
     translator.write(translated, out / 'fb2_to_arkit.csv')
     sidecar = bind(snapshot, translator, targets)
     (out / 'ict_facekit_subset.sidecar.json').write_bytes(msf.canonical_json(sidecar.document))
-    slot = {b['id'].split(':', 1)[1]: (b['id'].split(':', 1)[0], b['ref']['target']) for b in sidecar.document['bindings']}
-    drives = direct_inputs(targets)
 
     (out / 'mesh/indices.u32').write_bytes(struct.pack(f'<{len(indices)}I', *indices))
     evaluated = {}
@@ -156,38 +197,11 @@ def main(argv=None) -> int:
 
     residual_rows, manifest = [], []
     for number, (frame, result) in enumerate(zip(frames, translated)):
-        direct_w, translated_w = [0.0] * len(targets), [0.0] * len(targets)
-        channels, mesh_bound, oracle_ok = [], 0.0, True
-        for target in targets:
-            signal, index = slot[target]
-            fb2 = translator.signal_id(drives[target])
-            source_valid = translator.valid(fb2, frame['flags'])
-            direct = frame['values'][fb2] if source_valid else None
-            value = result['values'].get(signal)
-            if direct is not None:
-                direct_w[index] = direct
-            if value is not None:
-                translated_w[index] = value
-            arkit = signal[len(ARKIT):]
-            if value is None:
-                status, residual, bound = 'refused', '', ''
-            elif direct is None:
-                status, residual, bound = 'direct input invalid', '', ''
-            else:
-                residual = abs(value - direct)
-                if arkit in SPLIT:
-                    left, right = (frame['values'][translator.signal_id(drives[h])] for h in SPLIT[arkit])
-                    bound = abs(left - right) / 2
-                    ok = residual <= bound + EXACT_TOLERANCE
-                    status = 'averaged pair, within half the L/R difference' if ok else 'averaged pair, OVER half the L/R difference'
-                else:
-                    bound = EXACT_TOLERANCE
-                    ok = residual <= bound
-                    status = 'exact' if ok else 'exact rule, RESIDUAL OVER 1e-9'
-                oracle_ok &= ok
-                mesh_bound += residual * target_norms[index]
-            channels.append({'target': target, 'arkit': arkit, 'fb2': drives[target], 'direct': direct,
-                             'translated': value, 'residual': residual, 'bound': bound, 'status': status})
+        channels = check_channels(translator, frame, result, targets)
+        direct_w = [c['direct'] or 0.0 for c in channels]
+        translated_w = [c['translated'] or 0.0 for c in channels]
+        oracle_ok = all(c['passes'] for c in channels)
+        mesh_bound = sum(c['residual'] * norm for c, norm in zip(channels, target_norms) if c['residual'] != '')
         direct_p, translated_p = positions(direct_w), positions(translated_w)
         deltas = [math.dist(p, q) for p, q in zip(direct_p, translated_p)]
         max_delta = max(deltas)
@@ -223,7 +237,7 @@ def main(argv=None) -> int:
 def write_report(out: Path, rows: list[dict], manifest: list[dict], targets: list[str]) -> None:
     columns = ['frame', 'time', 'segment', 'target', 'arkit', 'fb2', 'direct', 'translated', 'residual', 'bound', 'status']
     with (out / 'residuals.csv').open('w', encoding='utf-8', newline='') as handle:
-        writer = csv.DictWriter(handle, columns, lineterminator='\n')
+        writer = csv.DictWriter(handle, columns, lineterminator='\n', extrasaction='ignore')
         writer.writeheader()
         writer.writerows({k: ('' if r[k] is None else r[k]) for k in columns} for r in rows)
     statuses = {}
