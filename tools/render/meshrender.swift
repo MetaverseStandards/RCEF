@@ -5,6 +5,7 @@
 // jobs.json: {"width":W,"height":H,"jobs":[{"positions":"p.f32","indices":"i.u32",
 //   "colors":"c.f32" (optional, per-vertex RGB float32), "lit":true, "color":[r,g,b],
 //   "background":[r,g,b], "camera":{"position":[x,y,z],"target":[x,y,z],"up":[0,1,0],"yfov":deg},
+//   "light":{"pitch":rad,"yaw":rad,"key":intensity,"ambient":intensity} (optional; defaults -0.35, -0.35, 900, 300),
 //   "out":"frame.png"}]}
 // Positions are little-endian float32 xyz triples, indices uint32 triangle lists.
 import AppKit
@@ -13,10 +14,11 @@ import Metal
 import SceneKit
 
 struct Camera: Decodable { let position: [Float]; let target: [Float]; let up: [Float]; let yfov: Double }
+struct Light: Decodable { let pitch: Double?; let yaw: Double?; let key: Double?; let ambient: Double? }
 struct Job: Decodable {
     let positions: String; let indices: String; let colors: String?
     let lit: Bool?; let color: [Double]?; let background: [Double]?
-    let camera: Camera; let out: String
+    let camera: Camera; let light: Light?; let out: String
 }
 struct Batch: Decodable { let width: Int; let height: Int; let jobs: [Job] }
 
@@ -70,10 +72,12 @@ func render(_ job: Job, _ renderer: SCNRenderer, _ size: CGSize) throws {
     camNode.position = v3(job.camera.position)
     camNode.look(at: v3(job.camera.target), up: v3(job.camera.up), localFront: SCNVector3(0, 0, -1))
     scene.rootNode.addChildNode(camNode)
-    let key = SCNNode(); key.light = SCNLight(); key.light!.type = .directional; key.light!.intensity = 900
+    let key = SCNNode(); key.light = SCNLight(); key.light!.type = .directional
+    key.light!.intensity = CGFloat(job.light?.key ?? 900)
     camNode.addChildNode(key)  // headlight: lighting follows the view
-    key.eulerAngles = SCNVector3(-0.35, -0.35, 0)
-    let fill = SCNNode(); fill.light = SCNLight(); fill.light!.type = .ambient; fill.light!.intensity = 300
+    key.eulerAngles = SCNVector3(CGFloat(job.light?.pitch ?? -0.35), CGFloat(job.light?.yaw ?? -0.35), 0)
+    let fill = SCNNode(); fill.light = SCNLight(); fill.light!.type = .ambient
+    fill.light!.intensity = CGFloat(job.light?.ambient ?? 300)
     scene.rootNode.addChildNode(fill)
 
     renderer.scene = scene

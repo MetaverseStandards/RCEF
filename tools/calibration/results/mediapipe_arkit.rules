@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Pending: these rules need msf-tools operators 1.1 (piecewise_linear) and move to
+# mappings/mediapipe_arkit.toml once RCEF adopts it. TOML; not named .toml so msf-tools does not read it yet.
+
+# No channel passed every held-out cell, so there are no rules.

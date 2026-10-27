@@ -2,15 +2,16 @@
 
 Each file here records one software-only calibration fit: how it was made, from what, the bounds it had to meet, and how it did on data it was not fitted to. A rule whose curve comes from a fit cites the record, and `check.py` refuses the checkout unless that rule's knots are exactly the record's frozen knots and every held-out cell for its channel passed.
 
-Published records:
+Records:
 
+- [mediapipe.ict-response](mediapipe.ict-response.cal): MediaPipe's response to untextured ICT renders. A negative result: 25 of MediaPipe's 51 ARKit-named scores rose enough in training to fit a curve, and none met its bounds on held-out ICT identities or on Rocketbox Male, so no rule cites it. Made with [tools/calibration](../tools/calibration/README.md).
 - [rig-gains.ict-rocketbox-female](rig-gains.ict-rocketbox-female.cal): rig intensity normalisation between two example rigs, ICT-FaceKit (reference) and Rocketbox Female, for 51 ARKit shapes. 3 pass (browInnerUp, cheekSquintLeft, cheekSquintRight); 48 fail and stay published as negative results. See [examples/README.md](../examples/README.md#6-rig-gains-how-strongly-two-rigs-render-the-same-arkit-name).
 
 The format is also exercised by the test fixtures in [tests/fixtures/calibration/](../tests/fixtures/calibration/), whose numbers are invented.
 
 ## Status: software-only
 
-Records are `calibrated_software`: fitted to renders of example rigs, with no people and no biometric data. Like `proposed`, this never means `verified_current`. `calibrated_measured` is reserved for physical capture and is refused for now. A software fit can say how a model or rig responds to renders; it says nothing about a real tracker's response to a real face (tracker gains, gaze angles, pupils, tongue, differences between people, latency, or what confidence values mean). Every record says so in its `scope` field.
+Records are `calibrated_software`: fitted to renders of example rigs, with no people and no biometric data. Like `proposed`, this never means `verified_current`. `calibrated_measured` is reserved for physical capture, designed but not run in [docs/calibration/physical-protocol.md](../docs/calibration/physical-protocol.md), and is refused for now. A software fit can say how a model or rig responds to renders; it says nothing about a real tracker's response to a real face (tracker gains, gaze angles, pupils, tongue, differences between people, latency, or what confidence values mean). Every record says so in its `scope` field.
 
 ## Files
 
@@ -19,7 +20,7 @@ Records are `calibrated_software`: fitted to renders of example rigs, with no pe
 
 ## Fields
 
-Every field is required, except `scan_origin` where noted, and no others are allowed. Dates, if any, are written as text, not as TOML dates.
+Every field is required, except `scan_origin` where noted and `cells`, and no others are allowed. A record without `cells` is a pre-registration: its frozen part and ledger line are committed before the held-out run, and the cells are added afterwards. No rule may cite it until then. Dates, if any, are written as text, not as TOML dates.
 
 | Field | Type | Meaning |
 |---|---|---|
@@ -63,7 +64,7 @@ A record can recompute its own hash, so the hash alone does not stop anyone re-r
 
 Lines are only ever added at the end, so dates never go backwards. Versions of an id start at `v1` and go up by one; every version after the first carries a reason of at least three words. `check.py` refuses a record unless its `version` is the latest in the ledger for its id and its frozen hash is the one recorded there. So changing anything frozen, a knot or a bound for example, needs a new ledger line with a reason, which is visible in review.
 
-Until its results exist, a record's frozen part is committed as `pending/<id>.cal` next to its ledger line; `check.py` reads only `*.cal` files directly in this folder, so a record without cells does not fail the checkout. The results commit moves it here and adds `cells`, changing nothing else.
+`rig-gains.ict-rocketbox-female` was pre-registered before records without cells were allowed: its freeze commit (`91f57f7`) holds the frozen part as `pending/rig-gains.ict-rocketbox-female.cal`, which `check.py` did not read, and its results commit moved it here and added `cells`, changing nothing else.
 
 What this guarantees: the ledger line for a freeze is committed before the results, and Git history shows that it came first and that it never changed afterwards. It does not prove that nobody looked at held-out data before freezing, and `check.py` cannot see Git history; the order is checked in review. The metrics in `cells` are deliberately not hashed and are not self-proving: they are trusted only because they can be reproduced. The record pins everything needed to do that: the code commit, the input asset hashes, the renderer's source and binary hashes with its OS and GPU, and the seeds.
 

@@ -2,4 +2,5 @@
 # Freeze ledger for calibration records (format: README.md in this folder).
 # Add one line per freeze, at the end only, and commit it before any results exist:
 # id version frozen_sha256 date [reason]
+mediapipe.ict-response v1 bf10b92b55476dd550fb9882e0c7427d9e4ddda05af0cd3e143ddf05ce62ff22 2026-10-27
 rig-gains.ict-rocketbox-female v1 5193181a3795817fcb739eeb9ea18927fec718edfac6097573ed61975add67d6 2026-10-27

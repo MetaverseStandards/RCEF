@@ -211,9 +211,10 @@ COMMIT = re.compile(r'[0-9a-f]{40}')
 RECORD_ID = re.compile(r'[a-z0-9][a-z0-9._-]*')
 RECORD_FIELDS = {'format': str, 'id': str, 'version': int, 'status': str, 'scope': str, 'method': str,
                  'channels': list, 'reference_rig': str, 'inputs': list, 'renderer': dict, 'code_commit': str,
-                 'training': dict, 'held_out': dict, 'evaluation': dict, 'curves': list, 'cells': list,
+                 'training': dict, 'held_out': dict, 'evaluation': dict, 'curves': list,
                  'licence': str, 'limitations': list}
-OPTIONAL_FIELDS = {'scan_origin': str}
+# A record without cells is a pre-registration: frozen and in the ledger, with no results yet.
+OPTIONAL_FIELDS = {'scan_origin': str, 'cells': list}
 SCOPE = 'software-only; not a measurement of any tracker'
 SCAN_ORIGIN = 'light-stage scans of real people'
 ICT = re.compile(r'\bict\b|identity\d{3}', re.IGNORECASE)
@@ -537,6 +538,9 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
                 problems.append(f'{label}, which has no curve from {rule.get("inputs")} to {rule.get("outputs")}')
             elif operator.get('knots') != curve[0]['knots']:
                 problems.append(f'{label}, but its knots are not exactly the frozen knots of that curve')
+            if 'cells' not in valid[cited]:
+                problems.append(f'{label}, which has no results yet')
+                continue
             cells = [c for c in valid[cited]['cells'] if [c['channel']] == rule.get('inputs')]
             if not cells:
                 problems.append(f'{label}, which has no held-out cell for {rule.get("inputs")}')
