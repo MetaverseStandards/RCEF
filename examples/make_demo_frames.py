@@ -9,7 +9,8 @@ exercises one behaviour of the translation:
 - jaw sweep: one channel 0 -> 1 -> 0 through a one-to-one rule;
 - gaze: both eyes look left, then right, one direction at a time; then each
   eye alone in each direction, so a rule reading the wrong eye shows up;
-- asymmetric brows and cheeks: left and right differ, through the averaged rules;
+- asymmetric brows and cheeks: left and right differ, through the averaged rules
+  (the cheeks both ways round, so each side drives its own half);
 - lips closed, jaw closed: LIPS_TOWARD with the jaw explicitly at rest;
 - smile, chin raiser and blink: each channel alone (left and right separately),
   so every rule is the only thing moving at some frame;
@@ -57,6 +58,7 @@ def fb2_frames():
                              [{f'EYES_LOOK_{direction.upper()}_{side}': v} for v in ramp(4)], True, True))
     segments.append(('asymmetric brows', [{'INNER_BROW_RAISER_L': v, 'INNER_BROW_RAISER_R': 0.25} for v in ramp(6)], True, True))
     segments.append(('asymmetric cheeks', [{'CHEEK_PUFF_L': v, 'CHEEK_PUFF_R': 0.0} for v in ramp(6)], True, True))
+    segments.append(('asymmetric cheeks, mirrored', [{'CHEEK_PUFF_L': 0.0, 'CHEEK_PUFF_R': v} for v in ramp(6)], True, True))
     segments.append(('lips closed, jaw closed', [{'LIPS_TOWARD': v, 'JAW_DROP': 0.0} for v in ramp(4)], True, True))
     for label, channel in (('smile left', 'LIP_CORNER_PULLER_L'), ('smile right', 'LIP_CORNER_PULLER_R'),
                            ('chin raiser top', 'CHIN_RAISER_T'), ('chin raiser bottom', 'CHIN_RAISER_B'),

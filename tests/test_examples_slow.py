@@ -61,7 +61,7 @@ class FacePipeline(unittest.TestCase):
     def test_every_shape_moves_in_some_frame(self):
         with (self.out / 'residuals.csv').open(encoding='utf-8', newline='') as handle:
             rows = list(csv.DictReader(handle))
-        moving = {r['target'] for r in rows if r['status'] == 'exact (moving)' or r['status'].startswith('averaged')}
+        moving = {r['target'] for r in rows if r['direct'] and float(r['direct'])}
         manifest = json.loads((self.out / 'frames.json').read_text())
         self.assertEqual(moving, set(manifest['targets']))
         self.assertIn('## Frames in which each shape moves', (self.out / 'residuals.md').read_text())
