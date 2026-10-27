@@ -2,7 +2,7 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-These examples run RCEF's published translations with the msf-tools public API, from CSV frames in to translated weights out, and then on a real face mesh. Everything here is synthetic input; nothing comes from a device.
+These examples run RCEF's published translations with the msf-tools public API. They start with CSV frames in and translated weights out, and then drive a real face mesh. All input here is synthetic; nothing comes from a device.
 
 ## 1. Set up a fresh environment
 
@@ -19,7 +19,7 @@ python -m pip install "git+https://github.com/Kjakubzak/msf-tools@$COMMIT"
 python -B check.py
 ```
 
-`check.py` refuses to run unless the installed msf-tools is exactly the locked commit, so a passing check also confirms the install. The examples need nothing else; they use only the Python standard library and msf-tools (with its FBX extra, `msf-tools-ufbx`, for the Rocketbox rigs, which needs a C compiler).
+`check.py` refuses to run unless the installed msf-tools is exactly the locked commit, so a passing check also confirms the install. The examples need nothing else. They use only the Python standard library and msf-tools. For the Rocketbox rigs they also use its FBX extra, `msf-tools-ufbx`, which needs a C compiler.
 
 ## 2. Translate FB2 frames to ARKit
 
@@ -27,22 +27,22 @@ python -B check.py
 python examples/translate_fb2_to_arkit.py
 ```
 
-This reads `examples/data/fb2_demo_frames.csv` and writes `~/.cache/rcef-examples/fb2_to_arkit.csv` (under `$XDG_CACHE_HOME` instead of `~/.cache` when it is set), so nothing lands in the checkout. To choose the files, pass them: `python examples/translate_fb2_to_arkit.py INPUT.csv OUTPUT.csv`.
+This reads `examples/data/fb2_demo_frames.csv` and writes `~/.cache/rcef-examples/fb2_to_arkit.csv` (under `$XDG_CACHE_HOME` instead of `~/.cache` when it is set), so nothing is written to the checkout. To choose the files, give them as arguments: `python examples/translate_fb2_to_arkit.py INPUT.csv OUTPUT.csv`.
 
-The input has one row per frame: `time`, a `segment` label, all 70 FB2 weights, and FB2's two validity flags, `isValid` and `isEyeFollowingBlendshapesValid`. The output has all 52 ARKit weights that RCEF's rules produce, plus two columns:
+The input has one row per frame: `time`, a `segment` label, all 70 FB2 weights, and FB2's two validity flags, `isValid` and `isEyeFollowingBlendshapesValid`. The output has all 52 ARKit weights that RCEF's mappings produce, plus two columns:
 
-- `refused`: which mapping refused the frame and why. For example, when eye following is lost, `fb2_gaze.to_arkit` is refused while the face weights still come through.
-- `dropped`: non-zero inputs that no RCEF rule reads, such as the tongue positions other than `TONGUE_OUT`.
+- `refused`: which map refused the frame, and why. For example, when eye following is lost, `fb2_gaze.to_arkit` is refused, but the face weights still come through.
+- `dropped`: non-zero inputs that no RCEF mapping reads, such as the tongue positions other than `TONGUE_OUT`.
 
-The demo frames come from `examples/make_demo_frames.py`. They cover a neutral pose, a jaw sweep, gaze left and right with both eyes and then with each eye alone, asymmetric brows, asymmetric cheeks both ways round, closed lips with the jaw closed, each smile, chin raiser and blink channel on its own, every other channel an FB2 rule reads on its own, lost eye following during a blink, a lost face, and a tongue position with no rule. Every one of the 52 FB2 rules is the only thing moving in some frame, so `tests/test_examples.py` can check that halving the rules, swapping each left rule with its right one, or dropping an input of an averaged rule makes the face pipeline's oracles fail for every shape.
+The demo frames come from `examples/make_demo_frames.py`. They cover a neutral pose, a jaw sweep, gaze left and right with both eyes and then with each eye alone, asymmetric brows, asymmetric cheeks both ways round, closed lips with the jaw closed, each smile, chin raiser and blink channel on its own, every other channel that an FB2 mapping reads, on its own; lost eye following during a blink; a lost face; and a tongue position with no mapping. Each of the 52 FB2 mappings is the only thing moving in some frame. Section 4 explains how the tests use this.
 
 How it works (see `examples/rcef_translate.py`):
 
-- It loads `generated/rcef.pack.json` and compiles `fb2.to_arkit` and `fb2_gaze.to_arkit` with the approximation opt-in, because RCEF's cross-provider rules are proposed approximations.
-- Each mapping gets only its own `required_inputs`. msf-tools refuses a frame if any channel it is given is marked invalid, even one the mapping does not use. If each mapping were given the whole FB2 frame, invalid gaze would also stop the face.
+- It loads `generated/rcef.pack.json` and compiles `fb2.to_arkit` and `fb2_gaze.to_arkit` with the approximation opt-in, because RCEF's cross-provider mappings are proposed approximations.
+- Each map gets only its own `required_inputs`. msf-tools refuses a frame if any channel it is given is marked invalid, even a channel that the map does not use. If each map got the whole FB2 frame, invalid gaze would also stop the face.
 - Each input's validity is the AND of the provider flags its signal record names, for example `isValid AND isEyeFollowingBlendshapesValid` for gaze.
 
-`rcef_translate.arkit_to_fb2()` goes the other way, ARKit to FB2, with RCEF's inverse rules. FB2 allows only one of two opposing gaze weights (left/right, up/down) to be non-zero. The rules take the difference of the two ARKit directions and split it into its two sides, so when ARKit sets both only the larger survives, reduced by the smaller, and the pair is never both non-zero.
+`rcef_translate.arkit_to_fb2()` goes the other way, from ARKit to FB2, with RCEF's inverse mappings. FB2 allows only one of two opposing gaze weights (left/right, up/down) to be non-zero. The mappings take the difference of the two ARKit directions and split it into its two sides. So when ARKit sets both, only the larger one survives, reduced by the smaller one, and the two are never both non-zero.
 
 ## 3. Translate META visemes to VRM
 
@@ -82,8 +82,8 @@ Each file is downloaded on first use and checked against a pinned SHA-256; none 
 For each frame the rig is evaluated with `msf_tools.evaluate_geometry(morph_weights=...)`:
 
 - **direct**: the FB2 values routed to the ARKit shapes as the Godot and VRCFT sources route them (`tests/fixtures/godot_fb2_rules.csv`), all 52 on Rocketbox. On ICT each brow and cheek half takes its own FB2 side.
-- **translated**: RCEF's translated ARKit weights. RCEF now writes all 52 coefficients; a shape a rule set did not write would stay at rest and be named on the frame ("no RCEF rule yet, direct render only"). FB2 channels no rule reads (the tongue positions other than `TONGUE_OUT`) are listed as dropped.
-- **facs** (Rocketbox only): Rocketbox's own FACS action-unit shapes driven with the expression's AUs, beside the translated render with its own difference colours. This is a semantic comparison between two independently authored shape sets, labelled "not an error measure", and never an oracle. AUs Rocketbox has no shape for are named on the frame.
+- **translated**: RCEF's translated ARKit weights. RCEF writes all 52 coefficients. If no mapping wrote a shape, that shape would stay at rest and be named on the frame ("no RCEF rule yet, direct render only"). FB2 channels that no mapping reads (the tongue positions other than `TONGUE_OUT`) are listed as dropped.
+- **facs** (Rocketbox only): Rocketbox's own FACS action-unit shapes driven with the expression's AUs, beside the translated render with its own difference colours. This compares the meaning of two shape sets that were authored independently. It is labelled "not an error measure" and is never an oracle. AUs Rocketbox has no shape for are named on the frame.
 
 Outputs in the output directory:
 
@@ -101,16 +101,16 @@ The position, index and colour files are in the format of the offscreen renderer
 
 The report checks four things:
 
-- Exact rules have residual ≤ 1e-9. On Rocketbox, `browInnerUp` and `cheekPuff` are single shapes, so their averaging rules are exact there too.
+- Exact mappings have residual ≤ 1e-9. On Rocketbox, `browInnerUp` and `cheekPuff` are single shapes, so their averaging mappings are exact there too.
 - On ICT, each half of an averaged pair is within |L − R| / 2 of its own side.
-- The largest vertex difference stays within the sum of each residual times that shape's largest vertex move, plus the whole direct movement of shapes no rule writes yet.
-- Refused and dropped channels, and shapes without a rule, are labelled on their frame and never shown as a silent zero.
+- The largest vertex difference stays within the sum of each residual times that shape's largest vertex move, plus the whole direct movement of shapes that no mapping writes yet.
+- Refused and dropped channels, and shapes without a mapping, are labelled on their frame. They are never shown as a silent zero.
 
-The pipeline exits non-zero if any oracle fails. `residuals.md` counts channels that are zero in both paths as "at rest in both paths", apart from "exact (moving)", and lists for each shape whether an RCEF rule writes it and in how many frames its FB2 input moves.
+The pipeline exits non-zero if any oracle fails. `residuals.md` counts channels that are zero in both paths as "at rest in both paths", separately from "exact (moving)". For each shape, it lists whether an RCEF mapping writes it and in how many frames its FB2 input moves.
 
-`examples/data/fb2_demo_frames.csv` is built so that every one of the 52 FB2 rules is the only thing moving in some frame; `tests/test_examples.py` checks that halving the rules, swapping each left rule with its right one, or dropping an input of an averaged rule makes these oracles fail for every shape.
+`examples/data/fb2_demo_frames.csv` is built so that each of the 52 FB2 mappings is the only thing moving in some frame. `tests/test_examples.py` uses this to check that these oracles fail for every shape if the mappings are halved, if each left mapping is swapped with its right one, or if an input of an averaged mapping is dropped.
 
-**What this shows and what it doesn't.** It shows that RCEF's rules connect names and meanings the way the public sources do, on two independently authored rigs. It is not a calibration result: neither provider publishes its gain, so equal weights are assumed to mean equal expressions. No cross-rig equality is expected either.
+**What this shows and what it does not.** It shows that RCEF's mappings connect names and meanings in the same way as the public sources, on two rigs that were authored independently. It is not a calibration result. Neither provider publishes its gain, so equal weights are assumed to mean equal expressions. Also, the two rigs are not expected to look the same.
 
 ## 5. Talking: visemes on a face
 
@@ -119,10 +119,10 @@ python examples/viseme_pipeline.py                  # Rocketbox, its own viseme 
 python examples/viseme_pipeline.py --rig vrm-twist  # the VRM sample, through RCEF
 ```
 
-The frames (`examples/data/viseme_talk_frames.csv`) say "bed car toe book", the META viseme specification's own example words: each viseme is held for two frames and crossfaded into the next, so every frame sums to one.
+The frames (`examples/data/viseme_talk_frames.csv`) say "bed car toe book", which are the example words of the META viseme specification. Each viseme is held for two frames and crossfaded into the next, so every frame sums to one.
 
 - **Rocketbox** has a shape for each of the 15 META visemes, numbered in the same order (it spells IH, OH and OU as I, O and U), so the frames drive them directly by name.
-- **VRM1_Constraint_Twist_Sample** (pixiv Inc., VRM Public License 1.0, redistribution and modification allowed, credit not required; vrm-specification commit `94e82dd`) has the five vowel presets. RCEF's `visemes.to_vrm` rules translate the frames, and `examples/vrm_presets.py` turns presets into morph weights through the model's own binds, following the VRM 1.0 expression specification (values clamped to [0, 1], `isBinary`, binds accumulated). The same binds driven through the vowel pairs that `scripts/derive_fb2_goldens.py` reads from the pinned VRM and META texts (`tests/fixtures/fb2_goldens.json`) must give the same morph weights within 1e-9. Consonants have no VRM preset and are labelled as dropped. Overrides are not applied and are labelled if a frame would need one. After the talk come the two winks from the expression library: RCEF's `fb2.to_vrm` rules turn FB2 `EYES_CLOSED_L` and `_R` into `blinkLeft` and `blinkRight`, checked the same way against the blink pairs read from the pinned OpenXR and VRM texts. `blink` (both eyes) is left unset, so a model that binds all three is not driven twice.
+- **VRM1_Constraint_Twist_Sample** (pixiv Inc., VRM Public License 1.0, redistribution and modification allowed, credit not required; vrm-specification commit `94e82dd`) has the five vowel presets. RCEF's `visemes.to_vrm` map translates the frames, and `examples/vrm_presets.py` turns presets into morph weights through the model's own binds, following the VRM 1.0 expression specification (values clamped to [0, 1], `isBinary`, binds accumulated). The same binds driven through the vowel pairs that `scripts/derive_fb2_goldens.py` reads from the pinned VRM and META texts (`tests/fixtures/fb2_goldens.json`) must give the same morph weights within 1e-9. Consonants have no VRM preset and are labelled as dropped. Overrides are not applied and are labelled if a frame would need one. After the talk come the two winks from the expression library. RCEF's `fb2.to_vrm` map turns FB2 `EYES_CLOSED_L` and `_R` into `blinkLeft` and `blinkRight`. This is checked in the same way, against the blink pairs read from the pinned OpenXR and VRM texts. `blink` (both eyes) is left unset, so a model that binds all three is not driven twice.
 
 Outputs go to `~/.cache/rcef-examples/visemes/RIG`, in the same format as section 4.
 
@@ -133,13 +133,13 @@ RCEF_SLOW_TESTS=1 RCEF_ICT_CACHE=~/.cache/rcef-ict-facekit RCEF_RIG_CACHE=~/.cac
   python -B -m unittest tests/test_examples_slow.py
 ```
 
-With `RCEF_SLOW_TESTS=1`, `tests/test_translations.py` also halves each translation rule on its own and checks that only its output changes (about half a minute).
+With `RCEF_SLOW_TESTS=1`, `tests/test_translations.py` also halves each translation mapping on its own and checks that only its output changes (about half a minute).
 
 ## 6. Rig gains: how strongly two rigs render the same ARKit name
 
-Sections 4 and 5 assume equal weights mean equal expressions. Between two example rigs that assumption can be tested in software. `examples/rig_gains.py` fits, for each ARKit shape that ICT-FaceKit and Rocketbox Female both have (51; ICT has no `tongueOut`), a monotone curve from an ICT weight to the Rocketbox Female weight that moves her face about as much, and evaluates it on an ICT identity it was not fitted to. It follows the calibration-record protocol in [calibration/README.md](../calibration/README.md); the record is `calibration/rig-gains.ict-rocketbox-female.cal`.
+Sections 4 and 5 assume that equal weights mean equal expressions. Between two example rigs, software can test that assumption. `examples/rig_gains.py` fits, for each ARKit shape that ICT-FaceKit and Rocketbox Female both have (51; ICT has no `tongueOut`), a monotone curve from an ICT weight to the Rocketbox Female weight that moves her face about as much, and evaluates it on an ICT identity it was not fitted to. It follows the calibration-record protocol in [calibration/README.md](../calibration/README.md); the record is `calibration/rig-gains.ict-rocketbox-female.cal`.
 
-This calibrates how two example rigs render ARKit names, with ICT-FaceKit as the reference by choice. It is not a measurement of any tracker, not a provider claim and not pack data. Rocketbox Male is never loaded: it is reserved as an unseen rig for a later method.
+This calibrates how two example rigs render ARKit names. ICT-FaceKit is the reference by choice. It is not a measurement of any tracker, not a provider claim and not pack data. Rocketbox Male is never loaded, because it is kept back as an unseen rig for a later method.
 
 ```sh
 swiftc -O -o /tmp/meshrender tools/render/meshrender.swift
@@ -151,9 +151,9 @@ python examples/rig_gains.py export --record calibration/rig-gains.ict-rocketbox
 
 The ICT cache needs ICT-FaceKit's 53 expression shapes and its first ten identity modes (`ict_facekit.CALIBRATION_FILES`, about 160 MB, fetched and checked on first use). The identity modes are principal components of light-stage scans of real people; they are used only as geometry.
 
-**How motion is compared.** The landmarks in `examples/data/rig_landmarks.json` (37 per rig: Multi-PIE 68 points on ICT, hand-picked or rule-based counterparts on Rocketbox, each with its provenance) are painted as small coloured markers on otherwise black meshes and rendered unlit with `tools/render/meshrender`, from jittered cameras framed by each rig's own eye distance. A marker's position is its colour centroid in the image, so markers hidden by a lid or a lip drop out. For each ICT pose, the best Rocketbox weight is the one whose marker displacements are nearest to ICT's. The curve's knots at ICT weights 0.25, 0.5, 0.75 and 1 are the medians over 24 training conditions (8 ICT identities, 3 cameras), made non-decreasing. The module docstring gives every constant and failure rule.
+**How motion is compared.** `examples/data/rig_landmarks.json` has 37 landmarks per rig: Multi-PIE 68 points on ICT, and counterparts on Rocketbox that were picked by hand or by a rule, each with its provenance. The landmarks are painted as small coloured markers on otherwise black meshes. `tools/render/meshrender` renders them unlit, from cameras with small random offsets, framed by each rig's own eye distance. A marker's position is its colour centroid in the image, so markers hidden by a lid or a lip drop out. For each ICT pose, the best Rocketbox weight is the one whose marker displacements are nearest to ICT's. The curve's knots at ICT weights 0.25, 0.5, 0.75 and 1 are the medians over 24 training conditions (8 ICT identities, 3 cameras), made non-decreasing. The module docstring gives every constant and failure rule.
 
-**Results are per shape.** A shape passes if, on the held-out identity, the curve's error is within the record's bounds and the expected response is detected in every condition. A condition is a failure if Rocketbox at its best weight explains less than half of ICT's motion (the shapes move different regions or directions), or if Rocketbox cannot reach ICT's motion at weight 1. A monotone curve cannot fix either, so those shapes are published as failed rather than forced.
+**Results are per shape.** A shape passes if, on the held-out identity, the curve's error is within the record's bounds and the expected response is detected in every condition. A condition is a failure if Rocketbox at its best weight explains less than half of ICT's motion (the shapes move different regions or directions), or if Rocketbox cannot reach ICT's motion at weight 1. A monotone curve cannot fix either problem, so those shapes are published as failed, not forced to fit.
 
 `examples/data/rig_gains.json` holds the curves of the shapes that passed and lists the others. `python examples/rigs.py --rig rocketbox-female --cache DIR --set mouthSmileLeft=0.6 --normalise --out pose` poses Rocketbox Female through it; without `--normalise` the weights are used as they are.
 
