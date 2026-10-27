@@ -56,7 +56,7 @@ class Records(unittest.TestCase):
 
     def test_required_fields_and_their_types(self):
         for field in ('version', 'scope', 'method', 'channels', 'reference_rig', 'inputs', 'renderer', 'code_commit',
-                      'training', 'held_out', 'evaluation', 'curves', 'cells', 'licence', 'limitations'):
+                      'training', 'held_out', 'evaluation', 'curves', 'licence', 'limitations'):
             with self.subTest(field):
                 self.assertRefused(lambda r: r.pop(field), field)
         self.assertRefused(lambda r: r.update(limitations=[]), 'limitations')
@@ -129,6 +129,11 @@ class Records(unittest.TestCase):
         self.assertRefused(lambda r: r['cells'][0].update(neutral=-0.01), 'neutral')
         self.assertRefused(lambda r: r['cells'][0].update(channel='fixture.source.other'), 'fixture.source.other')
         self.assertRefused(lambda r: r['cells'][0].pop('identity'), 'identity')
+
+    def test_a_record_without_cells_is_a_valid_pre_registration(self):
+        # Committed with its ledger line before the held-out run; results are added later.
+        self.assertEqual(self.changed(lambda r: r.pop('cells')), [])
+        self.assertRefused(lambda r: r.update(cells=[]), 'cells')
 
     def test_a_failing_cell_is_a_valid_negative_result(self):
         self.assertEqual(self.changed(lambda r: r['cells'][0].update(failures=2, p95=0.4)), [])
@@ -272,6 +277,13 @@ class CitingRules(unittest.TestCase):
                 self.assertEqual(check.calibration_problems(self.records, []), [], 'a negative result is valid')
                 problems = self.problems(fixture_rule())
                 self.assertTrue(any('fails' in p and 'fixture.jaw.calibrated' in p for p in problems), problems)
+
+    def test_a_rule_cannot_cite_a_record_that_has_no_results_yet(self):
+        path = self.records / RECORD.name
+        text = RECORD.read_text(encoding='utf-8')
+        path.write_text(text[:text.index('[[cells]]')], encoding='utf-8')
+        self.assertEqual(check.calibration_problems(self.records, []), [])
+        self.assertTrue(any('no results' in p for p in self.problems(fixture_rule())))
 
     def test_the_rule_must_match_one_curve_of_the_record(self):
         rule = fixture_rule()

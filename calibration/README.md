@@ -15,7 +15,7 @@ Records are `calibrated_software`: fitted to renders of example rigs, with no pe
 
 ## Fields
 
-Every field is required, except `scan_origin` where noted, and no others are allowed. Dates, if any, are written as text, not as TOML dates.
+Every field is required, except `scan_origin` where noted and `cells`, and no others are allowed. A record without `cells` is a pre-registration: its frozen part and ledger line are committed before the held-out run, and the cells are added afterwards. No rule may cite it until then. Dates, if any, are written as text, not as TOML dates.
 
 | Field | Type | Meaning |
 |---|---|---|
