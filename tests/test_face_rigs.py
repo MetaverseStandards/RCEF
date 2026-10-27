@@ -15,6 +15,7 @@ import face_pipeline  # noqa: E402
 import ict_facekit  # noqa: E402
 import rcef_translate  # noqa: E402
 import rigs  # noqa: E402
+import vrm_presets  # noqa: E402
 
 ARKIT_52 = list(face_pipeline.source_routes())
 ROCKETBOX_LIKE = ([f'AA_VI_{i:02d}_{n}' for i, n in enumerate(rigs.ROCKETBOX_VISEMES)]
@@ -53,6 +54,32 @@ class RigNames(unittest.TestCase):
         self.assertEqual(shapes['eyeBlink_L'], ('eyeBlinkLeft', None))
         self.assertEqual(shapes['jawOpen'], ('jawOpen', None))
         self.assertEqual(shapes['cheekPuff_R'], ('cheekPuff', 'R'))
+
+
+class VrmPresets(unittest.TestCase):
+    EXPRESSIONS = {
+        'aa': {'isBinary': False, 'morphTargetBinds': [{'node': 1, 'index': 36, 'weight': 1}]},
+        'ee': {'isBinary': False, 'morphTargetBinds': [{'node': 1, 'index': 36, 'weight': 0.5},
+                                                      {'node': 2, 'index': 3, 'weight': 0.25}]},
+        'blink': {'isBinary': True, 'morphTargetBinds': [{'node': 1, 'index': 12, 'weight': 1}]},
+        'happy': {'morphTargetBinds': [{'node': 1, 'index': 3, 'weight': 1}], 'overrideMouth': 'blend'},
+        'lookUp': {'isBinary': False},
+    }
+
+    def test_binds_accumulate_per_morph_target(self):
+        weights, labels = vrm_presets.morph_weights(self.EXPRESSIONS, {'aa': 0.5, 'ee': 0.5})
+        self.assertEqual(weights, {1: {36: 0.75}, 2: {3: 0.125}})
+        self.assertEqual(labels, [])
+
+    def test_values_are_clamped_and_binary_expressions_snap(self):
+        self.assertEqual(vrm_presets.morph_weights(self.EXPRESSIONS, {'aa': 1.5})[0], {1: {36: 1.0}})
+        self.assertEqual(vrm_presets.morph_weights(self.EXPRESSIONS, {'blink': 0.5})[0], {})
+        self.assertEqual(vrm_presets.morph_weights(self.EXPRESSIONS, {'blink': 0.51})[0], {1: {12: 1.0}})
+
+    def test_what_is_not_rendered_is_labelled(self):
+        _, labels = vrm_presets.morph_weights(self.EXPRESSIONS, {'happy': 0.2, 'lookUp': 0.3, 'oh': 0.1})
+        self.assertEqual(labels, ['happy: overrideMouth not applied', 'lookUp: no morph target binds on this model',
+                                  'oh: this model has no such expression'])
 
 
 class FullArkitRig(unittest.TestCase):

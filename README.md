@@ -96,7 +96,7 @@ Outputs are `generated/rcef.pack.json`, `rcef_mapping.csv`, `coverage.json`, and
 
 ## Examples
 
-[examples/README.md](examples/README.md) walks through RCEF end to end with the msf-tools public API. It translates FB2 frames to ARKit weights and META visemes to VRM presets from CSV, then drives the ICT-FaceKit face mesh both directly and through RCEF's rules and reports the residuals.
+[examples/README.md](examples/README.md) walks through RCEF end to end with the msf-tools public API. It translates FB2 frames to ARKit weights and META visemes to VRM presets from CSV. It then drives two Microsoft Rocketbox faces and the ICT-FaceKit face with a FACS-based expression library, both directly and through RCEF's rules, and reports the residuals. It also renders a short spoken phrase as visemes on Rocketbox and on a VRM model.
 
 ## Architecture and TOML guide
 

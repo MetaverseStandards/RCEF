@@ -66,7 +66,7 @@ Rig files go to `~/.cache/rcef-face-rigs` (`~/.cache/rcef-ict-facekit` for ICT) 
 
 | Rig | Source | Shapes used |
 |---|---|---|
-| `rocketbox-female`, `rocketbox-male` | Microsoft Rocketbox `Female_Adult_01_facial.fbx` and `Male_Adult_01_facial.fbx` (MIT, commit `0943055`; ARKit shapes by Fang Ma and Matias Volonte), loaded directly with msf-tools' FBX reader | all 52 ARKit shapes (`AK_*`); its FACS action-unit shapes (`AU_*`) for the comparison panel; its 15 viseme shapes (`AA_VI_*`) |
+| `rocketbox-female`, `rocketbox-male` | Microsoft Rocketbox `Female_Adult_01_facial.fbx` and `Male_Adult_01_facial.fbx` (MIT, commit `0943055`; ARKit shapes by Fang Ma and Matias Volonte), loaded directly with msf-tools' FBX reader | all 52 ARKit shapes (`AK_*`); its FACS action-unit shapes (`AU_*`) for the comparison panel; its 15 viseme shapes (`AA_VI_*`) in section 5 |
 | `ict` | ICT-FaceKit Light (MIT, USC Institute for Creative Technologies, commit `da5f95a`), converted to a GLB | the 16 ARKit shapes RCEF's first rules drive; `browInnerUp` and `cheekPuff` are split into halves |
 
 Each file is downloaded on first use and checked against a pinned SHA-256; none is stored in this repository. Rocketbox is a full-body avatar with a small face, so a renderer has to frame the head. All 53 ICT shapes would need about 4.3 million position components, more than msf-tools' 4 million budget, so only the 16 are converted.
@@ -109,6 +109,20 @@ The pipeline exits non-zero if any oracle fails. `residuals.md` counts channels 
 The ICT run with `examples/data/fb2_demo_frames.csv` uses frames built so that every one of the 14 FB2 rules is the only thing moving in some frame; `tests/test_examples.py` checks that halving any rule, or swapping a left rule with its right one, makes these oracles fail.
 
 **What this shows and what it doesn't.** It shows that RCEF's rules connect names and meanings the way the public sources do, on two independently authored rigs. It is not a calibration result: neither provider publishes its gain, so equal weights are assumed to mean equal expressions. No cross-rig equality is expected either.
+
+## 5. Talking: visemes on a face
+
+```sh
+python examples/viseme_pipeline.py                  # Rocketbox, its own viseme shapes
+python examples/viseme_pipeline.py --rig vrm-twist  # the VRM sample, through RCEF
+```
+
+The frames (`examples/data/viseme_talk_frames.csv`) say "bed car toe book", the META viseme specification's own example words: each viseme is held for two frames and crossfaded into the next, so every frame sums to one.
+
+- **Rocketbox** has a shape for each of the 15 META visemes, numbered in the same order (it spells IH, OH and OU as I, O and U), so the frames drive them directly by name.
+- **VRM1_Constraint_Twist_Sample** (pixiv Inc., VRM Public License 1.0, redistribution and modification allowed, credit not required; vrm-specification commit `94e82dd`) has the five vowel presets. RCEF's `visemes.to_vrm` rules translate the frames, and `examples/vrm_presets.py` turns presets into morph weights through the model's own binds, following the VRM 1.0 expression specification (values clamped to [0, 1], `isBinary`, binds accumulated). The same binds driven straight from the VRM vowel preset names must give the same morph weights within 1e-9. Consonants have no VRM preset and are labelled as dropped. Overrides are not applied and are labelled if a frame would need one.
+
+Outputs go to `~/.cache/rcef-examples/visemes/RIG`, in the same format as section 4.
 
 To run the pipelines as tests (the slow tier, not part of the default suite; about six minutes):
 

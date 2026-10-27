@@ -141,5 +141,34 @@ class RocketboxFace(unittest.TestCase):
                 self.assertEqual((self.out / frame[key]).stat().st_size, vertices * 12, (frame['frame'], key))
 
 
+@unittest.skipUnless(SLOW and RIG_CACHE, 'slow tier: set RCEF_SLOW_TESTS=1 and RCEF_RIG_CACHE')
+class Visemes(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.temp = tempfile.TemporaryDirectory(prefix='rcef-visemes-')
+        cls.out = Path(cls.temp.name)
+        cls.runs = {rig: run('viseme_pipeline.py', '--rig', rig, '--cache', RIG_CACHE, '--out', str(cls.out / rig))
+                    for rig in ('vrm-twist', 'rocketbox-female')}
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.temp.cleanup()
+
+    def test_translated_vrm_morph_weights_match_the_direct_ones(self):
+        process = self.runs['vrm-twist']
+        self.assertEqual(process.returncode, 0, process.stdout + process.stderr)
+        manifest = json.loads((self.out / 'vrm-twist/frames.json').read_text())
+        self.assertTrue(all(f['max_morph_weight_difference'] <= 1e-9 for f in manifest['frames']))
+        self.assertTrue(any('PP: no VRM preset' in label for f in manifest['frames'] for label in f['labels']))
+        self.assertIn('not calibration', manifest['caption'])
+
+    def test_rocketbox_speaks_with_its_own_viseme_shapes(self):
+        process = self.runs['rocketbox-female']
+        self.assertEqual(process.returncode, 0, process.stdout + process.stderr)
+        manifest = json.loads((self.out / 'rocketbox-female/frames.json').read_text())
+        self.assertEqual({f['segment'] for f in manifest['frames']}, {'', 'bed', 'car', 'toe', 'book'})
+        self.assertEqual(manifest['panels'], ['direct'])
+
+
 if __name__ == '__main__':
     unittest.main()
