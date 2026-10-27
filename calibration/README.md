@@ -6,7 +6,7 @@ No record is published yet. The format is exercised by the test fixtures in [tes
 
 ## Status: software-only
 
-Records are `calibrated_software`: fitted to renders of example rigs, with no people and no biometric data. Like `proposed`, this never means `verified_current`. `calibrated_measured` is reserved for physical capture and is refused for now. A software fit can say how a model or rig responds to renders; it says nothing about a real tracker's response to a real face (tracker gains, gaze angles, pupils, tongue, differences between people, latency, or what confidence values mean). Every record says so in its `scope` field.
+Records are `calibrated_software`: fitted to renders of example rigs, with no people and no biometric data. Like `proposed`, this never means `verified_current`. `calibrated_measured` is reserved for physical capture, designed but not run in [docs/calibration/physical-protocol.md](../docs/calibration/physical-protocol.md), and is refused for now. A software fit can say how a model or rig responds to renders; it says nothing about a real tracker's response to a real face (tracker gains, gaze angles, pupils, tongue, differences between people, latency, or what confidence values mean). Every record says so in its `scope` field.
 
 ## Files
 
