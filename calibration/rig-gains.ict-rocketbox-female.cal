@@ -1,0 +1,1384 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# RCEF calibration record (format: calibration/README.md).
+format = "rcef.calibration/1"
+id = "rig-gains.ict-rocketbox-female"
+version = 1
+status = "calibrated_software"
+scope = "software-only; not a measurement of any tracker"
+scan_origin = "ICT-FaceKit identity modes are principal components of light-stage scans of real people. This fit uses the first ten only as geometry, with synthetic coefficient vectors; no images or identifiers of any person are used."
+method = "landmark_monotone_fit"
+channels = ["arkit.coefficient.browDownLeft", "arkit.coefficient.browDownRight", "arkit.coefficient.browInnerUp", "arkit.coefficient.browOuterUpLeft", "arkit.coefficient.browOuterUpRight", "arkit.coefficient.cheekPuff", "arkit.coefficient.cheekSquintLeft", "arkit.coefficient.cheekSquintRight", "arkit.coefficient.eyeBlinkLeft", "arkit.coefficient.eyeBlinkRight", "arkit.coefficient.eyeLookDownLeft", "arkit.coefficient.eyeLookDownRight", "arkit.coefficient.eyeLookInLeft", "arkit.coefficient.eyeLookInRight", "arkit.coefficient.eyeLookOutLeft", "arkit.coefficient.eyeLookOutRight", "arkit.coefficient.eyeLookUpLeft", "arkit.coefficient.eyeLookUpRight", "arkit.coefficient.eyeSquintLeft", "arkit.coefficient.eyeSquintRight", "arkit.coefficient.eyeWideLeft", "arkit.coefficient.eyeWideRight", "arkit.coefficient.jawForward", "arkit.coefficient.jawLeft", "arkit.coefficient.jawOpen", "arkit.coefficient.jawRight", "arkit.coefficient.mouthClose", "arkit.coefficient.mouthDimpleLeft", "arkit.coefficient.mouthDimpleRight", "arkit.coefficient.mouthFrownLeft", "arkit.coefficient.mouthFrownRight", "arkit.coefficient.mouthFunnel", "arkit.coefficient.mouthLeft", "arkit.coefficient.mouthLowerDownLeft", "arkit.coefficient.mouthLowerDownRight", "arkit.coefficient.mouthPressLeft", "arkit.coefficient.mouthPressRight", "arkit.coefficient.mouthPucker", "arkit.coefficient.mouthRight", "arkit.coefficient.mouthRollLower", "arkit.coefficient.mouthRollUpper", "arkit.coefficient.mouthShrugLower", "arkit.coefficient.mouthShrugUpper", "arkit.coefficient.mouthSmileLeft", "arkit.coefficient.mouthSmileRight", "arkit.coefficient.mouthStretchLeft", "arkit.coefficient.mouthStretchRight", "arkit.coefficient.mouthUpperUpLeft", "arkit.coefficient.mouthUpperUpRight", "arkit.coefficient.noseSneerLeft", "arkit.coefficient.noseSneerRight"]
+reference_rig = "ICT-FaceKit Light (ICT-VGL/ICT-FaceKit da5f95a): generic neutral plus identity modes"
+code_commit = "ac0b95367984d237a8ae5b1b8692cbe9185b1047"
+licence = "CC-BY-SA-4.0"
+limitations = [
+  "Software renders of two example rigs only: it calibrates how ICT-FaceKit and Rocketbox Female render ARKit names, not any tracker or any real face.",
+  "ICT-FaceKit is the reference by choice, not ground truth; another reference rig would give other curves.",
+  "Held out by one ICT identity: ICT expression shapes are identity-independent deltas, so the held-out identity tests face shape, framing and visibility, not how different people make an expression.",
+  "Rocketbox Female is one avatar, so the curves do not transfer to other Rocketbox avatars; Rocketbox Male was never loaded (reserved as an unseen rig for the MediaPipe method).",
+  "Landmarks are hand-picked or rule-based on untextured meshes (examples/data/rig_landmarks.json); Rocketbox has no brow geometry, so its brow points are placements.",
+  "ICT's eyeLook shapes move only the eyelids (its eyeballs rotate separately), while Rocketbox's move the eyeballs, so the gaze channels compare different motions.",
+  "mouthClose is evaluated on its own, where it presses already closed lips together; ARKit defines it together with jawOpen, which this fit does not test.",
+  "Errors are in Rocketbox weight against the best-matching Rocketbox weight per condition; a passing shape can still differ in shape up to the match threshold (half the motion explained).",
+  "The neutral error is zero by construction: both rigs are linear blend shapes and every curve starts at [0, 0].",
+  "A monotone curve per shape cannot fix shapes that move different regions or directions, or that Rocketbox cannot reach; those fail as published negative results.",
+  "Rendered on one machine (renderer table); images, and so metrics, may differ slightly on another OS or GPU.",
+]
+
+[[inputs]]
+name = "ICT-FaceKit LICENSE (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "b20a78d8fc51657e14f3e00c8abb538d786ad00aa63210328c22565e583167e1"
+
+[[inputs]]
+name = "ICT-FaceKit generic_neutral_mesh.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "eedbc2576d8e5ea57f55255b8f98263213a1efb5431d8bfceed1d7aef10271f9"
+
+[[inputs]]
+name = "ICT-FaceKit browDown_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "d1dcd14fc085a9e258dec62a4bfe4a31d592cce5d8918a3892c20f480653f4c1"
+
+[[inputs]]
+name = "ICT-FaceKit browDown_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "66a2c72ab64999af168795f27182d011f52b90958c402d719d3ec8ff7d1c8939"
+
+[[inputs]]
+name = "ICT-FaceKit browInnerUp_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "81fb1625794ea36fb13303234ce06cef798acfdbc489077e22ae195a705bc92e"
+
+[[inputs]]
+name = "ICT-FaceKit browInnerUp_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "5e66b46cdad89fd1237273db2b885511688cf37636cedfdde432a4844c9109e7"
+
+[[inputs]]
+name = "ICT-FaceKit browOuterUp_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "022d5342687e51351f4cad6dd1abd42c3bb1b752d0b235bdc7fc588ab0d79c90"
+
+[[inputs]]
+name = "ICT-FaceKit browOuterUp_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "1e4722060538b274ed49ed872525d770b5bfd9262b7bce1b6310f49356f5b531"
+
+[[inputs]]
+name = "ICT-FaceKit cheekPuff_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "f53fd2bdeb8e26d0db8a684ab9c095c6bb113b74575dec329facae2799ff18c6"
+
+[[inputs]]
+name = "ICT-FaceKit cheekPuff_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "cd5b5d0f3a653a1fa31abeb65daf8fd6ffdf83a4d1bf22333a469b13b96fa801"
+
+[[inputs]]
+name = "ICT-FaceKit cheekSquint_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "572fe87f2e0cdd0a7ff868b9173d0ff08ee2bc73bf94c17b603f6e5d5b8fbe26"
+
+[[inputs]]
+name = "ICT-FaceKit cheekSquint_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "a9afa0aac432159e89eb54dbbb3139864b8cc1c4208c3c0e9c420d0d8050b99a"
+
+[[inputs]]
+name = "ICT-FaceKit eyeBlink_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "f5ed1c3072a400083b7d4f7f5cb3d73882b7ebb95c3232f957394db8cf7fe19e"
+
+[[inputs]]
+name = "ICT-FaceKit eyeBlink_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "d281ad0af03e89a70abf1214d52c295b3a279c9b35f6795938c4487f467ca003"
+
+[[inputs]]
+name = "ICT-FaceKit eyeLookDown_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "e7da4fa6509af5da25fab1a34255889a68f06b90fd37f65c6c05e5bdbbe2f755"
+
+[[inputs]]
+name = "ICT-FaceKit eyeLookDown_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "ac466de6decf619701f3ee7f80fa7371020d325084b41ad7f4b2840e232abf83"
+
+[[inputs]]
+name = "ICT-FaceKit eyeLookIn_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "1e037332bc059a95d05fcb24728ae297a2d4d268ff0cf623d3647d2a4f86bd31"
+
+[[inputs]]
+name = "ICT-FaceKit eyeLookIn_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "3d64db0e51ad28e76eff56217da401c5ee563b5e76a207cb192046465bbab14a"
+
+[[inputs]]
+name = "ICT-FaceKit eyeLookOut_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "235739695136c40b7a2c3239a100ff75b7bfc271ae195aeb55330848c999c9c8"
+
+[[inputs]]
+name = "ICT-FaceKit eyeLookOut_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "ac10dfa83ccaca7fd76fe96d74f8cbc80582e2ef914d1092827b54f88125650e"
+
+[[inputs]]
+name = "ICT-FaceKit eyeLookUp_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "72ed342df43489a76e9d468df3ca7f48328f41c924af0c03d88fde9905d82848"
+
+[[inputs]]
+name = "ICT-FaceKit eyeLookUp_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "d8ade1cab9f7f0c4ef6ec007f33e9c9df90a58c666b9aac5a784192cd389e899"
+
+[[inputs]]
+name = "ICT-FaceKit eyeSquint_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "ecb8244f083cf55fa9f0277427b8213315176a624d9ac3a09b533c7fbc68917e"
+
+[[inputs]]
+name = "ICT-FaceKit eyeSquint_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "0dffbbc651b9cdbc346ead32ba102051200c72ed8a93e7b33f07149e18390b8a"
+
+[[inputs]]
+name = "ICT-FaceKit eyeWide_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "015a995b0f09783683f5575af7e4c939cd758d194d7ca2e8ffacb9ddbabf0078"
+
+[[inputs]]
+name = "ICT-FaceKit eyeWide_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "4b8207f6013a751ae35affba62cc70bd6b53e046bbe48e8fd5a150450a7789ed"
+
+[[inputs]]
+name = "ICT-FaceKit jawForward.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "a0126b2926b69540f478e4c48f05e370868050e6c33718e53c2f17e190a3b239"
+
+[[inputs]]
+name = "ICT-FaceKit jawLeft.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "5af90cd941660fb0116948866414e4321035de754b7ebec787f8144445d2d9e9"
+
+[[inputs]]
+name = "ICT-FaceKit jawOpen.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "8d84355e10f48b05550980cee385bcd426f4797090da76a20de0535bb2f99f4a"
+
+[[inputs]]
+name = "ICT-FaceKit jawRight.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "d719335ad69a8f18797501d4728910c7a467aecbbae260923192b1bf242eec97"
+
+[[inputs]]
+name = "ICT-FaceKit mouthClose.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "4a44b94c269407cf1171483d87d99d2cbdea9c66242aabf2ad0f57cb785aa193"
+
+[[inputs]]
+name = "ICT-FaceKit mouthDimple_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "189f6e01adbf1e13147fe4d505d1f3006e5ce4590ae150064b810274093d29b0"
+
+[[inputs]]
+name = "ICT-FaceKit mouthDimple_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "4cf674b98d6d34a16fab462fbd9ecb2cb5e39ccaf3f50459b9ac7d59fbd6a215"
+
+[[inputs]]
+name = "ICT-FaceKit mouthFrown_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "1bfd720ad024e5805ac8472df170c2c96c09e817e02b66f916057d6e2d31ee9b"
+
+[[inputs]]
+name = "ICT-FaceKit mouthFrown_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "ae3da92fa1dc70010c6bec810338d740287c71b8730694c97876cab5af241f74"
+
+[[inputs]]
+name = "ICT-FaceKit mouthFunnel.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "d4f1dba04c1af5fc37452c88cc54a72f1133296c26d9abe0f8adb74dc5c2577f"
+
+[[inputs]]
+name = "ICT-FaceKit mouthLeft.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "01fb69aa8ac07c5762719c9bb2eec5372652c9f1e73509a63d01e7e60e28b885"
+
+[[inputs]]
+name = "ICT-FaceKit mouthLowerDown_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "8847660d51e2a72f2bce6ce9add7d58abab1cef967420db83056891291c0b2de"
+
+[[inputs]]
+name = "ICT-FaceKit mouthLowerDown_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "b5143ed50d41c91d80ddc8b565f6274eaf514509ec6f895797db34ca92a85b68"
+
+[[inputs]]
+name = "ICT-FaceKit mouthPress_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "de2bdaf2fa7199294ff7a281cd8f6647bf5ca9a6f84588bd7f7779fff4c61396"
+
+[[inputs]]
+name = "ICT-FaceKit mouthPress_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "ca8d9973b3231e51b8b76d3e7af7f7f3432959b7c37148fc25e7c643252847b6"
+
+[[inputs]]
+name = "ICT-FaceKit mouthPucker.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "9929c31025667683809f70df7dce612f72e3acfc7f9e8acb939f6636509dbc5c"
+
+[[inputs]]
+name = "ICT-FaceKit mouthRight.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "e3faaf5ed51715e77122d76e8187d5ba83ea9f54e15e29c52e64f26c52e66bda"
+
+[[inputs]]
+name = "ICT-FaceKit mouthRollLower.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "1f577e1129eef4f9e9dc26aa739c6d0f15b27253dee89af3428db6816666e910"
+
+[[inputs]]
+name = "ICT-FaceKit mouthRollUpper.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "a69ec7407adfd6a5f4c818179bb4604d9e506c07671976f75ac33ef8f54a1bb0"
+
+[[inputs]]
+name = "ICT-FaceKit mouthShrugLower.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "1eedd7831b0408bdcbc9aefe23b11803c54f81da5fc9be1fe81fc7a5117c0b88"
+
+[[inputs]]
+name = "ICT-FaceKit mouthShrugUpper.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "2bd3e3f1568366f2fd84717f0f63aee9f56eed4c303fc4f234aadd81d430032c"
+
+[[inputs]]
+name = "ICT-FaceKit mouthSmile_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "91794e73cef330f1c7d1f4541723544708536b39d5dd6ed35fd8f83f676b7af4"
+
+[[inputs]]
+name = "ICT-FaceKit mouthSmile_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "3fb3de3da9f8358edbb933a65ce6e44c25a2501f30dcb240daea725b68adac84"
+
+[[inputs]]
+name = "ICT-FaceKit mouthStretch_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "9187105730bad43023c63e2a91c979091b9289dd8fc1b587885412b8f7a3d2b7"
+
+[[inputs]]
+name = "ICT-FaceKit mouthStretch_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "d985452085a19d6b3da397ca2cd2f938d8e08761d2e684e87640f3639bdf5f6d"
+
+[[inputs]]
+name = "ICT-FaceKit mouthUpperUp_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "d49483aca6cbbb7a559edf4865aec62970560ddf3a0d34e5b208488bff59f722"
+
+[[inputs]]
+name = "ICT-FaceKit mouthUpperUp_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "299e3da0f36ca80c0c74e51900b67bfe6bb5b0101aaf46ce30075064c26a7f02"
+
+[[inputs]]
+name = "ICT-FaceKit noseSneer_L.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "47c5d66ddc1ba146480f0e43b1084f439e0e7d2af31bcec3e6a3bffc420ffa4d"
+
+[[inputs]]
+name = "ICT-FaceKit noseSneer_R.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "c384c41331124b9cd4b99c1bbe8aef56318cae2b8db6ff0f573a7347ebbe8caa"
+
+[[inputs]]
+name = "ICT-FaceKit identity000.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "918160cf82d541336b4c367cf93199c9827832bde02511b8fbdf9019d6f1a773"
+
+[[inputs]]
+name = "ICT-FaceKit identity001.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "325115059deb6691cb2d55da07ae38bb08ce36e4ea146982f294a17513155b3b"
+
+[[inputs]]
+name = "ICT-FaceKit identity002.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "e140e8305cd5232def3b94331d08450a13f312e525130fca8eeaa653231decc3"
+
+[[inputs]]
+name = "ICT-FaceKit identity003.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "be3481a6bed8953a6d9dd7f811a04bc6d2ab94d1bd76ecfaa6d4cae87a450f9d"
+
+[[inputs]]
+name = "ICT-FaceKit identity004.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "a2f411cc763e881cff250eb23c04fe8375b63a05a7dfa0492422e3b943e8a01d"
+
+[[inputs]]
+name = "ICT-FaceKit identity005.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "274178eb33e33c555e6024535a51a62ee50050abd4f7014bbc7a4dc90a638c65"
+
+[[inputs]]
+name = "ICT-FaceKit identity006.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "c9ae0426ab88b49065c852148f7bcff8cb09253fbee068b78955bd76c19a3e0f"
+
+[[inputs]]
+name = "ICT-FaceKit identity007.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "ba38037151277b94e2b6b9b9800275d92d2c0aa8d61057b0718c9d7b90fffc44"
+
+[[inputs]]
+name = "ICT-FaceKit identity008.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "b03543b783a15c1d28c5a384cd93657eda915227756780f682bc7370cd94ce1d"
+
+[[inputs]]
+name = "ICT-FaceKit identity009.obj (ICT-VGL/ICT-FaceKit da5f95a)"
+sha256 = "0cbb5ca5db9c61fa91df8d1c04b9b383b40d797032ca3f5a28a234d495e31b54"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_01_facial.fbx (microsoft/Microsoft-Rocketbox 0943055)"
+sha256 = "2e6ba71fb83a6899e3d4dd35da07fb5b078eef0c4d593f73d70cfc05dc4644cb"
+
+[[inputs]]
+name = "RCEF examples/data/rig_landmarks.json"
+sha256 = "dbcdebc6d7c9fdb78ade4056c37fcf49f089f21c222aed86340adefee6845328"
+
+[renderer]
+source_sha256 = "e4bd73dd71910ccc9d8893030dccbbe0ac5177c337678147e83d21770488b150"
+binary_sha256 = "a7cd2229fcac7dfc14bbfd1b2a07be2f9bfcad6a97d8c1f3412ed7e52299128d"
+compiler = "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)"
+os = "macOS 27.0.1 (arm64)"
+gpu = "Apple M4 Max"
+
+[training]
+conditions = 24
+description = "Per channel: ICT identities 1-8 (generic neutral plus ten identity modes, coefficients standard normal from SHA-256 of \"rcef.k3.identity:<j>:<i>\"), 3 cameras each (yaw +-30, pitch +-15 degrees, distance x0.92-1.08, vertical field of view 26-34 degrees, aim offset +-0.05 IOD, from SHA-256 of \"rcef.k3.train:<channel>:<j>:<k>\"), ICT weights 0.25, 0.5, 0.75 and 1; Rocketbox Female rendered at weights 0 to 1 in steps of 1/8. Knots: median best Rocketbox weight per ICT weight, pool-adjacent-violators, [0, 0] first. Held out: ICT identity 0, one condition per seed (camera and an ICT weight in [0.2, 1] from SHA-256 of \"rcef.k3.heldout:<seed>:<channel>\"). A condition is a failure if fewer than half the region markers (or 3) are visible, ICT moves under 0.5 px, Rocketbox at its best weight explains under half of ICT's motion, or Rocketbox at weight 1 reaches under 1/1.05 of it. Error: |curve(w) - best Rocketbox weight|. Constants and code: examples/rig_gains.py at code_commit; landmarks: examples/data/rig_landmarks.json."
+
+[held_out]
+seed_rule = "rcef.calibration.seeds/1"
+count = 24
+frozen_sha256 = "5193181a3795817fcb739eeb9ea18927fec718edfac6097573ed61975add67d6"
+
+[evaluation]
+min_conditions = 24
+
+[evaluation.bounds."arkit.coefficient.browDownLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.browDownRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.browInnerUp"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.browOuterUpLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.browOuterUpRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.cheekPuff"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.cheekSquintLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.cheekSquintRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeBlinkLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeBlinkRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeLookDownLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeLookDownRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeLookInLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeLookInRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeLookOutLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeLookOutRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeLookUpLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeLookUpRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeSquintLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeSquintRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeWideLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.eyeWideRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.jawForward"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.jawLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.jawOpen"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.jawRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthClose"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthDimpleLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthDimpleRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthFrownLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthFrownRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthFunnel"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthLowerDownLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthLowerDownRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthPressLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthPressRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthPucker"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthRollLower"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthRollUpper"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthShrugLower"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthShrugUpper"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthSmileLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthSmileRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthStretchLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthStretchRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthUpperUpLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.mouthUpperUpRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.noseSneerLeft"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[evaluation.bounds."arkit.coefficient.noseSneerRight"]
+median = 0.05
+p95 = 0.15
+neutral = 0.03
+
+[[curves]]
+input = "arkit.coefficient.browDownLeft"
+output = "rocketbox_female.AK_01_BrowDownLeft"
+knots = [[0.0, 0.0], [0.25, 0.164103], [0.5, 0.321478], [0.75, 0.48384], [1.0, 0.659608]]
+
+[[curves]]
+input = "arkit.coefficient.browDownRight"
+output = "rocketbox_female.AK_02_BrowDownRight"
+knots = [[0.0, 0.0], [0.25, 0.23828], [0.5, 0.493117], [0.75, 0.735679], [1.0, 0.993424]]
+
+[[curves]]
+input = "arkit.coefficient.browInnerUp"
+output = "rocketbox_female.AK_03_BrowInnerUp"
+knots = [[0.0, 0.0], [0.25, 0.169189], [0.5, 0.338976], [0.75, 0.509793], [1.0, 0.681347]]
+
+[[curves]]
+input = "arkit.coefficient.browOuterUpLeft"
+output = "rocketbox_female.AK_04_BrowOuterUpLeft"
+knots = [[0.0, 0.0], [0.25, 0.426664], [0.5, 0.8856], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.browOuterUpRight"
+output = "rocketbox_female.AK_05_BrowOuterUpRight"
+knots = [[0.0, 0.0], [0.25, 0.404668], [0.5, 0.820686], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.cheekPuff"
+output = "rocketbox_female.AK_06_CheekPuff"
+knots = [[0.0, 0.0], [0.25, 0.375], [0.5, 0.671693], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.cheekSquintLeft"
+output = "rocketbox_female.AK_07_CheekSquintLeft"
+knots = [[0.0, 0.0], [0.25, 0.199343], [0.5, 0.397599], [0.75, 0.593519], [1.0, 0.786519]]
+
+[[curves]]
+input = "arkit.coefficient.cheekSquintRight"
+output = "rocketbox_female.AK_08_CheekSquintRight"
+knots = [[0.0, 0.0], [0.25, 0.192268], [0.5, 0.382106], [0.75, 0.567171], [1.0, 0.756161]]
+
+[[curves]]
+input = "arkit.coefficient.eyeBlinkLeft"
+output = "rocketbox_female.AK_09_EyeBlinkLeft"
+knots = [[0.0, 0.0], [0.25, 0.253382], [0.5, 0.502509], [0.75, 0.801399], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.eyeBlinkRight"
+output = "rocketbox_female.AK_10_EyeBlinkRight"
+knots = [[0.0, 0.0], [0.25, 0.232463], [0.5, 0.46379], [0.75, 0.734783], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.eyeLookDownLeft"
+output = "rocketbox_female.AK_11_EyeLookDownLeft"
+knots = [[0.0, 0.0], [0.25, 0.211679], [0.5, 0.406034], [0.75, 0.406034], [1.0, 0.653566]]
+
+[[curves]]
+input = "arkit.coefficient.eyeLookDownRight"
+output = "rocketbox_female.AK_12_EyeLookDownRight"
+knots = [[0.0, 0.0], [0.25, 0.224081], [0.5, 0.446338], [0.75, 0.446338], [1.0, 0.761187]]
+
+[[curves]]
+input = "arkit.coefficient.eyeLookInLeft"
+output = "rocketbox_female.AK_13_EyeLookInLeft"
+knots = [[0.0, 0.0], [0.25, 0.058102], [0.5, 0.115607], [0.75, 0.172293], [1.0, 0.232482]]
+
+[[curves]]
+input = "arkit.coefficient.eyeLookInRight"
+output = "rocketbox_female.AK_14_EyeLookInRight"
+knots = [[0.0, 0.0], [0.25, 0.050846], [0.5, 0.101046], [0.75, 0.151371], [1.0, 0.201829]]
+
+[[curves]]
+input = "arkit.coefficient.eyeLookOutLeft"
+output = "rocketbox_female.AK_15_EyeLookOutLeft"
+knots = [[0.0, 0.0], [0.25, 0.048956], [0.5, 0.098438], [0.75, 0.141753], [1.0, 0.190384]]
+
+[[curves]]
+input = "arkit.coefficient.eyeLookOutRight"
+output = "rocketbox_female.AK_16_EyeLookOutRight"
+knots = [[0.0, 0.0], [0.25, 0.042409], [0.5, 0.085219], [0.75, 0.125], [1.0, 0.169312]]
+
+[[curves]]
+input = "arkit.coefficient.eyeLookUpLeft"
+output = "rocketbox_female.AK_17_EyeLookUpLeft"
+knots = [[0.0, 0.0], [0.25, 0.130426], [0.5, 0.231751], [0.75, 0.333878], [1.0, 0.433534]]
+
+[[curves]]
+input = "arkit.coefficient.eyeLookUpRight"
+output = "rocketbox_female.AK_18_EyeLookUpRight"
+knots = [[0.0, 0.0], [0.25, 0.13083], [0.5, 0.23862], [0.75, 0.342809], [1.0, 0.43899]]
+
+[[curves]]
+input = "arkit.coefficient.eyeSquintLeft"
+output = "rocketbox_female.AK_19_EyeSquintLeft"
+knots = [[0.0, 0.0], [0.25, 0.197989], [0.5, 0.404898], [0.75, 0.591059], [1.0, 0.787088]]
+
+[[curves]]
+input = "arkit.coefficient.eyeSquintRight"
+output = "rocketbox_female.AK_20_EyeSquintRight"
+knots = [[0.0, 0.0], [0.25, 0.189198], [0.5, 0.422331], [0.75, 0.625], [1.0, 0.777469]]
+
+[[curves]]
+input = "arkit.coefficient.eyeWideLeft"
+output = "rocketbox_female.AK_21_EyeWideLeft"
+knots = [[0.0, 0.0], [0.25, 0.37089], [0.5, 0.676234], [0.75, 0.933951], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.eyeWideRight"
+output = "rocketbox_female.AK_22_EyeWideRight"
+knots = [[0.0, 0.0], [0.25, 0.244932], [0.5, 0.437082], [0.75, 0.594383], [1.0, 0.775156]]
+
+[[curves]]
+input = "arkit.coefficient.jawForward"
+output = "rocketbox_female.AK_23_JawForward"
+knots = [[0.0, 0.0], [0.25, 0.320492], [0.5, 0.629629], [0.75, 0.915993], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.jawLeft"
+output = "rocketbox_female.AK_24_JawLeft"
+knots = [[0.0, 0.0], [0.25, 0.347157], [0.5, 0.686706], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.jawOpen"
+output = "rocketbox_female.AK_25_JawOpen"
+knots = [[0.0, 0.0], [0.25, 0.492017], [0.5, 0.968707], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.jawRight"
+output = "rocketbox_female.AK_26_JawRight"
+knots = [[0.0, 0.0], [0.25, 0.395045], [0.5, 0.779566], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthClose"
+output = "rocketbox_female.AK_27_MouthClose"
+knots = [[0.0, 0.0], [0.25, 0.0], [0.5, 0.5], [0.75, 0.75], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthDimpleLeft"
+output = "rocketbox_female.AK_28_MouthDimpleLeft"
+knots = [[0.0, 0.0], [0.25, 0.234912], [0.5, 0.450986], [0.75, 0.454698], [1.0, 0.454698]]
+
+[[curves]]
+input = "arkit.coefficient.mouthDimpleRight"
+output = "rocketbox_female.AK_29_MouthDimpleRight"
+knots = [[0.0, 0.0], [0.25, 0.329166], [0.5, 0.532817], [0.75, 0.532817], [1.0, 0.532817]]
+
+[[curves]]
+input = "arkit.coefficient.mouthFrownLeft"
+output = "rocketbox_female.AK_30_MouthFrownLeft"
+knots = [[0.0, 0.0], [0.25, 0.278946], [0.5, 0.563373], [0.75, 0.843352], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthFrownRight"
+output = "rocketbox_female.AK_31_MouthFrownRight"
+knots = [[0.0, 0.0], [0.25, 0.591871], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthFunnel"
+output = "rocketbox_female.AK_32_MouthFunnel"
+knots = [[0.0, 0.0], [0.25, 0.235414], [0.5, 0.529527], [0.75, 0.927933], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthLeft"
+output = "rocketbox_female.AK_33_MouthLeft"
+knots = [[0.0, 0.0], [0.25, 0.822745], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthLowerDownLeft"
+output = "rocketbox_female.AK_34_MouthLowerDownLeft"
+knots = [[0.0, 0.0], [0.25, 0.400548], [0.5, 0.831767], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthLowerDownRight"
+output = "rocketbox_female.AK_35_MouthLowerDownRight"
+knots = [[0.0, 0.0], [0.25, 0.415703], [0.5, 0.794032], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthPressLeft"
+output = "rocketbox_female.AK_36_MouthPressLeft"
+knots = [[0.0, 0.0], [0.25, 0.109958], [0.5, 0.220807], [0.75, 0.331601], [1.0, 0.442552]]
+
+[[curves]]
+input = "arkit.coefficient.mouthPressRight"
+output = "rocketbox_female.AK_37_MouthPressRight"
+knots = [[0.0, 0.0], [0.25, 0.081027], [0.5, 0.162428], [0.75, 0.242091], [1.0, 0.324731]]
+
+[[curves]]
+input = "arkit.coefficient.mouthPucker"
+output = "rocketbox_female.AK_38_MouthPucker"
+knots = [[0.0, 0.0], [0.25, 0.761662], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthRight"
+output = "rocketbox_female.AK_39_MouthRight"
+knots = [[0.0, 0.0], [0.25, 0.573243], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthRollLower"
+output = "rocketbox_female.AK_40_MouthRollLower"
+knots = [[0.0, 0.0], [0.25, 0.125], [0.5, 0.258558], [0.75, 0.367911], [1.0, 0.570002]]
+
+[[curves]]
+input = "arkit.coefficient.mouthRollUpper"
+output = "rocketbox_female.AK_41_MouthRollUpper"
+knots = [[0.0, 0.0], [0.25, 0.391411], [0.5, 0.820115], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthShrugLower"
+output = "rocketbox_female.AK_42_MouthShrugLower"
+knots = [[0.0, 0.0], [0.25, 0.875], [0.5, 0.875], [0.75, 0.875], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthShrugUpper"
+output = "rocketbox_female.AK_43_MouthShrugUpper"
+knots = [[0.0, 0.0], [0.25, 0.283999], [0.5, 0.586421], [0.75, 0.903937], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthSmileLeft"
+output = "rocketbox_female.AK_44_MouthSmileLeft"
+knots = [[0.0, 0.0], [0.25, 0.800434], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthSmileRight"
+output = "rocketbox_female.AK_45_MouthSmileRight"
+knots = [[0.0, 0.0], [0.25, 0.685421], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthStretchLeft"
+output = "rocketbox_female.AK_46_MouthStretchLeft"
+knots = [[0.0, 0.0], [0.25, 0.356512], [0.5, 0.668883], [0.75, 0.919456], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthStretchRight"
+output = "rocketbox_female.AK_47_MouthStretchRight"
+knots = [[0.0, 0.0], [0.25, 0.502071], [0.5, 0.98449], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthUpperUpLeft"
+output = "rocketbox_female.AK_48_MouthUpperUpLeft"
+knots = [[0.0, 0.0], [0.25, 0.366222], [0.5, 0.748663], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.mouthUpperUpRight"
+output = "rocketbox_female.AK_49_MouthUpperUpRight"
+knots = [[0.0, 0.0], [0.25, 0.48327], [0.5, 0.998604], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.noseSneerLeft"
+output = "rocketbox_female.AK_50_NoseSneerLeft"
+knots = [[0.0, 0.0], [0.25, 1.0], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
+
+[[curves]]
+input = "arkit.coefficient.noseSneerRight"
+output = "rocketbox_female.AK_51_NoseSneerRight"
+knots = [[0.0, 0.0], [0.25, 1.0], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
+
+[[cells]]
+channel = "arkit.coefficient.browDownLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 19
+median = 0.050981
+p95 = 0.229073
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.browDownRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 18
+median = 0.06993
+p95 = 0.166217
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.browInnerUp"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 0
+median = 0.012038
+p95 = 0.027537
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.browOuterUpLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 17
+median = 0.005502
+p95 = 0.15546
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.browOuterUpRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 15
+median = 0.049151
+p95 = 0.125992
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.cheekPuff"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.255865
+p95 = 0.592278
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.cheekSquintLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 0
+median = 0.032319
+p95 = 0.101687
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.cheekSquintRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 0
+median = 0.038561
+p95 = 0.076816
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeBlinkLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 6
+median = 0.01969
+p95 = 0.066911
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeBlinkRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 5
+median = 0.018905
+p95 = 0.070731
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookDownLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.017066
+p95 = 0.14942
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookDownRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.045521
+p95 = 0.122662
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookInLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 21
+median = 0.004246
+p95 = 0.013946
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookInRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 9
+median = 0.005332
+p95 = 0.014779
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookOutLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.008407
+p95 = 0.030701
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookOutRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.005877
+p95 = 0.020608
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookUpLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 10
+median = 0.015233
+p95 = 0.053172
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookUpRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 9
+median = 0.016733
+p95 = 0.093848
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeSquintLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.051405
+p95 = 0.246151
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeSquintRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.065457
+p95 = 0.170973
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeWideLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 8
+median = 0.064266
+p95 = 0.286289
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeWideRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 7
+median = 0.063216
+p95 = 0.25876
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.jawForward"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 10
+median = 0.065148
+p95 = 0.248137
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.jawLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 6
+median = 0.020609
+p95 = 0.080867
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.jawOpen"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 10
+median = 0.020994
+p95 = 0.116137
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.jawRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 14
+median = 4e-06
+p95 = 0.041705
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthClose"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 1.0
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthDimpleLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 19
+median = 0.219435
+p95 = 0.454174
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthDimpleRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 17
+median = 0.321816
+p95 = 0.532817
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthFrownLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 2
+median = 0.03941
+p95 = 0.084322
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthFrownRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 19
+median = 0.0
+p95 = 0.199253
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthFunnel"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.039653
+p95 = 0.26452
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.0
+p95 = 0.092468
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthLowerDownLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 14
+median = 0.0215
+p95 = 0.357592
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthLowerDownRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 18
+median = 0.01882
+p95 = 0.453601
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthPressLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.018475
+p95 = 0.047921
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthPressRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 3
+median = 0.009501
+p95 = 0.109599
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthPucker"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.121476
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 19
+median = 0.0
+p95 = 0.123981
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthRollLower"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 20
+median = 0.300544
+p95 = 0.851994
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthRollUpper"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 16
+median = 0.01658
+p95 = 0.12166
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthShrugLower"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.125
+p95 = 0.375
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthShrugUpper"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 6
+median = 0.032185
+p95 = 0.070242
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthSmileLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 22
+median = 0.0
+p95 = 0.102838
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthSmileRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 19
+median = 0.0
+p95 = 0.207849
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthStretchLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 5
+median = 0.058756
+p95 = 0.147563
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthStretchRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 13
+median = 0.011042
+p95 = 0.352221
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthUpperUpLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 10
+median = 0.008738
+p95 = 0.106441
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthUpperUpRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 18
+median = 0.000604
+p95 = 0.346015
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.noseSneerLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.0
+p95 = 0.0
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.noseSneerRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.0
+p95 = 0.09117
+neutral = 0.0

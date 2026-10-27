@@ -15,6 +15,8 @@ Native names, enum values and interface facts are extracted and reorganized; des
 | VRM Consortium / vrm-c contributors | Reference only; redistribution permission for specification prose unresolved | Preset names and interface facts extracted. Source prose, code examples and figures are not redistributed. |
 | Roblox Corporation / creator-docs contributors | CC-BY-4.0 | Names/required-pose list memberships and authoring facts reorganized; source prose/videos/models not copied. Conflicting requirement lists retained as facts. |
 | Khronos Group glTF contributors | Reference only; upstream license retained | Morph domain facts linked; no source algorithms or assets copied. |
+| USC Institute for Creative Technologies, ICT-FaceKit | MIT | Example data only: vertex indices of landmarks (including its README's Multi-PIE 68 indices) and curves fitted to renders of its shapes and identity modes (`examples/data/rig_landmarks.json`, `examples/data/rig_gains.json`, `calibration/rig-gains.ict-rocketbox-female.cal`). No geometry is committed; files are fetched and hash-checked. Copyright (c) 2020 USC Institute for Creative Technologies. |
+| Microsoft, Microsoft Rocketbox avatar library (ARKit shapes by Fang Ma and Matias Volonte) | MIT | Example data only: landmark vertex indices and fitted curves for Female_Adult_01, as above. No geometry is committed. Copyright (c) 2020 Microsoft. |
 
 Full source URLs, revisions, claim locators and SHA-256 digests are in [references.md](references.md) and [evidence/sources.toml](evidence/sources.toml). Inherited Apache-2.0 and CC-BY-4.0 license texts are included under `LICENSES/`; MIT and CC-BY-SA-4.0 texts govern original material as described above. The legal code texts retain their own notices.
 

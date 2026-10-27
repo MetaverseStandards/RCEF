@@ -5,6 +5,7 @@ Each file here records one software-only calibration fit: how it was made, from 
 Records:
 
 - [mediapipe.ict-response](mediapipe.ict-response.cal): MediaPipe's response to untextured ICT renders. A negative result: 25 of MediaPipe's 51 ARKit-named scores rose enough in training to fit a curve, and none met its bounds on held-out ICT identities or on Rocketbox Male, so no rule cites it. Made with [tools/calibration](../tools/calibration/README.md).
+- [rig-gains.ict-rocketbox-female](rig-gains.ict-rocketbox-female.cal): rig intensity normalisation between two example rigs, ICT-FaceKit (reference) and Rocketbox Female, for 51 ARKit shapes. 3 pass (browInnerUp, cheekSquintLeft, cheekSquintRight); 48 fail and stay published as negative results. See [examples/README.md](../examples/README.md#6-rig-gains-how-strongly-two-rigs-render-the-same-arkit-name).
 
 The format is also exercised by the test fixtures in [tests/fixtures/calibration/](../tests/fixtures/calibration/), whose numbers are invented.
 
@@ -62,6 +63,8 @@ A record can recompute its own hash, so the hash alone does not stop anyone re-r
 ```
 
 Lines are only ever added at the end, so dates never go backwards. Versions of an id start at `v1` and go up by one; every version after the first carries a reason of at least three words. `check.py` refuses a record unless its `version` is the latest in the ledger for its id and its frozen hash is the one recorded there. So changing anything frozen, a knot or a bound for example, needs a new ledger line with a reason, which is visible in review.
+
+`rig-gains.ict-rocketbox-female` was pre-registered before records without cells were allowed: its freeze commit (`91f57f7`) holds the frozen part as `pending/rig-gains.ict-rocketbox-female.cal`, which `check.py` did not read, and its results commit moved it here and added `cells`, changing nothing else.
 
 What this guarantees: the ledger line for a freeze is committed before the results, and Git history shows that it came first and that it never changed afterwards. It does not prove that nobody looked at held-out data before freezing, and `check.py` cannot see Git history; the order is checked in review. The metrics in `cells` are deliberately not hashed and are not self-proving: they are trusted only because they can be reproduced. The record pins everything needed to do that: the code commit, the input asset hashes, the renderer's source and binary hashes with its OS and GPU, and the seeds.
 
