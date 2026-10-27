@@ -71,10 +71,14 @@ class Translator:
         with path.open(encoding='utf-8', newline='') as handle:
             rows = list(csv.DictReader(handle))
         channels = [c for c in rows[0] if self.signal_id(c) in self.signals]
-        flags = [c for c in rows[0] if c not in channels and c not in ('time', 'segment')]
+        known = {name.strip() for s in self.signals.values() if s.get('validity')
+                 for name in s['validity'].split(' AND ')}
+        flags = [c for c in rows[0] if c in known]
+        # Anything else (such as an expression's phase) is a label carried through.
+        labels = [c for c in rows[0] if c not in channels and c not in known and c not in ('time', 'segment')]
         return [{'time': float(r['time']), 'segment': r.get('segment', ''),
                  'values': {self.signal_id(c): float(r[c]) for c in channels},
-                 'flags': {f: r[f] == '1' for f in flags}} for r in rows]
+                 'flags': {f: r[f] == '1' for f in flags}, 'labels': {c: r[c] for c in labels}} for r in rows]
 
     def translate(self, frames: list[dict]) -> list[dict]:
         """Per frame: output values, refusals by mapping, and non-zero inputs no rule reads."""

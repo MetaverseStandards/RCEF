@@ -18,6 +18,7 @@ except ModuleNotFoundError:  # run by file path from the repository root
     from tests import shared_pack
 
 ROOT = Path(__file__).resolve().parents[1]
+FB2 = 'openxr.fb2.XR_FACE_EXPRESSION2_{}_FB'.format
 sys.path.insert(0, str(ROOT / 'examples'))
 import face_pipeline  # noqa: E402
 import ict_facekit  # noqa: E402
@@ -108,6 +109,19 @@ def fb2_arkit_document(pack, mapping_ids):
              for e in record.get('evidence', [])}
     return {**pack, 'profiles': profiles, 'signals': signals, 'mappings': mappings,
             'evidence': [e for e in pack['evidence'] if e['id'] in cited]}
+
+
+class ReadFrames(unittest.TestCase):
+    def test_label_columns_are_kept_and_are_not_validity_flags(self):
+        translator = rcef_translate.fb2_to_arkit(pack=shared_pack.pack(), compiled=compiled())
+        with tempfile.TemporaryDirectory(prefix='rcef-frames-') as tmp:
+            path = Path(tmp) / 'frames.csv'
+            path.write_text('time,segment,phase,amount,JAW_DROP,isValid,isEyeFollowingBlendshapesValid\n'
+                            '0.0,anger,hold,1,0.5,1,0\n', encoding='utf-8')
+            frame, = translator.read(path)
+        self.assertEqual(frame['flags'], {'isValid': True, 'isEyeFollowingBlendshapesValid': False})
+        self.assertEqual(frame['labels'], {'phase': 'hold', 'amount': '1'})
+        self.assertEqual(frame['values'], {FB2('JAW_DROP'): 0.5})
 
 
 class Fb2Oracles(unittest.TestCase):
