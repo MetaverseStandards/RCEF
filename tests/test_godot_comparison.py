@@ -25,7 +25,7 @@ class GodotComparison(unittest.TestCase):
         rows = [r for r in compare_godot.compare(self.pack, self.routes) if r['mapping'] != '—']
         self.assertEqual(len(rows), 14)
         results = {r['arkit']: r['result'] for r in rows}
-        self.assertEqual(results.pop('browInnerUp'), 'DISAGREES with Godot, which has no route; agrees with VRCFT')
+        self.assertEqual(results.pop('browInnerUp'), "Godot has no route; RCEF follows VRCFT's average")
         self.assertEqual(set(results.values()), {'agrees with Godot'})
 
     def test_a_changed_weight_is_reported(self):

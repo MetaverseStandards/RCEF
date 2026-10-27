@@ -79,7 +79,7 @@ def compare(pack: dict, routes_csv: str) -> list[dict]:
         elif route['route'] == 'godot':
             result = 'agrees with Godot'
         else:
-            result = 'DISAGREES with Godot, which has no route; agrees with VRCFT'
+            result = "Godot has no route; RCEF follows VRCFT's average"
         rows.append({'arkit': arkit, 'mapping': mapping or '—', 'ours': text(ours), 'theirs': text(theirs),
                      'result': result, 'sources': route['sources'] if route else '—'})
     return rows
@@ -87,7 +87,7 @@ def compare(pack: dict, routes_csv: str) -> list[dict]:
 
 def render(pack: dict, routes_csv: str) -> str:
     rows = compare(pack, routes_csv)
-    disagreements = [r for r in rows if r['result'].startswith('DISAGREES')]
+    differences = [r for r in rows if r['mapping'] != '—' and r['result'] != 'agrees with Godot']
     missing = [r['arkit'] for r in rows if r['result'].startswith('Godot translates')]
     lines = [
         '# RCEF FB2 → ARKit rules compared with Godot',
@@ -100,15 +100,19 @@ def render(pack: dict, routes_csv: str) -> str:
         'parameter code is used. Weights are compared exactly.',
         '',
         f'RCEF translates {sum(1 for r in rows if r["mapping"] != "—")} ARKit coefficients from FB2. '
-        f'{len(disagreements)} disagree{"s" if len(disagreements) == 1 else ""} with Godot on weights; '
+        f'Weight disagreements with Godot: {sum(r["result"].startswith("DISAGREES") for r in rows)}. '
+        f'Without a Godot route: {sum(r["result"].startswith("Godot has no route") for r in rows)}. '
         f'Godot translates {len(missing)} more that RCEF does not yet.',
         '',
-        '## Every disagreement',
+        '## Every difference from Godot',
         '',
     ]
-    for r in disagreements:
-        lines.append(f'- **{r["arkit"]}** (`{r["mapping"]}`): RCEF uses {r["ours"]}; the source route is '
-                     f'{r["theirs"]}. {r["result"]}.')
+    for r in differences:
+        if r['result'].startswith('Godot has no route'):
+            lines.append(f'- **{r["arkit"]}** (`{r["mapping"]}`): {r["result"]} ({r["ours"]}).')
+        else:
+            lines.append(f'- **{r["arkit"]}** (`{r["mapping"]}`): RCEF uses {r["ours"]}; the source route is '
+                         f'{r["theirs"]}. {r["result"]}.')
     for arkit, note in SEMANTIC:
         lines.append(f'- **{arkit}** (meaning, not weights): {note}')
     lines += ['', '## RCEF rules', '', '| ARKit | RCEF mapping | RCEF | Source route | Result | Source lines |',

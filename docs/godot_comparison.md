@@ -7,11 +7,11 @@ The source routes come from the Godot OpenXR vendors plugin (FB2 weight → Godo
 face-modifier name table (Godot shape → ARKit name, MIT). Where Godot has no route, VRCFaceTracking's
 parameter code is used. Weights are compared exactly.
 
-RCEF translates 14 ARKit coefficients from FB2. 1 disagrees with Godot on weights; Godot translates 38 more that RCEF does not yet.
+RCEF translates 14 ARKit coefficients from FB2. Weight disagreements with Godot: 0. Without a Godot route: 1. Godot translates 38 more that RCEF does not yet.
 
-## Every disagreement
+## Every difference from Godot
 
-- **browInnerUp** (`fb2.to_arkit`): RCEF uses 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R; the source route is 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R. DISAGREES with Godot, which has no route; agrees with VRCFT.
+- **browInnerUp** (`fb2.to_arkit`): Godot has no route; RCEF follows VRCFT's average (0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R).
 - **mouthClose** (meaning, not weights): FB2 LIPS_TOWARD closes the lips "regardless of the position of the jaw"; Unified Expressions MouthClosed closes the mouth "in relation to JawOpen" and SRanipal requires Jaw_Open to be inactive. Godot and VRCFT both copy the value directly, as RCEF does.
 - **mouthShrugUpper** (meaning, not weights): ICT-FaceKit relates mouthShrugUpper to FACS AU10 (upper lip raiser), while Godot, VRCFT and RCEF use FB2 CHIN_RAISER_T; FB2 has separate UPPER_LIP_RAISER_L/R weights.
 - **jawOpen** (meaning, not weights): ICT-FaceKit relates jawOpen to FACS AU27 (mouth stretch); FB2 JAW_DROP is the jaw drop.
@@ -22,7 +22,7 @@ RCEF translates 14 ARKit coefficients from FB2. 1 disagrees with Godot on weight
 
 | ARKit | RCEF mapping | RCEF | Source route | Result | Source lines |
 |---|---|---|---|---|---|
-| browInnerUp | `fb2.to_arkit` | 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R | 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R | DISAGREES with Godot, which has no route; agrees with VRCFT | vrcft_docs_arkit:L41;vrcft_code_parameters:L87;vrcft_code_parameters:L88;godot_face_modifier:L102;godot_vendors_fb2:L224;godot_face_modifier:L100;godot_vendors_fb2:L223 |
+| browInnerUp | `fb2.to_arkit` | 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R | 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R | Godot has no route; RCEF follows VRCFT's average | vrcft_docs_arkit:L41;vrcft_code_parameters:L87;vrcft_code_parameters:L88;godot_face_modifier:L102;godot_vendors_fb2:L224;godot_face_modifier:L100;godot_vendors_fb2:L223 |
 | cheekPuff | `fb2.to_arkit` | 0.5·CHEEK_PUFF_L + 0.5·CHEEK_PUFF_R | 0.5·CHEEK_PUFF_L + 0.5·CHEEK_PUFF_R | agrees with Godot | godot_face_modifier:L288;godot_vendors_fb2:L235;godot_vendors_fb2:L236;godot_vendors_fb2:L319 |
 | eyeBlinkLeft | `fb2.to_arkit` | 1·EYES_CLOSED_L | 1·EYES_CLOSED_L | agrees with Godot | godot_face_modifier:L74;godot_vendors_fb2:L210 |
 | eyeBlinkRight | `fb2.to_arkit` | 1·EYES_CLOSED_R | 1·EYES_CLOSED_R | agrees with Godot | godot_face_modifier:L72;godot_vendors_fb2:L209 |
