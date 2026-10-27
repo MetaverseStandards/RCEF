@@ -2,7 +2,7 @@
 
 SPDX-License-Identifier: CC-BY-SA-4.0
 
-Generated from [evidence/sources.toml](evidence/sources.toml) by `scripts/export_references.py`; edit the TOML, not this file. Each entry gives the exact bytes RCEF verified: the URL, the revision (or `retrieval-digest` for mutable documentation pages), the retrieval date and the SHA-256. `scripts/verify_sources.py` re-fetches them. Provider names and enums are extracted as facts with attribution; source prose, figures and algorithms are not bundled.
+Generated from [evidence/sources.toml](evidence/sources.toml) by `scripts/export_references.py`. Edit the TOML, not this file. Each entry identifies the exact bytes RCEF verified: the URL, the revision (or `retrieval-digest` for documentation pages that change), the retrieval date and the SHA-256. `scripts/verify_sources.py` downloads them again. Provider names and enums are used as facts, with attribution. Source prose, figures and algorithms are not included.
 
 ## rcsf_readme
 

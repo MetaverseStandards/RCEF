@@ -4,15 +4,15 @@ Pack: rcef.parity; data version: 0.4.0.
 
 Generated from rcef.pack.json; SHA-256: 630d37a5b01e4983f8e5cbcbd54d8268abeffb09248ea793d4842bd2df5cd4f7.
 
-Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
+Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Provider attribution and source terms are in ../THIRD_PARTY_NOTICES.md.
 
-Rules preserve their declared direction, status, assumptions and losses. Unresolved rules are inventory records; they are not executable correspondences.
+Each mapping keeps its declared direction, status, assumptions and losses. An unresolved mapping is an inventory record. It cannot be executed.
 
 ## Proposed rules
 
-Proposed rules translate between providers. Each formula assumes the calibration stated in its rule below; losses list what the translation cannot carry.
+Proposed mappings translate between providers. Each formula assumes the calibration stated with its mapping below. Losses list what the translation cannot carry.
 
-| Mapping | Rule | Source → target | Formula | Losses | Evidence status |
+| Map | Mapping | Source → target | Formula | Losses | Evidence status |
 | --- | --- | --- | --- | --- | --- |
 | arkit.to_fb2 | arkit_fb2.BROW_LOWERER_L | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB = 1·browDownLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
 | arkit.to_fb2 | arkit_fb2.BROW_LOWERER_R | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB = 1·browDownRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |

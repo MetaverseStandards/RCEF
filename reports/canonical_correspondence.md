@@ -4,9 +4,9 @@ Pack: rcef.parity; data version: 0.4.0.
 
 Generated from rcef.pack.json; SHA-256: 630d37a5b01e4983f8e5cbcbd54d8268abeffb09248ea793d4842bd2df5cd4f7.
 
-Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
+Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Provider attribution and source terms are in ../THIRD_PARTY_NOTICES.md.
 
-Only authored rules appear here. A dash means no authored rule. Unresolved rules stay labeled unresolved. A mapped rule preserves its declared provider basis; it does not establish cross-provider or anatomical equality.
+Only authored mappings appear here. A dash means no authored mapping. Unresolved mappings stay labeled unresolved. A mapping with the `mapped` disposition keeps its declared provider basis. It does not show cross-provider or anatomical equality.
 
 ## RCEF eyeBlinkLeft
 
