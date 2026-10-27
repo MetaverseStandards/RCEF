@@ -135,7 +135,9 @@ def check_channels(translator, frame: dict, result: dict, targets: list[str]) ->
             else:
                 bound = EXACT_TOLERANCE
                 passes = residual <= bound
-                status = 'exact' if passes else 'exact rule, RESIDUAL OVER 1e-9'
+                status = 'exact (moving)' if passes else 'exact rule, RESIDUAL OVER 1e-9'
+            if direct == 0 and value == 0:
+                status = 'at rest in both paths'
         channels.append({'target': target, 'arkit': arkit, 'fb2': drives[target], 'direct': direct,
                          'translated': value, 'residual': residual, 'bound': bound, 'status': status,
                          'passes': passes})
@@ -244,7 +246,11 @@ def write_report(out: Path, rows: list[dict], manifest: list[dict], targets: lis
     for r in rows:
         statuses.setdefault(r['status'], 0)
         statuses[r['status']] += 1
-    worst_exact = max((r['residual'] for r in rows if r['status'] == 'exact'), default=0.0)
+    worst_exact = max((r['residual'] for r in rows if r['status'] == 'exact (moving)'), default=0.0)
+    moving = {t: 0 for t in targets}
+    for r in rows:
+        moving[r['target']] += bool(r['direct'] or r['translated'])
+    drives = {r['target']: (r['arkit'], r['fb2']) for r in rows}
     lines = ['# RCEF FB2 → ARKit on ICT-FaceKit: residual report', '', f'**{CAPTION}**', '',
              f'{len(manifest)} frames, {len(targets)} ICT-FaceKit shapes. Direct weights come from the Godot and VRCFT '
              'source routes; translated weights from RCEF\'s proposed rules.', '',
@@ -257,6 +263,12 @@ def write_report(out: Path, rows: list[dict], manifest: list[dict], targets: lis
              f'Frames where every oracle passes: {sum(m["oracles_pass"] for m in manifest)} of {len(manifest)}.', '',
              '| Channel status | Count |', '|---|---|']
     lines += [f'| {s} | {n} |' for s, n in sorted(statuses.items())]
+    lines += ['', '"At rest in both paths" counts channels that are zero in both the direct and the translated '
+              'weights. They cannot fail, so they are not counted as exact.', '',
+              '## Frames in which each shape moves', '',
+              'A rule is only tested where its shape moves; every shape should move in some frame.', '',
+              '| ICT-FaceKit shape | ARKit | FB2 (direct) | Frames moving |', '|---|---|---|---|']
+    lines += [f'| {t} | {drives[t][0]} | {drives[t][1]} | {moving[t]} |' for t in targets]
     lines += ['', '## Per frame', '', '| Frame | Time | Segment | Max vertex difference | Bound | Oracles | Labels |',
               '|---|---|---|---|---|---|---|']
     for m in manifest:

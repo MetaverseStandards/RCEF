@@ -144,6 +144,17 @@ class Fb2Oracles(unittest.TestCase):
     def test_the_published_rules_pass(self):
         self.assertEqual(self.failing_frames(self.results), [])
 
+    def test_channels_at_rest_are_counted_apart_from_exact_ones(self):
+        statuses = {}
+        for frame, result in zip(self.frames, self.results):
+            for c in face_pipeline.check_channels(self.translator, frame, result, ict_facekit.SHAPES):
+                statuses.setdefault(c['status'], []).append(c)
+        self.assertNotIn('exact', set(statuses))
+        self.assertTrue(statuses['at rest in both paths'])
+        self.assertTrue(all(c['direct'] == 0 == c['translated'] for c in statuses['at rest in both paths']))
+        self.assertTrue(statuses['exact (moving)'])
+        self.assertTrue(all(c['direct'] or c['translated'] for c in statuses['exact (moving)']))
+
     def test_halving_any_rule_fails(self):
         self.assertEqual(len(self.mapping_of), 14)
 

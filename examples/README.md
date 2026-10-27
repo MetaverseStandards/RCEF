@@ -84,6 +84,8 @@ The report checks four things:
 
 The pipeline exits non-zero if any oracle fails.
 
+`residuals.md` counts channels that are zero in both the direct and the translated weights as "at rest in both paths", apart from "exact (moving)", because a channel at rest cannot fail. It also lists, for each shape, how many frames move it: a rule is only tested where its shape moves.
+
 **What this shows and what it doesn't.** It shows that RCEF's rules connect names and meanings the way the public sources do, on one rig. It is not a calibration result: neither provider publishes its gain, so equal weights are assumed to mean equal expressions.
 
 To run the pipeline as a test (the slow tier, not part of the default suite):

@@ -47,12 +47,24 @@ class FacePipeline(unittest.TestCase):
     def test_residuals_follow_the_rules(self):
         with (self.out / 'residuals.csv').open(encoding='utf-8', newline='') as handle:
             rows = list(csv.DictReader(handle))
-        exact = [r for r in rows if r['status'] == 'exact']
+        exact = [r for r in rows if r['status'] == 'exact (moving)']
         averaged = [r for r in rows if r['status'].startswith('averaged pair')]
         self.assertTrue(exact and averaged)
+        self.assertTrue(all(float(r['direct'] or 0) or float(r['translated'] or 0) for r in exact))
+        at_rest = [r for r in rows if r['status'] == 'at rest in both paths']
+        self.assertTrue(at_rest)
+        self.assertTrue(all(float(r['direct']) == 0 == float(r['translated']) for r in at_rest))
         self.assertTrue(all(float(r['residual']) <= 1e-9 for r in exact))
         self.assertTrue(all(float(r['residual']) <= float(r['bound']) + 1e-9 for r in averaged))
         self.assertTrue(any(float(r['residual']) > 0 for r in averaged), 'the asymmetric frames must show a loss')
+
+    def test_every_shape_moves_in_some_frame(self):
+        with (self.out / 'residuals.csv').open(encoding='utf-8', newline='') as handle:
+            rows = list(csv.DictReader(handle))
+        moving = {r['target'] for r in rows if r['status'] == 'exact (moving)' or r['status'].startswith('averaged')}
+        manifest = json.loads((self.out / 'frames.json').read_text())
+        self.assertEqual(moving, set(manifest['targets']))
+        self.assertIn('## Frames in which each shape moves', (self.out / 'residuals.md').read_text())
 
     def test_refusals_and_dropped_channels_are_labelled(self):
         manifest = json.loads((self.out / 'frames.json').read_text())
