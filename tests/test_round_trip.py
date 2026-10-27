@@ -15,6 +15,11 @@ import unittest
 
 import msf_tools as msf
 
+try:
+    import shared_pack
+except ModuleNotFoundError:  # run by file path from the repository root
+    from tests import shared_pack
+
 ROOT = Path(__file__).resolve().parents[1]
 FB2 = 'openxr.fb2.XR_FACE_EXPRESSION2_{}_FB'
 ARKIT = 'arkit.coefficient.{}'
@@ -44,10 +49,11 @@ def source_pairs():
 class RoundTrip(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        document = msf.load_authoring(ROOT).value.to_dict()
+        document = shared_pack.document()
         forward_rules = {m['id']: m['rules'] for m in document['mappings'] if m['id'] in FORWARD}
         by_output = {o: i for i, o in source_pairs()}
         cls.one_to_one = {}
+        backs = []
         for mapping, rules in forward_rules.items():
             cls.one_to_one[mapping] = [r for r in rules if len(r['inputs']) == 1]
             back_id = BACK[mapping][0]
@@ -59,18 +65,25 @@ class RoundTrip(unittest.TestCase):
                              'mapping_quality': 'approximate', 'evidence_status': 'proposed',
                              'assumptions': ['Test-only reverse of a source-derived one-to-one pair.'],
                              'evidence': rule['evidence'], 'loss_annotations': deepcopy(rule['loss_annotations'])})
-            document['mappings'].append({'id': back_id, 'rules': back})
+            backs.append({'id': back_id, 'rules': back})
+        # The way back is compiled in a small pack holding only the four profiles it
+        # touches, which compiles and evaluates much faster than the full pack.
+        profiles = {p for _, s, t in BACK.values() for p in (s, t)}
+        document['profiles'] = [p for p in document['profiles'] if p['id'] in profiles]
+        kept = {sid for p in document['profiles'] for sid in p['signal_ids']}
+        document['signals'] = [s for s in document['signals'] if s['id'] in kept]
+        document['mappings'] = backs
         validated = msf.validate_authoring(document)
         if not validated.ok:
             raise AssertionError(validated.report.to_dict())
-        cls.pack = msf.compile_pack(validated.value).value
-        cls.compiled = {}
-        for mapping, (source, target) in [*FORWARD.items(), *[(b, (s, t)) for b, s, t in BACK.values()]]:
-            result = msf.compile_mapping(cls.pack, msf.profile_snapshot(cls.pack, source).value,
-                                         msf.profile_snapshot(cls.pack, target).value, mapping, True)
+        back_pack = msf.compile_pack(validated.value).value
+        cls.compiled = {m: shared_pack.mapping(m, s, t) for m, (s, t) in FORWARD.items()}
+        for back_id, source, target in BACK.values():
+            result = msf.compile_mapping(back_pack, msf.profile_snapshot(back_pack, source).value,
+                                         msf.profile_snapshot(back_pack, target).value, back_id, True)
             if result.value is None:
-                raise AssertionError((mapping, result.report.to_dict()))
-            cls.compiled[mapping] = result.value
+                raise AssertionError((back_id, result.report.to_dict()))
+            cls.compiled[back_id] = result.value
 
     def evaluate(self, mapping, frames):
         samples = [{'timestamp': float(i), 'values': f, 'validity': dict.fromkeys(f, True)}

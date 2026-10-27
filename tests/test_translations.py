@@ -11,6 +11,11 @@ import unittest
 
 import msf_tools as msf
 
+try:
+    import shared_pack
+except ModuleNotFoundError:  # run by file path from the repository root
+    from tests import shared_pack
+
 ROOT = Path(__file__).resolve().parents[1]
 MAPPINGS = {
     'fb2.to_arkit': ('openxr.fb2', 'arkit.coefficient'),
@@ -24,18 +29,9 @@ SIDED = ('Left', 'Right', '_L_FB', '_R_FB')
 class Translations(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        loaded = msf.load_authoring(ROOT)
-        if loaded.value is None:
-            raise AssertionError(loaded.report.to_dict())
-        cls.document = loaded.value.to_dict()
-        cls.pack = msf.compile_pack(loaded.value).value
-        cls.compiled = {}
-        for mapping, (source, target) in MAPPINGS.items():
-            result = msf.compile_mapping(cls.pack, msf.profile_snapshot(cls.pack, source).value,
-                                         msf.profile_snapshot(cls.pack, target).value, mapping, True)
-            if result.value is None:
-                raise AssertionError((mapping, result.report.to_dict()))
-            cls.compiled[mapping] = result.value
+        cls.document = shared_pack.document()
+        cls.pack = shared_pack.pack()
+        cls.compiled = {m: shared_pack.mapping(m, s, t) for m, (s, t) in MAPPINGS.items()}
         cls.goldens = json.loads((ROOT / 'tests/fixtures/fb2_goldens.json').read_text())
 
     def rules(self, mapping):
