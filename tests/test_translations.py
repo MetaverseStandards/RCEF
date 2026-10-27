@@ -311,8 +311,7 @@ class Translations(unittest.TestCase):
     def test_translations_need_the_approximation_opt_in(self):
         for mapping, (source, target) in MAPPINGS.items():
             with self.subTest(mapping=mapping):
-                result = msf.compile_mapping(self.pack, msf.profile_snapshot(self.pack, source).value,
-                                             msf.profile_snapshot(self.pack, target).value, mapping)
+                result = msf.compile_mapping(self.pack, shared_pack.snapshot(source), shared_pack.snapshot(target), mapping)
                 self.assertIsNone(result.value)
                 self.assertIn('E_APPROXIMATION', {d.code for d in result.report.diagnostics})
 

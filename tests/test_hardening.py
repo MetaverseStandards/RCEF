@@ -10,6 +10,11 @@ import unittest
 
 import msf_tools as msf
 
+try:
+    import shared_pack
+except ModuleNotFoundError:  # run by file path from the repository root
+    from tests import shared_pack
+
 ROOT = Path(__file__).resolve().parents[1]
 
 C, P, U = 'verified_current', 'proposed', 'unresolved'
@@ -42,15 +47,12 @@ RF_ROWS = (
 class Hardening(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        loaded = msf.load_authoring(ROOT)
-        if not loaded.ok:
-            raise AssertionError(loaded.report.to_dict())
-        cls.document = loaded.value.to_dict()
-        # Compiling the full pack takes a large share of the suite's time, so it is
-        # compiled once here and tests that do not edit the document share it.
+        cls.document = shared_pack.document()
+        # Compiling the full pack takes a large share of the suite's time, so tests
+        # that do not edit the document share the suite's one compiled pack.
         # msf-tools rechecks the whole pack on every evaluation, so the fixture
         # mappings, which many tests evaluate repeatedly, use a pack holding only them.
-        cls.pack = cls.compile_pack(cls.document)
+        cls.pack = shared_pack.pack()
         cls.fixture_pack = cls.compile_pack(cls.only(FIXTURE_PROFILES, FIXTURE_MAPPINGS))
         cls.shared_mappings = {}
         cls.expectations = json.loads((ROOT / 'tests/fixtures/identity_expectations.json').read_text())['rows']
@@ -93,25 +95,33 @@ class Hardening(unittest.TestCase):
     def shared_mapping(self, pack, mapping, source, target, approximate):
         key = (pack is self.fixture_pack, mapping, source, target, approximate)
         if key not in self.shared_mappings:
-            self.shared_mappings[key] = msf.compile_mapping(
-                pack, self.ok(msf.profile_snapshot(pack, source)),
-                self.ok(msf.profile_snapshot(pack, target)), mapping, approximate)
+            if pack is self.pack:
+                snapshots = shared_pack.snapshot(source), shared_pack.snapshot(target)
+            else:
+                snapshots = self.ok(msf.profile_snapshot(pack, source)), self.ok(msf.profile_snapshot(pack, target))
+            self.shared_mappings[key] = msf.compile_mapping(pack, *snapshots, mapping, approximate)
         return self.shared_mappings[key]
 
     @classmethod
     def only(cls, profiles, mappings):
         """A copy of the document reduced to some profiles and mappings, which compiles quickly."""
-        d = deepcopy(cls.document)
-        d['profiles'] = [p for p in d['profiles'] if p['id'] in profiles]
+        d = cls.subset(lambda p: p['id'] in profiles, lambda s: True, lambda m: m['id'] in mappings)
         kept = {s for p in d['profiles'] for s in p['signal_ids']}
         d['signals'] = [s for s in d['signals'] if s['id'] in kept]
-        d['mappings'] = [m for m in d['mappings'] if m['id'] in mappings]
         return d
 
+    @classmethod
+    def subset(cls, profile, signal, mapping):
+        """A deep copy of only the profiles, signals and mappings kept; copying the whole document is slow."""
+        d = {k: v for k, v in cls.document.items() if k not in ('profiles', 'signals', 'mappings')}
+        d['profiles'] = [p for p in cls.document['profiles'] if profile(p)]
+        d['signals'] = [s for s in cls.document['signals'] if signal(s)]
+        d['mappings'] = [m for m in cls.document['mappings'] if mapping(m)]
+        return deepcopy(d)
+
     def identity(self, source=SOURCE, target=TARGET, rule=RULE, mapping='arkit.to_canonical'):
-        d = deepcopy(self.document)
-        d['signals'] = [s for s in d['signals'] if s['id'] in (source, target)]
-        d['profiles'] = [p for p in d['profiles'] if p['id'] in ('arkit.coefficient', 'rcef.canonical')]
+        d = self.subset(lambda p: p['id'] in ('arkit.coefficient', 'rcef.canonical'),
+                        lambda s: s['id'] in (source, target), lambda m: m['id'] == mapping)
         for p in d['profiles']:
             p['signal_ids'] = [s for s in p['signal_ids'] if s in (source, target)]
         m = next(m for m in d['mappings'] if m['id'] == mapping)
@@ -372,7 +382,7 @@ class Hardening(unittest.TestCase):
     def test_sem07_literal_audit_rejects_paired_relabels_and_invented_neutral(self):
         for cause in ('neutral', 'side', 'units', 'definition'):
             with self.subTest(cause=cause):
-                d = deepcopy(self.document); signals = {s['id']: s for s in d['signals']}
+                d = {**self.document, 'signals': deepcopy(self.document['signals'])}; signals = {s['id']: s for s in d['signals']}
                 if cause == 'neutral': signals['rcef.vrcft.eye.Left.Openness']['neutral'] = 1.
                 elif cause == 'side':
                     for sid in ('vrcft.eye.Left.Openness', 'rcef.vrcft.eye.Left.Openness'): signals[sid]['side'] = 'shared'

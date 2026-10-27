@@ -34,9 +34,13 @@ def pack():
 
 
 @cache
+def snapshot(profile_id):
+    return msf.profile_snapshot(pack(), profile_id).value
+
+
+@cache
 def mapping(mapping_id, source, target, approximate=True):
-    result = msf.compile_mapping(pack(), msf.profile_snapshot(pack(), source).value,
-                                 msf.profile_snapshot(pack(), target).value, mapping_id, approximate)
+    result = msf.compile_mapping(pack(), snapshot(source), snapshot(target), mapping_id, approximate)
     if result.value is None:
         raise AssertionError((mapping_id, result.report.to_dict()))
     return result.value

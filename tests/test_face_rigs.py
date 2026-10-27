@@ -114,7 +114,8 @@ class VowelPresets(unittest.TestCase):
             self.assertEqual(viseme_pipeline.blink_presets(path), {'EYES_CLOSED_L': 'blink'})
 
     def test_the_wink_frames_close_one_vrm_eye(self):
-        translator = rcef_translate.fb2_to_vrm()
+        translator = rcef_translate.fb2_to_vrm(pack=shared_pack.pack(), compiled={
+            'fb2.to_vrm': shared_pack.mapping('fb2.to_vrm', 'openxr.fb2', 'vrm.preset')})
         frames = viseme_pipeline.wink_frames(translator)
         self.assertEqual({f['segment'] for f in frames}, {'wink left', 'wink right'})
         hold = next(f for f in frames if f['segment'] == 'wink left' and f['labels']['phase'] == 'hold')
