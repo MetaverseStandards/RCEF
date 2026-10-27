@@ -1,53 +1,53 @@
-arkit,fb2_inputs,route,sources
-browDownLeft,BROW_LOWERER_L*1,godot,godot_face_modifier:L272;godot_vendors_fb2:L311
-browDownRight,BROW_LOWERER_R*1,godot,godot_face_modifier:L270;godot_vendors_fb2:L310
-browInnerUp,INNER_BROW_RAISER_L*0.5;INNER_BROW_RAISER_R*0.5,vrcft mean via godot names,vrcft_docs_arkit:L41;vrcft_code_parameters:L87;vrcft_code_parameters:L88;godot_face_modifier:L102;godot_vendors_fb2:L224;godot_face_modifier:L100;godot_vendors_fb2:L223
-browOuterUpLeft,OUTER_BROW_RAISER_L*1,godot,godot_face_modifier:L106;godot_vendors_fb2:L226
-browOuterUpRight,OUTER_BROW_RAISER_R*1,godot,godot_face_modifier:L104;godot_vendors_fb2:L225
-cheekPuff,CHEEK_PUFF_L*0.5;CHEEK_PUFF_R*0.5,godot,godot_face_modifier:L288;godot_vendors_fb2:L235;godot_vendors_fb2:L236;godot_vendors_fb2:L319
-cheekSquintLeft,CHEEK_RAISER_L*1,godot,godot_face_modifier:L122;godot_vendors_fb2:L234
-cheekSquintRight,CHEEK_RAISER_R*1,godot,godot_face_modifier:L120;godot_vendors_fb2:L233
-eyeBlinkLeft,EYES_CLOSED_L*1,godot,godot_face_modifier:L74;godot_vendors_fb2:L210
-eyeBlinkRight,EYES_CLOSED_R*1,godot,godot_face_modifier:L72;godot_vendors_fb2:L209
-eyeLookDownLeft,EYES_LOOK_DOWN_L*1,godot,godot_face_modifier:L70;godot_vendors_fb2:L208
-eyeLookDownRight,EYES_LOOK_DOWN_R*1,godot,godot_face_modifier:L62;godot_vendors_fb2:L204
-eyeLookInLeft,EYES_LOOK_RIGHT_L*1,godot,godot_face_modifier:L66;godot_vendors_fb2:L206
-eyeLookInRight,EYES_LOOK_LEFT_R*1,godot,godot_face_modifier:L58;godot_vendors_fb2:L202
-eyeLookOutLeft,EYES_LOOK_LEFT_L*1,godot,godot_face_modifier:L64;godot_vendors_fb2:L205
-eyeLookOutRight,EYES_LOOK_RIGHT_R*1,godot,godot_face_modifier:L56;godot_vendors_fb2:L201
-eyeLookUpLeft,EYES_LOOK_UP_L*1,godot,godot_face_modifier:L68;godot_vendors_fb2:L207
-eyeLookUpRight,EYES_LOOK_UP_R*1,godot,godot_face_modifier:L60;godot_vendors_fb2:L203
-eyeSquintLeft,LID_TIGHTENER_L*1,godot,godot_face_modifier:L78;godot_vendors_fb2:L212
-eyeSquintRight,LID_TIGHTENER_R*1,godot,godot_face_modifier:L76;godot_vendors_fb2:L211
-eyeWideLeft,UPPER_LID_RAISER_L*1,godot,godot_face_modifier:L82;godot_vendors_fb2:L214
-eyeWideRight,UPPER_LID_RAISER_R*1,godot,godot_face_modifier:L80;godot_vendors_fb2:L213
-jawForward,JAW_THRUST*1,godot,godot_face_modifier:L140;godot_vendors_fb2:L243
-jawLeft,JAW_SIDEWAYS_LEFT*1,godot,godot_face_modifier:L138;godot_vendors_fb2:L242
-jawOpen,JAW_DROP*1,godot,godot_face_modifier:L132;godot_vendors_fb2:L239
-jawRight,JAW_SIDEWAYS_RIGHT*1,godot,godot_face_modifier:L136;godot_vendors_fb2:L241
-mouthClose,LIPS_TOWARD*1,godot,godot_face_modifier:L134;godot_vendors_fb2:L240
-mouthDimpleLeft,DIMPLER_L*1,godot,godot_face_modifier:L214;godot_vendors_fb2:L280
-mouthDimpleRight,DIMPLER_R*1,godot,godot_face_modifier:L212;godot_vendors_fb2:L279
-mouthFrownLeft,LIP_CORNER_DEPRESSOR_L*1,godot,godot_face_modifier:L206;godot_vendors_fb2:L276
-mouthFrownRight,LIP_CORNER_DEPRESSOR_R*1,godot,godot_face_modifier:L204;godot_vendors_fb2:L275
-mouthFunnel,LIP_FUNNELER_LB*0.25;LIP_FUNNELER_LT*0.25;LIP_FUNNELER_RB*0.25;LIP_FUNNELER_RT*0.25,godot,godot_face_modifier:L304;godot_vendors_fb2:L253;godot_vendors_fb2:L254;godot_vendors_fb2:L255;godot_vendors_fb2:L256;godot_vendors_fb2:L325;godot_vendors_fb2:L326;godot_vendors_fb2:L327
-mouthLeft,MOUTH_LEFT*1,godot,godot_face_modifier:L320;godot_vendors_fb2:L335
-mouthLowerDownLeft,LOWER_LIP_DEPRESSOR_L*1,godot,godot_face_modifier:L182;godot_vendors_fb2:L264
-mouthLowerDownRight,LOWER_LIP_DEPRESSOR_R*1,godot,godot_face_modifier:L180;godot_vendors_fb2:L263
-mouthPressLeft,LIP_PRESSOR_L*1,godot,godot_face_modifier:L222;godot_vendors_fb2:L284
-mouthPressRight,LIP_PRESSOR_R*1,godot,godot_face_modifier:L220;godot_vendors_fb2:L283
-mouthPucker,LIP_PUCKER_L*0.5;LIP_PUCKER_R*0.5,godot,godot_face_modifier:L310;godot_vendors_fb2:L257;godot_vendors_fb2:L258;godot_vendors_fb2:L259;godot_vendors_fb2:L260;godot_vendors_fb2:L328;godot_vendors_fb2:L329;godot_vendors_fb2:L330
-mouthRight,MOUTH_RIGHT*1,godot,godot_face_modifier:L318;godot_vendors_fb2:L334
-mouthRollLower,LIP_SUCK_LB*0.5;LIP_SUCK_RB*0.5,godot,godot_face_modifier:L296;godot_vendors_fb2:L249;godot_vendors_fb2:L250;godot_vendors_fb2:L323
-mouthRollUpper,LIP_SUCK_LT*0.5;LIP_SUCK_RT*0.5,godot,godot_face_modifier:L294;godot_vendors_fb2:L247;godot_vendors_fb2:L248;godot_vendors_fb2:L322
-mouthShrugLower,CHIN_RAISER_B*1,godot,godot_face_modifier:L218;godot_vendors_fb2:L282
-mouthShrugUpper,CHIN_RAISER_T*1,godot,godot_face_modifier:L216;godot_vendors_fb2:L281
-mouthSmileLeft,LIP_CORNER_PULLER_L*1,godot,godot_face_modifier:L324;godot_vendors_fb2:L337
-mouthSmileRight,LIP_CORNER_PULLER_R*1,godot,godot_face_modifier:L322;godot_vendors_fb2:L336
-mouthStretchLeft,LIP_STRETCHER_L*1,godot,godot_face_modifier:L210;godot_vendors_fb2:L278
-mouthStretchRight,LIP_STRETCHER_R*1,godot,godot_face_modifier:L208;godot_vendors_fb2:L277
-mouthUpperUpLeft,UPPER_LIP_RAISER_L*1,godot,godot_face_modifier:L178;godot_vendors_fb2:L262
-mouthUpperUpRight,UPPER_LIP_RAISER_R*1,godot,godot_face_modifier:L176;godot_vendors_fb2:L261
-noseSneerLeft,NOSE_WRINKLER_L*1,godot,godot_face_modifier:L110;godot_vendors_fb2:L228
-noseSneerRight,NOSE_WRINKLER_R*1,godot,godot_face_modifier:L108;godot_vendors_fb2:L227
-tongueOut,TONGUE_OUT*1,godot,godot_face_modifier:L228;godot_vendors_fb2:L287
+arkit,fb2_inputs,route,sources,second_sources,second_source_lines,notes
+browDownLeft,BROW_LOWERER_L*1,godot,godot_face_modifier:L272;godot_vendors_fb2:L311,vrcft;ict,vrcft_docs_arkit:L40;vrcft_docs_movement:L41;ict_facekit:L158,
+browDownRight,BROW_LOWERER_R*1,godot,godot_face_modifier:L270;godot_vendors_fb2:L310,vrcft;ict,vrcft_docs_arkit:L39;vrcft_docs_movement:L40;ict_facekit:L158,
+browInnerUp,INNER_BROW_RAISER_L*0.5;INNER_BROW_RAISER_R*0.5,vrcft mean via godot names,vrcft_docs_arkit:L41;vrcft_code_parameters:L87;vrcft_code_parameters:L88;godot_face_modifier:L102;godot_vendors_fb2:L224;godot_face_modifier:L100;godot_vendors_fb2:L223,ict,ict_facekit:L156,the route itself comes from vrcft; not counted again
+browOuterUpLeft,OUTER_BROW_RAISER_L*1,godot,godot_face_modifier:L106;godot_vendors_fb2:L226,vrcft;ict,vrcft_docs_arkit:L43;vrcft_docs_movement:L45;ict_facekit:L157,
+browOuterUpRight,OUTER_BROW_RAISER_R*1,godot,godot_face_modifier:L104;godot_vendors_fb2:L225,vrcft;ict,vrcft_docs_arkit:L42;vrcft_docs_movement:L44;ict_facekit:L157,
+cheekPuff,CHEEK_PUFF_L*0.5;CHEEK_PUFF_R*0.5,godot,godot_face_modifier:L288;godot_vendors_fb2:L235;godot_vendors_fb2:L236;godot_vendors_fb2:L319,vrcft mean;ict,vrcft_docs_arkit:L48;vrcft_code_parameters:L125;vrcft_code_parameters:L126;vrcft_code_parameters:L127;vrcft_docs_movement:L50;vrcft_docs_movement:L51;ict_facekit:L179,
+cheekSquintLeft,CHEEK_RAISER_L*1,godot,godot_face_modifier:L122;godot_vendors_fb2:L234,vrcft;ict,vrcft_docs_arkit:L47;vrcft_docs_movement:L49;ict_facekit:L159,
+cheekSquintRight,CHEEK_RAISER_R*1,godot,godot_face_modifier:L120;godot_vendors_fb2:L233,vrcft;ict,vrcft_docs_arkit:L46;vrcft_docs_movement:L48;ict_facekit:L159,
+eyeBlinkLeft,EYES_CLOSED_L*1,godot,godot_face_modifier:L74;godot_vendors_fb2:L210,vrcft;ict,vrcft_docs_arkit:L34;vrcft_docs_movement:L35;ict_facekit:L180,
+eyeBlinkRight,EYES_CLOSED_R*1,godot,godot_face_modifier:L72;godot_vendors_fb2:L209,vrcft;ict,vrcft_docs_arkit:L33;vrcft_docs_movement:L34;ict_facekit:L180,
+eyeLookDownLeft,EYES_LOOK_DOWN_L*1,godot,godot_face_modifier:L70;godot_vendors_fb2:L208,vrcft;ict,vrcft_docs_arkit:L30;vrcft_docs_movement:L31;ict_facekit:L184,
+eyeLookDownRight,EYES_LOOK_DOWN_R*1,godot,godot_face_modifier:L62;godot_vendors_fb2:L204,vrcft;ict,vrcft_docs_arkit:L26;vrcft_docs_movement:L27;ict_facekit:L184,
+eyeLookInLeft,EYES_LOOK_RIGHT_L*1,godot,godot_face_modifier:L66;godot_vendors_fb2:L206,ict,ict_facekit:L182,vrcft label EYES_LOOK_IN_L not in the registry; not counted
+eyeLookInRight,EYES_LOOK_LEFT_R*1,godot,godot_face_modifier:L58;godot_vendors_fb2:L202,ict,ict_facekit:L181,vrcft label EYES_LOOK_IN_R not in the registry; not counted
+eyeLookOutLeft,EYES_LOOK_LEFT_L*1,godot,godot_face_modifier:L64;godot_vendors_fb2:L205,ict,ict_facekit:L181,vrcft label EYES_LOOK_OUT_L not in the registry; not counted
+eyeLookOutRight,EYES_LOOK_RIGHT_R*1,godot,godot_face_modifier:L56;godot_vendors_fb2:L201,ict,ict_facekit:L182,vrcft label EYES_LOOK_OUT_R not in the registry; not counted
+eyeLookUpLeft,EYES_LOOK_UP_L*1,godot,godot_face_modifier:L68;godot_vendors_fb2:L207,vrcft;ict,vrcft_docs_arkit:L29;vrcft_docs_movement:L30;ict_facekit:L183,
+eyeLookUpRight,EYES_LOOK_UP_R*1,godot,godot_face_modifier:L60;godot_vendors_fb2:L203,vrcft;ict,vrcft_docs_arkit:L25;vrcft_docs_movement:L26;ict_facekit:L183,
+eyeSquintLeft,LID_TIGHTENER_L*1,godot,godot_face_modifier:L78;godot_vendors_fb2:L212,ict,ict_facekit:L161,vrcft label EYES_SQUINT_R not in the registry; not counted
+eyeSquintRight,LID_TIGHTENER_R*1,godot,godot_face_modifier:L76;godot_vendors_fb2:L211,ict,ict_facekit:L161,vrcft label EYES_SQUINT_R not in the registry; not counted
+eyeWideLeft,UPPER_LID_RAISER_L*1,godot,godot_face_modifier:L82;godot_vendors_fb2:L214,ict,ict_facekit:L160,vrcft label EYES_WIDEN_L not in the registry; not counted
+eyeWideRight,UPPER_LID_RAISER_R*1,godot,godot_face_modifier:L80;godot_vendors_fb2:L213,ict,ict_facekit:L160,vrcft label EYES_WIDEN_R not in the registry; not counted
+jawForward,JAW_THRUST*1,godot,godot_face_modifier:L140;godot_vendors_fb2:L243,vrcft;ict,vrcft_docs_arkit:L53;vrcft_docs_movement:L58;ict_facekit:L176,
+jawLeft,JAW_SIDEWAYS_LEFT*1,godot,godot_face_modifier:L138;godot_vendors_fb2:L242,vrcft,vrcft_docs_arkit:L52;vrcft_docs_movement:L57,
+jawOpen,JAW_DROP*1,godot,godot_face_modifier:L132;godot_vendors_fb2:L239,vrcft;ict,vrcft_docs_arkit:L49;vrcft_docs_movement:L54;ict_facekit:L174,
+jawRight,JAW_SIDEWAYS_RIGHT*1,godot,godot_face_modifier:L136;godot_vendors_fb2:L241,vrcft,vrcft_docs_arkit:L51;vrcft_docs_movement:L56,
+mouthClose,LIPS_TOWARD*1,godot,godot_face_modifier:L134;godot_vendors_fb2:L240,vrcft,vrcft_docs_arkit:L50;vrcft_docs_movement:L55,
+mouthDimpleLeft,DIMPLER_L*1,godot,godot_face_modifier:L214;godot_vendors_fb2:L280,vrcft;ict,vrcft_docs_arkit:L69;vrcft_docs_movement:L80;ict_facekit:L166,
+mouthDimpleRight,DIMPLER_R*1,godot,godot_face_modifier:L212;godot_vendors_fb2:L279,vrcft;ict,vrcft_docs_arkit:L68;vrcft_docs_movement:L79;ict_facekit:L166,
+mouthFrownLeft,LIP_CORNER_DEPRESSOR_L*1,godot,godot_face_modifier:L206;godot_vendors_fb2:L276,vrcft;ict,vrcft_docs_arkit:L65;vrcft_docs_movement:L76;ict_facekit:L167,
+mouthFrownRight,LIP_CORNER_DEPRESSOR_R*1,godot,godot_face_modifier:L204;godot_vendors_fb2:L275,vrcft;ict,vrcft_docs_arkit:L64;vrcft_docs_movement:L75;ict_facekit:L167,
+mouthFunnel,LIP_FUNNELER_LB*0.25;LIP_FUNNELER_LT*0.25;LIP_FUNNELER_RB*0.25;LIP_FUNNELER_RT*0.25,godot,godot_face_modifier:L304;godot_vendors_fb2:L253;godot_vendors_fb2:L254;godot_vendors_fb2:L255;godot_vendors_fb2:L256;godot_vendors_fb2:L325;godot_vendors_fb2:L326;godot_vendors_fb2:L327,vrcft mean;ict,vrcft_docs_arkit:L56;vrcft_code_parameters:L154;vrcft_code_parameters:L155;vrcft_code_parameters:L156;vrcft_docs_movement:L63;vrcft_docs_movement:L64;vrcft_docs_movement:L65;vrcft_docs_movement:L66;ict_facekit:L172,
+mouthLeft,MOUTH_LEFT*1,godot,godot_face_modifier:L320;godot_vendors_fb2:L335,,,single project for the ARKit name (Godot); vrcft pairs MOUTH_LEFT with its blended MouthLeft (vrcft_docs_movement:L88)
+mouthLowerDownLeft,LOWER_LIP_DEPRESSOR_L*1,godot,godot_face_modifier:L182;godot_vendors_fb2:L264,ict,ict_facekit:L168,vrcft label LOWER_LIP_DEPRESSER_L not in the registry; not counted
+mouthLowerDownRight,LOWER_LIP_DEPRESSOR_R*1,godot,godot_face_modifier:L180;godot_vendors_fb2:L263,vrcft;ict,vrcft_docs_arkit:L60;vrcft_docs_movement:L71;ict_facekit:L168,
+mouthPressLeft,LIP_PRESSOR_L*1,godot,godot_face_modifier:L222;godot_vendors_fb2:L284,vrcft;ict,vrcft_docs_arkit:L73;vrcft_docs_movement:L84;ict_facekit:L173,
+mouthPressRight,LIP_PRESSOR_R*1,godot,godot_face_modifier:L220;godot_vendors_fb2:L283,vrcft;ict,vrcft_docs_arkit:L72;vrcft_docs_movement:L83;ict_facekit:L173,
+mouthPucker,LIP_PUCKER_L*0.5;LIP_PUCKER_R*0.5,godot,godot_face_modifier:L310;godot_vendors_fb2:L257;godot_vendors_fb2:L258;godot_vendors_fb2:L259;godot_vendors_fb2:L260;godot_vendors_fb2:L328;godot_vendors_fb2:L329;godot_vendors_fb2:L330,vrcft mean;ict,vrcft_docs_arkit:L57;vrcft_code_parameters:L161;vrcft_code_parameters:L162;vrcft_code_parameters:L163;vrcft_docs_movement:L67;vrcft_docs_movement:L68;ict_facekit:L170,
+mouthRight,MOUTH_RIGHT*1,godot,godot_face_modifier:L318;godot_vendors_fb2:L334,,,single project for the ARKit name (Godot); vrcft pairs MOUTH_RIGHT with its blended MouthRight (vrcft_docs_movement:L87)
+mouthRollLower,LIP_SUCK_LB*0.5;LIP_SUCK_RB*0.5,godot,godot_face_modifier:L296;godot_vendors_fb2:L249;godot_vendors_fb2:L250;godot_vendors_fb2:L323,vrcft mean;ict,vrcft_docs_arkit:L55;vrcft_code_parameters:L147;vrcft_docs_movement:L61;vrcft_docs_movement:L62;ict_facekit:L175,
+mouthRollUpper,LIP_SUCK_LT*0.5;LIP_SUCK_RT*0.5,godot,godot_face_modifier:L294;godot_vendors_fb2:L247;godot_vendors_fb2:L248;godot_vendors_fb2:L322,vrcft mean;ict,vrcft_docs_arkit:L54;vrcft_code_parameters:L146;vrcft_docs_movement:L59;vrcft_docs_movement:L60;ict_facekit:L175,
+mouthShrugLower,CHIN_RAISER_B*1,godot,godot_face_modifier:L218;godot_vendors_fb2:L282,vrcft;ict,vrcft_docs_arkit:L71;vrcft_docs_movement:L82;ict_facekit:L169,
+mouthShrugUpper,CHIN_RAISER_T*1,godot,godot_face_modifier:L216;godot_vendors_fb2:L281,vrcft;ict,vrcft_docs_arkit:L70;vrcft_docs_movement:L81;ict_facekit:L163,
+mouthSmileLeft,LIP_CORNER_PULLER_L*1,godot,godot_face_modifier:L324;godot_vendors_fb2:L337,vrcft;ict,vrcft_docs_arkit:L63;vrcft_docs_movement:L74;ict_facekit:L165,
+mouthSmileRight,LIP_CORNER_PULLER_R*1,godot,godot_face_modifier:L322;godot_vendors_fb2:L336,vrcft;ict,vrcft_docs_arkit:L62;vrcft_docs_movement:L73;ict_facekit:L165,
+mouthStretchLeft,LIP_STRETCHER_L*1,godot,godot_face_modifier:L210;godot_vendors_fb2:L278,vrcft;ict,vrcft_docs_arkit:L67;vrcft_docs_movement:L78;ict_facekit:L171,
+mouthStretchRight,LIP_STRETCHER_R*1,godot,godot_face_modifier:L208;godot_vendors_fb2:L277,vrcft;ict,vrcft_docs_arkit:L66;vrcft_docs_movement:L77;ict_facekit:L171,
+mouthUpperUpLeft,UPPER_LIP_RAISER_L*1,godot,godot_face_modifier:L178;godot_vendors_fb2:L262,vrcft,vrcft_docs_arkit:L59;vrcft_docs_movement:L70,"ict names AU11 (Nasolabial deepener), not AU10; a disagreement, not a source"
+mouthUpperUpRight,UPPER_LIP_RAISER_R*1,godot,godot_face_modifier:L176;godot_vendors_fb2:L261,vrcft,vrcft_docs_arkit:L58;vrcft_docs_movement:L69,"ict names AU11 (Nasolabial deepener), not AU10; a disagreement, not a source"
+noseSneerLeft,NOSE_WRINKLER_L*1,godot,godot_face_modifier:L110;godot_vendors_fb2:L228,vrcft;ict,vrcft_docs_arkit:L45;vrcft_docs_movement:L47;ict_facekit:L162,
+noseSneerRight,NOSE_WRINKLER_R*1,godot,godot_face_modifier:L108;godot_vendors_fb2:L227,vrcft;ict,vrcft_docs_arkit:L44;vrcft_docs_movement:L46;ict_facekit:L162,
+tongueOut,TONGUE_OUT*1,godot,godot_face_modifier:L228;godot_vendors_fb2:L287,vrcft,vrcft_docs_arkit:L74;vrcft_docs_movement:L89,

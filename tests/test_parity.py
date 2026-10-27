@@ -80,13 +80,11 @@ class Parity(unittest.TestCase):
 
     def test_all_provider_identities_share_explicit_calibration(self):
         signals = {s['id']: s for s in self.document['signals']}
-        canonical = self.ok(msf.profile_snapshot(self.pack, 'rcef.canonical'))
         for mapping, profile in [('arkit.to_canonical', 'arkit.coefficient'),
                                  ('fb2.to_canonical', 'openxr.fb2'),
                                  ('vrcft_eye.to_canonical', 'vrcft.eye')]:
             with self.subTest(mapping=mapping):
-                source = self.ok(msf.profile_snapshot(self.pack, profile))
-                compiled = self.ok(msf.compile_mapping(self.pack, source, canonical, mapping))
+                compiled = shared_pack.mapping(mapping, profile, 'rcef.canonical', False)
                 rules = next(m['rules'] for m in self.document['mappings'] if m['id'] == mapping)
                 values = {r['inputs'][0]: 0.25 for r in rules}
                 sample = self.ok(msf.evaluate_mapping(compiled, [self.frame(values)])).samples[0]
@@ -97,9 +95,8 @@ class Parity(unittest.TestCase):
                     self.assertEqual(sample['values'][output_id], 0.25)
 
     def test_unresolved_cross_provider_refused(self):
-        source = self.ok(msf.profile_snapshot(self.pack, 'mediapipe.label'))
-        target = self.ok(msf.profile_snapshot(self.pack, 'rcef.canonical'))
-        self.rejected(msf.compile_mapping(self.pack, source, target, 'survey.ambiguous', True))
+        self.rejected(msf.compile_mapping(self.pack, shared_pack.snapshot('mediapipe.label'),
+                                          shared_pack.snapshot('rcef.canonical'), 'survey.ambiguous', True))
 
     def test_invalid_missing_boolean_nonfinite_and_domain_samples(self):
         compiled = self.ok(self.compile('fixture.affine'))

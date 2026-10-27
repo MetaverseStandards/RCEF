@@ -2,6 +2,51 @@
 
 Original documentation: CC-BY-SA-4.0.
 
+## Data 0.3.0 — 2026-10-26
+
+Complete FB2 -> ARKit, read it back, and add ARKit -> Unified Expressions
+and FB2 -> VRM blinks: 168 new rules, 187 in all. All new rules are proposed
+and approximate, as in 0.2.0: they compile only with the approximation
+opt-in, and each one states its calibration assumption and losses and cites
+at least two public sources.
+
+- `fb2.to_arkit` gains 34 rules and `fb2_gaze.to_arkit` gains vertical gaze
+  (4 rules), so all 52 ARKit coefficients are written. 4 are averages:
+  mouthFunnel (the four lip quarters), mouthPucker, mouthRollUpper and
+  mouthRollLower. mouthLeft and mouthRight are flagged: only Godot names the
+  ARKit coefficient for the FB2 channel, though VRCFaceTracking pairs the FB2
+  channel with its Unified shape and the definitions agree.
+
+- `arkit.to_fb2` (52 rules) and `arkit_gaze.to_fb2` (8 rules) read the FB2 ->
+  ARKit routes back. A coefficient FB2 splits into parts (browInnerUp,
+  cheekPuff, mouthPucker, mouthRollUpper, mouthRollLower, mouthFunnel) is
+  copied to each part, so FB2 -> ARKit returns it exactly; those rules declare
+  that the symmetry is invented. The gaze rules declare that FB2 requires
+  opposing directions to be exclusive and that no operator can enforce it;
+  the example translator refuses such frames.
+
+- `arkit.to_vrcft_artist` (68 rules) writes VRCFaceTracking's Unified
+  Expressions base shapes. Where Unified Expressions builds an ARKit
+  coefficient from several shapes, the value is copied into each, so
+  VRCFaceTracking's own composite gives it back: a mean for most, and its
+  published 0.75/0.25 and 0.8/0.2 splits for browDown and mouthSmile (new
+  evidence record `vrcft_simple_expressions`). mouthLeft and mouthRight are
+  flagged as above.
+
+- `fb2.to_vrm` (2 rules): EYES_CLOSED_L and _R to VRM blinkLeft and
+  blinkRight. `blink` is left unset so a model binding all three is not
+  driven twice. VRM does not say whose left blinkLeft is; a slow test reads
+  the side from the VRM sample's geometry.
+
+The signals these rules use for the first time become `mapped`. The demo
+frames move every channel an FB2 rule reads on its own, and the VRM viseme
+example ends with the expression library's two winks. The slow tier halves
+each rule on its own as a cross-check on the fast all-at-once test.
+
+Still unresolved, with reasons in the README: VRM look presets, VRM emotions,
+MediaPipe -> ARKit, Unified Expressions -> ARKit and FB2 -> Unified
+Expressions.
+
 ## Data 0.2.0 — 2026-10-26
 
 Add the first cross-provider translations. All 19 rules are proposed and

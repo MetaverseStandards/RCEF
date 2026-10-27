@@ -1,0 +1,1131 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+# Proposed ARKit -> FB2 translations: the FB2 -> ARKit routes read back. A
+# coefficient FB2 splits into parts is copied to each part, so FB2 -> ARKit gives
+# it back exactly. Gaze is a separate mapping, as in the forward direction.
+
+[[mappings]]
+id = "arkit.to_fb2"
+
+[[mappings.rules]]
+id = "arkit_fb2.BROW_LOWERER_L"
+inputs = ["arkit.coefficient.browDownLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit browDownLeft corresponds to FB2 BROW_LOWERER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.browDownLeft", "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.BROW_LOWERER_R"
+inputs = ["arkit.coefficient.browDownRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit browDownRight corresponds to FB2 BROW_LOWERER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.browDownRight", "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.INNER_BROW_RAISER_L"
+inputs = ["arkit.coefficient.browInnerUp"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit browInnerUp is one coefficient; FB2 INNER_BROW_RAISER_L is set to it, as are INNER_BROW_RAISER_R, so that FB2 -> ARKit gives browInnerUp back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_code_parameters", "vrcft_docs_movement", "vrcft_docs_arkit", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.browInnerUp", "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.browInnerUp", "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.INNER_BROW_RAISER_R"
+inputs = ["arkit.coefficient.browInnerUp"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit browInnerUp is one coefficient; FB2 INNER_BROW_RAISER_R is set to it, as are INNER_BROW_RAISER_L, so that FB2 -> ARKit gives browInnerUp back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_code_parameters", "vrcft_docs_movement", "vrcft_docs_arkit", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.browInnerUp", "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.browInnerUp", "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.OUTER_BROW_RAISER_L"
+inputs = ["arkit.coefficient.browOuterUpLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit browOuterUpLeft corresponds to FB2 OUTER_BROW_RAISER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.browOuterUpLeft", "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.OUTER_BROW_RAISER_R"
+inputs = ["arkit.coefficient.browOuterUpRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit browOuterUpRight corresponds to FB2 OUTER_BROW_RAISER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.browOuterUpRight", "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.CHEEK_PUFF_L"
+inputs = ["arkit.coefficient.cheekPuff"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit cheekPuff is one coefficient; FB2 CHEEK_PUFF_L is set to it, as are CHEEK_PUFF_R, so that FB2 -> ARKit gives cheekPuff back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.cheekPuff", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.cheekPuff", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.CHEEK_PUFF_R"
+inputs = ["arkit.coefficient.cheekPuff"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit cheekPuff is one coefficient; FB2 CHEEK_PUFF_R is set to it, as are CHEEK_PUFF_L, so that FB2 -> ARKit gives cheekPuff back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.cheekPuff", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.cheekPuff", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.CHEEK_RAISER_L"
+inputs = ["arkit.coefficient.cheekSquintLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit cheekSquintLeft corresponds to FB2 CHEEK_RAISER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.cheekSquintLeft", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.CHEEK_RAISER_R"
+inputs = ["arkit.coefficient.cheekSquintRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit cheekSquintRight corresponds to FB2 CHEEK_RAISER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.cheekSquintRight", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_CLOSED_L"
+inputs = ["arkit.coefficient.eyeBlinkLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeBlinkLeft corresponds to FB2 EYES_CLOSED_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeBlinkLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_CLOSED_R"
+inputs = ["arkit.coefficient.eyeBlinkRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeBlinkRight corresponds to FB2 EYES_CLOSED_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeBlinkRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LID_TIGHTENER_L"
+inputs = ["arkit.coefficient.eyeSquintLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeSquintLeft corresponds to FB2 LID_TIGHTENER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_SQUINT_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeSquintLeft", "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LID_TIGHTENER_R"
+inputs = ["arkit.coefficient.eyeSquintRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeSquintRight corresponds to FB2 LID_TIGHTENER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_SQUINT_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeSquintRight", "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.UPPER_LID_RAISER_L"
+inputs = ["arkit.coefficient.eyeWideLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeWideLeft corresponds to FB2 UPPER_LID_RAISER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_WIDEN_L, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeWideLeft", "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.UPPER_LID_RAISER_R"
+inputs = ["arkit.coefficient.eyeWideRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeWideRight corresponds to FB2 UPPER_LID_RAISER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled EYES_WIDEN_R, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeWideRight", "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.JAW_THRUST"
+inputs = ["arkit.coefficient.jawForward"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit jawForward corresponds to FB2 JAW_THRUST; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.jawForward", "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.JAW_SIDEWAYS_LEFT"
+inputs = ["arkit.coefficient.jawLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit jawLeft corresponds to FB2 JAW_SIDEWAYS_LEFT; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.jawLeft", "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.JAW_DROP"
+inputs = ["arkit.coefficient.jawOpen"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit jawOpen corresponds to FB2 JAW_DROP; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.jawOpen", "openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.JAW_SIDEWAYS_RIGHT"
+inputs = ["arkit.coefficient.jawRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit jawRight corresponds to FB2 JAW_SIDEWAYS_RIGHT; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.jawRight", "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIPS_TOWARD"
+inputs = ["arkit.coefficient.mouthClose"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthClose corresponds to FB2 LIPS_TOWARD; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_shapes", "vrcft_docs_overview"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthClose", "openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.DIMPLER_L"
+inputs = ["arkit.coefficient.mouthDimpleLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthDimpleLeft corresponds to FB2 DIMPLER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthDimpleLeft", "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.DIMPLER_R"
+inputs = ["arkit.coefficient.mouthDimpleRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthDimpleRight corresponds to FB2 DIMPLER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthDimpleRight", "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_CORNER_DEPRESSOR_L"
+inputs = ["arkit.coefficient.mouthFrownLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthFrownLeft corresponds to FB2 LIP_CORNER_DEPRESSOR_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthFrownLeft", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_CORNER_DEPRESSOR_R"
+inputs = ["arkit.coefficient.mouthFrownRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthFrownRight corresponds to FB2 LIP_CORNER_DEPRESSOR_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthFrownRight", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_FUNNELER_LB"
+inputs = ["arkit.coefficient.mouthFunnel"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthFunnel is one coefficient; FB2 LIP_FUNNELER_LB is set to it, as are LIP_FUNNELER_LT, LIP_FUNNELER_RB, LIP_FUNNELER_RT, so that FB2 -> ARKit gives mouthFunnel back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthFunnel", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthFunnel", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_FUNNELER_LT"
+inputs = ["arkit.coefficient.mouthFunnel"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthFunnel is one coefficient; FB2 LIP_FUNNELER_LT is set to it, as are LIP_FUNNELER_LB, LIP_FUNNELER_RB, LIP_FUNNELER_RT, so that FB2 -> ARKit gives mouthFunnel back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthFunnel", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthFunnel", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_FUNNELER_RB"
+inputs = ["arkit.coefficient.mouthFunnel"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthFunnel is one coefficient; FB2 LIP_FUNNELER_RB is set to it, as are LIP_FUNNELER_LB, LIP_FUNNELER_LT, LIP_FUNNELER_RT, so that FB2 -> ARKit gives mouthFunnel back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthFunnel", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthFunnel", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_FUNNELER_RT"
+inputs = ["arkit.coefficient.mouthFunnel"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthFunnel is one coefficient; FB2 LIP_FUNNELER_RT is set to it, as are LIP_FUNNELER_LB, LIP_FUNNELER_LT, LIP_FUNNELER_RB, so that FB2 -> ARKit gives mouthFunnel back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthFunnel", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthFunnel", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.MOUTH_LEFT"
+inputs = ["arkit.coefficient.mouthLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthLeft corresponds to FB2 MOUTH_LEFT; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "FLAGGED: only Godot names ARKit mouthLeft for this channel; see fb2_arkit.mouthLeft.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_movement"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthLeft", "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LOWER_LIP_DEPRESSOR_L"
+inputs = ["arkit.coefficient.mouthLowerDownLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthLowerDownLeft corresponds to FB2 LOWER_LIP_DEPRESSOR_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+  "VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled LOWER_LIP_DEPRESSER_L, a misspelling (not counted: typo), and without that row its ARKit table does not reach FB2.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthLowerDownLeft", "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LOWER_LIP_DEPRESSOR_R"
+inputs = ["arkit.coefficient.mouthLowerDownRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthLowerDownRight corresponds to FB2 LOWER_LIP_DEPRESSOR_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthLowerDownRight", "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_PRESSOR_L"
+inputs = ["arkit.coefficient.mouthPressLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthPressLeft corresponds to FB2 LIP_PRESSOR_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthPressLeft", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_PRESSOR_R"
+inputs = ["arkit.coefficient.mouthPressRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthPressRight corresponds to FB2 LIP_PRESSOR_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthPressRight", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_PUCKER_L"
+inputs = ["arkit.coefficient.mouthPucker"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthPucker is one coefficient; FB2 LIP_PUCKER_L is set to it, as are LIP_PUCKER_R, so that FB2 -> ARKit gives mouthPucker back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthPucker", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthPucker", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_PUCKER_R"
+inputs = ["arkit.coefficient.mouthPucker"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthPucker is one coefficient; FB2 LIP_PUCKER_R is set to it, as are LIP_PUCKER_L, so that FB2 -> ARKit gives mouthPucker back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthPucker", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthPucker", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.MOUTH_RIGHT"
+inputs = ["arkit.coefficient.mouthRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthRight corresponds to FB2 MOUTH_RIGHT; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "FLAGGED: only Godot names ARKit mouthRight for this channel; see fb2_arkit.mouthRight.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_movement"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthRight", "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_SUCK_LB"
+inputs = ["arkit.coefficient.mouthRollLower"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthRollLower is one coefficient; FB2 LIP_SUCK_LB is set to it, as are LIP_SUCK_RB, so that FB2 -> ARKit gives mouthRollLower back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthRollLower", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthRollLower", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_SUCK_RB"
+inputs = ["arkit.coefficient.mouthRollLower"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthRollLower is one coefficient; FB2 LIP_SUCK_RB is set to it, as are LIP_SUCK_LB, so that FB2 -> ARKit gives mouthRollLower back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthRollLower", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthRollLower", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_SUCK_LT"
+inputs = ["arkit.coefficient.mouthRollUpper"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthRollUpper is one coefficient; FB2 LIP_SUCK_LT is set to it, as are LIP_SUCK_RT, so that FB2 -> ARKit gives mouthRollUpper back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthRollUpper", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthRollUpper", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_SUCK_RT"
+inputs = ["arkit.coefficient.mouthRollUpper"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthRollUpper is one coefficient; FB2 LIP_SUCK_RT is set to it, as are LIP_SUCK_LT, so that FB2 -> ARKit gives mouthRollUpper back. How the coefficient divides between the FB2 parts is unknown.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "vrcft_code_parameters", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "asymmetry unknown: symmetry is invented", "refs" = ["arkit.coefficient.mouthRollUpper", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthRollUpper", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.CHIN_RAISER_B"
+inputs = ["arkit.coefficient.mouthShrugLower"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthShrugLower corresponds to FB2 CHIN_RAISER_B; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthShrugLower", "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.CHIN_RAISER_T"
+inputs = ["arkit.coefficient.mouthShrugUpper"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthShrugUpper corresponds to FB2 CHIN_RAISER_T; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthShrugUpper", "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_CORNER_PULLER_L"
+inputs = ["arkit.coefficient.mouthSmileLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthSmileLeft corresponds to FB2 LIP_CORNER_PULLER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthSmileLeft", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_CORNER_PULLER_R"
+inputs = ["arkit.coefficient.mouthSmileRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthSmileRight corresponds to FB2 LIP_CORNER_PULLER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthSmileRight", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_STRETCHER_L"
+inputs = ["arkit.coefficient.mouthStretchLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthStretchLeft corresponds to FB2 LIP_STRETCHER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthStretchLeft", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.LIP_STRETCHER_R"
+inputs = ["arkit.coefficient.mouthStretchRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthStretchRight corresponds to FB2 LIP_STRETCHER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthStretchRight", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.UPPER_LIP_RAISER_L"
+inputs = ["arkit.coefficient.mouthUpperUpLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthUpperUpLeft corresponds to FB2 UPPER_LIP_RAISER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthUpperUpLeft", "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.UPPER_LIP_RAISER_R"
+inputs = ["arkit.coefficient.mouthUpperUpRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit mouthUpperUpRight corresponds to FB2 UPPER_LIP_RAISER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.mouthUpperUpRight", "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.NOSE_WRINKLER_L"
+inputs = ["arkit.coefficient.noseSneerLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit noseSneerLeft corresponds to FB2 NOSE_WRINKLER_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.noseSneerLeft", "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.NOSE_WRINKLER_R"
+inputs = ["arkit.coefficient.noseSneerRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit noseSneerRight corresponds to FB2 NOSE_WRINKLER_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.noseSneerRight", "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.TONGUE_OUT"
+inputs = ["arkit.coefficient.tongueOut"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit tongueOut corresponds to FB2 TONGUE_OUT; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.tongueOut", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "both are extension shapes with no stated length", "refs" = ["arkit.coefficient.tongueOut", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"], "units" = "1" },
+]
+
+[[mappings]]
+id = "arkit_gaze.to_fb2"
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_LOOK_DOWN_L"
+inputs = ["arkit.coefficient.eyeLookDownLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeLookDownLeft corresponds to FB2 EYES_LOOK_DOWN_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeLookDownLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 maximum gaze angle is unspecified", "refs" = ["arkit.coefficient.eyeLookDownLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation", "refs" = ["arkit.coefficient.eyeLookDownLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)", "refs" = ["arkit.coefficient.eyeLookDownLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_LOOK_DOWN_R"
+inputs = ["arkit.coefficient.eyeLookDownRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeLookDownRight corresponds to FB2 EYES_LOOK_DOWN_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeLookDownRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 maximum gaze angle is unspecified", "refs" = ["arkit.coefficient.eyeLookDownRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation", "refs" = ["arkit.coefficient.eyeLookDownRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)", "refs" = ["arkit.coefficient.eyeLookDownRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_LOOK_RIGHT_L"
+inputs = ["arkit.coefficient.eyeLookInLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeLookInLeft corresponds to FB2 EYES_LOOK_RIGHT_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeLookInLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 maximum gaze angle is unspecified", "refs" = ["arkit.coefficient.eyeLookInLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation", "refs" = ["arkit.coefficient.eyeLookInLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)", "refs" = ["arkit.coefficient.eyeLookInLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_LOOK_LEFT_R"
+inputs = ["arkit.coefficient.eyeLookInRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeLookInRight corresponds to FB2 EYES_LOOK_LEFT_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeLookInRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 maximum gaze angle is unspecified", "refs" = ["arkit.coefficient.eyeLookInRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation", "refs" = ["arkit.coefficient.eyeLookInRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)", "refs" = ["arkit.coefficient.eyeLookInRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_LOOK_LEFT_L"
+inputs = ["arkit.coefficient.eyeLookOutLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeLookOutLeft corresponds to FB2 EYES_LOOK_LEFT_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeLookOutLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 maximum gaze angle is unspecified", "refs" = ["arkit.coefficient.eyeLookOutLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation", "refs" = ["arkit.coefficient.eyeLookOutLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)", "refs" = ["arkit.coefficient.eyeLookOutLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_LOOK_RIGHT_R"
+inputs = ["arkit.coefficient.eyeLookOutRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeLookOutRight corresponds to FB2 EYES_LOOK_RIGHT_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeLookOutRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 maximum gaze angle is unspecified", "refs" = ["arkit.coefficient.eyeLookOutRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation", "refs" = ["arkit.coefficient.eyeLookOutRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)", "refs" = ["arkit.coefficient.eyeLookOutRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_LOOK_UP_L"
+inputs = ["arkit.coefficient.eyeLookUpLeft"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeLookUpLeft corresponds to FB2 EYES_LOOK_UP_L; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeLookUpLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 maximum gaze angle is unspecified", "refs" = ["arkit.coefficient.eyeLookUpLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation", "refs" = ["arkit.coefficient.eyeLookUpLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)", "refs" = ["arkit.coefficient.eyeLookUpLeft", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "arkit_fb2.EYES_LOOK_UP_R"
+inputs = ["arkit.coefficient.eyeLookUpRight"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "ARKit eyeLookUpRight corresponds to FB2 EYES_LOOK_UP_R; this is the FB2 -> ARKit rule read back.",
+  "ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.",
+  "Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').",
+]
+evidence = ["xr_fb2", "apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "ict_facekit"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal", "refs" = ["arkit.coefficient.eyeLookUpRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 maximum gaze angle is unspecified", "refs" = ["arkit.coefficient.eyeLookUpRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation", "refs" = ["arkit.coefficient.eyeLookUpRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)", "refs" = ["arkit.coefficient.eyeLookUpRight", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"], "units" = "1" },
+]

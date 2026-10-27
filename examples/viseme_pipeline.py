@@ -19,6 +19,9 @@ it is set).
   sources (tests/fixtures/fb2_goldens.json) give "direct", independent of
   RCEF's rules; the two morph weight vectors must agree within 1e-9.
   Consonants have no VRM preset and are labelled as dropped.
+- The VRM path then shows the two winks from the expression library
+  (examples/data/fb2_expression_frames.csv): RCEF's fb2.to_vrm rules against
+  the blink pairs read from the same sources, with the same check.
 """
 from __future__ import annotations
 import argparse
@@ -37,11 +40,23 @@ import vrm_presets
 HERE = Path(__file__).resolve().parent
 TOLERANCE = 1e-9
 GOLDENS = HERE.parent / 'tests/fixtures/fb2_goldens.json'
+EXPRESSIONS = HERE / 'data/fb2_expression_frames.csv'
 
 
 def vowel_presets(path: Path = GOLDENS) -> dict[str, str]:
     """META vowel -> VRM preset, as scripts/derive_fb2_goldens.py read them from the pinned VRM and META texts."""
     return {p['viseme']: p['vrm'] for p in json.loads(path.read_text(encoding='utf-8'))['viseme_pairs']}
+
+
+def blink_presets(path: Path = GOLDENS) -> dict[str, str]:
+    """FB2 eye closure -> VRM blink preset, as scripts/derive_fb2_goldens.py read them from the pinned texts."""
+    return {p['fb2']: p['vrm'] for p in json.loads(path.read_text(encoding='utf-8'))['blink_pairs']}
+
+
+def wink_frames(translator: rcef_translate.Translator, path: Path = EXPRESSIONS) -> list[dict]:
+    return [f for f in translator.read(path) if f['segment'].startswith('wink')]
+
+
 CAPTION = ('Phoneme-label correspondence, not calibration: no published table maps META visemes to VRM presets, and '
            'each model authors its own shapes.')
 
@@ -90,8 +105,18 @@ def main(argv=None) -> int:
     translated = translator.translate(frames) if vrm else [None] * len(frames)
     if translated[0] is not None:
         translator.write(translated, out / 'visemes_to_vrm.csv')
+    jobs = [(translator, vowel_presets(), frame, result) for frame, result in zip(frames, translated)]
+    if vrm:
+        blinker = rcef_translate.fb2_to_vrm()
+        winks = wink_frames(blinker)
+        # The winks follow the talk without a gap.
+        shift = frames[-1]['time'] + (winks[1]['time'] - winks[0]['time']) - winks[0]['time']
+        for frame in winks:
+            frame['time'] = round(frame['time'] + shift, 6)
+        blinked = blinker.translate(winks)
+        blinker.write(blinked, out / 'fb2_to_vrm.csv')
+        jobs += [(blinker, blink_presets(), frame, result) for frame, result in zip(winks, blinked)]
     expressions = vrm_presets.presets(rig.snapshot.to_dict()['document']) if vrm else {}
-    pairs = vowel_presets()
     if not vrm and len(rig.visemes) != len(rigs.META_VISEME_ORDER):
         raise SystemExit(f'{rig.name}: expected a shape for each of the 15 META visemes')
     indices = rig.indices()
@@ -117,7 +142,7 @@ def main(argv=None) -> int:
         reference = {rig.node: {rig.visemes['AA']: 1.0}}
     heat_scale = 0.1 * max(math.dist(p, q) for p, q in zip(positions(reference), neutral))
     manifest = []
-    for number, (frame, result) in enumerate(zip(frames, translated)):
+    for number, (translator, pairs, frame, result) in enumerate(jobs):
         values = {translator.short(sid): v for sid, v in frame['values'].items()}
         stem = f'{number:04d}.f32'
         labels, ok = [], True
@@ -156,7 +181,7 @@ def main(argv=None) -> int:
         'heat_scale': heat_scale, 'bounds': {'min': low, 'max': high}, 'frames': manifest}, indent=1),
         encoding='utf-8')
     failed = [m['frame'] for m in manifest if not m['oracles_pass']]
-    print(f'{rig.name}: {len(frames)} frames, {len(evaluated)} geometry evaluations -> {out}')
+    print(f'{rig.name}: {len(jobs)} frames, {len(evaluated)} geometry evaluations -> {out}')
     print('all oracles pass' if not failed else f'oracles FAIL on frames {failed}')
     return 1 if failed else 0
 

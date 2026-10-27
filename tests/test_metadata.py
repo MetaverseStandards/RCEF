@@ -223,11 +223,9 @@ class Metadata(unittest.TestCase):
         self.assertEqual(checked, 21)
 
     def test_63_independent_scalar_endpoints(self):
-        target = self.ok(msf.profile_snapshot(self.pack, 'rcef.canonical'))
         assertions = 0
         for mapping, profile, entries in IDENTITIES:
-            source = self.ok(msf.profile_snapshot(self.pack, profile))
-            compiled = self.ok(msf.compile_mapping(self.pack, source, target, mapping))
+            compiled = shared_pack.mapping(mapping, profile, 'rcef.canonical', False)
             input_ids = [profile + '.' + name for name, _, _ in entries]
             frames = [{'timestamp': float(i), 'values': {sid: value for sid in input_ids},
                        'validity': {sid: True for sid in input_ids}}

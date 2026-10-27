@@ -8,7 +8,7 @@ Selected inventories: ARKit 52, MediaPipe 52, OpenXR FB 63 and FB2 70, optional 
 
 The canonical subset has 21 explicitly provider-calibrated scalar projections spanning blink, jaw, brow, directional gaze and physical pupil diameter. Executable identities preserve the stated provider basis. General calibration ambiguity is unresolved. Original affine and lossy bilateral fixtures demonstrate the shared runtime without claiming visual equivalence.
 
-Data 0.2.0 adds the first 19 cross-provider rules: FB2 to ARKit (face and, separately, horizontal gaze) and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
+Data 0.3.0 has 187 cross-provider rules: FB2 to all 52 ARKit coefficients and back (face and, separately, gaze), ARKit to VRCFaceTracking Unified Expressions, FB2 eye closure to VRM per-eye blinks, and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
 
 ## Expression sets and where they come from
 
@@ -23,12 +23,24 @@ How to read this: each row is one group of rules that turns values from the sour
 | [`arkit.to_canonical`](reports/mappings.md#arkitto_canonical) | `arkit.coefficient` → `rcef.canonical` | 9 | verified_current |
 | [`fb2.to_canonical`](reports/mappings.md#fb2to_canonical) | `openxr.fb2` → `rcef.canonical` | 8 | verified_current |
 | [`vrcft_eye.to_canonical`](reports/mappings.md#vrcft_eyeto_canonical) | `vrcft.eye` → `rcef.canonical` | 4 | verified_current |
-| [`fb2.to_arkit`](reports/mappings.md#fb2to_arkit) | `openxr.fb2` → `arkit.coefficient` | 10 | proposed |
-| [`fb2_gaze.to_arkit`](reports/mappings.md#fb2_gazeto_arkit) | `openxr.fb2` → `arkit.coefficient` | 4 | proposed |
+| [`fb2.to_arkit`](reports/mappings.md#fb2to_arkit) | `openxr.fb2` → `arkit.coefficient` | 44 | proposed |
+| [`fb2_gaze.to_arkit`](reports/mappings.md#fb2_gazeto_arkit) | `openxr.fb2` → `arkit.coefficient` | 8 | proposed |
+| [`arkit.to_fb2`](reports/mappings.md#arkitto_fb2) | `arkit.coefficient` → `openxr.fb2` | 52 | proposed |
+| [`arkit_gaze.to_fb2`](reports/mappings.md#arkit_gazeto_fb2) | `arkit.coefficient` → `openxr.fb2` | 8 | proposed |
+| [`arkit.to_vrcft_artist`](reports/mappings.md#arkitto_vrcft_artist) | `arkit.coefficient` → `vrcft.artist.base` | 68 | proposed |
+| [`fb2.to_vrm`](reports/mappings.md#fb2to_vrm) | `openxr.fb2` → `vrm.preset` | 2 | proposed |
 | [`visemes.to_vrm`](reports/mappings.md#visemesto_vrm) | `openxr.visemes` → `vrm.preset` | 5 | proposed |
 | [`fixture.affine`](reports/mappings.md#fixtureaffine) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
 | [`fixture.bilateral`](reports/mappings.md#fixturebilateral) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
 | [`survey.ambiguous`](reports/mappings.md#surveyambiguous) | `mediapipe.label` → `rcef.canonical` | 1 | unresolved (not executable) |
+
+Not translated yet, and why:
+
+- **VRM lookUp/Down/Left/Right:** VRM drives gaze by angle through range maps whose input is in degrees, while FB2 and ARKit publish no maximum angle. This needs an angle-and-curve operator.
+- **VRM emotions** (happy, angry, sad, relaxed, surprised): turning muscle movements into an emotion label is classification, not a linear map, and each model authors its own binds.
+- **MediaPipe to ARKit:** only one independent implementation (three.js) maps it, and the model card that would state the ARKit basis has not been reviewed.
+- **Unified Expressions to ARKit, and FB2 to Unified Expressions:** deferred to the next round. FB2 to Unified Expressions is largely FB2 to ARKit to Unified Expressions.
+- **Unified Expressions shapes with no ARKit counterpart** (cheek suck, mouth tightener, pupil dilation and constriction, tongue directions and others) are left unwritten by `arkit.to_vrcft_artist`.
 
 ### Expression sets
 
@@ -44,10 +56,10 @@ How to read this: start with the Role column. Source and target sets have execut
 | [`profiles/mediapipe.label.toml`](profiles/mediapipe.label.toml) | MediaPipe Face Landmarker blendshape labels (`kBlendshapeNames`), MediaPipe `f6988c4` | 53 | inventory only (its one rule is unresolved) | [Google: Face landmark detection guide](https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker) | [mediapipe](references.md#mediapipe) | Apache-2.0 upstream; names used as facts |
 | [`profiles/openxr.ancillary.toml`](profiles/openxr.ancillary.toml) | OpenXR `XR_FB_face_tracking` and `XR_FB_face_tracking2` confidence, data-source and expression-set enums, OpenXR-Docs `5a82d45` | 10 | inventory only | [OpenXR: XR_FB_face_tracking2](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_face_tracking2) | [xr_registry](references.md#xr_registry) | Apache-2.0 OR MIT (`xr.xml`); identifiers used as facts |
 | [`profiles/openxr.fb.toml`](profiles/openxr.fb.toml) | OpenXR `XR_FB_face_tracking` (`XrFaceExpressionFB`), OpenXR-Docs `5a82d45` | 65 | inventory only | [OpenXR: XR_FB_face_tracking](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_face_tracking) | [xr_fb](references.md#xr_fb), [xr_registry](references.md#xr_registry) | CC-BY-4.0 (extension text) |
-| [`profiles/openxr.fb2.toml`](profiles/openxr.fb2.toml) | OpenXR `XR_FB_face_tracking2` (`XrFaceExpression2FB`), OpenXR-Docs `5a82d45` | 71 | source | [OpenXR: XR_FB_face_tracking2](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_face_tracking2) | [xr_fb2](references.md#xr_fb2), [xr_registry](references.md#xr_registry) | CC-BY-4.0 (extension text) |
+| [`profiles/openxr.fb2.toml`](profiles/openxr.fb2.toml) | OpenXR `XR_FB_face_tracking2` (`XrFaceExpression2FB`), OpenXR-Docs `5a82d45` | 71 | source and target | [OpenXR: XR_FB_face_tracking2](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_FB_face_tracking2) | [xr_fb2](references.md#xr_fb2), [xr_registry](references.md#xr_registry) | CC-BY-4.0 (extension text) |
 | [`profiles/openxr.visemes.toml`](profiles/openxr.visemes.toml) | META visemes: OpenXR `XR_META_face_tracking_visemes` (`XrFaceTrackingVisemeMETA`), OpenXR-Docs `5a82d45` | 15 | source | [OpenXR: XR_META_face_tracking_visemes](https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_META_face_tracking_visemes) | [xr_registry](references.md#xr_registry), [xr_visemes](references.md#xr_visemes) | CC-BY-4.0 (extension text) |
 | [`profiles/roblox.control.toml`](profiles/roblox.control.toml) | Roblox FACS `FaceControls` for dynamic heads, creator-docs `a0fce04` | 50 | inventory only | [Roblox: FaceControls](https://create.roblox.com/docs/reference/engine/classes/FaceControls)² and [FACS poses reference](https://create.roblox.com/docs/avatar/dynamic-heads/facs-poses-reference) | [roblox_authoring](references.md#roblox_authoring), [roblox_controls](references.md#roblox_controls), [roblox_poses](references.md#roblox_poses), [roblox_requirements](references.md#roblox_requirements) | CC-BY-4.0 |
-| [`profiles/vrcft.artist.base.toml`](profiles/vrcft.artist.base.toml) | VRCFaceTracking Unified Expressions base shapes for avatar artists (documentation retrieved 2026-10-07) | 102 | inventory only | [VRCFT: Unified Expressions](https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/unified-blendshapes) | [vrcft_artist](references.md#vrcft_artist) | Documentation, reference only |
+| [`profiles/vrcft.artist.base.toml`](profiles/vrcft.artist.base.toml) | VRCFaceTracking Unified Expressions base shapes for avatar artists (documentation retrieved 2026-10-07) | 102 | target | [VRCFT: Unified Expressions](https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/unified-blendshapes) | [vrcft_artist](references.md#vrcft_artist) | Documentation, reference only |
 | [`profiles/vrcft.artist.blended.toml`](profiles/vrcft.artist.blended.toml) | VRCFaceTracking Unified Expressions blended shapes for avatar artists (documentation retrieved 2026-10-07) | 42 | inventory only | [VRCFT: Unified Expressions](https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/unified-blendshapes) | [vrcft_artist](references.md#vrcft_artist) | Documentation, reference only |
 | [`profiles/vrcft.eye.toml`](profiles/vrcft.eye.toml) | VRCFaceTracking raw and combined eye data (`UnifiedData.cs`), VRCFaceTracking `6432e6a` | 20 | source | [GitHub: UnifiedData.cs at 6432e6a](https://github.com/benaclejames/VRCFaceTracking/blob/6432e6a8d85fa7ec5115fc725c6abcb6dbdd4f35/VRCFaceTracking.Core/Params/Data/UnifiedData.cs) | [vrcft_data](references.md#vrcft_data) | Apache-2.0 |
 | [`profiles/vrcft.parameter.encoding.toml`](profiles/vrcft.parameter.encoding.toml) | VRCFaceTracking binary avatar-parameter encoding (documentation retrieved 2026-10-07) | 7 | inventory only | [VRCFT: Binary parameters](https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/parameters/types/binary) | [vrcft_binary](references.md#vrcft_binary) | Documentation, reference only |

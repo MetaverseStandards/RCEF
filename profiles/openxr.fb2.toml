@@ -8,13 +8,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 0, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 0, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -27,13 +27,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 1, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 1, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -52,7 +52,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 2, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 2, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -71,7 +71,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 3, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 3, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -84,13 +84,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 4, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 4, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -103,13 +103,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 5, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 5, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -166,7 +166,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 8, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 8, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -185,7 +185,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 9, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 9, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -198,13 +198,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_DIMPLER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 10, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 10, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -217,13 +217,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_DIMPLER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 11, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 11, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -242,7 +242,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 12, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 12, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and fb2.to_vrm; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -261,7 +261,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 13, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 13, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and fb2.to_vrm; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -448,7 +448,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 22, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 22, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -467,7 +467,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 23, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 23, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -486,7 +486,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_JAW_DROP_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 24, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 24, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -499,13 +499,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 25, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 25, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -518,13 +518,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 26, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 26, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -537,13 +537,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_JAW_THRUST_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 27, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 27, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -556,13 +556,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 28, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 28, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -575,13 +575,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 29, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 29, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -594,13 +594,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 30, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 30, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -613,13 +613,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 31, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 31, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -638,7 +638,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 32, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 32, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -657,7 +657,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 33, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 33, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -670,13 +670,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 34, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 34, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -689,13 +689,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 35, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 35, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -708,13 +708,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 36, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 36, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -727,13 +727,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 37, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 37, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -746,13 +746,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 38, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 38, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -765,13 +765,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 39, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 39, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -784,13 +784,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 40, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 40, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -803,13 +803,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 41, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 41, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -822,13 +822,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 42, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 42, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -841,13 +841,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 43, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 43, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -860,13 +860,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 44, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 44, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -879,13 +879,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 45, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 45, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -898,13 +898,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 46, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 46, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -917,13 +917,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 47, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 47, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -980,7 +980,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LIPS_TOWARD_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 50, "reason" = "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 50, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -993,13 +993,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 51, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 51, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1012,13 +1012,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 52, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 52, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1031,13 +1031,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_MOUTH_LEFT_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 53, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 53, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1050,13 +1050,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 54, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 54, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1069,13 +1069,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 55, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 55, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1088,13 +1088,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 56, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 56, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1107,13 +1107,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 57, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 57, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1126,13 +1126,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 58, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 58, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1145,13 +1145,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 59, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 59, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1164,13 +1164,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 60, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 60, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1183,13 +1183,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 61, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 61, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1202,13 +1202,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 62, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 62, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -1316,13 +1316,13 @@ value_type = "scalar"
 units = "1"
 domain = { "min" = 0.0, "max" = 1.0 }
 calibration = "openxr.fb2: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["xr_registry", "xr_fb2"]
 evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_TONGUE_OUT_FB"
 surface = "openxr.fb2"
 side = "shared"
-metadata = { "native_index" = 68, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "selected" = true }
+metadata = { "native_index" = 68, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"

@@ -106,6 +106,25 @@ class VowelPresets(unittest.TestCase):
             path.write_text(json.dumps({'viseme_pairs': [{'viseme': 'AA', 'vrm': 'oh'}]}), encoding='utf-8')
             self.assertEqual(viseme_pipeline.vowel_presets(path), {'AA': 'oh'})
 
+    def test_the_direct_vrm_blink_path_reads_the_source_derived_pairs(self):
+        self.assertEqual(viseme_pipeline.blink_presets(), {'EYES_CLOSED_L': 'blinkLeft', 'EYES_CLOSED_R': 'blinkRight'})
+        with tempfile.TemporaryDirectory(prefix='rcef-pairs-') as tmp:
+            path = Path(tmp) / 'goldens.json'
+            path.write_text(json.dumps({'blink_pairs': [{'fb2': 'EYES_CLOSED_L', 'vrm': 'blink'}]}), encoding='utf-8')
+            self.assertEqual(viseme_pipeline.blink_presets(path), {'EYES_CLOSED_L': 'blink'})
+
+    def test_the_wink_frames_close_one_vrm_eye(self):
+        translator = rcef_translate.fb2_to_vrm(pack=shared_pack.pack(), compiled={
+            'fb2.to_vrm': shared_pack.mapping('fb2.to_vrm', 'openxr.fb2', 'vrm.preset')})
+        frames = viseme_pipeline.wink_frames(translator)
+        self.assertEqual({f['segment'] for f in frames}, {'wink left', 'wink right'})
+        hold = next(f for f in frames if f['segment'] == 'wink left' and f['labels']['phase'] == 'hold')
+        result, = translator.translate([hold])
+        self.assertEqual(result['values'], {'vrm.preset.blinkLeft': hold['values'][translator.signal_id('EYES_CLOSED_L')],
+                                            'vrm.preset.blinkRight': 0.0})
+        self.assertGreater(result['values']['vrm.preset.blinkLeft'], 0.5)
+        self.assertIn('CHEEK_RAISER_L', result['dropped'])
+
 
 class FullArkitRig(unittest.TestCase):
     """On a rig with all 52 ARKit shapes, shapes without an RCEF rule are shown direct-only and labelled."""
@@ -126,14 +145,24 @@ class FullArkitRig(unittest.TestCase):
         statuses = {c['status'] for frame in self.channels for c in frame if c['arkit'] == 'browInnerUp'}
         self.assertEqual(statuses, {'exact (moving)', 'at rest in both paths'})
 
-    def test_every_oracle_passes_and_uncovered_shapes_are_labelled(self):
+    def test_every_shape_is_written_and_checked_exactly(self):
         self.assertTrue(all(c['passes'] for frame in self.channels for c in frame))
-        uncovered = {c['arkit'] for frame in self.channels for c in frame
-                     if c['status'] == 'no RCEF rule yet (direct only)'}
-        self.assertIn('mouthFrownLeft', uncovered)
-        self.assertNotIn('jawOpen', uncovered)
+        statuses = {c['status'] for frame in self.channels for c in frame}
+        self.assertEqual(statuses, {'exact (moving)', 'at rest in both paths'})
         anger = [c for f, frame in zip(self.frames, self.channels) if f['segment'] == 'anger' for c in frame]
-        self.assertTrue(any(c['arkit'] == 'browDownLeft' and c['direct'] and c['translated'] is None for c in anger))
+        self.assertTrue(any(c['arkit'] == 'browDownLeft' and c['direct'] and c['translated'] == c['direct']
+                            for c in anger))
+
+    def test_shapes_without_a_rule_are_labelled_not_failed(self):
+        face_only = rcef_translate.Translator('openxr.fb2', 'arkit.coefficient', ['fb2.to_arkit'],
+                                              self.translator.prefix, self.translator.suffix,
+                                              pack=shared_pack.pack(), compiled=compiled())
+        frames = [f for f in self.frames if f['segment'] == 'look up']
+        channels = [c for f, r in zip(frames, face_only.translate(frames))
+                    for c in face_pipeline.check_channels(face_only, f, r, self.targets)]
+        self.assertTrue(all(c['passes'] for c in channels))
+        self.assertTrue(any(c['arkit'] == 'eyeLookUpLeft' and c['status'] == 'no RCEF rule yet (direct only)'
+                            for c in channels))
 
     def test_a_halved_rule_fails_on_the_expression_frames(self):
         changed = [{**r, 'values': {**r['values'], 'arkit.coefficient.jawOpen': r['values']['arkit.coefficient.jawOpen'] / 2}}

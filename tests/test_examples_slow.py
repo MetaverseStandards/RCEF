@@ -8,6 +8,7 @@ skipped if its cache variable is unset. All of it takes about ten minutes.
 """
 import csv
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -87,7 +88,7 @@ class FacePipeline(unittest.TestCase):
             self.assertFalse(any('fb2.to_arkit:' in label for label in frame['labels']))
         for frame in by_segment['face lost']:
             self.assertTrue(any('fb2.to_arkit:' in label for label in frame['labels']))
-        self.assertTrue(any('TONGUE_OUT' in label for f in by_segment['tongue'] for label in f['labels']))
+        self.assertTrue(any('TONGUE_TIP_ALVEOLAR' in label for f in by_segment['tongue'] for label in f['labels']))
 
     def test_renderer_files_have_the_declared_sizes(self):
         manifest = json.loads((self.out / 'frames.json').read_text())
@@ -125,7 +126,7 @@ class RocketboxFace:
         self.assertIn(('anger', 'hold'), frames)
         self.assertIn(('look down', 'out'), frames)
         anger = next(f for f in self.manifest['frames'] if f['segment'] == 'anger' and f['phase'] == 'hold')
-        self.assertTrue(any(label.startswith('no RCEF rule yet') and 'browDownLeft' in label for label in anger['labels']))
+        self.assertFalse(any(label.startswith('no RCEF rule yet') for f in self.manifest['frames'] for label in f['labels']))
         self.assertTrue(any('LIP_TIGHTENER_L' in label for label in anger['labels']))
         surprise = next(f for f in self.manifest['frames'] if f['segment'] == 'surprise' and f['phase'] == 'hold')
         self.assertIn('AU 25 (lips part): no FB2 channel', surprise['labels'])
@@ -200,6 +201,40 @@ class Visemes(unittest.TestCase):
         self.assertTrue(all(f['max_morph_weight_difference'] <= 1e-9 for f in manifest['frames']))
         self.assertTrue(any('PP: no VRM preset' in label for f in manifest['frames'] for label in f['labels']))
         self.assertIn('not calibration', manifest['caption'])
+        winks = [f for f in manifest['frames'] if f['segment'].startswith('wink')]
+        self.assertEqual({f['segment'] for f in winks}, {'wink left', 'wink right'})
+        self.assertTrue(any(f['max_morph_weight_difference'] == 0 and f['phase'] == 'hold' for f in winks))
+
+    def test_vrm_blink_left_closes_the_eye_on_the_models_own_left(self):
+        # VRM does not say whose left blinkLeft is; RCEF assumes the avatar's own,
+        # so check it on this model's geometry rather than trusting its axes.
+        sys.path.insert(0, str(ROOT / 'examples'))
+        import msf_tools as msf
+        import rigs
+        import viseme_pipeline
+        import vrm_presets
+        rig = rigs.load('vrm-twist', Path(RIG_CACHE))
+        expressions = vrm_presets.presets(rig.snapshot.to_dict()['document'])
+
+        def positions(values):
+            weights = viseme_pipeline.vectors(rig.snapshot, vrm_presets.morph_weights(expressions, values)[0])
+            geometry = rigs.require(msf.evaluate_geometry(rig.snapshot, morph_weights=weights))
+            return [p for instance in geometry.instances for primitive in instance['primitives']
+                    for p in primitive['positions']]
+
+        def mean(points, axis):
+            return sum(p[axis] for p in points) / len(points)
+        neutral = positions({})
+        moved = {name: [q for p, q in zip(neutral, positions({name: 1.0})) if math.dist(p, q) > 1e-6]
+                 for name in ('blinkLeft', 'blinkRight')}
+        eyes = moved['blinkLeft'] + moved['blinkRight']
+        # The eyes sit at the front of the head: compare them with everything at or above them.
+        head = [p for p in neutral if p[1] >= min(q[1] for q in eyes)]
+        facing = 1 if mean(eyes, 2) > mean(head, 2) else -1
+        # With y up, the avatar's own left is up x forward: +x when it faces +z.
+        left = facing
+        self.assertGreater(left * mean(moved['blinkLeft'], 0), 0)
+        self.assertLess(left * mean(moved['blinkRight'], 0), 0)
 
     def test_rocketbox_speaks_with_its_own_viseme_shapes(self):
         for rig in ('rocketbox-female', 'rocketbox-male'):

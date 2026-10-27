@@ -5,8 +5,12 @@ The expected values come from tests/fixtures/fb2_goldens.json, which
 scripts/derive_fb2_goldens.py derives from the pinned Godot, VRCFT, META and
 VRM sources without reading RCEF's mapping data.
 """
+from copy import deepcopy
+import csv
 import json
+import os
 from pathlib import Path
+import re
 import unittest
 
 import msf_tools as msf
@@ -21,9 +25,25 @@ MAPPINGS = {
     'fb2.to_arkit': ('openxr.fb2', 'arkit.coefficient'),
     'fb2_gaze.to_arkit': ('openxr.fb2', 'arkit.coefficient'),
     'visemes.to_vrm': ('openxr.visemes', 'vrm.preset'),
+    'arkit.to_fb2': ('arkit.coefficient', 'openxr.fb2'),
+    'arkit_gaze.to_fb2': ('arkit.coefficient', 'openxr.fb2'),
+    'arkit.to_vrcft_artist': ('arkit.coefficient', 'vrcft.artist.base'),
+    'fb2.to_vrm': ('openxr.fb2', 'vrm.preset'),
 }
-KIND = {'fb2_to_arkit': ('fb2.to_arkit', 'fb2_gaze.to_arkit'), 'visemes_to_vrm': ('visemes.to_vrm',)}
+KIND = {'fb2_to_arkit': ('fb2.to_arkit', 'fb2_gaze.to_arkit'), 'visemes_to_vrm': ('visemes.to_vrm',),
+        'arkit_to_fb2': ('arkit.to_fb2', 'arkit_gaze.to_fb2'), 'arkit_to_ue': ('arkit.to_vrcft_artist',),
+        'fb2_to_vrm': ('fb2.to_vrm',)}
 SIDED = ('Left', 'Right', '_L_FB', '_R_FB')
+SLOW = os.environ.get('RCEF_SLOW_TESTS') == '1'
+
+
+def halve(rules):
+    for rule in rules:
+        operator = rule['operator']
+        if operator['id'] == 'affine':
+            operator['scale'] *= 0.5
+        else:
+            operator['weights'] = [w * 0.5 for w in operator['weights']]
 
 
 class Translations(unittest.TestCase):
@@ -77,8 +97,180 @@ class Translations(unittest.TestCase):
                 with self.subTest(target=target, inputs=case['inputs']):
                     self.assertEqual(values[target], expected, case['sources'])
                     checked.add(target)
-        self.assertEqual(checked, self.outputs('fb2.to_arkit') | self.outputs('fb2_gaze.to_arkit'),
-                         'every translated coefficient needs a source-derived vector')
+        expected = {o for c in self.goldens['cases'] if c['mapping_kind'] == 'fb2_to_arkit' for o in c['expected']}
+        self.assertEqual(checked, expected, 'every coefficient the sources route needs a rule, and only those')
+
+    def whole_frames(self, kind):
+        """The golden frames that set every input at once, each to its own value."""
+        frames = [c for c in self.goldens['cases'] if c['mapping_kind'] == kind and len(c['inputs']) > 4
+                  or c['mapping_kind'] == kind == 'fb2_to_vrm']
+        self.assertEqual(len(frames), 2, kind)
+        return frames
+
+    def check_whole_frames(self, kind, compiled=None):
+        """Per output: True if it matches the golden value in every whole frame."""
+        matches = {}
+        for mapping in KIND[kind]:
+            frames = self.whole_frames(kind)
+            inputs = self.inputs(mapping)
+            samples = [{'timestamp': 0.0, 'values': {k: v for k, v in f['inputs'].items() if k in inputs},
+                        'validity': dict.fromkeys(inputs, True)} for f in frames]
+            result = msf.evaluate_mapping((compiled or self.compiled)[mapping], samples)
+            self.assertIsNotNone(result.value, result.report.to_dict())
+            for frame, sample in zip(frames, result.value.samples):
+                for output in self.outputs(mapping):
+                    matches[output] = matches.get(output, True) and sample['values'][output] == frame['expected'][output]
+        return matches
+
+    def test_whole_frames_match_the_sources(self):
+        for kind in KIND:
+            if kind == 'visemes_to_vrm':
+                continue
+            with self.subTest(kind):
+                matches = self.check_whole_frames(kind)
+                expected = set(self.whole_frames(kind)[0]['expected'])
+                self.assertEqual(set(matches), expected)
+                self.assertEqual([o for o, ok in matches.items() if not ok], [])
+
+    def changed_copies(self, kind, change, only=None):
+        """Each mapping of `kind` (or just `only`) compiled from a small copy of the pack in which `change` has edited its rules."""
+        compiled = {}
+        for mapping in [only] if only else KIND[kind]:
+            source, target = MAPPINGS[mapping]
+            document = deepcopy(self.document)
+            rules = next(m for m in document['mappings'] if m['id'] == mapping)['rules']
+            members = {sid for r in rules for sid in r['inputs'] + r['outputs']}
+            profiles = [{**p, 'signal_ids': [sid for sid in p['signal_ids'] if sid in members]}
+                        for p in document['profiles'] if p['id'] in (source, target)]
+            signals = [x for x in document['signals'] if x['id'] in members]
+            cited = {e for record in profiles + signals + rules for e in record.get('evidence', [])}
+            change(rules)
+            small = {**document, 'profiles': profiles, 'signals': signals,
+                     'mappings': [m for m in document['mappings'] if m['id'] == mapping],
+                     'evidence': [e for e in document['evidence'] if e['id'] in cited]}
+            authored = msf.validate_authoring(small)
+            self.assertTrue(authored.ok, authored.report.to_dict())
+            pack = msf.compile_pack(authored.value).value
+            result = msf.compile_mapping(pack, msf.profile_snapshot(pack, source).value,
+                                         msf.profile_snapshot(pack, target).value, mapping, True)
+            self.assertIsNotNone(result.value, result.report.to_dict())
+            compiled[mapping] = result.value
+        return compiled
+
+    def test_halving_every_rule_changes_every_output(self):
+        # Each rule writes one output and reads no other rule's output, so halving
+        # them all at once and checking each output is the same as halving one at a time.
+        for kind in KIND:
+            if kind == 'visemes_to_vrm':
+                continue
+            with self.subTest(kind):
+                matches = self.check_whole_frames(kind, self.changed_copies(kind, halve))
+                self.assertEqual([o for o, ok in matches.items() if ok], [])
+
+    @unittest.skipUnless(SLOW, 'slow tier: set RCEF_SLOW_TESTS=1')
+    def test_halving_any_one_rule_changes_its_output_and_no_other(self):
+        for kind in KIND:
+            if kind == 'visemes_to_vrm':
+                continue
+            for mapping in KIND[kind]:
+                for rule in self.rules(mapping):
+                    with self.subTest(rule=rule['id']):
+                        def change(rules, target=rule['id']):
+                            halve([r for r in rules if r['id'] == target])
+                        compiled = {**self.compiled, **self.changed_copies(kind, change, mapping)}
+                        matches = self.check_whole_frames(kind, compiled)
+                        self.assertEqual([o for o, ok in matches.items() if not ok], rule['outputs'])
+
+    def test_swapping_every_left_and_right_rule_changes_both_outputs(self):
+        def side_free(sid):
+            return re.sub(r'(Left|Right)$|_[LR](?=[TB]?_FB$)|_(LEFT|RIGHT)(?=_FB$)', '#', sid)
+
+        def swap(rules):
+            by_key = {}
+            for rule in rules:
+                by_key.setdefault(side_free(rule['outputs'][0]), []).append(rule)
+            for pair in by_key.values():
+                if len(pair) == 2:
+                    pair[0]['inputs'], pair[1]['inputs'] = pair[1]['inputs'], pair[0]['inputs']
+        for kind in KIND:
+            if kind == 'visemes_to_vrm':
+                continue
+            with self.subTest(kind):
+                swapped = set()
+                for mapping in KIND[kind]:
+                    pairs = {}
+                    for rule in self.rules(mapping):
+                        pairs.setdefault(side_free(rule['outputs'][0]), []).append(rule)
+                    # A copied composite feeds both sides from one input; swapping changes nothing there.
+                    swapped |= {r['outputs'][0] for pair in pairs.values() if len(pair) == 2
+                                and pair[0]['inputs'] != pair[1]['inputs'] for r in pair}
+                self.assertTrue(swapped)
+                matches = self.check_whole_frames(kind, self.changed_copies(kind, swap))
+                self.assertEqual(sorted(o for o in swapped if matches[o]), [])
+
+    def test_fb2_to_arkit_after_arkit_to_fb2_returns_every_coefficient(self):
+        frames = self.whole_frames('arkit_to_fb2')
+        for frame in frames:
+            fb2 = {}
+            for mapping in KIND['arkit_to_fb2']:
+                inputs = self.inputs(mapping)
+                values, = self.evaluate(mapping, [{k: v for k, v in frame['inputs'].items() if k in inputs}])
+                fb2.update(values)
+            arkit = {}
+            for mapping in KIND['fb2_to_arkit']:
+                values, = self.evaluate(mapping, [{k: v for k, v in fb2.items() if k in self.inputs(mapping)}])
+                arkit.update(values)
+            self.assertEqual(arkit, frame['inputs'])
+
+    def test_inverse_gaze_declares_that_fb2_exclusivity_cannot_be_enforced(self):
+        rules = self.rules('arkit_gaze.to_fb2')
+        self.assertEqual(len(rules), 8)
+        for rule in rules:
+            with self.subTest(rule['id']):
+                self.assertTrue(any('exclusive' in loss['reason'] and 'operator gap' in loss['reason']
+                                    for loss in rule['loss_annotations']))
+        self.assertFalse(self.inputs('arkit_gaze.to_fb2') & self.inputs('arkit.to_fb2'))
+
+    def test_vrcft_composites_of_the_copied_parts_return_the_arkit_value(self):
+        # VRCFT's BrowDown is 0.75 BrowLowerer + 0.25 BrowPinch and its MouthSmile 0.8
+        # CornerPull + 0.2 CornerSlant; its other blended shapes are means of their parts.
+        frame = self.whole_frames('arkit_to_ue')[0]
+        values, = self.evaluate('arkit.to_vrcft_artist', [frame['inputs']])
+        ue = 'vrcft.artist.base.{}'.format
+        for side in ('Left', 'Right'):
+            down = 0.75 * values[ue(f'BrowLowerer{side}')] + 0.25 * values[ue(f'BrowPinch{side}')]
+            smile = 0.8 * values[ue(f'MouthCornerPull{side}')] + 0.2 * values[ue(f'MouthCornerSlant{side}')]
+            self.assertAlmostEqual(down, frame['inputs'][f'arkit.coefficient.browDown{side}'], places=12)
+            self.assertAlmostEqual(smile, frame['inputs'][f'arkit.coefficient.mouthSmile{side}'], places=12)
+        funnel = sum(values[ue(f'LipFunnel{p}')] for p in ('UpperLeft', 'UpperRight', 'LowerLeft', 'LowerRight')) / 4
+        self.assertEqual(funnel, frame['inputs']['arkit.coefficient.mouthFunnel'])
+
+    def test_fb2_to_vrm_drives_each_blink_side_but_not_both_eyes_blink(self):
+        # A VRM model may bind blink as well as blinkLeft and blinkRight; writing all
+        # three would close the eyes twice over.
+        self.assertEqual({r['inputs'][0].split('EXPRESSION2_')[1]: r['outputs'][0] for r in self.rules('fb2.to_vrm')},
+                         {'EYES_CLOSED_L_FB': 'vrm.preset.blinkLeft', 'EYES_CLOSED_R_FB': 'vrm.preset.blinkRight'})
+
+    def test_vrcft_tables_are_cited_only_where_they_name_the_rules_own_signals(self):
+        # VRCFT's Movement table writes some FB names that OpenXR does not define
+        # (EYES_SQUINT_R on the LID_TIGHTENER_L row) or misspells them; such a row is
+        # not evidence, and without it VRCFT's ARKit table does not reach FB2 either.
+        labels = self.goldens['vrcft_labels']
+        arkit_names = {n[0].lower() + n[1:] for n in labels['vrcft_docs_arkit']}
+        with (ROOT / 'tests/fixtures/godot_fb2_rules.csv').open(encoding='utf-8', newline='') as handle:
+            derived = {r['arkit']: r['sources'] + ';' + r['second_source_lines'] for r in csv.DictReader(handle)}
+        for mapping in ('fb2.to_arkit', 'fb2_gaze.to_arkit', 'arkit.to_fb2', 'arkit_gaze.to_fb2'):
+            for rule in self.rules(mapping):
+                signals = rule['inputs'] + rule['outputs']
+                fb2 = {re.sub(r'^openxr\.fb2\.XR_FACE_EXPRESSION2_|_FB$', '', sid) for sid in signals
+                       if sid.startswith('openxr.fb2.')}
+                arkit, = {sid.rsplit('.', 1)[1] for sid in signals if sid.startswith('arkit.coefficient.')}
+                with self.subTest(rule=rule['id']):
+                    if 'vrcft_docs_movement' in rule['evidence']:
+                        self.assertLessEqual(fb2, set(labels['vrcft_docs_movement']))
+                    if 'vrcft_docs_arkit' in rule['evidence']:
+                        self.assertIn(arkit, arkit_names)
+                        self.assertIn('vrcft_docs_arkit:', derived[arkit], 'the derivation does not count this row')
 
     def test_viseme_rules_match_source_derived_vectors_and_drop_consonants(self):
         case, = (c for c in self.goldens['cases'] if c['mapping_kind'] == 'visemes_to_vrm')
@@ -94,7 +286,11 @@ class Translations(unittest.TestCase):
     def test_averaged_pairs_lose_exactly_half_the_difference(self):
         averaged = [r for r in self.rules('fb2.to_arkit') if r['operator']['id'] == 'weighted_sum']
         self.assertEqual(sorted(r['outputs'][0] for r in averaged),
-                         ['arkit.coefficient.browInnerUp', 'arkit.coefficient.cheekPuff'])
+                         [f'arkit.coefficient.{n}' for n in ('browInnerUp', 'cheekPuff', 'mouthFunnel', 'mouthPucker',
+                                                             'mouthRollLower', 'mouthRollUpper')])
+        funnel, = (r for r in averaged if len(r['inputs']) == 4)
+        self.assertEqual(funnel['operator']['weights'], [0.25] * 4)
+        averaged = [r for r in averaged if len(r['inputs']) == 2]
         levels = (0.0, 0.25, 0.5, 0.75, 1.0)
         for rule in averaged:
             left, right = rule['inputs']
@@ -137,8 +333,7 @@ class Translations(unittest.TestCase):
     def test_translations_need_the_approximation_opt_in(self):
         for mapping, (source, target) in MAPPINGS.items():
             with self.subTest(mapping=mapping):
-                result = msf.compile_mapping(self.pack, msf.profile_snapshot(self.pack, source).value,
-                                             msf.profile_snapshot(self.pack, target).value, mapping)
+                result = msf.compile_mapping(self.pack, shared_pack.snapshot(source), shared_pack.snapshot(target), mapping)
                 self.assertIsNone(result.value)
                 self.assertIn('E_APPROXIMATION', {d.code for d in result.report.diagnostics})
 

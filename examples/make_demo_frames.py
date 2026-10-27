@@ -17,7 +17,8 @@ exercises one behaviour of the translation:
 - eye following lost: the face stays valid while the gaze weights are invalid
   (FB2 then reports them as zero), during a blink;
 - face lost: the whole frame is invalid;
-- tongue: a channel with no RCEF rule, with the jaw half open.
+- every other channel an RCEF FB2 rule reads, alone and briefly;
+- tongue: a channel with no RCEF rule (TONGUE_TIP_ALVEOLAR), with the jaw half open.
 
 All values are multiples of 1/16, so sums and halves are exact in binary.
 """
@@ -39,6 +40,15 @@ def names(profile, prefix, suffix):
     members = next(p['signal_ids'] for p in pack['profiles'] if p['id'] == profile)
     # Count sentinels are inventory records, not weights a runtime reports.
     return [sid[len(prefix):-len(suffix)] for sid in members if signals[sid]['disposition'] != 'excluded']
+
+
+def rule_inputs():
+    """The FB2 channels RCEF's FB2 -> ARKit rules read, in profile order."""
+    pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+    read = {i for m in pack['mappings'] if m['id'] in ('fb2.to_arkit', 'fb2_gaze.to_arkit')
+            for r in m['rules'] for i in r['inputs']}
+    order = next(p['signal_ids'] for p in pack['profiles'] if p['id'] == 'openxr.fb2')
+    return [sid[len(FB2_PREFIX):-len(FB2_SUFFIX)] for sid in order if sid in read]
 
 
 def ramp(steps):
@@ -64,9 +74,15 @@ def fb2_frames():
                            ('chin raiser top', 'CHIN_RAISER_T'), ('chin raiser bottom', 'CHIN_RAISER_B'),
                            ('blink left', 'EYES_CLOSED_L'), ('blink right', 'EYES_CLOSED_R')):
         segments.append((label, [{channel: v} for v in ramp(4)], True, True))
+    # Every other channel an RCEF FB2 rule reads, alone, so each rule is the only one moving somewhere.
+    alone = {[k for k, v in f.items() if v][0] for _, frames, *_ in segments for f in frames
+             if len([v for v in f.values() if v]) == 1}
+    for channel in rule_inputs():
+        if channel not in alone:
+            segments.append((f'{channel} alone', [{channel: v} for v in ramp(2)], True, True))
     segments.append(('eye following lost', [{'EYES_CLOSED_L': v, 'EYES_CLOSED_R': v} for v in ramp(5)], True, False))
     segments.append(('face lost', [{'JAW_DROP': 0.5}] * 5, False, False))
-    segments.append(('tongue', [{'JAW_DROP': 0.5, 'TONGUE_OUT': v} for v in ramp(5)], True, True))
+    segments.append(('tongue', [{'JAW_DROP': 0.5, 'TONGUE_TIP_ALVEOLAR': v} for v in ramp(5)], True, True))
     segments.append(('neutral', [{}] * 4, True, True))
     return segments
 
