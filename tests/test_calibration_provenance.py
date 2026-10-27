@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: MIT
 """A held-out run must use exactly the code a calibration record names."""
+import hashlib
 from pathlib import Path
 import subprocess
 import sys
@@ -86,6 +87,46 @@ class LoadedCode(unittest.TestCase):
         self.commit('change the helper')
         problem = provenance.code_problem(self.repo, self.code, provenance.loaded_files(self.repo))
         self.assertIn('examples/rcef_prov_helper.py', problem)
+
+
+class Inputs(unittest.TestCase):
+    """Every cached input a run reads must have the hash its record pins."""
+
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory(prefix='rcef-prov-')
+        self.addCleanup(temp.cleanup)
+        self.cache = Path(temp.name)
+        (self.cache / 'jawOpen.obj').write_text('v 0 0 0\n')
+        self.expected = {self.cache / 'jawOpen.obj': hashlib.sha256(b'v 0 0 0\n').hexdigest()}
+
+    def test_matching_inputs_are_accepted(self):
+        self.assertEqual(provenance.input_problems(self.expected), [])
+
+    def test_a_tampered_cached_input_is_refused(self):
+        (self.cache / 'jawOpen.obj').write_text('v 0 0 1\n')
+        problems = provenance.input_problems(self.expected)
+        self.assertEqual(len(problems), 1, problems)
+        self.assertIn('jawOpen.obj', problems[0])
+
+    def test_a_missing_cached_input_is_refused(self):
+        (self.cache / 'jawOpen.obj').unlink()
+        self.assertIn('missing', provenance.input_problems(self.expected)[0])
+
+
+class K4Inputs(unittest.TestCase):
+    def test_every_input_of_the_mediapipe_record_names_a_cache_file(self):
+        import check
+        import k4_record
+        record = check.load_record(k4_record.RECORD)
+        expected = k4_record.input_paths(record, Path('/cache'), Path('/rigs'))
+        self.assertEqual(len(expected), len(record['inputs']))
+        self.assertIn(Path('/cache/face_landmarker.task'), expected)
+        self.assertIn(Path('/rigs/Male_Adult_01_facial.fbx'), expected)
+        self.assertIn(Path('/cache/identity009.obj'), expected)
+
+    def test_the_harness_data_files_are_part_of_the_checked_code(self):
+        import k4_mediapipe
+        self.assertIn('tools/calibration/ict_files.json', k4_mediapipe.DATA_FILES)
 
 
 if __name__ == '__main__':

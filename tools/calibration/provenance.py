@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 """Check that a held-out run uses exactly the code a calibration record names in code_commit."""
 from __future__ import annotations
+import hashlib
 from pathlib import Path
 import subprocess
 import sys
@@ -46,3 +47,14 @@ def loaded_files(repo: Path) -> list[str]:
             if path.is_relative_to(root):
                 files.add(path.relative_to(root).as_posix())
     return sorted(files)
+
+
+def input_problems(expected: dict[Path, str]) -> list[str]:
+    """Each input file that is missing or whose SHA-256 differs from the one its record pins."""
+    problems = []
+    for path, digest in sorted(expected.items()):
+        if not path.is_file():
+            problems.append(f'{path} is missing')
+        elif hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+            problems.append(f'{path} does not have the SHA-256 the record pins ({digest})')
+    return problems

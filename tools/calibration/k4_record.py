@@ -24,6 +24,28 @@ STIMULUS = 'the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral fac
 q = json.dumps
 
 
+ICT_INPUT = f'ICT-FaceKit {k.ICT_COMMIT[:7]} '
+TASK_INPUT = 'MediaPipe face_landmarker.task (float16, version 1)'
+ROCKETBOX_INPUT = 'Microsoft Rocketbox Male_Adult_01_facial.fbx'
+
+
+def input_paths(record: dict, cache: Path, rig_cache: Path) -> dict[Path, str]:
+    """The cache file behind each of the record's inputs, with the SHA-256 the record pins for it."""
+    paths = {}
+    for item in record['inputs']:
+        name = item['name']
+        if name.startswith(ICT_INPUT):
+            path = cache / Path(name[len(ICT_INPUT):]).name
+        elif name == TASK_INPUT:
+            path = cache / 'face_landmarker.task'
+        elif name == ROCKETBOX_INPUT:
+            path = rig_cache / 'Male_Adult_01_facial.fbx'
+        else:
+            raise SystemExit(f'the record names an input this tool does not know: {name}')
+        paths[path] = item['sha256']
+    return paths
+
+
 def git(*args) -> str:
     return subprocess.run(['git', *args], cwd=k.ROOT, check=True, capture_output=True, text=True).stdout.strip()
 
@@ -92,10 +114,8 @@ def freeze(args) -> int:
     fitted = [c for c in k.CHANNELS if fits[c][0]]
     unfitted = {c: why for c, (knots, why) in fits.items() if not knots}
     import rigs
-    inputs = [(f'ICT-FaceKit {k.ICT_COMMIT[:7]} {name}', digest) for name, digest in k.ICT_FILES.items()
-              if name.endswith('.obj')]
-    inputs += [('MediaPipe face_landmarker.task (float16, version 1)', k.TASK_SHA256),
-               ('Microsoft Rocketbox Male_Adult_01_facial.fbx', rigs.FILES['Male_Adult_01_facial.fbx'][1])]
+    inputs = [(ICT_INPUT + name, digest) for name, digest in k.ICT_FILES.items() if name.endswith('.obj')]
+    inputs += [(TASK_INPUT, k.TASK_SHA256), (ROCKETBOX_INPUT, rigs.FILES['Male_Adult_01_facial.fbx'][1])]
     lines = ['# SPDX-License-Identifier: CC-BY-SA-4.0',
              '# Written by tools/calibration/k4_mediapipe.py. Everything but cells was frozen, and its hash written to',
              '# calibration/FREEZES, before the held-out run.',
@@ -145,8 +165,11 @@ def heldout(args) -> int:
     if problems:
         raise SystemExit('\n'.join(problems))
     record = check.load_record(RECORD)
+    problems = provenance.input_problems(input_paths(record, args.cache, args.rig_cache))
+    if problems:
+        raise SystemExit('cached inputs differ from the record:\n' + '\n'.join(problems))
     import rigs  # noqa: F401  (Rocketbox and ICT geometry; imported now so the code check covers it)
-    code = provenance.loaded_files(k.ROOT) + ['tools/render']
+    code = provenance.loaded_files(k.ROOT) + k.DATA_FILES + ['tools/render']
     if problem := provenance.code_problem(k.ROOT, record['code_commit'], code):
         raise SystemExit(problem)
     print(f'code as at {record["code_commit"][:12]}: {", ".join(code)}')
