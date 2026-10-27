@@ -156,3 +156,10 @@ The ICT cache needs ICT-FaceKit's 53 expression shapes and its first ten identit
 **Results are per shape.** A shape passes if, on the held-out identity, the curve's error is within the record's bounds and the expected response is detected in every condition. A condition is a failure if Rocketbox at its best weight explains less than half of ICT's motion (the shapes move different regions or directions), or if Rocketbox cannot reach ICT's motion at weight 1. A monotone curve cannot fix either, so those shapes are published as failed rather than forced.
 
 `examples/data/rig_gains.json` holds the curves of the shapes that passed and lists the others. `python examples/rigs.py --rig rocketbox-female --cache DIR --set mouthSmileLeft=0.6 --normalise --out pose` poses Rocketbox Female through it; without `--normalise` the weights are used as they are.
+
+To reproduce the fit and the held-out cells for two shapes as a test (slow tier, about half a minute):
+
+```sh
+RCEF_SLOW_TESTS=1 RCEF_K3_ICT_CACHE=DIR RCEF_RIG_CACHE=DIR RCEF_RENDERER=/tmp/meshrender \
+  python -B -m unittest tests/test_rig_gains.py
+```

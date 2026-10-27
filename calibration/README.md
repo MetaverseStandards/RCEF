@@ -2,7 +2,11 @@
 
 Each file here records one software-only calibration fit: how it was made, from what, the bounds it had to meet, and how it did on data it was not fitted to. A rule whose curve comes from a fit cites the record, and `check.py` refuses the checkout unless that rule's knots are exactly the record's frozen knots and every held-out cell for its channel passed.
 
-No record is published yet. The format is exercised by the test fixtures in [tests/fixtures/calibration/](../tests/fixtures/calibration/), whose numbers are invented.
+Published records:
+
+- [rig-gains.ict-rocketbox-female](rig-gains.ict-rocketbox-female.cal): rig intensity normalisation between two example rigs, ICT-FaceKit (reference) and Rocketbox Female, for 51 ARKit shapes. 3 pass (browInnerUp, cheekSquintLeft, cheekSquintRight); 48 fail and stay published as negative results. See [examples/README.md](../examples/README.md#6-rig-gains-how-strongly-two-rigs-render-the-same-arkit-name).
+
+The format is also exercised by the test fixtures in [tests/fixtures/calibration/](../tests/fixtures/calibration/), whose numbers are invented.
 
 ## Status: software-only
 

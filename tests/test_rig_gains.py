@@ -2,9 +2,12 @@
 """Rig intensity normalisation (examples/rig_gains.py): its pieces, its landmarks and, once frozen, its record."""
 import ast
 from fractions import Fraction
+import importlib.util
 import json
+import os
 from pathlib import Path
 import struct
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -16,6 +19,12 @@ import ict_facekit  # noqa: E402
 import rig_gains  # noqa: E402
 import rigs  # noqa: E402
 
+_spec = importlib.util.spec_from_file_location('rcef_check', ROOT / 'check.py')
+check = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(check)
+RECORD_PATH = ROOT / 'calibration/rig-gains.ict-rocketbox-female.cal'
+GAINS = json.loads((ROOT / 'examples/data/rig_gains.json').read_text(encoding='utf-8'))
+SLOW = os.environ.get('RCEF_SLOW_TESTS') == '1'
 LANDMARKS = json.loads((ROOT / 'examples/data/rig_landmarks.json').read_text(encoding='utf-8'))
 MULTI_PIE = [1225, 1888, 1052, 367, 1719, 1722, 2199, 1447, 966, 3661, 4390, 3927, 3924, 2608, 3272, 4088, 3443, 268,
              493, 1914, 2044, 1401, 3615, 4240, 4114, 2734, 2509, 978, 4527, 4942, 4857, 1140, 2075, 1147, 4269, 3360,
@@ -156,6 +165,102 @@ class ReservedRig(unittest.TestCase):
         self.assertNotIn("'Male'", source)
         self.assertNotIn('rocketbox-male', source)
         self.assertNotIn('Male_Adult', json.dumps(LANDMARKS))
+
+
+
+class Record(unittest.TestCase):
+    """The frozen record and the example data exported from it."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.record = check.load_record(RECORD_PATH)
+
+    def test_the_record_is_valid_and_frozen_in_the_ledger(self):
+        self.assertEqual(check.record_problems(self.record, rig_gains.RECORD_ID), [])
+        entries, problems = check.read_ledger(ROOT / 'calibration/FREEZES')
+        self.assertEqual(problems, [])
+        self.assertIsNone(check.freeze_problem(self.record, entries))
+
+    def test_it_covers_every_shared_shape_with_one_curve_and_one_held_out_cell(self):
+        signals = [rig_gains.signal(a) for a in rig_gains.channels()]
+        self.assertEqual(self.record['channels'], signals)
+        self.assertEqual([c['input'] for c in self.record['curves']], signals)
+        self.assertEqual([c['channel'] for c in self.record['cells']], signals)
+        self.assertTrue(all(c['output'].startswith('rocketbox_female.AK_') for c in self.record['curves']))
+        for cell in self.record['cells']:
+            self.assertEqual(cell['conditions'], self.record['held_out']['count'])
+            self.assertEqual(cell['identity'], f'ICT identity {rig_gains.HELD_OUT_IDENTITY} (held out)')
+            self.assertEqual(cell['side'], rig_gains.side(cell['channel'].rsplit('.', 1)[1]))
+
+    def test_every_curve_starts_at_rest_and_stays_in_range(self):
+        for curve in self.record['curves']:
+            self.assertEqual(curve['knots'][0], [0.0, 0.0])
+            self.assertEqual([k[0] for k in curve['knots']], [0.0, *rig_gains.TRAIN_WEIGHTS])
+            self.assertTrue(all(0.0 <= k[1] <= 1.0 for k in curve['knots']))
+
+    def test_it_says_what_it_is_not(self):
+        self.assertEqual(self.record['scope'], check.SCOPE)
+        self.assertIn(check.SCAN_ORIGIN, self.record['scan_origin'])
+        text = ' '.join(self.record['limitations'])
+        for words in ('not any tracker', 'Rocketbox Male was never loaded', 'eyeLook', 'mouthClose'):
+            self.assertIn(words, text)
+        self.assertFalse(any('Male' in i['name'] for i in self.record['inputs']))
+
+    def test_the_inputs_are_the_pinned_files(self):
+        hashes = {i['sha256'] for i in self.record['inputs']}
+        self.assertTrue(set(ict_facekit.CALIBRATION_FILES.values()) <= hashes)
+        self.assertIn(rigs.FILES['Female_Adult_01_facial.fbx'][1], hashes)
+        self.assertEqual(len(self.record['inputs']), len(ict_facekit.CALIBRATION_FILES) + 2)
+
+    def test_the_example_gains_are_exactly_the_passing_curves(self):
+        passing = {c['channel'] for c in self.record['cells'] if check.cell_passes(self.record, c)}
+        curves = {c['input'].rsplit('.', 1)[1]: c['knots'] for c in self.record['curves']}
+        self.assertEqual(GAINS['curves'], {rig_gains.signal(a).rsplit('.', 1)[1]: curves[a] for a in curves
+                                           if rig_gains.signal(a) in passing})
+        self.assertEqual(set(GAINS['curves']) | set(GAINS['not_normalised']), set(curves))
+        self.assertFalse(set(GAINS['curves']) & set(GAINS['not_normalised']))
+        self.assertEqual(GAINS['frozen_sha256'], self.record['held_out']['frozen_sha256'])
+        self.assertIn('not any tracker', GAINS['note'])
+
+    def test_normalise_maps_passing_shapes_and_leaves_the_rest(self):
+        weights = {'browInnerUp': 0.5, 'mouthPucker': 0.5, 'jawOpen': 0.3}
+        out = rigs.normalised(weights)
+        for name, w in weights.items():
+            if name in GAINS['curves']:
+                exact = rig_gains.curve_value(GAINS['curves'][name], w)
+                self.assertLessEqual(abs(Fraction(out[name]) - exact), Fraction(1, 2 ** 52))
+            else:
+                self.assertEqual(out[name], w)
+
+
+@unittest.skipUnless(SLOW and all(os.environ.get(k) for k in ('RCEF_K3_ICT_CACHE', 'RCEF_RIG_CACHE', 'RCEF_RENDERER')),
+                     'slow tier: set RCEF_SLOW_TESTS=1, RCEF_K3_ICT_CACHE, RCEF_RIG_CACHE and RCEF_RENDERER '
+                     '(a meshrender built from tools/render/meshrender.swift)')
+class Reproduction(unittest.TestCase):
+    """Re-run the fit and the held-out evaluation for two shapes (one passing, one failing) and compare."""
+    CHANNELS = 'browInnerUp,mouthPucker'
+
+    def run_command(self, *args):
+        return subprocess.run([sys.executable, '-B', str(ROOT / 'examples/rig_gains.py'), *args,
+                               '--ict-cache', os.environ['RCEF_K3_ICT_CACHE'], '--rig-cache', os.environ['RCEF_RIG_CACHE'],
+                               '--renderer', os.environ['RCEF_RENDERER'], '--channels', self.CHANNELS],
+                              capture_output=True, text=True, timeout=3600)
+
+    def test_the_fit_and_the_held_out_cells_reproduce(self):
+        record = check.load_record(RECORD_PATH)
+        with tempfile.TemporaryDirectory(prefix='rcef-k3-') as d:
+            fit = self.run_command('fit', '--work', f'{d}/fit', '--out', f'{d}/fit.json')
+            self.assertEqual(fit.returncode, 0, fit.stderr)
+            found = json.loads(Path(f'{d}/fit.json').read_text())['channels']
+            evaluated = self.run_command('evaluate', '--record', str(RECORD_PATH), '--work', f'{d}/eval',
+                                         '--out', f'{d}/cells.json')
+            self.assertEqual(evaluated.returncode, 0, evaluated.stderr)
+            cells = json.loads(Path(f'{d}/cells.json').read_text())['cells']
+        for name in self.CHANNELS.split(','):
+            signal = rig_gains.signal(name)
+            self.assertEqual(found[name]['knots'], next(c['knots'] for c in record['curves'] if c['input'] == signal))
+            self.assertEqual(next(c for c in cells if c['channel'] == signal),
+                             next(c for c in record['cells'] if c['channel'] == signal))
 
 
 if __name__ == '__main__':

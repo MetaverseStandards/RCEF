@@ -2,6 +2,22 @@
 
 Original documentation: CC-BY-SA-4.0.
 
+## Unreleased
+
+- First calibration record, `calibration/rig-gains.ict-rocketbox-female.cal`
+  (software-only; not a measurement of any tracker): one monotone curve per
+  ARKit shape from an ICT-FaceKit weight to the Rocketbox Female weight whose
+  rendered landmark motion matches, fitted on 8 ICT identities and evaluated
+  on a held-out one. 3 of 51 shapes pass (browInnerUp, cheekSquintLeft,
+  cheekSquintRight). 48 fail and are published as negative results: Rocketbox
+  moves differently (mouthPucker, mouthFunnel, cheekPuff, noseSneer, the
+  squints and gaze, among others), cannot reach ICT's motion (jawOpen, the
+  smiles, mouthLeft and mouthRight), or mouthClose, evaluated alone, hides
+  its own markers. The record was frozen in `calibration/FREEZES` before the
+  held-out run. Example data only, not pack data: `examples/rig_gains.py`,
+  `examples/data/rig_landmarks.json`, `examples/data/rig_gains.json` and
+  `rigs.py --normalise`. Rocketbox Male was never loaded.
+
 ## Data 0.3.0 — 2026-10-26
 
 Complete FB2 -> ARKit, read it back, and add ARKit -> Unified Expressions
