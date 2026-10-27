@@ -94,6 +94,10 @@ The 21 provider identities and 63 scalar comparisons preserve declared storage a
 
 Outputs are `generated/rcef.pack.json`, `rcef_mapping.csv`, `coverage.json`, and `SHA256SUMS`. JSON uses the shared sorted-key, indented stdlib encoding with UTF-8 and final LF, finite numbers and normalized negative zero. Arrays retain authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All bytes are rendered and validated before each file is atomically replaced; several replacements are not one transaction.
 
+## Examples
+
+[examples/README.md](examples/README.md) walks through RCEF end to end with the msf-tools public API. It translates FB2 frames to ARKit weights and META visemes to VRM presets from CSV, then drives the ICT-FaceKit face mesh both directly and through RCEF's rules and reports the residuals.
+
 ## Architecture and TOML guide
 
 See the [visual architecture report](docs/architecture.html), [Markdown guide](docs/architecture.md), [standalone diagram](docs/architecture.svg), and [TOML file index](docs/toml-index.csv). The guide explains discovery, validation, in-memory mapping, generated reports, and worked rule examples.

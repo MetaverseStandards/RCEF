@@ -2,3 +2,7 @@ __pycache__/
 *.py[cod]
 .venv/
 .DS_Store
+# Example outputs, for runs that write them into the checkout
+out/
+/fb2_to_arkit.csv
+/visemes_to_vrm.csv
