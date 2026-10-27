@@ -2,7 +2,7 @@
 
 Pack: rcef.parity; data version: 0.3.0.
 
-Generated from rcef.pack.json; SHA-256: dae3c4ace5cfa9590fee25fd16f5e81a1000b8ef357f41ef8e9d905f22836fb4.
+Generated from rcef.pack.json; SHA-256: 6df0795caaccf143272a9df29e8028ef108c85b0dde50b2e3491684a7a137482.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
 
@@ -194,8 +194,8 @@ Proposed rules translate between providers. Each formula assumes the calibration
 | fb2_gaze.to_arkit | fb2_arkit.eyeLookDownRight | openxr.fb2 → arkit.coefficient | eyeLookDownRight = 1·XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; FB2 describes eye rotation; ARKit describes eyelid movement consistent with the gaze; FB2 opposing directions are mutually exclusive; ARKit states no such constraint | proposed |
 | fb2_gaze.to_arkit | fb2_arkit.eyeLookUpLeft | openxr.fb2 → arkit.coefficient | eyeLookUpLeft = 1·XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; FB2 describes eye rotation; ARKit describes eyelid movement consistent with the gaze; FB2 opposing directions are mutually exclusive; ARKit states no such constraint | proposed |
 | fb2_gaze.to_arkit | fb2_arkit.eyeLookUpRight | openxr.fb2 → arkit.coefficient | eyeLookUpRight = 1·XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; FB2 describes eye rotation; ARKit describes eyelid movement consistent with the gaze; FB2 opposing directions are mutually exclusive; ARKit states no such constraint | proposed |
-| fb2.to_vrm | fb2_vrm.blinkLeft | openxr.fb2 → vrm.preset | blinkLeft = 1·XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB | an FB2 weight becomes an asset-authored expression weight; VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink | proposed |
-| fb2.to_vrm | fb2_vrm.blinkRight | openxr.fb2 → vrm.preset | blinkRight = 1·XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB | an FB2 weight becomes an asset-authored expression weight; VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink | proposed |
+| fb2.to_vrm | fb2_vrm.blinkLeft | openxr.fb2 → vrm.preset | blinkLeft = 1·XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB | an FB2 weight becomes an asset-authored expression weight; VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink; a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed | proposed |
+| fb2.to_vrm | fb2_vrm.blinkRight | openxr.fb2 → vrm.preset | blinkRight = 1·XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB | an FB2 weight becomes an asset-authored expression weight; VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink; a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed | proposed |
 | visemes.to_vrm | visemes_vrm.aa | openxr.visemes → vrm.preset | aa = 1·XR_FACE_TRACKING_VISEME_AA_META | consonant visemes are dropped, so outputs no longer sum to 1; a viseme probability becomes an asset-authored expression weight | proposed |
 | visemes.to_vrm | visemes_vrm.ih | openxr.visemes → vrm.preset | ih = 1·XR_FACE_TRACKING_VISEME_IH_META | consonant visemes are dropped, so outputs no longer sum to 1; a viseme probability becomes an asset-authored expression weight; vowel quality differs: META IH is the vowel in "tip", VRM ih is remarked "i" | proposed |
 | visemes.to_vrm | visemes_vrm.ou | openxr.visemes → vrm.preset | ou = 1·XR_FACE_TRACKING_VISEME_OU_META | consonant visemes are dropped, so outputs no longer sum to 1; a viseme probability becomes an asset-authored expression weight | proposed |
@@ -3352,12 +3352,12 @@ Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrc
 
 Assumptions:
 
-- FB2 EYES_CLOSED_L (lowers the top eyelid of the left eye) corresponds to VRM preset blinkLeft (closes the left eyelid); the definitions agree, but no published table pairs them.
+- FB2 EYES_CLOSED_L (lowers the top eyelid of the left eye) corresponds to VRM preset blinkLeft (closes the left eyelid); definitional only: the definitions agree, but no published table maps FB2 to VRM.
 - FB2 weight (0 to 1) is used directly as the VRM expression weight (0 to 1).
 - Both name sides from the subject's own face. FLAGGED: VRM gives no normative side; on the VRM 1.0 Twist sample blinkLeft moves the avatar's own left eyelid.
 - VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.
 
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"an FB2 weight becomes an asset-authored expression weight","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB","vrm.preset.blinkLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB","vrm.preset.blinkLeft"],"units":"1"}]
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"an FB2 weight becomes an asset-authored expression weight","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB","vrm.preset.blinkLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB","vrm.preset.blinkLeft"],"units":"1"},{"category":"signal","effect":"approximated","reason":"a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB","vrm.preset.blinkLeft"],"units":"1"}]
 
 Evidence: xr_fb2, vrm_expressions
 
@@ -3369,12 +3369,12 @@ Evidence: xr_fb2, vrm_expressions
 
 Assumptions:
 
-- FB2 EYES_CLOSED_R (lowers the top eyelid of the right eye) corresponds to VRM preset blinkRight (closes the right eyelid); the definitions agree, but no published table pairs them.
+- FB2 EYES_CLOSED_R (lowers the top eyelid of the right eye) corresponds to VRM preset blinkRight (closes the right eyelid); definitional only: the definitions agree, but no published table maps FB2 to VRM.
 - FB2 weight (0 to 1) is used directly as the VRM expression weight (0 to 1).
 - Both name sides from the subject's own face. FLAGGED: VRM gives no normative side; on the VRM 1.0 Twist sample blinkRight moves the avatar's own right eyelid.
 - VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.
 
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"an FB2 weight becomes an asset-authored expression weight","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB","vrm.preset.blinkRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB","vrm.preset.blinkRight"],"units":"1"}]
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"an FB2 weight becomes an asset-authored expression weight","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB","vrm.preset.blinkRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB","vrm.preset.blinkRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed","refs":["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB","vrm.preset.blinkRight"],"units":"1"}]
 
 Evidence: xr_fb2, vrm_expressions
 

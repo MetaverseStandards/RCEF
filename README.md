@@ -8,7 +8,7 @@ Selected inventories: ARKit 52, MediaPipe 52, OpenXR FB 63 and FB2 70, optional 
 
 The canonical subset has 21 explicitly provider-calibrated scalar projections spanning blink, jaw, brow, directional gaze and physical pupil diameter. Executable identities preserve the stated provider basis. General calibration ambiguity is unresolved. Original affine and lossy bilateral fixtures demonstrate the shared runtime without claiming visual equivalence.
 
-Data 0.2.0 adds the first 19 cross-provider rules: FB2 to ARKit (face and, separately, horizontal gaze) and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
+Data 0.3.0 has 187 cross-provider rules: FB2 to all 52 ARKit coefficients and back (face and, separately, gaze), ARKit to VRCFaceTracking Unified Expressions, FB2 eye closure to VRM per-eye blinks, and META visemes to VRM lip-sync presets. All are proposed and approximate, compile only with the approximation opt-in, and state their calibration assumptions and losses; see the [CHANGELOG](CHANGELOG.md). Their tests compare against expectations that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own rules.
 
 ## Expression sets and where they come from
 
@@ -33,6 +33,14 @@ How to read this: each row is one group of rules that turns values from the sour
 | [`fixture.affine`](reports/mappings.md#fixtureaffine) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
 | [`fixture.bilateral`](reports/mappings.md#fixturebilateral) | `fixture.source` → `fixture.target` | 1 | verified_current (synthetic) |
 | [`survey.ambiguous`](reports/mappings.md#surveyambiguous) | `mediapipe.label` → `rcef.canonical` | 1 | unresolved (not executable) |
+
+Not translated yet, and why:
+
+- **VRM lookUp/Down/Left/Right:** VRM drives gaze by angle through range maps whose input is in degrees, while FB2 and ARKit publish no maximum angle. This needs an angle-and-curve operator.
+- **VRM emotions** (happy, angry, sad, relaxed, surprised): turning muscle movements into an emotion label is classification, not a linear map, and each model authors its own binds.
+- **MediaPipe to ARKit:** only one independent implementation (three.js) maps it, and the model card that would state the ARKit basis has not been reviewed.
+- **Unified Expressions to ARKit, and FB2 to Unified Expressions:** deferred to the next round. FB2 to Unified Expressions is largely FB2 to ARKit to Unified Expressions.
+- **Unified Expressions shapes with no ARKit counterpart** (cheek suck, mouth tightener, pupil dilation and constriction, tongue directions and others) are left unwritten by `arkit.to_vrcft_artist`.
 
 ### Expression sets
 

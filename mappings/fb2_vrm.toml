@@ -14,7 +14,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "FB2 EYES_CLOSED_L (lowers the top eyelid of the left eye) corresponds to VRM preset blinkLeft (closes the left eyelid); the definitions agree, but no published table pairs them.",
+  "FB2 EYES_CLOSED_L (lowers the top eyelid of the left eye) corresponds to VRM preset blinkLeft (closes the left eyelid); definitional only: the definitions agree, but no published table maps FB2 to VRM.",
   "FB2 weight (0 to 1) is used directly as the VRM expression weight (0 to 1).",
   "Both name sides from the subject's own face. FLAGGED: VRM gives no normative side; on the VRM 1.0 Twist sample blinkLeft moves the avatar's own left eyelid.",
   "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
@@ -23,6 +23,7 @@ evidence = ["xr_fb2", "vrm_expressions"]
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "an FB2 weight becomes an asset-authored expression weight", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB", "vrm.preset.blinkLeft"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB", "vrm.preset.blinkLeft"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB", "vrm.preset.blinkLeft"], "units" = "1" },
 ]
 
 [[mappings.rules]]
@@ -34,7 +35,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "FB2 EYES_CLOSED_R (lowers the top eyelid of the right eye) corresponds to VRM preset blinkRight (closes the right eyelid); the definitions agree, but no published table pairs them.",
+  "FB2 EYES_CLOSED_R (lowers the top eyelid of the right eye) corresponds to VRM preset blinkRight (closes the right eyelid); definitional only: the definitions agree, but no published table maps FB2 to VRM.",
   "FB2 weight (0 to 1) is used directly as the VRM expression weight (0 to 1).",
   "Both name sides from the subject's own face. FLAGGED: VRM gives no normative side; on the VRM 1.0 Twist sample blinkRight moves the avatar's own right eyelid.",
   "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
@@ -43,4 +44,5 @@ evidence = ["xr_fb2", "vrm_expressions"]
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "an FB2 weight becomes an asset-authored expression weight", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB", "vrm.preset.blinkRight"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB", "vrm.preset.blinkRight"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB", "vrm.preset.blinkRight"], "units" = "1" },
 ]
