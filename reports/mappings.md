@@ -1,8 +1,8 @@
 # RCEF authored mappings
 
-Pack: rcef.parity; data version: 0.3.0.
+Pack: rcef.parity; data version: 0.4.0.
 
-Generated from rcef.pack.json; SHA-256: 0044a27b4dce891dfed5318f13f0b9eac0f716d24cf326d207c1055de0e009f1.
+Generated from rcef.pack.json; SHA-256: 4f7a15f88b775854365e116998568eec96af147223a7041d15df320b525e48c0.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
 
@@ -66,14 +66,18 @@ Proposed rules translate between providers. Each formula assumes the calibration
 | arkit.to_fb2 | arkit_fb2.NOSE_WRINKLER_L | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB = 1·noseSneerLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
 | arkit.to_fb2 | arkit_fb2.NOSE_WRINKLER_R | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB = 1·noseSneerRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
 | arkit.to_fb2 | arkit_fb2.TONGUE_OUT | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_TONGUE_OUT_FB = 1·tongueOut | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; both are extension shapes with no stated length | proposed |
-| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_DOWN_L | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB = 1·eyeLookDownLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
-| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_DOWN_R | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB = 1·eyeLookDownRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
-| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_RIGHT_L | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB = 1·eyeLookInLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
-| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_LEFT_R | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB = 1·eyeLookInRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
-| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_LEFT_L | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB = 1·eyeLookOutLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
-| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_RIGHT_R | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB = 1·eyeLookOutRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
-| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_UP_L | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB = 1·eyeLookUpLeft | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
-| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_UP_R | arkit.coefficient → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB = 1·eyeLookUpRight | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap) | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.gaze_in_minus_out_L | arkit.coefficient → rcef.intermediate | arkit_gaze_in_minus_out_L = 1·eyeLookInLeft + -1·eyeLookOutLeft | FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_RIGHT_L | rcef.intermediate → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB = {"id":"piecewise_linear","knots":[[-1.0,0.0],[0.0,0.0],[1.0,1.0]]} | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_LEFT_L | rcef.intermediate → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB = {"id":"piecewise_linear","knots":[[-1.0,1.0],[0.0,0.0],[1.0,0.0]]} | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.gaze_up_minus_down_L | arkit.coefficient → rcef.intermediate | arkit_gaze_up_minus_down_L = 1·eyeLookUpLeft + -1·eyeLookDownLeft | FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_UP_L | rcef.intermediate → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB = {"id":"piecewise_linear","knots":[[-1.0,0.0],[0.0,0.0],[1.0,1.0]]} | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_DOWN_L | rcef.intermediate → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB = {"id":"piecewise_linear","knots":[[-1.0,1.0],[0.0,0.0],[1.0,0.0]]} | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.gaze_in_minus_out_R | arkit.coefficient → rcef.intermediate | arkit_gaze_in_minus_out_R = 1·eyeLookInRight + -1·eyeLookOutRight | FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_LEFT_R | rcef.intermediate → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB = {"id":"piecewise_linear","knots":[[-1.0,0.0],[0.0,0.0],[1.0,1.0]]} | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_RIGHT_R | rcef.intermediate → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB = {"id":"piecewise_linear","knots":[[-1.0,1.0],[0.0,0.0],[1.0,0.0]]} | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.gaze_up_minus_down_R | arkit.coefficient → rcef.intermediate | arkit_gaze_up_minus_down_R = 1·eyeLookUpRight + -1·eyeLookDownRight | FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_UP_R | rcef.intermediate → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB = {"id":"piecewise_linear","knots":[[-1.0,0.0],[0.0,0.0],[1.0,1.0]]} | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
+| arkit_gaze.to_fb2 | arkit_fb2.EYES_LOOK_DOWN_R | rcef.intermediate → openxr.fb2 | XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB = {"id":"piecewise_linear","knots":[[-1.0,1.0],[0.0,0.0],[1.0,0.0]]} | provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal; FB2 maximum gaze angle is unspecified; ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation; FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | proposed |
 | arkit.to_vrcft_artist | arkit_vrcft_artist.BrowLowererLeft | arkit.coefficient → vrcft.artist.base | BrowLowererLeft = 1·browDownLeft | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
 | arkit.to_vrcft_artist | arkit_vrcft_artist.BrowPinchLeft | arkit.coefficient → vrcft.artist.base | BrowPinchLeft = 1·browDownLeft | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
 | arkit.to_vrcft_artist | arkit_vrcft_artist.BrowLowererRight | arkit.coefficient → vrcft.artist.base | BrowLowererRight = 1·browDownRight | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal; provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal | proposed |
@@ -1176,67 +1180,36 @@ Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrc
 
 ## arkit_gaze.to_fb2
 
-### arkit_fb2.EYES_LOOK_DOWN_L
+### arkit_fb2.gaze_in_minus_out_L
 
 | Inputs | Outputs | Operator | Status | Quality |
 | --- | --- | --- | --- | --- |
-| arkit.coefficient.eyeLookDownLeft | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+| arkit.coefficient.eyeLookInLeft, arkit.coefficient.eyeLookOutLeft | rcef.intermediate.arkit_gaze_in_minus_out_L | {"id":"weighted_sum","weights":[1.0,-1.0]} | mapped | approximate |
 
 Assumptions:
 
-- ARKit eyeLookDownLeft corresponds to FB2 EYES_LOOK_DOWN_L; this is the FB2 -&gt; ARKit rule read back.
-- ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- ARKit eyeLookInLeft and eyeLookOutLeft are opposing directions of one eye; their difference, from -1 to 1, carries both.
+- FB2 says only one of two opposing gaze directions is non-zero at a time (xr_fb2 lines 648-649).
 - Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
 
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookDownLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["arkit.coefficient.eyeLookDownLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["arkit.coefficient.eyeLookDownLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)","refs":["arkit.coefficient.eyeLookDownLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"],"units":"1"}]
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["arkit.coefficient.eyeLookInLeft","arkit.coefficient.eyeLookOutLeft","rcef.intermediate.arkit_gaze_in_minus_out_L"],"units":"1"}]
 
-Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, ict_facekit
-
-### arkit_fb2.EYES_LOOK_DOWN_R
-
-| Inputs | Outputs | Operator | Status | Quality |
-| --- | --- | --- | --- | --- |
-| arkit.coefficient.eyeLookDownRight | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
-
-Assumptions:
-
-- ARKit eyeLookDownRight corresponds to FB2 EYES_LOOK_DOWN_R; this is the FB2 -&gt; ARKit rule read back.
-- ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
-- Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
-
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookDownRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["arkit.coefficient.eyeLookDownRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["arkit.coefficient.eyeLookDownRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)","refs":["arkit.coefficient.eyeLookDownRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"],"units":"1"}]
-
-Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, ict_facekit
+Evidence: xr_fb2, apple_blendshapes
 
 ### arkit_fb2.EYES_LOOK_RIGHT_L
 
 | Inputs | Outputs | Operator | Status | Quality |
 | --- | --- | --- | --- | --- |
-| arkit.coefficient.eyeLookInLeft | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+| rcef.intermediate.arkit_gaze_in_minus_out_L | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB | {"id":"piecewise_linear","knots":[[-1.0,0.0],[0.0,0.0],[1.0,1.0]]} | mapped | approximate |
 
 Assumptions:
 
-- ARKit eyeLookInLeft corresponds to FB2 EYES_LOOK_RIGHT_L; this is the FB2 -&gt; ARKit rule read back.
+- ARKit eyeLookInLeft corresponds to FB2 EYES_LOOK_RIGHT_L; this is the FB2 -&gt; ARKit rule read back, taking eyeLookInLeft minus eyeLookOutLeft where it is above zero.
 - ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- A one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.
 - Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
 
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookInLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["arkit.coefficient.eyeLookInLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["arkit.coefficient.eyeLookInLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)","refs":["arkit.coefficient.eyeLookInLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"],"units":"1"}]
-
-Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, ict_facekit
-
-### arkit_fb2.EYES_LOOK_LEFT_R
-
-| Inputs | Outputs | Operator | Status | Quality |
-| --- | --- | --- | --- | --- |
-| arkit.coefficient.eyeLookInRight | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
-
-Assumptions:
-
-- ARKit eyeLookInRight corresponds to FB2 EYES_LOOK_LEFT_R; this is the FB2 -&gt; ARKit rule read back.
-- ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
-- Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
-
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookInRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["arkit.coefficient.eyeLookInRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["arkit.coefficient.eyeLookInRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)","refs":["arkit.coefficient.eyeLookInRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"],"units":"1"}]
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["rcef.intermediate.arkit_gaze_in_minus_out_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["rcef.intermediate.arkit_gaze_in_minus_out_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["rcef.intermediate.arkit_gaze_in_minus_out_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["rcef.intermediate.arkit_gaze_in_minus_out_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB"],"units":"1"}]
 
 Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, ict_facekit
 
@@ -1244,15 +1217,99 @@ Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, ict
 
 | Inputs | Outputs | Operator | Status | Quality |
 | --- | --- | --- | --- | --- |
-| arkit.coefficient.eyeLookOutLeft | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+| rcef.intermediate.arkit_gaze_in_minus_out_L | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB | {"id":"piecewise_linear","knots":[[-1.0,1.0],[0.0,0.0],[1.0,0.0]]} | mapped | approximate |
 
 Assumptions:
 
-- ARKit eyeLookOutLeft corresponds to FB2 EYES_LOOK_LEFT_L; this is the FB2 -&gt; ARKit rule read back.
+- ARKit eyeLookOutLeft corresponds to FB2 EYES_LOOK_LEFT_L; this is the FB2 -&gt; ARKit rule read back, taking how far eyeLookInLeft minus eyeLookOutLeft is below zero.
 - ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- A one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.
 - Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
 
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookOutLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["arkit.coefficient.eyeLookOutLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["arkit.coefficient.eyeLookOutLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)","refs":["arkit.coefficient.eyeLookOutLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"],"units":"1"}]
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["rcef.intermediate.arkit_gaze_in_minus_out_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["rcef.intermediate.arkit_gaze_in_minus_out_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["rcef.intermediate.arkit_gaze_in_minus_out_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["rcef.intermediate.arkit_gaze_in_minus_out_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB"],"units":"1"}]
+
+Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, ict_facekit
+
+### arkit_fb2.gaze_up_minus_down_L
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookUpLeft, arkit.coefficient.eyeLookDownLeft | rcef.intermediate.arkit_gaze_up_minus_down_L | {"id":"weighted_sum","weights":[1.0,-1.0]} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookUpLeft and eyeLookDownLeft are opposing directions of one eye; their difference, from -1 to 1, carries both.
+- FB2 says only one of two opposing gaze directions is non-zero at a time (xr_fb2 lines 648-649).
+- Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["arkit.coefficient.eyeLookUpLeft","arkit.coefficient.eyeLookDownLeft","rcef.intermediate.arkit_gaze_up_minus_down_L"],"units":"1"}]
+
+Evidence: xr_fb2, apple_blendshapes
+
+### arkit_fb2.EYES_LOOK_UP_L
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.intermediate.arkit_gaze_up_minus_down_L | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB | {"id":"piecewise_linear","knots":[[-1.0,0.0],[0.0,0.0],[1.0,1.0]]} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookUpLeft corresponds to FB2 EYES_LOOK_UP_L; this is the FB2 -&gt; ARKit rule read back, taking eyeLookUpLeft minus eyeLookDownLeft where it is above zero.
+- ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- A one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.
+- Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["rcef.intermediate.arkit_gaze_up_minus_down_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["rcef.intermediate.arkit_gaze_up_minus_down_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["rcef.intermediate.arkit_gaze_up_minus_down_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["rcef.intermediate.arkit_gaze_up_minus_down_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"],"units":"1"}]
+
+Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, ict_facekit
+
+### arkit_fb2.EYES_LOOK_DOWN_L
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.intermediate.arkit_gaze_up_minus_down_L | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB | {"id":"piecewise_linear","knots":[[-1.0,1.0],[0.0,0.0],[1.0,0.0]]} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookDownLeft corresponds to FB2 EYES_LOOK_DOWN_L; this is the FB2 -&gt; ARKit rule read back, taking how far eyeLookUpLeft minus eyeLookDownLeft is below zero.
+- ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- A one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.
+- Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["rcef.intermediate.arkit_gaze_up_minus_down_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["rcef.intermediate.arkit_gaze_up_minus_down_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["rcef.intermediate.arkit_gaze_up_minus_down_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["rcef.intermediate.arkit_gaze_up_minus_down_L","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"],"units":"1"}]
+
+Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, ict_facekit
+
+### arkit_fb2.gaze_in_minus_out_R
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| arkit.coefficient.eyeLookInRight, arkit.coefficient.eyeLookOutRight | rcef.intermediate.arkit_gaze_in_minus_out_R | {"id":"weighted_sum","weights":[1.0,-1.0]} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookInRight and eyeLookOutRight are opposing directions of one eye; their difference, from -1 to 1, carries both.
+- FB2 says only one of two opposing gaze directions is non-zero at a time (xr_fb2 lines 648-649).
+- Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["arkit.coefficient.eyeLookInRight","arkit.coefficient.eyeLookOutRight","rcef.intermediate.arkit_gaze_in_minus_out_R"],"units":"1"}]
+
+Evidence: xr_fb2, apple_blendshapes
+
+### arkit_fb2.EYES_LOOK_LEFT_R
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.intermediate.arkit_gaze_in_minus_out_R | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB | {"id":"piecewise_linear","knots":[[-1.0,0.0],[0.0,0.0],[1.0,1.0]]} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookInRight corresponds to FB2 EYES_LOOK_LEFT_R; this is the FB2 -&gt; ARKit rule read back, taking eyeLookInRight minus eyeLookOutRight where it is above zero.
+- ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- A one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.
+- Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["rcef.intermediate.arkit_gaze_in_minus_out_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["rcef.intermediate.arkit_gaze_in_minus_out_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["rcef.intermediate.arkit_gaze_in_minus_out_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["rcef.intermediate.arkit_gaze_in_minus_out_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB"],"units":"1"}]
 
 Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, ict_facekit
 
@@ -1260,47 +1317,66 @@ Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, ict
 
 | Inputs | Outputs | Operator | Status | Quality |
 | --- | --- | --- | --- | --- |
-| arkit.coefficient.eyeLookOutRight | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+| rcef.intermediate.arkit_gaze_in_minus_out_R | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB | {"id":"piecewise_linear","knots":[[-1.0,1.0],[0.0,0.0],[1.0,0.0]]} | mapped | approximate |
 
 Assumptions:
 
-- ARKit eyeLookOutRight corresponds to FB2 EYES_LOOK_RIGHT_R; this is the FB2 -&gt; ARKit rule read back.
+- ARKit eyeLookOutRight corresponds to FB2 EYES_LOOK_RIGHT_R; this is the FB2 -&gt; ARKit rule read back, taking how far eyeLookInRight minus eyeLookOutRight is below zero.
 - ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- A one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.
 - Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
 
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookOutRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["arkit.coefficient.eyeLookOutRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["arkit.coefficient.eyeLookOutRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)","refs":["arkit.coefficient.eyeLookOutRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"],"units":"1"}]
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["rcef.intermediate.arkit_gaze_in_minus_out_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["rcef.intermediate.arkit_gaze_in_minus_out_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["rcef.intermediate.arkit_gaze_in_minus_out_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["rcef.intermediate.arkit_gaze_in_minus_out_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB"],"units":"1"}]
 
 Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, ict_facekit
 
-### arkit_fb2.EYES_LOOK_UP_L
+### arkit_fb2.gaze_up_minus_down_R
 
 | Inputs | Outputs | Operator | Status | Quality |
 | --- | --- | --- | --- | --- |
-| arkit.coefficient.eyeLookUpLeft | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+| arkit.coefficient.eyeLookUpRight, arkit.coefficient.eyeLookDownRight | rcef.intermediate.arkit_gaze_up_minus_down_R | {"id":"weighted_sum","weights":[1.0,-1.0]} | mapped | approximate |
 
 Assumptions:
 
-- ARKit eyeLookUpLeft corresponds to FB2 EYES_LOOK_UP_L; this is the FB2 -&gt; ARKit rule read back.
-- ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- ARKit eyeLookUpRight and eyeLookDownRight are opposing directions of one eye; their difference, from -1 to 1, carries both.
+- FB2 says only one of two opposing gaze directions is non-zero at a time (xr_fb2 lines 648-649).
 - Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
 
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookUpLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["arkit.coefficient.eyeLookUpLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["arkit.coefficient.eyeLookUpLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)","refs":["arkit.coefficient.eyeLookUpLeft","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"],"units":"1"}]
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["arkit.coefficient.eyeLookUpRight","arkit.coefficient.eyeLookDownRight","rcef.intermediate.arkit_gaze_up_minus_down_R"],"units":"1"}]
 
-Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, ict_facekit
+Evidence: xr_fb2, apple_blendshapes
 
 ### arkit_fb2.EYES_LOOK_UP_R
 
 | Inputs | Outputs | Operator | Status | Quality |
 | --- | --- | --- | --- | --- |
-| arkit.coefficient.eyeLookUpRight | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+| rcef.intermediate.arkit_gaze_up_minus_down_R | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB | {"id":"piecewise_linear","knots":[[-1.0,0.0],[0.0,0.0],[1.0,1.0]]} | mapped | approximate |
 
 Assumptions:
 
-- ARKit eyeLookUpRight corresponds to FB2 EYES_LOOK_UP_R; this is the FB2 -&gt; ARKit rule read back.
+- ARKit eyeLookUpRight corresponds to FB2 EYES_LOOK_UP_R; this is the FB2 -&gt; ARKit rule read back, taking eyeLookUpRight minus eyeLookDownRight where it is above zero.
 - ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- A one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.
 - Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
 
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["arkit.coefficient.eyeLookUpRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["arkit.coefficient.eyeLookUpRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["arkit.coefficient.eyeLookUpRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 requires opposing directions to be exclusive (only one of a pair non-zero); ARKit can set both, and no operator can enforce exclusivity (operator gap)","refs":["arkit.coefficient.eyeLookUpRight","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"}]
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["rcef.intermediate.arkit_gaze_up_minus_down_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["rcef.intermediate.arkit_gaze_up_minus_down_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["rcef.intermediate.arkit_gaze_up_minus_down_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["rcef.intermediate.arkit_gaze_up_minus_down_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"],"units":"1"}]
+
+Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, ict_facekit
+
+### arkit_fb2.EYES_LOOK_DOWN_R
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.intermediate.arkit_gaze_up_minus_down_R | openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB | {"id":"piecewise_linear","knots":[[-1.0,1.0],[0.0,0.0],[1.0,0.0]]} | mapped | approximate |
+
+Assumptions:
+
+- ARKit eyeLookDownRight corresponds to FB2 EYES_LOOK_DOWN_R; this is the FB2 -&gt; ARKit rule read back, taking how far eyeLookUpRight minus eyeLookDownRight is below zero.
+- ARKit neutral (0) and maximum (1) are taken to equal FB2 weight 0 (not active) and 1 (fully active), linear in between; neither provider publishes its gain curve or full-activation pose.
+- A one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.
+- Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes 'the left eye').
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal","refs":["rcef.intermediate.arkit_gaze_up_minus_down_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 maximum gaze angle is unspecified","refs":["rcef.intermediate.arkit_gaze_up_minus_down_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation","refs":["rcef.intermediate.arkit_gaze_up_minus_down_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"],"units":"1"},{"category":"signal","effect":"approximated","reason":"FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller","refs":["rcef.intermediate.arkit_gaze_up_minus_down_R","openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"],"units":"1"}]
 
 Evidence: xr_fb2, apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, ict_facekit
 
