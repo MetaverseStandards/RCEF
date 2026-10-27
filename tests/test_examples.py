@@ -18,11 +18,15 @@ except ModuleNotFoundError:  # run by file path from the repository root
     from tests import shared_pack
 
 ROOT = Path(__file__).resolve().parents[1]
+FB2 = 'openxr.fb2.XR_FACE_EXPRESSION2_{}_FB'.format
 sys.path.insert(0, str(ROOT / 'examples'))
 import face_pipeline  # noqa: E402
 import ict_facekit  # noqa: E402
 import rcef_translate  # noqa: E402
+import rigs  # noqa: E402
 import translate_visemes_to_vrm  # noqa: E402
+
+ICT = face_pipeline.face_targets(rigs.ict_shapes(ict_facekit.SHAPES), ict_facekit.SHAPES)
 
 
 def compiled():
@@ -110,6 +114,19 @@ def fb2_arkit_document(pack, mapping_ids):
             'evidence': [e for e in pack['evidence'] if e['id'] in cited]}
 
 
+class ReadFrames(unittest.TestCase):
+    def test_label_columns_are_kept_and_are_not_validity_flags(self):
+        translator = rcef_translate.fb2_to_arkit(pack=shared_pack.pack(), compiled=compiled())
+        with tempfile.TemporaryDirectory(prefix='rcef-frames-') as tmp:
+            path = Path(tmp) / 'frames.csv'
+            path.write_text('time,segment,phase,amount,JAW_DROP,isValid,isEyeFollowingBlendshapesValid\n'
+                            '0.0,anger,hold,1,0.5,1,0\n', encoding='utf-8')
+            frame, = translator.read(path)
+        self.assertEqual(frame['flags'], {'isValid': True, 'isEyeFollowingBlendshapesValid': False})
+        self.assertEqual(frame['labels'], {'phase': 'hold', 'amount': '1'})
+        self.assertEqual(frame['values'], {FB2('JAW_DROP'): 0.5})
+
+
 class Fb2Oracles(unittest.TestCase):
     """The face pipeline's weight oracles catch a wrong FB2 rule on the demo frames."""
     MAPPINGS = ('fb2.to_arkit', 'fb2_gaze.to_arkit')
@@ -134,7 +151,7 @@ class Fb2Oracles(unittest.TestCase):
     def failing_frames(self, results):
         return [n for n, (frame, result) in enumerate(zip(self.frames, results))
                 if not all(c['passes'] for c in face_pipeline.check_channels(self.translator, frame, result,
-                                                                            ict_facekit.SHAPES))]
+                                                                            ICT))]
 
     def failing_frames_after(self, rule_id, change):
         """Change the mapping that holds `rule_id`; the other mapping keeps its published output."""
@@ -152,7 +169,7 @@ class Fb2Oracles(unittest.TestCase):
     def test_channels_at_rest_are_counted_apart_from_exact_ones(self):
         statuses = {}
         for frame, result in zip(self.frames, self.results):
-            for c in face_pipeline.check_channels(self.translator, frame, result, ict_facekit.SHAPES):
+            for c in face_pipeline.check_channels(self.translator, frame, result, ICT):
                 statuses.setdefault(c['status'], []).append(c)
         self.assertNotIn('exact', set(statuses))
         self.assertTrue(statuses['at rest in both paths'])
@@ -164,7 +181,7 @@ class Fb2Oracles(unittest.TestCase):
         still = set(ict_facekit.SHAPES)
         for frame, result in zip(self.frames, self.results):
             still -= {c['target'] for c in face_pipeline.check_channels(self.translator, frame, result,
-                                                                       ict_facekit.SHAPES) if c['direct']}
+                                                                       ICT) if c['direct']}
         self.assertEqual(still, set())
 
     def test_dropping_either_side_of_an_averaged_rule_fails(self):
@@ -231,8 +248,9 @@ class DefaultOutputs(unittest.TestCase):
             self.assertEqual(translate_visemes_to_vrm.main([]), 0)
             self.assertTrue((Path(tmp) / 'rcef-examples/visemes_to_vrm.csv').is_file())
             args = face_pipeline.arguments([])
-            self.assertEqual(args.out, Path(tmp) / 'rcef-examples/face')
-            self.assertEqual(args.cache, Path(tmp) / 'rcef-ict-facekit')
+            self.assertEqual((args.rig, args.out), ('rocketbox-female', Path(tmp) / 'rcef-examples/face/rocketbox-female'))
+            self.assertEqual(args.cache, Path(tmp) / 'rcef-face-rigs')
+            self.assertEqual(face_pipeline.arguments(['--rig', 'ict']).cache, Path(tmp) / 'rcef-ict-facekit')
 
 
 if __name__ == '__main__':
