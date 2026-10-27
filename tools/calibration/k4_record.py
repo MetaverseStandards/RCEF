@@ -10,6 +10,7 @@ import tempfile
 
 import k4_mediapipe as k
 import check
+import provenance
 
 RECORD_ID = 'mediapipe.ict-response'
 RECORD = k.ROOT / 'calibration' / f'{RECORD_ID}.cal'
@@ -21,6 +22,28 @@ CELLS = {'ict': 'ICT-FaceKit held-out identities (a new identity in every condit
          'rocketbox-male': 'Rocketbox Male_Adult_01 (a rig not used in training)'}
 STIMULUS = 'the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face'
 q = json.dumps
+
+
+ICT_INPUT = f'ICT-FaceKit {k.ICT_COMMIT[:7]} '
+TASK_INPUT = 'MediaPipe face_landmarker.task (float16, version 1)'
+ROCKETBOX_INPUT = 'Microsoft Rocketbox Male_Adult_01_facial.fbx'
+
+
+def input_paths(record: dict, cache: Path, rig_cache: Path) -> dict[Path, str]:
+    """The cache file behind each of the record's inputs, with the SHA-256 the record pins for it."""
+    paths = {}
+    for item in record['inputs']:
+        name = item['name']
+        if name.startswith(ICT_INPUT):
+            path = cache / Path(name[len(ICT_INPUT):]).name
+        elif name == TASK_INPUT:
+            path = cache / 'face_landmarker.task'
+        elif name == ROCKETBOX_INPUT:
+            path = rig_cache / 'Male_Adult_01_facial.fbx'
+        else:
+            raise SystemExit(f'the record names an input this tool does not know: {name}')
+        paths[path] = item['sha256']
+    return paths
 
 
 def git(*args) -> str:
@@ -91,10 +114,8 @@ def freeze(args) -> int:
     fitted = [c for c in k.CHANNELS if fits[c][0]]
     unfitted = {c: why for c, (knots, why) in fits.items() if not knots}
     import rigs
-    inputs = [(f'ICT-FaceKit {k.ICT_COMMIT[:7]} {name}', digest) for name, digest in k.ICT_FILES.items()
-              if name.endswith('.obj')]
-    inputs += [('MediaPipe face_landmarker.task (float16, version 1)', k.TASK_SHA256),
-               ('Microsoft Rocketbox Male_Adult_01_facial.fbx', rigs.FILES['Male_Adult_01_facial.fbx'][1])]
+    inputs = [(ICT_INPUT + name, digest) for name, digest in k.ICT_FILES.items() if name.endswith('.obj')]
+    inputs += [(TASK_INPUT, k.TASK_SHA256), (ROCKETBOX_INPUT, rigs.FILES['Male_Adult_01_facial.fbx'][1])]
     lines = ['# SPDX-License-Identifier: CC-BY-SA-4.0',
              '# Written by tools/calibration/k4_mediapipe.py. Everything but cells was frozen, and its hash written to',
              '# calibration/FREEZES, before the held-out run.',
@@ -136,11 +157,22 @@ def freeze(args) -> int:
 
 def heldout(args) -> int:
     """Render and score the held-out conditions; refuses unless the frozen record and its ledger line are committed."""
-    require_committed(RECORD, LEDGER, k.ROOT / 'tools/calibration', k.ROOT / 'tools/render')
+    require_committed(RECORD, LEDGER)
+    problems = check.verify_environment()
+    if problems:
+        raise SystemExit('the installed msf-tools is not the locked build:\n' + '\n'.join(problems))
     problems = check.calibration_problems(RECORD.parent, [])
     if problems:
         raise SystemExit('\n'.join(problems))
     record = check.load_record(RECORD)
+    problems = provenance.input_problems(input_paths(record, args.cache, args.rig_cache))
+    if problems:
+        raise SystemExit('cached inputs differ from the record:\n' + '\n'.join(problems))
+    import rigs  # noqa: F401  (Rocketbox and ICT geometry; imported now so the code check covers it)
+    code = provenance.loaded_files(k.ROOT) + k.DATA_FILES + ['tools/render']
+    if problem := provenance.code_problem(k.ROOT, record['code_commit'], code):
+        raise SystemExit(problem)
+    print(f'code as at {record["code_commit"][:12]}: {", ".join(code)}')
     if k.sha256(renderer(args)) != record['renderer']['binary_sha256']:
         raise SystemExit('this is not the renderer binary the record names')
     seeds = check.held_out_seeds(record)
@@ -152,7 +184,10 @@ def heldout(args) -> int:
         with tempfile.TemporaryDirectory(prefix='rcef-k4-') as work:
             out[rig.name] = {'conditions': conditions,
                              'results': k.sweep_runs(rig, conditions, channels, renderer(args), scorer, Path(work))}
-    save(args.out / 'heldout.json', out)
+    unchecked = sorted(set(provenance.loaded_files(k.ROOT)) - set(code))
+    if unchecked:
+        raise SystemExit(f'the run imported repository code that was not checked first: {", ".join(unchecked)}')
+    save(args.out / 'heldout.json', {**out, 'code_commit': record['code_commit'], 'code_files': code})
     return 0
 
 

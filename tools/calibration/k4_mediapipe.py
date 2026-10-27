@@ -40,6 +40,8 @@ sys.path.insert(0, str(ROOT))
 ICT_COMMIT = 'da5f95a607f5e6b37755b38d3385d7f2853732e5'
 ICT_RAW = f'https://raw.githubusercontent.com/ICT-VGL/ICT-FaceKit/{ICT_COMMIT}/'
 ICT_FILES = json.loads(Path(__file__).with_name('ict_files.json').read_text(encoding='utf-8'))
+# Data the harness reads besides its modules; a held-out run checks these with the code.
+DATA_FILES = ['tools/calibration/ict_files.json']
 TASK_URL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'
 TASK_SHA256 = '64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff'
 IDENTITY_MODES = 10
