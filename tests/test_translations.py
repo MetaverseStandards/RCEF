@@ -5,8 +5,10 @@ The expected values come from tests/fixtures/fb2_goldens.json, which
 scripts/derive_fb2_goldens.py derives from the pinned Godot, VRCFT, META and
 VRM sources without reading RCEF's mapping data.
 """
+from copy import deepcopy
 import json
 from pathlib import Path
+import re
 import unittest
 
 import msf_tools as msf
@@ -77,8 +79,105 @@ class Translations(unittest.TestCase):
                 with self.subTest(target=target, inputs=case['inputs']):
                     self.assertEqual(values[target], expected, case['sources'])
                     checked.add(target)
-        self.assertEqual(checked, self.outputs('fb2.to_arkit') | self.outputs('fb2_gaze.to_arkit'),
-                         'every translated coefficient needs a source-derived vector')
+        expected = {o for c in self.goldens['cases'] if c['mapping_kind'] == 'fb2_to_arkit' for o in c['expected']}
+        self.assertEqual(checked, expected, 'every coefficient the sources route needs a rule, and only those')
+
+    def whole_frames(self, kind):
+        """The golden frames that set every input at once, each to its own value."""
+        frames = [c for c in self.goldens['cases'] if c['mapping_kind'] == kind and len(c['inputs']) > 4
+                  or c['mapping_kind'] == kind == 'fb2_to_vrm']
+        self.assertEqual(len(frames), 2, kind)
+        return frames
+
+    def check_whole_frames(self, kind, compiled=None):
+        """Per output: True if it matches the golden value in every whole frame."""
+        matches = {}
+        for mapping in KIND[kind]:
+            frames = self.whole_frames(kind)
+            inputs = self.inputs(mapping)
+            samples = [{'timestamp': 0.0, 'values': {k: v for k, v in f['inputs'].items() if k in inputs},
+                        'validity': dict.fromkeys(inputs, True)} for f in frames]
+            result = msf.evaluate_mapping((compiled or self.compiled)[mapping], samples)
+            self.assertIsNotNone(result.value, result.report.to_dict())
+            for frame, sample in zip(frames, result.value.samples):
+                for output in self.outputs(mapping):
+                    matches[output] = matches.get(output, True) and sample['values'][output] == frame['expected'][output]
+        return matches
+
+    def test_whole_frames_match_the_sources(self):
+        for kind in KIND:
+            if kind == 'visemes_to_vrm':
+                continue
+            with self.subTest(kind):
+                matches = self.check_whole_frames(kind)
+                expected = set(self.whole_frames(kind)[0]['expected'])
+                self.assertEqual(set(matches), expected)
+                self.assertEqual([o for o, ok in matches.items() if not ok], [])
+
+    def changed_copies(self, kind, change):
+        """Each mapping of `kind` compiled from a small copy of the pack in which `change` has edited every rule."""
+        compiled = {}
+        for mapping in KIND[kind]:
+            source, target = MAPPINGS[mapping]
+            document = deepcopy(self.document)
+            rules = next(m for m in document['mappings'] if m['id'] == mapping)['rules']
+            members = {sid for r in rules for sid in r['inputs'] + r['outputs']}
+            profiles = [{**p, 'signal_ids': [sid for sid in p['signal_ids'] if sid in members]}
+                        for p in document['profiles'] if p['id'] in (source, target)]
+            signals = [x for x in document['signals'] if x['id'] in members]
+            cited = {e for record in profiles + signals + rules for e in record.get('evidence', [])}
+            change(rules)
+            small = {**document, 'profiles': profiles, 'signals': signals,
+                     'mappings': [m for m in document['mappings'] if m['id'] == mapping],
+                     'evidence': [e for e in document['evidence'] if e['id'] in cited]}
+            authored = msf.validate_authoring(small)
+            self.assertTrue(authored.ok, authored.report.to_dict())
+            pack = msf.compile_pack(authored.value).value
+            result = msf.compile_mapping(pack, msf.profile_snapshot(pack, source).value,
+                                         msf.profile_snapshot(pack, target).value, mapping, True)
+            self.assertIsNotNone(result.value, result.report.to_dict())
+            compiled[mapping] = result.value
+        return compiled
+
+    def test_halving_every_rule_changes_every_output(self):
+        # Each rule writes one output and reads no other rule's output, so halving
+        # them all at once and checking each output is the same as halving one at a time.
+        def halve(rules):
+            for rule in rules:
+                operator = rule['operator']
+                if operator['id'] == 'affine':
+                    operator['scale'] *= 0.5
+                else:
+                    operator['weights'] = [w * 0.5 for w in operator['weights']]
+        for kind in KIND:
+            if kind == 'visemes_to_vrm':
+                continue
+            with self.subTest(kind):
+                matches = self.check_whole_frames(kind, self.changed_copies(kind, halve))
+                self.assertEqual([o for o, ok in matches.items() if ok], [])
+
+    def test_swapping_every_left_and_right_rule_changes_both_outputs(self):
+        def side_free(sid):
+            return re.sub(r'(Left|Right)$|_[LR](?=[TB]?_FB$)|_(LEFT|RIGHT)(?=_FB$)', '#', sid)
+
+        def swap(rules):
+            by_key = {}
+            for rule in rules:
+                by_key.setdefault(side_free(rule['outputs'][0]), []).append(rule)
+            for pair in by_key.values():
+                if len(pair) == 2:
+                    pair[0]['inputs'], pair[1]['inputs'] = pair[1]['inputs'], pair[0]['inputs']
+        for kind in KIND:
+            if kind == 'visemes_to_vrm':
+                continue
+            with self.subTest(kind):
+                swapped = set()
+                for mapping in KIND[kind]:
+                    keys = [side_free(o) for o in self.outputs(mapping)]
+                    swapped |= {o for o in self.outputs(mapping) if keys.count(side_free(o)) == 2}
+                self.assertTrue(swapped)
+                matches = self.check_whole_frames(kind, self.changed_copies(kind, swap))
+                self.assertEqual(sorted(o for o in swapped if matches[o]), [])
 
     def test_viseme_rules_match_source_derived_vectors_and_drop_consonants(self):
         case, = (c for c in self.goldens['cases'] if c['mapping_kind'] == 'visemes_to_vrm')
@@ -94,7 +193,11 @@ class Translations(unittest.TestCase):
     def test_averaged_pairs_lose_exactly_half_the_difference(self):
         averaged = [r for r in self.rules('fb2.to_arkit') if r['operator']['id'] == 'weighted_sum']
         self.assertEqual(sorted(r['outputs'][0] for r in averaged),
-                         ['arkit.coefficient.browInnerUp', 'arkit.coefficient.cheekPuff'])
+                         [f'arkit.coefficient.{n}' for n in ('browInnerUp', 'cheekPuff', 'mouthFunnel', 'mouthPucker',
+                                                             'mouthRollLower', 'mouthRollUpper')])
+        funnel, = (r for r in averaged if len(r['inputs']) == 4)
+        self.assertEqual(funnel['operator']['weights'], [0.25] * 4)
+        averaged = [r for r in averaged if len(r['inputs']) == 2]
         levels = (0.0, 0.25, 0.5, 0.75, 1.0)
         for rule in averaged:
             left, right = rule['inputs']

@@ -23,7 +23,7 @@ class GodotComparison(unittest.TestCase):
 
     def test_only_brow_inner_up_departs_from_godot(self):
         rows = [r for r in compare_godot.compare(self.pack, self.routes) if r['mapping'] != '—']
-        self.assertEqual(len(rows), 14)
+        self.assertEqual(len(rows), 52)
         results = {r['arkit']: r['result'] for r in rows}
         self.assertEqual(results.pop('browInnerUp'), "Godot has no route; RCEF follows VRCFT's average")
         self.assertEqual(set(results.values()), {'agrees with Godot'})

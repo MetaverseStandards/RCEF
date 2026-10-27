@@ -40,6 +40,7 @@ UE = 'vrcft.artist.base.{}'
 # Values with exact binary representations, so sums and halves compare exactly.
 LEVELS = (0.25, 1.0)
 PAIRS = ((0.25, 0.75), (1.0, 0.0), (0.0, 1.0), (0.5, 0.5), (0.125, 0.875))
+QUADS = ((0.125, 0.25, 0.5, 1.0), (1.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.75, 0.25))
 
 
 def load_sources(cache: Path) -> tuple[dict[str, list[str]], dict[str, str]]:
@@ -459,7 +460,7 @@ def main() -> int:
         if len(inputs) == 1:
             values = [(level,) for level in LEVELS]
         else:
-            values = [pair for pair in PAIRS] if len(inputs) == 2 else []
+            values = [pair for pair in PAIRS] if len(inputs) == 2 else list(QUADS) if len(inputs) == 4 else []
         for value in values:
             frame = {FB2.format(name): v for name, v in zip(inputs, value)}
             expected = sum(r['inputs'][name] * v for name, v in zip(inputs, value))

@@ -29,12 +29,12 @@ python examples/translate_fb2_to_arkit.py
 
 This reads `examples/data/fb2_demo_frames.csv` and writes `~/.cache/rcef-examples/fb2_to_arkit.csv` (under `$XDG_CACHE_HOME` instead of `~/.cache` when it is set), so nothing lands in the checkout. To choose the files, pass them: `python examples/translate_fb2_to_arkit.py INPUT.csv OUTPUT.csv`.
 
-The input has one row per frame: `time`, a `segment` label, all 70 FB2 weights, and FB2's two validity flags, `isValid` and `isEyeFollowingBlendshapesValid`. The output has the 14 ARKit weights that RCEF's rules produce, plus two columns:
+The input has one row per frame: `time`, a `segment` label, all 70 FB2 weights, and FB2's two validity flags, `isValid` and `isEyeFollowingBlendshapesValid`. The output has all 52 ARKit weights that RCEF's rules produce, plus two columns:
 
 - `refused`: which mapping refused the frame and why. For example, when eye following is lost, `fb2_gaze.to_arkit` is refused while the face weights still come through.
-- `dropped`: non-zero inputs that no RCEF rule reads, such as `TONGUE_OUT`.
+- `dropped`: non-zero inputs that no RCEF rule reads, such as the tongue positions other than `TONGUE_OUT`.
 
-The demo frames come from `examples/make_demo_frames.py`. They cover a neutral pose, a jaw sweep, gaze left and right with both eyes and then with each eye alone, asymmetric brows, asymmetric cheeks both ways round, closed lips with the jaw closed, each smile, chin raiser and blink channel on its own, lost eye following during a blink, a lost face, and a tongue with no rule. Every one of the 14 FB2 rules is the only thing moving in some frame, so `tests/test_examples.py` can check that halving any rule, or swapping a left rule with its right one, makes the face pipeline's oracles fail.
+The demo frames come from `examples/make_demo_frames.py`. They cover a neutral pose, a jaw sweep, gaze left and right with both eyes and then with each eye alone, asymmetric brows, asymmetric cheeks both ways round, closed lips with the jaw closed, each smile, chin raiser and blink channel on its own, every other channel an FB2 rule reads on its own, lost eye following during a blink, a lost face, and a tongue position with no rule. Every one of the 52 FB2 rules is the only thing moving in some frame, so `tests/test_examples.py` can check that halving the rules, swapping each left rule with its right one, or dropping an input of an averaged rule makes the face pipeline's oracles fail for every shape.
 
 How it works (see `examples/rcef_translate.py`):
 
@@ -67,7 +67,7 @@ Rig files go to `~/.cache/rcef-face-rigs` (`~/.cache/rcef-ict-facekit` for ICT) 
 | Rig | Source | Shapes used |
 |---|---|---|
 | `rocketbox-female`, `rocketbox-male` | Microsoft Rocketbox `Female_Adult_01_facial.fbx` and `Male_Adult_01_facial.fbx` (MIT, commit `0943055`; ARKit shapes by Fang Ma and Matias Volonte), loaded directly with msf-tools' FBX reader | all 52 ARKit shapes (`AK_*`); its FACS action-unit shapes (`AU_*`) for the comparison panel; its 15 viseme shapes (`AA_VI_*`) in section 5 |
-| `ict` | ICT-FaceKit Light (MIT, USC Institute for Creative Technologies, commit `da5f95a`), converted to a GLB | the 16 ARKit shapes RCEF's first rules drive; `browInnerUp` and `cheekPuff` are split into halves |
+| `ict` | ICT-FaceKit Light (MIT, USC Institute for Creative Technologies, commit `da5f95a`), converted to a GLB | 16 of its ARKit shapes (all 53 would exceed msf-tools' budget); `browInnerUp` and `cheekPuff` are split into halves |
 
 Each file is downloaded on first use and checked against a pinned SHA-256; none is stored in this repository. Rocketbox is a full-body avatar with a small face, so a renderer has to frame the head. All 53 ICT shapes would need about 4.3 million position components, more than msf-tools' 4 million budget, so only the 16 are converted.
 
@@ -80,7 +80,7 @@ Each file is downloaded on first use and checked against a pinned SHA-256; none 
 For each frame the rig is evaluated with `msf_tools.evaluate_geometry(morph_weights=...)`:
 
 - **direct**: the FB2 values routed to the ARKit shapes as the Godot and VRCFT sources route them (`tests/fixtures/godot_fb2_rules.csv`), all 52 on Rocketbox. On ICT each brow and cheek half takes its own FB2 side.
-- **translated**: RCEF's translated ARKit weights. A shape no RCEF rule writes yet stays at rest and is named on the frame ("no RCEF rule yet, direct render only"); FB2 channels no rule reads are listed as dropped.
+- **translated**: RCEF's translated ARKit weights. RCEF now writes all 52 coefficients; a shape a rule set did not write would stay at rest and be named on the frame ("no RCEF rule yet, direct render only"). FB2 channels no rule reads (the tongue positions other than `TONGUE_OUT`) are listed as dropped.
 - **facs** (Rocketbox only): Rocketbox's own FACS action-unit shapes driven with the expression's AUs, beside the translated render with its own difference colours. This is a semantic comparison between two independently authored shape sets, labelled "not an error measure", and never an oracle. AUs Rocketbox has no shape for are named on the frame.
 
 Outputs in the output directory:
@@ -106,7 +106,7 @@ The report checks four things:
 
 The pipeline exits non-zero if any oracle fails. `residuals.md` counts channels that are zero in both paths as "at rest in both paths", apart from "exact (moving)", and lists for each shape whether an RCEF rule writes it and in how many frames its FB2 input moves.
 
-The ICT run with `examples/data/fb2_demo_frames.csv` uses frames built so that every one of the 14 FB2 rules is the only thing moving in some frame; `tests/test_examples.py` checks that halving any rule, or swapping a left rule with its right one, makes these oracles fail.
+`examples/data/fb2_demo_frames.csv` is built so that every one of the 52 FB2 rules is the only thing moving in some frame; `tests/test_examples.py` checks that halving the rules, swapping each left rule with its right one, or dropping an input of an averaged rule makes these oracles fail for every shape.
 
 **What this shows and what it doesn't.** It shows that RCEF's rules connect names and meanings the way the public sources do, on two independently authored rigs. It is not a calibration result: neither provider publishes its gain, so equal weights are assumed to mean equal expressions. No cross-rig equality is expected either.
 

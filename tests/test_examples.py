@@ -7,6 +7,7 @@ import io
 import json
 import os
 from pathlib import Path
+import re
 import sys
 import tempfile
 import unittest
@@ -27,6 +28,8 @@ import rigs  # noqa: E402
 import translate_visemes_to_vrm  # noqa: E402
 
 ICT = face_pipeline.face_targets(rigs.ict_shapes(ict_facekit.SHAPES), ict_facekit.SHAPES)
+ARKIT_52 = list(face_pipeline.source_routes())
+FULL = face_pipeline.face_targets([(i, a, None) for i, a in enumerate(ARKIT_52)], ARKIT_52)
 
 
 def compiled():
@@ -90,10 +93,10 @@ class Fb2Example(unittest.TestCase):
             self.assertIn('fb2_gaze.to_arkit', output['refused'])
 
     def test_unmapped_tongue_is_listed_as_dropped(self):
-        frames = [(s, o) for s, o in self.frames('tongue') if float(s['TONGUE_OUT']) > 0]
+        frames = [(s, o) for s, o in self.frames('tongue') if float(s['TONGUE_TIP_ALVEOLAR']) > 0]
         self.assertTrue(frames)
         for _, output in frames:
-            self.assertIn('TONGUE_OUT', output['dropped'])
+            self.assertIn('TONGUE_TIP_ALVEOLAR', output['dropped'])
             self.assertEqual(float(output['jawOpen']), 0.5)
 
 
@@ -127,15 +130,24 @@ class ReadFrames(unittest.TestCase):
         self.assertEqual(frame['values'], {FB2('JAW_DROP'): 0.5})
 
 
+def side_free(sid):
+    return re.sub(r'(Left|Right)$', '#', sid)
+
+
 class Fb2Oracles(unittest.TestCase):
-    """The face pipeline's weight oracles catch a wrong FB2 rule on the demo frames."""
+    """The face pipeline's weight oracles catch every wrong FB2 rule on the demo frames.
+
+    Each rule writes one coefficient and none reads another rule's output, so
+    changing every rule at once and asking which shapes fail is the same as
+    changing the rules one at a time. Every shape's own input moves alone in
+    some demo frame, so no change can hide behind another.
+    """
     MAPPINGS = ('fb2.to_arkit', 'fb2_gaze.to_arkit')
 
     @classmethod
     def setUpClass(cls):
-        pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
-        cls.translator = rcef_translate.fb2_to_arkit(
-            pack=rcef_translate.load_pack(fb2_arkit_document(pack, cls.MAPPINGS)))
+        cls.pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+        cls.translator = cls.translator_for(fb2_arkit_document(cls.pack, cls.MAPPINGS))
         # A refused frame has no weights to compare, so only fully valid frames
         # can show a wrong rule; each mapping then needs one evaluation. The
         # ramps go up and back down, so each pose is kept once.
@@ -145,26 +157,26 @@ class Fb2Oracles(unittest.TestCase):
                 poses.setdefault(tuple(frame['values'].values()), frame)
         cls.frames = list(poses.values())
         cls.results = cls.translator.translate(cls.frames)
-        cls.documents = {m: fb2_arkit_document(pack, (m,)) for m in cls.MAPPINGS}
-        cls.mapping_of = {r['id']: m['id'] for m in pack['mappings'] if m['id'] in cls.MAPPINGS for r in m['rules']}
 
-    def failing_frames(self, results):
-        return [n for n, (frame, result) in enumerate(zip(self.frames, results))
-                if not all(c['passes'] for c in face_pipeline.check_channels(self.translator, frame, result,
-                                                                            ICT))]
+    @staticmethod
+    def translator_for(document):
+        return rcef_translate.fb2_to_arkit(pack=rcef_translate.load_pack(document))
 
-    def failing_frames_after(self, rule_id, change):
-        """Change the mapping that holds `rule_id`; the other mapping keeps its published output."""
-        mapping = self.mapping_of[rule_id]
-        document = copy.deepcopy(self.documents[mapping])
-        change({r['id']: r for r in document['mappings'][0]['rules']})
-        changed = rcef_translate.Translator('openxr.fb2', 'arkit.coefficient', [mapping], self.translator.prefix,
-                                            self.translator.suffix, pack=rcef_translate.load_pack(document))
-        return self.failing_frames([{**r, 'values': {**r['values'], **c['values']}}
-                                    for r, c in zip(self.results, changed.translate(self.frames))])
+    def failing_shapes(self, results, targets=FULL):
+        return {c['arkit'] for frame, result in zip(self.frames, results)
+                for c in face_pipeline.check_channels(self.translator, frame, result, targets) if not c['passes']}
+
+    def after(self, change):
+        """Translate the demo frames with a copy of both mappings in which `change` has edited the rules."""
+        document = fb2_arkit_document(self.pack, self.MAPPINGS)
+        document['mappings'] = copy.deepcopy(document['mappings'])
+        for mapping in document['mappings']:
+            change(mapping['rules'])
+        return self.translator_for(document).translate(self.frames)
 
     def test_the_published_rules_pass(self):
-        self.assertEqual(self.failing_frames(self.results), [])
+        self.assertEqual(self.failing_shapes(self.results, ICT), set())
+        self.assertEqual(self.failing_shapes(self.results), set())
 
     def test_channels_at_rest_are_counted_apart_from_exact_ones(self):
         statuses = {}
@@ -178,48 +190,48 @@ class Fb2Oracles(unittest.TestCase):
         self.assertTrue(all(c['direct'] or c['translated'] for c in statuses['exact (moving)']))
 
     def test_every_shape_has_a_frame_where_its_own_input_moves(self):
-        still = set(ict_facekit.SHAPES)
-        for frame, result in zip(self.frames, self.results):
-            still -= {c['target'] for c in face_pipeline.check_channels(self.translator, frame, result,
-                                                                       ICT) if c['direct']}
-        self.assertEqual(still, set())
+        for targets in (ICT, FULL):
+            still = {t['name'] for t in targets}
+            for frame, result in zip(self.frames, self.results):
+                still -= {c['target'] for c in face_pipeline.check_channels(self.translator, frame, result, targets)
+                          if c['direct']}
+            self.assertEqual(still, set())
 
-    def test_dropping_either_side_of_an_averaged_rule_fails(self):
-        def drop(rule_id, side):
-            def change(rules):
-                rules[rule_id]['operator']['weights'][side] = 0.0
-            return change
-        for name in ('browInnerUp', 'cheekPuff'):
-            for side in (0, 1):
-                with self.subTest(name=name, side=side):
-                    rule_id = f'fb2_arkit.{name}'
-                    self.assertTrue(self.failing_frames_after(rule_id, drop(rule_id, side)))
-
-    def test_halving_any_rule_fails(self):
-        self.assertEqual(len(self.mapping_of), 14)
-
-        def halve(rule_id):
-            def change(rules):
-                operator = rules[rule_id]['operator']
+    def test_halving_every_rule_fails_every_shape(self):
+        def halve(rules):
+            for rule in rules:
+                operator = rule['operator']
                 if operator['id'] == 'affine':
                     operator['scale'] *= 0.5
                 else:
                     operator['weights'] = [w * 0.5 for w in operator['weights']]
-            return change
-        for rule_id in self.mapping_of:
-            with self.subTest(rule_id):
-                self.assertTrue(self.failing_frames_after(rule_id, halve(rule_id)))
+        self.assertEqual(self.failing_shapes(self.after(halve)), {t['arkit'] for t in FULL})
 
-    def test_swapping_left_and_right_fails(self):
-        def swap(first, second):
-            def change(rules):
-                rules[first]['inputs'], rules[second]['inputs'] = rules[second]['inputs'], rules[first]['inputs']
-            return change
-        for pair in (('eyeBlinkLeft', 'eyeBlinkRight'), ('mouthSmileLeft', 'mouthSmileRight'),
-                     ('eyeLookOutLeft', 'eyeLookInRight'), ('eyeLookInLeft', 'eyeLookOutRight')):
-            first, second = (f'fb2_arkit.{name}' for name in pair)
-            with self.subTest(pair):
-                self.assertTrue(self.failing_frames_after(first, swap(first, second)))
+    def test_swapping_every_left_and_right_rule_fails_both_shapes(self):
+        def swap(rules):
+            pairs = {}
+            for rule in rules:
+                pairs.setdefault(side_free(rule['outputs'][0]), []).append(rule)
+            for pair in pairs.values():
+                if len(pair) == 2:
+                    pair[0]['inputs'], pair[1]['inputs'] = pair[1]['inputs'], pair[0]['inputs']
+        sided = {t['arkit'] for t in FULL if side_free(t['arkit']) != t['arkit']}
+        self.assertEqual(len(sided), 40)
+        self.assertEqual(sided - self.failing_shapes(self.after(swap)), set())
+
+    def test_dropping_any_input_of_an_averaged_rule_fails(self):
+        averaged = {r['outputs'][0][len('arkit.coefficient.'):]: len(r['inputs'])
+                    for m in self.pack['mappings'] if m['id'] in self.MAPPINGS for r in m['rules']
+                    if r['operator']['id'] == 'weighted_sum'}
+        self.assertEqual(len(averaged), 6)
+        for position in range(4):
+            def drop(rules):
+                for rule in rules:
+                    if rule['operator']['id'] == 'weighted_sum' and position < len(rule['inputs']):
+                        rule['operator']['weights'][position] = 0.0
+            with self.subTest(position=position):
+                expected = {name for name, count in averaged.items() if position < count}
+                self.assertEqual(expected - self.failing_shapes(self.after(drop)), set())
 
 
 class VisemeExample(unittest.TestCase):

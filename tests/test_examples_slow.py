@@ -87,7 +87,7 @@ class FacePipeline(unittest.TestCase):
             self.assertFalse(any('fb2.to_arkit:' in label for label in frame['labels']))
         for frame in by_segment['face lost']:
             self.assertTrue(any('fb2.to_arkit:' in label for label in frame['labels']))
-        self.assertTrue(any('TONGUE_OUT' in label for f in by_segment['tongue'] for label in f['labels']))
+        self.assertTrue(any('TONGUE_TIP_ALVEOLAR' in label for f in by_segment['tongue'] for label in f['labels']))
 
     def test_renderer_files_have_the_declared_sizes(self):
         manifest = json.loads((self.out / 'frames.json').read_text())

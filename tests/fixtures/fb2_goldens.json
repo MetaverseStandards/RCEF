@@ -949,6 +949,72 @@
   },
   {
    "expected": {
+    "arkit.coefficient.mouthFunnel": 0.46875
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB": 0.125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB": 0.25,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB": 0.5,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L304",
+    "godot_vendors_fb2:L253",
+    "godot_vendors_fb2:L254",
+    "godot_vendors_fb2:L255",
+    "godot_vendors_fb2:L256",
+    "godot_vendors_fb2:L325",
+    "godot_vendors_fb2:L326",
+    "godot_vendors_fb2:L327"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthFunnel": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB": 1.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB": 0.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB": 0.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB": 0.0
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L304",
+    "godot_vendors_fb2:L253",
+    "godot_vendors_fb2:L254",
+    "godot_vendors_fb2:L255",
+    "godot_vendors_fb2:L256",
+    "godot_vendors_fb2:L325",
+    "godot_vendors_fb2:L326",
+    "godot_vendors_fb2:L327"
+   ]
+  },
+  {
+   "expected": {
+    "arkit.coefficient.mouthFunnel": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB": 0.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB": 0.0,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB": 0.75,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_arkit",
+   "sources": [
+    "godot_face_modifier:L304",
+    "godot_vendors_fb2:L253",
+    "godot_vendors_fb2:L254",
+    "godot_vendors_fb2:L255",
+    "godot_vendors_fb2:L256",
+    "godot_vendors_fb2:L325",
+    "godot_vendors_fb2:L326",
+    "godot_vendors_fb2:L327"
+   ]
+  },
+  {
+   "expected": {
     "arkit.coefficient.mouthLeft": 0.25
    },
    "inputs": {

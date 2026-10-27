@@ -1,5 +1,5 @@
 {
-  "data_version": "0.2.0",
+  "data_version": "0.3.0",
   "evidence": [
     {
       "claim": "Pinned survey/authoring baseline and provider presentation; historical parity reference.",
@@ -1331,6 +1331,1545 @@
           "outputs": [
             "arkit.coefficient.mouthShrugLower"
           ]
+        },
+        {
+          "assumptions": [
+            "FB2 BROW_LOWERER_L corresponds to ARKit browDownLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.browDownLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB",
+                "arkit.coefficient.browDownLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.browDownLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 BROW_LOWERER_R corresponds to ARKit browDownRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.browDownRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB",
+                "arkit.coefficient.browDownRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.browDownRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 OUTER_BROW_RAISER_L corresponds to ARKit browOuterUpLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.browOuterUpLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB",
+                "arkit.coefficient.browOuterUpLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.browOuterUpLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 OUTER_BROW_RAISER_R corresponds to ARKit browOuterUpRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.browOuterUpRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB",
+                "arkit.coefficient.browOuterUpRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.browOuterUpRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 CHEEK_RAISER_L corresponds to ARKit cheekSquintLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.cheekSquintLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB",
+                "arkit.coefficient.cheekSquintLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.cheekSquintLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 CHEEK_RAISER_R corresponds to ARKit cheekSquintRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.cheekSquintRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB",
+                "arkit.coefficient.cheekSquintRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.cheekSquintRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LID_TIGHTENER_L corresponds to ARKit eyeSquintLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.eyeSquintLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB",
+                "arkit.coefficient.eyeSquintLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.eyeSquintLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LID_TIGHTENER_R corresponds to ARKit eyeSquintRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.eyeSquintRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB",
+                "arkit.coefficient.eyeSquintRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.eyeSquintRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 UPPER_LID_RAISER_L corresponds to ARKit eyeWideLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.eyeWideLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB",
+                "arkit.coefficient.eyeWideLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.eyeWideLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 UPPER_LID_RAISER_R corresponds to ARKit eyeWideRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.eyeWideRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB",
+                "arkit.coefficient.eyeWideRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.eyeWideRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 JAW_THRUST corresponds to ARKit jawForward.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.jawForward",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB",
+                "arkit.coefficient.jawForward"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.jawForward"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 JAW_SIDEWAYS_LEFT corresponds to ARKit jawLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.jawLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB",
+                "arkit.coefficient.jawLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.jawLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 JAW_SIDEWAYS_RIGHT corresponds to ARKit jawRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.jawRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB",
+                "arkit.coefficient.jawRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.jawRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 DIMPLER_L corresponds to ARKit mouthDimpleLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthDimpleLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB",
+                "arkit.coefficient.mouthDimpleLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthDimpleLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 DIMPLER_R corresponds to ARKit mouthDimpleRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthDimpleRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB",
+                "arkit.coefficient.mouthDimpleRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthDimpleRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LIP_CORNER_DEPRESSOR_L corresponds to ARKit mouthFrownLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthFrownLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB",
+                "arkit.coefficient.mouthFrownLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthFrownLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LIP_CORNER_DEPRESSOR_R corresponds to ARKit mouthFrownRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthFrownRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB",
+                "arkit.coefficient.mouthFrownRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthFrownRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "ARKit mouthFunnel is one coefficient; it is the mean of the four quarters of FB2 LIP_FUNNELER_LB, LIP_FUNNELER_LT, LIP_FUNNELER_RB, LIP_FUNNELER_RT, as the Godot OpenXR vendors plugin computes it and VRCFaceTracking averages the matching Unified shapes.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "coupling": "bilateral_shared",
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "vrcft_code_parameters",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthFunnel",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB",
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB",
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB",
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "asymmetry irrecoverable",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB",
+                "arkit.coefficient.mouthFunnel"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB",
+                "arkit.coefficient.mouthFunnel"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "weighted_sum",
+            "weights": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "outputs": [
+            "arkit.coefficient.mouthFunnel"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 MOUTH_LEFT corresponds to ARKit mouthLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "FLAGGED: only Godot names ARKit mouthLeft for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthLeft, and the FB2 and Apple definitions agree.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_movement"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB",
+                "arkit.coefficient.mouthLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LOWER_LIP_DEPRESSOR_L corresponds to ARKit mouthLowerDownLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthLowerDownLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB",
+                "arkit.coefficient.mouthLowerDownLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthLowerDownLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LOWER_LIP_DEPRESSOR_R corresponds to ARKit mouthLowerDownRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthLowerDownRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB",
+                "arkit.coefficient.mouthLowerDownRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthLowerDownRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LIP_PRESSOR_L corresponds to ARKit mouthPressLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthPressLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB",
+                "arkit.coefficient.mouthPressLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthPressLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LIP_PRESSOR_R corresponds to ARKit mouthPressRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthPressRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB",
+                "arkit.coefficient.mouthPressRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthPressRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "ARKit mouthPucker is one coefficient; it is the mean of FB2 LIP_PUCKER_L, LIP_PUCKER_R, as the Godot OpenXR vendors plugin computes it and VRCFaceTracking averages the matching Unified shapes.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "coupling": "bilateral_shared",
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "vrcft_code_parameters",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthPucker",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB",
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "asymmetry irrecoverable",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB",
+                "arkit.coefficient.mouthPucker"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB",
+                "arkit.coefficient.mouthPucker"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "weighted_sum",
+            "weights": [
+              0.5,
+              0.5
+            ]
+          },
+          "outputs": [
+            "arkit.coefficient.mouthPucker"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 MOUTH_RIGHT corresponds to ARKit mouthRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "FLAGGED: only Godot names ARKit mouthRight for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthRight, and the FB2 and Apple definitions agree.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_movement"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB",
+                "arkit.coefficient.mouthRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "ARKit mouthRollLower is one coefficient; it is the mean of FB2 LIP_SUCK_LB, LIP_SUCK_RB, as the Godot OpenXR vendors plugin computes it and VRCFaceTracking averages the matching Unified shapes.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "coupling": "bilateral_shared",
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "vrcft_code_parameters",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthRollLower",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB",
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "asymmetry irrecoverable",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB",
+                "arkit.coefficient.mouthRollLower"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB",
+                "arkit.coefficient.mouthRollLower"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "weighted_sum",
+            "weights": [
+              0.5,
+              0.5
+            ]
+          },
+          "outputs": [
+            "arkit.coefficient.mouthRollLower"
+          ]
+        },
+        {
+          "assumptions": [
+            "ARKit mouthRollUpper is one coefficient; it is the mean of FB2 LIP_SUCK_LT, LIP_SUCK_RT, as the Godot OpenXR vendors plugin computes it and VRCFaceTracking averages the matching Unified shapes.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "coupling": "bilateral_shared",
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "vrcft_code_parameters",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthRollUpper",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB",
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "asymmetry irrecoverable",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB",
+                "arkit.coefficient.mouthRollUpper"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB",
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB",
+                "arkit.coefficient.mouthRollUpper"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "weighted_sum",
+            "weights": [
+              0.5,
+              0.5
+            ]
+          },
+          "outputs": [
+            "arkit.coefficient.mouthRollUpper"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LIP_STRETCHER_L corresponds to ARKit mouthStretchLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthStretchLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB",
+                "arkit.coefficient.mouthStretchLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthStretchLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 LIP_STRETCHER_R corresponds to ARKit mouthStretchRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthStretchRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB",
+                "arkit.coefficient.mouthStretchRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthStretchRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 UPPER_LIP_RAISER_L corresponds to ARKit mouthUpperUpLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthUpperUpLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB",
+                "arkit.coefficient.mouthUpperUpLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthUpperUpLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 UPPER_LIP_RAISER_R corresponds to ARKit mouthUpperUpRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.mouthUpperUpRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB",
+                "arkit.coefficient.mouthUpperUpRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.mouthUpperUpRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 NOSE_WRINKLER_L corresponds to ARKit noseSneerLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.noseSneerLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB",
+                "arkit.coefficient.noseSneerLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.noseSneerLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 NOSE_WRINKLER_R corresponds to ARKit noseSneerRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.noseSneerRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB",
+                "arkit.coefficient.noseSneerRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.noseSneerRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 TONGUE_OUT corresponds to ARKit tongueOut.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.tongueOut",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB",
+                "arkit.coefficient.tongueOut"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "both are extension shapes with no stated length",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB",
+                "arkit.coefficient.tongueOut"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.tongueOut"
+          ]
         }
       ]
     },
@@ -1619,6 +3158,298 @@
           },
           "outputs": [
             "arkit.coefficient.eyeLookInRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 EYES_LOOK_DOWN_L corresponds to ARKit eyeLookDownLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.eyeLookDownLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB",
+                "arkit.coefficient.eyeLookDownLeft"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 maximum gaze angle is unspecified",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB",
+                "arkit.coefficient.eyeLookDownLeft"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 describes eye rotation; ARKit describes eyelid movement consistent with the gaze",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB",
+                "arkit.coefficient.eyeLookDownLeft"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 opposing directions are mutually exclusive; ARKit states no such constraint",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB",
+                "arkit.coefficient.eyeLookDownLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.eyeLookDownLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 EYES_LOOK_DOWN_R corresponds to ARKit eyeLookDownRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.eyeLookDownRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB",
+                "arkit.coefficient.eyeLookDownRight"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 maximum gaze angle is unspecified",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB",
+                "arkit.coefficient.eyeLookDownRight"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 describes eye rotation; ARKit describes eyelid movement consistent with the gaze",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB",
+                "arkit.coefficient.eyeLookDownRight"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 opposing directions are mutually exclusive; ARKit states no such constraint",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB",
+                "arkit.coefficient.eyeLookDownRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.eyeLookDownRight"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 EYES_LOOK_UP_L corresponds to ARKit eyeLookUpLeft.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.eyeLookUpLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB",
+                "arkit.coefficient.eyeLookUpLeft"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 maximum gaze angle is unspecified",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB",
+                "arkit.coefficient.eyeLookUpLeft"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 describes eye rotation; ARKit describes eyelid movement consistent with the gaze",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB",
+                "arkit.coefficient.eyeLookUpLeft"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 opposing directions are mutually exclusive; ARKit states no such constraint",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB",
+                "arkit.coefficient.eyeLookUpLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.eyeLookUpLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 EYES_LOOK_UP_R corresponds to ARKit eyeLookUpRight.",
+            "FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.",
+            "Both providers name sides from the subject's own face (FB2 describes 'the left eye'; ARKit coefficients are face-relative)."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "apple_blendshapes",
+            "godot_vendors_fb2",
+            "godot_face_modifier",
+            "vrcft_docs_arkit",
+            "vrcft_docs_movement",
+            "ict_facekit"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_arkit.eyeLookUpRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "provider gain and full-activation pose are not published; 0 and 1 endpoints assumed equal",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB",
+                "arkit.coefficient.eyeLookUpRight"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 maximum gaze angle is unspecified",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB",
+                "arkit.coefficient.eyeLookUpRight"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 describes eye rotation; ARKit describes eyelid movement consistent with the gaze",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB",
+                "arkit.coefficient.eyeLookUpRight"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "FB2 opposing directions are mutually exclusive; ARKit states no such constraint",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB",
+                "arkit.coefficient.eyeLookUpRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "arkit.coefficient.eyeLookUpRight"
           ]
         }
       ]
@@ -3965,7 +5796,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:eyeLookDownLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -3978,7 +5809,7 @@
       "label": "eyeLookDownLeft",
       "metadata": {
         "inventory_ordinal": 1,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2_gaze.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "eyeLookDownLeft",
       "neutral": 0.0,
@@ -4040,7 +5871,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:eyeLookUpLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4053,7 +5884,7 @@
       "label": "eyeLookUpLeft",
       "metadata": {
         "inventory_ordinal": 4,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2_gaze.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "eyeLookUpLeft",
       "neutral": 0.0,
@@ -4065,7 +5896,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:eyeSquintLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4078,7 +5909,7 @@
       "label": "eyeSquintLeft",
       "metadata": {
         "inventory_ordinal": 5,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "eyeSquintLeft",
       "neutral": 0.0,
@@ -4090,7 +5921,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:eyeWideLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4103,7 +5934,7 @@
       "label": "eyeWideLeft",
       "metadata": {
         "inventory_ordinal": 6,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "eyeWideLeft",
       "neutral": 0.0,
@@ -4141,7 +5972,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:eyeLookDownRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4154,7 +5985,7 @@
       "label": "eyeLookDownRight",
       "metadata": {
         "inventory_ordinal": 8,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2_gaze.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "eyeLookDownRight",
       "neutral": 0.0,
@@ -4216,7 +6047,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:eyeLookUpRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4229,7 +6060,7 @@
       "label": "eyeLookUpRight",
       "metadata": {
         "inventory_ordinal": 11,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2_gaze.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "eyeLookUpRight",
       "neutral": 0.0,
@@ -4241,7 +6072,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:eyeSquintRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4254,7 +6085,7 @@
       "label": "eyeSquintRight",
       "metadata": {
         "inventory_ordinal": 12,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "eyeSquintRight",
       "neutral": 0.0,
@@ -4266,7 +6097,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:eyeWideRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4279,7 +6110,7 @@
       "label": "eyeWideRight",
       "metadata": {
         "inventory_ordinal": 13,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "eyeWideRight",
       "neutral": 0.0,
@@ -4317,7 +6148,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:jawLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4330,7 +6161,7 @@
       "label": "jawLeft",
       "metadata": {
         "inventory_ordinal": 15,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "jawLeft",
       "neutral": 0.0,
@@ -4342,7 +6173,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:jawRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4355,7 +6186,7 @@
       "label": "jawRight",
       "metadata": {
         "inventory_ordinal": 16,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "jawRight",
       "neutral": 0.0,
@@ -4418,7 +6249,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthFunnel: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4431,7 +6262,7 @@
       "label": "mouthFunnel",
       "metadata": {
         "inventory_ordinal": 19,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthFunnel",
       "neutral": 0.0,
@@ -4443,7 +6274,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthPucker: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4456,7 +6287,7 @@
       "label": "mouthPucker",
       "metadata": {
         "inventory_ordinal": 20,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthPucker",
       "neutral": 0.0,
@@ -4468,7 +6299,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4481,7 +6312,7 @@
       "label": "mouthLeft",
       "metadata": {
         "inventory_ordinal": 21,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthLeft",
       "neutral": 0.0,
@@ -4493,7 +6324,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4506,7 +6337,7 @@
       "label": "mouthRight",
       "metadata": {
         "inventory_ordinal": 22,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthRight",
       "neutral": 0.0,
@@ -4568,7 +6399,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthFrownLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4581,7 +6412,7 @@
       "label": "mouthFrownLeft",
       "metadata": {
         "inventory_ordinal": 25,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthFrownLeft",
       "neutral": 0.0,
@@ -4593,7 +6424,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthFrownRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4606,7 +6437,7 @@
       "label": "mouthFrownRight",
       "metadata": {
         "inventory_ordinal": 26,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthFrownRight",
       "neutral": 0.0,
@@ -4618,7 +6449,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthDimpleLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4631,7 +6462,7 @@
       "label": "mouthDimpleLeft",
       "metadata": {
         "inventory_ordinal": 27,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthDimpleLeft",
       "neutral": 0.0,
@@ -4643,7 +6474,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthDimpleRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4656,7 +6487,7 @@
       "label": "mouthDimpleRight",
       "metadata": {
         "inventory_ordinal": 28,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthDimpleRight",
       "neutral": 0.0,
@@ -4668,7 +6499,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthStretchLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4681,7 +6512,7 @@
       "label": "mouthStretchLeft",
       "metadata": {
         "inventory_ordinal": 29,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthStretchLeft",
       "neutral": 0.0,
@@ -4693,7 +6524,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthStretchRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4706,7 +6537,7 @@
       "label": "mouthStretchRight",
       "metadata": {
         "inventory_ordinal": 30,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthStretchRight",
       "neutral": 0.0,
@@ -4718,7 +6549,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthRollLower: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4731,7 +6562,7 @@
       "label": "mouthRollLower",
       "metadata": {
         "inventory_ordinal": 31,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthRollLower",
       "neutral": 0.0,
@@ -4743,7 +6574,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthRollUpper: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4756,7 +6587,7 @@
       "label": "mouthRollUpper",
       "metadata": {
         "inventory_ordinal": 32,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthRollUpper",
       "neutral": 0.0,
@@ -4818,7 +6649,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthPressLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4831,7 +6662,7 @@
       "label": "mouthPressLeft",
       "metadata": {
         "inventory_ordinal": 35,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthPressLeft",
       "neutral": 0.0,
@@ -4843,7 +6674,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthPressRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4856,7 +6687,7 @@
       "label": "mouthPressRight",
       "metadata": {
         "inventory_ordinal": 36,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthPressRight",
       "neutral": 0.0,
@@ -4868,7 +6699,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthLowerDownLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4881,7 +6712,7 @@
       "label": "mouthLowerDownLeft",
       "metadata": {
         "inventory_ordinal": 37,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthLowerDownLeft",
       "neutral": 0.0,
@@ -4893,7 +6724,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthLowerDownRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4906,7 +6737,7 @@
       "label": "mouthLowerDownRight",
       "metadata": {
         "inventory_ordinal": 38,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthLowerDownRight",
       "neutral": 0.0,
@@ -4918,7 +6749,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthUpperUpLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4931,7 +6762,7 @@
       "label": "mouthUpperUpLeft",
       "metadata": {
         "inventory_ordinal": 39,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthUpperUpLeft",
       "neutral": 0.0,
@@ -4943,7 +6774,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:mouthUpperUpRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -4956,7 +6787,7 @@
       "label": "mouthUpperUpRight",
       "metadata": {
         "inventory_ordinal": 40,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "mouthUpperUpRight",
       "neutral": 0.0,
@@ -5125,7 +6956,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:cheekSquintLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -5138,7 +6969,7 @@
       "label": "cheekSquintLeft",
       "metadata": {
         "inventory_ordinal": 47,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "cheekSquintLeft",
       "neutral": 0.0,
@@ -5150,7 +6981,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:cheekSquintRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -5163,7 +6994,7 @@
       "label": "cheekSquintRight",
       "metadata": {
         "inventory_ordinal": 48,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "cheekSquintRight",
       "neutral": 0.0,
@@ -5175,7 +7006,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:noseSneerLeft: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -5188,7 +7019,7 @@
       "label": "noseSneerLeft",
       "metadata": {
         "inventory_ordinal": 49,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "noseSneerLeft",
       "neutral": 0.0,
@@ -5200,7 +7031,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:noseSneerRight: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -5213,7 +7044,7 @@
       "label": "noseSneerRight",
       "metadata": {
         "inventory_ordinal": 50,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "noseSneerRight",
       "neutral": 0.0,
@@ -5225,7 +7056,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:tongueOut: face-relative native neutral-to-maximum coefficient",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -5238,7 +7069,7 @@
       "label": "tongueOut",
       "metadata": {
         "inventory_ordinal": 51,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved."
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured."
       },
       "native_id": "tongueOut",
       "neutral": 0.0,
@@ -12199,7 +14030,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -12213,7 +14044,7 @@
       "label": "XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB",
       "metadata": {
         "native_index": 0,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB",
@@ -12228,7 +14059,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -12242,7 +14073,7 @@
       "label": "XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB",
       "metadata": {
         "native_index": 1,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB",
@@ -12315,7 +14146,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -12329,7 +14160,7 @@
       "label": "XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB",
       "metadata": {
         "native_index": 4,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB",
@@ -12344,7 +14175,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -12358,7 +14189,7 @@
       "label": "XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB",
       "metadata": {
         "native_index": 5,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB",
@@ -12489,7 +14320,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -12503,7 +14334,7 @@
       "label": "XR_FACE_EXPRESSION2_DIMPLER_L_FB",
       "metadata": {
         "native_index": 10,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_DIMPLER_L_FB",
@@ -12518,7 +14349,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -12532,7 +14363,7 @@
       "label": "XR_FACE_EXPRESSION2_DIMPLER_R_FB",
       "metadata": {
         "native_index": 11,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_DIMPLER_R_FB",
@@ -12948,7 +14779,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -12962,7 +14793,7 @@
       "label": "XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB",
       "metadata": {
         "native_index": 25,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB",
@@ -12977,7 +14808,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -12991,7 +14822,7 @@
       "label": "XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB",
       "metadata": {
         "native_index": 26,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB",
@@ -13006,7 +14837,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13020,7 +14851,7 @@
       "label": "XR_FACE_EXPRESSION2_JAW_THRUST_FB",
       "metadata": {
         "native_index": 27,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_JAW_THRUST_FB",
@@ -13035,7 +14866,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13049,7 +14880,7 @@
       "label": "XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB",
       "metadata": {
         "native_index": 28,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB",
@@ -13064,7 +14895,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13078,7 +14909,7 @@
       "label": "XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB",
       "metadata": {
         "native_index": 29,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB",
@@ -13093,7 +14924,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13107,7 +14938,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB",
       "metadata": {
         "native_index": 30,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB",
@@ -13122,7 +14953,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13136,7 +14967,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB",
       "metadata": {
         "native_index": 31,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB",
@@ -13209,7 +15040,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13223,7 +15054,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB",
       "metadata": {
         "native_index": 34,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB",
@@ -13238,7 +15069,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13252,7 +15083,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB",
       "metadata": {
         "native_index": 35,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB",
@@ -13267,7 +15098,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13281,7 +15112,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB",
       "metadata": {
         "native_index": 36,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB",
@@ -13296,7 +15127,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13310,7 +15141,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB",
       "metadata": {
         "native_index": 37,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB",
@@ -13325,7 +15156,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13339,7 +15170,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB",
       "metadata": {
         "native_index": 38,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB",
@@ -13354,7 +15185,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13368,7 +15199,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB",
       "metadata": {
         "native_index": 39,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB",
@@ -13383,7 +15214,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13397,7 +15228,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB",
       "metadata": {
         "native_index": 40,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB",
@@ -13412,7 +15243,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13426,7 +15257,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB",
       "metadata": {
         "native_index": 41,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB",
@@ -13441,7 +15272,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13455,7 +15286,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB",
       "metadata": {
         "native_index": 42,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB",
@@ -13470,7 +15301,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13484,7 +15315,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB",
       "metadata": {
         "native_index": 43,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB",
@@ -13499,7 +15330,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13513,7 +15344,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB",
       "metadata": {
         "native_index": 44,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB",
@@ -13528,7 +15359,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13542,7 +15373,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB",
       "metadata": {
         "native_index": 45,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB",
@@ -13557,7 +15388,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13571,7 +15402,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB",
       "metadata": {
         "native_index": 46,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB",
@@ -13586,7 +15417,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13600,7 +15431,7 @@
       "label": "XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB",
       "metadata": {
         "native_index": 47,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB",
@@ -13702,7 +15533,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13716,7 +15547,7 @@
       "label": "XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB",
       "metadata": {
         "native_index": 51,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB",
@@ -13731,7 +15562,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13745,7 +15576,7 @@
       "label": "XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB",
       "metadata": {
         "native_index": 52,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB",
@@ -13760,7 +15591,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13774,7 +15605,7 @@
       "label": "XR_FACE_EXPRESSION2_MOUTH_LEFT_FB",
       "metadata": {
         "native_index": 53,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_MOUTH_LEFT_FB",
@@ -13789,7 +15620,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13803,7 +15634,7 @@
       "label": "XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB",
       "metadata": {
         "native_index": 54,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB",
@@ -13818,7 +15649,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13832,7 +15663,7 @@
       "label": "XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB",
       "metadata": {
         "native_index": 55,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB",
@@ -13847,7 +15678,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13861,7 +15692,7 @@
       "label": "XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB",
       "metadata": {
         "native_index": 56,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB",
@@ -13876,7 +15707,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13890,7 +15721,7 @@
       "label": "XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB",
       "metadata": {
         "native_index": 57,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB",
@@ -13905,7 +15736,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13919,7 +15750,7 @@
       "label": "XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB",
       "metadata": {
         "native_index": 58,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB",
@@ -13934,7 +15765,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13948,7 +15779,7 @@
       "label": "XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB",
       "metadata": {
         "native_index": 59,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB",
@@ -13963,7 +15794,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -13977,7 +15808,7 @@
       "label": "XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB",
       "metadata": {
         "native_index": 60,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB",
@@ -13992,7 +15823,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -14006,7 +15837,7 @@
       "label": "XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB",
       "metadata": {
         "native_index": 61,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB",
@@ -14021,7 +15852,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -14035,7 +15866,7 @@
       "label": "XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB",
       "metadata": {
         "native_index": 62,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB",
@@ -14195,7 +16026,7 @@
     {
       "calibration": "openxr.fb2: native basis; no canonical calibration established",
       "confidence": "upper/lower region confidences; no threshold implied",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -14209,7 +16040,7 @@
       "label": "XR_FACE_EXPRESSION2_TONGUE_OUT_FB",
       "metadata": {
         "native_index": 68,
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_arkit; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_TONGUE_OUT_FB",

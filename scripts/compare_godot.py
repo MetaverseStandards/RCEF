@@ -27,6 +27,8 @@ SEMANTIC = (
     ('mouthShrugUpper', 'ICT-FaceKit relates mouthShrugUpper to FACS AU10 (upper lip raiser), while Godot, VRCFT and '
      'RCEF use FB2 CHIN_RAISER_T; FB2 has separate UPPER_LIP_RAISER_L/R weights.'),
     ('jawOpen', 'ICT-FaceKit relates jawOpen to FACS AU27 (mouth stretch); FB2 JAW_DROP is the jaw drop.'),
+    ('mouthUpperUpLeft, mouthUpperUpRight', 'ICT-FaceKit relates mouthUpperUp to FACS AU11 (nasolabial deepener); '
+     'Godot, VRCFT and RCEF use FB2 UPPER_LIP_RAISER, named after AU10.'),
     ('mouthSmileLeft, mouthSmileRight', 'Unified Expressions MouthSmile blends corner pull and corner slant; FB2 has '
      'no slant, and Godot sets it to zero.'),
     ('eyeLookIn/Out', 'VRCFT\'s Meta Movement and overview tables name FB2 weights EYES_LOOK_IN/OUT_*, which do not exist '

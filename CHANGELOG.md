@@ -2,6 +2,22 @@
 
 Original documentation: CC-BY-SA-4.0.
 
+## Data 0.3.0 — 2026-10-27
+
+Complete FB2 -> ARKit. All new rules are proposed and approximate, as in
+0.2.0: they compile only with the approximation opt-in, and each one states
+its calibration assumption and losses and cites at least two public sources.
+
+- `fb2.to_arkit` gains 34 rules and `fb2_gaze.to_arkit` gains vertical gaze
+  (4 rules), so all 52 ARKit coefficients are written. 4 are averages:
+  mouthFunnel (the four lip quarters), mouthPucker, mouthRollUpper and
+  mouthRollLower. mouthLeft and mouthRight are flagged: only Godot names the
+  ARKit coefficient for the FB2 channel, though VRCFaceTracking pairs the FB2
+  channel with its Unified shape and the definitions agree.
+
+The signals these rules use for the first time become `mapped`. The demo
+frames move every channel an FB2 rule reads on its own.
+
 ## Data 0.2.0 — 2026-10-26
 
 Add the first cross-provider translations. All 19 rules are proposed and
