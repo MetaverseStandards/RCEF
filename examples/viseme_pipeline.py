@@ -42,6 +42,8 @@ GOLDENS = HERE.parent / 'tests/fixtures/fb2_goldens.json'
 def vowel_presets(path: Path = GOLDENS) -> dict[str, str]:
     """META vowel -> VRM preset, as scripts/derive_fb2_goldens.py read them from the pinned VRM and META texts."""
     return {p['viseme']: p['vrm'] for p in json.loads(path.read_text(encoding='utf-8'))['viseme_pairs']}
+
+
 CAPTION = ('Phoneme-label correspondence, not calibration: no published table maps META visemes to VRM presets, and '
            'each model authors its own shapes.')
 
