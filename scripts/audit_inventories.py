@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Compare authoring names/indices with exact digest-verified public source bytes."""
+"""Compare the names and indices in the authoring files with public source bytes whose digests are verified."""
 from __future__ import annotations
 import argparse
 import hashlib
@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 
 
 class Tables(HTMLParser):
-    """Extract factual table cells; never execute documentation scripts."""
+    """Read the text of HTML table cells. Never run scripts from the documentation."""
     def __init__(self):
         super().__init__()
         self.tables, self.table, self.cell = [], None, None
@@ -95,7 +95,7 @@ def audit(cache: Path) -> dict:
     names = [n[:-1] if n in ('v2/JawClench1','v2/JawMandibleRaise1') else n for n in names]
     compare('vrcft.parameter.float', names, 124)
     compare('vrcft.parameter.flags',[r[0] for r in params.tables[-1][1:]],3)
-    # Eye data is a component projection of a struct, with explicit field evidence.
+    # Each eye signal is one field of a C# struct; check that the struct still declares those fields.
     eye = source('vrcft_data')
     for declaration in ('public Vector2 Gaze;', 'public float PupilDiameter_MM;', 'public float Openness = 1.0f;'):
         if declaration not in eye: raise ValueError('VRCFT raw-eye field declaration changed')
