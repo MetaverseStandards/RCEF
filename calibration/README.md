@@ -1,26 +1,26 @@
 # Calibration records
 
-Each file here records one software-only calibration fit: how it was made, from what, the bounds it had to meet, and how it did on data it was not fitted to. A rule whose curve comes from a fit cites the record, and `check.py` refuses the checkout unless that rule's knots are exactly the record's frozen knots and every held-out cell for its channel passed.
+Each file here records one software-only calibration fit. It says how the fit was made and from what inputs. It also gives the bounds the fit had to meet and its results on data it was not fitted to. A mapping whose curve comes from a fit cites the record. `check.py` refuses the checkout unless that mapping's knots are exactly the record's frozen knots and every held-out cell for its channel passed.
 
 Records:
 
-- [mediapipe.ict-response](mediapipe.ict-response.cal): MediaPipe's response to untextured ICT renders. A negative result: 25 of MediaPipe's 51 ARKit-named scores rose enough in training to fit a curve, and none met its bounds on held-out ICT identities or on Rocketbox Male, so no rule cites it. Made with [tools/calibration](../tools/calibration/README.md).
-- [rig-gains.ict-rocketbox-female](rig-gains.ict-rocketbox-female.cal): rig intensity normalisation between two example rigs, ICT-FaceKit (reference) and Rocketbox Female, for 51 ARKit shapes. 3 pass (browInnerUp, cheekSquintLeft, cheekSquintRight); 48 fail and stay published as negative results. See [examples/README.md](../examples/README.md#6-rig-gains-how-strongly-two-rigs-render-the-same-arkit-name).
+- [mediapipe.ict-response](mediapipe.ict-response.cal): MediaPipe's response to untextured ICT renders. This is a negative result. 25 of MediaPipe's 51 ARKit-named scores rose enough in training to fit a curve. None of them met its bounds on held-out ICT identities or on Rocketbox Male, so no mapping cites the record. Made with [tools/calibration](../tools/calibration/README.md).
+- [rig-gains.ict-rocketbox-female](rig-gains.ict-rocketbox-female.cal): rig intensity normalisation between two example rigs, ICT-FaceKit (the reference) and Rocketbox Female, for 51 ARKit shapes. 3 shapes pass (browInnerUp, cheekSquintLeft, cheekSquintRight). 48 fail, and they stay published as negative results. See [examples/README.md](../examples/README.md#6-rig-gains-how-strongly-two-rigs-render-the-same-arkit-name).
 
-The format is also exercised by the test fixtures in [tests/fixtures/calibration/](../tests/fixtures/calibration/), whose numbers are invented.
+The test fixtures in [tests/fixtures/calibration/](../tests/fixtures/calibration/) also use this format. Their numbers are invented.
 
 ## Status: software-only
 
-Records are `calibrated_software`: fitted to renders of example rigs, with no people and no biometric data. Like `proposed`, this never means `verified_current`. `calibrated_measured` is reserved for physical capture, designed but not run in [docs/calibration/physical-protocol.md](../docs/calibration/physical-protocol.md), and is refused for now. A software fit can say how a model or rig responds to renders; it says nothing about a real tracker's response to a real face (tracker gains, gaze angles, pupils, tongue, differences between people, latency, or what confidence values mean). Every record says so in its `scope` field.
+Records are `calibrated_software`. They are fitted to renders of example rigs, with no people and no biometric data. Like `proposed`, this never means `verified_current`. `calibrated_measured` is reserved for physical capture. [docs/calibration/physical-protocol.md](../docs/calibration/physical-protocol.md) designs that capture, but it has not been run, and `check.py` refuses `calibrated_measured` for now. A software fit can show how a model or rig responds to renders. It shows nothing about how a real tracker responds to a real face: tracker gains, gaze angles, pupils, tongue, differences between people, latency, or what confidence values mean. Every record says so in its `scope` field.
 
 ## Files
 
-- `<id>.cal`: one record per fit. The content is TOML, but the file is not named `.toml`, because msf-tools reads every `.toml` file in the checkout as pack authoring. The record's `id` must equal the file name without `.cal`, and uses lowercase letters, digits, `.`, `_` and `-`.
+- `<id>.cal`: one record per fit. The content is TOML, but the file is not named `.toml`, because msf-tools reads every `.toml` file in the checkout as pack authoring. The record's `id` must be the file name without `.cal`. It uses only lowercase letters, digits, `.`, `_` and `-`.
 - `FREEZES`: the freeze ledger (below).
 
 ## Fields
 
-Every field is required, except `scan_origin` where noted and `cells`, and no others are allowed. A record without `cells` is a pre-registration: its frozen part and ledger line are committed before the held-out run, and the cells are added afterwards. No rule may cite it until then. Dates, if any, are written as text, not as TOML dates.
+Every field is required, except `scan_origin` (see its row) and `cells`. No other fields are allowed. A record without `cells` is a pre-registration: its frozen part and ledger line are committed before the held-out run, and the cells are added after it. No mapping may cite the record until then. Write any dates as text, not as TOML dates.
 
 | Field | Type | Meaning |
 |---|---|---|
@@ -46,32 +46,32 @@ Every field is required, except `scan_origin` where noted and `cells`, and no ot
 
 All hashes are lowercase hex SHA-256.
 
-**Knots** are `[input, output]` pairs: at least two, finite, with strictly increasing inputs, and monotone outputs (never rising after falling, or the reverse; a falling curve is allowed). Between knots the curve is linear, and it is not extrapolated past the end knots. This is the form RCEF expects the msf-tools `piecewise_linear` operator to take; until that operator exists no pack rule uses it.
+**Knots** are `[input, output]` pairs. There must be at least two, all finite, with strictly increasing inputs and monotone outputs: the outputs never rise after falling, or fall after rising. A falling curve is allowed. Between knots the curve is linear, and it is not extrapolated past the end knots. This is the form of the msf-tools `piecewise_linear` operator (operators 1.1). In the pack, the 8 gaze splits in `arkit_gaze.to_fb2` use that operator; none of them cites a calibration record.
 
-**Cells** are one per channel, side, stimulus and identity: `channel` (one of `channels`), `side`, `stimulus`, `identity`, `conditions`, `failures`, and three error measures, each a finite number at least 0: `median`, `p95` (not below the median) and `neutral` (the error at rest). A cell uses the first `conditions` held-out seeds, so `conditions` is at least `evaluation.min_conditions` and at most `held_out.count`. `failures` counts conditions where the expected response was not detected at all (at most `conditions`).
+There is one **cell** per channel, side, stimulus and identity. A cell has `channel` (one of `channels`), `side`, `stimulus`, `identity`, `conditions`, `failures`, and three error measures. Each error measure is a finite number, at least 0: `median`, `p95` (not below the median) and `neutral` (the error at rest). A cell uses the first `conditions` held-out seeds, so `conditions` is at least `evaluation.min_conditions` and at most `held_out.count`. `failures` counts the conditions where the expected response was not detected at all. It is at most `conditions`.
 
-A cell **passes** if it has no failures and its median, p95 and neutral errors are each within the channel's frozen bounds. Results are per cell: no pooling across cells and no shifting to a best fit. A record whose cells fail is still a valid record, a published negative result; but no rule may cite it for a channel unless every cell for that channel passes.
+A cell **passes** if it has no failures and its median, p95 and neutral errors are each within the channel's frozen bounds. Results are per cell. Cells are not pooled, and no cell is shifted to a best fit. A record whose cells fail is still a valid record: it is a published negative result. But no mapping may cite it for a channel unless every cell for that channel passes.
 
 ## Frozen part, ledger and held-out seeds
 
-Everything in a record except `cells` is the frozen part: method, inputs, renderer, curves, the bounds and the minimum conditions. `frozen_sha256` is the SHA-256 of that part, without `frozen_sha256` itself, written as compact JSON with sorted keys (`json.dumps(part, sort_keys=True, ensure_ascii=False, separators=(',', ':'))`, UTF-8). The held-out seeds come from it: seed *i*, for *i* from 0 to `count` − 1, is the first 8 bytes, read big-endian, of SHA-256 of the text `<frozen_sha256>:<i>`. `check.py`'s `held_out_seeds()` computes them.
+Everything in a record except `cells` is the frozen part: method, inputs, renderer, curves, the bounds and the minimum conditions. `frozen_sha256` is the SHA-256 of that part, without `frozen_sha256` itself. The part is written as compact JSON with sorted keys (`json.dumps(part, sort_keys=True, ensure_ascii=False, separators=(',', ':'))`, UTF-8). The held-out seeds come from this hash. Seed *i*, for *i* from 0 to `count` − 1, is the first 8 bytes, read big-endian, of the SHA-256 of the text `<frozen_sha256>:<i>`. `held_out_seeds()` in `check.py` computes them.
 
-A record can recompute its own hash, so the hash alone does not stop anyone re-rolling the seeds by changing a frozen value. The freeze ledger does. `FREEZES` has one line per freeze:
+Anyone can recompute a record's hash. So the hash alone does not stop someone from changing a frozen value to get new seeds. The freeze ledger stops this. `FREEZES` has one line per freeze:
 
 ```
 <id> v<version> <frozen_sha256> <date YYYY-MM-DD> [reason]
 ```
 
-Lines are only ever added at the end, so dates never go backwards. Versions of an id start at `v1` and go up by one; every version after the first carries a reason of at least three words. `check.py` refuses a record unless its `version` is the latest in the ledger for its id and its frozen hash is the one recorded there. So changing anything frozen, a knot or a bound for example, needs a new ledger line with a reason, which is visible in review.
+Lines are only added at the end, so dates never go backwards. Versions of an id start at `v1` and go up by one. Every version after the first has a reason of at least three words. `check.py` refuses a record unless its `version` is the latest one in the ledger for its id and its frozen hash is the one recorded there. So a change to anything frozen, for example a knot or a bound, needs a new ledger line with a reason. Reviewers can see that line.
 
-`rig-gains.ict-rocketbox-female` was pre-registered before records without cells were allowed: its freeze commit (`91f57f7`) holds the frozen part as `pending/rig-gains.ict-rocketbox-female.cal`, which `check.py` did not read, and its results commit moved it here and added `cells`, changing nothing else.
+`rig-gains.ict-rocketbox-female` was pre-registered before records without cells were allowed. Its freeze commit (`91f57f7`) holds the frozen part as `pending/rig-gains.ict-rocketbox-female.cal`, which `check.py` did not read. Its results commit moved the file here and added `cells`, and changed nothing else.
 
-What this guarantees: the ledger line for a freeze is committed before the results, and Git history shows that it came first and that it never changed afterwards. It does not prove that nobody looked at held-out data before freezing, and `check.py` cannot see Git history; the order is checked in review. The metrics in `cells` are deliberately not hashed and are not self-proving: they are trusted only because they can be reproduced. The record pins everything needed to do that: the code commit, the input asset hashes, the renderer's source and binary hashes with its OS and GPU, and the seeds.
+What this guarantees: the ledger line for a freeze is committed before the results. Git history shows that the line came first and did not change after that. It does not prove that nobody looked at held-out data before the freeze. Also, `check.py` cannot see Git history, so reviewers check the order. The metrics in `cells` are not hashed, on purpose, and they do not prove themselves. They are trusted only because they can be reproduced. The record pins everything needed to reproduce them: the code commit, the input asset hashes, the renderer's source and binary hashes with its OS and GPU, and the seeds.
 
-## Rules that cite a record
+## Mappings that cite a record
 
-A rule cites a record with the evidence id `calibration.<id>`. Its operator must be `piecewise_linear` with `knots` exactly equal to those of the record's curve with the same input and output, and every cell for its input channel must pass. `check.py` checks this for every rule in the checkout's authoring files, without msf-tools, after verifying the installed msf-tools and before running it.
+A mapping cites a record with the evidence id `calibration.<id>`. Its operator must be `piecewise_linear`. Its `knots` must be exactly equal to the knots of the record's curve with the same input and output. Every cell for its input channel must pass. `check.py` checks this for every mapping in the checkout's authoring files. It does this without msf-tools, after it verifies the installed msf-tools and before it runs msf-tools.
 
 ## ICT-FaceKit identities
 
-ICT-FaceKit's identity modes are derived from light-stage scans of real people. They may be used as geometry for fits, on condition that every record using them says so; `check.py` enforces this through `scan_origin`.
+ICT-FaceKit's identity modes come from light-stage scans of real people. Fits may use them as geometry, but every record that uses them must say so. `check.py` checks this through `scan_origin`.
