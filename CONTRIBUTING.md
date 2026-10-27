@@ -30,4 +30,4 @@ Every mapped rule states its assumptions, quality and losses. Keep native defaul
 
 Changes should include the affected evidence, generated artifacts, test results and remaining limitations. Review semantics and calibration separately from executable correctness. A proposal changes neither the wire contract nor support claims until its review and gates pass.
 
-The GitHub workflow runs on every push and pull request, and can be started by hand. It installs msf-tools from `Kjakubzak/msf-tools` at the locked commit, using the read-only `MSF_TOOLS_TOKEN` repository secret, then runs `check.py` and the tests on Python 3.11 and 3.12.
+The GitHub workflow runs on every push and pull request, and can be started by hand. It installs msf-tools from `Kjakubzak/msf-tools` at the locked commit, using the read-only `MSF_TOOLS_TOKEN` repository secret, then runs `check.py` and the tests on Python 3.11 and 3.12. GitHub Actions is not enabled on these repositories at the moment, so run `scripts/ci_local.sh`, which does the same on the local 3.11 and 3.12 venvs, and paste its summary into the pull request.
