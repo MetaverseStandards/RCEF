@@ -1,0 +1,12 @@
+{
+  "id": "fixture.jaw.calibrated",
+  "inputs": ["fixture.source.jaw"],
+  "outputs": ["fixture.target.jaw"],
+  "operator": {"id": "piecewise_linear", "knots": [[0.0, 0.0], [0.25, 0.18], [0.5, 0.41], [1.0, 1.0]]},
+  "disposition": "mapped",
+  "mapping_quality": "approximate",
+  "evidence_status": "calibrated_software",
+  "assumptions": ["Test fixture: a rule whose curve comes from the fixture calibration record."],
+  "evidence": ["calibration.fixture.jaw-gain"],
+  "loss_annotations": []
+}
