@@ -800,6 +800,7 @@ side = "shared"
 metadata = { "inventory_ordinal" = 46, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved." }
 neutral = 0.0
 region = "cheek"
+coupling = "bilateral_shared"
 
 [[signals]]
 id = "arkit.coefficient.cheekSquintLeft"

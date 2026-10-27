@@ -4021,6 +4021,7 @@
     },
     {
       "calibration": "arkit.coefficient.v1:cheekPuff: face-relative native neutral-to-maximum coefficient",
+      "coupling": "bilateral_shared",
       "disposition": "unresolved",
       "domain": {
         "max": 1.0,
