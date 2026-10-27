@@ -164,3 +164,7 @@ def arkit_to_fb2(root: Path = ROOT, **options) -> Translator:
 def visemes_to_vrm(root: Path = ROOT, **options) -> Translator:
     return Translator('openxr.visemes', 'vrm.preset', ['visemes.to_vrm'],
                       'openxr.visemes.XR_FACE_TRACKING_VISEME_', '_META', root, **options)
+
+
+def fb2_to_vrm(root: Path = ROOT, **options) -> Translator:
+    return Translator('openxr.fb2', 'vrm.preset', ['fb2.to_vrm'], 'openxr.fb2.XR_FACE_EXPRESSION2_', '_FB', root, **options)

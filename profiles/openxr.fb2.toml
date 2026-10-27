@@ -242,7 +242,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB"
 surface = "openxr.fb2"
 side = "left"
-metadata = { "native_index" = 12, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 12, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and fb2.to_vrm; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"
@@ -261,7 +261,7 @@ evidence_status = "verified_current"
 native_id = "XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB"
 surface = "openxr.fb2"
 side = "right"
-metadata = { "native_index" = 13, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.", "selected" = true }
+metadata = { "native_index" = 13, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and fb2.to_vrm; calibration correspondence is assumed, not measured.", "selected" = true }
 validity = "isValid"
 confidence = "upper/lower region confidences; no threshold implied"
 time = "XrTime from result; explicit seconds conversion required"

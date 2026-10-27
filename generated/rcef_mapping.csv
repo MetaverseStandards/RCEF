@@ -885,8 +885,8 @@ vrm.preset.ou,ou,scalar,1,mapped,verified_current,,,,,,,,,,,,,,,,,,,,,,1
 vrm.preset.ee,ee,scalar,1,mapped,verified_current,,,,,,,,,,,,,,,,,,,,,,1
 vrm.preset.oh,oh,scalar,1,mapped,verified_current,,,,,,,,,,,,,,,,,,,,,,1
 vrm.preset.blink,blink,scalar,1,unresolved,verified_current,,,,,,,,,,,,,,,,,,,,,,1
-vrm.preset.blinkLeft,blinkLeft,scalar,1,unresolved,verified_current,,,,,,,,,,,,,,,,,,,,,,1
-vrm.preset.blinkRight,blinkRight,scalar,1,unresolved,verified_current,,,,,,,,,,,,,,,,,,,,,,1
+vrm.preset.blinkLeft,blinkLeft,scalar,1,mapped,verified_current,,,,,,,,,,,,,,,,,,,,,,1
+vrm.preset.blinkRight,blinkRight,scalar,1,mapped,verified_current,,,,,,,,,,,,,,,,,,,,,,1
 vrm.preset.lookUp,lookUp,scalar,1,unresolved,verified_current,,,,,,,,,,,,,,,,,,,,,,1
 vrm.preset.lookDown,lookDown,scalar,1,unresolved,verified_current,,,,,,,,,,,,,,,,,,,,,,1
 vrm.preset.lookLeft,lookLeft,scalar,1,unresolved,verified_current,,,,,,,,,,,,,,,,,,,,,,1

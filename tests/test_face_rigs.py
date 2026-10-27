@@ -106,6 +106,24 @@ class VowelPresets(unittest.TestCase):
             path.write_text(json.dumps({'viseme_pairs': [{'viseme': 'AA', 'vrm': 'oh'}]}), encoding='utf-8')
             self.assertEqual(viseme_pipeline.vowel_presets(path), {'AA': 'oh'})
 
+    def test_the_direct_vrm_blink_path_reads_the_source_derived_pairs(self):
+        self.assertEqual(viseme_pipeline.blink_presets(), {'EYES_CLOSED_L': 'blinkLeft', 'EYES_CLOSED_R': 'blinkRight'})
+        with tempfile.TemporaryDirectory(prefix='rcef-pairs-') as tmp:
+            path = Path(tmp) / 'goldens.json'
+            path.write_text(json.dumps({'blink_pairs': [{'fb2': 'EYES_CLOSED_L', 'vrm': 'blink'}]}), encoding='utf-8')
+            self.assertEqual(viseme_pipeline.blink_presets(path), {'EYES_CLOSED_L': 'blink'})
+
+    def test_the_wink_frames_close_one_vrm_eye(self):
+        translator = rcef_translate.fb2_to_vrm()
+        frames = viseme_pipeline.wink_frames(translator)
+        self.assertEqual({f['segment'] for f in frames}, {'wink left', 'wink right'})
+        hold = next(f for f in frames if f['segment'] == 'wink left' and f['labels']['phase'] == 'hold')
+        result, = translator.translate([hold])
+        self.assertEqual(result['values'], {'vrm.preset.blinkLeft': hold['values'][translator.signal_id('EYES_CLOSED_L')],
+                                            'vrm.preset.blinkRight': 0.0})
+        self.assertGreater(result['values']['vrm.preset.blinkLeft'], 0.5)
+        self.assertIn('CHEEK_RAISER_L', result['dropped'])
+
 
 class FullArkitRig(unittest.TestCase):
     """On a rig with all 52 ARKit shapes, shapes without an RCEF rule are shown direct-only and labelled."""

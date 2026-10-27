@@ -2,7 +2,7 @@
 
 Pack: rcef.parity; data version: 0.3.0.
 
-Generated from rcef.pack.json; SHA-256: 92378ef525a07e122ec88461ff6148b49930d093137e7fe93853d226b2fad1b5.
+Generated from rcef.pack.json; SHA-256: dae3c4ace5cfa9590fee25fd16f5e81a1000b8ef357f41ef8e9d905f22836fb4.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Existing provider attribution and source terms remain in ../THIRD_PARTY_NOTICES.md.
 

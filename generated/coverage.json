@@ -1,8 +1,8 @@
 {
   "disposition_counts": {
     "excluded": 35,
-    "mapped": 220,
-    "unresolved": 632,
+    "mapped": 222,
+    "unresolved": 630,
     "unsupported": 6
   },
   "dispositions": {
@@ -263,7 +263,9 @@
       "vrm.preset.ih",
       "vrm.preset.ou",
       "vrm.preset.ee",
-      "vrm.preset.oh"
+      "vrm.preset.oh",
+      "vrm.preset.blinkLeft",
+      "vrm.preset.blinkRight"
     ],
     "unresolved": [
       "godot.base.FT_EYE_LOOK_OUT_RIGHT",
@@ -891,8 +893,6 @@
       "vrm.preset.relaxed",
       "vrm.preset.surprised",
       "vrm.preset.blink",
-      "vrm.preset.blinkLeft",
-      "vrm.preset.blinkRight",
       "vrm.preset.lookUp",
       "vrm.preset.lookDown",
       "vrm.preset.lookLeft",
@@ -1509,7 +1509,9 @@
         "fb2_arkit.eyeLookDownLeft",
         "fb2_arkit.eyeLookDownRight",
         "fb2_arkit.eyeLookUpLeft",
-        "fb2_arkit.eyeLookUpRight"
+        "fb2_arkit.eyeLookUpRight",
+        "fb2_vrm.blinkLeft",
+        "fb2_vrm.blinkRight"
       ],
       "sha256": "db7c6e3a0dee91f5bc7397830405e8596fe19e5eafc7608912b807163ab9a2ef",
       "signal_ids": [
@@ -2654,6 +2656,8 @@
       "retrieved": "2026-10-07",
       "revision": "94e82dd346fa6cf0337c4421728640e5252dd38e",
       "rule_ids": [
+        "fb2_vrm.blinkLeft",
+        "fb2_vrm.blinkRight",
         "visemes_vrm.aa",
         "visemes_vrm.ih",
         "visemes_vrm.ou",
@@ -4403,6 +4407,8 @@
       "fb2_arkit.eyeLookDownRight",
       "fb2_arkit.eyeLookUpLeft",
       "fb2_arkit.eyeLookUpRight",
+      "fb2_vrm.blinkLeft",
+      "fb2_vrm.blinkRight",
       "fixture.brow.collapse",
       "visemes_vrm.aa",
       "visemes_vrm.ih",
@@ -4436,10 +4442,10 @@
     ]
   },
   "mapping_quality_counts": {
-    "approximate": 186,
+    "approximate": 188,
     "exact": 22
   },
-  "pack_sha256": "92378ef525a07e122ec88461ff6148b49930d093137e7fe93853d226b2fad1b5",
+  "pack_sha256": "dae3c4ace5cfa9590fee25fd16f5e81a1000b8ef357f41ef8e9d905f22836fb4",
   "profiles": [
     {
       "count": 21,
@@ -5919,7 +5925,9 @@
           "fb2_arkit.eyeLookDownLeft",
           "fb2_arkit.eyeLookDownRight",
           "fb2_arkit.eyeLookUpLeft",
-          "fb2_arkit.eyeLookUpRight"
+          "fb2_arkit.eyeLookUpRight",
+          "fb2_vrm.blinkLeft",
+          "fb2_vrm.blinkRight"
         ],
         "exact": [
           "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB.identity",
@@ -5933,7 +5941,7 @@
         ]
       },
       "mapping_quality_counts": {
-        "approximate": 112,
+        "approximate": 114,
         "exact": 8
       },
       "metadata": {
@@ -7351,8 +7359,8 @@
       "count": 18,
       "disposition_counts": {
         "excluded": 0,
-        "mapped": 5,
-        "unresolved": 13,
+        "mapped": 7,
+        "unresolved": 11,
         "unsupported": 0
       },
       "dispositions": {
@@ -7362,7 +7370,9 @@
           "vrm.preset.ih",
           "vrm.preset.ou",
           "vrm.preset.ee",
-          "vrm.preset.oh"
+          "vrm.preset.oh",
+          "vrm.preset.blinkLeft",
+          "vrm.preset.blinkRight"
         ],
         "unresolved": [
           "vrm.preset.happy",
@@ -7371,8 +7381,6 @@
           "vrm.preset.relaxed",
           "vrm.preset.surprised",
           "vrm.preset.blink",
-          "vrm.preset.blinkLeft",
-          "vrm.preset.blinkRight",
           "vrm.preset.lookUp",
           "vrm.preset.lookDown",
           "vrm.preset.lookLeft",
@@ -7384,6 +7392,8 @@
       "id": "vrm.preset",
       "mapping_quality": {
         "approximate": [
+          "fb2_vrm.blinkLeft",
+          "fb2_vrm.blinkRight",
           "visemes_vrm.aa",
           "visemes_vrm.ih",
           "visemes_vrm.ou",
@@ -7393,7 +7403,7 @@
         "exact": []
       },
       "mapping_quality_counts": {
-        "approximate": 5,
+        "approximate": 7,
         "exact": 0
       },
       "metadata": {
@@ -16527,6 +16537,104 @@
     },
     {
       "assumptions": [
+        "FB2 EYES_CLOSED_L (lowers the top eyelid of the left eye) corresponds to VRM preset blinkLeft (closes the left eyelid); the definitions agree, but no published table pairs them.",
+        "FB2 weight (0 to 1) is used directly as the VRM expression weight (0 to 1).",
+        "Both name sides from the subject's own face. FLAGGED: VRM gives no normative side; on the VRM 1.0 Twist sample blinkLeft moves the avatar's own left eyelid.",
+        "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrm_expressions"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_vrm.blinkLeft",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "an FB2 weight becomes an asset-authored expression weight",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB",
+            "vrm.preset.blinkLeft"
+          ],
+          "units": "1"
+        },
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB",
+            "vrm.preset.blinkLeft"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "vrm.preset.blinkLeft"
+      ]
+    },
+    {
+      "assumptions": [
+        "FB2 EYES_CLOSED_R (lowers the top eyelid of the right eye) corresponds to VRM preset blinkRight (closes the right eyelid); the definitions agree, but no published table pairs them.",
+        "FB2 weight (0 to 1) is used directly as the VRM expression weight (0 to 1).",
+        "Both name sides from the subject's own face. FLAGGED: VRM gives no normative side; on the VRM 1.0 Twist sample blinkRight moves the avatar's own right eyelid.",
+        "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrm_expressions"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_vrm.blinkRight",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "an FB2 weight becomes an asset-authored expression weight",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB",
+            "vrm.preset.blinkRight"
+          ],
+          "units": "1"
+        },
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB",
+            "vrm.preset.blinkRight"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "vrm.preset.blinkRight"
+      ]
+    },
+    {
+      "assumptions": [
         "Original fixture states matching low/mid/high at -1/0/1 and 0/0.5/1; explicit basis conversion."
       ],
       "disposition": "mapped",
@@ -20586,10 +20694,11 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and fb2.to_vrm; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_fb2.EYES_CLOSED_L",
-        "fb2_arkit.eyeBlinkLeft"
+        "fb2_arkit.eyeBlinkLeft",
+        "fb2_vrm.blinkLeft"
       ]
     },
     {
@@ -20598,10 +20707,11 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and fb2.to_vrm; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_fb2.EYES_CLOSED_R",
-        "fb2_arkit.eyeBlinkRight"
+        "fb2_arkit.eyeBlinkRight",
+        "fb2_vrm.blinkRight"
       ]
     },
     {
@@ -25601,22 +25711,26 @@
       "rules": []
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "vrm.preset.blinkLeft",
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_vrm; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_vrm.blinkLeft"
+      ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "vrm.preset.blinkRight",
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_vrm; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_vrm.blinkRight"
+      ]
     },
     {
       "disposition": "unresolved",
@@ -25667,7 +25781,7 @@
   "totals": {
     "evidence": 36,
     "profiles": 22,
-    "rules": 209,
+    "rules": 211,
     "signals": 893
   }
 }

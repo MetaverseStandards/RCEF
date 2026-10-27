@@ -26,9 +26,11 @@ MAPPINGS = {
     'arkit.to_fb2': ('arkit.coefficient', 'openxr.fb2'),
     'arkit_gaze.to_fb2': ('arkit.coefficient', 'openxr.fb2'),
     'arkit.to_vrcft_artist': ('arkit.coefficient', 'vrcft.artist.base'),
+    'fb2.to_vrm': ('openxr.fb2', 'vrm.preset'),
 }
 KIND = {'fb2_to_arkit': ('fb2.to_arkit', 'fb2_gaze.to_arkit'), 'visemes_to_vrm': ('visemes.to_vrm',),
-        'arkit_to_fb2': ('arkit.to_fb2', 'arkit_gaze.to_fb2'), 'arkit_to_ue': ('arkit.to_vrcft_artist',)}
+        'arkit_to_fb2': ('arkit.to_fb2', 'arkit_gaze.to_fb2'), 'arkit_to_ue': ('arkit.to_vrcft_artist',),
+        'fb2_to_vrm': ('fb2.to_vrm',)}
 SIDED = ('Left', 'Right', '_L_FB', '_R_FB')
 
 
@@ -223,6 +225,12 @@ class Translations(unittest.TestCase):
             self.assertAlmostEqual(smile, frame['inputs'][f'arkit.coefficient.mouthSmile{side}'], places=12)
         funnel = sum(values[ue(f'LipFunnel{p}')] for p in ('UpperLeft', 'UpperRight', 'LowerLeft', 'LowerRight')) / 4
         self.assertEqual(funnel, frame['inputs']['arkit.coefficient.mouthFunnel'])
+
+    def test_fb2_to_vrm_drives_each_blink_side_but_not_both_eyes_blink(self):
+        # A VRM model may bind blink as well as blinkLeft and blinkRight; writing all
+        # three would close the eyes twice over.
+        self.assertEqual({r['inputs'][0].split('EXPRESSION2_')[1]: r['outputs'][0] for r in self.rules('fb2.to_vrm')},
+                         {'EYES_CLOSED_L_FB': 'vrm.preset.blinkLeft', 'EYES_CLOSED_R_FB': 'vrm.preset.blinkRight'})
 
     def test_viseme_rules_match_source_derived_vectors_and_drop_consonants(self):
         case, = (c for c in self.goldens['cases'] if c['mapping_kind'] == 'visemes_to_vrm')

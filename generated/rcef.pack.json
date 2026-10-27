@@ -9535,6 +9535,109 @@
       ]
     },
     {
+      "id": "fb2.to_vrm",
+      "rules": [
+        {
+          "assumptions": [
+            "FB2 EYES_CLOSED_L (lowers the top eyelid of the left eye) corresponds to VRM preset blinkLeft (closes the left eyelid); the definitions agree, but no published table pairs them.",
+            "FB2 weight (0 to 1) is used directly as the VRM expression weight (0 to 1).",
+            "Both name sides from the subject's own face. FLAGGED: VRM gives no normative side; on the VRM 1.0 Twist sample blinkLeft moves the avatar's own left eyelid.",
+            "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "vrm_expressions"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_vrm.blinkLeft",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "an FB2 weight becomes an asset-authored expression weight",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB",
+                "vrm.preset.blinkLeft"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB",
+                "vrm.preset.blinkLeft"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "vrm.preset.blinkLeft"
+          ]
+        },
+        {
+          "assumptions": [
+            "FB2 EYES_CLOSED_R (lowers the top eyelid of the right eye) corresponds to VRM preset blinkRight (closes the right eyelid); the definitions agree, but no published table pairs them.",
+            "FB2 weight (0 to 1) is used directly as the VRM expression weight (0 to 1).",
+            "Both name sides from the subject's own face. FLAGGED: VRM gives no normative side; on the VRM 1.0 Twist sample blinkRight moves the avatar's own right eyelid.",
+            "VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled."
+          ],
+          "disposition": "mapped",
+          "evidence": [
+            "xr_fb2",
+            "vrm_expressions"
+          ],
+          "evidence_status": "proposed",
+          "id": "fb2_vrm.blinkRight",
+          "inputs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB"
+          ],
+          "loss_annotations": [
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "an FB2 weight becomes an asset-authored expression weight",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB",
+                "vrm.preset.blinkRight"
+              ],
+              "units": "1"
+            },
+            {
+              "category": "signal",
+              "effect": "approximated",
+              "reason": "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink",
+              "refs": [
+                "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB",
+                "vrm.preset.blinkRight"
+              ],
+              "units": "1"
+            }
+          ],
+          "mapping_quality": "approximate",
+          "operator": {
+            "id": "affine",
+            "offset": 0.0,
+            "scale": 1.0
+          },
+          "outputs": [
+            "vrm.preset.blinkRight"
+          ]
+        }
+      ]
+    },
+    {
       "id": "fixture.affine",
       "rules": [
         {
@@ -20472,7 +20575,7 @@
       "label": "XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB",
       "metadata": {
         "native_index": 12,
-        "reason": "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and fb2.to_vrm; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB",
@@ -20501,7 +20604,7 @@
       "label": "XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB",
       "metadata": {
         "native_index": 13,
-        "reason": "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit and arkit.to_fb2; calibration correspondence is assumed, not measured.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and fb2.to_vrm; calibration correspondence is assumed, not measured.",
         "selected": true
       },
       "native_id": "XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB",
@@ -36019,7 +36122,7 @@
     {
       "calibration": "vrm1.preset:blinkLeft: asset-authored binding weights",
       "coupling": "asset_specific",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -36093,7 +36196,7 @@
           "block",
           "blend"
         ],
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_vrm; calibration correspondence is assumed, not measured.",
         "texture_binding_fields": [
           "material",
           "scale",
@@ -36118,7 +36221,7 @@
     {
       "calibration": "vrm1.preset:blinkRight: asset-authored binding weights",
       "coupling": "asset_specific",
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "domain": {
         "max": 1.0,
         "min": 0.0
@@ -36192,7 +36295,7 @@
           "block",
           "blend"
         ],
-        "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
+        "reason": "Native identifier evidenced; used by the proposed approximate translation fb2.to_vrm; calibration correspondence is assumed, not measured.",
         "texture_binding_fields": [
           "material",
           "scale",
