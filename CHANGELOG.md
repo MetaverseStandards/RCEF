@@ -47,6 +47,22 @@ exclusive, and the data now builds this in.
   install cannot match. The next lock update writes the file again.
 - The Git history was rewritten before publication, so older commit hashes
   are different.
+- Both calibration records are frozen again, as version 2. Version 1 names
+  commits that are not in the rewritten history. Version 2 was fitted again
+  with the current code (`code_commit` `7cd8ff9`), msf-character-tools
+  0.5.0 and a renderer built from the current
+  `tools/render/meshrender.swift`. Each record has a new line in
+  `calibration/FREEZES` with the reason. The method, inputs, bounds,
+  counts, limitations and all knots are the same as in v1. The held-out
+  runs used the new seeds that the v2 frozen hashes set.
+- The v2 results have the same pass and fail pattern as v1. In
+  `mediapipe.ict-response`, 0 of 25 fitted channels pass, so no mapping
+  cites the record. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes
+  pass (browInnerUp, cheekSquintLeft, cheekSquintRight) and 48 fail. The
+  cell numbers are different because the seeds are different.
+  `examples/data/rig_gains.json` has the new frozen hash; its curves do not
+  change. `calibration/README.md` and `tools/calibration/README.md` tell
+  how to reproduce v2.
 - The pack and the generated files do not change, so the data version
   stays 0.4.0.
 
