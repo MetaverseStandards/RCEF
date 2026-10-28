@@ -34,7 +34,7 @@ exclusive, and the data now builds this in.
   examples and the calibration tools use the new names.
 - RCEF is now at https://github.com/MetaverseStandards/RCEF, and
   msf-character-tools is at
-  https://github.com/MetaverseStandards/msf-character-tools. Both are
+  https://github.com/MetaverseStandards/msf_character_tools. Both are
   public.
 - The GitHub workflow downloads the public release wheel with `curl`. It
   needs no token. It still installs the wheel by hash.

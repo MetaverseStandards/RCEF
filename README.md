@@ -81,7 +81,7 @@ RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.t
 
 ## Generate and check
 
-You need Python 3.11 or newer and [msf-character-tools](https://github.com/MetaverseStandards/msf-character-tools), which is maintained separately. RCEF locks msf-character-tools 0.5.0 in [tooling.lock.json](evidence/tooling.lock.json). The lock has one entry per release wheel, keyed by the wheel's tag, with the wheel's SHA-256. Pick the tag for your platform and Python:
+You need Python 3.11 or newer and [msf-character-tools](https://github.com/MetaverseStandards/msf_character_tools), which is maintained separately. RCEF locks msf-character-tools 0.5.0 in [tooling.lock.json](evidence/tooling.lock.json). The lock has one entry per release wheel, keyed by the wheel's tag, with the wheel's SHA-256. Pick the tag for your platform and Python:
 
 | Platform | Python 3.11 | Python 3.12 and later |
 |---|---|---|
@@ -89,13 +89,13 @@ You need Python 3.11 or newer and [msf-character-tools](https://github.com/Metav
 | Linux x86_64 (glibc 2.28 or later) | `cp311-cp311-manylinux_2_28_x86_64` | `cp312-abi3-manylinux_2_28_x86_64` |
 | Linux aarch64 (glibc 2.28 or later) | `cp311-cp311-manylinux_2_28_aarch64` | `cp312-abi3-manylinux_2_28_aarch64` |
 
-Download that wheel from the [msf-character-tools v0.5.0 release](https://github.com/MetaverseStandards/msf-character-tools/releases/tag/v0.5.0), then install it with the hash from the lock:
+Download that wheel from the [msf-character-tools v0.5.0 release](https://github.com/MetaverseStandards/msf_character_tools/releases/tag/v0.5.0), then install it with the hash from the lock:
 
 ```sh
 TAG=cp312-abi3-macosx_11_0_arm64
 WHEEL=msf_character_tools-0.5.0-$TAG.whl
 DIR=$(mktemp -d)
-curl -fsSL -o "$DIR/$WHEEL" "https://github.com/MetaverseStandards/msf-character-tools/releases/download/v0.5.0/$WHEEL"
+curl -fsSL -o "$DIR/$WHEEL" "https://github.com/MetaverseStandards/msf_character_tools/releases/download/v0.5.0/$WHEEL"
 SHA=$(python3 -c 'import json, sys; print(json.load(open("evidence/tooling.lock.json"))["wheels"][sys.argv[1]]["sha256"])' "$TAG")
 echo "msf-character-tools @ file://$DIR/$WHEEL --hash=sha256:$SHA" > "$DIR/msf-character-tools.txt"
 uv pip install --python PATH/TO/python --require-hashes -r "$DIR/msf-character-tools.txt"

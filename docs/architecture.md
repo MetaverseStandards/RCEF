@@ -49,7 +49,7 @@ flowchart TD
 | MSF Character Tools | Authoring discovery and validation, `compile_pack`, `profile_snapshot`, `compile_mapping`, `evaluate_mapping`; asset inspection and sidecar binding | Implements the reviewed wire and operator contracts and their refusals. |
 | Independent reviewer or consumer | Review changed bytes and meaning; run the drift check and tests with the locked msf-character-tools | Executable correctness alone does not show visual, anatomical, cross-provider or physiological equivalence. |
 
-Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf-character-tools/msf_character_tools/authoring.py), [pack compiler](../../msf-character-tools/msf_character_tools/pack.py), [mapping compiler and evaluator](../../msf-character-tools/msf_character_tools/mapping.py), the [C++ core](../../msf-character-tools/core/src) behind them, [report exporter](../scripts/export_reports.py), [calibration tools](../tools/calibration/README.md), [tests](../tests/).
+Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf_character_tools/msf_character_tools/authoring.py), [pack compiler](../../msf_character_tools/msf_character_tools/pack.py), [mapping compiler and evaluator](../../msf_character_tools/msf_character_tools/mapping.py), the [C++ core](../../msf_character_tools/core/src) behind them, [report exporter](../scripts/export_reports.py), [calibration tools](../tools/calibration/README.md), [tests](../tests/).
 
 ## 2. What check.py does
 
@@ -115,7 +115,7 @@ The merged document needs all five keys and the four arrays. msf-character-tools
 
 Parsing is strict UTF-8 with `tomllib.loads`. TOML syntax errors and duplicate keys are reported before schema checks. The msf-character-tools validator refuses unknown keys, missing keys, invalid enums, duplicate IDs, references to records that do not exist, and invalid numbers or domains. The document must be JSON-compatible: TOML dates and times are not accepted as values, and NaN, infinity and booleans are refused as scalars. The pipeline never executes text from TOML, and it does not infer conversions from provider names.
 
-Sources: `load_authoring`, `authoring_files`, `_read_fragment` and `validate_authoring` in [authoring.py](../../msf-character-tools/msf_character_tools/authoring.py).
+Sources: `load_authoring`, `authoring_files`, `_read_fragment` and `validate_authoring` in [authoring.py](../../msf_character_tools/msf_character_tools/authoring.py).
 
 ## 4. Authoring field reference
 
@@ -171,7 +171,7 @@ In the schema a map is a `[[mappings]]` record and each mapping in it is one ent
 
 `disposition` says whether the author has admitted the relationship. `evidence_status` describes its evidence. `mapping_quality` describes the quality of an admitted mapping. These are separate fields. The direction is the ordered relationship from `inputs` to `outputs`. A mapping does not imply an inverse.
 
-Source: `validate_authoring` in [authoring.py](../../msf-character-tools/msf_character_tools/authoring.py), which runs the C++ core's checks: `validate_signal`, `validate_rule`, `knots` and `loss_annotation` in [authoring.cpp](../../msf-character-tools/core/src/authoring.cpp).
+Source: `validate_authoring` in [authoring.py](../../msf_character_tools/msf_character_tools/authoring.py), which runs the C++ core's checks: `validate_signal`, `validate_rule`, `knots` and `loss_annotation` in [authoring.cpp](../../msf_character_tools/core/src/authoring.cpp).
 
 ## 5. Examples of each operator
 
@@ -242,7 +242,7 @@ The runtime starts at `0.0`, multiplies each input by its weight, and adds the t
 
 Each split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero. When ARKit sets both directions, only their difference is kept. Each of these mappings declares that as a loss. The intermediate signals are in the `rcef.intermediate` profile, not in the source or target profile, so they stay virtual inside the compiled map. All 12 mappings in this map are proposed and approximate. See [arkit_fb2.toml](../mappings/arkit_fb2.toml) and [intermediate.toml](../data/intermediate.toml).
 
-Sources: operator dispatch and `piecewise` in the C++ core's [mapping.cpp](../../msf-character-tools/core/src/mapping.cpp), and `product`, `add`, `sub` and `divide` in [math3d.cpp](../../msf-character-tools/core/src/math3d.cpp). [math3d.py](../../msf-character-tools/msf_character_tools/math3d.py) exports them as `_product`, `_add`, `_sub` and `_divide`, with `_sum`, which applies `add` in order ([math_module.cpp](../../msf-character-tools/core/python/math_module.cpp)).
+Sources: operator dispatch and `piecewise` in the C++ core's [mapping.cpp](../../msf_character_tools/core/src/mapping.cpp), and `product`, `add`, `sub` and `divide` in [math3d.cpp](../../msf_character_tools/core/src/math3d.cpp). [math3d.py](../../msf_character_tools/msf_character_tools/math3d.py) exports them as `_product`, `_add`, `_sub` and `_divide`, with `_sum`, which applies `add` in order ([math_module.cpp](../../msf_character_tools/core/python/math_module.cpp)).
 
 ## 6. Runtime admission, validity and asset binding
 
@@ -307,7 +307,7 @@ The 21 canonical projections are 9 ARKit identities, 8 FB2 directional gaze iden
 
 A sidecar has `schema_version`, `asset_sha256`, `resource_hashes` and `bindings`, and optionally `metadata`. Reuse checks the exact asset hash and the hashes of the resources it reads. Names alone do not bind a target. `annotate_asset` makes a sidecar and does not change the original asset bytes. Asset-based CLI mapping needs explicit sidecars. Profile-based scalar fixtures need no asset.
 
-msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way; msf-character-tools 0.5.0 reads FBX with no extra package. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf-character-tools/msf_character_tools/snapshot.py) and the [shared reference](../../msf-character-tools/docs/reference.md).
+msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way; msf-character-tools 0.5.0 reads FBX with no extra package. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf_character_tools/msf_character_tools/snapshot.py) and the [shared reference](../../msf_character_tools/docs/reference.md).
 
 ## 7. Generated files and readable reports
 

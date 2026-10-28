@@ -26,7 +26,7 @@ LOCK = ROOT / 'evidence' / 'tooling.lock.json'
 PREVIOUS_LOCK_NAME = 'tooling.lock.previous.json'
 DISTRIBUTION = 'msf-character-tools'
 PACKAGE = 'msf_character_tools'
-SOURCE = 'https://github.com/MetaverseStandards/msf-character-tools'
+SOURCE = 'https://github.com/MetaverseStandards/msf_character_tools'
 
 
 LOCK_VERSION = 2
