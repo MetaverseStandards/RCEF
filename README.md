@@ -2,34 +2,34 @@
 
 ## Purpose
 
-The Reference Canonical Expression Framework (RCEF) is about face expression signals. Face trackers and avatar systems each publish their own set of these signals. ARKit, OpenXR FB2, MediaPipe, VRCFaceTracking, VRM, Godot and Roblox give these signals different names. They also use different scales and calibrations. So a value from one system cannot simply be copied into another system.
+The Reference Canonical Expression Framework (RCEF) is about face expression signals. Face trackers and avatar systems each publish their own set of these signals. ARKit, OpenXR FB2, MediaPipe, VRCFaceTracking, VRM, Godot and Roblox use different names, scales and calibrations. So you cannot simply copy a value from one system into another.
 
-RCEF records public expression interfaces, their calibration limits, and explicit one-way scalar mappings between them:
+RCEF does four things:
 
-- It records each public expression interface as data. Each record states its calibration limits and cites a pinned public source.
+- It records each public expression interface as data, with its calibration limits and a pinned public source.
 - It defines a small canonical set of 21 signals. Each canonical signal keeps the calibration of its provider.
-- It authors explicit one-way mappings from one set to another. Each mapping states its assumptions and its losses.
+- It defines explicit one-way scalar mappings from one set to another. Each mapping states its assumptions and its losses.
 - It checks all of this with [msf-character-tools](https://github.com/MetaverseStandards/msf_character_tools), which is maintained separately.
 
-The TOML files are the authoritative data. RCEF records provider names as facts, with attribution. Its definitions and examples are original.
+RCEF records provider names as facts, with attribution. Its definitions and examples are original.
 
 RCEF is not these things:
 
 - It is not a new universal blendshape set. "Canonical" does not mean one universal anatomy or one shared calibration.
-- Its cross-provider mappings are proposed approximations. They do not claim visual equivalence.
+- It is not a claim of visual equivalence. Its cross-provider mappings are proposed approximations.
 - It does not describe how a stylized character looks. RCEF describes what a signal means. Stylization is a separate layer on top of RCEF.
 
-[RCSF](https://github.com/MetaverseStandards/RCSF), the Reference Canonical Skeletal Framework, does the same job for skeletons in the same Metaverse Standards Forum organization on GitHub.
+[RCSF](https://github.com/MetaverseStandards/RCSF), the Reference Canonical Skeletal Framework, does a similar job for skeletons. It is also in the Metaverse Standards Forum organization on GitHub. Its README is a pinned source for RCEF ([rcsf_readme](references.md#rcsf_readme)).
 
 ## Contents
 
-You edit the TOML files: `pack.toml`, `profiles/`, `data/`, `mappings/` and `evidence/sources.toml`. They are the source of truth. Scripts write everything in `generated/` and `reports/`, and also `references.md`, `docs/toml-index.csv` and `docs/godot_comparison.md`. Do not edit those files by hand.
+You edit the TOML files: `pack.toml`, `profiles/`, `data/`, `mappings/` and `evidence/sources.toml`. They are the source of truth. Scripts write everything in `generated/` and `reports/`, and also `references.md`, `docs/toml-index.csv`, `docs/godot_comparison.md`, `tests/fixtures/fb2_goldens.json` and `tests/fixtures/godot_fb2_rules.csv`. `scripts/derive_fb2_goldens.py` writes the last two from cached public source bytes. Do not edit those files by hand.
 
-- `profiles/` - One TOML file per public expression set. `fixture.toml` holds RCEF's own synthetic fixtures. Source of truth.
-- `data/` - RCEF's own sets: `rcef.canonical` (21 signals) and `rcef.intermediate` (4 signals). Source of truth.
-- `mappings/` - The maps. Each map is a group of one-way mappings. Source of truth.
-- `pack.toml` - Root metadata: the schema, data and operator versions, the pack ID and the licence. Source of truth.
-- `evidence/` - `sources.toml` (the pinned public sources, source of truth), `tooling.lock.json` (the msf-character-tools lock) and `input-contracts/` (an optional input schema that RCEF itself does not use).
+- `profiles/` - One TOML file per public expression set. `fixture.toml` holds RCEF's own synthetic fixtures.
+- `data/` - RCEF's own sets: `rcef.canonical` (21 signals) and `rcef.intermediate` (4 signals).
+- `mappings/` - The maps. Each map is a group of one-way mappings.
+- `pack.toml` - Root metadata: the schema, data and operator versions, the pack ID and the licence.
+- `evidence/` - `sources.toml` (the pinned public sources), `tooling.lock.json` (the msf-character-tools lock) and `input-contracts/` (an optional input schema that RCEF itself does not use).
 - `calibration/` - Software-only calibration records (`*.cal`) and the append-only `FREEZES` ledger.
 - `generated/` - Generated: the pack, the signal and profile matrix CSV, coverage and checksums.
 - `reports/` - Generated: readable inventory, mapping and canonical correspondence reports, in Markdown and CSV, with checksums.
@@ -37,7 +37,7 @@ You edit the TOML files: `pack.toml`, `profiles/`, `data/`, `mappings/` and `evi
 - `examples/` - End-to-end translations and face pipelines. Their inputs are in `examples/data/`.
 - `tools/` - Optional tools that make calibration records (`tools/calibration/`), and the macOS renderer for calibration fits (`tools/render/`).
 - `scripts/` - Export, comparison, source-check and local CI scripts.
-- `check.py` - Checks the msf-character-tools install, the calibration records and all outputs. With `--write` it regenerates the outputs.
+- `check.py` - Checks the msf-character-tools install, the calibration records, and the files in `generated/` and `reports/`. With `--write` it regenerates those files.
 - `docs/` - The architecture guide and its visuals, the full expression-set table, `toml-index.csv`, `godot_comparison.md` and calibration notes.
 - `tests/` - The `unittest` suite. Its inputs are in `tests/fixtures/`.
 - `survey.md` - The selected scope of each surveyed interface and its calibration boundary.
@@ -49,11 +49,21 @@ You edit the TOML files: `pack.toml`, `profiles/`, `data/`, `mappings/` and `evi
 - `AGENTS.md` - The guide for coding agents. `CLAUDE.md` points to it.
 - `REVIEW.md` - The implementation self-review of 2026-10-07.
 - `LICENSE`, `LICENSES/`, `THIRD_PARTY_NOTICES.md` - The licences, their full texts, and the inherited source licences and provenance.
-- `.github/workflows/check.yml` - The GitHub workflow. GitHub Actions is not turned on for this repository.
+- `.github/workflows/check.yml` - The GitHub workflow.
 
 ## What RCEF covers
 
-RCEF has these selected inventories: ARKit 52, MediaPipe 52, OpenXR FB 63 and FB2 70, optional META visemes 15, VRCFT transport 88, raw/combined eye data, artist 102+42, publicly listed numeric avatar parameters 124 and activity flags 3, Godot 102+41, VRM 18, and Roblox 50. It also records ancillary enums, sentinels and encoding surfaces. These counts describe interfaces. They do not say how well anything tracks a face.
+RCEF records these selected inventories. The numbers describe interfaces. They do not say how well anything tracks a face.
+
+- ARKit: 52 coefficients.
+- MediaPipe: 52 labels.
+- OpenXR: FB 63, FB2 70, and the optional META visemes 15.
+- VRCFaceTracking: transport 88; raw and combined eye data; artist shapes 102 base and 42 blended; 124 publicly listed numeric avatar parameters; 3 activity flags.
+- Godot: 102 base and 41 blended.
+- VRM: 18 presets.
+- Roblox: 50 face controls.
+
+RCEF also records ancillary enums, sentinels and encoding surfaces.
 
 The canonical set has 21 scalar projections, and each one states its provider's calibration. They cover blink, jaw, brow, directional gaze and physical pupil diameter. The identity mappings keep the stated provider basis. Two original fixtures, one affine and one lossy bilateral, show the shared runtime. They do not claim visual equivalence.
 
@@ -93,7 +103,7 @@ Not translated yet, and why:
 
 ### Expression sets
 
-This table shows which expression sets the maps read or write. Each provider name is a file in `profiles/`, without `.toml`. RCEF's own sets are in `data/`. [docs/expression-sets.md](docs/expression-sets.md) has the full table: for each profile file, the expression set and revision, the signal count, the role in maps, the documentation, the pinned source, and the licence or terms. It also explains the signal counts and describes RCEF's own sets.
+This table shows which expression sets the maps read or write. Each name is a file in `profiles/` without `.toml`, except `rcef.canonical` and `rcef.intermediate`, which are in `data/`. [docs/expression-sets.md](docs/expression-sets.md) gives each file's revision, signal count, role, documentation, pinned source and licence or terms. It also explains the signal counts and RCEF's own sets.
 
 | Provider | Read or written by a map | Inventory only |
 |---|---|---|
@@ -132,13 +142,7 @@ The release is public, so the download needs no login or token. Without uv, `pyt
 
 You can also build the wheels yourself with msf-character-tools' `scripts/build_release.sh` at the locked commit. Its `docs/building.md` lists the pinned inputs that give the same bytes. `check.py` refuses any other build: every installed file must match the lock.
 
-Run these commands from the RCEF checkout. Regenerate the outputs:
-
-```sh
-python3 -B check.py --write
-```
-
-Review the generated diffs. Then check the outputs without writing, and run the tests:
+Run these commands from the RCEF checkout. Check the outputs and run the tests:
 
 ```sh
 python3 -B check.py
@@ -147,7 +151,7 @@ python3 -B -m unittest discover -s tests
 
 ## Editing the data
 
-The TOML files are the source of truth. Edit them, then regenerate the outputs. Two commands cover the shared outputs and the reports:
+Edit the TOML files, then regenerate the outputs and review the diffs. Two commands cover the shared outputs and the reports:
 
 ```sh
 python3 -B check.py            # CHECK: do the outputs still match the TOML? Writes nothing.
@@ -164,41 +168,42 @@ python3 -B scripts/compare_godot.py --write       # docs/godot_comparison.md fro
 
 Any change to a TOML file changes `docs/toml-index.csv`. Any change to a string in a TOML file also changes the pack hash. Then `rcef.pack.json`, `coverage.json`, both `SHA256SUMS` files and the three Markdown reports change too. [AGENTS.md](AGENTS.md#known-traps) says when the CSV files change. Regenerate everything, review every diff, and commit the TOML and the generated files together. Each data change also needs an entry in [CHANGELOG.md](CHANGELOG.md), in the top section, `Data 0.4.0 — unreleased`.
 
-GitHub Actions is not turned on for this repository. Run `sh scripts/ci_local.sh` instead. It runs `check.py` and the tests on Python 3.11 and 3.12. Paste its summary into the pull request.
+GitHub Actions is not turned on for this repository. Run `sh scripts/ci_local.sh` instead. It runs `check.py` and the tests on Python 3.11 and 3.12. Paste its summary into the pull request. It expects a venv for each version with the locked wheel installed. The comment at the top of the script gives the paths.
 
 ### Common tasks
 
 - **Fix or add a mapping in an existing map**
-  1. Edit the rule in its file in `mappings/`. A rule needs `id`, `inputs`, `outputs`, `operator`, `disposition`, `assumptions`, `evidence`, `evidence_status` and `loss_annotations`, and `mapping_quality` when it is mapped. See [Maps, mappings and loss annotations](docs/architecture.md#maps-mappings-and-loss-annotations).
+
+  1. Edit or add the mapping in its file in `mappings/`. In the TOML, a mapping is one entry in the map's `rules` array. It needs `id`, `inputs`, `outputs`, `operator`, `disposition`, `assumptions`, `evidence`, `evidence_status` and `loss_annotations`, and `mapping_quality` when its disposition is `mapped`. See [Maps, mappings and loss annotations](docs/architecture.md#maps-mappings-and-loss-annotations).
   2. Cite only evidence IDs that are in `evidence/sources.toml`. To add a source, follow the evidence steps in the next tasks.
   3. Run `python3 -B check.py --write` and `python3 -B scripts/export_toml_index.py --write`. If you changed `fb2.to_arkit` or `fb2_gaze.to_arkit`, also run `python3 -B scripts/compare_godot.py --write`.
-  4. If the number of mappings in the map changed, update the map's row in the [Mappings](#mappings) table, and the counts in [docs/architecture.md](docs/architecture.md).
+  4. If the number of mappings changed, update the map's row in the [Mappings](#mappings) table, the totals in [What RCEF covers](#what-rcef-covers) and AGENTS.md, and the counts in `docs/architecture.md`.
   5. Add a CHANGELOG entry, and run the tests.
 
   Commit the TOML, `generated/`, `reports/`, `docs/toml-index.csv`, any other changed generated file, the README and the CHANGELOG together.
 
 - **Add a new map**
-  1. Add a `[[mappings]]` record with a new `id` and its `rules`, in a file in `mappings/`. Rule IDs must be unique across all maps. The file name must end in lowercase `.toml`.
+
+  1. Add a `[[mappings]]` record with a new `id` and its `rules`, in a file in `mappings/`. Mapping IDs must be unique across all maps. The file name must end in lowercase `.toml`.
   2. Regenerate as in the first task.
   3. Add a row for the map to the [Mappings](#mappings) table: a link to `reports/mappings.md#` followed by the map ID without dots, the source and target sets, the number of mappings and the evidence status. `tests/test_readme_sources.py` fails until the row agrees with the pack.
   4. Update the counts in `docs/architecture.md`, and the hand-made visuals. See [the validation checklist](docs/architecture.md#9-independent-validation-checklist).
   5. Add a CHANGELOG entry, and run the tests.
 
 - **Add or update an expression set**
+
   1. Add or update its evidence record in `evidence/sources.toml`. [CONTRIBUTING](CONTRIBUTING.md) lists what a provider entry needs. Then run `python3 -B scripts/export_references.py --write` to update `references.md`.
   2. Add or edit `profiles/<name>.toml`: the `[[signals]]` records, each with a disposition and its evidence, and the `[[profiles]]` record that lists them.
   3. Add or update the file's row in [docs/expression-sets.md](docs/expression-sets.md), and its name in the [Expression sets](#expression-sets) table above. Add a new provider to [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-  4. Regenerate as in the first task, and update the counts in `docs/architecture.md`.
-  5. Optional: check the source bytes with `python3 -B scripts/verify_sources.py --source ID --cache DIR`. Use a cache directory outside this repository.
+  4. Regenerate as in the first task. Update the counts in [What RCEF covers](#what-rcef-covers), AGENTS.md and `docs/architecture.md`.
+  5. Optional: check the source bytes. `python3 -B scripts/verify_sources.py --source ID --cache DIR` checks the exact digest of a public source. It saves source bytes only to the cache that you name. Use a directory outside this repository. Then `python3 -B scripts/audit_inventories.py --cache DIR` compares the selected names, their order and the real enum indices with those verified bytes. The auditor needs every source it uses, so first run `verify_sources.py --cache DIR` without `--source`.
   6. Add a CHANGELOG entry, and run the tests.
 
   Commit the evidence, `references.md`, the profile, the generated files, the documentation tables and the CHANGELOG together.
 
-- **Regenerate and check all outputs**
-  Run `python3 -B check.py --write` and the three scripts above with `--write`. Review the diffs. Then run `python3 -B check.py`, the tests and `sh scripts/ci_local.sh`.
-
 - **Update the msf-character-tools lock**
-  Install the reviewed new release wheel by hash. Then run `python3 -B check.py --update-lock --wheel PATH/TO/WHEEL`, once from each Python and platform whose wheel tag you support. Run `check.py` and the tests again. Update the version, the wheel table and the install commands in [Getting started](#getting-started), and add a CHANGELOG entry. Commit `evidence/tooling.lock.json`, `evidence/tooling.lock.previous.json` (if the update made one), the README and the CHANGELOG together. [The msf-character-tools lock](docs/architecture.md#the-msf-character-tools-lock) gives the full rules.
+
+  Install the reviewed new release wheel by hash. Then run `python3 -B check.py --update-lock --wheel PATH/TO/WHEEL`, once from each Python and platform whose wheel tag you support. Run `check.py` and the tests again. Update the version, the wheel table and the install commands in [Getting started](#getting-started), and the "0.5.0" mentions in AGENTS.md and `docs/architecture.md`. Add a CHANGELOG entry. Commit `evidence/tooling.lock.json`, `evidence/tooling.lock.previous.json` (if the update made one), the README and the CHANGELOG together. [The msf-character-tools lock](docs/architecture.md#the-msf-character-tools-lock) gives the full rules.
 
 ## How checking works
 
@@ -206,18 +211,16 @@ GitHub Actions is not turned on for this repository. Run `sh scripts/ci_local.sh
 
 1. **The lock.** It checks that the installed msf-character-tools is exactly a locked release wheel. If not, it exits 2 before it reads any data.
 2. **The calibration records.** It checks the records in [calibration/](calibration/README.md) and the mappings that cite them. This step does not use msf-character-tools.
-3. **The shared outputs.** It runs msf-character-tools to build `generated/rcef.pack.json`, `rcef_mapping.csv`, `coverage.json` and `SHA256SUMS`. With `--write` it writes them. Without `--write` it checks that they have not changed.
+3. **The shared outputs.** It runs msf-character-tools to build the files in `generated/`: `rcef.pack.json`, `rcef_mapping.csv`, `coverage.json` and `SHA256SUMS`. With `--write` it writes them. Without `--write` it checks that they have not changed.
 4. **The readable reports.** It runs `scripts/export_reports.py` in the same way.
 
 The lock records a SHA-256 for every file in the installed package, for each wheel tag. One lock serves several Pythons. Checking never clones or downloads anything. [The msf-character-tools lock](docs/architecture.md#the-msf-character-tools-lock) gives the full rules, and tells how to adopt a new release and how to roll back.
 
 [Section 7](docs/architecture.md#7-generated-files-and-readable-reports) gives the encoding of the outputs. [Section 8](docs/architecture.md#8-edit-regenerate-check-and-qualify) says what the tests show and what they do not show.
 
-`scripts/verify_sources.py` is optional. It checks the exact digests of the public sources, and it saves source bytes only to a cache that you name, outside this repository. `scripts/audit_inventories.py --cache CACHE` then compares the selected names, their order and the real enum indices with those verified bytes.
-
 ## Reports
 
-`check.py --write` also writes readable reports from `generated/rcef.pack.json`, and `check.py` checks them:
+These readable reports come from `generated/rcef.pack.json` (step 4 above):
 
 - [Inventory Markdown](reports/inventory.md) and [CSV](reports/inventory.csv): every signal and profile membership, including excluded, unsupported and unresolved records. They show native names, indices, ranges, calibration, evidence and reasons. Native defaults and calibrated neutral values are kept separate.
 - [Mapping Markdown](reports/mappings.md) and [CSV](reports/mappings.csv): every authored one-way mapping with its operator, status, assumptions and loss annotations.
@@ -235,13 +238,13 @@ To check only the reports with Python's standard library, run `python3 -B script
 
 ## Open questions
 
-These items are open. Each one is already stated in the document that is linked.
+Each open item below is stated in full in the linked document.
 
 - **Calibration between providers.** In general, how one provider's calibration relates to another's is still unresolved. Maximum angles and model calibration are unknown, so no cross-provider identity is possible ([survey.md](survey.md#semantics-that-remain-distinct)). No provider publishes its gain, so the mappings assume that equal weights mean equal expressions ([AGENTS.md](AGENTS.md#limits)).
-- **Missing evidence.** MediaPipe model calibration and provenance, FB1 numeric bounds, FB2 maximum angles per direction, VRCFT raw gaze units and source contradictions, and which Roblox list of required poses is authoritative. These gaps block the derived mappings that depend on them ([proposal.md](proposal.md#release-limits-and-remaining-evidence), [REVIEW.md](REVIEW.md#evidence-and-gates-still-open)). [docs/calibration/mediapipe-licence.md](docs/calibration/mediapipe-licence.md) records a later check of the MediaPipe model's licence and training-data statements.
+- **Missing evidence.** RCEF has no evidence yet for: MediaPipe model calibration and provenance, FB1 numeric bounds, FB2 maximum angles per direction, VRCFT raw gaze units and source contradictions, and which Roblox list of required poses is authoritative. These gaps block the derived mappings that depend on them ([proposal.md](proposal.md#release-limits-and-remaining-evidence), [REVIEW.md](REVIEW.md#evidence-and-gates-still-open)). [docs/calibration/mediapipe-licence.md](docs/calibration/mediapipe-licence.md) records a later check of the MediaPipe model's licence and training-data statements.
 - **VRM specification prose.** It is still unknown whether VRM specification prose may be redistributed. RCEF links to it and does not copy it ([REVIEW.md](REVIEW.md#evidence-and-gates-still-open)).
 - **Mappings not translated yet.** See the list under [Mappings](#mappings).
-- **Physical capture.** [docs/calibration/physical-protocol.md](docs/calibration/physical-protocol.md) designs a capture with real trackers and real faces. It has not been run. Before any part of it runs, it needs a named owner, an ethics and legal review, and Ken's approval.
+- **Physical capture.** [docs/calibration/physical-protocol.md](docs/calibration/physical-protocol.md) designs a capture with real trackers and real faces. It has not been run. Before any part of it runs, it needs a named owner, an ethics and legal review, and approval from the project's release owners ([GOVERNANCE.md](GOVERNANCE.md)).
 - **Later gates.** Device integration, physical calibration, visual equivalence of geometry, execution of VRM bindings, Roblox certification, native and host acceptance, and standards adoption are later gates. Each one needs its own measured acceptance ([GOVERNANCE.md](GOVERNANCE.md), [REVIEW.md](REVIEW.md#evidence-and-gates-still-open)).
 
 ## More documentation
