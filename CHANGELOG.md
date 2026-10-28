@@ -4,8 +4,9 @@ Original documentation: CC-BY-SA-4.0.
 
 ## Data 0.4.0 — unreleased
 
-Adopt msf-tools operators 1.1 (`operator_version = "1.1"`). FB2 requires
-opposing gaze directions to be exclusive, and the data now builds this in.
+Adopt msf-tools (now msf-character-tools) operators 1.1
+(`operator_version = "1.1"`). FB2 requires opposing gaze directions to be
+exclusive, and the data now builds this in.
 
 - `arkit_gaze.to_fb2` now has 12 mappings. For each eye, a weighted sum
   takes ARKit in minus out (and up minus down). Two one-sided
@@ -17,7 +18,7 @@ opposing gaze directions to be exclusive, and the data now builds this in.
   no longer refuses such frames.
 - New `rcef.intermediate` profile (4 signals) for those differences, in
   `data/intermediate.toml`.
-- The msf-tools lock moves to 0.4.0 (commit `05ca053`), which provides
+- The msf-tools lock moves to 0.4.0 (commit `05ca053` in the rewritten history), which provides
   operators 1.1. It has one entry for each of the six release wheels:
   CPython 3.11 and 3.12 or later, on macOS arm64, Linux x86_64 and Linux
   aarch64. Each entry has the wheel's SHA-256 and the hash of every file

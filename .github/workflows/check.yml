@@ -27,7 +27,7 @@ jobs:
           EOF
           read -r tag version sha < "$RUNNER_TEMP/tag.txt"
           wheel="msf_character_tools-${version}-${tag}.whl"
-          curl -fsSL -o "$RUNNER_TEMP/$wheel" \
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/$wheel" \
             "https://github.com/MetaverseStandards/msf-character-tools/releases/download/v${version}/${wheel}"
           echo "msf-character-tools @ file://${RUNNER_TEMP}/${wheel} --hash=sha256:${sha}" > "$RUNNER_TEMP/msf-character-tools.txt"
           python -m pip install --require-hashes -r "$RUNNER_TEMP/msf-character-tools.txt"
