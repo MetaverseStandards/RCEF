@@ -1,6 +1,6 @@
 # Attribution and license notices
 
-Original RCEF code is Copyright (c) 2026 RCEF contributors, MIT. Original RCEF definitions, data arrangement, documentation and numerical fixtures are Copyright (c) 2026 RCEF contributors, CC-BY-SA-4.0. Attribution to RCEF contributors (2026), with a link to this repository when published, is sufficient for original contributions.
+Original RCEF code is Copyright (c) 2026 Metaverse Standards Forum, MIT. Original RCEF definitions, data arrangement, documentation and numerical fixtures are Copyright (c) 2026 Metaverse Standards Forum, CC-BY-SA-4.0. Attribution to RCEF contributors (2026), with a link to this repository, is sufficient for original contributions.
 
 RCEF extracts and reorganizes native names, enum values and interface facts. Its descriptions are original summaries. No provider implementation is copied into RCEF. The exact source bytes used for verification are kept outside the repository. Each license applies to its own material. RCEF does not change provider licenses or claim endorsement.
 

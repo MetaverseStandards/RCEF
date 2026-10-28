@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 2026 RCEF contributors. Written for RCEF's face renders; see tools/render/README.md.
+// Copyright (c) 2026 Metaverse Standards Forum. Written for RCEF's face renders; see tools/render/README.md.
 // meshrender: offscreen SceneKit renderer for plain triangle meshes.
 // Usage: meshrender jobs.json
 // jobs.json: {"width":W,"height":H,"jobs":[{"positions":"p.f32","indices":"i.u32",
