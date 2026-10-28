@@ -17,17 +17,33 @@ opposing gaze directions to be exclusive, and the data now builds this in.
   no longer refuses such frames.
 - New `rcef.intermediate` profile (4 signals) for those differences, in
   `data/intermediate.toml`.
-- The msf-tools lock moves to 0.4.0 (commit `ce52dfb`), which provides
+- The msf-tools lock moves to 0.4.0 (commit `05ca053`), which provides
   operators 1.1. It has one entry for each of the six release wheels:
   CPython 3.11 and 3.12 or later, on macOS arm64, Linux x86_64 and Linux
   aarch64. Each entry has the wheel's SHA-256 and the hash of every file
   it installs. Install the release wheel for your platform by hash;
   `check.py` refuses any other build. Earlier in this cycle the lock moved
-  to 0.3.0 (commit `e799dfb`); that lock is kept as
-  `evidence/tooling.lock.previous.json`.
+  to 0.3.0 (commit `710bb49`).
 - VRCFaceTracking's signed eye gaze is not split into FB2 directions. Its
   units and range are unresolved in RCEF's inventory, and `piecewise_linear`
   needs a declared range.
+- msf-tools has a new name, msf-character-tools. The lock moves to
+  msf-character-tools 0.5.0, which behaves the same as msf-tools 0.4.0.
+  The import package is `msf_character_tools`. `check.py`, the tests, the
+  examples and the calibration tools use the new names.
+- RCEF is now at https://github.com/MetaverseStandards/RCEF, and
+  msf-character-tools is at
+  https://github.com/MetaverseStandards/msf-character-tools. Both are
+  public.
+- The GitHub workflow downloads the public release wheel with `curl`. It
+  needs no token. It still installs the wheel by hash.
+- `evidence/tooling.lock.previous.json` is removed. The earlier locks name
+  commits that are not in the public history, and file hashes that a public
+  install cannot match. The next lock update writes the file again.
+- The Git history was rewritten before publication, so older commit hashes
+  are different.
+- The pack and the generated files do not change, so the data version
+  stays 0.4.0.
 
 ## Calibration and examples — unreleased
 
