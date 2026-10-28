@@ -1,0 +1,149 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+# Guide for coding agents
+
+This guide is for coding agents that use RCEF or change it. It gives the facts that are hard to find in the tree, and links to the full documents for the rest. Part 1 is for an agent that only reads RCEF's outputs. Part 2 is for an agent that changes RCEF.
+
+## Part 1: Using RCEF
+
+RCEF is an open catalogue of face-expression standards (ARKit, OpenXR FB2, META visemes, MediaPipe, VRCFaceTracking, VRM, Godot, Roblox) and the maps between them. The TOML files are the data. msf-tools is a separate package. It is the engine that checks the data, builds the pack and evaluates the maps. The current data is 0.4.0 (unreleased), checked with msf-tools 0.4.0.
+
+### Outputs
+
+| File | What it holds |
+|---|---|
+| `generated/rcef.pack.json` | The complete validated data: signals, profiles, maps (each mapping with its operator, assumptions, losses and evidence) and evidence records. Load this file. |
+| `generated/SHA256SUMS` | SHA-256 of the pack, `rcef_mapping.csv` and `coverage.json`. |
+| `generated/coverage.json` | Signals by disposition, mappings by quality, evidence and rule use, totals, and `pack_sha256`. |
+| `generated/rcef_mapping.csv` | A matrix: one row per signal, one column per profile. It is not a list of mappings. |
+| `reports/mappings.md`, `.csv` | Every mapping with its operator, status, assumptions and losses. |
+| `reports/inventory.md`, `.csv` | Every signal in every profile: native names, indices, ranges, calibration, evidence and reasons. |
+| `reports/canonical_correspondence.md`, `.csv` | The 21 canonical signals against the authored mappings. |
+| `reports/SHA256SUMS` | SHA-256 of the six report files. Each Markdown report also records the pack's SHA-256. |
+
+The README's [Mappings](README.md#mappings) table lists each map with its source and target profile.
+
+### Translate tracker values
+
+Use the msf-tools public API on the pack. Cross-provider maps are `proposed`, so `compile_mapping` refuses them (`E_APPROXIMATION`) unless you give `allow_approximation=True`. Run this from the RCEF checkout. It prints `0.5`:
+
+```python
+import json
+import msf_tools as msf
+
+doc = json.load(open('generated/rcef.pack.json', encoding='utf-8'))
+pack = msf.compile_pack(msf.validate_authoring(doc).value).value
+fb2 = msf.profile_snapshot(pack, 'openxr.fb2').value
+arkit = msf.profile_snapshot(pack, 'arkit.coefficient').value
+result = msf.compile_mapping(pack, fb2, arkit, 'fb2.to_arkit', allow_approximation=True)
+assert result.ok, result.report.to_dict()
+mapping = result.value
+inputs = sorted(mapping.required_inputs)
+values = dict.fromkeys(inputs, 0.0)
+values['openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB'] = 0.5
+frame = {'timestamp': 0.0, 'values': values, 'validity': dict.fromkeys(inputs, True)}
+out = msf.evaluate_mapping(mapping, [frame])
+assert out.ok, out.report.to_dict()
+print(out.value.samples[0]['values']['arkit.coefficient.jawOpen'])
+```
+
+What [examples/rcef_translate.py](examples/rcef_translate.py) does, and why:
+
+- Every input in `required_inputs` must be in the frame, or the frame is refused (`E_MISSING_SAMPLE`).
+- If any channel you give is marked invalid, msf-tools refuses the whole frame (`E_INVALID_SAMPLE`), even a channel that the map does not read. So give each map only its own inputs.
+- An input's validity is the AND of the provider flags in its signal's `validity` field, for example `isValid AND isEyeFollowingBlendshapesValid` for FB2 gaze.
+- A refused call returns no values. Each error's `ref` starts with `/samples/<n>/`, so you can find the refused frames and evaluate the rest again.
+- Face and gaze are separate maps: `fb2.to_arkit` with `fb2_gaze.to_arkit`, and `arkit.to_fb2` with `arkit_gaze.to_fb2`.
+
+[examples/README.md](examples/README.md) shows complete runs from CSV to CSV and onto face meshes.
+
+### Evidence status
+
+- `verified_current`: the record restates a verified source fact. The three `*.to_canonical` maps use it.
+- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 cross-provider mappings and the 4 internal gaze steps are `proposed`.
+- `calibrated_software`: the status of the records in [calibration/](calibration/README.md). They are fits to renders of example rigs, not measurements of a tracker. The pack (schema 1.0) does not use this status, and no mapping in data 0.4.0 cites a record.
+- `unresolved`: recorded but not executable. `compile_mapping` refuses it, even with the opt-in. The MediaPipe → ARKit map `survey.ambiguous` is the example.
+
+Evidence status and disposition (`mapped`, `unresolved`, `excluded`, `unsupported`) are separate fields.
+
+### Limits
+
+- The mappings connect names and meanings the way the public sources do. Intensities are not calibrated: no provider publishes its gain, so equal weights are assumed to mean equal expressions. Each mapping states its assumptions and losses in `reports/mappings.md`.
+- The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass.
+- The VRM maps come from specification texts only. No published table maps META visemes to VRM; `visemes.to_vrm` is a phoneme-label correspondence.
+- The README lists what is [not translated yet](README.md#mappings), and why.
+
+## Part 2: Contributing
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architecture.md) first. They give the full rules.
+
+### Layout
+
+| Path | Contents |
+|---|---|
+| `pack.toml` | Root metadata, including `data_version`. |
+| `data/` | RCEF's own sets: `rcef.canonical` (21 signals) and `rcef.intermediate` (4). |
+| `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. |
+| `mappings/` | Maps. Each map is a group of one-way mappings. |
+| `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` and `tooling.lock.previous.json` (the msf-tools lock), `input-contracts/`. |
+| `calibration/` | `*.cal` software-only calibration records and the `FREEZES` ledger. |
+| `generated/`, `reports/` | Outputs of `check.py --write`. Do not edit them by hand. |
+| `scripts/` | Export, comparison, source-check and local CI scripts. |
+| `tools/calibration/` | Optional tools that make calibration records. They need extra packages; `check.py` and the tests do not run them. |
+| `tools/render/` | `meshrender.swift`, the macOS offscreen renderer for calibration fits. |
+| `examples/` | End-to-end translations and face pipelines; inputs in `examples/data/`. |
+| `docs/` | Architecture guide and visuals, `toml-index.csv`, `godot_comparison.md`, calibration notes. |
+| `tests/` | The `unittest` suite. `tests/fixtures/` holds expectations derived from sources. |
+
+### Commands
+
+Install the locked msf-tools wheel by hash as the README's [Generate and check](README.md#generate-and-check) shows. Run every command from the checkout.
+
+```sh
+python3 -B check.py                          # check msf-tools, calibration, outputs; writes nothing
+python3 -B check.py --write                  # regenerate generated/ and reports/
+python3 -B -m unittest discover -s tests
+python3 -B scripts/export_reports.py         # reports only; add --write to regenerate
+python3 -B scripts/export_references.py --write   # references.md from evidence/sources.toml
+python3 -B scripts/compare_godot.py --write       # docs/godot_comparison.md
+python3 -B scripts/export_toml_index.py --write   # docs/toml-index.csv
+sh scripts/ci_local.sh                       # check.py and tests on Python 3.11 and 3.12
+```
+
+Without `--write`, each script checks its output and exits non-zero if the output is out of date. `ci_local.sh` uses `$MSF/_tools/rcef-venv3.11` and `rcef-venv3.12`; `MSF` defaults to `~/.local/share/msf`.
+
+### Rules that must not break
+
+| Rule | What enforces it |
+|---|---|
+| Every provider fact cites a public source in `evidence/sources.toml`, with the items CONTRIBUTING lists: exact revision, or retrieval date and digest; locator; original summary; units, domain and calibration; disposition. | msf-tools refuses a reference to a missing evidence id (`E_REFERENCE`), and a record with no `url` unless it is original work with `authorship` and `license` (`E_EVIDENCE`). No offline check reads the digests: run `scripts/verify_sources.py --cache DIR` (outside the repo) and review. |
+| Generated files and reports change only through the commands above, in the same commit as the source change. | `check.py` (byte drift), `tests/test_metadata.py`, `tests/test_readable_reports.py`. |
+| The README's Mappings and Expression sets tables, `references.md`, `docs/toml-index.csv` and `docs/godot_comparison.md` agree with the data. You edit the README tables by hand; scripts write the others. | `tests/test_readme_sources.py`, `test_references.py`, `test_toml_index.py`, `test_godot_comparison.py`. The README test reads the text between `### Mappings`, `### Expression sets` and `## Generate and check`. Keep those headings. |
+| Test expectations come from public sources, not from RCEF's mappings. | `scripts/derive_fb2_goldens.py` writes `tests/fixtures/fb2_goldens.json` and `godot_fb2_rules.csv` from cached source bytes, and never reads `mappings/`, `profiles/` or `data/`. Reviewers check that nobody edits them by hand. |
+| Calibration records are frozen, and `FREEZES` is append-only. A mapping may cite a record (`calibration.<id>`) only with operator `piecewise_linear`, knots exactly equal to the frozen knots, and every held-out cell for its channel passed. | `check.py`, before msf-tools runs; `tests/test_calibration.py`. `check.py` requires the latest ledger version and its hash, versions that go up by one, dates that never go back, and a reason for a re-freeze. It cannot see Git history, so reviewers check that no line changed and that the ledger line came before the results. See [calibration/README.md](calibration/README.md). |
+| msf-tools is exactly a locked release wheel. | `check.py` exits 2 for any other build; `tests/test_dependency.py`. |
+| Each data change has an entry in [CHANGELOG.md](CHANGELOG.md). | Reviewers. The top section is `Data 0.4.0 — unreleased`: add entries there. `tests/test_metadata.py` checks that `data_version` in `pack.toml` equals the pack's and has the form `X.Y.Z`. |
+| Code is MIT. Data and documentation are CC-BY-SA-4.0. Third-party facts are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Do not copy provider prose that has no open licence: write your own summary and cite the source. | Reviewers. Start each new file with a licence line, as the existing files do. |
+
+To adopt a new msf-tools release: install its wheel by hash, then run `python3 -B check.py --update-lock --wheel PATH/TO/WHEEL`. Do this once from each Python and platform whose wheel tag you support. Entries for the same commit are merged. A new commit drops the other tags and keeps the old lock as `tooling.lock.previous.json`. Without `--wheel`, the wheel's `sha256` in the lock becomes `null`.
+
+### Known traps
+
+- `check.py` checks the msf-tools install before anything else. If the install is wrong, it prints `Refusing to check` and exits 2 before it reads the data or the calibration records. It also refuses an `msf_tools` that would import from anywhere other than the installed distribution, for example through `PYTHONPATH`.
+- `tests/test_dependency.py` builds fake msf-tools installs and checks that `check.py` refuses each one before msf-tools runs (a marker file shows whether it ran). If you change the lock format or the order of steps in `check.py`, keep these tests meaningful. For example, the tampered-package fake must use a version and wheel tag that the lock has, or it is refused for the wrong reason.
+- Any change to a string in any TOML file changes the pack bytes, so the pack hash changes. Then all of `generated/`, the Markdown reports, `reports/SHA256SUMS` and `docs/toml-index.csv` change too. Regenerate them all.
+- msf-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
+- `docs/architecture.html`, `.svg` and `.png` are made by hand, and no test checks them. When the data changes, update them and the counts in `docs/architecture.md`, and render the PNG from the SVG at the same size (1160 × 560). See the checklist in [docs/architecture.md](docs/architecture.md#9-independent-validation-checklist).
+- The face and viseme pipelines download rigs on first use and check their hashes (`--cache DIR` for rig files, `--out DIR` for outputs; the defaults are under `~/.cache`). The slow tests skip unless `RCEF_SLOW_TESTS=1` and `RCEF_ICT_CACHE`, `RCEF_RIG_CACHE` (and, for rig gains, `RCEF_K3_ICT_CACHE` and `RCEF_RENDERER`) are set. See [examples/README.md](examples/README.md).
+
+### Change workflow
+
+1. Make small commits, one topic each.
+2. Run `scripts/ci_local.sh` on Python 3.11 and 3.12, and paste its summary into the pull request. GitHub Actions is not turned on for this repository.
+3. Get an independent review. Review meaning and calibration separately from executable correctness.
+4. Write in plain English (below).
+
+## Writing style
+
+- Use plain English in the style of ASD-STE100: short sentences, active voice, common words, one instruction per sentence. Leave out filler.
+- In prose, one rule is a **mapping** and a group such as `fb2.to_arkit` is a **map** ("the FB2 → ARKit map has 44 mappings").
+- Do not change code and schema names, such as `[[mappings]]` and `rules`.
