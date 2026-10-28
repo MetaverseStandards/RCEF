@@ -94,13 +94,13 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | `tools/calibration/` | Optional tools that make calibration records. They need extra packages. `check.py` and the tests never run them; the tests check only the curve fitting and cell scoring. |
 | `tools/render/` | `meshrender.swift`, the macOS offscreen renderer for calibration fits. |
 | `examples/` | End-to-end translations and face pipelines; inputs in `examples/data/`. |
-| `docs/` | Architecture guide and visuals, `toml-index.csv`, `godot_comparison.md`, calibration notes. |
+| `docs/` | Architecture guide and visuals, `expression-sets.md`, `toml-index.csv`, `godot_comparison.md`, calibration notes. |
 | `fixtures/` | `mapping_samples.json`: sample inputs and expected outputs for the affine, bilateral and identity checks in `tests/test_parity.py`. It is not `tests/fixtures/`, and it holds no signals (those are in `profiles/fixture.toml`). |
 | `tests/` | The `unittest` suite and its inputs in `tests/fixtures/`. |
 
 ### Commands
 
-Install the locked msf-character-tools wheel by hash as the README's [Generate and check](README.md#generate-and-check) shows. Run every command from the checkout.
+Install the locked msf-character-tools wheel by hash as the README's [Getting started](README.md#getting-started) shows. Run every command from the checkout.
 
 ```sh
 python3 -B check.py                          # check msf-character-tools, calibration, outputs; writes nothing
@@ -121,7 +121,7 @@ Without `--write`, each script checks its output and exits non-zero if the outpu
 |---|---|
 | Every provider fact cites a public source in `evidence/sources.toml`. The record needs the items that CONTRIBUTING lists. | msf-character-tools refuses a reference to a missing evidence id (`E_REFERENCE`). It also refuses a record with no `url`, unless the record is original work with `authorship` and `license` (`E_EVIDENCE`). No offline check reads the digests. Run `scripts/verify_sources.py --cache DIR` (outside the repo) and review the result. |
 | Generated files and reports change only through the commands above, in the same commit as the source change. | `check.py` (byte drift), `tests/test_metadata.py`, `tests/test_readable_reports.py`. |
-| The README's Mappings table, the table in `docs/expression-sets.md`, `references.md`, `docs/toml-index.csv` and `docs/godot_comparison.md` agree with the data. You edit the two tables by hand; scripts write the others. | `tests/test_readme_sources.py`, `test_references.py`, `test_toml_index.py`, `test_godot_comparison.py`. The README test reads the README text between `### Mappings` and `### Expression sets`, and the `docs/expression-sets.md` text between `## Where each set comes from` and `## Signal counts`. Keep those headings. |
+| The README's Mappings and Expression sets tables, the table in `docs/expression-sets.md`, `references.md`, `docs/toml-index.csv` and `docs/godot_comparison.md` agree with the data. You edit the three tables by hand; scripts write the others. | `tests/test_readme_sources.py`, `test_references.py`, `test_toml_index.py`, `test_godot_comparison.py`. The README test reads the README text between `### Mappings`, `### Expression sets` and `## Getting started`, and the `docs/expression-sets.md` text between `## Where each set comes from` and `## Signal counts`. Keep those headings. |
 | Test expectations come from public sources, not from RCEF's mappings. | `scripts/derive_fb2_goldens.py` writes `tests/fixtures/fb2_goldens.json` and `godot_fb2_rules.csv` from cached source bytes, and never reads `mappings/`, `profiles/` or `data/`. Reviewers check that nobody edits them by hand. |
 | Calibration records are frozen. `FREEZES` is append-only. A mapping can cite a record (`calibration.<id>`) only if all three are true: its operator is `piecewise_linear`, its knots equal the frozen knots, and every held-out cell for its channel passed. | `check.py`, before msf-character-tools runs; `tests/test_calibration.py`. `check.py` checks the ledger: the record must be the latest version, with its hash. Versions go up by one, dates never go back, and a re-freeze needs a reason. `check.py` cannot see Git history. Reviewers check that no line changed and that the ledger line came before the results. See [calibration/README.md](calibration/README.md). |
 | msf-character-tools is exactly a locked release wheel. | `check.py` exits 2 for any other build; `tests/test_dependency.py`. |

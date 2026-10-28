@@ -6,7 +6,7 @@ These optional tools make calibration records (see [calibration/README.md](../..
 
 This tool renders ICT-FaceKit with one ARKit coefficient moving at a time and scores each render with MediaPipe's Face Landmarker. It then fits a curve from each MediaPipe score back to the ICT weight. The licence check for the model is in [docs/calibration/mediapipe-licence.md](../../docs/calibration/mediapipe-licence.md).
 
-The tool needs Python 3.11+, numpy, mediapipe, the locked msf-character-tools release wheel (it reads the Rocketbox FBX rigs itself), and a renderer built from [tools/render](../render/README.md). `msf-character-tools.txt` is the hashed requirement from [Generate and check](../../README.md#generate-and-check). It is a separate install because `--require-hashes` needs a hash for every package it installs. With uv:
+The tool needs Python 3.11+, numpy, mediapipe, the locked msf-character-tools release wheel (it reads the Rocketbox FBX rigs itself), and a renderer built from [tools/render](../render/README.md). `msf-character-tools.txt` is the hashed requirement from [Getting started](../../README.md#getting-started). It is a separate install because `--require-hashes` needs a hash for every package it installs. With uv:
 
 ```sh
 uv venv k4-venv && uv pip install --python k4-venv/bin/python mediapipe numpy
@@ -51,7 +51,7 @@ python tools/calibration/k3_heldout.py --checkout /tmp/k3-freeze --ict-cache DIR
 To reproduce the published cells, three things must match the record:
 
 - **Code:** the freeze commit `dd9ecd2`. Its `examples/`, `check.py`, `tools/calibration/k3_heldout.py`, `tools/calibration/provenance.py` and `tools/render` are as at `code_commit` `7cd8ff9`.
-- **msf-character-tools:** 0.5.0, the release wheel that the lock at the freeze commit names, installed by hash (see [Generate and check](../../README.md#generate-and-check)). The `check.py` in the checkout refuses any other build.
+- **msf-character-tools:** 0.5.0, the release wheel that the lock at the freeze commit names, installed by hash (see [Getting started](../../README.md#getting-started)). The `check.py` in the checkout refuses any other build.
 - **Renderer:** the pinned binary (`binary_sha256` `60e618ff…` in the record), or a build of source `913c1641…` (`tools/render/meshrender.swift` at the freeze commit) with `swiftc -O`. A rebuild may have a different binary hash, and `k3_heldout.py` refuses a binary whose hash differs. Images also depend on the OS and GPU (record: macOS 27.0.1 arm64, Apple M4 Max).
 
 A second held-out run, with the same code, msf-character-tools build and renderer binary, gave cells equal to the published ones.

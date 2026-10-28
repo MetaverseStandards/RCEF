@@ -21,6 +21,9 @@ class ReadmeSources(unittest.TestCase):
     def setUpClass(cls):
         readme = (ROOT / 'README.md').read_text(encoding='utf-8')
         cls.mappings = table_rows(readme, '### Mappings', '### Expression sets')
+        overview = readme[readme.index('### Expression sets'):readme.index('## Getting started')]
+        cls.overview = [[cell.strip() for cell in line.strip('|').split(' | ')]
+                        for line in overview.splitlines()[1:] if line.startswith('| ') and '---' not in line][1:]
         # docs/expression-sets.md links up one level; read its links as paths from the checkout root.
         sets_doc = (ROOT / 'docs/expression-sets.md').read_text(encoding='utf-8').replace('](../', '](')
         cls.sets = table_rows(sets_doc, '## Where each set comes from', '## Signal counts')
@@ -84,6 +87,24 @@ class ReadmeSources(unittest.TestCase):
                             else 'target' if name in written else 'inventory only')
                 role = self.row_for(name)[3]
                 self.assertTrue(role == expected or role.startswith(expected + ' ('), (role, expected))
+
+    def test_readme_overview_lists_each_profile_file_once_in_its_role_column(self):
+        names = {Path(name).stem for name in self.files}
+        columns = {}
+        for row in self.overview:
+            self.assertEqual(len(row), 3, row)
+            for column in (1, 2):
+                for token in re.findall(r'`([^`]+)`', row[column]):
+                    if token in names:
+                        self.assertNotIn(token, columns)
+                        columns[token] = column
+                    else:
+                        self.assertIn(token, self.members)
+        self.assertEqual(set(columns), names)
+        for name in self.files:
+            with self.subTest(profile=name):
+                inventory_only = self.row_for(name)[3].startswith('inventory only')
+                self.assertEqual(columns[Path(name).stem], 2 if inventory_only else 1)
 
     def test_mapping_table_matches_the_pack(self):
         listed = {}

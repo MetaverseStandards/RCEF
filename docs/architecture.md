@@ -341,6 +341,8 @@ msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases 
 
 JSON uses sorted object keys, indent=2, UTF-8 with a final LF, finite numbers and normalized negative zero. Arrays keep the authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All shared output bytes are rendered and validated before any file is written. Each file is replaced atomically on its own. The four generated files and the seven report files are not replaced in one transaction, so after a failure, review all outputs and run the check again.
 
+The report exporter uses only the Python standard library, so report generation adds no third-party dependency. `generated/SHA256SUMS` and the generated mapping bytes keep their original contract. The reports keep the CC BY-SA 4.0 licence and attribution of RCEF's data and documentation.
+
 ## 8. Edit, regenerate, check and qualify
 
 These are suggested steps for an author in an RCEF checkout, with Python 3.11+.
