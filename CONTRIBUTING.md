@@ -2,12 +2,7 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-Edit the TOML authoring files, and run all commands from the RCEF checkout. Install msf-tools at the commit recorded as `git_commit` in [tooling.lock.json](evidence/tooling.lock.json), from GitHub or from a local checkout, into the Python you use for RCEF:
-
-```sh
-python3 -m pip install "git+https://github.com/Kjakubzak/msf-tools@COMMIT"
-# or: python3 -m pip install "git+file://$(cd ../msf-tools && pwd -P)@COMMIT"
-```
+Edit the TOML authoring files, and run all commands from the RCEF checkout. Install the msf-tools release wheel locked in [tooling.lock.json](evidence/tooling.lock.json) into the Python you use for RCEF, by hash, as [Generate and check](README.md#generate-and-check) in the README shows.
 
 Then regenerate the outputs:
 
@@ -30,4 +25,4 @@ Every mapping with disposition `mapped` states its assumptions, quality and loss
 
 A change includes the affected evidence, the generated files, the test results and the limitations that remain. Review meaning and calibration separately from executable correctness. A proposal does not change the wire contract or any support claim until it passes its review and gates.
 
-The GitHub workflow runs on every push and pull request, and you can also start it by hand. It installs msf-tools from `Kjakubzak/msf-tools` at the locked commit, with the read-only `MSF_TOOLS_TOKEN` repository secret. Then it runs `check.py` and the tests on Python 3.11 and 3.12. GitHub Actions is not turned on for these repositories at the moment. Instead, run `scripts/ci_local.sh`, which does the same on the local 3.11 and 3.12 venvs, and paste its summary into the pull request.
+The GitHub workflow runs on every push and pull request, and you can also start it by hand. It downloads the locked msf-tools release wheel for Linux x86_64 from `Kjakubzak/msf-tools` with the read-only `MSF_TOOLS_TOKEN` repository secret, and installs it by hash. Then it runs `check.py` and the tests on Python 3.11 and 3.12. GitHub Actions is not turned on for these repositories at the moment. Instead, run `scripts/ci_local.sh`, which does the same on the local 3.11 and 3.12 venvs, and paste its summary into the pull request.
