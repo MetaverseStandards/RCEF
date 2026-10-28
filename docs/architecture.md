@@ -7,7 +7,7 @@ The [offline visual report](architecture.html), the [SVG](architecture.svg) and 
 
 ## Scope of this guide
 
-This guide describes `rcef.parity` data version **0.4.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-tools 0.3.0 (commit `e799dfb`). The counts below were recomputed with the Python standard library from all 34 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
+This guide describes `rcef.parity` data version **0.4.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-tools 0.4.0 (commit `ce52dfb`), installed from its release wheels. The counts below were recomputed with the Python standard library from all 34 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
 
 | Measure | Total |
 | --- | ---: |
@@ -49,7 +49,7 @@ flowchart TD
 | MSF Tools | Authoring discovery and validation, `compile_pack`, `profile_snapshot`, `compile_mapping`, `evaluate_mapping`; asset inspection and sidecar binding | Implements the reviewed wire and operator contracts and their refusals. |
 | Independent reviewer or consumer | Review changed bytes and meaning; run the drift check and tests with the locked msf-tools | Executable correctness alone does not show visual, anatomical, cross-provider or physiological equivalence. |
 
-Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf-tools/msf_tools/authoring.py), [pack compiler](../../msf-tools/msf_tools/pack.py), [mapping compiler and evaluator](../../msf-tools/msf_tools/mapping.py), [report exporter](../scripts/export_reports.py), [calibration tools](../tools/calibration/README.md), [tests](../tests/).
+Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf-tools/msf_tools/authoring.py), [pack compiler](../../msf-tools/msf_tools/pack.py), [mapping compiler and evaluator](../../msf-tools/msf_tools/mapping.py), the [C++ core](../../msf-tools/core/src) behind them, [report exporter](../scripts/export_reports.py), [calibration tools](../tools/calibration/README.md), [tests](../tests/).
 
 ## 2. What check.py does
 
@@ -101,7 +101,7 @@ id = "rcef.parity"
 license = "CC-BY-SA-4.0"
 ```
 
-The merged document needs all five keys and the four arrays. msf-tools 0.3.0 accepts schema versions `"1.0"` and `"1.1"`, and operator versions `"1.0"` and `"1.1"`. Operators 1.1 add `piecewise_linear`; a mapping that uses it under operators 1.0 is refused. Schema 1.1 adds the evidence status `calibrated_software`; RCEF uses schema 1.0. `data_version` has its own version number, and it must be a semantic version: three numbers, with an optional prerelease suffix. Do not invent operators or extra root keys.
+The merged document needs all five keys and the four arrays. msf-tools 0.4.0 accepts schema versions `"1.0"` and `"1.1"`, and operator versions `"1.0"` and `"1.1"`. Operators 1.1 add `piecewise_linear`; a mapping that uses it under operators 1.0 is refused. Schema 1.1 adds the evidence status `calibrated_software`; RCEF uses schema 1.0. `data_version` has its own version number, and it must be a semantic version: three numbers, with an optional prerelease suffix. Do not invent operators or extra root keys.
 
 ### Arrays, tables and references
 
@@ -171,7 +171,7 @@ In the schema a map is a `[[mappings]]` record and each mapping in it is one ent
 
 `disposition` says whether the author has admitted the relationship. `evidence_status` describes its evidence. `mapping_quality` describes the quality of an admitted mapping. These are separate fields. The direction is the ordered relationship from `inputs` to `outputs`. A mapping does not imply an inverse.
 
-Source: `validate_signal`, `validate_rule`, `knots`, `loss_annotation` and `validate_authoring` in [authoring.py](../../msf-tools/msf_tools/authoring.py).
+Source: `validate_authoring` in [authoring.py](../../msf-tools/msf_tools/authoring.py), which runs the C++ core's checks: `validate_signal`, `validate_rule`, `knots` and `loss_annotation` in [authoring.cpp](../../msf-tools/core/src/authoring.cpp).
 
 ## 5. Examples of each operator
 
@@ -242,7 +242,7 @@ The runtime starts at `0.0`, multiplies each input by its weight, and adds the t
 
 Each split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero. When ARKit sets both directions, only their difference is kept. Each of these mappings declares that as a loss. The intermediate signals are in the `rcef.intermediate` profile, not in the source or target profile, so they stay virtual inside the compiled map. All 12 mappings in this map are proposed and approximate. See [arkit_fb2.toml](../mappings/arkit_fb2.toml) and [intermediate.toml](../data/intermediate.toml).
 
-Sources: operator dispatch and `_piecewise_linear` in [mapping.py](../../msf-tools/msf_tools/mapping.py), and `_product`, `_add`, `_sub`, `_divide`, `_sum` in [math3d.py](../../msf-tools/msf_tools/math3d.py).
+Sources: operator dispatch and `piecewise` in the C++ core's [mapping.cpp](../../msf-tools/core/src/mapping.cpp), and `product`, `add`, `sub` and `divide` in [math3d.cpp](../../msf-tools/core/src/math3d.cpp). [math3d.py](../../msf-tools/msf_tools/math3d.py) exports them as `_product`, `_add`, `_sub` and `_divide`, with `_sum`, which applies `add` in order ([math_module.cpp](../../msf-tools/core/python/math_module.cpp)).
 
 ## 6. Runtime admission, validity and asset binding
 
@@ -307,7 +307,7 @@ The 21 canonical projections are 9 ARKit identities, 8 FB2 directional gaze iden
 
 A sidecar has `schema_version`, `asset_sha256`, `resource_hashes` and `bindings`, and optionally `metadata`. Reuse checks the exact asset hash and the hashes of the resources it reads. Names alone do not bind a target. `annotate_asset` makes a sidecar and does not change the original asset bytes. Asset-based CLI mapping needs explicit sidecars. Profile-based scalar fixtures need no asset.
 
-msf-tools 0.3.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way, with the optional `msf-tools-ufbx` reader. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf-tools/msf_tools/snapshot.py) and the [shared reference](../../msf-tools/docs/reference.md).
+msf-tools 0.4.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way; msf-tools 0.4.0 reads FBX with no extra package. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf-tools/msf_tools/snapshot.py) and the [shared reference](../../msf-tools/docs/reference.md).
 
 ## 7. Generated files and readable reports
 
@@ -329,7 +329,7 @@ JSON uses sorted object keys, indent=2, UTF-8 with a final LF, finite numbers an
 These are suggested steps for an author in an RCEF checkout, with Python 3.11+.
 
 1. Find the affected signal, profile or mapping and its exact evidence IDs. Edit the authoritative TOML. Keep unresolved facts, and update evidence locators and digests where needed. Keep measured neutral, storage defaults and actual sample validity separate.
-2. Install msf-tools at the commit recorded in `evidence/tooling.lock.json`. `check.py` runs the installed `msf_tools` with the running interpreter. It does not install, clone or download anything.
+2. Install the msf-tools release wheel locked in `evidence/tooling.lock.json`, by hash. `check.py` runs the installed `msf_tools` with the running interpreter. It does not install, clone or download anything.
 3. Regenerate, review the changed generated and report bytes, and check again. `--write` regenerates. The default run checks for byte drift; it is not a full qualification.
 4. Run the tests with the same msf-tools. Keep device, capture and calibration gates separate.
 
