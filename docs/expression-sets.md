@@ -40,7 +40,7 @@ Each file in [profiles/](../profiles) records one public expression set, except 
 
 ## Signal counts
 
-The Signals column counts every inventory row, including count sentinels and rows recorded as absent. So it can be higher than the selected-interface counts in the README section [What RCEF covers](../README.md#what-rcef-covers). FB2 has 70 weights plus `COUNT` (71), FB has 63 plus `COUNT` and an absent tongue row (65), the VRCFT transport enum has 88 plus `Max` (89), and MediaPipe has its 52 labels plus an absent `tongueOut` row (53).
+The Signals column counts every inventory row, including count sentinels and rows recorded as absent. So it can be higher than the selected-interface counts in the README section [What RCEF covers](../README.md#what-rcef-covers). FB2 has 70 weights plus `COUNT` (71), FB has 63 plus `COUNT` and an absent tongue row (65), the VRCFT transport enum has 88 plus `Max` (89), and MediaPipe has its 52 labels plus an absent `tongueOut` row (53). Godot blended has 41 shapes plus the `FT_MAX` sentinel (42).
 
 ## RCEF's own sets
 

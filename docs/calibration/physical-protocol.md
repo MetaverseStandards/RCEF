@@ -1,6 +1,6 @@
 # Physical capture protocol (design only)
 
-This is a design only. It has not been run, no one has been recorded, and nothing in RCEF depends on it. It describes how RCEF could one day measure what software-only calibration cannot: how real trackers respond to real faces. Before any part of it runs, it needs a named owner, an ethics and legal review, and Ken's approval.
+This is a design only. It has not been run, no one has been recorded, and nothing in RCEF depends on it. It describes how RCEF could one day measure what software-only calibration cannot: how real trackers respond to real faces. Before any part of it runs, it needs a named owner, an ethics and legal review, and approval from the project's release owners ([GOVERNANCE.md](../../GOVERNANCE.md)).
 
 ## What it would measure, and what it would not
 
