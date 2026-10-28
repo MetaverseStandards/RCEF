@@ -55,12 +55,29 @@ Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf_character_tools
 
 `check.py` runs these steps in order and stops at the first failure.
 
-1. **Locked msf-character-tools.** It reads [tooling.lock.json](../evidence/tooling.lock.json), which is lock format 2. The lock records the msf-character-tools commit and version, and one entry per wheel tag. Each entry has the wheel's SHA-256 (when known) and a SHA-256 for every file in the installed `msf_character_tools` package. `check.py` refuses unless the installed package was built from the locked commit, its wheel tag has an entry, and every file in the package directory matches both its `RECORD` entry and the lock. It also refuses if `msf_character_tools` would be imported from somewhere other than that installed distribution. The README gives the full rules.
+1. **Locked msf-character-tools.** It checks the installed `msf_character_tools` package against [tooling.lock.json](../evidence/tooling.lock.json). If anything is different, it lists the problems, prints `Refusing to check` and exits 2. [The msf-character-tools lock](#the-msf-character-tools-lock) gives the rules.
 2. **Calibration records.** It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. Any mapping that cites a record (evidence id `calibration.<id>`) must use `piecewise_linear` with exactly the record's frozen knots, and every held-out cell for its input channel must pass. This step does not use msf-character-tools. No mapping in data 0.4.0 cites a record.
-3. **Shared outputs.** It runs `python -B -P -m msf_character_tools check` on the checkout, with an empty bytecode cache, so that the subprocess imports the verified package. With `--write` it regenerates the pack, the CSV, coverage and checksums. Without it, it checks that they have not drifted.
+3. **Shared outputs.** It runs `python -B -P -m msf_character_tools check AUTHORING --pack PATH --csv PATH [--write]` on the checkout, with an empty bytecode cache, so that the subprocess imports the verified package. With `--write` it regenerates the pack, the CSV, coverage and checksums. Without it, it checks that they have not drifted.
 4. **Readable reports.** If step 3 passes, it runs [export_reports.py](../scripts/export_reports.py) with the same write or check choice.
 
-`check.py --update-lock` records the installed msf-character-tools in the lock and exits. It keeps the old lock as `tooling.lock.previous.json` when the commit or version changes.
+### The msf-character-tools lock
+
+The lock is format 2. It records the msf-character-tools commit and version, and one entry per wheel tag. Each entry has the wheel's SHA-256, when known, and a SHA-256 for every file in the installed `msf_character_tools` package, of any type, not only the Python files. The lock's `source` URL is for information only.
+
+One lock serves several Pythons. `check.py` reads the wheel tag of the install from its `WHEEL` file, and checks the install against the entry for that tag.
+
+Before it does anything else, `check.py` checks all of these:
+
+- The installed package was built from the locked commit. `check.py` reads the commit from `msf_character_tools/_build_info.json`. If that file is missing, it reads the commit from the `direct_url.json` of a Git install. If both name a commit and they differ, it refuses.
+- The wheel tag of the install has an entry in the lock.
+- Every file in the package directory, of any type, matches both its `RECORD` entry and the lock. Bytecode caches are ignored.
+- `msf_character_tools` is imported from that installed distribution, and not from somewhere else (for example through `PYTHONPATH`).
+
+`check.py` compares the wheel hash after installation only if the installer recorded it. uv does not record it, so for uv installs `--require-hashes` checks the hash at install time. The commit and the file hashes identify the package, so `check.py` accepts local `file://` installs. Checking never clones or downloads anything.
+
+**Adopt a new release.** Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
+
+**Roll back.** msf-character-tools 0.5.0 is the first release from the public repository, so this checkout has no previous lock yet. To roll back, copy `tooling.lock.previous.json` over `tooling.lock.json`, install msf-character-tools at its commit, and use the `check.py` from the same RCEF commit as that lock.
 
 ### Calibration records and the held-out provenance check
 
@@ -322,7 +339,7 @@ msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases 
 | [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: the 21 canonical projections against the authored relationships. A dash means no authored mapping. Unresolved relationships stay labeled. |
 | [reports/SHA256SUMS](../reports/SHA256SUMS) | Hashes of the six report files, sorted by file name. It does not list itself. The Markdown reports record the SHA-256 of the pack they read. |
 
-JSON uses sorted object keys, indent=2, UTF-8 with a final LF, finite numbers and normalized negative zero. Arrays keep the authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All shared output bytes are rendered before any file is written. Each file is replaced atomically on its own. The four generated files and the seven report files are not replaced in one transaction, so after a failure, review all outputs and run the check again.
+JSON uses sorted object keys, indent=2, UTF-8 with a final LF, finite numbers and normalized negative zero. Arrays keep the authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All shared output bytes are rendered and validated before any file is written. Each file is replaced atomically on its own. The four generated files and the seven report files are not replaced in one transaction, so after a failure, review all outputs and run the check again.
 
 ## 8. Edit, regenerate, check and qualify
 
@@ -340,6 +357,8 @@ python3 -B check.py --write
 python3 -B check.py
 python3 -B -m unittest discover -s tests
 ```
+
+What the tests show: the 21 provider identities and 63 scalar comparisons keep the declared storage and the provider-specific assumptions. The FB2 direction tests move one direction at a time. Raw pupil fields and native defaults do not show a physical measurement, a calibrated neutral or cross-provider equivalence. Provider frame context, devices, capture and physiology are separate gates.
 
 Generating matching bytes does not run the tests. On these repositories, `scripts/ci_local.sh` runs `check.py` and the tests on the local Python 3.11 and 3.12 venvs and prints a summary for the pull request.
 
