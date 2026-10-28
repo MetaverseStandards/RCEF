@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""references.md and the README source table agree with evidence/sources.toml."""
+"""references.md agrees with evidence/sources.toml."""
 import importlib.util
 from pathlib import Path
 import tomllib

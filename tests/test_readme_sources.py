@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""The README's expression-set and mapping tables agree with the data they describe."""
+"""The README's mapping table and the expression-set table in docs/expression-sets.md agree with the data."""
 import json
 from pathlib import Path
 import re
@@ -21,7 +21,9 @@ class ReadmeSources(unittest.TestCase):
     def setUpClass(cls):
         readme = (ROOT / 'README.md').read_text(encoding='utf-8')
         cls.mappings = table_rows(readme, '### Mappings', '### Expression sets')
-        cls.sets = table_rows(readme, '### Expression sets', '## Generate and check')
+        # docs/expression-sets.md links up one level; read its links as paths from the checkout root.
+        sets_doc = (ROOT / 'docs/expression-sets.md').read_text(encoding='utf-8').replace('](../', '](')
+        cls.sets = table_rows(sets_doc, '## Where each set comes from', '## Signal counts')
         cls.evidence = {r['id']: r for r in
                         tomllib.loads((ROOT / 'evidence/sources.toml').read_text(encoding='utf-8'))['evidence']}
         cls.files = {p.name: tomllib.loads(p.read_text(encoding='utf-8')) for p in (ROOT / 'profiles').glob('*.toml')}
