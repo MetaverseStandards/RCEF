@@ -38,6 +38,10 @@ exclusive, and the data now builds this in.
   public.
 - The GitHub workflow downloads the public release wheel with `curl`. It
   needs no token. It still installs the wheel by hash.
+- The licence and notice files name the Metaverse Standards Forum as the
+  copyright holder. The licences do not change. Attribution and the
+  `authorship` fields still name RCEF contributors (2026), so the generated
+  files do not change.
 - `evidence/tooling.lock.previous.json` is removed. The earlier locks name
   commits that are not in the public history, and file hashes that a public
   install cannot match. The next lock update writes the file again.
