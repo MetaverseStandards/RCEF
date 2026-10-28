@@ -106,8 +106,15 @@ def limitations(unfitted: dict) -> list[str]:
 def freeze(args) -> int:
     """Fit each channel on the training scores and write the record's frozen part, with no cells, and its ledger line."""
     require_committed(k.ROOT / 'tools/calibration', k.ROOT / 'tools/render')
-    if RECORD.exists():
-        raise SystemExit(f'{RECORD} exists; a new fit needs a new version and a reason in the ledger')
+    entries, problems = check.read_ledger(LEDGER)
+    if problems:
+        raise SystemExit('\n'.join(problems))
+    version = 1 + max((v for (i, v) in entries if i == RECORD_ID), default=0)
+    reason = ' '.join((args.reason or '').split())
+    if version > 1 and len(reason.split()) < 3:
+        raise SystemExit(f'{RECORD_ID} is in the ledger already; give --reason (at least three words) for v{version}')
+    if version == 1 and RECORD.exists():
+        raise SystemExit(f'{RECORD} exists but the ledger has no line for it')
     training = json.loads((args.out / 'training.json').read_text(encoding='utf-8'))
     sweeps = k.by_channel(training['results'], k.CHANNELS)
     fits = {c: k.fit_channel(sweeps[c]) for c in k.CHANNELS}
@@ -119,7 +126,8 @@ def freeze(args) -> int:
     lines = ['# SPDX-License-Identifier: CC-BY-SA-4.0',
              '# Written by tools/calibration/k4_mediapipe.py. Everything but cells was frozen, and its hash written to',
              '# calibration/FREEZES, before the held-out run.',
-             'format = "rcef.calibration/1"', f'id = {q(RECORD_ID)}', 'version = 1', 'status = "calibrated_software"',
+             'format = "rcef.calibration/1"', f'id = {q(RECORD_ID)}', f'version = {version}',
+             'status = "calibrated_software"',
              f'scope = {q(check.SCOPE)}',
              'scan_origin = "ICT-FaceKit\'s identity modes are principal components of light-stage scans of real '
              'people; they are used here only as geometry, through 10 modes drawn from a standard normal."',
@@ -147,7 +155,8 @@ def freeze(args) -> int:
     frozen = check.frozen_sha256(check.load_record(RECORD))
     RECORD.write_text(RECORD.read_text(encoding='utf-8').replace('"PENDING"', q(frozen)), encoding='utf-8')
     with LEDGER.open('a', encoding='utf-8') as ledger:
-        ledger.write(f'{RECORD_ID} v1 {frozen} {datetime.date.today().isoformat()}\n')
+        ledger.write(f'{RECORD_ID} v{version} {frozen} {datetime.date.today().isoformat()}' +
+                     (f' {reason}' if version > 1 else '') + '\n')
     problems = check.calibration_problems(RECORD.parent, [])
     if problems:
         raise SystemExit('\n'.join(problems))

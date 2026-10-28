@@ -8,6 +8,7 @@ built tools/render/meshrender. RCEF's own code and tests do not use it.
     python tools/calibration/k4_mediapipe.py fetch
     python tools/calibration/k4_mediapipe.py train --renderer PATH     # training renders and scores
     python tools/calibration/k4_mediapipe.py freeze --renderer PATH    # fit; write the record's frozen part
+    (to freeze again as a new version, add --reason TEXT; the ledger needs one after v1)
     (commit the record and its calibration/FREEZES line)
     python tools/calibration/k4_mediapipe.py heldout --renderer PATH   # held-out renders and scores
     python tools/calibration/k4_mediapipe.py evaluate                  # cells into the record; rules for passes
@@ -356,6 +357,7 @@ def main(argv=None) -> int:
     parser.add_argument('--rig-cache', type=Path, default=cache_dir('rcef-face-rigs'), help='Rocketbox cache')
     parser.add_argument('--renderer', type=Path, help='a meshrender binary built from tools/render')
     parser.add_argument('--out', type=Path, default=cache_dir('rcef-k4'), help='renders and scores (not committed)')
+    parser.add_argument('--reason', help='freeze: why the record is frozen again, for a version after v1')
     args = parser.parse_args(argv)
     if args.command == 'fetch':
         fetch(args.cache)

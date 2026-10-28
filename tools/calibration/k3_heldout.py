@@ -1,21 +1,21 @@
 # SPDX-License-Identifier: MIT
 """Run the rig-gain record's held-out evaluation after the provenance checks in tools/calibration/provenance.py.
 
-examples/rig_gains.py was frozen (record rig-gains.ict-rocketbox-female, code_commit ac0b953) before this check
-existed. Later commits changed check.py and tools/render. So the run uses a separate checkout of the record's
-freeze commit, given with --checkout. This tool runs from a current checkout and first checks that:
+The run uses the checkout given with --checkout. It must be a checkout of the record's freeze commit or of a later
+commit that does not change the code the record names. This tool first checks that:
 
 - the record and its ledger line are committed in that checkout;
-- the msf-tools installed for this interpreter passes that checkout's check.py lock check;
+- the msf-character-tools installed for this interpreter passes that checkout's check.py lock check;
 - every cached input has the SHA-256 the record pins;
 - every repository file the run imports (found from the loaded modules), the landmarks and the renderer source are
   exactly as at code_commit, and the renderer binary is the one the record names.
 
-It then runs rig_gains.py's evaluation in this process. It reports whether the cells equal those published in this
-checkout's calibration/rig-gains.ict-rocketbox-female.cal (the frozen hash must be the same).
+It then runs rig_gains.py's evaluation in this process. If this checkout's
+calibration/rig-gains.ict-rocketbox-female.cal has cells and the same frozen hash, it reports whether the new cells
+are equal to them.
 
 Usage:
-  git worktree add /tmp/k3-freeze 91f57f7
+  git worktree add /tmp/k3-freeze FREEZE_COMMIT
   python tools/calibration/k3_heldout.py --checkout /tmp/k3-freeze --ict-cache DIR --rig-cache DIR \\
     --renderer BIN --work DIR --out heldout.json
 """
@@ -91,7 +91,7 @@ def main(argv=None) -> int:
     check = load_module('rcef_check_frozen', checkout / 'check.py')
     problems = check.verify_environment()
     if problems:
-        raise SystemExit('the installed msf-tools is not the locked build:\n' + '\n'.join(problems))
+        raise SystemExit('the installed msf-character-tools is not the locked build:\n' + '\n'.join(problems))
     record = check.load_record(record_file)
     entries, problems = check.read_ledger(checkout / 'calibration/FREEZES')
     if problems or (problem := check.freeze_problem(record, entries)):
