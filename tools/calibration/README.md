@@ -6,12 +6,11 @@ These optional tools make calibration records (see [calibration/README.md](../..
 
 This tool renders ICT-FaceKit with one ARKit coefficient moving at a time and scores each render with MediaPipe's Face Landmarker. It then fits a curve from each MediaPipe score back to the ICT weight. The licence check for the model is in [docs/calibration/mediapipe-licence.md](../../docs/calibration/mediapipe-licence.md).
 
-The tool needs Python 3.11+, numpy, mediapipe, msf-tools at the locked commit with msf-tools-ufbx (for Rocketbox), and a renderer built from [tools/render](../render/README.md). With uv:
+The tool needs Python 3.11+, numpy, mediapipe, the locked msf-tools release wheel (it reads the Rocketbox FBX rigs itself), and a renderer built from [tools/render](../render/README.md). `msf-tools.txt` is the hashed requirement from [Generate and check](../../README.md#generate-and-check). It is a separate install because `--require-hashes` needs a hash for every package it installs. With uv:
 
 ```sh
-uv venv k4-venv && uv pip install --python k4-venv/bin/python mediapipe numpy \
-  "msf-tools @ git+https://github.com/Kjakubzak/msf-tools@COMMIT" \
-  "msf-tools-ufbx @ git+https://github.com/Kjakubzak/msf-tools@COMMIT#subdirectory=native/ufbx"
+uv venv k4-venv && uv pip install --python k4-venv/bin/python mediapipe numpy
+uv pip install --python k4-venv/bin/python --require-hashes -r "$DIR/msf-tools.txt"
 swiftc -O -o meshrender tools/render/meshrender.swift
 ```
 
@@ -52,7 +51,7 @@ python tools/calibration/k3_heldout.py --checkout /tmp/k3-freeze --ict-cache DIR
 To reproduce the published cells, three things must match the record, not the current checkout:
 
 - **Code:** a checkout of the freeze commit `91f57f7`. Its `examples/`, `check.py` and `tools/render` are as at `code_commit` `ac0b953`.
-- **msf-tools:** `746a5fe` (0.2.0.dev0), with the lock at that commit, and `msf-tools-ufbx` from the same commit. RCEF's lock has since moved to 0.3.0, so use a separate venv. The `check.py` in the freeze checkout refuses any other build.
+- **msf-tools:** `746a5fe` (0.2.0.dev0), with the lock at that commit, and `msf-tools-ufbx` from the same commit. RCEF's lock has since moved to 0.4.0, so use a separate venv. The `check.py` in the freeze checkout refuses any other build.
 - **Renderer:** the pinned binary (`binary_sha256` `a7cd2229…` in the record), or a build of source `e4bd7391…` (`git show 91f57f7:tools/render/meshrender.swift`). A rebuild may have a different binary hash, and `k3_heldout.py` refuses a binary whose hash differs. Images also depend on the OS and GPU (record: macOS 27.0.1 arm64, Apple M4 Max). `tools/render/meshrender.swift` on main has changed since the freeze.
 
 The published cells were reproduced exactly in this way, with all three.

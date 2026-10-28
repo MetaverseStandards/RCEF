@@ -16,15 +16,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - name: Install msf-tools at the locked commit
+      - name: Install the locked msf-tools release wheel by hash
         env:
-          MSF_TOOLS_TOKEN: ${{ secrets.MSF_TOOLS_TOKEN }}
+          GH_TOKEN: ${{ secrets.MSF_TOOLS_TOKEN }}
         run: |
-          # The token stays in git's URL rewrite, so it is never written into the
-          # installed package's direct_url.json.
-          git config --global url."https://x-access-token:${MSF_TOOLS_TOKEN}@github.com/".insteadOf "https://github.com/"
-          commit=$(python -c "import json; print(json.load(open('evidence/tooling.lock.json'))['git_commit'])")
-          python -m pip install "git+https://github.com/Kjakubzak/msf-tools@${commit}"
-          git config --global --unset-all url."https://x-access-token:${MSF_TOOLS_TOKEN}@github.com/".insteadOf
+          python - <<'EOF' > "$RUNNER_TEMP/tag.txt"
+          import json, platform, sys
+          lock = json.load(open('evidence/tooling.lock.json'))
+          abi = 'cp311-cp311' if sys.version_info[:2] == (3, 11) else 'cp312-abi3'
+          tag = f'{abi}-manylinux_2_28_{platform.machine()}'
+          print(tag, lock['package_version'], lock['wheels'][tag]['sha256'])
+          EOF
+          read -r tag version sha < "$RUNNER_TEMP/tag.txt"
+          wheel="msf_tools-${version}-${tag}.whl"
+          gh release download "v${version}" -R Kjakubzak/msf-tools -p "$wheel" -D "$RUNNER_TEMP"
+          echo "msf-tools @ file://${RUNNER_TEMP}/${wheel} --hash=sha256:${sha}" > "$RUNNER_TEMP/msf-tools.txt"
+          python -m pip install --require-hashes -r "$RUNNER_TEMP/msf-tools.txt"
       - run: python -B check.py
       - run: python -B -m unittest discover -s tests -v

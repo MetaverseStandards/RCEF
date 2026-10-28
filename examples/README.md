@@ -11,15 +11,15 @@ From the RCEF checkout, with Python 3.11 or newer:
 ```sh
 python3 -m venv .venv
 . .venv/bin/activate
-COMMIT=$(python -c "import json; print(json.load(open('evidence/tooling.lock.json'))['git_commit'])")
-python -m pip install "git+https://github.com/Kjakubzak/msf-tools@$COMMIT"
-# or, from a local checkout: python -m pip install "git+file://$(cd ../msf-tools && pwd -P)@$COMMIT"
-# for the Rocketbox (FBX) rigs, also msf-tools' FBX reader from the same checkout:
-# python -m pip install ../msf-tools/native/ufbx
+```
+
+Install the locked msf-tools release wheel into it by hash, as [Generate and check](../README.md#generate-and-check) shows. With this venv's pip, the last step is `python -m pip install --require-hashes -r "$DIR/msf-tools.txt"`. Then check the install:
+
+```sh
 python -B check.py
 ```
 
-`check.py` refuses to run unless the installed msf-tools is exactly the locked commit, so a passing check also confirms the install. The examples need nothing else. They use only the Python standard library and msf-tools. For the Rocketbox rigs they also use its FBX extra, `msf-tools-ufbx`, which needs a C compiler.
+`check.py` refuses to run unless the installed msf-tools is exactly the locked release wheel, so a passing check also confirms the install. The examples need nothing else. They use only the Python standard library and msf-tools, which reads the Rocketbox FBX rigs itself.
 
 ## 2. Translate FB2 frames to ARKit
 

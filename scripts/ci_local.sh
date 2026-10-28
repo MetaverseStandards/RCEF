@@ -5,7 +5,7 @@
 # available on these repositories, so this is the CI run.
 #
 # The venvs default to $MSF/_tools/rcef-venv3.11 and rcef-venv3.12; each must
-# have msf-tools installed at the commit in evidence/tooling.lock.json.
+# have the msf-tools release wheel recorded in evidence/tooling.lock.json installed by hash.
 set -u
 MSF=${MSF:-$HOME/.local/share/msf}
 ROOT=$(cd "$(dirname "$0")/.." && pwd -P)

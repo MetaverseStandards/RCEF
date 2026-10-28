@@ -575,7 +575,11 @@ def main() -> int:
                              'for --require-hashes installs')
     args = parser.parse_args()
     if args.update_lock:
-        write_lock(metadata.distribution(DISTRIBUTION), wheel=args.wheel)
+        try:
+            write_lock(metadata.distribution(DISTRIBUTION), wheel=args.wheel)
+        except ValueError as error:
+            print(f'Refusing to update the lock: {error}', file=sys.stderr)
+            return 2
         return 0
     problems = verify_environment()
     if problems:
@@ -583,9 +587,10 @@ def main() -> int:
               f'{LOCK.relative_to(ROOT)}.', file=sys.stderr)
         for problem in problems:
             print(f'  - {problem}', file=sys.stderr)
-        commit = json.loads(LOCK.read_text(encoding='utf-8'))['git_commit']
-        print(f'Install {DISTRIBUTION} at commit {commit}. To adopt a reviewed new version '
-              'instead, install it and run check.py --update-lock.', file=sys.stderr)
+        lock = json.loads(LOCK.read_text(encoding='utf-8'))
+        print(f"Install the {DISTRIBUTION} {lock['package_version']} release wheel for your platform by its locked hash "
+              f"(commit {lock['git_commit']}; see README). To adopt a reviewed new version instead, install it "
+              'and run check.py --update-lock.', file=sys.stderr)
         return 2
     problems = calibration_problems(CALIBRATION, pack_rules(ROOT))
     if problems:

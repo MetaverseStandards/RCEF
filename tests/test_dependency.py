@@ -286,7 +286,11 @@ class LockVerification(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_check_refuses_tampered_package_before_any_work(self):
-        result, ran = self.run_check(self.site)
+        # A version and tag the real lock has, so check.py gets as far as comparing files.
+        lock = json.loads(check.LOCK.read_text())
+        site = fake_site(self.temp / 'locked-tag', LOCKED_COMMIT, version=lock['package_version'],
+                         tag=next(iter(lock['wheels'])))
+        result, ran = self.run_check(site)
         self.assertNotEqual(result.returncode, 0)
         self.assertFalse(ran, 'msf-tools ran despite the file mismatch')
         self.assertIn('msf_tools/__init__.py', result.stderr)

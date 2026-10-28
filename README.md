@@ -81,12 +81,28 @@ RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.t
 
 ## Generate and check
 
-You need Python 3.11+ and the `msf-tools` package, which is maintained separately. Install msf-tools at the commit recorded as `git_commit` in [tooling.lock.json](evidence/tooling.lock.json), from GitHub or from a local checkout, into the Python you use for RCEF:
+You need Python 3.11 or newer and msf-tools, which is maintained separately. RCEF locks msf-tools 0.4.0 in [tooling.lock.json](evidence/tooling.lock.json). The lock has one entry per release wheel, keyed by the wheel's tag, with the wheel's SHA-256. Pick the tag for your platform and Python:
+
+| Platform | Python 3.11 | Python 3.12 and later |
+|---|---|---|
+| macOS 11 or later, Apple silicon | `cp311-cp311-macosx_11_0_arm64` | `cp312-abi3-macosx_11_0_arm64` |
+| Linux x86_64 (glibc 2.28 or later) | `cp311-cp311-manylinux_2_28_x86_64` | `cp312-abi3-manylinux_2_28_x86_64` |
+| Linux aarch64 (glibc 2.28 or later) | `cp311-cp311-manylinux_2_28_aarch64` | `cp312-abi3-manylinux_2_28_aarch64` |
+
+Download that wheel from the msf-tools v0.4.0 release, then install it with the hash from the lock:
 
 ```sh
-python3 -m pip install "git+https://github.com/Kjakubzak/msf-tools@COMMIT"
-# or: python3 -m pip install "git+file://$(cd ../msf-tools && pwd -P)@COMMIT"
+TAG=cp312-abi3-macosx_11_0_arm64
+DIR=$(mktemp -d)
+gh release download v0.4.0 -R Kjakubzak/msf-tools -p "msf_tools-0.4.0-$TAG.whl" -D "$DIR"
+SHA=$(python3 -c 'import json, sys; print(json.load(open("evidence/tooling.lock.json"))["wheels"][sys.argv[1]]["sha256"])' "$TAG")
+echo "msf-tools @ file://$DIR/msf_tools-0.4.0-$TAG.whl --hash=sha256:$SHA" > "$DIR/msf-tools.txt"
+uv pip install --python PATH/TO/python --require-hashes -r "$DIR/msf-tools.txt"
 ```
+
+The msf-tools repository is private for now, so `gh` must be logged in to an account that can read it. Do not paste a token into a command or a file in the checkout. Without uv, `python3 -m pip install --require-hashes -r "$DIR/msf-tools.txt"` does the same.
+
+You can build the wheels yourself with msf-tools' `scripts/build_release.sh` at the locked commit; its `docs/building.md` lists the pinned inputs that give the same bytes. `check.py` refuses any other build: every installed file must match the lock.
 
 Then regenerate the outputs:
 
@@ -104,22 +120,6 @@ python3 -B -m unittest discover -s tests
 Run these commands from the RCEF checkout.
 
 The 21 provider identities and 63 scalar comparisons keep the declared storage and the provider-specific assumptions. The FB2 direction tests move one direction at a time. Raw pupil fields and native defaults do not show a physical measurement, a calibrated neutral or cross-provider equivalence. Provider frame context, devices, capture and physiology are separate gates.
-
-With [uv](https://docs.astral.sh/uv/) (environments made by `uv venv` have no pip), use `uv pip install --python PATH/TO/python ...` with the same requirement.
-
-To install a built msf-tools wheel instead, pin it by hash. This works only for msf-tools builds that include `msf_tools/_build_info.json`, which records the source commit. A wheel install has no Git record, and `check.py` refuses an install if it cannot find the commit. msf-tools 0.3.0 and later write this file. The lock's `wheels.TAG.sha256` is the hash to use for the wheel with that tag (`py3-none-any`, or later `cp311-cp311-...` and `cp312-abi3-...`). A wheel stores file times. To get the same bytes, build it from a clean clone at the locked commit with `SOURCE_DATE_EPOCH` set to that commit's time. A different setuptools can still change the bytes. The lock's per-file hashes check the installed package in both cases.
-
-```sh
-git clone https://github.com/Kjakubzak/msf-tools && cd msf-tools && git checkout COMMIT
-SOURCE_DATE_EPOCH=$(git log -1 --format=%ct) uv build --wheel
-```
-
-Then install it:
-
-```sh
-echo "msf-tools @ file:///path/to/msf_tools-VERSION-TAG.whl --hash=sha256:SHA256" > msf-tools.txt
-uv pip install --python PATH/TO/python --require-hashes -r msf-tools.txt
-```
 
 `check.py` uses the installed package. The lock (format 2) records msf-tools' commit and version. It also has one entry per wheel tag. Each entry has that wheel's SHA-256, when known, and a SHA-256 for every installed file in the `msf_tools` package, not only the Python files. One lock serves several Pythons: `check.py` checks each install against the entry for its own tag, which it reads from the install's `WHEEL` file. Before it does anything else, `check.py` verifies that the installed package was built from the locked commit. It reads the commit from `msf_tools/_build_info.json`, or, if that file is missing, from a Git install's `direct_url.json`. If both name a commit and they differ, it refuses. It also verifies that the install's tag has an entry, and that every file in the package directory, of any type, matches both its `RECORD` entry and the lock. Bytecode caches are ignored. If anything differs, it lists the problems and exits non-zero. It compares the wheel hash after installation only if the installer recorded it. uv does not record it, so for uv installs `--require-hashes` checks the hash at install time. The lock's `source` URL is for information only. The commit and file hashes identify the package, so `check.py` accepts local `file://` installs. To adopt a reviewed new msf-tools version, install it and run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the sha256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or version changes, the old lock is kept as [tooling.lock.previous.json](evidence/tooling.lock.previous.json). To roll back, copy that file over `tooling.lock.json`, install msf-tools at its commit, and use the `check.py` from the same RCEF commit as that lock. The wrapper calls `python3 -B -m msf_tools check AUTHORING --pack PATH --csv PATH [--write]`. Checking never clones or downloads anything.
 
