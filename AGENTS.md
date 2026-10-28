@@ -87,7 +87,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | `data/` | RCEF's own sets: `rcef.canonical` (21 signals) and `rcef.intermediate` (4). |
 | `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. |
 | `mappings/` | Maps. Each map is a group of one-way mappings. |
-| `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` and `tooling.lock.previous.json` (the msf-character-tools lock), `input-contracts/`. |
+| `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` (the msf-character-tools lock), `input-contracts/`. |
 | `calibration/` | `*.cal` software-only calibration records and the `FREEZES` ledger. |
 | `generated/`, `reports/` | Outputs of `check.py --write`. Do not edit them by hand. |
 | `scripts/` | Export, comparison, source-check and local CI scripts. |
