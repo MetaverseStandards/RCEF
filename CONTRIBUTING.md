@@ -2,6 +2,8 @@
 
 Original documentation: CC-BY-SA-4.0.
 
+Coding agents: read [AGENTS.md](AGENTS.md) first. It lists the commands, the rules that must not break and the known traps.
+
 Edit the TOML authoring files, and run all commands from the RCEF checkout. Install the msf-tools release wheel locked in [tooling.lock.json](evidence/tooling.lock.json) into the Python you use for RCEF, by hash, as [Generate and check](README.md#generate-and-check) in the README shows.
 
 Then regenerate the outputs:
