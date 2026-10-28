@@ -1,8 +1,8 @@
-# RCEF: Reference Canonical Expression Framework
+# Reference Canonical Expression Framework (RCEF)
 
 ## Purpose
 
-Face trackers and avatar systems each publish their own set of expression signals. ARKit, OpenXR FB2, MediaPipe, VRCFaceTracking, VRM, Godot and Roblox give these signals different names. They also use different scales and calibrations. So a value from one system cannot simply be copied into another system.
+The Reference Canonical Expression Framework (RCEF) is about face expression signals. Face trackers and avatar systems each publish their own set of these signals. ARKit, OpenXR FB2, MediaPipe, VRCFaceTracking, VRM, Godot and Roblox give these signals different names. They also use different scales and calibrations. So a value from one system cannot simply be copied into another system.
 
 RCEF records public expression interfaces, their calibration limits, and explicit one-way scalar mappings between them:
 
