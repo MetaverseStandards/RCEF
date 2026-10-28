@@ -88,11 +88,11 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | `calibration/` | `*.cal` software-only calibration records and the `FREEZES` ledger. |
 | `generated/`, `reports/` | Outputs of `check.py --write`. Do not edit them by hand. |
 | `scripts/` | Export, comparison, source-check and local CI scripts. |
-| `tools/calibration/` | Optional tools that make calibration records. They need extra packages; `check.py` and the tests do not run them. |
+| `tools/calibration/` | Optional tools that make calibration records. They need extra packages. `check.py` and the tests never run them; the tests check only the curve fitting and cell scoring. |
 | `tools/render/` | `meshrender.swift`, the macOS offscreen renderer for calibration fits. |
 | `examples/` | End-to-end translations and face pipelines; inputs in `examples/data/`. |
 | `docs/` | Architecture guide and visuals, `toml-index.csv`, `godot_comparison.md`, calibration notes. |
-| `tests/` | The `unittest` suite. `tests/fixtures/` holds expectations derived from sources. |
+| `tests/` | The `unittest` suite and its inputs in `tests/fixtures/`. |
 
 ### Commands
 
