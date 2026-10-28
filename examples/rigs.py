@@ -2,7 +2,7 @@
 """The face rigs the examples drive: two Rocketbox avatars, ICT-FaceKit and a VRM sample.
 
 Every rig is fetched into a cache outside the repository, checked against a
-pinned SHA-256 and loaded with msf_tools.inspect_asset; none is committed.
+pinned SHA-256 and loaded with msf_character_tools.inspect_asset; none is committed.
 
 - Microsoft Rocketbox (MIT): Female_Adult_01 and Male_Adult_01 "facial" FBX
   files, with Apple's 52 ARKit shapes (AK_*), the 15 Oculus visemes (AA_VI_*)
@@ -21,7 +21,7 @@ import re
 import struct
 from urllib.request import Request, urlopen
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 import ict_facekit
 

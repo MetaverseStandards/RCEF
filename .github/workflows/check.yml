@@ -16,9 +16,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - name: Install the locked msf-tools release wheel by hash
-        env:
-          GH_TOKEN: ${{ secrets.MSF_TOOLS_TOKEN }}
+      - name: Install the locked msf-character-tools release wheel by hash
         run: |
           python - <<'EOF' > "$RUNNER_TEMP/tag.txt"
           import json, platform, sys
@@ -28,9 +26,10 @@ jobs:
           print(tag, lock['package_version'], lock['wheels'][tag]['sha256'])
           EOF
           read -r tag version sha < "$RUNNER_TEMP/tag.txt"
-          wheel="msf_tools-${version}-${tag}.whl"
-          gh release download "v${version}" -R Kjakubzak/msf-tools -p "$wheel" -D "$RUNNER_TEMP"
-          echo "msf-tools @ file://${RUNNER_TEMP}/${wheel} --hash=sha256:${sha}" > "$RUNNER_TEMP/msf-tools.txt"
-          python -m pip install --require-hashes -r "$RUNNER_TEMP/msf-tools.txt"
+          wheel="msf_character_tools-${version}-${tag}.whl"
+          curl -fsSL -o "$RUNNER_TEMP/$wheel" \
+            "https://github.com/MetaverseStandards/msf-character-tools/releases/download/v${version}/${wheel}"
+          echo "msf-character-tools @ file://${RUNNER_TEMP}/${wheel} --hash=sha256:${sha}" > "$RUNNER_TEMP/msf-character-tools.txt"
+          python -m pip install --require-hashes -r "$RUNNER_TEMP/msf-character-tools.txt"
       - run: python -B check.py
       - run: python -B -m unittest discover -s tests -v

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Check the installed msf-tools and the calibration records, then the shared pack and its readable RCEF reports."""
+"""Check the installed msf-character-tools and the calibration records, then the shared pack and its readable RCEF reports."""
 from __future__ import annotations
 import argparse
 import base64
@@ -24,9 +24,9 @@ import zipfile
 ROOT = Path(__file__).resolve().parent
 LOCK = ROOT / 'evidence' / 'tooling.lock.json'
 PREVIOUS_LOCK_NAME = 'tooling.lock.previous.json'
-DISTRIBUTION = 'msf-tools'
-PACKAGE = 'msf_tools'
-SOURCE = 'https://github.com/Kjakubzak/msf-tools'
+DISTRIBUTION = 'msf-character-tools'
+PACKAGE = 'msf_character_tools'
+SOURCE = 'https://github.com/MetaverseStandards/msf-character-tools'
 
 
 LOCK_VERSION = 2
@@ -199,8 +199,8 @@ def verify_installed(lock: dict, dist: metadata.Distribution) -> list[str]:
 
 
 CALIBRATION = ROOT / 'calibration'
-# Records are TOML text, but not named *.toml: msf-tools reads every .toml file
-# in the checkout as pack authoring.
+# Records are TOML text, but not named *.toml: msf-character-tools reads every
+# .toml file in the checkout as pack authoring.
 RECORD_SUFFIX = '.cal'
 RECORD_FORMAT = 'rcef.calibration/1'
 SEED_RULE = 'rcef.calibration.seeds/1'
@@ -485,7 +485,7 @@ def cell_passes(record: dict, cell: dict) -> bool:
 
 
 def pack_rules(root: Path = ROOT) -> list[dict]:
-    """Every mapping rule in the checkout's authoring files, found the way msf-tools finds them."""
+    """Every mapping rule in the checkout's authoring files, found the way msf-character-tools finds them."""
     rules = []
     for directory, dirs, names in os.walk(root):
         dirs[:] = sorted(d for d in dirs if not d.startswith('.') and d != 'generated')
@@ -500,8 +500,8 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
     """Invalid calibration records, and rules whose knots are not exactly their record's frozen knots."""
     problems, valid, invalid = [], {}, set()
     paths = sorted(records.iterdir()) if records.is_dir() else []
-    problems += [f'{p.name}: calibration records are named *{RECORD_SUFFIX}; msf-tools would read a .toml file '
-                 'as pack authoring' for p in paths if p.suffix == '.toml']
+    problems += [f'{p.name}: calibration records are named *{RECORD_SUFFIX}; msf-character-tools would read a '
+                 '.toml file as pack authoring' for p in paths if p.suffix == '.toml']
     ledger, found = read_ledger(records / LEDGER)
     problems += found
     for path in (p for p in paths if p.suffix == RECORD_SUFFIX):
@@ -550,7 +550,7 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
 
 
 def verify_environment() -> list[str]:
-    """Check that the msf_tools this interpreter imports is the locked distribution."""
+    """Check that the msf_character_tools this interpreter imports is the locked distribution."""
     try:
         dist = metadata.distribution(DISTRIBUTION)
     except metadata.PackageNotFoundError:
@@ -599,8 +599,9 @@ def main() -> int:
             print(f'  - {problem}', file=sys.stderr)
         return 1
     # -P keeps the caller's working directory off the import path, so the
-    # subprocess imports the msf_tools verified above. An empty bytecode cache
-    # makes it run the verified source rather than any cached .pyc files.
+    # subprocess imports the msf_character_tools verified above. An empty
+    # bytecode cache makes it run the verified source rather than any cached
+    # .pyc files.
     with tempfile.TemporaryDirectory(prefix='rcef-pycache-') as cache:
         command = [sys.executable, '-B', '-P', '-X', f'pycache_prefix={cache}', '-m', PACKAGE,
                    'check', str(ROOT), '--pack', str(ROOT / 'generated' / 'rcef.pack.json'),

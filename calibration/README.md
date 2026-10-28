@@ -15,7 +15,7 @@ Records are `calibrated_software`. They are fitted to renders of example rigs, w
 
 ## Files
 
-- `<id>.cal`: one record per fit. The content is TOML, but the file is not named `.toml`, because msf-tools reads every `.toml` file in the checkout as pack authoring. The record's `id` must be the file name without `.cal`. It uses only lowercase letters, digits, `.`, `_` and `-`.
+- `<id>.cal`: one record per fit. The content is TOML, but the file is not named `.toml`, because msf-character-tools reads every `.toml` file in the checkout as pack authoring. The record's `id` must be the file name without `.cal`. It uses only lowercase letters, digits, `.`, `_` and `-`.
 - `FREEZES`: the freeze ledger (below).
 
 ## Fields
@@ -46,7 +46,7 @@ Every field is required, except `scan_origin` (see its row) and `cells`. No othe
 
 All hashes are lowercase hex SHA-256.
 
-**Knots** are `[input, output]` pairs. There must be at least two, all finite, with strictly increasing inputs and monotone outputs: the outputs never rise after falling, or fall after rising. A falling curve is allowed. Between knots the curve is linear, and it is not extrapolated past the end knots. This is the form of the msf-tools `piecewise_linear` operator (operators 1.1). In the pack, the 8 gaze splits in `arkit_gaze.to_fb2` use that operator; none of them cites a calibration record.
+**Knots** are `[input, output]` pairs. There must be at least two, all finite, with strictly increasing inputs and monotone outputs: the outputs never rise after falling, or fall after rising. A falling curve is allowed. Between knots the curve is linear, and it is not extrapolated past the end knots. This is the form of the msf-character-tools `piecewise_linear` operator (operators 1.1). In the pack, the 8 gaze splits in `arkit_gaze.to_fb2` use that operator; none of them cites a calibration record.
 
 There is one **cell** per channel, side, stimulus and identity. A cell has `channel` (one of `channels`), `side`, `stimulus`, `identity`, `conditions`, `failures`, and three error measures. Each error measure is a finite number, at least 0: `median`, `p95` (not below the median) and `neutral` (the error at rest). A cell uses the first `conditions` held-out seeds, so `conditions` is at least `evaluation.min_conditions` and at most `held_out.count`. `failures` counts the conditions where the expected response was not detected at all. It is at most `conditions`.
 
@@ -70,7 +70,7 @@ What this guarantees: the ledger line for a freeze is committed before the resul
 
 ## Mappings that cite a record
 
-A mapping cites a record with the evidence id `calibration.<id>`. Its operator must be `piecewise_linear`. Its `knots` must be exactly equal to the knots of the record's curve with the same input and output. Every cell for its input channel must pass. `check.py` checks this for every mapping in the checkout's authoring files. It does this without msf-tools, after it verifies the installed msf-tools and before it runs msf-tools.
+A mapping cites a record with the evidence id `calibration.<id>`. Its operator must be `piecewise_linear`. Its `knots` must be exactly equal to the knots of the record's curve with the same input and output. Every cell for its input channel must pass. `check.py` checks this for every mapping in the checkout's authoring files. It does this without msf-character-tools, after it verifies the installed msf-character-tools and before it runs msf-character-tools.
 
 ## ICT-FaceKit identities
 

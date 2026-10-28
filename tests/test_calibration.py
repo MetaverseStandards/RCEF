@@ -328,7 +328,7 @@ class Repository(unittest.TestCase):
         self.assertIn('fb2_vrm.blinkLeft', ids)
         self.assertIn('arkit.coefficient.eyeBlinkLeft.identity', ids)
 
-    def test_records_are_not_toml_files_so_msf_tools_does_not_read_them_as_authoring(self):
+    def test_records_are_not_toml_files_so_msf_character_tools_does_not_read_them_as_authoring(self):
         for directory in (ROOT / 'calibration', FIXTURES):
             self.assertEqual([p.name for p in directory.glob('*.toml')], [])
 

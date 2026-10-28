@@ -160,7 +160,7 @@ def heldout(args) -> int:
     require_committed(RECORD, LEDGER)
     problems = check.verify_environment()
     if problems:
-        raise SystemExit('the installed msf-tools is not the locked build:\n' + '\n'.join(problems))
+        raise SystemExit('the installed msf-character-tools is not the locked build:\n' + '\n'.join(problems))
     problems = check.calibration_problems(RECORD.parent, [])
     if problems:
         raise SystemExit('\n'.join(problems))
@@ -234,7 +234,7 @@ def rules_text(record: dict, passing: list[str]) -> str:
                  f"# MediaPipe's {len(k.CHANNELS)} ARKit-named scores pass. {len(knots)} rose enough in training to fit a",
                  '# curve, and none met its bounds on held-out ICT identities or on Rocketbox Male,',
                  '# so no mapping cites the record. The file is TOML, but it is not named .toml,',
-                 '# so msf-tools does not read it.',
+                 '# so msf-character-tools does not read it.',
                  '',
                  '# No channel passed every held-out cell, so there are no rules.', '']
         return '\n'.join(lines)
@@ -242,7 +242,8 @@ def rules_text(record: dict, passing: list[str]) -> str:
     lines = ['# SPDX-License-Identifier: CC-BY-SA-4.0',
              '# These mappings use evidence_status = "calibrated_software", which needs authoring',
              '# schema 1.1. They can move to mappings/mediapipe_arkit.toml once pack.toml uses',
-             '# schema 1.1. The file is TOML, but it is not named .toml, so msf-tools does not read it.',
+             '# schema 1.1. The file is TOML, but it is not named .toml, so msf-character-tools',
+             '# does not read it.',
              '']
     lines += ['[[mappings]]', 'id = "mediapipe.to_arkit"', '']
     for channel in passing:

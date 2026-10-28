@@ -11,7 +11,7 @@ import sys
 import tempfile
 import unittest
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 try:
     import shared_pack
@@ -26,7 +26,7 @@ class Parity(unittest.TestCase):
     def setUpClass(cls):
         cls.document = shared_pack.document()
         cls.pack = shared_pack.pack()
-        # msf-tools rechecks the whole pack on every evaluation. The fixture
+        # msf-character-tools rechecks the whole pack on every evaluation. The fixture
         # maps are evaluated many times, so they use a pack holding only them.
         fixtures = deepcopy(cls.document)
         fixtures['profiles'] = [p for p in fixtures['profiles'] if p['id'] in ('fixture.source', 'fixture.target')]
@@ -135,7 +135,7 @@ class Parity(unittest.TestCase):
                 source = ROOT / name
                 if source.is_dir(): shutil.copytree(source, path / name)
                 else: shutil.copy2(source, path / name)
-            runner = [sys.executable, '-B', '-P', '-m', 'msf_tools', 'check', str(path),
+            runner = [sys.executable, '-B', '-P', '-m', 'msf_character_tools', 'check', str(path),
                       '--pack', str(path / 'generated/rcef.pack.json'),
                       '--csv', str(path / 'generated/rcef_mapping.csv')]
             def run(write=False):

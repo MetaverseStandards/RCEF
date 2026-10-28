@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 import unittest
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 try:
     import shared_pack

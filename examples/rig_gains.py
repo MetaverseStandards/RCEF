@@ -203,7 +203,7 @@ class ICT(Rig):
 
 class Rocketbox(Rig):
     def __init__(self, cache: Path, landmarks: dict):
-        import msf_tools as msf
+        import msf_character_tools as msf
         import rigs
         self.msf, self.rigs = msf, rigs
         self.rig = rigs.load_rocketbox(cache, 'Female')

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 """Measure MediaPipe's blendshape response to untextured renders of ICT-FaceKit, and fit curves back to ARKit weights.
 
-Optional tool: needs numpy, mediapipe, msf-tools (for the Rocketbox rig) and a
+Optional tool: needs numpy, mediapipe, msf-character-tools (for the Rocketbox rig) and a
 built tools/render/meshrender. RCEF's own code and tests do not use it.
 
     python tools/calibration/k4_mediapipe.py fetch
@@ -146,9 +146,9 @@ def load_ict(cache: Path) -> Rig:
 
 
 def load_rocketbox_male(cache: Path) -> Rig:
-    """Rocketbox Male's ARKit shapes as linear deltas, each measured once with msf-tools."""
+    """Rocketbox Male's ARKit shapes as linear deltas, each measured once with msf-character-tools."""
     import numpy as np
-    import msf_tools as msf
+    import msf_character_tools as msf
     import rigs
     rig = rigs.load_rocketbox(cache, 'Male')
 

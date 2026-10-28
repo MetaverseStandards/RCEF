@@ -5,7 +5,7 @@ This guide is for coding agents that use RCEF or change it. It gives the facts t
 
 ## Part 1: Using RCEF
 
-RCEF is an open catalogue of face-expression standards (ARKit, OpenXR FB2, META visemes, MediaPipe, VRCFaceTracking, VRM, Godot, Roblox) and the maps between them. The TOML files are the data. msf-tools is a separate package. It is the engine that checks the data, builds the pack and evaluates the maps. The current data is 0.4.0 (unreleased), checked with msf-tools 0.4.0.
+RCEF is an open catalogue of face-expression standards (ARKit, OpenXR FB2, META visemes, MediaPipe, VRCFaceTracking, VRM, Godot, Roblox) and the maps between them. The TOML files are the data. msf-character-tools is a separate package. It is the engine that checks the data, builds the pack and evaluates the maps. The current data is 0.4.0 (unreleased), checked with msf-character-tools 0.5.0.
 
 ### Outputs
 
@@ -24,11 +24,11 @@ The README's [Mappings](README.md#mappings) table lists each map with its source
 
 ### Translate tracker values
 
-Use the msf-tools public API on the pack. Cross-provider maps are `proposed`, so `compile_mapping` refuses them (`E_APPROXIMATION`) unless you give `allow_approximation=True`. Run this from the RCEF checkout. It prints `0.5`:
+Use the msf-character-tools public API on the pack. Cross-provider maps are `proposed`, so `compile_mapping` refuses them (`E_APPROXIMATION`) unless you give `allow_approximation=True`. Run this from the RCEF checkout. It prints `0.5`:
 
 ```python
 import json
-import msf_tools as msf
+import msf_character_tools as msf
 
 doc = json.load(open('generated/rcef.pack.json', encoding='utf-8'))
 pack = msf.compile_pack(msf.validate_authoring(doc).value).value
@@ -49,7 +49,7 @@ print(out.value.samples[0]['values']['arkit.coefficient.jawOpen'])
 What [examples/rcef_translate.py](examples/rcef_translate.py) does, and why:
 
 - Every input in `required_inputs` must be in the frame, or the frame is refused (`E_MISSING_SAMPLE`).
-- If any channel you give is marked invalid, msf-tools refuses the whole frame (`E_INVALID_SAMPLE`), even a channel that the map does not read. So give each map only its own inputs.
+- If any channel you give is marked invalid, msf-character-tools refuses the whole frame (`E_INVALID_SAMPLE`), even a channel that the map does not read. So give each map only its own inputs.
 - An input's validity is the AND of the provider flags in its signal's `validity` field, for example `isValid AND isEyeFollowingBlendshapesValid` for FB2 gaze.
 - If one frame in a call is refused, the call returns no values for any frame. Each error's `ref` begins with `/samples/<n>`, for example `/samples/1/openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB`. Use it to find the refused frames, then evaluate the rest again.
 - Face and gaze are separate maps: `fb2.to_arkit` with `fb2_gaze.to_arkit`, and `arkit.to_fb2` with `arkit_gaze.to_fb2`.
@@ -87,7 +87,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | `data/` | RCEF's own sets: `rcef.canonical` (21 signals) and `rcef.intermediate` (4). |
 | `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. |
 | `mappings/` | Maps. Each map is a group of one-way mappings. |
-| `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` and `tooling.lock.previous.json` (the msf-tools lock), `input-contracts/`. |
+| `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` and `tooling.lock.previous.json` (the msf-character-tools lock), `input-contracts/`. |
 | `calibration/` | `*.cal` software-only calibration records and the `FREEZES` ledger. |
 | `generated/`, `reports/` | Outputs of `check.py --write`. Do not edit them by hand. |
 | `scripts/` | Export, comparison, source-check and local CI scripts. |
@@ -100,10 +100,10 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 
 ### Commands
 
-Install the locked msf-tools wheel by hash as the README's [Generate and check](README.md#generate-and-check) shows. Run every command from the checkout.
+Install the locked msf-character-tools wheel by hash as the README's [Generate and check](README.md#generate-and-check) shows. Run every command from the checkout.
 
 ```sh
-python3 -B check.py                          # check msf-tools, calibration, outputs; writes nothing
+python3 -B check.py                          # check msf-character-tools, calibration, outputs; writes nothing
 python3 -B check.py --write                  # regenerate generated/ and reports/
 python3 -B -m unittest discover -s tests
 python3 -B scripts/export_reports.py         # reports only; add --write to regenerate
@@ -119,23 +119,23 @@ Without `--write`, each script checks its output and exits non-zero if the outpu
 
 | Rule | What enforces it |
 |---|---|
-| Every provider fact cites a public source in `evidence/sources.toml`. The record needs the items that CONTRIBUTING lists. | msf-tools refuses a reference to a missing evidence id (`E_REFERENCE`). It also refuses a record with no `url`, unless the record is original work with `authorship` and `license` (`E_EVIDENCE`). No offline check reads the digests. Run `scripts/verify_sources.py --cache DIR` (outside the repo) and review the result. |
+| Every provider fact cites a public source in `evidence/sources.toml`. The record needs the items that CONTRIBUTING lists. | msf-character-tools refuses a reference to a missing evidence id (`E_REFERENCE`). It also refuses a record with no `url`, unless the record is original work with `authorship` and `license` (`E_EVIDENCE`). No offline check reads the digests. Run `scripts/verify_sources.py --cache DIR` (outside the repo) and review the result. |
 | Generated files and reports change only through the commands above, in the same commit as the source change. | `check.py` (byte drift), `tests/test_metadata.py`, `tests/test_readable_reports.py`. |
 | The README's Mappings and Expression sets tables, `references.md`, `docs/toml-index.csv` and `docs/godot_comparison.md` agree with the data. You edit the README tables by hand; scripts write the others. | `tests/test_readme_sources.py`, `test_references.py`, `test_toml_index.py`, `test_godot_comparison.py`. The README test reads the text between `### Mappings`, `### Expression sets` and `## Generate and check`. Keep those headings. |
 | Test expectations come from public sources, not from RCEF's mappings. | `scripts/derive_fb2_goldens.py` writes `tests/fixtures/fb2_goldens.json` and `godot_fb2_rules.csv` from cached source bytes, and never reads `mappings/`, `profiles/` or `data/`. Reviewers check that nobody edits them by hand. |
-| Calibration records are frozen. `FREEZES` is append-only. A mapping can cite a record (`calibration.<id>`) only if all three are true: its operator is `piecewise_linear`, its knots equal the frozen knots, and every held-out cell for its channel passed. | `check.py`, before msf-tools runs; `tests/test_calibration.py`. `check.py` checks the ledger: the record must be the latest version, with its hash. Versions go up by one, dates never go back, and a re-freeze needs a reason. `check.py` cannot see Git history. Reviewers check that no line changed and that the ledger line came before the results. See [calibration/README.md](calibration/README.md). |
-| msf-tools is exactly a locked release wheel. | `check.py` exits 2 for any other build; `tests/test_dependency.py`. |
+| Calibration records are frozen. `FREEZES` is append-only. A mapping can cite a record (`calibration.<id>`) only if all three are true: its operator is `piecewise_linear`, its knots equal the frozen knots, and every held-out cell for its channel passed. | `check.py`, before msf-character-tools runs; `tests/test_calibration.py`. `check.py` checks the ledger: the record must be the latest version, with its hash. Versions go up by one, dates never go back, and a re-freeze needs a reason. `check.py` cannot see Git history. Reviewers check that no line changed and that the ledger line came before the results. See [calibration/README.md](calibration/README.md). |
+| msf-character-tools is exactly a locked release wheel. | `check.py` exits 2 for any other build; `tests/test_dependency.py`. |
 | Each data change has an entry in [CHANGELOG.md](CHANGELOG.md). | Reviewers. The top section is `Data 0.4.0 — unreleased`: add entries there. `tests/test_metadata.py` checks that `data_version` in `pack.toml` equals the pack's and has the form `X.Y.Z`. |
 | Code is MIT. Data and documentation are CC-BY-SA-4.0. Third-party facts are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Do not copy provider prose that has no open licence: write your own summary and cite the source. | Reviewers. Start each new file with a licence line, as the existing files do. |
 
-To adopt a new msf-tools release: install its wheel by hash, then run `python3 -B check.py --update-lock --wheel PATH/TO/WHEEL`. Do this once from each Python and platform whose wheel tag you support. If the lock has the same commit and the same version, the new tag's entry is merged into it. If the commit or the version is different, the old lock moves to `tooling.lock.previous.json` and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`, and the README's install-by-hash steps then fail for that tag. pip records the hash, so after a pip install `--wheel` is optional.
+To adopt a new msf-character-tools release: install its wheel by hash, then run `python3 -B check.py --update-lock --wheel PATH/TO/WHEEL`. Do this once from each Python and platform whose wheel tag you support. If the lock has the same commit and the same version, the new tag's entry is merged into it. If the commit or the version is different, the old lock moves to `tooling.lock.previous.json` and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`, and the README's install-by-hash steps then fail for that tag. pip records the hash, so after a pip install `--wheel` is optional.
 
 ### Known traps
 
-- `check.py` checks the msf-tools install before anything else. If the install is wrong, it prints `Refusing to check` and exits 2 before it reads the data or the calibration records. It also refuses an `msf_tools` that would import from anywhere other than the installed distribution, for example through `PYTHONPATH`.
-- `tests/test_dependency.py` builds fake msf-tools installs and checks that `check.py` refuses each one before msf-tools runs (a marker file shows whether it ran). If you change the lock format or the order of steps in `check.py`, keep these tests meaningful. For example, the tampered-package fake must use a version and wheel tag that the lock has, or it is refused for the wrong reason.
+- `check.py` checks the msf-character-tools install before anything else. If the install is wrong, it prints `Refusing to check` and exits 2 before it reads the data or the calibration records. It also refuses an `msf_character_tools` that would import from anywhere other than the installed distribution, for example through `PYTHONPATH`.
+- `tests/test_dependency.py` builds fake msf-character-tools installs and checks that `check.py` refuses each one before msf-character-tools runs (a marker file shows whether it ran). If you change the lock format or the order of steps in `check.py`, keep these tests meaningful. For example, the tampered-package fake must use a version and wheel tag that the lock has, or it is refused for the wrong reason.
 - Any change to a string in any TOML file changes the pack bytes and so the pack hash. Then `rcef.pack.json`, `coverage.json`, `generated/SHA256SUMS`, all three Markdown reports, `reports/SHA256SUMS` and `docs/toml-index.csv` change. A CSV report changes only if the string is one of its columns. `rcef_mapping.csv` changes only if a signal's id, label, value type, units, disposition, evidence status or profile membership changes. Regenerate everything, and commit what changed.
-- msf-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
+- msf-character-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
 - `docs/architecture.html`, `.svg` and `.png` are made by hand, and no test checks them. When the data changes, update them and the counts in `docs/architecture.md`, and render the PNG from the SVG at the same size (1160 × 560). See the checklist in [docs/architecture.md](docs/architecture.md#9-independent-validation-checklist).
 - The face and viseme pipelines download rigs on first use and check their hashes (`--cache DIR` for rig files, `--out DIR` for outputs; the defaults are under `~/.cache`). The slow tests skip unless their variables are set. See [examples/README.md](examples/README.md).
   - `tests/test_examples_slow.py`: `RCEF_SLOW_TESTS=1`, plus `RCEF_ICT_CACHE` for the ICT tests and `RCEF_RIG_CACHE` for the Rocketbox and VRM tests.

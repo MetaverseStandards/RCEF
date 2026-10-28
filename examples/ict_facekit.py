@@ -9,8 +9,9 @@ they are never committed.
 
 Only the shapes the RCEF FB2 -> ARKit mappings can drive are converted. All 53
 expression shapes plus the neutral would need about 4.3 million position
-components, more than msf-tools' 4 million decoded-component budget, and
-sparse accessors do not help because msf-tools counts them at full size.
+components, more than msf-character-tools' 4 million decoded-component budget,
+and sparse accessors do not help because msf-character-tools counts them at full
+size.
 """
 from __future__ import annotations
 import hashlib

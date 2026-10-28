@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""How RCEF finds and checks its msf-tools dependency."""
+"""How RCEF finds and checks its msf-character-tools dependency."""
 import base64
 from copy import deepcopy
 import hashlib
@@ -24,15 +24,14 @@ PURE = 'py3-none-any'
 CP311 = 'cp311-cp311-macosx_11_0_arm64'
 CP312 = 'cp312-abi3-macosx_11_0_arm64'
 # Running the fake package writes this file, so a test can tell whether check.py
-# got as far as starting msf-tools.
+# got as far as starting msf-character-tools.
 FAKE_MAIN = 'import os, pathlib\npathlib.Path(os.environ["RCEF_TEST_MARKER"]).write_text("ran")\n'
 
 
 def plain_env():
-    """The caller's environment without any explicit msf-tools checkout selection."""
+    """The caller's environment without any explicit msf-character-tools checkout selection."""
     env = dict(os.environ)
-    for name in ('MSF_TOOLS_PATH', 'PYTHONPATH'):
-        env.pop(name, None)
+    env.pop('PYTHONPATH', None)
     return env
 
 
@@ -59,14 +58,14 @@ def record_line(site, name):
 
 
 def fake_site(root, commit, version='0.1.1', tag=PURE, build_info=None, vcs=True):
-    """A minimal site-packages holding an msf-tools wheel install.
+    """A minimal site-packages holding an msf-character-tools wheel install.
 
     `commit` goes in direct_url.json (as a Git install records it) unless `vcs`
     is false; `build_info`, if given, is the commit written to _build_info.json.
     """
     site = Path(root) / 'site'
-    package = site / 'msf_tools'
-    info = site / f'msf_tools-{version}.dist-info'
+    package = site / 'msf_character_tools'
+    info = site / f'msf_character_tools-{version}.dist-info'
     package.mkdir(parents=True)
     info.mkdir()
     (package / '__init__.py').write_text('VALUE = 1\n')
@@ -75,12 +74,12 @@ def fake_site(root, commit, version='0.1.1', tag=PURE, build_info=None, vcs=True
         (package / '_build_info.json').write_text(json.dumps({'version': version, 'commit': build_info}))
     if tag != PURE:
         (package / '_core.so').write_bytes(b'\x7fELF ' + tag.encode())
-    (info / 'METADATA').write_text(f'Metadata-Version: 2.1\nName: msf-tools\nVersion: {version}\n')
+    (info / 'METADATA').write_text(f'Metadata-Version: 2.1\nName: msf-character-tools\nVersion: {version}\n')
     (info / 'WHEEL').write_text(f'Wheel-Version: 1.0\nRoot-Is-Purelib: {"true" if tag == PURE else "false"}\n'
                                 f'Tag: {tag}\n')
     if vcs:
         (info / 'direct_url.json').write_text(json.dumps(
-            {'url': 'file:///msf-tools', 'vcs_info': {'vcs': 'git', 'commit_id': commit}}))
+            {'url': 'file:///msf-character-tools', 'vcs_info': {'vcs': 'git', 'commit_id': commit}}))
     write_record(site)
     return site
 
@@ -113,7 +112,7 @@ class LockVerification(unittest.TestCase):
 
     def test_real_installed_package_matches_the_lock(self):
         lock = json.loads(check.LOCK.read_text())
-        self.assertEqual(check.verify_installed(lock, metadata.distribution('msf-tools')), [])
+        self.assertEqual(check.verify_installed(lock, metadata.distribution('msf-character-tools')), [])
 
     def test_wrong_commit_is_refused(self):
         self.lock['git_commit'] = OTHER_COMMIT
@@ -132,47 +131,48 @@ class LockVerification(unittest.TestCase):
         self.assertTrue(any('9.9.9' in p for p in self.problems()))
 
     def test_tampered_installed_file_is_refused(self):
-        (self.site / 'msf_tools/__init__.py').write_text('VALUE = 2\n')
+        (self.site / 'msf_character_tools/__init__.py').write_text('VALUE = 2\n')
         problems = self.problems()
         self.assertTrue(problems)
-        self.assertTrue(all('msf_tools/__init__.py' in p for p in problems), problems)
+        self.assertTrue(all('msf_character_tools/__init__.py' in p for p in problems), problems)
 
     def test_tampered_file_with_matching_record_is_refused(self):
-        (self.site / 'msf_tools/__init__.py').write_text('VALUE = 2\n')
+        (self.site / 'msf_character_tools/__init__.py').write_text('VALUE = 2\n')
         write_record(self.site)
-        self.assertTrue(any('msf_tools/__init__.py' in p for p in self.problems()))
+        self.assertTrue(any('msf_character_tools/__init__.py' in p for p in self.problems()))
 
     def test_unlocked_extra_module_is_refused(self):
-        (self.site / 'msf_tools/extra.py').write_text('')
-        self.assertTrue(any('msf_tools/extra.py' in p for p in self.problems()))
+        (self.site / 'msf_character_tools/extra.py').write_text('')
+        self.assertTrue(any('msf_character_tools/extra.py' in p for p in self.problems()))
         write_record(self.site)
-        self.assertTrue(any('msf_tools/extra.py' in p for p in self.problems()))
+        self.assertTrue(any('msf_character_tools/extra.py' in p for p in self.problems()))
 
     def test_deleted_locked_file_is_refused(self):
-        (self.site / 'msf_tools/__main__.py').unlink()
-        self.assertTrue(any('msf_tools/__main__.py' in p for p in self.problems()))
+        (self.site / 'msf_character_tools/__main__.py').unlink()
+        self.assertTrue(any('msf_character_tools/__main__.py' in p for p in self.problems()))
 
     def test_lock_records_every_package_file_under_the_wheel_tag(self):
         site = fake_site(self.temp / 'native', LOCKED_COMMIT, tag=CP311)
-        (site / 'msf_tools/py.typed').write_text('')
+        (site / 'msf_character_tools/py.typed').write_text('')
         write_record(site)
         lock = check.lock_for(distribution(site))
         self.assertEqual(list(lock['wheels']), [CP311])
         self.assertEqual(sorted(lock['wheels'][CP311]['files']),
-                         ['msf_tools/__init__.py', 'msf_tools/__main__.py', 'msf_tools/_core.so', 'msf_tools/py.typed'])
+                         ['msf_character_tools/__init__.py', 'msf_character_tools/__main__.py',
+                          'msf_character_tools/_core.so', 'msf_character_tools/py.typed'])
 
     def test_unrecorded_shared_library_is_refused(self):
-        (self.site / 'msf_tools/_speedups.so').write_bytes(b'\x7fELF')
-        self.assertTrue(any('msf_tools/_speedups.so' in p for p in self.problems()))
+        (self.site / 'msf_character_tools/_speedups.so').write_bytes(b'\x7fELF')
+        self.assertTrue(any('msf_character_tools/_speedups.so' in p for p in self.problems()))
         write_record(self.site)
-        self.assertTrue(any('msf_tools/_speedups.so' in p for p in self.problems()))
+        self.assertTrue(any('msf_character_tools/_speedups.so' in p for p in self.problems()))
 
     def test_any_extra_file_is_refused_but_bytecode_caches_are_not(self):
-        (self.site / 'msf_tools/data.bin').write_bytes(b'x')
-        self.assertTrue(any('msf_tools/data.bin' in p for p in self.problems()))
-        (self.site / 'msf_tools/data.bin').unlink()
-        (self.site / 'msf_tools/__pycache__').mkdir()
-        (self.site / 'msf_tools/__pycache__/__init__.cpython-312.pyc').write_bytes(b'cache')
+        (self.site / 'msf_character_tools/data.bin').write_bytes(b'x')
+        self.assertTrue(any('msf_character_tools/data.bin' in p for p in self.problems()))
+        (self.site / 'msf_character_tools/data.bin').unlink()
+        (self.site / 'msf_character_tools/__pycache__').mkdir()
+        (self.site / 'msf_character_tools/__pycache__/__init__.cpython-312.pyc').write_bytes(b'cache')
         self.assertEqual(self.problems(), [])
 
     def test_wheel_tag_without_a_lock_entry_is_refused(self):
@@ -193,9 +193,10 @@ class LockVerification(unittest.TestCase):
         for site in sites.values():
             self.assertEqual(check.verify_installed(lock, distribution(site)), [])
         # The 3.12 library is not acceptable in the 3.11 install, even with a matching RECORD.
-        (sites[CP311] / 'msf_tools/_core.so').write_bytes((sites[CP312] / 'msf_tools/_core.so').read_bytes())
+        core = 'msf_character_tools/_core.so'
+        (sites[CP311] / core).write_bytes((sites[CP312] / core).read_bytes())
         write_record(sites[CP311])
-        self.assertTrue(any('msf_tools/_core.so' in p for p in check.verify_installed(lock, distribution(sites[CP311]))))
+        self.assertTrue(any(core in p for p in check.verify_installed(lock, distribution(sites[CP311]))))
 
     def test_lock_for_a_new_commit_drops_the_other_tags(self):
         lock_path = self.temp / 'tooling.lock.json'
@@ -230,7 +231,8 @@ class LockVerification(unittest.TestCase):
         wheel = 'a' * 64
         (info / 'direct_url.json').write_text(json.dumps({'url': 'file:///w.whl', 'archive_info': {
             'hashes': {'sha256': wheel}}}))
-        (self.site / 'msf_tools/_build_info.json').write_text(json.dumps({'version': '0.1.1', 'commit': LOCKED_COMMIT}))
+        (self.site / 'msf_character_tools/_build_info.json').write_text(
+            json.dumps({'version': '0.1.1', 'commit': LOCKED_COMMIT}))
         write_record(self.site)
         lock = check.lock_for(distribution(self.site))
         self.assertEqual(lock['wheels'][PURE]['sha256'], wheel)
@@ -239,14 +241,14 @@ class LockVerification(unittest.TestCase):
         self.assertTrue(any('b' * 64 in p for p in check.verify_installed(lock, distribution(self.site))))
 
     def test_lock_records_the_installed_wheel_files_hash_only_if_it_holds_the_same_files(self):
-        wheel = self.temp / 'msf_tools-0.1.1-py3-none-any.whl'
+        wheel = self.temp / 'msf_character_tools-0.1.1-py3-none-any.whl'
         with zipfile.ZipFile(wheel, 'w') as archive:
             for path in sorted(self.site.rglob('*')):
                 if path.is_file():
                     archive.write(path, path.relative_to(self.site).as_posix())
         lock = check.lock_for(distribution(self.site), wheel)
         self.assertEqual(lock['wheels'][PURE]['sha256'], hashlib.sha256(wheel.read_bytes()).hexdigest())
-        (self.site / 'msf_tools/__init__.py').write_text('VALUE = 2\n')
+        (self.site / 'msf_character_tools/__init__.py').write_text('VALUE = 2\n')
         write_record(self.site)
         with self.assertRaises(ValueError):
             check.lock_for(distribution(self.site), wheel)
@@ -269,11 +271,11 @@ class LockVerification(unittest.TestCase):
     def test_check_refuses_wrong_commit_before_any_work(self):
         result, ran = self.run_check(fake_site(self.temp / 'other', OTHER_COMMIT))
         self.assertNotEqual(result.returncode, 0)
-        self.assertFalse(ran, 'msf-tools ran despite the commit mismatch')
+        self.assertFalse(ran, 'msf-character-tools ran despite the commit mismatch')
         self.assertIn(OTHER_COMMIT, result.stderr)
 
     def test_package_in_working_directory_cannot_replace_the_verified_one(self):
-        foreign = self.temp / 'cwd' / 'msf_tools'
+        foreign = self.temp / 'cwd' / 'msf_character_tools'
         foreign.mkdir(parents=True)
         (foreign / '__init__.py').write_text('')
         (foreign / '__main__.py').write_text(FAKE_MAIN)
@@ -282,7 +284,7 @@ class LockVerification(unittest.TestCase):
         env['RCEF_TEST_MARKER'] = str(marker)
         result = subprocess.run([sys.executable, '-B', str(ROOT / 'check.py')], cwd=foreign.parent, env=env,
                                 capture_output=True, text=True, timeout=60)
-        self.assertFalse(marker.exists(), 'msf_tools from the working directory ran')
+        self.assertFalse(marker.exists(), 'msf_character_tools from the working directory ran')
         self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_check_refuses_tampered_package_before_any_work(self):
@@ -292,8 +294,8 @@ class LockVerification(unittest.TestCase):
                          tag=next(iter(lock['wheels'])))
         result, ran = self.run_check(site)
         self.assertNotEqual(result.returncode, 0)
-        self.assertFalse(ran, 'msf-tools ran despite the file mismatch')
-        self.assertIn('msf_tools/__init__.py', result.stderr)
+        self.assertFalse(ran, 'msf-character-tools ran despite the file mismatch')
+        self.assertIn('msf_character_tools/__init__.py', result.stderr)
 
 
 if __name__ == '__main__':

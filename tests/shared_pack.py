@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: MIT
 """One compiled RCEF pack shared by the test modules that only read it.
 
-Loading and compiling the full pack takes about a second, and msf-tools
+Loading and compiling the full pack takes about a second, and msf-character-tools
 records are immutable, so modules share one copy instead of compiling their own.
 """
 from functools import cache
 from pathlib import Path
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 ROOT = Path(__file__).resolve().parents[1]
 

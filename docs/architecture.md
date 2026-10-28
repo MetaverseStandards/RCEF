@@ -1,13 +1,13 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 # RCEF architecture: from TOML to explicit scalar mappings
 
-RCEF records public expression interfaces and explicit one-way scalar mappings between them. TOML is the authoritative authoring format. MSF Tools (msf-tools) supplies the parser, the validator, the deterministic pack compiler, the mapping compiler and the evaluator. RCEF adds its data, numerical fixtures, calibration records, readable reports and consumer acceptance tests.
+RCEF records public expression interfaces and explicit one-way scalar mappings between them. TOML is the authoritative authoring format. MSF Character Tools (msf-character-tools) supplies the parser, the validator, the deterministic pack compiler, the mapping compiler and the evaluator. RCEF adds its data, numerical fixtures, calibration records, readable reports and consumer acceptance tests.
 
-The [offline visual report](architecture.html), the [SVG](architecture.svg) and [PNG](architecture.png) views and the [TOML index](toml-index.csv) describe the same tree as this guide. Links in this guide are relative to `RCEF/docs`. Links to msf-tools assume a sibling `msf-tools` checkout.
+The [offline visual report](architecture.html), the [SVG](architecture.svg) and [PNG](architecture.png) views and the [TOML index](toml-index.csv) describe the same tree as this guide. Links in this guide are relative to `RCEF/docs`. Links to msf-character-tools assume a sibling `msf-character-tools` checkout.
 
 ## Scope of this guide
 
-This guide describes `rcef.parity` data version **0.4.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-tools 0.4.0 (commit `ce52dfb`), installed from its release wheels. The counts below were recomputed with the Python standard library from all 34 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
+This guide describes `rcef.parity` data version **0.4.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-character-tools 0.5.0, installed from its release wheels. The locked commit is in [tooling.lock.json](../evidence/tooling.lock.json). The counts below were recomputed with the Python standard library from all 34 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
 
 | Measure | Total |
 | --- | ---: |
@@ -28,8 +28,8 @@ Signal dispositions: 226 mapped, 681 unresolved, 6 unsupported and 36 excluded. 
 
 ```mermaid
 flowchart TD
-    L["check.py: installed msf-tools against tooling.lock.json (format 2)"] --> K["check.py: calibration records, FREEZES and the mappings that cite them"]
-    K --> B["msf-tools discovery: 34 TOML files, sorted"]
+    L["check.py: installed msf-character-tools against tooling.lock.json (format 2)"] --> K["check.py: calibration records, FREEZES and the mappings that cite them"]
+    K --> B["msf-character-tools discovery: 34 TOML files, sorted"]
     B --> C["Strict UTF-8 TOML parsing; schema, numeric and reference validation"]
     C --> D["compile_pack: immutable validated document and byte hash"]
     D --> E["Generated pack JSON, matrix CSV, coverage and checksums"]
@@ -41,26 +41,26 @@ flowchart TD
     H --> I
 ```
 
-`check.py` runs two RCEF checks before msf-tools runs. Then discovery, validation and pack compilation lead to two separate paths: one for runtime and one for exported files. The msf-tools map and evaluate commands load the TOML again and compile an in-memory Pack. They do not read the generated JSON, matrix CSV or coverage files. The report exporter reads the generated pack JSON directly. It does not read scalar frames or render geometry. An evaluation `Report`, which holds diagnostics and losses, is a different thing from a readable Markdown or CSV report.
+`check.py` runs two RCEF checks before msf-character-tools runs. Then discovery, validation and pack compilation lead to two separate paths: one for runtime and one for exported files. The msf-character-tools map and evaluate commands load the TOML again and compile an in-memory Pack. They do not read the generated JSON, matrix CSV or coverage files. The report exporter reads the generated pack JSON directly. It does not read scalar frames or render geometry. An evaluation `Report`, which holds diagnostics and losses, is a different thing from a readable Markdown or CSV report.
 
 | Owner | Supplies or implements | Boundary |
 | --- | --- | --- |
 | RCEF | `pack.toml`; provider and canonical inventories; profiles; evidence; directional maps; numerical fixtures; calibration records and `calibration/FREEZES`; `check.py`; report exporter; calibration tools; tests | Declares meaning and provenance. It does not implement the shared scalar algorithms. |
-| MSF Tools | Authoring discovery and validation, `compile_pack`, `profile_snapshot`, `compile_mapping`, `evaluate_mapping`; asset inspection and sidecar binding | Implements the reviewed wire and operator contracts and their refusals. |
-| Independent reviewer or consumer | Review changed bytes and meaning; run the drift check and tests with the locked msf-tools | Executable correctness alone does not show visual, anatomical, cross-provider or physiological equivalence. |
+| MSF Character Tools | Authoring discovery and validation, `compile_pack`, `profile_snapshot`, `compile_mapping`, `evaluate_mapping`; asset inspection and sidecar binding | Implements the reviewed wire and operator contracts and their refusals. |
+| Independent reviewer or consumer | Review changed bytes and meaning; run the drift check and tests with the locked msf-character-tools | Executable correctness alone does not show visual, anatomical, cross-provider or physiological equivalence. |
 
-Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf-tools/msf_tools/authoring.py), [pack compiler](../../msf-tools/msf_tools/pack.py), [mapping compiler and evaluator](../../msf-tools/msf_tools/mapping.py), the [C++ core](../../msf-tools/core/src) behind them, [report exporter](../scripts/export_reports.py), [calibration tools](../tools/calibration/README.md), [tests](../tests/).
+Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf-character-tools/msf_character_tools/authoring.py), [pack compiler](../../msf-character-tools/msf_character_tools/pack.py), [mapping compiler and evaluator](../../msf-character-tools/msf_character_tools/mapping.py), the [C++ core](../../msf-character-tools/core/src) behind them, [report exporter](../scripts/export_reports.py), [calibration tools](../tools/calibration/README.md), [tests](../tests/).
 
 ## 2. What check.py does
 
 `check.py` runs these steps in order and stops at the first failure.
 
-1. **Locked msf-tools.** It reads [tooling.lock.json](../evidence/tooling.lock.json), which is lock format 2. The lock records the msf-tools commit and version, and one entry per wheel tag. Each entry has the wheel's SHA-256 (when known) and a SHA-256 for every file in the installed `msf_tools` package. `check.py` refuses unless the installed package was built from the locked commit, its wheel tag has an entry, and every file in the package directory matches both its `RECORD` entry and the lock. It also refuses if `msf_tools` would be imported from somewhere other than that installed distribution. The README gives the full rules.
-2. **Calibration records.** It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. Any mapping that cites a record (evidence id `calibration.<id>`) must use `piecewise_linear` with exactly the record's frozen knots, and every held-out cell for its input channel must pass. This step does not use msf-tools. No mapping in data 0.4.0 cites a record.
-3. **Shared outputs.** It runs `python -B -P -m msf_tools check` on the checkout, with an empty bytecode cache, so that the subprocess imports the verified package. With `--write` it regenerates the pack, the CSV, coverage and checksums. Without it, it checks that they have not drifted.
+1. **Locked msf-character-tools.** It reads [tooling.lock.json](../evidence/tooling.lock.json), which is lock format 2. The lock records the msf-character-tools commit and version, and one entry per wheel tag. Each entry has the wheel's SHA-256 (when known) and a SHA-256 for every file in the installed `msf_character_tools` package. `check.py` refuses unless the installed package was built from the locked commit, its wheel tag has an entry, and every file in the package directory matches both its `RECORD` entry and the lock. It also refuses if `msf_character_tools` would be imported from somewhere other than that installed distribution. The README gives the full rules.
+2. **Calibration records.** It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. Any mapping that cites a record (evidence id `calibration.<id>`) must use `piecewise_linear` with exactly the record's frozen knots, and every held-out cell for its input channel must pass. This step does not use msf-character-tools. No mapping in data 0.4.0 cites a record.
+3. **Shared outputs.** It runs `python -B -P -m msf_character_tools check` on the checkout, with an empty bytecode cache, so that the subprocess imports the verified package. With `--write` it regenerates the pack, the CSV, coverage and checksums. Without it, it checks that they have not drifted.
 4. **Readable reports.** If step 3 passes, it runs [export_reports.py](../scripts/export_reports.py) with the same write or check choice.
 
-`check.py --update-lock` records the installed msf-tools in the lock and exits. It keeps the old lock as `tooling.lock.previous.json` when the commit or version changes.
+`check.py --update-lock` records the installed msf-character-tools in the lock and exits. It keeps the old lock as `tooling.lock.previous.json` when the commit or version changes.
 
 ### Calibration records and the held-out provenance check
 
@@ -69,7 +69,7 @@ A calibration record is a software-only fit, made from renders of example rigs. 
 - `mediapipe.ict-response`: a negative result. 25 of MediaPipe's 51 ARKit-named scores could be fitted, and none passed on held-out data.
 - `rig-gains.ict-rocketbox-female`: 3 of 51 ARKit shapes pass; 48 fail and are published as negative results.
 
-The calibration tools in [tools/calibration/](../tools/calibration/README.md) run the held-out step. Before they render anything, [provenance.py](../tools/calibration/provenance.py) checks that the record's `code_commit` is in the checkout's history and that no file the run imports has changed since that commit. The tools also check that every cached input has the SHA-256 the record pins and that the installed msf-tools passes the lock check. `k3_heldout.py` also requires the renderer binary that the record names. `check.py` cannot see Git history, so reviewers check that the ledger line was committed before the results.
+The calibration tools in [tools/calibration/](../tools/calibration/README.md) run the held-out step. Before they render anything, [provenance.py](../tools/calibration/provenance.py) checks that the record's `code_commit` is in the checkout's history and that no file the run imports has changed since that commit. The tools also check that every cached input has the SHA-256 the record pins and that the installed msf-character-tools passes the lock check. `k3_heldout.py` also requires the renderer binary that the record names. `check.py` cannot see Git history, so reviewers check that the ledger line was committed before the results.
 
 ## 3. How TOML is discovered and read
 
@@ -101,7 +101,7 @@ id = "rcef.parity"
 license = "CC-BY-SA-4.0"
 ```
 
-The merged document needs all five keys and the four arrays. msf-tools 0.4.0 accepts schema versions `"1.0"` and `"1.1"`, and operator versions `"1.0"` and `"1.1"`. Operators 1.1 add `piecewise_linear`; a mapping that uses it under operators 1.0 is refused. Schema 1.1 adds the evidence status `calibrated_software`; RCEF uses schema 1.0. `data_version` has its own version number, and it must be a semantic version: three numbers, with an optional prerelease suffix. Do not invent operators or extra root keys.
+The merged document needs all five keys and the four arrays. msf-character-tools 0.5.0 accepts schema versions `"1.0"` and `"1.1"`, and operator versions `"1.0"` and `"1.1"`. Operators 1.1 add `piecewise_linear`; a mapping that uses it under operators 1.0 is refused. Schema 1.1 adds the evidence status `calibrated_software`; RCEF uses schema 1.0. `data_version` has its own version number, and it must be a semantic version: three numbers, with an optional prerelease suffix. Do not invent operators or extra root keys.
 
 ### Arrays, tables and references
 
@@ -113,9 +113,9 @@ The merged document needs all five keys and the four arrays. msf-tools 0.4.0 acc
 - Profile `signal_ids`, rule `inputs` and `outputs`, and evidence references must name existing records. `label`, `native_id`, `region`, `side` and a similar-sounding anatomy are not references.
 - JSON object keys are sorted when written; arrays keep the authoring order. Profile column order follows profile order. Weighted-sum weights follow input order. Compilation repeatedly takes all mappings whose inputs are ready, in authored order. So dependencies run first, and authored order is kept within each batch. Independent rules in different batches can change their relative order.
 
-Parsing is strict UTF-8 with `tomllib.loads`. TOML syntax errors and duplicate keys are reported before schema checks. The msf-tools validator refuses unknown keys, missing keys, invalid enums, duplicate IDs, references to records that do not exist, and invalid numbers or domains. The document must be JSON-compatible: TOML dates and times are not accepted as values, and NaN, infinity and booleans are refused as scalars. The pipeline never executes text from TOML, and it does not infer conversions from provider names.
+Parsing is strict UTF-8 with `tomllib.loads`. TOML syntax errors and duplicate keys are reported before schema checks. The msf-character-tools validator refuses unknown keys, missing keys, invalid enums, duplicate IDs, references to records that do not exist, and invalid numbers or domains. The document must be JSON-compatible: TOML dates and times are not accepted as values, and NaN, infinity and booleans are refused as scalars. The pipeline never executes text from TOML, and it does not infer conversions from provider names.
 
-Sources: `load_authoring`, `authoring_files`, `_read_fragment` and `validate_authoring` in [authoring.py](../../msf-tools/msf_tools/authoring.py).
+Sources: `load_authoring`, `authoring_files`, `_read_fragment` and `validate_authoring` in [authoring.py](../../msf-character-tools/msf_character_tools/authoring.py).
 
 ## 4. Authoring field reference
 
@@ -171,7 +171,7 @@ In the schema a map is a `[[mappings]]` record and each mapping in it is one ent
 
 `disposition` says whether the author has admitted the relationship. `evidence_status` describes its evidence. `mapping_quality` describes the quality of an admitted mapping. These are separate fields. The direction is the ordered relationship from `inputs` to `outputs`. A mapping does not imply an inverse.
 
-Source: `validate_authoring` in [authoring.py](../../msf-tools/msf_tools/authoring.py), which runs the C++ core's checks: `validate_signal`, `validate_rule`, `knots` and `loss_annotation` in [authoring.cpp](../../msf-tools/core/src/authoring.cpp).
+Source: `validate_authoring` in [authoring.py](../../msf-character-tools/msf_character_tools/authoring.py), which runs the C++ core's checks: `validate_signal`, `validate_rule`, `knots` and `loss_annotation` in [authoring.cpp](../../msf-character-tools/core/src/authoring.cpp).
 
 ## 5. Examples of each operator
 
@@ -242,7 +242,7 @@ The runtime starts at `0.0`, multiplies each input by its weight, and adds the t
 
 Each split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero. When ARKit sets both directions, only their difference is kept. Each of these mappings declares that as a loss. The intermediate signals are in the `rcef.intermediate` profile, not in the source or target profile, so they stay virtual inside the compiled map. All 12 mappings in this map are proposed and approximate. See [arkit_fb2.toml](../mappings/arkit_fb2.toml) and [intermediate.toml](../data/intermediate.toml).
 
-Sources: operator dispatch and `piecewise` in the C++ core's [mapping.cpp](../../msf-tools/core/src/mapping.cpp), and `product`, `add`, `sub` and `divide` in [math3d.cpp](../../msf-tools/core/src/math3d.cpp). [math3d.py](../../msf-tools/msf_tools/math3d.py) exports them as `_product`, `_add`, `_sub` and `_divide`, with `_sum`, which applies `add` in order ([math_module.cpp](../../msf-tools/core/python/math_module.cpp)).
+Sources: operator dispatch and `piecewise` in the C++ core's [mapping.cpp](../../msf-character-tools/core/src/mapping.cpp), and `product`, `add`, `sub` and `divide` in [math3d.cpp](../../msf-character-tools/core/src/math3d.cpp). [math3d.py](../../msf-character-tools/msf_character_tools/math3d.py) exports them as `_product`, `_add`, `_sub` and `_divide`, with `_sum`, which applies `add` in order ([math_module.cpp](../../msf-character-tools/core/python/math_module.cpp)).
 
 ## 6. Runtime admission, validity and asset binding
 
@@ -307,15 +307,15 @@ The 21 canonical projections are 9 ARKit identities, 8 FB2 directional gaze iden
 
 A sidecar has `schema_version`, `asset_sha256`, `resource_hashes` and `bindings`, and optionally `metadata`. Reuse checks the exact asset hash and the hashes of the resources it reads. Names alone do not bind a target. `annotate_asset` makes a sidecar and does not change the original asset bytes. Asset-based CLI mapping needs explicit sidecars. Profile-based scalar fixtures need no asset.
 
-msf-tools 0.4.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way; msf-tools 0.4.0 reads FBX with no extra package. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf-tools/msf_tools/snapshot.py) and the [shared reference](../../msf-tools/docs/reference.md).
+msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way; msf-character-tools 0.5.0 reads FBX with no extra package. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf-character-tools/msf_character_tools/snapshot.py) and the [shared reference](../../msf-character-tools/docs/reference.md).
 
 ## 7. Generated files and readable reports
 
 | File | Producer and use |
 | --- | --- |
-| [generated/rcef.pack.json](../generated/rcef.pack.json) | msf-tools `compile_pack` and CLI output: the complete validated document. The immutable API Pack hashes its canonical bytes. It does not hold compiled map instructions. |
-| [generated/rcef_mapping.csv](../generated/rcef_mapping.csv) | msf-tools signal and profile membership matrix: one row per distinct signal, one column per profile. Despite its name, it is not a table of executable mappings. |
-| [generated/coverage.json](../generated/coverage.json) | msf-tools coverage: dispositions, quality partitions, memberships per profile, evidence and rule uses. It records the pack hash. |
+| [generated/rcef.pack.json](../generated/rcef.pack.json) | msf-character-tools `compile_pack` and CLI output: the complete validated document. The immutable API Pack hashes its canonical bytes. It does not hold compiled map instructions. |
+| [generated/rcef_mapping.csv](../generated/rcef_mapping.csv) | msf-character-tools signal and profile membership matrix: one row per distinct signal, one column per profile. Despite its name, it is not a table of executable mappings. |
+| [generated/coverage.json](../generated/coverage.json) | msf-character-tools coverage: dispositions, quality partitions, memberships per profile, evidence and rule uses. It records the pack hash. |
 | [generated/SHA256SUMS](../generated/SHA256SUMS) | Hashes of the pack, the matrix CSV and coverage, in that order. It does not list itself. |
 | [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 954 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
 | [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 215 authored one-way mappings with their status, operators, assumptions and losses. |
@@ -329,9 +329,9 @@ JSON uses sorted object keys, indent=2, UTF-8 with a final LF, finite numbers an
 These are suggested steps for an author in an RCEF checkout, with Python 3.11+.
 
 1. Find the affected signal, profile or mapping and its exact evidence IDs. Edit the authoritative TOML. Keep unresolved facts, and update evidence locators and digests where needed. Keep measured neutral, storage defaults and actual sample validity separate.
-2. Install the msf-tools release wheel locked in `evidence/tooling.lock.json`, by hash. `check.py` runs the installed `msf_tools` with the running interpreter. It does not install, clone or download anything.
+2. Install the msf-character-tools release wheel locked in `evidence/tooling.lock.json`, by hash. `check.py` runs the installed `msf_character_tools` with the running interpreter. It does not install, clone or download anything.
 3. Regenerate, review the changed generated and report bytes, and check again. `--write` regenerates. The default run checks for byte drift; it is not a full qualification.
-4. Run the tests with the same msf-tools. Keep device, capture and calibration gates separate.
+4. Run the tests with the same msf-character-tools. Keep device, capture and calibration gates separate.
 
 Regenerate, check and test:
 
@@ -373,9 +373,9 @@ Before you extend or release the inventory, read [CONTRIBUTING](../CONTRIBUTING.
 - Review the ARKit identity checks for calibration, domain, neutral, side and coupling. Check the independent expected values: identity `0.25`, affine `-1/0/1 → 0/0.5/1`, the ordered bilateral pairs, and the gaze splits. Require the approximation opt-in, and keep every authored loss.
 - Try a missing value or validity, false or non-boolean validity, missing required inputs, extra or non-source channels, non-finite or out-of-domain values, and one failing frame in a batch. Require no Result value on error.
 - Confirm that the unresolved MediaPipe → ARKit mapping refuses to run. Keep evidence status, disposition and quality apart. Do not infer inverse or cross-provider mappings from names.
-- Run the no-write drift check and the tests. `check.py` first checks the installed msf-tools against `evidence/tooling.lock.json`, and then the calibration records against `calibration/FREEZES`. Test the native backend separately.
+- Run the no-write drift check and the tests. `check.py` first checks the installed msf-character-tools against `evidence/tooling.lock.json`, and then the calibration records against `calibration/FREEZES`. Test the native backend separately.
 - When the data changes, update the HTML report, SVG, PNG and TOML index with it. Regenerate the TOML index with `python3 -B scripts/export_toml_index.py --write`; without `--write` it shows a diff and fails if the index does not match the TOML files, and `tests/test_toml_index.py` checks the same. Render the PNG from the SVG at the same size. Review the HTML in offline, narrow-screen and print modes. Tab through the stage and file explorer, operate the selectors and sliders with the keyboard, and test reset and invalid or missing modes. Compare all static and displayed fixture values. Check the content with JavaScript turned off and with a screen reader.
-- Check relative links with a sibling `msf-tools` checkout, and check the MIT notice on inline code and the CC-BY-SA-4.0 attribution on original documentation.
+- Check relative links with a sibling `msf-character-tools` checkout, and check the MIT notice on inline code and the CC-BY-SA-4.0 attribution on original documentation.
 
 ## Licensing
 

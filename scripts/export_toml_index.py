@@ -20,7 +20,7 @@ ARRAYS = ('signals', 'profiles', 'mappings', 'evidence')
 
 
 def authoring_files(root: Path = ROOT) -> list[Path]:
-    """The files msf-tools discovery reads: every *.toml, skipping hidden names and generated/."""
+    """The files msf-character-tools discovery reads: every *.toml, skipping hidden names and generated/."""
     files = []
     for directory, dirs, names in os.walk(root, followlinks=False):
         dirs[:] = [d for d in dirs if not d.startswith('.') and d != 'generated']

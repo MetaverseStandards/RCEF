@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # Original RCEF data; attributed source identifiers are factual inventories.
 # Proposed FB2 -> ARKit translations, all 52 coefficients. Gaze rules are a separate mapping because FB2
-# can report the face valid while eye following is not, and msf-tools refuses a
+# can report the face valid while eye following is not, and msf-character-tools refuses a
 # frame in which any input of a mapping is invalid.
 
 [[mappings]]

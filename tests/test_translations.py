@@ -13,7 +13,7 @@ from pathlib import Path
 import re
 import unittest
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 try:
     import shared_pack
@@ -77,7 +77,7 @@ class Translations(unittest.TestCase):
     def evaluate(self, mapping, frames):
         """Output values for each frame; a frame holds every input, zero unless given.
 
-        msf-tools rechecks the whole pack on every call, so the frames, which are
+        msf-character-tools rechecks the whole pack on every call, so the frames, which are
         independent, go in one call.
         """
         zero = dict.fromkeys(self.inputs(mapping), 0.0)
@@ -359,7 +359,7 @@ class Translations(unittest.TestCase):
             else:
                 self.assertIsNone(result.value)
                 self.assertEqual({d.code for d in result.report.diagnostics}, {'E_INVALID_SAMPLE'})
-        # msf-tools refuses any supplied channel marked invalid, even one the map
+        # msf-character-tools refuses any supplied channel marked invalid, even one the map
         # does not use, so consumers must give each map only its own inputs.
         result = self.run_frame('fb2.to_arkit', values, validity)
         self.assertIsNone(result.value)

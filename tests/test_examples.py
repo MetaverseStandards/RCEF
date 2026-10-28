@@ -103,7 +103,7 @@ class Fb2Example(unittest.TestCase):
 def fb2_arkit_document(pack, mapping_ids):
     """The pack cut down to some FB2 -> ARKit maps and the records they use.
 
-    msf-tools rechecks the whole pack on every call, so the many changed copies
+    msf-character-tools rechecks the whole pack on every call, so the many changed copies
     the oracle tests build stay fast only when the pack is small.
     """
     mappings = [m for m in pack['mappings'] if m['id'] in mapping_ids]

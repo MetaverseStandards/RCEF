@@ -1,7 +1,7 @@
 {
  "about": [
   "Example expressions as FB2 weight sets, and a short talking sequence as META visemes; examples/make_expression_frames.py turns them into frames.",
-  "Illustrative input for the face examples, not RCEF mapping data: nothing in profiles/ or mappings/ reads this file, and no golden comes from it. It is JSON because msf-tools reads every TOML file in the repository as pack authoring.",
+  "Illustrative input for the face examples, not RCEF mapping data: nothing in profiles/ or mappings/ reads this file, and no golden comes from it. It is JSON because msf-character-tools reads every TOML file in the repository as pack authoring.",
   "Licence: CC-BY-SA-4.0."
  ],
  "sources": {

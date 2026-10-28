@@ -81,7 +81,7 @@ RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.t
 
 ## Generate and check
 
-You need Python 3.11 or newer and msf-tools, which is maintained separately. RCEF locks msf-tools 0.4.0 in [tooling.lock.json](evidence/tooling.lock.json). The lock has one entry per release wheel, keyed by the wheel's tag, with the wheel's SHA-256. Pick the tag for your platform and Python:
+You need Python 3.11 or newer and [msf-character-tools](https://github.com/MetaverseStandards/msf-character-tools), which is maintained separately. RCEF locks msf-character-tools 0.5.0 in [tooling.lock.json](evidence/tooling.lock.json). The lock has one entry per release wheel, keyed by the wheel's tag, with the wheel's SHA-256. Pick the tag for your platform and Python:
 
 | Platform | Python 3.11 | Python 3.12 and later |
 |---|---|---|
@@ -89,20 +89,21 @@ You need Python 3.11 or newer and msf-tools, which is maintained separately. RCE
 | Linux x86_64 (glibc 2.28 or later) | `cp311-cp311-manylinux_2_28_x86_64` | `cp312-abi3-manylinux_2_28_x86_64` |
 | Linux aarch64 (glibc 2.28 or later) | `cp311-cp311-manylinux_2_28_aarch64` | `cp312-abi3-manylinux_2_28_aarch64` |
 
-Download that wheel from the msf-tools v0.4.0 release, then install it with the hash from the lock:
+Download that wheel from the [msf-character-tools v0.5.0 release](https://github.com/MetaverseStandards/msf-character-tools/releases/tag/v0.5.0), then install it with the hash from the lock:
 
 ```sh
 TAG=cp312-abi3-macosx_11_0_arm64
+WHEEL=msf_character_tools-0.5.0-$TAG.whl
 DIR=$(mktemp -d)
-gh release download v0.4.0 -R Kjakubzak/msf-tools -p "msf_tools-0.4.0-$TAG.whl" -D "$DIR"
+curl -fsSL -o "$DIR/$WHEEL" "https://github.com/MetaverseStandards/msf-character-tools/releases/download/v0.5.0/$WHEEL"
 SHA=$(python3 -c 'import json, sys; print(json.load(open("evidence/tooling.lock.json"))["wheels"][sys.argv[1]]["sha256"])' "$TAG")
-echo "msf-tools @ file://$DIR/msf_tools-0.4.0-$TAG.whl --hash=sha256:$SHA" > "$DIR/msf-tools.txt"
-uv pip install --python PATH/TO/python --require-hashes -r "$DIR/msf-tools.txt"
+echo "msf-character-tools @ file://$DIR/$WHEEL --hash=sha256:$SHA" > "$DIR/msf-character-tools.txt"
+uv pip install --python PATH/TO/python --require-hashes -r "$DIR/msf-character-tools.txt"
 ```
 
-The msf-tools repository is private for now, so `gh` must be logged in to an account that can read it. Do not paste a token into a command or a file in the checkout. Without uv, `python3 -m pip install --require-hashes -r "$DIR/msf-tools.txt"` does the same.
+The release is public, so the download needs no login or token. Without uv, `python3 -m pip install --require-hashes -r "$DIR/msf-character-tools.txt"` does the same.
 
-You can build the wheels yourself with msf-tools' `scripts/build_release.sh` at the locked commit; its `docs/building.md` lists the pinned inputs that give the same bytes. `check.py` refuses any other build: every installed file must match the lock.
+You can build the wheels yourself with msf-character-tools' `scripts/build_release.sh` at the locked commit; its `docs/building.md` lists the pinned inputs that give the same bytes. `check.py` refuses any other build: every installed file must match the lock.
 
 Then regenerate the outputs:
 
@@ -121,15 +122,15 @@ Run these commands from the RCEF checkout.
 
 The 21 provider identities and 63 scalar comparisons keep the declared storage and the provider-specific assumptions. The FB2 direction tests move one direction at a time. Raw pupil fields and native defaults do not show a physical measurement, a calibrated neutral or cross-provider equivalence. Provider frame context, devices, capture and physiology are separate gates.
 
-`check.py` uses the installed package. The lock (format 2) records msf-tools' commit and version. It also has one entry per wheel tag. Each entry has that wheel's SHA-256, when known, and a SHA-256 for every installed file in the `msf_tools` package, not only the Python files. One lock serves several Pythons: `check.py` checks each install against the entry for its own tag, which it reads from the install's `WHEEL` file. Before it does anything else, `check.py` verifies that the installed package was built from the locked commit. It reads the commit from `msf_tools/_build_info.json`, or, if that file is missing, from a Git install's `direct_url.json`. If both name a commit and they differ, it refuses. It also verifies that the install's tag has an entry, and that every file in the package directory, of any type, matches both its `RECORD` entry and the lock. Bytecode caches are ignored. If anything differs, it lists the problems and exits non-zero. It compares the wheel hash after installation only if the installer recorded it. uv does not record it, so for uv installs `--require-hashes` checks the hash at install time. The lock's `source` URL is for information only. The commit and file hashes identify the package, so `check.py` accepts local `file://` installs. To adopt a reviewed new msf-tools version, install it and run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the sha256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or version changes, the old lock is kept as [tooling.lock.previous.json](evidence/tooling.lock.previous.json). To roll back, copy that file over `tooling.lock.json`, install msf-tools at its commit, and use the `check.py` from the same RCEF commit as that lock. The wrapper calls `python3 -B -m msf_tools check AUTHORING --pack PATH --csv PATH [--write]`. Checking never clones or downloads anything.
+`check.py` uses the installed package. The lock (format 2) records msf-character-tools' commit and version. It also has one entry per wheel tag. Each entry has that wheel's SHA-256, when known, and a SHA-256 for every installed file in the `msf_character_tools` package, not only the Python files. One lock serves several Pythons: `check.py` checks each install against the entry for its own tag, which it reads from the install's `WHEEL` file. Before it does anything else, `check.py` verifies that the installed package was built from the locked commit. It reads the commit from `msf_character_tools/_build_info.json`, or, if that file is missing, from a Git install's `direct_url.json`. If both name a commit and they differ, it refuses. It also verifies that the install's tag has an entry, and that every file in the package directory, of any type, matches both its `RECORD` entry and the lock. Bytecode caches are ignored. If anything differs, it lists the problems and exits non-zero. It compares the wheel hash after installation only if the installer recorded it. uv does not record it, so for uv installs `--require-hashes` checks the hash at install time. The lock's `source` URL is for information only. The commit and file hashes identify the package, so `check.py` accepts local `file://` installs. To adopt a reviewed new msf-character-tools version, install it and run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the sha256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or version changes, the old lock is kept as [tooling.lock.previous.json](evidence/tooling.lock.previous.json). To roll back, copy that file over `tooling.lock.json`, install msf-character-tools at its commit, and use the `check.py` from the same RCEF commit as that lock. The wrapper calls `python3 -B -m msf_character_tools check AUTHORING --pack PATH --csv PATH [--write]`. Checking never clones or downloads anything.
 
-After it verifies msf-tools and before it runs msf-tools, `check.py` also checks the software-only calibration records in [calibration/](calibration/README.md). It refuses a mapping that cites a record unless the mapping's knots are exactly the record's frozen knots and every held-out cell for its channel passed. The renderer for those fits is in [tools/render/](tools/render/README.md).
+After it verifies msf-character-tools and before it runs msf-character-tools, `check.py` also checks the software-only calibration records in [calibration/](calibration/README.md). It refuses a mapping that cites a record unless the mapping's knots are exactly the record's frozen knots and every held-out cell for its channel passed. The renderer for those fits is in [tools/render/](tools/render/README.md).
 
 The outputs are `generated/rcef.pack.json`, `rcef_mapping.csv`, `coverage.json`, and `SHA256SUMS`. JSON uses the shared stdlib encoding: sorted keys, indented, UTF-8 with a final LF, finite numbers and normalized negative zero. Arrays keep the authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All bytes are rendered and validated before any file is replaced. Each file is replaced atomically, but the replacements together are not one transaction.
 
 ## Examples
 
-[examples/README.md](examples/README.md) uses RCEF from start to end with the msf-tools public API. It translates FB2 frames to ARKit weights, and META visemes to VRM presets, from CSV. It then drives two Microsoft Rocketbox faces and the ICT-FaceKit face with a FACS-based expression library, both directly and through RCEF's mappings, and reports the residuals. It also renders a short spoken phrase as visemes on Rocketbox and on a VRM model.
+[examples/README.md](examples/README.md) uses RCEF from start to end with the msf-character-tools public API. It translates FB2 frames to ARKit weights, and META visemes to VRM presets, from CSV. It then drives two Microsoft Rocketbox faces and the ICT-FaceKit face with a FACS-based expression library, both directly and through RCEF's mappings, and reports the residuals. It also renders a short spoken phrase as visemes on Rocketbox and on a VRM model.
 
 ## Architecture and TOML guide
 

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""Translate provider frames with RCEF's maps through the msf-tools public API.
+"""Translate provider frames with RCEF's maps through the msf-character-tools public API.
 
 Used by translate_fb2_to_arkit.py, translate_visemes_to_vrm.py,
 face_pipeline.py and viseme_pipeline.py.
@@ -10,7 +10,7 @@ import json
 import os
 from pathlib import Path
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -88,7 +88,7 @@ class Translator:
         results = [{'time': f['time'], 'segment': f['segment'], 'values': {}, 'refused': [], 'dropped': []}
                    for f in frames]
         for mapping, compiled in self.mappings.items():
-            # msf-tools refuses a frame if any channel it is given is marked invalid,
+            # msf-character-tools refuses a frame if any channel it is given is marked invalid,
             # even one the map does not read, so each map gets only its own inputs.
             inputs = sorted(compiled.required_inputs)
             samples = [{'timestamp': f['time'], 'values': {i: f['values'][i] for i in inputs},

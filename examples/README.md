@@ -2,7 +2,7 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-These examples run RCEF's published translations with the msf-tools public API. They start with CSV frames in and translated weights out, and then drive a real face mesh. All input here is synthetic; nothing comes from a device.
+These examples run RCEF's published translations with the msf-character-tools public API. They start with CSV frames in and translated weights out, and then drive a real face mesh. All input here is synthetic; nothing comes from a device.
 
 ## 1. Set up a fresh environment
 
@@ -13,13 +13,13 @@ python3 -m venv .venv
 . .venv/bin/activate
 ```
 
-Install the locked msf-tools release wheel into it by hash, as [Generate and check](../README.md#generate-and-check) shows. With this venv's pip, the last step is `python -m pip install --require-hashes -r "$DIR/msf-tools.txt"`. Then check the install:
+Install the locked msf-character-tools release wheel into it by hash, as [Generate and check](../README.md#generate-and-check) shows. With this venv's pip, the last step is `python -m pip install --require-hashes -r "$DIR/msf-character-tools.txt"`. Then check the install:
 
 ```sh
 python -B check.py
 ```
 
-`check.py` refuses to run unless the installed msf-tools is exactly the locked release wheel, so a passing check also confirms the install. The examples need nothing else. They use only the Python standard library and msf-tools, which reads the Rocketbox FBX rigs itself.
+`check.py` refuses to run unless the installed msf-character-tools is exactly the locked release wheel, so a passing check also confirms the install. The examples need nothing else. They use only the Python standard library and msf-character-tools, which reads the Rocketbox FBX rigs itself.
 
 ## 2. Translate FB2 frames to ARKit
 
@@ -39,7 +39,7 @@ The demo frames come from `examples/make_demo_frames.py`. They cover a neutral p
 How it works (see `examples/rcef_translate.py`):
 
 - It loads `generated/rcef.pack.json` and compiles `fb2.to_arkit` and `fb2_gaze.to_arkit` with the approximation opt-in, because RCEF's cross-provider mappings are proposed approximations.
-- Each map gets only its own `required_inputs`. msf-tools refuses a frame if any channel it is given is marked invalid, even a channel that the map does not use. If each map got the whole FB2 frame, invalid gaze would also stop the face.
+- Each map gets only its own `required_inputs`. msf-character-tools refuses a frame if any channel it is given is marked invalid, even a channel that the map does not use. If each map got the whole FB2 frame, invalid gaze would also stop the face.
 - Each input's validity is the AND of the provider flags its signal record names, for example `isValid AND isEyeFollowingBlendshapesValid` for gaze.
 
 `rcef_translate.arkit_to_fb2()` goes the other way, from ARKit to FB2, with RCEF's inverse mappings. FB2 allows only one of two opposing gaze weights (left/right, up/down) to be non-zero. The mappings take the difference of the two ARKit directions and split it into its two sides. So when ARKit sets both, only the larger one survives, reduced by the smaller one, and the two are never both non-zero.
@@ -68,10 +68,10 @@ Rig files go to `~/.cache/rcef-face-rigs` (`~/.cache/rcef-ict-facekit` for ICT) 
 
 | Rig | Source | Shapes used |
 |---|---|---|
-| `rocketbox-female`, `rocketbox-male` | Microsoft Rocketbox `Female_Adult_01_facial.fbx` and `Male_Adult_01_facial.fbx` (MIT, commit `0943055`; ARKit shapes by Fang Ma and Matias Volonte), loaded directly with msf-tools' FBX reader | all 52 ARKit shapes (`AK_*`); its FACS action-unit shapes (`AU_*`) for the comparison panel; its 15 viseme shapes (`AA_VI_*`) in section 5 |
-| `ict` | ICT-FaceKit Light (MIT, USC Institute for Creative Technologies, commit `da5f95a`), converted to a GLB | 16 of its ARKit shapes (all 53 would exceed msf-tools' budget); `browInnerUp` and `cheekPuff` are split into halves |
+| `rocketbox-female`, `rocketbox-male` | Microsoft Rocketbox `Female_Adult_01_facial.fbx` and `Male_Adult_01_facial.fbx` (MIT, commit `0943055`; ARKit shapes by Fang Ma and Matias Volonte), loaded directly with msf-character-tools' FBX reader | all 52 ARKit shapes (`AK_*`); its FACS action-unit shapes (`AU_*`) for the comparison panel; its 15 viseme shapes (`AA_VI_*`) in section 5 |
+| `ict` | ICT-FaceKit Light (MIT, USC Institute for Creative Technologies, commit `da5f95a`), converted to a GLB | 16 of its ARKit shapes (all 53 would exceed msf-character-tools' budget); `browInnerUp` and `cheekPuff` are split into halves |
 
-Each file is downloaded on first use and checked against a pinned SHA-256; none is stored in this repository. Rocketbox is a full-body avatar with a small face, so a renderer has to frame the head. All 53 ICT shapes would need about 4.3 million position components, more than msf-tools' 4 million budget, so only the 16 are converted.
+Each file is downloaded on first use and checked against a pinned SHA-256; none is stored in this repository. Rocketbox is a full-body avatar with a small face, so a renderer has to frame the head. All 53 ICT shapes would need about 4.3 million position components, more than msf-character-tools' 4 million budget, so only the 16 are converted.
 
 ### The frames
 
@@ -79,7 +79,7 @@ Each file is downloaded on first use and checked against a pinned SHA-256; none 
 
 ### What is compared
 
-For each frame the rig is evaluated with `msf_tools.evaluate_geometry(morph_weights=...)`:
+For each frame the rig is evaluated with `msf_character_tools.evaluate_geometry(morph_weights=...)`:
 
 - **direct**: the FB2 values routed to the ARKit shapes as the Godot and VRCFT sources route them (`tests/fixtures/godot_fb2_rules.csv`), all 52 on Rocketbox. On ICT each brow and cheek half takes its own FB2 side.
 - **translated**: RCEF's translated ARKit weights. RCEF writes all 52 coefficients. If no mapping wrote a shape, that shape would stay at rest and be named on the frame ("no RCEF rule yet, direct render only"). FB2 channels that no mapping reads (the tongue positions other than `TONGUE_OUT`) are listed as dropped.
@@ -90,7 +90,7 @@ Outputs in the output directory:
 | File | Contents |
 |---|---|
 | `fb2_to_arkit.csv` | the translated weights, refusals and dropped channels |
-| `sidecar.json` | the msf-tools sidecar binding each ARKit shape to its ARKit signal |
+| `sidecar.json` | the msf-character-tools sidecar binding each ARKit shape to its ARKit signal |
 | `mesh/indices.u32` | triangle indices of every mesh of the rig, little-endian uint32 |
 | `mesh/direct/NNNN.f32`, `mesh/translated/NNNN.f32`, `mesh/facs/NNNN.f32` | vertex positions per frame, little-endian float32 xyz |
 | `mesh/difference/NNNN.f32`, `mesh/facs_difference/NNNN.f32` | per-vertex difference colours, float32 RGB (blue = none, red = `heat_scale` or more) |

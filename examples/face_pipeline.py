@@ -11,7 +11,7 @@ when it is set), so nothing is written into the checkout unless asked. The
 frames default to the expression library (examples/data/fb2_expression_frames.csv).
 
 For every frame this builds morph weights for the rig's ARKit shapes twice and
-evaluates both with msf_tools.evaluate_geometry:
+evaluates both with msf_character_tools.evaluate_geometry:
 
 - direct: the FB2 values routed to ARKit names as the Godot and VRCFT sources
   route them (tests/fixtures/godot_fb2_rules.csv, derived from the pinned
@@ -43,7 +43,7 @@ import math
 from pathlib import Path
 import struct
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 import make_expression_frames
 import rcef_translate

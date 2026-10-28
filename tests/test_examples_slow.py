@@ -209,7 +209,7 @@ class Visemes(unittest.TestCase):
         # VRM does not say whose left blinkLeft is; RCEF assumes the avatar's own,
         # so check it on this model's geometry rather than trusting its axes.
         sys.path.insert(0, str(ROOT / 'examples'))
-        import msf_tools as msf
+        import msf_character_tools as msf
         import rigs
         import viseme_pipeline
         import vrm_presets

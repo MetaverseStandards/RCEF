@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 import unittest
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 try:
     import shared_pack

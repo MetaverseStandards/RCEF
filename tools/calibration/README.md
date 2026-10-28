@@ -6,11 +6,11 @@ These optional tools make calibration records (see [calibration/README.md](../..
 
 This tool renders ICT-FaceKit with one ARKit coefficient moving at a time and scores each render with MediaPipe's Face Landmarker. It then fits a curve from each MediaPipe score back to the ICT weight. The licence check for the model is in [docs/calibration/mediapipe-licence.md](../../docs/calibration/mediapipe-licence.md).
 
-The tool needs Python 3.11+, numpy, mediapipe, the locked msf-tools release wheel (it reads the Rocketbox FBX rigs itself), and a renderer built from [tools/render](../render/README.md). `msf-tools.txt` is the hashed requirement from [Generate and check](../../README.md#generate-and-check). It is a separate install because `--require-hashes` needs a hash for every package it installs. With uv:
+The tool needs Python 3.11+, numpy, mediapipe, the locked msf-character-tools release wheel (it reads the Rocketbox FBX rigs itself), and a renderer built from [tools/render](../render/README.md). `msf-character-tools.txt` is the hashed requirement from [Generate and check](../../README.md#generate-and-check). It is a separate install because `--require-hashes` needs a hash for every package it installs. With uv:
 
 ```sh
 uv venv k4-venv && uv pip install --python k4-venv/bin/python mediapipe numpy
-uv pip install --python k4-venv/bin/python --require-hashes -r "$DIR/msf-tools.txt"
+uv pip install --python k4-venv/bin/python --require-hashes -r "$DIR/msf-character-tools.txt"
 swiftc -O -o meshrender tools/render/meshrender.swift
 ```
 
@@ -21,7 +21,7 @@ Do these steps in this order:
 3. `freeze --renderer meshrender` fits each channel. It writes `calibration/mediapipe.ict-response.cal` without cells and adds its line to `calibration/FREEZES`. Commit the harness first, because the record names the commit. **Commit the record and the ledger line before step 4.**
 4. `heldout --renderer meshrender` first checks the setup and refuses to run unless all of these are true:
    - the freeze commit exists;
-   - the installed msf-tools passes `check.py`'s lock check;
+   - the installed msf-character-tools passes `check.py`'s lock check;
    - every cached input has the SHA-256 that the record's `inputs` pin;
    - every repository file that the run imports, `ict_files.json` and the renderer source are exactly as at the record's `code_commit`. The file list comes from the loaded modules, so `check.py` and `examples/` count too.
 

@@ -5,14 +5,16 @@
 # available on these repositories, so this is the CI run.
 #
 # The venvs default to $MSF/_tools/rcef-venv3.11 and rcef-venv3.12; each must
-# have the msf-tools release wheel recorded in evidence/tooling.lock.json installed by hash.
+# have the msf-character-tools release wheel recorded in
+# evidence/tooling.lock.json installed by hash.
 set -u
 MSF=${MSF:-$HOME/.local/share/msf}
 ROOT=$(cd "$(dirname "$0")/.." && pwd -P)
 LOGS=$(mktemp -d "${TMPDIR:-/tmp}/rcef-ci.XXXXXX")
 cd "$ROOT" || exit 2
-# check.py would refuse an msf-tools selected through these; keep the run clean.
-unset MSF_TOOLS_PATH PYTHONPATH
+# check.py would refuse an msf-character-tools selected through PYTHONPATH;
+# keep the run clean.
+unset PYTHONPATH
 
 overall=PASS
 rows=''
@@ -52,8 +54,8 @@ dirty=$(git status --porcelain | head -1)
 locked=$(sed -n 's/.*"git_commit": "\([0-9a-f]*\)".*/\1/p' evidence/tooling.lock.json | cut -c1-12)
 echo "### Local CI: $overall"
 echo
-echo "RCEF \`$commit\`${dirty:+ (with uncommitted changes)}; msf-tools locked at \`$locked\`."
-echo "check.py verifies the installed msf-tools against the lock before checking."
+echo "RCEF \`$commit\`${dirty:+ (with uncommitted changes)}; msf-character-tools locked at \`$locked\`."
+echo "check.py verifies the installed msf-character-tools against the lock before checking."
 echo
 echo "| Python | check.py | tests |"
 echo "|---|---|---|"

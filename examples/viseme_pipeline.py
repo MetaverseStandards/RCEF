@@ -30,7 +30,7 @@ import math
 from pathlib import Path
 import struct
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 import face_pipeline
 import rcef_translate

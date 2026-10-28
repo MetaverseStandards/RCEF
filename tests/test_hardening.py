@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import unittest
 
-import msf_tools as msf
+import msf_character_tools as msf
 
 try:
     import shared_pack
@@ -50,7 +50,7 @@ class Hardening(unittest.TestCase):
         cls.document = shared_pack.document()
         # Compiling the full pack takes a large share of the suite's time, so tests
         # that do not edit the document share the suite's one compiled pack.
-        # msf-tools rechecks the whole pack on every evaluation, so the fixture
+        # msf-character-tools rechecks the whole pack on every evaluation, so the fixture
         # maps, which many tests evaluate repeatedly, use a pack holding only them.
         cls.pack = shared_pack.pack()
         cls.fixture_pack = cls.compile_pack(cls.only(FIXTURE_PROFILES, FIXTURE_MAPPINGS))
