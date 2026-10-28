@@ -821,3 +821,564 @@ knots = [[0.0, 0.0], [0.25, 1.0], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
 input = "arkit.coefficient.noseSneerRight"
 output = "rocketbox_female.AK_51_NoseSneerRight"
 knots = [[0.0, 0.0], [0.25, 1.0], [0.5, 1.0], [0.75, 1.0], [1.0, 1.0]]
+
+[[cells]]
+channel = "arkit.coefficient.browDownLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 19
+median = 0.04592
+p95 = 0.189926
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.browDownRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 12
+median = 0.08727
+p95 = 0.220578
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.browInnerUp"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 0
+median = 0.014327
+p95 = 0.040176
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.browOuterUpLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 14
+median = 0.075429
+p95 = 0.185691
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.browOuterUpRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 10
+median = 0.023184
+p95 = 0.142638
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.cheekPuff"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.117561
+p95 = 0.349486
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.cheekSquintLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 0
+median = 0.042614
+p95 = 0.101044
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.cheekSquintRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 0
+median = 0.027579
+p95 = 0.089481
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeBlinkLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 4
+median = 0.02272
+p95 = 0.050069
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeBlinkRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 2
+median = 0.017615
+p95 = 0.051269
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookDownLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.018803
+p95 = 0.156313
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookDownRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.018404
+p95 = 0.13632
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookInLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 21
+median = 0.00653
+p95 = 0.017668
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookInRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 8
+median = 0.006664
+p95 = 0.017582
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookOutLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.013318
+p95 = 0.031522
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookOutRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.008801
+p95 = 0.023793
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookUpLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 8
+median = 0.013079
+p95 = 0.102854
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeLookUpRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 5
+median = 0.028295
+p95 = 0.056315
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeSquintLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.077339
+p95 = 0.157109
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeSquintRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.079391
+p95 = 0.275477
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeWideLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 10
+median = 0.087709
+p95 = 0.455081
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.eyeWideRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 6
+median = 0.067358
+p95 = 0.25679
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.jawForward"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 11
+median = 0.043784
+p95 = 0.274252
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.jawLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 9
+median = 0.02341
+p95 = 0.055109
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.jawOpen"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 19
+median = 0.0
+p95 = 0.071957
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.jawRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 14
+median = 0.024363
+p95 = 0.107623
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthClose"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 1.0
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthDimpleLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 14
+median = 0.300265
+p95 = 0.454698
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthDimpleRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 8
+median = 0.216827
+p95 = 0.532817
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthFrownLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 2
+median = 0.03198
+p95 = 0.109562
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthFrownRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 17
+median = 0.0
+p95 = 0.217852
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthFunnel"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 23
+median = 0.048594
+p95 = 0.158683
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 21
+median = 0.0
+p95 = 0.099341
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthLowerDownLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 13
+median = 0.031119
+p95 = 0.468772
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthLowerDownRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 12
+median = 0.09841
+p95 = 0.347582
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthPressLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.013143
+p95 = 0.065163
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthPressRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 5
+median = 0.010408
+p95 = 0.070249
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthPucker"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.124542
+p95 = 0.887115
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 14
+median = 0.003131
+p95 = 0.165445
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthRollLower"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 21
+median = 0.316093
+p95 = 0.747988
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthRollUpper"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 11
+median = 0.043543
+p95 = 0.15982
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthShrugLower"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.238072
+p95 = 0.375156
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthShrugUpper"
+side = "none"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 6
+median = 0.036885
+p95 = 0.078544
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthSmileLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 19
+median = 0.0
+p95 = 0.163823
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthSmileRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 18
+median = 0.0
+p95 = 0.129293
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthStretchLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 9
+median = 0.059811
+p95 = 0.209638
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthStretchRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 17
+median = 0.012951
+p95 = 0.305555
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthUpperUpLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 15
+median = 0.034079
+p95 = 0.227147
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.mouthUpperUpRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 19
+median = 4.5e-05
+p95 = 0.090465
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.noseSneerLeft"
+side = "left"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.0
+p95 = 0.0
+neutral = 0.0
+
+[[cells]]
+channel = "arkit.coefficient.noseSneerRight"
+side = "right"
+stimulus = "ICT weight in [0.2, 1.0], jittered camera"
+identity = "ICT identity 0 (held out)"
+conditions = 24
+failures = 24
+median = 0.0
+p95 = 0.0
+neutral = 0.0

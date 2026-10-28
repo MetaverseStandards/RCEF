@@ -554,3 +554,553 @@ knots = [[0.0, 0.0], [0.000301, 0.0], [0.004192, 0.2], [0.047608, 0.4], [0.16867
 input = "mediapipe.score.mouthStretchRight"
 output = "arkit.coefficient.mouthStretchRight"
 knots = [[0.0, 0.0], [0.005405, 0.0], [0.016363, 0.2], [0.040326, 0.4], [0.081536, 0.6], [0.126922, 0.8], [0.214686, 1.0], [1.0, 1.0]]
+
+[[cells]]
+channel = "mediapipe.score.browDownLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.2
+p95 = 0.820844
+neutral = 0.026596
+
+[[cells]]
+channel = "mediapipe.score.browDownLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 1.0
+
+[[cells]]
+channel = "mediapipe.score.browDownRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.2
+p95 = 0.8
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.browDownRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 1.0
+
+[[cells]]
+channel = "mediapipe.score.browInnerUp"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.336568
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.browInnerUp"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.browOuterUpLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.171054
+p95 = 0.648018
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.browOuterUpLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.browOuterUpRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.2
+p95 = 0.741866
+neutral = 0.018901
+
+[[cells]]
+channel = "mediapipe.score.browOuterUpRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeBlinkLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.072925
+p95 = 0.48195
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeBlinkLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.273331
+p95 = 0.896144
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeBlinkRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.086027
+p95 = 0.439279
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeBlinkRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.344717
+p95 = 0.875734
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeLookDownLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.2
+p95 = 0.703671
+neutral = 0.251767
+
+[[cells]]
+channel = "mediapipe.score.eyeLookDownLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeLookDownRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.2
+p95 = 0.669792
+neutral = 0.241955
+
+[[cells]]
+channel = "mediapipe.score.eyeLookDownRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeLookInRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeLookInRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.358044
+p95 = 1.0
+neutral = 0.494237
+
+[[cells]]
+channel = "mediapipe.score.eyeLookOutLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.352524
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeLookOutLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeSquintLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.365024
+p95 = 0.94253
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeSquintLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 1.0
+
+[[cells]]
+channel = "mediapipe.score.eyeSquintRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.eyeSquintRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 1.0
+
+[[cells]]
+channel = "mediapipe.score.jawOpen"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.066558
+p95 = 0.322474
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.jawOpen"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.222618
+p95 = 0.564507
+neutral = 0.070997
+
+[[cells]]
+channel = "mediapipe.score.mouthFunnel"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.05195
+p95 = 0.35602
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthFunnel"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 0.796872
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.058494
+p95 = 0.339651
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 0.960819
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthPressLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.204581
+p95 = 0.939353
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthPressLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.135979
+p95 = 0.517316
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthPucker"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.2
+p95 = 0.653203
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthPucker"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.4
+p95 = 1.0
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.076698
+p95 = 0.210416
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.375705
+p95 = 0.791507
+neutral = 0.002253
+
+[[cells]]
+channel = "mediapipe.score.mouthRollLower"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.2
+p95 = 0.694949
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthRollLower"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.272264
+p95 = 0.598637
+neutral = 0.483162
+
+[[cells]]
+channel = "mediapipe.score.mouthShrugLower"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.195659
+p95 = 0.6
+neutral = 0.201506
+
+[[cells]]
+channel = "mediapipe.score.mouthShrugLower"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.36066
+p95 = 0.8
+neutral = 0.395174
+
+[[cells]]
+channel = "mediapipe.score.mouthShrugUpper"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.120068
+p95 = 0.475317
+neutral = 0.073188
+
+[[cells]]
+channel = "mediapipe.score.mouthShrugUpper"
+side = "none"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.191253
+p95 = 0.457592
+neutral = 0.020136
+
+[[cells]]
+channel = "mediapipe.score.mouthSmileLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.129065
+p95 = 0.39741
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthSmileLeft"
+side = "left"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.388676
+p95 = 0.784357
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthSmileRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.146747
+p95 = 0.496087
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthSmileRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.394024
+p95 = 0.797075
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthStretchRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "ICT-FaceKit held-out identities (a new identity in every condition, drawn from the held-out seeds)"
+conditions = 20
+failures = 0
+median = 0.190614
+p95 = 0.605896
+neutral = 0.0
+
+[[cells]]
+channel = "mediapipe.score.mouthStretchRight"
+side = "right"
+stimulus = "the channel alone at 0, 0.2, 0.4, 0.6, 0.8 and 1, from a neutral face"
+identity = "Rocketbox Male_Adult_01 (a rig not used in training)"
+conditions = 20
+failures = 0
+median = 0.299264
+p95 = 0.744972
+neutral = 0.0
