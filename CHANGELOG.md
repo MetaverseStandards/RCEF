@@ -17,9 +17,13 @@ opposing gaze directions to be exclusive, and the data now builds this in.
   no longer refuses such frames.
 - New `rcef.intermediate` profile (4 signals) for those differences, in
   `data/intermediate.toml`.
-- The msf-tools lock moves to 0.3.0 (commit `e799dfb`), which provides
-  operators 1.1. It records the hash of the `py3-none-any` wheel built
-  from that commit. The 0.2.0.dev0 lock is kept as
+- The msf-tools lock moves to 0.4.0 (commit `ce52dfb`), which provides
+  operators 1.1. It has one entry for each of the six release wheels:
+  CPython 3.11 and 3.12 or later, on macOS arm64, Linux x86_64 and Linux
+  aarch64. Each entry has the wheel's SHA-256 and the hash of every file
+  it installs. Install the release wheel for your platform by hash;
+  `check.py` refuses any other build. Earlier in this cycle the lock moved
+  to 0.3.0 (commit `e799dfb`); that lock is kept as
   `evidence/tooling.lock.previous.json`.
 - VRCFaceTracking's signed eye gaze is not split into FB2 directions. Its
   units and range are unresolved in RCEF's inventory, and `piecewise_linear`
@@ -40,6 +44,9 @@ opposing gaze directions to be exclusive, and the data now builds this in.
   before the held-out run. Example data only, not pack data: `examples/rig_gains.py`,
   `examples/data/rig_landmarks.json`, `examples/data/rig_gains.json` and
   `rigs.py --normalise`. Rocketbox Male was never loaded.
+- The examples and the calibration tools read the Rocketbox FBX rigs with
+  msf-tools 0.4.0 itself, so they no longer need `msf-tools-ufbx` or a C
+  compiler.
 
 ## Data 0.3.0 — 2026-10-26
 
