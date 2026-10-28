@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Run check.py and the test suite on the local Python 3.11 and 3.12 venvs and
 # print a pass/fail summary to paste into a pull request. GitHub Actions is not
-# available on these repositories, so this is the CI run.
+# turned on for this repository, so this is the CI run.
 #
 # The venvs default to $MSF/_tools/rcef-venv3.11 and rcef-venv3.12; each must
 # have the msf-character-tools release wheel recorded in

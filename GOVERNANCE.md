@@ -2,7 +2,7 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-The repository is in the Metaverse Standards Forum organization on GitHub. Ken Jakubzak and the Forum's 3D Assets working group own repository publication and releases. The project decides who maintains it and who reviews meaning. This document does not claim a standards mandate or any outside approval.
+Ken Jakubzak and the Forum's 3D Assets working group own repository publication and releases. The project decides who maintains it and who reviews meaning. This document does not claim a standards mandate or any outside approval.
 
 A proposal states the problem, the public evidence, the effect on compatibility, the alternatives, the tests and the open questions. A signal ID stays the same when its label changes. A retired ID needs a documented tombstone. Schema, operator and data versions change independently. A change to meaning or licences needs review before it is published.
 
