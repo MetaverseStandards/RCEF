@@ -153,6 +153,33 @@ class Regression(unittest.TestCase):
         self.assertEqual(ab_compare.regression_families(self.first, self.root), ({}, {}, []))
 
 
+def facs_profile():
+    """A facs.code profile with the planned rows: 49 mapped signals, 25 unresolved and 18 excluded codes."""
+    codes = ab_compare.facs_codec.table()['codes']
+    mapped = ab_compare.facs_codec.signals()
+    others = [(f'facs.code.au{int(c.rstrip("*")):02d}', e['disposition']) for c, e in codes.items()
+              if e['disposition'] in ('unresolved', 'excluded')]
+    signals = [{'id': sid, 'disposition': d, 'domain': {'min': 0.0, 'max': 1.0}}
+               for sid, d in [(s, 'mapped') for s in mapped] + others]
+    return {'signals': signals, 'profiles': [{'id': 'facs.code', 'signal_ids': [s['id'] for s in signals]}]}
+
+
+class FacsFamilies(unittest.TestCase):
+    """The FACS families take the mapped rows only, whatever else the profile holds."""
+
+    def test_the_planned_profile_gives_49_uniform_and_46_letter_channels(self):
+        document = facs_profile()
+        rows = [s['disposition'] for s in document['signals']]
+        self.assertEqual((rows.count('mapped'), rows.count('unresolved'), rows.count('excluded')), (49, 25, 18))
+        sources = ab_compare.pinned_sources(ab_compare.load_a1(), document, {'FACS -> FB2': {'source': 'facs.code'}})
+        self.assertEqual(sources['facs.code']['channels'], ab_compare.facs_codec.signals())
+        letters = next(f for f in ab_compare.registered_families(sources) if f['name'] == 'facs_letters')
+        self.assertEqual(len(letters['channels']), 46)
+        abreg = {'seed_root': 'a' * 64, 'sources': sources, 'families': [{**letters, 'count': 50}]}
+        frames = ab_compare.ab_frames.seeded_families(abreg)['facs_letters']
+        self.assertEqual([f['keys'] for f in frames if ab_compare.facs_codec.read(f['keys']).values is None], [])
+
+
 class Baseline(unittest.TestCase):
     def test_a1_has_no_observed_loss_on_the_impulse_frames(self):
         figures = ab_compare.a1_loss()

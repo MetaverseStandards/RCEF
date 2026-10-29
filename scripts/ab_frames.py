@@ -70,12 +70,17 @@ def opposing_pairs(channels: list[str]) -> list[list[str]]:
     return pairs
 
 
-def pinned_source(document: dict, profile: str) -> dict:
-    """What the generator needs about one source set, copied from a pack document into the registration."""
+def pinned_source(document: dict, profile: str, mapped_only: bool = False) -> dict:
+    """What the generator needs about one source set, copied from a pack document into the registration.
+
+    A provider set keeps every channel but count sentinels (excluded). With
+    mapped_only, only mapped signals are channels: the facs.code rows of codes
+    with no canonical signal are inventory, not values a FACS frame holds.
+    """
     signals = {s['id']: s for s in document['signals']}
     members = next(p['signal_ids'] for p in document['profiles'] if p['id'] == profile)
-    # Count sentinels are inventory records, not weights a runtime reports.
-    channels = [sid for sid in members if signals[sid]['disposition'] != 'excluded']
+    channels = [sid for sid in members if signals[sid]['disposition'] == 'mapped'
+                or not mapped_only and signals[sid]['disposition'] != 'excluded']
     validity = {sid: signals[sid]['validity'] for sid in channels if signals[sid].get('validity')}
     flags = sorted({f.strip() for v in validity.values() for f in v.split(' AND ')})
     domains = {sid: [signals[sid]['domain'].get('min'), signals[sid]['domain'].get('max')] for sid in channels}
