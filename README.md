@@ -105,6 +105,8 @@ The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are 
 
 On the pairs that the direct maps also translate, the composed route gives the same weights as the direct maps (`tests/test_pivot_structure.py`); for META visemes to VRM that is `visemes.to_vrm`. All 348 mappings in the 55 maps of the two canonical sets are proposed and approximate. `scripts/build_canonical.py` writes both profiles and these maps from the two documents.
 
+The viseme pose bridge, `rcef_viseme_pose.to_rcef_expression`, joins the two canonical sets: 99 proposed mappings in 1 map, with 54 helper values in `rcef.intermediate`. It writes canonical expression values from the 9 viseme classes whose held-out cells pass in the calibration record `viseme-poses.rocketbox-female`. `scripts/build_canonical.py` writes it from the record.
+
 ### Mappings
 
 Each row is one map: a group of mappings that turns values in the source set into values in the target set. `verified_current` means that the mapping restates a verified source fact (it copies a provider value to the canonical set). `proposed` means an approximate cross-provider translation that is backed by sources and compiles only with the approximation opt-in. [reports/mappings.md](reports/mappings.md) lists every mapping with its assumptions, losses and evidence. That report also lists the maps that these tables leave out: RCEF's synthetic test maps (`fixture.affine`, `fixture.bilateral`) and `survey.ambiguous`, which is recorded but cannot be executed.
@@ -207,6 +209,14 @@ Each map reads one group and writes the target set's visemes for it. No map read
 | [`rcef_viseme_rest.to_visemes`](reports/mappings.md#rcef_viseme_restto_visemes) | `rcef.canonical_viseme` → `openxr.visemes` | 1 | proposed |
 | [`rcef_viseme_vowel.to_vrm`](reports/mappings.md#rcef_viseme_vowelto_vrm) | `rcef.canonical_viseme` → `vrm.preset` | 5 | proposed |
 
+#### The viseme pose bridge
+
+The bridge goes from the canonical viseme set to the canonical expression set. Each canonical expression signal of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` is the sum of each class weight times the class's pose, clamped at 1. The poses come from the calibration record [`viseme-poses.rocketbox-female`](calibration/README.md): one rig's viseme shapes, measured in its own ARKit shapes. The bridge reads only the 9 classes whose held-out cells pass. So META visemes and VRM vowels can drive ARKit, FB2 and Unified Expressions faces, with the limits that [canonical-set.md](docs/canonical-set.md#viseme-pose-bridge) gives.
+
+| Map | Source set → target set | Mappings | Evidence status |
+|---|---|---|---|
+| [`rcef_viseme_pose.to_rcef_expression`](reports/mappings.md#rcef_viseme_poseto_rcef_expression) | `rcef.canonical_viseme` → `rcef.canonical_expression` | 99 | proposed |
+
 Not translated yet, and why:
 
 - **VRM lookUp/Down/Left/Right:** VRM drives gaze by angle, through range maps whose input is in degrees. FB2 and ARKit publish no maximum angle. A translation needs an operator for angles and curves.
@@ -214,6 +224,7 @@ Not translated yet, and why:
 - **MediaPipe to ARKit:** only one independent implementation (three.js) maps MediaPipe to ARKit. The model card that would state the ARKit basis has not been reviewed.
 - **Unified Expressions to ARKit or FB2:** there is no map from Unified Expressions into the canonical expression set yet. FB2 to Unified Expressions now runs through the canonical expression set.
 - **Unified Expressions shapes with no ARKit counterpart** (cheek suck, mouth tightener, pupil dilation and constriction, tongue directions and others): neither `arkit.to_vrcft_artist` nor `rcef_face.to_vrcft_artist` writes them yet.
+- **Expression to viseme:** a face pose does not identify the sound, so no map goes from the canonical expression set to the canonical viseme set.
 - **Viseme sets other than META and the VRM vowels** (for example Amazon Polly, or sets with one class for several canonical classes): each needs its own audit against the canonical viseme classes before it gets maps.
 
 ### Expression sets
