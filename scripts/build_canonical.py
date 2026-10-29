@@ -694,7 +694,7 @@ class VisemeBuilder:
             for row in table(audit_doc, '## ' + spec['audit']):
                 short = ticks(row['Signal'])[0]
                 if short in self.by_short:
-                    rows[short] = {'verdict': row['Verdict'],
+                    rows[short] = {'verdict': row['Verdict'], 'paraphrase': row['Paraphrase'],
                                    'keys': [k for k in ticks(row['Owning hop, key']) if k in self.keys]}
             self.audit[key] = rows
         self.a16 = {}  # VRM preset -> (META cell and example, VRM remark), from today's viseme map
@@ -821,7 +821,13 @@ class VisemeBuilder:
             return ('correspondence: META viseme SIL, which META calls neutral, corresponds to canonical sil: no speech '
                     'articulation.')
         vowel = next((v for v in self.a16.values() if v[0] == native), None)
-        sounds = f' (META {vowel[1]})' if vowel else ''
+        if vowel:
+            sounds = f' (META {vowel[1]})'
+        else:
+            found = re.match(r'class probability for the sounds? ([^.:]+)', self.audit['visemes'][s['short']]['paraphrase'])
+            if not found:
+                raise SystemExit(f'{s["short"]}: the META audit row names no example sounds')
+            sounds = ' (META ' + re.sub(r' \((.+)\)$', r', read as \1', found.group(1).strip()) + ')'
         return (f'correspondence: META viseme {native}{sounds} corresponds to canonical {s["short"]}; '
                 'RCEF reads META\'s example sounds as members of this IPA shape class.')
 

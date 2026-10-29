@@ -112,7 +112,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme PP corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme PP (META p, b, m) corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -130,7 +130,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme FF corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme FF (META f, v) corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -148,7 +148,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme TH corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme TH (META th, read as θ ð) corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -166,7 +166,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme SS corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme SS (META s, z) corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -184,7 +184,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme CH corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme CH (META tS, dZ, S, read as tʃ dʒ ʃ) corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -202,7 +202,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme DD corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme DD (META t, d) corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -220,7 +220,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme NN corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme NN (META n, l) corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -238,7 +238,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme KK corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme KK (META k, g) corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -256,7 +256,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme RR corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme RR (META r, as in red) corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -435,7 +435,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme PP corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme PP (META p, b, m) corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -453,7 +453,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme FF corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme FF (META f, v) corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -471,7 +471,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme TH corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme TH (META th, read as θ ð) corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -489,7 +489,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme SS corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme SS (META s, z) corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -507,7 +507,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme CH corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme CH (META tS, dZ, S, read as tʃ dʒ ʃ) corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -525,7 +525,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme DD corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme DD (META t, d) corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -543,7 +543,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme NN corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme NN (META n, l) corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -561,7 +561,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme KK corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme KK (META k, g) corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
@@ -579,7 +579,7 @@ disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: META viseme RR corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
+  "correspondence: META viseme RR (META r, as in red) corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
   "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
