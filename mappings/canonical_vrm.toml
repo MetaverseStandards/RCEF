@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # Original RCEF data; attributed source identifiers are factual inventories.
 # Written by scripts/build_canonical.py from docs/canonical-set.md,
-# docs/canonical-set-audit.md and today's direct maps
-# (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run the script.
-# The maps between the canonical expression set and VRM: one map per canonical group and
+# docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and today's
+# direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run
+# the script.
+# The maps between the canonical sets and VRM: one map per canonical group and
 # direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
 
 [[mappings]]
@@ -53,4 +54,207 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
+]
+
+[[mappings]]
+id = "vrm_vowel.to_rcef"
+
+[[mappings.rules]]
+id = "vrm_rcef.vowel_open"
+inputs = ["vrm.preset.aa"]
+outputs = ["rcef.canonical_viseme.vowel_open"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset aa (remark \"aa\") corresponds to canonical vowel_open; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_vowel_asset_weight.",
+  "vrm.probability_as_weight: the VRM expression weight (0 to 1), authored per model, is read as the canonical class probability (0 to 1); the unit changes from VRM's weight to probability.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["vrm.preset.aa", "rcef.canonical_viseme.vowel_open"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "vrm_rcef.vowel_mid_spread"
+inputs = ["vrm.preset.ee"]
+outputs = ["rcef.canonical_viseme.vowel_mid_spread"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset ee (remark \"eh\") corresponds to canonical vowel_mid_spread; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_vowel_asset_weight.",
+  "vrm.probability_as_weight: the VRM expression weight (0 to 1), authored per model, is read as the canonical class probability (0 to 1); the unit changes from VRM's weight to probability.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["vrm.preset.ee", "rcef.canonical_viseme.vowel_mid_spread"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "vrm_rcef.vowel_close_spread"
+inputs = ["vrm.preset.ih"]
+outputs = ["rcef.canonical_viseme.vowel_close_spread"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset ih (remark \"i\") corresponds to canonical vowel_close_spread; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses vrm_vowel_asset_weight and vrm_ih_vowel_quality.",
+  "vrm.probability_as_weight: the VRM expression weight (0 to 1), authored per model, is read as the canonical class probability (0 to 1); the unit changes from VRM's weight to probability.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["vrm.preset.ih", "rcef.canonical_viseme.vowel_close_spread"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_ih_vowel_quality: META IH (ɪ, \"tip\") and VRM ih (remark \"i\") are different vowels in one shape class", "refs" = ["vrm.preset.ih", "rcef.canonical_viseme.vowel_close_spread"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "vrm_rcef.vowel_mid_rounded"
+inputs = ["vrm.preset.oh"]
+outputs = ["rcef.canonical_viseme.vowel_mid_rounded"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset oh (remark \"oh\") corresponds to canonical vowel_mid_rounded; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_vowel_asset_weight.",
+  "vrm.probability_as_weight: the VRM expression weight (0 to 1), authored per model, is read as the canonical class probability (0 to 1); the unit changes from VRM's weight to probability.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["vrm.preset.oh", "rcef.canonical_viseme.vowel_mid_rounded"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "vrm_rcef.vowel_close_rounded"
+inputs = ["vrm.preset.ou"]
+outputs = ["rcef.canonical_viseme.vowel_close_rounded"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset ou (remark \"u\") corresponds to canonical vowel_close_rounded; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_vowel_asset_weight.",
+  "vrm.probability_as_weight: the VRM expression weight (0 to 1), authored per model, is read as the canonical class probability (0 to 1); the unit changes from VRM's weight to probability.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["vrm.preset.ou", "rcef.canonical_viseme.vowel_close_rounded"], "units" = "1" },
+]
+
+[[mappings]]
+id = "rcef_viseme_vowel.to_vrm"
+
+[[mappings.rules]]
+id = "rcef_vrm.aa"
+inputs = ["rcef.canonical_viseme.vowel_open"]
+outputs = ["vrm.preset.aa"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset aa (remark \"aa\") corresponds to canonical vowel_open; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_vowel_asset_weight.",
+  "vrm.probability_as_weight: the canonical class probability (0 to 1) is used directly as the VRM expression weight (0 to 1); the unit changes from probability to VRM's weight.",
+  "vrm.phoneme_label_only: phoneme-label correspondence only; no published table maps META visemes or the canonical classes to VRM presets.",
+  "vrm.downstream_effects: VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["rcef.canonical_viseme.vowel_open", "vrm.preset.aa"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant and rest classes are dropped, so outputs no longer sum to 1", "refs" = ["rcef.canonical_viseme.vowel_open", "vrm.preset.aa"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_vrm.ih"
+inputs = ["rcef.canonical_viseme.vowel_close_spread"]
+outputs = ["vrm.preset.ih"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset ih (remark \"i\") corresponds to canonical vowel_close_spread; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses vrm_vowel_asset_weight and vrm_ih_vowel_quality.",
+  "vrm.probability_as_weight: the canonical class probability (0 to 1) is used directly as the VRM expression weight (0 to 1); the unit changes from probability to VRM's weight.",
+  "vrm.phoneme_label_only: phoneme-label correspondence only; no published table maps META visemes or the canonical classes to VRM presets.",
+  "vrm.downstream_effects: VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["rcef.canonical_viseme.vowel_close_spread", "vrm.preset.ih"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_ih_vowel_quality: META IH (ɪ, \"tip\") and VRM ih (remark \"i\") are different vowels in one shape class", "refs" = ["rcef.canonical_viseme.vowel_close_spread", "vrm.preset.ih"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant and rest classes are dropped, so outputs no longer sum to 1", "refs" = ["rcef.canonical_viseme.vowel_close_spread", "vrm.preset.ih"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_vrm.ou"
+inputs = ["rcef.canonical_viseme.vowel_close_rounded"]
+outputs = ["vrm.preset.ou"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset ou (remark \"u\") corresponds to canonical vowel_close_rounded; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_vowel_asset_weight.",
+  "vrm.probability_as_weight: the canonical class probability (0 to 1) is used directly as the VRM expression weight (0 to 1); the unit changes from probability to VRM's weight.",
+  "vrm.phoneme_label_only: phoneme-label correspondence only; no published table maps META visemes or the canonical classes to VRM presets.",
+  "vrm.downstream_effects: VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["rcef.canonical_viseme.vowel_close_rounded", "vrm.preset.ou"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant and rest classes are dropped, so outputs no longer sum to 1", "refs" = ["rcef.canonical_viseme.vowel_close_rounded", "vrm.preset.ou"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_vrm.ee"
+inputs = ["rcef.canonical_viseme.vowel_mid_spread"]
+outputs = ["vrm.preset.ee"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset ee (remark \"eh\") corresponds to canonical vowel_mid_spread; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_vowel_asset_weight.",
+  "vrm.probability_as_weight: the canonical class probability (0 to 1) is used directly as the VRM expression weight (0 to 1); the unit changes from probability to VRM's weight.",
+  "vrm.phoneme_label_only: phoneme-label correspondence only; no published table maps META visemes or the canonical classes to VRM presets.",
+  "vrm.downstream_effects: VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["rcef.canonical_viseme.vowel_mid_spread", "vrm.preset.ee"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant and rest classes are dropped, so outputs no longer sum to 1", "refs" = ["rcef.canonical_viseme.vowel_mid_spread", "vrm.preset.ee"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_vrm.oh"
+inputs = ["rcef.canonical_viseme.vowel_mid_rounded"]
+outputs = ["vrm.preset.oh"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM preset oh (remark \"oh\") corresponds to canonical vowel_mid_rounded; RCEF reads the remark as a vowel of this IPA shape class.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_vowel_asset_weight.",
+  "vrm.probability_as_weight: the canonical class probability (0 to 1) is used directly as the VRM expression weight (0 to 1); the unit changes from probability to VRM's weight.",
+  "vrm.phoneme_label_only: phoneme-label correspondence only; no published table maps META visemes or the canonical classes to VRM presets.",
+  "vrm.downstream_effects: VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["vrm_expressions", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight", "refs" = ["rcef.canonical_viseme.vowel_mid_rounded", "vrm.preset.oh"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "consonant and rest classes are dropped, so outputs no longer sum to 1", "refs" = ["rcef.canonical_viseme.vowel_mid_rounded", "vrm.preset.oh"], "units" = "1" },
 ]
