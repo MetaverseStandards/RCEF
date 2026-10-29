@@ -1,0 +1,3691 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Written by tools/calibration/viseme_poses.py. Everything but cells and feature_cells was frozen, and
+# its hash written to calibration/FREEZES, before the held-out run.
+format = "rcef.calibration/1"
+id = "viseme-poses.rocketbox-features"
+version = 1
+status = "calibrated_software"
+scope = "software-only; not a measurement of any tracker"
+method = "minimax_bounded_least_squares_pose_fit with a perceptual gate: for each canonical viseme class, one set of ARKit weights in [0, 1] for all 18 training rigs, from the 37 ARKit shapes of the groups face, cheek_puff, jaw_thrust and chin_raise_upper_lip, each Left and Right pair sharing one weight. On each training rig the shape error is |fit - viseme| / |viseme| over every vertex except the tongue (the vertices that the rig's tongueOut moves by more than 1% of its largest move). Every class starts from the weights with the smallest largest shape error (Lawson reweighting: 100 rounds of bounded least squares, each by cyclic coordinate descent to a change below 1e-13). For the gated classes (bilabial, vowel_close_rounded, vowel_mid_spread, alveolar_sibilant), 8 Gauss-Newton steps with Levenberg damping then lower the sum over the training rigs of 1 times the squared shape error plus each squared feature error divided by its tolerance (a range feature: its distance from the middle of the range, divided by half the width). The weights are rounded to 3 decimals and carried to canonical signals by the ARKit in-maps. Each curve gives the canonical value at class weight 1. Features are measured on landmark vertices that each rig's own ARKit shapes pick out (tools/calibration/viseme_poses.py, Mouth). The tolerance of a difference feature is the largest distance of a training rig's own viseme feature from the median over the training rigs, at least 0.5 mm or 0.02, rounded up to 3 decimals. The features and the fit weight 1 were chosen by leave-one-rig-out cross-validation within the training rigs; labiodental and coronal_nasal_lateral have no gate. Shape cell error, one cell per class and held-out rig: |reconstruction - target| / |target - neutral| over the rig's vertices except the tongue, where the target is the rig's own viseme shapes and the reconstruction is the rig's ARKit shapes at the weights that the ARKit out-maps give for clamp(sum of pose times class weight, 0, 1); neutral is that error at weight 0. A condition is a failure if the rig has no shape for the class, or if the target does not move the face but the reconstruction does; its error counts as 1. Feature cell error, one cell per gated class, feature and held-out rig, on the same 24 conditions: the absolute difference between the feature of the reconstruction and of the target, or how far the feature of the reconstruction lies outside its range; whole_face_error is the shape error of the condition. Pass rule: a class passes if its shape cells pass on every held-out rig, or if every one of its feature cells passes (largest error within the tolerance) on every held-out rig. Use: the viseme pose bridge is written from this record alone and reads exactly the classes that pass; it replaces viseme-poses.rocketbox-multi and viseme-poses.rocketbox-female for every class, whether more or fewer classes pass."
+channels = ["rcef.canonical_viseme.vowel_open", "rcef.canonical_viseme.vowel_mid_spread", "rcef.canonical_viseme.vowel_close_spread", "rcef.canonical_viseme.vowel_mid_rounded", "rcef.canonical_viseme.vowel_close_rounded", "rcef.canonical_viseme.bilabial", "rcef.canonical_viseme.labiodental", "rcef.canonical_viseme.dental", "rcef.canonical_viseme.alveolar_sibilant", "rcef.canonical_viseme.postalveolar", "rcef.canonical_viseme.coronal_stop", "rcef.canonical_viseme.coronal_nasal_lateral", "rcef.canonical_viseme.dorsal", "rcef.canonical_viseme.rhotic", "rcef.canonical_viseme.sil"]
+reference_rig = "Microsoft Rocketbox facial FBX files (0943055) of the 18 training rigs Female_Adult_01, _04, _06, _08, _10, _12, _13, _14, _17, Male_Adult_01, _02, _03, _05, _10, _11, _13, _17 and _19: each has 15 viseme shapes and 52 ARKit shapes on one mesh. Held out: Female_Adult_09, _15, Male_Adult_08 and _15. Rig sets by round 3 of the rules in tools/calibration/viseme_rigs.json"
+code_commit = "1393cefd7ac6c1d483ceeb75ef0931d1befc63d5"
+licence = "CC-BY-SA-4.0"
+limitations = [
+  "Software-only geometry of example rigs: the poses are the sculpted viseme shapes of 18 Rocketbox rigs measured in their own ARKit shapes. They say nothing about any tracker, any real face or how people articulate.",
+  "All training and held-out rigs come from one library, and their viseme and ARKit shapes were authored by the same team, so agreement on the held-out rigs may partly reflect shared authoring rather than transfer to independent rigs.",
+  "The perceptual gate checks a few landmark features of the mouth (lip opening and protrusion, corner width, jaw drop) and a loose whole-face guard; a class that passes by it may still differ from its viseme elsewhere on the face by up to the whole motion of the viseme.",
+  "The landmarks are single vertices or small vertex sets of low-polygon meshes, picked out by the rigs' own ARKit shapes; features are as coarse as the meshes, and their tolerances come from 18 rigs of one library.",
+  "The perceptual tolerances are the spread of the training rigs' own visemes, not measured perceptual thresholds; no viewer judged them.",
+  "Teeth and tongue are not represented beyond the teeth landmarks: the tongue is left out of the fit and of the error, and tongueOut is not in the basis.",
+  "The poses write no blink, gaze, jaw_sideways, mouth_shift or tongue_out values. Each Left and Right pair shares one weight, so every pose gives the Left and Right canonical signals equal values; the rigs' Left and Right shapes are not exact mirror images, so the two sides of a rig can still move slightly differently.",
+  "Coarticulation is not modelled: each class is one static pose, and a blend of classes is the clamped sum of their poses; the gate tests each class alone.",
+  "The weights are bounded to [0, 1] by design; whatever viseme motion the 37 ARKit shapes cannot reach that way is lost. On these rigs the ARKit shapes press the lips together only by moving their inner edges past each other, so the bilabial gate asks for closed lips and drawn-back lips, not for the lip compression of the rigs' own bilabial shapes.",
+  "The error is a ratio of Euclidean norms over all vertices except the tongue, so it weighs every vertex equally: large-area motion of the jaw and chin counts more than small lip details.",
+  "Rigs from other libraries render the same ARKit weight differently (record rig-gains.ict-rocketbox-female), so on such a rig the poses give other geometry.",
+  "Every rig held out by an earlier viseme pose record is a training rig here; no earlier record or tool loaded the four held-out rigs of this record.",
+]
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_01_facial.fbx"
+sha256 = "2e6ba71fb83a6899e3d4dd35da07fb5b078eef0c4d593f73d70cfc05dc4644cb"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_01_facial.fbx"
+sha256 = "55771cbbcffb8204dcfe450784c8439ee27bfa48efffc48d325b55ee4bd04388"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_10_facial.fbx"
+sha256 = "7b7208b23688af2f884570a4aaa47ef803442fba2bdb2433f196bb977459e4b5"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_08_facial.fbx"
+sha256 = "a98436064305b968d8bbf8a84632c746dbf5674c572f1916264f13ce53e7422d"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_12_facial.fbx"
+sha256 = "0dd67a4fd3f9d9b3a73d17e0862742ebb3197016387915b41f4815d50308c7ef"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_14_facial.fbx"
+sha256 = "8fcaa34c4ed5c3ea5f6b9add7e9a39ac0184d11232688102ef0811ef8cf2914c"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_17_facial.fbx"
+sha256 = "e779639155a145c027c54f7f6d91a2a82ad4be862bebee64337ef08245cb86b2"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_13_facial.fbx"
+sha256 = "acf0693228d3c3bca085f724aae2965c904b38d768bc0a71ba8a4606ab806549"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_03_facial.fbx"
+sha256 = "88aedb2f47ce68dab7ddaf1f53f6357290dc4edb69fc26e3d5fa27d18ee0785a"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_10_facial.fbx"
+sha256 = "e62c3c1345150d4cfebf454fbcb906d3cc8f4c846f4ee63e06d6928438b409a3"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_04_facial.fbx"
+sha256 = "ce83b428828314ef675d1a64ca17d8c3d2178cc4f8b3e80273483f83f08748fb"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_13_facial.fbx"
+sha256 = "fd3aabfd6e34ada38d3d7137075e4955701234cfc0f40613eae07f3750a36983"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_05_facial.fbx"
+sha256 = "2ae6474a98d477d3c46553cb93ea3d452179afa4756db18c23e8aec97982a161"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_11_facial.fbx"
+sha256 = "7c58b696c6f570a13dc6cb4d22f71d7ea82884eca095549fe2122c94a7f0b857"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_06_facial.fbx"
+sha256 = "b91c6e50deea83521f71f1d75b08bd1b34ef81d9b5ca4daf71a40ed64cf2ae90"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_17_facial.fbx"
+sha256 = "9d17d5b7d9dc32f5e975ab8d8cd269cc5469cfd95c2f34305c5df3259ed0a8de"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_19_facial.fbx"
+sha256 = "1f6d57d7bee1b792719b383f6d7a9136be3e55dda43cc3d308c302a966139241"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_02_facial.fbx"
+sha256 = "0f8dea5317896e16a4490ca76f7273cdaf513cc50eb855d228826ed874a15186"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_15_facial.fbx"
+sha256 = "aad9bf0fdbbd68ecd0bb692e0d79bab05fef6932d6e8ae27349c78fd49986a81"
+
+[[inputs]]
+name = "Microsoft Rocketbox Female_Adult_09_facial.fbx"
+sha256 = "4378899297e2acde9b331e6e55f83acff70ae5c26c86438231fb83770831f04a"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_08_facial.fbx"
+sha256 = "a736f359d8adb61436de72fd59ba0acac4b42d18751b22ac4d3e2b574d7a71e0"
+
+[[inputs]]
+name = "Microsoft Rocketbox Male_Adult_15_facial.fbx"
+sha256 = "14d1e398fb0dc762eafa1e457cf8fc4f151aefc5b54c8b3e6093486b10bbb380"
+
+[[inputs]]
+name = "Microsoft Rocketbox LICENSE.md"
+sha256 = "17474e386e0b9e1a700cc3d06b2b0882a2c376d9c6b49c7f8274409b8f8d2352"
+
+[[inputs]]
+name = "RCEF generated/rcef.pack.json (the ARKit in-maps and out-maps)"
+sha256 = "fb1b08385ed7cd8b90fdb09258b7479c43b191ac42b41601f32e34dca5ba5b6b"
+
+[training]
+conditions = 270
+description = "The 15 viseme shapes of each of the 18 training rigs (Female_Adult_01, _04, _06, _08, _10, _12, _13, _14, _17, Male_Adult_01, _02, _03, _05, _10, _11, _13, _17 and _19) at weight 1, fitted once per class over all rigs, each rig without its tongue (21 to 27 vertices). Shape residual |viseme - fit| / |viseme| after rounding, median/largest over the training rigs: vowel_open 0.286/0.300, vowel_mid_spread 0.605/0.633, vowel_close_spread 0.369/0.397, vowel_mid_rounded 0.303/0.317, vowel_close_rounded 0.678/0.914, bilabial 0.733/0.804, labiodental 0.909/0.930, dental 0.251/0.259, alveolar_sibilant 0.648/0.757, postalveolar 0.456/0.504, coronal_stop 0.285/0.295, coronal_nasal_lateral 0.521/0.536, dorsal 0.329/0.396, rhotic 0.554/0.589, sil 0.000/0.000 (sil does not move the face). Largest feature error over the training rigs (mm or ratio; range features: outside the range): bilabial: lip_opening_mm 0.000, lip_protrusion_mm 0.079; vowel_close_rounded: corner_width_ratio 0.024, lip_protrusion_mm 0.259; vowel_mid_spread: corner_width_ratio 0.087, lip_opening_mm 0.361; alveolar_sibilant: lip_opening_mm 0.566, jaw_drop_mm 0.001."
+
+[held_out]
+seed_rule = "rcef.calibration.seeds/1"
+count = 24
+frozen_sha256 = "ddde4315edf7071c85293b94641191983f59091107ceb4b70f0c9eb7c926c9c1"
+
+[evaluation]
+min_conditions = 24
+
+[evaluation.bounds."rcef.canonical_viseme.vowel_open"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.vowel_mid_spread"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.vowel_close_spread"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.vowel_mid_rounded"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.vowel_close_rounded"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.bilabial"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.labiodental"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.dental"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.alveolar_sibilant"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.postalveolar"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.coronal_stop"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.coronal_nasal_lateral"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.dorsal"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.rhotic"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."rcef.canonical_viseme.sil"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[[features]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_opening_mm"
+kind = "range"
+units = "mm"
+low = -2.0
+high = 0.5
+tolerance = 0.0
+description = "signed vertical opening of the lips on the mid line, in mm: the lowest upper-lip landmark minus the highest lower-lip landmark (negative when the inner edges overlap)"
+
+[[features]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_protrusion_mm"
+kind = "difference"
+units = "mm"
+tolerance = 0.5
+description = "forward movement of the mid-line lip landmarks from neutral, mean, in mm"
+
+[[features]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "whole_face_error"
+kind = "range"
+units = "1"
+low = 0.0
+high = 1.0
+tolerance = 0.0
+description = "the whole-mesh shape error of the condition (as in the shape cells); at most 1 means the reconstruction is no further from the target than the neutral face is"
+
+[[features]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "corner_width_ratio"
+kind = "difference"
+units = "1"
+tolerance = 0.041
+description = "distance between the two mouth-corner landmarks, divided by the neutral distance"
+
+[[features]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "lip_protrusion_mm"
+kind = "difference"
+units = "mm"
+tolerance = 0.732
+description = "forward movement of the mid-line lip landmarks from neutral, mean, in mm"
+
+[[features]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "whole_face_error"
+kind = "range"
+units = "1"
+low = 0.0
+high = 1.0
+tolerance = 0.0
+description = "the whole-mesh shape error of the condition (as in the shape cells); at most 1 means the reconstruction is no further from the target than the neutral face is"
+
+[[features]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "corner_width_ratio"
+kind = "difference"
+units = "1"
+tolerance = 0.197
+description = "distance between the two mouth-corner landmarks, divided by the neutral distance"
+
+[[features]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "lip_opening_mm"
+kind = "difference"
+units = "mm"
+tolerance = 0.779
+description = "signed vertical opening of the lips on the mid line, in mm: the lowest upper-lip landmark minus the highest lower-lip landmark (negative when the inner edges overlap)"
+
+[[features]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "whole_face_error"
+kind = "range"
+units = "1"
+low = 0.0
+high = 1.0
+tolerance = 0.0
+description = "the whole-mesh shape error of the condition (as in the shape cells); at most 1 means the reconstruction is no further from the target than the neutral face is"
+
+[[features]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "lip_opening_mm"
+kind = "difference"
+units = "mm"
+tolerance = 2.35
+description = "signed vertical opening of the lips on the mid line, in mm: the lowest upper-lip landmark minus the highest lower-lip landmark (negative when the inner edges overlap)"
+
+[[features]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "jaw_drop_mm"
+kind = "difference"
+units = "mm"
+tolerance = 0.5
+description = "downward movement of the lower-teeth landmarks from neutral, mean, in mm"
+
+[[features]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "whole_face_error"
+kind = "range"
+units = "1"
+low = 0.0
+high = 1.0
+tolerance = 0.0
+description = "the whole-mesh shape error of the condition (as in the shape cells); at most 1 means the reconstruction is no further from the target than the neutral face is"
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.82]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.82]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.451]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.451]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.451]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.451]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.882]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.882]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_open"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.595]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.213]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.623]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.623]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.206]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.206]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.287]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.287]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.697]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.697]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_spread"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.348]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.005]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.005]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.201]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.05]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.05]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.098]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.098]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.104]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.104]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.823]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.823]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_spread"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.01]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.01]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.006]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.006]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.131]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.131]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.583]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.702]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.702]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.671]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.671]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.671]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.671]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.729]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.729]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.887]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.887]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_mid_rounded"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.106]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.106]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.078]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.078]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.477]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.477]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.477]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.477]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.291]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.291]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.016]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.002]]
+
+[[curves]]
+input = "rcef.canonical_viseme.vowel_close_rounded"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.04]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.228]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.228]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.074]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.074]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.074]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.074]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.498]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.498]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.26]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.26]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.083]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.083]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.177]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.177]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.018]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.018]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.bilabial"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.071]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.177]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.177]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.01]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.01]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.101]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.101]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.101]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.101]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.297]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.297]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.271]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.271]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.122]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.122]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.005]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.005]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.046]]
+
+[[curves]]
+input = "rcef.canonical_viseme.labiodental"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.617]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.13]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.243]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.243]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.348]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.348]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.017]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.017]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.988]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.988]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dental"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.239]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.236]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.236]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.882]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.882]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.102]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.102]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.03]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.03]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.077]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.077]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.977]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.977]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.alveolar_sibilant"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.155]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.046]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.334]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.334]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.334]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.334]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.115]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.115]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.072]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.072]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.postalveolar"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.534]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.009]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.009]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.005]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.005]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.109]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.109]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.315]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.574]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.574]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.152]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.152]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.152]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.152]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.447]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.447]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.276]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.276]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.018]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.018]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_stop"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.311]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.018]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.117]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.117]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.203]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.203]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.203]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.203]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.492]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.492]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.977]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.977]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.007]]
+
+[[curves]]
+input = "rcef.canonical_viseme.coronal_nasal_lateral"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.463]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.047]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.009]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.009]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.001]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.098]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.098]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 1.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.017]]
+
+[[curves]]
+input = "rcef.canonical_viseme.dorsal"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.171]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.015]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.057]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.057]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.225]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.225]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.225]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.225]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.688]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.688]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.147]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.147]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.55]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.55]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.017]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.017]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.rhotic"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.brow_inner_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.brow_inner_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.brow_outer_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.brow_outer_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.brow_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.brow_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lid_tighten_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lid_tighten_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.upper_lid_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.upper_lid_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.cheek_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.cheek_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.nose_wrinkle_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.nose_wrinkle_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.jaw_drop"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_corner_pull_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_corner_pull_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_corner_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_corner_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.dimple_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.dimple_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_stretch_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_stretch_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.chin_raise"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_funnel_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_funnel_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_funnel_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_funnel_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_pucker_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_pucker_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_suck_upper_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_suck_upper_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_suck_lower_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_suck_lower_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_press_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lip_press_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lips_toward"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.upper_lip_raise_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.upper_lip_raise_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lower_lip_depress_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.lower_lip_depress_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.cheek_puff_left"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.cheek_puff_right"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.jaw_thrust"
+knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[curves]]
+input = "rcef.canonical_viseme.sil"
+output = "rcef.canonical_expression.chin_raise_upper_lip"
+knots = [[0.0, 0.0], [1.0, 0.0]]
