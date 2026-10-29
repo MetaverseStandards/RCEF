@@ -700,8 +700,8 @@ class VisemeBuilder:
         self.a16 = {}  # VRM preset -> (META cell and example, VRM remark), from today's viseme map
         for rule in self.a1['maps']['visemes.to_vrm']:
             for text in rule['assumptions']:
-                found = re.match(r'^META viseme (\w+) corresponds to VRM preset (\w+) \(META (.+); VRM remark (.+)\)\.$',
-                                 text)
+                found = re.match(
+                    r'^META viseme (\w+) corresponds to VRM preset (\w+) \(META (.+); VRM remark (.+)\)\.$', text)
                 if found:
                     self.a16[found.group(2)] = (found.group(1), found.group(3), found.group(4))
 
@@ -818,11 +818,12 @@ class VisemeBuilder:
     def meta_correspondence(self, s: dict) -> str:
         native = s['meta']
         if s['short'] == 'sil':
-            return 'correspondence: META viseme SIL, which META calls neutral, corresponds to canonical sil: no speech articulation.'
+            return ('correspondence: META viseme SIL, which META calls neutral, corresponds to canonical sil: no speech '
+                    'articulation.')
         vowel = next((v for v in self.a16.values() if v[0] == native), None)
         sounds = f' (META {vowel[1]})' if vowel else ''
-        return (f'correspondence: META viseme {native}{sounds} corresponds to canonical {s["short"]}; RCEF reads META\'s '
-                'example sounds as members of this IPA shape class.')
+        return (f'correspondence: META viseme {native}{sounds} corresponds to canonical {s["short"]}; '
+                'RCEF reads META\'s example sounds as members of this IPA shape class.')
 
     def meta_hop(self, s: dict, direction: str) -> dict:
         sid, cid = self.sid('visemes', s['meta']), self.cid(s['short'])
@@ -859,9 +860,9 @@ class VisemeBuilder:
                        self.endpoints('vrm', [s['short']], CLAUSES['in_copy'])]
         losses = self.audit_losses('vrm', [s['short']])
         if direction == 'in':
-            assumptions.append('vrm.probability_as_weight: the VRM expression weight (0 to 1), authored per model, is '
-                               'read as the canonical class probability (0 to 1); the unit changes from VRM\'s weight to '
-                               'probability.')
+            assumptions.append('vrm.probability_as_weight: the VRM expression weight (0 to 1), authored per model, '
+                               'is read as the canonical class probability (0 to 1); the unit changes from VRM\'s '
+                               'weight to probability.')
             rid, inputs, outputs = f'vrm_rcef.{s["short"]}', [sid], [cid]
         else:
             assumptions += ['vrm.probability_as_weight: the canonical class probability (0 to 1) is used directly as '

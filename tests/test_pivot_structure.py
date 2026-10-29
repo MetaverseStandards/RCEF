@@ -355,10 +355,12 @@ class PivotStructure(unittest.TestCase):
                 canonical = self.canonical(rule)
                 if rule['outputs'][0].startswith(INTERMEDIATE) and rule['outputs'] != [SUM]:
                     canonical = []
-                expected = {k for c in canonical for k in self.audit_row(key, c)['keys']}
-                expected |= {k for c in canonical for k in build_canonical.HOP_KEYS.get((key, direction, self.group[c]), [])}
-                if key == 'arkit':
-                    expected |= {k for c in canonical for k in self.docs['ict'].get(c[len(PREFIX):], {}).get('keys', [])}
+                expected = set()
+                for c in canonical:
+                    expected |= set(self.audit_row(key, c)['keys'])
+                    expected |= set(build_canonical.HOP_KEYS.get((key, direction, self.group[c]), []))
+                    if key == 'arkit':
+                        expected |= set(self.docs['ict'].get(c[len(PREFIX):], {}).get('keys', []))
                 # The audit's META viseme scope row owns every META copy hop.
                 if key == 'visemes' and self.kind(direction, key, rule, rules).endswith('_copy'):
                     expected.add(build_canonical.VISEME_SCOPE_KEY)

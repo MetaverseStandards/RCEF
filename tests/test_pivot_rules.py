@@ -38,7 +38,8 @@ SETS = {'arkit': ('arkit.coefficient', 'ARKit', ['apple_blendshapes']),
         'visemes': ('openxr.visemes', 'META', ['xr_visemes', 'xr_registry'])}
 AUDIT_SECTIONS = {'## FB2': 'fb2', '## ARKit': 'arkit', '## VRCFaceTracking Unified Expressions': 'vrcft_artist',
                   '## VRM': 'vrm', '## META visemes': 'visemes'}
-HOP = re.compile(r'^(?:(arkit|fb2|vrcft_artist|vrm|visemes)_\w+\.to_rcef|rcef_\w+\.to_(arkit|fb2|vrcft_artist|vrm|visemes))$')
+SET_KEYS = 'arkit|fb2|vrcft_artist|vrm|visemes'
+HOP = re.compile(rf'^(?:({SET_KEYS})_\w+\.to_rcef|rcef_\w+\.to_({SET_KEYS}))$')
 DIRECT = ('arkit.to_fb2', 'arkit_gaze.to_fb2', 'fb2.to_arkit', 'fb2_gaze.to_arkit', 'arkit.to_vrcft_artist',
           'fb2.to_vrm', 'visemes.to_vrm')
 VRM_WEIGHT = 'a canonical value becomes an asset-authored expression weight'
