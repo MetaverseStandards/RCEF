@@ -107,7 +107,7 @@ class OracleMatchesMsf(unittest.TestCase):
         for mapping, (source, _) in MAPS.items():
             with self.subTest(mapping):
                 rng = random.Random(f'ab_oracle {mapping}')
-                spec = {'name': 'random', 'count': RANDOM_FRAMES}
+                spec = {'name': 'random', 'count': RANDOM_FRAMES, 'range': [0.0, 1.0]}
                 self.compare(mapping, ab_frames.uniform_family(spec, self.sources[source], rng))
 
     def test_gaze_pairs_that_break_exclusivity_keep_only_the_difference(self):

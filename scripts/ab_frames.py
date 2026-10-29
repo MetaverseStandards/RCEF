@@ -208,7 +208,7 @@ def facs_key_impulses(name: str, sided: list[str], shared: list[str], directions
 # ---------------------------------------------------------------- seeded families
 
 def uniform_family(spec, source, rng):
-    low, high = spec.get('range', [0.0, 1.0])
+    low, high = spec['range']
     frames = []
     for n in range(spec['count']):
         values = {sid: mixed(rng, low, high) for sid in source['channels']}
@@ -228,29 +228,32 @@ def uniform_family(spec, source, rng):
 
 
 def simplex_family(spec, source, rng):
-    """Class probabilities that sum to 1 in decimal: 10**6 split at random cut points."""
-    frames, k = [], len(source['channels'])
+    """Class probabilities that sum to 1 in decimal: 10**decimals split at random cut points.
+
+    Decimal values only: full-mantissa values could not be made to sum to 1.
+    """
+    frames, k, scale = [], len(source['channels']), 10 ** spec['decimals']
     for _ in range(spec['count']):
-        cuts = sorted(below(rng, DECIMALS + 1) for _ in range(k - 1))
-        parts = [b - a for a, b in zip([0] + cuts, cuts + [DECIMALS])]
-        frames.append(frame(spec['name'], 'simplex', {sid: p / DECIMALS for sid, p in zip(source['channels'], parts)},
+        cuts = sorted(below(rng, scale + 1) for _ in range(k - 1))
+        parts = [b - a for a, b in zip([0] + cuts, cuts + [scale])]
+        frames.append(frame(spec['name'], 'simplex', {sid: p / scale for sid, p in zip(source['channels'], parts)},
                             source))
     return frames
 
 
 def vrm_family(spec, source, rng):
     """Uniform frames, frames with only the both-eyes blink set, all-zero frames and multi-vowel frames, in turn."""
-    frames = []
+    frames, low, high = [], *spec['range']
     for n in range(spec['count']):
         kind = n % 4
         if kind == 0:
-            values, label = {sid: mixed(rng) for sid in source['channels']}, 'uniform'
+            values, label = {sid: mixed(rng, low, high) for sid in source['channels']}, 'uniform'
         elif kind == 1:
-            values, label = {**zero(source), spec['blink']: mixed(rng)}, 'only blink'
+            values, label = {**zero(source), spec['blink']: mixed(rng, low, high)}, 'only blink'
         elif kind == 2:
             values, label = zero(source), 'all zero'
         else:
-            values, label = {**zero(source), **{v: mixed(rng) for v in spec['vowels']}}, 'several vowels'
+            values, label = {**zero(source), **{v: mixed(rng, low, high) for v in spec['vowels']}}, 'several vowels'
         frames.append(frame(spec['name'], label, values, source))
     return frames
 
@@ -261,7 +264,7 @@ def letter_family(spec, rng):
     for _ in range(spec['count']):
         keys = {}
         for sid in spec['channels']:
-            value = LETTER_VALUES[below(rng, len(LETTER_VALUES))]
+            value = spec['values'][below(rng, len(spec['values']))]
             if value:
                 keys[facs_key(sid)] = value
         frames.append({'family': spec['name'], 'label': 'letters', 'keys': keys})
