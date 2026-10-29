@@ -5,7 +5,7 @@ Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards For
 
 **Author affiliation: to be added by the release owners before this document goes to the working group.**
 
-**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with 60 of its 72 signals (every group except `cheek_suck`, `lip_tighten`, `tongue_place` and the pupils), and the maps of ARKit, FB2, Unified Expressions and VRM blinks. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
+**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with 60 of its 72 signals (every group except `cheek_suck`, `lip_tighten`, `tongue_place` and the pupils), and the maps of ARKit, FB2, Unified Expressions and VRM blinks. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels, and the [viseme pose bridge](#viseme-pose-bridge) from the viseme set to the expression set. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
 
 This document uses the proposal form of [GOVERNANCE.md](../GOVERNANCE.md): the problem, the proposal, the public evidence, the effect on compatibility, the alternatives, the tests and the open questions. Two documents go with it:
 
@@ -404,6 +404,32 @@ Each viseme signal has these metadata fields, in addition to the [fields](#field
 - `group`, `aligned_names` (META and VRM names, as facts) and `audit` (pointers to the audit rows);
 - on aggregates, `aggregates` (the list of classes); on refinements, `refines`.
 
+### Viseme pose bridge
+
+A viseme is a mouth shape, so each class reaches a pose of the face. The bridge `rcef_viseme_pose.to_rcef_expression` writes canonical expression values from canonical viseme values:
+
+expression_j = clamp(Σ_c pose[c][j] · viseme_c, 0, 1)
+
+Here pose[c][j] is the value that class *c* at weight 1 gives expression signal *j*. With the bridge, META visemes and the VRM vowels can drive ARKit, FB2 and Unified Expressions faces, also on rigs that have no viseme shapes of their own, such as ICT-FaceKit.
+
+- **Where the poses come from.** The calibration record `viseme-poses.rocketbox-female` (record `calibration.viseme-poses.rocketbox-female`) fits each of Rocketbox Female's 15 META viseme shapes as a combination of her own ARKit shapes, with weights from 0 to 1, by bounded least squares on the vertex displacements. Each Left and Right pair shares one weight, so a pose moves both sides equally. The fit leaves out the tongue, the eyes, the sideways jaw and mouth shifts and `tongueOut`. The ARKit in-maps, which are copies, then carry each weight to its canonical signals. [tools/calibration](../tools/calibration/README.md#viseme-poses-meta-viseme-shapes-in-arkit-shapes-viseme_posespy) gives the method.
+- **Held-out test.** The poses and the bounds were frozen, and the ledger line committed, before the evaluation on Rocketbox Male, a rig that the fit did not load. The error of a class is the distance between Male's own viseme shape and Male's ARKit shapes at the bridged weights, divided by how far the viseme shape moves the face. A class passes if this error is at most 0.5: the bridged pose is off by at most half of the viseme's own motion.
+- **Which classes the bridge reads.** 9 of the 15 classes pass, and the bridge reads only those: `vowel_open`, `vowel_close_spread`, `vowel_mid_rounded`, `dental`, `coronal_stop`, `coronal_nasal_lateral`, `dorsal`, `rhotic` and `sil`. Their errors on Male are 0.22 to 0.48; `sil` moves neither rig, so its pose is the neutral face. `vowel_mid_spread` (0.51), `postalveolar` (0.52), `vowel_close_rounded` (0.59), `alveolar_sibilant` (0.64), `bilabial` (0.67) and `labiodental` (0.92) fail. They stay in the record as negative results, and no mapping reads them. So weight on them moves no expression signal: a META PP frame (lips closed for p b m) gives a neutral face through the bridge, and Route lists the PP value as dropped. From VRM, `aa`, `ih` and `oh` drive the bridge; `ee` and `ou` are dropped.
+- **What it writes.** All 45 signals of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip`. A pose that the fit found as 0, for example on the brows, is written as 0. The bridge writes no `blink`, `gaze`, `jaw_sideways`, `mouth_shift` or `tongue_out` value, so out-maps of those groups label their outputs "not available from source".
+- **How it is written.** For each class, a copy into a helper `rcef.intermediate.viseme_pose_<class>`; the unit changes there from probability to 1. For each expression signal, a `weighted_sum` of the 9 helpers, with the frozen poses as weights, into `rcef.intermediate.viseme_pose_sum_<signal>` (0 to 9), then the clamp knots (0, 0), (1, 1), (9, 1). The weighted sums cite the record, and `check.py` refuses them unless each weight is exactly the record's frozen pose and every cell of each class read passes ([calibration/README.md](../calibration/README.md#mappings-that-cite-a-record)). These weights and knots are named census exceptions, allowed only in this map. `scripts/build_canonical.py` writes the map and its 54 helpers from the record.
+- **Evidence status.** The record's status is `calibrated_software`. Pack schema 1.0 has no such value, so every mapping of the bridge is `proposed` and `approximate`, and says so in its assumptions.
+- **Routes.** Route runs the bridge only when the target reads what it writes, the source cannot write that itself, and the source writes some of what the bridge reads: from META or VRM to ARKit, FB2 or Unified Expressions. Then the route runs in-maps, the bridge, then out-maps. A class that no selected in-map can write (VRM has no consonants and no `sil`) counts as 0 in the bridge's sum, and the frame's notes say so. A refused in-map refuses the bridge's outputs on that frame. Every other route gives the same values as without the bridge.
+
+**Limits.**
+
+- The poses are one rig's: Rocketbox Female's sculpted shapes, measured in her ARKit units. Other rigs render the same ARKit weights differently (record `rig-gains.ict-rocketbox-female`: 3 of 51 shapes pass), so on ICT-FaceKit or any other rig the same weights give other geometry.
+- A pose value is a fit coefficient, not a statement about the action. For example, the `vowel_open` pose has `lip_suck_upper` at 1, because Rocketbox's ARKit shapes need it to reach her sculpted open mouth.
+- Rocketbox Female and Male come from one library, with ARKit shapes by the same authors. A pass on Male may partly show shared authoring, not transfer to independent rigs.
+- Coarticulation is not modelled: each class is one static pose, and the poses of a blend add up. Teeth and tongue are not represented.
+- The test is software-only. It says nothing about any tracker or any real face.
+
+**No expression to viseme map.** The bridge goes one way. A face pose does not identify the sound: `coronal_stop`, `coronal_nasal_lateral` and `dorsal` have no lip target of their own, and different classes can reach similar poses. So RCEF has no map from the canonical expression set to the canonical viseme set, and it does not plan one.
+
 ## Eye closure from VRM and VRCFaceTracking
 
 - **VRM `blink` is not read.** VRM has `blinkLeft`, `blinkRight` and `blink`, which closes both eyes (`vrm_expressions` lines 177-179). The VRM in-map reads only `blinkLeft` and `blinkRight`. It declares the loss "VRM blink (both eyes) not read; when a model drives only blink, eye_close reads open", and the route lists a non-zero `blink` as dropped. Toward VRM, the out-map writes `blinkLeft` and `blinkRight` and leaves `blink` unset, with today's loss.
@@ -425,6 +451,7 @@ The table never applies one note to every cell.
 ## What the set does not claim
 
 - **No measured quantities:** no shared or measured gain, response curve or angle, and no physical length except the pupil diameter. In-between values are only assumed to correspond, per hop.
+- **No viseme from a pose:** the [viseme pose bridge](#viseme-pose-bridge) goes from visemes to expressions only.
 - **No equivalence:** not equal geometry on any rig, not the same pose across providers, not that shapes add up, not that opposing gaze directions are possible together, and not that sources agree at 0 and 1 (this is assumed).
 - **No status:** no FACS, MPEG-4 or OpenXR conformance, no completeness, no outside approval or endorsement, and no claim that everyone must adopt it. The status `accepted` is RCEF's own status only ([How the set grows](#how-the-set-grows)).
 - **No FACS coding.** RCEF values are not FACS scores, and RCEF does not code faces ([facs-intensity.md](facs-intensity.md)).
@@ -587,7 +614,9 @@ These tests come with the data change:
 - a capability matrix: for each set (FACS, FB v1, `XR_ANDROID_face_tracking` and `XR_ML_facial_expression`, from a committed list of their names with record and locator), which canonical groups it can fill, plus a synthetic partial source;
 - a FACS-crosswalk record goes only on hops of the provider whose names it uses (`ict_facekit`: ARKit hops only), and no crosswalk record goes on a FACS hop;
 - for `facs.code`: 92 rows with the dispositions 49, 25 and 18; the ID pattern; the calibration strings; `facs_au` agrees with the FACS maps;
-- for the visemes: every one of the 107 chart symbols in exactly one partition class; the 113 rule cases and the 4 symbols with no rule; refinements are subsets of one class and aggregates unions of whole classes in one group; only the 15 partition signals carry `probability_simplex`; every IPA string is in NFC; the aggregate in-map's clause and its fan-in are the only operators outside the census; its chain gives the clamped binary64 sum of META SS, DD, NN and RR on random frames; no route selects it; no out-map reads an aggregate or refinement together with any of its parts.
+- for the visemes: every one of the 107 chart symbols in exactly one partition class; the 113 rule cases and the 4 symbols with no rule; refinements are subsets of one class and aggregates unions of whole classes in one group; only the 15 partition signals carry `probability_simplex`; every IPA string is in NFC; the aggregate in-map's clause and its fan-in are the only hop operators outside the census; its chain gives the clamped binary64 sum of META SS, DD, NN and RR on random frames; no route selects it; no out-map reads an aggregate or refinement together with any of its parts.
+
+- for the viseme pose bridge (`tests/test_pose_bridge.py`, without the generator): it reads only the partition classes whose held-out cells pass; each weight is the record's frozen pose; the copy, sum and clamp chain gives the clamped sum on random frames; it writes whole expression groups; Route runs it only from META or VRM to ARKit, FB2 or Unified Expressions, and every other route gives the same values as without it.
 
 ## Open questions
 
@@ -599,6 +628,7 @@ These tests come with the data change:
 - What are the real ranges of VRCFaceTracking `Openness` and `PupilDiameter_MM`?
 - Should the tongue-position signals ever be linked to the Unified Expressions tongue directions?
 - Who in the working group reviews meaning, and how long does it take?
+- Would a pose fit with the tongue, or on a rig whose ARKit and viseme shapes come from different authors, pass for the six classes that fail on Rocketbox Male? A second held-out rig with its own viseme shapes would test transfer better than one library.
 - Are y vs u, ɯ vs i, o ɔ vs ɑ, r ɹ ɻ vs w and unlabialised r ɹ ɻ vs t d n l visibly different outside English? No study RCEF read measures these contrasts; the rounding rule infers them from studies of rounding as a feature. The split of tap ɾ (`coronal_stop`) from trill r (`rhotic`) follows META, with no shape evidence; both are in one floor shape.
 - Does labialised English /ʃ ʒ/ make the postalveolar split look larger in the English maps than the IPA shapes would? The only source is marked "citation needed", so the rounding rule is not applied there.
 

@@ -29,7 +29,7 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 ### The data (edit these)
 
 - `profiles/`: one file per public expression set, for example ARKit, OpenXR FB2 or VRM. Each file lists the set's signals: name, value range (often 0 to 1), face side, neutral value and public source.
-- `data/`: RCEF's own sets. `canonical.toml` is the canonical set of 21 signals. `canonical_expression.toml` is the draft canonical expression set of 60 signals, and `canonical_viseme.toml` the draft canonical viseme set of 16 signals. `intermediate.toml` holds 9 helper values: 4 that the ARKit → FB2 gaze map uses inside, 4 that the map from the canonical expression set to FB2 gaze uses inside, and 1 that the META map to `alveolar_floor` uses inside.
+- `data/`: RCEF's own sets. `canonical.toml` is the canonical set of 21 signals. `canonical_expression.toml` is the draft canonical expression set of 60 signals, and `canonical_viseme.toml` the draft canonical viseme set of 16 signals. `intermediate.toml` holds 63 helper values: 4 that the ARKit → FB2 gaze map uses inside, 4 that the map from the canonical expression set to FB2 gaze uses inside, 1 that the META map to `alveolar_floor` uses inside, and 54 that the viseme pose bridge uses inside (`scripts/build_canonical.py` writes those).
 - `mappings/`: the maps. A map turns the signals of one set into those of another, for example FB2 into ARKit. Each mapping names its inputs, outputs and formula (a copy, a scale and offset, a weighted sum or a curve), and states its assumptions and losses. The `canonical_*.toml` files hold the maps into and out of the canonical expression set.
 - `evidence/`: `sources.toml` lists each public source with its exact revision and SHA-256. `tooling.lock.json` pins the msf-character-tools build that checks the data. `input-contracts/` holds an optional schema that RCEF does not use.
 - `calibration/`: curves fitted to software renders of example faces. The `FREEZES` ledger only grows. It shows that each fit was fixed before it was tested.
@@ -359,11 +359,11 @@ To check only the reports with Python's standard library, run `python3 -B script
 
 ## Examples
 
-[examples/README.md](examples/README.md) uses RCEF from start to end with the msf-character-tools public API. It translates FB2 frames to ARKit weights, and META visemes to VRM presets, from CSV. It then drives two Microsoft Rocketbox faces and the ICT-FaceKit face with a FACS-based expression library, both directly and through RCEF's mappings, and reports the residuals. It also renders a short spoken phrase as visemes on Rocketbox and on a VRM model.
+[examples/README.md](examples/README.md) uses RCEF from start to end with the msf-character-tools public API. It translates FB2 frames to ARKit weights, and META visemes to VRM presets, from CSV. It then drives two Microsoft Rocketbox faces and the ICT-FaceKit face with a FACS-based expression library, both directly and through RCEF's mappings, and reports the residuals. It also renders a short spoken phrase as visemes on Rocketbox and on a VRM model, and drives Rocketbox Male and ICT-FaceKit with visemes through the viseme pose bridge.
 
 ## Calibration
 
-[calibration/](calibration/README.md) holds software-only calibration records. They are fits to renders of example rigs, not measurements of a tracker. `check.py` refuses a mapping that cites a record unless the mapping's knots are exactly the record's frozen knots and every held-out cell for its channel passed. No mapping in data 0.5.0 cites a record. The renderer for those fits is in [tools/render/](tools/render/README.md), and the tools that make the records are in [tools/calibration/](tools/calibration/README.md).
+[calibration/](calibration/README.md) holds software-only calibration records. They are fits to renders or mesh geometry of example rigs, not measurements of a tracker. `check.py` refuses a mapping that cites a record unless its values are exactly the record's frozen values (knots, or the poses of a weighted sum) and every held-out cell of each channel it reads passed. In data 0.5.0 the 45 weighted sums of the viseme pose bridge cite `viseme-poses.rocketbox-female`, for the 9 classes that pass. The renderer for the rendered fits is in [tools/render/](tools/render/README.md), and the tools that make the records are in [tools/calibration/](tools/calibration/README.md).
 
 ## Open questions
 

@@ -62,17 +62,18 @@ What [examples/rcef_translate.py](examples/rcef_translate.py) does, and why:
 Each mapping (and each signal) has an `evidence_status` field. It says how well the mapping itself is supported. It is not the `status` of the evidence records it cites: all records in `evidence/sources.toml` are `verified_current`, including the records that `proposed` mappings cite. The values of `evidence_status` are:
 
 - `verified_current`: the mapping restates a verified source fact. The three `*.to_canonical` maps and the synthetic `fixture.affine` and `fixture.bilateral` use it.
-- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 direct cross-provider mappings and their 4 internal gaze steps are `proposed`, and so are the 348 mappings into and out of the canonical expression and viseme sets and their 76 signals.
+- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 direct cross-provider mappings and their 4 internal gaze steps are `proposed`, and so are the 348 mappings into and out of the canonical expression and viseme sets and their 76 signals, and the 99 mappings of the viseme pose bridge between the two sets.
 - `unresolved`: recorded but not executable. `compile_mapping` refuses it, even with the opt-in. The MediaPipe → ARKit map `survey.ambiguous` is the example.
 
-`calibrated_software` is the `status` of the records in [calibration/](calibration/README.md). They are fits to renders of example rigs, not measurements of a tracker. The pack uses schema 1.0, which does not have this value, and no mapping in data 0.5.0 cites a calibration record.
+`calibrated_software` is the `status` of the records in [calibration/](calibration/README.md). They are fits to renders or mesh geometry of example rigs, not measurements of a tracker. The pack uses schema 1.0, which does not have this value. So the mappings that cite a calibration record, the 45 weighted sums of the viseme pose bridge (`calibration.viseme-poses.rocketbox-female`), are `proposed`, and their assumptions say why.
 
 `evidence_status` and `disposition` (`mapped`, `unresolved`, `excluded`, `unsupported`) are separate fields.
 
 ### Limits
 
 - The mappings connect names and meanings the way the public sources do. Intensities are not calibrated: no provider publishes its gain, so equal weights are assumed to mean equal expressions. Each mapping states its assumptions and losses in `reports/mappings.md`.
-- The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass.
+- The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass. In `viseme-poses.rocketbox-female`, 9 of 15 viseme classes pass, and the viseme pose bridge reads only those.
+- The viseme pose bridge lets META visemes and VRM vowels drive ARKit, FB2 and Unified Expressions faces. Its poses are one rig's (Rocketbox Female's) viseme shapes in its own ARKit units. Classes that failed (among them `bilabial` and `vowel_mid_spread`) move nothing. There is no map from expressions back to visemes.
 - The VRM maps come from specification texts only. No published table maps META visemes to VRM; `visemes.to_vrm` is a phoneme-label correspondence.
 - The README lists what is [not translated yet](README.md#mappings), and why.
 
@@ -85,14 +86,14 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | Path | Contents |
 |---|---|
 | `pack.toml` | Root metadata, including `data_version`. |
-| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (60), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (9). `canonical_expression.toml` and `canonical_viseme.toml` are generated. |
+| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (60), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (63). `canonical_expression.toml` and `canonical_viseme.toml` are generated, and so is the part of `intermediate.toml` below its marker line (the 54 helpers of the viseme pose bridge, and the profile). |
 | `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. |
-| `mappings/` | Maps. Each map is a group of one-way mappings. `canonical_*.toml` hold the maps into and out of the canonical expression set; they are generated. |
+| `mappings/` | Maps. Each map is a group of one-way mappings. `canonical_*.toml` hold the maps into and out of the canonical sets, and `canonical_viseme_pose.toml` the viseme pose bridge between them; they are generated. |
 | `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` (the msf-character-tools lock), `input-contracts/`. |
 | `calibration/` | `*.cal` software-only calibration records and the `FREEZES` ledger. |
 | `generated/`, `reports/` | Outputs of `check.py --write`. Do not edit them by hand. |
 | `scripts/` | Export, comparison, source-check and local CI scripts, and `build_canonical.py`, which writes the canonical expression set and its maps. |
-| `tools/calibration/` | Optional tools that make calibration records. They need extra packages. `check.py` and the tests never run them; the tests check only the curve fitting and cell scoring. |
+| `tools/calibration/` | Optional tools that make calibration records. Most need extra packages; `viseme_poses.py` needs only msf-character-tools. `check.py` and the tests never run them; the tests check only the fitting and cell scoring. |
 | `tools/render/` | `meshrender.swift`, the macOS offscreen renderer for calibration fits. |
 | `examples/` | End-to-end translations and face pipelines; inputs in `examples/data/`. |
 | `docs/` | Architecture guide and visuals, `expression-sets.md`, `toml-index.csv`, `godot_comparison.md`, calibration notes, and the draft canonical expression set: `canonical-set.md`, `canonical-set-audit.md` and `facs-intensity.md`. |
@@ -137,7 +138,7 @@ To adopt a new msf-character-tools release: install its wheel by hash, then run 
 - `check.py` checks the msf-character-tools install before anything else. If the install is wrong, it prints `Refusing to check` and exits 2 before it reads the data or the calibration records. It also refuses an `msf_character_tools` that would import from anywhere other than the installed distribution, for example through `PYTHONPATH`.
 - `tests/test_dependency.py` builds fake msf-character-tools installs and checks that `check.py` refuses each one before msf-character-tools runs (a marker file shows whether it ran). If you change the lock format or the order of steps in `check.py`, keep these tests meaningful. For example, the tampered-package fake must use a version and wheel tag that the lock has, or it is refused for the wrong reason.
 - Any change to a string in any TOML file changes the pack bytes and so the pack hash. Then `rcef.pack.json`, `coverage.json`, `generated/SHA256SUMS`, all three Markdown reports, `reports/SHA256SUMS` and `docs/toml-index.csv` change. A CSV report changes only if the string is one of its columns. `rcef_mapping.csv` changes only if a signal's id, label, value type, units, disposition, evidence status or profile membership changes. Regenerate everything, and commit what changed.
-- `data/canonical_expression.toml`, `data/canonical_viseme.toml` and `mappings/canonical_*.toml` are written by `scripts/build_canonical.py` from `docs/canonical-set.md`, `docs/canonical-set-audit.md`, `tests/fixtures/ipa_chart_symbols.json` and `tests/fixtures/baseline-dea1713.pack.json`. Do not edit them by hand: `tests/test_pivot_structure.py` fails if they differ from what the script writes. Change the documents, then run the script with `--write`.
+- `data/canonical_expression.toml`, `data/canonical_viseme.toml`, `mappings/canonical_*.toml` and the part of `data/intermediate.toml` below its marker line are written by `scripts/build_canonical.py` from `docs/canonical-set.md`, `docs/canonical-set-audit.md`, `tests/fixtures/ipa_chart_symbols.json`, `tests/fixtures/baseline-dea1713.pack.json` and, for the viseme pose bridge, `calibration/viseme-poses.rocketbox-female.cal`. Do not edit them by hand: `tests/test_pivot_structure.py` fails if they differ from what the script writes. Change the documents, then run the script with `--write`.
 - The 7 direct maps (`fb2.to_arkit`, `fb2_gaze.to_arkit`, `arkit.to_fb2`, `arkit_gaze.to_fb2`, `arkit.to_vrcft_artist`, `fb2.to_vrm`, `visemes.to_vrm`) are frozen. `tests/test_pivot_structure.py` compares them, their signals and their evidence records with `tests/fixtures/baseline-dea1713.pack.json`.
 - msf-character-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
 - `docs/architecture.html`, `.svg` and `.png` are made by hand, and no test checks them. When the data changes, update them and the counts in `docs/architecture.md`, and render the PNG from the SVG at the same size (1160 × 560). See the checklist in [docs/architecture.md](docs/architecture.md#9-independent-validation-checklist).

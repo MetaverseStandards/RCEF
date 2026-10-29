@@ -96,6 +96,33 @@ do not change.
 - New tests: `tests/test_canonical_visemes.py` checks the viseme
   vocabulary, that every IPA chart symbol is in exactly one class, the IPA
   rules, the aggregate and the coupling.
+- New map `rcef_viseme_pose.to_rcef_expression`, the viseme pose bridge, in
+  `mappings/canonical_viseme_pose.toml`: 99 mappings from the canonical
+  viseme set to the canonical expression set. Each signal of the groups
+  `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` is the sum of
+  each class weight times the class's pose, clamped at 1: a copy per class
+  (the unit changes from probability to 1), a `weighted_sum` per signal with
+  the frozen poses as weights, and a clamp. The poses come from the
+  calibration record `viseme-poses.rocketbox-female`. The bridge reads only
+  the 9 classes whose held-out cells pass (`vowel_open`,
+  `vowel_close_spread`, `vowel_mid_rounded`, `dental`, `coronal_stop`,
+  `coronal_nasal_lateral`, `dorsal`, `rhotic` and `sil`); weight on the 6
+  that fail moves nothing. 54 new `rcef.intermediate` signals (63 in all),
+  which `scripts/build_canonical.py` writes below a marker line in
+  `data/intermediate.toml`. Every bridge mapping is `proposed` and
+  `approximate`: pack schema 1.0 has no `calibrated_software`. Its losses
+  are `viseme_pose_one_rig`, `viseme_pose_residual` and
+  `viseme_pose_classes_not_read`. No map goes from expressions to visemes.
+- New evidence record `calibration.viseme-poses.rocketbox-female`, which the
+  45 weighted sums of the bridge cite.
+- `examples/rcef_route.py` runs a bridge between the canonical sets when the
+  target reads what it writes, the source cannot write that itself, and the
+  source writes some of what it reads: META or VRM to ARKit, FB2 or Unified
+  Expressions. Classes that the source cannot write count as 0 in the
+  bridge, with a note. Every other route gives the same values as before;
+  the A/B dry run gives byte-identical files.
+- New tests: `tests/test_pose_bridge.py` checks the bridge against the
+  record and Route without the generator.
 
 ## Data 0.4.0 — not released (A/B baseline at `dea1713`, pack SHA-256 `630d37a5…`)
 
@@ -162,6 +189,26 @@ exclusive, and the data now builds this in.
   stays 0.4.0.
 
 ## Calibration and examples — unreleased
+
+- Calibration record `calibration/viseme-poses.rocketbox-female.cal`
+  (software-only; mesh geometry only, so it has no renderer): each of
+  Rocketbox Female's 15 META viseme shapes fitted as a mirror-symmetric
+  combination of her ARKit shapes, with weights from 0 to 1 (bounded least
+  squares over every vertex except the tongue), carried to canonical
+  expression signals by the ARKit in-maps. Frozen with bounds of 0.5 on the
+  median and p95 error (the error is the distance to the held-out rig's own
+  viseme shape divided by that shape's motion) before the held-out run on
+  Rocketbox Male. 9 of 15 classes pass; `vowel_mid_spread` (0.51),
+  `postalveolar` (0.52), `vowel_close_rounded` (0.59), `alveolar_sibilant`
+  (0.64), `bilabial` (0.67) and `labiodental` (0.92) fail and are published
+  as negative results. Made by `tools/calibration/viseme_poses.py`.
+- `check.py` accepts a record with no `renderer` (a fit that renders
+  nothing), and a `weighted_sum` that cites a record of poses: each input a
+  copy of one channel, one clamp reading the sum, and weights exactly the
+  frozen poses. `calibration/README.md` describes both.
+- `examples/viseme_bridge.py` drives Rocketbox Male and ICT-FaceKit with
+  META viseme frames through the bridge, writes the meshes for rendering,
+  and compares Male with its own viseme shapes.
 
 - Calibration record `calibration/rig-gains.ict-rocketbox-female.cal`
   (software-only; not a measurement of any tracker): one monotone curve per
