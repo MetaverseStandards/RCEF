@@ -62,9 +62,10 @@ do not change.
   `XR_ML_facial_expression` from `tests/fixtures/capability_sets.json`,
   which `scripts/derive_capability_sets.py` writes from cached source bytes.
 - New profile `rcef.canonical_viseme` in `data/canonical_viseme.toml`: 16
-  signals, vocabulary version `1.0`, status `draft`. 15 are mouth-shape
-  classes defined by the IPA chart (2020 revision): `viseme_vowel` (5),
-  `viseme_consonant` (9) and `viseme_rest` (1, `sil`). They are the fewest
+  signals, vocabulary version `1.0`, status `draft`. 15 are partition
+  classes: `viseme_vowel` (5) and `viseme_consonant` (9), mouth-shape
+  classes that hold the IPA chart (2020 revision), and `viseme_rest` (1,
+  `sil`). They are the fewest
   classes that keep every META viseme and every VRM vowel apart, and every
   symbol of the chart falls in exactly one of them; the IPA symbols that no
   provider names are assigned by place and manner, as

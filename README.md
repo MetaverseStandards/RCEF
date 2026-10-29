@@ -98,7 +98,7 @@ Data 0.5.0 also adds the draft canonical expression set, `rcef.canonical_express
 
 So a translation can run from ARKit or FB2 through the canonical expression set to ARKit, FB2, Unified Expressions or VRM blinks. Each group has one map in each direction.
 
-The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are mouth-shape classes defined by the IPA chart (vowel 5, consonant 9, rest 1); from a valid META frame their values sum to 1. The 16th, `alveolar_floor`, is the sum of the three alveolar classes and `rhotic`, clamped at 1: the coronal floor class of the IPA shapes. 42 mappings in 9 maps go into and out of it:
+The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are partition classes (vowel 5, consonant 9, rest 1): 14 mouth-shape classes that hold every symbol of the IPA chart, and the rest class `sil`. From a valid META frame their values sum to 1. The 16th, `alveolar_floor`, is the sum of the three alveolar classes and `rhotic`, clamped at 1: the class that joins them in the IPA strict floor. 42 mappings in 9 maps go into and out of it:
 
 - META visemes and the VRM vowel presets into the canonical viseme set (22 mappings in 5 maps, with 1 internal step in the map that writes `alveolar_floor`);
 - the canonical viseme set to META visemes and the VRM vowel presets (20 mappings in 4 maps).
