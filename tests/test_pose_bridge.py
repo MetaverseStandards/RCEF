@@ -27,7 +27,7 @@ check = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(check)
 
 BRIDGE = 'rcef_viseme_pose.to_rcef_expression'
-RECORD = 'viseme-poses.rocketbox-multi'
+RECORD = 'viseme-poses.rocketbox-features'
 VISEME, EXPRESSION = 'rcef.canonical_viseme', 'rcef.canonical_expression'
 GROUPS = {'face', 'cheek_puff', 'jaw_thrust', 'chin_raise_upper_lip'}
 COPY = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
@@ -45,8 +45,7 @@ class PoseBridge(unittest.TestCase):
         cls.members = {p['id']: p['signal_ids'] for p in cls.document['profiles']}
         cls.rules = next(m['rules'] for m in cls.document['mappings'] if m['id'] == BRIDGE)
         cls.record = tomllib.loads((ROOT / f'calibration/{RECORD}.cal').read_text(encoding='utf-8'))
-        cls.passing = [c for c in cls.record['channels']
-                       if all(check.cell_passes(cls.record, x) for x in cls.record['cells'] if x['channel'] == c)]
+        cls.passing = [c for c in cls.record['channels'] if check.channel_passes(cls.record, c)]
         cls.writer = {r['outputs'][0]: r for r in cls.rules}
         cls.sums = [r for r in cls.rules if r['operator']['id'] == 'weighted_sum']
         cls.clamp = {r['inputs'][0]: r for r in cls.rules if r['operator']['id'] == 'piecewise_linear'}
@@ -80,22 +79,28 @@ class PoseBridge(unittest.TestCase):
         self.assertLessEqual(set(inputs), partition)
         self.assertNotIn(f'{VISEME}.alveolar_floor', inputs)
         self.assertEqual(sorted(inputs), sorted(self.passing))
-        self.assertEqual(len(self.passing), 7)
+        self.assertEqual(len(self.passing), 11)
         for rule in self.sums:
             self.assertEqual(self.classes_of(rule), self.passing, rule['id'])
 
-    def test_it_is_written_from_the_multi_rig_record_alone(self):
+    def test_it_is_written_from_the_perceptual_record_alone(self):
         rigs = {c['identity'] for c in self.record['cells']}
         self.assertEqual(len(rigs), 4)
         for channel in self.record['channels']:
             self.assertEqual(len([c for c in self.record['cells'] if c['channel'] == channel]), 4, channel)
         self.assertEqual([c.rsplit('.', 1)[1] for c in self.passing],
-                         ['vowel_open', 'vowel_close_spread', 'vowel_mid_rounded', 'dental', 'coronal_stop', 'dorsal',
+                         ['vowel_open', 'vowel_mid_spread', 'vowel_close_spread', 'vowel_mid_rounded',
+                          'vowel_close_rounded', 'bilabial', 'dental', 'alveolar_sibilant', 'coronal_stop', 'dorsal',
                           'sil'])
-        old = 'calibration.viseme-poses.rocketbox-female'
-        self.assertFalse([r['id'] for m in self.document['mappings'] for r in m['rules'] if old in r['evidence']])
-        self.assertNotIn(old, {e['id'] for e in self.document['evidence']})
-        self.assertTrue((ROOT / 'calibration/viseme-poses.rocketbox-female.cal').is_file())
+        gated = {c for c in self.passing
+                 if not all(check.cell_passes(self.record, x) for x in self.record['cells'] if x['channel'] == c)}
+        self.assertEqual(sorted(c.rsplit('.', 1)[1] for c in gated),
+                         ['alveolar_sibilant', 'bilabial', 'vowel_close_rounded', 'vowel_mid_spread'])
+        for old in ('viseme-poses.rocketbox-female', 'viseme-poses.rocketbox-multi'):
+            cited = f'calibration.{old}'
+            self.assertFalse([r['id'] for m in self.document['mappings'] for r in m['rules'] if cited in r['evidence']])
+            self.assertNotIn(cited, {e['id'] for e in self.document['evidence']})
+            self.assertTrue((ROOT / f'calibration/{old}.cal').is_file())
 
     def test_each_weight_is_the_frozen_pose_of_the_record(self):
         curves = {(c['input'], c['output']): c['knots'] for c in self.record['curves']}
@@ -187,13 +192,18 @@ class PoseBridge(unittest.TestCase):
 
     def test_meta_to_arkit_drops_failing_classes_and_refuses_upstream(self):
         route = self.route('openxr.visemes', 'arkit.coefficient')
-        aa, pp, sil, bad = route.translate([self.meta_frame(AA=1.0), self.meta_frame(PP=1.0),
-                                            self.meta_frame(SIL=1.0), self.meta_frame(False, AA=1.0)])
+        aa, ff, sil, bad, pp = route.translate([self.meta_frame(AA=1.0), self.meta_frame(FF=1.0),
+                                                self.meta_frame(SIL=1.0), self.meta_frame(False, AA=1.0),
+                                                self.meta_frame(PP=1.0)])
         self.assertEqual(aa['values']['arkit.coefficient.jawOpen'],
                          self.poses()[f'{EXPRESSION}.jaw_drop'][f'{VISEME}.vowel_open'])
         self.assertEqual(aa['dropped'], [])
-        self.assertEqual(pp['dropped'], [META.format('PP')])
-        self.assertEqual(set(pp['values'].values()), {0.0})
+        self.assertEqual(ff['dropped'], [META.format('FF')])
+        self.assertEqual(set(ff['values'].values()), {0.0})
+        # bilabial passes by its perceptual gate, so PP now drives lip closure.
+        self.assertEqual(pp['dropped'], [])
+        self.assertEqual(pp['values']['arkit.coefficient.mouthRollLower'],
+                         self.poses()[f'{EXPRESSION}.lip_suck_lower_left'][f'{VISEME}.bilabial'])
         self.assertEqual(set(sil['values'].values()), {0.0})
         # The groups the bridge does not write are not available, never refused.
         self.assertEqual(set(aa['labels'].values()), {rcef_route.NOT_AVAILABLE})
@@ -208,15 +218,15 @@ class PoseBridge(unittest.TestCase):
 
     def test_vrm_vowels_drive_the_bridge_with_the_classes_vrm_lacks_at_zero(self):
         route = self.route('vrm.preset', 'arkit.coefficient')
-        self.assertEqual(route.fill[BRIDGE], sorted(set(self.passing) - {f'{VISEME}.vowel_open',
-                                                                          f'{VISEME}.vowel_close_spread',
-                                                                          f'{VISEME}.vowel_mid_rounded'}))
+        vowels = {f'{VISEME}.{v}' for v in ('vowel_open', 'vowel_mid_spread', 'vowel_close_spread',
+                                             'vowel_mid_rounded', 'vowel_close_rounded')}
+        self.assertEqual(route.fill[BRIDGE], sorted(set(self.passing) - vowels))
         presets = {s: 0.0 for s in route.kept | {f'vrm.preset.{p}' for p in ('aa', 'ee', 'ih', 'oh', 'ou')}}
         vrm, = route.translate([{'time': 0.0, 'values': {**presets, 'vrm.preset.aa': 1.0, 'vrm.preset.ee': 0.5},
                                  'flags': {}}])
-        meta, = self.route('openxr.visemes', 'arkit.coefficient').translate([self.meta_frame(AA=1.0)])
+        meta, = self.route('openxr.visemes', 'arkit.coefficient').translate([self.meta_frame(AA=1.0, E=0.5)])
         self.assertEqual(vrm['values'], meta['values'])
-        self.assertEqual(vrm['dropped'], ['vrm.preset.ee'])
+        self.assertEqual(vrm['dropped'], [])
         self.assertEqual(len(vrm['notes']), 1)
         self.assertIn('counted as 0', vrm['notes'][0])
 

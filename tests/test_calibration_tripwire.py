@@ -36,6 +36,9 @@ MULTI_V1_COMMIT = '5b25c8d'
 MULTI = 'calibration/viseme-poses.rocketbox-multi.cal'
 # The commit that published the results of version 2.
 MULTI_COMMIT = '29a5223'
+# The commit that published the results of the perceptual record.
+FEATURES_COMMIT = '68e0f1e'
+FEATURES = ['calibration/viseme-poses.rocketbox-features.cal']
 
 
 def has_history():
@@ -58,6 +61,9 @@ class Protected(unittest.TestCase):
 
     def test_the_multi_rig_viseme_poses_record_is_unchanged(self):
         self.assertIsNone(provenance.code_problem(ROOT, MULTI_COMMIT, [MULTI]))
+
+    def test_the_perceptual_viseme_poses_record_is_unchanged(self):
+        self.assertIsNone(provenance.code_problem(ROOT, FEATURES_COMMIT, FEATURES))
 
     def test_version_1_of_the_multi_rig_record_is_kept_in_the_history(self):
         text = subprocess.run(['git', 'show', f'{MULTI_V1_COMMIT}:{MULTI}'], cwd=ROOT, check=True,
