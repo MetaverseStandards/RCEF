@@ -1005,6 +1005,37 @@ def status(metric: str, rows: list[dict]) -> str:
     return 'pass' if ok else 'FAIL'
 
 
+FACS_FAMILIES = ['facs_library', 'facs_key_impulses', 'facs_letters']
+
+
+def missing_rows(report: dict, abreg: dict) -> dict:
+    """Per gate, the pairs or families it has no row for. A gate with a missing row fails: no rows is no evidence."""
+    rows = report['metrics']
+    required = {**{m: ('pair', list(A1_PAIRS)) for m in ('M1', 'M1s', 'M2', 'M2c')},
+                'B equals O': ('pair', list(abreg['pairs'])), 'M3 coverage': ('pair', list(abreg['pairs'])),
+                'M10': ('family', FACS_FAMILIES), 'M10b': ('family', FACS_FAMILIES)}
+    missing = {}
+    for metric, (key, names) in required.items():
+        have = {r.get(key) for r in rows.get(metric, [])}
+        if absent := [n for n in names if n not in have]:
+            missing[metric] = absent
+    if not rows.get('M3 exact'):
+        missing['M3 exact'] = ['a round-trip pair']
+    m4 = {(r['arm'], r['pair']) for r in rows.get('M4', [])}
+    if absent := [f'{arm} {p}' for arm, names in (('A1', A1_PAIRS), ('B', abreg['pairs'])) for p in names
+                  if (arm, p) not in m4]:
+        missing['M4'] = absent
+    return missing
+
+
+def statuses(report: dict, abreg: dict) -> dict:
+    """Each gate's status: FAIL if any row fails or a required row is missing."""
+    found = {m: status(m, rows) for m, rows in report['metrics'].items()}
+    for metric in missing_rows(report, abreg):
+        found[metric] = 'FAIL'
+    return found
+
+
 def csv_text(rows: list[list]) -> str:
     buffer = io.StringIO()
     csv.writer(buffer, lineterminator='\n').writerows(rows)
@@ -1014,7 +1045,9 @@ def csv_text(rows: list[list]) -> str:
 def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timings: dict, pins: list, dry_run: bool,
                   b_path: Path) -> dict:
     out.mkdir(parents=True, exist_ok=True)
-    statuses = {m: status(m, rows) for m, rows in report['metrics'].items()}
+    row_statuses = {m: status(m, rows) for m, rows in report['metrics'].items()}
+    missing = missing_rows(report, abreg)
+    gate_statuses = statuses(report, abreg)
     files = {}
     for metric, rows in report['metrics'].items():
         slug = re.sub(r'[^a-z0-9]+', '_', metric.lower()).strip('_')
@@ -1034,9 +1067,10 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
         lines += ['Frames seen before the change (regression families, made again by the generator each earlier '
                   f'freeze pinned): {", ".join(report["regression"])}.', '']
     lines += ['| Metric | Threshold | Status |', '|---|---|---|']
-    for metric in sorted(statuses):
+    for metric in sorted(gate_statuses):
         threshold = THRESHOLDS.get(metric) or THRESHOLDS.get(metric.split()[0], 'report only')
-        lines.append(f'| {metric} | {threshold} | {statuses[metric]} |')
+        shown = gate_statuses[metric] + (f' (no rows for {", ".join(missing[metric])})' if metric in missing else '')
+        lines.append(f'| {metric} | {threshold} | {shown} |')
     for metric, needs in PENDING.items():
         lines.append(f'| {metric} | needs {needs} | pending |')
     lines += ['', '| Pair | Evidence status (A1 / B) | M2c shortfall | M4b | External reference |',
@@ -1053,10 +1087,11 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
     files['scoreboard.md'] = '\n'.join(lines) + '\n'
     for name, text in files.items():
         (out / name).write_text(text, encoding='utf-8')
-    passed = all(s in ('pass', 'report') for s in statuses.values()) and not PENDING and not dry_run
+    passed = all(s in ('pass', 'report') for s in gate_statuses.values()) and not PENDING and not dry_run
     manifest = {'id': abreg['id'], 'version': abreg['version'], 'kind': abreg['kind'],
                 'abreg_sha256': abreg_sha256(abreg), 'seed_root': abreg['seed_root'], 'dry_run': dry_run,
-                'pin_problems': pins, 'passed': passed, 'statuses': statuses, 'pending': PENDING,
+                'pin_problems': pins, 'passed': passed, 'statuses': gate_statuses, 'row_statuses': row_statuses,
+                'missing_rows': missing, 'pending': PENDING,
                 'a1_sha256': A1_SHA256, 'b_pack': b_path.name, 'b_pack_sha256': sha256_bytes(b_path.read_bytes()),
                 'code': code_hashes(), 'runtime': runtime_pins()}
     (out / 'manifest.json').write_text(json.dumps(manifest, indent=1, sort_keys=True) + '\n', encoding='utf-8')

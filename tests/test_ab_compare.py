@@ -93,6 +93,21 @@ class Metrics(unittest.TestCase):
         self.assertEqual(ab_compare.facs_compare(b, expected, ['b', 'c'])[0]['coverage_violations'], 0)
 
 
+class RequiredRows(unittest.TestCase):
+    def test_a_gate_with_no_rows_for_a_required_pair_or_family_fails(self):
+        abreg = {'pairs': {'META -> VRM': {}, 'FB2 -> FB2': {}}}
+        report = {'metrics': {'M1': [{'pair': 'META -> VRM', 'value_differences': 0, 'sign_differences': 0}],
+                              'B equals O': [{'pair': 'META -> VRM', 'differences': 0}],
+                              'M3 exact': [{'pair': 'FB2 -> FB2', 'errors': 0}]}}
+        missing = ab_compare.missing_rows(report, abreg)
+        self.assertEqual(set(missing['M1']), set(ab_compare.A1_PAIRS) - {'META -> VRM'})
+        self.assertEqual(missing['B equals O'], ['FB2 -> FB2'])
+        self.assertEqual(missing['M10'], ['facs_library', 'facs_key_impulses', 'facs_letters'])
+        self.assertNotIn('M3 exact', missing)
+        statuses = ab_compare.statuses(report, abreg)
+        self.assertEqual((statuses['M1'], statuses['M10'], statuses['M3 exact']), ('FAIL', 'FAIL', 'pass'))
+
+
 class FlatLinks(unittest.TestCase):
     def test_o_lists_the_eight_fb2_gaze_cross_links_from_the_knots(self):
         document = ab_compare.load_a1()
@@ -258,9 +273,16 @@ class DryRun(unittest.TestCase):
         abreg, b_path = self.register(self.document)
         self.assertEqual(sorted(abreg['pairs']), ['FB2 -> FB2', 'FB2 -> VRM blink', 'META -> VRM'])
         manifest = ab_compare.run(self.tmp / 'x.abreg', self.tmp / 'out', b_path=b_path, dry_run=True)
-        statuses = manifest['statuses']
-        self.assertEqual(statuses.pop('M5 R1'), 'FAIL')  # 126 of the 129 goldens need pairs this B cannot route
-        self.assertEqual(set(statuses.values()), {'pass', 'report'})
+        rows = manifest['row_statuses']
+        self.assertEqual(rows.pop('M5 R1'), 'FAIL')  # 126 of the 129 goldens need pairs this B cannot route
+        self.assertEqual(set(rows.values()), {'pass', 'report'})
+        # The rows that exist pass, but the ARKit pairs, FACS -> FB2 and FACS -> ARKit have none: those gates fail.
+        missing = {'ARKit -> FB2', 'ARKit -> VRCFT UE', 'FB2 -> ARKit'}
+        for metric in ('M1', 'M1s', 'M2', 'M2c'):
+            self.assertEqual(set(manifest['missing_rows'][metric]), missing, metric)
+            self.assertEqual(manifest['statuses'][metric], 'FAIL', metric)
+        self.assertEqual((manifest['statuses']['M10'], manifest['statuses']['M10b']), ('FAIL', 'FAIL'))
+        self.assertEqual(manifest['statuses']['M3 exact'], 'pass')
         self.assertFalse(manifest['passed'])
         scoreboard = (self.tmp / 'out/scoreboard.md').read_text(encoding='utf-8')
         self.assertIn('Dry run', scoreboard)
@@ -273,7 +295,7 @@ class DryRun(unittest.TestCase):
         rule = next(r for m in self.document['mappings'] if m['id'] == 'rcef_vowel.to_vrm' for r in m['rules'])
         rule['operator']['scale'] = 0.5
         _, b_path = self.register(self.document)
-        statuses = ab_compare.run(self.tmp / 'x.abreg', self.tmp / 'out', b_path=b_path, dry_run=True)['statuses']
+        statuses = ab_compare.run(self.tmp / 'x.abreg', self.tmp / 'out', b_path=b_path, dry_run=True)['row_statuses']
         self.assertEqual((statuses['M1'], statuses['M1s'], statuses['B equals O']), ('FAIL', 'FAIL', 'pass'))
 
     def test_a_run_whose_pins_do_not_match_is_refused(self):
