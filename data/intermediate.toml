@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # Original RCEF data. Values computed inside a mapping and never read or written
 # by a provider. The first four belong to the direct map arkit_gaze.to_fb2, the
-# next four to the out-map rcef_gaze.to_fb2 and the last one to the viseme
-# in-map visemes_aggregate.to_rcef. Its units are the source's, probability,
-# because a weighted sum cannot change units; its range, 0 to 4, is not a
-# probability range.
+# next four to the out-map rcef_gaze.to_fb2 and the ninth to the viseme in-map
+# visemes_aggregate.to_rcef. Its units are the source's, probability, because a
+# weighted sum cannot change units; its range, 0 to 4, is not a probability
+# range. The rest belong to the viseme pose bridge
+# rcef_viseme_pose.to_rcef_expression; scripts/build_canonical.py writes them and
+# the profile.
 
 [[signals]]
 id = "rcef.intermediate.arkit_gaze_in_minus_out_L"
@@ -140,8 +142,822 @@ side = "shared"
 metadata = { "definition" = "The sum of META's SS, DD, NN and RR class probabilities, from 0 to 4. Computed inside visemes_aggregate.to_rcef and clamped at 1 into the canonical aggregate alveolar_floor; no provider reads or writes it. The viseme domain of 0 to 1 does not apply to this helper.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
+
+# Below this line: written by scripts/build_canonical.py from the calibration record
+# viseme-poses.rocketbox-female. Edit the record or the script, not this part.
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_vowel_open"
+label = "RCEF activation of the vowel_open viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_vowel_open: canonical vowel_open read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical vowel_open, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_vowel_close_spread"
+label = "RCEF activation of the vowel_close_spread viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_vowel_close_spread: canonical vowel_close_spread read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical vowel_close_spread, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_vowel_mid_rounded"
+label = "RCEF activation of the vowel_mid_rounded viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_vowel_mid_rounded: canonical vowel_mid_rounded read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical vowel_mid_rounded, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_dental"
+label = "RCEF activation of the dental viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_dental: canonical dental read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical dental, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_coronal_stop"
+label = "RCEF activation of the coronal_stop viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_coronal_stop: canonical coronal_stop read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical coronal_stop, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_coronal_nasal_lateral"
+label = "RCEF activation of the coronal_nasal_lateral viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_coronal_nasal_lateral: canonical coronal_nasal_lateral read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical coronal_nasal_lateral, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_dorsal"
+label = "RCEF activation of the dorsal viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_dorsal: canonical dorsal read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical dorsal, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_rhotic"
+label = "RCEF activation of the rhotic viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_rhotic: canonical rhotic read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical rhotic, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sil"
+label = "RCEF activation of the sil viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sil: canonical sil read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical sil, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_brow_inner_raise_left"
+label = "RCEF sum of the viseme poses in brow_inner_raise_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_brow_inner_raise_left: sum of the viseme poses in brow_inner_raise_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_inner_raise_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_inner_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "brow"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_brow_inner_raise_right"
+label = "RCEF sum of the viseme poses in brow_inner_raise_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_brow_inner_raise_right: sum of the viseme poses in brow_inner_raise_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_inner_raise_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_inner_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "brow"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_brow_outer_raise_left"
+label = "RCEF sum of the viseme poses in brow_outer_raise_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_brow_outer_raise_left: sum of the viseme poses in brow_outer_raise_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_outer_raise_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_outer_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "brow"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_brow_outer_raise_right"
+label = "RCEF sum of the viseme poses in brow_outer_raise_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_brow_outer_raise_right: sum of the viseme poses in brow_outer_raise_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_outer_raise_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_outer_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "brow"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_brow_lower_left"
+label = "RCEF sum of the viseme poses in brow_lower_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_brow_lower_left: sum of the viseme poses in brow_lower_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_lower_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_lower_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "brow"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_brow_lower_right"
+label = "RCEF sum of the viseme poses in brow_lower_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_brow_lower_right: sum of the viseme poses in brow_lower_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_lower_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_lower_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "brow"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lid_tighten_left"
+label = "RCEF sum of the viseme poses in lid_tighten_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lid_tighten_left: sum of the viseme poses in lid_tighten_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lid_tighten_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lid_tighten_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lid_tighten_right"
+label = "RCEF sum of the viseme poses in lid_tighten_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lid_tighten_right: sum of the viseme poses in lid_tighten_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lid_tighten_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lid_tighten_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_upper_lid_raise_left"
+label = "RCEF sum of the viseme poses in upper_lid_raise_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_upper_lid_raise_left: sum of the viseme poses in upper_lid_raise_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lid_raise_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into upper_lid_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_upper_lid_raise_right"
+label = "RCEF sum of the viseme poses in upper_lid_raise_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_upper_lid_raise_right: sum of the viseme poses in upper_lid_raise_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lid_raise_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into upper_lid_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_cheek_raise_left"
+label = "RCEF sum of the viseme poses in cheek_raise_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_cheek_raise_left: sum of the viseme poses in cheek_raise_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_raise_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into cheek_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "cheek"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_cheek_raise_right"
+label = "RCEF sum of the viseme poses in cheek_raise_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_cheek_raise_right: sum of the viseme poses in cheek_raise_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_raise_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into cheek_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "cheek"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_nose_wrinkle_left"
+label = "RCEF sum of the viseme poses in nose_wrinkle_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_nose_wrinkle_left: sum of the viseme poses in nose_wrinkle_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical nose_wrinkle_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into nose_wrinkle_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "nose"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_nose_wrinkle_right"
+label = "RCEF sum of the viseme poses in nose_wrinkle_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_nose_wrinkle_right: sum of the viseme poses in nose_wrinkle_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical nose_wrinkle_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into nose_wrinkle_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "nose"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_jaw_drop"
+label = "RCEF sum of the viseme poses in jaw_drop"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_jaw_drop: sum of the viseme poses in jaw_drop before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical jaw_drop, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into jaw_drop; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "jaw"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_corner_pull_left"
+label = "RCEF sum of the viseme poses in lip_corner_pull_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_corner_pull_left: sum of the viseme poses in lip_corner_pull_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_pull_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_corner_pull_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_corner_pull_right"
+label = "RCEF sum of the viseme poses in lip_corner_pull_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_corner_pull_right: sum of the viseme poses in lip_corner_pull_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_pull_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_corner_pull_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_corner_depress_left"
+label = "RCEF sum of the viseme poses in lip_corner_depress_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_corner_depress_left: sum of the viseme poses in lip_corner_depress_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_depress_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_corner_depress_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_corner_depress_right"
+label = "RCEF sum of the viseme poses in lip_corner_depress_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_corner_depress_right: sum of the viseme poses in lip_corner_depress_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_depress_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_corner_depress_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_dimple_left"
+label = "RCEF sum of the viseme poses in dimple_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_dimple_left: sum of the viseme poses in dimple_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical dimple_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into dimple_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_dimple_right"
+label = "RCEF sum of the viseme poses in dimple_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_dimple_right: sum of the viseme poses in dimple_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical dimple_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into dimple_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_stretch_left"
+label = "RCEF sum of the viseme poses in lip_stretch_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_stretch_left: sum of the viseme poses in lip_stretch_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_stretch_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_stretch_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_stretch_right"
+label = "RCEF sum of the viseme poses in lip_stretch_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_stretch_right: sum of the viseme poses in lip_stretch_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_stretch_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_stretch_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_chin_raise"
+label = "RCEF sum of the viseme poses in chin_raise"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_chin_raise: sum of the viseme poses in chin_raise before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical chin_raise, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into chin_raise; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_funnel_upper_left"
+label = "RCEF sum of the viseme poses in lip_funnel_upper_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_funnel_upper_left: sum of the viseme poses in lip_funnel_upper_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_upper_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_funnel_upper_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_funnel_upper_right"
+label = "RCEF sum of the viseme poses in lip_funnel_upper_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_funnel_upper_right: sum of the viseme poses in lip_funnel_upper_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_upper_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_funnel_upper_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_funnel_lower_left"
+label = "RCEF sum of the viseme poses in lip_funnel_lower_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_funnel_lower_left: sum of the viseme poses in lip_funnel_lower_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_lower_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_funnel_lower_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_funnel_lower_right"
+label = "RCEF sum of the viseme poses in lip_funnel_lower_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_funnel_lower_right: sum of the viseme poses in lip_funnel_lower_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_lower_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_funnel_lower_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_pucker_left"
+label = "RCEF sum of the viseme poses in lip_pucker_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_pucker_left: sum of the viseme poses in lip_pucker_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_pucker_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_pucker_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_pucker_right"
+label = "RCEF sum of the viseme poses in lip_pucker_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_pucker_right: sum of the viseme poses in lip_pucker_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_pucker_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_pucker_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_suck_upper_left"
+label = "RCEF sum of the viseme poses in lip_suck_upper_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_suck_upper_left: sum of the viseme poses in lip_suck_upper_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_upper_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_suck_upper_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_suck_upper_right"
+label = "RCEF sum of the viseme poses in lip_suck_upper_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_suck_upper_right: sum of the viseme poses in lip_suck_upper_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_upper_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_suck_upper_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_suck_lower_left"
+label = "RCEF sum of the viseme poses in lip_suck_lower_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_suck_lower_left: sum of the viseme poses in lip_suck_lower_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_lower_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_suck_lower_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_suck_lower_right"
+label = "RCEF sum of the viseme poses in lip_suck_lower_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_suck_lower_right: sum of the viseme poses in lip_suck_lower_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_lower_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_suck_lower_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_press_left"
+label = "RCEF sum of the viseme poses in lip_press_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_press_left: sum of the viseme poses in lip_press_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_press_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_press_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lip_press_right"
+label = "RCEF sum of the viseme poses in lip_press_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lip_press_right: sum of the viseme poses in lip_press_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_press_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_press_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lips_toward"
+label = "RCEF sum of the viseme poses in lips_toward"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lips_toward: sum of the viseme poses in lips_toward before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lips_toward, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lips_toward; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_upper_lip_raise_left"
+label = "RCEF sum of the viseme poses in upper_lip_raise_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_upper_lip_raise_left: sum of the viseme poses in upper_lip_raise_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lip_raise_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into upper_lip_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_upper_lip_raise_right"
+label = "RCEF sum of the viseme poses in upper_lip_raise_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_upper_lip_raise_right: sum of the viseme poses in upper_lip_raise_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lip_raise_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into upper_lip_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lower_lip_depress_left"
+label = "RCEF sum of the viseme poses in lower_lip_depress_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lower_lip_depress_left: sum of the viseme poses in lower_lip_depress_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lower_lip_depress_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lower_lip_depress_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_lower_lip_depress_right"
+label = "RCEF sum of the viseme poses in lower_lip_depress_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_lower_lip_depress_right: sum of the viseme poses in lower_lip_depress_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lower_lip_depress_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lower_lip_depress_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_cheek_puff_left"
+label = "RCEF sum of the viseme poses in cheek_puff_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_cheek_puff_left: sum of the viseme poses in cheek_puff_left before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_puff_left, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into cheek_puff_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "cheek"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_cheek_puff_right"
+label = "RCEF sum of the viseme poses in cheek_puff_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_cheek_puff_right: sum of the viseme poses in cheek_puff_right before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_puff_right, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into cheek_puff_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "cheek"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_jaw_thrust"
+label = "RCEF sum of the viseme poses in jaw_thrust"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_jaw_thrust: sum of the viseme poses in jaw_thrust before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical jaw_thrust, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into jaw_thrust; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "jaw"
+
+[[signals]]
+id = "rcef.intermediate.viseme_pose_sum_chin_raise_upper_lip"
+label = "RCEF sum of the viseme poses in chin_raise_upper_lip"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 9.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_sum_chin_raise_upper_lip: sum of the viseme poses in chin_raise_upper_lip before the clamp, 0 to 9"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical chin_raise_upper_lip, from 0 to 9. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into chin_raise_upper_lip; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
 [[profiles]]
 id = "rcef.intermediate"
 label = "RCEF intermediate values inside translations"
-signal_ids = ["rcef.intermediate.arkit_gaze_in_minus_out_L", "rcef.intermediate.arkit_gaze_up_minus_down_L", "rcef.intermediate.arkit_gaze_in_minus_out_R", "rcef.intermediate.arkit_gaze_up_minus_down_R", "rcef.intermediate.gaze_in_minus_out_left", "rcef.intermediate.gaze_up_minus_down_left", "rcef.intermediate.gaze_in_minus_out_right", "rcef.intermediate.gaze_up_minus_down_right", "rcef.intermediate.viseme_alveolar_floor_sum"]
+signal_ids = ["rcef.intermediate.arkit_gaze_in_minus_out_L", "rcef.intermediate.arkit_gaze_up_minus_down_L", "rcef.intermediate.arkit_gaze_in_minus_out_R", "rcef.intermediate.arkit_gaze_up_minus_down_R", "rcef.intermediate.gaze_in_minus_out_left", "rcef.intermediate.gaze_up_minus_down_left", "rcef.intermediate.gaze_in_minus_out_right", "rcef.intermediate.gaze_up_minus_down_right", "rcef.intermediate.viseme_alveolar_floor_sum", "rcef.intermediate.viseme_pose_vowel_open", "rcef.intermediate.viseme_pose_vowel_close_spread", "rcef.intermediate.viseme_pose_vowel_mid_rounded", "rcef.intermediate.viseme_pose_dental", "rcef.intermediate.viseme_pose_coronal_stop", "rcef.intermediate.viseme_pose_coronal_nasal_lateral", "rcef.intermediate.viseme_pose_dorsal", "rcef.intermediate.viseme_pose_rhotic", "rcef.intermediate.viseme_pose_sil", "rcef.intermediate.viseme_pose_sum_brow_inner_raise_left", "rcef.intermediate.viseme_pose_sum_brow_inner_raise_right", "rcef.intermediate.viseme_pose_sum_brow_outer_raise_left", "rcef.intermediate.viseme_pose_sum_brow_outer_raise_right", "rcef.intermediate.viseme_pose_sum_brow_lower_left", "rcef.intermediate.viseme_pose_sum_brow_lower_right", "rcef.intermediate.viseme_pose_sum_lid_tighten_left", "rcef.intermediate.viseme_pose_sum_lid_tighten_right", "rcef.intermediate.viseme_pose_sum_upper_lid_raise_left", "rcef.intermediate.viseme_pose_sum_upper_lid_raise_right", "rcef.intermediate.viseme_pose_sum_cheek_raise_left", "rcef.intermediate.viseme_pose_sum_cheek_raise_right", "rcef.intermediate.viseme_pose_sum_nose_wrinkle_left", "rcef.intermediate.viseme_pose_sum_nose_wrinkle_right", "rcef.intermediate.viseme_pose_sum_jaw_drop", "rcef.intermediate.viseme_pose_sum_lip_corner_pull_left", "rcef.intermediate.viseme_pose_sum_lip_corner_pull_right", "rcef.intermediate.viseme_pose_sum_lip_corner_depress_left", "rcef.intermediate.viseme_pose_sum_lip_corner_depress_right", "rcef.intermediate.viseme_pose_sum_dimple_left", "rcef.intermediate.viseme_pose_sum_dimple_right", "rcef.intermediate.viseme_pose_sum_lip_stretch_left", "rcef.intermediate.viseme_pose_sum_lip_stretch_right", "rcef.intermediate.viseme_pose_sum_chin_raise", "rcef.intermediate.viseme_pose_sum_lip_funnel_upper_left", "rcef.intermediate.viseme_pose_sum_lip_funnel_upper_right", "rcef.intermediate.viseme_pose_sum_lip_funnel_lower_left", "rcef.intermediate.viseme_pose_sum_lip_funnel_lower_right", "rcef.intermediate.viseme_pose_sum_lip_pucker_left", "rcef.intermediate.viseme_pose_sum_lip_pucker_right", "rcef.intermediate.viseme_pose_sum_lip_suck_upper_left", "rcef.intermediate.viseme_pose_sum_lip_suck_upper_right", "rcef.intermediate.viseme_pose_sum_lip_suck_lower_left", "rcef.intermediate.viseme_pose_sum_lip_suck_lower_right", "rcef.intermediate.viseme_pose_sum_lip_press_left", "rcef.intermediate.viseme_pose_sum_lip_press_right", "rcef.intermediate.viseme_pose_sum_lips_toward", "rcef.intermediate.viseme_pose_sum_upper_lip_raise_left", "rcef.intermediate.viseme_pose_sum_upper_lip_raise_right", "rcef.intermediate.viseme_pose_sum_lower_lip_depress_left", "rcef.intermediate.viseme_pose_sum_lower_lip_depress_right", "rcef.intermediate.viseme_pose_sum_cheek_puff_left", "rcef.intermediate.viseme_pose_sum_cheek_puff_right", "rcef.intermediate.viseme_pose_sum_jaw_thrust", "rcef.intermediate.viseme_pose_sum_chin_raise_upper_lip"]
 evidence = ["rcef_definitions"]

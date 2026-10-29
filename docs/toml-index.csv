@@ -2,13 +2,14 @@ path,role,table_kinds,signals,profiles,membership_rows,mappings,rules,evidence,c
 data/canonical.toml,canonical signals and profile,[[signals]]; [[profiles]],21,1,21,0,0,0,21,19997,a17ca42cc6c3ddd749874ef9e43040429bdd1c917a913e235deb3f5f171fe060,CC-BY-SA-4.0
 data/canonical_expression.toml,canonical expression signals and profile,[[signals]]; [[profiles]],60,1,60,0,0,0,60,86192,925e0752e03073b40633974deca74a003d673f70f7339672cb41fbed63aeb55c,CC-BY-SA-4.0
 data/canonical_viseme.toml,canonical viseme signals and profile,[[signals]]; [[profiles]],16,1,16,0,0,0,16,24881,de54fa88ae8e46e06e4464e360000fcfc5fd0620f00b877b730b8992ca4a0447,CC-BY-SA-4.0
-data/intermediate.toml,intermediate signals and profile,[[signals]]; [[profiles]],9,1,9,0,0,0,0,8025,86b78bdc8a3f739ff8f54a4e585389431fb51e431bdb0b7edeccde276a81d44b,CC-BY-SA-4.0
-evidence/sources.toml,source evidence,[[evidence]],0,0,0,0,0,76,0,47569,58ae865df3d7b62cef4c0bf287c3250b2a6d9377bf11b1a51892216a24ddfc8d,CC-BY-SA-4.0
+data/intermediate.toml,intermediate signals and profile,[[signals]]; [[profiles]],63,1,63,0,0,0,0,55487,f71891da0da39f3915c5af460126473a96fd482fee7a0af032e0aae1cb8e734c,CC-BY-SA-4.0
+evidence/sources.toml,source evidence,[[evidence]],0,0,0,0,0,77,0,48298,7cce91281de2717344d7056767ae0c1a97b29c8612b7d1dfc1600764bbc3710a,CC-BY-SA-4.0
 mappings/arkit.toml,directional maps,[[mappings]],0,0,0,1,9,0,0,5768,6f517ea1fcf885a241ad8c0ea41fa2d9fb3160564ea25adf796da7eb50ac8084,CC-BY-SA-4.0
 mappings/arkit_fb2.toml,directional maps,[[mappings]],0,0,0,2,64,0,0,90520,f6c958b30b6c8c13f8091ba294018c5ed5a358a8a4f537bf2434ccbb3b194bc3,CC-BY-SA-4.0
 mappings/arkit_vrcft.toml,directional maps,[[mappings]],0,0,0,1,68,0,0,95202,4fc813c50a2b88c9334af2a141c2ac4b8dc797794f8def8350d7bf86b9097150,CC-BY-SA-4.0
 mappings/canonical_arkit.toml,directional maps,[[mappings]],0,0,0,18,112,0,0,234542,9152272d0d9c73c123eb6478cc1273bfb4cdb183644c082498f5720ea2e65db4,CC-BY-SA-4.0
 mappings/canonical_fb2.toml,directional maps,[[mappings]],0,0,0,18,124,0,0,192657,bd8f47ce227686c059cd8a89056da3a786ab3665137fea0d0d0a5d6ac43e468c,CC-BY-SA-4.0
+mappings/canonical_viseme_pose.toml,directional maps,[[mappings]],0,0,0,1,99,0,0,348223,2d4cb2b31b6d5149b80a4222718636db58109410a16fdfc6a032128dee9e7b91,CC-BY-SA-4.0
 mappings/canonical_visemes.toml,directional maps,[[mappings]],0,0,0,7,32,0,0,48550,4601a2939407ee8759ae65a1fa484cf78659aeb6ec7fa02c45cc175de941102e,CC-BY-SA-4.0
 mappings/canonical_vrcft_artist.toml,directional maps,[[mappings]],0,0,0,9,68,0,0,119552,d669bba53ff7ae811906b38ca5139cd1792c3cd5fb52637a9bff0c9b1483c512,CC-BY-SA-4.0
 mappings/canonical_vrm.toml,directional maps,[[mappings]],0,0,0,3,12,0,0,23311,2bdd536f895bdb4725973ec889036e36224696f70289384a8669662e4ba7aca5,CC-BY-SA-4.0
