@@ -23,8 +23,8 @@ the profiles their signals belong to, not by their names.
   it only when the target reads what it writes, the source cannot write that
   itself, and the source writes some of what the bridge reads. Then the route
   is in-maps -> bridge -> out-maps. A class that no selected in-map can write
-  counts as 0 in the bridge, and the frame's notes say so; a class refused
-  upstream refuses the bridge's outputs on that frame.
+  counts as 0 in the bridge, and the notes of each frame it runs on say so; a
+  class refused upstream refuses the bridge's outputs on that frame.
 
 One-hop mode (`maps=[...]`) runs the named maps straight from source to
 target, as rcef_translate.Translator does. The A/B comparison runs today's
@@ -202,14 +202,13 @@ class Route:
                 blocked[i].update(dict.fromkeys(outputs, {self.writer[s] for s in missing}))
             else:
                 span.append(i)
-            if fill:
-                short = ', '.join(s.rsplit('.', 1)[1] for s in fill)
-                results[i]['notes'].append(ZERO_FILLED.format(mapping, short))
+        short = ', '.join(s.rsplit('.', 1)[1] for s in fill)
         for i, values in zip(span, self._run(mapping, frames, span, results)):
             if values is None:
-                blocked[i].update(dict.fromkeys(outputs, {mapping}))
-            else:
-                middle[i]['values'].update(values)
+                continue  # the out-maps label its outputs "refused upstream at" the bridge, their writer
+            middle[i]['values'].update(values)
+            if fill:
+                results[i]['notes'].append(ZERO_FILLED.format(mapping, short))
 
     def _run(self, mapping: str, frames: list[dict], span, results: list[dict]) -> list[dict | None]:
         """The map's output values for each frame in `span`, or None where it refused the frame."""
