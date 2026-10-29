@@ -587,7 +587,7 @@ These tests come with the data change:
 - a capability matrix: for each set (FACS, FB v1, `XR_ANDROID_face_tracking` and `XR_ML_facial_expression`, from a committed list of their names with record and locator), which canonical groups it can fill, plus a synthetic partial source;
 - a FACS-crosswalk record goes only on hops of the provider whose names it uses (`ict_facekit`: ARKit hops only), and no crosswalk record goes on a FACS hop;
 - for `facs.code`: 92 rows with the dispositions 49, 25 and 18; the ID pattern; the calibration strings; `facs_au` agrees with the FACS maps;
-- for the visemes: every one of the 107 chart symbols in exactly one partition class; the 112 rule cases and the 3 symbols with no rule; refinements are subsets of one class and aggregates unions of whole classes in one group; only the 15 partition signals carry `probability_simplex`; every IPA string is in NFC; the aggregate in-map's clause and its fan-in are the only operators outside the census.
+- for the visemes: every one of the 107 chart symbols in exactly one partition class; the 112 rule cases and the 3 symbols with no rule; refinements are subsets of one class and aggregates unions of whole classes in one group; only the 15 partition signals carry `probability_simplex`; every IPA string is in NFC; the aggregate in-map's clause and its fan-in are the only operators outside the census; its chain gives the clamped binary64 sum of META SS, DD, NN and RR on random frames; no route selects it; no out-map reads an aggregate or refinement together with any of its parts.
 
 ## Open questions
 
