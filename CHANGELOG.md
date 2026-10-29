@@ -71,8 +71,9 @@ do not change.
   `docs/canonical-set.md` shows. The 15 are coupled as a
   `probability_simplex`: from a valid META frame they sum to 1. The 16th
   signal, `alveolar_floor` (group `viseme_aggregate`), is the sum of
-  `alveolar_sibilant`, `coronal_stop` and `coronal_nasal_lateral`, clamped
-  at 1; it is outside the simplex.
+  `alveolar_sibilant`, `coronal_stop`, `coronal_nasal_lateral` and
+  `rhotic`, clamped at 1; it is outside the simplex. Sums and argmax over
+  the profile use the 15 partition signals only.
 - 42 new mappings in 9 maps: META visemes and the VRM vowel presets into the
   canonical viseme set (22 mappings in 5 maps), and the canonical viseme set
   to META visemes and the VRM vowel presets (20 mappings in 4 maps). The map

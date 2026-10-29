@@ -536,7 +536,7 @@ Each loss reason of today's maps maps to the keys that cover it on the pivot rou
 
 ## Keys added on today's pairs
 
-A pivot route may carry an audit key that today's rule for the same pair does not carry. Each such key is listed here. Any other added key is an error.
+A pivot route may carry an audit key that today's rule for the same pair does not carry. Each such key is listed here, and an A/B registration lists the same keys in `audit_added_keys` ([ab/README.md](../ab/README.md)). Any other added key is an error.
 
 | Key | Pairs where it is added |
 |---|---|
