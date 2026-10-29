@@ -67,7 +67,7 @@ Anyone can compute `seed_root` from a registration that is not committed yet. So
 
 ## Fixed inputs: the edge set and the impulse frames
 
-These families are fixed lists. They do not depend on `seed_root`, so every A1 figure in a registration (A1's refusals on the edge set and A1's observed loss) is computed before `seed_root` exists, in one pass. `ab_compare.py` checks this by computing the figures again with another `seed_root`.
+These families are fixed lists. They do not depend on `seed_root`, so every A1 figure in a registration (A1's refusals on the edge set and A1's observed loss) is computed before `seed_root` exists, in one pass. `ab_compare.py` checks this by computing the figures again from the registration with its `seed_root` field removed, and comparing them with the recorded ones.
 
 - **Edge set:** each of these values on every channel at once, and on each channel alone: ±0, 1, 2⁻³⁰, 0.1, 0.3, 2⁻⁵⁴, 2⁻⁵³, 0.5 and its two neighbours, the value below 1, float32 roundings of 0.1, 0.3, 1/3 and 0.7, 5e-324, 1.5e-323, (1 + 2⁻⁵²)·2⁻¹⁰²¹, 2⁻¹⁰²⁰ and 2⁻¹⁰²². Then each pair of opposing gaze directions at (0.3, 0.1), (0.1, 0.3), (0.3, 0.3) and (1, 1).
 - **Impulse frames:** the all-zero frame, then each channel alone at 1 and at 0.5.
@@ -94,7 +94,7 @@ The seeded families mix full-mantissa binary64 values with 6-decimal values. The
 - `SHA256SUMS`: the hash of each result file and of each generated frame file;
 - `timings.json`, which no hash covers.
 
-Freeze ids, hashes and paths are only in `manifest.json`. So a `reproduce` run can match the results of the freeze it reproduces byte for byte, apart from `manifest.json`, `timings.json` and their lines in `SHA256SUMS`.
+Freeze ids, hashes and paths are only in `manifest.json`. So a `reproduce` run can match the results of the freeze it reproduces byte for byte, apart from `manifest.json`, its line in `SHA256SUMS`, and `timings.json`, which has no line there.
 
 ## What the tools compute today
 

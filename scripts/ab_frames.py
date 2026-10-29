@@ -44,7 +44,7 @@ def f32(x: float) -> float:
     return struct.unpack('<f', struct.pack('<f', x))[0]
 
 
-# Family 5: values that exercise signed zero, rounding near the knots, float32 inputs and products near underflow.
+# The edge set: values that exercise signed zero, rounding near the knots, float32 inputs and products near underflow.
 EDGE_VALUES = (0.0, -0.0, 1.0, 2.0 ** -30, 0.1, 0.3, 2.0 ** -54, 2.0 ** -53, 0.5,
                math.nextafter(0.5, 0.0), math.nextafter(0.5, 1.0), math.nextafter(1.0, 0.0),
                f32(0.1), f32(0.3), f32(1 / 3), f32(0.7),
@@ -135,7 +135,7 @@ def zero(source):
 
 
 def grid_family(name: str, source: dict) -> list[dict]:
-    """Family 4: every channel at k/16, then each pattern of validity flags on a half-way frame."""
+    """Grid frames: every channel at k/16, then each pattern of validity flags on a half-way frame."""
     frames = [frame(name, f'all {k}/{GRID_STEPS}', dict.fromkeys(source['channels'], k / GRID_STEPS), source)
               for k in range(GRID_STEPS + 1)]
     flags = source['flags']
@@ -148,7 +148,7 @@ def grid_family(name: str, source: dict) -> list[dict]:
 
 
 def edge_family(name: str, source: dict) -> list[dict]:
-    """Family 5: each edge value on every channel at once and on each channel alone, and the opposing gaze pairs."""
+    """The edge set: each edge value on every channel at once and on each channel alone, and the opposing gaze pairs."""
     frames = []
     for value in EDGE_VALUES:
         frames.append(frame(name, f'all {value!r}', dict.fromkeys(source['channels'], value), source))
@@ -162,7 +162,7 @@ def edge_family(name: str, source: dict) -> list[dict]:
 
 
 def impulse_family(name: str, source: dict) -> list[dict]:
-    """Family 6: the all-zero frame, then each channel alone at each fixed amplitude."""
+    """Impulse frames: the all-zero frame, then each channel alone at each fixed amplitude."""
     frames = [frame(name, 'all zero', zero(source), source)]
     for sid in source['channels']:
         for amplitude in IMPULSE_AMPLITUDES:
@@ -171,7 +171,7 @@ def impulse_family(name: str, source: dict) -> list[dict]:
 
 
 def golden_family(name: str, goldens: dict, sources: dict, kinds: dict) -> list[dict]:
-    """Family 1: each golden case on its own source set, every other channel 0."""
+    """Golden frames: each golden case on its own source set, every other channel 0."""
     frames = []
     for n, case in enumerate(goldens['cases']):
         source = sources[kinds[case['mapping_kind']]]
@@ -180,7 +180,7 @@ def golden_family(name: str, goldens: dict, sources: dict, kinds: dict) -> list[
 
 
 def csv_family(name: str, path: Path, source: dict, prefix: str, suffix: str) -> list[dict]:
-    """Family 2: an example CSV; columns are channels named without the prefix and suffix, then flags."""
+    """Example CSV frames: an example CSV; columns are channels named without the prefix and suffix, then flags."""
     with path.open(encoding='utf-8', newline='') as handle:
         rows = list(csv.DictReader(handle))
     channels = [c for c in rows[0] if f'{prefix}{c}{suffix}' in source['channels']]
@@ -279,7 +279,7 @@ def seeded_family(spec: dict, sources: dict, seed_root: str, index: int) -> list
 
 
 def perturbation_family(name: str, bases: list[dict], source: dict) -> list[dict]:
-    """Family 7: each input of each base frame left out, set to 1.5 and set to -0.1, and each flag cleared."""
+    """Perturbation frames: each input of a base frame left out, set to 1.5 and to -0.1; each flag cleared."""
     frames = []
     for n, base in enumerate(bases):
         for sid in source['channels']:
@@ -309,7 +309,7 @@ def family_source(name: str, abreg: dict) -> str:
 
 
 def fixed_families(abreg: dict) -> dict[str, list[dict]]:
-    """Families 4, 5 and 6 for every pinned source; they read no seed."""
+    """The grid, edge and impulse families of every pinned source; they read no seed."""
     families = {}
     for profile, source in abreg['sources'].items():
         families[f'grid:{profile}'] = grid_family(f'grid:{profile}', source)
@@ -319,7 +319,7 @@ def fixed_families(abreg: dict) -> dict[str, list[dict]]:
 
 
 def fixed_inputs(abreg: dict, root: Path = ROOT) -> dict[str, list[dict]]:
-    """Families 1 and 2 and the FACS key impulses (item 9); each input file must have its pinned SHA-256."""
+    """The golden, example CSV and FACS key-impulse families; each input file must have its pinned SHA-256."""
     spec, families = abreg.get('fixed_inputs', {}), {}
 
     def read(entry):
@@ -346,7 +346,7 @@ def fixed_inputs(abreg: dict, root: Path = ROOT) -> dict[str, list[dict]]:
 
 
 def seeded_families(abreg: dict) -> dict[str, list[dict]]:
-    """Families 3 and 7, from the registration's seed_root."""
+    """The seeded and perturbation families, from the registration's seed_root."""
     families = {}
     for index, spec in enumerate(abreg['families']):
         families[spec['name']] = seeded_family(spec, abreg['sources'], abreg['seed_root'], index)

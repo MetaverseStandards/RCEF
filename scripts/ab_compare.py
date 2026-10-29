@@ -73,7 +73,7 @@ A2_PAIRS = {'FB2 -> VRCFT UE': [('openxr.fb2', 'arkit.coefficient', ['fb2.to_ark
                                 ('arkit.coefficient', 'vrcft.artist.base', ['arkit.to_vrcft_artist'])],
             'ARKit -> VRM blink': [('arkit.coefficient', 'openxr.fb2', ['arkit.to_fb2']),
                                    ('openxr.fb2', 'vrm.preset', ['fb2.to_vrm'])]}
-# Every pair B may run (plan section 5.2); a registration freezes the maps of those the B pack can route.
+# Every pair B may run; a registration freezes the maps of those the B pack can route.
 B_PAIRS = {**{name: (s, t) for name, (s, t, _) in A1_PAIRS.items()},
            'FB2 -> VRCFT UE': ('openxr.fb2', 'vrcft.artist.base'),
            'ARKit -> VRM blink': ('arkit.coefficient', 'vrm.preset'),
@@ -97,7 +97,8 @@ CSV_INPUTS = [('examples/data/fb2_demo_frames.csv', 'openxr.fb2', *FB2),
               ('examples/data/fb2_expression_frames.csv', 'openxr.fb2', *FB2),
               ('examples/data/viseme_demo_frames.csv', 'openxr.visemes', *VISEMES),
               ('examples/data/viseme_talk_frames.csv', 'openxr.visemes', *VISEMES)]
-# Plan section 5.3, item 3. A family whose source the B pack cannot route is left out of a draft.
+# The seeded families and their default sizes (ab/README.md). A family whose source the B pack cannot route is
+# left out of a draft.
 FAMILIES = [{'name': 'fb2_contract', 'kind': 'fb2_contract', 'source': 'openxr.fb2', 'count': 2000},
             {'name': 'fb2_breaking', 'kind': 'uniform', 'source': 'openxr.fb2', 'count': 2000},
             {'name': 'arkit_uniform', 'kind': 'uniform', 'source': 'arkit.coefficient', 'count': 2000},
@@ -110,7 +111,7 @@ FAMILIES = [{'name': 'fb2_contract', 'kind': 'fb2_contract', 'source': 'openxr.f
             {'name': 'facs_uniform', 'kind': 'uniform', 'source': 'facs.code', 'count': 2000},
             {'name': 'facs_letters', 'kind': 'facs_letters', 'count': 500}]
 PERTURB_BASES = 4
-# FACS channels that A3 and B share (5.3 item 3): every mapped facs.code signal but AU19 and AU43.
+# FACS channels that A3 and B share: every mapped facs.code signal but AU19 and AU43, which A3's table lacks.
 FACS_UNSHARED = ('facs.code.au19', 'facs.code.au43_left', 'facs.code.au43_right')
 FACS_MAPPED, FACS_SHARED = 49, 46
 # Outputs that the FACS route cannot write but A3 (and A3 then A1) writes as zero or from AU61-64 (M10, M10b).
@@ -120,7 +121,7 @@ M10_NOT_AVAILABLE = [f'{FB2[0]}{c}{FB2[1]}' for c in (
     *(f'EYES_LOOK_{d}_{s}' for d in ('LEFT', 'RIGHT', 'UP', 'DOWN') for s in 'LR'))]
 M10B_NOT_AVAILABLE = [ARKIT + c for c in ('mouthLeft', 'mouthRight', 'mouthShrugUpper', *(
     f'eyeLook{d}{s}' for d in ('In', 'Out', 'Up', 'Down') for s in ('Left', 'Right')))]
-# FB2 gaze outputs on the negative knot segment: fl(1 - fl(1 - b)) rounds (M3 c).
+# FB2 gaze outputs on the negative knot segment: fl(1 - fl(1 - b)) rounds, so M3 reports their error.
 M3_ROUNDING = [f'{FB2[0]}EYES_LOOK_{c}_FB' for c in ('LEFT_L', 'RIGHT_R', 'DOWN_L', 'DOWN_R')]
 TINY = 2.0 ** -1020
 THRESHOLDS = {
@@ -136,7 +137,7 @@ THRESHOLDS = {
     'M10': 'FACS -> FB2: B equals A3 on outputs both write; coverage list frozen; B refuses 0 frames',
     'M10b': 'FACS -> ARKit: B equals A3 then A1 on outputs both write; coverage list frozen',
 }
-# Gates the S2 tooling cannot compute yet: their frozen tables come from the definitions audit (S1) and the data (S4).
+# Gates these tools cannot compute yet: their frozen tables come from the definitions audit and the canonical data.
 PENDING = {'M4 keys': 'the rule-scoped reason -> key table', 'M4b': 'the assumption catalogue',
            'M6': 'the geometry harness', 'M7': 'the mutation set', 'M11': 'B ARKit -> FACS links and the R5 table',
            'M8 R3': 'the R3 goldens'}
@@ -614,7 +615,7 @@ def registered_families(sources: dict) -> list[dict]:
 
 
 def draft(root: Path = ROOT, b_path: Path | None = None, date: str = '') -> dict:
-    """A first registration (ab.pivot v1) with every pin the tools can compute; lists the S1 and S4 work fills in."""
+    """A first registration (ab.pivot v1) with every pin the tools can compute; the audit and data fill the lists."""
     a1 = load_a1(root)
     b_path = b_path or root / B_PACK
     b_document = json.loads(b_path.read_text(encoding='utf-8'))
@@ -1076,7 +1077,7 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
     files['refusals.csv'] = csv_text([['arm', 'pair', 'family', 'frame', 'map', 'codes'], *report['refusals']])
     files['losses.csv'] = csv_text([['arm', 'pair', 'observed loss'], *report['observed_loss']])
     files['assumptions.csv'] = csv_text([['pair', 'A1 rule', 'template', 'B key or superseded reason'],
-                                         ['pending', 'the assumption catalogue (M4b) is frozen before S6', '', '']])
+                                         ['pending', 'the assumption catalogue (M4b) is not frozen yet', '', '']])
     lines = ['# A/B comparison: scoreboard', '',
              'The pivot route (B) against the direct maps (A1) and the other arms. The held-out frames are held out '
              'by procedure: the registration and its ledger line were committed before this run.', '']

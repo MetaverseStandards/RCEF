@@ -21,8 +21,9 @@ import rcef_translate  # noqa: E402
 
 FIXTURE = ROOT / 'tests/fixtures/baseline-dea1713.pack.json'
 DATA = ROOT / 'examples/data'
-# Refused frames per map, measured on the baseline pack. The FB2 -> ARKit and
-# viseme counts are the ones the pivot plan recorded before this runner existed.
+# Refused frames per map, measured on the baseline pack: the gaze map refuses the
+# 16 FB2 demo frames whose eye-following flag is cleared or whose face is lost,
+# the face maps the 5 face-lost frames, and the viseme map the 3 invalid frames.
 REFUSED = {
     ('fb2_to_arkit', 'fb2_demo_frames.csv'): {'fb2_gaze.to_arkit': 16, 'fb2.to_arkit': 5},
     ('fb2_to_arkit', 'fb2_expression_frames.csv'): {},
