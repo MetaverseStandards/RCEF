@@ -20,7 +20,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions BrowLowererLeft and BrowPinchLeft together correspond to canonical brow_lower_left; this mapping writes BrowLowererLeft.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; see loss arkit_browdown_outer.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; and that Unified Expressions BrowLowererLeft and BrowPinchLeft differ from canonical brow_lower_left; see losses arkit_browdown_outer and vrcft_ue_set_equal.",
   "fan_out.vrcft_ue: canonical brow_lower_left is one whole action, which Unified Expressions splits into parts; BrowLowererLeft is set to the canonical value, as is BrowPinchLeft. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererLeft + 0.25 x BrowPinchLeft; the weights sum to 1, so copying the canonical value into both parts gives it back.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_simple_expressions", "rcef_canonical_v1"]
@@ -40,7 +40,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions BrowLowererLeft and BrowPinchLeft together correspond to canonical brow_lower_left; this mapping writes BrowPinchLeft.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; see loss arkit_browdown_outer.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; and that Unified Expressions BrowLowererLeft and BrowPinchLeft differ from canonical brow_lower_left; see losses arkit_browdown_outer and vrcft_ue_set_equal.",
   "fan_out.vrcft_ue: canonical brow_lower_left is one whole action, which Unified Expressions splits into parts; BrowPinchLeft is set to the canonical value, as is BrowLowererLeft. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererLeft + 0.25 x BrowPinchLeft; the weights sum to 1, so copying the canonical value into both parts gives it back.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_simple_expressions", "rcef_canonical_v1"]
@@ -60,7 +60,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions BrowLowererRight and BrowPinchRight together correspond to canonical brow_lower_right; this mapping writes BrowLowererRight.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; see loss arkit_browdown_outer.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; and that Unified Expressions BrowLowererRight and BrowPinchRight differ from canonical brow_lower_right; see losses arkit_browdown_outer and vrcft_ue_set_equal.",
   "fan_out.vrcft_ue: canonical brow_lower_right is one whole action, which Unified Expressions splits into parts; BrowLowererRight is set to the canonical value, as is BrowPinchRight. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererRight + 0.25 x BrowPinchRight; the weights sum to 1, so copying the canonical value into both parts gives it back.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_simple_expressions", "rcef_canonical_v1"]
@@ -80,7 +80,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions BrowLowererRight and BrowPinchRight together correspond to canonical brow_lower_right; this mapping writes BrowPinchRight.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; see loss arkit_browdown_outer.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; and that Unified Expressions BrowLowererRight and BrowPinchRight differ from canonical brow_lower_right; see losses arkit_browdown_outer and vrcft_ue_set_equal.",
   "fan_out.vrcft_ue: canonical brow_lower_right is one whole action, which Unified Expressions splits into parts; BrowPinchRight is set to the canonical value, as is BrowLowererRight. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererRight + 0.25 x BrowPinchRight; the weights sum to 1, so copying the canonical value into both parts gives it back.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_simple_expressions", "rcef_canonical_v1"]
@@ -172,7 +172,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions CheekSquintLeft corresponds to canonical cheek_raise_left.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_cheeksquint_cheek.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintLeft differs from canonical cheek_raise_left; see loss arkit_cheeksquint_cheek.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintLeft differs from canonical cheek_raise_left; and that Unified Expressions CheekSquintLeft differs from canonical cheek_raise_left; see losses arkit_cheeksquint_cheek and vrcft_ue_cheeksquint_cheek.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -191,7 +191,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions CheekSquintRight corresponds to canonical cheek_raise_right.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_cheeksquint_cheek.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintRight differs from canonical cheek_raise_right; see loss arkit_cheeksquint_cheek.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintRight differs from canonical cheek_raise_right; and that Unified Expressions CheekSquintRight differs from canonical cheek_raise_right; see losses arkit_cheeksquint_cheek and vrcft_ue_cheeksquint_cheek.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -210,7 +210,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeSquintLeft corresponds to canonical lid_tighten_left.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_eyesquint_socket.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintLeft differs from canonical lid_tighten_left; see loss arkit_eyesquint_face.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintLeft differs from canonical lid_tighten_left; and that Unified Expressions EyeSquintLeft differs from canonical lid_tighten_left; see losses arkit_eyesquint_face and vrcft_ue_eyesquint_socket.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -229,7 +229,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeSquintRight corresponds to canonical lid_tighten_right.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_eyesquint_socket.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintRight differs from canonical lid_tighten_right; see loss arkit_eyesquint_face.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintRight differs from canonical lid_tighten_right; and that Unified Expressions EyeSquintRight differs from canonical lid_tighten_right; see losses arkit_eyesquint_face and vrcft_ue_eyesquint_socket.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -302,8 +302,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthClosed corresponds to canonical lips_toward.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_mouthclosed_jaw_relative.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthClose is unresolved against canonical lips_toward; see loss arkit_mouthclose_jaw_unresolved.",
-  "lips_toward.jaw_not_compensated: the value is copied without compensating for the jaw. Canonical lips_toward follows FB2 LIPS_TOWARD, which closes the lips whatever the jaw does; the audit rows are FB2 same, ARKit unresolved and Unified Expressions differs.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthClose is unresolved against canonical lips_toward; and that Unified Expressions MouthClosed differs from canonical lips_toward; see losses arkit_mouthclose_jaw_unresolved and vrcft_ue_mouthclosed_jaw_relative.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -540,8 +539,8 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight together correspond to canonical lip_pucker_right; this mapping writes LipPuckerUpperRight.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_right; see loss arkit_mouthpucker_compression.",
-  "fan_out.vrcft_ue: canonical lip_pucker_right is one whole action, which Unified Expressions splits into parts; LipPuckerUpperRight is set to the canonical value, as is LipPuckerUpperLeft, LipPuckerLowerRight, LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the canonical value into each part gives it back.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_right; and that Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight differ from canonical lip_pucker_right; see losses arkit_mouthpucker_compression and vrcft_ue_set_equal.",
+  "fan_out.vrcft_ue: canonical lip_pucker_right is one whole action, which Unified Expressions splits into parts; LipPuckerUpperRight is set to the canonical value, as is LipPuckerLowerRight. VRCFaceTracking computes the blended shape as the mean of LipPuckerUpperRight, LipPuckerUpperLeft, LipPuckerLowerRight and LipPuckerLowerLeft. The canonical set holds the two sides apart: lip_pucker_left goes to LipPuckerUpperLeft and LipPuckerLowerLeft, so the blended shape is the mean of canonical lip_pucker_right and lip_pucker_left.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_code_parameters", "rcef_canonical_v1"]
 loss_annotations = [
@@ -560,8 +559,8 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft together correspond to canonical lip_pucker_left; this mapping writes LipPuckerUpperLeft.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; see loss arkit_mouthpucker_compression.",
-  "fan_out.vrcft_ue: canonical lip_pucker_left is one whole action, which Unified Expressions splits into parts; LipPuckerUpperLeft is set to the canonical value, as is LipPuckerUpperRight, LipPuckerLowerRight, LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the canonical value into each part gives it back.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; and that Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft differ from canonical lip_pucker_left; see losses arkit_mouthpucker_compression and vrcft_ue_set_equal.",
+  "fan_out.vrcft_ue: canonical lip_pucker_left is one whole action, which Unified Expressions splits into parts; LipPuckerUpperLeft is set to the canonical value, as is LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of LipPuckerUpperLeft, LipPuckerUpperRight, LipPuckerLowerRight and LipPuckerLowerLeft. The canonical set holds the two sides apart: lip_pucker_right goes to LipPuckerUpperRight and LipPuckerLowerRight, so the blended shape is the mean of canonical lip_pucker_left and lip_pucker_right.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_code_parameters", "rcef_canonical_v1"]
 loss_annotations = [
@@ -580,8 +579,8 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight together correspond to canonical lip_pucker_right; this mapping writes LipPuckerLowerRight.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_right; see loss arkit_mouthpucker_compression.",
-  "fan_out.vrcft_ue: canonical lip_pucker_right is one whole action, which Unified Expressions splits into parts; LipPuckerLowerRight is set to the canonical value, as is LipPuckerUpperRight, LipPuckerUpperLeft, LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the canonical value into each part gives it back.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_right; and that Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight differ from canonical lip_pucker_right; see losses arkit_mouthpucker_compression and vrcft_ue_set_equal.",
+  "fan_out.vrcft_ue: canonical lip_pucker_right is one whole action, which Unified Expressions splits into parts; LipPuckerLowerRight is set to the canonical value, as is LipPuckerUpperRight. VRCFaceTracking computes the blended shape as the mean of LipPuckerLowerRight, LipPuckerUpperRight, LipPuckerUpperLeft and LipPuckerLowerLeft. The canonical set holds the two sides apart: lip_pucker_left goes to LipPuckerUpperLeft and LipPuckerLowerLeft, so the blended shape is the mean of canonical lip_pucker_right and lip_pucker_left.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_code_parameters", "rcef_canonical_v1"]
 loss_annotations = [
@@ -600,8 +599,8 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft together correspond to canonical lip_pucker_left; this mapping writes LipPuckerLowerLeft.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; see loss arkit_mouthpucker_compression.",
-  "fan_out.vrcft_ue: canonical lip_pucker_left is one whole action, which Unified Expressions splits into parts; LipPuckerLowerLeft is set to the canonical value, as is LipPuckerUpperRight, LipPuckerUpperLeft, LipPuckerLowerRight. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the canonical value into each part gives it back.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; and that Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft differ from canonical lip_pucker_left; see losses arkit_mouthpucker_compression and vrcft_ue_set_equal.",
+  "fan_out.vrcft_ue: canonical lip_pucker_left is one whole action, which Unified Expressions splits into parts; LipPuckerLowerLeft is set to the canonical value, as is LipPuckerUpperLeft. VRCFaceTracking computes the blended shape as the mean of LipPuckerLowerLeft, LipPuckerUpperRight, LipPuckerUpperLeft and LipPuckerLowerRight. The canonical set holds the two sides apart: lip_pucker_right goes to LipPuckerUpperRight and LipPuckerLowerRight, so the blended shape is the mean of canonical lip_pucker_left and lip_pucker_right.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_code_parameters", "rcef_canonical_v1"]
 loss_annotations = [
@@ -710,7 +709,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft together correspond to canonical lip_corner_pull_left; this mapping writes MouthCornerPullLeft.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; see loss arkit_mouthsmile_upward.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; and that Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft differ from canonical lip_corner_pull_left; see losses arkit_mouthsmile_upward and vrcft_ue_set_equal.",
   "fan_out.vrcft_ue: canonical lip_corner_pull_left is one whole action, which Unified Expressions splits into parts; MouthCornerPullLeft is set to the canonical value, as is MouthCornerSlantLeft. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullLeft + 0.2 x MouthCornerSlantLeft; the weights sum to 1, so copying the canonical value into both parts gives it back.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_simple_expressions", "rcef_canonical_v1"]
@@ -730,7 +729,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft together correspond to canonical lip_corner_pull_left; this mapping writes MouthCornerSlantLeft.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; see loss arkit_mouthsmile_upward.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; and that Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft differ from canonical lip_corner_pull_left; see losses arkit_mouthsmile_upward and vrcft_ue_set_equal.",
   "fan_out.vrcft_ue: canonical lip_corner_pull_left is one whole action, which Unified Expressions splits into parts; MouthCornerSlantLeft is set to the canonical value, as is MouthCornerPullLeft. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullLeft + 0.2 x MouthCornerSlantLeft; the weights sum to 1, so copying the canonical value into both parts gives it back.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_simple_expressions", "rcef_canonical_v1"]
@@ -750,7 +749,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthCornerPullRight and MouthCornerSlantRight together correspond to canonical lip_corner_pull_right; this mapping writes MouthCornerPullRight.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; see loss arkit_mouthsmile_upward.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; and that Unified Expressions MouthCornerPullRight and MouthCornerSlantRight differ from canonical lip_corner_pull_right; see losses arkit_mouthsmile_upward and vrcft_ue_set_equal.",
   "fan_out.vrcft_ue: canonical lip_corner_pull_right is one whole action, which Unified Expressions splits into parts; MouthCornerPullRight is set to the canonical value, as is MouthCornerSlantRight. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullRight + 0.2 x MouthCornerSlantRight; the weights sum to 1, so copying the canonical value into both parts gives it back.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_simple_expressions", "rcef_canonical_v1"]
@@ -770,7 +769,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthCornerPullRight and MouthCornerSlantRight together correspond to canonical lip_corner_pull_right; this mapping writes MouthCornerSlantRight.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; see loss arkit_mouthsmile_upward.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; and that Unified Expressions MouthCornerPullRight and MouthCornerSlantRight differ from canonical lip_corner_pull_right; see losses arkit_mouthsmile_upward and vrcft_ue_set_equal.",
   "fan_out.vrcft_ue: canonical lip_corner_pull_right is one whole action, which Unified Expressions splits into parts; MouthCornerSlantRight is set to the canonical value, as is MouthCornerPullRight. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullRight + 0.2 x MouthCornerSlantRight; the weights sum to 1, so copying the canonical value into both parts gives it back.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_simple_expressions", "rcef_canonical_v1"]
@@ -790,7 +789,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthStretchLeft corresponds to canonical lip_stretch_left.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_mouthstretch_down.",
-  "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical lip_stretch_left is defined to match ARKit mouthStretchLeft.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthStretchLeft differs from canonical lip_stretch_left; see loss vrcft_ue_mouthstretch_down.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -809,7 +808,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthStretchRight corresponds to canonical lip_stretch_right.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_mouthstretch_down.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthStretchRight is unresolved against canonical lip_stretch_right; see loss arkit_mouthstretchright_text_side.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthStretchRight is unresolved against canonical lip_stretch_right; and that Unified Expressions MouthStretchRight differs from canonical lip_stretch_right; see losses arkit_mouthstretchright_text_side and vrcft_ue_mouthstretch_down.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1002,7 +1001,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthUpperLeft and MouthLowerLeft together correspond to canonical mouth_shift_left; this mapping writes MouthUpperLeft.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match ARKit mouthLeft.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperLeft and MouthLowerLeft differ from canonical mouth_shift_left; see loss vrcft_ue_set_equal.",
   "evidence.godot_only_mouth_shift: FLAGGED: VRCFaceTracking's ARKit table has no mouthLeft row; only Godot names the ARKit coefficient for the blended Unified shape.",
   "fan_out.vrcft_ue: canonical mouth_shift_left is one whole action, which Unified Expressions splits into parts; MouthUpperLeft is set to the canonical value, as is MouthLowerLeft. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_LEFT with the blended shape.",
 ]
@@ -1023,7 +1022,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthUpperLeft and MouthLowerLeft together correspond to canonical mouth_shift_left; this mapping writes MouthLowerLeft.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match ARKit mouthLeft.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperLeft and MouthLowerLeft differ from canonical mouth_shift_left; see loss vrcft_ue_set_equal.",
   "evidence.godot_only_mouth_shift: FLAGGED: VRCFaceTracking's ARKit table has no mouthLeft row; only Godot names the ARKit coefficient for the blended Unified shape.",
   "fan_out.vrcft_ue: canonical mouth_shift_left is one whole action, which Unified Expressions splits into parts; MouthLowerLeft is set to the canonical value, as is MouthUpperLeft. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_LEFT with the blended shape.",
 ]
@@ -1044,7 +1043,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthUpperRight and MouthLowerRight together correspond to canonical mouth_shift_right; this mapping writes MouthUpperRight.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match ARKit mouthRight.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperRight and MouthLowerRight differ from canonical mouth_shift_right; see loss vrcft_ue_set_equal.",
   "evidence.godot_only_mouth_shift: FLAGGED: VRCFaceTracking's ARKit table has no mouthRight row; only Godot names the ARKit coefficient for the blended Unified shape.",
   "fan_out.vrcft_ue: canonical mouth_shift_right is one whole action, which Unified Expressions splits into parts; MouthUpperRight is set to the canonical value, as is MouthLowerRight. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_RIGHT with the blended shape.",
 ]
@@ -1065,7 +1064,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions MouthUpperRight and MouthLowerRight together correspond to canonical mouth_shift_right; this mapping writes MouthLowerRight.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-  "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match ARKit mouthRight.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperRight and MouthLowerRight differ from canonical mouth_shift_right; see loss vrcft_ue_set_equal.",
   "evidence.godot_only_mouth_shift: FLAGGED: VRCFaceTracking's ARKit table has no mouthRight row; only Godot names the ARKit coefficient for the blended Unified shape.",
   "fan_out.vrcft_ue: canonical mouth_shift_right is one whole action, which Unified Expressions splits into parts; MouthLowerRight is set to the canonical value, as is MouthUpperRight. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_RIGHT with the blended shape.",
 ]
@@ -1149,7 +1148,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeLookDownLeft corresponds to canonical gaze_down_left.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; and that Unified Expressions EyeLookDownLeft differs from canonical gaze_down_left; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1168,7 +1167,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeLookDownRight corresponds to canonical gaze_down_right.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; and that Unified Expressions EyeLookDownRight differs from canonical gaze_down_right; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1187,7 +1186,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeLookInLeft corresponds to canonical gaze_in_left.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; and that Unified Expressions EyeLookInLeft differs from canonical gaze_in_left; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1206,7 +1205,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeLookInRight corresponds to canonical gaze_in_right.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; and that Unified Expressions EyeLookInRight differs from canonical gaze_in_right; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1225,7 +1224,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeLookOutLeft corresponds to canonical gaze_out_left.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; and that Unified Expressions EyeLookOutLeft differs from canonical gaze_out_left; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1244,7 +1243,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeLookOutRight corresponds to canonical gaze_out_right.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; and that Unified Expressions EyeLookOutRight differs from canonical gaze_out_right; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1263,7 +1262,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeLookUpLeft corresponds to canonical gaze_up_left.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; and that Unified Expressions EyeLookUpLeft differs from canonical gaze_up_left; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1282,7 +1281,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: Unified Expressions EyeLookUpRight corresponds to canonical gaze_up_right.",
   "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; and that Unified Expressions EyeLookUpRight differs from canonical gaze_up_right; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle.",
 ]
 evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_docs_arkit", "rcef_canonical_v1"]
 loss_annotations = [

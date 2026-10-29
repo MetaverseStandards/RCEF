@@ -7112,7 +7112,7 @@
     "approximate": 498,
     "exact": 22
   },
-  "pack_sha256": "1eb36507ac82331f22087de142b56fac9637f7350583e87fb0897758493f7bb0",
+  "pack_sha256": "682f7dd3b394768f70a657f16314aea1f6d16f8ae684ad9df882b9bd92ebef0e",
   "profiles": [
     {
       "count": 21,
@@ -17815,8 +17815,8 @@
       "assumptions": [
         "correspondence: ARKit browDownLeft corresponds to canonical brow_lower_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_browdown_outer.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical brow_lower_left is defined to match FB2 BROW_LOWERER_L.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it carries over because canonical brow_lower_left is defined to match Unified Expressions BrowLowererLeft and BrowPinchLeft.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; see loss arkit_browdown_outer.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that Unified Expressions BrowLowererLeft and BrowPinchLeft differ from canonical brow_lower_left; and that ARKit browDownLeft differs from canonical brow_lower_left; see losses vrcft_ue_set_equal and arkit_browdown_outer.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 4 to ARKit browDownLeft; it carries over because canonical brow_lower_left has facs_au 4."
       ],
       "disposition": "mapped",
@@ -17871,8 +17871,8 @@
       "assumptions": [
         "correspondence: ARKit browDownRight corresponds to canonical brow_lower_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_browdown_outer.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical brow_lower_right is defined to match FB2 BROW_LOWERER_R.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it carries over because canonical brow_lower_right is defined to match Unified Expressions BrowLowererRight and BrowPinchRight.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; see loss arkit_browdown_outer.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that Unified Expressions BrowLowererRight and BrowPinchRight differ from canonical brow_lower_right; and that ARKit browDownRight differs from canonical brow_lower_right; see losses vrcft_ue_set_equal and arkit_browdown_outer.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 4 to ARKit browDownRight; it carries over because canonical brow_lower_right has facs_au 4."
       ],
       "disposition": "mapped",
@@ -17927,8 +17927,8 @@
       "assumptions": [
         "correspondence: ARKit eyeSquintLeft corresponds to canonical lid_tighten_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_eyesquint_face.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it carries over because canonical lid_tighten_left is defined to match FB2 LID_TIGHTENER_L.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeSquintLeft differs from canonical lid_tighten_left; see loss vrcft_ue_eyesquint_socket.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintLeft differs from canonical lid_tighten_left; see loss arkit_eyesquint_face.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeSquintLeft differs from canonical lid_tighten_left; and that ARKit eyeSquintLeft differs from canonical lid_tighten_left; see losses vrcft_ue_eyesquint_socket and arkit_eyesquint_face.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 7 to ARKit eyeSquintLeft; it carries over because canonical lid_tighten_left has facs_au 7."
       ],
       "disposition": "mapped",
@@ -17981,8 +17981,8 @@
       "assumptions": [
         "correspondence: ARKit eyeSquintRight corresponds to canonical lid_tighten_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_eyesquint_face.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it carries over because canonical lid_tighten_right is defined to match FB2 LID_TIGHTENER_R.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeSquintRight differs from canonical lid_tighten_right; see loss vrcft_ue_eyesquint_socket.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintRight differs from canonical lid_tighten_right; see loss arkit_eyesquint_face.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeSquintRight differs from canonical lid_tighten_right; and that ARKit eyeSquintRight differs from canonical lid_tighten_right; see losses vrcft_ue_eyesquint_socket and arkit_eyesquint_face.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 7 to ARKit eyeSquintRight; it carries over because canonical lid_tighten_right has facs_au 7."
       ],
       "disposition": "mapped",
@@ -18123,8 +18123,8 @@
       "assumptions": [
         "correspondence: ARKit cheekSquintLeft corresponds to canonical cheek_raise_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_cheeksquint_cheek.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical cheek_raise_left is defined to match FB2 CHEEK_RAISER_L.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions CheekSquintLeft differs from canonical cheek_raise_left; see loss vrcft_ue_cheeksquint_cheek.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintLeft differs from canonical cheek_raise_left; see loss arkit_cheeksquint_cheek.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions CheekSquintLeft differs from canonical cheek_raise_left; and that ARKit cheekSquintLeft differs from canonical cheek_raise_left; see losses vrcft_ue_cheeksquint_cheek and arkit_cheeksquint_cheek.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 6 to ARKit cheekSquintLeft; it carries over because canonical cheek_raise_left has facs_au 6."
       ],
       "disposition": "mapped",
@@ -18178,8 +18178,8 @@
       "assumptions": [
         "correspondence: ARKit cheekSquintRight corresponds to canonical cheek_raise_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_cheeksquint_cheek.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical cheek_raise_right is defined to match FB2 CHEEK_RAISER_R.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions CheekSquintRight differs from canonical cheek_raise_right; see loss vrcft_ue_cheeksquint_cheek.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintRight differs from canonical cheek_raise_right; see loss arkit_cheeksquint_cheek.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions CheekSquintRight differs from canonical cheek_raise_right; and that ARKit cheekSquintRight differs from canonical cheek_raise_right; see losses vrcft_ue_cheeksquint_cheek and arkit_cheeksquint_cheek.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 6 to ARKit cheekSquintRight; it carries over because canonical cheek_raise_right has facs_au 6."
       ],
       "disposition": "mapped",
@@ -18366,8 +18366,8 @@
       "assumptions": [
         "correspondence: ARKit mouthSmileLeft corresponds to canonical lip_corner_pull_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthsmile_upward.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it carries over because canonical lip_corner_pull_left is defined to match FB2 LIP_CORNER_PULLER_L.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it carries over because canonical lip_corner_pull_left is defined to match Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; see loss arkit_mouthsmile_upward.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft differ from canonical lip_corner_pull_left; and that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; see losses vrcft_ue_set_equal and arkit_mouthsmile_upward.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 12 to ARKit mouthSmileLeft; it carries over because canonical lip_corner_pull_left has facs_au 12."
       ],
       "disposition": "mapped",
@@ -18422,8 +18422,8 @@
       "assumptions": [
         "correspondence: ARKit mouthSmileRight corresponds to canonical lip_corner_pull_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthsmile_upward.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it carries over because canonical lip_corner_pull_right is defined to match FB2 LIP_CORNER_PULLER_R.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it carries over because canonical lip_corner_pull_right is defined to match Unified Expressions MouthCornerPullRight and MouthCornerSlantRight.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; see loss arkit_mouthsmile_upward.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthCornerPullRight and MouthCornerSlantRight differ from canonical lip_corner_pull_right; and that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; see losses vrcft_ue_set_equal and arkit_mouthsmile_upward.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 12 to ARKit mouthSmileRight; it carries over because canonical lip_corner_pull_right has facs_au 12."
       ],
       "disposition": "mapped",
@@ -18704,7 +18704,7 @@
         "correspondence: ARKit mouthStretchRight corresponds to canonical lip_stretch_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthstretchright_text_side.",
         "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit mouthStretchRight is unresolved against canonical lip_stretch_right; see loss arkit_mouthstretchright_text_side.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthStretchRight differs from canonical lip_stretch_right; see loss vrcft_ue_mouthstretch_down.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthStretchRight differs from canonical lip_stretch_right; and that ARKit mouthStretchRight is unresolved against canonical lip_stretch_right; see losses vrcft_ue_mouthstretch_down and arkit_mouthstretchright_text_side.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 20 to ARKit mouthStretchRight; it carries over because canonical lip_stretch_right has facs_au 20."
       ],
       "disposition": "mapped",
@@ -18758,8 +18758,8 @@
       "assumptions": [
         "correspondence: ARKit mouthShrugLower corresponds to canonical chin_raise.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthshrug_outward.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it carries over because canonical chin_raise is defined to match FB2 CHIN_RAISER_B.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical chin_raise is defined to match Unified Expressions MouthRaiserLower."
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit mouthShrugLower differs from canonical chin_raise; see loss arkit_mouthshrug_outward.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthShrugLower differs from canonical chin_raise; see loss arkit_mouthshrug_outward."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -19035,8 +19035,8 @@
       "assumptions": [
         "correspondence: ARKit mouthPucker is one value for canonical lip_pucker_left and lip_pucker_right; this mapping writes lip_pucker_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one ARKit value is copied into each part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthpucker_compression.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, vrcft_code_parameters); it carries over because canonical lip_pucker_left is defined to match FB2 LIP_PUCKER_L.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it carries over because canonical lip_pucker_left is defined to match Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; see loss arkit_mouthpucker_compression.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft differ from canonical lip_pucker_left; and that ARKit mouthPucker differs from canonical lip_pucker_left; see losses vrcft_ue_set_equal and arkit_mouthpucker_compression.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 18 to ARKit mouthPucker; it carries over because canonical lip_pucker_left has facs_au 18."
       ],
       "disposition": "mapped",
@@ -19101,8 +19101,8 @@
       "assumptions": [
         "correspondence: ARKit mouthPucker is one value for canonical lip_pucker_left and lip_pucker_right; this mapping writes lip_pucker_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one ARKit value is copied into each part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthpucker_compression.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, vrcft_code_parameters); it carries over because canonical lip_pucker_right is defined to match FB2 LIP_PUCKER_R.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it carries over because canonical lip_pucker_right is defined to match Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_right; see loss arkit_mouthpucker_compression.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight differ from canonical lip_pucker_right; and that ARKit mouthPucker differs from canonical lip_pucker_right; see losses vrcft_ue_set_equal and arkit_mouthpucker_compression.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 18 to ARKit mouthPucker; it carries over because canonical lip_pucker_right has facs_au 18."
       ],
       "disposition": "mapped",
@@ -19391,8 +19391,8 @@
       "assumptions": [
         "correspondence: ARKit mouthPressLeft corresponds to canonical lip_press_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthpress_lower_lip.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical lip_press_left is defined to match FB2 LIP_PRESSOR_L.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical lip_press_left is defined to match Unified Expressions MouthPressLeft.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit mouthPressLeft differs from canonical lip_press_left; see loss arkit_mouthpress_lower_lip.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthPressLeft differs from canonical lip_press_left; see loss arkit_mouthpress_lower_lip.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 24 to ARKit mouthPressLeft; it carries over because canonical lip_press_left has facs_au 24."
       ],
       "disposition": "mapped",
@@ -19446,8 +19446,8 @@
       "assumptions": [
         "correspondence: ARKit mouthPressRight corresponds to canonical lip_press_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthpress_lower_lip.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical lip_press_right is defined to match FB2 LIP_PRESSOR_R.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical lip_press_right is defined to match Unified Expressions MouthPressRight.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit mouthPressRight differs from canonical lip_press_right; see loss arkit_mouthpress_lower_lip.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthPressRight differs from canonical lip_press_right; see loss arkit_mouthpress_lower_lip.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 24 to ARKit mouthPressRight; it carries over because canonical lip_press_right has facs_au 24."
       ],
       "disposition": "mapped",
@@ -19502,7 +19502,7 @@
         "correspondence: ARKit mouthClose corresponds to canonical lips_toward.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthclose_jaw_unresolved.",
         "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier, vrcft_docs_shapes, vrcft_docs_overview); it does not carry over for the defined action, because the audit finds that ARKit mouthClose is unresolved against canonical lips_toward; see loss arkit_mouthclose_jaw_unresolved.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthClosed differs from canonical lips_toward; see loss vrcft_ue_mouthclosed_jaw_relative."
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthClosed differs from canonical lips_toward; and that ARKit mouthClose is unresolved against canonical lips_toward; see losses vrcft_ue_mouthclosed_jaw_relative and arkit_mouthclose_jaw_unresolved."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -19993,8 +19993,8 @@
         "correspondence: ARKit mouthLeft corresponds to canonical mouth_shift_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
         "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match FB2 MOUTH_LEFT.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match Unified Expressions MouthUpperLeft and MouthLowerLeft.",
-        "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthLeft for this channel; see fb2_arkit.mouthLeft."
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperLeft and MouthLowerLeft differ from canonical mouth_shift_left; see loss vrcft_ue_set_equal.",
+        "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthLeft for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthLeft, and the FB2 and Apple definitions agree."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -20036,8 +20036,8 @@
         "correspondence: ARKit mouthRight corresponds to canonical mouth_shift_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
         "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match FB2 MOUTH_RIGHT.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match Unified Expressions MouthUpperRight and MouthLowerRight.",
-        "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthRight for this channel; see fb2_arkit.mouthRight."
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperRight and MouthLowerRight differ from canonical mouth_shift_right; see loss vrcft_ue_set_equal.",
+        "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthRight for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthRight, and the FB2 and Apple definitions agree."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -20078,8 +20078,8 @@
       "assumptions": [
         "correspondence: ARKit mouthShrugUpper corresponds to canonical chin_raise_upper_lip.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthshrug_outward.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it carries over because canonical chin_raise_upper_lip is defined to match FB2 CHIN_RAISER_T.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical chin_raise_upper_lip is defined to match Unified Expressions MouthRaiserUpper."
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit mouthShrugUpper differs from canonical chin_raise_upper_lip; see loss arkit_mouthshrug_outward.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthShrugUpper differs from canonical chin_raise_upper_lip; see loss arkit_mouthshrug_outward."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -20241,8 +20241,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookInLeft corresponds to canonical gaze_in_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_RIGHT_L differs from canonical gaze_in_left; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookInLeft differs from canonical gaze_in_left; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_RIGHT_L differs from canonical gaze_in_left; and that ARKit eyeLookInLeft differs from canonical gaze_in_left; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookInLeft differs from canonical gaze_in_left; and that ARKit eyeLookInLeft differs from canonical gaze_in_left; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookInLeft for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -20295,8 +20295,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookInRight corresponds to canonical gaze_in_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_LEFT_R differs from canonical gaze_in_right; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookInRight differs from canonical gaze_in_right; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_LEFT_R differs from canonical gaze_in_right; and that ARKit eyeLookInRight differs from canonical gaze_in_right; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookInRight differs from canonical gaze_in_right; and that ARKit eyeLookInRight differs from canonical gaze_in_right; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookInRight for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -20349,8 +20349,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookOutLeft corresponds to canonical gaze_out_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_LEFT_L differs from canonical gaze_out_left; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookOutLeft differs from canonical gaze_out_left; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_LEFT_L differs from canonical gaze_out_left; and that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookOutLeft differs from canonical gaze_out_left; and that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookOutLeft for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -20403,8 +20403,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookOutRight corresponds to canonical gaze_out_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_RIGHT_R differs from canonical gaze_out_right; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookOutRight differs from canonical gaze_out_right; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_RIGHT_R differs from canonical gaze_out_right; and that ARKit eyeLookOutRight differs from canonical gaze_out_right; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookOutRight differs from canonical gaze_out_right; and that ARKit eyeLookOutRight differs from canonical gaze_out_right; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookOutRight for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -20457,8 +20457,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookUpLeft corresponds to canonical gaze_up_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_UP_L differs from canonical gaze_up_left; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookUpLeft differs from canonical gaze_up_left; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_UP_L differs from canonical gaze_up_left; and that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookUpLeft differs from canonical gaze_up_left; and that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookUpLeft for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -20512,8 +20512,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookUpRight corresponds to canonical gaze_up_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_UP_R differs from canonical gaze_up_right; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookUpRight differs from canonical gaze_up_right; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_UP_R differs from canonical gaze_up_right; and that ARKit eyeLookUpRight differs from canonical gaze_up_right; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookUpRight differs from canonical gaze_up_right; and that ARKit eyeLookUpRight differs from canonical gaze_up_right; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookUpRight for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -20567,8 +20567,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookDownLeft corresponds to canonical gaze_down_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_DOWN_L differs from canonical gaze_down_left; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookDownLeft differs from canonical gaze_down_left; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_DOWN_L differs from canonical gaze_down_left; and that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookDownLeft differs from canonical gaze_down_left; and that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookDownLeft for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -20622,8 +20622,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookDownRight corresponds to canonical gaze_down_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_DOWN_R differs from canonical gaze_down_right; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookDownRight differs from canonical gaze_down_right; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_DOWN_R differs from canonical gaze_down_right; and that ARKit eyeLookDownRight differs from canonical gaze_down_right; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookDownRight differs from canonical gaze_down_right; and that ARKit eyeLookDownRight differs from canonical gaze_down_right; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookDownRight for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -20774,7 +20774,7 @@
         "correspondence: ARKit mouthClose corresponds to canonical lips_toward.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthclose_jaw_unresolved.",
         "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier, vrcft_docs_shapes, vrcft_docs_overview); it does not carry over for the defined action, because the audit finds that ARKit mouthClose is unresolved against canonical lips_toward; see loss arkit_mouthclose_jaw_unresolved.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthClosed differs from canonical lips_toward; see loss vrcft_ue_mouthclosed_jaw_relative.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthClosed differs from canonical lips_toward; and that ARKit mouthClose is unresolved against canonical lips_toward; see losses vrcft_ue_mouthclosed_jaw_relative and arkit_mouthclose_jaw_unresolved.",
         "lips_toward.jaw_not_compensated: the value is copied without compensating for the jaw. Canonical lips_toward follows FB2 LIPS_TOWARD, which closes the lips whatever the jaw does; the audit rows are FB2 same, ARKit unresolved and Unified Expressions differs."
       ],
       "disposition": "mapped",
@@ -20890,8 +20890,8 @@
       "assumptions": [
         "correspondence: ARKit mouthSmileLeft corresponds to canonical lip_corner_pull_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthsmile_upward.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it carries over because canonical lip_corner_pull_left is defined to match FB2 LIP_CORNER_PULLER_L.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it carries over because canonical lip_corner_pull_left is defined to match Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; see loss arkit_mouthsmile_upward.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft differ from canonical lip_corner_pull_left; and that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; see losses vrcft_ue_set_equal and arkit_mouthsmile_upward.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 12 to ARKit mouthSmileLeft; it carries over because canonical lip_corner_pull_left has facs_au 12."
       ],
       "disposition": "mapped",
@@ -20946,8 +20946,8 @@
       "assumptions": [
         "correspondence: ARKit mouthSmileRight corresponds to canonical lip_corner_pull_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthsmile_upward.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it carries over because canonical lip_corner_pull_right is defined to match FB2 LIP_CORNER_PULLER_R.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it carries over because canonical lip_corner_pull_right is defined to match Unified Expressions MouthCornerPullRight and MouthCornerSlantRight.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; see loss arkit_mouthsmile_upward.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthCornerPullRight and MouthCornerSlantRight differ from canonical lip_corner_pull_right; and that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; see losses vrcft_ue_set_equal and arkit_mouthsmile_upward.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 12 to ARKit mouthSmileRight; it carries over because canonical lip_corner_pull_right has facs_au 12."
       ],
       "disposition": "mapped",
@@ -21002,8 +21002,8 @@
       "assumptions": [
         "correspondence: ARKit mouthShrugLower corresponds to canonical chin_raise.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthshrug_outward.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it carries over because canonical chin_raise is defined to match FB2 CHIN_RAISER_B.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical chin_raise is defined to match Unified Expressions MouthRaiserLower."
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit mouthShrugLower differs from canonical chin_raise; see loss arkit_mouthshrug_outward.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthShrugLower differs from canonical chin_raise; see loss arkit_mouthshrug_outward."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -21055,8 +21055,8 @@
       "assumptions": [
         "correspondence: ARKit browDownLeft corresponds to canonical brow_lower_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_browdown_outer.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical brow_lower_left is defined to match FB2 BROW_LOWERER_L.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it carries over because canonical brow_lower_left is defined to match Unified Expressions BrowLowererLeft and BrowPinchLeft.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; see loss arkit_browdown_outer.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that Unified Expressions BrowLowererLeft and BrowPinchLeft differ from canonical brow_lower_left; and that ARKit browDownLeft differs from canonical brow_lower_left; see losses vrcft_ue_set_equal and arkit_browdown_outer.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 4 to ARKit browDownLeft; it carries over because canonical brow_lower_left has facs_au 4."
       ],
       "disposition": "mapped",
@@ -21111,8 +21111,8 @@
       "assumptions": [
         "correspondence: ARKit browDownRight corresponds to canonical brow_lower_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_browdown_outer.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical brow_lower_right is defined to match FB2 BROW_LOWERER_R.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it carries over because canonical brow_lower_right is defined to match Unified Expressions BrowLowererRight and BrowPinchRight.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; see loss arkit_browdown_outer.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that Unified Expressions BrowLowererRight and BrowPinchRight differ from canonical brow_lower_right; and that ARKit browDownRight differs from canonical brow_lower_right; see losses vrcft_ue_set_equal and arkit_browdown_outer.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 4 to ARKit browDownRight; it carries over because canonical brow_lower_right has facs_au 4."
       ],
       "disposition": "mapped",
@@ -21257,8 +21257,8 @@
       "assumptions": [
         "correspondence: ARKit cheekSquintLeft corresponds to canonical cheek_raise_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_cheeksquint_cheek.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical cheek_raise_left is defined to match FB2 CHEEK_RAISER_L.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions CheekSquintLeft differs from canonical cheek_raise_left; see loss vrcft_ue_cheeksquint_cheek.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintLeft differs from canonical cheek_raise_left; see loss arkit_cheeksquint_cheek.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions CheekSquintLeft differs from canonical cheek_raise_left; and that ARKit cheekSquintLeft differs from canonical cheek_raise_left; see losses vrcft_ue_cheeksquint_cheek and arkit_cheeksquint_cheek.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 6 to ARKit cheekSquintLeft; it carries over because canonical cheek_raise_left has facs_au 6."
       ],
       "disposition": "mapped",
@@ -21312,8 +21312,8 @@
       "assumptions": [
         "correspondence: ARKit cheekSquintRight corresponds to canonical cheek_raise_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_cheeksquint_cheek.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical cheek_raise_right is defined to match FB2 CHEEK_RAISER_R.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions CheekSquintRight differs from canonical cheek_raise_right; see loss vrcft_ue_cheeksquint_cheek.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintRight differs from canonical cheek_raise_right; see loss arkit_cheeksquint_cheek.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions CheekSquintRight differs from canonical cheek_raise_right; and that ARKit cheekSquintRight differs from canonical cheek_raise_right; see losses vrcft_ue_cheeksquint_cheek and arkit_cheeksquint_cheek.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 6 to ARKit cheekSquintRight; it carries over because canonical cheek_raise_right has facs_au 6."
       ],
       "disposition": "mapped",
@@ -21367,8 +21367,8 @@
       "assumptions": [
         "correspondence: ARKit eyeSquintLeft corresponds to canonical lid_tighten_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_eyesquint_face.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it carries over because canonical lid_tighten_left is defined to match FB2 LID_TIGHTENER_L.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeSquintLeft differs from canonical lid_tighten_left; see loss vrcft_ue_eyesquint_socket.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintLeft differs from canonical lid_tighten_left; see loss arkit_eyesquint_face.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeSquintLeft differs from canonical lid_tighten_left; and that ARKit eyeSquintLeft differs from canonical lid_tighten_left; see losses vrcft_ue_eyesquint_socket and arkit_eyesquint_face.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 7 to ARKit eyeSquintLeft; it carries over because canonical lid_tighten_left has facs_au 7."
       ],
       "disposition": "mapped",
@@ -21421,8 +21421,8 @@
       "assumptions": [
         "correspondence: ARKit eyeSquintRight corresponds to canonical lid_tighten_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_eyesquint_face.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it carries over because canonical lid_tighten_right is defined to match FB2 LID_TIGHTENER_R.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeSquintRight differs from canonical lid_tighten_right; see loss vrcft_ue_eyesquint_socket.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintRight differs from canonical lid_tighten_right; see loss arkit_eyesquint_face.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeSquintRight differs from canonical lid_tighten_right; and that ARKit eyeSquintRight differs from canonical lid_tighten_right; see losses vrcft_ue_eyesquint_socket and arkit_eyesquint_face.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 7 to ARKit eyeSquintRight; it carries over because canonical lid_tighten_right has facs_au 7."
       ],
       "disposition": "mapped",
@@ -21902,8 +21902,8 @@
       "assumptions": [
         "correspondence: ARKit mouthPressLeft corresponds to canonical lip_press_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthpress_lower_lip.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical lip_press_left is defined to match FB2 LIP_PRESSOR_L.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical lip_press_left is defined to match Unified Expressions MouthPressLeft.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit mouthPressLeft differs from canonical lip_press_left; see loss arkit_mouthpress_lower_lip.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthPressLeft differs from canonical lip_press_left; see loss arkit_mouthpress_lower_lip.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 24 to ARKit mouthPressLeft; it carries over because canonical lip_press_left has facs_au 24."
       ],
       "disposition": "mapped",
@@ -21957,8 +21957,8 @@
       "assumptions": [
         "correspondence: ARKit mouthPressRight corresponds to canonical lip_press_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthpress_lower_lip.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it carries over because canonical lip_press_right is defined to match FB2 LIP_PRESSOR_R.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical lip_press_right is defined to match Unified Expressions MouthPressRight.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit mouthPressRight differs from canonical lip_press_right; see loss arkit_mouthpress_lower_lip.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthPressRight differs from canonical lip_press_right; see loss arkit_mouthpress_lower_lip.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 24 to ARKit mouthPressRight; it carries over because canonical lip_press_right has facs_au 24."
       ],
       "disposition": "mapped",
@@ -22012,8 +22012,8 @@
       "assumptions": [
         "correspondence: ARKit mouthPucker corresponds to canonical lip_pucker_left and lip_pucker_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the ARKit value is the mean of the canonical parts; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthpucker_compression.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, vrcft_code_parameters); it carries over because canonical lip_pucker_left and lip_pucker_right are defined to match FB2 LIP_PUCKER_L and LIP_PUCKER_R.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it carries over because canonical lip_pucker_left and lip_pucker_right are defined to match Unified Expressions LipPuckerUpperLeft, LipPuckerLowerLeft, LipPuckerUpperRight and LipPuckerLowerRight.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; and that ARKit mouthPucker differs from canonical lip_pucker_right; see loss arkit_mouthpucker_compression.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft differ from canonical lip_pucker_left; and that ARKit mouthPucker differs from canonical lip_pucker_left; and that Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight differ from canonical lip_pucker_right; and that ARKit mouthPucker differs from canonical lip_pucker_right; see losses vrcft_ue_set_equal and arkit_mouthpucker_compression.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 18 to ARKit mouthPucker; it carries over because canonical lip_pucker_left and lip_pucker_right have facs_au 18.",
         "mean.arkit: ARKit mouthPucker is one coefficient; it is the mean of canonical lip_pucker_left, lip_pucker_right, as the Godot OpenXR vendors plugin computes it and VRCFaceTracking averages the matching Unified shapes."
       ],
@@ -22255,7 +22255,7 @@
         "correspondence: ARKit mouthStretchRight corresponds to canonical lip_stretch_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthstretchright_text_side.",
         "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit mouthStretchRight is unresolved against canonical lip_stretch_right; see loss arkit_mouthstretchright_text_side.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthStretchRight differs from canonical lip_stretch_right; see loss vrcft_ue_mouthstretch_down.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthStretchRight differs from canonical lip_stretch_right; and that ARKit mouthStretchRight is unresolved against canonical lip_stretch_right; see losses vrcft_ue_mouthstretch_down and arkit_mouthstretchright_text_side.",
         "transfer.facs_crosswalk: ict_facekit relates FACS code 20 to ARKit mouthStretchRight; it carries over because canonical lip_stretch_right has facs_au 20."
       ],
       "disposition": "mapped",
@@ -22689,7 +22689,7 @@
         "correspondence: ARKit mouthLeft corresponds to canonical mouth_shift_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
         "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match FB2 MOUTH_LEFT.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match Unified Expressions MouthUpperLeft and MouthLowerLeft.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperLeft and MouthLowerLeft differ from canonical mouth_shift_left; see loss vrcft_ue_set_equal.",
         "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthLeft for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthLeft, and the FB2 and Apple definitions agree."
       ],
       "disposition": "mapped",
@@ -22732,7 +22732,7 @@
         "correspondence: ARKit mouthRight corresponds to canonical mouth_shift_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
         "transfer.provider: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match FB2 MOUTH_RIGHT.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match Unified Expressions MouthUpperRight and MouthLowerRight.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperRight and MouthLowerRight differ from canonical mouth_shift_right; see loss vrcft_ue_set_equal.",
         "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthRight for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthRight, and the FB2 and Apple definitions agree."
       ],
       "disposition": "mapped",
@@ -22774,8 +22774,8 @@
       "assumptions": [
         "correspondence: ARKit mouthShrugUpper corresponds to canonical chin_raise_upper_lip.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_mouthshrug_outward.",
-        "transfer.provider: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it carries over because canonical chin_raise_upper_lip is defined to match FB2 CHIN_RAISER_T.",
-        "transfer.provider: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical chin_raise_upper_lip is defined to match Unified Expressions MouthRaiserUpper."
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit mouthShrugUpper differs from canonical chin_raise_upper_lip; see loss arkit_mouthshrug_outward.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthShrugUpper differs from canonical chin_raise_upper_lip; see loss arkit_mouthshrug_outward."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -22937,8 +22937,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookOutLeft corresponds to canonical gaze_out_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_LEFT_L differs from canonical gaze_out_left; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookOutLeft differs from canonical gaze_out_left; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_LEFT_L differs from canonical gaze_out_left; and that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookOutLeft differs from canonical gaze_out_left; and that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookOutLeft for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -22991,8 +22991,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookInLeft corresponds to canonical gaze_in_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_RIGHT_L differs from canonical gaze_in_left; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookInLeft differs from canonical gaze_in_left; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_RIGHT_L differs from canonical gaze_in_left; and that ARKit eyeLookInLeft differs from canonical gaze_in_left; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookInLeft differs from canonical gaze_in_left; and that ARKit eyeLookInLeft differs from canonical gaze_in_left; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookInLeft for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -23045,8 +23045,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookOutRight corresponds to canonical gaze_out_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_RIGHT_R differs from canonical gaze_out_right; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookOutRight differs from canonical gaze_out_right; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_RIGHT_R differs from canonical gaze_out_right; and that ARKit eyeLookOutRight differs from canonical gaze_out_right; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookOutRight differs from canonical gaze_out_right; and that ARKit eyeLookOutRight differs from canonical gaze_out_right; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookOutRight for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -23099,8 +23099,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookInRight corresponds to canonical gaze_in_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_LEFT_R differs from canonical gaze_in_right; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookInRight differs from canonical gaze_in_right; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_LEFT_R differs from canonical gaze_in_right; and that ARKit eyeLookInRight differs from canonical gaze_in_right; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookInRight differs from canonical gaze_in_right; and that ARKit eyeLookInRight differs from canonical gaze_in_right; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookInRight for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -23153,8 +23153,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookDownLeft corresponds to canonical gaze_down_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_DOWN_L differs from canonical gaze_down_left; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookDownLeft differs from canonical gaze_down_left; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_DOWN_L differs from canonical gaze_down_left; and that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookDownLeft differs from canonical gaze_down_left; and that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookDownLeft for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -23208,8 +23208,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookDownRight corresponds to canonical gaze_down_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_DOWN_R differs from canonical gaze_down_right; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookDownRight differs from canonical gaze_down_right; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_DOWN_R differs from canonical gaze_down_right; and that ARKit eyeLookDownRight differs from canonical gaze_down_right; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookDownRight differs from canonical gaze_down_right; and that ARKit eyeLookDownRight differs from canonical gaze_down_right; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookDownRight for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -23263,8 +23263,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookUpLeft corresponds to canonical gaze_up_left.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_UP_L differs from canonical gaze_up_left; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookUpLeft differs from canonical gaze_up_left; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_UP_L differs from canonical gaze_up_left; and that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookUpLeft differs from canonical gaze_up_left; and that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookUpLeft for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -23318,8 +23318,8 @@
       "assumptions": [
         "correspondence: ARKit eyeLookUpRight corresponds to canonical gaze_up_right.",
         "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss arkit_gaze_eyelid.",
-        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_UP_R differs from canonical gaze_up_right; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookUpRight differs from canonical gaze_up_right; see loss vrcft_ue_gaze_no_angle.",
+        "transfer.withdrawn: correspondence evidence is FB2↔ARKit (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that FB2 EYES_LOOK_UP_R differs from canonical gaze_up_right; and that ARKit eyeLookUpRight differs from canonical gaze_up_right; see losses fb2_gaze_rotation, fb2_gaze_max_angle_unspecified and arkit_gaze_eyelid.",
+        "transfer.withdrawn: correspondence evidence is Unified Expressions↔ARKit (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions EyeLookUpRight differs from canonical gaze_up_right; and that ARKit eyeLookUpRight differs from canonical gaze_up_right; see losses vrcft_ue_gaze_no_angle and arkit_gaze_eyelid.",
         "transfer.facs_crosswalk: ict_facekit names ARKit eyeLookUpRight for an eye movement code; no FACS transfer claimed; canonical gaze has no FACS code."
       ],
       "disposition": "mapped",
@@ -25571,7 +25571,7 @@
       "assumptions": [
         "correspondence: FB2 EYES_LOOK_RIGHT_L corresponds to canonical gaze_in_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; and that FB2 EYES_LOOK_RIGHT_L differs from canonical gaze_in_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -25641,7 +25641,7 @@
       "assumptions": [
         "correspondence: FB2 EYES_LOOK_LEFT_R corresponds to canonical gaze_in_right.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; and that FB2 EYES_LOOK_LEFT_R differs from canonical gaze_in_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -25711,7 +25711,7 @@
       "assumptions": [
         "correspondence: FB2 EYES_LOOK_LEFT_L corresponds to canonical gaze_out_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; and that FB2 EYES_LOOK_LEFT_L differs from canonical gaze_out_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -25781,7 +25781,7 @@
       "assumptions": [
         "correspondence: FB2 EYES_LOOK_RIGHT_R corresponds to canonical gaze_out_right.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; and that FB2 EYES_LOOK_RIGHT_R differs from canonical gaze_out_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -25851,7 +25851,7 @@
       "assumptions": [
         "correspondence: FB2 EYES_LOOK_UP_L corresponds to canonical gaze_up_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; and that FB2 EYES_LOOK_UP_L differs from canonical gaze_up_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -25923,7 +25923,7 @@
       "assumptions": [
         "correspondence: FB2 EYES_LOOK_UP_R corresponds to canonical gaze_up_right.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; and that FB2 EYES_LOOK_UP_R differs from canonical gaze_up_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -25995,7 +25995,7 @@
       "assumptions": [
         "correspondence: FB2 EYES_LOOK_DOWN_L corresponds to canonical gaze_down_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; and that FB2 EYES_LOOK_DOWN_L differs from canonical gaze_down_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -26067,7 +26067,7 @@
       "assumptions": [
         "correspondence: FB2 EYES_LOOK_DOWN_R corresponds to canonical gaze_down_right.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; and that FB2 EYES_LOOK_DOWN_R differs from canonical gaze_down_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -26731,8 +26731,7 @@
       "assumptions": [
         "correspondence: FB2 LIPS_TOWARD corresponds to canonical lips_toward.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier, vrcft_docs_shapes, vrcft_docs_overview); it does not carry over for the defined action, because the audit finds that ARKit mouthClose is unresolved against canonical lips_toward; see loss arkit_mouthclose_jaw_unresolved.",
-        "lips_toward.jaw_not_compensated: the value is copied without compensating for the jaw. Canonical lips_toward follows FB2 LIPS_TOWARD, which closes the lips whatever the jaw does; the audit rows are FB2 same, ARKit unresolved and Unified Expressions differs."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier, vrcft_docs_shapes, vrcft_docs_overview); it does not carry over for the defined action, because the audit finds that ARKit mouthClose is unresolved against canonical lips_toward; see loss arkit_mouthclose_jaw_unresolved."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -28128,7 +28127,7 @@
         "correspondence: FB2 MOUTH_LEFT corresponds to canonical mouth_shift_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
         "transfer.provider: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match ARKit mouthLeft.",
-        "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthLeft for this channel; see fb2_arkit.mouthLeft."
+        "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthLeft for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthLeft, and the FB2 and Apple definitions agree."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -28170,7 +28169,7 @@
         "correspondence: FB2 MOUTH_RIGHT corresponds to canonical mouth_shift_right.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
         "transfer.provider: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match ARKit mouthRight.",
-        "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthRight for this channel; see fb2_arkit.mouthRight."
+        "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthRight for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthRight, and the FB2 and Apple definitions agree."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -28379,7 +28378,7 @@
         "correspondence: FB2 EYES_LOOK_RIGHT_L corresponds to canonical gaze_in_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
         "net.fb2_gaze: FB2 EYES_LOOK_RIGHT_L is gaze_in_minus_out_left where it is above zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; and that FB2 EYES_LOOK_RIGHT_L differs from canonical gaze_in_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -28462,7 +28461,7 @@
         "correspondence: FB2 EYES_LOOK_LEFT_L corresponds to canonical gaze_out_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
         "net.fb2_gaze: FB2 EYES_LOOK_LEFT_L is how far gaze_in_minus_out_left is below zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; and that FB2 EYES_LOOK_LEFT_L differs from canonical gaze_out_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -28596,7 +28595,7 @@
         "correspondence: FB2 EYES_LOOK_UP_L corresponds to canonical gaze_up_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
         "net.fb2_gaze: FB2 EYES_LOOK_UP_L is gaze_up_minus_down_left where it is above zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; and that FB2 EYES_LOOK_UP_L differs from canonical gaze_up_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -28681,7 +28680,7 @@
         "correspondence: FB2 EYES_LOOK_DOWN_L corresponds to canonical gaze_down_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
         "net.fb2_gaze: FB2 EYES_LOOK_DOWN_L is how far gaze_up_minus_down_left is below zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; and that FB2 EYES_LOOK_DOWN_L differs from canonical gaze_down_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -28817,7 +28816,7 @@
         "correspondence: FB2 EYES_LOOK_LEFT_R corresponds to canonical gaze_in_right.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
         "net.fb2_gaze: FB2 EYES_LOOK_LEFT_R is gaze_in_minus_out_right where it is above zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; and that FB2 EYES_LOOK_LEFT_R differs from canonical gaze_in_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -28900,7 +28899,7 @@
         "correspondence: FB2 EYES_LOOK_RIGHT_R corresponds to canonical gaze_out_right.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
         "net.fb2_gaze: FB2 EYES_LOOK_RIGHT_R is how far gaze_in_minus_out_right is below zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; and that FB2 EYES_LOOK_RIGHT_R differs from canonical gaze_out_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -29034,7 +29033,7 @@
         "correspondence: FB2 EYES_LOOK_UP_R corresponds to canonical gaze_up_right.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
         "net.fb2_gaze: FB2 EYES_LOOK_UP_R is gaze_up_minus_down_right where it is above zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; and that FB2 EYES_LOOK_UP_R differs from canonical gaze_up_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -29119,7 +29118,7 @@
         "correspondence: FB2 EYES_LOOK_DOWN_R corresponds to canonical gaze_down_right.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
         "net.fb2_gaze: FB2 EYES_LOOK_DOWN_R is how far gaze_up_minus_down_right is below zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; and that FB2 EYES_LOOK_DOWN_R differs from canonical gaze_down_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -29265,7 +29264,7 @@
       "assumptions": [
         "correspondence: Unified Expressions BrowLowererLeft and BrowPinchLeft together correspond to canonical brow_lower_left; this mapping writes BrowLowererLeft.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; see loss arkit_browdown_outer.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; and that Unified Expressions BrowLowererLeft and BrowPinchLeft differ from canonical brow_lower_left; see losses arkit_browdown_outer and vrcft_ue_set_equal.",
         "fan_out.vrcft_ue: canonical brow_lower_left is one whole action, which Unified Expressions splits into parts; BrowLowererLeft is set to the canonical value, as is BrowPinchLeft. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererLeft + 0.25 x BrowPinchLeft; the weights sum to 1, so copying the canonical value into both parts gives it back."
       ],
       "disposition": "mapped",
@@ -29318,7 +29317,7 @@
       "assumptions": [
         "correspondence: Unified Expressions BrowLowererLeft and BrowPinchLeft together correspond to canonical brow_lower_left; this mapping writes BrowPinchLeft.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; see loss arkit_browdown_outer.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; and that Unified Expressions BrowLowererLeft and BrowPinchLeft differ from canonical brow_lower_left; see losses arkit_browdown_outer and vrcft_ue_set_equal.",
         "fan_out.vrcft_ue: canonical brow_lower_left is one whole action, which Unified Expressions splits into parts; BrowPinchLeft is set to the canonical value, as is BrowLowererLeft. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererLeft + 0.25 x BrowPinchLeft; the weights sum to 1, so copying the canonical value into both parts gives it back."
       ],
       "disposition": "mapped",
@@ -29371,7 +29370,7 @@
       "assumptions": [
         "correspondence: Unified Expressions BrowLowererRight and BrowPinchRight together correspond to canonical brow_lower_right; this mapping writes BrowLowererRight.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; see loss arkit_browdown_outer.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; and that Unified Expressions BrowLowererRight and BrowPinchRight differ from canonical brow_lower_right; see losses arkit_browdown_outer and vrcft_ue_set_equal.",
         "fan_out.vrcft_ue: canonical brow_lower_right is one whole action, which Unified Expressions splits into parts; BrowLowererRight is set to the canonical value, as is BrowPinchRight. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererRight + 0.25 x BrowPinchRight; the weights sum to 1, so copying the canonical value into both parts gives it back."
       ],
       "disposition": "mapped",
@@ -29424,7 +29423,7 @@
       "assumptions": [
         "correspondence: Unified Expressions BrowLowererRight and BrowPinchRight together correspond to canonical brow_lower_right; this mapping writes BrowPinchRight.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; see loss arkit_browdown_outer.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit browDownRight differs from canonical brow_lower_right; and that Unified Expressions BrowLowererRight and BrowPinchRight differ from canonical brow_lower_right; see losses arkit_browdown_outer and vrcft_ue_set_equal.",
         "fan_out.vrcft_ue: canonical brow_lower_right is one whole action, which Unified Expressions splits into parts; BrowPinchRight is set to the canonical value, as is BrowLowererRight. VRCFaceTracking defines the blended shape as 0.75 x BrowLowererRight + 0.25 x BrowPinchRight; the weights sum to 1, so copying the canonical value into both parts gives it back."
       ],
       "disposition": "mapped",
@@ -29643,7 +29642,7 @@
       "assumptions": [
         "correspondence: Unified Expressions CheekSquintLeft corresponds to canonical cheek_raise_left.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_cheeksquint_cheek.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintLeft differs from canonical cheek_raise_left; see loss arkit_cheeksquint_cheek."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintLeft differs from canonical cheek_raise_left; and that Unified Expressions CheekSquintLeft differs from canonical cheek_raise_left; see losses arkit_cheeksquint_cheek and vrcft_ue_cheeksquint_cheek."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -29694,7 +29693,7 @@
       "assumptions": [
         "correspondence: Unified Expressions CheekSquintRight corresponds to canonical cheek_raise_right.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_cheeksquint_cheek.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintRight differs from canonical cheek_raise_right; see loss arkit_cheeksquint_cheek."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit cheekSquintRight differs from canonical cheek_raise_right; and that Unified Expressions CheekSquintRight differs from canonical cheek_raise_right; see losses arkit_cheeksquint_cheek and vrcft_ue_cheeksquint_cheek."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -29745,7 +29744,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeSquintLeft corresponds to canonical lid_tighten_left.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_eyesquint_socket.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintLeft differs from canonical lid_tighten_left; see loss arkit_eyesquint_face."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintLeft differs from canonical lid_tighten_left; and that Unified Expressions EyeSquintLeft differs from canonical lid_tighten_left; see losses arkit_eyesquint_face and vrcft_ue_eyesquint_socket."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -29796,7 +29795,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeSquintRight corresponds to canonical lid_tighten_right.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_eyesquint_socket.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintRight differs from canonical lid_tighten_right; see loss arkit_eyesquint_face."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeSquintRight differs from canonical lid_tighten_right; and that Unified Expressions EyeSquintRight differs from canonical lid_tighten_right; see losses arkit_eyesquint_face and vrcft_ue_eyesquint_socket."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -29970,8 +29969,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthClosed corresponds to canonical lips_toward.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_mouthclosed_jaw_relative.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthClose is unresolved against canonical lips_toward; see loss arkit_mouthclose_jaw_unresolved.",
-        "lips_toward.jaw_not_compensated: the value is copied without compensating for the jaw. Canonical lips_toward follows FB2 LIPS_TOWARD, which closes the lips whatever the jaw does; the audit rows are FB2 same, ARKit unresolved and Unified Expressions differs."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthClose is unresolved against canonical lips_toward; and that Unified Expressions MouthClosed differs from canonical lips_toward; see losses arkit_mouthclose_jaw_unresolved and vrcft_ue_mouthclosed_jaw_relative."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -30538,8 +30536,8 @@
       "assumptions": [
         "correspondence: Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight together correspond to canonical lip_pucker_right; this mapping writes LipPuckerUpperRight.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_right; see loss arkit_mouthpucker_compression.",
-        "fan_out.vrcft_ue: canonical lip_pucker_right is one whole action, which Unified Expressions splits into parts; LipPuckerUpperRight is set to the canonical value, as is LipPuckerUpperLeft, LipPuckerLowerRight, LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the canonical value into each part gives it back."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_right; and that Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight differ from canonical lip_pucker_right; see losses arkit_mouthpucker_compression and vrcft_ue_set_equal.",
+        "fan_out.vrcft_ue: canonical lip_pucker_right is one whole action, which Unified Expressions splits into parts; LipPuckerUpperRight is set to the canonical value, as is LipPuckerLowerRight. VRCFaceTracking computes the blended shape as the mean of LipPuckerUpperRight, LipPuckerUpperLeft, LipPuckerLowerRight and LipPuckerLowerLeft. The canonical set holds the two sides apart: lip_pucker_left goes to LipPuckerUpperLeft and LipPuckerLowerLeft, so the blended shape is the mean of canonical lip_pucker_right and lip_pucker_left."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -30591,8 +30589,8 @@
       "assumptions": [
         "correspondence: Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft together correspond to canonical lip_pucker_left; this mapping writes LipPuckerUpperLeft.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; see loss arkit_mouthpucker_compression.",
-        "fan_out.vrcft_ue: canonical lip_pucker_left is one whole action, which Unified Expressions splits into parts; LipPuckerUpperLeft is set to the canonical value, as is LipPuckerUpperRight, LipPuckerLowerRight, LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the canonical value into each part gives it back."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; and that Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft differ from canonical lip_pucker_left; see losses arkit_mouthpucker_compression and vrcft_ue_set_equal.",
+        "fan_out.vrcft_ue: canonical lip_pucker_left is one whole action, which Unified Expressions splits into parts; LipPuckerUpperLeft is set to the canonical value, as is LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of LipPuckerUpperLeft, LipPuckerUpperRight, LipPuckerLowerRight and LipPuckerLowerLeft. The canonical set holds the two sides apart: lip_pucker_right goes to LipPuckerUpperRight and LipPuckerLowerRight, so the blended shape is the mean of canonical lip_pucker_left and lip_pucker_right."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -30644,8 +30642,8 @@
       "assumptions": [
         "correspondence: Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight together correspond to canonical lip_pucker_right; this mapping writes LipPuckerLowerRight.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_right; see loss arkit_mouthpucker_compression.",
-        "fan_out.vrcft_ue: canonical lip_pucker_right is one whole action, which Unified Expressions splits into parts; LipPuckerLowerRight is set to the canonical value, as is LipPuckerUpperRight, LipPuckerUpperLeft, LipPuckerLowerLeft. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the canonical value into each part gives it back."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_right; and that Unified Expressions LipPuckerUpperRight and LipPuckerLowerRight differ from canonical lip_pucker_right; see losses arkit_mouthpucker_compression and vrcft_ue_set_equal.",
+        "fan_out.vrcft_ue: canonical lip_pucker_right is one whole action, which Unified Expressions splits into parts; LipPuckerLowerRight is set to the canonical value, as is LipPuckerUpperRight. VRCFaceTracking computes the blended shape as the mean of LipPuckerLowerRight, LipPuckerUpperRight, LipPuckerUpperLeft and LipPuckerLowerLeft. The canonical set holds the two sides apart: lip_pucker_left goes to LipPuckerUpperLeft and LipPuckerLowerLeft, so the blended shape is the mean of canonical lip_pucker_right and lip_pucker_left."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -30697,8 +30695,8 @@
       "assumptions": [
         "correspondence: Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft together correspond to canonical lip_pucker_left; this mapping writes LipPuckerLowerLeft.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; see loss arkit_mouthpucker_compression.",
-        "fan_out.vrcft_ue: canonical lip_pucker_left is one whole action, which Unified Expressions splits into parts; LipPuckerLowerLeft is set to the canonical value, as is LipPuckerUpperRight, LipPuckerUpperLeft, LipPuckerLowerRight. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the canonical value into each part gives it back."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_code_parameters); it does not carry over for the defined action, because the audit finds that ARKit mouthPucker differs from canonical lip_pucker_left; and that Unified Expressions LipPuckerUpperLeft and LipPuckerLowerLeft differ from canonical lip_pucker_left; see losses arkit_mouthpucker_compression and vrcft_ue_set_equal.",
+        "fan_out.vrcft_ue: canonical lip_pucker_left is one whole action, which Unified Expressions splits into parts; LipPuckerLowerLeft is set to the canonical value, as is LipPuckerUpperLeft. VRCFaceTracking computes the blended shape as the mean of LipPuckerLowerLeft, LipPuckerUpperRight, LipPuckerUpperLeft and LipPuckerLowerRight. The canonical set holds the two sides apart: lip_pucker_right goes to LipPuckerUpperRight and LipPuckerLowerRight, so the blended shape is the mean of canonical lip_pucker_left and lip_pucker_right."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -30959,7 +30957,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft together correspond to canonical lip_corner_pull_left; this mapping writes MouthCornerPullLeft.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; see loss arkit_mouthsmile_upward.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; and that Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft differ from canonical lip_corner_pull_left; see losses arkit_mouthsmile_upward and vrcft_ue_set_equal.",
         "fan_out.vrcft_ue: canonical lip_corner_pull_left is one whole action, which Unified Expressions splits into parts; MouthCornerPullLeft is set to the canonical value, as is MouthCornerSlantLeft. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullLeft + 0.2 x MouthCornerSlantLeft; the weights sum to 1, so copying the canonical value into both parts gives it back."
       ],
       "disposition": "mapped",
@@ -31012,7 +31010,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft together correspond to canonical lip_corner_pull_left; this mapping writes MouthCornerSlantLeft.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; see loss arkit_mouthsmile_upward.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileLeft differs from canonical lip_corner_pull_left; and that Unified Expressions MouthCornerPullLeft and MouthCornerSlantLeft differ from canonical lip_corner_pull_left; see losses arkit_mouthsmile_upward and vrcft_ue_set_equal.",
         "fan_out.vrcft_ue: canonical lip_corner_pull_left is one whole action, which Unified Expressions splits into parts; MouthCornerSlantLeft is set to the canonical value, as is MouthCornerPullLeft. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullLeft + 0.2 x MouthCornerSlantLeft; the weights sum to 1, so copying the canonical value into both parts gives it back."
       ],
       "disposition": "mapped",
@@ -31065,7 +31063,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthCornerPullRight and MouthCornerSlantRight together correspond to canonical lip_corner_pull_right; this mapping writes MouthCornerPullRight.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; see loss arkit_mouthsmile_upward.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; and that Unified Expressions MouthCornerPullRight and MouthCornerSlantRight differ from canonical lip_corner_pull_right; see losses arkit_mouthsmile_upward and vrcft_ue_set_equal.",
         "fan_out.vrcft_ue: canonical lip_corner_pull_right is one whole action, which Unified Expressions splits into parts; MouthCornerPullRight is set to the canonical value, as is MouthCornerSlantRight. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullRight + 0.2 x MouthCornerSlantRight; the weights sum to 1, so copying the canonical value into both parts gives it back."
       ],
       "disposition": "mapped",
@@ -31118,7 +31116,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthCornerPullRight and MouthCornerSlantRight together correspond to canonical lip_corner_pull_right; this mapping writes MouthCornerSlantRight.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; see loss arkit_mouthsmile_upward.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit, vrcft_simple_expressions); it does not carry over for the defined action, because the audit finds that ARKit mouthSmileRight differs from canonical lip_corner_pull_right; and that Unified Expressions MouthCornerPullRight and MouthCornerSlantRight differ from canonical lip_corner_pull_right; see losses arkit_mouthsmile_upward and vrcft_ue_set_equal.",
         "fan_out.vrcft_ue: canonical lip_corner_pull_right is one whole action, which Unified Expressions splits into parts; MouthCornerSlantRight is set to the canonical value, as is MouthCornerPullRight. VRCFaceTracking defines the blended shape as 0.8 x MouthCornerPullRight + 0.2 x MouthCornerSlantRight; the weights sum to 1, so copying the canonical value into both parts gives it back."
       ],
       "disposition": "mapped",
@@ -31171,7 +31169,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthStretchLeft corresponds to canonical lip_stretch_left.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_mouthstretch_down.",
-        "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it carries over because canonical lip_stretch_left is defined to match ARKit mouthStretchLeft."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthStretchLeft differs from canonical lip_stretch_left; see loss vrcft_ue_mouthstretch_down."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -31222,7 +31220,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthStretchRight corresponds to canonical lip_stretch_right.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_mouthstretch_down.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthStretchRight is unresolved against canonical lip_stretch_right; see loss arkit_mouthstretchright_text_side."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit mouthStretchRight is unresolved against canonical lip_stretch_right; and that Unified Expressions MouthStretchRight differs from canonical lip_stretch_right; see losses arkit_mouthstretchright_text_side and vrcft_ue_mouthstretch_down."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -31644,7 +31642,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthUpperLeft and MouthLowerLeft together correspond to canonical mouth_shift_left; this mapping writes MouthUpperLeft.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match ARKit mouthLeft.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperLeft and MouthLowerLeft differ from canonical mouth_shift_left; see loss vrcft_ue_set_equal.",
         "evidence.godot_only_mouth_shift: FLAGGED: VRCFaceTracking's ARKit table has no mouthLeft row; only Godot names the ARKit coefficient for the blended Unified shape.",
         "fan_out.vrcft_ue: canonical mouth_shift_left is one whole action, which Unified Expressions splits into parts; MouthUpperLeft is set to the canonical value, as is MouthLowerLeft. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_LEFT with the blended shape."
       ],
@@ -31697,7 +31695,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthUpperLeft and MouthLowerLeft together correspond to canonical mouth_shift_left; this mapping writes MouthLowerLeft.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match ARKit mouthLeft.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperLeft and MouthLowerLeft differ from canonical mouth_shift_left; see loss vrcft_ue_set_equal.",
         "evidence.godot_only_mouth_shift: FLAGGED: VRCFaceTracking's ARKit table has no mouthLeft row; only Godot names the ARKit coefficient for the blended Unified shape.",
         "fan_out.vrcft_ue: canonical mouth_shift_left is one whole action, which Unified Expressions splits into parts; MouthLowerLeft is set to the canonical value, as is MouthUpperLeft. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_LEFT with the blended shape."
       ],
@@ -31750,7 +31748,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthUpperRight and MouthLowerRight together correspond to canonical mouth_shift_right; this mapping writes MouthUpperRight.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match ARKit mouthRight.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperRight and MouthLowerRight differ from canonical mouth_shift_right; see loss vrcft_ue_set_equal.",
         "evidence.godot_only_mouth_shift: FLAGGED: VRCFaceTracking's ARKit table has no mouthRight row; only Godot names the ARKit coefficient for the blended Unified shape.",
         "fan_out.vrcft_ue: canonical mouth_shift_right is one whole action, which Unified Expressions splits into parts; MouthUpperRight is set to the canonical value, as is MouthLowerRight. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_RIGHT with the blended shape."
       ],
@@ -31803,7 +31801,7 @@
       "assumptions": [
         "correspondence: Unified Expressions MouthUpperRight and MouthLowerRight together correspond to canonical mouth_shift_right; this mapping writes MouthLowerRight.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one canonical value is copied into each Unified Expressions part; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_set_equal.",
-        "transfer.provider: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match ARKit mouthRight.",
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that Unified Expressions MouthUpperRight and MouthLowerRight differ from canonical mouth_shift_right; see loss vrcft_ue_set_equal.",
         "evidence.godot_only_mouth_shift: FLAGGED: VRCFaceTracking's ARKit table has no mouthRight row; only Godot names the ARKit coefficient for the blended Unified shape.",
         "fan_out.vrcft_ue: canonical mouth_shift_right is one whole action, which Unified Expressions splits into parts; MouthLowerRight is set to the canonical value, as is MouthUpperRight. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 MOUTH_RIGHT with the blended shape."
       ],
@@ -31979,7 +31977,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeLookDownLeft corresponds to canonical gaze_down_left.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; and that Unified Expressions EyeLookDownLeft differs from canonical gaze_down_left; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -32030,7 +32028,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeLookDownRight corresponds to canonical gaze_down_right.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; and that Unified Expressions EyeLookDownRight differs from canonical gaze_down_right; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -32081,7 +32079,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeLookInLeft corresponds to canonical gaze_in_left.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; and that Unified Expressions EyeLookInLeft differs from canonical gaze_in_left; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -32132,7 +32130,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeLookInRight corresponds to canonical gaze_in_right.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; and that Unified Expressions EyeLookInRight differs from canonical gaze_in_right; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -32183,7 +32181,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeLookOutLeft corresponds to canonical gaze_out_left.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; and that Unified Expressions EyeLookOutLeft differs from canonical gaze_out_left; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -32234,7 +32232,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeLookOutRight corresponds to canonical gaze_out_right.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; and that Unified Expressions EyeLookOutRight differs from canonical gaze_out_right; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -32285,7 +32283,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeLookUpLeft corresponds to canonical gaze_up_left.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; and that Unified Expressions EyeLookUpLeft differs from canonical gaze_up_left; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -32336,7 +32334,7 @@
       "assumptions": [
         "correspondence: Unified Expressions EyeLookUpRight corresponds to canonical gaze_up_right.",
         "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_ue_gaze_no_angle.",
-        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; see loss arkit_gaze_eyelid."
+        "transfer.withdrawn: correspondence evidence is ARKit↔Unified Expressions (godot_face_modifier, vrcft_docs_arkit); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; and that Unified Expressions EyeLookUpRight differs from canonical gaze_up_right; see losses arkit_gaze_eyelid and vrcft_ue_gaze_no_angle."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -32486,7 +32484,7 @@
         {
           "category": "signal",
           "effect": "approximated",
-          "reason": "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft as the subject's own left",
+          "reason": "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right",
           "refs": [
             "rcef.canonical_expression.eye_close_left",
             "vrm.preset.blinkLeft"
@@ -32556,7 +32554,7 @@
         {
           "category": "signal",
           "effect": "approximated",
-          "reason": "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft as the subject's own left",
+          "reason": "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right",
           "refs": [
             "rcef.canonical_expression.eye_close_right",
             "vrm.preset.blinkRight"

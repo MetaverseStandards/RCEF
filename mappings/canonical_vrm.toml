@@ -29,7 +29,7 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "a canonical value becomes an asset-authored expression weight", "refs" = ["rcef.canonical_expression.eye_close_left", "vrm.preset.blinkLeft"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink", "refs" = ["rcef.canonical_expression.eye_close_left", "vrm.preset.blinkLeft"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed", "refs" = ["rcef.canonical_expression.eye_close_left", "vrm.preset.blinkLeft"], "units" = "1" },
-  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft as the subject's own left", "refs" = ["rcef.canonical_expression.eye_close_left", "vrm.preset.blinkLeft"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right", "refs" = ["rcef.canonical_expression.eye_close_left", "vrm.preset.blinkLeft"], "units" = "1" },
 ]
 
 [[mappings.rules]]
@@ -52,5 +52,5 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "a canonical value becomes an asset-authored expression weight", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
-  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft as the subject's own left", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
 ]
