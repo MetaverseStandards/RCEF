@@ -1,0 +1,254 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+# Written by scripts/build_canonical.py from docs/canonical-set.md,
+# docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and today's
+# direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run
+# the script.
+# The canonical viseme set, vocabulary version 1.0 (draft). See docs/canonical-set.md.
+
+[[signals]]
+id = "rcef.canonical_viseme.sil"
+label = "Rest: no speech articulation"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:sil: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "No speech articulation: silence and pauses. sil is not an IPA segment, and RCEF asserts no mouth pose for it.", "ipa_members" = [], "ipa_members_assumed" = [], "ipa_rules" = "", "shape" = { "lips" = "no pose asserted", "teeth" = "no pose asserted", "tongue" = "no pose asserted", "jaw" = "no pose asserted" }, "shape_class" = "rest", "shape_floor" = "rest", "group" = "viseme_rest", "aligned_names" = { "openxr.visemes" = ["SIL"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.bilabial"
+label = "Bilabial: lips closed or close together"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:bilabial: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: bilabial consonants; the lips close or come close together.", "ipa_members" = ["p", "b", "m", "ʙ", "ɸ", "β", "ʘ", "ɓ"], "ipa_members_assumed" = ["ʙ", "ɸ", "β", "ʘ", "ɓ"], "ipa_rules" = "β̞; pʼ; the double articulations k͡p ɡ͡b ŋ͡m", "ipa_place" = ["bilabial"], "ipa_manner" = ["plosive", "nasal", "trill", "fricative", "click", "implosive"], "shape" = { "lips" = "closed for the stops, nasal, trill, click and implosive; close together but not closed for the fricatives", "teeth" = "hidden", "tongue" = "not visible", "jaw" = "close" }, "shape_class" = "bilabial", "shape_floor" = "bilabial", "group" = "viseme_consonant", "aligned_names" = { "openxr.visemes" = ["PP"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.labiodental"
+label = "Labiodental: lower lip to upper teeth"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:labiodental: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: labiodental consonants; the lower lip touches the upper teeth.", "ipa_members" = ["ɱ", "ⱱ", "f", "v", "ʋ"], "ipa_members_assumed" = ["ɱ", "ⱱ", "ʋ"], "ipa_rules" = "p͡f b͡v", "ipa_place" = ["labiodental"], "ipa_manner" = ["nasal", "tap or flap", "fricative", "approximant"], "shape" = { "lips" = "the lower lip touches the upper teeth", "teeth" = "upper teeth visible", "tongue" = "hidden", "jaw" = "close" }, "shape_class" = "labiodental", "shape_floor" = "labiodental", "group" = "viseme_consonant", "aligned_names" = { "openxr.visemes" = ["FF"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.dental"
+label = "Dental fricative, interdental or linguolabial: tongue tip visible"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:dental: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: dental fricatives, interdental and linguolabial coronals; the tongue tip shows at or between the teeth, or at the upper lip. IPA dental stops, nasals and laterals (t̪ d̪ n̪ l̪) stay in the coronal classes.", "ipa_members" = ["θ", "ð"], "ipa_members_assumed" = [], "ipa_rules" = "interdental coronals (t̪̟ n̪͆) and linguolabials (t̼ p̼); t͡θ d͡ð", "ipa_place" = ["dental"], "ipa_manner" = ["dental fricative", "interdental (by rule)", "linguolabial (by rule)"], "shape" = { "lips" = "apart, neutral", "teeth" = "slightly apart", "tongue" = "tip visible at or between the teeth, or at the upper lip", "jaw" = "slightly open" }, "shape_class" = "dental", "shape_floor" = "dental", "group" = "viseme_consonant", "aligned_names" = { "openxr.visemes" = ["TH"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.alveolar_sibilant"
+label = "Alveolar sibilant: teeth close"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:alveolar_sibilant: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: alveolar sibilants; the teeth are close together.", "ipa_members" = ["s", "z"], "ipa_members_assumed" = [], "ipa_rules" = "t͡s d͡z; sʼ", "ipa_place" = ["alveolar"], "ipa_manner" = ["fricative"], "shape" = { "lips" = "neutral to spread", "teeth" = "close together, visible", "tongue" = "hidden", "jaw" = "narrowed" }, "shape_class" = "alveolar_sibilant", "shape_floor" = "alveolar_floor", "shape_floor_note" = "sibilant split mixed (7 of 14 maps); the DD and NN split in the merge band (4 of 15)", "group" = "viseme_consonant", "aligned_names" = { "openxr.visemes" = ["SS"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.postalveolar"
+label = "Postalveolar sibilant: lips forward, teeth close"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:postalveolar: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: postalveolar sibilants, including retroflex and alveolo-palatal sibilants; the lips push forward and the teeth are close.", "ipa_members" = ["ʃ", "ʒ", "ʂ", "ʐ", "ɕ", "ʑ", "ɧ"], "ipa_members_assumed" = ["ʂ", "ʐ", "ɕ", "ʑ", "ɧ"], "ipa_rules" = "t͡ʃ d͡ʒ t͡ɕ d͡ʑ ʈ͡ʂ ɖ͡ʐ; sʷ zʷ", "ipa_place" = ["postalveolar", "retroflex", "alveolo-palatal", "postalveolar and velar"], "ipa_manner" = ["fricative"], "shape" = { "lips" = "pushed forward or flared", "teeth" = "close together", "tongue" = "hidden", "jaw" = "narrowed" }, "shape_class" = "postalveolar", "shape_floor" = "postalveolar", "group" = "viseme_consonant", "aligned_names" = { "openxr.visemes" = ["CH"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.coronal_stop"
+label = "Coronal stop or tap"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:coronal_stop: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: coronal stops and taps, including retroflex stops and the coronal clicks; no lip target of their own.", "ipa_members" = ["t", "d", "ʈ", "ɖ", "ɾ", "ɽ", "ǀ", "ǃ", "ǂ", "ɗ"], "ipa_members_assumed" = ["ʈ", "ɖ", "ɾ", "ɽ", "ǀ", "ǃ", "ǂ", "ɗ"], "ipa_rules" = "tʼ; t̪ d̪", "ipa_place" = ["alveolar", "retroflex", "dental", "(post)alveolar", "palatoalveolar", "dental/alveolar"], "ipa_manner" = ["plosive", "tap or flap", "click", "implosive"], "shape" = { "lips" = "follow the neighbouring vowel", "teeth" = "follow the neighbouring vowel", "tongue" = "tip or blade raised to the teeth or the ridge; visible only with an open jaw", "jaw" = "follows the neighbouring vowel" }, "shape_class" = "coronal_stop_nasal_lateral", "shape_note" = "manner split kept by 4 of 15 maps (Binnie, Kricos, Lee, Hazen); kept for META DD and NN", "shape_floor" = "alveolar_floor", "shape_floor_note" = "sibilant split mixed (7 of 14 maps); the DD and NN split in the merge band (4 of 15)", "group" = "viseme_consonant", "aligned_names" = { "openxr.visemes" = ["DD"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.coronal_nasal_lateral"
+label = "Coronal nasal or lateral"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:coronal_nasal_lateral: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: coronal nasals and laterals, including retroflex ones and the lateral click; no lip target of their own.", "ipa_members" = ["n", "ɳ", "ɬ", "ɮ", "l", "ɭ", "ǁ", "ɺ"], "ipa_members_assumed" = ["ɳ", "ɬ", "ɮ", "ɭ", "ǁ", "ɺ"], "ipa_rules" = "ɫ; t͡ɬ d͡ɮ; n̪ l̪", "ipa_place" = ["alveolar", "retroflex", "alveolar lateral"], "ipa_manner" = ["nasal", "lateral fricative", "lateral approximant", "click", "lateral flap"], "shape" = { "lips" = "follow the neighbouring vowel", "teeth" = "follow the neighbouring vowel", "tongue" = "as for `coronal_stop`; the sides of the tongue are not visible from the front", "jaw" = "follows the neighbouring vowel" }, "shape_class" = "coronal_stop_nasal_lateral", "shape_note" = "manner split kept by 4 of 15 maps (Binnie, Kricos, Lee, Hazen); kept for META DD and NN", "shape_floor" = "alveolar_floor", "shape_floor_note" = "sibilant split mixed (7 of 14 maps); the DD and NN split in the merge band (4 of 15)", "group" = "viseme_consonant", "aligned_names" = { "openxr.visemes" = ["NN"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.dorsal"
+label = "Dorsal and laryngeal: no front target"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:dorsal: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: dorsal consonants, including pharyngeal, epiglottal and glottal consonants (no front target).", "ipa_members" = ["c", "ɟ", "k", "ɡ", "q", "ɢ", "ʔ", "ɲ", "ŋ", "ɴ", "ʀ", "ç", "ʝ", "x", "ɣ", "χ", "ʁ", "ħ", "ʕ", "h", "ɦ", "ʎ", "ʟ", "ʄ", "ɠ", "ʛ", "ʜ", "ʢ", "ʡ"], "ipa_members_assumed" = ["c", "ɟ", "q", "ɢ", "ʔ", "ɲ", "ɴ", "ʀ", "ç", "ʝ", "x", "ɣ", "χ", "ʁ", "ħ", "ʕ", "h", "ɦ", "ʎ", "ʟ", "ʄ", "ɠ", "ʛ", "ʜ", "ʢ", "ʡ"], "ipa_rules" = "kʼ; k͡x", "ipa_place" = ["palatal", "velar", "uvular", "glottal", "pharyngeal", "epiglottal"], "ipa_manner" = ["plosive", "nasal", "trill", "fricative", "lateral approximant", "implosive"], "shape" = { "lips" = "follow the neighbouring vowel", "teeth" = "follow the neighbouring vowel", "tongue" = "hidden", "jaw" = "follows the neighbouring vowel" }, "shape_class" = "dorsal", "shape_floor" = "dorsal", "group" = "viseme_consonant", "aligned_names" = { "openxr.visemes" = ["KK"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.rhotic"
+label = "Coronal rhotic"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:rhotic: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: the coronal rhotics r ɹ ɻ and the r-coloured mid-central vowels; the uvular ʀ ʁ are dorsal.", "ipa_members" = ["r", "ɹ", "ɻ"], "ipa_members_assumed" = ["r", "ɻ"], "ipa_rules" = "ɚ ɝ (ə˞ ɜ˞); ɹʷ", "ipa_place" = ["alveolar", "retroflex"], "ipa_manner" = ["trill", "approximant"], "shape" = { "lips" = "no lip target of their own; some English speakers round slightly", "teeth" = "slightly apart", "tongue" = "hidden", "jaw" = "mid-close" }, "shape_class" = "rhotic", "shape_note" = "r vs w mixed in English maps; English /r/ is often labialised [ɹʷ]; IPA r ɹ ɻ are unlabialised", "shape_floor" = "rhotic", "shape_floor_note" = "r vs w mixed in English maps (6 of 12); English /r/ labialised [ɹʷ]; IPA r ɹ ɻ unlabialised; r with the coronals a minority reading (4 of 15)", "group" = "viseme_consonant", "aligned_names" = { "openxr.visemes" = ["RR"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.vowel_open"
+label = "Open and near-open unrounded vowels"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:vowel_open: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: open and near-open unrounded vowels only (the open rounded ɒ ɶ are in vowel_mid_rounded).", "ipa_members" = ["æ", "ɐ", "a", "ɑ"], "ipa_members_assumed" = ["æ", "ɐ"], "ipa_rules" = "a˞", "ipa_height" = ["near-open", "open"], "ipa_backness" = ["front", "central", "back"], "ipa_rounding" = ["unrounded"], "shape" = { "lips" = "relaxed, with a wide vertical opening", "teeth" = "lower teeth may show", "tongue" = "low", "jaw" = "open" }, "shape_class" = "vowel_open", "shape_floor" = "open", "group" = "viseme_vowel", "aligned_names" = { "openxr.visemes" = ["AA"], "vrm.preset" = ["aa"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#vrm", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.vowel_mid_spread"
+label = "Close-mid to open-mid unrounded vowels"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:vowel_mid_spread: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: close-mid, mid and open-mid unrounded vowels.", "ipa_members" = ["e", "ɘ", "ɤ", "ə", "ɛ", "ɜ", "ʌ"], "ipa_members_assumed" = ["ɘ", "ɤ", "ə", "ɜ", "ʌ"], "ipa_rules" = "ɘ˞", "ipa_height" = ["close-mid", "mid", "open-mid"], "ipa_backness" = ["front", "central", "back"], "ipa_rounding" = ["unrounded"], "shape" = { "lips" = "spread or neutral", "teeth" = "apart; upper teeth visible", "tongue" = "hidden", "jaw" = "mid" }, "shape_class" = "vowel_mid_spread", "shape_floor" = "mid_spread", "group" = "viseme_vowel", "aligned_names" = { "openxr.visemes" = ["E"], "vrm.preset" = ["ee"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#vrm", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.vowel_close_spread"
+label = "Close and near-close unrounded vowels and glides"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:vowel_close_spread: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: close and near-close unrounded vowels, and the glides j ɰ.", "ipa_members" = ["j", "ɰ", "i", "ɨ", "ɯ", "ɪ"], "ipa_members_assumed" = ["j", "ɰ", "ɨ", "ɯ"], "ipa_rules" = "", "ipa_height" = ["close", "near-close"], "ipa_backness" = ["front", "central", "back", "near-front"], "ipa_rounding" = ["unrounded"], "ipa_glides" = ["j", "ɰ"], "shape" = { "lips" = "spread, corners drawn back", "teeth" = "close, often visible", "tongue" = "hidden", "jaw" = "close" }, "shape_class" = "vowel_close_spread", "shape_floor" = "close_spread", "group" = "viseme_vowel", "aligned_names" = { "openxr.visemes" = ["IH"], "vrm.preset" = ["ih"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#vrm", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.vowel_mid_rounded"
+label = "Close-mid to open rounded vowels"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:vowel_mid_rounded: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: close-mid to open rounded vowels, including the open ɒ ɶ by rounding.", "ipa_members" = ["ø", "ɵ", "o", "œ", "ɞ", "ɔ", "ɶ", "ɒ"], "ipa_members_assumed" = ["ɶ", "ɒ"], "ipa_rules" = "o˞; eʷ eᵝ", "ipa_height" = ["close-mid", "open-mid", "open"], "ipa_backness" = ["front", "central", "back"], "ipa_rounding" = ["rounded"], "shape" = { "lips" = "rounded: pushed forward for o ɔ ɵ ɞ, compressed for ø œ ɶ", "teeth" = "mostly hidden", "tongue" = "hidden", "jaw" = "mid; open for ɒ ɶ" }, "shape_class" = "vowel_mid_rounded", "shape_note" = "apart from ɑ in 2 of 5 count-matched English maps (mixed; some Northern Cities speakers make /ɔ/ unrounded); kept by rounding; ɒ ɶ contested (the least-rounded open vowels)", "shape_floor" = "mid_rounded", "group" = "viseme_vowel", "aligned_names" = { "openxr.visemes" = ["OH"], "vrm.preset" = ["oh"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#vrm", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.vowel_close_rounded"
+label = "Close and near-close rounded vowels and glides"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:vowel_close_rounded: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "probability_simplex"
+metadata = { "definition" = "RCEF class: close and near-close rounded vowels, and the glides w ʍ ɥ.", "ipa_members" = ["ʍ", "w", "ɥ", "y", "ʉ", "u", "ʏ", "ʊ"], "ipa_members_assumed" = ["ʍ", "w", "ɥ"], "ipa_rules" = "kʷ tʷ hʷ kᵝ and other consonants with no lip target of their own when labialised or compressed; ɯᵝ jʷ", "ipa_height" = ["close", "near-close"], "ipa_backness" = ["front", "central", "back", "near-front", "near-back"], "ipa_rounding" = ["rounded"], "ipa_glides" = ["ʍ", "w", "ɥ"], "shape" = { "lips" = "tightly rounded with a small opening: pushed forward for u ʉ ʊ w ʍ, compressed for y ʏ ɥ", "teeth" = "hidden", "tongue" = "hidden", "jaw" = "close" }, "shape_class" = "vowel_close_rounded", "shape_floor" = "close_rounded", "group" = "viseme_vowel", "aligned_names" = { "openxr.visemes" = ["OU"], "vrm.preset" = ["ou"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes", "docs/canonical-set-audit.md#vrm", "docs/canonical-set-audit.md#ipa-reference-rows"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_viseme.alveolar_floor"
+label = "Alveolar floor (aggregate)"
+value_type = "scalar"
+units = "probability"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:alveolar_floor: sum of the IPA shape classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, clamped to [0,1]; not part of the simplex sum; no per-class neutral"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+coupling = "aggregate_of_simplex_classes"
+metadata = { "definition" = "RCEF aggregate: the alveolar and retroflex stops, taps, nasals and laterals, the coronal clicks and s z; not θ ð, ʃ ʒ ʂ ʐ or r ɹ ɻ, which are coronal too.", "ipa_members" = ["t", "d", "ʈ", "ɖ", "n", "ɳ", "ɾ", "ɽ", "s", "z", "ɬ", "ɮ", "l", "ɭ", "ǀ", "ǃ", "ǂ", "ǁ", "ɗ", "ɺ"], "ipa_members_assumed" = ["ʈ", "ɖ", "ɳ", "ɾ", "ɽ", "ɬ", "ɮ", "ɭ", "ǀ", "ǃ", "ǂ", "ǁ", "ɗ", "ɺ"], "ipa_rules" = "as its classes", "ipa_place" = ["alveolar", "retroflex", "dental", "(post)alveolar", "palatoalveolar", "alveolar lateral", "dental/alveolar"], "ipa_manner" = ["plosive", "nasal", "tap or flap", "fricative", "lateral fricative", "lateral approximant", "click", "implosive", "lateral flap"], "shape_floor" = "alveolar_floor", "group" = "viseme_aggregate", "aligned_names" = { "openxr.visemes" = ["SS", "DD", "NN"] }, "audit" = ["docs/canonical-set-audit.md#meta-visemes"], "aggregates" = ["alveolar_sibilant", "coronal_stop", "coronal_nasal_lateral"] }
+region = "mouth"
+
+[[profiles]]
+id = "rcef.canonical_viseme"
+label = "RCEF canonical viseme set (draft)"
+signal_ids = ["rcef.canonical_viseme.sil", "rcef.canonical_viseme.bilabial", "rcef.canonical_viseme.labiodental", "rcef.canonical_viseme.dental", "rcef.canonical_viseme.alveolar_sibilant", "rcef.canonical_viseme.postalveolar", "rcef.canonical_viseme.coronal_stop", "rcef.canonical_viseme.coronal_nasal_lateral", "rcef.canonical_viseme.dorsal", "rcef.canonical_viseme.rhotic", "rcef.canonical_viseme.vowel_open", "rcef.canonical_viseme.vowel_mid_spread", "rcef.canonical_viseme.vowel_close_spread", "rcef.canonical_viseme.vowel_mid_rounded", "rcef.canonical_viseme.vowel_close_rounded", "rcef.canonical_viseme.alveolar_floor"]
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+metadata = { "vocabulary_version" = "1.0", "vocabulary_status" = "draft", "scope" = "IPA shape classes, minimal under parity when the META and VRM hops target partition classes, plus the floor aggregate alveolar_floor; each value is the source's class weight, with no shared or measured gain", "groups" = ["viseme_vowel", "viseme_consonant", "viseme_rest", "viseme_aggregate"] }

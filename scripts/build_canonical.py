@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Write the canonical expression profile and the maps between it and each expression set.
+"""Write the canonical expression and viseme profiles and the maps between them and each expression set.
 
 The output is data. The script only reads:
 
-- docs/canonical-set.md: the signal table (short names, labels, sides,
-  regions, groups, definitions and FACS codes) and the calibration strings;
+- docs/canonical-set.md: the signal tables (short names, labels, sides,
+  regions, groups, definitions and FACS codes; for the visemes also the IPA
+  symbols, shapes and floor classes) and the calibration strings;
 - docs/canonical-set-audit.md: the audit table of each source (its names,
   verdicts and loss keys), the ICT-FaceKit table and the loss-key texts;
+- tests/fixtures/ipa_chart_symbols.json: the IPA chart symbols of each viseme
+  class, with their chart cells and evidence levels;
 - tests/fixtures/baseline-dea1713.pack.json: today's direct maps. They give
   the operators, weight order and knots of the ARKit and FB2 out-maps, the
   crosswalk evidence each hop takes over, and the assumptions that the
   assumption catalogue carries over.
 
-It writes data/canonical_expression.toml and mappings/canonical_<set>.toml.
+It writes data/canonical_expression.toml, data/canonical_viseme.toml and
+mappings/canonical_<set>.toml.
 With --write it rewrites them; without it, it exits non-zero if any of them
 is out of date. Each output section is made per profile and per map, so a new
-profile (such as the canonical visemes) or a new group adds its own section.
+profile or a new group adds its own section.
 """
 from __future__ import annotations
 import argparse
@@ -611,6 +615,289 @@ def join(items: list[str]) -> str:
     return items[0] if len(items) == 1 else ', '.join(items[:-1]) + ' and ' + items[-1]
 
 
+# ---------------------------------------------------------------- the canonical visemes
+
+VISEME_PROFILE = 'rcef.canonical_viseme'
+IPA_RECORD = 'ipa_chart_doulos_2020'
+IPA_FIXTURE = 'tests/fixtures/ipa_chart_symbols.json'
+INTERMEDIATE_SUM = f'{INTERMEDIATE}viseme_alveolar_floor_sum'
+# The viseme sets: META's 15 classes and VRM's 5 vowel presets. Records as in PROVIDERS; every viseme hop also cites
+# the IPA chart record, which defines the classes.
+VISEME_PROVIDERS = {
+    'visemes': {'name': 'META', 'profile': 'openxr.visemes', 'id': 'openxr.visemes.XR_FACE_TRACKING_VISEME_{}_META',
+                'records': ['xr_visemes', 'xr_registry'], 'audit': 'META visemes'},
+    'vrm': {'name': 'VRM', 'profile': 'vrm.preset', 'id': 'vrm.preset.{}', 'records': ['vrm_expressions'],
+            'audit': 'VRM'},
+}
+VISEME_GAIN = 'META gain and full-activation pose not published'
+VISEME_SCOPE_KEY = 'meta_viseme_class_scope'
+META_TO_OTHER = ('from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or '
+                 'above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met')
+VRM_DROPPED = 'consonant and rest classes are dropped, so outputs no longer sum to 1'
+SUM_CLAUSE = 'the canonical value is the sum of the META classes {}, clamped at 1'
+OTHER_SYMBOLS = {  # place and manner of the chart's "other symbols"
+    'ʍ': ('labial-velar', 'fricative'), 'w': ('labial-velar', 'approximant'), 'ɥ': ('labial-palatal', 'approximant'),
+    'ʜ': ('epiglottal', 'fricative'), 'ʢ': ('epiglottal', 'fricative'), 'ʡ': ('epiglottal', 'plosive'),
+    'ɕ': ('alveolo-palatal', 'fricative'), 'ʑ': ('alveolo-palatal', 'fricative'),
+    'ɺ': ('alveolar', 'lateral flap'), 'ɧ': ('postalveolar and velar', 'fricative')}
+
+
+def table_after(text: str, heading: str, marker: str) -> list[dict]:
+    """The first Markdown table after the line that starts with `marker`, inside the section under `heading`."""
+    lines = text.splitlines()
+    start = lines.index(heading)
+    at = next(n for n in range(start + 1, len(lines)) if lines[n].startswith(marker))
+    return table('\n'.join([heading, *lines[at + 1:]]), heading)
+
+
+def cell_or_none(cell: str) -> str:
+    return '' if cell == 'none' else cell
+
+
+class VisemeBuilder:
+    def __init__(self, root: Path = ROOT, a1: dict | None = None):
+        doc = (root / SIGNAL_DOC).read_text(encoding='utf-8')
+        audit_doc = (root / AUDIT_DOC).read_text(encoding='utf-8')
+        self.a1 = a1 or read_a1(root)
+        self.calibration = {}
+        for kind, label in (('class', 'Viseme classes'), ('aggregate', 'Viseme aggregates')):
+            found = re.search(rf'^- \*\*{label}:\*\* `(rcef\.canonical\.v1:<short_name>: [^`]+)`$', doc, re.M)
+            self.calibration[kind] = found.group(1)
+        heading = '### Viseme signals'
+        shapes = {ticks(r['Short name'])[0]: r for r in table_after(doc, heading, '**Visible shape.**')}
+        notes = {ticks(r['Short name'])[0]: r for r in table_after(doc, heading, '**Notes on shape classes')}
+        fixture = json.loads((root / IPA_FIXTURE).read_text(encoding='utf-8'))['symbols']
+        self.signals = []
+        for row in table(doc, heading):
+            short = ticks(row['Short name'])[0]
+            parts = ticks(row['IPA chart symbols']) if row['Group'] == 'viseme_aggregate' else [short]
+            members = [s for s in fixture if s['class'] in parts]
+            if row['Group'] != 'viseme_aggregate' and row['IPA chart symbols'] != 'none':
+                if [s['symbol'] for s in members] != row['IPA chart symbols'].split():
+                    raise SystemExit(f'{short}: the IPA chart symbols disagree with {IPA_FIXTURE}')
+            self.signals.append({
+                'short': short, 'label': row['Label'], 'group': row['Group'], 'members': members, 'parts': parts,
+                'rule': cell_or_none(row['By rule']), 'definition': plain(row['Definition']),
+                'shape_class': cell_or_none(row['Shape class']), 'shape_floor': row['Shape floor'],
+                'meta': row['META'], 'vrm': cell_or_none(row['VRM']), 'shape': shapes.get(short),
+                'shape_note': cell_or_none(notes[short]['Shape note']) if short in notes else '',
+                'floor_note': cell_or_none(notes[short]['Shape-floor note']) if short in notes else ''})
+        self.by_short = {s['short']: s for s in self.signals}
+        listed = [ticks(r['Group'])[0] for r in table(doc, '### Groups')]
+        self.groups = [g for g in listed if any(s['group'] == g for s in self.signals)]
+        if set(self.groups) != {s['group'] for s in self.signals}:
+            raise SystemExit('a viseme group is missing from the groups table')
+        self.keys = {ticks(r['Key'])[0]: r['Loss text'] for r in table(audit_doc, '## Loss keys')}
+        self.audit = {}
+        for key, spec in VISEME_PROVIDERS.items():
+            rows = {}
+            for row in table(audit_doc, '## ' + spec['audit']):
+                short = ticks(row['Signal'])[0]
+                if short in self.by_short:
+                    rows[short] = {'verdict': row['Verdict'],
+                                   'keys': [k for k in ticks(row['Owning hop, key']) if k in self.keys]}
+            self.audit[key] = rows
+        self.a16 = {}  # VRM preset -> (META cell and example, VRM remark), from today's viseme map
+        for rule in self.a1['maps']['visemes.to_vrm']:
+            for text in rule['assumptions']:
+                found = re.match(r'^META viseme (\w+) corresponds to VRM preset (\w+) \(META (.+); VRM remark (.+)\)\.$',
+                                 text)
+                if found:
+                    self.a16[found.group(2)] = (found.group(1), found.group(3), found.group(4))
+
+    def cid(self, short: str) -> str:
+        return f'{VISEME_PROFILE}.{short}'
+
+    def sid(self, key: str, native: str) -> str:
+        return VISEME_PROVIDERS[key]['id'].format(native)
+
+    def meta_names(self, s: dict) -> list[str]:
+        return re.findall(r'\b[A-Z]{1,3}\b', s['meta'])
+
+    # -- signals
+    def features(self, s: dict) -> dict:
+        consonant, vowel = {'place': [], 'manner': []}, {'height': [], 'backness': [], 'rounding': []}
+        for m in s['members']:
+            if m['section'] == 'Vowels':
+                height, rest = m['cell'].split(' × ')
+                backness, rounding = rest.split(', ')
+                for k, v in (('height', height), ('backness', backness), ('rounding', rounding)):
+                    if v.lower() not in vowel[k]:
+                        vowel[k].append(v.lower())
+                continue
+            if m['section'] == 'Other symbols':
+                place, manner = OTHER_SYMBOLS[m['symbol']]
+            else:
+                manner, place = m['cell'].split(' × ')
+                manner = {'Clicks': 'click', 'Voiced implosives': 'implosive'}.get(manner, manner)
+            for k, v in (('place', place), ('manner', manner)):
+                if v.lower() not in consonant[k]:
+                    consonant[k].append(v.lower())
+        if s['short'] == 'dental':  # the IPA dental stops, nasals and laterals stay in the coronal classes
+            consonant['manner'] = ['dental fricative', 'interdental (by rule)', 'linguolabial (by rule)']
+        out = {}
+        if s['group'] in ('viseme_vowel',):
+            out.update({f'ipa_{k}': v for k, v in vowel.items()})
+            glides = [m['symbol'] for m in s['members'] if m['section'] != 'Vowels']
+            if glides:
+                out['ipa_glides'] = glides
+        elif s['members']:
+            out.update({f'ipa_{k}': v for k, v in consonant.items()})
+        return out
+
+    def viseme_signals(self) -> list[dict]:
+        out = []
+        for s in self.signals:
+            aggregate = s['group'] == 'viseme_aggregate'
+            metadata = {'definition': s['definition'], 'ipa_members': [m['symbol'] for m in s['members']],
+                        'ipa_members_assumed': [m['symbol'] for m in s['members'] if m['evidence'].startswith('A')],
+                        'ipa_rules': s['rule'], **self.features(s)}
+            if s['shape']:
+                metadata['shape'] = {k: s['shape'][k.title()] for k in ('lips', 'teeth', 'tongue', 'jaw')}
+            if s['shape_class']:
+                metadata['shape_class'] = s['shape_class']
+            if s['shape_note']:
+                metadata['shape_note'] = s['shape_note']
+            metadata['shape_floor'] = s['shape_floor']
+            if s['floor_note']:
+                metadata['shape_floor_note'] = s['floor_note']
+            aligned = {'openxr.visemes': self.meta_names(s)}
+            if s['vrm']:
+                aligned['vrm.preset'] = [s['vrm']]
+            anchors = ['docs/canonical-set-audit.md#meta-visemes']
+            if s['short'] in self.audit['vrm']:
+                anchors.append('docs/canonical-set-audit.md#vrm')
+            if s['members'] and not aggregate:
+                anchors.append('docs/canonical-set-audit.md#ipa-reference-rows')
+            metadata.update({'group': s['group'], 'aligned_names': aligned, 'audit': anchors})
+            if aggregate:
+                metadata['aggregates'] = s['parts']
+                calibration = self.calibration['aggregate'].replace('<classes>', join(s['parts']))
+            else:
+                calibration = self.calibration['class']
+            out.append({'id': self.cid(s['short']), 'label': s['label'], 'value_type': 'scalar',
+                        'units': 'probability', 'domain': {'min': 0.0, 'max': 1.0},
+                        'calibration': calibration.replace('<short_name>', s['short']), 'disposition': 'mapped',
+                        'evidence': [OWN, IPA_RECORD], 'evidence_status': 'proposed', 'side': 'shared',
+                        'coupling': 'aggregate_of_simplex_classes' if aggregate else 'probability_simplex',
+                        'metadata': metadata, 'region': 'mouth'})
+        return out
+
+    def viseme_profile(self) -> dict:
+        return {'id': VISEME_PROFILE, 'label': 'RCEF canonical viseme set (draft)',
+                'signal_ids': [self.cid(s['short']) for s in self.signals], 'evidence': [OWN, IPA_RECORD],
+                'metadata': {'vocabulary_version': '1.0', 'vocabulary_status': 'draft',
+                             'scope': 'IPA shape classes, minimal under parity when the META and VRM hops target '
+                                      'partition classes, plus the floor aggregate alveolar_floor; each value is the '
+                                      'source\'s class weight, with no shared or measured gain',
+                             'groups': self.groups}}
+
+    # -- hops
+    def endpoints(self, key: str, shorts: list[str], clause: str) -> str:
+        text = f'endpoints: {OPENING.format(possessive(VISEME_PROVIDERS[key]["name"]))}; {clause}'
+        keys = list(dict.fromkeys(k for s in shorts if self.audit[key].get(s, {}).get('verdict', 'same') != 'same'
+                                  for k in self.audit[key][s]['keys']))
+        if keys:
+            text += '; ' + DIFFERS.format(('losses ' if len(keys) > 1 else 'loss ') + join(keys))
+        return text + '.'
+
+    def audit_losses(self, key: str, shorts: list[str]) -> list[str]:
+        return [f'{k}: {self.keys[k]}' for s in shorts for k in self.audit[key].get(s, {}).get('keys', [])]
+
+    def evidence(self, key: str) -> list[str]:
+        return [*VISEME_PROVIDERS[key]['records'], IPA_RECORD, OWN]
+
+    def rule(self, rid, inputs, outputs, operator, assumptions, losses, evidence) -> dict:
+        refs = inputs + outputs
+        return {'id': rid, 'inputs': inputs, 'outputs': outputs, 'operator': operator, 'disposition': 'mapped',
+                'mapping_quality': 'approximate', 'evidence_status': 'proposed', 'assumptions': assumptions,
+                'evidence': evidence,
+                'loss_annotations': [{'category': 'signal', 'effect': 'approximated', 'reason': r, 'refs': refs,
+                                      'units': '1'} for r in losses]}
+
+    def meta_correspondence(self, s: dict) -> str:
+        native = s['meta']
+        if s['short'] == 'sil':
+            return 'correspondence: META viseme SIL, which META calls neutral, corresponds to canonical sil: no speech articulation.'
+        vowel = next((v for v in self.a16.values() if v[0] == native), None)
+        sounds = f' (META {vowel[1]})' if vowel else ''
+        return (f'correspondence: META viseme {native}{sounds} corresponds to canonical {s["short"]}; RCEF reads META\'s '
+                'example sounds as members of this IPA shape class.')
+
+    def meta_hop(self, s: dict, direction: str) -> dict:
+        sid, cid = self.sid('visemes', s['meta']), self.cid(s['short'])
+        losses = [VISEME_GAIN, f'{VISEME_SCOPE_KEY}: {self.keys[VISEME_SCOPE_KEY]}',
+                  *self.audit_losses('visemes', [s['short']])]
+        if direction == 'out' and s['group'] == 'viseme_vowel':
+            losses.append(META_TO_OTHER)
+        rid = f'visemes_rcef.{s["short"]}' if direction == 'in' else f'rcef_visemes.{s["meta"]}'
+        inputs, outputs = ([sid], [cid]) if direction == 'in' else ([cid], [sid])
+        assumptions = [self.meta_correspondence(s), self.endpoints('visemes', [s['short']], CLAUSES['in_copy'])]
+        return self.rule(rid, inputs, outputs, copy(), assumptions, losses, self.evidence('visemes'))
+
+    def aggregate_rules(self, s: dict) -> list[dict]:
+        names = self.meta_names(s)
+        inputs = [self.sid('visemes', n) for n in names]
+        assumptions = [
+            f'correspondence: canonical {s["short"]} is the union of the classes {join(s["parts"])}, which META '
+            f'{join(names)} carry one to one.',
+            self.endpoints('visemes', [s['short']], SUM_CLAUSE.format(join(names)))]
+        losses = [VISEME_GAIN, *self.audit_losses('visemes', [s['short']])]
+        evidence = self.evidence('visemes')
+        return [self.rule(f'visemes_rcef.{INTERMEDIATE_SUM[len(INTERMEDIATE):]}', inputs, [INTERMEDIATE_SUM],
+                          {'id': 'weighted_sum', 'weights': [1.0] * len(inputs)}, assumptions, losses, evidence),
+                self.rule(f'visemes_rcef.{s["short"]}', [INTERMEDIATE_SUM], [self.cid(s['short'])],
+                          {'id': 'piecewise_linear', 'knots': [[0.0, 0.0], [1.0, 1.0], [float(len(inputs)), 1.0]]},
+                          assumptions, losses, evidence)]
+
+    def vrm_hop(self, s: dict, direction: str) -> dict:
+        preset = s['vrm']
+        sid, cid = self.sid('vrm', preset), self.cid(s['short'])
+        remark = self.a16[preset][2]
+        assumptions = [f'correspondence: VRM preset {preset} (remark {remark}) corresponds to canonical {s["short"]}; '
+                       'RCEF reads the remark as a vowel of this IPA shape class.',
+                       self.endpoints('vrm', [s['short']], CLAUSES['in_copy'])]
+        losses = self.audit_losses('vrm', [s['short']])
+        if direction == 'in':
+            assumptions.append('vrm.probability_as_weight: the VRM expression weight (0 to 1), authored per model, is '
+                               'read as the canonical class probability (0 to 1); the unit changes from VRM\'s weight to '
+                               'probability.')
+            rid, inputs, outputs = f'vrm_rcef.{s["short"]}', [sid], [cid]
+        else:
+            assumptions += ['vrm.probability_as_weight: the canonical class probability (0 to 1) is used directly as '
+                            'the VRM expression weight (0 to 1); the unit changes from probability to VRM\'s weight.',
+                            'vrm.phoneme_label_only: phoneme-label correspondence only; no published table maps META '
+                            'visemes or the canonical classes to VRM presets.',
+                            *['vrm.downstream_effects: ' + a for r in self.a1['maps']['visemes.to_vrm']
+                              if r['outputs'] == [sid] for a in r['assumptions'] if a.startswith('VRM isBinary')]]
+            losses.append(VRM_DROPPED)
+            rid, inputs, outputs = f'rcef_vrm.{preset}', [cid], [sid]
+        return self.rule(rid, inputs, outputs, copy(), assumptions, losses, self.evidence('vrm'))
+
+    def meta_maps(self) -> list[dict]:
+        maps = []
+        for group in self.groups:
+            members = [s for s in self.signals if s['group'] == group]
+            if group == 'viseme_aggregate':
+                maps.append({'id': 'visemes_aggregate.to_rcef',
+                             'rules': [r for s in members for r in self.aggregate_rules(s)]})
+            else:
+                maps.append({'id': f'visemes_{group[len("viseme_"):]}.to_rcef',
+                             'rules': [self.meta_hop(s, 'in') for s in members]})
+        for group in self.groups:
+            if group != 'viseme_aggregate':
+                maps.append({'id': f'rcef_{group}.to_visemes',
+                             'rules': [self.meta_hop(s, 'out') for s in self.signals if s['group'] == group]})
+        return maps
+
+    def vrm_maps(self) -> list[dict]:
+        vowels = [s for s in self.signals if s['vrm']]
+        by_preset = {s['vrm']: s for s in vowels}
+        order = [r['outputs'][0].rsplit('.', 1)[1] for r in self.a1['maps']['visemes.to_vrm']]
+        return [{'id': 'vrm_vowel.to_rcef', 'rules': [self.vrm_hop(s, 'in') for s in vowels]},
+                {'id': 'rcef_viseme_vowel.to_vrm', 'rules': [self.vrm_hop(by_preset[p], 'out') for p in order]}]
+
+
 # ---------------------------------------------------------------- TOML
 
 def value(v) -> str:
@@ -630,13 +917,14 @@ def value(v) -> str:
 HEADER = '''# SPDX-License-Identifier: CC-BY-SA-4.0
 # Original RCEF data; attributed source identifiers are factual inventories.
 # Written by scripts/build_canonical.py from docs/canonical-set.md,
-# docs/canonical-set-audit.md and today's direct maps
-# (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run the script.
+# docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and today's
+# direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run
+# the script.
 '''
 
 
-def signals_toml(signals: list[dict], profile: dict) -> str:
-    parts = [HEADER, '# The canonical expression set, vocabulary version 1.0 (draft). See docs/canonical-set.md.\n']
+def signals_toml(signals: list[dict], profile: dict, title: str = 'canonical expression set') -> str:
+    parts = [HEADER, f'# The {title}, vocabulary version 1.0 (draft). See docs/canonical-set.md.\n']
     for s in signals:
         parts.append('\n[[signals]]\n' + ''.join(f'{k} = {value(v)}\n' for k, v in s.items()))
     parts.append('\n[[profiles]]\n' + ''.join(f'{k} = {value(v)}\n' for k, v in profile.items()))
@@ -644,7 +932,7 @@ def signals_toml(signals: list[dict], profile: dict) -> str:
 
 
 def maps_toml(name: str, maps: list[dict]) -> str:
-    parts = [HEADER, f'# The maps between the canonical expression set and {name}: one map per canonical group and\n'
+    parts = [HEADER, f'# The maps between the canonical sets and {name}: one map per canonical group and\n'
                      '# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.\n']
     for m in maps:
         parts.append(f'\n[[mappings]]\nid = {value(m["id"])}\n')
@@ -660,9 +948,14 @@ def maps_toml(name: str, maps: list[dict]) -> str:
 
 def render(root: Path = ROOT) -> dict[str, str]:
     builder = Builder(root)
-    files = {'data/canonical_expression.toml': signals_toml(builder.canonical_signals(), builder.profile())}
+    visemes = VisemeBuilder(root, builder.a1)
+    files = {'data/canonical_expression.toml': signals_toml(builder.canonical_signals(), builder.profile()),
+             'data/canonical_viseme.toml': signals_toml(visemes.viseme_signals(), visemes.viseme_profile(),
+                                                        'canonical viseme set')}
     for key, path in FILES.items():
-        files[path] = maps_toml(PROVIDERS[key]['name'], builder.maps(key))
+        maps = builder.maps(key) + (visemes.vrm_maps() if key == 'vrm' else [])
+        files[path] = maps_toml(PROVIDERS[key]['name'], maps)
+    files['mappings/canonical_visemes.toml'] = maps_toml('META visemes', visemes.meta_maps())
     return files
 
 

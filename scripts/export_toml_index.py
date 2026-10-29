@@ -38,6 +38,8 @@ def role(path: str, document: dict) -> str:
         return 'canonical signals and profile'
     if path == 'data/canonical_expression.toml':
         return 'canonical expression signals and profile'
+    if path == 'data/canonical_viseme.toml':
+        return 'canonical viseme signals and profile'
     if path == 'data/intermediate.toml':
         return 'intermediate signals and profile'
     if 'evidence' in document:
