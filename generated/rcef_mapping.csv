@@ -104,7 +104,7 @@ rcef.intermediate.gaze_in_minus_out_left,RCEF canonical gaze_in_left minus gaze_
 rcef.intermediate.gaze_up_minus_down_left,RCEF canonical gaze_up_left minus gaze_down_left,scalar,1,mapped,proposed,,,,1,,,,,,,,,,,,,,,,,,,,,,
 rcef.intermediate.gaze_in_minus_out_right,RCEF canonical gaze_in_right minus gaze_out_right,scalar,1,mapped,proposed,,,,1,,,,,,,,,,,,,,,,,,,,,,
 rcef.intermediate.gaze_up_minus_down_right,RCEF canonical gaze_up_right minus gaze_down_right,scalar,1,mapped,proposed,,,,1,,,,,,,,,,,,,,,,,,,,,,
-rcef.intermediate.viseme_alveolar_floor_sum,"RCEF sum of META visemes SS, DD and NN",scalar,probability,mapped,proposed,,,,1,,,,,,,,,,,,,,,,,,,,,,
+rcef.intermediate.viseme_alveolar_floor_sum,"RCEF sum of META visemes SS, DD, NN and RR",scalar,probability,mapped,proposed,,,,1,,,,,,,,,,,,,,,,,,,,,,
 arkit.ancillary.leftEyeTransform,leftEyeTransform,scalar,unknown,excluded,verified_current,,,,,1,,,,,,,,,,,,,,,,,,,,,
 arkit.ancillary.init_rawValue,init(rawValue:),scalar,unknown,excluded,verified_current,,,,,1,,,,,,,,,,,,,,,,,,,,,
 arkit.coefficient.eyeBlinkLeft,eyeBlinkLeft,scalar,1,mapped,verified_current,,,,,,1,,,,,,,,,,,,,,,,,,,,

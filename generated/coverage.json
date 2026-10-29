@@ -7774,7 +7774,7 @@
     "approximate": 540,
     "exact": 22
   },
-  "pack_sha256": "8417043153a2f3efc93df2fdda926890df0844aa66c66f6a07da1820bb5a6f22",
+  "pack_sha256": "b853f7e333ce5397315a8c792f9195d0bcb28615a4bd09658a096be008a4204c",
   "profiles": [
     {
       "count": 21,
@@ -30815,8 +30815,8 @@
     },
     {
       "assumptions": [
-        "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, which META SS, DD and NN carry one to one.",
-        "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD and NN, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum."
+        "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.",
+        "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -30830,7 +30830,8 @@
       "inputs": [
         "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META",
         "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META",
-        "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"
+        "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META",
+        "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"
       ],
       "loss_annotations": [
         {
@@ -30841,6 +30842,7 @@
             "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META",
             "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META",
             "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META",
+            "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META",
             "rcef.intermediate.viseme_alveolar_floor_sum"
           ],
           "units": "1"
@@ -30853,6 +30855,7 @@
             "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META",
             "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META",
             "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META",
+            "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META",
             "rcef.intermediate.viseme_alveolar_floor_sum"
           ],
           "units": "1"
@@ -30864,6 +30867,7 @@
         "weights": [
           1.0,
           1.0,
+          1.0,
           1.0
         ]
       },
@@ -30873,8 +30877,8 @@
     },
     {
       "assumptions": [
-        "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, which META SS, DD and NN carry one to one.",
-        "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD and NN, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum."
+        "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.",
+        "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum."
       ],
       "disposition": "mapped",
       "evidence": [
@@ -30923,7 +30927,7 @@
             1.0
           ],
           [
-            3.0,
+            4.0,
             1.0
           ]
         ]
@@ -45225,6 +45229,7 @@
       "reason": "Native identifier evidenced; copied to the canonical viseme class rhotic by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.rhotic",
+        "visemes_rcef.viseme_alveolar_floor_sum",
         "rcef_visemes.RR"
       ]
     },

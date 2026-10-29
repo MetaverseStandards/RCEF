@@ -303,7 +303,7 @@ Record `xr_visemes` (OpenXR-Docs `5a82d45`, CC-BY-4.0). Each value is a probabil
 | `vowel_close_spread` | IH | `xr_visemes` 226 | class probability for the sounds ih, as in tip (ɪ) | same | — |
 | `vowel_mid_rounded` | OH | `xr_visemes` 233 | class probability for the sounds oh, as in toe (o) | same | — |
 | `vowel_close_rounded` | OU | `xr_visemes` 240 | class probability for the sounds ou, as in book (ʊ) | same | — |
-| `alveolar_floor` | SS, DD and NN | `xr_visemes` 170, 191, 198 | the sum of the META classes SS, DD and NN, clamped at 1; META has no such class | differs | META aggregate in (`visemes_aggregate.to_rcef`), `meta_viseme_aggregate_sum` |
+| `alveolar_floor` | SS, DD, NN and RR | `xr_visemes` 170, 191, 198, 205 | the sum of the META classes SS, DD, NN and RR, clamped at 1; META has no such class | differs | META aggregate in (`visemes_aggregate.to_rcef`), `meta_viseme_aggregate_sum` |
 
 ## META viseme scope
 

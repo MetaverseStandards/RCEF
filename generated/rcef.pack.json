@@ -19985,8 +19985,8 @@
       "rules": [
         {
           "assumptions": [
-            "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, which META SS, DD and NN carry one to one.",
-            "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD and NN, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum."
+            "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.",
+            "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -20000,7 +20000,8 @@
           "inputs": [
             "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META",
             "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META",
-            "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"
+            "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META",
+            "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"
           ],
           "loss_annotations": [
             {
@@ -20011,6 +20012,7 @@
                 "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META",
                 "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META",
                 "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META",
+                "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META",
                 "rcef.intermediate.viseme_alveolar_floor_sum"
               ],
               "units": "1"
@@ -20023,6 +20025,7 @@
                 "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META",
                 "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META",
                 "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META",
+                "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META",
                 "rcef.intermediate.viseme_alveolar_floor_sum"
               ],
               "units": "1"
@@ -20034,6 +20037,7 @@
             "weights": [
               1.0,
               1.0,
+              1.0,
               1.0
             ]
           },
@@ -20043,8 +20047,8 @@
         },
         {
           "assumptions": [
-            "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, which META SS, DD and NN carry one to one.",
-            "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD and NN, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum."
+            "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.",
+            "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum."
           ],
           "disposition": "mapped",
           "evidence": [
@@ -20093,7 +20097,7 @@
                 1.0
               ],
               [
-                3.0,
+                4.0,
                 1.0
               ]
             ]
@@ -33576,7 +33580,7 @@
           "docs/canonical-set-audit.md#meta-visemes",
           "docs/canonical-set-audit.md#ipa-reference-rows"
         ],
-        "definition": "RCEF class: the coronal rhotics r ɹ ɻ and the r-coloured mid-central vowels; the uvular ʀ ʁ are dorsal.",
+        "definition": "RCEF class: the coronal rhotics r ɹ ɻ and the r-coloured mid-central vowels; the uvular ʀ ʁ are dorsal. A partition class kept for META RR; in the shape floor it goes with the coronals.",
         "group": "viseme_consonant",
         "ipa_manner": [
           "trill",
@@ -33603,9 +33607,9 @@
           "tongue": "hidden"
         },
         "shape_class": "rhotic",
-        "shape_floor": "rhotic",
-        "shape_floor_note": "r vs w mixed in English maps (6 of 12); English /r/ labialised [ɹʷ]; IPA r ɹ ɻ unlabialised; r with the coronals a minority reading (4 of 15)",
-        "shape_note": "r vs w mixed in English maps; English /r/ is often labialised [ɹʷ]; IPA r ɹ ɻ are unlabialised"
+        "shape_floor": "alveolar_floor",
+        "shape_floor_note": "split from the coronals (11 of 15) and from w (6 of 12) counted on English [ɹʷ]; IPA r ɹ ɻ are unlabialised with no lip target, so they go with the coronals by IPA definition (A)",
+        "shape_note": "counted on English [ɹʷ]; IPA r ɹ ɻ show no attested visible difference from the coronals"
       },
       "region": "mouth",
       "side": "shared",
@@ -33987,7 +33991,7 @@
       "value_type": "scalar"
     },
     {
-      "calibration": "rcef.canonical.v1:alveolar_floor: sum of the IPA shape classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, clamped to [0,1]; not part of the simplex sum; no per-class neutral",
+      "calibration": "rcef.canonical.v1:alveolar_floor: sum of the IPA shape classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, clamped to [0,1]; not part of the simplex sum; no per-class neutral",
       "coupling": "aggregate_of_simplex_classes",
       "disposition": "mapped",
       "domain": {
@@ -34005,26 +34009,30 @@
         "aggregates": [
           "alveolar_sibilant",
           "coronal_stop",
-          "coronal_nasal_lateral"
+          "coronal_nasal_lateral",
+          "rhotic"
         ],
         "aligned_names": {
           "openxr.visemes": [
             "SS",
             "DD",
-            "NN"
+            "NN",
+            "RR"
           ]
         },
         "audit": [
           "docs/canonical-set-audit.md#meta-visemes"
         ],
-        "definition": "RCEF aggregate: the alveolar and retroflex stops, taps, nasals and laterals, the coronal clicks and s z; not θ ð, ʃ ʒ ʂ ʐ or r ɹ ɻ, which are coronal too.",
+        "definition": "RCEF aggregate: the alveolar and retroflex stops, taps, trills, rhotic approximants r ɹ ɻ (and ɚ ɝ by rule), nasals and laterals, the coronal clicks and s z; not θ ð or ʃ ʒ ʂ ʐ, which are coronal too.",
         "group": "viseme_aggregate",
         "ipa_manner": [
           "plosive",
           "nasal",
+          "trill",
           "tap or flap",
           "fricative",
           "lateral fricative",
+          "approximant",
           "lateral approximant",
           "click",
           "implosive",
@@ -34037,12 +34045,15 @@
           "ɖ",
           "n",
           "ɳ",
+          "r",
           "ɾ",
           "ɽ",
           "s",
           "z",
           "ɬ",
           "ɮ",
+          "ɹ",
+          "ɻ",
           "l",
           "ɭ",
           "ǀ",
@@ -34056,10 +34067,12 @@
           "ʈ",
           "ɖ",
           "ɳ",
+          "r",
           "ɾ",
           "ɽ",
           "ɬ",
           "ɮ",
+          "ɻ",
           "ɭ",
           "ǀ",
           "ǃ",
@@ -34278,21 +34291,21 @@
       "value_type": "scalar"
     },
     {
-      "calibration": "rcef.intermediate.v1:viseme_alveolar_floor_sum: sum of META SS, DD and NN before the clamp; not a probability",
+      "calibration": "rcef.intermediate.v1:viseme_alveolar_floor_sum: sum of META SS, DD, NN and RR before the clamp; not a probability",
       "disposition": "mapped",
       "domain": {
-        "max": 3.0,
+        "max": 4.0,
         "min": 0.0
       },
       "evidence": [
-        "rcef_canonical_v1",
-        "xr_visemes"
+        "xr_visemes",
+        "rcef_canonical_v1"
       ],
       "evidence_status": "proposed",
       "id": "rcef.intermediate.viseme_alveolar_floor_sum",
-      "label": "RCEF sum of META visemes SS, DD and NN",
+      "label": "RCEF sum of META visemes SS, DD, NN and RR",
       "metadata": {
-        "definition": "The sum of META's SS, DD and NN class probabilities, from 0 to 3. Computed inside visemes_aggregate.to_rcef and clamped at 1 into the canonical aggregate alveolar_floor; no provider reads or writes it. The viseme domain of 0 to 1 does not apply to this helper.",
+        "definition": "The sum of META's SS, DD, NN and RR class probabilities, from 0 to 4. Computed inside visemes_aggregate.to_rcef and clamped at 1 into the canonical aggregate alveolar_floor; no provider reads or writes it. The viseme domain of 0 to 1 does not apply to this helper.",
         "reason": "Intermediate value of a proposed approximate translation."
       },
       "region": "mouth",

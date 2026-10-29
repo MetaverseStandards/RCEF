@@ -291,33 +291,33 @@ id = "visemes_aggregate.to_rcef"
 
 [[mappings.rules]]
 id = "visemes_rcef.viseme_alveolar_floor_sum"
-inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"]
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"]
 outputs = ["rcef.intermediate.viseme_alveolar_floor_sum"]
-operator = { "id" = "weighted_sum", "weights" = [1.0, 1.0, 1.0] }
+operator = { "id" = "weighted_sum", "weights" = [1.0, 1.0, 1.0, 1.0] }
 disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, which META SS, DD and NN carry one to one.",
-  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD and NN, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.",
+  "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
 loss_annotations = [
-  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "rcef.intermediate.viseme_alveolar_floor_sum"], "units" = "1" },
-  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "rcef.intermediate.viseme_alveolar_floor_sum"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META", "rcef.intermediate.viseme_alveolar_floor_sum"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META", "rcef.intermediate.viseme_alveolar_floor_sum"], "units" = "1" },
 ]
 
 [[mappings.rules]]
 id = "visemes_rcef.alveolar_floor"
 inputs = ["rcef.intermediate.viseme_alveolar_floor_sum"]
 outputs = ["rcef.canonical_viseme.alveolar_floor"]
-operator = { "id" = "piecewise_linear", "knots" = [[0.0, 0.0], [1.0, 1.0], [3.0, 1.0]] }
+operator = { "id" = "piecewise_linear", "knots" = [[0.0, 0.0], [1.0, 1.0], [4.0, 1.0]] }
 disposition = "mapped"
 mapping_quality = "approximate"
 evidence_status = "proposed"
 assumptions = [
-  "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, which META SS, DD and NN carry one to one.",
-  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD and NN, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.",
+  "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.",
 ]
 evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
 loss_annotations = [

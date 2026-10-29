@@ -56,8 +56,8 @@ OPERATORS = [{'id': 'affine', 'scale': 1.0, 'offset': 0.0}, {'id': 'weighted_sum
              {'id': 'piecewise_linear', 'knots': [[-1.0, 0.0], [0.0, 0.0], [1.0, 1.0]]},
              {'id': 'piecewise_linear', 'knots': [[-1.0, 1.0], [0.0, 0.0], [1.0, 0.0]]}]
 # Census exceptions, each allowed in one map only: the viseme aggregate's fan-in and its clamp.
-EXCEPTIONS = {'visemes_aggregate.to_rcef': [{'id': 'weighted_sum', 'weights': [1.0, 1.0, 1.0]},
-                                            {'id': 'piecewise_linear', 'knots': [[0.0, 0.0], [1.0, 1.0], [3.0, 1.0]]}]}
+EXCEPTIONS = {'visemes_aggregate.to_rcef': [{'id': 'weighted_sum', 'weights': [1.0, 1.0, 1.0, 1.0]},
+                                            {'id': 'piecewise_linear', 'knots': [[0.0, 0.0], [1.0, 1.0], [4.0, 1.0]]}]}
 KEYS = {'correspondence', 'endpoints', 'transfer.provider', 'transfer.withdrawn', 'transfer.facs_crosswalk',
         'fan_out.vrcft_ue', 'net.fb2_gaze', 'gaze.fb2_exclusive', 'mean.arkit', 'evidence.vrcft_tables_not_cited',
         'evidence.godot_only_mouth_shift', 'vrm.downstream_effects', 'vrm.side_caveat', 'vrm.definitional_only',

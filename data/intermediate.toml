@@ -3,7 +3,7 @@
 # by a provider. The first four belong to the direct map arkit_gaze.to_fb2, the
 # next four to the out-map rcef_gaze.to_fb2 and the last one to the viseme
 # in-map visemes_aggregate.to_rcef. Its units are the source's, probability,
-# because a weighted sum cannot change units; its range, 0 to 3, is not a
+# because a weighted sum cannot change units; its range, 0 to 4, is not a
 # probability range.
 
 [[signals]]
@@ -128,16 +128,16 @@ region = "gaze"
 
 [[signals]]
 id = "rcef.intermediate.viseme_alveolar_floor_sum"
-label = "RCEF sum of META visemes SS, DD and NN"
+label = "RCEF sum of META visemes SS, DD, NN and RR"
 value_type = "scalar"
 units = "probability"
-domain = { "min" = 0.0, "max" = 3.0 }
-calibration = "rcef.intermediate.v1:viseme_alveolar_floor_sum: sum of META SS, DD and NN before the clamp; not a probability"
+domain = { "min" = 0.0, "max" = 4.0 }
+calibration = "rcef.intermediate.v1:viseme_alveolar_floor_sum: sum of META SS, DD, NN and RR before the clamp; not a probability"
 disposition = "mapped"
-evidence = ["rcef_canonical_v1", "xr_visemes"]
+evidence = ["xr_visemes", "rcef_canonical_v1"]
 evidence_status = "proposed"
 side = "shared"
-metadata = { "definition" = "The sum of META's SS, DD and NN class probabilities, from 0 to 3. Computed inside visemes_aggregate.to_rcef and clamped at 1 into the canonical aggregate alveolar_floor; no provider reads or writes it. The viseme domain of 0 to 1 does not apply to this helper.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of META's SS, DD, NN and RR class probabilities, from 0 to 4. Computed inside visemes_aggregate.to_rcef and clamped at 1 into the canonical aggregate alveolar_floor; no provider reads or writes it. The viseme domain of 0 to 1 does not apply to this helper.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[profiles]]
