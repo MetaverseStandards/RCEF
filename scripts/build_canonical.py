@@ -907,7 +907,7 @@ class VisemeBuilder:
 
 # ---------------------------------------------------------------- the viseme pose bridge
 
-POSE_RECORD = 'viseme-poses.rocketbox-female'
+POSE_RECORD = 'viseme-poses.rocketbox-multi'
 POSE_EVIDENCE = f'calibration.{POSE_RECORD}'
 POSE_MAP = 'rcef_viseme_pose.to_rcef_expression'
 POSE_FILE = 'mappings/canonical_viseme_pose.toml'
@@ -925,10 +925,11 @@ CALIBRATION_STATUS = ('calibration_status: the record is calibrated_software, a 
                       'not a measurement of any tracker; pack schema 1.0 has no such evidence status, so the mapping '
                       'is proposed.')
 POSE_COMMON = [
-    "one_rig: the poses are one rig's: Rocketbox Female's sculpted viseme shapes, measured in her own ARKit units by "
-    'a mirror-symmetric bounded fit; on Rocketbox Male, a rig the fit did not use, each pose read here reproduces '
-    'its class\'s own shape to within half of its motion; other rigs render the same ARKit weights differently '
-    '(calibration record rig-gains.ict-rocketbox-female).',
+    'example_rigs: the poses are fitted to the sculpted viseme shapes of 10 Rocketbox rigs, measured in their own '
+    'ARKit units by one bounded fit for all of them; on each of 4 other Rocketbox rigs, which the fit did not use, '
+    "each pose read here reproduces its class's own shape to within half of its motion; all 14 rigs come from one "
+    'library, and rigs from other libraries render the same ARKit weights differently (calibration record '
+    'rig-gains.ict-rocketbox-female).',
     'coarticulation: not modelled; each class is one static pose, and the poses of a blend of classes add up; RCEF '
     'has no operator over time.',
     'teeth_tongue: teeth and tongue are not represented; the bridge writes no tongue_out, blink, gaze, jaw_sideways '
@@ -973,8 +974,9 @@ class PoseBridge:
 
     def losses(self) -> list[str]:
         low, high = self.residual
-        out = ['viseme_pose_one_rig: poses of one example rig in its own ARKit units; another rig\'s geometry differs',
-               f'viseme_pose_residual: part of each viseme\'s own motion is not reproduced (on Rocketbox Male '
+        out = ['viseme_pose_example_rigs: poses of example Rocketbox rigs in their own ARKit units; the geometry of a '
+               'rig from another library differs',
+               f"viseme_pose_residual: part of each viseme's own motion is not reproduced (on the held-out rigs "
                f'{low:.2f} to {high:.2f} of it, for the classes read that move the face)']
         if self.failing:
             out.append(f'viseme_pose_classes_not_read: {join([self.short(c) for c in self.failing])} failed the '
@@ -997,8 +999,8 @@ class PoseBridge:
             meta = self.visemes.by_short[self.short(cid)]['meta']
             rules.append(self.rule(
                 f'rcef_viseme_pose.{self.short(cid)}', [cid], [self.helper(cid)], copy(),
-                [f"correspondence: canonical {self.short(cid)} at weight 1 reaches its pose, the face of Rocketbox "
-                 f"Female's META {meta} viseme shape measured in her ARKit shapes (calibration record "
+                [f'correspondence: canonical {self.short(cid)} at weight 1 reaches its pose, the face of the META '
+                 f'{meta} viseme shapes of 10 Rocketbox rigs measured in their ARKit shapes (calibration record '
                  f'{POSE_RECORD}).',
                  'units: the class probability (0 to 1) is read as the activation of the class\'s pose (0 to 1); '
                  'the unit changes from probability to 1.'],
