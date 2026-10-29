@@ -17,7 +17,10 @@ rule on its own, so that a fault in the generator fails here even when the data 
 - a hop withdraws a crosswalk transfer exactly when its own audit row or the other set's audit row for the
   canonical signal is `differs` or `unresolved`, and names those rows' loss keys;
 - a Unified Expressions fan-out names only the parts that its canonical value goes to;
-- the jaw caveat of today's FB2 -> ARKit mouthClose rule is on the ARKit out-hop only.
+- the jaw caveat of today's FB2 -> ARKit mouthClose rule is on the ARKit out-hop only;
+- every VRM vowel hop, in and out, states the unit change from probability to VRM weight, and no other hop does;
+- the META viseme hops copy each META signal to its own canonical class and back, so META -> canonical -> META
+  gives every value back.
 """
 import json
 from pathlib import Path
@@ -268,6 +271,29 @@ class PivotRules(unittest.TestCase):
         found = [r['id'] for _, r in self.rules
                  if any(a.startswith('lips_toward.jaw_not_compensated:') for a in r['assumptions'])]
         self.assertEqual(found, ['rcef_arkit.mouthClose'])
+
+    def test_each_vrm_vowel_hop_states_the_unit_change(self):
+        stated = [r['id'] for _, r in self.rules
+                  if sum(a.startswith('vrm.probability_as_weight: ') for a in r['assumptions']) == 1]
+        vowel_hops = [r['id'] for key, r in self.rules if key == 'vrm' and is_viseme(r)]
+        self.assertEqual(len(vowel_hops), 10)
+        self.assertEqual(sorted(stated), sorted(vowel_hops))
+
+    def test_meta_to_canonical_to_meta_gives_every_value_back(self):
+        copy = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
+        into, back = {}, {}
+        for key, rule in self.rules:
+            if key != 'visemes' or rule['outputs'] == [SUM] or rule['inputs'] == [SUM]:
+                continue
+            [source], [target] = rule['inputs'], rule['outputs']
+            self.assertEqual(rule['operator'], copy, rule['id'])
+            if rule['id'] in self.in_rules:
+                into[source] = target
+            else:
+                back[source] = target
+        self.assertEqual(len(into), 15)
+        self.assertEqual(len(set(into.values())), 15)
+        self.assertEqual({c: m for m, c in into.items()}, back)
 
 
 if __name__ == '__main__':
