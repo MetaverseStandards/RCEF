@@ -112,6 +112,7 @@ FAMILIES = [{'name': 'fb2_contract', 'kind': 'fb2_contract', 'source': 'openxr.f
 PERTURB_BASES = 4
 # FACS channels that A3 and B share (5.3 item 3): every mapped facs.code signal but AU19 and AU43.
 FACS_UNSHARED = ('facs.code.au19', 'facs.code.au43_left', 'facs.code.au43_right')
+FACS_MAPPED, FACS_SHARED = 49, 46
 # Outputs that the FACS route cannot write but A3 (and A3 then A1) writes as zero or from AU61-64 (M10, M10b).
 M10_NOT_AVAILABLE = [f'{FB2[0]}{c}{FB2[1]}' for c in (
     'MOUTH_LEFT', 'MOUTH_RIGHT', 'CHIN_RAISER_T', 'TONGUE_RETREAT', 'TONGUE_TIP_INTERDENTAL', 'TONGUE_TIP_ALVEOLAR',
@@ -584,24 +585,41 @@ def b_pairs(document: dict) -> dict:
     return pairs
 
 
+def pinned_sources(a1: dict, b_document: dict, pairs: dict) -> dict:
+    """The A1 source sets from the A1 fixture; the sets only B reads from the B pack."""
+    sources = {p: ab_frames.pinned_source(a1, p) for p in A1_SOURCES}
+    for pair in pairs.values():
+        if pair['source'] not in sources:
+            sources[pair['source']] = ab_frames.pinned_source(b_document, pair['source'],
+                                                              mapped_only=pair['source'] == 'facs.code')
+    if 'facs.code' in sources and len(sources['facs.code']['channels']) != FACS_MAPPED:
+        raise SystemExit(f'facs.code has {len(sources["facs.code"]["channels"])} mapped signals, not {FACS_MAPPED}')
+    return sources
+
+
+def registered_families(sources: dict) -> list[dict]:
+    """The seeded families whose source set is pinned, with the FACS letter family's channels."""
+    families = []
+    for spec in FAMILIES:
+        if spec['kind'] == 'facs_letters':
+            if 'facs.code' in sources:
+                channels = [s for s in sources['facs.code']['channels'] if s not in FACS_UNSHARED]
+                if len(channels) != FACS_SHARED:
+                    raise SystemExit(f'the FACS letter family has {len(channels)} channels, not {FACS_SHARED}')
+                families.append({**spec, 'channels': channels})
+        elif spec['source'] in sources:
+            families.append(spec)
+    return families
+
+
 def draft(root: Path = ROOT, b_path: Path | None = None, date: str = '') -> dict:
     """A first registration (ab.pivot v1) with every pin the tools can compute; lists the S1 and S4 work fills in."""
     a1 = load_a1(root)
     b_path = b_path or root / B_PACK
     b_document = json.loads(b_path.read_text(encoding='utf-8'))
     pairs = b_pairs(b_document)
-    sources = {p: ab_frames.pinned_source(a1, p) for p in A1_SOURCES}
-    for pair in pairs.values():
-        if pair['source'] not in sources:
-            sources[pair['source']] = ab_frames.pinned_source(b_document, pair['source'])
-    families = []
-    for spec in FAMILIES:
-        if spec['kind'] == 'facs_letters':
-            if 'facs.code' in sources:
-                families.append({**spec, 'channels': [s for s in sources['facs.code']['channels']
-                                                      if s not in FACS_UNSHARED]})
-        elif spec['source'] in sources:
-            families.append(spec)
+    sources = pinned_sources(a1, b_document, pairs)
+    families = registered_families(sources)
     codes = facs_codec.table()['codes']
     keys = {'sided': [c for c, e in codes.items() if e['read'] == 'sided' and c != '43'],
             'shared': [c for c, e in codes.items() if e['read'] == 'shared' and c != '19'],
