@@ -9,6 +9,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'examples'))
 import facs_codec  # noqa: E402
 
+try:
+    import ab_a3
+except ModuleNotFoundError:  # run by file path from the repository root
+    from tests import ab_a3
+
 AU = 'facs.code.au{:02d}'
 
 
@@ -124,6 +129,20 @@ class Read(unittest.TestCase):
             self.assertEqual(facs_codec.letter(reading.values[f'{AU.format(12)}_left']), name)
         with self.assertRaises(ValueError):
             facs_codec.letter(1.5)
+
+
+class Library(unittest.TestCase):
+    def test_all_22_library_expressions_convert_to_what_a3_gives_b(self):
+        lib = ab_a3.library()
+        rows = ab_a3.expression_rows(lib, ab_a3.channels())
+        b = ab_a3.b_inputs(facs_codec)
+        held = {row['segment']: b[n] for n, row in enumerate(rows) if row['phase'] == 'hold'}
+        self.assertEqual(len(lib['expressions']), 22)
+        for expression in lib['expressions']:
+            with self.subTest(expression['name']):
+                reading = facs_codec.read(expression['aus'])
+                self.assertIsNotNone(reading.values, reading.refused)
+                self.assertEqual(reading, held[expression['name']])
 
 
 if __name__ == '__main__':
