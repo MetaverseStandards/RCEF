@@ -144,7 +144,7 @@ region = "mouth"
 
 
 # Below this line: written by scripts/build_canonical.py from the calibration record
-# viseme-poses.rocketbox-female. Edit the record or the script, not this part.
+# viseme-poses.rocketbox-multi. Edit the record or the script, not this part.
 
 [[signals]]
 id = "rcef.intermediate.viseme_pose_vowel_open"
@@ -207,6 +207,21 @@ metadata = { "definition" = "The weight of canonical dental, read as how far its
 region = "mouth"
 
 [[signals]]
+id = "rcef.intermediate.viseme_pose_postalveolar"
+label = "RCEF activation of the postalveolar viseme pose"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:viseme_pose_postalveolar: canonical postalveolar read as the activation of its pose, 0 to 1"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The weight of canonical postalveolar, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "mouth"
+
+[[signals]]
 id = "rcef.intermediate.viseme_pose_coronal_stop"
 label = "RCEF activation of the coronal_stop viseme pose"
 value_type = "scalar"
@@ -219,21 +234,6 @@ evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
 metadata = { "definition" = "The weight of canonical coronal_stop, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
-region = "mouth"
-
-[[signals]]
-id = "rcef.intermediate.viseme_pose_coronal_nasal_lateral"
-label = "RCEF activation of the coronal_nasal_lateral viseme pose"
-value_type = "scalar"
-units = "1"
-domain = { "min" = 0.0, "max" = 1.0 }
-calibration = "rcef.intermediate.v1:viseme_pose_coronal_nasal_lateral: canonical coronal_nasal_lateral read as the activation of its pose, 0 to 1"
-disposition = "mapped"
-evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
-evidence_status = "proposed"
-side = "shared"
-neutral = 0.0
-metadata = { "definition" = "The weight of canonical coronal_nasal_lateral, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -959,5 +959,5 @@ region = "mouth"
 [[profiles]]
 id = "rcef.intermediate"
 label = "RCEF intermediate values inside translations"
-signal_ids = ["rcef.intermediate.arkit_gaze_in_minus_out_L", "rcef.intermediate.arkit_gaze_up_minus_down_L", "rcef.intermediate.arkit_gaze_in_minus_out_R", "rcef.intermediate.arkit_gaze_up_minus_down_R", "rcef.intermediate.gaze_in_minus_out_left", "rcef.intermediate.gaze_up_minus_down_left", "rcef.intermediate.gaze_in_minus_out_right", "rcef.intermediate.gaze_up_minus_down_right", "rcef.intermediate.viseme_alveolar_floor_sum", "rcef.intermediate.viseme_pose_vowel_open", "rcef.intermediate.viseme_pose_vowel_close_spread", "rcef.intermediate.viseme_pose_vowel_mid_rounded", "rcef.intermediate.viseme_pose_dental", "rcef.intermediate.viseme_pose_coronal_stop", "rcef.intermediate.viseme_pose_coronal_nasal_lateral", "rcef.intermediate.viseme_pose_dorsal", "rcef.intermediate.viseme_pose_rhotic", "rcef.intermediate.viseme_pose_sil", "rcef.intermediate.viseme_pose_sum_brow_inner_raise_left", "rcef.intermediate.viseme_pose_sum_brow_inner_raise_right", "rcef.intermediate.viseme_pose_sum_brow_outer_raise_left", "rcef.intermediate.viseme_pose_sum_brow_outer_raise_right", "rcef.intermediate.viseme_pose_sum_brow_lower_left", "rcef.intermediate.viseme_pose_sum_brow_lower_right", "rcef.intermediate.viseme_pose_sum_lid_tighten_left", "rcef.intermediate.viseme_pose_sum_lid_tighten_right", "rcef.intermediate.viseme_pose_sum_upper_lid_raise_left", "rcef.intermediate.viseme_pose_sum_upper_lid_raise_right", "rcef.intermediate.viseme_pose_sum_cheek_raise_left", "rcef.intermediate.viseme_pose_sum_cheek_raise_right", "rcef.intermediate.viseme_pose_sum_nose_wrinkle_left", "rcef.intermediate.viseme_pose_sum_nose_wrinkle_right", "rcef.intermediate.viseme_pose_sum_jaw_drop", "rcef.intermediate.viseme_pose_sum_lip_corner_pull_left", "rcef.intermediate.viseme_pose_sum_lip_corner_pull_right", "rcef.intermediate.viseme_pose_sum_lip_corner_depress_left", "rcef.intermediate.viseme_pose_sum_lip_corner_depress_right", "rcef.intermediate.viseme_pose_sum_dimple_left", "rcef.intermediate.viseme_pose_sum_dimple_right", "rcef.intermediate.viseme_pose_sum_lip_stretch_left", "rcef.intermediate.viseme_pose_sum_lip_stretch_right", "rcef.intermediate.viseme_pose_sum_chin_raise", "rcef.intermediate.viseme_pose_sum_lip_funnel_upper_left", "rcef.intermediate.viseme_pose_sum_lip_funnel_upper_right", "rcef.intermediate.viseme_pose_sum_lip_funnel_lower_left", "rcef.intermediate.viseme_pose_sum_lip_funnel_lower_right", "rcef.intermediate.viseme_pose_sum_lip_pucker_left", "rcef.intermediate.viseme_pose_sum_lip_pucker_right", "rcef.intermediate.viseme_pose_sum_lip_suck_upper_left", "rcef.intermediate.viseme_pose_sum_lip_suck_upper_right", "rcef.intermediate.viseme_pose_sum_lip_suck_lower_left", "rcef.intermediate.viseme_pose_sum_lip_suck_lower_right", "rcef.intermediate.viseme_pose_sum_lip_press_left", "rcef.intermediate.viseme_pose_sum_lip_press_right", "rcef.intermediate.viseme_pose_sum_lips_toward", "rcef.intermediate.viseme_pose_sum_upper_lip_raise_left", "rcef.intermediate.viseme_pose_sum_upper_lip_raise_right", "rcef.intermediate.viseme_pose_sum_lower_lip_depress_left", "rcef.intermediate.viseme_pose_sum_lower_lip_depress_right", "rcef.intermediate.viseme_pose_sum_cheek_puff_left", "rcef.intermediate.viseme_pose_sum_cheek_puff_right", "rcef.intermediate.viseme_pose_sum_jaw_thrust", "rcef.intermediate.viseme_pose_sum_chin_raise_upper_lip"]
+signal_ids = ["rcef.intermediate.arkit_gaze_in_minus_out_L", "rcef.intermediate.arkit_gaze_up_minus_down_L", "rcef.intermediate.arkit_gaze_in_minus_out_R", "rcef.intermediate.arkit_gaze_up_minus_down_R", "rcef.intermediate.gaze_in_minus_out_left", "rcef.intermediate.gaze_up_minus_down_left", "rcef.intermediate.gaze_in_minus_out_right", "rcef.intermediate.gaze_up_minus_down_right", "rcef.intermediate.viseme_alveolar_floor_sum", "rcef.intermediate.viseme_pose_vowel_open", "rcef.intermediate.viseme_pose_vowel_close_spread", "rcef.intermediate.viseme_pose_vowel_mid_rounded", "rcef.intermediate.viseme_pose_dental", "rcef.intermediate.viseme_pose_postalveolar", "rcef.intermediate.viseme_pose_coronal_stop", "rcef.intermediate.viseme_pose_dorsal", "rcef.intermediate.viseme_pose_rhotic", "rcef.intermediate.viseme_pose_sil", "rcef.intermediate.viseme_pose_sum_brow_inner_raise_left", "rcef.intermediate.viseme_pose_sum_brow_inner_raise_right", "rcef.intermediate.viseme_pose_sum_brow_outer_raise_left", "rcef.intermediate.viseme_pose_sum_brow_outer_raise_right", "rcef.intermediate.viseme_pose_sum_brow_lower_left", "rcef.intermediate.viseme_pose_sum_brow_lower_right", "rcef.intermediate.viseme_pose_sum_lid_tighten_left", "rcef.intermediate.viseme_pose_sum_lid_tighten_right", "rcef.intermediate.viseme_pose_sum_upper_lid_raise_left", "rcef.intermediate.viseme_pose_sum_upper_lid_raise_right", "rcef.intermediate.viseme_pose_sum_cheek_raise_left", "rcef.intermediate.viseme_pose_sum_cheek_raise_right", "rcef.intermediate.viseme_pose_sum_nose_wrinkle_left", "rcef.intermediate.viseme_pose_sum_nose_wrinkle_right", "rcef.intermediate.viseme_pose_sum_jaw_drop", "rcef.intermediate.viseme_pose_sum_lip_corner_pull_left", "rcef.intermediate.viseme_pose_sum_lip_corner_pull_right", "rcef.intermediate.viseme_pose_sum_lip_corner_depress_left", "rcef.intermediate.viseme_pose_sum_lip_corner_depress_right", "rcef.intermediate.viseme_pose_sum_dimple_left", "rcef.intermediate.viseme_pose_sum_dimple_right", "rcef.intermediate.viseme_pose_sum_lip_stretch_left", "rcef.intermediate.viseme_pose_sum_lip_stretch_right", "rcef.intermediate.viseme_pose_sum_chin_raise", "rcef.intermediate.viseme_pose_sum_lip_funnel_upper_left", "rcef.intermediate.viseme_pose_sum_lip_funnel_upper_right", "rcef.intermediate.viseme_pose_sum_lip_funnel_lower_left", "rcef.intermediate.viseme_pose_sum_lip_funnel_lower_right", "rcef.intermediate.viseme_pose_sum_lip_pucker_left", "rcef.intermediate.viseme_pose_sum_lip_pucker_right", "rcef.intermediate.viseme_pose_sum_lip_suck_upper_left", "rcef.intermediate.viseme_pose_sum_lip_suck_upper_right", "rcef.intermediate.viseme_pose_sum_lip_suck_lower_left", "rcef.intermediate.viseme_pose_sum_lip_suck_lower_right", "rcef.intermediate.viseme_pose_sum_lip_press_left", "rcef.intermediate.viseme_pose_sum_lip_press_right", "rcef.intermediate.viseme_pose_sum_lips_toward", "rcef.intermediate.viseme_pose_sum_upper_lip_raise_left", "rcef.intermediate.viseme_pose_sum_upper_lip_raise_right", "rcef.intermediate.viseme_pose_sum_lower_lip_depress_left", "rcef.intermediate.viseme_pose_sum_lower_lip_depress_right", "rcef.intermediate.viseme_pose_sum_cheek_puff_left", "rcef.intermediate.viseme_pose_sum_cheek_puff_right", "rcef.intermediate.viseme_pose_sum_jaw_thrust", "rcef.intermediate.viseme_pose_sum_chin_raise_upper_lip"]
 evidence = ["rcef_definitions"]
