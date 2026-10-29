@@ -966,7 +966,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: FB2 EYES_LOOK_RIGHT_L corresponds to canonical gaze_in_left.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; and that FB2 EYES_LOOK_RIGHT_L differs from canonical gaze_in_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "rcef_canonical_v1"]
 loss_annotations = [
@@ -987,7 +987,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: FB2 EYES_LOOK_LEFT_R corresponds to canonical gaze_in_right.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; and that FB2 EYES_LOOK_LEFT_R differs from canonical gaze_in_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1008,7 +1008,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: FB2 EYES_LOOK_LEFT_L corresponds to canonical gaze_out_left.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; and that FB2 EYES_LOOK_LEFT_L differs from canonical gaze_out_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1029,7 +1029,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: FB2 EYES_LOOK_RIGHT_R corresponds to canonical gaze_out_right.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; and that FB2 EYES_LOOK_RIGHT_R differs from canonical gaze_out_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1050,7 +1050,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: FB2 EYES_LOOK_UP_L corresponds to canonical gaze_up_left.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; and that FB2 EYES_LOOK_UP_L differs from canonical gaze_up_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1071,7 +1071,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: FB2 EYES_LOOK_UP_R corresponds to canonical gaze_up_right.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; and that FB2 EYES_LOOK_UP_R differs from canonical gaze_up_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1092,7 +1092,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: FB2 EYES_LOOK_DOWN_L corresponds to canonical gaze_down_left.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; and that FB2 EYES_LOOK_DOWN_L differs from canonical gaze_down_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1113,7 +1113,7 @@ evidence_status = "proposed"
 assumptions = [
   "correspondence: FB2 EYES_LOOK_DOWN_R corresponds to canonical gaze_down_right.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; and that FB2 EYES_LOOK_DOWN_R differs from canonical gaze_down_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [
@@ -1398,7 +1398,6 @@ assumptions = [
   "correspondence: FB2 LIPS_TOWARD corresponds to canonical lips_toward.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
   "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (vrcft_docs_movement, vrcft_docs_arkit, godot_vendors_fb2, godot_face_modifier, vrcft_docs_shapes, vrcft_docs_overview); it does not carry over for the defined action, because the audit finds that ARKit mouthClose is unresolved against canonical lips_toward; see loss arkit_mouthclose_jaw_unresolved.",
-  "lips_toward.jaw_not_compensated: the value is copied without compensating for the jaw. Canonical lips_toward follows FB2 LIPS_TOWARD, which closes the lips whatever the jaw does; the audit rows are FB2 same, ARKit unresolved and Unified Expressions differs.",
 ]
 evidence = ["xr_fb2", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_shapes", "vrcft_docs_overview", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2006,7 +2005,7 @@ assumptions = [
   "correspondence: FB2 MOUTH_LEFT corresponds to canonical mouth_shift_left.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
   "transfer.provider: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_left is defined to match ARKit mouthLeft.",
-  "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthLeft for this channel; see fb2_arkit.mouthLeft.",
+  "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthLeft for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthLeft, and the FB2 and Apple definitions agree.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2025,7 +2024,7 @@ assumptions = [
   "correspondence: FB2 MOUTH_RIGHT corresponds to canonical mouth_shift_right.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
   "transfer.provider: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_movement); it carries over because canonical mouth_shift_right is defined to match ARKit mouthRight.",
-  "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthRight for this channel; see fb2_arkit.mouthRight.",
+  "evidence.godot_only_mouth_shift: FLAGGED: only Godot names ARKit mouthRight for this channel (its face-modifier alias); VRCFaceTracking pairs the FB2 channel with Unified MouthRight, and the FB2 and Apple definitions agree.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2124,7 +2123,7 @@ assumptions = [
   "correspondence: FB2 EYES_LOOK_RIGHT_L corresponds to canonical gaze_in_left.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
   "net.fb2_gaze: FB2 EYES_LOOK_RIGHT_L is gaze_in_minus_out_left where it is above zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInLeft differs from canonical gaze_in_left; and that FB2 EYES_LOOK_RIGHT_L differs from canonical gaze_in_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2146,7 +2145,7 @@ assumptions = [
   "correspondence: FB2 EYES_LOOK_LEFT_L corresponds to canonical gaze_out_left.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
   "net.fb2_gaze: FB2 EYES_LOOK_LEFT_L is how far gaze_in_minus_out_left is below zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutLeft differs from canonical gaze_out_left; and that FB2 EYES_LOOK_LEFT_L differs from canonical gaze_out_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2186,7 +2185,7 @@ assumptions = [
   "correspondence: FB2 EYES_LOOK_UP_L corresponds to canonical gaze_up_left.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
   "net.fb2_gaze: FB2 EYES_LOOK_UP_L is gaze_up_minus_down_left where it is above zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpLeft differs from canonical gaze_up_left; and that FB2 EYES_LOOK_UP_L differs from canonical gaze_up_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2208,7 +2207,7 @@ assumptions = [
   "correspondence: FB2 EYES_LOOK_DOWN_L corresponds to canonical gaze_down_left.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
   "net.fb2_gaze: FB2 EYES_LOOK_DOWN_L is how far gaze_up_minus_down_left is below zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownLeft differs from canonical gaze_down_left; and that FB2 EYES_LOOK_DOWN_L differs from canonical gaze_down_left; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2248,7 +2247,7 @@ assumptions = [
   "correspondence: FB2 EYES_LOOK_LEFT_R corresponds to canonical gaze_in_right.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
   "net.fb2_gaze: FB2 EYES_LOOK_LEFT_R is gaze_in_minus_out_right where it is above zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookInRight differs from canonical gaze_in_right; and that FB2 EYES_LOOK_LEFT_R differs from canonical gaze_in_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2270,7 +2269,7 @@ assumptions = [
   "correspondence: FB2 EYES_LOOK_RIGHT_R corresponds to canonical gaze_out_right.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
   "net.fb2_gaze: FB2 EYES_LOOK_RIGHT_R is how far gaze_in_minus_out_right is below zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier); it does not carry over for the defined action, because the audit finds that ARKit eyeLookOutRight differs from canonical gaze_out_right; and that FB2 EYES_LOOK_RIGHT_R differs from canonical gaze_out_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2310,7 +2309,7 @@ assumptions = [
   "correspondence: FB2 EYES_LOOK_UP_R corresponds to canonical gaze_up_right.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
   "net.fb2_gaze: FB2 EYES_LOOK_UP_R is gaze_up_minus_down_right where it is above zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookUpRight differs from canonical gaze_up_right; and that FB2 EYES_LOOK_UP_R differs from canonical gaze_up_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [
@@ -2332,7 +2331,7 @@ assumptions = [
   "correspondence: FB2 EYES_LOOK_DOWN_R corresponds to canonical gaze_down_right.",
   "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the larger of two opposing directions is reduced by the smaller; only the difference is kept; the endpoints are assumed equal although the defined actions differ or are unresolved; see losses fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
   "net.fb2_gaze: FB2 EYES_LOOK_DOWN_R is how far gaze_up_minus_down_right is below zero; a one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.",
-  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; see loss arkit_gaze_eyelid.",
+  "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit eyeLookDownRight differs from canonical gaze_down_right; and that FB2 EYES_LOOK_DOWN_R differs from canonical gaze_down_right; see losses arkit_gaze_eyelid, fb2_gaze_rotation and fb2_gaze_max_angle_unspecified.",
 ]
 evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_arkit", "vrcft_docs_movement", "rcef_canonical_v1"]
 loss_annotations = [

@@ -6,10 +6,10 @@ evidence/sources.toml,source evidence,[[evidence]],0,0,0,0,0,47,0,27907,a22db0f2
 mappings/arkit.toml,directional maps,[[mappings]],0,0,0,1,9,0,0,5768,6f517ea1fcf885a241ad8c0ea41fa2d9fb3160564ea25adf796da7eb50ac8084,CC-BY-SA-4.0
 mappings/arkit_fb2.toml,directional maps,[[mappings]],0,0,0,2,64,0,0,90520,f6c958b30b6c8c13f8091ba294018c5ed5a358a8a4f537bf2434ccbb3b194bc3,CC-BY-SA-4.0
 mappings/arkit_vrcft.toml,directional maps,[[mappings]],0,0,0,1,68,0,0,95202,4fc813c50a2b88c9334af2a141c2ac4b8dc797794f8def8350d7bf86b9097150,CC-BY-SA-4.0
-mappings/canonical_arkit.toml,directional maps,[[mappings]],0,0,0,18,112,0,0,225028,b7dbc29a66781bc0a3a5642aa40f5941001e3d16ab53baf193927921af2b48b6,CC-BY-SA-4.0
-mappings/canonical_fb2.toml,directional maps,[[mappings]],0,0,0,18,124,0,0,190697,51a33255d9c1b46b1ced494d9f387a6471a32ffac3bd1b4a13b6ee1cde1a814c,CC-BY-SA-4.0
-mappings/canonical_vrcft_artist.toml,directional maps,[[mappings]],0,0,0,9,68,0,0,115324,1529ce87fdb0284908d96dc4291da87f6121f31bfe166fe23de960155689e1da,CC-BY-SA-4.0
-mappings/canonical_vrm.toml,directional maps,[[mappings]],0,0,0,1,2,0,0,5336,477d63721ea56875d18066c26044d7ee473a12775bc0adbc1923e644f4e0d7ae,CC-BY-SA-4.0
+mappings/canonical_arkit.toml,directional maps,[[mappings]],0,0,0,18,112,0,0,234511,a7968a6ccd0e95ae93a5b05af4339cf714a40481af601c661a57035f4b007134,CC-BY-SA-4.0
+mappings/canonical_fb2.toml,directional maps,[[mappings]],0,0,0,18,124,0,0,192626,6eceb95c20ca519a55d28d6b5350475dcf2963d52c017c034344adb3e4c9e7c2,CC-BY-SA-4.0
+mappings/canonical_vrcft_artist.toml,directional maps,[[mappings]],0,0,0,9,68,0,0,119521,9a73893a07198ecee25ba5697dab5d7c1dad856dfb4138ba7eae6a81b316c480,CC-BY-SA-4.0
+mappings/canonical_vrm.toml,directional maps,[[mappings]],0,0,0,1,2,0,0,5386,f59312ab070c92fc2efc40573d49b88e16a87f795c787252e13de436eb887c5f,CC-BY-SA-4.0
 mappings/fb2.toml,directional maps,[[mappings]],0,0,0,1,8,0,0,5932,7ab5e6a63225de33b4ae456aded73a0f911ffd9248c6264023f95b24c1d62736,CC-BY-SA-4.0
 mappings/fb2_arkit.toml,directional maps,[[mappings]],0,0,0,2,52,0,0,71779,685023853c3aa68e7885487bdc8a7bc3666d78bb5bfab613367d61336e9ba4f2,CC-BY-SA-4.0
 mappings/fb2_vrm.toml,directional maps,[[mappings]],0,0,0,1,2,0,0,3628,c4fcbbdf028d0cafd86491aee9db04cbce1e8fd5579868a83e6e9026906fd944,CC-BY-SA-4.0

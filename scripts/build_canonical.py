@@ -285,16 +285,20 @@ class Builder:
             other_name = PROVIDERS[other]['name']
             other_names = self.names(other, [s for s in shorts if s in self.audit[other]])
             head = f'correspondence evidence is {other_name}↔{name} ({", ".join(records)})'
+            # Withdrawn when either set's audit row for the canonical signal is not `same`: the other set's or its own.
             reasons, keys = [], []
             for short in shorts:
-                theirs, ours = self.audit[other].get(short), self.audit[key][short]
-                if theirs and theirs['verdict'] != 'same' and theirs['keys'] != [SPLIT_KEY]:
-                    verb = 'differs from' if theirs['verdict'] == 'differs' else 'is unresolved against'
-                    reasons.append(f'{other_name} {join(self.names(other, [short]))} {verb} canonical {short}')
-                    keys += theirs['keys']
-                elif ours['verdict'] == 'unresolved':
-                    reasons.append(f'{name} {native} is unresolved against canonical {short}')
-                    keys += ours['keys']
+                for who in (other, key):
+                    row = self.audit[who].get(short)
+                    if not row or row['verdict'] == 'same':
+                        continue
+                    who_names = self.names(who, [short])
+                    verb = (('differ from', 'are unresolved against') if len(who_names) > 1 else
+                            ('differs from', 'is unresolved against'))[row['verdict'] != 'differs']
+                    reason = f'{PROVIDERS[who]["name"]} {join(who_names)} {verb} canonical {short}'
+                    if reason not in reasons:
+                        reasons.append(reason)
+                    keys += row['keys']
             if reasons:
                 keys = list(dict.fromkeys(keys))
                 out.append(f'transfer.withdrawn: {head}; it does not carry over for the defined action, because the '
@@ -338,9 +342,12 @@ class Builder:
             out += ['evidence.vrcft_tables_not_cited: ' + a
                     for a in self.a1_strings(sid, end, r"VRCFaceTracking's tables are not cited")]
         godot_maps = ('arkit.to_fb2', 'fb2.to_arkit') + (('arkit.to_vrcft_artist',) if end == 'out' else ())
-        out += ['evidence.godot_only_mouth_shift: ' + a
-                for a in self.a1_strings(sid, end, r'FLAGGED: (only Godot names|VRCFaceTracking\'s ARKit table)',
-                                         godot_maps)]
+        for text in self.a1_strings(sid, end, r'FLAGGED: (only Godot names|VRCFaceTracking\'s ARKit table)', godot_maps):
+            if found := re.search(r' for this channel; see fb2_arkit\.(\w+)\.$', text):
+                full = self.a1_strings(PROVIDERS['arkit']['id'].format(found.group(1)), 'out',
+                                       r'FLAGGED: only Godot names ARKit \w+ for this channel \(', ('fb2.to_arkit',))
+                text = full[0]
+            out.append('evidence.godot_only_mouth_shift: ' + text)
         if kind == 'out_mean':
             for text in self.a1_strings(sid, 'out', r'ARKit \w+ is one coefficient'):
                 for fb2_sid, short in self.fb2_to_short().items():
@@ -348,12 +355,25 @@ class Builder:
                 text = text.replace('of the four quarters of FB2 ', 'of the four canonical quarters ')
                 out.append('mean.arkit: ' + text.replace(' of FB2 ', ' of canonical '))
         if kind == 'out_fan':
+            native = self.native(key, sid)
+            parts = [self.native(key, n) for n, s in self.aligned[key].items() if s == shorts and n != sid]
             for text in self.a1_strings(sid, 'out', r'ARKit \w+ is a blended Unified Expressions shape'):
-                text = re.sub(r'^ARKit \w+ is a blended Unified Expressions shape; ',
-                              f'canonical {shorts[0]} is one whole action, which Unified Expressions splits into '
-                              f'parts; ', text)
-                out.append('fan_out.vrcft_ue: ' + text.replace('the ARKit value', 'the canonical value'))
-        if 'lips_toward' in shorts and end == 'out':
+                listed = re.match(r'^ARKit \w+ is a blended Unified Expressions shape; (\w+) is set to the ARKit '
+                                  r'value, as is ([\w, ]+)\. (.*)$', text)
+                every = [listed.group(1), *listed.group(2).split(', ')]
+                head = (f'canonical {shorts[0]} is one whole action, which Unified Expressions splits into parts; '
+                        f'{native} is set to the canonical value, as is {join(parts)}. ')
+                if sorted(every) == sorted([native, *parts]):
+                    tail = listed.group(3).replace('the ARKit value', 'the canonical value')
+                else:
+                    others = [n for n in self.aligned[key] if self.native(key, n) in every
+                              and self.aligned[key][n] != shorts]
+                    other = self.aligned[key][others[0]][0]
+                    tail = (f'VRCFaceTracking computes the blended shape as the mean of {join(every)}. The canonical '
+                            f'set holds the two sides apart: {other} goes to {join(self.native(key, n) for n in others)}, '
+                            f'so the blended shape is the mean of canonical {shorts[0]} and {other}.')
+                out.append('fan_out.vrcft_ue: ' + head + tail)
+        if 'lips_toward' in shorts and end == 'out' and key == 'arkit':
             out.append('lips_toward.jaw_not_compensated: the value is copied without compensating for the jaw. '
                        'Canonical lips_toward follows FB2 LIPS_TOWARD, which closes the lips whatever the jaw does; '
                        'the audit rows are FB2 same, ARKit unresolved and Unified Expressions differs.')
