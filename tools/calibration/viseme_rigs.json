@@ -1,9 +1,8 @@
 {
- "about": "Rig sets of the calibration record viseme-poses.rocketbox-multi, chosen by the rules below before the rigs they name were downloaded. See README.md.",
+ "about": "Rig sets of the viseme pose records, one round per record version, each chosen by its rule before the rigs it names were downloaded. See README.md.",
  "rocketbox_commit": "0943055db6ec570bcef9f2c8b41c9e5467c808f9",
  "probed": "2026-10-29: Assets/Avatars/Adults/<name>/Export/<name>_facial.fbx for Female_Adult_01 to _30 and Male_Adult_01 to _30; a candidate is a file larger than 1000 bytes (the others are 14-byte \"404: Not Found\" bodies)",
- "rule": "Training always holds Female_Adult_01 and Male_Adult_01. For each of Female and Male, sort the other candidates by the lowercase hex SHA-256 of their UTF-8 name. The first 2 are held out and the next 4 are training. A chosen rig that cannot be downloaded or loaded, or that does not have the 52 ARKit shapes and the 15 viseme shapes, is listed under replaced and its place goes to the next unused candidate of the same sex in that order.",
- "rule_version_2": "For version 2 of viseme-poses.rocketbox-multi, the rigs that version 1 held out are seen: they are listed under seen and are never held out again. Training stays as in version 1. For each of Female and Male, the next 2 candidates in the same SHA-256 order that no set has used are held out. A chosen rig that cannot be downloaded or loaded, or that does not have the 52 ARKit shapes and the 15 viseme shapes, is listed under replaced and its place goes to the next unused candidate of the same sex in that order.",
+ "rule": "For each of Female and Male, sort the candidates by the lowercase hex SHA-256 of their UTF-8 name. A chosen rig that cannot be downloaded or loaded, or that does not have the 52 ARKit shapes and the 15 viseme shapes, is listed under replaced and its place goes to the next unused candidate of the same sex in that order. No rig is ever held out twice.",
  "candidates": {
   "Female": [
    {
@@ -150,29 +149,81 @@
    }
   ]
  },
- "training": [
-  "Female_Adult_01",
-  "Male_Adult_01",
-  "Female_Adult_10",
-  "Female_Adult_08",
-  "Female_Adult_12",
-  "Female_Adult_14",
-  "Male_Adult_17",
-  "Male_Adult_13",
-  "Male_Adult_03",
-  "Male_Adult_10"
- ],
- "seen": [
-  "Female_Adult_04",
-  "Female_Adult_13",
-  "Male_Adult_05",
-  "Male_Adult_11"
- ],
- "held_out": [
-  "Female_Adult_06",
-  "Female_Adult_17",
-  "Male_Adult_19",
-  "Male_Adult_02"
+ "rounds": [
+  {
+   "record": "viseme-poses.rocketbox-multi v1",
+   "rule": "Training always holds Female_Adult_01 and Male_Adult_01. For each of Female and Male, sort the other candidates by the lowercase hex SHA-256 of their UTF-8 name. The first 2 are held out and the next 4 are training. A chosen rig that cannot be downloaded or loaded, or that does not have the 52 ARKit shapes and the 15 viseme shapes, is listed under replaced and its place goes to the next unused candidate of the same sex in that order.",
+   "training": [
+    "Female_Adult_01",
+    "Male_Adult_01",
+    "Female_Adult_10",
+    "Female_Adult_08",
+    "Female_Adult_12",
+    "Female_Adult_14",
+    "Male_Adult_17",
+    "Male_Adult_13",
+    "Male_Adult_03",
+    "Male_Adult_10"
+   ],
+   "held_out": [
+    "Female_Adult_04",
+    "Female_Adult_13",
+    "Male_Adult_05",
+    "Male_Adult_11"
+   ]
+  },
+  {
+   "record": "viseme-poses.rocketbox-multi v2",
+   "rule": "For version 2 of viseme-poses.rocketbox-multi, the rigs that version 1 held out are seen: they are listed under seen and are never held out again. Training stays as in version 1. For each of Female and Male, the next 2 candidates in the same SHA-256 order that no set has used are held out. A chosen rig that cannot be downloaded or loaded, or that does not have the 52 ARKit shapes and the 15 viseme shapes, is listed under replaced and its place goes to the next unused candidate of the same sex in that order.",
+   "training": [
+    "Female_Adult_01",
+    "Male_Adult_01",
+    "Female_Adult_10",
+    "Female_Adult_08",
+    "Female_Adult_12",
+    "Female_Adult_14",
+    "Male_Adult_17",
+    "Male_Adult_13",
+    "Male_Adult_03",
+    "Male_Adult_10"
+   ],
+   "held_out": [
+    "Female_Adult_06",
+    "Female_Adult_17",
+    "Male_Adult_19",
+    "Male_Adult_02"
+   ]
+  },
+  {
+   "record": "viseme-poses.rocketbox-features v1",
+   "rule": "Training is the training of the previous round plus every rig that an earlier round held out, so that the perceptual tolerances and the leave-one-rig-out cross-validation rest on 18 rigs rather than 10. For each of Female and Male, the next 2 candidates in the SHA-256 order that no round has used are held out.",
+   "training": [
+    "Female_Adult_01",
+    "Male_Adult_01",
+    "Female_Adult_10",
+    "Female_Adult_08",
+    "Female_Adult_12",
+    "Female_Adult_14",
+    "Male_Adult_17",
+    "Male_Adult_13",
+    "Male_Adult_03",
+    "Male_Adult_10",
+    "Female_Adult_04",
+    "Female_Adult_13",
+    "Male_Adult_05",
+    "Male_Adult_11",
+    "Female_Adult_06",
+    "Female_Adult_17",
+    "Male_Adult_19",
+    "Male_Adult_02"
+   ],
+   "held_out": [
+    "Female_Adult_15",
+    "Female_Adult_09",
+    "Male_Adult_08",
+    "Male_Adult_15"
+   ]
+  }
  ],
  "replaced": []
 }

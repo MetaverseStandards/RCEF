@@ -109,3 +109,8 @@ The result: training `Female_Adult_01`, `_08`, `_10`, `_12`, `_14`, `Male_Adult_
 - For each sex, the next 2 candidates in the same SHA-256 order that no set has used are held out. Replacement works as before.
 
 The result: held out `Female_Adult_06`, `_17`, `Male_Adult_02` and `_19`.
+
+**Rounds.** From the perceptual record on, `viseme_rigs.json` lists one round per record version under `rounds`, each with its rule, training and held-out rigs. Round 3, for `viseme-poses.rocketbox-features` v1, was committed before any of its new rigs was downloaded:
+
+- Training is the 10 training rigs of round 2 plus the 8 rigs that rounds 1 and 2 held out: 18 rigs. The reason is training-only: the perceptual tolerances are set from how much the rigs' own visemes differ, and the leave-one-rig-out cross-validation that chooses the method needs as many rigs as can be had. No rig that was held out is held out again.
+- For each sex, the next 2 candidates in the SHA-256 order that no round has used are held out: `Female_Adult_09`, `_15`, `Male_Adult_08` and `_15`.
