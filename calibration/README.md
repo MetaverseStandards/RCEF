@@ -24,7 +24,7 @@ Records are `calibrated_software`. They are fitted to renders or mesh geometry o
 
 ## Fields
 
-Every field is required, except `scan_origin` and `renderer` (see their rows) and `cells`. No other fields are allowed. A record without `cells` is a pre-registration: its frozen part and ledger line are committed before the held-out run, and the cells are added after it. No mapping may cite the record until then. Write any dates as text, not as TOML dates.
+Every field is required, except `scan_origin` and `renderer` (see their rows), `cells`, and `features` and `feature_cells`. No other fields are allowed. A record without `cells` is a pre-registration: its frozen part and ledger line are committed before the held-out run, and the cells are added after it. No mapping may cite the record until then. Write any dates as text, not as TOML dates.
 
 | Field | Type | Meaning |
 |---|---|---|
@@ -45,6 +45,8 @@ Every field is required, except `scan_origin` and `renderer` (see their rows) an
 | `evaluation` | table | `min_conditions`, the fewest held-out conditions a cell may have (at least 20), and `bounds`: for each channel, the largest acceptable `median`, `p95` and `neutral` error |
 | `curves` | list of tables | the frozen curves: `input` (one of `channels`), `output`, and `knots` |
 | `cells` | list of tables | per-cell results on the held-out seeds (below) |
+| `features` | list of tables | optional, frozen: the perceptual gate (below) |
+| `feature_cells` | list of tables | optional: per-feature results on the held-out seeds (below) |
 | `licence` | text | the licence of the record's numbers |
 | `limitations` | list of text | what the fit does not show: at least one statement, each at least 5 words and 30 characters |
 
@@ -56,9 +58,20 @@ There is one **cell** per channel, side, stimulus and identity. A cell has `chan
 
 A cell **passes** if it has no failures and its median, p95 and neutral errors are each within the channel's frozen bounds. Results are per cell. Cells are not pooled, and no cell is shifted to a best fit. A record whose cells fail is still a valid record: it is a published negative result. But no mapping may cite it for a channel unless every cell for that channel passes.
 
+## Perceptual gate
+
+A record may also give some channels a perceptual gate: a few visible features, each with a frozen tolerance. The gate checks named features of the face, such as how far the lips are apart on the mid line, not the whole-mesh shape. A channel then passes if every one of its shape cells passes, **or** if every one of its features has a passing feature cell for every held-out identity of its shape cells.
+
+Each entry of `features` has `channel` (one of `channels`), `feature` (a name; each channel and feature appear once), `kind`, `units`, `tolerance` (a finite number, at least 0) and a `description`. There are two kinds:
+
+- `difference`: the error of a condition is the absolute difference between the feature of the reconstruction and the feature of the target.
+- `range`: the entry also has `low` and `high` (`low` below `high`), and the error of a condition is how far the feature of the reconstruction lies outside them (0 inside).
+
+A feature cell has `channel`, `feature` (one of the features), `identity`, `conditions` (at least `evaluation.min_conditions`, at most `held_out.count`), `failures`, and the `median`, `p95` and `max` of the errors (finite, at least 0, in that order or equal). A feature cell passes if it has no failures and its `max` is within the feature's `tolerance`: every condition must pass, not only most. `features` are part of the frozen part; `feature_cells` are results, like `cells`, and are not hashed. A record with `feature_cells` must have `cells` too: both come from one held-out run.
+
 ## Frozen part, ledger and held-out seeds
 
-Everything in a record except `cells` is the frozen part: method, inputs, renderer (if any), curves, the bounds and the minimum conditions. `frozen_sha256` is the SHA-256 of that part, without `frozen_sha256` itself. The part is written as compact JSON with sorted keys (`json.dumps(part, sort_keys=True, ensure_ascii=False, separators=(',', ':'))`, UTF-8). The held-out seeds come from this hash. Seed *i*, for *i* from 0 to `count` − 1, is the first 8 bytes, read big-endian, of the SHA-256 of the text `<frozen_sha256>:<i>`. `held_out_seeds()` in `check.py` computes them.
+Everything in a record except `cells` and `feature_cells` is the frozen part: method, inputs, renderer (if any), curves, features, the bounds and the minimum conditions. `frozen_sha256` is the SHA-256 of that part, without `frozen_sha256` itself. The part is written as compact JSON with sorted keys (`json.dumps(part, sort_keys=True, ensure_ascii=False, separators=(',', ':'))`, UTF-8). The held-out seeds come from this hash. Seed *i*, for *i* from 0 to `count` − 1, is the first 8 bytes, read big-endian, of the SHA-256 of the text `<frozen_sha256>:<i>`. `held_out_seeds()` in `check.py` computes them.
 
 Anyone can recompute a record's hash. So the hash alone does not stop someone from changing a frozen value to get new seeds. The freeze ledger stops this. `FREEZES` has one line per freeze:
 
@@ -81,7 +94,7 @@ What this guarantees: the ledger line for a freeze is committed before the resul
 A mapping cites a record with the evidence id `calibration.<id>`, and the pack holds an evidence record with that id that points to the file. Its operator must be `piecewise_linear` or `weighted_sum`.
 
 - **`piecewise_linear`:** its `knots` must be exactly equal to the knots of the record's curve with the same input and output. Every cell for its input channel must pass.
-- **`weighted_sum` (a pose sum):** the record's curves are poses, with knots `[[0, 0], [1, pose]]`: input channel *c* at weight 1 gives output *j* the value `pose`. Each input of the sum must be a copy (`affine` with scale 1 and offset 0) of one channel, made by one mapping, and have one weight. Exactly one mapping reads the sum: the clamp, a `piecewise_linear` mapping with the sum as its only input, the knots `[[0, 0], [1, 1], [n, 1]]` for *n* inputs (`[[0, 0], [1, 1]]` for one) and the output *j*. Each weight must be exactly the pose of the curve from its channel to *j*. Every cell of every channel that the sum reads must pass.
+- **`weighted_sum` (a pose sum):** the record's curves are poses, with knots `[[0, 0], [1, pose]]`: input channel *c* at weight 1 gives output *j* the value `pose`. Each input of the sum must be a copy (`affine` with scale 1 and offset 0) of one channel, made by one mapping, and have one weight. Exactly one mapping reads the sum: the clamp, a `piecewise_linear` mapping with the sum as its only input, the knots `[[0, 0], [1, 1], [n, 1]]` for *n* inputs (`[[0, 0], [1, 1]]` for one) and the output *j*. Each weight must be exactly the pose of the curve from its channel to *j*. Every channel that the sum reads must pass: all its cells, or, if the record gives it features, all its feature cells.
 
 `check.py` checks this for every mapping in the checkout's authoring files. It does this without msf-character-tools, after it verifies the installed msf-character-tools and before it runs msf-character-tools.
 

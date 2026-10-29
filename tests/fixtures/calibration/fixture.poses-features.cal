@@ -1,0 +1,114 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# RCEF calibration record (format: calibration/README.md). TEST FIXTURE: every
+# number and hash here is invented to exercise check.py; nothing was measured.
+# A geometry-only fit with a perceptual gate for fixture.source.lip: its shape cell
+# fails, and its feature cells pass.
+format = "rcef.calibration/1"
+id = "fixture.poses-features"
+version = 1
+status = "calibrated_software"
+scope = "software-only; not a measurement of any tracker"
+method = "pose_fit"
+channels = ["fixture.source.jaw", "fixture.source.lip"]
+reference_rig = "Fixture rig (synthetic)"
+code_commit = "0123456789abcdef0123456789abcdef01234567"
+licence = "CC-BY-SA-4.0"
+limitations = [
+  "Synthetic test fixture; it describes no real fit.",
+]
+
+[[inputs]]
+name = "fixture-rig.glb"
+sha256 = "1111111111111111111111111111111111111111111111111111111111111111"
+
+[training]
+conditions = 2
+description = "Each fixture source shape fitted once."
+
+[held_out]
+seed_rule = "rcef.calibration.seeds/1"
+count = 24
+frozen_sha256 = "f58a579bdccabb1f647a669489ab558a4b419ac189336374e84a33052f2f0d23"
+
+[evaluation]
+min_conditions = 24
+
+[evaluation.bounds."fixture.source.jaw"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[evaluation.bounds."fixture.source.lip"]
+median = 0.5
+p95 = 0.5
+neutral = 0.01
+
+[[features]]
+channel = "fixture.source.lip"
+feature = "lip_opening_mm"
+kind = "range"
+units = "mm"
+low = -2.0
+high = 0.5
+tolerance = 0.0
+description = "Signed vertical opening of the lips on the mid line; the lips must be closed."
+
+[[features]]
+channel = "fixture.source.lip"
+feature = "lip_protrusion_mm"
+kind = "difference"
+units = "mm"
+tolerance = 0.5
+description = "Forward movement of the lips, compared with the rig's own shape."
+
+[[curves]]
+input = "fixture.source.jaw"
+output = "fixture.target.jaw"
+knots = [[0.0, 0.0], [1.0, 0.4]]
+
+[[curves]]
+input = "fixture.source.lip"
+output = "fixture.target.jaw"
+knots = [[0.0, 0.0], [1.0, 0.25]]
+
+[[cells]]
+channel = "fixture.source.jaw"
+side = "shared"
+stimulus = "class weight"
+identity = "fixture rig 2"
+conditions = 24
+failures = 0
+median = 0.2
+p95 = 0.3
+neutral = 0.0
+
+[[cells]]
+channel = "fixture.source.lip"
+side = "shared"
+stimulus = "class weight"
+identity = "fixture rig 2"
+conditions = 24
+failures = 0
+median = 0.6
+p95 = 0.7
+neutral = 0.0
+
+[[feature_cells]]
+channel = "fixture.source.lip"
+feature = "lip_opening_mm"
+identity = "fixture rig 2"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "fixture.source.lip"
+feature = "lip_protrusion_mm"
+identity = "fixture rig 2"
+conditions = 24
+failures = 0
+median = 0.1
+p95 = 0.3
+max = 0.4
