@@ -1,0 +1,913 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+# Written by scripts/build_canonical.py from docs/canonical-set.md,
+# docs/canonical-set-audit.md and today's direct maps
+# (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run the script.
+# The canonical expression set, vocabulary version 1.0 (draft). See docs/canonical-set.md.
+
+[[signals]]
+id = "rcef.canonical_expression.brow_inner_raise_left"
+label = "Inner brow raise, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:brow_inner_raise_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The inner part of the left brow lifts, and the forehead above it lifts with it.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "1", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["browInnerUp"], "openxr.fb2" = ["INNER_BROW_RAISER_L"], "vrcft.artist.base" = ["BrowInnerUpLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "brow"
+
+[[signals]]
+id = "rcef.canonical_expression.brow_inner_raise_right"
+label = "Inner brow raise, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:brow_inner_raise_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The inner part of the right brow lifts, and the forehead above it lifts with it.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "1", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["browInnerUp"], "openxr.fb2" = ["INNER_BROW_RAISER_R"], "vrcft.artist.base" = ["BrowInnerUpRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "brow"
+
+[[signals]]
+id = "rcef.canonical_expression.brow_outer_raise_left"
+label = "Outer brow raise, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:brow_outer_raise_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The outer part of the left brow lifts, and the forehead above it lifts with it.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "2", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["browOuterUpLeft"], "openxr.fb2" = ["OUTER_BROW_RAISER_L"], "vrcft.artist.base" = ["BrowOuterUpLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "brow"
+
+[[signals]]
+id = "rcef.canonical_expression.brow_outer_raise_right"
+label = "Outer brow raise, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:brow_outer_raise_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The outer part of the right brow lifts, and the forehead above it lifts with it.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "2", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["browOuterUpRight"], "openxr.fb2" = ["OUTER_BROW_RAISER_R"], "vrcft.artist.base" = ["BrowOuterUpRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "brow"
+
+[[signals]]
+id = "rcef.canonical_expression.brow_lower_left"
+label = "Brow lower, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:brow_lower_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left brow lowers and draws toward the middle of the face. This is the whole action: the inner and outer parts move together.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "4", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["browDownLeft"], "openxr.fb2" = ["BROW_LOWERER_L"], "vrcft.artist.base" = ["BrowLowererLeft", "BrowPinchLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "brow"
+
+[[signals]]
+id = "rcef.canonical_expression.brow_lower_right"
+label = "Brow lower, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:brow_lower_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right brow lowers and draws toward the middle of the face. This is the whole action: the inner and outer parts move together.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "4", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["browDownRight"], "openxr.fb2" = ["BROW_LOWERER_R"], "vrcft.artist.base" = ["BrowLowererRight", "BrowPinchRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "brow"
+
+[[signals]]
+id = "rcef.canonical_expression.eye_close_left"
+label = "Eye close, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:eye_close_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The upper lid of the left eye lowers until it covers the eye. 1 is the eye fully closed.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "43", "facs_table" = "gross_behavior", "group" = "blink", "aligned_names" = { "arkit.coefficient" = ["eyeBlinkLeft"], "openxr.fb2" = ["EYES_CLOSED_L"], "vrcft.artist.base" = ["EyeClosedLeft"], "vrm.preset" = ["blinkLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#vrm", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.canonical_expression.eye_close_right"
+label = "Eye close, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:eye_close_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The upper lid of the right eye lowers until it covers the eye. 1 is the eye fully closed.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "43", "facs_table" = "gross_behavior", "group" = "blink", "aligned_names" = { "arkit.coefficient" = ["eyeBlinkRight"], "openxr.fb2" = ["EYES_CLOSED_R"], "vrcft.artist.base" = ["EyeClosedRight"], "vrm.preset" = ["blinkRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#vrm", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.canonical_expression.lid_tighten_left"
+label = "Lid tighten, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lid_tighten_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The lids of the left eye tighten and narrow the eye opening. The lower lid moves toward the inner corner.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "7", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["eyeSquintLeft"], "openxr.fb2" = ["LID_TIGHTENER_L"], "vrcft.artist.base" = ["EyeSquintLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.canonical_expression.lid_tighten_right"
+label = "Lid tighten, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lid_tighten_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The lids of the right eye tighten and narrow the eye opening. The lower lid moves toward the inner corner.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "7", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["eyeSquintRight"], "openxr.fb2" = ["LID_TIGHTENER_R"], "vrcft.artist.base" = ["EyeSquintRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.canonical_expression.upper_lid_raise_left"
+label = "Upper lid raise, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:upper_lid_raise_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The upper lid of the left eye lifts and the eye opens wider.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "5", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["eyeWideLeft"], "openxr.fb2" = ["UPPER_LID_RAISER_L"], "vrcft.artist.base" = ["EyeWideLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.canonical_expression.upper_lid_raise_right"
+label = "Upper lid raise, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:upper_lid_raise_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The upper lid of the right eye lifts and the eye opens wider.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "5", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["eyeWideRight"], "openxr.fb2" = ["UPPER_LID_RAISER_R"], "vrcft.artist.base" = ["EyeWideRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "eyelid"
+
+[[signals]]
+id = "rcef.canonical_expression.gaze_in_left"
+label = "Gaze in, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:gaze_in_left: fraction of the source's maximum gaze in this direction; source-relative; no angle and no curve claimed"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left eye turns toward the nose, as a fraction of the source's maximum gaze in that direction (see Gaze in docs/canonical-set.md).", "zero" = "the eye does not look in this direction", "one" = "the source's maximum gaze in this direction", "facs_au" = "", "facs_table" = "", "group" = "gaze", "aligned_names" = { "arkit.coefficient" = ["eyeLookInLeft"], "openxr.fb2" = ["EYES_LOOK_RIGHT_L"], "vrcft.artist.base" = ["EyeLookInLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "gaze"
+
+[[signals]]
+id = "rcef.canonical_expression.gaze_in_right"
+label = "Gaze in, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:gaze_in_right: fraction of the source's maximum gaze in this direction; source-relative; no angle and no curve claimed"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right eye turns toward the nose, as a fraction of the source's maximum gaze in that direction (see Gaze in docs/canonical-set.md).", "zero" = "the eye does not look in this direction", "one" = "the source's maximum gaze in this direction", "facs_au" = "", "facs_table" = "", "group" = "gaze", "aligned_names" = { "arkit.coefficient" = ["eyeLookInRight"], "openxr.fb2" = ["EYES_LOOK_LEFT_R"], "vrcft.artist.base" = ["EyeLookInRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "gaze"
+
+[[signals]]
+id = "rcef.canonical_expression.gaze_out_left"
+label = "Gaze out, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:gaze_out_left: fraction of the source's maximum gaze in this direction; source-relative; no angle and no curve claimed"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left eye turns toward the temple, as a fraction of the source's maximum gaze in that direction (see Gaze in docs/canonical-set.md).", "zero" = "the eye does not look in this direction", "one" = "the source's maximum gaze in this direction", "facs_au" = "", "facs_table" = "", "group" = "gaze", "aligned_names" = { "arkit.coefficient" = ["eyeLookOutLeft"], "openxr.fb2" = ["EYES_LOOK_LEFT_L"], "vrcft.artist.base" = ["EyeLookOutLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "gaze"
+
+[[signals]]
+id = "rcef.canonical_expression.gaze_out_right"
+label = "Gaze out, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:gaze_out_right: fraction of the source's maximum gaze in this direction; source-relative; no angle and no curve claimed"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right eye turns toward the temple, as a fraction of the source's maximum gaze in that direction (see Gaze in docs/canonical-set.md).", "zero" = "the eye does not look in this direction", "one" = "the source's maximum gaze in this direction", "facs_au" = "", "facs_table" = "", "group" = "gaze", "aligned_names" = { "arkit.coefficient" = ["eyeLookOutRight"], "openxr.fb2" = ["EYES_LOOK_RIGHT_R"], "vrcft.artist.base" = ["EyeLookOutRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "gaze"
+
+[[signals]]
+id = "rcef.canonical_expression.gaze_up_left"
+label = "Gaze up, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:gaze_up_left: fraction of the source's maximum gaze in this direction; source-relative; no angle and no curve claimed"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left eye turns up, as a fraction of the source's maximum gaze in that direction (see Gaze in docs/canonical-set.md).", "zero" = "the eye does not look in this direction", "one" = "the source's maximum gaze in this direction", "facs_au" = "", "facs_table" = "", "group" = "gaze", "aligned_names" = { "arkit.coefficient" = ["eyeLookUpLeft"], "openxr.fb2" = ["EYES_LOOK_UP_L"], "vrcft.artist.base" = ["EyeLookUpLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "gaze"
+
+[[signals]]
+id = "rcef.canonical_expression.gaze_up_right"
+label = "Gaze up, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:gaze_up_right: fraction of the source's maximum gaze in this direction; source-relative; no angle and no curve claimed"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right eye turns up, as a fraction of the source's maximum gaze in that direction (see Gaze in docs/canonical-set.md).", "zero" = "the eye does not look in this direction", "one" = "the source's maximum gaze in this direction", "facs_au" = "", "facs_table" = "", "group" = "gaze", "aligned_names" = { "arkit.coefficient" = ["eyeLookUpRight"], "openxr.fb2" = ["EYES_LOOK_UP_R"], "vrcft.artist.base" = ["EyeLookUpRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "gaze"
+
+[[signals]]
+id = "rcef.canonical_expression.gaze_down_left"
+label = "Gaze down, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:gaze_down_left: fraction of the source's maximum gaze in this direction; source-relative; no angle and no curve claimed"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left eye turns down, as a fraction of the source's maximum gaze in that direction (see Gaze in docs/canonical-set.md).", "zero" = "the eye does not look in this direction", "one" = "the source's maximum gaze in this direction", "facs_au" = "", "facs_table" = "", "group" = "gaze", "aligned_names" = { "arkit.coefficient" = ["eyeLookDownLeft"], "openxr.fb2" = ["EYES_LOOK_DOWN_L"], "vrcft.artist.base" = ["EyeLookDownLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "gaze"
+
+[[signals]]
+id = "rcef.canonical_expression.gaze_down_right"
+label = "Gaze down, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:gaze_down_right: fraction of the source's maximum gaze in this direction; source-relative; no angle and no curve claimed"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right eye turns down, as a fraction of the source's maximum gaze in that direction (see Gaze in docs/canonical-set.md).", "zero" = "the eye does not look in this direction", "one" = "the source's maximum gaze in this direction", "facs_au" = "", "facs_table" = "", "group" = "gaze", "aligned_names" = { "arkit.coefficient" = ["eyeLookDownRight"], "openxr.fb2" = ["EYES_LOOK_DOWN_R"], "vrcft.artist.base" = ["EyeLookDownRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "gaze"
+
+[[signals]]
+id = "rcef.canonical_expression.cheek_puff_left"
+label = "Cheek puff, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:cheek_puff_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "Air fills the left cheek and pushes it outward.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "34", "facs_table" = "gross_behavior", "group" = "cheek_puff", "aligned_names" = { "arkit.coefficient" = ["cheekPuff"], "openxr.fb2" = ["CHEEK_PUFF_L"], "vrcft.artist.base" = ["CheekPuffLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "cheek"
+
+[[signals]]
+id = "rcef.canonical_expression.cheek_puff_right"
+label = "Cheek puff, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:cheek_puff_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "Air fills the right cheek and pushes it outward.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "34", "facs_table" = "gross_behavior", "group" = "cheek_puff", "aligned_names" = { "arkit.coefficient" = ["cheekPuff"], "openxr.fb2" = ["CHEEK_PUFF_R"], "vrcft.artist.base" = ["CheekPuffRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "cheek"
+
+[[signals]]
+id = "rcef.canonical_expression.cheek_raise_left"
+label = "Cheek raise, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:cheek_raise_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The outer part of the muscle ring around the left eye tightens, narrowing the outer corner of the eye; the skin below the eye and the upper cheek are pushed up.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "6", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["cheekSquintLeft"], "openxr.fb2" = ["CHEEK_RAISER_L"], "vrcft.artist.base" = ["CheekSquintLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "cheek"
+
+[[signals]]
+id = "rcef.canonical_expression.cheek_raise_right"
+label = "Cheek raise, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:cheek_raise_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The outer part of the muscle ring around the right eye tightens, narrowing the outer corner of the eye; the skin below the eye and the upper cheek are pushed up.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "6", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["cheekSquintRight"], "openxr.fb2" = ["CHEEK_RAISER_R"], "vrcft.artist.base" = ["CheekSquintRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "cheek"
+
+[[signals]]
+id = "rcef.canonical_expression.nose_wrinkle_left"
+label = "Nose wrinkle, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:nose_wrinkle_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left side of the nose and the nostril lift, and the skin over the nose wrinkles.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "9", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["noseSneerLeft"], "openxr.fb2" = ["NOSE_WRINKLER_L"], "vrcft.artist.base" = ["NoseSneerLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "nose"
+
+[[signals]]
+id = "rcef.canonical_expression.nose_wrinkle_right"
+label = "Nose wrinkle, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:nose_wrinkle_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right side of the nose and the nostril lift, and the skin over the nose wrinkles.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "9", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["noseSneerRight"], "openxr.fb2" = ["NOSE_WRINKLER_R"], "vrcft.artist.base" = ["NoseSneerRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "nose"
+
+[[signals]]
+id = "rcef.canonical_expression.jaw_drop"
+label = "Jaw drop"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:jaw_drop: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The lower jaw moves down and the mouth opens. This is the whole opening of the jaw.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "26", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["jawOpen"], "openxr.fb2" = ["JAW_DROP"], "vrcft.artist.base" = ["JawOpen"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "jaw"
+
+[[signals]]
+id = "rcef.canonical_expression.jaw_thrust"
+label = "Jaw thrust"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:jaw_thrust: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The lower jaw moves forward.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "29", "facs_table" = "gross_behavior", "group" = "jaw_thrust", "aligned_names" = { "arkit.coefficient" = ["jawForward"], "openxr.fb2" = ["JAW_THRUST"], "vrcft.artist.base" = ["JawForward"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "jaw"
+
+[[signals]]
+id = "rcef.canonical_expression.jaw_sideways_left"
+label = "Jaw sideways left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:jaw_sideways_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia", "xr_fb2", "xr_fb2_fig_eyes_closed_l", "xr_fb2_fig_eyes_look_left_l", "xr_fb2_fig_mouth_left", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The lower jaw moves toward the subject's own left.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "30", "facs_table" = "gross_behavior", "group" = "jaw_sideways", "aligned_names" = { "arkit.coefficient" = ["jawLeft"], "openxr.fb2" = ["JAW_SIDEWAYS_LEFT"], "vrcft.artist.base" = ["JawLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "jaw"
+
+[[signals]]
+id = "rcef.canonical_expression.jaw_sideways_right"
+label = "Jaw sideways right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:jaw_sideways_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia", "xr_fb2", "xr_fb2_fig_eyes_closed_l", "xr_fb2_fig_eyes_look_left_l", "xr_fb2_fig_mouth_left", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The lower jaw moves toward the subject's own right.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "30", "facs_table" = "gross_behavior", "group" = "jaw_sideways", "aligned_names" = { "arkit.coefficient" = ["jawRight"], "openxr.fb2" = ["JAW_SIDEWAYS_RIGHT"], "vrcft.artist.base" = ["JawRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "jaw"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_corner_pull_left"
+label = "Lip corner pull, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_corner_pull_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left lip corner is drawn up, back and outward.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "12", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthSmileLeft"], "openxr.fb2" = ["LIP_CORNER_PULLER_L"], "vrcft.artist.base" = ["MouthCornerPullLeft", "MouthCornerSlantLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_corner_pull_right"
+label = "Lip corner pull, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_corner_pull_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right lip corner is drawn up, back and outward.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "12", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthSmileRight"], "openxr.fb2" = ["LIP_CORNER_PULLER_R"], "vrcft.artist.base" = ["MouthCornerPullRight", "MouthCornerSlantRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_corner_depress_left"
+label = "Lip corner depress, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_corner_depress_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left lip corner is drawn down.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "15", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthFrownLeft"], "openxr.fb2" = ["LIP_CORNER_DEPRESSOR_L"], "vrcft.artist.base" = ["MouthFrownLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_corner_depress_right"
+label = "Lip corner depress, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_corner_depress_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right lip corner is drawn down.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "15", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthFrownRight"], "openxr.fb2" = ["LIP_CORNER_DEPRESSOR_R"], "vrcft.artist.base" = ["MouthFrownRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.dimple_left"
+label = "Dimple, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:dimple_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left lip corner tightens against the teeth and is drawn back.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "14", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthDimpleLeft"], "openxr.fb2" = ["DIMPLER_L"], "vrcft.artist.base" = ["MouthDimpleLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.dimple_right"
+label = "Dimple, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:dimple_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right lip corner tightens against the teeth and is drawn back.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "14", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthDimpleRight"], "openxr.fb2" = ["DIMPLER_R"], "vrcft.artist.base" = ["MouthDimpleRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_stretch_left"
+label = "Lip stretch, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_stretch_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left lip corner is drawn outward, toward the ear, and the lips stretch.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "20", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthStretchLeft"], "openxr.fb2" = ["LIP_STRETCHER_L"], "vrcft.artist.base" = ["MouthStretchLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_stretch_right"
+label = "Lip stretch, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_stretch_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right lip corner is drawn outward, toward the ear, and the lips stretch.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "20", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthStretchRight"], "openxr.fb2" = ["LIP_STRETCHER_R"], "vrcft.artist.base" = ["MouthStretchRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.mouth_shift_left"
+label = "Mouth shift left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:mouth_shift_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "xr_fb2", "xr_fb2_fig_eyes_closed_l", "xr_fb2_fig_eyes_look_left_l", "xr_fb2_fig_mouth_left", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The whole mouth moves toward the subject's own left.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "", "facs_table" = "", "group" = "mouth_shift", "aligned_names" = { "arkit.coefficient" = ["mouthLeft"], "openxr.fb2" = ["MOUTH_LEFT"], "vrcft.artist.base" = ["MouthUpperLeft", "MouthLowerLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.mouth_shift_right"
+label = "Mouth shift right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:mouth_shift_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "xr_fb2", "xr_fb2_fig_eyes_closed_l", "xr_fb2_fig_eyes_look_left_l", "xr_fb2_fig_mouth_left", "apple_blendshapes"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The whole mouth moves toward the subject's own right.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "", "facs_table" = "", "group" = "mouth_shift", "aligned_names" = { "arkit.coefficient" = ["mouthRight"], "openxr.fb2" = ["MOUTH_RIGHT"], "vrcft.artist.base" = ["MouthUpperRight", "MouthLowerRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.chin_raise"
+label = "Chin raise"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:chin_raise: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The skin of the chin and the lower lip are pushed up.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "17", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthShrugLower"], "openxr.fb2" = ["CHIN_RAISER_B"], "vrcft.artist.base" = ["MouthRaiserLower"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.chin_raise_upper_lip"
+label = "Chin raise, upper lip"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:chin_raise_upper_lip: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The upper lip is pushed up by the rising lower lip. This is the part of chin raising that moves the upper lip; chin_raise holds the rest.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "", "facs_table" = "", "group" = "chin_raise_upper_lip", "aligned_names" = { "arkit.coefficient" = ["mouthShrugUpper"], "openxr.fb2" = ["CHIN_RAISER_T"], "vrcft.artist.base" = ["MouthRaiserUpper"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_funnel_upper_left"
+label = "Lip funnel, upper left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_funnel_upper_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The upper left part of the lips pushes forward and turns outward into a funnel. The mouth rounds and the lips may part.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthFunnel"], "openxr.fb2" = ["LIP_FUNNELER_LT"], "vrcft.artist.base" = ["LipFunnelUpperLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_funnel_upper_right"
+label = "Lip funnel, upper right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_funnel_upper_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The upper right part of the lips pushes forward and turns outward into a funnel. The mouth rounds and the lips may part.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthFunnel"], "openxr.fb2" = ["LIP_FUNNELER_RT"], "vrcft.artist.base" = ["LipFunnelUpperRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_funnel_lower_left"
+label = "Lip funnel, lower left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_funnel_lower_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The lower left part of the lips pushes forward and turns outward into a funnel. The mouth rounds and the lips may part.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthFunnel"], "openxr.fb2" = ["LIP_FUNNELER_LB"], "vrcft.artist.base" = ["LipFunnelLowerLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_funnel_lower_right"
+label = "Lip funnel, lower right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_funnel_lower_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The lower right part of the lips pushes forward and turns outward into a funnel. The mouth rounds and the lips may part.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthFunnel"], "openxr.fb2" = ["LIP_FUNNELER_RB"], "vrcft.artist.base" = ["LipFunnelLowerRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_pucker_left"
+label = "Lip pucker, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_pucker_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left lip corner is drawn toward the middle of the mouth and the lips push forward.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "18", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthPucker"], "openxr.fb2" = ["LIP_PUCKER_L"], "vrcft.artist.base" = ["LipPuckerUpperLeft", "LipPuckerLowerLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_pucker_right"
+label = "Lip pucker, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_pucker_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right lip corner is drawn toward the middle of the mouth and the lips push forward.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "18", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthPucker"], "openxr.fb2" = ["LIP_PUCKER_R"], "vrcft.artist.base" = ["LipPuckerUpperRight", "LipPuckerLowerRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_suck_upper_left"
+label = "Lip suck, upper left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_suck_upper_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The upper left part of the lips rolls into the mouth.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthRollUpper"], "openxr.fb2" = ["LIP_SUCK_LT"], "vrcft.artist.base" = ["LipSuckUpperLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_suck_upper_right"
+label = "Lip suck, upper right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_suck_upper_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The upper right part of the lips rolls into the mouth.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthRollUpper"], "openxr.fb2" = ["LIP_SUCK_RT"], "vrcft.artist.base" = ["LipSuckUpperRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_suck_lower_left"
+label = "Lip suck, lower left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_suck_lower_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The lower left part of the lips rolls into the mouth.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthRollLower"], "openxr.fb2" = ["LIP_SUCK_LB"], "vrcft.artist.base" = ["LipSuckLowerLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_suck_lower_right"
+label = "Lip suck, lower right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_suck_lower_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The lower right part of the lips rolls into the mouth.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthRollLower"], "openxr.fb2" = ["LIP_SUCK_RB"], "vrcft.artist.base" = ["LipSuckLowerRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_press_left"
+label = "Lip press, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_press_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left halves of the upper and lower lips press together.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "24", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthPressLeft"], "openxr.fb2" = ["LIP_PRESSOR_L"], "vrcft.artist.base" = ["MouthPressLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_press_right"
+label = "Lip press, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_press_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right halves of the upper and lower lips press together.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "24", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthPressRight"], "openxr.fb2" = ["LIP_PRESSOR_R"], "vrcft.artist.base" = ["MouthPressRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lips_toward"
+label = "Lips toward each other"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lips_toward: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The lips move toward each other until they meet, at any jaw opening (FB2 LIPS_TOWARD, xr_fb2 lines 817-818; FACS AU8). At jaw_drop = 0 the lips are already together; RCEF does not define what a non-zero value adds there.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "8", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthClose"], "openxr.fb2" = ["LIPS_TOWARD"], "vrcft.artist.base" = ["MouthClosed"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.upper_lip_raise_left"
+label = "Upper lip raise, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:upper_lip_raise_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left part of the upper lip lifts.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "10", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthUpperUpLeft"], "openxr.fb2" = ["UPPER_LIP_RAISER_L"], "vrcft.artist.base" = ["MouthUpperUpLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.upper_lip_raise_right"
+label = "Upper lip raise, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:upper_lip_raise_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right part of the upper lip lifts.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "10", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthUpperUpRight"], "openxr.fb2" = ["UPPER_LIP_RAISER_R"], "vrcft.artist.base" = ["MouthUpperUpRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lower_lip_depress_left"
+label = "Lower lip depress, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lower_lip_depress_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left part of the lower lip is drawn down.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "16", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthLowerDownLeft"], "openxr.fb2" = ["LOWER_LIP_DEPRESSOR_L"], "vrcft.artist.base" = ["MouthLowerDownLeft"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lower_lip_depress_right"
+label = "Lower lip depress, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lower_lip_depress_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right part of the lower lip is drawn down.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "16", "facs_table" = "main", "group" = "face", "aligned_names" = { "arkit.coefficient" = ["mouthLowerDownRight"], "openxr.fb2" = ["LOWER_LIP_DEPRESSOR_R"], "vrcft.artist.base" = ["MouthLowerDownRight"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs", "docs/canonical-set-audit.md#facs-crosswalk-ict-facekit"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.tongue_out"
+label = "Tongue out"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:tongue_out: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The tongue moves forward and out of the mouth. No length is stated.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "19", "facs_table" = "main", "group" = "tongue_out", "aligned_names" = { "arkit.coefficient" = ["tongueOut"], "openxr.fb2" = ["TONGUE_OUT"], "vrcft.artist.base" = ["TongueOut"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "tongue"
+
+[[profiles]]
+id = "rcef.canonical_expression"
+label = "RCEF canonical expression set (draft)"
+signal_ids = ["rcef.canonical_expression.brow_inner_raise_left", "rcef.canonical_expression.brow_inner_raise_right", "rcef.canonical_expression.brow_outer_raise_left", "rcef.canonical_expression.brow_outer_raise_right", "rcef.canonical_expression.brow_lower_left", "rcef.canonical_expression.brow_lower_right", "rcef.canonical_expression.eye_close_left", "rcef.canonical_expression.eye_close_right", "rcef.canonical_expression.lid_tighten_left", "rcef.canonical_expression.lid_tighten_right", "rcef.canonical_expression.upper_lid_raise_left", "rcef.canonical_expression.upper_lid_raise_right", "rcef.canonical_expression.gaze_in_left", "rcef.canonical_expression.gaze_in_right", "rcef.canonical_expression.gaze_out_left", "rcef.canonical_expression.gaze_out_right", "rcef.canonical_expression.gaze_up_left", "rcef.canonical_expression.gaze_up_right", "rcef.canonical_expression.gaze_down_left", "rcef.canonical_expression.gaze_down_right", "rcef.canonical_expression.cheek_puff_left", "rcef.canonical_expression.cheek_puff_right", "rcef.canonical_expression.cheek_raise_left", "rcef.canonical_expression.cheek_raise_right", "rcef.canonical_expression.nose_wrinkle_left", "rcef.canonical_expression.nose_wrinkle_right", "rcef.canonical_expression.jaw_drop", "rcef.canonical_expression.jaw_thrust", "rcef.canonical_expression.jaw_sideways_left", "rcef.canonical_expression.jaw_sideways_right", "rcef.canonical_expression.lip_corner_pull_left", "rcef.canonical_expression.lip_corner_pull_right", "rcef.canonical_expression.lip_corner_depress_left", "rcef.canonical_expression.lip_corner_depress_right", "rcef.canonical_expression.dimple_left", "rcef.canonical_expression.dimple_right", "rcef.canonical_expression.lip_stretch_left", "rcef.canonical_expression.lip_stretch_right", "rcef.canonical_expression.mouth_shift_left", "rcef.canonical_expression.mouth_shift_right", "rcef.canonical_expression.chin_raise", "rcef.canonical_expression.chin_raise_upper_lip", "rcef.canonical_expression.lip_funnel_upper_left", "rcef.canonical_expression.lip_funnel_upper_right", "rcef.canonical_expression.lip_funnel_lower_left", "rcef.canonical_expression.lip_funnel_lower_right", "rcef.canonical_expression.lip_pucker_left", "rcef.canonical_expression.lip_pucker_right", "rcef.canonical_expression.lip_suck_upper_left", "rcef.canonical_expression.lip_suck_upper_right", "rcef.canonical_expression.lip_suck_lower_left", "rcef.canonical_expression.lip_suck_lower_right", "rcef.canonical_expression.lip_press_left", "rcef.canonical_expression.lip_press_right", "rcef.canonical_expression.lips_toward", "rcef.canonical_expression.upper_lip_raise_left", "rcef.canonical_expression.upper_lip_raise_right", "rcef.canonical_expression.lower_lip_depress_left", "rcef.canonical_expression.lower_lip_depress_right", "rcef.canonical_expression.tongue_out"]
+evidence = ["rcef_canonical_v1"]
+metadata = { "vocabulary_version" = "1.0", "vocabulary_status" = "draft", "scope" = "a pivot for translating between expression sets; each signal has a declared meaning, but no shared or measured gain", "groups" = ["face", "cheek_puff", "jaw_thrust", "jaw_sideways", "mouth_shift", "chin_raise_upper_lip", "blink", "gaze", "tongue_out"] }

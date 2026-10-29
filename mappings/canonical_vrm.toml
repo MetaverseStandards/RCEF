@@ -1,0 +1,56 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+# Written by scripts/build_canonical.py from docs/canonical-set.md,
+# docs/canonical-set-audit.md and today's direct maps
+# (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run the script.
+# The maps between the canonical expression set and VRM: one map per canonical group and
+# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
+
+[[mappings]]
+id = "rcef_blink.to_vrm"
+
+[[mappings.rules]]
+id = "rcef_vrm.blinkLeft"
+inputs = ["rcef.canonical_expression.eye_close_left"]
+outputs = ["vrm.preset.blinkLeft"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM blinkLeft corresponds to canonical eye_close_left.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_blink_side_unresolved.",
+  "vrm.definitional_only: canonical eye_close_left (the upper lid of the left eye lowers until it covers the eye) corresponds to VRM preset blinkLeft (closes the left eyelid); definitional only: the definitions agree, but no published table maps FB2 or the canonical set to VRM.",
+  "vrm.side_caveat: VRM gives no normative side; on the VRM 1.0 Twist sample blinkLeft moves the avatar's own left eyelid.",
+  "vrm.downstream_effects: VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["vrm_expressions", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "a canonical value becomes an asset-authored expression weight", "refs" = ["rcef.canonical_expression.eye_close_left", "vrm.preset.blinkLeft"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink", "refs" = ["rcef.canonical_expression.eye_close_left", "vrm.preset.blinkLeft"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed", "refs" = ["rcef.canonical_expression.eye_close_left", "vrm.preset.blinkLeft"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft as the subject's own left", "refs" = ["rcef.canonical_expression.eye_close_left", "vrm.preset.blinkLeft"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_vrm.blinkRight"
+inputs = ["rcef.canonical_expression.eye_close_right"]
+outputs = ["vrm.preset.blinkRight"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: VRM blinkRight corresponds to canonical eye_close_right.",
+  "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_blink_side_unresolved.",
+  "vrm.definitional_only: canonical eye_close_right (the upper lid of the right eye lowers until it covers the eye) corresponds to VRM preset blinkRight (closes the right eyelid); definitional only: the definitions agree, but no published table maps FB2 or the canonical set to VRM.",
+  "vrm.side_caveat: VRM gives no normative side; on the VRM 1.0 Twist sample blinkRight moves the avatar's own right eyelid.",
+  "vrm.downstream_effects: VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.",
+]
+evidence = ["vrm_expressions", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "a canonical value becomes an asset-authored expression weight", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft as the subject's own left", "refs" = ["rcef.canonical_expression.eye_close_right", "vrm.preset.blinkRight"], "units" = "1" },
+]
