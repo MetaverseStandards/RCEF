@@ -27,7 +27,7 @@ check = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(check)
 
 BRIDGE = 'rcef_viseme_pose.to_rcef_expression'
-RECORD = 'viseme-poses.rocketbox-female'
+RECORD = 'viseme-poses.rocketbox-multi'
 VISEME, EXPRESSION = 'rcef.canonical_viseme', 'rcef.canonical_expression'
 GROUPS = {'face', 'cheek_puff', 'jaw_thrust', 'chin_raise_upper_lip'}
 COPY = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
@@ -83,6 +83,19 @@ class PoseBridge(unittest.TestCase):
         self.assertEqual(len(self.passing), 9)
         for rule in self.sums:
             self.assertEqual(self.classes_of(rule), self.passing, rule['id'])
+
+    def test_it_is_written_from_the_multi_rig_record_alone(self):
+        rigs = {c['identity'] for c in self.record['cells']}
+        self.assertEqual(len(rigs), 4)
+        for channel in self.record['channels']:
+            self.assertEqual(len([c for c in self.record['cells'] if c['channel'] == channel]), 4, channel)
+        self.assertEqual([c.rsplit('.', 1)[1] for c in self.passing],
+                         ['vowel_open', 'vowel_close_spread', 'vowel_mid_rounded', 'dental', 'postalveolar',
+                          'coronal_stop', 'dorsal', 'rhotic', 'sil'])
+        old = 'calibration.viseme-poses.rocketbox-female'
+        self.assertFalse([r['id'] for m in self.document['mappings'] for r in m['rules'] if old in r['evidence']])
+        self.assertNotIn(old, {e['id'] for e in self.document['evidence']})
+        self.assertTrue((ROOT / 'calibration/viseme-poses.rocketbox-female.cal').is_file())
 
     def test_each_weight_is_the_frozen_pose_of_the_record(self):
         curves = {(c['input'], c['output']): c['knots'] for c in self.record['curves']}
