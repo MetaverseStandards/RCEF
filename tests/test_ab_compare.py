@@ -10,6 +10,7 @@ from fractions import Fraction
 import json
 import os
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -19,6 +20,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 import ab_compare  # noqa: E402
 
 SLOW = os.environ.get('RCEF_SLOW_TESTS') == '1'
+ARKIT, FB2 = 'arkit.coefficient.', 'openxr.fb2.XR_FACE_EXPRESSION2_'
 
 
 def result(values=None, labels=None, refused=None, dropped=None):
@@ -89,6 +91,66 @@ class Metrics(unittest.TestCase):
         self.assertEqual(counts['coverage_violations'], 1)
         b[0]['labels']['c'] = ab_compare.rcef_route.NOT_AVAILABLE
         self.assertEqual(ab_compare.facs_compare(b, expected, ['b', 'c'])[0]['coverage_violations'], 0)
+
+
+class FlatLinks(unittest.TestCase):
+    def test_o_lists_the_eight_fb2_gaze_cross_links_from_the_knots(self):
+        document = ab_compare.load_a1()
+        pair = {'source': 'arkit.coefficient', 'target': 'openxr.fb2', 'in_hops': [],
+                'out_hops': [['arkit.to_fb2', None], ['arkit_gaze.to_fb2', None]]}
+        impulse = ab_compare.ab_frames.impulse_family('impulse', ab_compare.ab_frames.pinned_source(
+            document, 'arkit.coefficient'))
+        o = ab_compare.oracle_results(ab_compare.ab_oracle.Oracle(document), pair, impulse)
+        flat = ab_compare.flat_links(document, pair, impulse, o)
+        self.assertEqual(len(flat), 8)
+        self.assertIn([ARKIT + 'eyeLookOutLeft', FB2 + 'EYES_LOOK_RIGHT_L_FB'], flat)
+
+
+class Regression(unittest.TestCase):
+    """A fix freeze makes the earlier freeze's seeded families again with the generator that freeze pinned."""
+
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory(prefix='rcef-ab-')
+        self.addCleanup(temp.cleanup)
+        self.root = Path(temp.name)
+        (self.root / 'scripts').mkdir()
+        (self.root / 'ab').mkdir()
+        generator = self.root / ab_compare.CODE['generator']
+        generator.write_bytes((ROOT / ab_compare.CODE['generator']).read_bytes())
+        self.git('init', '-q')
+        self.git('add', '-A')
+        self.git('commit', '-q', '-m', 'generator')
+        old = ab_compare.sha256_bytes(generator.read_bytes())
+        source = {'channels': ['a', 'b'], 'flags': [], 'gaze_pairs': []}
+        self.first = {'id': 'ab.pivot', 'version': 1, 'kind': 'first', 'sources': {'s': source},
+                      'families': [{'name': 'u', 'kind': 'uniform', 'source': 's', 'count': 3}],
+                      'pins': {'code': {'generator': old}}}
+        self.first['seed_root'] = ab_compare.seed_root(self.first)
+        (self.root / 'ab/ab.pivot-v1.abreg').write_text(json.dumps(self.first), encoding='utf-8')
+        generator.write_text(generator.read_text(encoding='utf-8') + '# changed\n', encoding='utf-8')
+        self.fix = {**self.first, 'version': 2, 'kind': 'fix', 'renames': {'a': 'a2'}}
+
+    def git(self, *args):
+        subprocess.run(['git', '-c', 'user.name=t', '-c', 'user.email=t@t', *args], cwd=self.root, check=True,
+                       capture_output=True)
+
+    def test_the_earlier_families_come_back_from_the_pinned_generator_with_renames(self):
+        families, sources, problems = ab_compare.regression_families(self.fix, self.root)
+        self.assertEqual(problems, [])
+        self.assertEqual(sources, {'regression:v1:u': 's'})
+        frames = families['regression:v1:u']
+        self.assertEqual(len(frames), 3)
+        self.assertEqual(set(frames[0]['values']), {'a2', 'b'})
+
+    def test_frames_that_differ_from_the_earlier_run_are_a_problem(self):
+        folder = self.root / ab_compare.RESULTS / 'v1'
+        folder.mkdir(parents=True)
+        (folder / 'SHA256SUMS').write_text(f'{"0" * 64}  frames/u.jsonl\n', encoding='utf-8')
+        self.assertEqual(ab_compare.regression_families(self.fix, self.root)[2],
+                         ['v1: frames/u.jsonl does not have the hash its run recorded'])
+
+    def test_a_first_freeze_has_no_regression_families(self):
+        self.assertEqual(ab_compare.regression_families(self.first, self.root), ({}, {}, []))
 
 
 class Baseline(unittest.TestCase):

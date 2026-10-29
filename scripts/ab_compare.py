@@ -37,6 +37,7 @@ import struct
 import subprocess
 import sys
 import time
+import types
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / 'examples'), str(ROOT / 'scripts'), str(ROOT / 'tests')]
@@ -443,6 +444,31 @@ def m3_exact(frames: list[dict], back: list[dict], source: dict) -> tuple[dict, 
     return counts, failures
 
 
+def links(document: dict, pair: dict, outputs) -> dict:
+    """Each (source input, output) link of the composed hop weights: True when a piecewise operator is on the way."""
+    out_rules = rules_by_output(document, [h[0] for h in pair['out_hops']])
+    in_rules = rules_by_output(document, [h[0] for h in pair['in_hops']])
+    found = {}
+    for output in outputs:
+        rules, leaves = upstream(out_rules, output)
+        if pair['in_hops']:
+            inner = [(leaf, upstream(in_rules, leaf)) for leaf in leaves if leaf in in_rules]
+            rules = rules + [r for _, (more, _) in inner for r in more]
+            leaves = {s for _, (_, sources) in inner for s in sources}
+        knots = any(r['operator']['id'] == 'piecewise_linear' for r in rules)
+        found.update({(s, output): knots for s in leaves})
+    return found
+
+
+def flat_links(document: dict, pair: dict, impulse: list[dict], o: list[dict]) -> list[list[str]]:
+    """The links O never changes on the impulse frames because they enter a piecewise operator on its flat side."""
+    changed = {}
+    for n in range(1, len(impulse)):
+        changed.setdefault(impulse_channel(impulse[n]), set()).update(ab_oracle.changed(o[0], o[n]))
+    return sorted([s, out] for (s, out), knots in links(document, pair, o[0]['values']).items()
+                  if knots and out not in changed.get(s, set()))
+
+
 def m3_coverage(document: dict, pair: dict, impulse: list[dict], b: list[dict], o: list[dict], flat: list,
                 seeded: dict) -> tuple[dict, list]:
     """Impulse frames change exactly O's outputs; every composed link is in O's set or the frozen flat list; every
@@ -456,20 +482,13 @@ def m3_coverage(document: dict, pair: dict, impulse: list[dict], b: list[dict], 
         if got != want:
             counts['violations'] += 1
             failures.append([impulse[n]['label'], 'changed outputs differ from O'])
-    out_rules = rules_by_output(document, [h[0] for h in pair['out_hops']])
-    in_rules = rules_by_output(document, [h[0] for h in pair['in_hops']])
-    links = set()
-    for output in b[0]['values']:
-        _, leaves = upstream(out_rules, output)
-        if pair['in_hops']:
-            leaves = {s for leaf in leaves if leaf in in_rules for s in upstream(in_rules, leaf)[1]}
-        links |= {(s, output) for s in leaves}
-    for s, output in sorted(links):
+    linked = sorted(links(document, pair, b[0]['values']))
+    for s, output in linked:
         if output not in changed_b.get(s, set()) and [s, output] not in flat:
             counts['violations'] += 1
             failures.append([f'{s} -> {output}', 'linked but never changed, and not in the flat list'])
     for name, results in seeded.items():
-        for output in sorted({o for s, o in links}):
+        for output in sorted({o for s, o in linked}):
             share = sum(bool(r['values'].get(output)) for r in results) / max(len(results), 1)
             if share < 0.01:
                 counts['violations'] += 1
@@ -611,6 +630,12 @@ def draft(root: Path = ROOT, b_path: Path | None = None, date: str = '') -> dict
                  'code': code_hashes(root), 'runtime': runtime_pins(root)},
         'not_registered': sorted(set(B_PAIRS) - set(pairs)),
     }
+    oracle, fixed = ab_oracle.Oracle(b_document), ab_frames.fixed_families(abreg)
+    flat = set()
+    for pair in pairs.values():
+        impulse = fixed[f'impulse:{pair["source"]}']
+        flat |= {tuple(link) for link in flat_links(b_document, pair, impulse, oracle_results(oracle, pair, impulse))}
+    abreg['lists']['m3_flat_links'] = sorted(map(list, flat))
     abreg['a1_figures'] = a1_figures(abreg, a1)
     abreg['seed_root'] = seed_root(abreg)
     return abreg
@@ -722,6 +747,66 @@ def abreg_problems(abreg: dict, abregs: dict, manifests: dict, root: Path, recom
     return problems
 
 
+# ---------------------------------------------------------------- regression families
+
+def generator_at(root: Path, digest: str):
+    """The frame generator whose file has this SHA-256: the checkout's, or one from Git history; None if neither."""
+    if sha256_bytes((root / CODE['generator']).read_bytes()) == digest:
+        return ab_frames
+    for commit in git(root, 'log', '--format=%H', '--', CODE['generator']).stdout.split():
+        shown = subprocess.run(['git', 'show', f'{commit}:{CODE["generator"]}'], cwd=root, capture_output=True)
+        if shown.returncode == 0 and sha256_bytes(shown.stdout) == digest:
+            module = types.ModuleType(f'ab_frames_{commit[:12]}')
+            module.__file__ = str(root / CODE['generator'])
+            # The generator uses only the standard library, so its old text runs on its own.
+            exec(compile(shown.stdout, f'{CODE["generator"]} at {commit[:12]}', 'exec'), module.__dict__)
+            return module
+    return None
+
+
+def results_folder(abreg: dict) -> str:
+    return f'v{abreg["version"]}' if abreg['id'] == FIRST else f'{abreg["id"]}-v{abreg["version"]}'
+
+
+def regression_families(abreg: dict, root: Path = ROOT) -> tuple[dict, dict, list[str]]:
+    """The seeded families of every earlier freeze, made again by the generator each one pinned.
+
+    Only a fix or revise freeze, or a reproduce freeze of one, has them. Their
+    frame hashes must equal the earlier run's SHA256SUMS, where it exists. A
+    rename map in the registration ("renames") is applied to their signal IDs.
+    Returns the families, the source set of each and any problems.
+    """
+    target = abreg
+    if abreg['kind'] == 'reproduce':
+        reproduced = root / 'ab' / f'{abreg["reproduces"]["id"]}-v{abreg["reproduces"]["version"]}.abreg'
+        target = json.loads(reproduced.read_text(encoding='utf-8'))
+    if target['kind'] not in ('fix', 'revise'):
+        return {}, {}, []
+    families, sources, problems = {}, {}, []
+    renames = abreg.get('renames', {})
+    for version in range(1, target['version']):
+        path = root / 'ab' / f'{target["id"]}-v{version}.abreg'
+        earlier = json.loads(path.read_text(encoding='utf-8')) if path.is_file() else None
+        if earlier is None or earlier['kind'] == 'reproduce':
+            continue
+        generator = generator_at(root, earlier['pins']['code']['generator'])
+        if generator is None:
+            problems.append(f'v{version}: no generator in the history has the pinned hash')
+            continue
+        sums_path = root / RESULTS / results_folder(earlier) / 'SHA256SUMS'
+        sums = dict(reversed(line.split('  ', 1)) for line in sums_path.read_text(encoding='utf-8').splitlines()) \
+            if sums_path.is_file() else {}
+        for name, frames in generator.seeded_families(earlier).items():
+            relative = f'frames/{name.replace(":", "__")}.jsonl'
+            if sums and sums.get(relative) != sha256_bytes(generator.file_text(frames).encode('utf-8')):
+                problems.append(f'v{version}: {relative} does not have the hash its run recorded')
+            label = f'regression:v{version}:{name}'
+            families[label] = [{**f, 'values': {renames.get(k, k): v for k, v in f.get('values', {}).items()}}
+                               if 'values' in f else f for f in frames]
+            sources[label] = renames.get(ab_frames.family_source(name, earlier), ab_frames.family_source(name, earlier))
+    return families, sources, problems
+
+
 # ---------------------------------------------------------------- the run
 
 def pin_problems(abreg: dict, root: Path, b_path: Path) -> list[str]:
@@ -743,6 +828,8 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
     abreg = json.loads(abreg_path.read_text(encoding='utf-8'))
     b_path = b_path or root / B_PACK
     pins = pin_problems(abreg, root, b_path)
+    regression, regression_sources, problems = regression_families(abreg, root)
+    pins += problems
     if pins and not dry_run:
         raise SystemExit('refusing a registered run:\n' + '\n'.join(f'  {p}' for p in pins))
     timings = {}
@@ -758,7 +845,7 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
     a1_pack, b_pack = rcef_translate.load_pack(a1_document), rcef_translate.load_pack(b_document)
     oracle = ab_oracle.Oracle(b_document)
     families = {**ab_frames.fixed_inputs(abreg, root), **ab_frames.fixed_families(abreg),
-                **ab_frames.seeded_families(abreg)}
+                **ab_frames.seeded_families(abreg), **regression}
     if 'facs.code' in abreg['sources']:
         families['facs_library'] = [{'family': 'facs_library', 'label': str(n), 'keys': keys}
                                     for n, keys in enumerate(ab_a3.b_keys())]
@@ -769,8 +856,9 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
             families[name] = facs_values(frames)
     by_source = {}
     for name in families:
-        by_source.setdefault(ab_frames.family_source(name, abreg), []).append(name)
-    report = {'metrics': {}, 'failures': {}, 'refusals': [], 'observed_loss': []}
+        source = regression_sources.get(name) or ab_frames.family_source(name, abreg)
+        by_source.setdefault(source, []).append(name)
+    report = {'metrics': {}, 'failures': {}, 'refusals': [], 'observed_loss': [], 'regression': sorted(regression)}
 
     def record(metric, row, counts, failures=()):
         report['metrics'].setdefault(metric, []).append({**row, **counts})
@@ -924,6 +1012,9 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
              'by procedure: the registration and its ledger line were committed before this run.', '']
     if dry_run:
         lines += ['**Dry run: not a registered result.**', '']
+    if report['regression']:
+        lines += ['Frames seen before the change (regression families, made again by the generator each earlier '
+                  f'freeze pinned): {", ".join(report["regression"])}.', '']
     lines += ['| Metric | Threshold | Status |', '|---|---|---|']
     for metric in sorted(statuses):
         threshold = THRESHOLDS.get(metric) or THRESHOLDS.get(metric.split()[0], 'report only')
