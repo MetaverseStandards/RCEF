@@ -84,7 +84,8 @@ class Read(unittest.TestCase):
                                ('L26', 'L26'), ('L27', 'L27'), ('L37', 'L37'), ('R37B', 'R37B'), ('1+1B', '1B'),
                                ('L12+L12', 'L12'), ('26+27', '27'),
                                ('43+45', '45'), ('45+L46', 'L46'), ('L43+L46', 'L46'), ('12+L12', 'L12'),
-                               ('L70', 'L70'), ('3', '3'), ('12F', '12F'), ('1++2', '(empty)'),
+                               ('L70', 'L70'), ('3', '3'), ('M7', 'M7'), ('97', '97'), ('12F', '12F'),
+                               ('1++2', '(empty)'),
                                ({'12': 'F'}, '12'), ({'12': True}, '12'), ({'X12': 'C'}, 'X12')):
             with self.subTest(notation):
                 reading = facs_codec.read(notation)
@@ -119,8 +120,9 @@ class Read(unittest.TestCase):
             self.assertEqual(self.values(f'12C+{code}').values, {})
 
     def test_codes_with_no_signal_are_listed_as_not_read(self):
-        reading = self.values('11+13B+25+61+62+63+64+M61+M55C+51+21+0+12C')
-        self.assertEqual(reading.not_read, ('11', '13B', '25', '61', '62', '63', '64', 'M61', 'M55C', '51', '21', '0'))
+        reading = self.values('11+13B+25+61+62+63+64+M61+M55C+51+21+0+97*C+12C')
+        self.assertEqual(reading.not_read, ('11', '13B', '25', '61', '62', '63', '64', 'M61', 'M55C', '51', '21', '0',
+                                            '97*C'))
         self.assertEqual(self.nonzero('11+13B+25+61+62+63+64+M61+M55C+51+21+0+12C'), sided(12, 0.6))
 
     def test_decode_thresholds_and_the_letter_round_trip(self):
