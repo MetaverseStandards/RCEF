@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Freeze ledger for A/B registrations (format: README.md in this folder).
+# Add one line per registration, at the end only, in a commit after the registration and before any results:
+# id version abreg_sha256 date [reason]
