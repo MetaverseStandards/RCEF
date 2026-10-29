@@ -96,35 +96,66 @@ class HeldOut(unittest.TestCase):
 
 
 class RigSets(unittest.TestCase):
-    def test_the_rig_sets_follow_their_rule(self):
-        self.assertEqual(vp.chosen(vp.SETS), (vp.TRAINING, vp.HELD_OUT_RIGS, vp.SEEN))
-        self.assertEqual(len(vp.TRAINING), 10)
-        self.assertEqual(len(vp.HELD_OUT_RIGS), 4)
-        self.assertEqual(len(vp.SEEN), 4)
-        everything = vp.TRAINING + vp.HELD_OUT_RIGS + vp.SEEN
-        self.assertEqual(len(set(everything)), len(everything))
-        self.assertIn('Male_Adult_01', vp.TRAINING)
-        for rigs in (vp.HELD_OUT_RIGS, vp.SEEN):
-            self.assertEqual(sorted(a.split('_')[0] for a in rigs), ['Female', 'Female', 'Male', 'Male'])
+    def test_the_rig_sets_of_every_round_follow_their_rule(self):
+        rounds = [(r['training'], r['held_out']) for r in vp.SETS['rounds']]
+        self.assertEqual(vp.chosen(vp.SETS), rounds)
+        self.assertEqual([len(t) for t, _ in rounds], [10, 10, 18])
+        self.assertEqual((vp.TRAINING, vp.HELD_OUT_RIGS), rounds[-1])
+        for training, held in rounds:
+            self.assertFalse(set(training) & set(held))
+            self.assertEqual(sorted(a.split('_')[0] for a in held), ['Female', 'Female', 'Male', 'Male'])
 
-    def test_the_version_1_held_out_rigs_are_never_held_out_again(self):
-        self.assertEqual(sorted(vp.SEEN), ['Female_Adult_04', 'Female_Adult_13', 'Male_Adult_05', 'Male_Adult_11'])
-        self.assertFalse(set(vp.SEEN) & set(vp.HELD_OUT_RIGS + vp.TRAINING))
+    def test_no_rig_is_ever_held_out_twice(self):
+        held = [a for r in vp.SETS['rounds'] for a in r['held_out']]
+        self.assertEqual(len(held), len(set(held)))
+        self.assertEqual(sorted(vp.TRAINING), sorted(vp.SETS['rounds'][0]['training'] + held[:8]))
 
     def test_a_replaced_rig_gives_its_place_to_the_next_unused_candidate(self):
         sets = json.loads(json.dumps(vp.SETS))
         first = vp.HELD_OUT_RIGS[0]
         sets['replaced'] = [{'name': first, 'reason': 'synthetic'}]
-        training, held, seen = vp.chosen(sets)
-        self.assertNotIn(first, held + training + seen)
+        rounds = vp.chosen(sets)
+        training, held = rounds[-1]
+        self.assertNotIn(first, held + training)
         self.assertEqual(held[1:], vp.HELD_OUT_RIGS[1:])
-        self.assertEqual((training, seen), (vp.TRAINING, vp.SEEN))
+        self.assertEqual(rounds[:2], vp.chosen(vp.SETS)[:2])
         self.assertEqual(held[0].split('_')[0], first.split('_')[0])
 
     def test_every_rig_file_is_pinned(self):
         text = (ROOT / 'examples/rigs.py').read_text(encoding='utf-8')
-        for avatar in vp.TRAINING + vp.HELD_OUT_RIGS + vp.SEEN:
+        for avatar in vp.TRAINING + vp.HELD_OUT_RIGS:
             self.assertIn(f"'{avatar}': '", text)
+
+
+class Gate(unittest.TestCase):
+    def test_feature_errors(self):
+        self.assertEqual(vp.feature_error('difference', None, 1.5, 1.0), 0.5)
+        self.assertEqual(vp.feature_error('range', (-2.0, 0.5), 0.2, 9.0), 0.0)
+        self.assertAlmostEqual(vp.feature_error('range', (-2.0, 0.5), 0.75, 0.0), 0.25)
+        self.assertAlmostEqual(vp.feature_error('range', (-2.0, 0.5), -2.5, 0.0), 0.5)
+
+    def test_the_gated_classes_and_their_features(self):
+        self.assertEqual(sorted(c.rsplit('.', 1)[1] for c in vp.FEATURES),
+                         ['alveolar_sibilant', 'bilabial', 'vowel_close_rounded', 'vowel_mid_spread'])
+        for spec in vp.FEATURES.values():
+            self.assertLessEqual(len(spec), 3)
+            for feature, kind, span in spec:
+                self.assertIn(feature, vp.UNITS)
+                self.assertIn(feature, vp.DESCRIPTIONS)
+                self.assertEqual(span is None, kind == 'difference')
+        self.assertEqual(vp.FEATURES[vp.V + 'bilabial'][0], ('lip_opening_mm', 'range', (-2.0, 0.5)))
+
+    def test_tolerances_are_the_spread_of_the_rigs_own_features_with_a_floor(self):
+        class Fake:
+            def __init__(self, opening, width):
+                self.values = {'lip_opening_mm': opening, 'corner_width_ratio': width}
+
+            def target(self, meta):
+                return self.values
+        spec = [('lip_opening_mm', 'difference', None), ('corner_width_ratio', 'difference', None)]
+        mouths = {n: Fake(o, w) for n, (o, w) in enumerate([(4.0, 0.9), (5.0, 0.905), (7.2, 0.91)])}
+        self.assertEqual(vp.tolerances(mouths, 'E', spec), {'lip_opening_mm': 2.2, 'corner_width_ratio': 0.02})
+        self.assertEqual(vp.tolerances(mouths, 'E', [vp.GUARD]), {'whole_face_error': 0.0})
 
 
 class Tied(unittest.TestCase):
