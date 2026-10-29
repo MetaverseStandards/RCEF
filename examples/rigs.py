@@ -7,7 +7,7 @@ pinned SHA-256 and loaded with msf_character_tools.inspect_asset; none is commit
 - Microsoft Rocketbox (MIT): Female_Adult_01 and Male_Adult_01 "facial" FBX
   files, with Apple's 52 ARKit shapes (AK_*), the 15 Oculus visemes (AA_VI_*)
   and FACS action-unit shapes (AU_*), authored independently of ICT-FaceKit.
-  The viseme pose tool also reads 12 more Rocketbox adults (ROCKETBOX_SHA256),
+  The viseme pose tool also reads 16 more Rocketbox adults (ROCKETBOX_SHA256),
   as rocketbox-female-NN and rocketbox-male-NN.
 - ICT-FaceKit Light (MIT): the 16 ARKit-named shapes RCEF's mappings drove first.
 - VRM1_Constraint_Twist_Sample (VRM Public License 1.0, redistribution and
@@ -47,6 +47,10 @@ ROCKETBOX_SHA256 = {
     'Male_Adult_11': '7c58b696c6f570a13dc6cb4d22f71d7ea82884eca095549fe2122c94a7f0b857',
     'Male_Adult_13': 'acf0693228d3c3bca085f724aae2965c904b38d768bc0a71ba8a4606ab806549',
     'Male_Adult_17': 'e779639155a145c027c54f7f6d91a2a82ad4be862bebee64337ef08245cb86b2',
+    'Female_Adult_06': 'b91c6e50deea83521f71f1d75b08bd1b34ef81d9b5ca4daf71a40ed64cf2ae90',
+    'Female_Adult_17': '9d17d5b7d9dc32f5e975ab8d8cd269cc5469cfd95c2f34305c5df3259ed0a8de',
+    'Male_Adult_02': '0f8dea5317896e16a4490ca76f7273cdaf513cc50eb855d228826ed874a15186',
+    'Male_Adult_19': '1f6d57d7bee1b792719b383f6d7a9136be3e55dda43cc3d308c302a966139241',
 }
 FILES = {
     **{f'{avatar}_facial.fbx': (ROCKETBOX_RAW + f'Assets/Avatars/Adults/{avatar}/Export/{avatar}_facial.fbx', digest)
