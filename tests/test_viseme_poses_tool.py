@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: MIT
-"""The pure parts of the viseme pose tool: the bounded fit, the held-out conditions, the clamped sum and the cells."""
+"""The pure parts of the viseme pose tool: the rig sets, the bounded and minimax fits, the held-out conditions, the
+clamped sum and the cells."""
 import json
 from pathlib import Path
 import sys
@@ -33,7 +34,29 @@ class Fit(unittest.TestCase):
         self.assertEqual(u[0], 0.0)
         self.assertAlmostEqual(u[1], 0.7, places=10)
 
-    def test_left_and_right_share_one_weight(self):
+    def test_a_warm_start_reaches_the_same_weights(self):
+        a, b = [1.0, 0.0, 1.0], [0.0, 1.0, 1.0]
+        target = [0.3 * x + 0.6 * y for x, y in zip(a, b)]
+        g, rhs = vp.gram([a, b]), [vp.dot(a, target), vp.dot(b, target)]
+        warm = vp.bounded_least_squares(g, rhs, start=[1.0, 0.0])
+        self.assertAlmostEqual(warm[0], 0.3, places=10)
+        self.assertAlmostEqual(warm[1], 0.6, places=10)
+
+    def test_minimax_balances_the_largest_relative_error(self):
+        # One shape [1, 0]; rig 1 wants it at 1, rig 2 at 0.5. Errors |u - 1| and |u - 0.5| / 0.5 are equal, 1/3,
+        # at u = 2/3; the sum of their squares is smallest at u = 0.6.
+        g = [[1.0]]
+        systems = [(g, [1.0], 1.0), (g, [0.5], 0.25)]
+        [u] = vp.minimax(systems)
+        self.assertAlmostEqual(u, 2 / 3, places=3)
+        self.assertAlmostEqual(vp.error([u], *systems[0]), vp.error([u], *systems[1]), places=3)
+        self.assertEqual(vp.minimax(systems, iterations=1), [0.6])
+
+    def test_minimax_leaves_out_rigs_whose_target_does_not_move(self):
+        self.assertEqual(vp.minimax([([[1.0]], [0.0], 0.0)]), [0.0])
+        self.assertEqual(vp.minimax([([[1.0]], [0.0], 0.0), ([[1.0]], [0.5], 0.25)]), [0.5])
+
+    def test_left_and_right_share_one_weight_in_the_symmetric_candidate(self):
         self.assertEqual(vp.pair('mouthSmileLeft'), 'mouthSmile')
         self.assertEqual(vp.pair('mouthSmileRight'), 'mouthSmile')
         self.assertEqual(vp.pair('jawOpen'), 'jawOpen')
@@ -70,6 +93,31 @@ class HeldOut(unittest.TestCase):
         errors = [i / 100 for i in range(1, 25)]
         result = vp.cell(errors, 1, 0.0)
         self.assertEqual((result['failures'], result['median'], result['p95']), (1, 0.125, 0.23))
+
+
+class RigSets(unittest.TestCase):
+    def test_the_rig_sets_follow_their_rule(self):
+        self.assertEqual(vp.chosen(vp.SETS), (vp.TRAINING, vp.HELD_OUT_RIGS))
+        self.assertEqual(len(vp.TRAINING), 10)
+        self.assertEqual(len(vp.HELD_OUT_RIGS), 4)
+        self.assertFalse(set(vp.TRAINING) & set(vp.HELD_OUT_RIGS))
+        self.assertIn('Male_Adult_01', vp.TRAINING)
+        self.assertEqual(sorted(a.split('_')[0] for a in vp.HELD_OUT_RIGS), ['Female', 'Female', 'Male', 'Male'])
+
+    def test_a_replaced_rig_gives_its_place_to_the_next_unused_candidate(self):
+        sets = json.loads(json.dumps(vp.SETS))
+        first = vp.HELD_OUT_RIGS[0]
+        sets['replaced'] = [{'name': first, 'reason': 'synthetic'}]
+        training, held = vp.chosen(sets)
+        self.assertNotIn(first, held + training)
+        self.assertEqual(held[1:], vp.HELD_OUT_RIGS[1:])
+        self.assertEqual(training, vp.TRAINING)
+        self.assertEqual(held[0].split('_')[0], first.split('_')[0])
+
+    def test_every_rig_file_is_pinned(self):
+        text = (ROOT / 'examples/rigs.py').read_text(encoding='utf-8')
+        for avatar in vp.TRAINING + vp.HELD_OUT_RIGS:
+            self.assertIn(f"'{avatar}': '", text)
 
 
 class Pack(unittest.TestCase):
