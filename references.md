@@ -425,13 +425,13 @@ Original RCEF canonical expression vocabulary, version 1 (draft): signal definit
 - License or terms: CC-BY-SA-4.0
 - Locator: docs/canonical-set.md; docs/canonical-set-audit.md; data/canonical_expression.toml
 
-## calibration.viseme-poses.rocketbox-multi
+## calibration.viseme-poses.rocketbox-features
 
-RCEF calibration record viseme-poses.rocketbox-multi, version 2 (calibrated_software): the pose of each canonical viseme class in canonical expression signals, with each Left and Right pair tied, fitted to the META viseme shapes of 10 Microsoft Rocketbox rigs in their own ARKit shapes, frozen with its bounds before a held-out evaluation on 4 other Rocketbox rigs (Female_Adult_06, Female_Adult_17, Male_Adult_02 and Male_Adult_19); 7 of 15 classes pass on every held-out rig. A fit to the geometry of example rigs, not a measurement of any tracker.
+RCEF calibration record viseme-poses.rocketbox-features, version 1 (calibrated_software): the pose of each canonical viseme class in canonical expression signals, with each Left and Right pair tied, fitted to the META viseme shapes of 18 Microsoft Rocketbox rigs in their own ARKit shapes, with a perceptual gate (visible mouth features with frozen tolerances) for bilabial, vowel_close_rounded, vowel_mid_spread and alveolar_sibilant; frozen before a held-out evaluation on 4 other Rocketbox rigs (Female_Adult_09, Female_Adult_15, Male_Adult_08 and Male_Adult_15); 11 of 15 classes pass, 7 by their shape and 4 by the perceptual gate. A fit to the geometry of example rigs, not a measurement of any tracker.
 
 - Original authorship: RCEF contributors (2026); fitted to the Microsoft Rocketbox avatar library (MIT)
 - License or terms: CC-BY-SA-4.0
-- Locator: calibration/viseme-poses.rocketbox-multi.cal; calibration/FREEZES; tools/calibration/viseme_rigs.json
+- Locator: calibration/viseme-poses.rocketbox-features.cal; calibration/FREEZES; tools/calibration/viseme_rigs.json
 
 ## facs_wikipedia
 

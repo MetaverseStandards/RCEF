@@ -907,7 +907,7 @@ class VisemeBuilder:
 
 # ---------------------------------------------------------------- the viseme pose bridge
 
-POSE_RECORD = 'viseme-poses.rocketbox-multi'
+POSE_RECORD = 'viseme-poses.rocketbox-features'
 POSE_EVIDENCE = f'calibration.{POSE_RECORD}'
 POSE_MAP = 'rcef_viseme_pose.to_rcef_expression'
 POSE_FILE = 'mappings/canonical_viseme_pose.toml'
@@ -925,11 +925,12 @@ CALIBRATION_STATUS = ('calibration_status: the record is calibrated_software, a 
                       'not a measurement of any tracker; pack schema 1.0 has no such evidence status, so the mapping '
                       'is proposed.')
 POSE_COMMON = [
-    'example_rigs: the poses are fitted to the sculpted viseme shapes of 10 Rocketbox rigs, measured in their own '
-    'ARKit units by one bounded fit for all of them; on each of 4 other Rocketbox rigs, which the fit did not use, '
-    "each pose read here reproduces its class's own shape to within half of its motion; all 14 rigs come from one "
-    'library, and rigs from other libraries render the same ARKit weights differently (calibration record '
-    'rig-gains.ict-rocketbox-female).',
+    'example_rigs: the poses are fitted to the sculpted viseme shapes of 18 Rocketbox rigs, measured in their own '
+    'ARKit units by one bounded fit for all of them, with Left and Right tied; on each of 4 other Rocketbox rigs, '
+    "which the fit did not use, each pose read here either reproduces its class's own shape to within half of its "
+    "motion (shape gate) or meets its class's visible mouth features within their frozen tolerances (perceptual "
+    'gate); all 22 rigs come from one library, and rigs from other libraries render the same ARKit weights '
+    'differently (calibration record rig-gains.ict-rocketbox-female).',
     'coarticulation: not modelled; each class is one static pose, and the poses of a blend of classes add up; RCEF '
     'has no operator over time.',
     'teeth_tongue: teeth and tongue are not represented; the bridge writes no tongue_out, blink, gaze, jaw_sideways '
@@ -938,10 +939,13 @@ POSE_COMMON = [
 ]
 
 
-def passes(record: dict, cell: dict) -> bool:
-    """check.py's rule: no failures, and every error within its channel's frozen bounds."""
-    bound = record['evaluation']['bounds'][cell['channel']]
-    return cell['failures'] == 0 and all(cell[k] <= bound[k] for k in ('median', 'p95', 'neutral'))
+def load_check():
+    """check.py as a module, for its pass rule of calibration records (shape cells, or the perceptual gate)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('rcef_check', ROOT / 'check.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 class PoseBridge:
@@ -952,13 +956,16 @@ class PoseBridge:
         self.root = root
         record = tomllib.loads((root / f'calibration/{POSE_RECORD}.cal').read_text(encoding='utf-8'))
         cells = record.get('cells', [])
-        self.classes = [c for c in record['channels'] if cells and all(passes(record, x) for x in cells
-                                                                      if x['channel'] == c)]
+        check = load_check()
+        self.classes = [c for c in record['channels'] if cells and check.channel_passes(record, c)]
+        self.by_features = [c for c in self.classes if not all(check.cell_passes(record, x) for x in cells
+                                                              if x['channel'] == c)]
         self.failing = [c for c in record['channels'] if c not in self.classes]
         self.poses = {}
         for curve in record['curves']:
             self.poses.setdefault(curve['output'], {})[curve['input']] = curve['knots'][1][1]
-        moving = [x['p95'] for x in cells if x['channel'] in self.classes and x['p95'] > 0]
+        moving = [x['p95'] for x in cells if x['channel'] in self.classes and x['channel'] not in self.by_features
+                  and x['p95'] > 0]
         self.residual = (min(moving), max(moving)) if moving else (0.0, 0.0)
         self.visemes = visemes
         self.expression = {s['id']: s for s in expression}
@@ -977,10 +984,14 @@ class PoseBridge:
         out = ['viseme_pose_example_rigs: poses of example Rocketbox rigs in their own ARKit units; the geometry of a '
                'rig from another library differs',
                f"viseme_pose_residual: part of each viseme's own motion is not reproduced (on the held-out rigs "
-               f'{low:.2f} to {high:.2f} of it, for the classes read that move the face)']
+               f'{low:.2f} to {high:.2f} of it, for the classes read by their shape that move the face)']
+        if self.by_features:
+            out.append(f'viseme_pose_perceptual_gate: {join([self.short(c) for c in self.by_features])} are read '
+                       'because their visible mouth features pass, though their whole-face shape error is more than '
+                       'half of the motion')
         if self.failing:
-            out.append(f'viseme_pose_classes_not_read: {join([self.short(c) for c in self.failing])} failed the '
-                       'held-out bounds and are not read')
+            out.append(f'viseme_pose_classes_not_read: {join([self.short(c) for c in self.failing])} failed both '
+                       'held-out gates and are not read')
         return out
 
     def rule(self, rid, inputs, outputs, operator, assumptions, evidence) -> dict:
@@ -1006,7 +1017,8 @@ class PoseBridge:
                  'the unit changes from probability to 1.'],
                 POSE_RECORDS))
         names = join([self.short(c) for c in self.classes])
-        read = (f'classes: the bridge reads the {len(self.classes)} classes whose held-out cells pass ({names})'
+        read = (f'classes: the bridge reads the {len(self.classes)} classes that pass the shape or the perceptual '
+                f'gate on every held-out rig ({names})'
                 + (f'; {join([self.short(c) for c in self.failing])} failed and are not read, so weight on them '
                    'moves no expression signal.' if self.failing else '.'))
         k = float(len(self.classes))
