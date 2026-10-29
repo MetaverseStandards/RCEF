@@ -32,6 +32,8 @@ POSES = ['calibration/viseme-poses.rocketbox-female.cal']
 # Version 1 of viseme-poses.rocketbox-multi, replaced in the checkout by version 2, is kept in the history.
 MULTI_V1_COMMIT = '5b25c8d'
 MULTI = 'calibration/viseme-poses.rocketbox-multi.cal'
+# The commit that published the results of version 2.
+MULTI_COMMIT = '29a5223'
 
 
 def has_history():
@@ -51,6 +53,9 @@ class Protected(unittest.TestCase):
 
     def test_the_viseme_poses_record_is_unchanged(self):
         self.assertIsNone(provenance.code_problem(ROOT, POSES_COMMIT, POSES))
+
+    def test_the_multi_rig_viseme_poses_record_is_unchanged(self):
+        self.assertIsNone(provenance.code_problem(ROOT, MULTI_COMMIT, [MULTI]))
 
     def test_version_1_of_the_multi_rig_record_is_kept_in_the_history(self):
         text = subprocess.run(['git', 'show', f'{MULTI_V1_COMMIT}:{MULTI}'], cwd=ROOT, check=True,

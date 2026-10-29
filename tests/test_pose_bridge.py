@@ -80,7 +80,7 @@ class PoseBridge(unittest.TestCase):
         self.assertLessEqual(set(inputs), partition)
         self.assertNotIn(f'{VISEME}.alveolar_floor', inputs)
         self.assertEqual(sorted(inputs), sorted(self.passing))
-        self.assertEqual(len(self.passing), 9)
+        self.assertEqual(len(self.passing), 7)
         for rule in self.sums:
             self.assertEqual(self.classes_of(rule), self.passing, rule['id'])
 
@@ -90,8 +90,8 @@ class PoseBridge(unittest.TestCase):
         for channel in self.record['channels']:
             self.assertEqual(len([c for c in self.record['cells'] if c['channel'] == channel]), 4, channel)
         self.assertEqual([c.rsplit('.', 1)[1] for c in self.passing],
-                         ['vowel_open', 'vowel_close_spread', 'vowel_mid_rounded', 'dental', 'postalveolar',
-                          'coronal_stop', 'dorsal', 'rhotic', 'sil'])
+                         ['vowel_open', 'vowel_close_spread', 'vowel_mid_rounded', 'dental', 'coronal_stop', 'dorsal',
+                          'sil'])
         old = 'calibration.viseme-poses.rocketbox-female'
         self.assertFalse([r['id'] for m in self.document['mappings'] for r in m['rules'] if old in r['evidence']])
         self.assertNotIn(old, {e['id'] for e in self.document['evidence']})
