@@ -84,7 +84,7 @@ class Read(unittest.TestCase):
                                ('L26', 'L26'), ('L27', 'L27'), ('1+1B', '1B'), ('L12+L12', 'L12'), ('26+27', '27'),
                                ('43+45', '45'), ('45+L46', 'L46'), ('L43+L46', 'L46'), ('12+L12', 'L12'),
                                ('L70', 'L70'), ('3', '3'), ('12F', '12F'), ('1++2', '(empty)'),
-                               ({'12': 'F'}, '12'), ({'12': True}, '12')):
+                               ({'12': 'F'}, '12'), ({'12': True}, '12'), ({'X12': 'C'}, 'X12')):
             with self.subTest(notation):
                 reading = facs_codec.read(notation)
                 self.assertIsNone(reading.values)
