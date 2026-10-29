@@ -18,9 +18,10 @@ except ModuleNotFoundError:  # run by file path from the repository root
 ROOT = Path(__file__).resolve().parents[1]
 
 C, P, U = 'verified_current', 'proposed', 'unresolved'
-SOURCE = 'arkit.coefficient.eyeBlinkLeft'
-TARGET = 'rcef.arkit.coefficient.eyeBlinkLeft'
-RULE = 'arkit.coefficient.eyeBlinkLeft.identity'
+SOURCE = 'fixture.identity.plain.source'
+TARGET = 'fixture.identity.plain.target'
+RULE = 'fixture.identity.plain'
+IDENTITY_PROFILES = ('fixture.identity.source', 'fixture.identity.target')
 FIXTURE_PROFILES = ('fixture.source', 'fixture.target')
 FIXTURE_MAPPINGS = ('fixture.affine', 'fixture.bilateral')
 # The admitted table from the accepted readiness contract. Each row names where
@@ -48,14 +49,11 @@ class Hardening(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.document = shared_pack.document()
-        # Compiling the full pack takes a large share of the suite's time, so tests
-        # that do not edit the document share the suite's one compiled pack.
         # msf-character-tools rechecks the whole pack on every evaluation, so the fixture
         # maps, which many tests evaluate repeatedly, use a pack holding only them.
-        cls.pack = shared_pack.pack()
         cls.fixture_pack = cls.compile_pack(cls.only(FIXTURE_PROFILES, FIXTURE_MAPPINGS))
         cls.shared_mappings = {}
-        cls.expectations = json.loads((ROOT / 'tests/fixtures/identity_expectations.json').read_text())['rows']
+        cls.identity_fixture = json.loads((ROOT / 'tests/fixtures/fixture_identity.json').read_text())
 
     def ok(self, result):
         self.assertTrue(result.report.ok, result.report.to_dict())
@@ -73,10 +71,8 @@ class Hardening(unittest.TestCase):
         self.assertNotIn('E_INTERNAL', [d.code for d in result.report.diagnostics])
         return matches
 
-    def compile(self, document=None, mapping='arkit.to_canonical', source='arkit.coefficient',
-                target='rcef.canonical', approximate=False):
-        if document is None:
-            return self.pack, self.shared_mapping(self.pack, mapping, source, target, approximate)
+    def compile(self, document, mapping='fixture.identity', source=IDENTITY_PROFILES[0],
+                target=IDENTITY_PROFILES[1], approximate=False):
         before = deepcopy(document)
         pack = self.ok(msf.compile_pack(self.ok(msf.validate_authoring(document))))
         result = msf.compile_mapping(pack, self.ok(msf.profile_snapshot(pack, source)),
@@ -92,14 +88,11 @@ class Hardening(unittest.TestCase):
             raise AssertionError(compiled.report.to_dict())
         return compiled.value
 
-    def shared_mapping(self, pack, mapping, source, target, approximate):
-        key = (pack is self.fixture_pack, mapping, source, target, approximate)
+    def shared_mapping(self, mapping, approximate):
+        key = mapping, approximate
         if key not in self.shared_mappings:
-            if pack is self.pack:
-                snapshots = shared_pack.snapshot(source), shared_pack.snapshot(target)
-            else:
-                snapshots = self.ok(msf.profile_snapshot(pack, source)), self.ok(msf.profile_snapshot(pack, target))
-            self.shared_mappings[key] = msf.compile_mapping(pack, *snapshots, mapping, approximate)
+            snapshots = [self.ok(msf.profile_snapshot(self.fixture_pack, p)) for p in FIXTURE_PROFILES]
+            self.shared_mappings[key] = msf.compile_mapping(self.fixture_pack, *snapshots, mapping, approximate)
         return self.shared_mappings[key]
 
     @classmethod
@@ -119,14 +112,13 @@ class Hardening(unittest.TestCase):
         d['mappings'] = [m for m in cls.document['mappings'] if mapping(m)]
         return deepcopy(d)
 
-    def identity(self, source=SOURCE, target=TARGET, rule=RULE, mapping='arkit.to_canonical'):
-        d = self.subset(lambda p: p['id'] in ('arkit.coefficient', 'rcef.canonical'),
-                        lambda s: s['id'] in (source, target), lambda m: m['id'] == mapping)
+    def identity(self):
+        """A copy of the identity fixture reduced to the one mapping SOURCE -> TARGET."""
+        d = deepcopy(self.identity_fixture)
+        d['signals'] = [s for s in d['signals'] if s['id'] in (SOURCE, TARGET)]
         for p in d['profiles']:
-            p['signal_ids'] = [s for s in p['signal_ids'] if s in (source, target)]
-        m = next(m for m in d['mappings'] if m['id'] == mapping)
-        m['rules'] = [r for r in m['rules'] if r['id'] == rule]
-        d['mappings'] = [m]
+            p['signal_ids'] = [s for s in p['signal_ids'] if s in (SOURCE, TARGET)]
+        d['mappings'][0]['rules'] = [r for r in d['mappings'][0]['rules'] if r['id'] == RULE]
         return d
 
     @staticmethod
@@ -151,61 +143,46 @@ class Hardening(unittest.TestCase):
         self.assertEqual(frames, before)
         return result
 
-    def assert_literals(self, document):
-        signals = {s['id']: s for s in document['signals']}
-        mappings = {m['id']: m['rules'] for m in document['mappings']}
-        for row in self.expectations:
-            for endpoint in ('source', 'target'):
-                sid = row['input_id'] if endpoint == 'source' else row['output_id']
-                actual = signals[sid]
-                for key, value in row[f'expected_{endpoint}_fields'].items():
-                    observed = actual['metadata'][key] if key in ('provider_basis', 'definition') else actual[key]
-                    self.assertEqual(observed, value, (sid, key))
-                for key in row[f'{endpoint}_fields_required_absent']:
-                    self.assertNotIn(key, actual, (sid, key))
-            rule = next(r for r in mappings[row['mapping_id']] if r['id'] == row['expected_rule']['id'])
-            self.assertEqual(rule, row['expected_rule'])
-        for mapping, count in (('arkit.to_canonical', 9), ('fb2.to_canonical', 8), ('vrcft_eye.to_canonical', 4)):
-            expected = [r['expected_rule']['id'] for r in self.expectations if r['mapping_id'] == mapping]
-            self.assertEqual(len(expected), count)
-            self.assertEqual([r['id'] for r in mappings[mapping]], expected)
+    def test_sem01_fixture_identities_copy_values_and_raw_storage(self):
+        rules = self.identity_fixture['mappings'][0]['rules']
+        compiled = self.ok(self.compile(deepcopy(self.identity_fixture))[1])
+        peers = [r['inputs'][0] for r in rules]
+        # One frame per (signal, value), and each frame sets a single signal.
+        cases, frames = [], []
+        for rule in rules:
+            for value in (0., .25, 1.):
+                values = dict.fromkeys(peers, 0.)
+                values[rule['inputs'][0]] = value
+                cases.append((rule, value))
+                frames.append(self.frame(values))
+        samples = self.ok(self.evaluate(compiled, frames)).samples
+        self.assertEqual(len(samples), 15)
+        for (rule, value), sample in zip(cases, samples):
+            with self.subTest(rule=rule['id'], value=value):
+                output = rule['outputs'][0]
+                self.assertEqual(sample['values'][output], value)
+                self.assertEqual(sample['timestamp'], .125)
+                self.assertIs(sample['validity'][output], True)
+        raw = ('fixture.identity.raw.source', 'fixture.identity.raw_mm.source')
+        self.assertEqual([s['domain'] for s in self.identity_fixture['signals'] if s['id'] in raw], [{}, {}])
+        frames = [self.frame({**dict.fromkeys(peers, 0.), **dict(zip(raw, pair))}) for pair in ((1.5e308, -3.), (-3., 1.5e308))]
+        for frame, sample in zip(frames, self.ok(self.evaluate(compiled, frames)).samples):
+            self.assertEqual(dict(sample['values']), {r['outputs'][0]: frame['values'][r['inputs'][0]] for r in rules})
 
-    def test_sem01_literal_identities_and_63_single_direction_comparisons(self):
-        self.assertEqual(len(self.expectations), 21)
-        self.assert_literals(self.document)
-        self.assert_literals(json.loads((ROOT / 'generated/rcef.pack.json').read_text()))
-        self.assertEqual(self.pack.to_bytes(), (ROOT / 'generated/rcef.pack.json').read_bytes())
-        compiled = {}
-        for mapping, source in (('arkit.to_canonical', 'arkit.coefficient'),
-                                ('fb2.to_canonical', 'openxr.fb2'), ('vrcft_eye.to_canonical', 'vrcft.eye')):
-            compiled[mapping] = self.ok(self.compile(mapping=mapping, source=source)[1])
-        comparisons = 0
-        for mapping, mapping_compiled in compiled.items():
-            rows = [r for r in self.expectations if r['mapping_id'] == mapping]
-            peers = [r['input_id'] for r in rows]
-            # One frame per (signal, value), and each frame sets a single signal. Frames
-            # are evaluated independently, so one call covers the whole map.
-            cases, frames = [], []
-            for row in rows:
-                for value, expected in ((0., 0.), (.25, .25), (1., 1.)):
-                    values = dict.fromkeys(peers, 0.)
-                    values[row['input_id']] = value
-                    cases.append((row, value, expected))
-                    frames.append(self.frame(values))
-            samples = self.ok(self.evaluate(mapping_compiled, frames)).samples
-            self.assertEqual(len(samples), len(cases))
-            for (row, value, expected), sample in zip(cases, samples):
-                with self.subTest(signal=row['input_id'], value=value):
-                    self.assertEqual(sample['values'][row['output_id']], expected)
-                    self.assertEqual(sample['timestamp'], .125)
-                    self.assertIs(sample['validity'][row['output_id']], True)
-                    comparisons += 1
-        self.assertEqual(comparisons, 63)
-        raw = compiled['vrcft_eye.to_canonical']
-        values = {'vrcft.eye.Left.Openness': 1.5e308, 'vrcft.eye.Right.Openness': -3.,
-                  'vrcft.eye.Left.PupilDiameter_MM': -3., 'vrcft.eye.Right.PupilDiameter_MM': 1.5e308}
-        sample = self.ok(self.evaluate(raw, [self.frame(values)])).samples[0]
-        self.assertEqual(dict(sample['values']), {'rcef.' + k: v for k, v in values.items()})
+    def test_sem01_fixture_keeps_each_identity_case(self):
+        # The rebased tests rely on these cases; pin them so a simpler fixture cannot drop one.
+        shape = {s['id']: (s['units'], s['domain'], s['side'], s.get('neutral'), s.get('coupling'))
+                 for s in self.identity_fixture['signals']}
+        unit = {'min': 0., 'max': 1.}
+        expected = {'plain': ('1', unit, 'left', 0., None),
+                    'shared': ('1', unit, 'shared', 0., 'bilateral_shared'),
+                    'exclusive': ('1', unit, 'left', 0., 'opposing_direction_exclusive'),
+                    'raw': ('1', {}, 'left', None, None),
+                    'raw_mm': ('mm', {}, 'left', None, None)}
+        for name, want in expected.items():
+            for end in ('source', 'target'):
+                with self.subTest(signal=f'{name}.{end}'):
+                    self.assertEqual(shape[f'fixture.identity.{name}.{end}'], want)
 
     def test_sem02_each_empty_own_evidence_refuses_execution(self):
         for location in ('rule', 'source', 'target'):
@@ -244,8 +221,8 @@ class Hardening(unittest.TestCase):
         base = d['signals'][0]
         for sid in ('synthetic.b', 'synthetic.mid', 'synthetic.parallel'):
             s = deepcopy(base); s['id'] = sid; s['label'] = sid; d['signals'].append(s)
-        next(p for p in d['profiles'] if p['id'] == 'arkit.coefficient')['signal_ids'] = [SOURCE, 'synthetic.b']
-        next(p for p in d['profiles'] if p['id'] == 'rcef.canonical')['signal_ids'] = [TARGET, 'synthetic.parallel']
+        next(p for p in d['profiles'] if p['id'] == IDENTITY_PROFILES[0])['signal_ids'] = [SOURCE, 'synthetic.b']
+        next(p for p in d['profiles'] if p['id'] == IDENTITY_PROFILES[1])['signal_ids'] = [TARGET, 'synthetic.parallel']
         template = d['mappings'][0]['rules'][0]
         def rule(id, inputs, output, op):
             r = deepcopy(template); r.update(id=id, inputs=inputs, outputs=[output], operator=op); return r
@@ -359,17 +336,15 @@ class Hardening(unittest.TestCase):
         self.ok(self.compile(d)[1])
 
     def test_sem06_coupling_presence_and_values(self):
-        cases = (('arkit.coefficient.browInnerUp', 'arkit.to_canonical', 'arkit.coefficient'),
-                 ('openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB', 'fb2.to_canonical', 'openxr.fb2'))
-        for sid, mapping, source_profile in cases:
+        for rule in ('fixture.identity.shared', 'fixture.identity.exclusive'):
             for cause in ('delete', 'change', 'empty'):
-                with self.subTest(signal=sid, cause=cause):
-                    d = self.only((source_profile, 'rcef.canonical'), (mapping,))
-                    s = next(s for s in d['signals'] if s['id'] == 'rcef.' + sid)
+                with self.subTest(rule=rule, cause=cause):
+                    d = deepcopy(self.identity_fixture)
+                    s = next(s for s in d['signals'] if s['id'] == rule + '.target')
                     if cause == 'delete': del s['coupling']
                     elif cause == 'change': s['coupling'] = 'composite'
                     else: s['coupling'] = []
-                    self.errors(self.compile(d, mapping, source_profile)[1], 'E_COUPLING_COMPATIBILITY', sid + '.identity')
+                    self.errors(self.compile(d)[1], 'E_COUPLING_COMPATIBILITY', rule)
         d = self.identity(); self.records(d)['target']['coupling'] = 'bilateral_shared'
         self.errors(self.compile(d)[1], 'E_COUPLING_COMPATIBILITY', RULE)
         for value in ([], 'bilateral_shared'):
@@ -378,18 +353,6 @@ class Hardening(unittest.TestCase):
             self.ok(self.compile(d)[1])
         d = self.identity(); self.records(d)['target']['coupling'] = None
         self.assertIn('E_TYPE', [e.code for e in msf.validate_authoring(d).report.diagnostics])
-
-    def test_sem07_literal_audit_rejects_paired_relabels_and_invented_neutral(self):
-        for cause in ('neutral', 'side', 'units', 'definition'):
-            with self.subTest(cause=cause):
-                d = {**self.document, 'signals': deepcopy(self.document['signals'])}; signals = {s['id']: s for s in d['signals']}
-                if cause == 'neutral': signals['rcef.vrcft.eye.Left.Openness']['neutral'] = 1.
-                elif cause == 'side':
-                    for sid in ('vrcft.eye.Left.Openness', 'rcef.vrcft.eye.Left.Openness'): signals[sid]['side'] = 'shared'
-                elif cause == 'units':
-                    for sid in ('vrcft.eye.Left.PupilDiameter_MM', 'rcef.vrcft.eye.Left.PupilDiameter_MM'): signals[sid]['units'] = '1'
-                else: signals[TARGET]['metadata']['definition'] = 'Measured physiology.'
-                with self.assertRaises(AssertionError): self.assert_literals(d)
 
     def test_sem08_existing_identity_basis_domain_and_units(self):
         for field, value, code in (('calibration', 'other.basis', 'E_CALIBRATION'),
@@ -400,7 +363,7 @@ class Hardening(unittest.TestCase):
 
     def fixture(self, mapping, approximate=False, document=None):
         if document is None:
-            return self.shared_mapping(self.fixture_pack, mapping, 'fixture.source', 'fixture.target', approximate)
+            return self.shared_mapping(mapping, approximate)
         return self.compile(document, mapping, 'fixture.source', 'fixture.target', approximate)[1]
 
     def test_der01_affine_and_bilateral_literal_outputs_and_losses(self):

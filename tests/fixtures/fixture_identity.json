@@ -1,0 +1,343 @@
+{
+  "schema_version": "1.0",
+  "data_version": "0.4.0",
+  "operator_version": "1.1",
+  "id": "rcef.fixture.identity",
+  "license": "CC-BY-SA-4.0",
+  "signals": [
+    {
+      "id": "fixture.identity.plain.source",
+      "label": "fixture.identity.plain.source",
+      "value_type": "scalar",
+      "units": "1",
+      "domain": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "calibration": "fixture.identity.plain.v1",
+      "side": "left",
+      "region": "other",
+      "neutral": 0.0,
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    },
+    {
+      "id": "fixture.identity.plain.target",
+      "label": "fixture.identity.plain.target",
+      "value_type": "scalar",
+      "units": "1",
+      "domain": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "calibration": "fixture.identity.plain.v1",
+      "side": "left",
+      "region": "other",
+      "neutral": 0.0,
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    },
+    {
+      "id": "fixture.identity.shared.source",
+      "label": "fixture.identity.shared.source",
+      "value_type": "scalar",
+      "units": "1",
+      "domain": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "calibration": "fixture.identity.shared.v1",
+      "side": "shared",
+      "region": "other",
+      "neutral": 0.0,
+      "coupling": "bilateral_shared",
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    },
+    {
+      "id": "fixture.identity.shared.target",
+      "label": "fixture.identity.shared.target",
+      "value_type": "scalar",
+      "units": "1",
+      "domain": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "calibration": "fixture.identity.shared.v1",
+      "side": "shared",
+      "region": "other",
+      "neutral": 0.0,
+      "coupling": "bilateral_shared",
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    },
+    {
+      "id": "fixture.identity.exclusive.source",
+      "label": "fixture.identity.exclusive.source",
+      "value_type": "scalar",
+      "units": "1",
+      "domain": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "calibration": "fixture.identity.exclusive.v1",
+      "side": "left",
+      "region": "other",
+      "neutral": 0.0,
+      "coupling": "opposing_direction_exclusive",
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    },
+    {
+      "id": "fixture.identity.exclusive.target",
+      "label": "fixture.identity.exclusive.target",
+      "value_type": "scalar",
+      "units": "1",
+      "domain": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "calibration": "fixture.identity.exclusive.v1",
+      "side": "left",
+      "region": "other",
+      "neutral": 0.0,
+      "coupling": "opposing_direction_exclusive",
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    },
+    {
+      "id": "fixture.identity.raw.source",
+      "label": "fixture.identity.raw.source",
+      "value_type": "scalar",
+      "units": "1",
+      "domain": {},
+      "calibration": "fixture.identity.raw.v1",
+      "side": "left",
+      "region": "other",
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    },
+    {
+      "id": "fixture.identity.raw.target",
+      "label": "fixture.identity.raw.target",
+      "value_type": "scalar",
+      "units": "1",
+      "domain": {},
+      "calibration": "fixture.identity.raw.v1",
+      "side": "left",
+      "region": "other",
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    },
+    {
+      "id": "fixture.identity.raw_mm.source",
+      "label": "fixture.identity.raw_mm.source",
+      "value_type": "scalar",
+      "units": "mm",
+      "domain": {},
+      "calibration": "fixture.identity.raw_mm.v1",
+      "side": "left",
+      "region": "other",
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    },
+    {
+      "id": "fixture.identity.raw_mm.target",
+      "label": "fixture.identity.raw_mm.target",
+      "value_type": "scalar",
+      "units": "mm",
+      "domain": {},
+      "calibration": "fixture.identity.raw_mm.v1",
+      "side": "left",
+      "region": "other",
+      "disposition": "mapped",
+      "evidence": [
+        "original.synthetic.identity"
+      ],
+      "evidence_status": "verified_current"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "fixture.identity.source",
+      "label": "Original synthetic identity inputs",
+      "signal_ids": [
+        "fixture.identity.plain.source",
+        "fixture.identity.shared.source",
+        "fixture.identity.exclusive.source",
+        "fixture.identity.raw.source",
+        "fixture.identity.raw_mm.source"
+      ]
+    },
+    {
+      "id": "fixture.identity.target",
+      "label": "Original synthetic identity outputs",
+      "signal_ids": [
+        "fixture.identity.plain.target",
+        "fixture.identity.shared.target",
+        "fixture.identity.exclusive.target",
+        "fixture.identity.raw.target",
+        "fixture.identity.raw_mm.target"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "original.synthetic.identity",
+      "claim": "Original author-defined storage identity on synthetic channels; no provider equivalence or physiological measurement",
+      "status": "verified_current",
+      "license": "CC-BY-SA-4.0",
+      "authorship": "RCEF contributors (2026)",
+      "locator": "tests/fixtures/fixture_identity.json"
+    }
+  ],
+  "mappings": [
+    {
+      "id": "fixture.identity",
+      "rules": [
+        {
+          "id": "fixture.identity.plain",
+          "inputs": [
+            "fixture.identity.plain.source"
+          ],
+          "outputs": [
+            "fixture.identity.plain.target"
+          ],
+          "operator": {
+            "id": "identity"
+          },
+          "disposition": "mapped",
+          "mapping_quality": "exact",
+          "assumptions": [
+            "Valid scalar sample supplied with synthetic calibration fixture.identity.plain.v1.",
+            "Output keeps the declared synthetic storage only; no provider or visual equivalence."
+          ],
+          "evidence": [
+            "original.synthetic.identity"
+          ],
+          "evidence_status": "verified_current",
+          "loss_annotations": []
+        },
+        {
+          "id": "fixture.identity.shared",
+          "inputs": [
+            "fixture.identity.shared.source"
+          ],
+          "outputs": [
+            "fixture.identity.shared.target"
+          ],
+          "operator": {
+            "id": "identity"
+          },
+          "disposition": "mapped",
+          "mapping_quality": "exact",
+          "assumptions": [
+            "Valid scalar sample supplied with synthetic calibration fixture.identity.shared.v1.",
+            "Output keeps the declared synthetic storage only; no provider or visual equivalence."
+          ],
+          "evidence": [
+            "original.synthetic.identity"
+          ],
+          "evidence_status": "verified_current",
+          "loss_annotations": []
+        },
+        {
+          "id": "fixture.identity.exclusive",
+          "inputs": [
+            "fixture.identity.exclusive.source"
+          ],
+          "outputs": [
+            "fixture.identity.exclusive.target"
+          ],
+          "operator": {
+            "id": "identity"
+          },
+          "disposition": "mapped",
+          "mapping_quality": "exact",
+          "assumptions": [
+            "Valid scalar sample supplied with synthetic calibration fixture.identity.exclusive.v1.",
+            "Output keeps the declared synthetic storage only; no provider or visual equivalence."
+          ],
+          "evidence": [
+            "original.synthetic.identity"
+          ],
+          "evidence_status": "verified_current",
+          "loss_annotations": []
+        },
+        {
+          "id": "fixture.identity.raw",
+          "inputs": [
+            "fixture.identity.raw.source"
+          ],
+          "outputs": [
+            "fixture.identity.raw.target"
+          ],
+          "operator": {
+            "id": "identity"
+          },
+          "disposition": "mapped",
+          "mapping_quality": "exact",
+          "assumptions": [
+            "Valid scalar sample supplied with synthetic calibration fixture.identity.raw.v1.",
+            "Output keeps the declared synthetic storage only; no provider or visual equivalence."
+          ],
+          "evidence": [
+            "original.synthetic.identity"
+          ],
+          "evidence_status": "verified_current",
+          "loss_annotations": []
+        },
+        {
+          "id": "fixture.identity.raw_mm",
+          "inputs": [
+            "fixture.identity.raw_mm.source"
+          ],
+          "outputs": [
+            "fixture.identity.raw_mm.target"
+          ],
+          "operator": {
+            "id": "identity"
+          },
+          "disposition": "mapped",
+          "mapping_quality": "exact",
+          "assumptions": [
+            "Valid scalar sample supplied with synthetic calibration fixture.identity.raw_mm.v1.",
+            "Output keeps the declared synthetic storage only; no provider or visual equivalence."
+          ],
+          "evidence": [
+            "original.synthetic.identity"
+          ],
+          "evidence_status": "verified_current",
+          "loss_annotations": []
+        }
+      ]
+    }
+  ]
+}
