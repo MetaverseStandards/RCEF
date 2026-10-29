@@ -163,3 +163,14 @@ To reproduce the fit and the held-out cells for two shapes as a test (slow tier,
 RCEF_SLOW_TESTS=1 RCEF_K3_ICT_CACHE=DIR RCEF_RIG_CACHE=DIR RCEF_RENDERER=/tmp/meshrender \
   python -B -m unittest tests/test_rig_gains.py
 ```
+
+## 7. Visemes on faces without viseme shapes: the pose bridge
+
+```sh
+python examples/viseme_bridge.py                                       # "bed car toe book"
+python examples/viseme_bridge.py --frames examples/data/viseme_demo_frames.csv
+```
+
+Route carries the META frames through the canonical viseme set, the [viseme pose bridge](../docs/canonical-set.md#viseme-pose-bridge) and the canonical expression set to ARKit weights (`bridge_arkit.csv`). The weights then pose Rocketbox Male_Adult_01 and ICT-FaceKit. ICT has no viseme shapes; the script reads all 53 of its expression shapes from the OBJ files in `~/.cache/rcef-ict-full` (`--ict-cache`), the cache of `tools/calibration/k4_mediapipe.py fetch`. Rocketbox Male's own viseme shapes, driven by the same frames by name, are the comparison. For each frame the script writes the meshes (bridged and direct for Male, with a difference colour map, and bridged for ICT) to `~/.cache/rcef-examples/viseme-bridge/mesh/`, and in `frames.json` the error `|bridged - direct| / |direct|` over Male's vertices except the tongue, as in the calibration record, and the RMS distance in millimetres.
+
+On Rocketbox Male at full weight, the error is 0.22 to 0.48 for the classes the bridge reads, as in the calibration record (for `vowel_open` 0.29, an RMS distance of 4.0 mm over the vertices that move). Frames on `bilabial`, `vowel_mid_spread` or `vowel_close_rounded` (META PP, E and OU) give a neutral face, error 1, because those classes failed their bounds and the bridge does not read them; the route lists their values as dropped. On ICT the same ARKit weights give other geometry, often a much wider mouth: the weights are Rocketbox Female's units, and the two rigs render ARKit names differently (section 6).
