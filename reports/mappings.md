@@ -2,7 +2,7 @@
 
 Pack: rcef.parity; data version: 0.5.0.
 
-Generated from rcef.pack.json; SHA-256: b853f7e333ce5397315a8c792f9195d0bcb28615a4bd09658a096be008a4204c.
+Generated from rcef.pack.json; SHA-256: b444b378ca4a923c81700b6f0bdb3a33e79127ec2314c57c402f63b8e04b7a33.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Provider attribution and source terms are in ../THIRD_PARTY_NOTICES.md.
 
@@ -6982,7 +6982,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme PP corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme PP (META p, b, m) corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META","rcef.canonical_viseme.bilabial"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META","rcef.canonical_viseme.bilabial"],"units":"1"}]
@@ -6997,7 +6997,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme FF corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme FF (META f, v) corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META","rcef.canonical_viseme.labiodental"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META","rcef.canonical_viseme.labiodental"],"units":"1"}]
@@ -7012,7 +7012,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme TH corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme TH (META th, read as θ ð) corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META","rcef.canonical_viseme.dental"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META","rcef.canonical_viseme.dental"],"units":"1"}]
@@ -7027,7 +7027,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme SS corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme SS (META s, z) corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META","rcef.canonical_viseme.alveolar_sibilant"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META","rcef.canonical_viseme.alveolar_sibilant"],"units":"1"}]
@@ -7042,7 +7042,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme CH corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme CH (META tS, dZ, S, read as tʃ dʒ ʃ) corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META","rcef.canonical_viseme.postalveolar"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META","rcef.canonical_viseme.postalveolar"],"units":"1"}]
@@ -7057,7 +7057,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme DD corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme DD (META t, d) corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META","rcef.canonical_viseme.coronal_stop"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META","rcef.canonical_viseme.coronal_stop"],"units":"1"}]
@@ -7072,7 +7072,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme NN corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme NN (META n, l) corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META","rcef.canonical_viseme.coronal_nasal_lateral"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META","rcef.canonical_viseme.coronal_nasal_lateral"],"units":"1"}]
@@ -7087,7 +7087,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme KK corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme KK (META k, g) corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META","rcef.canonical_viseme.dorsal"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META","rcef.canonical_viseme.dorsal"],"units":"1"}]
@@ -7102,7 +7102,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme RR corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme RR (META r, as in red) corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META","rcef.canonical_viseme.rhotic"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META","rcef.canonical_viseme.rhotic"],"units":"1"}]
@@ -7245,7 +7245,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme PP corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme PP (META p, b, m) corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.canonical_viseme.bilabial","openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["rcef.canonical_viseme.bilabial","openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META"],"units":"1"}]
@@ -7260,7 +7260,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme FF corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme FF (META f, v) corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.canonical_viseme.labiodental","openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["rcef.canonical_viseme.labiodental","openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META"],"units":"1"}]
@@ -7275,7 +7275,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme TH corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme TH (META th, read as θ ð) corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.canonical_viseme.dental","openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["rcef.canonical_viseme.dental","openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META"],"units":"1"}]
@@ -7290,7 +7290,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme SS corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme SS (META s, z) corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.canonical_viseme.alveolar_sibilant","openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["rcef.canonical_viseme.alveolar_sibilant","openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META"],"units":"1"}]
@@ -7305,7 +7305,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme CH corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme CH (META tS, dZ, S, read as tʃ dʒ ʃ) corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.canonical_viseme.postalveolar","openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["rcef.canonical_viseme.postalveolar","openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META"],"units":"1"}]
@@ -7320,7 +7320,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme DD corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme DD (META t, d) corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.canonical_viseme.coronal_stop","openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["rcef.canonical_viseme.coronal_stop","openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META"],"units":"1"}]
@@ -7335,7 +7335,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme NN corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme NN (META n, l) corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.canonical_viseme.coronal_nasal_lateral","openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["rcef.canonical_viseme.coronal_nasal_lateral","openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"],"units":"1"}]
@@ -7350,7 +7350,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme KK corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme KK (META k, g) corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.canonical_viseme.dorsal","openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["rcef.canonical_viseme.dorsal","openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META"],"units":"1"}]
@@ -7365,7 +7365,7 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 Assumptions:
 
-- correspondence: META viseme RR corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.
+- correspondence: META viseme RR (META r, as in red) corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.
 - endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.canonical_viseme.rhotic","openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape","refs":["rcef.canonical_viseme.rhotic","openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"],"units":"1"}]

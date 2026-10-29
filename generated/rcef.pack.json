@@ -19485,7 +19485,7 @@
       "rules": [
         {
           "assumptions": [
-            "correspondence: META viseme PP corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme PP (META p, b, m) corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -19534,7 +19534,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme FF corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme FF (META f, v) corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -19583,7 +19583,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme TH corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme TH (META th, read as θ ð) corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -19632,7 +19632,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme SS corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme SS (META s, z) corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -19681,7 +19681,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme CH corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme CH (META tS, dZ, S, read as tʃ dʒ ʃ) corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -19730,7 +19730,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme DD corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme DD (META t, d) corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -19779,7 +19779,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme NN corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme NN (META n, l) corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -19828,7 +19828,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme KK corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme KK (META k, g) corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -19877,7 +19877,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme RR corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme RR (META r, as in red) corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -20413,7 +20413,7 @@
       "rules": [
         {
           "assumptions": [
-            "correspondence: META viseme PP corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme PP (META p, b, m) corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -20462,7 +20462,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme FF corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme FF (META f, v) corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -20511,7 +20511,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme TH corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme TH (META th, read as θ ð) corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -20560,7 +20560,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme SS corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme SS (META s, z) corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -20609,7 +20609,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme CH corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme CH (META tS, dZ, S, read as tʃ dʒ ʃ) corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -20658,7 +20658,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme DD corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme DD (META t, d) corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -20707,7 +20707,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme NN corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme NN (META n, l) corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -20756,7 +20756,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme KK corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme KK (META k, g) corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -20805,7 +20805,7 @@
         },
         {
           "assumptions": [
-            "correspondence: META viseme RR corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
+            "correspondence: META viseme RR (META r, as in red) corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
             "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
           ],
           "disposition": "mapped",
@@ -46155,7 +46155,7 @@
         "invalid_array_zero": true,
         "native_index": 4,
         "optional_feature": true,
-        "reason": "Native identifier evidenced; copied to the canonical viseme class coronal_stop by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
+        "reason": "Native identifier evidenced; copied to the canonical viseme class coronal_stop by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes, and summed into the aggregate alveolar_floor by visemes_aggregate.to_rcef; calibration correspondence is assumed, not measured.",
         "selected": true,
         "silence_valid": false,
         "valid_sum": 1.0
@@ -46260,7 +46260,7 @@
         "invalid_array_zero": true,
         "native_index": 7,
         "optional_feature": true,
-        "reason": "Native identifier evidenced; copied to the canonical viseme class alveolar_sibilant by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
+        "reason": "Native identifier evidenced; copied to the canonical viseme class alveolar_sibilant by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes, and summed into the aggregate alveolar_floor by visemes_aggregate.to_rcef; calibration correspondence is assumed, not measured.",
         "selected": true,
         "silence_valid": false,
         "valid_sum": 1.0
@@ -46295,7 +46295,7 @@
         "invalid_array_zero": true,
         "native_index": 8,
         "optional_feature": true,
-        "reason": "Native identifier evidenced; copied to the canonical viseme class coronal_nasal_lateral by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
+        "reason": "Native identifier evidenced; copied to the canonical viseme class coronal_nasal_lateral by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes, and summed into the aggregate alveolar_floor by visemes_aggregate.to_rcef; calibration correspondence is assumed, not measured.",
         "selected": true,
         "silence_valid": false,
         "valid_sum": 1.0
@@ -46330,7 +46330,7 @@
         "invalid_array_zero": true,
         "native_index": 9,
         "optional_feature": true,
-        "reason": "Native identifier evidenced; copied to the canonical viseme class rhotic by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
+        "reason": "Native identifier evidenced; copied to the canonical viseme class rhotic by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes, and summed into the aggregate alveolar_floor by visemes_aggregate.to_rcef; calibration correspondence is assumed, not measured.",
         "selected": true,
         "silence_valid": false,
         "valid_sum": 1.0

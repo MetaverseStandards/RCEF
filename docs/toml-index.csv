@@ -9,7 +9,7 @@ mappings/arkit_fb2.toml,directional maps,[[mappings]],0,0,0,2,64,0,0,90520,f6c95
 mappings/arkit_vrcft.toml,directional maps,[[mappings]],0,0,0,1,68,0,0,95202,4fc813c50a2b88c9334af2a141c2ac4b8dc797794f8def8350d7bf86b9097150,CC-BY-SA-4.0
 mappings/canonical_arkit.toml,directional maps,[[mappings]],0,0,0,18,112,0,0,234542,9152272d0d9c73c123eb6478cc1273bfb4cdb183644c082498f5720ea2e65db4,CC-BY-SA-4.0
 mappings/canonical_fb2.toml,directional maps,[[mappings]],0,0,0,18,124,0,0,192657,bd8f47ce227686c059cd8a89056da3a786ab3665137fea0d0d0a5d6ac43e468c,CC-BY-SA-4.0
-mappings/canonical_visemes.toml,directional maps,[[mappings]],0,0,0,7,32,0,0,48236,74953843a73cbda77a32356b264df87592e23661a8f1d57caaef7ecc20c824ec,CC-BY-SA-4.0
+mappings/canonical_visemes.toml,directional maps,[[mappings]],0,0,0,7,32,0,0,48550,4601a2939407ee8759ae65a1fa484cf78659aeb6ec7fa02c45cc175de941102e,CC-BY-SA-4.0
 mappings/canonical_vrcft_artist.toml,directional maps,[[mappings]],0,0,0,9,68,0,0,119552,d669bba53ff7ae811906b38ca5139cd1792c3cd5fb52637a9bff0c9b1483c512,CC-BY-SA-4.0
 mappings/canonical_vrm.toml,directional maps,[[mappings]],0,0,0,3,12,0,0,23311,2bdd536f895bdb4725973ec889036e36224696f70289384a8669662e4ba7aca5,CC-BY-SA-4.0
 mappings/fb2.toml,directional maps,[[mappings]],0,0,0,1,8,0,0,5932,7ab5e6a63225de33b4ae456aded73a0f911ffd9248c6264023f95b24c1d62736,CC-BY-SA-4.0
@@ -30,7 +30,7 @@ profiles/mediapipe.score.toml,signal inventory and profiles,[[signals]]; [[profi
 profiles/openxr.ancillary.toml,signal inventory and profiles,[[signals]]; [[profiles]],10,1,10,0,0,0,0,6902,48c82fdedc8fb8da624090963692dafd31b78647ecb3909940e3e1474c6c6a42,CC-BY-SA-4.0
 profiles/openxr.fb.toml,signal inventory and profiles,[[signals]]; [[profiles]],65,1,65,0,0,0,0,53120,22bc55b88aa55fc244c29bb8b4def6a12fd5809bd699a1b09d20ba7be8e7a3da,CC-BY-SA-4.0
 profiles/openxr.fb2.toml,signal inventory and profiles,[[signals]]; [[profiles]],71,1,71,0,0,0,0,64949,b08ba5b762514219989e01a6d2c4e1dd9ee995566284e125bfb8f2c8be218d3f,CC-BY-SA-4.0
-profiles/openxr.visemes.toml,signal inventory and profiles,[[signals]]; [[profiles]],15,1,15,0,0,0,0,16644,b6a2a2f2165d5cda26d02a6c831e2154fd190788f3c84caffb3845855d2d58a2,CC-BY-SA-4.0
+profiles/openxr.visemes.toml,signal inventory and profiles,[[signals]]; [[profiles]],15,1,15,0,0,0,0,16944,e850b566bb948374d5dd5cc1a61b3ff2221609a9c1991489ab0acb91047eb526,CC-BY-SA-4.0
 profiles/roblox.control.toml,signal inventory and profiles,[[signals]]; [[profiles]],50,1,50,0,0,0,0,45108,0ede53622d74ec141767bfd3ec1725f3cfa6fe46045027eb0d1a5eb85ccb4124,CC-BY-SA-4.0
 profiles/vrcft.artist.base.toml,signal inventory and profiles,[[signals]]; [[profiles]],102,1,102,0,0,0,0,70077,ff02a5905f04ec7653e595494f5b68ca8c2bc4ef3629f75896379db4b1a8ac88,CC-BY-SA-4.0
 profiles/vrcft.artist.blended.toml,signal inventory and profiles,[[signals]]; [[profiles]],42,1,42,0,0,0,0,33651,74e1ba510161a1685c0dd79fc837f01860e1485ec5ed86d59900d5bd1302baa4,CC-BY-SA-4.0
