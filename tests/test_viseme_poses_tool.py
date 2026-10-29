@@ -56,7 +56,7 @@ class Fit(unittest.TestCase):
         self.assertEqual(vp.minimax([([[1.0]], [0.0], 0.0)]), [0.0])
         self.assertEqual(vp.minimax([([[1.0]], [0.0], 0.0), ([[1.0]], [0.5], 0.25)]), [0.5])
 
-    def test_left_and_right_share_one_weight_in_the_symmetric_candidate(self):
+    def test_left_and_right_share_one_weight(self):
         self.assertEqual(vp.pair('mouthSmileLeft'), 'mouthSmile')
         self.assertEqual(vp.pair('mouthSmileRight'), 'mouthSmile')
         self.assertEqual(vp.pair('jawOpen'), 'jawOpen')
@@ -97,27 +97,43 @@ class HeldOut(unittest.TestCase):
 
 class RigSets(unittest.TestCase):
     def test_the_rig_sets_follow_their_rule(self):
-        self.assertEqual(vp.chosen(vp.SETS), (vp.TRAINING, vp.HELD_OUT_RIGS))
+        self.assertEqual(vp.chosen(vp.SETS), (vp.TRAINING, vp.HELD_OUT_RIGS, vp.SEEN))
         self.assertEqual(len(vp.TRAINING), 10)
         self.assertEqual(len(vp.HELD_OUT_RIGS), 4)
-        self.assertFalse(set(vp.TRAINING) & set(vp.HELD_OUT_RIGS))
+        self.assertEqual(len(vp.SEEN), 4)
+        everything = vp.TRAINING + vp.HELD_OUT_RIGS + vp.SEEN
+        self.assertEqual(len(set(everything)), len(everything))
         self.assertIn('Male_Adult_01', vp.TRAINING)
-        self.assertEqual(sorted(a.split('_')[0] for a in vp.HELD_OUT_RIGS), ['Female', 'Female', 'Male', 'Male'])
+        for rigs in (vp.HELD_OUT_RIGS, vp.SEEN):
+            self.assertEqual(sorted(a.split('_')[0] for a in rigs), ['Female', 'Female', 'Male', 'Male'])
+
+    def test_the_version_1_held_out_rigs_are_never_held_out_again(self):
+        self.assertEqual(sorted(vp.SEEN), ['Female_Adult_04', 'Female_Adult_13', 'Male_Adult_05', 'Male_Adult_11'])
+        self.assertFalse(set(vp.SEEN) & set(vp.HELD_OUT_RIGS + vp.TRAINING))
 
     def test_a_replaced_rig_gives_its_place_to_the_next_unused_candidate(self):
         sets = json.loads(json.dumps(vp.SETS))
         first = vp.HELD_OUT_RIGS[0]
         sets['replaced'] = [{'name': first, 'reason': 'synthetic'}]
-        training, held = vp.chosen(sets)
-        self.assertNotIn(first, held + training)
+        training, held, seen = vp.chosen(sets)
+        self.assertNotIn(first, held + training + seen)
         self.assertEqual(held[1:], vp.HELD_OUT_RIGS[1:])
-        self.assertEqual(training, vp.TRAINING)
+        self.assertEqual((training, seen), (vp.TRAINING, vp.SEEN))
         self.assertEqual(held[0].split('_')[0], first.split('_')[0])
 
     def test_every_rig_file_is_pinned(self):
         text = (ROOT / 'examples/rigs.py').read_text(encoding='utf-8')
-        for avatar in vp.TRAINING + vp.HELD_OUT_RIGS:
+        for avatar in vp.TRAINING + vp.HELD_OUT_RIGS + vp.SEEN:
             self.assertIn(f"'{avatar}': '", text)
+
+
+class Tied(unittest.TestCase):
+    def test_left_and_right_columns_are_summed_into_one(self):
+        class Fake:
+            basis = [[1.0, 0.0], [0.0, 2.0], [3.0, 3.0]]
+        keys, columns = vp.tied(Fake, ['mouthSmileLeft', 'mouthSmileRight', 'jawOpen'])
+        self.assertEqual(keys, ['mouthSmile', 'jawOpen'])
+        self.assertEqual(columns, [[1.0, 2.0], [3.0, 3.0]])
 
 
 class Pack(unittest.TestCase):
