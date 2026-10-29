@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +35,13 @@ class Baseline(unittest.TestCase):
         document = json.loads(FIXTURE.read_text(encoding='utf-8'))
         self.assertEqual(document['data_version'], '0.4.0')
         self.assertLessEqual(set(DIRECT), {m['id'] for m in document['mappings']})
+
+    def test_the_comparison_harness_pins_the_same_fixture(self):
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import ab_compare
+        self.assertEqual((ab_compare.A1_SHA256, ab_compare.A1_COMMIT), (SHA256, COMMIT))
+        self.assertEqual(ROOT / ab_compare.A1_FIXTURE, FIXTURE)
+        self.assertEqual({m for _, _, maps in ab_compare.A1_PAIRS.values() for m in maps}, set(DIRECT))
 
 
 if __name__ == '__main__':
