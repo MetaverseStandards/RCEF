@@ -12,7 +12,8 @@ This audit goes with the draft [canonical expression set](canonical-set.md). It 
 - **Rows.** There are three kinds of row:
   - one row for each pair of canonical signal and phase-1 source that maps it;
   - one row for each pair of canonical signal with a FACS code and FACS crosswalk record that a hop of that signal cites. Today the only such record is `ict_facekit`. A crosswalk difference on a signal whose hops do not cite the record is a [note](#crosswalk-notes) with no key;
-  - one row for each canonical signal that a FACS hop links, plus rows for the FACS encoding and frame.
+  - one row for each canonical signal that a FACS hop links, plus rows for the FACS encoding and frame;
+  - for the visemes, one IPA reference row for each IPA shape class, and one row for the scope of META's classes.
 - **Each row** gives the source's name, the evidence record and locator, and an RCEF paraphrase of the source's definition. A paraphrase says what moves, which way and on which side, in RCEF's own words. Whose side is settled once per source in [Frames](#frames-whose-left). The canonical definitions are in the [signal table](canonical-set.md#expression-signals). Records whose licence is "reference only", or that state no licence, allow no copying of prose: the Apple, VRM and VRCFaceTracking documentation records. RCEF paraphrases every row in the same way, whatever the licence.
 - **Verdicts:**
   - `same`: the source's own text or figure names the action that the canonical definition describes. It needs a cited locator. Without evidence the verdict is `unresolved`.
@@ -275,33 +276,63 @@ Record `vrm_expressions` (vrm-specification `94e82dd`, reference only). 7 rows: 
 |---|---|---|---|---|---|
 | `eye_close_left` | `blinkLeft` | `vrm_expressions` 178 | shuts one eye, named as the left; whose left is not stated ([Frames](#frames-whose-left)) | unresolved | VRM blink in and out, `vrm_blink_side_unresolved` |
 | `eye_close_right` | `blinkRight` | `vrm_expressions` 179 | shuts one eye, named as the right; whose right is not stated | unresolved | VRM blink in and out, `vrm_blink_side_unresolved` |
-| `aa` | `aa` | `vrm_expressions` 163 | a mouth-shape preset for speech, weighted as each model's author chose; remark "aa" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
-| `ih` | `ih` | `vrm_expressions` 164 | a mouth-shape preset for speech; remark "i", while META's IH is the vowel of "tip" | differs | VRM vowel in and out, `vrm_vowel_asset_weight`, `vrm_ih_vowel_quality` |
-| `ou` | `ou` | `vrm_expressions` 165 | a mouth-shape preset for speech; remark "u" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
-| `e` | `ee` | `vrm_expressions` 166 | a mouth-shape preset for speech; remark "eh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
-| `oh` | `oh` | `vrm_expressions` 167 | a mouth-shape preset for speech; remark "oh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `vowel_open` | `aa` | `vrm_expressions` 163 | a mouth-shape preset for speech, weighted as each model's author chose; remark "aa" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `vowel_close_spread` | `ih` | `vrm_expressions` 164 | a mouth-shape preset for speech; remark "i", while META's IH is the vowel of "tip" | differs | VRM vowel in and out, `vrm_vowel_asset_weight`, `vrm_ih_vowel_quality` |
+| `vowel_close_rounded` | `ou` | `vrm_expressions` 165 | a mouth-shape preset for speech; remark "u". Read as Japanese [ɯᵝ] it stays in this class; VRM states no language | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `vowel_mid_spread` | `ee` | `vrm_expressions` 166 | a mouth-shape preset for speech; remark "eh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `vowel_mid_rounded` | `oh` | `vrm_expressions` 167 | a mouth-shape preset for speech; remark "oh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
 
 ## META visemes
 
-Record `xr_visemes` (OpenXR-Docs `5a82d45`, CC-BY-4.0). Each value is a probability from 0 to 1, and the values sum to 1 when `isValid` is true (lines 104-107). The canonical visemes follow META, so all 15 rows are `same`.
+Record `xr_visemes` (OpenXR-Docs `5a82d45`, CC-BY-4.0). Each value is a probability from 0 to 1, and the values sum to 1 when `isValid` is true (lines 104-107). The canonical classes contain META's classes one to one; the IPA readings are RCEF's. 16 rows: 15 `same`, 1 `differs`.
 
 | Signal | Source name | Locator | Paraphrase | Verdict | Owning hop, key |
 |---|---|---|---|---|---|
-| `sil` | SIL | `xr_visemes` 142 | the frame is silent; META's table calls this class neutral | same | — |
-| `pp` | PP | `xr_visemes` 149 | class probability for the sounds p, b, m | same | — |
-| `ff` | FF | `xr_visemes` 156 | class probability for the sounds f, v | same | — |
-| `th` | TH | `xr_visemes` 163 | class probability for the sounds th | same | — |
-| `dd` | DD | `xr_visemes` 170 | class probability for the sounds t, d | same | — |
-| `kk` | KK | `xr_visemes` 177 | class probability for the sounds k, g | same | — |
-| `ch` | CH | `xr_visemes` 184 | class probability for the sounds tS, dZ, S | same | — |
-| `ss` | SS | `xr_visemes` 191 | class probability for the sounds s, z | same | — |
-| `nn` | NN | `xr_visemes` 198 | class probability for the sounds n, l | same | — |
-| `rr` | RR | `xr_visemes` 205 | class probability for the sounds r | same | — |
-| `aa` | AA | `xr_visemes` 212 | class probability for the sounds A:, as in car | same | — |
-| `e` | E | `xr_visemes` 219 | class probability for the sounds e, as in bed | same | — |
-| `ih` | IH | `xr_visemes` 226 | class probability for the sounds ih, as in tip | same | — |
-| `oh` | OH | `xr_visemes` 233 | class probability for the sounds oh, as in toe | same | — |
-| `ou` | OU | `xr_visemes` 240 | class probability for the sounds ou, as in book | same | — |
+| `sil` | SIL | `xr_visemes` 142 | the frame is silent; META's table calls this class neutral. Not an IPA segment, so it has no IPA reference row. META's image shows the lips together and relaxed; RCEF asserts no pose for other sources | same | — |
+| `bilabial` | PP | `xr_visemes` 149 | class probability for the sounds p, b, m | same | — |
+| `labiodental` | FF | `xr_visemes` 156 | class probability for the sounds f, v | same | — |
+| `dental` | TH | `xr_visemes` 163 | class probability for the sounds th (θ ð) | same | — |
+| `coronal_stop` | DD | `xr_visemes` 170 | class probability for the sounds t, d. META renders it in isolation with the teeth close; RCEF's class has no front target of its own, so META's pose is one rig choice | same | — |
+| `dorsal` | KK | `xr_visemes` 177 | class probability for the sounds k, g. META renders it in isolation with the teeth close; RCEF's class has no front target of its own, so META's pose is one rig choice | same | — |
+| `postalveolar` | CH | `xr_visemes` 184 | class probability for the sounds tS, dZ, S (tʃ dʒ ʃ) | same | — |
+| `alveolar_sibilant` | SS | `xr_visemes` 191 | class probability for the sounds s, z | same | — |
+| `coronal_nasal_lateral` | NN | `xr_visemes` 198 | class probability for the sounds n, l. META renders it in isolation with the teeth close; RCEF's class has no front target of its own, so META's pose is one rig choice | same | — |
+| `rhotic` | RR | `xr_visemes` 205 | class probability for the sound r, as in red: read literally as the trill r or as English ɹ, one class. META's images: no clear protrusion from the front, slight protrusion in the three-quarter view (one speaker; weak support) | same | — |
+| `vowel_open` | AA | `xr_visemes` 212 | class probability for the sounds A:, as in car (ɑ) | same | — |
+| `vowel_mid_spread` | E | `xr_visemes` 219 | class probability for the sounds e, as in bed (e or ɛ, one class) | same | — |
+| `vowel_close_spread` | IH | `xr_visemes` 226 | class probability for the sounds ih, as in tip (ɪ) | same | — |
+| `vowel_mid_rounded` | OH | `xr_visemes` 233 | class probability for the sounds oh, as in toe (o) | same | — |
+| `vowel_close_rounded` | OU | `xr_visemes` 240 | class probability for the sounds ou, as in book (ʊ) | same | — |
+| `alveolar_floor` | SS, DD and NN | `xr_visemes` 170, 191, 198 | the sum of the META classes SS, DD and NN, clamped at 1; META has no such class | differs | META aggregate in (`visemes_aggregate.to_rcef`), `meta_viseme_aggregate_sum` |
+
+## META viseme scope
+
+One row, in its own category, like the FACS encoding rows.
+
+| Topic | Locator | Paraphrase | Verdict | Owning hop, key |
+|---|---|---|---|---|
+| META's class membership outside its examples | `xr_visemes` 142-245 | META lists English example phonemes for each class; how META classifies other IPA sounds is not stated; RCEF assigns them by shape | unresolved | every META copy hop, `meta_viseme_class_scope` |
+
+## IPA reference rows
+
+Record `ipa_chart_doulos_2020` (the IPA chart, revised to 2020). One row for each IPA shape class: its members and the chart cells they come from. The members are the chart's definitions, so every row is `same`; the evidence column names the A-level members ([IPA chart assignment](canonical-set.md#ipa-chart-assignment)). There is no row for `sil` or for aggregates.
+
+| Signal | IPA members | Chart cells | Evidence | Verdict | Owning hop, key |
+|---|---|---|---|---|---|
+| `bilabial` | p b m ʙ ɸ β ʘ ɓ | pulmonic: Plosive × Bilabial; pulmonic: Nasal × Bilabial; pulmonic: Trill × Bilabial; pulmonic: Fricative × Bilabial; non-pulmonic: Clicks × Bilabial; non-pulmonic: Voiced implosives × Bilabial | A: ʙ ɸ β ʘ ɓ | same | — |
+| `labiodental` | ɱ ⱱ f v ʋ | pulmonic: Nasal × Labiodental; pulmonic: Tap or Flap × Labiodental; pulmonic: Fricative × Labiodental; pulmonic: Approximant × Labiodental | A: ɱ ⱱ ʋ | same | — |
+| `dental` | θ ð | pulmonic: Fricative × Dental | E | same | — |
+| `alveolar_sibilant` | s z | pulmonic: Fricative × Alveolar | E | same | — |
+| `postalveolar` | ʃ ʒ ʂ ʐ ɕ ʑ ɧ | pulmonic: Fricative × Postalveolar; pulmonic: Fricative × Retroflex; other symbols: Alveolo-palatal fricatives; other symbols: Simultaneous ʃ and x | A: ʂ ʐ ɕ ʑ ɧ | same | — |
+| `coronal_stop` | t d ʈ ɖ ɾ ɽ ǀ ǃ ǂ ɗ | pulmonic: Plosive × Alveolar; pulmonic: Plosive × Retroflex; pulmonic: Tap or Flap × Alveolar; pulmonic: Tap or Flap × Retroflex; non-pulmonic: Clicks × Dental; non-pulmonic: Clicks × (Post)alveolar; non-pulmonic: Clicks × Palatoalveolar; non-pulmonic: Voiced implosives × Dental/alveolar | A: ʈ ɖ ɾ ɽ ǀ ǃ ǂ ɗ | same | — |
+| `coronal_nasal_lateral` | n ɳ ɬ ɮ l ɭ ǁ ɺ | pulmonic: Nasal × Alveolar; pulmonic: Nasal × Retroflex; pulmonic: Lateral fricative × Alveolar; pulmonic: Lateral approximant × Alveolar; pulmonic: Lateral approximant × Retroflex; non-pulmonic: Clicks × Alveolar lateral; other symbols: Voiced alveolar lateral flap | A: ɳ ɬ ɮ ɭ ǁ ɺ | same | — |
+| `dorsal` | c ɟ k ɡ q ɢ ʔ ɲ ŋ ɴ ʀ ç ʝ x ɣ χ ʁ ħ ʕ h ɦ ʎ ʟ ʄ ɠ ʛ ʜ ʢ ʡ | pulmonic: Plosive × Palatal; pulmonic: Plosive × Velar; pulmonic: Plosive × Uvular; pulmonic: Plosive × Glottal; pulmonic: Nasal × Palatal; pulmonic: Nasal × Velar; pulmonic: Nasal × Uvular; pulmonic: Trill × Uvular; pulmonic: Fricative × Palatal; pulmonic: Fricative × Velar; pulmonic: Fricative × Uvular; pulmonic: Fricative × Pharyngeal; pulmonic: Fricative × Glottal; pulmonic: Lateral approximant × Palatal; pulmonic: Lateral approximant × Velar; non-pulmonic: Voiced implosives × Palatal; non-pulmonic: Voiced implosives × Velar; non-pulmonic: Voiced implosives × Uvular; other symbols: Voiceless epiglottal fricative; other symbols: Voiced epiglottal fricative; other symbols: Epiglottal plosive | A: c ɟ q ɢ ʔ ɲ ɴ ʀ ç ʝ x ɣ χ ʁ ħ ʕ h ɦ ʎ ʟ ʄ ɠ ʛ ʜ ʢ ʡ | same | — |
+| `rhotic` | r ɹ ɻ | pulmonic: Trill × Alveolar; pulmonic: Approximant × Alveolar; pulmonic: Approximant × Retroflex | A: r ɻ | same | — |
+| `vowel_open` | æ ɐ a ɑ | vowels: Near-open × Front, unrounded; vowels: Near-open × Central, unrounded; vowels: Open × Front, unrounded; vowels: Open × Back, unrounded | A: æ ɐ | same | — |
+| `vowel_mid_spread` | e ɘ ɤ ə ɛ ɜ ʌ | vowels: Close-mid × Front, unrounded; vowels: Close-mid × Central, unrounded; vowels: Close-mid × Back, unrounded; vowels: Mid × Central, unrounded; vowels: Open-mid × Front, unrounded; vowels: Open-mid × Central, unrounded; vowels: Open-mid × Back, unrounded | A: ɘ ɤ ə ɜ ʌ | same | — |
+| `vowel_close_spread` | j ɰ i ɨ ɯ ɪ | pulmonic: Approximant × Palatal; pulmonic: Approximant × Velar; vowels: Close × Front, unrounded; vowels: Close × Central, unrounded; vowels: Close × Back, unrounded; vowels: Near-close × Near-front, unrounded | A: j ɰ ɨ ɯ | same | — |
+| `vowel_mid_rounded` | ø ɵ o œ ɞ ɔ ɶ ɒ | vowels: Close-mid × Front, rounded; vowels: Close-mid × Central, rounded; vowels: Close-mid × Back, rounded; vowels: Open-mid × Front, rounded; vowels: Open-mid × Central, rounded; vowels: Open-mid × Back, rounded; vowels: Open × Front, rounded; vowels: Open × Back, rounded | A: ɶ ɒ; contested: ɶ ɒ | same | — |
+| `vowel_close_rounded` | ʍ w ɥ y ʉ u ʏ ʊ | other symbols: Voiceless labial-velar fricative; other symbols: Voiced labial-velar approximant; other symbols: Voiced labial-palatal approximant; vowels: Close × Front, rounded; vowels: Close × Central, rounded; vowels: Close × Back, rounded; vowels: Near-close × Near-front, rounded; vowels: Near-close × Near-back, rounded | A: ʍ w ɥ; contested: ʊ | same | — |
 
 ## FACS
 
@@ -462,7 +493,9 @@ No hop cites these sources for the signals named, so they get no loss key.
 | `vrcft_eye_openness_neutral_unresolved` | unresolved | VRCFaceTracking eye blink in and out | eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused |
 | `vrm_blink_side_unresolved` | unresolved | VRM blink in and out | VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right |
 | `vrm_vowel_asset_weight` | differs | VRM vowel in and out | in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight |
-| `vrm_ih_vowel_quality` | differs | VRM vowel in and out (`ih`) | vowel quality differs: META IH is the vowel in "tip", VRM ih is remarked "i" |
+| `vrm_ih_vowel_quality` | differs | VRM vowel in and out (`ih`) | META IH (ɪ, "tip") and VRM ih (remark "i") are different vowels in one shape class |
+| `meta_viseme_class_scope` | unresolved | every META copy hop (30) | META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape |
+| `meta_viseme_aggregate_sum` | differs | META aggregate in (`visemes_aggregate.to_rcef`, 2) | sum of the listed classes, clamped at 1; META has no such class |
 | `facs_ordinal_intensity` | differs | every FACS hop (102) | FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured |
 | `facs_side_frame_unresolved` | unresolved | every sided FACS hop and both AU30 hops | FACS names L and R without saying whose side; RCEF reads them as the subject's own |
 | `facs_au30_direction_unresolved` | unresolved | FACS AU30 in and out | FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left |
@@ -471,7 +504,7 @@ No hop cites these sources for the signals named, so they get no loss key.
 | `facs_eyelid_events` | differs | FACS AU43 in and out | FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43 |
 | `facs_gross_code_no_intensity` | differs | the 18 FACS hops of 29, 30, 34, 35 and 43 | the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption |
 
-Hops also carry losses that are not audit verdicts: the gain loss of each hop, "asymmetry unknown: symmetry is invented" (ARKit in-hop fan-outs, FACS AU22 and AU28 in-hop fan-outs), "asymmetry irrecoverable" (ARKit and FACS out-hop means), "only their difference is kept" and the rounding loss (FB2 gaze out-hop), "no stated length" (every `tongue_out` hop) and the other VRM losses (consonants dropped, `isBinary`, `blink` not set or not read).
+Hops also carry losses that are not audit verdicts: the gain loss of each hop, "asymmetry unknown: symmetry is invented" (ARKit in-hop fan-outs, FACS AU22 and AU28 in-hop fan-outs), "asymmetry irrecoverable" (ARKit and FACS out-hop means), "only their difference is kept" and the rounding loss (FB2 gaze out-hop), "no stated length" (every `tongue_out` hop) and the other VRM losses (consonants dropped, `isBinary`, `blink` not set or not read). The viseme hops add the META gain loss on every META hop, "consonant and rest classes are dropped, so outputs no longer sum to 1" on the VRM vowel out-hop, and "from a source other than META: consonant and rest classes not produced; …" on the META vowel out-hop.
 
 ## Mapping today's losses to keys
 
@@ -489,7 +522,7 @@ Each loss reason of today's maps maps to the keys that cover it on the pivot rou
 | FB2 opposing directions are mutually exclusive; ARKit states no such constraint (on `fb2_gaze.to_arkit`) | 8 | `fb2_gaze_exclusive` on the FB2 gaze in-hop |
 | ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | 8 | `arkit_gaze_eyelid` and `vrcft_ue_gaze_no_angle` |
 | asymmetry irrecoverable | 6 | the ARKit out-hop's mean loss |
-| consonant visemes are dropped, so outputs no longer sum to 1 | 5 | the VRM vowel out-hop's consonant loss |
+| consonant visemes are dropped, so outputs no longer sum to 1 | 5 | the VRM vowel out-hop's consonant and rest loss |
 | a viseme probability becomes an asset-authored expression weight | 5 | `vrm_vowel_asset_weight` |
 | both are extension shapes with no stated length | 3 | "no stated length" on each `tongue_out` hop |
 | FB2 also pulls the corner back and laterally; ARKit describes upward movement only | 2 | `arkit_mouthsmile_upward` |
@@ -512,6 +545,7 @@ A pivot route may carry an audit key that today's rule for the same pair does no
 | `arkit_mouthclose_jaw_unresolved` | ARKit → FB2, ARKit → Unified Expressions (on FB2 → ARKit it covers today's jaw loss) |
 | `vrcft_ue_eyesquint_socket`, `vrcft_ue_cheeksquint_cheek`, `vrcft_ue_mouthstretch_down`, `vrcft_ue_mouthclosed_jaw_relative`, `vrcft_ue_mouthlowerdown_direction_unresolved` | ARKit → Unified Expressions |
 | `vrm_blink_side_unresolved` | FB2 → VRM blink (today an assumption only) |
+| `meta_viseme_class_scope` | META → VRM |
 
 ## Corrections to today's losses
 
@@ -593,9 +627,11 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 | Unified Expressions | 39 | 23 | 2 | 64 |
 | VRCFaceTracking eye | 2 | 0 | 2 | 4 |
 | VRM | 0 | 5 | 2 | 7 |
-| META visemes | 15 | 0 | 0 | 15 |
+| META visemes | 15 | 1 | 0 | 16 |
+| META viseme scope | 0 | 0 | 1 | 1 |
+| IPA reference rows | 14 | 0 | 0 | 14 |
 | FACS signal rows | 49 | 2 | 2 | 53 |
 | FACS encoding rows | 0 | 3 | 0 | 3 |
 | ICT-FaceKit crosswalk | 37 | 4 | 0 | 41 |
 | Frames | 4 | 0 | 2 | 6 |
-| **All** | 244 | 67 | 12 | 323 |
+| **All** | 258 | 68 | 13 | 339 |
