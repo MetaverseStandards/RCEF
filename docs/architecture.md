@@ -7,29 +7,30 @@ The [offline visual report](architecture.html), the [SVG](architecture.svg) and 
 
 ## Scope of this guide
 
-This guide describes `rcef.parity` data version **0.4.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-character-tools 0.5.0, installed from its release wheels. The locked commit is in [tooling.lock.json](../evidence/tooling.lock.json). The counts below were recomputed with the Python standard library from all 34 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
+This guide describes `rcef.parity` data version **0.5.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-character-tools 0.5.0, installed from its release wheels. The locked commit is in [tooling.lock.json](../evidence/tooling.lock.json). The counts below were recomputed with the Python standard library from all 39 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
 
 | Measure | Total |
 | --- | ---: |
-| Distinct signal IDs | 949 |
-| Profiles | 24 |
-| Profile membership rows | 954 |
-| Maps (`[[mappings]]` records) | 13 |
-| Mappings (rules) | 215 |
-| Evidence records | 38 |
+| Distinct signal IDs | 1013 |
+| Profiles | 25 |
+| Profile membership rows | 1018 |
+| Maps (`[[mappings]]` records) | 59 |
+| Mappings (rules) | 521 |
+| Evidence records | 47 |
 | Provider-specific canonical signals | 21 |
-| RCEF intermediate signals | 4 |
+| Canonical expression signals (draft) | 60 |
+| RCEF intermediate signals | 8 |
 
 Five fixture signals are in both the aggregate fixture profile and its source and target profiles. That gives 5 distinct signals but 10 memberships, which explains the difference of five rows. Also, `godot.blended.toml` has 42 actual rows, while its selected interface has 41; the counts here include every actual row. See the full [inventory](../reports/inventory.md).
 
-Signal dispositions: 226 mapped, 681 unresolved, 6 unsupported and 36 excluded. Mappings: 214 mapped (22 exact, 192 approximate) and 1 unresolved. Operators: 174 `affine`, 22 `identity`, 11 `weighted_sum` and 8 `piecewise_linear`. A `mapped` signal does not guarantee that every requested map or frame can be executed.
+Signal dispositions: 290 mapped, 681 unresolved, 6 unsupported and 36 excluded. Mappings: 520 mapped (22 exact, 498 approximate) and 1 unresolved. Operators: 462 `affine`, 22 `identity`, 21 `weighted_sum` and 16 `piecewise_linear`. A `mapped` signal does not guarantee that every requested map or frame can be executed.
 
 ## 1. Architecture and ownership
 
 ```mermaid
 flowchart TD
     L["check.py: installed msf-character-tools against tooling.lock.json (format 2)"] --> K["check.py: calibration records, FREEZES and the mappings that cite them"]
-    K --> B["msf-character-tools discovery: 34 TOML files, sorted"]
+    K --> B["msf-character-tools discovery: 39 TOML files, sorted"]
     B --> C["Strict UTF-8 TOML parsing; schema, numeric and reference validation"]
     C --> D["compile_pack: immutable validated document and byte hash"]
     D --> E["Generated pack JSON, matrix CSV, coverage and checksums"]
@@ -56,7 +57,7 @@ Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf_character_tools
 `check.py` runs these steps in order and stops at the first failure.
 
 1. **Locked msf-character-tools.** It checks the installed `msf_character_tools` package against [tooling.lock.json](../evidence/tooling.lock.json). If anything is different, it lists the problems, prints `Refusing to check` and exits 2. [The msf-character-tools lock](#the-msf-character-tools-lock) gives the rules.
-2. **Calibration records.** It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. Any mapping that cites a record (evidence id `calibration.<id>`) must use `piecewise_linear` with exactly the record's frozen knots, and every held-out cell for its input channel must pass. This step does not use msf-character-tools. No mapping in data 0.4.0 cites a record.
+2. **Calibration records.** It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. Any mapping that cites a record (evidence id `calibration.<id>`) must use `piecewise_linear` with exactly the record's frozen knots, and every held-out cell for its input channel must pass. This step does not use msf-character-tools. No mapping in data 0.5.0 cites a record.
 3. **Shared outputs.** It runs `python -B -P -m msf_character_tools check AUTHORING --pack PATH --csv PATH [--write]` on the checkout, with an empty bytecode cache, so that the subprocess imports the verified package. With `--write` it regenerates the pack, the CSV, coverage and checksums. Without it, it checks that they have not drifted.
 4. **Readable reports.** If step 3 passes, it runs [export_reports.py](../scripts/export_reports.py) with the same write or check choice.
 
@@ -99,10 +100,10 @@ Directory discovery walks the tree and includes every file name that ends in low
 | Location | Role | Files | Signals | Profiles | Memberships | Maps / mappings | Evidence |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [pack.toml](../pack.toml) | Root metadata | 1 | 0 | 0 | 0 | 0 / 0 | 0 |
-| [data/canonical.toml](../data/canonical.toml) and [data/intermediate.toml](../data/intermediate.toml) | Provider-specific projections and intermediate values, each with its profile | 2 | 25 | 2 | 25 | 0 / 0 | 0 |
+| [data/canonical.toml](../data/canonical.toml), [data/canonical_expression.toml](../data/canonical_expression.toml) and [data/intermediate.toml](../data/intermediate.toml) | Provider-specific projections, the draft canonical expression set and intermediate values, each with its profile | 3 | 89 | 3 | 89 | 0 / 0 | 0 |
 | [profiles/fixture.toml](../profiles/fixture.toml) and the provider profile files | Signal arrays and profile arrays | 20 | 924 | 22 | 929 | 0 / 0 | 0 |
-| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 10 | 0 | 0 | 0 | 13 / 215 | 0 |
-| [evidence/sources.toml](../evidence/sources.toml) | Evidence array | 1 | 0 | 0 | 0 | 0 / 0 | 38 |
+| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 14 | 0 | 0 | 0 | 59 / 521 | 0 |
+| [evidence/sources.toml](../evidence/sources.toml) | Evidence array | 1 | 0 | 0 | 0 | 0 / 0 | 47 |
 
 Each of the five root metadata keys appears once in the whole directory. A repeated metadata key is refused, even if its value is the same. The top-level `signals`, `profiles`, `mappings` and `evidence` must be arrays. They are added in file order, and each file's array order is kept.
 
@@ -112,7 +113,7 @@ Each of the five root metadata keys appears once in the whole directory. A repea
 
 ```toml
 schema_version = "1.0"
-data_version = "0.4.0"
+data_version = "0.5.0"
 operator_version = "1.1"
 id = "rcef.parity"
 license = "CC-BY-SA-4.0"
@@ -334,8 +335,8 @@ msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases 
 | [generated/rcef_mapping.csv](../generated/rcef_mapping.csv) | msf-character-tools signal and profile membership matrix: one row per distinct signal, one column per profile. Despite its name, it is not a table of executable mappings. |
 | [generated/coverage.json](../generated/coverage.json) | msf-character-tools coverage: dispositions, quality partitions, memberships per profile, evidence and rule uses. It records the pack hash. |
 | [generated/SHA256SUMS](../generated/SHA256SUMS) | Hashes of the pack, the matrix CSV and coverage, in that order. It does not list itself. |
-| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 954 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
-| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 215 authored one-way mappings with their status, operators, assumptions and losses. |
+| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 1018 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
+| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 521 authored one-way mappings with their status, operators, assumptions and losses. |
 | [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: the 21 canonical projections against the authored relationships. A dash means no authored mapping. Unresolved relationships stay labeled. |
 | [reports/SHA256SUMS](../reports/SHA256SUMS) | Hashes of the six report files, sorted by file name. It does not list itself. The Markdown reports record the SHA-256 of the pack they read. |
 
@@ -390,7 +391,7 @@ Before you extend or release the inventory, read [CONTRIBUTING](../CONTRIBUTING.
 
 ## 9. Independent validation checklist
 
-- Recompute the counts from all 34 TOML files, and the uniqueness and reference relationships. Compare the merged data with the current pack. Count memberships separately from distinct signals and from selected-interface metadata.
+- Recompute the counts from all 39 TOML files, and the uniqueness and reference relationships. Compare the merged data with the current pack. Count memberships separately from distinct signals and from selected-interface metadata.
 - Review the ARKit identity checks for calibration, domain, neutral, side and coupling. Check the independent expected values: identity `0.25`, affine `-1/0/1 → 0/0.5/1`, the ordered bilateral pairs, and the gaze splits. Require the approximation opt-in, and keep every authored loss.
 - Try a missing value or validity, false or non-boolean validity, missing required inputs, extra or non-source channels, non-finite or out-of-domain values, and one failing frame in a batch. Require no Result value on error.
 - Confirm that the unresolved MediaPipe → ARKit mapping refuses to run. Keep evidence status, disposition and quality apart. Do not infer inverse or cross-provider mappings from names.
