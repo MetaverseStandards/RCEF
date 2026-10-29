@@ -539,7 +539,10 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
                                 'weighted_sum')
                 continue
             else:
-                channels = rule.get('inputs')
+                channels = rule.get('inputs') or []
+                if not channels:
+                    problems.append(f'{label}, but it reads no channel')
+                    continue
                 curve = [c for c in valid[cited]['curves'] if [c['input']] == rule.get('inputs')
                          and [c['output']] == rule.get('outputs')]
                 if not curve:
@@ -561,22 +564,31 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
 def pose_sum_problems(rule: dict, record: dict, rules: list[dict]) -> tuple[list[str], list[str]]:
     """How a weighted_sum rule departs from its record's pose curves, and the channels it reads.
 
-    Each input must be a copy of one channel, made by one rule. The sum must be read by exactly one
-    piecewise_linear rule (the clamp), whose output is the output of the curves. Each weight w must be the
-    pose of its channel: the curve from that channel to that output has exactly the knots [[0.0, 0.0], [1.0, w]].
+    Each input must be a copy of one channel, made by one rule, and have one weight. The sum must be read by
+    exactly one rule, the clamp: a piecewise_linear rule with the sum as its only input, one output, and the knots
+    [[0, 0], [1, 1], [n, 1]] for n inputs ([[0, 0], [1, 1]] for one). Its output is the output of the curves. Each weight w must be the pose of
+    its channel: the curve from that channel to that output has exactly the knots [[0.0, 0.0], [1.0, w]].
     """
+    inputs, weights = rule.get('inputs') or [], rule['operator'].get('weights') or []
+    outputs = rule.get('outputs') or []
+    if not inputs or len(weights) != len(inputs) or len(outputs) != 1:
+        return ['it does not have one weight per input and one output'], []
     writers = {}
     for other in rules:
         for sid in other.get('outputs', []):
             writers.setdefault(sid, []).append(other)
-    clamps = [r for r in rules if r.get('inputs') == rule.get('outputs')]
-    if len(clamps) != 1 or clamps[0].get('operator', {}).get('id') != 'piecewise_linear' \
-            or len(clamps[0].get('outputs', [])) != 1:
-        return ['its sum is not read by exactly one piecewise_linear rule'], []
-    output = clamps[0]['outputs'][0]
+    readers = [r for r in rules if outputs[0] in (r.get('inputs') or [])]
+    clamp = readers[0] if len(readers) == 1 else {}
+    if len(readers) != 1 or clamp.get('operator', {}).get('id') != 'piecewise_linear' \
+            or clamp.get('inputs') != outputs or len(clamp.get('outputs', [])) != 1:
+        return ['its sum is not read by exactly one rule, a piecewise_linear clamp'], []
+    expected = [[0.0, 0.0], [1.0, 1.0]] + ([[float(len(inputs)), 1.0]] if len(inputs) > 1 else [])
+    if clamp['operator'].get('knots') != expected:
+        return [f'its clamp {clamp.get("id")} does not have the knots {expected}'], []
+    output = clamp['outputs'][0]
     knots = {c['input']: c['knots'] for c in record['curves'] if c['output'] == output}
     problems, channels = [], []
-    for sid, weight in zip(rule.get('inputs', []), rule['operator'].get('weights', [])):
+    for sid, weight in zip(inputs, weights, strict=True):
         steps = writers.get(sid, [])
         if len(steps) != 1 or steps[0].get('operator') != COPY or len(steps[0].get('inputs', [])) != 1:
             problems.append(f'its input {sid} is not a copy of one channel made by one rule')
