@@ -72,6 +72,8 @@ What this guarantees: the ledger line for a freeze is committed before the resul
 
 A mapping cites a record with the evidence id `calibration.<id>`. Its operator must be `piecewise_linear`. Its `knots` must be exactly equal to the knots of the record's curve with the same input and output. Every cell for its input channel must pass. `check.py` checks this for every mapping in the checkout's authoring files. It does this without msf-character-tools, after it verifies the installed msf-character-tools and before it runs msf-character-tools.
 
+A MediaPipe record that passes does not become a direct MediaPipe → ARKit map. It becomes a MediaPipe in-hop to the draft [canonical expression set](../docs/canonical-set.md#calibrated-mediapipe-records), `mediapipe_<group>.to_rcef`. The in-hop cites the record and the [definitions audit](../docs/canonical-set-audit.md#arkit) rows of the ARKit in-hop. `tools/calibration/k4_record.py` stays as it is until a record passes, although the `.rules` file it writes says that its rules can move to a direct `mappings/mediapipe_arkit.toml`. Then the tool changes under a new `code_commit`, and the record is frozen again with a new ledger line.
+
 ## ICT-FaceKit identities
 
 ICT-FaceKit's identity modes come from light-stage scans of real people. Fits may use them as geometry, but every record that uses them must say so. `check.py` checks this through `scan_origin`.
