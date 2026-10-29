@@ -22,7 +22,8 @@ assumption, and the values are not FACS scores:
   read as another code or left out) is shared, such as 17, 27 or 37, or on a
   visibility code;
   the same code twice; two codes that write one signal (26 and 27; two of 43,
-  45 and 46 on one eye); a code that is not in the list;
+  45 and 46 on one eye); a code that is not in the list (M codes included;
+  97* and 98* are written with their asterisk, as the list writes them);
 - some codes are read as another code (27 as 26; 45 and 46 as 43), some
   leave signals out (41, 42, 44, 33, 37 and the visibility codes 70-74),
   and the rest are listed as not read. A left-out signal has no value at
@@ -119,7 +120,10 @@ def read(notation: str | dict, data: dict | None = None) -> Reading:
             refused.append(f'{text}: {side} (one side unstated, or both sides with one stronger) cannot be encoded')
             continue
         if m:
-            not_read.append(text)
+            if f'M{code}' in data['m_codes']:
+                not_read.append(text)
+            else:
+                refused.append(f'{text}: not a code in the FACS list')
             continue
         if code in data['visibility']:
             if side:
