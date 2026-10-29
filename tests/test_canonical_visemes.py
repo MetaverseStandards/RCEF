@@ -29,7 +29,7 @@ SECTIONS = {'Pulmonic consonants': 59, 'Non-pulmonic consonants': 10, 'Other sym
 RULE_CASES = {
     # rhoticity
     'ɚ': 'rhotic', 'ɝ': 'rhotic', 'a˞': 'vowel_open', 'ə˞': 'rhotic', 'ɜ˞': 'rhotic', 'ɘ˞': 'vowel_mid_spread',
-    'o˞': 'vowel_mid_rounded',
+    'o˞': 'vowel_mid_rounded', 'l˞': 'coronal_nasal_lateral',
     # labialisation and compression
     'kʷ': 'vowel_close_rounded', 'ɡʷ': 'vowel_close_rounded', 'tʷ': 'vowel_close_rounded',
     'dʷ': 'vowel_close_rounded', 'xʷ': 'vowel_close_rounded', 'hʷ': 'vowel_close_rounded',
@@ -66,7 +66,7 @@ RULE_CASES = {
     'ɥ': 'vowel_close_rounded', 'ǁ': 'coronal_nasal_lateral', 'ɒ': 'vowel_mid_rounded',
     'ʉ': 'vowel_close_rounded', 'ɵ': 'vowel_mid_rounded', 'ɞ': 'vowel_mid_rounded',
 }
-NO_RULE = ['f͆', 'θ͆', 'k̼']
+NO_RULE = ['f͆', 'θ͆', 'k̼', 'ʃ̼']
 # Every reading of each provider label that the audit considers (META's cells and examples, VRM's remarks).
 READINGS = {
     'openxr.visemes': {'PP': 'p b m', 'FF': 'f v', 'TH': 'θ ð', 'DD': 't d', 'KK': 'k ɡ', 'CH': 't͡ʃ d͡ʒ ʃ',
@@ -156,7 +156,7 @@ class CanonicalVisemes(unittest.TestCase):
         self.assertEqual(listed, expected)
 
     def test_rule_cases(self):
-        self.assertEqual((len(RULE_CASES), len(NO_RULE)), (112, 3))
+        self.assertEqual((len(RULE_CASES), len(NO_RULE)), (113, 4))
         for symbol, expected in RULE_CASES.items():
             with self.subTest(symbol=symbol):
                 self.assertEqual(ipa_classes.classify(symbol), expected)
