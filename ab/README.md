@@ -79,7 +79,7 @@ The seeded families mix full-mantissa binary64 values with 6-decimal values. Eac
 ## Registration order
 
 1. `python3 -B scripts/ab_compare.py draft OUT.abreg --date YYYY-MM-DD` writes a draft outside this folder. It pins the channel lists, the input hashes, the code hashes, the runtime and the B pack, freezes the maps of each B pair, and computes the A1 figures.
-2. Fill in the frozen lists that the definitions audit and the data give (the loss-key table, the assumption catalogue, the audit-added keys and the others in `lists`). The project's release owners review the registration. Then compute `seed_root` again (`ab_compare.seed_root`).
+2. Fill in the frozen lists that the definitions audit and the data give (the loss-key table, the assumption catalogue, the audit-added keys and the others in `lists`). `audit_added_keys` holds, for each pair, the keys of the audit's [Keys added on today's pairs](../docs/canonical-set-audit.md#keys-added-on-todays-pairs) table, for example `meta_viseme_class_scope` for META → VRM; M4 needs a key in both lists. The project's release owners review the registration. Then compute `seed_root` again (`ab_compare.seed_root`).
 3. Commit the registration to this folder. Then, in a later commit, add its line to `FREEZES`.
 4. Run it: `python3 -B scripts/ab_compare.py run ab/ab.pivot-v1.abreg ab/results/v1`. A run whose pins do not match the checkout is refused. `--dry-run` runs anyway and marks the results as not registered.
 5. Commit the results. Merge without squashing, so the commit order stays visible.
