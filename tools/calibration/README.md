@@ -55,3 +55,20 @@ To reproduce the published cells, three things must match the record:
 - **Renderer:** the pinned binary (`binary_sha256` `60e618ff…` in the record), or a build of source `913c1641…` (`tools/render/meshrender.swift` at the freeze commit) with `swiftc -O`. A rebuild may have a different binary hash, and `k3_heldout.py` refuses a binary whose hash differs. Images also depend on the OS and GPU (record: macOS 27.0.1 arm64, Apple M4 Max).
 
 A second held-out run, with the same code, msf-character-tools build and renderer binary, gave cells equal to the published ones.
+
+## Viseme poses: META viseme shapes in ARKit shapes (`viseme_poses.py`)
+
+This tool makes the record `viseme-poses.rocketbox-female`. It fits each of Rocketbox Female's 15 META viseme shapes as a combination of her own ARKit shapes, with weights from 0 to 1, and carries the weights to canonical expression signals through the ARKit in-maps. The result is one pose per canonical viseme class. The pose bridge in the [canonical set](../../docs/canonical-set.md#viseme-pose-bridge) uses the poses of the classes that pass.
+
+The tool uses only mesh geometry, so it needs no renderer and no extra packages: Python 3.11+ and the locked msf-character-tools release wheel, which reads the Rocketbox FBX files. Do these steps in this order:
+
+1. Commit the code. `python tools/calibration/viseme_poses.py freeze --rig-cache DIR` fits Rocketbox Female, writes `calibration/viseme-poses.rocketbox-female.cal` without cells and adds its line to `calibration/FREEZES`. It never loads Rocketbox Male. **Commit the record and the ledger line before step 2.**
+2. `heldout --rig-cache DIR` refuses to run unless the record and its ledger line are committed, the installed msf-character-tools passes `check.py`'s lock check, the rig files and the pack have the SHA-256 that the record pins, and every repository file that the run imports is as at the record's `code_commit`. It then loads Rocketbox Male, scores one cell per class on the held-out seeds and adds the cells to the record. `--out FILE` also writes the cells, each class's error at full weight and the list of code files as JSON.
+
+The fit:
+
+- **Basis:** the 37 ARKit shapes that the in-maps of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` read. Each Left and Right pair shares one weight, so a pose moves both sides equally. The eye shapes, `jawLeft`, `jawRight`, `mouthLeft`, `mouthRight` and `tongueOut` are left out.
+- **Region:** every vertex except the tongue, which is every vertex that the rig's `tongueOut` moves by more than 1% of its largest move.
+- **Solver:** bounded least squares on the vertex displacements (weights from 0 to 1), by cyclic coordinate descent on the normal equations until no weight changes by more than 10⁻¹³. Weights are rounded to 3 decimals.
+
+The held-out cell of a class has 24 conditions, one per seed: the class at a weight from 0.2 to 1, and in half the conditions `sil` at 1 minus that weight. The error is the distance between Rocketbox Male's own viseme shapes at those weights and the reconstruction, divided by how far the viseme shapes move the face. The reconstruction is Male's ARKit shapes at the weights that the pack's ARKit out-maps give for the clamped sum of the frozen poses. Distances are Euclidean norms over all vertices except Male's tongue. A cell passes if its median and p95 errors are at most 0.5 (the error is at most half the motion) and its neutral error is at most 0.01. A run takes under a minute.
