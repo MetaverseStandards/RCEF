@@ -103,18 +103,22 @@ do not change.
   each class weight times the class's pose, clamped at 1: a copy per class
   (the unit changes from probability to 1), a `weighted_sum` per signal with
   the frozen poses as weights, and a clamp. The poses come from the
-  calibration record `viseme-poses.rocketbox-female`. The bridge reads only
-  the 9 classes whose held-out cells pass (`vowel_open`,
-  `vowel_close_spread`, `vowel_mid_rounded`, `dental`, `coronal_stop`,
-  `coronal_nasal_lateral`, `dorsal`, `rhotic` and `sil`); weight on the 6
-  that fail moves nothing. 54 new `rcef.intermediate` signals (63 in all),
+  calibration record `viseme-poses.rocketbox-multi`. The bridge reads only
+  the 9 classes whose held-out cells pass on all 4 held-out rigs
+  (`vowel_open`, `vowel_close_spread`, `vowel_mid_rounded`, `dental`,
+  `postalveolar`, `coronal_stop`, `dorsal`, `rhotic` and `sil`); weight on
+  the 6 that fail moves nothing. The bridge was first written from
+  `viseme-poses.rocketbox-female`; as decided before the multi-rig record's
+  held-out run, the multi-rig record replaced it for every class. It reads
+  `postalveolar` now and no longer reads `coronal_nasal_lateral`. 54 new `rcef.intermediate` signals (63 in all),
   which `scripts/build_canonical.py` writes below a marker line in
   `data/intermediate.toml`. Every bridge mapping is `proposed` and
   `approximate`: pack schema 1.0 has no `calibrated_software`. Its losses
-  are `viseme_pose_one_rig`, `viseme_pose_residual` and
+  are `viseme_pose_example_rigs`, `viseme_pose_residual` and
   `viseme_pose_classes_not_read`. No map goes from expressions to visemes.
-- New evidence record `calibration.viseme-poses.rocketbox-female`, which the
-  45 weighted sums of the bridge cite.
+- New evidence record `calibration.viseme-poses.rocketbox-multi`, which the
+  45 weighted sums of the bridge cite. It replaced the evidence record
+  `calibration.viseme-poses.rocketbox-female`.
 - `examples/rcef_route.py` runs a bridge between the canonical sets when the
   target reads what it writes, the source cannot write that itself, and the
   source writes some of what it reads: META or VRM to ARKit, FB2 or Unified
@@ -202,14 +206,31 @@ exclusive, and the data now builds this in.
   classes); the neutral bound cannot fail; `vowel_mid_spread` (0.51),
   `postalveolar` (0.52), `vowel_close_rounded` (0.59), `alveolar_sibilant`
   (0.64), `bilabial` (0.67) and `labiodental` (0.92) fail and are published
-  as negative results. Made by `tools/calibration/viseme_poses.py`.
+  as negative results. Made by `tools/calibration/viseme_poses.py` at its
+  freeze commit. No mapping cites it now.
+- Calibration record `calibration/viseme-poses.rocketbox-multi.cal`
+  (software-only; mesh geometry only): one pose per class for 10 Rocketbox
+  training rigs at once, with Left and Right weights apart and the largest
+  training-rig error made small (Lawson reweighting of bounded least
+  squares). A rule in `tools/calibration/viseme_rigs.json` chose the
+  training and held-out rigs before any new rig was downloaded; the method
+  was chosen by leave-one-rig-out cross-validation on the training rigs
+  (`viseme_poses.py cv`). Same bounds as the single-rig record. Held out on
+  Female_Adult_04, Female_Adult_13, Male_Adult_05 and Male_Adult_11: 9 of
+  15 classes pass on every rig (`sil` trivially: 8 of 14 speech classes).
+  `coronal_nasal_lateral` (0.46 to 0.51), `vowel_mid_spread` (0.54 to
+  0.59), `vowel_close_rounded` (0.55 to 0.60), `bilabial` (0.56 to 0.70),
+  `alveolar_sibilant` (0.62 to 0.64) and `labiodental` (0.90 to 0.93) fail
+  and are published as negative results. `examples/rigs.py` pins the 12 new
+  Rocketbox files.
 - `check.py` accepts a record with no `renderer` (a fit that renders
   nothing), and a `weighted_sum` that cites a record of poses: each input a
   copy of one channel, one clamp reading the sum, and weights exactly the
   frozen poses. `calibration/README.md` describes both.
-- `examples/viseme_bridge.py` drives Rocketbox Male and ICT-FaceKit with
-  META viseme frames through the bridge, writes the meshes for rendering,
-  and compares Male with its own viseme shapes.
+- `examples/viseme_bridge.py` drives a Rocketbox rig (default the held-out
+  Female_Adult_04) and ICT-FaceKit with META viseme frames through the
+  bridge, writes the meshes for rendering, compares the Rocketbox rig with
+  its own viseme shapes, and prints a line per META viseme.
 
 - Calibration record `calibration/rig-gains.ict-rocketbox-female.cal`
   (software-only; not a measurement of any tracker): one monotone curve per

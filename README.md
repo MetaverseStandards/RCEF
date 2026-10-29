@@ -105,7 +105,7 @@ The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are 
 
 On the pairs that the direct maps also translate, the composed route gives the same weights as the direct maps (`tests/test_pivot_structure.py`); for META visemes to VRM that is `visemes.to_vrm`. All 348 mappings in the 55 maps of the two canonical sets are proposed and approximate. `scripts/build_canonical.py` writes both profiles and these maps from the two documents.
 
-The viseme pose bridge, `rcef_viseme_pose.to_rcef_expression`, joins the two canonical sets: 99 proposed mappings in 1 map, with 54 helper values in `rcef.intermediate`. It writes canonical expression values from the 9 viseme classes whose held-out cells pass in the calibration record `viseme-poses.rocketbox-female`. `scripts/build_canonical.py` writes it from the record.
+The viseme pose bridge, `rcef_viseme_pose.to_rcef_expression`, joins the two canonical sets: 99 proposed mappings in 1 map, with 54 helper values in `rcef.intermediate`. It writes canonical expression values from the 9 viseme classes whose held-out cells pass on all 4 held-out rigs in the calibration record `viseme-poses.rocketbox-multi`. `scripts/build_canonical.py` writes it from the record.
 
 ### Mappings
 
@@ -211,7 +211,7 @@ Each map reads one group and writes the target set's visemes for it. No map read
 
 #### The viseme pose bridge
 
-The bridge goes from the canonical viseme set to the canonical expression set. Each canonical expression signal of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` is the sum of each class weight times the class's pose, clamped at 1. The poses come from the calibration record [`viseme-poses.rocketbox-female`](calibration/README.md): one rig's viseme shapes, measured in its own ARKit shapes. The bridge reads only the 9 classes whose held-out cells pass (`sil` trivially, so 8 of 14 speech classes). So META visemes and VRM vowels can drive ARKit, FB2 and Unified Expressions faces, with the limits that [canonical-set.md](docs/canonical-set.md#viseme-pose-bridge) gives.
+The bridge goes from the canonical viseme set to the canonical expression set. Each canonical expression signal of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` is the sum of each class weight times the class's pose, clamped at 1. The poses come from the calibration record [`viseme-poses.rocketbox-multi`](calibration/README.md): the viseme shapes of 10 Rocketbox rigs, measured in their own ARKit shapes, and held out on 4 others. The bridge reads only the 9 classes whose held-out cells pass on every held-out rig (`sil` trivially, so 8 of 14 speech classes). Lip closure for p, b and m (`bilabial`) fails, so it moves nothing. So META visemes and VRM vowels can drive ARKit, FB2 and Unified Expressions faces, with the limits that [canonical-set.md](docs/canonical-set.md#viseme-pose-bridge) gives.
 
 | Map | Source set → target set | Mappings | Evidence status |
 |---|---|---|---|
@@ -359,11 +359,11 @@ To check only the reports with Python's standard library, run `python3 -B script
 
 ## Examples
 
-[examples/README.md](examples/README.md) uses RCEF from start to end with the msf-character-tools public API. It translates FB2 frames to ARKit weights, and META visemes to VRM presets, from CSV. It then drives two Microsoft Rocketbox faces and the ICT-FaceKit face with a FACS-based expression library, both directly and through RCEF's mappings, and reports the residuals. It also renders a short spoken phrase as visemes on Rocketbox and on a VRM model, and drives Rocketbox Male and ICT-FaceKit with visemes through the viseme pose bridge.
+[examples/README.md](examples/README.md) uses RCEF from start to end with the msf-character-tools public API. It translates FB2 frames to ARKit weights, and META visemes to VRM presets, from CSV. It then drives two Microsoft Rocketbox faces and the ICT-FaceKit face with a FACS-based expression library, both directly and through RCEF's mappings, and reports the residuals. It also renders a short spoken phrase as visemes on Rocketbox and on a VRM model, and drives a held-out Rocketbox rig and ICT-FaceKit with visemes through the viseme pose bridge.
 
 ## Calibration
 
-[calibration/](calibration/README.md) holds software-only calibration records. They are fits to renders or mesh geometry of example rigs, not measurements of a tracker. `check.py` refuses a mapping that cites a record unless its values are exactly the record's frozen values (knots, or the poses of a weighted sum) and every held-out cell of each channel it reads passed. In data 0.5.0 the 45 weighted sums of the viseme pose bridge cite `viseme-poses.rocketbox-female`, for the 9 classes that pass. The renderer for the rendered fits is in [tools/render/](tools/render/README.md), and the tools that make the records are in [tools/calibration/](tools/calibration/README.md).
+[calibration/](calibration/README.md) holds software-only calibration records. They are fits to renders or mesh geometry of example rigs, not measurements of a tracker. `check.py` refuses a mapping that cites a record unless its values are exactly the record's frozen values (knots, or the poses of a weighted sum) and every held-out cell of each channel it reads passed. In data 0.5.0 the 45 weighted sums of the viseme pose bridge cite `viseme-poses.rocketbox-multi`, for the 9 classes that pass. The earlier `viseme-poses.rocketbox-female` stays as history; no mapping cites it. The renderer for the rendered fits is in [tools/render/](tools/render/README.md), and the tools that make the records are in [tools/calibration/](tools/calibration/README.md).
 
 ## Open questions
 

@@ -58,24 +58,43 @@ A second held-out run, with the same code, msf-character-tools build and rendere
 
 ## Viseme poses: META viseme shapes in ARKit shapes (`viseme_poses.py`)
 
-This tool makes the record `viseme-poses.rocketbox-female`. It fits each of Rocketbox Female's 15 META viseme shapes as a combination of her own ARKit shapes, with weights from 0 to 1, and carries the weights to canonical expression signals through the ARKit in-maps. The result is one pose per canonical viseme class. The pose bridge in the [canonical set](../../docs/canonical-set.md#viseme-pose-bridge) uses the poses of the classes that pass.
+This tool makes the record `viseme-poses.rocketbox-multi`. For each canonical viseme class, it fits one combination of ARKit shapes, with weights from 0 to 1, to the META viseme shapes of the 10 training rigs at once. It carries the weights to canonical expression signals through the ARKit in-maps. The result is one pose per canonical viseme class. The pose bridge in the [canonical set](../../docs/canonical-set.md#viseme-pose-bridge) uses the poses of the classes that pass. The earlier record `viseme-poses.rocketbox-female` was made by this tool at its freeze commit `a0381b2` (see [calibration/README.md](../../calibration/README.md#frozen-part-ledger-and-held-out-seeds)); the tool no longer makes it.
 
-The tool uses only mesh geometry, so it needs no renderer and no extra packages: Python 3.11+ and the locked msf-character-tools release wheel, which reads the Rocketbox FBX files. Do these steps in this order:
+The tool uses only mesh geometry, so it needs no renderer and no extra packages: Python 3.11+ and the locked msf-character-tools release wheel, which reads the Rocketbox FBX files. The rig sets are in [viseme_rigs.json](viseme_rigs.json) (see [below](#rig-sets-for-the-multi-rig-viseme-poses-viseme_rigsjson)). Do these steps in this order:
 
-1. Commit the code. `python tools/calibration/viseme_poses.py freeze --rig-cache DIR` fits Rocketbox Female, writes `calibration/viseme-poses.rocketbox-female.cal` without cells and adds its line to `calibration/FREEZES`. It never loads Rocketbox Male. **Commit the record and the ledger line before step 2.**
-2. `heldout --rig-cache DIR` refuses to run unless the record and its ledger line are committed, the installed msf-character-tools passes `check.py`'s lock check, the rig files and the pack have the SHA-256 that the record pins, and every repository file that the run imports is as at the record's `code_commit`. It then loads Rocketbox Male, scores one cell per class on the held-out seeds and adds the cells to the record. `--out FILE` also writes the cells, each class's error at full weight and the list of code files as JSON.
+1. Commit the code. `python tools/calibration/viseme_poses.py cv --rig-cache DIR` prints the leave-one-rig-out comparison of the candidate methods. It loads only the training rigs. It takes about 6 minutes.
+2. `freeze --rig-cache DIR` checks that the rig sets follow their rule, fits the training rigs, writes `calibration/viseme-poses.rocketbox-multi.cal` without cells and adds its line to `calibration/FREEZES`. It never loads a held-out rig. **Commit the record and the ledger line before step 3.**
+3. `heldout --rig-cache DIR` refuses to run unless the record and its ledger line are committed, the installed msf-character-tools passes `check.py`'s lock check, the rig files and the pack have the SHA-256 that the record pins, and every repository file that the run imports, and `viseme_rigs.json`, is as at the record's `code_commit`. It then loads the held-out rigs, scores one cell per class and rig on the held-out seeds and adds the cells to the record. `--out FILE` also writes the cells, each cell's error at full weight and the list of code files as JSON. It takes under a minute.
 
 The fit:
 
-- **Basis:** the 37 ARKit shapes that the in-maps of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` read. Each Left and Right pair shares one weight, so a pose moves both sides equally. The blink and gaze shapes (`eyeBlink*`, `eyeLook*`), `jawLeft`, `jawRight`, `mouthLeft`, `mouthRight` and `tongueOut` are left out; the lid and cheek shapes (`eyeSquint`, `eyeWide`, `cheekSquint`) are in.
-- **Region:** every vertex except the tongue, which is every vertex that the rig's `tongueOut` moves by more than 1% of its largest move.
-- **Solver:** bounded least squares on the vertex displacements (weights from 0 to 1), by cyclic coordinate descent on the normal equations until no weight changes by more than 10⁻¹³. Weights are rounded to 3 decimals.
+- **Basis:** the 37 ARKit shapes that the in-maps of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` read. Left and Right shapes have their own weights. The blink and gaze shapes (`eyeBlink*`, `eyeLook*`), `jawLeft`, `jawRight`, `mouthLeft`, `mouthRight` and `tongueOut` are left out; the lid and cheek shapes (`eyeSquint`, `eyeWide`, `cheekSquint`) are in.
+- **Region:** on each rig, every vertex except the tongue, which is every vertex that the rig's `tongueOut` moves by more than 1% of its largest move.
+- **Objective:** on each training rig, the error is the distance between the fit and the rig's viseme shape, divided by how far the viseme shape moves the face. The fit makes the largest error over the training rigs as small as it can.
+- **Solver:** Lawson reweighting, 100 rounds. Each round fits bounded least squares (weights from 0 to 1) to the sum of each rig's weight times its squared error, by cyclic coordinate descent on the normal equations until no weight changes by more than 10⁻¹³. Each rig's weight starts at 1 and is then multiplied by its error. Weights are rounded to 3 decimals.
 
-The held-out cell of a class has 24 conditions, one per seed: the class at a weight from 0.2 to 1, and in half the conditions `sil` at 1 minus that weight. The error is the distance between Rocketbox Male's own viseme shapes at those weights and the reconstruction, divided by how far the viseme shapes move the face. The reconstruction is Male's ARKit shapes at the weights that the pack's ARKit out-maps give for the clamped sum of the frozen poses. Distances are Euclidean norms over all vertices except Male's tongue. A cell passes if its median and p95 errors are at most 0.5 (the error is at most half the motion) and its neutral error is at most 0.01. The neutral bound cannot fail: at weight 0 the bridged weights are 0, so both faces are neutral. A run takes under a minute.
+How the method was chosen, on the training rigs only. Each candidate was fitted to 9 training rigs and scored on the 10th, for each of the 10 rigs. The candidates were: an objective that sums the squared errors or makes the largest error small (minimax); Left and Right with their own weights or one shared weight (mirror-symmetric, as in the earlier record); and the lip region (the vertices that `mouthFunnel` moves by more than 20% of its largest move) weighted 5 times or not. The rule was to take the candidate with the most classes at or below 0.5 on every left-out rig, then the lowest mean of the largest error per class. Results (`cv` at `c0b8b8b`):
+
+| Candidate | Classes at or below 0.5 on every left-out rig | Mean of the largest error per class |
+|---|---|---|
+| Female_Adult_01 alone, mirror-symmetric, least squares (the earlier method) | 7 | 0.514 |
+| minimax, Left and Right apart (chosen) | 8 | 0.479 |
+| least squares, Left and Right apart | 7 | 0.484 |
+| minimax, mirror-symmetric | 8 | 0.506 |
+| least squares, mirror-symmetric | 7 | 0.513 |
+| minimax, Left and Right apart, lip region ×5 | 6 | 0.499 |
+| least squares, Left and Right apart, lip region ×5 | 7 | 0.495 |
+| minimax, mirror-symmetric, lip region ×5 | 6 | 0.526 |
+| least squares, mirror-symmetric, lip region ×5 | 7 | 0.522 |
+| each rig fitted to itself (a floor, not a candidate) | 9 | 0.443 |
+
+With the chosen method, the 8 classes are `vowel_open`, `vowel_close_spread`, `vowel_mid_rounded`, `dental`, `postalveolar` (largest 0.497), `coronal_stop`, `dorsal` and `sil`. `rhotic` reached 0.628 and `coronal_nasal_lateral` 0.590 on one left-out rig, Female_Adult_12. The lip weighting gave no lip class a pass: `bilabial` stayed at 0.71 or more and `labiodental` at 0.91 or more on its worst left-out rig. Even when each rig is fitted to itself, `vowel_mid_spread`, `vowel_close_rounded`, `bilabial`, `labiodental` and `alveolar_sibilant` stay above 0.5 on every rig, and `coronal_nasal_lateral` reaches 0.511 on one.
+
+The held-out cell of a class on a rig has 24 conditions, one per seed: the class at a weight from 0.2 to 1, and in half the conditions `sil` at 1 minus that weight. The error is the distance between the rig's own viseme shapes at those weights and the reconstruction, divided by how far the viseme shapes move the face. The reconstruction is the rig's ARKit shapes at the weights that the pack's ARKit out-maps give for the clamped sum of the frozen poses. Distances are Euclidean norms over all vertices except the rig's tongue. A cell passes if its median and p95 errors are at most 0.5 (the error is at most half the motion) and its neutral error is at most 0.01. A class passes if its cells pass on all 4 held-out rigs. The neutral bound cannot fail: at weight 0 the bridged weights are 0, so both faces are neutral.
 
 ## Rig sets for the multi-rig viseme poses (`viseme_rigs.json`)
 
-The next viseme pose record, `viseme-poses.rocketbox-multi`, is fitted on several Rocketbox rigs and held out on others. [viseme_rigs.json](viseme_rigs.json) fixes the rig sets. They were chosen by a rule, before any new rig was downloaded. Only the HTTP status and size of each file at Rocketbox commit `0943055` were known then.
+The viseme pose record `viseme-poses.rocketbox-multi` is fitted on several Rocketbox rigs and held out on others. [viseme_rigs.json](viseme_rigs.json) fixes the rig sets. They were chosen by a rule, before any new rig was downloaded. Only the HTTP status and size of each file at Rocketbox commit `0943055` were known then.
 
 - **Candidates:** every `Female_Adult_NN` and `Male_Adult_NN` facial FBX at that commit, except `_01`. That is `Female_Adult_02` to `_17` and `Male_Adult_02` to `_21`.
 - **Training:** `Female_Adult_01` and `Male_Adult_01`, plus 4 new rigs of each sex. Rocketbox Male_Adult_01 was the held-out rig of `viseme-poses.rocketbox-female`, so it may be used for training but never again as a held-out rig.
