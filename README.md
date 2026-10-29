@@ -56,7 +56,7 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 
 ### Documents
 
-- `docs/`: the [architecture guide](docs/architecture.md) (also as a diagram and a web page), the [full table of expression sets](docs/expression-sets.md) and calibration notes.
+- `docs/`: the [architecture guide](docs/architecture.md) (also as a diagram and a web page), the [full table of expression sets](docs/expression-sets.md), calibration notes, and the draft [canonical expression set](docs/canonical-set.md) with its [definitions audit](docs/canonical-set-audit.md) and [FACS intensity codec](docs/facs-intensity.md).
 - `survey.md`: what RCEF selected from each system, and the limits of each.
 - `proposal.md`: the data format, the API and the release limits.
 - `CHANGELOG.md`, `CONTRIBUTING.md` and `GOVERNANCE.md`: the changes in each data version, what a change must include, and who owns releases.
@@ -266,6 +266,7 @@ Each open item below is stated in full in the linked document.
 - [Architecture guide](docs/architecture.md): what `check.py` does, how TOML is discovered and validated, how maps compile and run in memory, the generated reports, and worked examples of each operator. The [visual architecture report](docs/architecture.html), [standalone diagram](docs/architecture.svg) and [TOML file index](docs/toml-index.csv) describe the same data 0.4.0 tree as the guide.
 - [Expression sets](docs/expression-sets.md): every profile file, with its documentation, pinned source and licence.
 - [Godot comparison](docs/godot_comparison.md): RCEF's FB2 → ARKit mappings compared with the routes in Godot's public sources.
+- [Canonical expression set (draft)](docs/canonical-set.md): the proposed pivot vocabulary, with its [definitions audit](docs/canonical-set-audit.md) and the [FACS intensity codec](docs/facs-intensity.md). It is a proposal for review; the data does not hold it yet.
 - [Survey](survey.md), [proposal](proposal.md), [references](references.md) and [source evidence](evidence/sources.toml).
 - [Review](REVIEW.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
 - [Calibration notes](docs/calibration/): the physical capture design, the action unit dataset review and the MediaPipe licence check.

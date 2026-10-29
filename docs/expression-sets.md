@@ -45,3 +45,39 @@ The Signals column counts every inventory row, including count sentinels and row
 ## RCEF's own sets
 
 RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.toml](../data/canonical.toml). It is the target of the three `*.to_canonical` maps. RCEF's intermediate values, `rcef.intermediate` (4 signals), are in [data/intermediate.toml](../data/intermediate.toml). Each one is the signed difference of two opposing ARKit gaze directions. `arkit_gaze.to_fb2` computes them internally, and no provider reads or writes them.
+
+## Planned expression sets
+
+This section is a plan, not data. It goes with the draft [canonical expression set](canonical-set.md), through which every translation is to run. Phase 1 is the first release of the canonical set. Its sources are ARKit, FB2, META visemes, VRM (blinks and vowels), VRCFaceTracking eye data and FACS codes (`facs.code`); Unified Expressions is a target only.
+
+**Rule for every new set.** A set joins only with a pinned public source and a known licence. It gets a profile, evidence records, rows in the [definitions audit](canonical-set-audit.md), a row in the test that checks which canonical groups each set can fill, and in-maps or out-maps. A new copyright holder of CC-BY-4.0 text gets a row in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). A product name in a profile ID gets a trademark check. New sets join after the first release of the canonical set, so they do not change the comparison with today's maps. A pair of sets with no public route between them is labelled "no external reference".
+
+**How the list was made.** It has RCEF's own profiles; every face, facial, lip and eye-expression weight enum in the OpenXR registry at `5a82d45` (`xr_registry`), so it is complete for OpenXR at that commit; and other sets the authors knew of. It is not a complete list of public sets.
+
+**Sets that already have a profile:**
+
+| Set | Public source | Licence or terms | Signals | Phase | Notes |
+|---|---|---|---:|---|---|
+| OpenXR `XR_FB_face_tracking` (FB v1) | `xr_fb`, `xr_registry` at `5a82d45` | CC-BY-4.0 extension text; `xr.xml` Apache-2.0 OR MIT | 63 | 1b | 63 copies, one in-map per group |
+| VRCFaceTracking Unified Expressions: in-maps, transport and part shapes | `vrcft_*` records, VRCFaceTracking `6432e6a` | Apache-2.0 code; documentation reference only | 88 transport; 102 base and 42 blended artist shapes | out-maps 1; in-maps 2 | the parts need new IDs and blended weights |
+| Godot `XRFaceTracker` | `godot_enum` at `e7b12e7` | MIT | 102 base and 41 blended | out-maps 2; in-maps 3 | the names follow Unified Expressions (`godot_enum` lines 38-40) |
+| MediaPipe | `mediapipe` at `f6988c4` | Apache-2.0 | 52 | 2, if the project decides to map it | a passing calibration record becomes an in-hop ([calibration/README.md](../calibration/README.md#mappings-that-cite-a-record)) |
+| Roblox `FaceControls` | `roblox_*` records at `a0fce04` | CC-BY-4.0 | 50, all `unresolved` today | 3 | joint poses with FACS-style names but no code numbers; side convention not checked |
+| VRM emotions and `look*` presets | `vrm_*` records | reference only | — | not planned | out of scope ([README](../README.md#mappings)) |
+
+**New public sets:**
+
+| Set | Public source | Licence or terms | Signals | Phase | Notes |
+|---|---|---|---:|---|---|
+| OpenXR `XR_ANDROID_face_tracking` | `xr_registry`: `xr.xml` lines 8629-8698, extension line 20744; extension text in OpenXR-Docs at `5a82d45` | CC-BY-4.0 extension text; `xr.xml` Apache-2.0 OR MIT | 68: 64 with FB2 names, plus 4 tongue directions | 1b | 64 copies; the 4 tongue directions are not mapped |
+| OpenXR `XR_ML_facial_expression` | `xr.xml` lines 8948-8996, extension line 21105 | CC-BY-4.0 extension text | 46: 45 with FB2 names, plus CHIN_RAISER | 1b | CHIN_RAISER → `chin_raise`; `chin_raise_upper_lip` is not available, as for FACS 17. It can fill the `face` group because cheek puff, jaw thrust and jaw sideways have groups of their own |
+| OpenXR `XR_BD_facial_simulation` | `xr.xml` lines 9485-9561, extension line 19731 | CC-BY-4.0 extension text | 72: 52 face shapes and 20 lip classes | 2 | the lip classes differ from META's 15 and need their own audit |
+| OpenXR `XR_HTC_facial_tracking` | `xr.xml` lines 8422-8478, extension line 16244 | CC-BY-4.0 extension text | 51: 14 eye and 37 lip shapes | 2 | no brow or nose shapes, so it cannot fill `face`; it needs a split of `face` into one group per action |
+| OpenFace 2.x action unit outputs | OpenFace wiki pages "Action-Units" and "Output-Format" (not pinned to a commit) | software licensed for noncommercial academic research only; the licence grants no trademark rights; the wiki pages state no licence | 18 action units; intensity 0 to 5 for 17 of them | 2 | column names and the scale used as facts only; in-maps only, by `piecewise_linear` knots (0, 0), (1, 0.2) … (5, 1.0); no sides, so each sided signal is a fan-out; cannot fill `face` (no 8, 16, 18, 22, 24 or 28); needs a trademark check |
+| Py-Feat action unit outputs | `feat/pretrained.py` at `4ebb4ec` (lines 89-108) | code MIT; model weights noncommercial | 20 action units | 2 | output scale not checked; in-maps only; cannot fill `face` (no 8, 16, 18 or 22) |
+| Microsoft Rocketbox AU shapes | Rocketbox at `0943055` | MIT | 48 shapes | test asset | a target asset for FACS, not a new set |
+| MetaHuman curves; MPEG-4 facial animation parameters; Apple Vision Pro personas | Epic documentation; ISO/IEC 14496-2; Apple documentation | MetaHuman DNA calibration files: Epic terms, Unreal Engine only; ISO standard paid | — | not planned | MetaHuman only if Epic publishes the names under usable terms |
+| Live Link Face; Unity AR Foundation | Epic and Unity documentation | not checked | ARKit's 52 | no new set | these pass ARKit values through; use the ARKit profile |
+| FACS emotion presets (EMFACS) | `facs_wikipedia` raw lines 36-53 | CC-BY-SA-4.0 article text | 7 emotions | examples only | stay in `examples/data/expressions.json`, not pack data |
+
+**Phase 1b** also adds the FACS gaze codes 61-64, with the loss key `facs_side_frame_unresolved`. **Phase 2** adds the FACS-only signals that the action unit detectors need, such as `lips_part` (25), as version 1.1 signals ([reserved names](canonical-set.md#reserved-names)).
