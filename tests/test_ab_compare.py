@@ -49,11 +49,13 @@ class Metrics(unittest.TestCase):
         self.assertEqual(ab_compare.m2(a1, b)[0]['violations'], 0)
 
     def test_b_must_equal_the_oracle_bit_for_bit_with_the_same_codes_and_labels(self):
-        b = [result({'x': 0.0}), result(refused={'m': {'codes': ['E_DOMAIN'], 'refs': []}})]
-        o = [{'values': {'x': -0.0}, 'refused': {}, 'labels': {}}, {'values': {}, 'refused': {'m': ['E_DOMAIN']},
-                                                                    'labels': {}}]
+        refused = {'m': {'codes': ['E_DOMAIN'], 'refs': ['rules/out']}}
+        b = [result({'x': 0.0}), result(refused=refused), result(refused=refused)]
+        o = [{'values': {'x': -0.0}, 'refused': {}, 'labels': {}},
+             {'values': {}, 'refused': refused, 'labels': {}},
+             {'values': {}, 'refused': {'m': {'codes': ['E_DOMAIN'], 'refs': ['in']}}, 'labels': {}}]
         counts, failures = ab_compare.equals_oracle(b, o)
-        self.assertEqual((counts['differences'], failures[0][0]), (1, 0))
+        self.assertEqual((counts['differences'], [f[0] for f in failures]), (2, [0, 2]))
 
     def test_observed_loss_ignores_dropped_and_declared_inputs(self):
         frames = [{'values': {'a': 0.0, 'b': 0.0, 'c': 0.0, 'd': 0.0}}] + [

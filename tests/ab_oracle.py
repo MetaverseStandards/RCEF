@@ -205,7 +205,8 @@ class Oracle:
         in_hops lists (in-map, canonical profile); out_maps lists (out-map,
         canonical profile). With no in-hops the out-maps read the source frame
         (one-hop mode). The result holds values, refusal codes by map and
-        labels of outputs not written, as rcef_route.Route gives them.
+        labels of outputs not written, as rcef_route.Route gives them: a
+        refusal holds its codes and the references after "/samples/<n>/".
         """
         result = {'values': {}, 'refused': {}, 'labels': {}}
         middle, writer = (dict(values), {}) if not in_hops else ({}, {})
@@ -213,7 +214,7 @@ class Oracle:
             outputs, diagnostics = self.run(mapping, source, canonical, values, flags)
             writer.update(dict.fromkeys(self.plan(mapping, canonical).outputs, mapping))
             if outputs is None:
-                result['refused'][mapping] = sorted({code for code, _ in diagnostics})
+                result['refused'][mapping] = refusal(diagnostics)
             else:
                 middle.update(outputs)
         for mapping, canonical in out_maps:
@@ -229,11 +230,16 @@ class Oracle:
             outputs, diagnostics = self.run(mapping, canonical if in_hops else source, target, middle,
                                             {} if in_hops else flags)
             if outputs is None:
-                result['refused'][mapping] = sorted({code for code, _ in diagnostics})
+                result['refused'][mapping] = refusal(diagnostics)
                 result['labels'].update(dict.fromkeys(plan.outputs, f'refused at {mapping}'))
             else:
                 result['values'].update(outputs)
         return result
+
+
+def refusal(diagnostics: list) -> dict:
+    return {'codes': sorted({code for code, _ in diagnostics}),
+            'refs': sorted({ref.split('/', 3)[3] for _, ref in diagnostics if ref.count('/') >= 3})}
 
 
 def changed(zero: dict, other: dict) -> set:
