@@ -62,7 +62,7 @@ What [examples/rcef_translate.py](examples/rcef_translate.py) does, and why:
 Each mapping (and each signal) has an `evidence_status` field. It says how well the mapping itself is supported. It is not the `status` of the evidence records it cites: all records in `evidence/sources.toml` are `verified_current`, including the records that `proposed` mappings cite. The values of `evidence_status` are:
 
 - `verified_current`: the mapping restates a verified source fact. The three `*.to_canonical` maps and the synthetic `fixture.affine` and `fixture.bilateral` use it.
-- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 direct cross-provider mappings and their 4 internal gaze steps are `proposed`, and so are the 306 mappings into and out of the canonical expression set and the 60 canonical expression signals.
+- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 direct cross-provider mappings and their 4 internal gaze steps are `proposed`, and so are the 348 mappings into and out of the canonical expression and viseme sets and their 76 signals.
 - `unresolved`: recorded but not executable. `compile_mapping` refuses it, even with the opt-in. The MediaPipe → ARKit map `survey.ambiguous` is the example.
 
 `calibrated_software` is the `status` of the records in [calibration/](calibration/README.md). They are fits to renders of example rigs, not measurements of a tracker. The pack uses schema 1.0, which does not have this value, and no mapping in data 0.5.0 cites a calibration record.
@@ -85,7 +85,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | Path | Contents |
 |---|---|
 | `pack.toml` | Root metadata, including `data_version`. |
-| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (60) and `rcef.intermediate` (8). `canonical_expression.toml` is generated. |
+| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (60), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (9). `canonical_expression.toml` and `canonical_viseme.toml` are generated. |
 | `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. |
 | `mappings/` | Maps. Each map is a group of one-way mappings. `canonical_*.toml` hold the maps into and out of the canonical expression set; they are generated. |
 | `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` (the msf-character-tools lock), `input-contracts/`. |
@@ -111,7 +111,7 @@ python3 -B scripts/export_reports.py         # reports only; add --write to rege
 python3 -B scripts/export_references.py --write   # references.md from evidence/sources.toml
 python3 -B scripts/compare_godot.py --write       # docs/godot_comparison.md
 python3 -B scripts/export_toml_index.py --write   # docs/toml-index.csv
-python3 -B scripts/build_canonical.py --write     # data/canonical_expression.toml, mappings/canonical_*.toml
+python3 -B scripts/build_canonical.py --write     # data/canonical_expression.toml, data/canonical_viseme.toml, mappings/canonical_*.toml
 sh scripts/ci_local.sh                       # check.py and tests on Python 3.11 and 3.12
 ```
 
@@ -137,7 +137,7 @@ To adopt a new msf-character-tools release: install its wheel by hash, then run 
 - `check.py` checks the msf-character-tools install before anything else. If the install is wrong, it prints `Refusing to check` and exits 2 before it reads the data or the calibration records. It also refuses an `msf_character_tools` that would import from anywhere other than the installed distribution, for example through `PYTHONPATH`.
 - `tests/test_dependency.py` builds fake msf-character-tools installs and checks that `check.py` refuses each one before msf-character-tools runs (a marker file shows whether it ran). If you change the lock format or the order of steps in `check.py`, keep these tests meaningful. For example, the tampered-package fake must use a version and wheel tag that the lock has, or it is refused for the wrong reason.
 - Any change to a string in any TOML file changes the pack bytes and so the pack hash. Then `rcef.pack.json`, `coverage.json`, `generated/SHA256SUMS`, all three Markdown reports, `reports/SHA256SUMS` and `docs/toml-index.csv` change. A CSV report changes only if the string is one of its columns. `rcef_mapping.csv` changes only if a signal's id, label, value type, units, disposition, evidence status or profile membership changes. Regenerate everything, and commit what changed.
-- `data/canonical_expression.toml` and `mappings/canonical_*.toml` are written by `scripts/build_canonical.py` from `docs/canonical-set.md`, `docs/canonical-set-audit.md` and `tests/fixtures/baseline-dea1713.pack.json`. Do not edit them by hand: `tests/test_pivot_structure.py` fails if they differ from what the script writes. Change the documents, then run the script with `--write`.
+- `data/canonical_expression.toml`, `data/canonical_viseme.toml` and `mappings/canonical_*.toml` are written by `scripts/build_canonical.py` from `docs/canonical-set.md`, `docs/canonical-set-audit.md`, `tests/fixtures/ipa_chart_symbols.json` and `tests/fixtures/baseline-dea1713.pack.json`. Do not edit them by hand: `tests/test_pivot_structure.py` fails if they differ from what the script writes. Change the documents, then run the script with `--write`.
 - The 7 direct maps (`fb2.to_arkit`, `fb2_gaze.to_arkit`, `arkit.to_fb2`, `arkit_gaze.to_fb2`, `arkit.to_vrcft_artist`, `fb2.to_vrm`, `visemes.to_vrm`) are frozen. `tests/test_pivot_structure.py` compares them, their signals and their evidence records with `tests/fixtures/baseline-dea1713.pack.json`.
 - msf-character-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
 - `docs/architecture.html`, `.svg` and `.png` are made by hand, and no test checks them. When the data changes, update them and the counts in `docs/architecture.md`, and render the PNG from the SVG at the same size (1160 × 560). See the checklist in [docs/architecture.md](docs/architecture.md#9-independent-validation-checklist).

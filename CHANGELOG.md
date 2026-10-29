@@ -4,9 +4,10 @@ Original documentation: CC-BY-SA-4.0.
 
 ## Data 0.5.0 — unreleased
 
-The draft canonical expression set joins the data, with maps into it and out
-of it. A translation can now run from a source set through the canonical
-expression set to a target set. The 7 direct maps do not change.
+The draft canonical expression set and the draft canonical viseme set join
+the data, with maps into them and out of them. A translation can now run
+from a source set through a canonical set to a target set. The 7 direct maps
+do not change.
 
 - New profile `rcef.canonical_expression` in
   `data/canonical_expression.toml`: 60 signals, vocabulary version `1.0`,
@@ -21,7 +22,7 @@ expression set to a target set. The 7 direct maps do not change.
   canonical expression set to ARKit, FB2, VRCFaceTracking Unified
   Expressions and VRM per-eye blinks (186 mappings in 28 maps). The FB2 gaze
   out-map has 4 internal steps, which write 4 new `rcef.intermediate`
-  signals (8 in all).
+  signals.
 - Each new mapping states, as assumptions: the correspondence; the
   endpoints, with a clause that matches its operator; whether the evidence
   of today's direct maps carries over to the canonical signal or is
@@ -52,14 +53,47 @@ expression set to a target set. The 7 direct maps do not change.
   revision 1357638399), `rcsf_proposal` (the RCSF proposal at `f6c3ea8`),
   and six figure records for the FB2 and Unified Expressions figures that
   the definitions cite.
-- `scripts/build_canonical.py` writes the profile and the 46 maps from
-  `docs/canonical-set.md`, its audit and the direct maps. New tests:
+- `scripts/build_canonical.py` writes both profiles and the 55 maps from
+  `docs/canonical-set.md`, its audit, the IPA chart assignment in
+  `tests/fixtures/ipa_chart_symbols.json` and the direct maps. New tests:
   `tests/test_canonical_vocabulary.py` and `tests/test_pivot_structure.py`.
   The capability matrix in the second reads the names of FACS,
   `XR_FB_face_tracking`, `XR_ANDROID_face_tracking` and
   `XR_ML_facial_expression` from `tests/fixtures/capability_sets.json`,
   which `scripts/derive_capability_sets.py` writes from cached source bytes.
-- The viseme part of the canonical set is not in this version.
+- New profile `rcef.canonical_viseme` in `data/canonical_viseme.toml`: 16
+  signals, vocabulary version `1.0`, status `draft`. 15 are mouth-shape
+  classes defined by the IPA chart (2020 revision): `viseme_vowel` (5),
+  `viseme_consonant` (9) and `viseme_rest` (1, `sil`). They are the fewest
+  classes that keep every META viseme and every VRM vowel apart, and every
+  symbol of the chart falls in exactly one of them; the IPA symbols that no
+  provider names are assigned by place and manner, as
+  `docs/canonical-set.md` shows. The 15 are coupled as a
+  `probability_simplex`: from a valid META frame they sum to 1. The 16th
+  signal, `alveolar_floor` (group `viseme_aggregate`), is the sum of
+  `alveolar_sibilant`, `coronal_stop` and `coronal_nasal_lateral`, clamped
+  at 1; it is outside the simplex.
+- 42 new mappings in 9 maps: META visemes and the VRM vowel presets into the
+  canonical viseme set (22 mappings in 5 maps), and the canonical viseme set
+  to META visemes and the VRM vowel presets (20 mappings in 4 maps). The map
+  to `alveolar_floor` has 1 internal step, which writes 1 new
+  `rcef.intermediate` signal (9 in all). Every viseme mapping is `proposed`
+  and `approximate`.
+- META visemes to VRM through the canonical viseme set gives the same
+  weights and the same refusals as `visemes.to_vrm`. The 10 META consonant
+  and silence visemes, which no map read before, are now `mapped`.
+- Losses added for the visemes: `meta_viseme_class_scope` (META's classes
+  are named by example sounds, and the canonical classes by the IPA chart)
+  on every META viseme hop, and `meta_viseme_aggregate_sum` on the map to
+  `alveolar_floor`.
+- New evidence records for the visemes: the IPA chart (2020, Kiel and
+  Doulos SIL files), Amazon Polly's archived licence and en-US phoneme
+  table, four Wikipedia articles (roundedness, labialization, interdental
+  and linguolabial consonants), ten META viseme reference images, and the
+  viseme literature that the definitions cite.
+- New tests: `tests/test_canonical_visemes.py` checks the viseme
+  vocabulary, that every IPA chart symbol is in exactly one class, the IPA
+  rules, the aggregate and the coupling.
 
 ## Data 0.4.0 — not released (A/B baseline at `dea1713`, pack SHA-256 `630d37a5…`)
 
