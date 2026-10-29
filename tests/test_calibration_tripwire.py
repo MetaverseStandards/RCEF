@@ -21,6 +21,9 @@ RECORD_COMMIT = '2fa1be4'
 CODE = ['check.py', 'examples/rig_gains.py', 'examples/rigs.py', 'examples/ict_facekit.py', 'examples/rcef_translate.py',
         'examples/data/rig_landmarks.json', 'tools/calibration/ict_files.json', 'tools/render/']
 RECORD = ['calibration/rig-gains.ict-rocketbox-female.cal']
+# The commit that published the viseme-poses results.
+POSES_COMMIT = 'e43a0ca'
+POSES = ['calibration/viseme-poses.rocketbox-female.cal']
 
 
 def has_history():
@@ -37,6 +40,9 @@ class Protected(unittest.TestCase):
 
     def test_the_rig_gains_record_is_unchanged(self):
         self.assertIsNone(provenance.code_problem(ROOT, RECORD_COMMIT, RECORD))
+
+    def test_the_viseme_poses_record_is_unchanged(self):
+        self.assertIsNone(provenance.code_problem(ROOT, POSES_COMMIT, POSES))
 
 
 if __name__ == '__main__':
