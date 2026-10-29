@@ -2,7 +2,7 @@ path,role,table_kinds,signals,profiles,membership_rows,mappings,rules,evidence,c
 data/canonical.toml,canonical signals and profile,[[signals]]; [[profiles]],21,1,21,0,0,0,21,19997,a17ca42cc6c3ddd749874ef9e43040429bdd1c917a913e235deb3f5f171fe060,CC-BY-SA-4.0
 data/canonical_expression.toml,canonical expression signals and profile,[[signals]]; [[profiles]],60,1,60,0,0,0,60,86151,b8785ccd164eaa3399ce3e1905dc84285de5928d4114aa98eaedcac0835fa0c9,CC-BY-SA-4.0
 data/intermediate.toml,intermediate signals and profile,[[signals]]; [[profiles]],8,1,8,0,0,0,0,6946,9aee518e25863d2ac65835bbdc8eb8f01ea81cec4385740c90294ba8f6957275,CC-BY-SA-4.0
-evidence/sources.toml,source evidence,[[evidence]],0,0,0,0,0,47,0,27907,a22db0f298c3264b3100254e4244442df667bf585293cf35a7ef7d2e1f1e0486,CC-BY-SA-4.0
+evidence/sources.toml,source evidence,[[evidence]],0,0,0,0,0,76,0,47569,58ae865df3d7b62cef4c0bf287c3250b2a6d9377bf11b1a51892216a24ddfc8d,CC-BY-SA-4.0
 mappings/arkit.toml,directional maps,[[mappings]],0,0,0,1,9,0,0,5768,6f517ea1fcf885a241ad8c0ea41fa2d9fb3160564ea25adf796da7eb50ac8084,CC-BY-SA-4.0
 mappings/arkit_fb2.toml,directional maps,[[mappings]],0,0,0,2,64,0,0,90520,f6c958b30b6c8c13f8091ba294018c5ed5a358a8a4f537bf2434ccbb3b194bc3,CC-BY-SA-4.0
 mappings/arkit_vrcft.toml,directional maps,[[mappings]],0,0,0,1,68,0,0,95202,4fc813c50a2b88c9334af2a141c2ac4b8dc797794f8def8350d7bf86b9097150,CC-BY-SA-4.0
