@@ -7,6 +7,8 @@ pinned SHA-256 and loaded with msf_character_tools.inspect_asset; none is commit
 - Microsoft Rocketbox (MIT): Female_Adult_01 and Male_Adult_01 "facial" FBX
   files, with Apple's 52 ARKit shapes (AK_*), the 15 Oculus visemes (AA_VI_*)
   and FACS action-unit shapes (AU_*), authored independently of ICT-FaceKit.
+  The viseme pose tool also reads 12 more Rocketbox adults (ROCKETBOX_SHA256),
+  as rocketbox-female-NN and rocketbox-male-NN.
 - ICT-FaceKit Light (MIT): the 16 ARKit-named shapes RCEF's mappings drove first.
 - VRM1_Constraint_Twist_Sample (VRM Public License 1.0, redistribution and
   modification allowed, credit not required): VRM 1.0 expression presets.
@@ -29,13 +31,26 @@ ROCKETBOX_COMMIT = '0943055db6ec570bcef9f2c8b41c9e5467c808f9'
 ROCKETBOX_RAW = f'https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/{ROCKETBOX_COMMIT}/'
 VRM_COMMIT = '94e82dd346fa6cf0337c4421728640e5252dd38e'
 VRM_RAW = f'https://raw.githubusercontent.com/vrm-c/vrm-specification/{VRM_COMMIT}/'
+# The Rocketbox facial FBX files the examples and tools read, by avatar.
+ROCKETBOX_SHA256 = {
+    'Female_Adult_01': '2e6ba71fb83a6899e3d4dd35da07fb5b078eef0c4d593f73d70cfc05dc4644cb',
+    'Male_Adult_01': '55771cbbcffb8204dcfe450784c8439ee27bfa48efffc48d325b55ee4bd04388',
+    'Female_Adult_04': 'ce83b428828314ef675d1a64ca17d8c3d2178cc4f8b3e80273483f83f08748fb',
+    'Female_Adult_08': 'a98436064305b968d8bbf8a84632c746dbf5674c572f1916264f13ce53e7422d',
+    'Female_Adult_10': '7b7208b23688af2f884570a4aaa47ef803442fba2bdb2433f196bb977459e4b5',
+    'Female_Adult_12': '0dd67a4fd3f9d9b3a73d17e0862742ebb3197016387915b41f4815d50308c7ef',
+    'Female_Adult_13': 'fd3aabfd6e34ada38d3d7137075e4955701234cfc0f40613eae07f3750a36983',
+    'Female_Adult_14': '8fcaa34c4ed5c3ea5f6b9add7e9a39ac0184d11232688102ef0811ef8cf2914c',
+    'Male_Adult_03': '88aedb2f47ce68dab7ddaf1f53f6357290dc4edb69fc26e3d5fa27d18ee0785a',
+    'Male_Adult_05': '2ae6474a98d477d3c46553cb93ea3d452179afa4756db18c23e8aec97982a161',
+    'Male_Adult_10': 'e62c3c1345150d4cfebf454fbcb906d3cc8f4c846f4ee63e06d6928438b409a3',
+    'Male_Adult_11': '7c58b696c6f570a13dc6cb4d22f71d7ea82884eca095549fe2122c94a7f0b857',
+    'Male_Adult_13': 'acf0693228d3c3bca085f724aae2965c904b38d768bc0a71ba8a4606ab806549',
+    'Male_Adult_17': 'e779639155a145c027c54f7f6d91a2a82ad4be862bebee64337ef08245cb86b2',
+}
 FILES = {
-    'Female_Adult_01_facial.fbx': (
-        ROCKETBOX_RAW + 'Assets/Avatars/Adults/Female_Adult_01/Export/Female_Adult_01_facial.fbx',
-        '2e6ba71fb83a6899e3d4dd35da07fb5b078eef0c4d593f73d70cfc05dc4644cb'),
-    'Male_Adult_01_facial.fbx': (
-        ROCKETBOX_RAW + 'Assets/Avatars/Adults/Male_Adult_01/Export/Male_Adult_01_facial.fbx',
-        '55771cbbcffb8204dcfe450784c8439ee27bfa48efffc48d325b55ee4bd04388'),
+    **{f'{avatar}_facial.fbx': (ROCKETBOX_RAW + f'Assets/Avatars/Adults/{avatar}/Export/{avatar}_facial.fbx', digest)
+       for avatar, digest in ROCKETBOX_SHA256.items()},
     'ROCKETBOX_LICENSE.md': (ROCKETBOX_RAW + 'LICENSE.md',
                              '17474e386e0b9e1a700cc3d06b2b0882a2c376d9c6b49c7f8274409b8f8d2352'),
     'VRM1_Constraint_Twist_Sample.vrm': (
@@ -121,8 +136,8 @@ def facs_targets(targets: list[str], au_key: str) -> list[int] | None:
     return both or (sided['L'] + sided['R']) or None
 
 
-def load_rocketbox(cache: Path, which: str) -> Rig:
-    name = f'{which}_Adult_01_facial.fbx'
+def load_rocketbox(cache: Path, which: str, number: str = '01') -> Rig:
+    name = f'{which}_Adult_{number}_facial.fbx'
     fetch(cache, 'ROCKETBOX_LICENSE.md')
     snapshot = require(msf.inspect_asset(fetch(cache, name).read_bytes(), 'fbx'))
     keys = snapshot.to_dict()['source']['target_keys']
@@ -133,9 +148,21 @@ def load_rocketbox(cache: Path, which: str) -> Rig:
     arkit = rocketbox_arkit(targets)
     if len(arkit) != 52:
         raise SystemExit(f'{name}: expected 52 ARKit shapes, found {len(arkit)}')
-    return Rig(f'rocketbox-{which.lower()}', f'{ROCKETBOX_CREDIT} ({which}_Adult_01)', snapshot, node, targets,
+    return Rig(rocketbox_name(which, number), f'{ROCKETBOX_CREDIT} ({which}_Adult_{number})', snapshot, node, targets,
                shapes=[(i, a, None) for i, a in arkit.items()], visemes=rocketbox_visemes(targets),
                facs={t: i for i, t in enumerate(targets) if t.startswith('AU_')})
+
+
+def rocketbox_name(which: str, number: str) -> str:
+    """The rig name of a Rocketbox adult: rocketbox-female for Female_Adult_01, rocketbox-male-05 for Male_Adult_05."""
+    return f'rocketbox-{which.lower()}' + ('' if number == '01' else f'-{number}')
+
+
+def rocketbox_avatar(name: str) -> tuple[str, str] | None:
+    """('Female', '04') for the rig name rocketbox-female-04, ('Male', '01') for rocketbox-male; None otherwise."""
+    if m := re.fullmatch(r'rocketbox-(female|male)(?:-(\d\d))?', name):
+        return m.group(1).capitalize(), m.group(2) or '01'
+    return None
 
 
 def ict_shapes(targets: list[str]) -> list[tuple[int, str, str | None]]:
@@ -173,7 +200,10 @@ def load(name: str, cache: Path) -> Rig:
         return load_ict(cache)
     if name == 'vrm-twist':
         return load_vrm(cache)
-    return load_rocketbox(cache, {'rocketbox-female': 'Female', 'rocketbox-male': 'Male'}[name])
+    avatar = rocketbox_avatar(name)
+    if avatar is None or f'{avatar[0]}_Adult_{avatar[1]}' not in ROCKETBOX_SHA256:
+        raise SystemExit(f'unknown rig {name}')
+    return load_rocketbox(cache, *avatar)
 
 
 def triangle_indices(snapshot) -> list[int]:
