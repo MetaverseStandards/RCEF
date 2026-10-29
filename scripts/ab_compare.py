@@ -265,14 +265,13 @@ def oracle_results(oracle: ab_oracle.Oracle, pair: dict, frames: list[dict]) -> 
 
 
 def equals_oracle(b: list[dict], o: list[dict]) -> tuple[dict, list]:
-    """B's values (bit for bit), refusal codes by map and labels equal O's."""
+    """B's values (bit for bit), refusals by map (codes and references) and labels equal O's."""
     counts, failures = {'frames': len(b), 'differences': 0}, []
     for n, (x, y) in enumerate(zip(b, o, strict=True)):
-        codes = {m: r['codes'] for m, r in x['refused'].items()}
         if ({k: bits(v) for k, v in x['values'].items()} != {k: bits(v) for k, v in y['values'].items()}
-                or codes != y['refused'] or x['labels'] != y['labels']):
+                or x['refused'] != y['refused'] or x['labels'] != y['labels']):
             counts['differences'] += 1
-            failures.append([n, json.dumps(codes, sort_keys=True), json.dumps(y['refused'], sort_keys=True)])
+            failures.append([n, json.dumps(x['refused'], sort_keys=True), json.dumps(y['refused'], sort_keys=True)])
     return counts, failures
 
 

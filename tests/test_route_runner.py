@@ -157,7 +157,7 @@ class TranslatorAnchor(unittest.TestCase):
         self.assertEqual(set(result['labels'].values()), {'refused at arkit.to_fb2'})
 
 
-def synthetic_pack():
+def synthetic_document():
     """A small pack with one source set, the canonical expression set, a second source and one target set.
 
     Canonical groups: brow (2), jaw, eye, tongue and cheek. No out-map reads
@@ -206,10 +206,13 @@ def synthetic_pack():
         {'id': 'rcef_cheek.to_tgt', 'rules': [rule('out.cheek', [c['cheek']], 'tgt.cheek', copy)]},
     ]
     evidence = [e for e in base['evidence'] if e['id'] == 'rcef_definitions']
-    document = {**{k: base[k] for k in ('schema_version', 'data_version', 'operator_version', 'license')},
-                'id': 'synthetic.route', 'signals': signals, 'profiles': profiles, 'mappings': mappings,
-                'evidence': evidence}
-    return rcef_translate.load_pack(document)
+    return {**{k: base[k] for k in ('schema_version', 'data_version', 'operator_version', 'license')},
+            'id': 'synthetic.route', 'signals': signals, 'profiles': profiles, 'mappings': mappings,
+            'evidence': evidence}
+
+
+def synthetic_pack():
+    return rcef_translate.load_pack(synthetic_document())
 
 
 class TwoHop(unittest.TestCase):
