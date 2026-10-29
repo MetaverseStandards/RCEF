@@ -16,7 +16,10 @@ tests/fixtures/baseline-dea1713.pack.json:
 - every assumption and every loss of today's maps has a home on the route (M4b), and a route adds
   only the audit keys that the audit lists for its pair;
 - the composed hop weights equal today's weights (M1s);
-- which canonical groups other sets could fill (the capability matrix).
+- which canonical groups other sets could fill (the capability matrix);
+- the viseme aggregate: its chain gives the clamped binary64 sum of its META
+  inputs, no route selects its in-map, and no out-map reads an aggregate or
+  refinement together with any of its parts.
 
 The viseme hops (META and the VRM vowels to and from the canonical viseme set)
 follow the same rules; their one fan-in, the aggregate alveolar_floor, is a
@@ -24,6 +27,7 @@ census exception scoped to its map.
 """
 import json
 from pathlib import Path
+import random
 import re
 import sys
 import unittest
@@ -570,6 +574,49 @@ class PivotStructure(unittest.TestCase):
                for s in self.members['openxr.fb2']]
         partial = self.capability([n for n in fb2 if n != 'BROW_LOWERER_L'])
         self.assertEqual(partial, [g for g in self.groups if g != 'face'])
+
+    def test_the_aggregate_chain_gives_the_clamped_sum(self):
+        pack = rcef_translate.load_pack(self.pack)
+        route = rcef_route.Route('openxr.visemes', VISEME[:-1], pack=pack, maps=['visemes_aggregate.to_rcef'])
+        step = next(r for _, _, _, _, r in self.hop_rules() if r['outputs'] == [SUM])
+        target = route.outputs[0]
+        self.assertEqual(route.outputs, [self.sum_target])
+        rng = random.Random(4)
+        frames = [[0.0] * 4, [1.0] * 4, [0.25] * 4, [0.5, 0.5, 0.0, 0.0], [1.0, 0.0, 0.0, 0.0]]
+        frames += [[rng.random() * rng.choice((0.25, 0.5, 1.0)) for _ in step['inputs']] for _ in range(20000)]
+        results = route.translate([{'time': n / 60, 'values': dict(zip(step['inputs'], x)),
+                                    'flags': {'isValid': True}}
+                                   for n, x in enumerate(frames)])
+        for x, result in zip(frames, results):
+            total = 0.0
+            for value in x:
+                total += value
+            self.assertEqual(result['values'][target], min(total, 1.0), x)
+
+    def test_no_route_selects_the_aggregate_in_map(self):
+        pack = rcef_translate.load_pack(self.pack)
+        for source, target in [('openxr.visemes', 'vrm.preset'), ('openxr.visemes', 'openxr.visemes'),
+                               ('vrm.preset', 'openxr.visemes'), ('vrm.preset', 'vrm.preset')]:
+            with self.subTest(source=source, target=target):
+                route = rcef_route.Route(source, target, pack=pack)
+                self.assertNotIn('visemes_aggregate.to_rcef', route.in_maps)
+                self.assertNotIn(SUM, {o for m in route.in_maps for o in route.rules[m][0]['outputs']})
+
+    def test_no_out_map_reads_an_aggregate_or_refinement_with_its_parts(self):
+        parts = {}
+        for sid, s in self.signals.items():
+            meta = s.get('metadata', {})
+            if sid.startswith(VISEME) and ('aggregates' in meta or 'refines' in meta):
+                named = meta.get('aggregates', [meta.get('refines')])
+                parts[sid] = {VISEME + p for p in (named if isinstance(named, list) else [named])}
+        self.assertIn(self.sum_target, parts)
+        for map_id, direction, _, _, rules in self.hops:
+            if direction != 'out':
+                continue
+            read = set(rcef_route.map_ends(rules)[0])
+            for derived, members in parts.items():
+                with self.subTest(map=map_id, signal=derived):
+                    self.assertFalse(derived in read and read & members)
 
     def test_a_missing_face_input_refuses_only_the_face_outputs(self):
         pack = rcef_translate.load_pack(self.pack)
