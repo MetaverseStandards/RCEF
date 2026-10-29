@@ -105,7 +105,7 @@ The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are 
 
 On the pairs that the direct maps also translate, the composed route gives the same weights as the direct maps (`tests/test_pivot_structure.py`); for META visemes to VRM that is `visemes.to_vrm`. All 348 mappings in the 55 maps of the two canonical sets are proposed and approximate. `scripts/build_canonical.py` writes both profiles and these maps from the two documents.
 
-The viseme pose bridge, `rcef_viseme_pose.to_rcef_expression`, joins the two canonical sets: 99 proposed mappings in 1 map, with 54 helper values in `rcef.intermediate`. It writes canonical expression values from the 9 viseme classes whose held-out cells pass on all 4 held-out rigs in the calibration record `viseme-poses.rocketbox-multi`. `scripts/build_canonical.py` writes it from the record.
+The viseme pose bridge, `rcef_viseme_pose.to_rcef_expression`, joins the two canonical sets: 97 proposed mappings in 1 map, with 52 helper values in `rcef.intermediate`. It writes canonical expression values from the 7 viseme classes whose held-out cells pass on all 4 held-out rigs in the calibration record `viseme-poses.rocketbox-multi`. `scripts/build_canonical.py` writes it from the record.
 
 ### Mappings
 
@@ -215,7 +215,7 @@ The bridge goes from the canonical viseme set to the canonical expression set. E
 
 | Map | Source set → target set | Mappings | Evidence status |
 |---|---|---|---|
-| [`rcef_viseme_pose.to_rcef_expression`](reports/mappings.md#rcef_viseme_poseto_rcef_expression) | `rcef.canonical_viseme` → `rcef.canonical_expression` | 99 | proposed |
+| [`rcef_viseme_pose.to_rcef_expression`](reports/mappings.md#rcef_viseme_poseto_rcef_expression) | `rcef.canonical_viseme` → `rcef.canonical_expression` | 97 | proposed |
 
 Not translated yet, and why:
 

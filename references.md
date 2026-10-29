@@ -427,7 +427,7 @@ Original RCEF canonical expression vocabulary, version 1 (draft): signal definit
 
 ## calibration.viseme-poses.rocketbox-multi
 
-RCEF calibration record viseme-poses.rocketbox-multi, version 1 (calibrated_software): the pose of each canonical viseme class in canonical expression signals, fitted to the META viseme shapes of 10 Microsoft Rocketbox rigs in their own ARKit shapes, frozen with its bounds before a held-out evaluation on 4 other Rocketbox rigs (Female_Adult_04, Female_Adult_13, Male_Adult_05 and Male_Adult_11); 9 of 15 classes pass on every held-out rig. A fit to the geometry of example rigs, not a measurement of any tracker.
+RCEF calibration record viseme-poses.rocketbox-multi, version 2 (calibrated_software): the pose of each canonical viseme class in canonical expression signals, with each Left and Right pair tied, fitted to the META viseme shapes of 10 Microsoft Rocketbox rigs in their own ARKit shapes, frozen with its bounds before a held-out evaluation on 4 other Rocketbox rigs (Female_Adult_06, Female_Adult_17, Male_Adult_02 and Male_Adult_19); 7 of 15 classes pass on every held-out rig. A fit to the geometry of example rigs, not a measurement of any tracker.
 
 - Original authorship: RCEF contributors (2026); fitted to the Microsoft Rocketbox avatar library (MIT)
 - License or terms: CC-BY-SA-4.0
