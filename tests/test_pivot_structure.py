@@ -231,7 +231,8 @@ class PivotStructure(unittest.TestCase):
                                  'run scripts/build_canonical.py --write')
 
     def test_every_map_with_a_canonical_signal_is_a_named_hop(self):
-        named = {h[0] for h in self.hops}
+        # The pose bridge joins the two canonical sets; tests/test_pose_bridge.py checks it.
+        named = {h[0] for h in self.hops} | {build_canonical.POSE_MAP}
         for mapping in self.pack['mappings']:
             if any(s.startswith(CANONICAL) for r in mapping['rules'] for s in r['inputs'] + r['outputs']):
                 self.assertIn(mapping['id'], named)

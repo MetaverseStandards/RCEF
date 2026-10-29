@@ -905,6 +905,172 @@ class VisemeBuilder:
                 {'id': 'rcef_viseme_vowel.to_vrm', 'rules': [self.vrm_hop(by_preset[p], 'out') for p in order]}]
 
 
+# ---------------------------------------------------------------- the viseme pose bridge
+
+POSE_RECORD = 'viseme-poses.rocketbox-female'
+POSE_EVIDENCE = f'calibration.{POSE_RECORD}'
+POSE_MAP = 'rcef_viseme_pose.to_rcef_expression'
+POSE_FILE = 'mappings/canonical_viseme_pose.toml'
+INTERMEDIATE_FILE = 'data/intermediate.toml'
+POSE_MARKER = ('# Below this line: written by scripts/build_canonical.py from the calibration record\n'
+               f'# {POSE_RECORD}. Edit the record or the script, not this part.\n')
+POSE_HEADER = ('# SPDX-License-Identifier: CC-BY-SA-4.0\n'
+               '# Original RCEF data. Written by scripts/build_canonical.py from the frozen poses and held-out\n'
+               f'# cells of calibration/{POSE_RECORD}.cal. Edit the script, not this file.\n')
+POSE_INTRO = (f'# The viseme pose bridge, from calibration/{POSE_RECORD}.cal: each canonical expression\n'
+              '# signal is the clamped sum of class weight times frozen pose, over the canonical viseme\n'
+              '# classes whose held-out cells pass. See docs/canonical-set.md.\n')
+POSE_RECORDS = ['xr_visemes', 'apple_blendshapes', IPA_RECORD, OWN]
+CALIBRATION_STATUS = ('calibration_status: the record is calibrated_software, a fit to the geometry of example rigs, '
+                      'not a measurement of any tracker; pack schema 1.0 has no such evidence status, so the mapping '
+                      'is proposed.')
+POSE_COMMON = [
+    "one_rig: the poses are one rig's: Rocketbox Female's sculpted viseme shapes, measured in her own ARKit units by "
+    'a mirror-symmetric bounded fit; on Rocketbox Male, a rig the fit did not use, each pose read here reproduces '
+    'its class\'s own shape to within half of its motion; other rigs render the same ARKit weights differently '
+    '(calibration record rig-gains.ict-rocketbox-female).',
+    'coarticulation: not modelled; each class is one static pose, and the poses of a blend of classes add up; RCEF '
+    'has no operator over time.',
+    'teeth_tongue: teeth and tongue are not represented; the bridge writes no tongue_out, blink, gaze, jaw_sideways '
+    'or mouth_shift value.',
+    CALIBRATION_STATUS,
+]
+
+
+def passes(record: dict, cell: dict) -> bool:
+    """check.py's rule: no failures, and every error within its channel's frozen bounds."""
+    bound = record['evaluation']['bounds'][cell['channel']]
+    return cell['failures'] == 0 and all(cell[k] <= bound[k] for k in ('median', 'p95', 'neutral'))
+
+
+class PoseBridge:
+    """The bridge from the canonical viseme classes whose held-out cells pass to the canonical expression signals."""
+
+    def __init__(self, root: Path, visemes: VisemeBuilder, expression: list[dict]):
+        import tomllib
+        self.root = root
+        record = tomllib.loads((root / f'calibration/{POSE_RECORD}.cal').read_text(encoding='utf-8'))
+        cells = record.get('cells', [])
+        self.classes = [c for c in record['channels'] if cells and all(passes(record, x) for x in cells
+                                                                      if x['channel'] == c)]
+        self.failing = [c for c in record['channels'] if c not in self.classes]
+        self.poses = {}
+        for curve in record['curves']:
+            self.poses.setdefault(curve['output'], {})[curve['input']] = curve['knots'][1][1]
+        moving = [x['p95'] for x in cells if x['channel'] in self.classes and x['p95'] > 0]
+        self.residual = (min(moving), max(moving)) if moving else (0.0, 0.0)
+        self.visemes = visemes
+        self.expression = {s['id']: s for s in expression}
+
+    def short(self, sid: str) -> str:
+        return sid.rsplit('.', 1)[1]
+
+    def helper(self, cid: str) -> str:
+        return f'{INTERMEDIATE}viseme_pose_{self.short(cid)}'
+
+    def sum_helper(self, sid: str) -> str:
+        return f'{INTERMEDIATE}viseme_pose_sum_{self.short(sid)}'
+
+    def losses(self) -> list[str]:
+        low, high = self.residual
+        out = ['viseme_pose_one_rig: poses of one example rig in its own ARKit units; another rig\'s geometry differs',
+               f'viseme_pose_residual: part of each viseme\'s own motion is not reproduced (on Rocketbox Male '
+               f'{low:.2f} to {high:.2f} of it, for the classes read that move the face)']
+        if self.failing:
+            out.append(f'viseme_pose_classes_not_read: {join([self.short(c) for c in self.failing])} failed the '
+                       'held-out bounds and are not read')
+        return out
+
+    def rule(self, rid, inputs, outputs, operator, assumptions, evidence) -> dict:
+        refs = inputs + outputs
+        return {'id': rid, 'inputs': inputs, 'outputs': outputs, 'operator': operator, 'disposition': 'mapped',
+                'mapping_quality': 'approximate', 'evidence_status': 'proposed', 'assumptions': assumptions,
+                'evidence': evidence,
+                'loss_annotations': [{'category': 'signal', 'effect': 'approximated', 'reason': r, 'refs': refs,
+                                      'units': '1'} for r in self.losses()]}
+
+    def maps(self) -> list[dict]:
+        if not self.classes:
+            return []
+        rules = []
+        for cid in self.classes:
+            meta = self.visemes.by_short[self.short(cid)]['meta']
+            rules.append(self.rule(
+                f'rcef_viseme_pose.{self.short(cid)}', [cid], [self.helper(cid)], copy(),
+                [f"correspondence: canonical {self.short(cid)} at weight 1 reaches its pose, the face of Rocketbox "
+                 f"Female's META {meta} viseme shape measured in her ARKit shapes (calibration record "
+                 f'{POSE_RECORD}).',
+                 'units: the class probability (0 to 1) is read as the activation of the class\'s pose (0 to 1); '
+                 'the unit changes from probability to 1.'],
+                POSE_RECORDS))
+        names = join([self.short(c) for c in self.classes])
+        read = (f'classes: the bridge reads the {len(self.classes)} classes whose held-out cells pass ({names})'
+                + (f'; {join([self.short(c) for c in self.failing])} failed and are not read, so weight on them '
+                   'moves no expression signal.' if self.failing else '.'))
+        k = float(len(self.classes))
+        for sid, poses in self.poses.items():
+            short = self.short(sid)
+            assumptions = [f'pose: canonical {short} is the sum of each class weight times the frozen pose of the '
+                           f'class in {short} (calibration record {POSE_RECORD}), clamped at 1.', read, *POSE_COMMON]
+            rules.append(self.rule(f'rcef_viseme_pose.{short}_sum', [self.helper(c) for c in self.classes],
+                                   [self.sum_helper(sid)], {'id': 'weighted_sum',
+                                                            'weights': [poses[c] for c in self.classes]},
+                                   assumptions, [POSE_EVIDENCE, *POSE_RECORDS]))
+            rules.append(self.rule(f'rcef_viseme_pose.{short}', [self.sum_helper(sid)], [sid],
+                                   {'id': 'piecewise_linear', 'knots': [[0.0, 0.0], [1.0, 1.0], [k, 1.0]]},
+                                   assumptions, POSE_RECORDS))
+        return [{'id': POSE_MAP, 'rules': rules}]
+
+    def helpers(self) -> list[dict]:
+        if not self.classes:
+            return []
+        reason = 'Intermediate value of a proposed approximate translation.'
+        out = []
+        for cid in self.classes:
+            short = self.short(cid)
+            out.append({'id': self.helper(cid), 'label': f'RCEF activation of the {short} viseme pose',
+                        'value_type': 'scalar', 'units': '1', 'domain': {'min': 0.0, 'max': 1.0},
+                        'calibration': f'rcef.intermediate.v1:viseme_pose_{short}: canonical {short} read as the '
+                                       'activation of its pose, 0 to 1',
+                        'disposition': 'mapped', 'evidence': [OWN, IPA_RECORD], 'evidence_status': 'proposed',
+                        'side': 'shared', 'neutral': 0.0,
+                        'metadata': {'definition': f'The weight of canonical {short}, read as how far its viseme pose '
+                                                   f'is reached, from 0 to 1. Computed inside {POSE_MAP}; no '
+                                                   'provider reads or writes it.', 'reason': reason},
+                        'region': 'mouth'})
+        k = float(len(self.classes))
+        for sid in self.poses:
+            short, signal = self.short(sid), self.expression[sid]
+            out.append({'id': self.sum_helper(sid), 'label': f'RCEF sum of the viseme poses in {short}',
+                        'value_type': 'scalar', 'units': '1', 'domain': {'min': 0.0, 'max': k},
+                        'calibration': f'rcef.intermediate.v1:viseme_pose_sum_{short}: sum of the viseme poses in '
+                                       f'{short} before the clamp, 0 to {len(self.classes)}',
+                        'disposition': 'mapped', 'evidence': [OWN, 'apple_blendshapes'], 'evidence_status': 'proposed',
+                        'side': signal['side'], 'neutral': 0.0,
+                        'metadata': {'definition': f'The sum of each viseme class activation times its pose in '
+                                                   f'canonical {short}, from 0 to {len(self.classes)}. Computed '
+                                                   f'inside {POSE_MAP} and clamped at 1 into {short}; no provider '
+                                                   'reads or writes it.', 'reason': reason},
+                        'region': signal['region']})
+        return out
+
+    def intermediate_toml(self) -> str:
+        """data/intermediate.toml: its hand-written part, then the bridge helpers and the profile of all."""
+        import tomllib
+        text = (self.root / INTERMEDIATE_FILE).read_text(encoding='utf-8')
+        if POSE_MARKER not in text:
+            raise SystemExit(f'{INTERMEDIATE_FILE} has lost its marker line; restore it')
+        hand = text.split(POSE_MARKER)[0]
+        helpers = self.helpers()
+        ids = [s['id'] for s in tomllib.loads(hand).get('signals', [])] + [s['id'] for s in helpers]
+        profile = {'id': 'rcef.intermediate', 'label': 'RCEF intermediate values inside translations',
+                   'signal_ids': ids, 'evidence': ['rcef_definitions']}
+        parts = [hand, POSE_MARKER]
+        parts += ['\n[[signals]]\n' + ''.join(f'{k} = {value(v)}\n' for k, v in s.items()) for s in helpers]
+        parts.append('\n[[profiles]]\n' + ''.join(f'{k} = {value(v)}\n' for k, v in profile.items()))
+        return ''.join(parts)
+
+
 # ---------------------------------------------------------------- TOML
 
 def value(v) -> str:
@@ -938,9 +1104,9 @@ def signals_toml(signals: list[dict], profile: dict, title: str = 'canonical exp
     return ''.join(parts)
 
 
-def maps_toml(name: str, maps: list[dict]) -> str:
-    parts = [HEADER, f'# The maps between the canonical sets and {name}: one map per canonical group and\n'
-                     '# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.\n']
+def maps_toml(name: str, maps: list[dict], intro: str | None = None, header: str = HEADER) -> str:
+    parts = [header, intro or f'# The maps between the canonical sets and {name}: one map per canonical group and\n'
+                              '# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.\n']
     for m in maps:
         parts.append(f'\n[[mappings]]\nid = {value(m["id"])}\n')
         for r in m['rules']:
@@ -963,6 +1129,9 @@ def render(root: Path = ROOT) -> dict[str, str]:
         maps = builder.maps(key) + (visemes.vrm_maps() if key == 'vrm' else [])
         files[path] = maps_toml(PROVIDERS[key]['name'], maps)
     files['mappings/canonical_visemes.toml'] = maps_toml('META visemes', visemes.meta_maps())
+    bridge = PoseBridge(root, visemes, builder.canonical_signals())
+    files[POSE_FILE] = maps_toml('', bridge.maps(), POSE_INTRO, POSE_HEADER)
+    files[INTERMEDIATE_FILE] = bridge.intermediate_toml()
     return files
 
 

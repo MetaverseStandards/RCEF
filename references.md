@@ -425,6 +425,14 @@ Original RCEF canonical expression vocabulary, version 1 (draft): signal definit
 - License or terms: CC-BY-SA-4.0
 - Locator: docs/canonical-set.md; docs/canonical-set-audit.md; data/canonical_expression.toml
 
+## calibration.viseme-poses.rocketbox-female
+
+RCEF calibration record viseme-poses.rocketbox-female, version 1 (calibrated_software): the pose of each canonical viseme class in canonical expression signals, fitted to Microsoft Rocketbox Female_Adult_01's META viseme shapes in her own ARKit shapes, frozen with its bounds before a held-out evaluation on Rocketbox Male_Adult_01; 9 of 15 classes pass. A fit to the geometry of example rigs, not a measurement of any tracker.
+
+- Original authorship: RCEF contributors (2026); fitted to the Microsoft Rocketbox avatar library (MIT)
+- License or terms: CC-BY-SA-4.0
+- Locator: calibration/viseme-poses.rocketbox-female.cal; calibration/FREEZES
+
 ## facs_wikipedia
 
 FACS code numbers, short names, table membership, intensity letters, modifier letters and visibility-region names used as facts; no prose copied; not the FACS manual.
