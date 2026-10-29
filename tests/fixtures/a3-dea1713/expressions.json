@@ -1,0 +1,404 @@
+{
+ "about": [
+  "Example expressions as FB2 weight sets, and a short talking sequence as META visemes; examples/make_expression_frames.py turns them into frames.",
+  "Illustrative input for the face examples, not RCEF mapping data: nothing in profiles/ or mappings/ reads this file, and no golden comes from it. It is JSON because msf-character-tools reads every TOML file in the repository as pack authoring.",
+  "Licence: CC-BY-SA-4.0."
+ ],
+ "sources": {
+  "EMF": "Wikipedia, 'Facial Action Coding System', revision 1357638399 (2026-06-03), raw wikitext lines 36-53: emotion table (EMFACS), citing Friesen & Ekman, EMFACS-7 (1983, unpublished)",
+  "DU": "Du, Tao & Martinez, 'Compound facial expressions of emotion', PNAS 111(15) 2014, doi:10.1073/pnas.1322355111, Table 1 (prototypical AUs, variants in brackets)",
+  "AU": "Wikipedia, 'Facial Action Coding System', revision 1357638399, raw wikitext lines 87-264: action units (AU number and name)",
+  "VIS": "OpenXR XR_META_face_tracking_visemes: viseme table with example words (lines 130-250) and the sum-to-one rule (lines 104-107)"
+ },
+ "intensity_note": "FACS intensity letters as FB2 weights. ASSUMPTION: neither FACS nor FB2 defines a numeric scale, so A-E are taken as linear steps, and a prototype AU with no stated intensity is taken as C. The optional variants in DU are left out.",
+ "intensity": {
+  "A": 0.2,
+  "B": 0.4,
+  "C": 0.6,
+  "D": 0.8,
+  "E": 1.0
+ },
+ "au_channels_note": "AU -> FB2 channel. FB2 channel names are the FACS action-unit names (AU); the FB2 specification gives no AU numbers, so this is a name correspondence. A bilateral AU sets every side of the channel equally; \"L12\" or \"R12\" sets one side. AU 30 has a direction instead of a side. AU 17 (chin raiser) maps to CHIN_RAISER_B only: FB2 describes CHIN_RAISER_T as the upper-lip motion the chin raiser induces, so the top channel is not set separately.",
+ "au_channels": {
+  "1": "INNER_BROW_RAISER",
+  "2": "OUTER_BROW_RAISER",
+  "4": "BROW_LOWERER",
+  "5": "UPPER_LID_RAISER",
+  "6": "CHEEK_RAISER",
+  "7": "LID_TIGHTENER",
+  "8": "LIPS_TOWARD",
+  "9": "NOSE_WRINKLER",
+  "10": "UPPER_LIP_RAISER",
+  "12": "LIP_CORNER_PULLER",
+  "14": "DIMPLER",
+  "15": "LIP_CORNER_DEPRESSOR",
+  "16": "LOWER_LIP_DEPRESSOR",
+  "17": "CHIN_RAISER_B",
+  "18": "LIP_PUCKER",
+  "20": "LIP_STRETCHER",
+  "22": "LIP_FUNNELER",
+  "23": "LIP_TIGHTENER",
+  "24": "LIP_PRESSOR",
+  "26": "JAW_DROP",
+  "28": "LIP_SUCK",
+  "29": "JAW_THRUST",
+  "30": {
+   "L": "JAW_SIDEWAYS_LEFT",
+   "R": "JAW_SIDEWAYS_RIGHT"
+  },
+  "34": "CHEEK_PUFF",
+  "35": "CHEEK_SUCK",
+  "46": "EYES_CLOSED",
+  "61": "EYES_LOOK_LEFT",
+  "62": "EYES_LOOK_RIGHT",
+  "63": "EYES_LOOK_UP",
+  "64": "EYES_LOOK_DOWN"
+ },
+ "no_fb2_channel_note": "AUs in a prototype that FB2 has no channel for; frames that need them say so.",
+ "no_fb2_channel": {
+  "25": "lips part",
+  "27": "mouth stretch"
+ },
+ "expressions_note": "18 expressions, then gaze one direction at a time (FB2 opposing gaze directions are exclusive).",
+ "expressions": [
+  {
+   "name": "happiness",
+   "aus": {
+    "6": "C",
+    "12": "C"
+   },
+   "sources": [
+    "EMF: 6+12",
+    "DU: 12, 25 [6]"
+   ]
+  },
+  {
+   "name": "sadness",
+   "aus": {
+    "1": "C",
+    "4": "C",
+    "15": "C"
+   },
+   "sources": [
+    "EMF: 1+4+15",
+    "DU: 4, 15 [1, 6, 11, 17]"
+   ]
+  },
+  {
+   "name": "surprise",
+   "aus": {
+    "1": "C",
+    "2": "C",
+    "5": "B",
+    "25": "C",
+    "26": "C"
+   },
+   "sources": [
+    "EMF: 1+2+5B+26",
+    "DU: 1, 2, 25, 26 [5]"
+   ]
+  },
+  {
+   "name": "fear",
+   "aus": {
+    "1": "C",
+    "2": "C",
+    "4": "C",
+    "5": "C",
+    "7": "C",
+    "20": "C",
+    "26": "C"
+   },
+   "sources": [
+    "EMF: 1+2+4+5+7+20+26",
+    "DU: 1, 4, 20, 25 [2, 5, 26]"
+   ]
+  },
+  {
+   "name": "anger",
+   "aus": {
+    "4": "C",
+    "5": "C",
+    "7": "C",
+    "23": "C",
+    "24": "C"
+   },
+   "sources": [
+    "EMF: 4+5+7+23",
+    "DU: 4, 7, 24 [10, 17, 23]"
+   ],
+   "assumptions": [
+    "AU 24 comes from [DU] and is added to the [EMF] set."
+   ]
+  },
+  {
+   "name": "disgust",
+   "aus": {
+    "9": "C",
+    "10": "C",
+    "15": "C",
+    "17": "C"
+   },
+   "sources": [
+    "EMF: 9+15+17",
+    "DU: 9, 10, 17 [4, 24]"
+   ],
+   "assumptions": [
+    "The union of the two sources: AU 10 from [DU], AU 15 from [EMF]."
+   ]
+  },
+  {
+   "name": "contempt",
+   "aus": {
+    "R12": "A",
+    "R14": "A"
+   },
+   "sources": [
+    "EMF: R12A+R14A"
+   ],
+   "assumptions": [
+    "Single source: [DU] has no contempt prototype."
+   ]
+  },
+  {
+   "name": "happily surprised",
+   "aus": {
+    "1": "C",
+    "2": "C",
+    "12": "C",
+    "25": "C"
+   },
+   "sources": [
+    "DU: 1, 2, 12, 25 (compound expression)"
+   ],
+   "assumptions": [
+    "Single source: [EMF] has no compound expressions."
+   ]
+  },
+  {
+   "name": "brow raise",
+   "aus": {
+    "1": 0.8,
+    "2": 0.8
+   },
+   "sources": [
+    "AU: 1 inner brow raiser, 2 outer brow raiser"
+   ],
+   "assumptions": [
+    "Weight 0.8 is chosen for display; no source gives an intensity."
+   ]
+  },
+  {
+   "name": "squint",
+   "aus": {
+    "7": 0.7,
+    "6": 0.3
+   },
+   "sources": [
+    "AU: 7 lid tightener, 6 cheek raiser"
+   ],
+   "assumptions": [
+    "Weights 0.7 and 0.3 are chosen for display; no source gives intensities."
+   ]
+  },
+  {
+   "name": "wink left",
+   "aus": {
+    "L46": 1.0,
+    "L6": 0.3
+   },
+   "sources": [
+    "AU: 46 wink"
+   ],
+   "assumptions": [
+    "A wink is taken as one closed eye with a slight cheek raise (0.3, chosen for display)."
+   ]
+  },
+  {
+   "name": "wink right",
+   "aus": {
+    "R46": 1.0,
+    "R6": 0.3
+   },
+   "sources": [
+    "AU: 46 wink"
+   ],
+   "assumptions": [
+    "A wink is taken as one closed eye with a slight cheek raise (0.3, chosen for display)."
+   ]
+  },
+  {
+   "name": "smirk left",
+   "aus": {
+    "L12": "C"
+   },
+   "sources": [
+    "AU: 12 lip corner puller, one side"
+   ]
+  },
+  {
+   "name": "pucker",
+   "aus": {
+    "18": 0.8,
+    "22": 0.3
+   },
+   "sources": [
+    "AU: 18 lip pucker, 22 lip funneler"
+   ],
+   "assumptions": [
+    "Weights 0.8 and 0.3 are chosen for display; no source gives intensities."
+   ]
+  },
+  {
+   "name": "cheek puff",
+   "aus": {
+    "34": 0.8,
+    "8": 0.5
+   },
+   "sources": [
+    "AU: 34 cheek puff, 8 lips toward each other"
+   ],
+   "assumptions": [
+    "The lips are taken as sealed while the cheeks puff (AU 8 at 0.5); weights chosen for display."
+   ]
+  },
+  {
+   "name": "lip suck",
+   "aus": {
+    "28": 0.7
+   },
+   "sources": [
+    "AU: 28 lip suck"
+   ],
+   "assumptions": [
+    "Weight 0.7 is chosen for display; no source gives an intensity."
+   ]
+  },
+  {
+   "name": "jaw sideways left",
+   "aus": {
+    "L30": "C"
+   },
+   "sources": [
+    "AU: 30 jaw sideways"
+   ]
+  },
+  {
+   "name": "jaw sideways right",
+   "aus": {
+    "R30": "C"
+   },
+   "sources": [
+    "AU: 30 jaw sideways"
+   ]
+  },
+  {
+   "name": "look left",
+   "aus": {
+    "61": 0.8
+   },
+   "sources": [
+    "AU: 61 eyes turn left"
+   ],
+   "assumptions": [
+    "Weight 0.8 is chosen for display; no source gives an intensity."
+   ]
+  },
+  {
+   "name": "look right",
+   "aus": {
+    "62": 0.8
+   },
+   "sources": [
+    "AU: 62 eyes turn right"
+   ],
+   "assumptions": [
+    "Weight 0.8 is chosen for display; no source gives an intensity."
+   ]
+  },
+  {
+   "name": "look up",
+   "aus": {
+    "63": 0.8
+   },
+   "sources": [
+    "AU: 63 eyes up"
+   ],
+   "assumptions": [
+    "Weight 0.8 is chosen for display; no source gives an intensity."
+   ]
+  },
+  {
+   "name": "look down",
+   "aus": {
+    "64": 0.8
+   },
+   "sources": [
+    "AU: 64 eyes down"
+   ],
+   "assumptions": [
+    "Weight 0.8 is chosen for display; no source gives an intensity."
+   ]
+  }
+ ],
+ "talk": {
+  "note": "\"bed car toe book\", the specification's own example words (VIS), one viseme per sound, starting and ending in silence.",
+  "sources": [
+   "VIS: example words bed (PP, E, DD), car (KK, AA, RR), toe (DD, OH), book (PP, OU, KK)"
+  ],
+  "sequence": [
+   [
+    "",
+    "SIL"
+   ],
+   [
+    "bed",
+    "PP"
+   ],
+   [
+    "bed",
+    "E"
+   ],
+   [
+    "bed",
+    "DD"
+   ],
+   [
+    "car",
+    "KK"
+   ],
+   [
+    "car",
+    "AA"
+   ],
+   [
+    "car",
+    "RR"
+   ],
+   [
+    "toe",
+    "DD"
+   ],
+   [
+    "toe",
+    "OH"
+   ],
+   [
+    "book",
+    "PP"
+   ],
+   [
+    "book",
+    "OU"
+   ],
+   [
+    "book",
+    "KK"
+   ],
+   [
+    "",
+    "SIL"
+   ]
+  ]
+ }
+}
