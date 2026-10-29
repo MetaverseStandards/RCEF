@@ -65,7 +65,10 @@ class Route:
 
     def __init__(self, source: str, target: str, pack: msf.Pack | None = None, maps: list[str] | None = None,
                  canonical: tuple[str, ...] = CANONICAL, compiled: dict | None = None, root: Path = ROOT):
-        """`maps` selects one-hop mode; `compiled` holds maps already compiled from the same pack, by map ID."""
+        """`maps` selects one-hop mode; `compiled` holds maps already compiled from the same pack, by map ID.
+
+        `hops` lists (map, source profile, target profile) for every map the route runs.
+        """
         self.pack = pack or load_pack(json.loads((root / 'generated/rcef.pack.json').read_text(encoding='utf-8')))
         document = self.pack.document
         self.source, self.target, self.one_hop = source, target, maps is not None
@@ -94,6 +97,7 @@ class Route:
                             if home(i, [source]) and home(o, canonical) and wanted & set(o)]
             hops = ([(m, source, home(ends[m][1], canonical)) for m in self.in_maps]
                     + [(m, home(ends[m][0], canonical), target) for m in self.out_maps])
+        self.hops = hops
         snapshots, self.mappings = {}, {}
         for mapping, src, dst in hops:
             if compiled and mapping in compiled:

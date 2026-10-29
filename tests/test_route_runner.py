@@ -65,7 +65,7 @@ class TranslatorAnchor(unittest.TestCase):
     def setUpClass(cls):
         cls.pack = rcef_translate.load_pack(json.loads(FIXTURE.read_text(encoding='utf-8')))
         cls.translators = {kind: getattr(rcef_translate, kind)(pack=cls.pack) for kind in PROFILES}
-        cls.full_arkit = []
+        cls.complete = None
 
     def route(self, kind):
         return rcef_route.Route(*PROFILES[kind], pack=self.pack, maps=list(self.translators[kind].mappings))
@@ -102,13 +102,15 @@ class TranslatorAnchor(unittest.TestCase):
 
     def arkit_frames(self):
         """The ARKit frames of case 1 that have all 52 outputs: Translator raises KeyError on a partial frame."""
-        frames = []
-        for name in ('fb2_demo_frames.csv', 'fb2_expression_frames.csv'):
-            results = self.translators['fb2_to_arkit'].translate(self.frames('fb2_to_arkit', name))
-            frames += [{'time': r['time'], 'segment': r['segment'], 'values': r['values'], 'flags': {}}
-                       for r in results if len(r['values']) == 52]
-        self.assertEqual(len(frames), 425 + 221)
-        return frames
+        if self.complete is None:
+            frames = []
+            for name in ('fb2_demo_frames.csv', 'fb2_expression_frames.csv'):
+                results = self.translators['fb2_to_arkit'].translate(self.frames('fb2_to_arkit', name))
+                frames += [{'time': r['time'], 'segment': r['segment'], 'values': r['values'], 'flags': {}}
+                           for r in results if len(r['values']) == 52]
+            type(self).complete = frames
+        self.assertEqual(len(self.complete), 425 + 221)
+        return self.complete
 
     def test_4_arkit_to_fb2_on_the_complete_arkit_frames(self):
         self.check(self.translators['arkit_to_fb2'], self.route('arkit_to_fb2'), self.arkit_frames(), {})
@@ -182,8 +184,8 @@ def synthetic_pack():
     canonical = [f'rcef.canonical_expression.{n}' for n in ('brow_left', 'brow_right', 'jaw', 'eye', 'tongue', 'cheek')]
     c = {sid.rsplit('.', 1)[1]: sid for sid in canonical}
     target = ['tgt.brow', 'tgt.jaw', 'tgt.jaw_double', 'tgt.eye', 'tgt.cheek']
-    signals = ([signal(s, 'isValid') for s in src] + [signal('src.eye', 'isValid AND isEyeValid'), signal('other.cheek')]
-               + [signal(s) for s in canonical + target])
+    signals = ([signal(s, 'isValid') for s in src] + [signal('src.eye', 'isValid AND isEyeValid')]
+               + [signal(s) for s in ['other.cheek'] + canonical + target])
     profiles = [{'id': 'src', 'label': 'source', 'signal_ids': src + ['src.eye']},
                 {'id': 'other', 'label': 'second source', 'signal_ids': ['other.cheek']},
                 {'id': 'rcef.canonical_expression', 'label': 'canonical', 'signal_ids': canonical},

@@ -154,7 +154,8 @@ class ImpulseLinks(unittest.TestCase):
                     self.assertEqual(links[pair, frame['label']], ab_oracle.changed(expected[0], self.oracle.route(
                         source, target, [], [(m, None) for m in maps], frame['values'], frame['flags'])))
         # The weight-linked LOOK_RIGHT_L stays 0: eyeLookOutLeft enters its knots on the flat side.
-        self.assertEqual(links['ARKit -> FB2', f'{ARKIT.format("eyeLookOutLeft")} 1.0'], {FB2.format('EYES_LOOK_LEFT_L')})
+        self.assertEqual(links['ARKit -> FB2', f'{ARKIT.format("eyeLookOutLeft")} 1.0'],
+                         {FB2.format('EYES_LOOK_LEFT_L')})
 
 
 if __name__ == '__main__':

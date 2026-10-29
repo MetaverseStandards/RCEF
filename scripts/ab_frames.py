@@ -291,6 +291,18 @@ def perturbation_family(name: str, bases: list[dict], source: dict) -> list[dict
 
 # ---------------------------------------------------------------- all families of a registration
 
+def family_source(name: str, abreg: dict) -> str:
+    """The source set of a family: in its name ("edge:<profile>"), its spec, or facs.code for the FACS key families."""
+    if name.startswith('perturb:'):
+        name = name.split(':', 1)[1]
+    spec = next((f for f in abreg['families'] if f['name'] == name), None)
+    if spec:
+        return spec.get('source', 'facs.code')
+    if name.startswith('facs_'):
+        return 'facs.code'
+    return name.split(':')[1]
+
+
 def fixed_families(abreg: dict) -> dict[str, list[dict]]:
     """Families 4, 5 and 6 for every pinned source; they read no seed."""
     families = {}
@@ -312,9 +324,13 @@ def fixed_inputs(abreg: dict, root: Path = ROOT) -> dict[str, list[dict]]:
         return root / entry['path']
     if 'goldens' in spec:
         goldens = json.loads(read(spec['goldens']).read_text(encoding='utf-8'))
-        families['goldens'] = golden_family('goldens', goldens, abreg['sources'], spec['goldens']['kinds'])
+        for source in dict.fromkeys(spec['goldens']['kinds'].values()):
+            kinds = spec['goldens']['kinds']
+            cases = {**goldens, 'cases': [c for c in goldens['cases'] if kinds[c['mapping_kind']] == source]}
+            families[f'goldens:{source}'] = golden_family(f'goldens:{source}', cases, abreg['sources'],
+                                                          spec['goldens']['kinds'])
     for entry in spec.get('csv', []):
-        name = f'csv:{Path(entry["path"]).stem}'
+        name = f'csv:{entry["source"]}:{Path(entry["path"]).stem}'
         families[name] = csv_family(name, read(entry), abreg['sources'][entry['source']], entry['prefix'],
                                     entry['suffix'])
     if 'facs_keys' in spec:
