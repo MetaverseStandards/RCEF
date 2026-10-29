@@ -1,0 +1,564 @@
+{
+ "about": [
+  "FACS code numbers, names and tables, and RCEF's rules for reading FACS notation into facs.code values. examples/facs_codec.py reads this file.",
+  "The code numbers, names, tables, intensity letters, side letters and visibility names are facts from the source below. No prose is copied, and nothing comes from the FACS manual. Every reading rule is an RCEF assumption, and the values are RCEF's numeric encoding, not FACS scores.",
+  "It is JSON because msf-character-tools reads every TOML file in the repository as pack authoring.",
+  "Licence: CC-BY-SA-4.0."
+ ],
+ "source": "Wikipedia, 'Facial Action Coding System', revision 1357638399 (2026-06-03), raw wikitext lines 69-75 (intensity letters), 78 (side letters), 82-142 (main codes), 144-176 (head movement codes), 178-204 (eye movement codes), 206-221 (visibility codes) and 223-284 (gross behavior codes)",
+ "letters_note": "rcef.facs.letters.v1. FACS defines only the ordered letters A (trace) to E (the maximum for the person) and no numeric scale. ASSUMPTION, as in expressions.json: A-E are taken as 0.2-1.0, and a code with no letter as C. The same table is used for gross behaviour codes, which the source gives no intensity scale.",
+ "letters": {
+  "A": 0.2,
+  "B": 0.4,
+  "C": 0.6,
+  "D": 0.8,
+  "E": 1.0
+ },
+ "no_letter": "C",
+ "decode_note": "For display only: a value at or above each bound, and below the next, shows that letter; below 0.1 is absent. The bounds are the midpoints between the letter values, an ASSUMPTION.",
+ "decode": [
+  [
+   0.1,
+   "A"
+  ],
+  [
+   0.3,
+   "B"
+  ],
+  [
+   0.5,
+   "C"
+  ],
+  [
+   0.7,
+   "D"
+  ],
+  [
+   0.9,
+   "E"
+  ]
+ ],
+ "codes_note": "disposition: the code's row in the facs.code profile (mapped, unresolved or excluded; none: not a row). read: sided (no side letter sets both sides, L or R one side), shared (no side letter allowed), direction (L or R needed; they name the direction), none (listed as not read), as (read as that code; side: required means L or R is needed), leave_out (the signals of those codes on the stated side, or both sides, are left out, never 0; a side letter is refused when every one of those signals is shared). A side letter is refused wherever every signal a code writes, is read as or leaves out is shared. Codes are written as the source lists them: 97* and 98* need their asterisk, and a code or M code that is not listed here is refused. A code a coder scores instead of a mapped code is read as it or leaves its signals out; a code a coder would score beside the mapped codes is not read. All of these are ASSUMPTIONS.",
+ "codes": {
+  "0": {
+   "name": "Neutral face",
+   "table": "main",
+   "disposition": "none",
+   "read": "none"
+  },
+  "1": {
+   "name": "Inner brow raiser",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "2": {
+   "name": "Outer brow raiser",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "4": {
+   "name": "Brow lowerer",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "5": {
+   "name": "Upper lid raiser",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "6": {
+   "name": "Cheek raiser",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "7": {
+   "name": "Lid tightener",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "8": {
+   "name": "Lips toward each other",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "shared"
+  },
+  "9": {
+   "name": "Nose wrinkler",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "10": {
+   "name": "Upper lip raiser",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "11": {
+   "name": "Nasolabial deepener",
+   "table": "main",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "12": {
+   "name": "Lip corner puller",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "13": {
+   "name": "Sharp lip puller",
+   "table": "main",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "14": {
+   "name": "Dimpler",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "15": {
+   "name": "Lip corner depressor",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "16": {
+   "name": "Lower lip depressor",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "17": {
+   "name": "Chin raiser",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "shared"
+  },
+  "18": {
+   "name": "Lip pucker",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "19": {
+   "name": "Tongue show",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "shared"
+  },
+  "20": {
+   "name": "Lip stretcher",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "21": {
+   "name": "Neck tightener",
+   "table": "main",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "22": {
+   "name": "Lip funneler",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "23": {
+   "name": "Lip tightener",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "24": {
+   "name": "Lip pressor",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "25": {
+   "name": "Lips part",
+   "table": "main",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "26": {
+   "name": "Jaw drop",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "shared"
+  },
+  "27": {
+   "name": "Mouth stretch",
+   "table": "main",
+   "disposition": "unresolved",
+   "read": {
+    "as": "26"
+   }
+  },
+  "28": {
+   "name": "Lip suck",
+   "table": "main",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "29": {
+   "name": "Jaw thrust",
+   "table": "gross_behavior",
+   "disposition": "mapped",
+   "read": "shared"
+  },
+  "30": {
+   "name": "Jaw sideways",
+   "table": "gross_behavior",
+   "disposition": "mapped",
+   "read": "direction"
+  },
+  "31": {
+   "name": "Jaw clencher",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "32": {
+   "name": "[Lip] bite",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "33": {
+   "name": "[Cheek] blow",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": {
+    "leave_out": [
+     "34"
+    ]
+   }
+  },
+  "34": {
+   "name": "[Cheek] puff",
+   "table": "gross_behavior",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "35": {
+   "name": "[Cheek] suck",
+   "table": "gross_behavior",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "36": {
+   "name": "[Tongue] bulge",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "37": {
+   "name": "Lip wipe",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": {
+    "leave_out": [
+     "19"
+    ]
+   }
+  },
+  "38": {
+   "name": "Nostril dilator",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "39": {
+   "name": "Nostril compressor",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "40": {
+   "name": "Sniff",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "41": {
+   "name": "Lid droop",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": {
+    "leave_out": [
+     "43"
+    ]
+   }
+  },
+  "42": {
+   "name": "Slit",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": {
+    "leave_out": [
+     "43"
+    ]
+   }
+  },
+  "43": {
+   "name": "Eyes closed",
+   "table": "gross_behavior",
+   "disposition": "mapped",
+   "read": "sided"
+  },
+  "44": {
+   "name": "Squint",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": {
+    "leave_out": [
+     "43",
+     "7"
+    ]
+   }
+  },
+  "45": {
+   "name": "Blink",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": {
+    "as": "43"
+   }
+  },
+  "46": {
+   "name": "Wink",
+   "table": "gross_behavior",
+   "disposition": "unresolved",
+   "read": {
+    "as": "43",
+    "side": "required"
+   }
+  },
+  "50": {
+   "name": "Speech",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "51": {
+   "name": "Head turn left",
+   "table": "head",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "52": {
+   "name": "Head turn right",
+   "table": "head",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "53": {
+   "name": "Head up",
+   "table": "head",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "54": {
+   "name": "Head down",
+   "table": "head",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "55": {
+   "name": "Head tilt left",
+   "table": "head",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "56": {
+   "name": "Head tilt right",
+   "table": "head",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "57": {
+   "name": "Head forward",
+   "table": "head",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "58": {
+   "name": "Head back",
+   "table": "head",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "61": {
+   "name": "Eyes turn left",
+   "table": "eye",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "62": {
+   "name": "Eyes turn right",
+   "table": "eye",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "63": {
+   "name": "Eyes up",
+   "table": "eye",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "64": {
+   "name": "Eyes down",
+   "table": "eye",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "65": {
+   "name": "Walleye",
+   "table": "eye",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "66": {
+   "name": "Cross-eye",
+   "table": "eye",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "69": {
+   "name": "Eyes positioned to look at other person",
+   "table": "eye",
+   "disposition": "unresolved",
+   "read": "none"
+  },
+  "80": {
+   "name": "Swallow",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "81": {
+   "name": "Chewing",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "82": {
+   "name": "Shoulder shrug",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "84": {
+   "name": "Head shake back and forth",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "85": {
+   "name": "Head nod up and down",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "91": {
+   "name": "Flash",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "92": {
+   "name": "Partial flash",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "97*": {
+   "name": "Shiver/tremble",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  },
+  "98*": {
+   "name": "Fast up-down look",
+   "table": "gross_behavior",
+   "disposition": "excluded",
+   "read": "none"
+  }
+ },
+ "m_codes_note": "The M codes describe timed combinations, not face weights. They are listed as not read, with or without a letter; an M code that is not in this list is refused.",
+ "m_codes": {
+  "M55": "Head tilt left",
+  "M56": "Head tilt right",
+  "M57": "Head thrust forward",
+  "M59": "Head shake up and down",
+  "M60": "Head shake side to side",
+  "M83": "Head upward and to the side",
+  "M61": "Eyes left",
+  "M62": "Eyes right",
+  "M68": "Upward rolling of eyes",
+  "M69": "Head or eyes look at other person"
+ },
+ "visibility_note": "A visibility code leaves out the signals of the codes listed for it, never 0, so the in-map refuses the whole group. Which codes each region holds is an ASSUMPTION; the source gives only the region names. all: every mapped code.",
+ "visibility": {
+  "70": {
+   "name": "Brows and forehead not visible",
+   "leave_out": [
+    "1",
+    "2",
+    "4"
+   ]
+  },
+  "71": {
+   "name": "Eyes not visible",
+   "leave_out": [
+    "5",
+    "6",
+    "7",
+    "43"
+   ]
+  },
+  "72": {
+   "name": "Lower face not visible",
+   "leave_out": [
+    "8",
+    "9",
+    "10",
+    "12",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "22",
+    "23",
+    "24",
+    "26",
+    "28",
+    "29",
+    "30",
+    "34",
+    "35"
+   ]
+  },
+  "73": {
+   "name": "Entire face not visible",
+   "leave_out": "all"
+  },
+  "74": {
+   "name": "Unscorable",
+   "leave_out": "all"
+  }
+ }
+}
