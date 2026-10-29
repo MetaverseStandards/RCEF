@@ -87,7 +87,8 @@ A calibration record is a software-only fit, made from renders or mesh geometry 
 
 - `mediapipe.ict-response`: a negative result. 25 of MediaPipe's 51 ARKit-named scores could be fitted, and none passed on held-out data.
 - `rig-gains.ict-rocketbox-female`: 3 of 51 ARKit shapes pass; 48 fail and are published as negative results.
-- `viseme-poses.rocketbox-female`: the pose of each canonical viseme class, fitted to Rocketbox Female's viseme shapes in her ARKit shapes, on mesh geometry only. 9 of 15 classes pass on Rocketbox Male (`sil` trivially, so 8 of 14 speech classes); the viseme pose bridge reads only those.
+- `viseme-poses.rocketbox-female`: the pose of each canonical viseme class, fitted to Rocketbox Female's viseme shapes in her ARKit shapes, on mesh geometry only. 9 of 15 classes pass on Rocketbox Male. No mapping cites it now.
+- `viseme-poses.rocketbox-multi`: the pose of each canonical viseme class, fitted to the viseme shapes of 10 Rocketbox rigs in their ARKit shapes, on mesh geometry only. 9 of 15 classes pass on all 4 held-out Rocketbox rigs (`sil` trivially, so 8 of 14 speech classes); the viseme pose bridge reads only those.
 
 The calibration tools in [tools/calibration/](../tools/calibration/README.md) run the held-out step. Before they render anything, [provenance.py](../tools/calibration/provenance.py) checks that the record's `code_commit` is in the checkout's history and that no file the run imports has changed since that commit. The tools also check that every cached input has the SHA-256 the record pins and that the installed msf-character-tools passes the lock check. `k3_heldout.py` also requires the renderer binary that the record names. `check.py` cannot see Git history, so reviewers check that the ledger line was committed before the results.
 
