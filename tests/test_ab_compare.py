@@ -93,6 +93,8 @@ class Metrics(unittest.TestCase):
         self.assertEqual(counts['coverage_violations'], 1)
         b[0]['labels']['c'] = ab_compare.rcef_route.NOT_AVAILABLE
         self.assertEqual(ab_compare.facs_compare(b, expected, ['b', 'c'])[0]['coverage_violations'], 0)
+        # The unwritten outputs must be the whole frozen list: B writing a listed output is a violation too.
+        self.assertEqual(ab_compare.facs_compare(b, expected, ['a', 'b', 'c'])[0]['coverage_violations'], 1)
 
 
 class RequiredRows(unittest.TestCase):
