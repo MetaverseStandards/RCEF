@@ -3,7 +3,7 @@
 
 RCEF records public expression interfaces and explicit one-way scalar mappings between them. TOML is the authoritative authoring format. MSF Character Tools (msf-character-tools) supplies the parser, the validator, the deterministic pack compiler, the mapping compiler and the evaluator. RCEF adds its data, numerical fixtures, calibration records, readable reports and consumer acceptance tests.
 
-The [offline visual report](architecture.html), the [SVG](architecture.svg) view and the [TOML index](toml-index.csv) describe the same tree as this guide. The [PNG](architecture.png) view still shows data 0.4.0 until it is rendered again from the SVG. Links in this guide are relative to `RCEF/docs`. Links to msf-character-tools assume a sibling `msf_character_tools` checkout.
+The [offline visual report](architecture.html), the [SVG](architecture.svg) and [PNG](architecture.png) views and the [TOML index](toml-index.csv) describe the same tree as this guide. Links in this guide are relative to `RCEF/docs`. Links to msf-character-tools assume a sibling `msf_character_tools` checkout.
 
 ## Scope of this guide
 
