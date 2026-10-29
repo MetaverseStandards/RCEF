@@ -6,11 +6,13 @@ a pose value pose[c][j] in [0, 1]. A class at weight 1 is meant to give expressi
 record curves are [[0, 0], [1, pose]].
 
 Rig sets: tools/calibration/viseme_rigs.json, chosen by a rule before any new rig was downloaded. The fit loads
-only the training rigs; the held-out step loads only the held-out rigs.
+only the training rigs; the held-out step loads only the held-out rigs. Version 2 of the record holds out fresh
+rigs: the rigs that version 1 held out are listed as seen and are never held out again.
 
 Fit (mesh geometry only, no renders):
 - basis: the ARKit shapes that the ARKit in-maps of the groups in GROUPS read (37 shapes); blink, gaze, the
-  sideways jaw and mouth shifts and tongueOut are left out. Left and Right shapes have their own weights;
+  sideways jaw and mouth shifts and tongueOut are left out. Each Left and Right pair shares one weight, so the
+  basis has 24 columns (13 pairs and 11 single shapes). Version 1 gave Left and Right their own weights;
 - region: on each rig, every vertex except the tongue: the vertices that the rig's tongueOut shape moves by more
   than 1% of its largest move;
 - for each class, one set of ARKit weights u in [0, 1] for all training rigs. On rig r the error is
@@ -22,6 +24,12 @@ Fit (mesh geometry only, no renders):
 - each ARKit weight then goes to its canonical signals through the ARKit in-maps, which are copies.
 
 The cv step compares the candidate methods by leave-one-rig-out cross-validation within the training rigs.
+
+The lips step (report only, after the held-out step; it changes no cell and no pass or fail) measures on each
+held-out rig, at full weight, three distances for the classes bilabial (META PP), labiodental (FF) and
+vowel_close_rounded (OU): the inner-lip gap, the distance from the upper teeth to the lower lip and the width
+between the mouth corners. It compares the rig's own viseme shape with the class's frozen pose and the neutral face,
+and writes tools/calibration/results/viseme_lips.json.
 
 Held-out evaluation (the held-out rigs, which the fit never loads): for each class and rig, one condition per
 held-out seed. The class gets a weight w in [0.2, 1] from the seed; in half the conditions the rest class sil gets
@@ -35,6 +43,7 @@ Usage:
   viseme_poses.py cv --rig-cache DIR                      # leave-one-rig-out table of the candidate methods
   viseme_poses.py freeze --rig-cache DIR [--reason TEXT]  # commit the record and FREEZES before the next step
   viseme_poses.py heldout --rig-cache DIR [--out summary.json]
+  viseme_poses.py lips --rig-cache DIR                    # report only
 """
 from __future__ import annotations
 import argparse
@@ -63,7 +72,12 @@ REST = 'rcef.canonical_viseme.sil'
 TOLERANCE = 1e-13
 ITERATIONS = 100
 TONGUE = 0.01
-# cv only: the lip region (vertices that mouthFunnel moves by more than 20% of its largest move) and its weight.
+# lips only: the classes measured, the midline band and the reach of the mouth landmarks, in metres.
+LIP_CLASSES = ('rcef.canonical_viseme.bilabial', 'rcef.canonical_viseme.labiodental',
+               'rcef.canonical_viseme.vowel_close_rounded')
+MIDLINE, MOUTH = 0.003, 0.01
+LIPS_OUT = ROOT / 'tools/calibration/results/viseme_lips.json'
+# cv and lips: the lip region (vertices that mouthFunnel moves by more than 20% of its largest move) and its weight.
 LIP, LIP_WEIGHT = 0.2, 5.0
 DECIMALS = 3
 HELD_OUT = 24
@@ -73,7 +87,7 @@ COPY = check.COPY
 RIG_SETS = ROOT / 'tools/calibration/viseme_rigs.json'
 DATA_FILES = [RIG_SETS.relative_to(ROOT).as_posix()]
 SETS = json.loads(RIG_SETS.read_text(encoding='utf-8'))
-TRAINING, HELD_OUT_RIGS = SETS['training'], SETS['held_out']
+TRAINING, HELD_OUT_RIGS, SEEN = SETS['training'], SETS['held_out'], SETS['seen']
 INPUT_FILES = {**{f'Microsoft Rocketbox {a}_facial.fbx': f'{a}_facial.fbx' for a in TRAINING + HELD_OUT_RIGS},
                'Microsoft Rocketbox LICENSE.md': 'ROCKETBOX_LICENSE.md'}
 PACK_INPUT = 'RCEF generated/rcef.pack.json (the ARKit in-maps and out-maps)'
@@ -152,22 +166,25 @@ def error(u: list[float], g: list[list[float]], b: list[float], tt: float) -> fl
     return ratio(quadratic(u, g) - 2 * dot(u, b) + tt, tt)[0]
 
 
-def chosen(sets: dict) -> tuple[list[str], list[str]]:
-    """The training and held-out rigs that the rule in viseme_rigs.json gives for its candidates and replacements.
+def chosen(sets: dict) -> tuple[list[str], list[str], list[str]]:
+    """The training, held-out and seen rigs that the rules in viseme_rigs.json give for its candidates and
+    replacements.
 
-    For each sex, the candidates in the order of the SHA-256 of their name: the first 2 are held out, the next 4
-    are training. A replaced rig's place goes to the next unused candidate of the same sex in that order.
+    For each sex, the candidates in the order of the SHA-256 of their name. Version 1: the first 2 are held out, the
+    next 4 are training. Version 2: those 2 are seen, training is unchanged, and the next 2 are held out. A replaced
+    rig's place goes to the next unused candidate of the same sex in that order.
     """
-    training, held = ['Female_Adult_01', 'Male_Adult_01'], []
+    training, held, seen = ['Female_Adult_01', 'Male_Adult_01'], [], []
     replaced = {r['name'] for r in sets['replaced']}
     for sex in ('Female', 'Male'):
         order = sorted((c['name'] for c in sets['candidates'][sex]),
                        key=lambda n: hashlib.sha256(n.encode('utf-8')).hexdigest())
-        picks, spare = order[:6], iter(order[6:])
+        picks, spare = order[:8], iter(order[8:])
         picks = [n if n not in replaced else next(x for x in spare if x not in replaced) for n in picks]
-        held += picks[:2]
-        training += picks[2:]
-    return training, held
+        seen += picks[:2]
+        training += picks[2:6]
+        held += picks[6:]
+    return training, held, seen
 
 
 def unit_draws(seed: int, channel: str) -> tuple[float, bool]:
@@ -256,7 +273,10 @@ class Geometry:
         # Above 1% of the largest move: the tongue's vertices move by centimetres, the rest by float noise.
         self.keep = [v for v, m in enumerate(moved) if m <= TONGUE * max(moved)]
         self.tongue = len(rest) // 3 - len(self.keep)
+        self.rest = self._region(rest)
         self.basis = [self._region(delta(arkit[a])) for a in basis]
+        self.arkit = {a: self._region(delta(arkit[a]))
+                      for a in ('jawOpen', 'mouthFunnel', 'mouthSmileLeft', 'mouthSmileRight')}
         if len(self.rig.visemes) != 15:
             raise SystemExit(f'{avatar} has {len(self.rig.visemes)} viseme shapes, not 15')
         self.visemes = {meta: self._region(delta(i)) for meta, i in self.rig.visemes.items()}
@@ -287,6 +307,49 @@ class Geometry:
         moved = [math.hypot(*funnel[3 * v:3 * v + 3]) for v in range(len(funnel) // 3)]
         return [LIP_WEIGHT if moved[i // 3] > LIP * max(moved) else 1.0 for i in range(len(funnel))]
 
+    def landmarks(self) -> dict[str, list[int]]:
+        """lips only: region vertex sets for the mouth measures, found from the rig's own shapes.
+
+        Lips are the vertices that mouthFunnel moves by more than LIP of its largest move, within MOUTH of the
+        height of the vertex that jawOpen moves most. A lip vertex is upper lip if jawOpen moves it by less than 0.3
+        of its largest move, lower lip if by more than 0.6. The corners are the lip vertices that mouthSmileLeft and
+        mouthSmileRight move most. Only the vertices within MIDLINE of x = 0 (the rig's midline; x is across the
+        face) count for the gap. The upper teeth are the vertices that neither shape moves
+        (under 0.05 of the largest move), within MOUTH of the midline, behind the front of the upper lip by at most
+        2 MOUTH and no higher than MOUTH / 2 above the lowest upper-lip vertex on the midline.
+        """
+        def moved(shape):
+            values = [math.hypot(*shape[3 * v:3 * v + 3]) for v in range(len(shape) // 3)]
+            top = max(values)
+            return [x / top for x in values]
+        jaw, funnel = moved(self.arkit['jawOpen']), moved(self.arkit['mouthFunnel'])
+        point = [tuple(self.rest[3 * v:3 * v + 3]) for v in range(len(self.rest) // 3)]
+        centre = point[max(range(len(jaw)), key=jaw.__getitem__)]
+        lips = [v for v, f in enumerate(funnel) if f > LIP and abs(point[v][2] - centre[2]) <= MOUTH]
+        upper = [v for v in lips if jaw[v] < 0.3]
+        lower = [v for v in lips if jaw[v] > 0.6]
+        mid_upper = [v for v in upper if abs(point[v][0]) <= MIDLINE]
+        front = min(point[v][1] for v in mid_upper)
+        edge = min(point[v][2] for v in mid_upper)
+        teeth = [v for v, p in enumerate(point) if jaw[v] < 0.05 and funnel[v] < 0.05 and abs(p[0]) <= MOUTH
+                 and front < p[1] <= front + 2 * MOUTH and centre[2] - MOUTH <= p[2] <= edge + MOUTH / 2]
+        return {'upper': mid_upper, 'lower': [v for v in lower if abs(point[v][0]) <= MIDLINE],
+                'lower_lip': [v for v in lower if abs(point[v][0]) <= MOUTH], 'teeth': teeth,
+                'corners': [max(lips, key=moved(self.arkit[side]).__getitem__)
+                            for side in ('mouthSmileLeft', 'mouthSmileRight')]}
+
+    def measures(self, landmarks: dict, displacement: list[float]) -> dict[str, float]:
+        """lips only: inner-lip gap, upper teeth to lower lip and corner width, in mm, at rest plus a displacement."""
+        point = [tuple(r + d for r, d in zip(self.rest[3 * v:3 * v + 3], displacement[3 * v:3 * v + 3]))
+                 for v in range(len(self.rest) // 3)]
+
+        def nearest(a, b):
+            return 1000 * min(math.dist(point[x], point[y]) for x in landmarks[a] for y in landmarks[b])
+        left, right = landmarks['corners']
+        return {'lip_gap_mm': round(nearest('upper', 'lower'), 2),
+                'teeth_to_lower_lip_mm': round(nearest('teeth', 'lower_lip'), 2),
+                'corner_width_mm': round(1000 * math.dist(point[left], point[right]), 2)}
+
 
 # ---------------------------------------------------------------------------------------------- steps
 
@@ -301,13 +364,22 @@ def require_committed(*paths: Path) -> None:
 
 
 def pair(name: str) -> str:
-    """cv only: the weight a shape shares in a mirror-symmetric fit: mouthSmileLeft and mouthSmileRight share
-    mouthSmile."""
+    """The weight a shape shares in the mirror-symmetric fit: mouthSmileLeft and mouthSmileRight share mouthSmile."""
     return name.removesuffix('Left').removesuffix('Right')
 
 
 def load_training(cache: Path, basis: list[str]) -> dict[str, Geometry]:
     return {avatar: Geometry(cache, avatar, basis) for avatar in TRAINING}
+
+
+def tied(geometry: Geometry, basis: list[str]) -> tuple[list[str], list[list[float]]]:
+    """The mirror-symmetric basis: each Left and Right pair summed into one column, in the order of first use."""
+    keys = list(dict.fromkeys(pair(a) for a in basis))
+    columns = {k: None for k in keys}
+    for name, shape in zip(basis, geometry.basis):
+        key = pair(name)
+        columns[key] = shape if columns[key] is None else [a + b for a, b in zip(columns[key], shape)]
+    return keys, list(columns.values())
 
 
 def fit(cache: Path) -> tuple[dict, dict, dict]:
@@ -316,12 +388,16 @@ def fit(cache: Path) -> tuple[dict, dict, dict]:
     classes, arkit, signals = correspondences(pack_document())
     basis = list(arkit)
     rigs = load_training(cache, basis)
-    systems = {avatar: geometry.systems(list(classes))[1] for avatar, geometry in rigs.items()}
+    systems = {}
+    for avatar, geometry in rigs.items():
+        keys, columns = tied(geometry, basis)
+        systems[avatar] = geometry.systems(list(classes), columns)[1]
     poses, residuals = {}, {}
     for meta, cid in classes.items():
         u = [round(x, DECIMALS) for x in minimax([systems[a][meta] for a in rigs])]
         residuals[cid] = {a: error(u, *systems[a][meta]) for a in rigs}
-        by_signal = {j: w for a, w in zip(basis, u) for j in arkit[a]}
+        weights = dict(zip(keys, u))
+        by_signal = {j: weights[pair(a)] for a in basis for j in arkit[a]}
         poses[cid] = {j: by_signal[j] for j in signals}
     return poses, residuals, {a: g.tongue for a, g in rigs.items()}
 
@@ -334,14 +410,14 @@ def cv(args) -> int:
     keys = list(dict.fromkeys(pair(a) for a in basis))
     tie = [[1.0 if pair(a) == k else 0.0 for a in basis] for k in keys]  # paired weight -> ARKit shapes
 
-    def tied(geometry):
+    def paired(geometry):
         return [[math.fsum(c[i] for c, t in zip(geometry.basis, row) if t) for i in range(len(geometry.basis[0]))]
                 for row in tie]
     plain = {a: g.systems(metas)[1] for a, g in rigs.items()}
     variants = {}
     for symmetric in (False, True):
         for lip in (False, True):
-            fitted = {a: g.systems(metas, tied(g) if symmetric else None, g.lip_scale(basis) if lip else None)[1]
+            fitted = {a: g.systems(metas, paired(g) if symmetric else None, g.lip_scale(basis) if lip else None)[1]
                       for a, g in rigs.items()}
             for objective in ('minimax', 'sum'):
                 variants[(objective, symmetric, lip)] = fitted
@@ -363,8 +439,8 @@ def cv(args) -> int:
     # on the other training rigs.
     single = {}
     for meta in metas:
-        u = expand([round(x, DECIMALS) for x in solve('sum', [variants[('sum', True, False)]['Female_Adult_01'][meta]])],
-                   True)
+        system = variants[('sum', True, False)]['Female_Adult_01'][meta]
+        u = expand([round(x, DECIMALS) for x in solve('sum', [system])], True)
         single[meta] = [error(u, *plain[a][meta]) for a in rigs if a != 'Female_Adult_01']
     rows.append(('Female_Adult_01 only, symmetric, least squares', single))
     # A floor, not a candidate: each rig fitted to itself (Left and Right apart, least squares).
@@ -383,7 +459,8 @@ def cv(args) -> int:
     print('error on the left-out rig at full weight, median / max over the folds; classes <= 0.5 on every fold')
     for name, table in rows:
         passing = [short[m] for m in metas if max(table[m]) <= BOUNDS['median']]
-        print(f'\n{name}: {len(passing)} classes; mean of the per-class max {statistics.mean(map(max, table.values())):.3f}')
+        mean = statistics.mean(map(max, table.values()))
+        print(f'\n{name}: {len(passing)} classes; mean of the per-class max {mean:.3f}')
         print('  ' + ', '.join(f'{short[m]} {statistics.median(table[m]):.3f}/{max(table[m]):.3f}' for m in metas))
     return 0
 
@@ -409,8 +486,9 @@ def limitations() -> list[str]:
         'Teeth and tongue are not represented: the tongue is left out of the fit and of the error, tongueOut is not '
         'in the basis, and the teeth count only as part of the face mesh that moves with the jaw.',
         'The poses write no blink, gaze, jaw_sideways, mouth_shift or tongue_out values: those shapes are not in '
-        'the basis. Left and Right shapes have their own weights, so a pose may move the two sides by slightly '
-        'different amounts, as the training rigs do.',
+        'the basis. Each Left and Right pair shares one weight, so every pose gives the Left and Right canonical '
+        "signals equal values. The rigs' Left and Right shapes are not exact mirror images, so on these rigs the two "
+        'sides of the face can still move slightly differently.',
         'Coarticulation is not modelled: each class is one static pose, and a blend of classes is the clamped sum '
         'of their poses.',
         'The weights are bounded to [0, 1] by design; whatever viseme motion the 37 ARKit shapes cannot reach that '
@@ -426,13 +504,17 @@ def limitations() -> list[str]:
         'Rigs from other libraries render the same ARKit weight differently (record rig-gains.ict-rocketbox-female), '
         'so on such a rig the poses give other geometry.',
         'Rocketbox Male_Adult_01 was the held-out rig of viseme-poses.rocketbox-female and is a training rig here. '
-        'No earlier record or tool loaded the four held-out rigs.',
+        'The four rigs that version 1 of this record held out are seen and are neither held out nor used for '
+        'training. No earlier record or tool loaded the four held-out rigs of this version.',
+        'Version 1 of this record gave Left and Right their own weights. Its poses differed between the two sides '
+        'by up to 0.56 (rhotic: lower_lip_depress_left 0.439, lower_lip_depress_right 1.0), and its limitations '
+        'called the difference slight, which understated it. This version ties Left and Right.',
     ]
 
 
 def freeze(args) -> int:
     require_committed(ROOT / 'tools/calibration', ROOT / 'examples', ROOT / 'check.py', PACK)
-    if chosen(SETS) != (TRAINING, HELD_OUT_RIGS):
+    if chosen(SETS) != (TRAINING, HELD_OUT_RIGS, SEEN):
         raise SystemExit(f'{RIG_SETS.name}: the rig sets are not the ones its rule gives')
     entries, problems = check.read_ledger(LEDGER)
     if problems:
@@ -450,24 +532,26 @@ def freeze(args) -> int:
     channels = list(poses)
     method = ('minimax_bounded_least_squares_pose_fit: for each canonical viseme class, one set of ARKit weights in '
               '[0, 1] for all training rigs, from the 37 ARKit shapes of the groups face, cheek_puff, jaw_thrust and '
-              'chin_raise_upper_lip, Left and Right apart. On each training rig the error is |fit - viseme| / '
-              "|viseme| over the vertex displacements of every vertex except the tongue (the vertices that the rig's "
-              'tongueOut moves by more than 1% of its largest move). The fit approaches the weights with the '
-              f'smallest largest error by Lawson reweighting: {ITERATIONS} rounds of bounded least squares on the sum '
-              'of rig weight times squared error, each rig weight starting at 1 and then multiplied by its error and '
-              'normalised; each round by cyclic coordinate descent on the normal equations to a change below 1e-13. '
-              'The weights are rounded to 3 decimals and carried to canonical signals by the ARKit in-maps. Each '
-              'curve gives the canonical value at class weight 1. This method was chosen over a single-rig fit, a '
-              'sum of squared errors, a mirror-symmetric fit and a lip-region weighting by leave-one-rig-out '
-              'cross-validation within the training rigs. Cell error, one cell per class and held-out rig: '
-              "|reconstruction - target| / |target - neutral| over the rig's vertices except the tongue, where the "
-              "target is the rig's own viseme shapes and the reconstruction is the rig's ARKit shapes at the weights "
-              'that the ARKit out-maps give for clamp(sum of pose times class weight, 0, 1); neutral is that error '
-              'at weight 0. A condition is a failure if the rig has no shape for the class, or if the target does not '
-              'move the face but the reconstruction does; its error counts as 1. A class passes if its cells pass on '
-              'every held-out rig. Use: the viseme pose bridge is written from this record alone and reads exactly '
-              'the classes that pass; it replaces viseme-poses.rocketbox-female for every class, whether more or '
-              'fewer classes pass.')
+              'chin_raise_upper_lip, each Left and Right pair sharing one weight. On each training rig the error is '
+              "|fit - viseme| / |viseme| over the vertex displacements of every vertex except the tongue (the vertices "
+              "that the rig's tongueOut moves by more than 1% of its largest move). The fit approaches the weights "
+              f'with the smallest largest error by Lawson reweighting: {ITERATIONS} rounds of bounded least squares on '
+              'the sum of rig weight times squared error, each rig weight starting at 1 and then multiplied by its '
+              'error and normalised; each round by cyclic coordinate descent on the normal equations to a change '
+              'below 1e-13. The weights are rounded to 3 decimals and carried to canonical signals by the ARKit '
+              'in-maps. Each curve gives the canonical value at class weight 1. Among the mirror-symmetric '
+              'candidates (a single-rig fit, a sum of squared errors, a lip-region weighting), leave-one-rig-out '
+              'cross-validation within the training rigs chose this one; version 1 gave Left and Right their own '
+              'weights, which made the poses lopsided. Held out: rigs that no earlier fit or evaluation loaded. Cell '
+              "error, one cell per class and held-out rig: |reconstruction - target| / |target - neutral| over the "
+              "rig's vertices except the tongue, where the target is the rig's own viseme shapes and the "
+              "reconstruction is the rig's ARKit shapes at the weights that the ARKit out-maps give for clamp(sum of "
+              'pose times class weight, 0, 1); neutral is that error at weight 0. A condition is a failure if the rig '
+              'has no shape for the class, or if the target does not move the face but the reconstruction does; its '
+              'error counts as 1. A class passes if its cells pass on every held-out rig. Use: the viseme pose bridge '
+              'is written from this record alone and reads exactly the classes that pass; it replaces every earlier '
+              'version of this record and viseme-poses.rocketbox-female for every class, whether more or fewer '
+              'classes pass.')
     worst = {c: max(residuals[c].values()) for c in channels}
     middle = {c: statistics.median(residuals[c].values()) for c in channels}
     training = ', '.join(f'{c.rsplit(".", 1)[1]} {middle[c]:.3f}/{worst[c]:.3f}' for c in channels)
@@ -477,7 +561,8 @@ def freeze(args) -> int:
                    f'after rounding, median/largest over the training rigs: {training} (sil does not move the face).')
     reference = (f'Microsoft Rocketbox facial FBX files ({rigs.ROCKETBOX_COMMIT[:7]}) of the {len(TRAINING)} training '
                  f'rigs {avatars(TRAINING)}: each has 15 viseme shapes and 52 ARKit shapes on one mesh. Held out: '
-                 f'{avatars(HELD_OUT_RIGS)}. Rig sets by the rule in tools/calibration/viseme_rigs.json')
+                 f'{avatars(HELD_OUT_RIGS)}; seen and not used: {avatars(SEEN)}. Rig sets by the rules in '
+                 'tools/calibration/viseme_rigs.json')
     lines = ['# SPDX-License-Identifier: CC-BY-SA-4.0',
              '# Written by tools/calibration/viseme_poses.py. Everything but cells was frozen, and its hash written to',
              '# calibration/FREEZES, before the held-out run.',
@@ -541,7 +626,7 @@ def arkit_weights(msf, compiled, values: dict[str, float]) -> dict[str, float]:
 
 
 def identity(avatar: str) -> str:
-    return f'Rocketbox {avatar} (held-out rig, not loaded by the fit)'
+    return f'Rocketbox {avatar} (held-out rig, not loaded by any fit or earlier evaluation)'
 
 
 def evaluate(record: dict, cache: Path) -> dict[tuple[str, str], dict]:
@@ -637,14 +722,62 @@ def heldout(args) -> int:
     return 0
 
 
+def lips(args) -> int:
+    """Report only: mouth distances of the frozen poses and the rigs' own visemes for PP, FF and OU."""
+    record = check.load_record(RECORD)
+    if 'cells' not in record:
+        raise SystemExit(f'{RECORD.name} has no cells yet; run the held-out step first')
+    paths = {(args.rig_cache / INPUT_FILES[i['name']] if i['name'] in INPUT_FILES else PACK): i['sha256']
+             for i in record['inputs'] if i['name'] != PACK_INPUT}
+    problems = provenance.input_problems(paths)
+    if problems:
+        raise SystemExit('inputs differ from the record:\n' + '\n'.join(problems))
+    document = pack_document()
+    classes, arkit, _ = correspondences(document)
+    basis = list(arkit)
+    meta = {cid: m for m, cid in classes.items()}
+    poses = {}
+    for curve in record['curves']:
+        poses.setdefault(curve['input'], {})[curve['output']] = curve['knots'][1][1]
+    read = {c for c in record['channels'] if all(check.cell_passes(record, x) for x in record['cells']
+                                                if x['channel'] == c)}
+    msf, compiled = out_maps(document)
+    rows = []
+    for avatar in HELD_OUT_RIGS:
+        geometry = Geometry(args.rig_cache, avatar, basis)
+        marks = geometry.landmarks()
+        neutral = geometry.measures(marks, [0.0] * len(geometry.rest))
+        for channel in LIP_CLASSES:
+            u = arkit_weights(msf, compiled, bridge(poses, {channel: 1.0}))
+            pose = [math.fsum(u[a] * shape[k] for a, shape in zip(basis, geometry.basis))
+                    for k in range(len(geometry.rest))]
+            rows.append({'rig': avatar, 'class': channel.rsplit('.', 1)[1], 'meta': meta[channel],
+                         'read_by_bridge': channel in read, 'neutral': neutral,
+                         'own_viseme': geometry.measures(marks, geometry.visemes[meta[channel]]),
+                         'frozen_pose': geometry.measures(marks, pose)})
+            row = rows[-1]
+            print(f'{avatar:16} {meta[channel]:3} ' + '  '.join(
+                f'{k[:-3]} neutral {row["neutral"][k]:.2f} own {row["own_viseme"][k]:.2f} '
+                f'pose {row["frozen_pose"][k]:.2f}' for k in neutral))
+    LIPS_OUT.write_text(json.dumps({
+        'about': ('Report only, not gated: mouth distances in mm at full weight on the held-out rigs of '
+                  f'{RECORD_ID} v{record["version"]}, for the frozen pose of each class (which the bridge reads only '
+                  'if the class passes; otherwise the bridge gives the neutral face) and for the rig\'s own viseme. '
+                  'They change no cell and no pass or fail. Landmarks: see Geometry.landmarks in viseme_poses.py.'),
+        'record': RECORD_ID, 'version': record['version'], 'frozen_sha256': record['held_out']['frozen_sha256'],
+        'rows': rows}, indent=1) + '\n', encoding='utf-8')
+    print(f'wrote {LIPS_OUT.relative_to(ROOT)}')
+    return 0
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('step', choices=['cv', 'freeze', 'heldout'])
+    parser.add_argument('step', choices=['cv', 'freeze', 'heldout', 'lips'])
     parser.add_argument('--rig-cache', type=Path, required=True, help='directory for the Rocketbox files')
     parser.add_argument('--reason', help='freeze: why a new version is frozen')
     parser.add_argument('--out', type=Path, help='heldout: also write the cells and the code files as JSON')
     args = parser.parse_args(argv)
-    return {'cv': cv, 'freeze': freeze, 'heldout': heldout}[args.step](args)
+    return {'cv': cv, 'freeze': freeze, 'heldout': heldout, 'lips': lips}[args.step](args)
 
 
 if __name__ == '__main__':
