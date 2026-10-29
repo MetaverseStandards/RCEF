@@ -497,7 +497,7 @@ def m3_coverage(document: dict, pair: dict, impulse: list[dict], b: list[dict], 
 
 
 def facs_compare(b: list[dict], expected: list[dict], not_available: list[str]) -> tuple[dict, list]:
-    """M10 and M10b: values on outputs both write, B's coverage against the frozen list, and B's refusals."""
+    """M10 and M10b: values on outputs both write, B's coverage equal to the frozen list, and B's refusals."""
     counts = {'frames': len(b), 'value_differences': 0, 'coverage_violations': 0, 'b_refusals': 0}
     failures = []
     for n, (x, values) in enumerate(zip(b, expected, strict=True)):
@@ -506,8 +506,10 @@ def facs_compare(b: list[dict], expected: list[dict], not_available: list[str]) 
             if bits(x['values'][output]) != bits(values[output]):
                 counts['value_differences'] += 1
                 failures.append([n, output, repr(values[output]), repr(x['values'][output])])
+        # The outputs B leaves unwritten must be exactly the frozen list, each labelled "not available".
         unwritten = set(values) - set(x['values'])
-        wrong = {o for o in unwritten if o not in not_available or x['labels'].get(o) != rcef_route.NOT_AVAILABLE}
+        wrong = (unwritten ^ set(not_available)) | {
+            o for o in unwritten if x['labels'].get(o) != rcef_route.NOT_AVAILABLE}
         extra = set(x['values']) - set(values)
         if wrong or extra:
             counts['coverage_violations'] += 1
