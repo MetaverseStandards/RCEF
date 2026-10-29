@@ -1,0 +1,212 @@
+# SPDX-License-Identifier: MIT
+"""The viseme pose bridge against its calibration record and Route, without the generator.
+
+- the bridge reads only partition classes, and exactly those whose held-out cells all pass;
+- each weight is the record's frozen pose, read through one copy per class and one clamp per output;
+- the clamp chain gives clamp(sum of weight times pose, 0, 1) on random frames;
+- it writes whole canonical expression groups, and only cites the record on its sums;
+- Route runs it only from a viseme set to an expression set, and every other route is as without it;
+- refusals, labels, dropped classes and the classes a source cannot write.
+"""
+import importlib.util
+import itertools
+import json
+from pathlib import Path
+import random
+import sys
+import tomllib
+import unittest
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'examples'))
+import rcef_route  # noqa: E402
+import rcef_translate  # noqa: E402
+
+_spec = importlib.util.spec_from_file_location('rcef_check', ROOT / 'check.py')
+check = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(check)
+
+BRIDGE = 'rcef_viseme_pose.to_rcef_expression'
+RECORD = 'viseme-poses.rocketbox-female'
+VISEME, EXPRESSION = 'rcef.canonical_viseme', 'rcef.canonical_expression'
+GROUPS = {'face', 'cheek_puff', 'jaw_thrust', 'chin_raise_upper_lip'}
+COPY = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
+META = 'openxr.visemes.XR_FACE_TRACKING_VISEME_{}_META'
+META_NAMES = ['SIL', 'PP', 'FF', 'TH', 'DD', 'KK', 'CH', 'SS', 'NN', 'RR', 'AA', 'E', 'IH', 'OH', 'OU']
+SETS = ['arkit.coefficient', 'openxr.fb2', 'openxr.visemes', 'vrm.preset', 'vrcft.artist.base', 'vrcft.eye']
+
+
+class PoseBridge(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.document = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+        cls.pack = rcef_translate.load_pack(cls.document)
+        cls.signals = {s['id']: s for s in cls.document['signals']}
+        cls.members = {p['id']: p['signal_ids'] for p in cls.document['profiles']}
+        cls.rules = next(m['rules'] for m in cls.document['mappings'] if m['id'] == BRIDGE)
+        cls.record = tomllib.loads((ROOT / f'calibration/{RECORD}.cal').read_text(encoding='utf-8'))
+        cls.passing = [c for c in cls.record['channels']
+                       if all(check.cell_passes(cls.record, x) for x in cls.record['cells'] if x['channel'] == c)]
+        cls.writer = {r['outputs'][0]: r for r in cls.rules}
+        cls.sums = [r for r in cls.rules if r['operator']['id'] == 'weighted_sum']
+        cls.clamp = {r['inputs'][0]: r for r in cls.rules if r['operator']['id'] == 'piecewise_linear'}
+        cls.compiled = {}
+
+    def route(self, source, target, pack=None, compiled=None):
+        """A Route that reuses the maps already compiled from the same pack."""
+        compiled = self.compiled if compiled is None else compiled
+        route = rcef_route.Route(source, target, pack=pack or self.pack, compiled=compiled)
+        compiled.update(route.mappings)
+        return route
+
+    def classes_of(self, rule):
+        """The canonical classes a sum reads, through the copy that makes each input."""
+        out = []
+        for sid in rule['inputs']:
+            copy = self.writer[sid]
+            self.assertEqual(copy['operator'], COPY, copy['id'])
+            out.append(copy['inputs'][0])
+        return out
+
+    def poses(self):
+        """{expression signal: {class: weight}} as the bridge applies them."""
+        return {self.clamp[r['outputs'][0]]['outputs'][0]: dict(zip(self.classes_of(r), r['operator']['weights']))
+                for r in self.sums}
+
+    def test_it_reads_only_partition_classes_and_exactly_the_passing_ones(self):
+        inputs, outputs = rcef_route.map_ends(self.rules)
+        partition = {s for s in self.members[VISEME] if self.signals[s]['coupling'] == 'probability_simplex'}
+        self.assertEqual(len(partition), 15)
+        self.assertLessEqual(set(inputs), partition)
+        self.assertNotIn(f'{VISEME}.alveolar_floor', inputs)
+        self.assertEqual(sorted(inputs), sorted(self.passing))
+        self.assertEqual(len(self.passing), 9)
+        for rule in self.sums:
+            self.assertEqual(self.classes_of(rule), self.passing, rule['id'])
+
+    def test_each_weight_is_the_frozen_pose_of_the_record(self):
+        curves = {(c['input'], c['output']): c['knots'] for c in self.record['curves']}
+        poses = self.poses()
+        self.assertEqual(len(poses), 45)
+        for output, weights in poses.items():
+            for cls, weight in weights.items():
+                self.assertEqual(curves[(cls, output)], [[0.0, 0.0], [1.0, weight]], (cls, output))
+
+    def test_it_writes_whole_expression_groups_and_nothing_else(self):
+        _, outputs = rcef_route.map_ends(self.rules)
+        whole = {s for s in self.members[EXPRESSION] if self.signals[s]['metadata']['group'] in GROUPS}
+        self.assertEqual(set(outputs), whole)
+        self.assertEqual(len(outputs), len(set(outputs)))
+
+    def test_the_chain_is_copy_then_sum_then_clamp(self):
+        k = float(len(self.passing))
+        for rule in self.rules:
+            for sid in rule['inputs'] + rule['outputs']:
+                if sid.startswith('rcef.intermediate.'):
+                    self.assertIn(sid, self.members['rcef.intermediate'])
+                    self.assertEqual(self.signals[sid]['units'], '1')
+        for rule in self.sums:
+            [helper] = rule['outputs']
+            self.assertEqual(self.signals[helper]['domain'], {'min': 0.0, 'max': k})
+            self.assertEqual(self.clamp[helper]['operator']['knots'], [[0.0, 0.0], [1.0, 1.0], [k, 1.0]])
+        self.assertEqual(len(self.rules), len(self.passing) + 2 * len(self.sums))
+
+    def test_the_compiled_bridge_gives_the_clamped_sum(self):
+        compiled = self.route('openxr.visemes', 'arkit.coefficient').mappings[BRIDGE]
+        poses, rng = self.poses(), random.Random(20261029)
+        frames = []
+        for n in range(200):
+            values = {c: rng.random() * (1.0 if n % 2 else 1.0 / len(self.passing)) for c in self.passing}
+            frames.append({'timestamp': float(n), 'values': values, 'validity': dict.fromkeys(values, True)})
+        result = rcef_route.msf.evaluate_mapping(compiled, frames)
+        self.assertTrue(result.ok, result.report.to_dict())
+        clamped = 0
+        for frame, sample in zip(frames, result.value.samples):
+            for output, weights in poses.items():
+                total = 0.0
+                for cls in self.passing:
+                    total += frame['values'][cls] * weights[cls]
+                self.assertAlmostEqual(sample['values'][output], min(max(total, 0.0), 1.0), places=12)
+                clamped += total > 1.0
+        self.assertGreater(clamped, 0)
+
+    def test_only_the_sums_cite_the_record(self):
+        cited = [r['id'] for r in self.rules if f'calibration.{RECORD}' in r['evidence']]
+        self.assertEqual(cited, [r['id'] for r in self.sums])
+        self.assertEqual({r['evidence_status'] for r in self.rules}, {'proposed'})
+        self.assertEqual({r['mapping_quality'] for r in self.rules}, {'approximate'})
+        self.assertIn(f'calibration.{RECORD}', {e['id'] for e in self.document['evidence']})
+        self.assertEqual(check.calibration_problems(ROOT / 'calibration', check.pack_rules(ROOT)), [])
+
+    def test_route_runs_the_bridge_only_from_a_viseme_set_to_an_expression_set(self):
+        for source, target in itertools.product(SETS, SETS):
+            with self.subTest(source=source, target=target):
+                route = self.route(source, target)
+                expected = source in ('openxr.visemes', 'vrm.preset') and target in (
+                    'arkit.coefficient', 'openxr.fb2', 'vrcft.artist.base')
+                self.assertEqual(route.bridges, [BRIDGE] if expected else [])
+                if expected:
+                    self.assertTrue(route.in_maps)
+                    self.assertNotIn('visemes_aggregate.to_rcef', route.in_maps)
+
+    def test_every_other_route_is_as_without_the_bridge(self):
+        without = dict(self.document, mappings=[m for m in self.document['mappings'] if m['id'] != BRIDGE])
+        bare = rcef_translate.load_pack(without)
+        flags = {f.strip(): True for s in self.signals.values() if s.get('validity')
+                 for f in s['validity'].split(' AND ')}
+        rng, cache = random.Random(7), {}
+        for source, target in itertools.product(SETS, SETS):
+            route = self.route(source, target)
+            if route.bridges:
+                continue
+            with self.subTest(source=source, target=target):
+                old = self.route(source, target, bare, cache)
+                self.assertEqual((route.in_maps, route.out_maps, route.hops, route.kept),
+                                 (old.in_maps, old.out_maps, old.hops, old.kept))
+                inputs = sorted(old.kept or {i for m in old.in_maps for i in old.mappings[m].required_inputs})
+                frames = [{'time': float(n), 'values': {s: rng.random() for s in inputs}, 'flags': flags}
+                          for n in range(5)]
+                self.assertEqual(route.translate(frames), old.translate(frames))
+
+    def meta_frame(self, valid=True, **weights):
+        return {'time': 0.0, 'values': {META.format(n): weights.get(n, 0.0) for n in META_NAMES},
+                'flags': {'isValid': valid}}
+
+    def test_meta_to_arkit_drops_failing_classes_and_refuses_upstream(self):
+        route = self.route('openxr.visemes', 'arkit.coefficient')
+        aa, pp, sil, bad = route.translate([self.meta_frame(AA=1.0), self.meta_frame(PP=1.0),
+                                            self.meta_frame(SIL=1.0), self.meta_frame(False, AA=1.0)])
+        self.assertEqual(aa['values']['arkit.coefficient.jawOpen'],
+                         self.poses()[f'{EXPRESSION}.jaw_drop'][f'{VISEME}.vowel_open'])
+        self.assertEqual(aa['dropped'], [])
+        self.assertEqual(pp['dropped'], [META.format('PP')])
+        self.assertEqual(set(pp['values'].values()), {0.0})
+        self.assertEqual(set(sil['values'].values()), {0.0})
+        # The groups the bridge does not write are not available, never refused.
+        self.assertEqual(set(aa['labels'].values()), {rcef_route.NOT_AVAILABLE})
+        self.assertIn('arkit.coefficient.eyeBlinkLeft', aa['labels'])
+        self.assertIn('arkit.coefficient.jawLeft', aa['labels'])
+        self.assertEqual(set(bad['values']), set())
+        refused = {lab for lab in bad['labels'].values() if lab != rcef_route.NOT_AVAILABLE}
+        self.assertEqual(refused, {'refused upstream at visemes_consonant.to_rcef, visemes_rest.to_rcef, '
+                                   'visemes_vowel.to_rcef'})
+        self.assertNotIn(BRIDGE, bad['refused'])
+        self.assertEqual(aa['notes'], [])
+
+    def test_vrm_vowels_drive_the_bridge_with_the_classes_vrm_lacks_at_zero(self):
+        route = self.route('vrm.preset', 'arkit.coefficient')
+        self.assertEqual(route.fill[BRIDGE], sorted(set(self.passing) - {f'{VISEME}.vowel_open',
+                                                                          f'{VISEME}.vowel_close_spread',
+                                                                          f'{VISEME}.vowel_mid_rounded'}))
+        presets = {s: 0.0 for s in route.kept | {f'vrm.preset.{p}' for p in ('aa', 'ee', 'ih', 'oh', 'ou')}}
+        vrm, = route.translate([{'time': 0.0, 'values': {**presets, 'vrm.preset.aa': 1.0, 'vrm.preset.ee': 0.5},
+                                 'flags': {}}])
+        meta, = self.route('openxr.visemes', 'arkit.coefficient').translate([self.meta_frame(AA=1.0)])
+        self.assertEqual(vrm['values'], meta['values'])
+        self.assertEqual(vrm['dropped'], ['vrm.preset.ee'])
+        self.assertEqual(len(vrm['notes']), 1)
+        self.assertIn('counted as 0', vrm['notes'][0])
+
+
+if __name__ == '__main__':
+    unittest.main()
