@@ -200,6 +200,8 @@ class Route:
             if len(parts) < 3 or parts[1] != 'samples':
                 raise SystemExit(outcome.report.to_dict())
             refused.setdefault(span[int(parts[2])], []).append(diagnostic)
+        if not refused:
+            raise SystemExit(outcome.report.to_dict())  # a failure that names no frame: retrying cannot help
         for i, diagnostics in refused.items():
             results[i]['refused'][mapping] = {'codes': sorted({d.code for d in diagnostics}),
                                               'refs': sorted({d.ref.split('/', 3)[3] for d in diagnostics
