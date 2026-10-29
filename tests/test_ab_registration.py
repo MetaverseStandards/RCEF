@@ -114,7 +114,8 @@ class Rules(unittest.TestCase):
 
     def test_thresholds_never_change_inside_an_id(self):
         self.add(registration())
-        self.add(registration(2, 'fix', metrics={'M1': 'looser'}), reason='the oracle had a bug')
+        self.add(registration(2, 'fix', metrics={'M1': 'looser'}, changes=['the oracle']),
+                 reason='the oracle had a bug')
         self.assertProblem('thresholds must equal')
 
     def test_a_new_ab_sets_its_own_thresholds(self):
@@ -125,9 +126,10 @@ class Rules(unittest.TestCase):
     def test_a_changed_list_needs_the_release_owners_acceptance(self):
         self.add(registration())
         lists = {'intended_differences': ['signed gaze']}
-        self.add(registration(2, 'fix', lists=lists), reason='a hop bug in the gaze out-map')
+        self.add(registration(2, 'fix', lists=lists, changes=['the gaze out-map']),
+                 reason='a hop bug in the gaze out-map')
         self.assertProblem("list intended_differences changed without the release owners' acceptance")
-        accepted = registration(3, 'fix', lists=lists, acceptance={
+        accepted = registration(3, 'fix', lists=lists, changes=['the gaze out-map'], acceptance={
             'intended_differences': 'accepted by the project\'s release owners on 2026-11-02'})
         self.add(accepted, reason='same list, now with the acceptance recorded')
         problems = self.problems()
@@ -138,6 +140,23 @@ class Rules(unittest.TestCase):
         self.results(registration())
         self.add(registration(2, 'revise'), reason='working group renames of two maps')
         self.assertProblem('a "revise" freeze lists each change')
+
+    def test_a_fix_freeze_names_what_changed(self):
+        self.add(registration())
+        self.add(registration(2, 'fix'), reason='after the failing first run')
+        self.assertProblem('a "fix" freeze names what changed')
+
+    def test_a_reproduce_freeze_reproduces_the_latest_passing_freeze(self):
+        first = registration()
+        fix = registration(2, 'fix', changes=['the oracle'])
+        self.add(first)
+        self.add(fix, reason='after the failing first run')
+        self.results(first, passed=True)
+        self.results(fix, passed=True)
+        reproduce = {**registration(3, 'reproduce'), 'reproduces': {'id': 'ab.pivot', 'version': 1}}
+        reproduce['seed_root'] = first['seed_root']
+        self.add(reproduce, reason='re-run after the direct maps are retired')
+        self.assertProblem('the latest passing freeze, ab.pivot v2')
 
     def test_a_reproduce_freeze_names_a_passing_freeze_and_copies_its_seeds(self):
         first = registration()
@@ -165,6 +184,22 @@ class Rules(unittest.TestCase):
         self.add(abreg)
         self.results(abreg, folder='v7')
         self.assertProblem('must be in ab/results/v1/')
+
+    def test_the_registration_is_committed_before_its_ledger_line(self):
+        self.git('init', '-q')
+        abreg = registration()
+        self.add(abreg)
+        self.commit('registration and ledger line together')
+        self.assertProblem('must be committed before its line in ab/FREEZES')
+
+    def test_committed_results_need_a_committed_ledger_line(self):
+        self.git('init', '-q')
+        abreg = registration()
+        self.add(abreg, line=False)
+        self.results(abreg)
+        self.commit('registration and results')
+        self.add(abreg)
+        self.assertProblem('its line in ab/FREEZES is not committed')
 
     def test_the_ledger_line_is_committed_before_the_results(self):
         self.git('init', '-q')
