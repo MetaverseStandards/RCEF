@@ -207,6 +207,40 @@ class PoseBridge(unittest.TestCase):
         self.assertEqual(len(vrm['notes']), 1)
         self.assertIn('counted as 0', vrm['notes'][0])
 
+    def synthetic(self, change):
+        """A pack compiled from a changed copy of the published pack document."""
+        document = json.loads(json.dumps(self.document))
+        change(document)
+        return rcef_translate.load_pack(document)
+
+    def test_no_bridge_where_the_source_writes_the_bridge_outputs_itself(self):
+        def add_jaw_in_map(document):
+            rule = json.loads(json.dumps(next(m for m in document['mappings']
+                                              if m['id'] == 'vrm_vowel.to_rcef')['rules'][0]))
+            rule.update(id='synthetic.jaw', outputs=[f'{EXPRESSION}.jaw_drop'])
+            for loss in rule['loss_annotations']:
+                loss['refs'] = rule['inputs'] + rule['outputs']
+            document['mappings'].append({'id': 'vrm_synthetic.to_rcef', 'rules': [rule]})
+        route = rcef_route.Route('vrm.preset', 'arkit.coefficient', pack=self.synthetic(add_jaw_in_map))
+        self.assertEqual(route.bridges, [])
+        self.assertEqual(route.in_maps, ['vrm_synthetic.to_rcef'])
+
+    def test_a_frame_the_bridge_refuses_labels_its_outputs_and_gets_no_note(self):
+        def narrow(document):
+            helper = next(s for s in document['signals'] if s['id'] == 'rcef.intermediate.viseme_pose_vowel_open')
+            helper['domain'] = {'min': 0.0, 'max': 0.5}
+        route = rcef_route.Route('vrm.preset', 'arkit.coefficient', pack=self.synthetic(narrow))
+        presets = {f'vrm.preset.{p}': 0.0 for p in ('aa', 'ee', 'ih', 'oh', 'ou')}
+        refused, ran = route.translate([{'time': 0.0, 'values': {**presets, 'vrm.preset.aa': 1.0}, 'flags': {}},
+                                        {'time': 0.1, 'values': {**presets, 'vrm.preset.aa': 0.25}, 'flags': {}}])
+        self.assertEqual(refused['refused'][BRIDGE]['codes'], ['E_DOMAIN'])
+        self.assertEqual(refused['values'], {})
+        self.assertIn(f'refused upstream at {BRIDGE}', refused['labels'].values())
+        self.assertEqual(refused['notes'], [])
+        self.assertEqual(ran['refused'], {})
+        self.assertEqual(len(ran['notes']), 1)
+        self.assertTrue(ran['values'])
+
 
 if __name__ == '__main__':
     unittest.main()
