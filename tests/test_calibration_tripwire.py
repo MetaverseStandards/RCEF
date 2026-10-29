@@ -19,8 +19,10 @@ import provenance  # noqa: E402
 # check.py changed again (16a698f) after viseme-poses.rocketbox-female (code_commit d7e0f50), which is reproduced from
 # its freeze commit, a0381b2. viseme_poses.py then learnt the multi-rig fit (c0b8b8b; viseme-poses.rocketbox-multi v1,
 # code_commit ce56bb6, reproduced from its freeze commit d53567c), and then the tied Left and Right fit and the lips
-# step (05b8b0e), the code of viseme-poses.rocketbox-multi v2.
-CODE_COMMIT = '05b8b0ebe79e2e94eb147a9d0777728ee7f9ded9'
+# step (05b8b0e), the code of viseme-poses.rocketbox-multi v2 (reproduced from its freeze commit 8354daf). check.py
+# then learnt the perceptual gate, and viseme_poses.py the features (295f4d7), the code of
+# viseme-poses.rocketbox-features.
+CODE_COMMIT = '295f4d76d8da53eb6b3936c5bec62ec8579ac2fe'
 RECORD_COMMIT = '2fa1be4'
 CODE = ['check.py', 'examples/rig_gains.py', 'examples/rigs.py', 'examples/ict_facekit.py', 'examples/rcef_translate.py',
         'examples/data/rig_landmarks.json', 'tools/calibration/ict_files.json', 'tools/calibration/viseme_rigs.json',
