@@ -211,7 +211,7 @@ Each map reads one group and writes the target set's visemes for it. No map read
 
 #### The viseme pose bridge
 
-The bridge goes from the canonical viseme set to the canonical expression set. Each canonical expression signal of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` is the sum of each class weight times the class's pose, clamped at 1. The poses come from the calibration record [`viseme-poses.rocketbox-female`](calibration/README.md): one rig's viseme shapes, measured in its own ARKit shapes. The bridge reads only the 9 classes whose held-out cells pass. So META visemes and VRM vowels can drive ARKit, FB2 and Unified Expressions faces, with the limits that [canonical-set.md](docs/canonical-set.md#viseme-pose-bridge) gives.
+The bridge goes from the canonical viseme set to the canonical expression set. Each canonical expression signal of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` is the sum of each class weight times the class's pose, clamped at 1. The poses come from the calibration record [`viseme-poses.rocketbox-female`](calibration/README.md): one rig's viseme shapes, measured in its own ARKit shapes. The bridge reads only the 9 classes whose held-out cells pass (`sil` trivially, so 8 of 14 speech classes). So META visemes and VRM vowels can drive ARKit, FB2 and Unified Expressions faces, with the limits that [canonical-set.md](docs/canonical-set.md#viseme-pose-bridge) gives.
 
 | Map | Source set → target set | Mappings | Evidence status |
 |---|---|---|---|

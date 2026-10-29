@@ -72,7 +72,7 @@ Each mapping (and each signal) has an `evidence_status` field. It says how well 
 ### Limits
 
 - The mappings connect names and meanings the way the public sources do. Intensities are not calibrated: no provider publishes its gain, so equal weights are assumed to mean equal expressions. Each mapping states its assumptions and losses in `reports/mappings.md`.
-- The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass. In `viseme-poses.rocketbox-female`, 9 of 15 viseme classes pass, and the viseme pose bridge reads only those.
+- The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass. In `viseme-poses.rocketbox-female`, 9 of 15 viseme classes pass (`sil` trivially, so 8 of 14 speech classes), and the viseme pose bridge reads only those.
 - The viseme pose bridge lets META visemes and VRM vowels drive ARKit, FB2 and Unified Expressions faces. Its poses are one rig's (Rocketbox Female's) viseme shapes in its own ARKit units. Classes that failed (among them `bilabial` and `vowel_mid_spread`) move nothing. There is no map from expressions back to visemes.
 - The VRM maps come from specification texts only. No published table maps META visemes to VRM; `visemes.to_vrm` is a phoneme-label correspondence.
 - The README lists what is [not translated yet](README.md#mappings), and why.
