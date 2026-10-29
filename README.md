@@ -23,33 +23,47 @@ RCEF is not these things:
 
 ## Contents
 
-You edit the TOML files: `pack.toml`, `profiles/`, `data/`, `mappings/` and `evidence/sources.toml`. They are the source of truth. Scripts write everything in `generated/` and `reports/`, and also `references.md`, `docs/toml-index.csv`, `docs/godot_comparison.md`, `tests/fixtures/fb2_goldens.json` and `tests/fixtures/godot_fb2_rules.csv`. `scripts/derive_fb2_goldens.py` writes the last two from cached public source bytes. Do not edit those files by hand.
+RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts build everything else from that data.
 
-- `profiles/` - One TOML file per public expression set. `fixture.toml` holds RCEF's own synthetic fixtures.
-- `data/` - RCEF's own sets: `rcef.canonical` (21 signals) and `rcef.intermediate` (4 signals).
-- `mappings/` - The maps. Each map is a group of one-way mappings.
-- `pack.toml` - Root metadata: the schema, data and operator versions, the pack ID and the licence.
-- `evidence/` - `sources.toml` (the pinned public sources), `tooling.lock.json` (the msf-character-tools lock) and `input-contracts/` (an optional input schema that RCEF itself does not use).
-- `calibration/` - Software-only calibration records (`*.cal`) and the append-only `FREEZES` ledger.
-- `generated/` - Generated: the pack, the signal and profile matrix CSV, coverage and checksums.
-- `reports/` - Generated: readable inventory, mapping and canonical correspondence reports, in Markdown and CSV, with checksums.
-- `fixtures/` - `mapping_samples.json`: sample inputs and expected outputs for the affine, bilateral and identity checks.
-- `examples/` - End-to-end translations and face pipelines. Their inputs are in `examples/data/`.
-- `tools/` - Optional tools that make calibration records (`tools/calibration/`), and the macOS renderer for calibration fits (`tools/render/`).
-- `scripts/` - Export, comparison, source-check and local CI scripts.
-- `check.py` - Checks the msf-character-tools install, the calibration records, and the files in `generated/` and `reports/`. With `--write` it regenerates those files.
-- `docs/` - The architecture guide and its visuals, the full expression-set table, `toml-index.csv`, `godot_comparison.md` and calibration notes.
-- `tests/` - The `unittest` suite. Its inputs are in `tests/fixtures/`.
-- `survey.md` - The selected scope of each surveyed interface and its calibration boundary.
-- `proposal.md` - The authoring and mapping proposal: wire contract, executable examples and release limits.
-- `references.md` - Generated from `evidence/sources.toml`: each public source with its revision, retrieval date and SHA-256.
-- `CHANGELOG.md` - Changes for each data version.
-- `CONTRIBUTING.md` - What a change must include.
-- `GOVERNANCE.md` - Ownership and release gates.
-- `AGENTS.md` - The guide for coding agents. `CLAUDE.md` points to it.
-- `REVIEW.md` - The implementation self-review of 2026-10-07.
-- `LICENSE`, `LICENSES/`, `THIRD_PARTY_NOTICES.md` - The licences, their full texts, and the inherited source licences and provenance.
-- `.github/workflows/check.yml` - The GitHub workflow.
+### The data (edit these)
+
+- `profiles/`: one file per public expression set, for example ARKit, OpenXR FB2 or VRM. Each file lists the set's signals: name, value range (often 0 to 1), face side, neutral value and public source.
+- `data/`: RCEF's own sets. `canonical.toml` is the canonical set of 21 signals. `intermediate.toml` holds 4 helper values that the ARKit → FB2 gaze map uses inside.
+- `mappings/`: the maps. A map turns the signals of one set into those of another, for example FB2 into ARKit. Each mapping names its inputs, outputs and formula (a copy, a scale and offset, a weighted sum or a curve), and states its assumptions and losses.
+- `evidence/`: `sources.toml` lists each public source with its exact revision and SHA-256. `tooling.lock.json` pins the msf-character-tools build that checks the data. `input-contracts/` holds an optional schema that RCEF does not use.
+- `calibration/`: curves fitted to software renders of example faces. The `FREEZES` ledger only grows. It shows that each fit was fixed before it was tested.
+- `pack.toml`: the version numbers, ID and licence of the whole data set.
+
+### Generated files (do not edit)
+
+- `generated/`: all the data merged into one JSON file (`rcef.pack.json`), plus a CSV table, a coverage summary and checksums.
+- `reports/`: the same data as readable Markdown and CSV tables: every signal, every mapping, and how each set lines up with the canonical set.
+- `references.md`, `docs/toml-index.csv` and `docs/godot_comparison.md`: the source list, an index of the TOML files, and a comparison with Godot.
+
+`check.py --write` writes `generated/` and `reports/`. [Editing the data](#editing-the-data) names the scripts for the other files.
+
+### Code and tests
+
+- `check.py`: the main check. It verifies the locked msf-character-tools, the calibration records and the generated files in `generated/` and `reports/`. `--write` rebuilds those files.
+- `scripts/`: helper programs. They write the source list and TOML index, compare RCEF with Godot, check the public sources and run the local CI.
+- `tests/`: the automated tests, with their inputs in `tests/fixtures/`. `scripts/derive_fb2_goldens.py` makes two of those inputs from cached public sources.
+- `fixtures/`: small made-up inputs with known answers. They show how the formulas behave.
+- `tools/`: optional tools that make the calibration records, and the small macOS renderer they use.
+
+### Examples
+
+- `examples/`: programs you can run. They translate recorded FB2 face frames to ARKit, turn speech visemes into VRM mouth shapes, and drive 3D example faces. Their inputs are in `examples/data/`.
+
+### Documents
+
+- `docs/`: the [architecture guide](docs/architecture.md) (also as a diagram and a web page), the [full table of expression sets](docs/expression-sets.md) and calibration notes.
+- `survey.md`: what RCEF selected from each system, and the limits of each.
+- `proposal.md`: the data format, the API and the release limits.
+- `CHANGELOG.md`, `CONTRIBUTING.md` and `GOVERNANCE.md`: the changes in each data version, what a change must include, and who owns releases.
+- `REVIEW.md`: a self-review dated 2026-10-07.
+- `AGENTS.md`: instructions for AI coding assistants. `CLAUDE.md` points to it.
+- `LICENSE`, `LICENSES/` and `THIRD_PARTY_NOTICES.md`: the licences and the credits for public sources.
+- `.github/workflows/check.yml`: a GitHub workflow.
 
 ## What RCEF covers
 
