@@ -428,6 +428,8 @@ Here pose[c][j] is the value that class *c* at weight 1 gives expression signal 
 - Coarticulation is not modelled: each class is one static pose, and the poses of a blend add up. Teeth and tongue are not represented.
 - The test is software-only. It says nothing about any tracker or any real face.
 
+**Next record.** The record `viseme-poses.rocketbox-multi` fits one pose per class to 10 Rocketbox rigs and holds it out on 4 others. It was frozen before its held-out run. The rule for its use was fixed then too: the bridge will be written from that record alone and read exactly the classes that pass on every held-out rig. It will replace `viseme-poses.rocketbox-female` for every class, whether more or fewer classes pass.
+
 **No expression to viseme map.** The bridge goes one way. A face pose does not identify the sound: `coronal_stop`, `coronal_nasal_lateral` and `dorsal` have no lip target of their own, and different classes can reach similar poses. So RCEF has no map from the canonical expression set to the canonical viseme set, and it does not plan one.
 
 ## Eye closure from VRM and VRCFaceTracking
