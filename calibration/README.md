@@ -20,7 +20,7 @@ Records are `calibrated_software`. They are fitted to renders of example rigs, w
 
 ## Fields
 
-Every field is required, except `scan_origin` (see its row) and `cells`. No other fields are allowed. A record without `cells` is a pre-registration: its frozen part and ledger line are committed before the held-out run, and the cells are added after it. No mapping may cite the record until then. Write any dates as text, not as TOML dates.
+Every field is required, except `scan_origin` and `renderer` (see their rows) and `cells`. No other fields are allowed. A record without `cells` is a pre-registration: its frozen part and ledger line are committed before the held-out run, and the cells are added after it. No mapping may cite the record until then. Write any dates as text, not as TOML dates.
 
 | Field | Type | Meaning |
 |---|---|---|
@@ -34,7 +34,7 @@ Every field is required, except `scan_origin` (see its row) and `cells`. No othe
 | `channels` | list of text | the signal ids the fit measured, distinct |
 | `reference_rig` | text | the rig whose response is the reference |
 | `inputs` | list of tables | every input asset: `name` and its `sha256` |
-| `renderer` | table | `source_sha256` and `binary_sha256` of the renderer (see [tools/render](../tools/render/README.md)), and the `compiler`, `os` and `gpu` it ran with |
+| `renderer` | table | `source_sha256` and `binary_sha256` of the renderer (see [tools/render](../tools/render/README.md)), and the `compiler`, `os` and `gpu` it ran with; required when the fit or its evaluation renders images, and left out when both use only mesh geometry |
 | `code_commit` | text | the full 40-character commit of the code that ran the fit |
 | `training` | table | `conditions`, the number of training conditions (a positive integer), and a `description` of them |
 | `held_out` | table | `seed_rule` = `rcef.calibration.seeds/1`, `count` of held-out seeds, and `frozen_sha256` (below) |
@@ -54,7 +54,7 @@ A cell **passes** if it has no failures and its median, p95 and neutral errors a
 
 ## Frozen part, ledger and held-out seeds
 
-Everything in a record except `cells` is the frozen part: method, inputs, renderer, curves, the bounds and the minimum conditions. `frozen_sha256` is the SHA-256 of that part, without `frozen_sha256` itself. The part is written as compact JSON with sorted keys (`json.dumps(part, sort_keys=True, ensure_ascii=False, separators=(',', ':'))`, UTF-8). The held-out seeds come from this hash. Seed *i*, for *i* from 0 to `count` − 1, is the first 8 bytes, read big-endian, of the SHA-256 of the text `<frozen_sha256>:<i>`. `held_out_seeds()` in `check.py` computes them.
+Everything in a record except `cells` is the frozen part: method, inputs, renderer (if any), curves, the bounds and the minimum conditions. `frozen_sha256` is the SHA-256 of that part, without `frozen_sha256` itself. The part is written as compact JSON with sorted keys (`json.dumps(part, sort_keys=True, ensure_ascii=False, separators=(',', ':'))`, UTF-8). The held-out seeds come from this hash. Seed *i*, for *i* from 0 to `count` − 1, is the first 8 bytes, read big-endian, of the SHA-256 of the text `<frozen_sha256>:<i>`. `held_out_seeds()` in `check.py` computes them.
 
 Anyone can recompute a record's hash. So the hash alone does not stop someone from changing a frozen value to get new seeds. The freeze ledger stops this. `FREEZES` has one line per freeze:
 
@@ -70,7 +70,12 @@ What this guarantees: the ledger line for a freeze is committed before the resul
 
 ## Mappings that cite a record
 
-A mapping cites a record with the evidence id `calibration.<id>`. Its operator must be `piecewise_linear`. Its `knots` must be exactly equal to the knots of the record's curve with the same input and output. Every cell for its input channel must pass. `check.py` checks this for every mapping in the checkout's authoring files. It does this without msf-character-tools, after it verifies the installed msf-character-tools and before it runs msf-character-tools.
+A mapping cites a record with the evidence id `calibration.<id>`, and the pack holds an evidence record with that id that points to the file. Its operator must be `piecewise_linear` or `weighted_sum`.
+
+- **`piecewise_linear`:** its `knots` must be exactly equal to the knots of the record's curve with the same input and output. Every cell for its input channel must pass.
+- **`weighted_sum` (a pose sum):** the record's curves are poses, with knots `[[0, 0], [1, pose]]`: input channel *c* at weight 1 gives output *j* the value `pose`. Each input of the sum must be a copy (`affine` with scale 1 and offset 0) of one channel, made by one mapping. Exactly one `piecewise_linear` mapping reads the sum, the clamp, and its output is *j*. Each weight must be exactly the pose of the curve from its channel to *j*. Every cell of every channel that the sum reads must pass.
+
+`check.py` checks this for every mapping in the checkout's authoring files. It does this without msf-character-tools, after it verifies the installed msf-character-tools and before it runs msf-character-tools.
 
 A MediaPipe record that passes does not become a direct MediaPipe → ARKit map. It becomes a MediaPipe in-hop to the draft [canonical expression set](../docs/canonical-set.md#calibrated-mediapipe-records), `mediapipe_<group>.to_rcef`. The in-hop cites the record and the [definitions audit](../docs/canonical-set-audit.md#arkit) rows of the ARKit in-hop. `tools/calibration/k4_record.py` stays as it is until a record passes, although the `.rules` file it writes says that its rules can move to a direct `mappings/mediapipe_arkit.toml`. Then the tool changes under a new `code_commit`, and the record is frozen again with a new ledger line.
 
