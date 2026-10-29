@@ -416,3 +416,99 @@ MediaPipe Face Landmarker model bundle (float16, version 1), holding face_detect
 - SHA-256: `64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff`
 - License or terms: Apache-2.0
 - Locator: face_blendshapes.tflite in the bundle
+
+## rcef_canonical_v1
+
+Original RCEF canonical expression vocabulary, version 1 (draft): signal definitions, groups, the meaning of 0 and 1, the definitions audit and the assumptions each hop states; no measured gain, response curve or cross-provider equivalence.
+
+- Original authorship: RCEF contributors (2026)
+- License or terms: CC-BY-SA-4.0
+- Locator: docs/canonical-set.md; docs/canonical-set-audit.md; data/canonical_expression.toml
+
+## facs_wikipedia
+
+FACS code numbers, short names, table membership, intensity letters, modifier letters and visibility-region names used as facts; no prose copied; not the FACS manual.
+
+- Source: [facs_wikipedia](https://en.wikipedia.org/w/index.php?title=Facial_Action_Coding_System&oldid=1357638399&action=raw)
+- Revision: `1357638399`
+- Retrieved: 2026-10-28
+- SHA-256: `04e85bb6602305aa367c5d2b3f3f4fc4b78d8c213e73303f2694225453f5733a`
+- License or terms: CC-BY-SA-4.0
+- Locator: raw wikitext lines 69-75 (intensity letters), 78 (side modifiers), 82-142 (main codes), 144-176 (head movement codes), 178-204 (eye movement codes), 206-221 (visibility codes) and 223-284 (gross behavior codes)
+
+## rcsf_proposal
+
+RCSF design aims: coverage of most distinct joints across the analysed standards, format neutrality, and neutral territory for standards organizations; cited for RCEF's aims and its stated departures, not copied.
+
+- Source: [rcsf_proposal](https://raw.githubusercontent.com/MetaverseStandards/RCSF/f6c3ea8a00d4901496326b4a6fe6a24913a563c6/proposal.md)
+- Revision: `f6c3ea8a00d4901496326b4a6fe6a24913a563c6`
+- Retrieved: 2026-10-29
+- SHA-256: `7f7c771789140e78fb71b24e67ff1460eb59033d28054622b8206fe08c8dda99`
+- License or terms: CC-BY-SA-4.0 (stated in the RCSF README)
+- Locator: lines 70, 74 and 107
+
+## xr_fb2_fig_eyes_closed_l
+
+FB2 front-view figure for EYES_CLOSED_L: the eye on the viewer's right closes, so FB2 names sides from the subject's own face; cited, not copied.
+
+- Source: [xr_fb2_fig_eyes_closed_l](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_FB_Face_Expression_2_Eyes_Closed_L.png)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `78456d18833a58cdfe5edb54aeb31c2e5a3601de32f78d74b3f4b33a367efb12`
+- License or terms: CC-BY-4.0
+- Locator: whole image; referenced from fb_face_tracking2.adoc line 584
+
+## xr_fb2_fig_eyes_look_left_l
+
+FB2 front-view figure for EYES_LOOK_LEFT_L: the eye on the viewer's right turns toward the viewer's right, the temple, so the subject's own left eye looks out; cited, not copied.
+
+- Source: [xr_fb2_fig_eyes_look_left_l](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_FB_Face_Expression_2_Eyes_Look_Left_L.png)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `30794e175a00ff7c0d13e8a537d75315c4477359dae910ceef872f49dbe3b8cb`
+- License or terms: CC-BY-4.0
+- Locator: whole image; referenced from fb_face_tracking2.adoc line 608
+
+## xr_fb2_fig_mouth_left
+
+FB2 front-view figure for MOUTH_LEFT: the mouth moves toward the viewer's right, the subject's own left; cited, not copied.
+
+- Source: [xr_fb2_fig_mouth_left](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_FB_Face_Expression_2_Mouth_Left.png)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `07465af6b55f6fbc835b05b3d51401300705b24d115ca8425d1d6d1a9272d4f0`
+- License or terms: CC-BY-4.0
+- Locator: whole image; referenced from fb_face_tracking2.adoc line 834
+
+## vrcft_fig_eyeclosedleft
+
+VRCFaceTracking reference figure for EyeClosedLeft: the eye on the viewer's right closes, so Unified Expressions names sides from the subject's own face; cited, not copied.
+
+- Source: [vrcft_fig_eyeclosedleft](https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/img/avatar/avatar_ref_eyeclosedleft.png)
+- Revision: `3036f4668322f2364a918a885dc3a72c828359f3`
+- Retrieved: 2026-10-29
+- SHA-256: `128dc5f1dad57f703c57aded753bbaa621a46d28fbbed795f5cf5b62f98b3cbb`
+- License or terms: reference only; source figure not redistributed
+- Locator: whole image; referenced from _unified-shape-table.mdx line 75
+
+## vrcft_fig_eyelookoutleft
+
+VRCFaceTracking reference figure for EyeLookOutLeft: the eye on the viewer's right turns toward the viewer's right, the temple; cited, not copied.
+
+- Source: [vrcft_fig_eyelookoutleft](https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/img/avatar/avatar_ref_eyelookoutleft.png)
+- Revision: `3036f4668322f2364a918a885dc3a72c828359f3`
+- Retrieved: 2026-10-29
+- SHA-256: `22fbb1ca0adefec555b8b86e5c317954b98de5efa97df5aba60c96a041583759`
+- License or terms: reference only; source figure not redistributed
+- Locator: whole image; referenced from _unified-shape-table.mdx line 50
+
+## vrcft_fig_mouthupperleft
+
+VRCFaceTracking reference figure for MouthUpperLeft: the upper lip moves toward the viewer's right, the subject's own left; cited, not copied.
+
+- Source: [vrcft_fig_mouthupperleft](https://raw.githubusercontent.com/VRCFaceTracking/docs/3036f4668322f2364a918a885dc3a72c828359f3/docs/tutorial-avatars/tutorial-avatars-extras/img/avatar/avatar_ref_mouthupperleft.png)
+- Revision: `3036f4668322f2364a918a885dc3a72c828359f3`
+- Retrieved: 2026-10-29
+- SHA-256: `60c5a1c618f10998ddae848868c9aa609b3711a040a927cee098478b53157cff`
+- License or terms: reference only; source figure not redistributed
+- Locator: whole image; referenced from _unified-shape-table.mdx line 365
