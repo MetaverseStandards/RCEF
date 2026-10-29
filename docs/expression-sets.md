@@ -44,7 +44,7 @@ The Signals column counts every inventory row, including count sentinels and row
 
 ## RCEF's own sets
 
-RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.toml](../data/canonical.toml). It is the target of the three `*.to_canonical` maps. RCEF's intermediate values, `rcef.intermediate` (4 signals), are in [data/intermediate.toml](../data/intermediate.toml). Each one is the signed difference of two opposing ARKit gaze directions. `arkit_gaze.to_fb2` computes them internally, and no provider reads or writes them.
+RCEF's own canonical set, `rcef.canonical` (21 signals), is in [data/canonical.toml](../data/canonical.toml). It is the target of the three `*.to_canonical` maps. The draft canonical expression set, `rcef.canonical_expression` (60 signals), is in [data/canonical_expression.toml](../data/canonical_expression.toml). [canonical-set.md](canonical-set.md) defines it. ARKit and FB2 map into it, and it maps to ARKit, FB2, Unified Expressions and VRM blinks; the README's [Mappings](../README.md#mappings) tables list these maps. RCEF's intermediate values, `rcef.intermediate` (8 signals), are in [data/intermediate.toml](../data/intermediate.toml). Each one is the signed difference of two opposing gaze directions: 4 of ARKit's, which `arkit_gaze.to_fb2` computes, and 4 of the canonical expression set's, which `rcef_gaze.to_fb2` computes. Each map computes them internally, and no provider reads or writes them.
 
 ## Planned expression sets
 

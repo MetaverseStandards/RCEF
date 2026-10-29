@@ -5,7 +5,7 @@ Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards For
 
 **Author affiliation: to be added by the release owners before this document goes to the working group.**
 
-**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. The data in this repository does not hold these profiles yet. Today the pack has the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
+**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with 60 of its 72 signals (every group except `cheek_suck`, `lip_tighten`, `tongue_place` and the pupils), and the maps of ARKit, FB2, Unified Expressions and VRM blinks. The viseme profile and its maps are not in the data yet. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
 
 This document uses the proposal form of [GOVERNANCE.md](../GOVERNANCE.md): the problem, the proposal, the public evidence, the effect on compatibility, the alternatives, the tests and the open questions. Two documents go with it:
 
