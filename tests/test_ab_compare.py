@@ -112,6 +112,23 @@ class RequiredRows(unittest.TestCase):
         self.assertEqual((statuses['M1'], statuses['M10'], statuses['M3 exact']), ('FAIL', 'FAIL', 'pass'))
 
 
+class Manifest(unittest.TestCase):
+    def test_the_manifest_hashes_the_code_of_the_checkout_it_ran_in(self):
+        with tempfile.TemporaryDirectory(prefix='rcef-ab-') as tmp:
+            root = Path(tmp)
+            for path in [*ab_compare.CODE.values(), 'evidence/tooling.lock.json']:
+                (root / path).parent.mkdir(parents=True, exist_ok=True)
+                (root / path).write_bytes((ROOT / path).read_bytes())
+            (root / ab_compare.CODE['oracle']).write_text('# another oracle\n', encoding='utf-8')
+            b_path = root / 'b.pack.json'
+            b_path.write_text('{}', encoding='utf-8')
+            abreg = {'id': 'ab.pivot', 'version': 1, 'kind': 'first', 'seed_root': 'a' * 64, 'pairs': {}}
+            report = {'metrics': {}, 'failures': {}, 'refusals': [], 'observed_loss': [], 'regression': []}
+            manifest = ab_compare.write_results(root / 'out', abreg, report, {}, {}, [], True, b_path, root)
+            self.assertEqual(manifest['code'], ab_compare.code_hashes(root))
+            self.assertNotEqual(manifest['code'], ab_compare.code_hashes(ROOT))
+
+
 class FlatLinks(unittest.TestCase):
     def test_o_lists_the_eight_fb2_gaze_cross_links_from_the_knots(self):
         document = ab_compare.load_a1()
