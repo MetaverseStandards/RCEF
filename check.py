@@ -210,11 +210,13 @@ SHA256 = re.compile(r'[0-9a-f]{64}')
 COMMIT = re.compile(r'[0-9a-f]{40}')
 RECORD_ID = re.compile(r'[a-z0-9][a-z0-9._-]*')
 RECORD_FIELDS = {'format': str, 'id': str, 'version': int, 'status': str, 'scope': str, 'method': str,
-                 'channels': list, 'reference_rig': str, 'inputs': list, 'renderer': dict, 'code_commit': str,
+                 'channels': list, 'reference_rig': str, 'inputs': list, 'code_commit': str,
                  'training': dict, 'held_out': dict, 'evaluation': dict, 'curves': list,
                  'licence': str, 'limitations': list}
-# A record without cells is a pre-registration: frozen and in the ledger, with no results yet.
-OPTIONAL_FIELDS = {'scan_origin': str, 'cells': list}
+# A record without cells is a pre-registration: frozen and in the ledger, with no results yet. A fit that renders
+# nothing (mesh geometry only) has no renderer.
+OPTIONAL_FIELDS = {'scan_origin': str, 'cells': list, 'renderer': dict}
+COPY = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
 SCOPE = 'software-only; not a measurement of any tracker'
 SCAN_ORIGIN = 'light-stage scans of real people'
 ICT = re.compile(r'\bict\b|identity\d{3}', re.IGNORECASE)
@@ -529,24 +531,63 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
                 problems.append(f'{label}, which does not exist in {records.name}/')
                 continue
             operator = rule.get('operator', {})
-            if operator.get('id') != 'piecewise_linear':
-                problems.append(f'{label} but its operator is {operator.get("id")}, not piecewise_linear')
+            if operator.get('id') == 'weighted_sum':
+                found, channels = pose_sum_problems(rule, valid[cited], rules)
+                problems += [f'{label}, but {p}' for p in found]
+            elif operator.get('id') != 'piecewise_linear':
+                problems.append(f'{label} but its operator is {operator.get("id")}, not piecewise_linear or '
+                                'weighted_sum')
                 continue
-            curve = [c for c in valid[cited]['curves'] if [c['input']] == rule.get('inputs')
-                     and [c['output']] == rule.get('outputs')]
-            if not curve:
-                problems.append(f'{label}, which has no curve from {rule.get("inputs")} to {rule.get("outputs")}')
-            elif operator.get('knots') != curve[0]['knots']:
-                problems.append(f'{label}, but its knots are not exactly the frozen knots of that curve')
+            else:
+                channels = rule.get('inputs')
+                curve = [c for c in valid[cited]['curves'] if [c['input']] == rule.get('inputs')
+                         and [c['output']] == rule.get('outputs')]
+                if not curve:
+                    problems.append(f'{label}, which has no curve from {rule.get("inputs")} to {rule.get("outputs")}')
+                elif operator.get('knots') != curve[0]['knots']:
+                    problems.append(f'{label}, but its knots are not exactly the frozen knots of that curve')
             if 'cells' not in valid[cited]:
                 problems.append(f'{label}, which has no results yet')
                 continue
-            cells = [c for c in valid[cited]['cells'] if [c['channel']] == rule.get('inputs')]
-            if not cells:
-                problems.append(f'{label}, which has no held-out cell for {rule.get("inputs")}')
-            problems += [f'{label}, but its cell for {c["stimulus"]}, {c["identity"]}, side {c["side"]} fails the '
-                         'frozen bounds' for c in cells if not cell_passes(valid[cited], c)]
+            for channel in channels:
+                cells = [c for c in valid[cited]['cells'] if c['channel'] == channel]
+                if not cells:
+                    problems.append(f'{label}, which has no held-out cell for {[channel]}')
+                problems += [f'{label}, but its cell for {c["stimulus"]}, {c["identity"]}, side {c["side"]} fails '
+                             'the frozen bounds' for c in cells if not cell_passes(valid[cited], c)]
     return problems
+
+
+def pose_sum_problems(rule: dict, record: dict, rules: list[dict]) -> tuple[list[str], list[str]]:
+    """How a weighted_sum rule departs from its record's pose curves, and the channels it reads.
+
+    Each input must be a copy of one channel, made by one rule. The sum must be read by exactly one
+    piecewise_linear rule (the clamp), whose output is the output of the curves. Each weight w must be the
+    pose of its channel: the curve from that channel to that output has exactly the knots [[0.0, 0.0], [1.0, w]].
+    """
+    writers = {}
+    for other in rules:
+        for sid in other.get('outputs', []):
+            writers.setdefault(sid, []).append(other)
+    clamps = [r for r in rules if r.get('inputs') == rule.get('outputs')]
+    if len(clamps) != 1 or clamps[0].get('operator', {}).get('id') != 'piecewise_linear' \
+            or len(clamps[0].get('outputs', [])) != 1:
+        return ['its sum is not read by exactly one piecewise_linear rule'], []
+    output = clamps[0]['outputs'][0]
+    knots = {c['input']: c['knots'] for c in record['curves'] if c['output'] == output}
+    problems, channels = [], []
+    for sid, weight in zip(rule.get('inputs', []), rule['operator'].get('weights', [])):
+        steps = writers.get(sid, [])
+        if len(steps) != 1 or steps[0].get('operator') != COPY or len(steps[0].get('inputs', [])) != 1:
+            problems.append(f'its input {sid} is not a copy of one channel made by one rule')
+            continue
+        channel = steps[0]['inputs'][0]
+        channels.append(channel)
+        if channel not in knots:
+            problems.append(f'the record has no curve from {channel} to {output}')
+        elif knots[channel] != [[0.0, 0.0], [1.0, weight]]:
+            problems.append(f'its weight for {channel} is not the frozen pose of the curve to {output}')
+    return problems, channels
 
 
 def verify_environment() -> list[str]:

@@ -16,6 +16,7 @@ check = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(check)
 FIXTURES = ROOT / 'tests/fixtures/calibration'
 RECORD = FIXTURES / 'fixture.jaw-gain.cal'
+POSES = FIXTURES / 'fixture.poses.cal'
 CHANNEL = 'fixture.source.jaw'
 SCAN_NOTE = ('Identity modes come from ICT-FaceKit, which derives them from light-stage scans of real people; '
              'they are used only as geometry.')
@@ -23,6 +24,11 @@ SCAN_NOTE = ('Identity modes come from ICT-FaceKit, which derives them from ligh
 
 def fixture_rule():
     return json.loads((FIXTURES / 'fixture_rule.json').read_text(encoding='utf-8'))
+
+
+def pose_rules():
+    """Two copies of the channels, their weighted sum, which cites fixture.poses, and the clamp of the sum."""
+    return json.loads((FIXTURES / 'fixture_pose_rules.json').read_text(encoding='utf-8'))
 
 
 def refreeze(record):
@@ -55,7 +61,7 @@ class Records(unittest.TestCase):
         self.assertTrue(any('fixture.other' in p for p in self.problems(name='fixture.other')))
 
     def test_required_fields_and_their_types(self):
-        for field in ('version', 'scope', 'method', 'channels', 'reference_rig', 'inputs', 'renderer', 'code_commit',
+        for field in ('version', 'scope', 'method', 'channels', 'reference_rig', 'inputs', 'code_commit',
                       'training', 'held_out', 'evaluation', 'curves', 'licence', 'limitations'):
             with self.subTest(field):
                 self.assertRefused(lambda r: r.pop(field), field)
@@ -96,6 +102,11 @@ class Records(unittest.TestCase):
         for field in ('os', 'gpu', 'compiler'):
             with self.subTest(field):
                 self.assertRefused(lambda r: r['renderer'].pop(field), field)
+        self.assertRefused(lambda r: r.update(renderer='meshrender'), 'renderer')
+
+    def test_a_fit_on_mesh_geometry_alone_has_no_renderer(self):
+        self.assertEqual(self.changed(lambda r: r.pop('renderer'), freeze=True), [])
+        self.assertEqual(check.record_problems(check.load_record(POSES), 'fixture.poses'), [])
 
     def test_curves_are_monotone_with_strictly_increasing_inputs(self):
         self.assertRefused(lambda r: r['curves'][0].update(knots=[[0.0, 0.0]]), 'knots')
@@ -316,6 +327,64 @@ class CitingRules(unittest.TestCase):
         rule['evidence'] = ['xr_fb2']
         rule['operator'] = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
         self.assertEqual(self.problems(rule), [])
+
+
+class CitingPoseSums(unittest.TestCase):
+    """A weighted_sum rule cites a record of poses: its weights are the poses, read through copies and a clamp."""
+
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory(prefix='rcef-cal-')
+        self.addCleanup(temp.cleanup)
+        self.records = Path(temp.name)
+        shutil.copy(POSES, self.records)
+        shutil.copy(FIXTURES / 'FREEZES', self.records)
+        self.rules = pose_rules()
+
+    def problems(self, rules=None):
+        return check.calibration_problems(self.records, self.rules if rules is None else rules)
+
+    def assertRefused(self, *words):
+        problems = self.problems()
+        self.assertTrue(problems, 'the rules were accepted')
+        for word in words:
+            self.assertTrue(any(word in p for p in problems), problems)
+
+    def test_weights_equal_to_the_frozen_poses_are_accepted(self):
+        self.assertEqual(self.problems(), [])
+
+    def test_each_weight_must_equal_its_pose_exactly(self):
+        self.rules[2]['operator']['weights'][1] = 0.25 + 1e-12
+        self.assertRefused('fixture.source.lip', 'frozen pose')
+
+    def test_each_input_must_be_a_copy_of_one_channel(self):
+        self.rules[0]['operator'] = {'id': 'affine', 'scale': 0.5, 'offset': 0.0}
+        self.assertRefused('fixture.helper.jaw', 'copy')
+        self.rules = pose_rules()[1:]
+        self.assertRefused('fixture.helper.jaw', 'copy')
+
+    def test_the_sum_must_be_read_by_one_clamp_whose_output_has_the_curves(self):
+        self.rules[3]['operator'] = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
+        self.assertRefused('piecewise_linear')
+        self.rules = pose_rules()
+        self.rules[3]['outputs'] = ['fixture.target.other']
+        self.assertRefused('no curve', 'fixture.target.other')
+
+    def test_every_cell_of_every_channel_read_must_pass(self):
+        path = self.records / POSES.name
+        path.write_text(POSES.read_text(encoding='utf-8').replace('median = 0.3\np95 = 0.4', 'median = 0.3\np95 = 0.6'),
+                        encoding='utf-8')
+        self.assertEqual(check.calibration_problems(self.records, []), [], 'a negative result is valid')
+        self.assertRefused('fails', 'fixture.pose.sum')
+        # Without the failing channel's input, the sum may cite the record.
+        self.rules = pose_rules()
+        del self.rules[1]
+        self.rules[1]['inputs'], self.rules[1]['operator']['weights'] = ['fixture.helper.jaw'], [0.4]
+        self.assertEqual(self.problems(), [])
+
+    def test_a_pose_sum_cannot_cite_a_record_that_has_no_results_yet(self):
+        text = POSES.read_text(encoding='utf-8')
+        (self.records / POSES.name).write_text(text[:text.index('[[cells]]')], encoding='utf-8')
+        self.assertRefused('no results')
 
 
 class Repository(unittest.TestCase):

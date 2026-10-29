@@ -1,0 +1,11 @@
+[
+  {"id": "fixture.pose.jaw", "inputs": ["fixture.source.jaw"], "outputs": ["fixture.helper.jaw"],
+   "operator": {"id": "affine", "scale": 1.0, "offset": 0.0}, "evidence": ["rcef_canonical_v1"]},
+  {"id": "fixture.pose.lip", "inputs": ["fixture.source.lip"], "outputs": ["fixture.helper.lip"],
+   "operator": {"id": "affine", "scale": 1.0, "offset": 0.0}, "evidence": ["rcef_canonical_v1"]},
+  {"id": "fixture.pose.sum", "inputs": ["fixture.helper.jaw", "fixture.helper.lip"], "outputs": ["fixture.helper.sum"],
+   "operator": {"id": "weighted_sum", "weights": [0.4, 0.25]}, "evidence": ["calibration.fixture.poses"]},
+  {"id": "fixture.pose.clamp", "inputs": ["fixture.helper.sum"], "outputs": ["fixture.target.jaw"],
+   "operator": {"id": "piecewise_linear", "knots": [[0.0, 0.0], [1.0, 1.0], [2.0, 1.0]]},
+   "evidence": ["rcef_canonical_v1"]}
+]
