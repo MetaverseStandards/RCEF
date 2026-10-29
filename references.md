@@ -512,3 +512,322 @@ VRCFaceTracking reference figure for MouthUpperLeft: the upper lip moves toward 
 - SHA-256: `60c5a1c618f10998ddae848868c9aa609b3711a040a927cee098478b53157cff`
 - License or terms: reference only; source figure not redistributed
 - Locator: whole image; referenced from _unified-shape-table.mdx line 365
+
+## ipa_chart_kiel_2020
+
+The IPA chart (revised to 2020), Kiel typeface: the symbol inventory and its places, manners, heights, backness and rounding; its text layer uses legacy font codes, so symbols are checked against the Doulos file.
+
+- Source: [ipa_chart_kiel_2020](https://www.internationalphoneticassociation.org/IPAcharts/common_files/pdfs/pdfs_IPA_charts_archive/IPA_Kiel_2020.pdf)
+- Revision: `2020 (the 2015/2005 symbol set with updated years)`
+- Retrieved: 2026-10-29
+- SHA-256: `52c7c15eeaaf40d517ab9a7d1142fe6604709b254830a36efb89b10ddac97647`
+- License or terms: CC BY-SA 3.0 Unported at issue (both 2020 files); the IPA now states CC BY-SA 4.0 for the IPA Chart in IPA Kiel and all its subparts; RCEF's adapted fixture is CC-BY-SA-4.0 under BY-SA 3.0 section 4(b)
+- Locator: chart sections and cells (pulmonic consonants, non-pulmonic consonants, other symbols, vowels, diacritics)
+
+## ipa_chart_doulos_2020
+
+The IPA chart (revised to 2020), Doulos SIL typeface: the 107 chart symbols, their places and manners, vowel heights, backness and rounding, and the diacritics used by the canonical viseme classes and tests/fixtures/ipa_chart_symbols.json.
+
+- Source: [ipa_chart_doulos_2020](https://www.internationalphoneticassociation.org/IPAcharts/common_files/pdfs/pdfs_IPA_charts_archive/IPA_Doulos_2020.pdf)
+- Revision: `2020 (the 2015/2005 symbol set with updated years)`
+- Retrieved: 2026-10-29
+- SHA-256: `63b09d419619a82f6458991415c50bcbcfd2ed4465da000d5e598431a9ba8912`
+- License or terms: CC BY-SA 3.0 Unported at issue (both 2020 files); the IPA now states CC BY-SA 4.0 for the IPA Chart in IPA Kiel and all its subparts; RCEF's adapted fixture is CC-BY-SA-4.0 under BY-SA 3.0 section 4(b)
+- Locator: chart sections and cells, for example "Pulmonic consonants, Fricative x Dental" (tests/fixtures/ipa_chart_symbols.json)
+
+## polly_license
+
+Licence of the archived Amazon Polly developer guide (CC BY-SA 4.0 for the documentation); the archive is out of date relative to the live AWS documentation, which is not cited.
+
+- Source: [polly_license](https://raw.githubusercontent.com/awsdocs/amazon-polly-developer-guide/97b0d81ab6468129948d48beb767da1d692f2f27/LICENSE)
+- Revision: `97b0d81ab6468129948d48beb767da1d692f2f27`
+- Retrieved: 2026-10-29
+- SHA-256: `a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c`
+- License or terms: CC-BY-SA-4.0
+- Locator: LICENSE
+
+## polly_ph_table_en_us
+
+Archived Amazon Polly en-US phoneme and viseme table: IPA phonemes and the viseme each belongs to; a roadmap source only.
+
+- Source: [polly_ph_table_en_us](https://raw.githubusercontent.com/awsdocs/amazon-polly-developer-guide/97b0d81ab6468129948d48beb767da1d692f2f27/doc_source/ph-table-english-us.md)
+- Revision: `97b0d81ab6468129948d48beb767da1d692f2f27`
+- Retrieved: 2026-10-29
+- SHA-256: `ec4c47270921bb094b5db3a2637ca34507ed10bc18b7f66a4db4b528087db6d7`
+- License or terms: CC-BY-SA-4.0
+- Locator: doc_source/ph-table-english-us.md, whole table
+
+## wikipedia_roundedness
+
+Lip rounding: the IPA clines of rounding and spreading (back unrounded vowels parallel to the front ones; close central vowels fully spread and closely rounded; open rounded vowels least rounded), protruded and compressed rounding, rounded glides; facts only, no prose copied.
+
+- Source: [wikipedia_roundedness](https://en.wikipedia.org/w/index.php?title=Roundedness&oldid=1373837679&action=raw)
+- Revision: `1373837679`
+- Retrieved: 2026-10-29
+- SHA-256: `a03d3afcd24c6fbac8cb3833a646dcbf9f207379eb425a85052c920347ac79d0`
+- License or terms: CC-BY-SA-4.0
+- Locator: raw wikitext lines 15-21 (clines), 52-56 (protrusion and compression), 85 (unrounded realisations)
+
+## wikipedia_labialization
+
+Labialization is written with superscript w; labialised postalveolar approximant listed for many dialects of English; facts only, no prose copied.
+
+- Source: [wikipedia_labialization](https://en.wikipedia.org/w/index.php?title=Labialization&oldid=1379064613&action=raw)
+- Revision: `1379064613`
+- Retrieved: 2026-10-29
+- SHA-256: `f877902cafe962bdb3ea1ae2bfcb20264301e4cf23fb5a6376aaf8b57bf3e2ff`
+- License or terms: CC-BY-SA-4.0
+- Locator: raw wikitext lines 20 and 512-514
+
+## wikipedia_interdental
+
+Interdental consonants: the extIPA bridge transcription, the advanced-alveolar alternative, sibilants not interdental, Australian laminal dentals; facts only, no prose copied.
+
+- Source: [wikipedia_interdental](https://en.wikipedia.org/w/index.php?title=Interdental_consonant&oldid=1363969577&action=raw)
+- Revision: `1363969577`
+- Retrieved: 2026-10-29
+- SHA-256: `92090b5ff4c86bc2d2ead471862d0e27db96da8ba75a4d4d52f67a254b983018`
+- License or terms: CC-BY-SA-4.0
+- Locator: raw wikitext lines 10, 12, 22 and 24
+
+## wikipedia_linguolabial
+
+Linguolabial consonants: the tongue tip or blade against the upper lip; the seagull diacritic on alveolar, dental and labial letters, and the earlier apical notation; facts only, no prose copied.
+
+- Source: [wikipedia_linguolabial](https://en.wikipedia.org/w/index.php?title=Linguolabial_consonant&oldid=1374589336&action=raw)
+- Revision: `1374589336`
+- Retrieved: 2026-10-29
+- SHA-256: `f680e1fc645ad2a49c50a085a321e4db3f6bd1520d4ee3ba6b3411a8ca069477`
+- License or terms: CC-BY-SA-4.0
+- Locator: raw wikitext lines 10, 19 and 21
+
+## xr_visemes_fig_sil
+
+META reference image for SIL, front view: lips together, jaw closed, relaxed; cited, not copied.
+
+- Source: [xr_visemes_fig_sil](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_SIL.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `d5d03b8b194559b3ecbeede8691d694d7af2466d95bc5a52bc9b540f829887f1`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_SIL.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 145
+
+## xr_visemes_fig_dd
+
+META reference image for DD, front view, shown in isolation: teeth close and visible; cited, not copied.
+
+- Source: [xr_visemes_fig_dd](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_DD.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `d06beb076b091497c4afbc97344b096d7b447ffb55bfeff1b7fd346ac959e9bc`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_DD.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 173
+
+## xr_visemes_fig_nn
+
+META reference image for NN, front view, shown in isolation: teeth close and visible; cited, not copied.
+
+- Source: [xr_visemes_fig_nn](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_NN.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `9a9f7416dbdbaad296bc4acc366ea67fdfca6809e475ebf3f601dec3b8272749`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_NN.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 201
+
+## xr_visemes_fig_kk
+
+META reference image for KK, front view, shown in isolation: teeth close and visible; cited, not copied.
+
+- Source: [xr_visemes_fig_kk](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_KK.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `009eec02094c44b0381aabadbb32619b1d429e17633dc95cf5d69e66137b8281`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_KK.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 180
+
+## xr_visemes_fig_rr
+
+META reference image for RR, front view: lips slightly parted, no clear protrusion; cited, not copied.
+
+- Source: [xr_visemes_fig_rr](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_RR.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `c4ce3b30790617267d98ecf74228cee33db5c9aa48448eac0513997aaadf1699`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_RR.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 208
+
+## xr_visemes_fig_th
+
+META reference image for TH, front view: lips parted, tongue tip visible at the teeth; cited, not copied.
+
+- Source: [xr_visemes_fig_th](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_TH.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `6652003f64b032bd3faf9c0b2aac211798c562dcd775c2c2a99424515bd21d1c`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_TH.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 166
+
+## xr_visemes_fig_rr_rot
+
+META reference image for RR, three-quarter view: the lips sit slightly forward of SIL and IH, the lower lip slightly everted (a judgement on one speaker); cited, not copied.
+
+- Source: [xr_visemes_fig_rr_rot](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_RR_rot.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `87cb5bc78a969e01780f401381b0866bc02cbd9b4f1dff27b049c0efa303f429`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_RR_rot.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 210
+
+## xr_visemes_fig_ch_rot
+
+META reference image for CH, three-quarter view: lips forward; cited, not copied.
+
+- Source: [xr_visemes_fig_ch_rot](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_CH_rot.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `9a024434c87745822022bc3005a0e01101ed51ef60ffa85b8efd702672180d27`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_CH_rot.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 189
+
+## xr_visemes_fig_ou_rot
+
+META reference image for OU, three-quarter view: lips protruded and rounded; cited, not copied.
+
+- Source: [xr_visemes_fig_ou_rot](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_OU_rot.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `7c33e83679353b8208c31060f189bdc28c713ea59f33f7d9b785d1b7bbf43614`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_OU_rot.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 245
+
+## xr_visemes_fig_sil_rot
+
+META reference image for SIL, three-quarter view: lips together, relaxed; cited, not copied.
+
+- Source: [xr_visemes_fig_sil_rot](https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d/specification/sources/images/XR_META_Face_Tracking_Viseme_SIL_rot.jpg)
+- Revision: `5a82d45bc9e0adbaa24b6c4a3e5b6d50e08c887d`
+- Retrieved: 2026-10-29
+- SHA-256: `7afe5bb9e061524b2a5bb04e1ed3d4ade3a1732b7eed73c3c98c26fc286b4740`
+- License or terms: CC-BY-4.0 (REUSE sidecar XR_META_Face_Tracking_Viseme_SIL_rot.jpg.license: Copyright (c) 2021-2026 The Khronos Group Inc., SPDX-License-Identifier CC-BY-4.0)
+- Locator: whole image; referenced from meta_face_tracking_visemes.adoc line 147
+
+## bear_harvey_2017
+
+Bear and Harvey, "Phoneme-to-viseme mappings: the good, the bad, and the ugly", Speech Communication 2017 (doi 10.1016/j.specom.2017.07.001): the published English vowel and consonant viseme maps that RCEF counts, their class counts, and which maps perform best on isolated words and on continuous speech.
+
+- Source: [bear_harvey_2017](https://arxiv.org/pdf/1805.02934v1)
+- Revision: `arXiv 1805.02934v1`
+- Retrieved: 2026-10-29
+- SHA-256: `20b32ad6054d6b96f7430e76046680475f3e37eba8a8b116555890ffadf492b9`
+- License or terms: reference only; arXiv non-exclusive distribution licence 1.0; facts only, paraphrased
+- Locator: Table 2 (vowel maps), Table 3 (consonant maps), Table 5 (class counts), Section 3.4 and Table 8 (best maps)
+
+## fernandez_lopez_sukno_2017
+
+Fernandez-Lopez and Sukno, 2017: Spanish viseme sets of different sizes compared for phoneme recovery; a bilabial fricative kept apart.
+
+- Source: [fernandez_lopez_sukno_2017](https://arxiv.org/pdf/1704.08035v1)
+- Revision: `arXiv 1704.08035v1`
+- Retrieved: 2026-10-29
+- SHA-256: `e21f7b39fd42def3dc29805ed9da95a92d47f20a678d49d002781483eb3e1ca9`
+- License or terms: reference only; arXiv non-exclusive distribution licence 1.0; facts only, paraphrased
+- Locator: viseme sets and results sections
+
+## zhou_visemenet_2018
+
+Zhou et al., "VisemeNet", 2018: 20 JALI-style viseme groups listed with IPA phonemes.
+
+- Source: [zhou_visemenet_2018](https://arxiv.org/pdf/1805.09488v1)
+- Revision: `arXiv 1805.09488v1`
+- Retrieved: 2026-10-29
+- SHA-256: `fcd9812cbe19600ceab9ab07e457443f57af8326e87c281c5c73de21319618f2`
+- License or terms: reference only; arXiv non-exclusive distribution licence 1.0; facts only, paraphrased
+- Locator: viseme group table
+
+## jali_2016
+
+Edwards et al., "JALI", SIGGRAPH 2016 (doi 10.1145/2897824.2925984): articulation constraints for visemes; tongue-only visemes do not move the lips; pauses usually leave the mouth open.
+
+- Source: [jali_2016](https://www.dgp.toronto.edu/~elf/JALISIG16.pdf)
+- Revision: `SIGGRAPH 2016 author copy`
+- Retrieved: 2026-10-29
+- SHA-256: `8a02957a91b705d4d357226d7db1fbeab59e8204308ac952ca7e34ea15190707`
+- License or terms: reference only; (c) ACM; facts only, paraphrased
+- Locator: section on viseme articulation constraints and coarticulation rules
+
+## pubmed_owens_blazek_1985
+
+Owens and Blazek 1985, PubMed abstract (PMID 4046579): composite consonant viseme groups seen by hearing-impaired and normal-hearing viewers; each group mixes voicing and nasality.
+
+- Source: [pubmed_owens_blazek_1985](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=4046579&rettype=abstract&retmode=text)
+- Revision: `PMID 4046579`
+- Retrieved: 2026-10-29
+- SHA-256: `f81bc090fd75705bc60b716cfe6cc0e14d20abcf129c621ca4bd7f412d877575`
+- License or terms: reference only; abstract (c) publisher; facts only, paraphrased
+- Locator: abstract
+
+## pubmed_robert_ribes_1998
+
+Robert-Ribes et al. 1998, PubMed abstract (PMID 9637049): for French oral vowels, rounding is perceived better than height in the visual channel, and backness is almost invisible.
+
+- Source: [pubmed_robert_ribes_1998](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=9637049&rettype=abstract&retmode=text)
+- Revision: `PMID 9637049`
+- Retrieved: 2026-10-29
+- SHA-256: `de6e2adbff10ee34a5426912724e57334c27e312812d847207927bdc8b071aad`
+- License or terms: reference only; abstract (c) publisher; facts only, paraphrased
+- Locator: abstract
+
+## pubmed_montgomery_jackson_1983
+
+Montgomery and Jackson 1983, PubMed abstract (PMID 6875099): visual vowel perception shows a lip spreading and rounding dimension and a tongue height dimension.
+
+- Source: [pubmed_montgomery_jackson_1983](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=6875099&rettype=abstract&retmode=text)
+- Revision: `PMID 6875099`
+- Retrieved: 2026-10-29
+- SHA-256: `649109c5c5a11f2c91bc67133e4acb5db54438fd1972c30512e8cb577d6b6ed4`
+- License or terms: reference only; abstract (c) publisher; facts only, paraphrased
+- Locator: abstract
+
+## pubmed_benguerel_pichora_fuller_1982
+
+Benguerel and Pichora-Fuller 1982, PubMed abstract (PMID 7162162): labial, rounded and alveolar or palatal place carry more visual information than continuancy.
+
+- Source: [pubmed_benguerel_pichora_fuller_1982](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=7162162&rettype=abstract&retmode=text)
+- Revision: `PMID 7162162`
+- Retrieved: 2026-10-29
+- SHA-256: `0ff5199ebf97428d6954f87675e37a4f6e1b71a8ad4cd0dba223fe9bdbbd1621`
+- License or terms: reference only; abstract (c) publisher; facts only, paraphrased
+- Locator: abstract
+
+## pubmed_auer_bernstein_1997
+
+Auer and Bernstein 1997, PubMed abstract (PMID 9407662): with about 12 phonemic equivalence classes, most words are visually similar to only a few others.
+
+- Source: [pubmed_auer_bernstein_1997](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=9407662&rettype=abstract&retmode=text)
+- Revision: `PMID 9407662`
+- Retrieved: 2026-10-29
+- SHA-256: `59e5004fd776cae10de6a5fb8f48401c17d3ba3961a9f94c851a6f9077a507c5`
+- License or terms: reference only; abstract (c) publisher; facts only, paraphrased
+- Locator: abstract
+
+## pubmed_valkenier_2012
+
+Valkenier et al. 2012, PubMed abstract (PMID 22992710): for Dutch front vowels, lip rounding is carried mainly by the visual channel and height by the auditory channel.
+
+- Source: [pubmed_valkenier_2012](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=22992710&rettype=abstract&retmode=text)
+- Revision: `PMID 22992710`
+- Retrieved: 2026-10-29
+- SHA-256: `e79c8fa4d577efec3f784c14190194a60da413d9bd75e1e64955a1589a8c21a5`
+- License or terms: reference only; abstract (c) publisher; facts only, paraphrased
+- Locator: abstract
+
+## pubmed_havenhill_do_2018
+
+Havenhill and Do 2018, PubMed abstract (PMID 29867686): some Northern Cities speakers produce /ɔ/ with unround lips, which is perceptually weaker than rounded /ɔ/.
+
+- Source: [pubmed_havenhill_do_2018](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29867686&rettype=abstract&retmode=text)
+- Revision: `PMID 29867686`
+- Retrieved: 2026-10-29
+- SHA-256: `c352ee8b7be8a2e73c2f449f2ded7a5041e85a5fbe257e47667dc3209edd56a6`
+- License or terms: reference only; open access (CC BY per the journal policy, not verified on the article page); facts only, paraphrased
+- Locator: abstract
