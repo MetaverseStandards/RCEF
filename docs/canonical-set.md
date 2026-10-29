@@ -4,6 +4,7 @@
 Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards Forum.
 
 <!-- D28: affiliation statement, wording from the release owners, pending -->
+**Author affiliation: to be added by the release owners before this document goes to the working group.**
 
 **Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. The data in this repository does not hold these profiles yet. Today the pack has the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
 
@@ -144,13 +145,13 @@ The table gives every signal of `rcef.canonical_expression`. 0 is the neutral fa
 | `gaze_down_right` | Gaze down, right | right | Gaze | gaze | The right eye turns down, as a fraction of the source's maximum gaze in that direction (see [Gaze](#gaze)). | none | EYES_LOOK_DOWN_R | eyeLookDownRight |
 | `cheek_puff_left` | Cheek puff, left | left | Cheeks | cheek_puff | Air fills the left cheek and pushes it outward. | 34 (`gross_behavior`) | CHEEK_PUFF_L | cheekPuff (copied to both sides) |
 | `cheek_puff_right` | Cheek puff, right | right | Cheeks | cheek_puff | Air fills the right cheek and pushes it outward. | 34 (`gross_behavior`) | CHEEK_PUFF_R | cheekPuff (copied to both sides) |
-| `cheek_raise_left` | Cheek raise, left | left | Cheeks | face | The outer part of the muscle ring around the left eye tightens. The outer eye corner narrows and the cheek below it lifts. | 6 (`main`) | CHEEK_RAISER_L | cheekSquintLeft |
-| `cheek_raise_right` | Cheek raise, right | right | Cheeks | face | The outer part of the muscle ring around the right eye tightens. The outer eye corner narrows and the cheek below it lifts. | 6 (`main`) | CHEEK_RAISER_R | cheekSquintRight |
+| `cheek_raise_left` | Cheek raise, left | left | Cheeks | face | The outer part of the muscle ring around the left eye tightens and squeezes the outer corner of the eye. No cheek movement is part of the definition. | 6 (`main`) | CHEEK_RAISER_L | cheekSquintLeft |
+| `cheek_raise_right` | Cheek raise, right | right | Cheeks | face | The outer part of the muscle ring around the right eye tightens and squeezes the outer corner of the eye. No cheek movement is part of the definition. | 6 (`main`) | CHEEK_RAISER_R | cheekSquintRight |
 | `cheek_suck_left` | Cheek suck, left | left | Cheeks | cheek_suck | The left cheek draws in against the teeth and hollows. | 35 (`gross_behavior`) | CHEEK_SUCK_L | none |
 | `cheek_suck_right` | Cheek suck, right | right | Cheeks | cheek_suck | The right cheek draws in against the teeth and hollows. | 35 (`gross_behavior`) | CHEEK_SUCK_R | none |
 | `nose_wrinkle_left` | Nose wrinkle, left | left | Nose | face | The left side of the nose and the nostril lift, and the skin over the nose wrinkles. | 9 (`main`) | NOSE_WRINKLER_L | noseSneerLeft |
 | `nose_wrinkle_right` | Nose wrinkle, right | right | Nose | face | The right side of the nose and the nostril lift, and the skin over the nose wrinkles. | 9 (`main`) | NOSE_WRINKLER_R | noseSneerRight |
-| `jaw_drop` | Jaw drop | shared | Jaw | face | The lower jaw moves down and the mouth opens. This is the whole opening of the jaw. | 26 (`main`) | JAW_DROP | jawOpen |
+| `jaw_drop` | Jaw drop | shared | Jaw | face | The lower jaw moves down and back, and the mouth opens. This is the whole opening of the jaw. | 26 (`main`) | JAW_DROP | jawOpen |
 | `jaw_thrust` | Jaw thrust | shared | Jaw | jaw_thrust | The lower jaw moves forward. | 29 (`gross_behavior`) | JAW_THRUST | jawForward |
 | `jaw_sideways_left` | Jaw sideways left | shared | Jaw | jaw_sideways | The lower jaw moves toward the subject's own left. | 30 (L30, R30 read as directions) (`gross_behavior`) | JAW_SIDEWAYS_LEFT | jawLeft |
 | `jaw_sideways_right` | Jaw sideways right | shared | Jaw | jaw_sideways | The lower jaw moves toward the subject's own right. | 30 (L30, R30 read as directions) (`gross_behavior`) | JAW_SIDEWAYS_RIGHT | jawRight |
@@ -188,7 +189,7 @@ The table gives every signal of `rcef.canonical_expression`. 0 is the neutral fa
 | `tongue_out` | Tongue out | shared | Tongue | tongue_out | The tongue moves forward and out of the mouth. No length is stated. | 19 (`main`) | TONGUE_OUT | tongueOut |
 | `tongue_retreat` | Tongue retreat | shared | Tongue | tongue_place | The tongue draws back toward the throat and stays low in the mouth. | none | TONGUE_RETREAT | none |
 | `tongue_tip_interdental` | Tongue tip between the teeth | shared | Tongue | tongue_place | The tongue tip touches the upper teeth and shows between the teeth, as for the TH viseme. | none | TONGUE_TIP_INTERDENTAL | none |
-| `tongue_tip_alveolar` | Tongue tip on the gum ridge | shared | Tongue | tongue_place | The tongue tip touches the ridge behind the upper teeth, as for the NN viseme. | none | TONGUE_TIP_ALVEOLAR | none |
+| `tongue_tip_alveolar` | Tongue tip behind the upper teeth | shared | Tongue | tongue_place | The tongue tip touches the back of the upper teeth, as for the NN viseme. | none | TONGUE_TIP_ALVEOLAR | none |
 | `tongue_front_dorsal_palate` | Tongue front on the palate | shared | Tongue | tongue_place | The front of the tongue presses on the palate, as for the CH viseme. | none | TONGUE_FRONT_DORSAL_PALATE | none |
 | `tongue_mid_dorsal_palate` | Tongue middle on the palate | shared | Tongue | tongue_place | The middle of the tongue presses on the palate, as for the DD viseme. | none | TONGUE_MID_DORSAL_PALATE | none |
 | `tongue_back_dorsal_velar` | Tongue back on the soft palate | shared | Tongue | tongue_place | The back of the tongue presses on the soft palate, as for the KK viseme. | none | TONGUE_BACK_DORSAL_VELAR | none |
@@ -224,9 +225,10 @@ The values are class probabilities, as the META viseme extension defines them (`
 - **Why both rotation and eyelids:** ARKit's eye-look coefficients describe eyelid movement (`apple_blendshapes`), and FB2 describes eye rotation (`xr_fb2` lines 643-649). A definition that says rotation only would add a claim that today's ARKit → Unified Expressions map does not make.
 - **Whose side.** Apple names left and right from the face, so `eyeLookInLeft` (left eyelids, rightward gaze) is toward the nose (`apple_blendshapes`, Discussion). FB2's figure for EYES_LOOK_LEFT_L turns the subject's own left eye toward the temple (record `xr_fb2_fig_eyes_look_left_l`).
 - **FB2 names:** LOOK_LEFT_L → `gaze_out_left`, LOOK_RIGHT_L → `gaze_in_left`, LOOK_LEFT_R → `gaze_in_right`, LOOK_RIGHT_R → `gaze_out_right`. Today's `fb2_gaze.to_arkit` and the Godot OpenXR vendors plugin route the values the same way (`godot_vendors_fb2` lines 201-208).
-- **No exclusivity claim.** FB2 says that only one of two opposing directions is non-zero (`xr_fb2` lines 648-649). The canonical set states no such constraint. The FB2 out-map keeps only the difference of each opposing pair. When both directions of a pair are non-zero, each FB2 output loses up to the smaller of the two values.
-- **Rounding on the FB2 out-map.** The four outputs on the negative knot segment may change by up to 2⁻⁵⁴ when below 0.5, and values at or below 2⁻⁵⁴ become 0. Today's `arkit_gaze.to_fb2` gives the same values.
-- **Why directions, not signed angles:** every current gaze route keeps its values, and FB2's 0 to 1 range stays. **Why in and out:** the names do not change under mirroring, and they match ARKit, Unified Expressions and Godot.
+- **FB2 out-map helpers.** The FB2 gaze out-map nets each opposing pair through 4 helper values, with today's orientation and knots: `rcef.intermediate.gaze_in_minus_out_left`, `gaze_in_minus_out_right`, `gaze_up_minus_down_left` and `gaze_up_minus_down_right`. They replace today's 4 helpers, `rcef.intermediate.arkit_gaze_in_minus_out_L`, `arkit_gaze_up_minus_down_L`, `arkit_gaze_in_minus_out_R` and `arkit_gaze_up_minus_down_R` (`data/intermediate.toml`), which get tombstones when the direct maps are retired.
+- **No exclusivity claim.** FB2 says that only one of two opposing directions is non-zero (`xr_fb2` lines 648-649). The canonical set states no such constraint, so the FB2 gaze in-hop carries the loss `fb2_gaze_exclusive`. The FB2 out-map keeps only the difference of each opposing pair. When both directions of a pair are non-zero, each FB2 output loses up to the smaller of the two values.
+- **Rounding on the FB2 out-map.** The four outputs on the negative knot segment may change by up to 2⁻⁵⁴ when below 0.5, and values at or below 2⁻⁵⁴ become 0. The design goal is that these values equal those of today's `arkit_gaze.to_fb2`; the pre-registered comparison tests this.
+- **Why directions, not signed angles:** the design keeps the values of every current gaze route (the comparison tests this), and FB2's 0 to 1 range stays. **Why in and out:** the names do not change under mirroring, and they match ARKit, Unified Expressions and Godot.
 - **No FACS code on gaze.** FACS 61 and 62 turn both eyes left or right together. Which eye turns toward the nose depends on whose "left" Wikipedia means, and the article does not say. Public crosswalks disagree on it. So the gaze signals have no `facs_au` for now. A later step may add 61-64 with the loss key `facs_side_frame_unresolved`.
 
 ## Visemes
@@ -236,6 +238,12 @@ The values are class probabilities, as the META viseme extension defines them (`
 - The rules of [Meaning of 0, 1 and neutral](#meaning-of-0-1-and-neutral) do not apply.
 - **From VRM:** VRM's vowel presets are weights authored per model. The in-map treats them as probabilities. There is no sum constraint (aa = 1 and oh = 1 sum to 2), and VRM gives no `sil`.
 - **To META from another source:** the out-map writes the five vowels only. It never claims META validity: it writes no `isValid`, and it labels the frame "META validity not asserted". The loss reads: "consonant classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met".
+
+## Eye closure from VRM and VRCFaceTracking
+
+- **VRM `blink` is not read.** VRM has `blinkLeft`, `blinkRight` and `blink`, which closes both eyes (`vrm_expressions` lines 177-179). The VRM in-map reads only `blinkLeft` and `blinkRight`. It declares the loss "VRM blink (both eyes) not read; when a model drives only blink, eye_close reads open", and the route lists a non-zero `blink` as dropped. Toward VRM, the out-map writes `blinkLeft` and `blinkRight` and leaves `blink` unset, with today's loss.
+- **VRM side.** Both VRM blink hops keep today's caveat, "VRM gives no normative side; on the VRM 1.0 Twist sample blinkLeft moves the avatar's own left eyelid", and add the loss key `vrm_blink_side_unresolved` ([audit](canonical-set-audit.md#vrm)).
+- **VRCFaceTracking eye.** `eye_close` is 1 − `Openness`. `Openness` 1 is taken as `eye_close` 0, relaxed open lids, but VRCFaceTracking does not say that 1 is neutral (loss key `vrcft_eye_openness_neutral_unresolved`). An `Openness` outside 0 to 1 would give a value outside the canonical domain of 0 to 1, so the hop is designed to refuse it.
 
 ## No equivalent
 
@@ -279,6 +287,8 @@ The table never applies one note to every cell.
 
 A version 1 signal stands for the whole action. For example, `brow_lower` is the whole brow lowering, and `lip_corner_pull` is the whole corner pull. When a source with finer parts joins, for example Unified Expressions BrowLowerer and BrowPinch, each part gets a new ID. That source's in-map then also writes the version 1 total.
 
+**Base shapes only.** Blended or combined shapes are never canonical signals. The out-maps of this first phase write base shapes only, and the consumer computes any blended shape from them: for example Unified Expressions BrowDown (0.75 BrowLowerer + 0.25 BrowPinch) and MouthSmile (0.8 MouthCornerPull + 0.2 MouthCornerSlant) (`vrcft_simple_expressions`). Blended out-maps wait until hop weights other than powers of two are allowed.
+
 ### Group splits
 
 If a later source cannot fill a whole group, RCEF splits the group into smaller groups with new out-map IDs. The old out-map IDs get tombstones. An in-map never writes a made-up 0 to fill a group.
@@ -306,7 +316,7 @@ A future MediaPipe calibration record that passes its held-out test becomes a Me
 
 ## FACS
 
-FACS is the Facial Action Coding System. Other expression sets name their shapes after its action units: Roblox calls its face poses FACS poses (`roblox_poses`), and FB2 names such as INNER_BROW_RAISER equal Wikipedia's FACS names, here AU1 "Inner brow raiser" (`facs_wikipedia` raw line 89). FACS publishes no numeric interface. So `facs.code` is RCEF's own encoding of public code numbers. "FACS" here means facial action codes; the profile names FACS code numbers from a public list. It is not FACS coding, and its values are not FACS scores.
+FACS is the Facial Action Coding System. Other expression sets name their shapes after its action units: Roblox calls its face poses FACS poses (`roblox_poses`), and many FB2 names, such as INNER_BROW_RAISER, match Wikipedia's FACS names, here AU1 "Inner brow raiser" (`facs_wikipedia` raw line 89), although the FB2 text never names FACS. FACS publishes no numeric interface. So `facs.code` is RCEF's own encoding of public code numbers. "FACS" here means facial action codes; the profile names FACS code numbers from a public list. It is not FACS coding, and its values are not FACS scores.
 
 **Source.** The code numbers, names, table membership and letters come from the Wikipedia article "Facial Action Coding System", revision 1357638399, as facts (record `facs_wikipedia`, CC-BY-SA-4.0). No article prose is copied. The FACS manual is not read, quoted or paraphrased ([THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)).
 
@@ -351,7 +361,7 @@ FACS is the Facial Action Coding System. Other expression sets name their shapes
 
 ## Public evidence
 
-These existing records support the definitions and the audit: `xr_fb2`, `xr_visemes`, `xr_registry`, `apple_blendshapes`, `vrcft_docs_shapes`, `vrcft_data`, `vrcft_code_parameters`, `vrm_expressions`, `godot_enum`, `godot_vendors_fb2`, `ict_facekit` and `rcsf_readme` ([references.md](../references.md)).
+These existing records support the definitions and the audit: `roblox_poses`, `xr_fb2`, `xr_visemes`, `xr_registry`, `apple_blendshapes`, `vrcft_docs_shapes`, `vrcft_data`, `vrcft_code_parameters`, `vrcft_simple_expressions`, `vrm_expressions`, `godot_enum`, `godot_vendors_fb2`, `ict_facekit` and `rcsf_readme` ([references.md](../references.md)).
 
 The data change that adds the profiles also adds these records. Each image record is cited, never copied.
 
@@ -374,7 +384,7 @@ The data change that adds `facs.code` adds four more records: `facs_hager_2002` 
 - New profiles and maps are added. Nothing changes in the existing profiles or values.
 - The 7 direct maps, the 3 identity maps, the old `rcef.canonical` profile and its 21 signals, and the 4 old intermediate signals are retired later, with tombstones. Until then they stay as they are.
 - Every hop is `approximate` and `proposed`, except the 4 pupil copies, which are `exact` and `verified_current`. So 19 of the 21 `verified_current` mappings in today's three identity maps have only `proposed` routes in their place.
-- Two-hop routes give the same values as today's direct maps on every output that both write. A pre-registered comparison checks this before the direct maps are retired.
+- The design goal is that two-hop routes give the same values as today's direct maps on every output that both write. A pre-registered comparison tests this before the direct maps are retired; until then it is a goal, not a result.
 
 ## Alternatives considered
 
@@ -400,6 +410,8 @@ These tests come with the data change:
 - an audit row for each pair of canonical signal and mapped provider, and for each pair of signal with a FACS code and cited FACS crosswalk;
 - each hop's assumption clause matches its operator; every assumption of today's maps has a home on each route ([assumption catalogue](canonical-set-audit.md#assumption-catalogue));
 - the side and direction suffixes agree between the two ends of every mapping;
+- a capability matrix: for each set (FACS, FB v1, `XR_ANDROID_face_tracking` and `XR_ML_facial_expression`, from a committed list of their names with record and locator), which canonical groups it can fill, plus a synthetic partial source;
+- a FACS-crosswalk record goes only on hops of the provider whose names it uses (`ict_facekit`: ARKit hops only), and no crosswalk record goes on a FACS hop;
 - for `facs.code`: 92 rows with the dispositions 49, 25 and 18; the ID pattern; the calibration strings; `facs_au` agrees with the FACS maps.
 
 ## Open questions
