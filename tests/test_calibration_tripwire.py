@@ -16,7 +16,9 @@ import provenance  # noqa: E402
 # The last commit that changed the calibration code, and the one that published the rig-gains results. The code
 # changed after the rig-gains and MediaPipe records (code_commit 7cd8ff9) when check.py learnt geometry-only records
 # and pose sums, and viseme_poses.py was added; those two records are reproduced from their freeze commit, dd9ecd2.
-CODE_COMMIT = 'a03affe90c15fed693ded9a746ab78af79badd55'
+# check.py changed again (16a698f) after the viseme-poses record (code_commit d7e0f50), which is reproduced from its
+# freeze commit, a0381b2.
+CODE_COMMIT = '16a698fa1e59118c845cf6aef09c4cd9feec3213'
 RECORD_COMMIT = '2fa1be4'
 CODE = ['check.py', 'examples/rig_gains.py', 'examples/rigs.py', 'examples/ict_facekit.py', 'examples/rcef_translate.py',
         'examples/data/rig_landmarks.json', 'tools/calibration/ict_files.json', 'tools/render/']
