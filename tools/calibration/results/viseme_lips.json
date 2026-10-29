@@ -1,0 +1,260 @@
+{
+ "about": "Report only, not gated: mouth distances in mm at full weight on the held-out rigs of viseme-poses.rocketbox-multi v2, for the frozen pose of each class (which the bridge reads only if the class passes; otherwise the bridge gives the neutral face) and for the rig's own viseme. They change no cell and no pass or fail. Landmarks: see Geometry.landmarks in viseme_poses.py.",
+ "record": "viseme-poses.rocketbox-multi",
+ "version": 2,
+ "frozen_sha256": "f2251681ae72d864d8478e2aa62fdb6dfaa8e0d923fbbd310636dac2633e09e3",
+ "rows": [
+  {
+   "rig": "Female_Adult_06",
+   "class": "bilabial",
+   "meta": "PP",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.58,
+    "teeth_to_lower_lip_mm": 4.27,
+    "corner_width_mm": 29.99
+   },
+   "own_viseme": {
+    "lip_gap_mm": 1.38,
+    "teeth_to_lower_lip_mm": 3.84,
+    "corner_width_mm": 29.95
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 2.07,
+    "teeth_to_lower_lip_mm": 3.02,
+    "corner_width_mm": 30.52
+   }
+  },
+  {
+   "rig": "Female_Adult_06",
+   "class": "labiodental",
+   "meta": "FF",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.58,
+    "teeth_to_lower_lip_mm": 4.27,
+    "corner_width_mm": 29.99
+   },
+   "own_viseme": {
+    "lip_gap_mm": 5.0,
+    "teeth_to_lower_lip_mm": 3.52,
+    "corner_width_mm": 29.99
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 2.4,
+    "teeth_to_lower_lip_mm": 3.39,
+    "corner_width_mm": 30.09
+   }
+  },
+  {
+   "rig": "Female_Adult_06",
+   "class": "vowel_close_rounded",
+   "meta": "OU",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.58,
+    "teeth_to_lower_lip_mm": 4.27,
+    "corner_width_mm": 29.99
+   },
+   "own_viseme": {
+    "lip_gap_mm": 2.0,
+    "teeth_to_lower_lip_mm": 9.17,
+    "corner_width_mm": 26.34
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 0.71,
+    "teeth_to_lower_lip_mm": 6.05,
+    "corner_width_mm": 26.79
+   }
+  },
+  {
+   "rig": "Female_Adult_17",
+   "class": "bilabial",
+   "meta": "PP",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.53,
+    "teeth_to_lower_lip_mm": 3.31,
+    "corner_width_mm": 27.58
+   },
+   "own_viseme": {
+    "lip_gap_mm": 0.78,
+    "teeth_to_lower_lip_mm": 2.45,
+    "corner_width_mm": 27.57
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 2.23,
+    "teeth_to_lower_lip_mm": 2.23,
+    "corner_width_mm": 28.11
+   }
+  },
+  {
+   "rig": "Female_Adult_17",
+   "class": "labiodental",
+   "meta": "FF",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.53,
+    "teeth_to_lower_lip_mm": 3.31,
+    "corner_width_mm": 27.58
+   },
+   "own_viseme": {
+    "lip_gap_mm": 5.3,
+    "teeth_to_lower_lip_mm": 2.66,
+    "corner_width_mm": 27.58
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 2.58,
+    "teeth_to_lower_lip_mm": 2.44,
+    "corner_width_mm": 27.67
+   }
+  },
+  {
+   "rig": "Female_Adult_17",
+   "class": "vowel_close_rounded",
+   "meta": "OU",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.53,
+    "teeth_to_lower_lip_mm": 3.31,
+    "corner_width_mm": 27.58
+   },
+   "own_viseme": {
+    "lip_gap_mm": 1.13,
+    "teeth_to_lower_lip_mm": 7.62,
+    "corner_width_mm": 23.93
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 0.82,
+    "teeth_to_lower_lip_mm": 5.1,
+    "corner_width_mm": 24.36
+   }
+  },
+  {
+   "rig": "Male_Adult_19",
+   "class": "bilabial",
+   "meta": "PP",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.58,
+    "teeth_to_lower_lip_mm": 6.26,
+    "corner_width_mm": 34.65
+   },
+   "own_viseme": {
+    "lip_gap_mm": 0.58,
+    "teeth_to_lower_lip_mm": 4.92,
+    "corner_width_mm": 34.6
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 1.16,
+    "teeth_to_lower_lip_mm": 5.62,
+    "corner_width_mm": 35.17
+   }
+  },
+  {
+   "rig": "Male_Adult_19",
+   "class": "labiodental",
+   "meta": "FF",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.58,
+    "teeth_to_lower_lip_mm": 6.26,
+    "corner_width_mm": 34.65
+   },
+   "own_viseme": {
+    "lip_gap_mm": 4.98,
+    "teeth_to_lower_lip_mm": 4.9,
+    "corner_width_mm": 34.65
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 2.53,
+    "teeth_to_lower_lip_mm": 5.57,
+    "corner_width_mm": 34.72
+   }
+  },
+  {
+   "rig": "Male_Adult_19",
+   "class": "vowel_close_rounded",
+   "meta": "OU",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.58,
+    "teeth_to_lower_lip_mm": 6.26,
+    "corner_width_mm": 34.65
+   },
+   "own_viseme": {
+    "lip_gap_mm": 2.62,
+    "teeth_to_lower_lip_mm": 10.55,
+    "corner_width_mm": 31.0
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 0.79,
+    "teeth_to_lower_lip_mm": 8.15,
+    "corner_width_mm": 31.33
+   }
+  },
+  {
+   "rig": "Male_Adult_02",
+   "class": "bilabial",
+   "meta": "PP",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.69,
+    "teeth_to_lower_lip_mm": 3.28,
+    "corner_width_mm": 45.47
+   },
+   "own_viseme": {
+    "lip_gap_mm": 0.99,
+    "teeth_to_lower_lip_mm": 2.18,
+    "corner_width_mm": 45.42
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 2.2,
+    "teeth_to_lower_lip_mm": 2.43,
+    "corner_width_mm": 45.44
+   }
+  },
+  {
+   "rig": "Male_Adult_02",
+   "class": "labiodental",
+   "meta": "FF",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.69,
+    "teeth_to_lower_lip_mm": 3.28,
+    "corner_width_mm": 45.47
+   },
+   "own_viseme": {
+    "lip_gap_mm": 4.78,
+    "teeth_to_lower_lip_mm": 2.32,
+    "corner_width_mm": 45.47
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 2.52,
+    "teeth_to_lower_lip_mm": 2.44,
+    "corner_width_mm": 45.27
+   }
+  },
+  {
+   "rig": "Male_Adult_02",
+   "class": "vowel_close_rounded",
+   "meta": "OU",
+   "read_by_bridge": false,
+   "neutral": {
+    "lip_gap_mm": 0.69,
+    "teeth_to_lower_lip_mm": 3.28,
+    "corner_width_mm": 45.47
+   },
+   "own_viseme": {
+    "lip_gap_mm": 2.95,
+    "teeth_to_lower_lip_mm": 6.89,
+    "corner_width_mm": 41.92
+   },
+   "frozen_pose": {
+    "lip_gap_mm": 0.84,
+    "teeth_to_lower_lip_mm": 4.95,
+    "corner_width_mm": 42.95
+   }
+  }
+ ]
+}
