@@ -306,6 +306,11 @@ class CitingRules(unittest.TestCase):
         rule['evidence'] = ['calibration.fixture.missing']
         self.assertTrue(any('fixture.missing' in p for p in self.problems(rule)))
 
+    def test_a_rule_citing_a_record_with_no_inputs_is_refused_with_a_message(self):
+        rule = fixture_rule()
+        del rule['inputs']
+        self.assertTrue(any('reads no channel' in p for p in self.problems(rule)))
+
     def test_a_rule_citing_a_record_must_use_its_curve(self):
         rule = fixture_rule()
         rule['operator'] = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
@@ -379,7 +384,26 @@ class CitingPoseSums(unittest.TestCase):
         self.rules = pose_rules()
         del self.rules[1]
         self.rules[1]['inputs'], self.rules[1]['operator']['weights'] = ['fixture.helper.jaw'], [0.4]
+        self.rules[2]['operator']['knots'] = [[0.0, 0.0], [1.0, 1.0]]
         self.assertEqual(self.problems(), [])
+
+    def test_the_clamp_must_have_the_clamp_knots(self):
+        self.rules[3]['operator']['knots'] = [[0.0, 0.0], [0.5, 1.0], [2.0, 1.0]]
+        self.assertRefused('fixture.pose.clamp', 'knots')
+        self.rules[3]['operator']['knots'] = [[0.0, 0.0], [1.0, 1.0], [3.0, 1.0]]
+        self.assertRefused('knots')
+
+    def test_no_other_rule_may_read_the_sum(self):
+        self.rules.append({'id': 'fixture.pose.extra', 'inputs': ['fixture.helper.sum', 'fixture.source.lip'],
+                           'outputs': ['fixture.target.other'],
+                           'operator': {'id': 'weighted_sum', 'weights': [3.0, 1.0]}, 'evidence': []})
+        self.assertRefused('exactly one rule')
+
+    def test_each_input_needs_exactly_one_weight(self):
+        self.rules[2]['operator']['weights'] = [0.4]
+        self.assertRefused('one weight per input')
+        self.rules[2]['operator']['weights'] = [0.4, 0.25, 0.1]
+        self.assertRefused('one weight per input')
 
     def test_a_pose_sum_cannot_cite_a_record_that_has_no_results_yet(self):
         text = POSES.read_text(encoding='utf-8')
