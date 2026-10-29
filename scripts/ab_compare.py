@@ -1003,7 +1003,7 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
         record('M5 R2', {'reference': 'R2'}, *r2(b_document, abreg['pairs']['FB2 -> ARKit'], rows,
                                                  abreg['lists']['r2_departures']))
     timings['total'] = round(time.perf_counter() - started, 3)
-    return write_results(out, abreg, report, frame_sums, timings, pins, dry_run, b_path)
+    return write_results(out, abreg, report, frame_sums, timings, pins, dry_run, b_path, root)
 
 
 # ---------------------------------------------------------------- results
@@ -1065,7 +1065,7 @@ def csv_text(rows: list[list]) -> str:
 
 
 def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timings: dict, pins: list, dry_run: bool,
-                  b_path: Path) -> dict:
+                  b_path: Path, root: Path = ROOT) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     row_statuses = {m: status(m, rows) for m, rows in report['metrics'].items()}
     missing = missing_rows(report, abreg)
@@ -1115,7 +1115,7 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
                 'pin_problems': pins, 'passed': passed, 'statuses': gate_statuses, 'row_statuses': row_statuses,
                 'missing_rows': missing, 'pending': PENDING,
                 'a1_sha256': A1_SHA256, 'b_pack': b_path.name, 'b_pack_sha256': sha256_bytes(b_path.read_bytes()),
-                'code': code_hashes(), 'runtime': runtime_pins()}
+                'code': code_hashes(root), 'runtime': runtime_pins(root)}
     (out / 'manifest.json').write_text(json.dumps(manifest, indent=1, sort_keys=True) + '\n', encoding='utf-8')
     (out / 'timings.json').write_text(json.dumps(timings, indent=1, sort_keys=True) + '\n', encoding='utf-8')
     sums = {name: sha256_bytes((out / name).read_bytes()) for name in [*files, 'manifest.json']}
