@@ -707,6 +707,11 @@ def registration_problems(root: Path = ROOT, recompute: bool = True, history: bo
     for key, abreg in sorted(abregs.items(), key=lambda item: (item[0][0], item[0][1])):
         where = f'ab/{key[0]}-v{key[1]}.abreg'
         problems += [f'{where}: {p}' for p in abreg_problems(abreg, abregs, manifests, root, recompute)]
+        registered = ledger_commit(root, abreg_sha256(abreg)) if history else None
+        if registered:
+            committed = added_commit(root, where)
+            if not committed or committed == registered or not is_ancestor(root, committed, registered):
+                problems.append(f'{where} must be committed before its line in {LEDGER}')
     for key, (path, manifest) in manifests.items():
         where = path.relative_to(root).as_posix()
         abreg = abregs.get(key)
@@ -721,10 +726,15 @@ def registration_problems(root: Path = ROOT, recompute: bool = True, history: bo
         if not history:
             continue
         registered, results = ledger_commit(root, abreg_sha256(abreg)), added_commit(root, where)
-        if registered and results and (registered == results or git(
-                root, 'merge-base', '--is-ancestor', registered, results).returncode):
+        if results and not registered:
+            problems.append(f'{where} is committed, but its line in {LEDGER} is not committed')
+        elif registered and results and (registered == results or not is_ancestor(root, registered, results)):
             problems.append(f'{where} was committed before, or with, its line in {LEDGER}')
     return problems
+
+
+def is_ancestor(root: Path, older: str, newer: str) -> bool:
+    return git(root, 'merge-base', '--is-ancestor', older, newer).returncode == 0
 
 
 def abreg_problems(abreg: dict, abregs: dict, manifests: dict, root: Path, recompute: bool) -> list[str]:
@@ -739,8 +749,14 @@ def abreg_problems(abreg: dict, abregs: dict, manifests: dict, root: Path, recom
         target = abreg.get('reproduces', {})
         reproduced = abregs.get((target.get('id'), target.get('version')))
         manifest = manifests.get((target.get('id'), target.get('version')), (None, {}))[1]
+        passing = [v for (i, v), other in abregs.items() if i == abreg['id'] and v < version
+                   and other['kind'] in ('first', 'new', 'fix', 'revise') and manifests.get((i, v), (None, {}))[1].get(
+                       'passed') and not manifests[(i, v)][1].get('dry_run')]
         if reproduced is None or not manifest.get('passed') or manifest.get('dry_run'):
             problems.append('a "reproduce" freeze must name a registered freeze whose results passed')
+        elif target.get('id') != abreg['id'] or target.get('version') != max(passing, default=None):
+            latest = f'{abreg["id"]} v{max(passing)}' if passing else 'a first, new, fix or revise freeze'
+            problems.append(f'a "reproduce" freeze reproduces the latest passing freeze, {latest}')
         elif any(abreg.get(k) != reproduced.get(k) for k in ('seed_root', 'sources', 'families', 'perturbations')) or (
                 abreg['pins']['code'].get('generator') != reproduced['pins']['code'].get('generator')
                 or abreg['pins']['runtime'] != reproduced['pins']['runtime']):
@@ -754,6 +770,8 @@ def abreg_problems(abreg: dict, abregs: dict, manifests: dict, root: Path, recom
         for name in sorted(set(abreg.get('lists', {})) | set(previous.get('lists', {}))):
             if abreg['lists'].get(name) != previous['lists'].get(name) and not abreg.get('acceptance', {}).get(name):
                 problems.append(f'list {name} changed without the release owners\' acceptance in "acceptance"')
+    if kind == 'fix' and not abreg.get('changes'):
+        problems.append('a "fix" freeze names what changed in "changes"')
     if kind == 'revise' and (not abreg.get('changes') or not abreg.get('acceptance', {}).get('changes')):
         problems.append('a "revise" freeze lists each change, and the release owners accept the list before the run')
     if recompute and abreg.get('a1_figures') is not None:
