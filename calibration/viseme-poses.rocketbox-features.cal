@@ -3689,3 +3689,1143 @@ knots = [[0.0, 0.0], [1.0, 0.0]]
 input = "rcef.canonical_viseme.sil"
 output = "rcef.canonical_expression.chin_raise_upper_lip"
 knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_open"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.284917
+p95 = 0.284917
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.610635
+p95 = 0.610635
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_spread"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.373892
+p95 = 0.373892
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_rounded"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.302172
+p95 = 0.302172
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.678146
+p95 = 0.678146
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.bilabial"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.725268
+p95 = 0.725268
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.labiodental"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.906377
+p95 = 0.906377
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dental"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.252259
+p95 = 0.252259
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.647047
+p95 = 0.647047
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.postalveolar"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.449208
+p95 = 0.449208
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_stop"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.287334
+p95 = 0.287334
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_nasal_lateral"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.527513
+p95 = 0.527513
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dorsal"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.343385
+p95 = 0.343385
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.rhotic"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.56765
+p95 = 0.56765
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.sil"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_open"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.293034
+p95 = 0.293034
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.613907
+p95 = 0.613907
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_spread"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.382164
+p95 = 0.382164
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_rounded"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.314025
+p95 = 0.314025
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.662234
+p95 = 0.662234
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.bilabial"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.738805
+p95 = 0.738805
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.labiodental"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.901403
+p95 = 0.901403
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dental"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.254712
+p95 = 0.254712
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.648563
+p95 = 0.648563
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.postalveolar"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.473478
+p95 = 0.473478
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_stop"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.28821
+p95 = 0.28821
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_nasal_lateral"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.528339
+p95 = 0.528339
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dorsal"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.383447
+p95 = 0.383447
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.rhotic"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.590992
+p95 = 0.590992
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.sil"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_open"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.291799
+p95 = 0.291799
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.580745
+p95 = 0.580745
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_spread"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.346749
+p95 = 0.346749
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_rounded"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.285752
+p95 = 0.285752
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.652889
+p95 = 0.652889
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.bilabial"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.752483
+p95 = 0.752483
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.labiodental"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.925723
+p95 = 0.925723
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dental"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.244869
+p95 = 0.244869
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.64176
+p95 = 0.64176
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.postalveolar"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.52483
+p95 = 0.52483
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_stop"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.276584
+p95 = 0.276584
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_nasal_lateral"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.504769
+p95 = 0.504769
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dorsal"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.313567
+p95 = 0.313567
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.rhotic"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.538601
+p95 = 0.538601
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.sil"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_open"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.290915
+p95 = 0.290915
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.568877
+p95 = 0.568877
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_spread"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.345492
+p95 = 0.345492
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_rounded"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.2815
+p95 = 0.2815
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.669304
+p95 = 0.669304
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.bilabial"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.735676
+p95 = 0.735676
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.labiodental"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.909758
+p95 = 0.909758
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dental"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.236047
+p95 = 0.236047
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.644366
+p95 = 0.644366
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.postalveolar"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.504703
+p95 = 0.504703
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_stop"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.271122
+p95 = 0.271122
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_nasal_lateral"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.497844
+p95 = 0.497844
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dorsal"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.332035
+p95 = 0.332035
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.rhotic"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.543951
+p95 = 0.543951
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.sil"
+side = "both"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; the rig's ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+neutral = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "corner_width_ratio"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.027567
+p95 = 0.037449
+max = 0.04188
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "lip_opening_mm"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.006636
+p95 = 0.009113
+max = 0.01024
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "whole_face_error"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "corner_width_ratio"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.005034
+p95 = 0.008
+max = 0.00813
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "lip_protrusion_mm"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.019492
+p95 = 0.031036
+max = 0.031541
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "whole_face_error"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_opening_mm"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_protrusion_mm"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.000423
+p95 = 0.000723
+max = 0.000738
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "whole_face_error"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "lip_opening_mm"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.026898
+p95 = 0.041519
+max = 0.041583
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "jaw_drop_mm"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 1.7e-05
+p95 = 2.7e-05
+max = 2.7e-05
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "whole_face_error"
+identity = "Rocketbox Female_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "corner_width_ratio"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.031605
+p95 = 0.042878
+max = 0.047924
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "lip_opening_mm"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.014751
+p95 = 0.020258
+max = 0.022762
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "whole_face_error"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "corner_width_ratio"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.004486
+p95 = 0.007124
+max = 0.007239
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "lip_protrusion_mm"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.031788
+p95 = 0.050614
+max = 0.051437
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "whole_face_error"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_opening_mm"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_protrusion_mm"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.006117
+p95 = 0.01045
+max = 0.010674
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "whole_face_error"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "lip_opening_mm"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.026898
+p95 = 0.041519
+max = 0.041583
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "jaw_drop_mm"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 1.8e-05
+p95 = 2.8e-05
+max = 2.8e-05
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "whole_face_error"
+identity = "Rocketbox Female_Adult_09 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "corner_width_ratio"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.028535
+p95 = 0.03875
+max = 0.043328
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "lip_opening_mm"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.075896
+p95 = 0.104227
+max = 0.117113
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "whole_face_error"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "corner_width_ratio"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.004479
+p95 = 0.007148
+max = 0.007265
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "lip_protrusion_mm"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.039909
+p95 = 0.063544
+max = 0.064577
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "whole_face_error"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_opening_mm"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_protrusion_mm"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.015224
+p95 = 0.026006
+max = 0.026564
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "whole_face_error"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "lip_opening_mm"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.024976
+p95 = 0.038551
+max = 0.038611
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "jaw_drop_mm"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "whole_face_error"
+identity = "Rocketbox Male_Adult_08 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "corner_width_ratio"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.039725
+p95 = 0.054585
+max = 0.061349
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "lip_opening_mm"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.056197
+p95 = 0.077175
+max = 0.086716
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+feature = "whole_face_error"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "corner_width_ratio"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.006253
+p95 = 0.00996
+max = 0.010123
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "lip_protrusion_mm"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.012663
+p95 = 0.020163
+max = 0.020491
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+feature = "whole_face_error"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_opening_mm"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "lip_protrusion_mm"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.023123
+p95 = 0.039499
+max = 0.040348
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.bilabial"
+feature = "whole_face_error"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "lip_opening_mm"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.024961
+p95 = 0.038529
+max = 0.038588
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "jaw_drop_mm"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
+
+[[feature_cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+feature = "whole_face_error"
+identity = "Rocketbox Male_Adult_15 (held-out rig, not loaded by any fit or earlier evaluation)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
