@@ -5,7 +5,7 @@ Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards For
 
 **Author affiliation: to be added by the release owners before this document goes to the working group.**
 
-**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with 60 of its 72 signals (every group except `cheek_suck`, `lip_tighten`, `tongue_place` and the pupils), and the maps of ARKit, FB2, Unified Expressions and VRM blinks. The viseme profile and its maps are not in the data yet. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
+**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with 60 of its 72 signals (every group except `cheek_suck`, `lip_tighten`, `tongue_place` and the pupils), and the maps of ARKit, FB2, Unified Expressions and VRM blinks. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
 
 This document uses the proposal form of [GOVERNANCE.md](../GOVERNANCE.md): the problem, the proposal, the public evidence, the effect on compatibility, the alternatives, the tests and the open questions. Two documents go with it:
 
@@ -20,7 +20,7 @@ RCSF does this job for skeletons. It calls itself a pivot for translating betwee
 
 ## Proposal in brief
 
-- Two new profiles: `rcef.canonical_expression` with 72 signals (70 without units, 2 in millimetres), and `rcef.canonical_viseme` with 15 signals.
+- Two new profiles: `rcef.canonical_expression` with 72 signals (70 without units, 2 in millimetres), and `rcef.canonical_viseme` with 16 signals: 15 IPA shape classes (14 speech classes and `sil`) and one aggregate, `alveolar_floor`.
 - Every translation runs source → canonical set → target. An in-map turns a provider's values into canonical values. An out-map turns canonical values into a provider's values.
 - The FACS code numbers become an expression set of their own, `facs.code`, with in-maps and out-maps ([FACS](#facs)).
 - RCEF is a pivot for translating between expression sets. It is not a set that everyone must adopt. Each canonical signal has a declared meaning, but no shared or measured gain.
@@ -28,14 +28,14 @@ RCSF does this job for skeletons. It calls itself a pivot for translating betwee
 ## Names and IDs
 
 - **Expression IDs:** `rcef.canonical_expression.<short_name>`, in lowercase snake_case. Sides use `_left` and `_right`. Lip quadrants use `_upper_left`, `_upper_right`, `_lower_left` and `_lower_right`.
-- **Viseme IDs:** `rcef.canonical_viseme.<class>`. The classes are `sil`, `pp`, `ff`, `th`, `dd`, `kk`, `ch`, `ss`, `nn`, `rr`, `aa`, `e`, `ih`, `oh` and `ou`.
+- **Viseme IDs:** `rcef.canonical_viseme.<class>`, in ASCII snake_case, named by IPA place of articulation or vowel shape: `sil`, `bilabial`, `labiodental`, `dental`, `alveolar_sibilant`, `postalveolar`, `coronal_stop`, `coronal_nasal_lateral`, `dorsal`, `rhotic`, `vowel_open`, `vowel_mid_spread`, `vowel_close_spread`, `vowel_mid_rounded`, `vowel_close_rounded`, and the aggregate `alveolar_floor`. IPA symbols appear only in labels and metadata. Each viseme signal has a `definition` that names any difference between its ID and its members.
 - Short names are unique across both profiles.
 - The prefix of each ID is its profile ID. The new IDs do not reuse the `rcef.canonical.` namespace.
 - An ID never holds a version. Versions are in the calibration string and in the profile metadata.
 - An ID never changes. A new meaning gets a new ID. A retired ID needs a tombstone ([GOVERNANCE.md](../GOVERNANCE.md)).
 - New IDs become permanent at the first release that contains them.
 - **Labels** are plain English, for example "Inner brow raise, left". The label carries the readable name.
-- **Why snake_case.** RCSF uses readable names such as "Hips" (RCSF `joints.csv`, `f6c3ea8`). RCEF uses snake_case IDs instead, as a neutral style: ARKit and VRM use lowerCamelCase, FB2 uses UPPER_SNAKE and VRCFaceTracking Unified Expressions uses PascalCase. One-word IDs look the same in any lowercase style. For example, the viseme classes `aa`, `ih`, `oh` and `ou` equal VRM preset names.
+- **Why snake_case.** RCSF uses readable names such as "Hips" (RCSF `joints.csv`, `f6c3ea8`). RCEF uses snake_case IDs instead, as a neutral style: ARKit and VRM use lowerCamelCase, FB2 uses UPPER_SNAKE and VRCFaceTracking Unified Expressions uses PascalCase. One-word IDs look the same in any lowercase style. For example, the viseme class `dental` reads the same in every lowercase style.
 
 ## Fields
 
@@ -47,11 +47,11 @@ Every canonical signal has these fields.
 | `calibration` | The string for the signal's class (below). |
 | `side` | `left`, `right` or `shared`, from the subject's own face. On `jaw_sideways_*` and `mouth_shift_*` the suffix names a direction: `_left` means "toward the subject's own left". Their side is `shared`, because the whole jaw or mouth moves. |
 | `region` | As in the [signal table](#expression-signals). |
-| `coupling` | None on expression signals. `probability_simplex` on visemes; this is a label only. |
+| `coupling` | None on expression signals. On visemes it is a label only: `probability_simplex` on the 15 partition signals, `aggregate_of_simplex_classes` on aggregates and `refinement_of_simplex_class` on refinements. |
 | `disposition` | `mapped` once a mapping uses the signal. |
 | `evidence_status` | `proposed`. The two pupil signals are `verified_current`, and their evidence holds only `verified_current` records (`rcef_canonical_v1`, `vrcft_data`). msf-character-tools needs this for a `verified_current` mapping ([architecture.md](architecture.md#map-compilation-is-stricter-than-inventory-validation)). |
 | `evidence` | `rcef_canonical_v1`, the original record for this vocabulary. Signals with a FACS code also cite `facs_wikipedia`. The jaw and mouth-shift signals also cite `xr_fb2`, the FB2 figure records and `apple_blendshapes` for their direction wording. |
-| `metadata` | `definition` (RCEF's own text), `zero`, `one`, `facs_au` (empty where the table shows none), `facs_table` (`main` or `gross_behavior`), `group`, `aligned_names` (provider names, as facts) and `audit` (a pointer to the [audit](canonical-set-audit.md) rows). |
+| `metadata` | `definition` (RCEF's own text), `zero`, `one`, `facs_au` (empty where the table shows none), `facs_table` (`main` or `gross_behavior`), `group`, `aligned_names` (provider names, as facts) and `audit` (a pointer to the [audit](canonical-set-audit.md) rows). Viseme signals have their own fields ([Viseme metadata](#viseme-metadata)). |
 
 Both profiles also have `vocabulary_version` and `vocabulary_status` in their metadata ([How the set grows](#how-the-set-grows)).
 
@@ -59,7 +59,9 @@ Both profiles also have `vocabulary_version` and `vocabulary_status` in their me
 
 - **Expression signals:** `rcef.canonical.v1:<short_name>: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve`
 - **Gaze:** `rcef.canonical.v1:<short_name>: fraction of the source's maximum gaze in this direction; source-relative; no angle and no curve claimed`
-- **Visemes:** `rcef.canonical.v1:<short_name>: class probability as the source reports it; no per-class neutral; silence is sil = 1`
+- **Viseme classes:** `rcef.canonical.v1:<short_name>: probability of the IPA shape class (docs/canonical-set.md) as the source reports it; no per-class neutral; rest is sil = 1`
+- **Viseme aggregates:** `rcef.canonical.v1:<short_name>: sum of the IPA shape classes <classes>, clamped to [0,1]; not part of the simplex sum; no per-class neutral`
+- **Viseme refinements:** `rcef.canonical.v1:<short_name>: probability of the IPA shape subclass (part of <parent>) as the source reports it; not part of the simplex sum`
 - **Pupils:** `rcef.canonical.v1:<short_name>: tracker-reported pupil diameter in millimetres`
 
 ## Meaning of 0, 1 and neutral
@@ -85,6 +87,7 @@ These rules apply to the expression signals. The pupils are a length. [Gaze](#ga
 | affine(1,0), FACS, one input, one output | "the value is carried over unchanged" |
 | affine(1,0) fan-out (FACS in-hop, AU22 and AU28 per side) | "the one FACS side value is copied into the upper and the lower part" |
 | weighted_sum mean (FACS out-hop, AU22 and AU28 per side) | "the FACS side value is the mean of the upper and lower canonical parts" |
+| weighted_sum [1, 1, 1] and clamp knots (viseme aggregate in-hop) | "the canonical value is the sum of the META classes SS, DD and NN, clamped at 1" |
 
 FACS hops start with their own assumption instead: "FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding ([facs-intensity.md](facs-intensity.md)) and correspond as the operator passes them; no evidence supports this, and no response curve is measured". On the hops of the gross behaviour codes (29, 30, 34, 35 and 43) the first clause reads: "the action at its fullest, as RCEF assumes, is canonical 1; the source gives no intensity scale for gross behaviour codes".
 
@@ -111,8 +114,12 @@ A group is the set of signals that one in-map writes and one out-map reads. A so
 | `lip_tighten` | 2 | `lip_tighten_left`, `lip_tighten_right` |
 | `tongue_place` | 6 | the 6 tongue positions |
 | `pupil_mm` | 2 | the 2 pupil diameters |
-| `viseme_vowel` | 5 | `aa`, `e`, `ih`, `oh`, `ou` |
-| `viseme_consonant` | 10 | `sil`, `pp`, `ff`, `th`, `dd`, `kk`, `ch`, `ss`, `nn`, `rr` |
+| `viseme_vowel` | 5 | `vowel_open`, `vowel_mid_spread`, `vowel_close_spread`, `vowel_mid_rounded`, `vowel_close_rounded` |
+| `viseme_consonant` | 9 | `bilabial`, `labiodental`, `dental`, `alveolar_sibilant`, `postalveolar`, `coronal_stop`, `coronal_nasal_lateral`, `dorsal`, `rhotic` |
+| `viseme_rest` | 1 | `sil` |
+| `viseme_aggregate` | 1 | `alveolar_floor` |
+
+A META vowel never shares a group with a consonant or `sil`, so the VRM vowel route reads META's vowels only. A `viseme_refinement` group comes with the first refinement, and a `viseme_vowel_aggregate` group with the first vowel aggregate.
 
 **Why these groups.** FACS has no code for `mouth_shift_*` or `chin_raise_upper_lip`. The OpenXR `XR_ML_facial_expression` set has no cheek puff, jaw thrust or jaw sideways shapes (`xr_registry`, `xr.xml` lines 8948-8996). If these signals were in `face`, neither source could fill `face`, and no face value could be written from them. So they are small groups of their own.
 
@@ -187,35 +194,70 @@ The table gives every signal of `rcef.canonical_expression`. 0 is the neutral fa
 | `lower_lip_depress_right` | Lower lip depress, right | right | Lips | face | The right part of the lower lip is drawn down. | 16 (`main`) | LOWER_LIP_DEPRESSOR_R | mouthLowerDownRight |
 | `tongue_out` | Tongue out | shared | Tongue | tongue_out | The tongue moves forward and out of the mouth. No length is stated. | 19 (`main`) | TONGUE_OUT | tongueOut |
 | `tongue_retreat` | Tongue retreat | shared | Tongue | tongue_place | The tongue draws back toward the throat and stays low in the mouth. | none | TONGUE_RETREAT | none |
-| `tongue_tip_interdental` | Tongue tip between the teeth | shared | Tongue | tongue_place | The tongue tip touches the upper teeth and shows between the teeth, as for the TH viseme. | none | TONGUE_TIP_INTERDENTAL | none |
-| `tongue_tip_alveolar` | Tongue tip behind the upper teeth | shared | Tongue | tongue_place | The tongue tip touches the back of the upper teeth, as for the NN viseme. | none | TONGUE_TIP_ALVEOLAR | none |
-| `tongue_front_dorsal_palate` | Tongue front on the palate | shared | Tongue | tongue_place | The front of the tongue presses on the palate, as for the CH viseme. | none | TONGUE_FRONT_DORSAL_PALATE | none |
-| `tongue_mid_dorsal_palate` | Tongue middle on the palate | shared | Tongue | tongue_place | The middle of the tongue presses on the palate, as for the DD viseme. | none | TONGUE_MID_DORSAL_PALATE | none |
-| `tongue_back_dorsal_velar` | Tongue back on the palate | shared | Tongue | tongue_place | The back of the tongue presses on the palate, as for the KK viseme. | none | TONGUE_BACK_DORSAL_VELAR | none |
+| `tongue_tip_interdental` | Tongue tip between the teeth | shared | Tongue | tongue_place | The tongue tip touches the upper teeth and shows between the teeth, as for META's TH viseme (canonical `dental`). | none | TONGUE_TIP_INTERDENTAL | none |
+| `tongue_tip_alveolar` | Tongue tip behind the upper teeth | shared | Tongue | tongue_place | The tongue tip touches the back of the upper teeth, as for META's NN viseme (canonical `coronal_nasal_lateral`). | none | TONGUE_TIP_ALVEOLAR | none |
+| `tongue_front_dorsal_palate` | Tongue front on the palate | shared | Tongue | tongue_place | The front of the tongue presses on the palate, as for META's CH viseme (canonical `postalveolar`). | none | TONGUE_FRONT_DORSAL_PALATE | none |
+| `tongue_mid_dorsal_palate` | Tongue middle on the palate | shared | Tongue | tongue_place | The middle of the tongue presses on the palate, as for the DD viseme. FB2 describes DD's tongue this way; RCEF's `coronal_stop` is the IPA coronal class. | none | TONGUE_MID_DORSAL_PALATE | none |
+| `tongue_back_dorsal_velar` | Tongue back on the palate | shared | Tongue | tongue_place | The back of the tongue presses on the palate, as for META's KK viseme (canonical `dorsal`). | none | TONGUE_BACK_DORSAL_VELAR | none |
 | `pupil_diameter_mm_left` | Pupil diameter (mm), left | left | Pupils | pupil_mm | The diameter of the left pupil in millimetres, as the tracker reports it (VRCFaceTracking eye `Left.PupilDiameter_MM`). Units `mm`; no range is declared. | none | none | none |
 | `pupil_diameter_mm_right` | Pupil diameter (mm), right | right | Pupils | pupil_mm | The diameter of the right pupil in millimetres, as the tracker reports it (VRCFaceTracking eye `Right.PupilDiameter_MM`). Units `mm`; no range is declared. | none | none | none |
 
 ### Viseme signals
 
-The values are class probabilities, as the META viseme extension defines them (`xr_visemes` lines 104-107). The phoneme classes are META's (`xr_visemes` lines 142-245).
+The canonical visemes are classes of visible mouth shape, defined by the International Phonetic Alphabet (IPA). Each class is a set of IPA chart symbols (record `ipa_chart_doulos_2020`), and each of the 107 chart symbols belongs to exactly one class. [IPA chart assignment](#ipa-chart-assignment) lists every symbol with its chart cell and evidence level. The values are probabilities ([Visemes](#visemes)).
 
-| Short name | Label | Group | Definition | META | VRM |
-|---|---|---|---|---|---|
-| `sil` | Viseme SIL | viseme_consonant | The probability that the frame is silence. `sil` = 1 is the silent frame. | SIL | none |
-| `pp` | Viseme PP | viseme_consonant | The probability that the frame shows the PP viseme class (phonemes: p, b, m). | PP | none |
-| `ff` | Viseme FF | viseme_consonant | The probability that the frame shows the FF viseme class (phonemes: f, v). | FF | none |
-| `th` | Viseme TH | viseme_consonant | The probability that the frame shows the TH viseme class (phonemes: th). | TH | none |
-| `dd` | Viseme DD | viseme_consonant | The probability that the frame shows the DD viseme class (phonemes: t, d). | DD | none |
-| `kk` | Viseme KK | viseme_consonant | The probability that the frame shows the KK viseme class (phonemes: k, g). | KK | none |
-| `ch` | Viseme CH | viseme_consonant | The probability that the frame shows the CH viseme class (phonemes: tS, dZ, S). | CH | none |
-| `ss` | Viseme SS | viseme_consonant | The probability that the frame shows the SS viseme class (phonemes: s, z). | SS | none |
-| `nn` | Viseme NN | viseme_consonant | The probability that the frame shows the NN viseme class (phonemes: n, l). | NN | none |
-| `rr` | Viseme RR | viseme_consonant | The probability that the frame shows the RR viseme class (phonemes: r). | RR | none |
-| `aa` | Viseme AA | viseme_vowel | The probability that the frame shows the AA viseme class (phonemes: A:, as in car). | AA | aa |
-| `e` | Viseme E | viseme_vowel | The probability that the frame shows the E viseme class (phonemes: e, as in bed). | E | ee |
-| `ih` | Viseme IH | viseme_vowel | The probability that the frame shows the IH viseme class (phonemes: ih, as in tip). | IH | ih |
-| `oh` | Viseme OH | viseme_vowel | The probability that the frame shows the OH viseme class (phonemes: oh, as in toe). | OH | oh |
-| `ou` | Viseme OU | viseme_vowel | The probability that the frame shows the OU viseme class (phonemes: ou, as in book). | OU | ou |
+There are 15 partition signals: 14 speech classes and `sil`. Together they partition the chart, and only they carry `coupling = "probability_simplex"`. The 16th signal, `alveolar_floor`, is an aggregate: its value is the sum of three partition classes, clamped at 1 ([Viseme aggregates](#viseme-aggregates)).
+
+| Short name | Label | Group | IPA chart symbols | By rule | Definition | Shape class | Shape floor | META | VRM |
+|---|---|---|---|---|---|---|---|---|---|
+| `sil` | Rest: no speech articulation | viseme_rest | none | none | No speech articulation: silence and pauses. sil is not an IPA segment, and RCEF asserts no mouth pose for it. | rest | rest | SIL | none |
+| `bilabial` | Bilabial: lips closed or close together | viseme_consonant | p b m ʙ ɸ β ʘ ɓ | β̞; pʼ; the double articulations k͡p ɡ͡b ŋ͡m | RCEF class: bilabial consonants; the lips close or come close together. | bilabial | bilabial | PP | none |
+| `labiodental` | Labiodental: lower lip to upper teeth | viseme_consonant | ɱ ⱱ f v ʋ | p͡f b͡v | RCEF class: labiodental consonants; the lower lip touches the upper teeth. | labiodental | labiodental | FF | none |
+| `dental` | Dental fricative, interdental or linguolabial: tongue tip visible | viseme_consonant | θ ð | interdental coronals (t̪̟ n̪͆) and linguolabials (t̼ p̼); t͡θ d͡ð | RCEF class: dental fricatives, interdental and linguolabial coronals; the tongue tip shows at or between the teeth, or at the upper lip. IPA dental stops, nasals and laterals (t̪ d̪ n̪ l̪) stay in the coronal classes. | dental | dental | TH | none |
+| `alveolar_sibilant` | Alveolar sibilant: teeth close | viseme_consonant | s z | t͡s d͡z; sʼ | RCEF class: alveolar sibilants; the teeth are close together. | alveolar_sibilant | alveolar_floor | SS | none |
+| `postalveolar` | Postalveolar sibilant: lips forward, teeth close | viseme_consonant | ʃ ʒ ʂ ʐ ɕ ʑ ɧ | t͡ʃ d͡ʒ t͡ɕ d͡ʑ ʈ͡ʂ ɖ͡ʐ; sʷ zʷ | RCEF class: postalveolar sibilants, including retroflex and alveolo-palatal sibilants; the lips push forward and the teeth are close. | postalveolar | postalveolar | CH | none |
+| `coronal_stop` | Coronal stop or tap | viseme_consonant | t d ʈ ɖ ɾ ɽ ǀ ǃ ǂ ɗ | tʼ; t̪ d̪ | RCEF class: coronal stops and taps, including retroflex stops and the coronal clicks; no lip target of their own. | coronal_stop_nasal_lateral | alveolar_floor | DD | none |
+| `coronal_nasal_lateral` | Coronal nasal or lateral | viseme_consonant | n ɳ ɬ ɮ l ɭ ǁ ɺ | ɫ; t͡ɬ d͡ɮ; n̪ l̪ | RCEF class: coronal nasals and laterals, including retroflex ones and the lateral click; no lip target of their own. | coronal_stop_nasal_lateral | alveolar_floor | NN | none |
+| `dorsal` | Dorsal and laryngeal: no front target | viseme_consonant | c ɟ k ɡ q ɢ ʔ ɲ ŋ ɴ ʀ ç ʝ x ɣ χ ʁ ħ ʕ h ɦ ʎ ʟ ʄ ɠ ʛ ʜ ʢ ʡ | kʼ; k͡x | RCEF class: dorsal consonants, including pharyngeal, epiglottal and glottal consonants (no front target). | dorsal | dorsal | KK | none |
+| `rhotic` | Coronal rhotic | viseme_consonant | r ɹ ɻ | ɚ ɝ (ə˞ ɜ˞); ɹʷ | RCEF class: the coronal rhotics r ɹ ɻ and the r-coloured mid-central vowels; the uvular ʀ ʁ are dorsal. | rhotic | rhotic | RR | none |
+| `vowel_open` | Open and near-open unrounded vowels | viseme_vowel | æ ɐ a ɑ | a˞ | RCEF class: open and near-open unrounded vowels only (the open rounded ɒ ɶ are in vowel_mid_rounded). | vowel_open | open | AA | aa |
+| `vowel_mid_spread` | Close-mid to open-mid unrounded vowels | viseme_vowel | e ɘ ɤ ə ɛ ɜ ʌ | ɘ˞ | RCEF class: close-mid, mid and open-mid unrounded vowels. | vowel_mid_spread | mid_spread | E | ee |
+| `vowel_close_spread` | Close and near-close unrounded vowels and glides | viseme_vowel | j ɰ i ɨ ɯ ɪ | none | RCEF class: close and near-close unrounded vowels, and the glides j ɰ. | vowel_close_spread | close_spread | IH | ih |
+| `vowel_mid_rounded` | Close-mid to open rounded vowels | viseme_vowel | ø ɵ o œ ɞ ɔ ɶ ɒ | o˞; eʷ eᵝ | RCEF class: close-mid to open rounded vowels, including the open ɒ ɶ by rounding. | vowel_mid_rounded | mid_rounded | OH | oh |
+| `vowel_close_rounded` | Close and near-close rounded vowels and glides | viseme_vowel | ʍ w ɥ y ʉ u ʏ ʊ | kʷ tʷ hʷ kᵝ and other consonants with no lip target of their own when labialised or compressed; ɯᵝ jʷ | RCEF class: close and near-close rounded vowels, and the glides w ʍ ɥ. | vowel_close_rounded | close_rounded | OU | ou |
+| `alveolar_floor` | Alveolar floor (aggregate) | viseme_aggregate | union of `alveolar_sibilant`, `coronal_stop` and `coronal_nasal_lateral` | as its classes | RCEF aggregate: the alveolar and retroflex stops, taps, nasals and laterals, the coronal clicks and s z; not θ ð, ʃ ʒ ʂ ʐ or r ɹ ɻ, which are coronal too. | none | alveolar_floor | SS + DD + NN, clamped at 1 | none |
+
+"By rule" lists symbols that are not single chart cells and join the class by the [IPA rules](#ipa-rules). The META and VRM columns name the provider classes that the hops copy, as facts.
+
+**Visible shape.** The shape of each class, in RCEF's words. The sources are JALI's articulation rules (record `jali_2016`), the IPA's description of protruded and compressed rounding (record `wikipedia_roundedness`, raw lines 52-56) and META's reference images (records `xr_visemes_fig_*`); the rest is RCEF's articulatory inference.
+
+| Short name | Lips | Teeth | Tongue | Jaw |
+|---|---|---|---|---|
+| `sil` | no pose asserted | no pose asserted | no pose asserted | no pose asserted |
+| `bilabial` | closed for the stops, nasal, trill, click and implosive; close together but not closed for the fricatives | hidden | not visible | close |
+| `labiodental` | the lower lip touches the upper teeth | upper teeth visible | hidden | close |
+| `dental` | apart, neutral | slightly apart | tip visible at or between the teeth, or at the upper lip | slightly open |
+| `alveolar_sibilant` | neutral to spread | close together, visible | hidden | narrowed |
+| `postalveolar` | pushed forward or flared | close together | hidden | narrowed |
+| `coronal_stop` | follow the neighbouring vowel | follow the neighbouring vowel | tip or blade raised to the teeth or the ridge; visible only with an open jaw | follows the neighbouring vowel |
+| `coronal_nasal_lateral` | follow the neighbouring vowel | follow the neighbouring vowel | as for `coronal_stop`; the sides of the tongue are not visible from the front | follows the neighbouring vowel |
+| `dorsal` | follow the neighbouring vowel | follow the neighbouring vowel | hidden | follows the neighbouring vowel |
+| `rhotic` | no lip target of their own; some English speakers round slightly | slightly apart | hidden | mid-close |
+| `vowel_open` | relaxed, with a wide vertical opening | lower teeth may show | low | open |
+| `vowel_mid_spread` | spread or neutral | apart; upper teeth visible | hidden | mid |
+| `vowel_close_spread` | spread, corners drawn back | close, often visible | hidden | close |
+| `vowel_mid_rounded` | rounded: pushed forward for o ɔ ɵ ɞ, compressed for ø œ ɶ | mostly hidden | hidden | mid; open for ɒ ɶ |
+| `vowel_close_rounded` | tightly rounded with a small opening: pushed forward for u ʉ ʊ w ʍ, compressed for y ʏ ɥ | hidden | hidden | close |
+
+**Notes on shape classes and the floor.** The shape class and the shape floor are explained in [Why these classes](#why-these-classes-minimal-under-parity).
+
+| Short name | Shape note | Shape-floor note |
+|---|---|---|
+| `alveolar_sibilant` | none | sibilant split mixed (7 of 14 maps); the DD and NN split in the merge band (4 of 15) |
+| `coronal_stop` | manner split kept by 4 of 15 maps (Binnie, Kricos, Lee, Hazen); kept for META DD and NN | sibilant split mixed (7 of 14 maps); the DD and NN split in the merge band (4 of 15) |
+| `coronal_nasal_lateral` | manner split kept by 4 of 15 maps (Binnie, Kricos, Lee, Hazen); kept for META DD and NN | sibilant split mixed (7 of 14 maps); the DD and NN split in the merge band (4 of 15) |
+| `rhotic` | r vs w mixed in English maps; English /r/ is often labialised [ɹʷ]; IPA r ɹ ɻ are unlabialised | r vs w mixed in English maps (6 of 12); English /r/ labialised [ɹʷ]; IPA r ɹ ɻ unlabialised; r with the coronals a minority reading (4 of 15) |
+| `vowel_mid_rounded` | apart from ɑ in 2 of 5 count-matched English maps (mixed; some Northern Cities speakers make /ɔ/ unrounded); kept by rounding; ɒ ɶ contested (the least-rounded open vowels) | none |
 
 ## Gaze
 
@@ -232,11 +274,132 @@ The values are class probabilities, as the META viseme extension defines them (`
 
 ## Visemes
 
+### What a viseme value means
+
 - Visemes are speech classes, not muscle actions. So they are a separate profile, `rcef.canonical_viseme`.
-- The values are class probabilities, as META defines them (`xr_visemes` lines 104-107). There is no neutral per signal. Silence is `sil` = 1; META lists SIL as neutral (`xr_visemes` lines 142-143).
-- The rules of [Meaning of 0, 1 and neutral](#meaning-of-0-1-and-neutral) do not apply.
+- A value is the weight of "the frame's articulation belongs to this IPA shape class", as the source reports it: META's class probability (`xr_visemes` lines 104-107), or a VRM weight as each model's author set it (loss `vrm_vowel_asset_weight`). It is not a phoneme detection or a transcription.
+- The fields are `units = "probability"`, a domain from 0 to 1, no `neutral` field and `side = "shared"`. The rules of [Meaning of 0, 1 and neutral](#meaning-of-0-1-and-neutral) do not apply.
+- **Sum.** From a valid META frame, the 15 partition values sum to 1, as META delivers them. From VRM there is no sum constraint. RCEF enforces no sum and never renormalises.
+- **Rest.** `sil` = 1 means no speech articulation. It is not an IPA segment, and RCEF asserts no mouth pose for it. META's reference image for SIL shows the lips together and relaxed (record `xr_visemes_fig_sil`), while JALI notes that pauses usually leave the mouth open (record `jali_2016`); a rig chooses. An invalid META frame (all values 0) is refused at the META in-hop and never becomes `sil`. A source with no rest class leaves `sil` absent, never 0.
+- **Coarticulation.** `coronal_stop`, `coronal_nasal_lateral`, `dorsal` and plain `rhotic` have no lip shape of their own: the lips follow the neighbouring vowel (record `jali_2016`). RCEF has no operator over time, so it does not model this.
+- **Not available.** A class that no selected in-map writes is absent. An out-map that reads it labels its outputs "not available from source"; this is not a refusal.
 - **From VRM:** VRM's vowel presets are weights authored per model. The in-map treats them as probabilities. There is no sum constraint (aa = 1 and oh = 1 sum to 2), and VRM gives no `sil`.
-- **To META from another source:** the out-map writes the five vowels only. It never claims META validity: it writes no `isValid`, and it labels the frame "META validity not asserted". The loss reads: "consonant classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met".
+- **To META from another source:** only the five vowels have values. The route never claims META validity: it writes no `isValid`, and it labels the frame "META validity not asserted". The vowel out-map's loss reads: "from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met".
+
+### The IPA basis
+
+- Each class is a set of IPA chart symbols with a place and manner, or a height, backness and rounding. Each of the 107 chart symbols is in exactly one class ([IPA chart assignment](#ipa-chart-assignment)). Symbols that are not single chart cells follow the [IPA rules](#ipa-rules).
+- **Evidence levels.** E: a cited source states it. A: an articulatory inference or an RCEF convention. The viseme maps that RCEF counts are English, so every consonant outside English is A. `ipa_members_assumed` lists every A member of a class.
+- **Vowel rows.** The vowel classes use one height cut for every backness value, following the chart rows. The IPA's lip clines agree: the back unrounded vowels follow the same spreading cline as the front ones, ɨ is fully spread, and a and ɑ are both neutral (record `wikipedia_roundedness`, raw lines 15-21, which cite the IPA Handbook). The central and back unrounded vowels, æ and ə are still A, because the English maps put æ with ɛ and ʌ with ɑ. ʊ with u is E but contested: two of the counted maps group ʊ elsewhere.
+- **Provider labels.** Each META and VRM label is read literally and by its example word. Every reading lands in one class, and META's 14 speech classes go to 14 different classes. META RR, written "r" (a trill in IPA) with the example "red" (English ɹ), is one class, `rhotic`. META IH (ɪ, "tip") and VRM ih (remark "i") share `vowel_close_spread`. VRM ou, if it is read as Japanese [ɯᵝ], stays in `vowel_close_rounded`.
+- **DD.** FB2 describes the tongue for DD as mid-dorsal on the palate (`xr_fb2` lines 915-917). RCEF's `coronal_stop` is the IPA coronal class.
+
+### Why these classes: minimal under parity
+
+The partition is **minimal under parity when the META and VRM hops target partition classes**. It is META's 14 speech classes and rest, extended to the whole IPA chart and named by IPA. It is not the pure shape floor (below). The class count and boundaries come from META; the evidence does not show that the world's mouth shapes fall into exactly these 14 classes.
+
+- **Parity.** Each META vowel goes to its own canonical class by a copy, and each VRM vowel preset is copied from it, so a META → VRM route gives today's values. No two META classes share a canonical class, so META → canonical → META gives every value back. Together these need at least 14 speech-class signals.
+- **The floor test.** For each candidate split, RCEF counts the published English viseme maps that list both sides: the 15 consonant maps of Bear and Harvey's Table 3 plus the composite groups of Owens and Blazek, or the 8 vowel maps of Table 2 (records `bear_harvey_2017`, `pubmed_owens_blazek_1985`). A split that at least two thirds of these maps keep is a **shape split**. A split that at most one third keep is in the **merge band**. The others are **mixed**. The threshold is an RCEF convention; any threshold above one half, up to 9/13, gives the same floor.
+- **Limits of the test.** The counted maps are English phoneme maps (Bear and Harvey adapt American maps to British English), so members outside English are placed by convention from the chart. The maps are not independent: Bear and Harvey call many of them incremental improvements of earlier sets, and three share an author. With those three counted as one vote, the floor does not change.
+
+| Split | Maps that keep it / maps that list both | Band |
+|---|---|---|
+| p b m vs f v | 16 / 16 | shape split |
+| postalveolar vs the rest | 15 / 16 | shape split |
+| dental θ ð vs the rest | 11 / 15 | shape split |
+| t d vs k ɡ (coronal vs dorsal) | 11 / 15 | shape split |
+| r vs the coronals t d n l s z | 11 / 15 | shape split |
+| s z vs t d n l | 7 / 14 | mixed |
+| l vs t d n | 7 / 15 | mixed |
+| r vs w | 6 / 12 | mixed; kept by the rounding rule |
+| t d vs n l (META DD and NN) | 4 / 15 | merge band |
+| rounded vs spread (u vs i) | 8 / 8 | shape split |
+| mid vs close rounded (o ɔ vs u ʊ) | 6 / 7 | shape split |
+| mid rounded vs mid spread | 6 / 7 | shape split |
+| open vs mid spread | 5 / 6 | shape split |
+| close vs mid spread | 6 / 8 | shape split |
+| mid rounded vs open (ɔ vs ɑ) | 2 / 5 count-matched maps | mixed; kept by the rounding rule |
+
+- **The rounding rule.** Where the English count for a split is mixed and the merge can rest on an English pronunciation that adds or drops lip rounding, the floor keeps apart the classes that differ in rounding by IPA definition. This is an RCEF convention (A). It applies twice:
+  - **o ɔ vs ɑ.** The only count is English /ɔ/ against /ɑ/, and it is mixed. It tests no [o], ø or œ. Some speakers in the Northern Cities shift make /ɔ/ with unround lips, a variant that is harder to see (record `pubmed_havenhill_do_2018`). Where the maps test rounding at equal height they keep it (u vs i, 8 of 8). So `vowel_mid_rounded` is a floor shape.
+  - **r vs w.** No map puts r with a vowel. IPA w is labial-velar, while IPA r ɹ ɻ have no lip rounding; rounding on them is written ɹʷ (record `wikipedia_labialization`, raw line 20). Many English accents labialise /r/ (raw lines 512-514), which explains the English merges. So `rhotic` is a floor shape.
+- **Perception studies,** each stated as what it found: in the visual channel, French listeners perceive vowel rounding better than height, and backness is almost invisible (record `pubmed_robert_ribes_1998`); for Dutch front vowels, rounding is carried mainly by vision and height by hearing (`pubmed_valkenier_2012`); American English vowels show a rounding dimension and a height dimension, not ranked (`pubmed_montgomery_jackson_1983`), although the same authors' map merges /ɔ/ with /ɑ/. Voicing and nasality are not visible: each of Owens and Blazek's groups mixes them (`pubmed_owens_blazek_1985`). JALI's tongue-only visemes do not move the lips (`jali_2016`).
+- **The strict floor** has 7 consonant shapes (bilabial, labiodental, dental, postalveolar, alveolar_floor, dorsal and rhotic) and 5 vowel shapes, plus rest. It keeps today's META → VRM values but not the META round trip: META SS, DD and NN would share one class, and writing them back would need an invented split.
+- **Splits kept for META.** The partition keeps two splits that the floor merges: `alveolar_sibilant` (mixed, 7 of 14 maps) and the manner split of DD and NN (merge band, 4 of 15 maps; two of them, Lee and Hazen, are among Bear and Harvey's best consonant maps on isolated words). The two DD and NN signals share `shape_class = coronal_stop_nasal_lateral`, an RCEF convention: they differ only in manner, with no lip or jaw target of their own.
+- **The floor class as a value.** The one floor class that is not a partition class, `alveolar_floor`, is written from META as an aggregate ([Viseme aggregates](#viseme-aggregates)). So every strict-floor class is a signal. `shape_floor` on each signal names its floor class, with 13 values: bilabial, labiodental, dental, postalveolar, alveolar_floor, dorsal, rhotic, open, mid_rounded, mid_spread, close_spread, close_rounded and rest. `shape_class` has 14 values.
+- **Not coarser.** Woodward's map of 4 consonant groups, the best on continuous speech, merges three splits that most maps keep. Merging r with w and u, or o ɔ with ɑ, as some English maps do, would change today's META → VRM values through RR and OH.
+- **Not finer.** A separate lateral class (7 of 15 maps, mixed) would need an invented split of META NN. Finer shapes wait as [refinements](#viseme-refinements).
+- **Vowels.** The maps disagree on the vowel set: they have 3 to 9 vowel classes (Bear and Harvey Table 5). On isolated words, Lee's vowel classes are the best; they are the same five classes as RCEF's.
+
+### IPA rules
+
+These rules place symbols that are not single chart cells. `tests/ipa_classes.py` applies them, and the tests check 112 cases and 3 symbols that have no rule.
+
+- **Labialisation (ʷ, ᶣ).** On a class with no lip target of its own (`coronal_stop`, `coronal_nasal_lateral`, `dorsal`) the symbol goes to `vowel_close_rounded`, the class of w and ɥ (kʷ, tʷ, hʷ). On `alveolar_sibilant` it goes to `postalveolar` (sʷ). On an unrounded vowel or glide it goes to the rounded class of the same height band (eʷ → `vowel_mid_rounded`; jʷ → `vowel_close_rounded`). On the other classes there is no change (pʷ, θʷ). ɹʷ stays `rhotic`, because META RR covers English labialised /r/.
+- **Compression (ᵝ, ᶹ).** On a class with no lip target of its own the symbol goes to `vowel_close_rounded` (kᵝ). On an unrounded vowel it goes to the rounded class of its height band (ɯᵝ → `vowel_close_rounded`; an open vowel → `vowel_mid_rounded`). On other symbols there is no change (record `wikipedia_roundedness`, raw lines 52-56).
+- **Rhoticity (˞).** On ə or ɜ the symbol goes to `rhotic`, so ə˞ = ɚ and ɜ˞ = ɝ. Any other vowel keeps its class (a˞ → `vowel_open`).
+- **Dental and interdental.** The dental mark ̪ alone keeps the class: t̪ d̪ n̪ l̪ stay coronal, because the tongue tip stays behind the teeth. The advanced mark ̟ alone keeps the class. ̪ with ̟ on a coronal or rhotic gives `dental` (t̪̟), but not on a sibilant (s̪̟ stays `alveolar_sibilant`). The extIPA bridge ͆ with ̪, ̺ or ̻ on those classes gives `dental` (n̪͆; this mark is not on the IPA chart). ͆ in any other use has no rule (record `wikipedia_interdental`).
+- **Linguolabial (̼).** On a labial or coronal letter the symbol goes to `dental`, because the tongue tip or blade touches the upper lip (t̼, θ̼, p̼). On any other letter there is no rule. ̺ on a labial letter, the older apico-labial notation, also gives `dental` (p̺) (record `wikipedia_linguolabial`).
+- **Leading superscripts.** A superscript nasal or ʰ before the letter (ᵐb, ⁿd, ʰt) is dropped; the letter keeps its class.
+- **Other marks keep the class:** ʲ ˠ ˤ, the velarised or pharyngealised tilde (ɫ), voicing, aspiration, nasalisation, nasal and lateral release, length, syllabic and non-syllabic marks, more and less rounded, raised and lowered (β̞, ɹ̝), tongue root, centralised, apical and laminal.
+- **Affricates** (tie bar) take the class of their release: t͡s → `alveolar_sibilant`, t͡ʃ → `postalveolar`, p͡f → `labiodental`, t͡ɬ → `coronal_nasal_lateral`, k͡x → `dorsal`. **Double articulations** (k͡p, ɡ͡b, ŋ͡m) are `bilabial`: the lip closure is the visible one. **Ejectives** (ʼ) keep the class of the base consonant.
+- **Laryngeals** h ɦ ʔ ħ ʕ ʜ ʢ ʡ are always `dorsal`, by one fixed convention.
+- **Not classes.** A diphthong is two shapes in sequence. Stress, length, boundary and tone marks are not segments.
+- **Contrary readings.** Each A-level convention has a contrary reading. For example, ɒ ɶ could go to `vowel_open`, because on the IPA rounding cline they are the least-rounded rounded vowels (record `wikipedia_roundedness`, raw lines 17 and 21); the lateral click ǁ could go to `coronal_stop`; ɹʷ could go to `vowel_close_rounded`; the glides j ɰ could go to `dorsal`. A change of class keeps every META and VRM value, because no provider writes these symbols.
+
+### Viseme aggregates
+
+- An **aggregate** is a derived signal whose members are the union of two or more whole partition classes of one group (`metadata.aggregates`). Its value is the sum of their values, clamped at 1. It is outside the simplex sum: `coupling = "aggregate_of_simplex_classes"`, no `shape_class`, and its own group (`viseme_aggregate` for consonant aggregates).
+- **The one class exception.** [Base shapes only](#whole-actions-first) has one exception: viseme aggregates, which are unions of whole simplex classes in one group, written as clamped sums with weights 1 and their own coupling. Weighted blends stay excluded. `alveolar_floor` is the only aggregate in this version.
+- **`alveolar_floor`** = `alveolar_sibilant` + `coronal_stop` + `coronal_nasal_lateral` (20 chart symbols). Its in-map, `visemes_aggregate.to_rcef`, has two mappings. The first is a `weighted_sum` with weights [1, 1, 1] of META SS, DD and NN into the helper `rcef.intermediate.viseme_alveolar_floor_sum`, which runs from 0 to 3 and has the source units, `probability`, because these operators cannot change units. The second clamps it with the `piecewise_linear` knots (0, 0), (1, 1), (3, 1). These two operators are named exceptions to the census of hop operators (weights of powers of two and today's knots); they are allowed only in this map. Both mappings carry the loss `meta_viseme_aggregate_sum`.
+- No out-map reads an aggregate in this version, so a route never selects the aggregate in-map. A later out-map that reads one selects it on its own routes only.
+- **Reserved aggregates** (not signals yet). A later aggregate needs no new exception, but its fan-in is named here, as a census exception, when it ships.
+
+| Reserved aggregate | Classes | Note |
+|---|---|---|
+| `coronal_stop_nasal_lateral` | `coronal_stop`, `coronal_nasal_lateral` | for a source with one t d n l class |
+| `alveolar_or_dorsal` | `alveolar_sibilant`, `coronal_stop`, `coronal_nasal_lateral`, `dorsal` | Owens and Blazek's large group; a planned source for a coarse "most consonants" class |
+| `vowel_rounded` | `vowel_mid_rounded`, `vowel_close_rounded` | one rounded vowel class, as in Hazen's map |
+| `vowel_open_or_mid_rounded` | `vowel_open`, `vowel_mid_rounded` | an English-map view (English /ɔ/ with /ɑ/); not a floor class |
+
+### Viseme refinements
+
+- A finer class is a **refinement** signal with `metadata.refines` set to one partition class. Its members must be a subset of that class, and the partition class stays the total. A refinement is outside the simplex sum (`coupling = "refinement_of_simplex_class"`) and has its own group, `viseme_refinement`. A finer source writes the refinement and also the parent total; coarse out-maps read the parent. Refinements may overlap, and no RCEF out-map computes a complement.
+- **Reserved refinements** (not signals yet):
+
+| Reserved refinement | Refines | Members |
+|---|---|---|
+| `bilabial_fricative` | `bilabial` | ɸ β; β̞ by rule |
+| `lateral` | `coronal_nasal_lateral` | l ɭ ɬ ɮ ɺ ǁ |
+| `palatal` | `dorsal` | c ɟ ɲ ç ʝ ʎ |
+| `vowel_close_compressed` | `vowel_close_rounded` | y ʏ ɥ |
+| `vowel_mid_compressed` | `vowel_mid_rounded` | ø œ ɶ |
+| `vowel_lower_mid_spread` | `vowel_mid_spread` | ɛ ɜ ʌ |
+| `vowel_lower_mid_rounded` | `vowel_mid_rounded` | ɔ œ ɞ ɒ ɶ |
+| `vowel_close_back_unrounded` | `vowel_close_spread` | ɯ ɰ (an English-map refinement) |
+| `vowel_mid_nonfront_unrounded` | `vowel_mid_spread` | ɘ ə ɜ ɤ ʌ (an English-map refinement) |
+| `vowel_open_nonfront_unrounded` | `vowel_open` | ɑ ɐ (an English-map refinement) |
+
+The three English-map refinements follow the English maps' split of back from front unrounded vowels; the IPA lip clines do not support a lip difference there.
+
+### Coarse viseme sources
+
+The copy rule for coarse sources does not apply to viseme classes, because copies into two partition classes would break the simplex sum:
+
+- An in-map never copies one source class into two partition classes, and an out-map never reads two partition classes back by a mean. Copies into a parent and its refinement, or into an aggregate, are allowed.
+- A coarse source splits a class by halves (`affine(0.5, 0)`) or leaves the parts unwritten, which splits the group.
+- Every fan-in of k inputs is a `weighted_sum` with weights 1 into a helper from 0 to k in the input units, then the clamp knots (0, 0), (1, 1), (k, 1), then a copy where the units change. Each such fan-in is a named census exception, scoped to its map. This version has one: `visemes_aggregate.to_rcef`.
+
+### Viseme metadata
+
+Each viseme signal has these metadata fields, in addition to the [fields](#fields) every signal has:
+
+- `definition`: RCEF's meaning, naming any difference between the ID's place or height term and its members;
+- `ipa_members` (NFC; ɡ is U+0261) and `ipa_members_assumed` (the A-level members); `ipa_rules` (the symbols that join by rule);
+- for consonant classes `ipa_place` and `ipa_manner`, for vowel classes `ipa_height`, `ipa_backness` and `ipa_rounding`, from the chart cells of the members;
+- `shape` (lips, teeth, tongue, jaw), `shape_class`, `shape_note` where there is one, `shape_floor` and `shape_floor_note`;
+- `group`, `aligned_names` (META and VRM names, as facts) and `audit` (pointers to the audit rows);
+- on aggregates, `aggregates` (the list of classes); on refinements, `refines`.
 
 ## Eye closure from VRM and VRCFaceTracking
 
@@ -286,7 +449,7 @@ The table never applies one note to every cell.
 
 A version 1 signal stands for the whole action. For example, `brow_lower` is the whole brow lowering, and `lip_corner_pull` is the whole corner pull. When a source with finer parts joins, for example Unified Expressions BrowLowerer and BrowPinch, each part gets a new ID. That source's in-map then also writes the version 1 total.
 
-**Base shapes only.** Blended or combined shapes are never canonical signals. The out-maps of this first phase write base shapes only, and the consumer computes any blended shape from them: for example Unified Expressions BrowDown (0.75 BrowLowerer + 0.25 BrowPinch) and MouthSmile (0.8 MouthCornerPull + 0.2 MouthCornerSlant) (`vrcft_simple_expressions`). Blended out-maps wait until hop weights other than powers of two are allowed.
+**Base shapes only.** Blended or combined shapes are never canonical signals. The out-maps of this first phase write base shapes only, and the consumer computes any blended shape from them: for example Unified Expressions BrowDown (0.75 BrowLowerer + 0.25 BrowPinch) and MouthSmile (0.8 MouthCornerPull + 0.2 MouthCornerSlant) (`vrcft_simple_expressions`). Blended out-maps wait until hop weights other than powers of two are allowed. Viseme aggregates are the one class exception ([Viseme aggregates](#viseme-aggregates)).
 
 ### Group splits
 
@@ -306,6 +469,8 @@ These short names are reserved for actions that no first-phase source writes. Th
 | `pupil_dilate_{left,right}`, `pupil_constrict_{left,right}` | Godot `FT_EYE_DILATION_*`, `FT_EYE_CONSTRICT_*` (lines 64-67) |
 | `soft_palate_close`, `throat_swallow`, `neck_flex_{left,right}` | Godot lines 148-151 |
 | `lips_part` (25), `mouth_stretch` (27), `nasolabial_deepen` (11), `sharp_lip_pull` (13), `nostril_dilate` (38), `nostril_compress` (39), `neck_tighten` (21) | FACS codes with no canonical signal (`facs_wikipedia`) |
+
+Viseme refinements and aggregates are reserved in [Visemes](#viseme-refinements).
 
 Some pairs may name one action: Godot nasal dilation and constriction and FACS 38 and 39, and Godot upper deepen and FACS 11. The audit decides this before either name becomes a signal, and only one signal is added per action.
 
@@ -375,12 +540,18 @@ The data change that adds the profiles also adds these records. Each image recor
 | `vrcft_fig_eyeclosedleft` | VRCFaceTracking docs `3036f46`, `docs/tutorial-avatars/tutorial-avatars-extras/img/avatar/avatar_ref_eyeclosedleft.png`, SHA-256 `128dc5f1dad57f703c57aded753bbaa621a46d28fbbed795f5cf5b62f98b3cbb` | Reference only |
 | `vrcft_fig_eyelookoutleft` | Same folder, `avatar_ref_eyelookoutleft.png`, SHA-256 `22fbb1ca0adefec555b8b86e5c317954b98de5efa97df5aba60c96a041583759` | Reference only |
 | `vrcft_fig_mouthupperleft` | Same folder, `avatar_ref_mouthupperleft.png`, SHA-256 `60c5a1c618f10998ddae848868c9aa609b3711a040a927cee098478b53157cff` | Reference only |
+| `ipa_chart_kiel_2020`, `ipa_chart_doulos_2020` | The IPA chart (revised to 2020), the Kiel and Doulos SIL archive files of the International Phonetic Association. The Doulos file carries the 107 symbols and the cell locators of [IPA chart assignment](#ipa-chart-assignment) | CC BY-SA 3.0 Unported at issue; the IPA now states CC BY-SA 4.0 for the IPA Chart in IPA Kiel and all its subparts; RCEF's adapted fixture is CC-BY-SA-4.0 under BY-SA 3.0 section 4(b) |
+| `wikipedia_roundedness`, `wikipedia_labialization`, `wikipedia_interdental`, `wikipedia_linguolabial` | Wikipedia articles at pinned revisions (raw wikitext): lip rounding and its clines, labialisation, interdental and linguolabial consonants | CC-BY-SA-4.0; facts only, no prose copied |
+| `xr_visemes_fig_sil`, `_dd`, `_nn`, `_kk`, `_rr`, `_th`, `_rr_rot`, `_ch_rot`, `_ou_rot`, `_sil_rot` | META's reference images for the visemes, OpenXR-Docs `5a82d45` | CC-BY-4.0 (Khronos REUSE sidecars) |
+| `polly_license`, `polly_ph_table_en_us` | The archived Amazon Polly developer guide at `97b0d81ab6468129948d48beb767da1d692f2f27`: its licence and en-US phoneme table. The archive is out of date relative to the live AWS documentation, which is not cited | CC-BY-SA-4.0 |
+| `bear_harvey_2017`, `fernandez_lopez_sukno_2017`, `zhou_visemenet_2018`, `jali_2016` | Viseme literature: versioned arXiv files and the JALI author copy | Reference only; facts, paraphrased |
+| `pubmed_owens_blazek_1985`, `pubmed_robert_ribes_1998`, `pubmed_montgomery_jackson_1983`, `pubmed_benguerel_pichora_fuller_1982`, `pubmed_auer_bernstein_1997`, `pubmed_valkenier_2012`, `pubmed_havenhill_do_2018` | PubMed abstracts, one pinned NCBI efetch file per article | Reference only; facts, paraphrased |
 
 The data change that adds `facs.code` adds four more records: `facs_hager_2002` (the FACS publisher's page on the 2002 edition, an archived copy of 2008-12-18; reference only), `rocketbox_avatars` (Microsoft Rocketbox at `0943055`, MIT; the 48 `AU_*` shape names), `pyfeat_au_reference` (Py-Feat `docs/pages/au_reference.md` at `4ebb4ec`, MIT) and `ozel_arkit_facs` (Melinda Ozel, "ARKit to FACS", reference only). The last two support audit notes only; no hop cites them.
 
 ## Effect on compatibility
 
-- New profiles and maps are added. Nothing changes in the existing profiles or values.
+- New profiles and maps are added. No existing value changes. In the META viseme profile, the 10 consonant and SIL signals become `mapped`, because the new hops use them.
 - The 7 direct maps, the 3 identity maps, the old `rcef.canonical` profile and its 21 signals, and the 4 old intermediate signals are retired later, with tombstones. Until then they stay as they are.
 - Every hop is `approximate` and `proposed`, except the 4 pupil copies, which are `exact` and `verified_current`. So 19 of the 21 `verified_current` mappings in today's three identity maps have only `proposed` routes in their place.
 - The design goal is that two-hop routes give the same values as today's direct maps on every output that both write. A pre-registered comparison tests this before the direct maps are retired; until then it is a goal, not a result.
@@ -392,7 +563,8 @@ The data change that adds `facs.code` adds four more records: `facs_hager_2002` 
 | Gaze form | 8 directional fractions | Signed yaw and pitch: changes today's values |
 | Gaze names | in and out | Subject left and right: the names change under mirroring |
 | Granularity | the finest first-phase source | Add the Unified Expressions parts now: no first-phase source writes them |
-| Visemes | a separate profile with two groups and no neutral | Inside the expression profile: visemes are classes, not actions |
+| Visemes | a separate profile with four groups and no neutral | Inside the expression profile: visemes are classes, not actions |
+| Viseme classes | IPA shape classes, minimal under parity, plus the floor aggregate `alveolar_floor` | META's IDs with IPA members: the same values, but provider names; the pure shape floor as the partition: loses the META round trip; the floor as metadata only: no floor value |
 | Pupil | millimetres, outside the unitless exports | Back to `unresolved`: loses an exact route |
 | ID style | snake_case | PascalCase, like RCSF: matches one provider's style |
 | `lips_toward` | follows FB2: lips meet at any jaw opening | A jaw-relative corrective, like Unified Expressions: adds a loss on every FB2 hop |
@@ -411,7 +583,8 @@ These tests come with the data change:
 - the side and direction suffixes agree between the two ends of every mapping;
 - a capability matrix: for each set (FACS, FB v1, `XR_ANDROID_face_tracking` and `XR_ML_facial_expression`, from a committed list of their names with record and locator), which canonical groups it can fill, plus a synthetic partial source;
 - a FACS-crosswalk record goes only on hops of the provider whose names it uses (`ict_facekit`: ARKit hops only), and no crosswalk record goes on a FACS hop;
-- for `facs.code`: 92 rows with the dispositions 49, 25 and 18; the ID pattern; the calibration strings; `facs_au` agrees with the FACS maps.
+- for `facs.code`: 92 rows with the dispositions 49, 25 and 18; the ID pattern; the calibration strings; `facs_au` agrees with the FACS maps;
+- for the visemes: every one of the 107 chart symbols in exactly one partition class; the 112 rule cases and the 3 symbols with no rule; refinements are subsets of one class and aggregates unions of whole classes in one group; only the 15 partition signals carry `probability_simplex`; every IPA string is in NFC; the aggregate in-map's clause and its fan-in are the only operators outside the census.
 
 ## Open questions
 
@@ -423,3 +596,117 @@ These tests come with the data change:
 - What are the real ranges of VRCFaceTracking `Openness` and `PupilDiameter_MM`?
 - Should the tongue-position signals ever be linked to the Unified Expressions tongue directions?
 - Who in the working group reviews meaning, and how long does it take?
+
+## IPA chart assignment
+
+Every symbol of the IPA chart (revised to 2020; record `ipa_chart_doulos_2020`), with its chart section and cell, its canonical viseme class and the evidence level of that placement: E, a cited source states it; A, an RCEF convention or articulatory inference. The counted viseme maps are English, so every consonant outside English is A. "Contested" marks a placement with a contrary reading ([IPA rules](#ipa-rules)). The same list is in `tests/fixtures/ipa_chart_symbols.json`, which the tests read.
+
+| Symbol | Code points | Chart section | Cell | Class | Evidence |
+|---|---|---|---|---|---|
+| p | U+0070 | Pulmonic consonants | Plosive × Bilabial | `bilabial` | E |
+| b | U+0062 | Pulmonic consonants | Plosive × Bilabial | `bilabial` | E |
+| t | U+0074 | Pulmonic consonants | Plosive × Alveolar | `coronal_stop` | E |
+| d | U+0064 | Pulmonic consonants | Plosive × Alveolar | `coronal_stop` | E |
+| ʈ | U+0288 | Pulmonic consonants | Plosive × Retroflex | `coronal_stop` | A |
+| ɖ | U+0256 | Pulmonic consonants | Plosive × Retroflex | `coronal_stop` | A |
+| c | U+0063 | Pulmonic consonants | Plosive × Palatal | `dorsal` | A |
+| ɟ | U+025F | Pulmonic consonants | Plosive × Palatal | `dorsal` | A |
+| k | U+006B | Pulmonic consonants | Plosive × Velar | `dorsal` | E |
+| ɡ | U+0261 | Pulmonic consonants | Plosive × Velar | `dorsal` | E |
+| q | U+0071 | Pulmonic consonants | Plosive × Uvular | `dorsal` | A |
+| ɢ | U+0262 | Pulmonic consonants | Plosive × Uvular | `dorsal` | A |
+| ʔ | U+0294 | Pulmonic consonants | Plosive × Glottal | `dorsal` | A |
+| m | U+006D | Pulmonic consonants | Nasal × Bilabial | `bilabial` | E |
+| ɱ | U+0271 | Pulmonic consonants | Nasal × Labiodental | `labiodental` | A |
+| n | U+006E | Pulmonic consonants | Nasal × Alveolar | `coronal_nasal_lateral` | E |
+| ɳ | U+0273 | Pulmonic consonants | Nasal × Retroflex | `coronal_nasal_lateral` | A |
+| ɲ | U+0272 | Pulmonic consonants | Nasal × Palatal | `dorsal` | A |
+| ŋ | U+014B | Pulmonic consonants | Nasal × Velar | `dorsal` | E |
+| ɴ | U+0274 | Pulmonic consonants | Nasal × Uvular | `dorsal` | A |
+| ʙ | U+0299 | Pulmonic consonants | Trill × Bilabial | `bilabial` | A |
+| r | U+0072 | Pulmonic consonants | Trill × Alveolar | `rhotic` | A |
+| ʀ | U+0280 | Pulmonic consonants | Trill × Uvular | `dorsal` | A |
+| ⱱ | U+2C71 | Pulmonic consonants | Tap or Flap × Labiodental | `labiodental` | A |
+| ɾ | U+027E | Pulmonic consonants | Tap or Flap × Alveolar | `coronal_stop` | A |
+| ɽ | U+027D | Pulmonic consonants | Tap or Flap × Retroflex | `coronal_stop` | A |
+| ɸ | U+0278 | Pulmonic consonants | Fricative × Bilabial | `bilabial` | A |
+| β | U+03B2 | Pulmonic consonants | Fricative × Bilabial | `bilabial` | A |
+| f | U+0066 | Pulmonic consonants | Fricative × Labiodental | `labiodental` | E |
+| v | U+0076 | Pulmonic consonants | Fricative × Labiodental | `labiodental` | E |
+| θ | U+03B8 | Pulmonic consonants | Fricative × Dental | `dental` | E |
+| ð | U+00F0 | Pulmonic consonants | Fricative × Dental | `dental` | E |
+| s | U+0073 | Pulmonic consonants | Fricative × Alveolar | `alveolar_sibilant` | E |
+| z | U+007A | Pulmonic consonants | Fricative × Alveolar | `alveolar_sibilant` | E |
+| ʃ | U+0283 | Pulmonic consonants | Fricative × Postalveolar | `postalveolar` | E |
+| ʒ | U+0292 | Pulmonic consonants | Fricative × Postalveolar | `postalveolar` | E |
+| ʂ | U+0282 | Pulmonic consonants | Fricative × Retroflex | `postalveolar` | A |
+| ʐ | U+0290 | Pulmonic consonants | Fricative × Retroflex | `postalveolar` | A |
+| ç | U+00E7 | Pulmonic consonants | Fricative × Palatal | `dorsal` | A |
+| ʝ | U+029D | Pulmonic consonants | Fricative × Palatal | `dorsal` | A |
+| x | U+0078 | Pulmonic consonants | Fricative × Velar | `dorsal` | A |
+| ɣ | U+0263 | Pulmonic consonants | Fricative × Velar | `dorsal` | A |
+| χ | U+03C7 | Pulmonic consonants | Fricative × Uvular | `dorsal` | A |
+| ʁ | U+0281 | Pulmonic consonants | Fricative × Uvular | `dorsal` | A |
+| ħ | U+0127 | Pulmonic consonants | Fricative × Pharyngeal | `dorsal` | A |
+| ʕ | U+0295 | Pulmonic consonants | Fricative × Pharyngeal | `dorsal` | A |
+| h | U+0068 | Pulmonic consonants | Fricative × Glottal | `dorsal` | A |
+| ɦ | U+0266 | Pulmonic consonants | Fricative × Glottal | `dorsal` | A |
+| ɬ | U+026C | Pulmonic consonants | Lateral fricative × Alveolar | `coronal_nasal_lateral` | A |
+| ɮ | U+026E | Pulmonic consonants | Lateral fricative × Alveolar | `coronal_nasal_lateral` | A |
+| ʋ | U+028B | Pulmonic consonants | Approximant × Labiodental | `labiodental` | A |
+| ɹ | U+0279 | Pulmonic consonants | Approximant × Alveolar | `rhotic` | E |
+| ɻ | U+027B | Pulmonic consonants | Approximant × Retroflex | `rhotic` | A |
+| j | U+006A | Pulmonic consonants | Approximant × Palatal | `vowel_close_spread` | A |
+| ɰ | U+0270 | Pulmonic consonants | Approximant × Velar | `vowel_close_spread` | A |
+| l | U+006C | Pulmonic consonants | Lateral approximant × Alveolar | `coronal_nasal_lateral` | E |
+| ɭ | U+026D | Pulmonic consonants | Lateral approximant × Retroflex | `coronal_nasal_lateral` | A |
+| ʎ | U+028E | Pulmonic consonants | Lateral approximant × Palatal | `dorsal` | A |
+| ʟ | U+029F | Pulmonic consonants | Lateral approximant × Velar | `dorsal` | A |
+| ʘ | U+0298 | Non-pulmonic consonants | Clicks × Bilabial | `bilabial` | A |
+| ǀ | U+01C0 | Non-pulmonic consonants | Clicks × Dental | `coronal_stop` | A |
+| ǃ | U+01C3 | Non-pulmonic consonants | Clicks × (Post)alveolar | `coronal_stop` | A |
+| ǂ | U+01C2 | Non-pulmonic consonants | Clicks × Palatoalveolar | `coronal_stop` | A |
+| ǁ | U+01C1 | Non-pulmonic consonants | Clicks × Alveolar lateral | `coronal_nasal_lateral` | A |
+| ɓ | U+0253 | Non-pulmonic consonants | Voiced implosives × Bilabial | `bilabial` | A |
+| ɗ | U+0257 | Non-pulmonic consonants | Voiced implosives × Dental/alveolar | `coronal_stop` | A |
+| ʄ | U+0284 | Non-pulmonic consonants | Voiced implosives × Palatal | `dorsal` | A |
+| ɠ | U+0260 | Non-pulmonic consonants | Voiced implosives × Velar | `dorsal` | A |
+| ʛ | U+029B | Non-pulmonic consonants | Voiced implosives × Uvular | `dorsal` | A |
+| ʍ | U+028D | Other symbols | Voiceless labial-velar fricative | `vowel_close_rounded` | A |
+| w | U+0077 | Other symbols | Voiced labial-velar approximant | `vowel_close_rounded` | A |
+| ɥ | U+0265 | Other symbols | Voiced labial-palatal approximant | `vowel_close_rounded` | A |
+| ʜ | U+029C | Other symbols | Voiceless epiglottal fricative | `dorsal` | A |
+| ʢ | U+02A2 | Other symbols | Voiced epiglottal fricative | `dorsal` | A |
+| ʡ | U+02A1 | Other symbols | Epiglottal plosive | `dorsal` | A |
+| ɕ | U+0255 | Other symbols | Alveolo-palatal fricatives | `postalveolar` | A |
+| ʑ | U+0291 | Other symbols | Alveolo-palatal fricatives | `postalveolar` | A |
+| ɺ | U+027A | Other symbols | Voiced alveolar lateral flap | `coronal_nasal_lateral` | A |
+| ɧ | U+0267 | Other symbols | Simultaneous ʃ and x | `postalveolar` | A |
+| i | U+0069 | Vowels | Close × Front, unrounded | `vowel_close_spread` | E |
+| y | U+0079 | Vowels | Close × Front, rounded | `vowel_close_rounded` | E |
+| ɨ | U+0268 | Vowels | Close × Central, unrounded | `vowel_close_spread` | A |
+| ʉ | U+0289 | Vowels | Close × Central, rounded | `vowel_close_rounded` | E |
+| ɯ | U+026F | Vowels | Close × Back, unrounded | `vowel_close_spread` | A |
+| u | U+0075 | Vowels | Close × Back, rounded | `vowel_close_rounded` | E |
+| ɪ | U+026A | Vowels | Near-close × Near-front, unrounded | `vowel_close_spread` | E |
+| ʏ | U+028F | Vowels | Near-close × Near-front, rounded | `vowel_close_rounded` | E |
+| ʊ | U+028A | Vowels | Near-close × Near-back, rounded | `vowel_close_rounded` | E, contested |
+| e | U+0065 | Vowels | Close-mid × Front, unrounded | `vowel_mid_spread` | E |
+| ø | U+00F8 | Vowels | Close-mid × Front, rounded | `vowel_mid_rounded` | E |
+| ɘ | U+0258 | Vowels | Close-mid × Central, unrounded | `vowel_mid_spread` | A |
+| ɵ | U+0275 | Vowels | Close-mid × Central, rounded | `vowel_mid_rounded` | E |
+| ɤ | U+0264 | Vowels | Close-mid × Back, unrounded | `vowel_mid_spread` | A |
+| o | U+006F | Vowels | Close-mid × Back, rounded | `vowel_mid_rounded` | E |
+| ə | U+0259 | Vowels | Mid × Central, unrounded | `vowel_mid_spread` | A |
+| ɛ | U+025B | Vowels | Open-mid × Front, unrounded | `vowel_mid_spread` | E |
+| œ | U+0153 | Vowels | Open-mid × Front, rounded | `vowel_mid_rounded` | E |
+| ɜ | U+025C | Vowels | Open-mid × Central, unrounded | `vowel_mid_spread` | A |
+| ɞ | U+025E | Vowels | Open-mid × Central, rounded | `vowel_mid_rounded` | E |
+| ʌ | U+028C | Vowels | Open-mid × Back, unrounded | `vowel_mid_spread` | A |
+| ɔ | U+0254 | Vowels | Open-mid × Back, rounded | `vowel_mid_rounded` | E |
+| æ | U+00E6 | Vowels | Near-open × Front, unrounded | `vowel_open` | A |
+| ɐ | U+0250 | Vowels | Near-open × Central, unrounded | `vowel_open` | A |
+| a | U+0061 | Vowels | Open × Front, unrounded | `vowel_open` | E |
+| ɶ | U+0276 | Vowels | Open × Front, rounded | `vowel_mid_rounded` | A, contested |
+| ɑ | U+0251 | Vowels | Open × Back, unrounded | `vowel_open` | E |
+| ɒ | U+0252 | Vowels | Open × Back, rounded | `vowel_mid_rounded` | A, contested |

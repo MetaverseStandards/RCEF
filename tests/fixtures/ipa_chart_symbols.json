@@ -1,0 +1,862 @@
+{
+ "source": "ipa_chart_doulos_2020",
+ "note": "The 107 symbols of the IPA chart (revised to 2020), each with its chart section and cell, the canonical viseme class it belongs to, and the evidence level of that placement (E: stated in a cited source; A: RCEF convention or articulatory inference). Checked by hand against the pinned Doulos SIL file. Licence: CC-BY-SA-4.0, adapted from the IPA chart (CC BY-SA 3.0 at issue) under BY-SA 3.0 section 4(b).",
+ "symbols": [
+  {
+   "symbol": "p",
+   "code_points": "U+0070",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Bilabial",
+   "class": "bilabial",
+   "evidence": "E"
+  },
+  {
+   "symbol": "b",
+   "code_points": "U+0062",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Bilabial",
+   "class": "bilabial",
+   "evidence": "E"
+  },
+  {
+   "symbol": "t",
+   "code_points": "U+0074",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Alveolar",
+   "class": "coronal_stop",
+   "evidence": "E"
+  },
+  {
+   "symbol": "d",
+   "code_points": "U+0064",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Alveolar",
+   "class": "coronal_stop",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ʈ",
+   "code_points": "U+0288",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Retroflex",
+   "class": "coronal_stop",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɖ",
+   "code_points": "U+0256",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Retroflex",
+   "class": "coronal_stop",
+   "evidence": "A"
+  },
+  {
+   "symbol": "c",
+   "code_points": "U+0063",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Palatal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɟ",
+   "code_points": "U+025F",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Palatal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "k",
+   "code_points": "U+006B",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Velar",
+   "class": "dorsal",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɡ",
+   "code_points": "U+0261",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Velar",
+   "class": "dorsal",
+   "evidence": "E"
+  },
+  {
+   "symbol": "q",
+   "code_points": "U+0071",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Uvular",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɢ",
+   "code_points": "U+0262",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Uvular",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʔ",
+   "code_points": "U+0294",
+   "section": "Pulmonic consonants",
+   "cell": "Plosive × Glottal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "m",
+   "code_points": "U+006D",
+   "section": "Pulmonic consonants",
+   "cell": "Nasal × Bilabial",
+   "class": "bilabial",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɱ",
+   "code_points": "U+0271",
+   "section": "Pulmonic consonants",
+   "cell": "Nasal × Labiodental",
+   "class": "labiodental",
+   "evidence": "A"
+  },
+  {
+   "symbol": "n",
+   "code_points": "U+006E",
+   "section": "Pulmonic consonants",
+   "cell": "Nasal × Alveolar",
+   "class": "coronal_nasal_lateral",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɳ",
+   "code_points": "U+0273",
+   "section": "Pulmonic consonants",
+   "cell": "Nasal × Retroflex",
+   "class": "coronal_nasal_lateral",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɲ",
+   "code_points": "U+0272",
+   "section": "Pulmonic consonants",
+   "cell": "Nasal × Palatal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ŋ",
+   "code_points": "U+014B",
+   "section": "Pulmonic consonants",
+   "cell": "Nasal × Velar",
+   "class": "dorsal",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɴ",
+   "code_points": "U+0274",
+   "section": "Pulmonic consonants",
+   "cell": "Nasal × Uvular",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʙ",
+   "code_points": "U+0299",
+   "section": "Pulmonic consonants",
+   "cell": "Trill × Bilabial",
+   "class": "bilabial",
+   "evidence": "A"
+  },
+  {
+   "symbol": "r",
+   "code_points": "U+0072",
+   "section": "Pulmonic consonants",
+   "cell": "Trill × Alveolar",
+   "class": "rhotic",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʀ",
+   "code_points": "U+0280",
+   "section": "Pulmonic consonants",
+   "cell": "Trill × Uvular",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ⱱ",
+   "code_points": "U+2C71",
+   "section": "Pulmonic consonants",
+   "cell": "Tap or Flap × Labiodental",
+   "class": "labiodental",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɾ",
+   "code_points": "U+027E",
+   "section": "Pulmonic consonants",
+   "cell": "Tap or Flap × Alveolar",
+   "class": "coronal_stop",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɽ",
+   "code_points": "U+027D",
+   "section": "Pulmonic consonants",
+   "cell": "Tap or Flap × Retroflex",
+   "class": "coronal_stop",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɸ",
+   "code_points": "U+0278",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Bilabial",
+   "class": "bilabial",
+   "evidence": "A"
+  },
+  {
+   "symbol": "β",
+   "code_points": "U+03B2",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Bilabial",
+   "class": "bilabial",
+   "evidence": "A"
+  },
+  {
+   "symbol": "f",
+   "code_points": "U+0066",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Labiodental",
+   "class": "labiodental",
+   "evidence": "E"
+  },
+  {
+   "symbol": "v",
+   "code_points": "U+0076",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Labiodental",
+   "class": "labiodental",
+   "evidence": "E"
+  },
+  {
+   "symbol": "θ",
+   "code_points": "U+03B8",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Dental",
+   "class": "dental",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ð",
+   "code_points": "U+00F0",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Dental",
+   "class": "dental",
+   "evidence": "E"
+  },
+  {
+   "symbol": "s",
+   "code_points": "U+0073",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Alveolar",
+   "class": "alveolar_sibilant",
+   "evidence": "E"
+  },
+  {
+   "symbol": "z",
+   "code_points": "U+007A",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Alveolar",
+   "class": "alveolar_sibilant",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ʃ",
+   "code_points": "U+0283",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Postalveolar",
+   "class": "postalveolar",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ʒ",
+   "code_points": "U+0292",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Postalveolar",
+   "class": "postalveolar",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ʂ",
+   "code_points": "U+0282",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Retroflex",
+   "class": "postalveolar",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʐ",
+   "code_points": "U+0290",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Retroflex",
+   "class": "postalveolar",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ç",
+   "code_points": "U+00E7",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Palatal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʝ",
+   "code_points": "U+029D",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Palatal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "x",
+   "code_points": "U+0078",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Velar",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɣ",
+   "code_points": "U+0263",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Velar",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "χ",
+   "code_points": "U+03C7",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Uvular",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʁ",
+   "code_points": "U+0281",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Uvular",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ħ",
+   "code_points": "U+0127",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Pharyngeal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʕ",
+   "code_points": "U+0295",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Pharyngeal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "h",
+   "code_points": "U+0068",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Glottal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɦ",
+   "code_points": "U+0266",
+   "section": "Pulmonic consonants",
+   "cell": "Fricative × Glottal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɬ",
+   "code_points": "U+026C",
+   "section": "Pulmonic consonants",
+   "cell": "Lateral fricative × Alveolar",
+   "class": "coronal_nasal_lateral",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɮ",
+   "code_points": "U+026E",
+   "section": "Pulmonic consonants",
+   "cell": "Lateral fricative × Alveolar",
+   "class": "coronal_nasal_lateral",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʋ",
+   "code_points": "U+028B",
+   "section": "Pulmonic consonants",
+   "cell": "Approximant × Labiodental",
+   "class": "labiodental",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɹ",
+   "code_points": "U+0279",
+   "section": "Pulmonic consonants",
+   "cell": "Approximant × Alveolar",
+   "class": "rhotic",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɻ",
+   "code_points": "U+027B",
+   "section": "Pulmonic consonants",
+   "cell": "Approximant × Retroflex",
+   "class": "rhotic",
+   "evidence": "A"
+  },
+  {
+   "symbol": "j",
+   "code_points": "U+006A",
+   "section": "Pulmonic consonants",
+   "cell": "Approximant × Palatal",
+   "class": "vowel_close_spread",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɰ",
+   "code_points": "U+0270",
+   "section": "Pulmonic consonants",
+   "cell": "Approximant × Velar",
+   "class": "vowel_close_spread",
+   "evidence": "A"
+  },
+  {
+   "symbol": "l",
+   "code_points": "U+006C",
+   "section": "Pulmonic consonants",
+   "cell": "Lateral approximant × Alveolar",
+   "class": "coronal_nasal_lateral",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɭ",
+   "code_points": "U+026D",
+   "section": "Pulmonic consonants",
+   "cell": "Lateral approximant × Retroflex",
+   "class": "coronal_nasal_lateral",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʎ",
+   "code_points": "U+028E",
+   "section": "Pulmonic consonants",
+   "cell": "Lateral approximant × Palatal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʟ",
+   "code_points": "U+029F",
+   "section": "Pulmonic consonants",
+   "cell": "Lateral approximant × Velar",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʘ",
+   "code_points": "U+0298",
+   "section": "Non-pulmonic consonants",
+   "cell": "Clicks × Bilabial",
+   "class": "bilabial",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ǀ",
+   "code_points": "U+01C0",
+   "section": "Non-pulmonic consonants",
+   "cell": "Clicks × Dental",
+   "class": "coronal_stop",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ǃ",
+   "code_points": "U+01C3",
+   "section": "Non-pulmonic consonants",
+   "cell": "Clicks × (Post)alveolar",
+   "class": "coronal_stop",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ǂ",
+   "code_points": "U+01C2",
+   "section": "Non-pulmonic consonants",
+   "cell": "Clicks × Palatoalveolar",
+   "class": "coronal_stop",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ǁ",
+   "code_points": "U+01C1",
+   "section": "Non-pulmonic consonants",
+   "cell": "Clicks × Alveolar lateral",
+   "class": "coronal_nasal_lateral",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɓ",
+   "code_points": "U+0253",
+   "section": "Non-pulmonic consonants",
+   "cell": "Voiced implosives × Bilabial",
+   "class": "bilabial",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɗ",
+   "code_points": "U+0257",
+   "section": "Non-pulmonic consonants",
+   "cell": "Voiced implosives × Dental/alveolar",
+   "class": "coronal_stop",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʄ",
+   "code_points": "U+0284",
+   "section": "Non-pulmonic consonants",
+   "cell": "Voiced implosives × Palatal",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɠ",
+   "code_points": "U+0260",
+   "section": "Non-pulmonic consonants",
+   "cell": "Voiced implosives × Velar",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʛ",
+   "code_points": "U+029B",
+   "section": "Non-pulmonic consonants",
+   "cell": "Voiced implosives × Uvular",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʍ",
+   "code_points": "U+028D",
+   "section": "Other symbols",
+   "cell": "Voiceless labial-velar fricative",
+   "class": "vowel_close_rounded",
+   "evidence": "A"
+  },
+  {
+   "symbol": "w",
+   "code_points": "U+0077",
+   "section": "Other symbols",
+   "cell": "Voiced labial-velar approximant",
+   "class": "vowel_close_rounded",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɥ",
+   "code_points": "U+0265",
+   "section": "Other symbols",
+   "cell": "Voiced labial-palatal approximant",
+   "class": "vowel_close_rounded",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʜ",
+   "code_points": "U+029C",
+   "section": "Other symbols",
+   "cell": "Voiceless epiglottal fricative",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʢ",
+   "code_points": "U+02A2",
+   "section": "Other symbols",
+   "cell": "Voiced epiglottal fricative",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʡ",
+   "code_points": "U+02A1",
+   "section": "Other symbols",
+   "cell": "Epiglottal plosive",
+   "class": "dorsal",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɕ",
+   "code_points": "U+0255",
+   "section": "Other symbols",
+   "cell": "Alveolo-palatal fricatives",
+   "class": "postalveolar",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʑ",
+   "code_points": "U+0291",
+   "section": "Other symbols",
+   "cell": "Alveolo-palatal fricatives",
+   "class": "postalveolar",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɺ",
+   "code_points": "U+027A",
+   "section": "Other symbols",
+   "cell": "Voiced alveolar lateral flap",
+   "class": "coronal_nasal_lateral",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɧ",
+   "code_points": "U+0267",
+   "section": "Other symbols",
+   "cell": "Simultaneous ʃ and x",
+   "class": "postalveolar",
+   "evidence": "A"
+  },
+  {
+   "symbol": "i",
+   "code_points": "U+0069",
+   "section": "Vowels",
+   "cell": "Close × Front, unrounded",
+   "class": "vowel_close_spread",
+   "evidence": "E"
+  },
+  {
+   "symbol": "y",
+   "code_points": "U+0079",
+   "section": "Vowels",
+   "cell": "Close × Front, rounded",
+   "class": "vowel_close_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɨ",
+   "code_points": "U+0268",
+   "section": "Vowels",
+   "cell": "Close × Central, unrounded",
+   "class": "vowel_close_spread",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ʉ",
+   "code_points": "U+0289",
+   "section": "Vowels",
+   "cell": "Close × Central, rounded",
+   "class": "vowel_close_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɯ",
+   "code_points": "U+026F",
+   "section": "Vowels",
+   "cell": "Close × Back, unrounded",
+   "class": "vowel_close_spread",
+   "evidence": "A"
+  },
+  {
+   "symbol": "u",
+   "code_points": "U+0075",
+   "section": "Vowels",
+   "cell": "Close × Back, rounded",
+   "class": "vowel_close_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɪ",
+   "code_points": "U+026A",
+   "section": "Vowels",
+   "cell": "Near-close × Near-front, unrounded",
+   "class": "vowel_close_spread",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ʏ",
+   "code_points": "U+028F",
+   "section": "Vowels",
+   "cell": "Near-close × Near-front, rounded",
+   "class": "vowel_close_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ʊ",
+   "code_points": "U+028A",
+   "section": "Vowels",
+   "cell": "Near-close × Near-back, rounded",
+   "class": "vowel_close_rounded",
+   "evidence": "E, contested"
+  },
+  {
+   "symbol": "e",
+   "code_points": "U+0065",
+   "section": "Vowels",
+   "cell": "Close-mid × Front, unrounded",
+   "class": "vowel_mid_spread",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ø",
+   "code_points": "U+00F8",
+   "section": "Vowels",
+   "cell": "Close-mid × Front, rounded",
+   "class": "vowel_mid_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɘ",
+   "code_points": "U+0258",
+   "section": "Vowels",
+   "cell": "Close-mid × Central, unrounded",
+   "class": "vowel_mid_spread",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɵ",
+   "code_points": "U+0275",
+   "section": "Vowels",
+   "cell": "Close-mid × Central, rounded",
+   "class": "vowel_mid_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɤ",
+   "code_points": "U+0264",
+   "section": "Vowels",
+   "cell": "Close-mid × Back, unrounded",
+   "class": "vowel_mid_spread",
+   "evidence": "A"
+  },
+  {
+   "symbol": "o",
+   "code_points": "U+006F",
+   "section": "Vowels",
+   "cell": "Close-mid × Back, rounded",
+   "class": "vowel_mid_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ə",
+   "code_points": "U+0259",
+   "section": "Vowels",
+   "cell": "Mid × Central, unrounded",
+   "class": "vowel_mid_spread",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɛ",
+   "code_points": "U+025B",
+   "section": "Vowels",
+   "cell": "Open-mid × Front, unrounded",
+   "class": "vowel_mid_spread",
+   "evidence": "E"
+  },
+  {
+   "symbol": "œ",
+   "code_points": "U+0153",
+   "section": "Vowels",
+   "cell": "Open-mid × Front, rounded",
+   "class": "vowel_mid_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɜ",
+   "code_points": "U+025C",
+   "section": "Vowels",
+   "cell": "Open-mid × Central, unrounded",
+   "class": "vowel_mid_spread",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɞ",
+   "code_points": "U+025E",
+   "section": "Vowels",
+   "cell": "Open-mid × Central, rounded",
+   "class": "vowel_mid_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ʌ",
+   "code_points": "U+028C",
+   "section": "Vowels",
+   "cell": "Open-mid × Back, unrounded",
+   "class": "vowel_mid_spread",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɔ",
+   "code_points": "U+0254",
+   "section": "Vowels",
+   "cell": "Open-mid × Back, rounded",
+   "class": "vowel_mid_rounded",
+   "evidence": "E"
+  },
+  {
+   "symbol": "æ",
+   "code_points": "U+00E6",
+   "section": "Vowels",
+   "cell": "Near-open × Front, unrounded",
+   "class": "vowel_open",
+   "evidence": "A"
+  },
+  {
+   "symbol": "ɐ",
+   "code_points": "U+0250",
+   "section": "Vowels",
+   "cell": "Near-open × Central, unrounded",
+   "class": "vowel_open",
+   "evidence": "A"
+  },
+  {
+   "symbol": "a",
+   "code_points": "U+0061",
+   "section": "Vowels",
+   "cell": "Open × Front, unrounded",
+   "class": "vowel_open",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɶ",
+   "code_points": "U+0276",
+   "section": "Vowels",
+   "cell": "Open × Front, rounded",
+   "class": "vowel_mid_rounded",
+   "evidence": "A, contested"
+  },
+  {
+   "symbol": "ɑ",
+   "code_points": "U+0251",
+   "section": "Vowels",
+   "cell": "Open × Back, unrounded",
+   "class": "vowel_open",
+   "evidence": "E"
+  },
+  {
+   "symbol": "ɒ",
+   "code_points": "U+0252",
+   "section": "Vowels",
+   "cell": "Open × Back, rounded",
+   "class": "vowel_mid_rounded",
+   "evidence": "A, contested"
+  }
+ ]
+}
