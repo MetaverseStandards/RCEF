@@ -87,7 +87,7 @@ These rules apply to the expression signals. The pupils are a length. [Gaze](#ga
 | affine(1,0), FACS, one input, one output | "the value is carried over unchanged" |
 | affine(1,0) fan-out (FACS in-hop, AU22 and AU28 per side) | "the one FACS side value is copied into the upper and the lower part" |
 | weighted_sum mean (FACS out-hop, AU22 and AU28 per side) | "the FACS side value is the mean of the upper and lower canonical parts" |
-| weighted_sum [1, 1, 1] and clamp knots (viseme aggregate in-hop) | "the canonical value is the sum of the META classes SS, DD and NN, clamped at 1" |
+| weighted_sum [1, 1, 1, 1] and clamp knots (viseme aggregate in-hop) | "the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1" |
 
 FACS hops start with their own assumption instead: "FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding ([facs-intensity.md](facs-intensity.md)) and correspond as the operator passes them; no evidence supports this, and no response curve is measured". On the hops of the gross behaviour codes (29, 30, 34, 35 and 43) the first clause reads: "the action at its fullest, as RCEF assumes, is canonical 1; the source gives no intensity scale for gross behaviour codes".
 
@@ -206,7 +206,7 @@ The table gives every signal of `rcef.canonical_expression`. 0 is the neutral fa
 
 The canonical visemes are classes of visible mouth shape, defined by the International Phonetic Alphabet (IPA). Each class is a set of IPA chart symbols (record `ipa_chart_doulos_2020`), and each of the 107 chart symbols belongs to exactly one class. [IPA chart assignment](#ipa-chart-assignment) lists every symbol with its chart cell and evidence level. The values are probabilities ([Visemes](#visemes)).
 
-There are 15 partition signals: 14 speech classes and `sil`. Together they partition the chart, and only they carry `coupling = "probability_simplex"`. The 16th signal, `alveolar_floor`, is an aggregate: its value is the sum of three partition classes, clamped at 1 ([Viseme aggregates](#viseme-aggregates)).
+There are 15 partition signals: 14 speech classes and `sil`. Together they partition the chart, and only they carry `coupling = "probability_simplex"`. The 16th signal, `alveolar_floor`, is an aggregate: its value is the sum of four partition classes, clamped at 1 ([Viseme aggregates](#viseme-aggregates)).
 
 | Short name | Label | Group | IPA chart symbols | By rule | Definition | Shape class | Shape floor | META | VRM |
 |---|---|---|---|---|---|---|---|---|---|
@@ -219,13 +219,13 @@ There are 15 partition signals: 14 speech classes and `sil`. Together they parti
 | `coronal_stop` | Coronal stop or tap | viseme_consonant | t d ʈ ɖ ɾ ɽ ǀ ǃ ǂ ɗ | tʼ; t̪ d̪ | RCEF class: coronal stops and taps, including retroflex stops and the coronal clicks; no lip target of their own. | coronal_stop_nasal_lateral | alveolar_floor | DD | none |
 | `coronal_nasal_lateral` | Coronal nasal or lateral | viseme_consonant | n ɳ ɬ ɮ l ɭ ǁ ɺ | ɫ; t͡ɬ d͡ɮ; n̪ l̪ | RCEF class: coronal nasals and laterals, including retroflex ones and the lateral click; no lip target of their own. | coronal_stop_nasal_lateral | alveolar_floor | NN | none |
 | `dorsal` | Dorsal and laryngeal: no front target | viseme_consonant | c ɟ k ɡ q ɢ ʔ ɲ ŋ ɴ ʀ ç ʝ x ɣ χ ʁ ħ ʕ h ɦ ʎ ʟ ʄ ɠ ʛ ʜ ʢ ʡ | kʼ; k͡x | RCEF class: dorsal consonants, including pharyngeal, epiglottal and glottal consonants (no front target). | dorsal | dorsal | KK | none |
-| `rhotic` | Coronal rhotic | viseme_consonant | r ɹ ɻ | ɚ ɝ (ə˞ ɜ˞); ɹʷ | RCEF class: the coronal rhotics r ɹ ɻ and the r-coloured mid-central vowels; the uvular ʀ ʁ are dorsal. | rhotic | rhotic | RR | none |
+| `rhotic` | Coronal rhotic | viseme_consonant | r ɹ ɻ | ɚ ɝ (ə˞ ɜ˞); ɹʷ | RCEF class: the coronal rhotics r ɹ ɻ and the r-coloured mid-central vowels; the uvular ʀ ʁ are dorsal. A partition class kept for META RR; in the shape floor it goes with the coronals. | rhotic | alveolar_floor | RR | none |
 | `vowel_open` | Open and near-open unrounded vowels | viseme_vowel | æ ɐ a ɑ | a˞ | RCEF class: open and near-open unrounded vowels only (the open rounded ɒ ɶ are in vowel_mid_rounded). | vowel_open | open | AA | aa |
 | `vowel_mid_spread` | Close-mid to open-mid unrounded vowels | viseme_vowel | e ɘ ɤ ə ɛ ɜ ʌ | ɘ˞ | RCEF class: close-mid, mid and open-mid unrounded vowels. | vowel_mid_spread | mid_spread | E | ee |
 | `vowel_close_spread` | Close and near-close unrounded vowels and glides | viseme_vowel | j ɰ i ɨ ɯ ɪ | none | RCEF class: close and near-close unrounded vowels, and the glides j ɰ. | vowel_close_spread | close_spread | IH | ih |
 | `vowel_mid_rounded` | Close-mid to open rounded vowels | viseme_vowel | ø ɵ o œ ɞ ɔ ɶ ɒ | o˞; eʷ eᵝ | RCEF class: close-mid to open rounded vowels, including the open ɒ ɶ by rounding. | vowel_mid_rounded | mid_rounded | OH | oh |
 | `vowel_close_rounded` | Close and near-close rounded vowels and glides | viseme_vowel | ʍ w ɥ y ʉ u ʏ ʊ | kʷ tʷ hʷ kᵝ and other consonants with no lip target of their own when labialised or compressed; ɯᵝ jʷ | RCEF class: close and near-close rounded vowels, and the glides w ʍ ɥ. | vowel_close_rounded | close_rounded | OU | ou |
-| `alveolar_floor` | Alveolar floor (aggregate) | viseme_aggregate | union of `alveolar_sibilant`, `coronal_stop` and `coronal_nasal_lateral` | as its classes | RCEF aggregate: the alveolar and retroflex stops, taps, nasals and laterals, the coronal clicks and s z; not θ ð, ʃ ʒ ʂ ʐ or r ɹ ɻ, which are coronal too. | none | alveolar_floor | SS + DD + NN, clamped at 1 | none |
+| `alveolar_floor` | Alveolar floor (aggregate) | viseme_aggregate | union of `alveolar_sibilant`, `coronal_stop`, `coronal_nasal_lateral` and `rhotic` | as its classes | RCEF aggregate: the alveolar and retroflex stops, taps, trills, rhotic approximants r ɹ ɻ (and ɚ ɝ by rule), nasals and laterals, the coronal clicks and s z; not θ ð or ʃ ʒ ʂ ʐ, which are coronal too. | none | alveolar_floor | SS + DD + NN + RR, clamped at 1 | none |
 
 "By rule" lists symbols that are not single chart cells and join the class by the [IPA rules](#ipa-rules). The META and VRM columns name the provider classes that the hops copy, as facts.
 
@@ -256,7 +256,7 @@ There are 15 partition signals: 14 speech classes and `sil`. Together they parti
 | `alveolar_sibilant` | none | sibilant split mixed (7 of 14 maps); the DD and NN split in the merge band (4 of 15) |
 | `coronal_stop` | manner split kept by 4 of 15 maps (Binnie, Kricos, Lee, Hazen); kept for META DD and NN | sibilant split mixed (7 of 14 maps); the DD and NN split in the merge band (4 of 15) |
 | `coronal_nasal_lateral` | manner split kept by 4 of 15 maps (Binnie, Kricos, Lee, Hazen); kept for META DD and NN | sibilant split mixed (7 of 14 maps); the DD and NN split in the merge band (4 of 15) |
-| `rhotic` | r vs w mixed in English maps; English /r/ is often labialised [ɹʷ]; IPA r ɹ ɻ are unlabialised | r vs w mixed in English maps (6 of 12); English /r/ labialised [ɹʷ]; IPA r ɹ ɻ unlabialised; r with the coronals a minority reading (4 of 15) |
+| `rhotic` | counted on English [ɹʷ]; IPA r ɹ ɻ show no attested visible difference from the coronals | split from the coronals (11 of 15) and from w (6 of 12) counted on English [ɹʷ]; IPA r ɹ ɻ are unlabialised with no lip target, so they go with the coronals by IPA definition (A) |
 | `vowel_mid_rounded` | apart from ɑ in 2 of 5 count-matched English maps (mixed; some Northern Cities speakers make /ɔ/ unrounded); kept by rounding; ɒ ɶ contested (the least-rounded open vowels) | none |
 
 ## Gaze

@@ -2,7 +2,7 @@
 
 Pack: rcef.parity; data version: 0.5.0.
 
-Generated from rcef.pack.json; SHA-256: 8417043153a2f3efc93df2fdda926890df0844aa66c66f6a07da1820bb5a6f22.
+Generated from rcef.pack.json; SHA-256: b853f7e333ce5397315a8c792f9195d0bcb28615a4bd09658a096be008a4204c.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Provider attribution and source terms are in ../THIRD_PARTY_NOTICES.md.
 
@@ -397,8 +397,8 @@ Proposed mappings translate between providers. Each formula assumes the calibrat
 | visemes_consonant.to_rcef | visemes_rcef.dorsal | openxr.visemes → rcef.canonical_viseme | dorsal = 1·XR_FACE_TRACKING_VISEME_KK_META | META gain and full-activation pose not published; meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape | proposed |
 | visemes_consonant.to_rcef | visemes_rcef.rhotic | openxr.visemes → rcef.canonical_viseme | rhotic = 1·XR_FACE_TRACKING_VISEME_RR_META | META gain and full-activation pose not published; meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape | proposed |
 | visemes_rest.to_rcef | visemes_rcef.sil | openxr.visemes → rcef.canonical_viseme | sil = 1·XR_FACE_TRACKING_VISEME_SIL_META | META gain and full-activation pose not published; meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape | proposed |
-| visemes_aggregate.to_rcef | visemes_rcef.viseme_alveolar_floor_sum | openxr.visemes → rcef.intermediate | viseme_alveolar_floor_sum = 1·XR_FACE_TRACKING_VISEME_SS_META + 1·XR_FACE_TRACKING_VISEME_DD_META + 1·XR_FACE_TRACKING_VISEME_NN_META | META gain and full-activation pose not published; meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class | proposed |
-| visemes_aggregate.to_rcef | visemes_rcef.alveolar_floor | rcef.intermediate → rcef.canonical_viseme | alveolar_floor = {"id":"piecewise_linear","knots":[[0.0,0.0],[1.0,1.0],[3.0,1.0]]} | META gain and full-activation pose not published; meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class | proposed |
+| visemes_aggregate.to_rcef | visemes_rcef.viseme_alveolar_floor_sum | openxr.visemes → rcef.intermediate | viseme_alveolar_floor_sum = 1·XR_FACE_TRACKING_VISEME_SS_META + 1·XR_FACE_TRACKING_VISEME_DD_META + 1·XR_FACE_TRACKING_VISEME_NN_META + 1·XR_FACE_TRACKING_VISEME_RR_META | META gain and full-activation pose not published; meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class | proposed |
+| visemes_aggregate.to_rcef | visemes_rcef.alveolar_floor | rcef.intermediate → rcef.canonical_viseme | alveolar_floor = {"id":"piecewise_linear","knots":[[0.0,0.0],[1.0,1.0],[4.0,1.0]]} | META gain and full-activation pose not published; meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class | proposed |
 | rcef_viseme_vowel.to_visemes | rcef_visemes.AA | rcef.canonical_viseme → openxr.visemes | XR_FACE_TRACKING_VISEME_AA_META = 1·vowel_open | META gain and full-activation pose not published; meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape; from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met | proposed |
 | rcef_viseme_vowel.to_visemes | rcef_visemes.E | rcef.canonical_viseme → openxr.visemes | XR_FACE_TRACKING_VISEME_E_META = 1·vowel_mid_spread | META gain and full-activation pose not published; meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape; from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met | proposed |
 | rcef_viseme_vowel.to_visemes | rcef_visemes.IH | rcef.canonical_viseme → openxr.visemes | XR_FACE_TRACKING_VISEME_IH_META = 1·vowel_close_spread | META gain and full-activation pose not published; meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape; from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met | proposed |
@@ -7132,14 +7132,14 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 | Inputs | Outputs | Operator | Status | Quality |
 | --- | --- | --- | --- | --- |
-| openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META, openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META, openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META | rcef.intermediate.viseme_alveolar_floor_sum | {"id":"weighted_sum","weights":[1.0,1.0,1.0]} | mapped | approximate |
+| openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META, openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META, openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META, openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META | rcef.intermediate.viseme_alveolar_floor_sum | {"id":"weighted_sum","weights":[1.0,1.0,1.0,1.0]} | mapped | approximate |
 
 Assumptions:
 
-- correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, which META SS, DD and NN carry one to one.
-- endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD and NN, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.
+- correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.
+- endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.
 
-Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META","openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META","openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META","rcef.intermediate.viseme_alveolar_floor_sum"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META","openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META","openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META","rcef.intermediate.viseme_alveolar_floor_sum"],"units":"1"}]
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META","openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META","openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META","openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META","rcef.intermediate.viseme_alveolar_floor_sum"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class","refs":["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META","openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META","openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META","openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META","rcef.intermediate.viseme_alveolar_floor_sum"],"units":"1"}]
 
 Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
@@ -7147,12 +7147,12 @@ Evidence: xr_visemes, xr_registry, ipa_chart_doulos_2020, rcef_canonical_v1
 
 | Inputs | Outputs | Operator | Status | Quality |
 | --- | --- | --- | --- | --- |
-| rcef.intermediate.viseme_alveolar_floor_sum | rcef.canonical_viseme.alveolar_floor | {"id":"piecewise_linear","knots":[[0.0,0.0],[1.0,1.0],[3.0,1.0]]} | mapped | approximate |
+| rcef.intermediate.viseme_alveolar_floor_sum | rcef.canonical_viseme.alveolar_floor | {"id":"piecewise_linear","knots":[[0.0,0.0],[1.0,1.0],[4.0,1.0]]} | mapped | approximate |
 
 Assumptions:
 
-- correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop and coronal_nasal_lateral, which META SS, DD and NN carry one to one.
-- endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD and NN, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.
+- correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.
+- endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.
 
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"META gain and full-activation pose not published","refs":["rcef.intermediate.viseme_alveolar_floor_sum","rcef.canonical_viseme.alveolar_floor"],"units":"1"},{"category":"signal","effect":"approximated","reason":"meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class","refs":["rcef.intermediate.viseme_alveolar_floor_sum","rcef.canonical_viseme.alveolar_floor"],"units":"1"}]
 

@@ -208,7 +208,7 @@ class CanonicalVisemes(unittest.TestCase):
             self.assertNotIn('shape_class', s['metadata'])
             union = [m for p in parts for m in self.classes[p]['metadata']['ipa_members']]
             self.assertEqual(sorted(s['metadata']['ipa_members']), sorted(union))
-            self.assertEqual(len(union), 20)
+            self.assertEqual(len(union), 23)
             reserved[short] = parts
         for name, parts in reserved.items():
             with self.subTest(aggregate=name):
