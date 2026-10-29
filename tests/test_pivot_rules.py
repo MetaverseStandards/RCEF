@@ -5,12 +5,15 @@ tests/test_pivot_structure.py compares the data with what scripts/build_canonica
 not import the generator: they read the pack, the audit document and the frozen direct maps, and state each
 rule on its own, so that a fault in the generator fails here even when the data agrees with the generator.
 
-- every hop states its gain loss, so every route states it twice (VRM out-hops state the weight loss);
+- every hop states its gain loss, so every route states it twice (VRM blink out-hops state the weight loss,
+  VRM vowel hops the asset-weight key);
 - each tongue_out hop states that the tongue extension has no stated length;
 - exactly the 4 FB2 gaze outputs on a negative knot segment state the 2⁻⁵⁴ rounding loss;
 - each hop cites exactly its evidence: its set's own records, every crosswalk record that today's direct maps
-  cite on a rule that links its provider signal to another set (ict_facekit on ARKit hops only), and
-  rcef_canonical_v1;
+  cite on a rule that links its provider signal to another set (ict_facekit on ARKit hops only), the IPA chart
+  on viseme hops, and rcef_canonical_v1;
+- each crosswalk set that a hop cites has exactly one transfer assumption, and each transfer assumption names
+  a crosswalk set that the hop cites;
 - a hop withdraws a crosswalk transfer exactly when its own audit row or the other set's audit row for the
   canonical signal is `differs` or `unresolved`, and names those rows' loss keys;
 - a Unified Expressions fan-out names only the parts that its canonical value goes to;
@@ -23,18 +26,25 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 PREFIX = 'rcef.canonical_expression.'
+VISEME = 'rcef.canonical_viseme.'
 INTERMEDIATE = 'rcef.intermediate.'
+SUM = INTERMEDIATE + 'viseme_alveolar_floor_sum'
 OWN = 'rcef_canonical_v1'
+IPA = 'ipa_chart_doulos_2020'
 SETS = {'arkit': ('arkit.coefficient', 'ARKit', ['apple_blendshapes']),
         'fb2': ('openxr.fb2', 'FB2', ['xr_fb2']),
         'vrcft_artist': ('vrcft.artist.base', 'Unified Expressions', ['vrcft_artist', 'vrcft_docs_shapes']),
-        'vrm': ('vrm.preset', 'VRM', ['vrm_expressions'])}
+        'vrm': ('vrm.preset', 'VRM', ['vrm_expressions']),
+        'visemes': ('openxr.visemes', 'META', ['xr_visemes', 'xr_registry'])}
 AUDIT_SECTIONS = {'## FB2': 'fb2', '## ARKit': 'arkit', '## VRCFaceTracking Unified Expressions': 'vrcft_artist',
-                  '## VRM': 'vrm'}
-HOP = re.compile(r'^(?:(arkit|fb2|vrcft_artist|vrm)_\w+\.to_rcef|rcef_\w+\.to_(arkit|fb2|vrcft_artist|vrm))$')
+                  '## VRM': 'vrm', '## META visemes': 'visemes'}
+HOP = re.compile(r'^(?:(arkit|fb2|vrcft_artist|vrm|visemes)_\w+\.to_rcef|rcef_\w+\.to_(arkit|fb2|vrcft_artist|vrm|visemes))$')
 DIRECT = ('arkit.to_fb2', 'arkit_gaze.to_fb2', 'fb2.to_arkit', 'fb2_gaze.to_arkit', 'arkit.to_vrcft_artist',
-          'fb2.to_vrm')
+          'fb2.to_vrm', 'visemes.to_vrm')
 VRM_WEIGHT = 'a canonical value becomes an asset-authored expression weight'
+VRM_VOWEL_WEIGHT = 'vrm_vowel_asset_weight: '
+TRANSFER = re.compile(r'^transfer\.(?:provider|withdrawn): correspondence evidence is (.+?)↔(.+?) \(([^)]+)\)')
+ICT_TRANSFER = re.compile(r'^transfer\.(?:facs_crosswalk|withdrawn): ict_facekit ')
 NO_LENGTH = 'no stated length'
 ROUNDED = {f'openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_{d}_FB' for d in ('LEFT_L', 'DOWN_L', 'RIGHT_R', 'DOWN_R')}
 RANK = {'same': 0, 'differs': 1, 'unresolved': 2}
@@ -44,17 +54,25 @@ def set_of(sid: str) -> str | None:
     return next((key for key, (profile, _, _) in SETS.items() if sid.startswith(profile + '.')), None)
 
 
+def is_viseme(rule: dict) -> bool:
+    return any(s.startswith(VISEME) or s == SUM for s in rule['inputs'] + rule['outputs'])
+
+
 class PivotRules(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
         cls.signals = {s['id']: s for s in cls.pack['signals']}
         cls.hops = []  # (set, rule)
+        cls.in_rules = []
         for mapping in cls.pack['mappings']:
             if found := HOP.match(mapping['id']):
                 cls.hops += [(found.group(1) or found.group(2), rule) for rule in mapping['rules']]
-        cls.steps = [r for _, r in cls.hops if r['outputs'][0].startswith(INTERMEDIATE)]
-        cls.rules = [(k, r) for k, r in cls.hops if not r['outputs'][0].startswith(INTERMEDIATE)]
+                if found.group(1):
+                    cls.in_rules += [rule['id'] for rule in mapping['rules']]
+        # Internal steps: the FB2 gaze nets, and the META sum that the aggregate in-hop clamps.
+        cls.steps = [r for _, r in cls.hops if r['outputs'][0].startswith(INTERMEDIATE) and r['outputs'] != [SUM]]
+        cls.rules = [(k, r) for k, r in cls.hops if r not in cls.steps]
         # Audit rows: the worst verdict per (set, canonical short name), and the keys of the rows.
         cls.audit = {key: {} for key in SETS}
         text = (ROOT / 'docs/canonical-set-audit.md').read_text(encoding='utf-8')
@@ -92,7 +110,9 @@ class PivotRules(unittest.TestCase):
 
     def canonical(self, key, rule):
         """The canonical short names of a rule; a netting split's, through the aligned FB2 name it writes."""
-        shorts = [s[len(PREFIX):] for s in rule['inputs'] + rule['outputs'] if s.startswith(PREFIX)]
+        shorts = [s.rsplit('.', 1)[1] for s in rule['inputs'] + rule['outputs'] if s.startswith((PREFIX, VISEME))]
+        if not shorts and rule['outputs'] == [SUM]:
+            return [next(r for _, r in self.hops if r['inputs'] == [SUM])['outputs'][0].rsplit('.', 1)[1]]
         if not shorts:
             native = rule['outputs'][0].removeprefix('openxr.fb2.XR_FACE_EXPRESSION2_').removesuffix('_FB')
             shorts = [s[len(PREFIX):] for s, signal in self.signals.items() if s.startswith(PREFIX)
@@ -106,15 +126,19 @@ class PivotRules(unittest.TestCase):
         self.assertEqual(len(self.steps), 4)
         for key, rule in self.rules:
             name = SETS[key][1]
-            expected = VRM_WEIGHT if key == 'vrm' else f'{name} gain and full-activation pose not published'
             with self.subTest(rule=rule['id']):
-                self.assertIn(expected, self.reasons(rule))
+                if key == 'vrm' and is_viseme(rule):
+                    self.assertTrue([r for r in self.reasons(rule) if r.startswith(VRM_VOWEL_WEIGHT)])
+                else:
+                    expected = VRM_WEIGHT if key == 'vrm' else f'{name} gain and full-activation pose not published'
+                    self.assertIn(expected, self.reasons(rule))
         for rule in self.steps:
             self.assertFalse([r for r in self.reasons(rule) if 'gain' in r], rule['id'])
-        # So every route from an in-hop to an out-hop states it on both hops.
-        ins = [r for k, r in self.rules if any(i.startswith(SETS[k][0] + '.') for i in r['inputs'])]
+        # So every route from an in-hop to an out-hop states it on both hops. The META aggregate in-hop states it
+        # on its sum and on its clamp.
+        ins = [r for k, r in self.rules if r['id'] in self.in_rules]
         outs = [r for k, r in self.rules if r not in ins]
-        self.assertEqual((len(ins), len(outs)), (120, 182))
+        self.assertEqual((len(ins), len(outs)), (142, 202))
 
     def test_each_tongue_out_hop_states_the_missing_length(self):
         tongue = [(k, r) for k, r in self.rules if 'tongue_out' in self.canonical(k, r)]
@@ -135,19 +159,72 @@ class PivotRules(unittest.TestCase):
             self.assertEqual(rule['evidence'], ['xr_fb2', OWN], rule['id'])
         for key, rule in self.rules:
             own = SETS[key][2]
-            expected = set(own) | {OWN}
-            for sid in [s for s in rule['inputs'] + rule['outputs'] if set_of(s) == key]:
-                for inputs, output, evidence in self.chains:
-                    others = [output] if sid in inputs else inputs if sid == output else []
-                    for other in {set_of(o) for o in others} - {None, key}:
-                        expected |= set(evidence) - set(own) - set(SETS[other][2])
-            if key != 'arkit':
-                expected.discard('ict_facekit')
+            expected = set(own) | {OWN} | ({IPA} if is_viseme(rule) else set())
+            for records in self.crosswalks(key, rule).values():
+                expected |= records
+            if key == 'arkit':
+                expected |= self.ict(key, rule)
             with self.subTest(rule=rule['id']):
                 self.assertEqual(set(rule['evidence']), expected)
                 self.assertEqual(len(rule['evidence']), len(expected))
                 self.assertEqual(rule['evidence'][:len(own)], own)
-                self.assertEqual(rule['evidence'][-1], OWN)
+                self.assertEqual(rule['evidence'][-2:] if is_viseme(rule) else rule['evidence'][-1:],
+                                 [IPA, OWN] if is_viseme(rule) else [OWN])
+
+    def linked(self, key, rule):
+        """Today's chains that link a provider signal of this hop to another set: (other set, evidence)."""
+        for sid in [s for s in rule['inputs'] + rule['outputs'] if set_of(s) == key]:
+            for inputs, output, evidence in self.chains:
+                others = [output] if sid in inputs else inputs if sid == output else []
+                for other in {set_of(o) for o in others} - {None, key}:
+                    yield other, set(evidence)
+
+    def crosswalks(self, key, rule):
+        """The crosswalk records per other set: today's evidence on the linking chains, less both sets' own."""
+        found = {}
+        for other, evidence in self.linked(key, rule):
+            records = evidence - set(SETS[key][2]) - set(SETS[other][2]) - {'ict_facekit'}
+            if records:
+                found.setdefault(other, set()).update(records)
+        return found
+
+    def ict(self, key, rule):
+        return {'ict_facekit'} & set().union(*(evidence for _, evidence in self.linked(key, rule)))
+
+    def transfer_failures(self, key, rule):
+        """Why the transfer assumptions of a hop do not match the crosswalk sets it cites; [] when they do."""
+        names = {name: k for k, (_, name, _) in SETS.items()}
+        cited = {other: records for other, records in self.crosswalks(key, rule).items()
+                 if records <= set(rule['evidence'])}
+        stated = {}
+        for text in rule['assumptions']:
+            if found := TRANSFER.match(text):
+                if names.get(found.group(2)) != key:
+                    return [f'names {found.group(2)}, not this hop\'s set: {text}']
+                stated.setdefault(names.get(found.group(1)), []).append(set(found.group(3).split(', ')))
+        failures = [f'{other}: {len(stated.get(other, []))} transfer assumptions' for other in cited
+                    if len(stated.get(other, [])) != 1]
+        failures += [f'{other}: a transfer assumption for a set the hop does not cite' for other in stated
+                     if other not in cited]
+        failures += [f'{other}: records {texts[0]} are not {cited[other]}' for other, texts in stated.items()
+                     if other in cited and len(texts) == 1 and texts[0] != cited[other]]
+        ict = [text for text in rule['assumptions'] if ICT_TRANSFER.match(text)]
+        if len(ict) != ('ict_facekit' in rule['evidence']):
+            failures.append(f'ict_facekit: {len(ict)} transfer assumptions')
+        return failures
+
+    def test_each_crosswalk_set_cited_has_exactly_one_transfer_assumption(self):
+        mutants = 0
+        for key, rule in self.rules:
+            with self.subTest(rule=rule['id']):
+                self.assertEqual(self.transfer_failures(key, rule), [])
+            # A hop that drops any one of its transfer assumptions fails.
+            for n, text in enumerate(rule['assumptions']):
+                if text.startswith('transfer.'):
+                    mutant = {**rule, 'assumptions': rule['assumptions'][:n] + rule['assumptions'][n + 1:]}
+                    self.assertTrue(self.transfer_failures(key, mutant), (rule['id'], text))
+                    mutants += 1
+        self.assertGreater(mutants, 0)
 
     def test_a_transfer_is_withdrawn_exactly_where_an_audit_row_is_not_same(self):
         names = {name: key for key, (_, name, _) in SETS.items()}
