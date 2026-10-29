@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # Original RCEF data. Values computed inside a mapping and never read or written
-# by a provider.
+# by a provider. The first four belong to the direct map arkit_gaze.to_fb2; the
+# last four to the out-map rcef_gaze.to_fb2.
 
 [[signals]]
 id = "rcef.intermediate.arkit_gaze_in_minus_out_L"
@@ -62,8 +63,68 @@ neutral = 0.0
 metadata = { "definition" = "The right eye's ARKit gaze up minus down, from -1 to 1. Computed inside arkit_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "gaze"
 
+[[signals]]
+id = "rcef.intermediate.gaze_in_minus_out_left"
+label = "RCEF canonical gaze_in_left minus gaze_out_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:gaze_in_minus_out_left: canonical gaze_in_left minus gaze_out_left, each a fraction of the source's maximum gaze in its direction"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "xr_fb2"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left eye's canonical gaze toward the nose minus toward the temple, from -1 to 1. Computed inside rcef_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "gaze"
+
+[[signals]]
+id = "rcef.intermediate.gaze_up_minus_down_left"
+label = "RCEF canonical gaze_up_left minus gaze_down_left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:gaze_up_minus_down_left: canonical gaze_up_left minus gaze_down_left, each a fraction of the source's maximum gaze in its direction"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "xr_fb2"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left eye's canonical gaze up minus down, from -1 to 1. Computed inside rcef_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "gaze"
+
+[[signals]]
+id = "rcef.intermediate.gaze_in_minus_out_right"
+label = "RCEF canonical gaze_in_right minus gaze_out_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:gaze_in_minus_out_right: canonical gaze_in_right minus gaze_out_right, each a fraction of the source's maximum gaze in its direction"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "xr_fb2"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right eye's canonical gaze toward the nose minus toward the temple, from -1 to 1. Computed inside rcef_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "gaze"
+
+[[signals]]
+id = "rcef.intermediate.gaze_up_minus_down_right"
+label = "RCEF canonical gaze_up_right minus gaze_down_right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = -1.0, "max" = 1.0 }
+calibration = "rcef.intermediate.v1:gaze_up_minus_down_right: canonical gaze_up_right minus gaze_down_right, each a fraction of the source's maximum gaze in its direction"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "xr_fb2"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right eye's canonical gaze up minus down, from -1 to 1. Computed inside rcef_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+region = "gaze"
+
 [[profiles]]
 id = "rcef.intermediate"
 label = "RCEF intermediate values inside translations"
-signal_ids = ["rcef.intermediate.arkit_gaze_in_minus_out_L", "rcef.intermediate.arkit_gaze_up_minus_down_L", "rcef.intermediate.arkit_gaze_in_minus_out_R", "rcef.intermediate.arkit_gaze_up_minus_down_R"]
+signal_ids = ["rcef.intermediate.arkit_gaze_in_minus_out_L", "rcef.intermediate.arkit_gaze_up_minus_down_L", "rcef.intermediate.arkit_gaze_in_minus_out_R", "rcef.intermediate.arkit_gaze_up_minus_down_R", "rcef.intermediate.gaze_in_minus_out_left", "rcef.intermediate.gaze_up_minus_down_left", "rcef.intermediate.gaze_in_minus_out_right", "rcef.intermediate.gaze_up_minus_down_right"]
 evidence = ["rcef_definitions"]

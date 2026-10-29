@@ -5,7 +5,7 @@ This guide is for coding agents that use RCEF or change it. It gives the facts t
 
 ## Part 1: Using RCEF
 
-RCEF is an open catalogue of face-expression standards (ARKit, OpenXR FB2, META visemes, MediaPipe, VRCFaceTracking, VRM, Godot, Roblox) and the maps between them. The TOML files are the data. msf-character-tools is a separate package. It is the engine that checks the data, builds the pack and evaluates the maps. The current data is 0.4.0 (unreleased), checked with msf-character-tools 0.5.0.
+RCEF is an open catalogue of face-expression standards (ARKit, OpenXR FB2, META visemes, MediaPipe, VRCFaceTracking, VRM, Godot, Roblox) and the maps between them. The TOML files are the data. msf-character-tools is a separate package. It is the engine that checks the data, builds the pack and evaluates the maps. The current data is 0.5.0 (unreleased), checked with msf-character-tools 0.5.0.
 
 ### Outputs
 
@@ -17,7 +17,7 @@ RCEF is an open catalogue of face-expression standards (ARKit, OpenXR FB2, META 
 | `generated/rcef_mapping.csv` | A matrix: one row per signal, one column per profile. It is not a list of mappings. |
 | `reports/mappings.md`, `.csv` | Every mapping with its operator, status, assumptions and losses. |
 | `reports/inventory.md`, `.csv` | Every signal in every profile: native names, indices, ranges, calibration, evidence and reasons. |
-| `reports/canonical_correspondence.md`, `.csv` | The 21 canonical signals against the authored mappings. |
+| `reports/canonical_correspondence.md`, `.csv` | The 21 signals of `rcef.canonical` against the authored mappings. |
 | `reports/SHA256SUMS` | SHA-256 of the six report files. Each Markdown report also records the pack's SHA-256. |
 
 The README's [Mappings](README.md#mappings) table lists each map with its source and target profile.
@@ -53,18 +53,19 @@ What [examples/rcef_translate.py](examples/rcef_translate.py) does, and why:
 - An input's validity is the AND of the provider flags in its signal's `validity` field, for example `isValid AND isEyeFollowingBlendshapesValid` for FB2 gaze.
 - If one frame in a call is refused, the call returns no values for any frame. Each error's `ref` begins with `/samples/<n>`, for example `/samples/1/openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB`. Use it to find the refused frames, then evaluate the rest again.
 - Face and gaze are separate maps: `fb2.to_arkit` with `fb2_gaze.to_arkit`, and `arkit.to_fb2` with `arkit_gaze.to_fb2`.
+- To translate through the draft canonical expression set, use [examples/rcef_route.py](examples/rcef_route.py). It finds the in-maps and out-maps of a source and target set, runs each group's in-map and out-map, and reports a refused group without refusing the others.
 
 [examples/README.md](examples/README.md) shows complete runs from CSV to CSV and onto face meshes.
 
 ### Evidence status
 
-Each mapping (and each signal) has an `evidence_status` field. It says how well the mapping itself is supported. It is not the `status` of the evidence records it cites: all 38 records in `evidence/sources.toml` are `verified_current`, including the records that `proposed` mappings cite. The values of `evidence_status` are:
+Each mapping (and each signal) has an `evidence_status` field. It says how well the mapping itself is supported. It is not the `status` of the evidence records it cites: all records in `evidence/sources.toml` are `verified_current`, including the records that `proposed` mappings cite. The values of `evidence_status` are:
 
 - `verified_current`: the mapping restates a verified source fact. The three `*.to_canonical` maps and the synthetic `fixture.affine` and `fixture.bilateral` use it.
-- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 cross-provider mappings and the 4 internal gaze steps are `proposed`.
+- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 direct cross-provider mappings and their 4 internal gaze steps are `proposed`, and so are the 306 mappings into and out of the canonical expression set and the 60 canonical expression signals.
 - `unresolved`: recorded but not executable. `compile_mapping` refuses it, even with the opt-in. The MediaPipe → ARKit map `survey.ambiguous` is the example.
 
-`calibrated_software` is the `status` of the records in [calibration/](calibration/README.md). They are fits to renders of example rigs, not measurements of a tracker. The pack uses schema 1.0, which does not have this value, and no mapping in data 0.4.0 cites a calibration record.
+`calibrated_software` is the `status` of the records in [calibration/](calibration/README.md). They are fits to renders of example rigs, not measurements of a tracker. The pack uses schema 1.0, which does not have this value, and no mapping in data 0.5.0 cites a calibration record.
 
 `evidence_status` and `disposition` (`mapped`, `unresolved`, `excluded`, `unsupported`) are separate fields.
 
@@ -84,13 +85,13 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | Path | Contents |
 |---|---|
 | `pack.toml` | Root metadata, including `data_version`. |
-| `data/` | RCEF's own sets: `rcef.canonical` (21 signals) and `rcef.intermediate` (4). |
+| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (60) and `rcef.intermediate` (8). `canonical_expression.toml` is generated. |
 | `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. |
-| `mappings/` | Maps. Each map is a group of one-way mappings. |
+| `mappings/` | Maps. Each map is a group of one-way mappings. `canonical_*.toml` hold the maps into and out of the canonical expression set; they are generated. |
 | `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` (the msf-character-tools lock), `input-contracts/`. |
 | `calibration/` | `*.cal` software-only calibration records and the `FREEZES` ledger. |
 | `generated/`, `reports/` | Outputs of `check.py --write`. Do not edit them by hand. |
-| `scripts/` | Export, comparison, source-check and local CI scripts. |
+| `scripts/` | Export, comparison, source-check and local CI scripts, and `build_canonical.py`, which writes the canonical expression set and its maps. |
 | `tools/calibration/` | Optional tools that make calibration records. They need extra packages. `check.py` and the tests never run them; the tests check only the curve fitting and cell scoring. |
 | `tools/render/` | `meshrender.swift`, the macOS offscreen renderer for calibration fits. |
 | `examples/` | End-to-end translations and face pipelines; inputs in `examples/data/`. |
@@ -110,6 +111,7 @@ python3 -B scripts/export_reports.py         # reports only; add --write to rege
 python3 -B scripts/export_references.py --write   # references.md from evidence/sources.toml
 python3 -B scripts/compare_godot.py --write       # docs/godot_comparison.md
 python3 -B scripts/export_toml_index.py --write   # docs/toml-index.csv
+python3 -B scripts/build_canonical.py --write     # data/canonical_expression.toml, mappings/canonical_*.toml
 sh scripts/ci_local.sh                       # check.py and tests on Python 3.11 and 3.12
 ```
 
@@ -125,7 +127,7 @@ Without `--write`, each script checks its output and exits non-zero if the outpu
 | Test expectations come from public sources, not from RCEF's mappings. | `scripts/derive_fb2_goldens.py` writes `tests/fixtures/fb2_goldens.json` and `godot_fb2_rules.csv` from cached source bytes, and never reads `mappings/`, `profiles/` or `data/`. Reviewers check that nobody edits them by hand. |
 | Calibration records are frozen. `FREEZES` is append-only. A mapping can cite a record (`calibration.<id>`) only if all three are true: its operator is `piecewise_linear`, its knots equal the frozen knots, and every held-out cell for its channel passed. | `check.py`, before msf-character-tools runs; `tests/test_calibration.py`. `check.py` checks the ledger: the record must be the latest version, with its hash. Versions go up by one, dates never go back, and a re-freeze needs a reason. `check.py` cannot see Git history. Reviewers check that no line changed and that the ledger line came before the results. See [calibration/README.md](calibration/README.md). |
 | msf-character-tools is exactly a locked release wheel. | `check.py` exits 2 for any other build; `tests/test_dependency.py`. |
-| Each data change has an entry in [CHANGELOG.md](CHANGELOG.md). | Reviewers. The top section is `Data 0.4.0 — unreleased`: add entries there. `tests/test_metadata.py` checks that `data_version` in `pack.toml` equals the pack's and has the form `X.Y.Z`. |
+| Each data change has an entry in [CHANGELOG.md](CHANGELOG.md). | Reviewers. The top section is `Data 0.5.0 — unreleased`: add entries there. Calibration records have their own ledger, so their entries go in the separate `Calibration and examples — unreleased` section below the data sections. `tests/test_metadata.py` checks that `data_version` in `pack.toml` equals the pack's and has the form `X.Y.Z`. |
 | Code is MIT. Data and documentation are CC-BY-SA-4.0. Third-party facts are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Do not copy provider prose that has no open licence: write your own summary and cite the source. | Reviewers. Start each new file with a licence line, as the existing files do. |
 
 To adopt a new msf-character-tools release: install its wheel by hash, then run `python3 -B check.py --update-lock --wheel PATH/TO/WHEEL`. Do this once from each Python and platform whose wheel tag you support. If the lock has the same commit and the same version, the new tag's entry is merged into it. If the commit or the version is different, the old lock moves to `tooling.lock.previous.json` and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`, and the README's install-by-hash steps then fail for that tag. pip records the hash, so after a pip install `--wheel` is optional.
@@ -135,6 +137,8 @@ To adopt a new msf-character-tools release: install its wheel by hash, then run 
 - `check.py` checks the msf-character-tools install before anything else. If the install is wrong, it prints `Refusing to check` and exits 2 before it reads the data or the calibration records. It also refuses an `msf_character_tools` that would import from anywhere other than the installed distribution, for example through `PYTHONPATH`.
 - `tests/test_dependency.py` builds fake msf-character-tools installs and checks that `check.py` refuses each one before msf-character-tools runs (a marker file shows whether it ran). If you change the lock format or the order of steps in `check.py`, keep these tests meaningful. For example, the tampered-package fake must use a version and wheel tag that the lock has, or it is refused for the wrong reason.
 - Any change to a string in any TOML file changes the pack bytes and so the pack hash. Then `rcef.pack.json`, `coverage.json`, `generated/SHA256SUMS`, all three Markdown reports, `reports/SHA256SUMS` and `docs/toml-index.csv` change. A CSV report changes only if the string is one of its columns. `rcef_mapping.csv` changes only if a signal's id, label, value type, units, disposition, evidence status or profile membership changes. Regenerate everything, and commit what changed.
+- `data/canonical_expression.toml` and `mappings/canonical_*.toml` are written by `scripts/build_canonical.py` from `docs/canonical-set.md`, `docs/canonical-set-audit.md` and `tests/fixtures/baseline-dea1713.pack.json`. Do not edit them by hand: `tests/test_pivot_structure.py` fails if they differ from what the script writes. Change the documents, then run the script with `--write`.
+- The 7 direct maps (`fb2.to_arkit`, `fb2_gaze.to_arkit`, `arkit.to_fb2`, `arkit_gaze.to_fb2`, `arkit.to_vrcft_artist`, `fb2.to_vrm`, `visemes.to_vrm`) are frozen. `tests/test_pivot_structure.py` compares them, their signals and their evidence records with `tests/fixtures/baseline-dea1713.pack.json`.
 - msf-character-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
 - `docs/architecture.html`, `.svg` and `.png` are made by hand, and no test checks them. When the data changes, update them and the counts in `docs/architecture.md`, and render the PNG from the SVG at the same size (1160 × 560). See the checklist in [docs/architecture.md](docs/architecture.md#9-independent-validation-checklist).
 - The face and viseme pipelines download rigs on first use and check their hashes (`--cache DIR` for rig files, `--out DIR` for outputs; the defaults are under `~/.cache`). The slow tests skip unless their variables are set. See [examples/README.md](examples/README.md).

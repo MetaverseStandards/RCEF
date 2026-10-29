@@ -2,7 +2,64 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-## Data 0.4.0 — unreleased
+## Data 0.5.0 — unreleased
+
+The draft canonical expression set joins the data, with maps into it and out
+of it. A translation can now run from a source set through the canonical
+expression set to a target set. The 7 direct maps do not change.
+
+- New profile `rcef.canonical_expression` in
+  `data/canonical_expression.toml`: 60 signals, vocabulary version `1.0`,
+  status `draft`, as `docs/canonical-set.md` defines them. The groups are
+  `face` (41), `cheek_puff` (2), `jaw_thrust` (1), `jaw_sideways` (2),
+  `mouth_shift` (2), `chin_raise_upper_lip` (1), `blink` (2), `gaze` (8) and
+  `tongue_out` (1). Each signal's metadata gives its definition, its 0 and 1,
+  its FACS code where it has one, its group, the provider names aligned to
+  it and its rows in the definitions audit.
+- 306 new mappings in 46 maps, one map per group and direction: ARKit and FB2
+  into the canonical expression set (120 mappings in 18 maps), and the
+  canonical expression set to ARKit, FB2, VRCFaceTracking Unified
+  Expressions and VRM per-eye blinks (186 mappings in 28 maps). The FB2 gaze
+  out-map has 4 internal steps, which write 4 new `rcef.intermediate`
+  signals (8 in all).
+- Each new mapping states, as assumptions: the correspondence; the
+  endpoints, with a clause that matches its operator; whether the evidence
+  of today's direct maps carries over to the canonical signal or is
+  withdrawn, with the loss that withdraws it; and every other assumption of
+  today's direct maps, as the assumption catalogue in
+  `docs/canonical-set-audit.md` places it.
+- Evidence status: every canonical expression signal and every new mapping
+  is `proposed` and `approximate`. The identity maps into `rcef.canonical`
+  stay `verified_current`. The canonical pupils, which would be
+  `verified_current`, are not in this version.
+- Losses added by the definitions audit, on the hops that the audit names:
+  the ARKit `mouthClose` jaw relation (`arkit_mouthclose_jaw_unresolved`),
+  the ARKit definitions that differ from the canonical ones, the VRM blink
+  side (`vrm_blink_side_unresolved`, until now an assumption only), the
+  Unified Expressions definitions that differ, and the ICT-FaceKit FACS
+  crosswalk codes that differ from the canonical codes
+  (`ict_au33_cheek_blow`, `ict_au45_blink`). No loss of today's maps is
+  corrected.
+- On the pairs that the direct maps also translate (FB2 → ARKit,
+  ARKit → FB2, ARKit → Unified Expressions, FB2 → VRM blinks), the route
+  through the canonical expression set gives the same weights as the direct
+  maps. FB2 → Unified Expressions is new: it runs through the canonical
+  expression set.
+- New evidence records: `rcef_canonical_v1` (the original canonical
+  expression vocabulary), `facs_wikipedia` (FACS code numbers, Wikipedia
+  revision 1357638399), `rcsf_proposal` (the RCSF proposal at `f6c3ea8`),
+  and six figure records for the FB2 and Unified Expressions figures that
+  the definitions cite.
+- `scripts/build_canonical.py` writes the profile and the 46 maps from
+  `docs/canonical-set.md`, its audit and the direct maps. New tests:
+  `tests/test_canonical_vocabulary.py` and `tests/test_pivot_structure.py`.
+  The capability matrix in the second reads the names of FACS,
+  `XR_FB_face_tracking`, `XR_ANDROID_face_tracking` and
+  `XR_ML_facial_expression` from `tests/fixtures/capability_sets.json`,
+  which `scripts/derive_capability_sets.py` writes from cached source bytes.
+- The viseme part of the canonical set is not in this version.
+
+## Data 0.4.0 — not released (A/B baseline at `dea1713`, pack SHA-256 `630d37a5…`)
 
 Adopt msf-tools (now msf-character-tools) operators 1.1
 (`operator_version = "1.1"`). FB2 requires opposing gaze directions to be

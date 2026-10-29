@@ -4,10 +4,11 @@
 
 The Reference Canonical Expression Framework (RCEF) is about face expression signals. Face trackers and avatar systems each publish their own set of these signals. ARKit, OpenXR FB2, MediaPipe, VRCFaceTracking, VRM, Godot and Roblox use different names, scales and calibrations. So you cannot simply copy a value from one system into another.
 
-RCEF does four things:
+RCEF does five things:
 
 - It records each public expression interface as data, with its calibration limits and a pinned public source.
 - It defines a small canonical set of 21 signals. Each canonical signal keeps the calibration of its provider.
+- It defines a draft canonical expression set of 60 signals, each with a meaning that RCEF declares, and maps into and out of it. A translation can then run from a source set through the canonical expression set to a target set.
 - It defines explicit one-way scalar mappings from one set to another. Each mapping states its assumptions and its losses.
 - It checks all of this with [msf-character-tools](https://github.com/MetaverseStandards/msf_character_tools), which is maintained separately.
 
@@ -28,8 +29,8 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 ### The data (edit these)
 
 - `profiles/`: one file per public expression set, for example ARKit, OpenXR FB2 or VRM. Each file lists the set's signals: name, value range (often 0 to 1), face side, neutral value and public source.
-- `data/`: RCEF's own sets. `canonical.toml` is the canonical set of 21 signals. `intermediate.toml` holds 4 helper values that the ARKit → FB2 gaze map uses inside.
-- `mappings/`: the maps. A map turns the signals of one set into those of another, for example FB2 into ARKit. Each mapping names its inputs, outputs and formula (a copy, a scale and offset, a weighted sum or a curve), and states its assumptions and losses.
+- `data/`: RCEF's own sets. `canonical.toml` is the canonical set of 21 signals. `canonical_expression.toml` is the draft canonical expression set of 60 signals. `intermediate.toml` holds 8 helper values: 4 that the ARKit → FB2 gaze map uses inside, and 4 that the map from the canonical expression set to FB2 gaze uses inside.
+- `mappings/`: the maps. A map turns the signals of one set into those of another, for example FB2 into ARKit. Each mapping names its inputs, outputs and formula (a copy, a scale and offset, a weighted sum or a curve), and states its assumptions and losses. The `canonical_*.toml` files hold the maps into and out of the canonical expression set.
 - `evidence/`: `sources.toml` lists each public source with its exact revision and SHA-256. `tooling.lock.json` pins the msf-character-tools build that checks the data. `input-contracts/` holds an optional schema that RCEF does not use.
 - `calibration/`: curves fitted to software renders of example faces. The `FREEZES` ledger only grows. It shows that each fit was fixed before it was tested.
 - `pack.toml`: the version numbers, ID and licence of the whole data set.
@@ -45,8 +46,8 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 ### Code and tests
 
 - `check.py`: the main check. It verifies the locked msf-character-tools, the calibration records and the generated files in `generated/` and `reports/`. `--write` rebuilds those files.
-- `scripts/`: helper programs. They write the source list and TOML index, compare RCEF with Godot, check the public sources and run the local CI.
-- `tests/`: the automated tests, with their inputs in `tests/fixtures/`. `scripts/derive_fb2_goldens.py` makes two of those inputs from cached public sources.
+- `scripts/`: helper programs. They write the canonical expression set and its maps, the source list and the TOML index, compare RCEF with Godot, check the public sources and run the local CI.
+- `tests/`: the automated tests, with their inputs in `tests/fixtures/`. `scripts/derive_fb2_goldens.py` makes two of those inputs from cached public sources, and `scripts/derive_capability_sets.py` makes the name lists in `capability_sets.json`.
 - `fixtures/`: small made-up inputs with known answers. They show how the formulas behave.
 - `tools/`: optional tools that make the calibration records, and the small macOS renderer they use.
 
@@ -81,7 +82,7 @@ RCEF also records ancillary enums, sentinels and encoding surfaces.
 
 The canonical set has 21 scalar projections, and each one states its provider's calibration. They cover blink, jaw, brow, directional gaze and physical pupil diameter. The identity mappings keep the stated provider basis. Two original fixtures, one affine and one lossy bilateral, show the shared runtime. They do not claim visual equivalence.
 
-Data 0.4.0 has 187 cross-provider mappings. They translate:
+Data 0.5.0 keeps the 187 direct cross-provider mappings of data 0.4.0 unchanged. They translate:
 
 - FB2 to all 52 ARKit coefficients, and back (face and, separately, gaze);
 - ARKit to VRCFaceTracking Unified Expressions;
@@ -90,9 +91,18 @@ Data 0.4.0 has 187 cross-provider mappings. They translate:
 
 The ARKit → FB2 gaze map also has 4 internal steps. Each step takes one eye's two opposing ARKit gaze directions (in and out, or up and down) to one intermediate difference. All of these mappings are proposed and approximate. They compile only with the approximation opt-in. Each one states its calibration assumptions and losses (see the [CHANGELOG](CHANGELOG.md)). Their tests compare results with expected values that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own mappings.
 
+Data 0.5.0 also adds the draft canonical expression set, `rcef.canonical_expression`: 60 signals in 9 groups (face 41, cheek puff 2, jaw thrust 1, jaw sideways 2, mouth shift 2, chin raise upper lip 1, blink 2, gaze 8, tongue out 1). [docs/canonical-set.md](docs/canonical-set.md) defines each signal, and the [definitions audit](docs/canonical-set-audit.md) compares it with each source. 306 mappings in 46 maps go into and out of it:
+
+- ARKit and FB2 into the canonical expression set (120 mappings in 18 maps);
+- the canonical expression set to ARKit, FB2, VRCFaceTracking Unified Expressions and VRM per-eye blinks (186 mappings in 28 maps, with 4 internal steps in the FB2 gaze map).
+
+So a translation can run from ARKit or FB2 through the canonical expression set to ARKit, FB2, Unified Expressions or VRM blinks. Each group has one map in each direction. On the pairs that the direct maps also translate, the composed route gives the same weights as the direct maps (`tests/test_pivot_structure.py`). All 306 mappings are proposed and approximate. `scripts/build_canonical.py` writes the profile and these maps from the two documents.
+
 ### Mappings
 
-Each row is one map: a group of mappings that turns values in the source set into values in the target set. `verified_current` means that the mapping restates a verified source fact (it copies a provider value to the canonical set). `proposed` means an approximate cross-provider translation that is backed by sources and compiles only with the approximation opt-in. [reports/mappings.md](reports/mappings.md) lists every mapping with its assumptions, losses and evidence. That report also lists the maps that this table leaves out: RCEF's synthetic test maps (`fixture.affine`, `fixture.bilateral`) and `survey.ambiguous`, which is recorded but cannot be executed.
+Each row is one map: a group of mappings that turns values in the source set into values in the target set. `verified_current` means that the mapping restates a verified source fact (it copies a provider value to the canonical set). `proposed` means an approximate cross-provider translation that is backed by sources and compiles only with the approximation opt-in. [reports/mappings.md](reports/mappings.md) lists every mapping with its assumptions, losses and evidence. That report also lists the maps that these tables leave out: RCEF's synthetic test maps (`fixture.affine`, `fixture.bilateral`) and `survey.ambiguous`, which is recorded but cannot be executed.
+
+#### Direct maps
 
 | Map | Source set → target set | Mappings | Evidence status |
 |---|---|---|---|
@@ -107,17 +117,78 @@ Each row is one map: a group of mappings that turns values in the source set int
 | [`fb2.to_vrm`](reports/mappings.md#fb2to_vrm) | `openxr.fb2` → `vrm.preset` | 2 | proposed |
 | [`visemes.to_vrm`](reports/mappings.md#visemesto_vrm) | `openxr.visemes` → `vrm.preset` | 5 | proposed |
 
+#### Maps into the canonical expression set
+
+Each map reads one source set and writes one whole group of the canonical expression set.
+
+| Map | Source set → target set | Mappings | Evidence status |
+|---|---|---|---|
+| [`arkit_face.to_rcef`](reports/mappings.md#arkit_faceto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 41 | proposed |
+| [`arkit_cheek_puff.to_rcef`](reports/mappings.md#arkit_cheek_puffto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 2 | proposed |
+| [`arkit_jaw_thrust.to_rcef`](reports/mappings.md#arkit_jaw_thrustto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 1 | proposed |
+| [`arkit_jaw_sideways.to_rcef`](reports/mappings.md#arkit_jaw_sidewaysto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 2 | proposed |
+| [`arkit_mouth_shift.to_rcef`](reports/mappings.md#arkit_mouth_shiftto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 2 | proposed |
+| [`arkit_chin_raise_upper_lip.to_rcef`](reports/mappings.md#arkit_chin_raise_upper_lipto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 1 | proposed |
+| [`arkit_blink.to_rcef`](reports/mappings.md#arkit_blinkto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 2 | proposed |
+| [`arkit_gaze.to_rcef`](reports/mappings.md#arkit_gazeto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 8 | proposed |
+| [`arkit_tongue_out.to_rcef`](reports/mappings.md#arkit_tongue_outto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 1 | proposed |
+| [`fb2_face.to_rcef`](reports/mappings.md#fb2_faceto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 41 | proposed |
+| [`fb2_cheek_puff.to_rcef`](reports/mappings.md#fb2_cheek_puffto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
+| [`fb2_jaw_thrust.to_rcef`](reports/mappings.md#fb2_jaw_thrustto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 1 | proposed |
+| [`fb2_jaw_sideways.to_rcef`](reports/mappings.md#fb2_jaw_sidewaysto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
+| [`fb2_mouth_shift.to_rcef`](reports/mappings.md#fb2_mouth_shiftto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
+| [`fb2_chin_raise_upper_lip.to_rcef`](reports/mappings.md#fb2_chin_raise_upper_lipto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 1 | proposed |
+| [`fb2_blink.to_rcef`](reports/mappings.md#fb2_blinkto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
+| [`fb2_gaze.to_rcef`](reports/mappings.md#fb2_gazeto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 8 | proposed |
+| [`fb2_tongue_out.to_rcef`](reports/mappings.md#fb2_tongue_outto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 1 | proposed |
+
+#### Maps out of the canonical expression set
+
+Each map reads one group and writes the target set's signals for it. An out-map gives values only when the in-map of its group gave values for the whole group.
+
+| Map | Source set → target set | Mappings | Evidence status |
+|---|---|---|---|
+| [`rcef_face.to_arkit`](reports/mappings.md#rcef_faceto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 34 | proposed |
+| [`rcef_cheek_puff.to_arkit`](reports/mappings.md#rcef_cheek_puffto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 1 | proposed |
+| [`rcef_jaw_thrust.to_arkit`](reports/mappings.md#rcef_jaw_thrustto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 1 | proposed |
+| [`rcef_jaw_sideways.to_arkit`](reports/mappings.md#rcef_jaw_sidewaysto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 2 | proposed |
+| [`rcef_mouth_shift.to_arkit`](reports/mappings.md#rcef_mouth_shiftto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 2 | proposed |
+| [`rcef_chin_raise_upper_lip.to_arkit`](reports/mappings.md#rcef_chin_raise_upper_lipto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 1 | proposed |
+| [`rcef_blink.to_arkit`](reports/mappings.md#rcef_blinkto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 2 | proposed |
+| [`rcef_gaze.to_arkit`](reports/mappings.md#rcef_gazeto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 8 | proposed |
+| [`rcef_tongue_out.to_arkit`](reports/mappings.md#rcef_tongue_outto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 1 | proposed |
+| [`rcef_face.to_fb2`](reports/mappings.md#rcef_faceto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 41 | proposed |
+| [`rcef_cheek_puff.to_fb2`](reports/mappings.md#rcef_cheek_puffto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
+| [`rcef_jaw_thrust.to_fb2`](reports/mappings.md#rcef_jaw_thrustto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 1 | proposed |
+| [`rcef_jaw_sideways.to_fb2`](reports/mappings.md#rcef_jaw_sidewaysto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
+| [`rcef_mouth_shift.to_fb2`](reports/mappings.md#rcef_mouth_shiftto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
+| [`rcef_chin_raise_upper_lip.to_fb2`](reports/mappings.md#rcef_chin_raise_upper_lipto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 1 | proposed |
+| [`rcef_blink.to_fb2`](reports/mappings.md#rcef_blinkto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
+| [`rcef_gaze.to_fb2`](reports/mappings.md#rcef_gazeto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 12 | proposed |
+| [`rcef_tongue_out.to_fb2`](reports/mappings.md#rcef_tongue_outto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 1 | proposed |
+| [`rcef_face.to_vrcft_artist`](reports/mappings.md#rcef_faceto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 47 | proposed |
+| [`rcef_cheek_puff.to_vrcft_artist`](reports/mappings.md#rcef_cheek_puffto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 2 | proposed |
+| [`rcef_jaw_thrust.to_vrcft_artist`](reports/mappings.md#rcef_jaw_thrustto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 1 | proposed |
+| [`rcef_jaw_sideways.to_vrcft_artist`](reports/mappings.md#rcef_jaw_sidewaysto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 2 | proposed |
+| [`rcef_mouth_shift.to_vrcft_artist`](reports/mappings.md#rcef_mouth_shiftto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 4 | proposed |
+| [`rcef_chin_raise_upper_lip.to_vrcft_artist`](reports/mappings.md#rcef_chin_raise_upper_lipto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 1 | proposed |
+| [`rcef_blink.to_vrcft_artist`](reports/mappings.md#rcef_blinkto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 2 | proposed |
+| [`rcef_gaze.to_vrcft_artist`](reports/mappings.md#rcef_gazeto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 8 | proposed |
+| [`rcef_tongue_out.to_vrcft_artist`](reports/mappings.md#rcef_tongue_outto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 1 | proposed |
+| [`rcef_blink.to_vrm`](reports/mappings.md#rcef_blinkto_vrm) | `rcef.canonical_expression` → `vrm.preset` | 2 | proposed |
+
 Not translated yet, and why:
 
 - **VRM lookUp/Down/Left/Right:** VRM drives gaze by angle, through range maps whose input is in degrees. FB2 and ARKit publish no maximum angle. A translation needs an operator for angles and curves.
 - **VRM emotions** (happy, angry, sad, relaxed, surprised): to turn muscle movements into an emotion label is a classification, not a linear calculation. Also, each model authors its own binds.
 - **MediaPipe to ARKit:** only one independent implementation (three.js) maps MediaPipe to ARKit. The model card that would state the ARKit basis has not been reviewed.
-- **Unified Expressions to ARKit, and FB2 to Unified Expressions:** these wait for the next round. FB2 to Unified Expressions is mostly FB2 to ARKit, then ARKit to Unified Expressions.
-- **Unified Expressions shapes with no ARKit counterpart** (cheek suck, mouth tightener, pupil dilation and constriction, tongue directions and others): `arkit.to_vrcft_artist` does not write them.
+- **Unified Expressions to ARKit or FB2:** there is no map from Unified Expressions into the canonical expression set yet. FB2 to Unified Expressions now runs through the canonical expression set.
+- **Unified Expressions shapes with no ARKit counterpart** (cheek suck, mouth tightener, pupil dilation and constriction, tongue directions and others): neither `arkit.to_vrcft_artist` nor `rcef_face.to_vrcft_artist` writes them yet.
+- **META visemes through the canonical set:** the canonical viseme set is not in the data yet, so `visemes.to_vrm` is still the only viseme map.
 
 ### Expression sets
 
-This table shows which expression sets the maps read or write. Each name is a file in `profiles/` without `.toml`, except `rcef.canonical` and `rcef.intermediate`, which are in `data/`. [docs/expression-sets.md](docs/expression-sets.md) gives each file's revision, signal count, role, documentation, pinned source and licence or terms. It also explains the signal counts and RCEF's own sets.
+This table shows which expression sets the maps read or write. Each name is a file in `profiles/` without `.toml`, except `rcef.canonical`, `rcef.canonical_expression` and `rcef.intermediate`, which are in `data/`. [docs/expression-sets.md](docs/expression-sets.md) gives each file's revision, signal count, role, documentation, pinned source and licence or terms. It also explains the signal counts and RCEF's own sets.
 
 | Provider | Read or written by a map | Inventory only |
 |---|---|---|
@@ -128,7 +199,7 @@ This table shows which expression sets the maps read or write. Each name is a fi
 | MediaPipe | none | `mediapipe.label`, `mediapipe.score` |
 | Godot | none | `godot.base`, `godot.blended` |
 | Roblox | none | `roblox.control` |
-| RCEF | `rcef.canonical`, `rcef.intermediate` (RCEF's own sets), `fixture` (synthetic) | none |
+| RCEF | `rcef.canonical`, `rcef.canonical_expression`, `rcef.intermediate` (RCEF's own sets), `fixture` (synthetic) | none |
 
 ## Getting started
 
@@ -172,15 +243,16 @@ python3 -B check.py            # CHECK: do the outputs still match the TOML? Wri
 python3 -B check.py --write    # APPLY: regenerate generated/ and reports/ from the TOML.
 ```
 
-Three more scripts write the other generated files. Without `--write`, each one only checks its file and fails if the file is out of date:
+Four more scripts write the other generated files. Without `--write`, each one only checks its files and fails if they are out of date:
 
 ```sh
+python3 -B scripts/build_canonical.py --write     # data/canonical_expression.toml and mappings/canonical_*.toml from docs/canonical-set.md and its audit
 python3 -B scripts/export_references.py --write   # references.md from evidence/sources.toml
 python3 -B scripts/export_toml_index.py --write   # docs/toml-index.csv from all TOML files
 python3 -B scripts/compare_godot.py --write       # docs/godot_comparison.md from the pack
 ```
 
-Any change to a TOML file changes `docs/toml-index.csv`. Any change to a string in a TOML file also changes the pack hash. Then `rcef.pack.json`, `coverage.json`, both `SHA256SUMS` files and the three Markdown reports change too. [AGENTS.md](AGENTS.md#known-traps) says when the CSV files change. Regenerate everything, review every diff, and commit the TOML and the generated files together. Each data change also needs an entry in [CHANGELOG.md](CHANGELOG.md), in the top section, `Data 0.4.0 — unreleased`.
+Any change to a TOML file changes `docs/toml-index.csv`. Any change to a string in a TOML file also changes the pack hash. Then `rcef.pack.json`, `coverage.json`, both `SHA256SUMS` files and the three Markdown reports change too. [AGENTS.md](AGENTS.md#known-traps) says when the CSV files change. Regenerate everything, review every diff, and commit the TOML and the generated files together. Each data change also needs an entry in [CHANGELOG.md](CHANGELOG.md), in the top section, `Data 0.5.0 — unreleased`.
 
 GitHub Actions is not turned on for this repository. Run `sh scripts/ci_local.sh` instead. It runs `check.py` and the tests on Python 3.11 and 3.12. Paste its summary into the pull request. It expects a venv for each version with the locked wheel installed. The comment at the top of the script gives the paths.
 
@@ -189,6 +261,8 @@ GitHub Actions is not turned on for this repository. Run `sh scripts/ci_local.sh
 - **Fix or add a mapping in an existing map**
 
   1. Edit or add the mapping in its file in `mappings/`. In the TOML, a mapping is one entry in the map's `rules` array. It needs `id`, `inputs`, `outputs`, `operator`, `disposition`, `assumptions`, `evidence`, `evidence_status` and `loss_annotations`, and `mapping_quality` when its disposition is `mapped`. See [Maps, mappings and loss annotations](docs/architecture.md#maps-mappings-and-loss-annotations).
+     Do not edit `data/canonical_expression.toml` or `mappings/canonical_*.toml` by hand. `scripts/build_canonical.py --write` writes them from `docs/canonical-set.md`, its definitions audit and the direct maps as frozen in `tests/fixtures/baseline-dea1713.pack.json`; change the documents, then run it.
+     The 7 direct maps are frozen: `tests/test_pivot_structure.py` fails if they differ from that file.
   2. Cite only evidence IDs that are in `evidence/sources.toml`. To add a source, follow the evidence steps in the next tasks.
   3. Run `python3 -B check.py --write` and `python3 -B scripts/export_toml_index.py --write`. If you changed `fb2.to_arkit` or `fb2_gaze.to_arkit`, also run `python3 -B scripts/compare_godot.py --write`.
   4. If the number of mappings changed, update the map's row in the [Mappings](#mappings) table, the totals in [What RCEF covers](#what-rcef-covers) and AGENTS.md, and the counts in `docs/architecture.md`.
@@ -248,7 +322,7 @@ To check only the reports with Python's standard library, run `python3 -B script
 
 ## Calibration
 
-[calibration/](calibration/README.md) holds software-only calibration records. They are fits to renders of example rigs, not measurements of a tracker. `check.py` refuses a mapping that cites a record unless the mapping's knots are exactly the record's frozen knots and every held-out cell for its channel passed. No mapping in data 0.4.0 cites a record. The renderer for those fits is in [tools/render/](tools/render/README.md), and the tools that make the records are in [tools/calibration/](tools/calibration/README.md).
+[calibration/](calibration/README.md) holds software-only calibration records. They are fits to renders of example rigs, not measurements of a tracker. `check.py` refuses a mapping that cites a record unless the mapping's knots are exactly the record's frozen knots and every held-out cell for its channel passed. No mapping in data 0.5.0 cites a record. The renderer for those fits is in [tools/render/](tools/render/README.md), and the tools that make the records are in [tools/calibration/](tools/calibration/README.md).
 
 ## Open questions
 
@@ -263,10 +337,10 @@ Each open item below is stated in full in the linked document.
 
 ## More documentation
 
-- [Architecture guide](docs/architecture.md): what `check.py` does, how TOML is discovered and validated, how maps compile and run in memory, the generated reports, and worked examples of each operator. The [visual architecture report](docs/architecture.html), [standalone diagram](docs/architecture.svg) and [TOML file index](docs/toml-index.csv) describe the same data 0.4.0 tree as the guide.
+- [Architecture guide](docs/architecture.md): what `check.py` does, how TOML is discovered and validated, how maps compile and run in memory, the generated reports, and worked examples of each operator. The [TOML file index](docs/toml-index.csv) describes the same data 0.5.0 tree as the guide. The [visual architecture report](docs/architecture.html) and [standalone diagram](docs/architecture.svg) still show the data 0.4.0 tree, without the canonical expression set.
 - [Expression sets](docs/expression-sets.md): every profile file, with its documentation, pinned source and licence.
 - [Godot comparison](docs/godot_comparison.md): RCEF's FB2 → ARKit mappings compared with the routes in Godot's public sources.
-- [Canonical expression set (draft)](docs/canonical-set.md): the proposed pivot vocabulary, with its [definitions audit](docs/canonical-set-audit.md) and the [FACS intensity codec](docs/facs-intensity.md). It is a proposal for review; the data does not hold it yet.
+- [Canonical expression set (draft)](docs/canonical-set.md): the proposed pivot vocabulary, with its [definitions audit](docs/canonical-set-audit.md) and the [FACS intensity codec](docs/facs-intensity.md). It is a proposal for review. Data 0.5.0 holds its expression part as the draft profile `rcef.canonical_expression`, with its maps; the visemes and the later signal groups are not in the data yet.
 - [Survey](survey.md), [proposal](proposal.md), [references](references.md) and [source evidence](evidence/sources.toml).
 - [Review](REVIEW.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
 - [Calibration notes](docs/calibration/): the physical capture design, the action unit dataset review and the MediaPipe licence check.

@@ -27,12 +27,17 @@ def authoring_files(root: Path = ROOT) -> list[Path]:
         files += [Path(directory) / n for n in names if not n.startswith('.') and n.endswith('.toml')]
     return sorted(files)
 
+# RCEF's canonical profiles, counted in the canonical_signals column.
+CANONICAL = ('rcef.canonical', 'rcef.canonical_expression', 'rcef.canonical_viseme')
+
 
 def role(path: str, document: dict) -> str:
     if path == 'pack.toml':
         return 'pack metadata'
     if path == 'data/canonical.toml':
         return 'canonical signals and profile'
+    if path == 'data/canonical_expression.toml':
+        return 'canonical expression signals and profile'
     if path == 'data/intermediate.toml':
         return 'intermediate signals and profile'
     if 'evidence' in document:
@@ -46,7 +51,7 @@ def render(root: Path = ROOT) -> str:
     files = authoring_files(root)
     documents = {f: tomllib.loads(f.read_text(encoding='utf-8')) for f in files}
     canonical = {s for d in documents.values() for p in d.get('profiles', [])
-                 if p['id'] == 'rcef.canonical' for s in p['signal_ids']}
+                 if p['id'] in CANONICAL for s in p['signal_ids']}
     out = io.StringIO()
     writer = csv.writer(out, lineterminator='\n')
     writer.writerow(COLUMNS)
