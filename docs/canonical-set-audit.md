@@ -13,10 +13,10 @@ This audit goes with the draft [canonical expression set](canonical-set.md). It 
   - one row for each pair of canonical signal and phase-1 source that maps it;
   - one row for each pair of canonical signal with a FACS code and FACS crosswalk record that a hop of that signal cites. Today the only such record is `ict_facekit`. A crosswalk difference on a signal whose hops do not cite the record is a [note](#crosswalk-notes) with no key;
   - one row for each canonical signal that a FACS hop links, plus rows for the FACS encoding and frame.
-- **Each row** gives the source's name, the evidence record and locator, and an RCEF paraphrase of the source's definition. The canonical definitions are in the [signal table](canonical-set.md#expression-signals). Records whose licence is "reference only", or that state no licence, allow no copying of prose: the Apple, VRM and VRCFaceTracking documentation records. RCEF paraphrases every row in the same way, whatever the licence.
+- **Each row** gives the source's name, the evidence record and locator, and an RCEF paraphrase of the source's definition. A paraphrase says what moves, which way and on which side, in RCEF's own words. Whose side is settled once per source in [Frames](#frames-whose-left). The canonical definitions are in the [signal table](canonical-set.md#expression-signals). Records whose licence is "reference only", or that state no licence, allow no copying of prose: the Apple, VRM and VRCFaceTracking documentation records. RCEF paraphrases every row in the same way, whatever the licence.
 - **Verdicts:**
   - `same`: the source's own text or figure names the action that the canonical definition describes. It needs a cited locator. Without evidence the verdict is `unresolved`.
-  - `differs`: the source defines a different or wider action. The row gives the owning hop and a stable loss key.
+  - `differs`: the source defines a different or wider action. A source also differs when it names a main direction that the canonical definition does not have, or leaves out one that it has. A minor qualifier in the source, such as "slightly" or "often", does not change the verdict. The row gives the owning hop and a stable loss key.
   - `unresolved`: the evidence is missing or conflicts. The row gives the owning hop and a stable loss key.
 - **Hops.** "ARKit in and out" means the ARKit in-map and out-map of the signal's group, for example `arkit_face.to_rcef` and `rcef_face.to_arkit`. The [loss keys](#loss-keys) table gives each key's text.
 - **Locators** are line numbers in the pinned source file of the record, unless the row says otherwise. For `apple_blendshapes` the locator is the abstract of the named coefficient in Apple's JSON data.
@@ -32,7 +32,7 @@ This audit goes with the draft [canonical expression set](canonical-set.md). It 
 
 | Source | Signals | Evidence | Verdict | Owning hop, key |
 |---|---|---|---|---|
-| ARKit | every sided ARKit row, and the direction words of `jaw_sideways_*`, `mouth_shift_*` and gaze | `apple_blendshapes`, Discussion: left and right in the coefficient names are relative to the face, and `eyeBlinkRight` is the face's right eye | `same` | — |
+| ARKit | every sided ARKit row, and the direction words of `jaw_sideways_*`, `mouth_shift_*` and gaze | `apple_blendshapes`, Discussion: the sides in the coefficient names belong to the face itself, so `eyeBlinkRight` is the face's own right eye. One exception: the abstract of `mouthStretchRight` names the other corner, so the `lip_stretch_right` row is `unresolved` ([ARKit](#arkit)) | `same` | — |
 | FB2 | every FB2 row with a side or a direction suffix, gaze and `jaw_sideways_*` and `mouth_shift_*` included | The figures show the subject's own side: EYES_CLOSED_L closes the eye on the viewer's right (`xr_fb2_fig_eyes_closed_l`); EYES_LOOK_LEFT_L turns that eye toward the viewer's right, the temple (`xr_fb2_fig_eyes_look_left_l`); MOUTH_LEFT moves the mouth toward the viewer's right (`xr_fb2_fig_mouth_left`). The text ties the direction to the side name: MOUTH_LEFT pulls the left lip corner leftward (`xr_fb2` 835-836). The JAW_SIDEWAYS_LEFT figure (`xr_fb2` 671), enlarged, shows the chin and lower lip moving toward the viewer's right; this agrees | `same` | — |
 | Unified Expressions | every sided Unified Expressions row | The figures show the subject's own side: EyeClosedLeft closes the eye on the viewer's right (`vrcft_fig_eyeclosedleft`); EyeLookOutLeft turns that eye toward the viewer's right, the temple (`vrcft_fig_eyelookoutleft`); MouthUpperLeft moves the upper lip toward the viewer's right (`vrcft_fig_mouthupperleft`). The JawLeft figure has no neutral figure beside it, so it settles nothing; the jaw rows follow the text and the MouthUpperLeft figure | `same` | — |
 | VRCFaceTracking eye | `eye_close_*`, `pupil_diameter_mm_*` | The same project computes `v2/EyeClosedLeft` as 1 − `Eye.Left.Openness` (`vrcft_code_parameters` 40), so the EyeClosedLeft figure applies | `same` | — |
@@ -41,80 +41,80 @@ This audit goes with the draft [canonical expression set](canonical-set.md). It 
 
 ## FB2
 
-Record `xr_fb2` (OpenXR-Docs `5a82d45`, CC-BY-4.0). Every weight is in [0, 1]: 0 is not active, 1 is fully active (lines 351-353). 70 rows: 62 `same`, 8 `differs`. The two gaze keys are `fb2_gaze_rotation` and `fb2_gaze_max_angle_unspecified`.
+Record `xr_fb2` (OpenXR-Docs `5a82d45`, CC-BY-4.0). Every weight is in [0, 1]: 0 is not active, 1 is fully active (lines 351-353). 70 rows: 62 `same`, 8 `differs`. Each gaze row carries two keys, `fb2_gaze_rotation` and `fb2_gaze_max_angle_unspecified`. The FB2 gaze in-hop also carries `fb2_gaze_exclusive`; that is a hop loss, not a verdict on one signal.
 
 | Signal | Source name | Locator | Paraphrase | Verdict | Owning hop, key |
 |---|---|---|---|---|---|
-| `brow_inner_raise_left` | INNER_BROW_RAISER_L | `xr_fb2` 654-655 | lifts the inner part of the left brow and the forehead | same | — |
-| `brow_inner_raise_right` | INNER_BROW_RAISER_R | `xr_fb2` 660-661 | lifts the inner part of the right brow and the forehead | same | — |
-| `brow_outer_raise_left` | OUTER_BROW_RAISER_L | `xr_fb2` 861-862 | lifts the outer part of the left brow and the forehead | same | — |
-| `brow_outer_raise_right` | OUTER_BROW_RAISER_R | `xr_fb2` 867-868 | lifts the outer part of the right brow and the forehead | same | — |
-| `brow_lower_left` | BROW_LOWERER_L | `xr_fb2` 512-513 | lowers the left brow and draws it in; the middle of the forehead lowers too | same | — |
-| `brow_lower_right` | BROW_LOWERER_R | `xr_fb2` 518-519 | lowers the right brow and draws it in; the middle of the forehead lowers too | same | — |
-| `eye_close_left` | EYES_CLOSED_L | `xr_fb2` 585-586 | lowers the upper lid until it covers the left eye | same | — |
-| `eye_close_right` | EYES_CLOSED_R | `xr_fb2` 591-592 | lowers the upper lid until it covers the right eye | same | — |
-| `lid_tighten_left` | LID_TIGHTENER_L | `xr_fb2` 687-689 | tightens the rings around the left eyelids and pushes the lower lid toward the inner corner | same | — |
-| `lid_tighten_right` | LID_TIGHTENER_R | `xr_fb2` 693-695 | tightens the rings around the right eyelids and pushes the lower lid toward the inner corner | same | — |
-| `upper_lid_raise_left` | UPPER_LID_RAISER_L | `xr_fb2` 873-874 | pulls the left upper lid up and back, so the eye opens wider | same | — |
-| `upper_lid_raise_right` | UPPER_LID_RAISER_R | `xr_fb2` 879-880 | pulls the right upper lid up and back, so the eye opens wider | same | — |
-| `gaze_in_left` | EYES_LOOK_RIGHT_L | `xr_fb2` 621-622 | moves the left eye with a rightward gaze; the eight LOOK weights are linear in angle, 1 is the maximum angle, and only one of two opposing directions is non-zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation` |
-| `gaze_in_right` | EYES_LOOK_LEFT_R | `xr_fb2` 615-616 | moves the right eye with a leftward gaze; the eight LOOK weights are linear in angle, 1 is the maximum angle, and only one of two opposing directions is non-zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation` |
-| `gaze_out_left` | EYES_LOOK_LEFT_L | `xr_fb2` 609-610 | moves the left eye with a leftward gaze; the eight LOOK weights are linear in angle, 1 is the maximum angle, and only one of two opposing directions is non-zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation` |
-| `gaze_out_right` | EYES_LOOK_RIGHT_R | `xr_fb2` 627-628 | moves the right eye with a rightward gaze; the eight LOOK weights are linear in angle, 1 is the maximum angle, and only one of two opposing directions is non-zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation` |
-| `gaze_up_left` | EYES_LOOK_UP_L | `xr_fb2` 633-634 | moves the left eye with a upward gaze; the eight LOOK weights are linear in angle, 1 is the maximum angle, and only one of two opposing directions is non-zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation` |
-| `gaze_up_right` | EYES_LOOK_UP_R | `xr_fb2` 639-640 | moves the right eye with a upward gaze; the eight LOOK weights are linear in angle, 1 is the maximum angle, and only one of two opposing directions is non-zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation` |
-| `gaze_down_left` | EYES_LOOK_DOWN_L | `xr_fb2` 597-598 | moves the left eye with a downward gaze; the eight LOOK weights are linear in angle, 1 is the maximum angle, and only one of two opposing directions is non-zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation` |
-| `gaze_down_right` | EYES_LOOK_DOWN_R | `xr_fb2` 603-604 | moves the right eye with a downward gaze; the eight LOOK weights are linear in angle, 1 is the maximum angle, and only one of two opposing directions is non-zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation` |
-| `cheek_puff_left` | CHEEK_PUFF_L | `xr_fb2` 524-525 | fills the left cheek with air so that it rounds outward | same | — |
-| `cheek_puff_right` | CHEEK_PUFF_R | `xr_fb2` 530-531 | fills the right cheek with air so that it rounds outward | same | — |
-| `cheek_raise_left` | CHEEK_RAISER_L | `xr_fb2` 536-537 | tightens the outer rings around the left eye and narrows the outer eye corner | same | — |
-| `cheek_raise_right` | CHEEK_RAISER_R | `xr_fb2` 542-543 | tightens the outer rings around the right eye and narrows the outer eye corner | same | — |
-| `cheek_suck_left` | CHEEK_SUCK_L | `xr_fb2` 548-549 | draws the left cheek in against the teeth | same | — |
-| `cheek_suck_right` | CHEEK_SUCK_R | `xr_fb2` 554-555 | draws the right cheek in against the teeth | same | — |
-| `nose_wrinkle_left` | NOSE_WRINKLER_L | `xr_fb2` 847-849 | lifts the left side of the nose, the nostril and the middle of the upper lip | same | — |
-| `nose_wrinkle_right` | NOSE_WRINKLER_R | `xr_fb2` 854-856 | lifts the right side of the nose, the nostril and the middle of the upper lip | same | — |
-| `jaw_drop` | JAW_DROP | `xr_fb2` 666-667 | moves the lower jaw down and back | same | — |
-| `jaw_thrust` | JAW_THRUST | `xr_fb2` 682 | moves the lower jaw forward | same | — |
-| `jaw_sideways_left` | JAW_SIDEWAYS_LEFT | `xr_fb2` 672 | moves the lower jaw leftward | same | — |
-| `jaw_sideways_right` | JAW_SIDEWAYS_RIGHT | `xr_fb2` 677 | moves the lower jaw rightward | same | — |
-| `lip_corner_pull_left` | LIP_CORNER_PULLER_L | `xr_fb2` 709-710 | draws the left lip corner up, back and outward | same | — |
-| `lip_corner_pull_right` | LIP_CORNER_PULLER_R | `xr_fb2` 715-716 | draws the right lip corner up, back and outward | same | — |
-| `lip_corner_depress_left` | LIP_CORNER_DEPRESSOR_L | `xr_fb2` 699 | draws the left lip corner down | same | — |
-| `lip_corner_depress_right` | LIP_CORNER_DEPRESSOR_R | `xr_fb2` 704 | draws the right lip corner down | same | — |
-| `dimple_left` | DIMPLER_L | `xr_fb2` 573-575 | presses the left lip corner against the teeth and draws it back, often up | same | — |
-| `dimple_right` | DIMPLER_R | `xr_fb2` 579-581 | presses the right lip corner against the teeth and draws it back, often up | same | — |
-| `lip_stretch_left` | LIP_STRETCHER_L | `xr_fb2` 769-770 | draws the left lip corner outward and stretches the lips | same | — |
-| `lip_stretch_right` | LIP_STRETCHER_R | `xr_fb2` 775-776 | draws the right lip corner outward and stretches the lips | same | — |
-| `mouth_shift_left` | MOUTH_LEFT | `xr_fb2` 835-836 | pulls the left lip corner leftward and pushes the other side of the mouth toward it | same | — |
-| `mouth_shift_right` | MOUTH_RIGHT | `xr_fb2` 841-842 | pulls the right lip corner rightward and pushes the other side of the mouth toward it | same | — |
-| `chin_raise` | CHIN_RAISER_B | `xr_fb2` 560-561 | pushes the chin skin and the lower lip up | same | — |
-| `chin_raise_upper_lip` | CHIN_RAISER_T | `xr_fb2` 566-568 | pushes the upper lip up; the text says the upward push of CHIN_RAISER_B causes it | same | — |
-| `lip_funnel_upper_left` | LIP_FUNNELER_LT | `xr_fb2` 727-729 | pushes the upper left lip outward and forward; the mouth tends to round and the lips to part | same | — |
-| `lip_funnel_upper_right` | LIP_FUNNELER_RT | `xr_fb2` 739-741 | pushes the upper right lip outward and forward; the mouth tends to round and the lips to part | same | — |
-| `lip_funnel_lower_left` | LIP_FUNNELER_LB | `xr_fb2` 721-723 | pushes the lower left lip outward and forward; the mouth tends to round and the lips to part | same | — |
-| `lip_funnel_lower_right` | LIP_FUNNELER_RB | `xr_fb2` 733-735 | pushes the lower right lip outward and forward; the mouth tends to round and the lips to part | same | — |
-| `lip_pucker_left` | LIP_PUCKER_L | `xr_fb2` 757-758 | draws the left lip corner toward the middle so that the lips push forward | same | — |
-| `lip_pucker_right` | LIP_PUCKER_R | `xr_fb2` 763-764 | draws the right lip corner toward the middle so that the lips push forward | same | — |
-| `lip_suck_upper_left` | LIP_SUCK_LT | `xr_fb2` 787-788 | draws the upper left lip into the mouth | same | — |
-| `lip_suck_upper_right` | LIP_SUCK_RT | `xr_fb2` 799-800 | draws the upper right lip into the mouth | same | — |
-| `lip_suck_lower_left` | LIP_SUCK_LB | `xr_fb2` 781-782 | draws the lower left lip into the mouth | same | — |
-| `lip_suck_lower_right` | LIP_SUCK_RB | `xr_fb2` 793-794 | draws the lower right lip into the mouth | same | — |
-| `lip_press_left` | LIP_PRESSOR_L | `xr_fb2` 745-746 | presses the left upper and lower lips together | same | — |
-| `lip_press_right` | LIP_PRESSOR_R | `xr_fb2` 751-752 | presses the right upper and lower lips together | same | — |
-| `lip_tighten_left` | LIP_TIGHTENER_L | `xr_fb2` 805-806 | narrows the left lips in the horizontal plane | same | — |
-| `lip_tighten_right` | LIP_TIGHTENER_R | `xr_fb2` 811-812 | narrows the right lips in the horizontal plane | same | — |
-| `lips_toward` | LIPS_TOWARD | `xr_fb2` 817-818 | brings the lips into contact and keeps the mouth closed, whatever the jaw position | same | — |
-| `upper_lip_raise_left` | UPPER_LIP_RAISER_L | `xr_fb2` 885-886 | lifts the left upper lip, more to the side than the nose wrinkler does | same | — |
-| `upper_lip_raise_right` | UPPER_LIP_RAISER_R | `xr_fb2` 891-892 | lifts the right upper lip, more to the side than the nose wrinkler does | same | — |
-| `lower_lip_depress_left` | LOWER_LIP_DEPRESSOR_L | `xr_fb2` 823-824 | draws the left lower lip down and a little outward | same | — |
-| `lower_lip_depress_right` | LOWER_LIP_DEPRESSOR_R | `xr_fb2` 829-830 | draws the right lower lip down and a little outward | same | — |
-| `tongue_out` | TONGUE_OUT | `xr_fb2` 928 | puts the tongue out | same | — |
-| `tongue_retreat` | TONGUE_RETREAT | `xr_fb2` 933-934 | pulls the tongue back toward the throat and keeps it low, as for the AA viseme | same | — |
-| `tongue_tip_interdental` | TONGUE_TIP_INTERDENTAL | `xr_fb2` 897-899 | puts the tongue tip on the upper teeth, just past the teeth line, as for the TH viseme | same | — |
-| `tongue_tip_alveolar` | TONGUE_TIP_ALVEOLAR | `xr_fb2` 904-905 | puts the tongue tip on the back of the upper teeth, as for the NN viseme | same | — |
-| `tongue_front_dorsal_palate` | TONGUE_FRONT_DORSAL_PALATE | `xr_fb2` 910-911 | presses the front of the tongue on the palate, as for the CH viseme | same | — |
-| `tongue_mid_dorsal_palate` | TONGUE_MID_DORSAL_PALATE | `xr_fb2` 916-917 | presses the middle of the tongue on the palate, as for the DD viseme | same | — |
-| `tongue_back_dorsal_velar` | TONGUE_BACK_DORSAL_VELAR | `xr_fb2` 922-923 | presses the back of the tongue on the palate, as for the KK viseme | same | — |
+| `brow_inner_raise_left` | INNER_BROW_RAISER_L | `xr_fb2` 654-655 | raises the left eyebrow's end nearest the nose, with the skin above it | same | — |
+| `brow_inner_raise_right` | INNER_BROW_RAISER_R | `xr_fb2` 660-661 | raises the right eyebrow's end nearest the nose, with the skin above it | same | — |
+| `brow_outer_raise_left` | OUTER_BROW_RAISER_L | `xr_fb2` 861-862 | raises the left eyebrow's end nearest the temple, with the skin above it | same | — |
+| `brow_outer_raise_right` | OUTER_BROW_RAISER_R | `xr_fb2` 867-868 | raises the right eyebrow's end nearest the temple, with the skin above it | same | — |
+| `brow_lower_left` | BROW_LOWERER_L | `xr_fb2` 512-513 | pulls the left eyebrow down and toward the centre line; the middle of the brow region drops as well | same | — |
+| `brow_lower_right` | BROW_LOWERER_R | `xr_fb2` 518-519 | pulls the right eyebrow down and toward the centre line; the middle of the brow region drops as well | same | — |
+| `eye_close_left` | EYES_CLOSED_L | `xr_fb2` 585-586 | brings the upper lid of the left eye down until the eye is shut | same | — |
+| `eye_close_right` | EYES_CLOSED_R | `xr_fb2` 591-592 | brings the upper lid of the right eye down until the eye is shut | same | — |
+| `lid_tighten_left` | LID_TIGHTENER_L | `xr_fb2` 687-689 | narrows the left eye: the muscle round the lids contracts, and the bottom lid's skin moves in toward the corner by the nose | same | — |
+| `lid_tighten_right` | LID_TIGHTENER_R | `xr_fb2` 693-695 | narrows the right eye: the muscle round the lids contracts, and the bottom lid's skin moves in toward the corner by the nose | same | — |
+| `upper_lid_raise_left` | UPPER_LID_RAISER_L | `xr_fb2` 873-874 | opens the left eye wider by lifting its upper lid and drawing it back | same | — |
+| `upper_lid_raise_right` | UPPER_LID_RAISER_R | `xr_fb2` 879-880 | opens the right eye wider by lifting its upper lid and drawing it back | same | — |
+| `gaze_in_left` | EYES_LOOK_RIGHT_L | `xr_fb2` 621-622 | turns the left eye to the right; the weight is proportional to the rotation angle and reaches 1 at the largest angle, and at most one weight of an opposing pair is above zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation`, `fb2_gaze_max_angle_unspecified` |
+| `gaze_in_right` | EYES_LOOK_LEFT_R | `xr_fb2` 615-616 | turns the right eye to the left; the weight is proportional to the rotation angle and reaches 1 at the largest angle, and at most one weight of an opposing pair is above zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation`, `fb2_gaze_max_angle_unspecified` |
+| `gaze_out_left` | EYES_LOOK_LEFT_L | `xr_fb2` 609-610 | turns the left eye to the left; the weight is proportional to the rotation angle and reaches 1 at the largest angle, and at most one weight of an opposing pair is above zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation`, `fb2_gaze_max_angle_unspecified` |
+| `gaze_out_right` | EYES_LOOK_RIGHT_R | `xr_fb2` 627-628 | turns the right eye to the right; the weight is proportional to the rotation angle and reaches 1 at the largest angle, and at most one weight of an opposing pair is above zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation`, `fb2_gaze_max_angle_unspecified` |
+| `gaze_up_left` | EYES_LOOK_UP_L | `xr_fb2` 633-634 | turns the left eye up; the weight is proportional to the rotation angle and reaches 1 at the largest angle, and at most one weight of an opposing pair is above zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation`, `fb2_gaze_max_angle_unspecified` |
+| `gaze_up_right` | EYES_LOOK_UP_R | `xr_fb2` 639-640 | turns the right eye up; the weight is proportional to the rotation angle and reaches 1 at the largest angle, and at most one weight of an opposing pair is above zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation`, `fb2_gaze_max_angle_unspecified` |
+| `gaze_down_left` | EYES_LOOK_DOWN_L | `xr_fb2` 597-598 | turns the left eye down; the weight is proportional to the rotation angle and reaches 1 at the largest angle, and at most one weight of an opposing pair is above zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation`, `fb2_gaze_max_angle_unspecified` |
+| `gaze_down_right` | EYES_LOOK_DOWN_R | `xr_fb2` 603-604 | turns the right eye down; the weight is proportional to the rotation angle and reaches 1 at the largest angle, and at most one weight of an opposing pair is above zero (lines 643-649) | differs | FB2 gaze in and out, `fb2_gaze_rotation`, `fb2_gaze_max_angle_unspecified` |
+| `cheek_puff_left` | CHEEK_PUFF_L | `xr_fb2` 524-525 | inflates the left cheek so that it bulges | same | — |
+| `cheek_puff_right` | CHEEK_PUFF_R | `xr_fb2` 530-531 | inflates the right cheek so that it bulges | same | — |
+| `cheek_raise_left` | CHEEK_RAISER_L | `xr_fb2` 536-537 | contracts the outermost muscle ring round the left eye socket, which narrows the eye at its temple-side corner | same | — |
+| `cheek_raise_right` | CHEEK_RAISER_R | `xr_fb2` 542-543 | contracts the outermost muscle ring round the right eye socket, which narrows the eye at its temple-side corner | same | — |
+| `cheek_suck_left` | CHEEK_SUCK_L | `xr_fb2` 548-549 | pulls the left cheek inward so that it sinks | same | — |
+| `cheek_suck_right` | CHEEK_SUCK_R | `xr_fb2` 554-555 | pulls the right cheek inward so that it sinks | same | — |
+| `nose_wrinkle_left` | NOSE_WRINKLER_L | `xr_fb2` 847-849 | wrinkles the nose by raising its left flank and nostril; the centre of the top lip rises too | same | — |
+| `nose_wrinkle_right` | NOSE_WRINKLER_R | `xr_fb2` 854-856 | wrinkles the nose by raising its right flank and nostril; the centre of the top lip rises too | same | — |
+| `jaw_drop` | JAW_DROP | `xr_fb2` 666-667 | opens the mouth by swinging the jawbone down and back | same | — |
+| `jaw_thrust` | JAW_THRUST | `xr_fb2` 682 | pushes the jawbone out to the front | same | — |
+| `jaw_sideways_left` | JAW_SIDEWAYS_LEFT | `xr_fb2` 672 | shifts the jawbone to the left | same | — |
+| `jaw_sideways_right` | JAW_SIDEWAYS_RIGHT | `xr_fb2` 677 | shifts the jawbone to the right | same | — |
+| `lip_corner_pull_left` | LIP_CORNER_PULLER_L | `xr_fb2` 709-710 | pulls the left end of the lips upward, backward and out to the side | same | — |
+| `lip_corner_pull_right` | LIP_CORNER_PULLER_R | `xr_fb2` 715-716 | pulls the right end of the lips upward, backward and out to the side | same | — |
+| `lip_corner_depress_left` | LIP_CORNER_DEPRESSOR_L | `xr_fb2` 699 | pulls the left end of the lips down | same | — |
+| `lip_corner_depress_right` | LIP_CORNER_DEPRESSOR_R | `xr_fb2` 704 | pulls the right end of the lips down | same | — |
+| `dimple_left` | DIMPLER_L | `xr_fb2` 573-575 | presses the left end of the lips onto the teeth and moves it back, often a little up | same | — |
+| `dimple_right` | DIMPLER_R | `xr_fb2` 579-581 | presses the right end of the lips onto the teeth and moves it back, often a little up | same | — |
+| `lip_stretch_left` | LIP_STRETCHER_L | `xr_fb2` 769-770 | pulls the left end of the lips out toward the ear, so that the mouth goes wide and flat | same | — |
+| `lip_stretch_right` | LIP_STRETCHER_R | `xr_fb2` 775-776 | pulls the right end of the lips out toward the ear, so that the mouth goes wide and flat | same | — |
+| `mouth_shift_left` | MOUTH_LEFT | `xr_fb2` 835-836 | moves the whole mouth to the left: the left end leads and the other half follows | same | — |
+| `mouth_shift_right` | MOUTH_RIGHT | `xr_fb2` 841-842 | moves the whole mouth to the right: the right end leads and the other half follows | same | — |
+| `chin_raise` | CHIN_RAISER_B | `xr_fb2` 560-561 | lifts the soft tissue of the chin along with the bottom lip | same | — |
+| `chin_raise_upper_lip` | CHIN_RAISER_T | `xr_fb2` 566-568 | raises the top lip as a side effect of the chin and bottom lip rising (CHIN_RAISER_B) | same | — |
+| `lip_funnel_upper_left` | LIP_FUNNELER_LT | `xr_fb2` 727-729 | pushes the upper left quarter of the lips forward and turns it out; the mouth tends to become round and open | same | — |
+| `lip_funnel_upper_right` | LIP_FUNNELER_RT | `xr_fb2` 739-741 | pushes the upper right quarter of the lips forward and turns it out; the mouth tends to become round and open | same | — |
+| `lip_funnel_lower_left` | LIP_FUNNELER_LB | `xr_fb2` 721-723 | pushes the lower left quarter of the lips forward and turns it out; the mouth tends to become round and open | same | — |
+| `lip_funnel_lower_right` | LIP_FUNNELER_RB | `xr_fb2` 733-735 | pushes the lower right quarter of the lips forward and turns it out; the mouth tends to become round and open | same | — |
+| `lip_pucker_left` | LIP_PUCKER_L | `xr_fb2` 757-758 | pulls the left end of the lips toward the centre so that the lips push forward | same | — |
+| `lip_pucker_right` | LIP_PUCKER_R | `xr_fb2` 763-764 | pulls the right end of the lips toward the centre so that the lips push forward | same | — |
+| `lip_suck_upper_left` | LIP_SUCK_LT | `xr_fb2` 787-788 | rolls the upper left quarter of the lips inward, into the mouth | same | — |
+| `lip_suck_upper_right` | LIP_SUCK_RT | `xr_fb2` 799-800 | rolls the upper right quarter of the lips inward, into the mouth | same | — |
+| `lip_suck_lower_left` | LIP_SUCK_LB | `xr_fb2` 781-782 | rolls the lower left quarter of the lips inward, into the mouth | same | — |
+| `lip_suck_lower_right` | LIP_SUCK_RB | `xr_fb2` 793-794 | rolls the lower right quarter of the lips inward, into the mouth | same | — |
+| `lip_press_left` | LIP_PRESSOR_L | `xr_fb2` 745-746 | squeezes the left halves of both lips together | same | — |
+| `lip_press_right` | LIP_PRESSOR_R | `xr_fb2` 751-752 | squeezes the right halves of both lips together | same | — |
+| `lip_tighten_left` | LIP_TIGHTENER_L | `xr_fb2` 805-806 | makes the left part of the lips thinner and tighter from side to side | same | — |
+| `lip_tighten_right` | LIP_TIGHTENER_R | `xr_fb2` 811-812 | makes the right part of the lips thinner and tighter from side to side | same | — |
+| `lips_toward` | LIPS_TOWARD | `xr_fb2` 817-818 | brings upper and lower lip together so that the mouth stays shut, whatever the jaw does | same | — |
+| `upper_lip_raise_left` | UPPER_LIP_RAISER_L | `xr_fb2` 885-886 | raises the left part of the top lip, farther from the midline than the nose wrinkle does | same | — |
+| `upper_lip_raise_right` | UPPER_LIP_RAISER_R | `xr_fb2` 891-892 | raises the right part of the top lip, farther from the midline than the nose wrinkle does | same | — |
+| `lower_lip_depress_left` | LOWER_LIP_DEPRESSOR_L | `xr_fb2` 823-824 | pulls the left part of the bottom lip down and a little to the side | same | — |
+| `lower_lip_depress_right` | LOWER_LIP_DEPRESSOR_R | `xr_fb2` 829-830 | pulls the right part of the bottom lip down and a little to the side | same | — |
+| `tongue_out` | TONGUE_OUT | `xr_fb2` 928 | extends the tongue out of the mouth | same | — |
+| `tongue_retreat` | TONGUE_RETREAT | `xr_fb2` 933-934 | retracts the tongue into the rear of the mouth and holds it flat, as when saying AA | same | — |
+| `tongue_tip_interdental` | TONGUE_TIP_INTERDENTAL | `xr_fb2` 897-899 | puts the tongue's point against the upper incisors, just showing between them, as for TH | same | — |
+| `tongue_tip_alveolar` | TONGUE_TIP_ALVEOLAR | `xr_fb2` 904-905 | puts the tongue's point on the inner face of the upper incisors, as for NN | same | — |
+| `tongue_front_dorsal_palate` | TONGUE_FRONT_DORSAL_PALATE | `xr_fb2` 910-911 | pushes the forward part of the tongue up onto the roof of the mouth, as for CH | same | — |
+| `tongue_mid_dorsal_palate` | TONGUE_MID_DORSAL_PALATE | `xr_fb2` 916-917 | pushes the centre of the tongue up onto the roof of the mouth, as for DD | same | — |
+| `tongue_back_dorsal_velar` | TONGUE_BACK_DORSAL_VELAR | `xr_fb2` 922-923 | pushes the rear of the tongue up toward the soft roof of the mouth, as for KK | same | — |
 
 ## ARKit
 
@@ -122,148 +122,150 @@ Record `apple_blendshapes` (Apple documentation data, reference only). Each coef
 
 | Signal | Source name | Locator | Paraphrase | Verdict | Owning hop, key |
 |---|---|---|---|---|---|
-| `brow_inner_raise_left` | browInnerUp | `apple_blendshapes`, abstract of `browInnerUp` | the inner parts of both brows move up (one coefficient for both sides) | same | — |
-| `brow_inner_raise_right` | browInnerUp | `apple_blendshapes`, abstract of `browInnerUp` | the inner parts of both brows move up (one coefficient for both sides) | same | — |
-| `brow_outer_raise_left` | browOuterUpLeft | `apple_blendshapes`, abstract of `browOuterUpLeft` | the outer part of the left brow moves up | same | — |
-| `brow_outer_raise_right` | browOuterUpRight | `apple_blendshapes`, abstract of `browOuterUpRight` | the outer part of the right brow moves up | same | — |
-| `brow_lower_left` | browDownLeft | `apple_blendshapes`, abstract of `browDownLeft` | the outer part of the left brow moves down; the canonical signal is the whole brow lowering | differs | ARKit in and out, `arkit_browdown_outer` |
-| `brow_lower_right` | browDownRight | `apple_blendshapes`, abstract of `browDownRight` | the outer part of the right brow moves down; the canonical signal is the whole brow lowering | differs | ARKit in and out, `arkit_browdown_outer` |
-| `eye_close_left` | eyeBlinkLeft | `apple_blendshapes`, abstract of `eyeBlinkLeft` | the lids close over the left eye | same | — |
-| `eye_close_right` | eyeBlinkRight | `apple_blendshapes`, abstract of `eyeBlinkRight` | the lids close over the right eye | same | — |
-| `lid_tighten_left` | eyeSquintLeft | `apple_blendshapes`, abstract of `eyeSquintLeft` | the face around the left eye contracts; the canonical signal is the lids only | differs | ARKit in and out, `arkit_eyesquint_face` |
-| `lid_tighten_right` | eyeSquintRight | `apple_blendshapes`, abstract of `eyeSquintRight` | the face around the right eye contracts; the canonical signal is the lids only | differs | ARKit in and out, `arkit_eyesquint_face` |
-| `upper_lid_raise_left` | eyeWideLeft | `apple_blendshapes`, abstract of `eyeWideLeft` | the lids around the left eye widen | same | — |
-| `upper_lid_raise_right` | eyeWideRight | `apple_blendshapes`, abstract of `eyeWideRight` | the lids around the right eye widen | same | — |
-| `gaze_in_left` | eyeLookInLeft | `apple_blendshapes`, abstract of `eyeLookInLeft` | the left eyelids move as they do with a rightward gaze; eyelid movement, not eye rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
-| `gaze_in_right` | eyeLookInRight | `apple_blendshapes`, abstract of `eyeLookInRight` | the right eyelids move as they do with a leftward gaze; eyelid movement, not eye rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
-| `gaze_out_left` | eyeLookOutLeft | `apple_blendshapes`, abstract of `eyeLookOutLeft` | the left eyelids move as they do with a leftward gaze; eyelid movement, not eye rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
-| `gaze_out_right` | eyeLookOutRight | `apple_blendshapes`, abstract of `eyeLookOutRight` | the right eyelids move as they do with a rightward gaze; eyelid movement, not eye rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
-| `gaze_up_left` | eyeLookUpLeft | `apple_blendshapes`, abstract of `eyeLookUpLeft` | the left eyelids move as they do with a upward gaze; eyelid movement, not eye rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
-| `gaze_up_right` | eyeLookUpRight | `apple_blendshapes`, abstract of `eyeLookUpRight` | the right eyelids move as they do with a upward gaze; eyelid movement, not eye rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
-| `gaze_down_left` | eyeLookDownLeft | `apple_blendshapes`, abstract of `eyeLookDownLeft` | the left eyelids move as they do with a downward gaze; eyelid movement, not eye rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
-| `gaze_down_right` | eyeLookDownRight | `apple_blendshapes`, abstract of `eyeLookDownRight` | the right eyelids move as they do with a downward gaze; eyelid movement, not eye rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
-| `cheek_puff_left` | cheekPuff | `apple_blendshapes`, abstract of `cheekPuff` | both cheeks move outward (one coefficient for both sides) | same | — |
-| `cheek_puff_right` | cheekPuff | `apple_blendshapes`, abstract of `cheekPuff` | both cheeks move outward (one coefficient for both sides) | same | — |
-| `cheek_raise_left` | cheekSquintLeft | `apple_blendshapes`, abstract of `cheekSquintLeft` | the cheek around and below the left eye moves up; the canonical signal is the tightening of the ring around the eye | differs | ARKit in and out, `arkit_cheeksquint_cheek` |
-| `cheek_raise_right` | cheekSquintRight | `apple_blendshapes`, abstract of `cheekSquintRight` | the cheek around and below the right eye moves up; the canonical signal is the tightening of the ring around the eye | differs | ARKit in and out, `arkit_cheeksquint_cheek` |
-| `nose_wrinkle_left` | noseSneerLeft | `apple_blendshapes`, abstract of `noseSneerLeft` | the left side of the nose rises around the nostril | same | — |
-| `nose_wrinkle_right` | noseSneerRight | `apple_blendshapes`, abstract of `noseSneerRight` | the right side of the nose rises around the nostril | same | — |
-| `jaw_drop` | jawOpen | `apple_blendshapes`, abstract of `jawOpen` | the lower jaw opens | same | — |
-| `jaw_thrust` | jawForward | `apple_blendshapes`, abstract of `jawForward` | the lower jaw moves forward | same | — |
-| `jaw_sideways_left` | jawLeft | `apple_blendshapes`, abstract of `jawLeft` | the lower jaw moves leftward | same | — |
-| `jaw_sideways_right` | jawRight | `apple_blendshapes`, abstract of `jawRight` | the lower jaw moves rightward | same | — |
-| `lip_corner_pull_left` | mouthSmileLeft | `apple_blendshapes`, abstract of `mouthSmileLeft` | the left mouth corner moves up; upward only, where the canonical signal is also back and outward | differs | ARKit in and out, `arkit_mouthsmile_upward` |
-| `lip_corner_pull_right` | mouthSmileRight | `apple_blendshapes`, abstract of `mouthSmileRight` | the right mouth corner moves up; upward only, where the canonical signal is also back and outward | differs | ARKit in and out, `arkit_mouthsmile_upward` |
-| `lip_corner_depress_left` | mouthFrownLeft | `apple_blendshapes`, abstract of `mouthFrownLeft` | the left mouth corner moves down | same | — |
-| `lip_corner_depress_right` | mouthFrownRight | `apple_blendshapes`, abstract of `mouthFrownRight` | the right mouth corner moves down | same | — |
-| `dimple_left` | mouthDimpleLeft | `apple_blendshapes`, abstract of `mouthDimpleLeft` | the left mouth corner moves back | same | — |
-| `dimple_right` | mouthDimpleRight | `apple_blendshapes`, abstract of `mouthDimpleRight` | the right mouth corner moves back | same | — |
-| `lip_stretch_left` | mouthStretchLeft | `apple_blendshapes`, abstract of `mouthStretchLeft` | the left mouth corner moves leftward | same | — |
-| `lip_stretch_right` | mouthStretchRight | `apple_blendshapes`, abstract of `mouthStretchRight` | the abstract describes rightward movement but names the left mouth corner; the coefficient name and RCEF's profile (`side = "right"`) say right | unresolved | ARKit in and out, `arkit_mouthstretchright_text_side` |
-| `mouth_shift_left` | mouthLeft | `apple_blendshapes`, abstract of `mouthLeft` | both lips move leftward together | same | — |
-| `mouth_shift_right` | mouthRight | `apple_blendshapes`, abstract of `mouthRight` | both lips move rightward together | same | — |
-| `chin_raise` | mouthShrugLower | `apple_blendshapes`, abstract of `mouthShrugLower` | the lower lip moves outward; the canonical signal pushes the chin and lower lip up | differs | ARKit in and out, `arkit_mouthshrug_outward` |
-| `chin_raise_upper_lip` | mouthShrugUpper | `apple_blendshapes`, abstract of `mouthShrugUpper` | the upper lip moves outward; the canonical signal pushes it up | differs | ARKit in and out, `arkit_mouthshrug_outward` |
-| `lip_funnel_upper_left` | mouthFunnel | `apple_blendshapes`, abstract of `mouthFunnel` | both lips contract into an open shape (one coefficient for all four parts) | same | — |
-| `lip_funnel_upper_right` | mouthFunnel | `apple_blendshapes`, abstract of `mouthFunnel` | both lips contract into an open shape (one coefficient for all four parts) | same | — |
-| `lip_funnel_lower_left` | mouthFunnel | `apple_blendshapes`, abstract of `mouthFunnel` | both lips contract into an open shape (one coefficient for all four parts) | same | — |
-| `lip_funnel_lower_right` | mouthFunnel | `apple_blendshapes`, abstract of `mouthFunnel` | both lips contract into an open shape (one coefficient for all four parts) | same | — |
-| `lip_pucker_left` | mouthPucker | `apple_blendshapes`, abstract of `mouthPucker` | both closed lips contract and are compressed (one coefficient for both sides); no forward push is stated, where the canonical signal pushes the lips forward | differs | ARKit in and out, `arkit_mouthpucker_compression` |
-| `lip_pucker_right` | mouthPucker | `apple_blendshapes`, abstract of `mouthPucker` | both closed lips contract and are compressed (one coefficient for both sides); no forward push is stated, where the canonical signal pushes the lips forward | differs | ARKit in and out, `arkit_mouthpucker_compression` |
-| `lip_suck_upper_left` | mouthRollUpper | `apple_blendshapes`, abstract of `mouthRollUpper` | the upper lip moves into the mouth (one coefficient for both sides) | same | — |
-| `lip_suck_upper_right` | mouthRollUpper | `apple_blendshapes`, abstract of `mouthRollUpper` | the upper lip moves into the mouth (one coefficient for both sides) | same | — |
-| `lip_suck_lower_left` | mouthRollLower | `apple_blendshapes`, abstract of `mouthRollLower` | the lower lip moves into the mouth (one coefficient for both sides) | same | — |
-| `lip_suck_lower_right` | mouthRollLower | `apple_blendshapes`, abstract of `mouthRollLower` | the lower lip moves into the mouth (one coefficient for both sides) | same | — |
-| `lip_press_left` | mouthPressLeft | `apple_blendshapes`, abstract of `mouthPressLeft` | the lower lip is compressed upward on the left side; the canonical signal presses both lips together | differs | ARKit in and out, `arkit_mouthpress_lower_lip` |
-| `lip_press_right` | mouthPressRight | `apple_blendshapes`, abstract of `mouthPressRight` | the lower lip is compressed upward on the right side; the canonical signal presses both lips together | differs | ARKit in and out, `arkit_mouthpress_lower_lip` |
-| `lips_toward` | mouthClose | `apple_blendshapes`, abstract of `mouthClose` | the lips close, and the abstract stresses that this is apart from the jaw position. RCEF's own calibration record reads ARKit as defining it together with jawOpen (`calibration/rig-gains.ict-rocketbox-female.cal` line 21), and on the ICT rig mouthClose alone failed 24 of 24 held-out conditions (`examples/data/rig_gains.json` line 105). The evidence conflicts | unresolved | ARKit in and out, `arkit_mouthclose_jaw_unresolved` |
-| `upper_lip_raise_left` | mouthUpperUpLeft | `apple_blendshapes`, abstract of `mouthUpperUpLeft` | the upper lip moves up on the left side | same | — |
-| `upper_lip_raise_right` | mouthUpperUpRight | `apple_blendshapes`, abstract of `mouthUpperUpRight` | the upper lip moves up on the right side | same | — |
-| `lower_lip_depress_left` | mouthLowerDownLeft | `apple_blendshapes`, abstract of `mouthLowerDownLeft` | the lower lip moves down on the left side | same | — |
-| `lower_lip_depress_right` | mouthLowerDownRight | `apple_blendshapes`, abstract of `mouthLowerDownRight` | the lower lip moves down on the right side | same | — |
-| `tongue_out` | tongueOut | `apple_blendshapes`, abstract of `tongueOut` | the tongue extends; no length is stated (existing loss "no stated length" on each `tongue_out` hop) | same | — |
+| `brow_inner_raise_left` | browInnerUp | `apple_blendshapes`, abstract of `browInnerUp` | both brows rise at their ends nearest the nose (one value for the two sides) | same | — |
+| `brow_inner_raise_right` | browInnerUp | `apple_blendshapes`, abstract of `browInnerUp` | both brows rise at their ends nearest the nose (one value for the two sides) | same | — |
+| `brow_outer_raise_left` | browOuterUpLeft | `apple_blendshapes`, abstract of `browOuterUpLeft` | the left brow rises at its temple end | same | — |
+| `brow_outer_raise_right` | browOuterUpRight | `apple_blendshapes`, abstract of `browOuterUpRight` | the right brow rises at its temple end | same | — |
+| `brow_lower_left` | browDownLeft | `apple_blendshapes`, abstract of `browDownLeft` | the left brow drops at its temple end only; the canonical signal is the whole brow lowering | differs | ARKit in and out, `arkit_browdown_outer` |
+| `brow_lower_right` | browDownRight | `apple_blendshapes`, abstract of `browDownRight` | the right brow drops at its temple end only; the canonical signal is the whole brow lowering | differs | ARKit in and out, `arkit_browdown_outer` |
+| `eye_close_left` | eyeBlinkLeft | `apple_blendshapes`, abstract of `eyeBlinkLeft` | the lids of the left eye come together and shut it | same | — |
+| `eye_close_right` | eyeBlinkRight | `apple_blendshapes`, abstract of `eyeBlinkRight` | the lids of the right eye come together and shut it | same | — |
+| `lid_tighten_left` | eyeSquintLeft | `apple_blendshapes`, abstract of `eyeSquintLeft` | the skin and muscle surrounding the left eye squeeze in; the canonical signal is the lids only | differs | ARKit in and out, `arkit_eyesquint_face` |
+| `lid_tighten_right` | eyeSquintRight | `apple_blendshapes`, abstract of `eyeSquintRight` | the skin and muscle surrounding the right eye squeeze in; the canonical signal is the lids only | differs | ARKit in and out, `arkit_eyesquint_face` |
+| `upper_lid_raise_left` | eyeWideLeft | `apple_blendshapes`, abstract of `eyeWideLeft` | the lids of the left eye open farther apart | same | — |
+| `upper_lid_raise_right` | eyeWideRight | `apple_blendshapes`, abstract of `eyeWideRight` | the lids of the right eye open farther apart | same | — |
+| `gaze_in_left` | eyeLookInLeft | `apple_blendshapes`, abstract of `eyeLookInLeft` | the left lids shift the way they do when the eyes look to the right; this is lid motion, not eyeball rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
+| `gaze_in_right` | eyeLookInRight | `apple_blendshapes`, abstract of `eyeLookInRight` | the right lids shift the way they do when the eyes look to the left; this is lid motion, not eyeball rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
+| `gaze_out_left` | eyeLookOutLeft | `apple_blendshapes`, abstract of `eyeLookOutLeft` | the left lids shift the way they do when the eyes look to the left; this is lid motion, not eyeball rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
+| `gaze_out_right` | eyeLookOutRight | `apple_blendshapes`, abstract of `eyeLookOutRight` | the right lids shift the way they do when the eyes look to the right; this is lid motion, not eyeball rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
+| `gaze_up_left` | eyeLookUpLeft | `apple_blendshapes`, abstract of `eyeLookUpLeft` | the left lids shift the way they do when the eyes look up; this is lid motion, not eyeball rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
+| `gaze_up_right` | eyeLookUpRight | `apple_blendshapes`, abstract of `eyeLookUpRight` | the right lids shift the way they do when the eyes look up; this is lid motion, not eyeball rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
+| `gaze_down_left` | eyeLookDownLeft | `apple_blendshapes`, abstract of `eyeLookDownLeft` | the left lids shift the way they do when the eyes look down; this is lid motion, not eyeball rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
+| `gaze_down_right` | eyeLookDownRight | `apple_blendshapes`, abstract of `eyeLookDownRight` | the right lids shift the way they do when the eyes look down; this is lid motion, not eyeball rotation | differs | ARKit in and out, `arkit_gaze_eyelid` |
+| `cheek_puff_left` | cheekPuff | `apple_blendshapes`, abstract of `cheekPuff` | the two cheeks bulge (one value for both sides) | same | — |
+| `cheek_puff_right` | cheekPuff | `apple_blendshapes`, abstract of `cheekPuff` | the two cheeks bulge (one value for both sides) | same | — |
+| `cheek_raise_left` | cheekSquintLeft | `apple_blendshapes`, abstract of `cheekSquintLeft` | the left cheek rises under and beside the eye; the canonical signal is the ring round the eye tightening, with no cheek movement stated | differs | ARKit in and out, `arkit_cheeksquint_cheek` |
+| `cheek_raise_right` | cheekSquintRight | `apple_blendshapes`, abstract of `cheekSquintRight` | the right cheek rises under and beside the eye; the canonical signal is the ring round the eye tightening, with no cheek movement stated | differs | ARKit in and out, `arkit_cheeksquint_cheek` |
+| `nose_wrinkle_left` | noseSneerLeft | `apple_blendshapes`, abstract of `noseSneerLeft` | the left flank of the nose and its nostril go up | same | — |
+| `nose_wrinkle_right` | noseSneerRight | `apple_blendshapes`, abstract of `noseSneerRight` | the right flank of the nose and its nostril go up | same | — |
+| `jaw_drop` | jawOpen | `apple_blendshapes`, abstract of `jawOpen` | the jawbone drops and the mouth gapes | same | — |
+| `jaw_thrust` | jawForward | `apple_blendshapes`, abstract of `jawForward` | the jawbone pushes out to the front | same | — |
+| `jaw_sideways_left` | jawLeft | `apple_blendshapes`, abstract of `jawLeft` | the jawbone shifts to the face's left | same | — |
+| `jaw_sideways_right` | jawRight | `apple_blendshapes`, abstract of `jawRight` | the jawbone shifts to the face's right | same | — |
+| `lip_corner_pull_left` | mouthSmileLeft | `apple_blendshapes`, abstract of `mouthSmileLeft` | the left end of the lips rises; only the upward motion is stated, where the canonical signal also draws it back and out | differs | ARKit in and out, `arkit_mouthsmile_upward` |
+| `lip_corner_pull_right` | mouthSmileRight | `apple_blendshapes`, abstract of `mouthSmileRight` | the right end of the lips rises; only the upward motion is stated, where the canonical signal also draws it back and out | differs | ARKit in and out, `arkit_mouthsmile_upward` |
+| `lip_corner_depress_left` | mouthFrownLeft | `apple_blendshapes`, abstract of `mouthFrownLeft` | the left end of the lips sinks | same | — |
+| `lip_corner_depress_right` | mouthFrownRight | `apple_blendshapes`, abstract of `mouthFrownRight` | the right end of the lips sinks | same | — |
+| `dimple_left` | mouthDimpleLeft | `apple_blendshapes`, abstract of `mouthDimpleLeft` | the left end of the lips is drawn back | same | — |
+| `dimple_right` | mouthDimpleRight | `apple_blendshapes`, abstract of `mouthDimpleRight` | the right end of the lips is drawn back | same | — |
+| `lip_stretch_left` | mouthStretchLeft | `apple_blendshapes`, abstract of `mouthStretchLeft` | the left end of the lips is drawn out to the left | same | — |
+| `lip_stretch_right` | mouthStretchRight | `apple_blendshapes`, abstract of `mouthStretchRight` | the text describes a pull to the right but applies it to the corner on the other side; the coefficient name and RCEF's profile (`side = "right"`) say right | unresolved | ARKit in and out, `arkit_mouthstretchright_text_side` |
+| `mouth_shift_left` | mouthLeft | `apple_blendshapes`, abstract of `mouthLeft` | the whole mouth slides toward the face's left | same | — |
+| `mouth_shift_right` | mouthRight | `apple_blendshapes`, abstract of `mouthRight` | the whole mouth slides toward the face's right | same | — |
+| `chin_raise` | mouthShrugLower | `apple_blendshapes`, abstract of `mouthShrugLower` | the bottom lip pushes out; the canonical signal lifts the chin and bottom lip | differs | ARKit in and out, `arkit_mouthshrug_outward` |
+| `chin_raise_upper_lip` | mouthShrugUpper | `apple_blendshapes`, abstract of `mouthShrugUpper` | the top lip pushes out; the canonical signal lifts it | differs | ARKit in and out, `arkit_mouthshrug_outward` |
+| `lip_funnel_upper_left` | mouthFunnel | `apple_blendshapes`, abstract of `mouthFunnel` | the lips draw in to form a rounded opening (one value for all four parts) | same | — |
+| `lip_funnel_upper_right` | mouthFunnel | `apple_blendshapes`, abstract of `mouthFunnel` | the lips draw in to form a rounded opening (one value for all four parts) | same | — |
+| `lip_funnel_lower_left` | mouthFunnel | `apple_blendshapes`, abstract of `mouthFunnel` | the lips draw in to form a rounded opening (one value for all four parts) | same | — |
+| `lip_funnel_lower_right` | mouthFunnel | `apple_blendshapes`, abstract of `mouthFunnel` | the lips draw in to form a rounded opening (one value for all four parts) | same | — |
+| `lip_pucker_left` | mouthPucker | `apple_blendshapes`, abstract of `mouthPucker` | the shut lips draw together and squeeze (one value for both sides); no forward push is stated, where the canonical signal pushes the lips forward | differs | ARKit in and out, `arkit_mouthpucker_compression` |
+| `lip_pucker_right` | mouthPucker | `apple_blendshapes`, abstract of `mouthPucker` | the shut lips draw together and squeeze (one value for both sides); no forward push is stated, where the canonical signal pushes the lips forward | differs | ARKit in and out, `arkit_mouthpucker_compression` |
+| `lip_suck_upper_left` | mouthRollUpper | `apple_blendshapes`, abstract of `mouthRollUpper` | the top lip turns inward (one value for both sides) | same | — |
+| `lip_suck_upper_right` | mouthRollUpper | `apple_blendshapes`, abstract of `mouthRollUpper` | the top lip turns inward (one value for both sides) | same | — |
+| `lip_suck_lower_left` | mouthRollLower | `apple_blendshapes`, abstract of `mouthRollLower` | the bottom lip turns inward (one value for both sides) | same | — |
+| `lip_suck_lower_right` | mouthRollLower | `apple_blendshapes`, abstract of `mouthRollLower` | the bottom lip turns inward (one value for both sides) | same | — |
+| `lip_press_left` | mouthPressLeft | `apple_blendshapes`, abstract of `mouthPressLeft` | on the left, the bottom lip is pushed up and squashed; the canonical signal presses both lips together | differs | ARKit in and out, `arkit_mouthpress_lower_lip` |
+| `lip_press_right` | mouthPressRight | `apple_blendshapes`, abstract of `mouthPressRight` | on the right, the bottom lip is pushed up and squashed; the canonical signal presses both lips together | differs | ARKit in and out, `arkit_mouthpress_lower_lip` |
+| `lips_toward` | mouthClose | `apple_blendshapes`, abstract of `mouthClose` | the lips come together, and the text stresses that this does not depend on how far the jaw is open. RCEF's own calibration record reads ARKit as defining it together with jawOpen (`calibration/rig-gains.ict-rocketbox-female.cal` line 21), and on the ICT rig mouthClose alone failed 24 of 24 held-out conditions (`examples/data/rig_gains.json` line 105). The evidence conflicts | unresolved | ARKit in and out, `arkit_mouthclose_jaw_unresolved` |
+| `upper_lip_raise_left` | mouthUpperUpLeft | `apple_blendshapes`, abstract of `mouthUpperUpLeft` | the top lip rises on the left | same | — |
+| `upper_lip_raise_right` | mouthUpperUpRight | `apple_blendshapes`, abstract of `mouthUpperUpRight` | the top lip rises on the right | same | — |
+| `lower_lip_depress_left` | mouthLowerDownLeft | `apple_blendshapes`, abstract of `mouthLowerDownLeft` | the bottom lip drops on the left | same | — |
+| `lower_lip_depress_right` | mouthLowerDownRight | `apple_blendshapes`, abstract of `mouthLowerDownRight` | the bottom lip drops on the right | same | — |
+| `tongue_out` | tongueOut | `apple_blendshapes`, abstract of `tongueOut` | the tongue comes forward out of the mouth; no length is stated (existing loss "no stated length" on each `tongue_out` hop) | same | — |
 
 ## VRCFaceTracking Unified Expressions
 
-Record `vrcft_docs_shapes` (VRCFaceTracking docs `3036f46`, reference only). Phase 1 has out-maps only. 64 rows: 41 `same`, 21 `differs`, 2 `unresolved`. The out-hops for `cheek_suck_*` and `lip_tighten_*` come with the FB2-only signals.
+Record `vrcft_docs_shapes` (VRCFaceTracking docs `3036f46`, reference only). Phase 1 has out-maps only. 64 rows: 39 `same`, 23 `differs`, 2 `unresolved`. The out-hops for `cheek_suck_*` and `lip_tighten_*` come with the FB2-only signals.
+
+On gaze, the row paraphrase says only what this table states: a direction, with no largest angle. The loss that the hop carries keeps the wording of today's ARKit → Unified Expressions loss, "eyelid and eye movement; no maximum angle stated". The eyelid part comes from today's map, not from this table row; the key `vrcft_ue_gaze_no_angle` carries both.
 
 | Signal | Source name | Locator | Paraphrase | Verdict | Owning hop, key |
 |---|---|---|---|---|---|
-| `brow_inner_raise_left` | BrowInnerUpLeft | `vrcft_docs_shapes` 147 | the inner part of the left brow pulls up | same | — |
-| `brow_inner_raise_right` | BrowInnerUpRight | `vrcft_docs_shapes` 142 | the inner part of the right brow pulls up | same | — |
-| `brow_outer_raise_left` | BrowOuterUpLeft | `vrcft_docs_shapes` 157 | the outer part of the left brow pulls up | same | — |
-| `brow_outer_raise_right` | BrowOuterUpRight | `vrcft_docs_shapes` 152 | the outer part of the right brow pulls up | same | — |
-| `brow_lower_left` | BrowLowererLeft and BrowPinchLeft | `vrcft_docs_shapes` 137, 127 | two parts: the outer left brow pulls down, and the left brow pinches in; the canonical signal is the whole action, and the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
-| `brow_lower_right` | BrowLowererRight and BrowPinchRight | `vrcft_docs_shapes` 132, 122 | two parts: the outer right brow pulls down, and the right brow pinches in; the canonical signal is the whole action, and the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
-| `eye_close_left` | EyeClosedLeft | `vrcft_docs_shapes` 77 | closes the left eyelid | same | — |
-| `eye_close_right` | EyeClosedRight | `vrcft_docs_shapes` 72 | closes the right eyelid | same | — |
-| `lid_tighten_left` | EyeSquintLeft | `vrcft_docs_shapes` 87 | squeezes the muscles of the left eye socket; the canonical signal is the lids only | differs | VRCFT UE out, `vrcft_ue_eyesquint_socket` |
-| `lid_tighten_right` | EyeSquintRight | `vrcft_docs_shapes` 82 | squeezes the muscles of the right eye socket; the canonical signal is the lids only | differs | VRCFT UE out, `vrcft_ue_eyesquint_socket` |
-| `upper_lid_raise_left` | EyeWideLeft | `vrcft_docs_shapes` 97 | the left eyelid opens wider than relaxed | same | — |
-| `upper_lid_raise_right` | EyeWideRight | `vrcft_docs_shapes` 92 | the right eyelid opens wider than relaxed | same | — |
-| `gaze_in_left` | EyeLookInLeft | `vrcft_docs_shapes` 57 | the left eye looks in; no maximum angle is stated | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
-| `gaze_in_right` | EyeLookInRight | `vrcft_docs_shapes` 37 | the right eye looks in; no maximum angle is stated | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
-| `gaze_out_left` | EyeLookOutLeft | `vrcft_docs_shapes` 52 | the left eye looks out; no maximum angle is stated | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
-| `gaze_out_right` | EyeLookOutRight | `vrcft_docs_shapes` 32 | the right eye looks out; no maximum angle is stated | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
-| `gaze_up_left` | EyeLookUpLeft | `vrcft_docs_shapes` 62 | the left eye looks up; no maximum angle is stated | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
-| `gaze_up_right` | EyeLookUpRight | `vrcft_docs_shapes` 42 | the right eye looks up; no maximum angle is stated | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
-| `gaze_down_left` | EyeLookDownLeft | `vrcft_docs_shapes` 67 | the left eye looks down; no maximum angle is stated | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
-| `gaze_down_right` | EyeLookDownRight | `vrcft_docs_shapes` 47 | the right eye looks down; no maximum angle is stated | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
-| `cheek_puff_left` | CheekPuffLeft | `vrcft_docs_shapes` 207 | puffs the left cheek | same | — |
-| `cheek_puff_right` | CheekPuffRight | `vrcft_docs_shapes` 202 | puffs the right cheek | same | — |
-| `cheek_raise_left` | CheekSquintLeft | `vrcft_docs_shapes` 197 | raises the left cheek; the canonical signal is the tightening of the ring around the eye | differs | VRCFT UE out, `vrcft_ue_cheeksquint_cheek` |
-| `cheek_raise_right` | CheekSquintRight | `vrcft_docs_shapes` 192 | raises the right cheek; the canonical signal is the tightening of the ring around the eye | differs | VRCFT UE out, `vrcft_ue_cheeksquint_cheek` |
-| `cheek_suck_left` | CheekSuckLeft | `vrcft_docs_shapes` 217 | sucks in the left cheek (out-hop added with the FB2-only signals) | same | — |
-| `cheek_suck_right` | CheekSuckRight | `vrcft_docs_shapes` 212 | sucks in the right cheek (out-hop added with the FB2-only signals) | same | — |
-| `nose_wrinkle_left` | NoseSneerLeft | `vrcft_docs_shapes` 167 | the left side of the face sneers; the shape is named for the nose | same | — |
-| `nose_wrinkle_right` | NoseSneerRight | `vrcft_docs_shapes` 162 | the right side of the face sneers; the shape is named for the nose | same | — |
-| `jaw_drop` | JawOpen | `vrcft_docs_shapes` 222 | opens the jaw | same | — |
-| `jaw_thrust` | JawForward | `vrcft_docs_shapes` 242 | pushes the jaw forward | same | — |
-| `jaw_sideways_left` | JawLeft | `vrcft_docs_shapes` 237 | pushes the jaw to the left | same | — |
-| `jaw_sideways_right` | JawRight | `vrcft_docs_shapes` 232 | pushes the jaw to the right | same | — |
-| `lip_corner_pull_left` | MouthCornerPullLeft and MouthCornerSlantLeft | `vrcft_docs_shapes` 387, 397 | two parts: the left corner pulls up and out on a diagonal, and the left corner slants up; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
-| `lip_corner_pull_right` | MouthCornerPullRight and MouthCornerSlantRight | `vrcft_docs_shapes` 382, 392 | two parts: the right corner pulls up and out on a diagonal, and the right corner slants up; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
-| `lip_corner_depress_left` | MouthFrownLeft | `vrcft_docs_shapes` 407 | the left lip corner pulls down | same | — |
-| `lip_corner_depress_right` | MouthFrownRight | `vrcft_docs_shapes` 402 | the right lip corner pulls down | same | — |
-| `dimple_left` | MouthDimpleLeft | `vrcft_docs_shapes` 427 | the left lip corner moves back | same | — |
-| `dimple_right` | MouthDimpleRight | `vrcft_docs_shapes` 422 | the right lip corner moves back | same | — |
-| `lip_stretch_left` | MouthStretchLeft | `vrcft_docs_shapes` 417 | the left lip corner pulls out and down | same | — |
-| `lip_stretch_right` | MouthStretchRight | `vrcft_docs_shapes` 412 | the right lip corner pulls out and down | same | — |
-| `mouth_shift_left` | MouthUpperLeft and MouthLowerLeft | `vrcft_docs_shapes` 367, 377 | two parts: the upper lip moves to the left, and the lower lip moves to the left; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
-| `mouth_shift_right` | MouthUpperRight and MouthLowerRight | `vrcft_docs_shapes` 362, 372 | two parts: the upper lip moves to the right, and the lower lip moves to the right; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
-| `chin_raise` | MouthRaiserLower | `vrcft_docs_shapes` 437 | the lower mouth rises and pushes out a little | same | — |
-| `chin_raise_upper_lip` | MouthRaiserUpper | `vrcft_docs_shapes` 432 | the upper mouth rises and pushes out a little | same | — |
-| `lip_funnel_upper_left` | LipFunnelUpperLeft | `vrcft_docs_shapes` 297 | the upper left part of the lips pushes into a funnel | same | — |
-| `lip_funnel_upper_right` | LipFunnelUpperRight | `vrcft_docs_shapes` 292 | the upper right part of the lips pushes into a funnel | same | — |
-| `lip_funnel_lower_left` | LipFunnelLowerLeft | `vrcft_docs_shapes` 307 | the lower left part of the lips pushes into a funnel | same | — |
-| `lip_funnel_lower_right` | LipFunnelLowerRight | `vrcft_docs_shapes` 302 | the lower right part of the lips pushes into a funnel | same | — |
-| `lip_pucker_left` | LipPuckerUpperLeft and LipPuckerLowerLeft | `vrcft_docs_shapes` 317, 327 | two parts: the upper and the lower left part of the lips push outward; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
-| `lip_pucker_right` | LipPuckerUpperRight and LipPuckerLowerRight | `vrcft_docs_shapes` 312, 322 | two parts: the upper and the lower right part of the lips push outward; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
-| `lip_suck_upper_left` | LipSuckUpperLeft | `vrcft_docs_shapes` 267 | the upper left part of the lips tucks into the mouth | same | — |
-| `lip_suck_upper_right` | LipSuckUpperRight | `vrcft_docs_shapes` 262 | the upper right part of the lips tucks into the mouth | same | — |
-| `lip_suck_lower_left` | LipSuckLowerLeft | `vrcft_docs_shapes` 277 | the lower left part of the lips tucks into the mouth | same | — |
-| `lip_suck_lower_right` | LipSuckLowerRight | `vrcft_docs_shapes` 272 | the lower right part of the lips tucks into the mouth | same | — |
-| `lip_press_left` | MouthPressLeft | `vrcft_docs_shapes` 447 | the left lips press together and flatten vertically | same | — |
-| `lip_press_right` | MouthPressRight | `vrcft_docs_shapes` 442 | the right lips press together and flatten vertically | same | — |
-| `lip_tighten_left` | MouthTightenerLeft | `vrcft_docs_shapes` 457 | the left lips squeeze together horizontally (out-hop added with the FB2-only signals) | same | — |
-| `lip_tighten_right` | MouthTightenerRight | `vrcft_docs_shapes` 452 | the right lips squeeze together horizontally (out-hop added with the FB2-only signals) | same | — |
-| `lips_toward` | MouthClosed | `vrcft_docs_shapes` 227 | closes the mouth relative to JawOpen; the canonical signal is defined at any jaw opening | differs | VRCFT UE out, `vrcft_ue_mouthclosed_jaw_relative` |
-| `upper_lip_raise_left` | MouthUpperUpLeft | `vrcft_docs_shapes` 337 | the upper left part of the lip pulls up | same | — |
-| `upper_lip_raise_right` | MouthUpperUpRight | `vrcft_docs_shapes` 332 | the upper right part of the lip pulls up | same | — |
-| `lower_lip_depress_left` | MouthLowerDownLeft | `vrcft_docs_shapes` 347 | the docs say the lower left part of the lip pulls up, while the name says down (RCEF's profile, `profiles/vrcft.artist.base.toml` lines 1009 and 1025) | unresolved | VRCFT UE out, `vrcft_ue_mouthlowerdown_direction_unresolved` |
-| `lower_lip_depress_right` | MouthLowerDownRight | `vrcft_docs_shapes` 342 | the docs say the lower right part of the lip pulls up, while the name says down (RCEF's profile, `profiles/vrcft.artist.base.toml` lines 1009 and 1025) | unresolved | VRCFT UE out, `vrcft_ue_mouthlowerdown_direction_unresolved` |
-| `tongue_out` | TongueOut | `vrcft_docs_shapes` 462 | the tongue sticks out of the mouth where it can be seen; no length is stated (existing loss "no stated length") | same | — |
+| `brow_inner_raise_left` | BrowInnerUpLeft | `vrcft_docs_shapes` 147 | the left brow rises at its nose end | same | — |
+| `brow_inner_raise_right` | BrowInnerUpRight | `vrcft_docs_shapes` 142 | the right brow rises at its nose end | same | — |
+| `brow_outer_raise_left` | BrowOuterUpLeft | `vrcft_docs_shapes` 157 | the left brow rises at its temple end | same | — |
+| `brow_outer_raise_right` | BrowOuterUpRight | `vrcft_docs_shapes` 152 | the right brow rises at its temple end | same | — |
+| `brow_lower_left` | BrowLowererLeft and BrowPinchLeft | `vrcft_docs_shapes` 137, 127 | two parts: the temple end of the left brow drops, and the brow draws toward the centre; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
+| `brow_lower_right` | BrowLowererRight and BrowPinchRight | `vrcft_docs_shapes` 132, 122 | two parts: the temple end of the right brow drops, and the brow draws toward the centre; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
+| `eye_close_left` | EyeClosedLeft | `vrcft_docs_shapes` 77 | the left eye shuts | same | — |
+| `eye_close_right` | EyeClosedRight | `vrcft_docs_shapes` 72 | the right eye shuts | same | — |
+| `lid_tighten_left` | EyeSquintLeft | `vrcft_docs_shapes` 87 | the ring round the left eye clamps down; the canonical signal is the lids only | differs | VRCFT UE out, `vrcft_ue_eyesquint_socket` |
+| `lid_tighten_right` | EyeSquintRight | `vrcft_docs_shapes` 82 | the ring round the right eye clamps down; the canonical signal is the lids only | differs | VRCFT UE out, `vrcft_ue_eyesquint_socket` |
+| `upper_lid_raise_left` | EyeWideLeft | `vrcft_docs_shapes` 97 | the left eye opens more than at rest | same | — |
+| `upper_lid_raise_right` | EyeWideRight | `vrcft_docs_shapes` 92 | the right eye opens more than at rest | same | — |
+| `gaze_in_left` | EyeLookInLeft | `vrcft_docs_shapes` 57 | the left eye turns toward the nose; no largest angle is given | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
+| `gaze_in_right` | EyeLookInRight | `vrcft_docs_shapes` 37 | the right eye turns toward the nose; no largest angle is given | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
+| `gaze_out_left` | EyeLookOutLeft | `vrcft_docs_shapes` 52 | the left eye turns toward the temple; no largest angle is given | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
+| `gaze_out_right` | EyeLookOutRight | `vrcft_docs_shapes` 32 | the right eye turns toward the temple; no largest angle is given | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
+| `gaze_up_left` | EyeLookUpLeft | `vrcft_docs_shapes` 62 | the left eye turns upward; no largest angle is given | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
+| `gaze_up_right` | EyeLookUpRight | `vrcft_docs_shapes` 42 | the right eye turns upward; no largest angle is given | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
+| `gaze_down_left` | EyeLookDownLeft | `vrcft_docs_shapes` 67 | the left eye turns downward; no largest angle is given | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
+| `gaze_down_right` | EyeLookDownRight | `vrcft_docs_shapes` 47 | the right eye turns downward; no largest angle is given | differs | VRCFT UE out, `vrcft_ue_gaze_no_angle` |
+| `cheek_puff_left` | CheekPuffLeft | `vrcft_docs_shapes` 207 | air bulges the left cheek | same | — |
+| `cheek_puff_right` | CheekPuffRight | `vrcft_docs_shapes` 202 | air bulges the right cheek | same | — |
+| `cheek_raise_left` | CheekSquintLeft | `vrcft_docs_shapes` 197 | the left cheek goes up; the canonical signal is the ring round the eye tightening, with no cheek movement stated | differs | VRCFT UE out, `vrcft_ue_cheeksquint_cheek` |
+| `cheek_raise_right` | CheekSquintRight | `vrcft_docs_shapes` 192 | the right cheek goes up; the canonical signal is the ring round the eye tightening, with no cheek movement stated | differs | VRCFT UE out, `vrcft_ue_cheeksquint_cheek` |
+| `cheek_suck_left` | CheekSuckLeft | `vrcft_docs_shapes` 217 | the left cheek is drawn inward and hollows (out-hop added with the FB2-only signals) | same | — |
+| `cheek_suck_right` | CheekSuckRight | `vrcft_docs_shapes` 212 | the right cheek is drawn inward and hollows (out-hop added with the FB2-only signals) | same | — |
+| `nose_wrinkle_left` | NoseSneerLeft | `vrcft_docs_shapes` 167 | the left half of the face curls into a snarl; the shape is named for the nose | same | — |
+| `nose_wrinkle_right` | NoseSneerRight | `vrcft_docs_shapes` 162 | the right half of the face curls into a snarl; the shape is named for the nose | same | — |
+| `jaw_drop` | JawOpen | `vrcft_docs_shapes` 222 | the jaw drops and the mouth gapes | same | — |
+| `jaw_thrust` | JawForward | `vrcft_docs_shapes` 242 | the jaw juts out to the front | same | — |
+| `jaw_sideways_left` | JawLeft | `vrcft_docs_shapes` 237 | the jaw shifts toward the left | same | — |
+| `jaw_sideways_right` | JawRight | `vrcft_docs_shapes` 232 | the jaw shifts toward the right | same | — |
+| `lip_corner_pull_left` | MouthCornerPullLeft and MouthCornerSlantLeft | `vrcft_docs_shapes` 387, 397 | two parts: the left end of the lips goes upward and outward at an angle, and the left end tilts upward; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
+| `lip_corner_pull_right` | MouthCornerPullRight and MouthCornerSlantRight | `vrcft_docs_shapes` 382, 392 | two parts: the right end of the lips goes upward and outward at an angle, and the right end tilts upward; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
+| `lip_corner_depress_left` | MouthFrownLeft | `vrcft_docs_shapes` 407 | the left end of the lips sinks | same | — |
+| `lip_corner_depress_right` | MouthFrownRight | `vrcft_docs_shapes` 402 | the right end of the lips sinks | same | — |
+| `dimple_left` | MouthDimpleLeft | `vrcft_docs_shapes` 427 | the left end of the lips is drawn back | same | — |
+| `dimple_right` | MouthDimpleRight | `vrcft_docs_shapes` 422 | the right end of the lips is drawn back | same | — |
+| `lip_stretch_left` | MouthStretchLeft | `vrcft_docs_shapes` 417 | the left end of the lips is drawn outward and downward; the canonical signal pulls outward only | differs | VRCFT UE out, `vrcft_ue_mouthstretch_down` |
+| `lip_stretch_right` | MouthStretchRight | `vrcft_docs_shapes` 412 | the right end of the lips is drawn outward and downward; the canonical signal pulls outward only | differs | VRCFT UE out, `vrcft_ue_mouthstretch_down` |
+| `mouth_shift_left` | MouthUpperLeft and MouthLowerLeft | `vrcft_docs_shapes` 367, 377 | two parts: the top lip and the bottom lip each slide to the left; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
+| `mouth_shift_right` | MouthUpperRight and MouthLowerRight | `vrcft_docs_shapes` 362, 372 | two parts: the top lip and the bottom lip each slide to the right; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
+| `chin_raise` | MouthRaiserLower | `vrcft_docs_shapes` 437 | the bottom lip area goes up and a little forward | same | — |
+| `chin_raise_upper_lip` | MouthRaiserUpper | `vrcft_docs_shapes` 432 | the top lip area goes up and a little forward | same | — |
+| `lip_funnel_upper_left` | LipFunnelUpperLeft | `vrcft_docs_shapes` 297 | the upper left quarter of the lips flares into a cone shape | same | — |
+| `lip_funnel_upper_right` | LipFunnelUpperRight | `vrcft_docs_shapes` 292 | the upper right quarter of the lips flares into a cone shape | same | — |
+| `lip_funnel_lower_left` | LipFunnelLowerLeft | `vrcft_docs_shapes` 307 | the lower left quarter of the lips flares into a cone shape | same | — |
+| `lip_funnel_lower_right` | LipFunnelLowerRight | `vrcft_docs_shapes` 302 | the lower right quarter of the lips flares into a cone shape | same | — |
+| `lip_pucker_left` | LipPuckerUpperLeft and LipPuckerLowerLeft | `vrcft_docs_shapes` 317, 327 | two parts: the top and the bottom left quarter of the lips protrude; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
+| `lip_pucker_right` | LipPuckerUpperRight and LipPuckerLowerRight | `vrcft_docs_shapes` 312, 322 | two parts: the top and the bottom right quarter of the lips protrude; the out-hop sets both parts equal | differs | VRCFT UE out, `vrcft_ue_set_equal` |
+| `lip_suck_upper_left` | LipSuckUpperLeft | `vrcft_docs_shapes` 267 | the upper left quarter of the lips rolls inward | same | — |
+| `lip_suck_upper_right` | LipSuckUpperRight | `vrcft_docs_shapes` 262 | the upper right quarter of the lips rolls inward | same | — |
+| `lip_suck_lower_left` | LipSuckLowerLeft | `vrcft_docs_shapes` 277 | the lower left quarter of the lips rolls inward | same | — |
+| `lip_suck_lower_right` | LipSuckLowerRight | `vrcft_docs_shapes` 272 | the lower right quarter of the lips rolls inward | same | — |
+| `lip_press_left` | MouthPressLeft | `vrcft_docs_shapes` 447 | on the left, the top and bottom lips squeeze shut and go thin | same | — |
+| `lip_press_right` | MouthPressRight | `vrcft_docs_shapes` 442 | on the right, the top and bottom lips squeeze shut and go thin | same | — |
+| `lip_tighten_left` | MouthTightenerLeft | `vrcft_docs_shapes` 457 | on the left, the lips draw in and narrow across the mouth (out-hop added with the FB2-only signals) | same | — |
+| `lip_tighten_right` | MouthTightenerRight | `vrcft_docs_shapes` 452 | on the right, the lips draw in and narrow across the mouth (out-hop added with the FB2-only signals) | same | — |
+| `lips_toward` | MouthClosed | `vrcft_docs_shapes` 227 | the lips meet, measured against how open the jaw is; the canonical signal is defined at any jaw opening | differs | VRCFT UE out, `vrcft_ue_mouthclosed_jaw_relative` |
+| `upper_lip_raise_left` | MouthUpperUpLeft | `vrcft_docs_shapes` 337 | the top lip rises on the left | same | — |
+| `upper_lip_raise_right` | MouthUpperUpRight | `vrcft_docs_shapes` 332 | the top lip rises on the right | same | — |
+| `lower_lip_depress_left` | MouthLowerDownLeft | `vrcft_docs_shapes` 347 | the description says the bottom lip rises on the left, while the name says it drops (RCEF's profile, `profiles/vrcft.artist.base.toml` lines 1009 and 1025) | unresolved | VRCFT UE out, `vrcft_ue_mouthlowerdown_direction_unresolved` |
+| `lower_lip_depress_right` | MouthLowerDownRight | `vrcft_docs_shapes` 342 | the description says the bottom lip rises on the right, while the name says it drops (RCEF's profile, `profiles/vrcft.artist.base.toml` lines 1009 and 1025) | unresolved | VRCFT UE out, `vrcft_ue_mouthlowerdown_direction_unresolved` |
+| `tongue_out` | TongueOut | `vrcft_docs_shapes` 462 | the tongue extends beyond the lips where it can be seen; no length is stated (existing loss "no stated length") | same | — |
 
 ## VRCFaceTracking eye
 
-Record `vrcft_data` (VRCFaceTracking `6432e6a`, Apache-2.0). 4 rows: 2 `same`, 2 `differs`.
+Record `vrcft_data` (VRCFaceTracking `6432e6a`, Apache-2.0). 4 rows: 2 `same`, 2 `unresolved`.
 
 | Signal | Source name | Locator | Paraphrase | Verdict | Owning hop, key |
 |---|---|---|---|---|---|
-| `eye_close_left` | `Left.Openness` | `vrcft_data` 14; `vrcft_code_parameters` 40 | how open the left eye is, starting at 1; the same project computes the left eye's closure as 1 − openness. It does not say that 1 is a relaxed open eye | differs | VRCFaceTracking eye blink in and out, `vrcft_eye_openness_endpoint` |
-| `eye_close_right` | `Right.Openness` | `vrcft_data` 14; `vrcft_code_parameters` 41 | as for the left eye | differs | VRCFaceTracking eye blink in and out, `vrcft_eye_openness_endpoint` |
-| `pupil_diameter_mm_left` | `Left.PupilDiameter_MM` | `vrcft_data` 13 | the pupil diameter of the left eye in millimetres | same | — |
-| `pupil_diameter_mm_right` | `Right.PupilDiameter_MM` | `vrcft_data` 13 | the pupil diameter of the right eye in millimetres | same | — |
+| `eye_close_left` | `Left.Openness` | `vrcft_data` 14; `vrcft_code_parameters` 40 | a float for how far the left eye is open, which defaults to 1; the project derives the left eye's closure as one minus it. No source says that 1 is a relaxed, open eye, so the neutral end is missing evidence | unresolved | VRCFaceTracking eye blink in and out, `vrcft_eye_openness_neutral_unresolved` |
+| `eye_close_right` | `Right.Openness` | `vrcft_data` 14; `vrcft_code_parameters` 41 | a float for how far the right eye is open, which defaults to 1; the project derives the right eye's closure as one minus it. No source says that 1 is a relaxed, open eye | unresolved | VRCFaceTracking eye blink in and out, `vrcft_eye_openness_neutral_unresolved` |
+| `pupil_diameter_mm_left` | `Left.PupilDiameter_MM` | `vrcft_data` 13 | a float giving the left pupil's width in millimetres | same | — |
+| `pupil_diameter_mm_right` | `Right.PupilDiameter_MM` | `vrcft_data` 13 | a float giving the right pupil's width in millimetres | same | — |
 
 ## VRM
 
@@ -271,13 +273,13 @@ Record `vrm_expressions` (vrm-specification `94e82dd`, reference only). 7 rows: 
 
 | Signal | Source name | Locator | Paraphrase | Verdict | Owning hop, key |
 |---|---|---|---|---|---|
-| `eye_close_left` | `blinkLeft` | `vrm_expressions` 178 | closes the left eyelid; whose left is not stated ([Frames](#frames-whose-left)) | unresolved | VRM blink in and out, `vrm_blink_side_unresolved` |
-| `eye_close_right` | `blinkRight` | `vrm_expressions` 179 | closes the right eyelid; whose right is not stated | unresolved | VRM blink in and out, `vrm_blink_side_unresolved` |
-| `aa` | `aa` | `vrm_expressions` 163 | a lip-sync preset whose weight each model authors; remarked "aa" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
-| `ih` | `ih` | `vrm_expressions` 164 | a lip-sync preset; remarked "i", while META's IH is the vowel in "tip" | differs | VRM vowel in and out, `vrm_vowel_asset_weight`, `vrm_ih_vowel_quality` |
-| `ou` | `ou` | `vrm_expressions` 165 | a lip-sync preset; remarked "u" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
-| `e` | `ee` | `vrm_expressions` 166 | a lip-sync preset; remarked "eh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
-| `oh` | `oh` | `vrm_expressions` 167 | a lip-sync preset; remarked "oh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `eye_close_left` | `blinkLeft` | `vrm_expressions` 178 | shuts one eye, named as the left; whose left is not stated ([Frames](#frames-whose-left)) | unresolved | VRM blink in and out, `vrm_blink_side_unresolved` |
+| `eye_close_right` | `blinkRight` | `vrm_expressions` 179 | shuts one eye, named as the right; whose right is not stated | unresolved | VRM blink in and out, `vrm_blink_side_unresolved` |
+| `aa` | `aa` | `vrm_expressions` 163 | a mouth-shape preset for speech, weighted as each model's author chose; remark "aa" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `ih` | `ih` | `vrm_expressions` 164 | a mouth-shape preset for speech; remark "i", while META's IH is the vowel of "tip" | differs | VRM vowel in and out, `vrm_vowel_asset_weight`, `vrm_ih_vowel_quality` |
+| `ou` | `ou` | `vrm_expressions` 165 | a mouth-shape preset for speech; remark "u" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `e` | `ee` | `vrm_expressions` 166 | a mouth-shape preset for speech; remark "eh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `oh` | `oh` | `vrm_expressions` 167 | a mouth-shape preset for speech; remark "oh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
 
 ## META visemes
 
@@ -285,25 +287,25 @@ Record `xr_visemes` (OpenXR-Docs `5a82d45`, CC-BY-4.0). Each value is a probabil
 
 | Signal | Source name | Locator | Paraphrase | Verdict | Owning hop, key |
 |---|---|---|---|---|---|
-| `sil` | SIL | `xr_visemes` 142 | silence; META lists it as neutral | same | — |
-| `pp` | PP | `xr_visemes` 149 | the PP class, phonemes p, b, m | same | — |
-| `ff` | FF | `xr_visemes` 156 | the FF class, phonemes f, v | same | — |
-| `th` | TH | `xr_visemes` 163 | the TH class, phonemes th | same | — |
-| `dd` | DD | `xr_visemes` 170 | the DD class, phonemes t, d | same | — |
-| `kk` | KK | `xr_visemes` 177 | the KK class, phonemes k, g | same | — |
-| `ch` | CH | `xr_visemes` 184 | the CH class, phonemes tS, dZ, S | same | — |
-| `ss` | SS | `xr_visemes` 191 | the SS class, phonemes s, z | same | — |
-| `nn` | NN | `xr_visemes` 198 | the NN class, phonemes n, l | same | — |
-| `rr` | RR | `xr_visemes` 205 | the RR class, phonemes r | same | — |
-| `aa` | AA | `xr_visemes` 212 | the AA class, phonemes A:, as in car | same | — |
-| `e` | E | `xr_visemes` 219 | the E class, phonemes e, as in bed | same | — |
-| `ih` | IH | `xr_visemes` 226 | the IH class, phonemes ih, as in tip | same | — |
-| `oh` | OH | `xr_visemes` 233 | the OH class, phonemes oh, as in toe | same | — |
-| `ou` | OU | `xr_visemes` 240 | the OU class, phonemes ou, as in book | same | — |
+| `sil` | SIL | `xr_visemes` 142 | the frame is silent; META's table calls this class neutral | same | — |
+| `pp` | PP | `xr_visemes` 149 | class probability for the sounds p, b, m | same | — |
+| `ff` | FF | `xr_visemes` 156 | class probability for the sounds f, v | same | — |
+| `th` | TH | `xr_visemes` 163 | class probability for the sounds th | same | — |
+| `dd` | DD | `xr_visemes` 170 | class probability for the sounds t, d | same | — |
+| `kk` | KK | `xr_visemes` 177 | class probability for the sounds k, g | same | — |
+| `ch` | CH | `xr_visemes` 184 | class probability for the sounds tS, dZ, S | same | — |
+| `ss` | SS | `xr_visemes` 191 | class probability for the sounds s, z | same | — |
+| `nn` | NN | `xr_visemes` 198 | class probability for the sounds n, l | same | — |
+| `rr` | RR | `xr_visemes` 205 | class probability for the sounds r | same | — |
+| `aa` | AA | `xr_visemes` 212 | class probability for the sounds A:, as in car | same | — |
+| `e` | E | `xr_visemes` 219 | class probability for the sounds e, as in bed | same | — |
+| `ih` | IH | `xr_visemes` 226 | class probability for the sounds ih, as in tip | same | — |
+| `oh` | OH | `xr_visemes` 233 | class probability for the sounds oh, as in toe | same | — |
+| `ou` | OU | `xr_visemes` 240 | class probability for the sounds ou, as in book | same | — |
 
 ## FACS
 
-Record `facs_wikipedia` (Wikipedia revision 1357638399, CC-BY-SA-4.0). Wikipedia gives a code number and a name, not a criterion. So `same` means only that the FACS name names the action that the canonical definition describes. Code names are given as facts. 53 signal rows: 49 `same`, 2 `differs`, 2 `unresolved`. The four encoding and frame rows follow the table.
+Record `facs_wikipedia` (Wikipedia revision 1357638399, CC-BY-SA-4.0). Wikipedia gives a code number and a name, not a criterion. So `same` means only that the FACS name names the action that the canonical definition describes. Code names are given as facts. 53 signal rows: 49 `same`, 2 `differs`, 2 `unresolved`. Three encoding rows follow the table. The FACS side frame is in [Frames](#frames-whose-left).
 
 | Signal | FACS code (`facs.code` ID) | Locator | Code and name | Difference | Verdict | Owning hop, key |
 |---|---|---|---|---|---|---|
@@ -321,8 +323,8 @@ Record `facs_wikipedia` (Wikipedia revision 1357638399, CC-BY-SA-4.0). Wikipedia
 | `upper_lid_raise_right` | R5 (`facs.code.au05_right`) | `facs_wikipedia` raw line 95 | 5 Upper lid raiser | none on the action | same | — |
 | `cheek_puff_left` | L34 (`facs.code.au34_left`) | `facs_wikipedia` raw line 239 | 34 [Cheek] puff | none on the action | same | — |
 | `cheek_puff_right` | R34 (`facs.code.au34_right`) | `facs_wikipedia` raw line 239 | 34 [Cheek] puff | none on the action | same | — |
-| `cheek_raise_left` | L6 (`facs.code.au06_left`) | `facs_wikipedia` raw line 97 | 6 Cheek raiser | none on the action | same | — |
-| `cheek_raise_right` | R6 (`facs.code.au06_right`) | `facs_wikipedia` raw line 97 | 6 Cheek raiser | none on the action | same | — |
+| `cheek_raise_left` | L6 (`facs.code.au06_left`) | `facs_wikipedia` raw line 97 | 6 Cheek raiser | none on the action: the name is cheek raiser, and the muscle column names the orbital part of orbicularis oculi, the outer ring round the eye (raw line 97) | same | — |
+| `cheek_raise_right` | R6 (`facs.code.au06_right`) | `facs_wikipedia` raw line 97 | 6 Cheek raiser | none on the action: the name is cheek raiser, and the muscle column names the orbital part of orbicularis oculi, the outer ring round the eye (raw line 97) | same | — |
 | `cheek_suck_left` | L35 (`facs.code.au35_left`) | `facs_wikipedia` raw line 241 | 35 [Cheek] suck | none on the action | same | — |
 | `cheek_suck_right` | R35 (`facs.code.au35_right`) | `facs_wikipedia` raw line 241 | 35 [Cheek] suck | none on the action | same | — |
 | `nose_wrinkle_left` | L9 (`facs.code.au09_left`) | `facs_wikipedia` raw line 103 | 9 Nose wrinkler | none on the action | same | — |
@@ -364,7 +366,6 @@ Record `facs_wikipedia` (Wikipedia revision 1357638399, CC-BY-SA-4.0). Wikipedia
 | Canonical signals | FACS codes | Difference | Verdict | Owning hop, key |
 |---|---|---|---|---|
 | `eye_close_left`, `eye_close_right` | 45 Blink (raw line 261), 46 Wink (263); 41 Lid droop (253), 42 Slit (255), 44 Squint (259) | FACS scores blink and wink as events, apart from 43; RCEF carries closure per frame only. The codec reads 45 as two-sided AU43 and L46 or R46 as one-sided AU43, as `examples/face_pipeline.py` lines 142-147 already do. 41, 42 and 44 leave `eye_close` out ([codec](facs-intensity.md#codes-that-are-not-mapped)) | differs | the 4 AU43 hops, `facs_eyelid_events` |
-| every sided `facs.code` signal (42) and both AU30 directions | modifiers L and R (raw line 78) | see [Frames](#frames-whose-left) | unresolved | every sided FACS hop and both AU30 hops, `facs_side_frame_unresolved` |
 | every mapped `facs.code` signal (49) | intensity letters A-E (raw lines 69-75) | FACS intensity is ordinal, and E is the person's maximum; the canonical value is a declared fraction | differs | every FACS hop, `facs_ordinal_intensity` |
 | `jaw_thrust`, `jaw_sideways_*`, `cheek_puff_*`, `cheek_suck_*`, `eye_close_*` | gross behaviour codes 29, 30, 34, 35 and 43 (raw line 224; action descriptors, raw line 65) | the source gives no intensity scale for these codes; 1 is RCEF's assumption | differs | the 18 hops of these codes, `facs_gross_code_no_intensity` |
 
@@ -430,7 +431,7 @@ No hop cites these sources for the signals named, so they get no loss key.
 
 - Every `mapped` provider signal's `metadata.reason` was scanned for "unresolved", "conflict", "contradict", "while", "differs" and "unclear". Only Unified Expressions `MouthLowerDownLeft` and `MouthLowerDownRight` match (`profiles/vrcft.artist.base.toml` lines 1009 and 1025). Their rows are `unresolved`.
 - Today's assumptions marked "FLAGGED" are the VRM side (catalogue a26) and the Godot-only mouthLeft and mouthRight names (a24, a29, a30). The VRM side is an `unresolved` row. The mouth names concern which output gets a value, not a frame; the ARKit and FB2 frame rows settle the direction.
-- New in this audit: Apple's abstract for `mouthStretchRight` describes rightward movement of the left corner of the mouth. The name and RCEF's profile say right. The row is `unresolved`.
+- New in this audit: Apple's abstract for `mouthStretchRight` applies the rightward movement to the corner on the other side. The name and RCEF's profile say right. The row is `unresolved`.
 
 ## Loss keys
 
@@ -438,12 +439,12 @@ No hop cites these sources for the signals named, so they get no loss key.
 |---|---|---|---|
 | `fb2_gaze_rotation` | differs | FB2 gaze in and out | source describes eye rotation, linear in angle; the canonical value claims no curve |
 | `fb2_gaze_max_angle_unspecified` | differs | FB2 gaze in and out | FB2 maximum gaze angle is unspecified |
-| `fb2_gaze_exclusive` | differs | FB2 gaze in and out | FB2 opposing directions are mutually exclusive; the canonical set states no such constraint |
+| `fb2_gaze_exclusive` | differs | FB2 gaze in | FB2 opposing directions are mutually exclusive; the canonical set states no such constraint |
 | `arkit_gaze_eyelid` | differs | ARKit gaze in and out | source describes eyelid movement consistent with the gaze |
-| `vrcft_ue_gaze_no_angle` | differs | Unified Expressions gaze out | source describes eye movement in a direction; no maximum angle stated |
+| `vrcft_ue_gaze_no_angle` | differs | Unified Expressions gaze out | source describes eyelid and eye movement; no maximum angle stated (the wording of today's ARKit → Unified Expressions loss) |
 | `arkit_browdown_outer` | differs | ARKit face in and out | ARKit describes the outer part of the brow; the canonical signal is the whole brow lowering |
 | `arkit_eyesquint_face` | differs | ARKit face in and out | ARKit describes contraction of the face around the eye; the canonical signal is the lids only |
-| `arkit_cheeksquint_cheek` | differs | ARKit face in and out | ARKit describes the cheek moving up around and below the eye; the canonical signal is the tightening of the ring around the eye |
+| `arkit_cheeksquint_cheek` | differs | ARKit face in and out | ARKit describes the cheek moving up around and below the eye; the canonical signal is the tightening of the ring around the eye, with no cheek movement |
 | `arkit_mouthpress_lower_lip` | differs | ARKit face in and out | ARKit describes upward compression of the lower lip; the canonical signal presses both lips together |
 | `arkit_mouthsmile_upward` | differs | ARKit face in and out | ARKit describes upward movement only; the canonical signal also draws the corner back and outward |
 | `arkit_mouthshrug_outward` | differs | ARKit face in and out; ARKit `chin_raise_upper_lip` in and out | ARKit describes outward lip movement; the canonical signals push up |
@@ -454,10 +455,11 @@ No hop cites these sources for the signals named, so they get no loss key.
 | `ict_au45_blink` | differs | ARKit blink in and out | ICT relates eyeBlink to AU45 blink; the canonical code is AU43; the ICT crosswalk does not carry over for the FACS code |
 | `vrcft_ue_set_equal` | differs | Unified Expressions out, 16 mappings: brow 4, mouth shift 4, corner 4, pucker 4 | Unified Expressions splits this shape into parts whose ratio the canonical set does not record; the parts are set equal |
 | `vrcft_ue_eyesquint_socket` | differs | Unified Expressions face out | Unified Expressions describes the muscles of the eye socket; the canonical signal is the lids only |
-| `vrcft_ue_cheeksquint_cheek` | differs | Unified Expressions face out | Unified Expressions describes a cheek raise; the canonical signal is the tightening of the ring around the eye |
+| `vrcft_ue_cheeksquint_cheek` | differs | Unified Expressions face out | Unified Expressions describes a cheek raise; the canonical signal is the tightening of the ring around the eye, with no cheek movement |
+| `vrcft_ue_mouthstretch_down` | differs | Unified Expressions face out | Unified Expressions pulls the corner outward and downward; the canonical signal pulls it outward only |
 | `vrcft_ue_mouthclosed_jaw_relative` | differs | Unified Expressions face out | Unified Expressions defines MouthClosed relative to JawOpen; the canonical signal is defined at any jaw opening |
 | `vrcft_ue_mouthlowerdown_direction_unresolved` | unresolved | Unified Expressions face out | provider direction unresolved (native name versus artist wording) |
-| `vrcft_eye_openness_endpoint` | differs | VRCFaceTracking eye blink in and out | eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused |
+| `vrcft_eye_openness_neutral_unresolved` | unresolved | VRCFaceTracking eye blink in and out | eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused |
 | `vrm_blink_side_unresolved` | unresolved | VRM blink in and out | VRM gives no normative side; RCEF reads blinkLeft as the subject's own left |
 | `vrm_vowel_asset_weight` | differs | VRM vowel in and out | in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight |
 | `vrm_ih_vowel_quality` | differs | VRM vowel in and out (`ih`) | vowel quality differs: META IH is the vowel in "tip", VRM ih is remarked "i" |
@@ -481,10 +483,10 @@ Each loss reason of today's maps maps to the keys that cover it on the pivot rou
 | Unified Expressions splits this shape into parts whose ratio cannot be recovered from ARKit; the parts are set equal | 28 | 16 rules (BrowLowerer and BrowPinch, MouthUpper and MouthLower, MouthCornerPull and MouthCornerSlant, LipPucker upper and lower): `vrcft_ue_set_equal`. 12 rules (BrowInnerUp, CheekPuff, LipFunnel, LipSuck): the ARKit in-hop's "asymmetry unknown: symmetry is invented" |
 | FB2 maximum gaze angle is unspecified | 16 | `fb2_gaze_max_angle_unspecified` |
 | asymmetry unknown: symmetry is invented | 14 | the ARKit in-hop's fan-out loss |
-| FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller | 12 | the FB2 gaze out-hop's "only their difference is kept" |
+| FB2 allows only one of two opposing gaze directions to be non-zero; when ARKit sets both, only their difference is kept, as the larger direction reduced by the smaller (on `arkit_gaze.to_fb2`) | 12 | the FB2 gaze out-hop's "only their difference is kept" |
 | ARKit describes eyelid movement consistent with the gaze; FB2 describes eye rotation | 8 | `arkit_gaze_eyelid` and `fb2_gaze_rotation` |
 | FB2 describes eye rotation; ARKit describes eyelid movement consistent with the gaze | 8 | `fb2_gaze_rotation` and `arkit_gaze_eyelid` |
-| FB2 opposing directions are mutually exclusive; ARKit states no such constraint | 8 | `fb2_gaze_exclusive` on the FB2 gaze out-hop |
+| FB2 opposing directions are mutually exclusive; ARKit states no such constraint (on `fb2_gaze.to_arkit`) | 8 | `fb2_gaze_exclusive` on the FB2 gaze in-hop |
 | ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | 8 | `arkit_gaze_eyelid` and `vrcft_ue_gaze_no_angle` |
 | asymmetry irrecoverable | 6 | the ARKit out-hop's mean loss |
 | consonant visemes are dropped, so outputs no longer sum to 1 | 5 | the VRM vowel out-hop's consonant loss |
@@ -508,8 +510,7 @@ A pivot route may carry an audit key that today's rule for the same pair does no
 | `arkit_browdown_outer`, `arkit_eyesquint_face`, `arkit_cheeksquint_cheek`, `arkit_mouthpress_lower_lip`, `arkit_mouthpucker_compression`, `arkit_mouthstretchright_text_side`, `ict_au33_cheek_blow`, `ict_au45_blink` | FB2 → ARKit, ARKit → FB2, ARKit → Unified Expressions |
 | `arkit_mouthsmile_upward`, `arkit_mouthshrug_outward` | ARKit → FB2, ARKit → Unified Expressions |
 | `arkit_mouthclose_jaw_unresolved` | ARKit → FB2, ARKit → Unified Expressions (on FB2 → ARKit it covers today's jaw loss) |
-| `vrcft_ue_eyesquint_socket`, `vrcft_ue_cheeksquint_cheek`, `vrcft_ue_mouthclosed_jaw_relative`, `vrcft_ue_mouthlowerdown_direction_unresolved` | ARKit → Unified Expressions |
-| `fb2_gaze_exclusive` | FB2 → ARKit (on ARKit → FB2 it covers today's exclusivity loss) |
+| `vrcft_ue_eyesquint_socket`, `vrcft_ue_cheeksquint_cheek`, `vrcft_ue_mouthstretch_down`, `vrcft_ue_mouthclosed_jaw_relative`, `vrcft_ue_mouthlowerdown_direction_unresolved` | ARKit → Unified Expressions |
 | `vrm_blink_side_unresolved` | FB2 → VRM blink (today an assumption only) |
 
 ## Corrections to today's losses
@@ -571,7 +572,7 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 | `transfer.provider` | "correspondence evidence is P↔provider; it carries over because `<short_name>` is defined to match P `<name>`" |
 | `fan_out.vrcft_ue` | why the parts are set equal, with the blend rule the source gives |
 | `net.fb2_gaze` | the FB2 gaze netting: the difference of each opposing pair is split back into two one-sided values, each exactly zero on its flat side |
-| `gaze.fb2_exclusive` | FB2 says only one of two opposing gaze directions is non-zero at a time (`xr_fb2` 648-649) |
+| `gaze.fb2_exclusive` | FB2 says only one of two opposing gaze directions is non-zero at a time (`xr_fb2` 648-649). This is an assumption on the out-hop, kept from today's ARKit → FB2 map; it is not the loss key `fb2_gaze_exclusive`, which is on the in-hop |
 | `mean.arkit` | the ARKit value is the mean of the canonical parts, and which implementers compute it the same way |
 | `evidence.vrcft_tables_not_cited` | why VRCFaceTracking's comparison tables are not cited on this FB2 hop |
 | `evidence.godot_only_mouth_shift` | only Godot names the ARKit coefficient for this mouth shift |
@@ -588,12 +589,12 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 |---|---:|---:|---:|---:|
 | FB2 | 62 | 8 | 0 | 70 |
 | ARKit | 36 | 22 | 2 | 60 |
-| Unified Expressions | 41 | 21 | 2 | 64 |
-| VRCFaceTracking eye | 2 | 2 | 0 | 4 |
+| Unified Expressions | 39 | 23 | 2 | 64 |
+| VRCFaceTracking eye | 2 | 0 | 2 | 4 |
 | VRM | 0 | 5 | 2 | 7 |
 | META visemes | 15 | 0 | 0 | 15 |
 | FACS signal rows | 49 | 2 | 2 | 53 |
-| FACS encoding and frame rows | 0 | 3 | 1 | 4 |
+| FACS encoding rows | 0 | 3 | 0 | 3 |
 | ICT-FaceKit crosswalk | 37 | 4 | 0 | 41 |
 | Frames | 4 | 0 | 2 | 6 |
-| **All** | 246 | 67 | 11 | 324 |
+| **All** | 244 | 67 | 12 | 323 |
