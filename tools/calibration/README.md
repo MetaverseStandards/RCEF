@@ -72,3 +72,14 @@ The fit:
 - **Solver:** bounded least squares on the vertex displacements (weights from 0 to 1), by cyclic coordinate descent on the normal equations until no weight changes by more than 10⁻¹³. Weights are rounded to 3 decimals.
 
 The held-out cell of a class has 24 conditions, one per seed: the class at a weight from 0.2 to 1, and in half the conditions `sil` at 1 minus that weight. The error is the distance between Rocketbox Male's own viseme shapes at those weights and the reconstruction, divided by how far the viseme shapes move the face. The reconstruction is Male's ARKit shapes at the weights that the pack's ARKit out-maps give for the clamped sum of the frozen poses. Distances are Euclidean norms over all vertices except Male's tongue. A cell passes if its median and p95 errors are at most 0.5 (the error is at most half the motion) and its neutral error is at most 0.01. The neutral bound cannot fail: at weight 0 the bridged weights are 0, so both faces are neutral. A run takes under a minute.
+
+## Rig sets for the multi-rig viseme poses (`viseme_rigs.json`)
+
+The next viseme pose record, `viseme-poses.rocketbox-multi`, is fitted on several Rocketbox rigs and held out on others. [viseme_rigs.json](viseme_rigs.json) fixes the rig sets. They were chosen by a rule, before any new rig was downloaded. Only the HTTP status and size of each file at Rocketbox commit `0943055` were known then.
+
+- **Candidates:** every `Female_Adult_NN` and `Male_Adult_NN` facial FBX at that commit, except `_01`. That is `Female_Adult_02` to `_17` and `Male_Adult_02` to `_21`.
+- **Training:** `Female_Adult_01` and `Male_Adult_01`, plus 4 new rigs of each sex. Rocketbox Male_Adult_01 was the held-out rig of `viseme-poses.rocketbox-female`, so it may be used for training but never again as a held-out rig.
+- **Held out:** 2 new rigs of each sex.
+- **Rule:** for each sex, sort the candidates by the lowercase hex SHA-256 of their name (for example `Female_Adult_04`, UTF-8). The first 2 are held out, and the next 4 are training. If a chosen rig cannot be downloaded or loaded, or does not have the 52 ARKit shapes and the 15 viseme shapes, it goes under `replaced`, and the next unused candidate of the same sex in that order takes its place.
+
+The result: training `Female_Adult_01`, `_08`, `_10`, `_12`, `_14`, `Male_Adult_01`, `_03`, `_10`, `_13` and `_17`; held out `Female_Adult_04`, `_13`, `Male_Adult_05` and `_11`. The fit and its method choices may use only the training rigs. No held-out geometry is read before the record's frozen part and ledger line are committed.

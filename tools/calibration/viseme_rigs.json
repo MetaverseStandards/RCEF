@@ -1,0 +1,171 @@
+{
+ "about": "Rig sets of the calibration record viseme-poses.rocketbox-multi, chosen by the rule below before any of the new rigs was downloaded. See README.md.",
+ "rocketbox_commit": "0943055db6ec570bcef9f2c8b41c9e5467c808f9",
+ "probed": "2026-10-29: Assets/Avatars/Adults/<name>/Export/<name>_facial.fbx for Female_Adult_01 to _30 and Male_Adult_01 to _30; a candidate is a file larger than 1000 bytes (the others are 14-byte \"404: Not Found\" bodies)",
+ "rule": "Training always holds Female_Adult_01 and Male_Adult_01. For each of Female and Male, sort the other candidates by the lowercase hex SHA-256 of their UTF-8 name. The first 2 are held out and the next 4 are training. A chosen rig that cannot be downloaded or loaded, or that does not have the 52 ARKit shapes and the 15 viseme shapes, is listed under replaced and its place goes to the next unused candidate of the same sex in that order.",
+ "candidates": {
+  "Female": [
+   {
+    "name": "Female_Adult_02",
+    "bytes": 2050400
+   },
+   {
+    "name": "Female_Adult_03",
+    "bytes": 2397744
+   },
+   {
+    "name": "Female_Adult_04",
+    "bytes": 2349152
+   },
+   {
+    "name": "Female_Adult_05",
+    "bytes": 2158576
+   },
+   {
+    "name": "Female_Adult_06",
+    "bytes": 1863184
+   },
+   {
+    "name": "Female_Adult_07",
+    "bytes": 2136864
+   },
+   {
+    "name": "Female_Adult_08",
+    "bytes": 2147392
+   },
+   {
+    "name": "Female_Adult_09",
+    "bytes": 2135024
+   },
+   {
+    "name": "Female_Adult_10",
+    "bytes": 1858560
+   },
+   {
+    "name": "Female_Adult_11",
+    "bytes": 2126800
+   },
+   {
+    "name": "Female_Adult_12",
+    "bytes": 2192768
+   },
+   {
+    "name": "Female_Adult_13",
+    "bytes": 2209984
+   },
+   {
+    "name": "Female_Adult_14",
+    "bytes": 2148192
+   },
+   {
+    "name": "Female_Adult_15",
+    "bytes": 2206336
+   },
+   {
+    "name": "Female_Adult_16",
+    "bytes": 1024880
+   },
+   {
+    "name": "Female_Adult_17",
+    "bytes": 2114512
+   }
+  ],
+  "Male": [
+   {
+    "name": "Male_Adult_02",
+    "bytes": 1981328
+   },
+   {
+    "name": "Male_Adult_03",
+    "bytes": 1907328
+   },
+   {
+    "name": "Male_Adult_04",
+    "bytes": 2173840
+   },
+   {
+    "name": "Male_Adult_05",
+    "bytes": 1978688
+   },
+   {
+    "name": "Male_Adult_06",
+    "bytes": 2082768
+   },
+   {
+    "name": "Male_Adult_07",
+    "bytes": 1881520
+   },
+   {
+    "name": "Male_Adult_08",
+    "bytes": 1913408
+   },
+   {
+    "name": "Male_Adult_09",
+    "bytes": 1930736
+   },
+   {
+    "name": "Male_Adult_10",
+    "bytes": 1877232
+   },
+   {
+    "name": "Male_Adult_11",
+    "bytes": 1779440
+   },
+   {
+    "name": "Male_Adult_12",
+    "bytes": 1772832
+   },
+   {
+    "name": "Male_Adult_13",
+    "bytes": 1776592
+   },
+   {
+    "name": "Male_Adult_14",
+    "bytes": 1765696
+   },
+   {
+    "name": "Male_Adult_15",
+    "bytes": 1853888
+   },
+   {
+    "name": "Male_Adult_16",
+    "bytes": 1853952
+   },
+   {
+    "name": "Male_Adult_17",
+    "bytes": 1821648
+   },
+   {
+    "name": "Male_Adult_18",
+    "bytes": 1656816
+   },
+   {
+    "name": "Male_Adult_19",
+    "bytes": 1817936
+   },
+   {
+    "name": "Male_Adult_20",
+    "bytes": 1840944
+   }
+  ]
+ },
+ "training": [
+  "Female_Adult_01",
+  "Male_Adult_01",
+  "Female_Adult_10",
+  "Female_Adult_08",
+  "Female_Adult_12",
+  "Female_Adult_14",
+  "Male_Adult_17",
+  "Male_Adult_13",
+  "Male_Adult_03",
+  "Male_Adult_10"
+ ],
+ "held_out": [
+  "Female_Adult_04",
+  "Female_Adult_13",
+  "Male_Adult_05",
+  "Male_Adult_11"
+ ],
+ "replaced": []
+}
