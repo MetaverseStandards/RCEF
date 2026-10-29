@@ -102,3 +102,10 @@ The viseme pose record `viseme-poses.rocketbox-multi` is fitted on several Rocke
 - **Rule:** for each sex, sort the candidates by the lowercase hex SHA-256 of their name (for example `Female_Adult_04`, UTF-8). The first 2 are held out, and the next 4 are training. If a chosen rig cannot be downloaded or loaded, or does not have the 52 ARKit shapes and the 15 viseme shapes, it goes under `replaced`, and the next unused candidate of the same sex in that order takes its place.
 
 The result: training `Female_Adult_01`, `_08`, `_10`, `_12`, `_14`, `Male_Adult_01`, `_03`, `_10`, `_13` and `_17`; held out `Female_Adult_04`, `_13`, `Male_Adult_05` and `_11`. The fit and its method choices may use only the training rigs. No held-out geometry is read before the record's frozen part and ledger line are committed.
+
+**Version 2.** Version 1 of the record gave Left and Right their own weights, and its poses differed between the sides by up to 0.56, more than its limitations said. Version 2 ties Left and Right and needs fresh held-out rigs, because the version 1 held-out rigs have been seen. The extended rule, committed before any of the new rigs was downloaded:
+
+- The rigs that version 1 held out (`Female_Adult_04`, `_13`, `Male_Adult_05` and `_11`) go under `seen`. They are never held out again. They do not join training: training stays as in version 1.
+- For each sex, the next 2 candidates in the same SHA-256 order that no set has used are held out. Replacement works as before.
+
+The result: held out `Female_Adult_06`, `_17`, `Male_Adult_02` and `_19`.
