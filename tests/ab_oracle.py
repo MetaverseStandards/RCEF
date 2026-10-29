@@ -21,8 +21,8 @@ core/src/math3d.cpp), in binary64 and in the same order of operations:
 Domain bounds are compared as binary64 values. That is exact for the bounds
 RCEF uses (whole numbers); msf-character-tools compares the decimal text.
 
-A3, the A/B harness and the oracle's own test use it to give expected values
-and refusal codes before any registered run of the pivot route (ab/README.md).
+The A/B harness (scripts/ab_compare.py) uses it to give the pivot route's
+expected values and refusals before any registered run (ab/README.md).
 """
 from __future__ import annotations
 import bisect
