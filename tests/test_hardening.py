@@ -169,6 +169,21 @@ class Hardening(unittest.TestCase):
         for frame, sample in zip(frames, self.ok(self.evaluate(compiled, frames)).samples):
             self.assertEqual(dict(sample['values']), {r['outputs'][0]: frame['values'][r['inputs'][0]] for r in rules})
 
+    def test_sem01_fixture_keeps_each_identity_case(self):
+        # The rebased tests rely on these cases; pin them so a simpler fixture cannot drop one.
+        shape = {s['id']: (s['units'], s['domain'], s['side'], s.get('neutral'), s.get('coupling'))
+                 for s in self.identity_fixture['signals']}
+        unit = {'min': 0., 'max': 1.}
+        expected = {'plain': ('1', unit, 'left', 0., None),
+                    'shared': ('1', unit, 'shared', 0., 'bilateral_shared'),
+                    'exclusive': ('1', unit, 'left', 0., 'opposing_direction_exclusive'),
+                    'raw': ('1', {}, 'left', None, None),
+                    'raw_mm': ('mm', {}, 'left', None, None)}
+        for name, want in expected.items():
+            for end in ('source', 'target'):
+                with self.subTest(signal=f'{name}.{end}'):
+                    self.assertEqual(shape[f'fixture.identity.{name}.{end}'], want)
+
     def test_sem02_each_empty_own_evidence_refuses_execution(self):
         for location in ('rule', 'source', 'target'):
             with self.subTest(location=location):
