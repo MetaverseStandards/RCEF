@@ -13,10 +13,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools/calibration'))
 import provenance  # noqa: E402
 
-# The last commit that changed the calibration code, and the one that published the rig-gains results.
-CODE_COMMIT = '7cd8ff930702b9a864b5c3358260bc6c542cd796'
+# The last commit that changed the calibration code, and the one that published the rig-gains results. The code
+# changed after the rig-gains and MediaPipe records (code_commit 7cd8ff9) when check.py learnt geometry-only records
+# and pose sums, and viseme_poses.py was added; those two records are reproduced from their freeze commit, dd9ecd2.
+CODE_COMMIT = 'a03affe90c15fed693ded9a746ab78af79badd55'
 RECORD_COMMIT = '2fa1be4'
-CODE = ['check.py', 'examples/rig_gains.py', 'examples/rigs.py', 'examples/ict_facekit.py',
+CODE = ['check.py', 'examples/rig_gains.py', 'examples/rigs.py', 'examples/ict_facekit.py', 'examples/rcef_translate.py',
         'examples/data/rig_landmarks.json', 'tools/calibration/ict_files.json', 'tools/render/']
 RECORD = ['calibration/rig-gains.ict-rocketbox-female.cal']
 
