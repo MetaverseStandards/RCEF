@@ -18,7 +18,9 @@ assumption, and the values are not FACS scores:
 - no side letter sets both sides of a sided code; L or R sets one side; on a
   direction code (30) L or R is the direction;
 - refused, with the codes named: U and A; a direction code or a wink (46)
-  with no side letter; a side letter on a shared code or a visibility code;
+  with no side letter; a side letter on a code whose every signal (written,
+  read as another code or left out) is shared, such as 17, 27 or 37, or on a
+  visibility code;
   the same code twice; two codes that write one signal (26 and 27; two of 43,
   45 and 46 on one eye); a code that is not in the list;
 - some codes are read as another code (27 as 26; 45 and 46 as 43), some
@@ -135,6 +137,9 @@ def read(notation: str | dict, data: dict | None = None) -> Reading:
             not_read.append(text)
             continue
         if isinstance(rule, dict) and 'leave_out' in rule:
+            if side and all(codes[c]['read'] == 'shared' for c in rule['leave_out']):
+                refused.append(f'{text}: code {code} leaves out only signals with no sides in facs.code')
+                continue
             left_out.update(s for c in rule['leave_out'] for s in _targets(c, side, data))
             continue
         target = rule['as'] if isinstance(rule, dict) else code
