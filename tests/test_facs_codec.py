@@ -81,7 +81,8 @@ class Read(unittest.TestCase):
 
     def test_refusals_name_the_codes(self):
         for notation, code in (('U12', 'U12'), ('A12C', 'A12C'), ('30', '30'), ('46', '46'), ('L17', 'L17'),
-                               ('L26', 'L26'), ('L27', 'L27'), ('1+1B', '1B'), ('L12+L12', 'L12'), ('26+27', '27'),
+                               ('L26', 'L26'), ('L27', 'L27'), ('L37', 'L37'), ('R37B', 'R37B'), ('1+1B', '1B'),
+                               ('L12+L12', 'L12'), ('26+27', '27'),
                                ('43+45', '45'), ('45+L46', 'L46'), ('L43+L46', 'L46'), ('12+L12', 'L12'),
                                ('L70', 'L70'), ('3', '3'), ('12F', '12F'), ('1++2', '(empty)'),
                                ({'12': 'F'}, '12'), ({'12': True}, '12'), ({'X12': 'C'}, 'X12')):
@@ -101,6 +102,8 @@ class Read(unittest.TestCase):
         for notation, left_out in (('33', sided(34, 0)), ('37', {AU.format(19): 0}), ('41', sided(43, 0)),
                                    ('42', sided(43, 0)), ('44', {**sided(43, 0), **sided(7, 0)}),
                                    ('L44', {f'{AU.format(43)}_left': 0, f'{AU.format(7)}_left': 0}),
+                                   ('R33', {f'{AU.format(34)}_right': 0}), ('L41', {f'{AU.format(43)}_left': 0}),
+                                   ('R42', {f'{AU.format(43)}_right': 0}),
                                    ('43E+41', sided(43, 0)), ('7C+44', {**sided(43, 0), **sided(7, 0)})):
             with self.subTest(notation):
                 reading = self.values(notation)

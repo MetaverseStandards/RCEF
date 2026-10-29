@@ -38,7 +38,7 @@
    "E"
   ]
  ],
- "codes_note": "disposition: the code's row in the facs.code profile (mapped, unresolved or excluded; none: not a row). read: sided (no side letter sets both sides, L or R one side), shared (no side letter allowed), direction (L or R needed; they name the direction), none (listed as not read), as (read as that code; side: required means L or R is needed), leave_out (the signals of those codes on the stated side, or both sides, are left out, never 0). A code a coder scores instead of a mapped code is read as it or leaves its signals out; a code a coder would score beside the mapped codes is not read. All of these are ASSUMPTIONS.",
+ "codes_note": "disposition: the code's row in the facs.code profile (mapped, unresolved or excluded; none: not a row). read: sided (no side letter sets both sides, L or R one side), shared (no side letter allowed), direction (L or R needed; they name the direction), none (listed as not read), as (read as that code; side: required means L or R is needed), leave_out (the signals of those codes on the stated side, or both sides, are left out, never 0; a side letter is refused when every one of those signals is shared). A side letter is refused wherever every signal a code writes, is read as or leaves out is shared. A code a coder scores instead of a mapped code is read as it or leaves its signals out; a code a coder would score beside the mapped codes is not read. All of these are ASSUMPTIONS.",
  "codes": {
   "0": {
    "name": "Neutral face",
