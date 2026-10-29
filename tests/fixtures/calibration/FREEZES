@@ -2,4 +2,5 @@
 # Test fixture freeze ledger (format: calibration/README.md).
 # id version frozen_sha256 date [reason]
 fixture.poses v1 828caa0d591460c27a6dbd22f839b26905bfcb40be2fb3a4864201084f570e39 2026-10-27
+fixture.poses-features v1 f58a579bdccabb1f647a669489ab558a4b419ac189336374e84a33052f2f0d23 2026-10-27
 fixture.jaw-gain v1 a0b64c522c27cd70ee641f516c3ffcb18ae01029a6bbdcfb20cae8e98ace6a89 2026-10-27

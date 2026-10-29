@@ -214,8 +214,10 @@ RECORD_FIELDS = {'format': str, 'id': str, 'version': int, 'status': str, 'scope
                  'training': dict, 'held_out': dict, 'evaluation': dict, 'curves': list,
                  'licence': str, 'limitations': list}
 # A record without cells is a pre-registration: frozen and in the ledger, with no results yet. A fit that renders
-# nothing (mesh geometry only) has no renderer.
-OPTIONAL_FIELDS = {'scan_origin': str, 'cells': list, 'renderer': dict}
+# nothing (mesh geometry only) has no renderer. features (frozen) and feature_cells (results) add the perceptual gate.
+OPTIONAL_FIELDS = {'scan_origin': str, 'cells': list, 'renderer': dict, 'features': list, 'feature_cells': list}
+RESULTS = ('cells', 'feature_cells')
+FEATURE_KINDS = ('difference', 'range')
 COPY = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
 SCOPE = 'software-only; not a measurement of any tracker'
 SCAN_ORIGIN = 'light-stage scans of real people'
@@ -231,12 +233,12 @@ def load_record(path: Path) -> dict:
 
 
 def frozen_sha256(record: dict) -> str:
-    """The sha256 of everything in a record except its metrics (cells) and this hash itself.
+    """The sha256 of everything in a record except its metrics (cells and feature_cells) and this hash itself.
 
     The part is serialised as compact, key-sorted JSON, so the hash depends on
     the values, not on how the TOML is laid out.
     """
-    frozen = {k: v for k, v in record.items() if k != 'cells'}
+    frozen = {k: v for k, v in record.items() if k not in RESULTS}
     if isinstance(frozen.get('held_out'), dict):
         frozen['held_out'] = {k: v for k, v in frozen['held_out'].items() if k != 'frozen_sha256'}
     text = json.dumps(frozen, sort_keys=True, ensure_ascii=False, separators=(',', ':'), allow_nan=False)
@@ -419,6 +421,62 @@ def record_problems(record: dict, name: str) -> list[str]:
             problems.append(f'{where}channel {cell["channel"]} is not one of the channels')
         if _number(cell.get('median')) and _number(cell.get('p95')) and cell['median'] > cell['p95']:
             problems.append(f'{where}median {cell["median"]} is above p95 {cell["p95"]}')
+    problems += feature_problems(record, channels, minimum, count)
+    return problems
+
+
+def feature_problems(record: dict, channels, minimum, count) -> list[str]:
+    """How the perceptual part of a record (features, feature_cells) departs from calibration/README.md."""
+    problems, declared = [], set()
+    metric = (lambda v: _number(v) and v >= 0, 'a finite number >= 0')
+    features = record.get('features') if isinstance(record.get('features'), list) else None
+    if features is not None and not features:
+        problems.append('features must list at least one feature')
+    for i, feature in enumerate(features or ()):
+        where = f'features[{i}].'
+        if not isinstance(feature, dict):
+            problems.append(f'features[{i}] must be a table')
+            continue
+        fields = {'channel': (_text, 'text'), 'feature': (_text, 'text'), 'units': (_text, 'text'),
+                  'kind': (lambda v: v in FEATURE_KINDS, ' or '.join(FEATURE_KINDS)), 'tolerance': metric,
+                  'description': (_text, 'text')}
+        if feature.get('kind') == 'range':
+            fields.update(low=(_number, 'a finite number'), high=(_number, 'a finite number'))
+        problems += _fields(feature, fields, where)
+        if feature.get('kind') == 'range' and _number(feature.get('low')) and _number(feature.get('high')) \
+                and feature['low'] >= feature['high']:
+            problems.append(f'{where}low must be below high')
+        if channels is not None and _text(feature.get('channel')) and feature['channel'] not in channels:
+            problems.append(f'{where}channel {feature["channel"]} is not one of the channels')
+        key = (feature.get('channel'), feature.get('feature'))
+        if key in declared:
+            problems.append(f'the feature {key[1]} of {key[0]} appears twice')
+        declared.add(key)
+    cells = record.get('feature_cells') if isinstance(record.get('feature_cells'), list) else None
+    if cells is not None and not cells:
+        problems.append('feature_cells must list at least one cell')
+    if cells and 'cells' not in record:
+        problems.append('feature_cells come with the cells of the same held-out run')
+    for i, cell in enumerate(cells or ()):
+        where = f'feature_cells[{i}].'
+        if not isinstance(cell, dict):
+            problems.append(f'feature_cells[{i}] must be a table')
+            continue
+        problems += _fields(cell, {'channel': (_text, 'text'), 'feature': (_text, 'text'), 'identity': (_text, 'text'),
+                                   'conditions': (lambda v: type(v) is int and v >= (minimum or MIN_CONDITIONS),
+                                                  'an integer >= evaluation.min_conditions'),
+                                   'failures': (lambda v: type(v) is int and v >= 0, 'an integer >= 0'),
+                                   'median': metric, 'p95': metric, 'max': metric}, where)
+        if (cell.get('channel'), cell.get('feature')) not in declared:
+            problems.append(f'{where}{cell.get("feature")} of {cell.get("channel")} is not one of the features')
+        conditions = cell.get('conditions')
+        if type(conditions) is int and count is not None and conditions > count:
+            problems.append(f'{where}conditions {conditions} is more than held_out.count {count}')
+        if type(cell.get('failures')) is int and type(conditions) is int and cell['failures'] > conditions:
+            problems.append(f'{where}failures {cell["failures"]} is more than its conditions {conditions}')
+        values = [cell.get(k) for k in ('median', 'p95', 'max')]
+        if all(_number(v) for v in values) and not values[0] <= values[1] <= values[2]:
+            problems.append(f'{where}median, p95 and max must not decrease')
     return problems
 
 
@@ -484,6 +542,31 @@ def cell_passes(record: dict, cell: dict) -> bool:
     """A cell passes if nothing was missed and every error is within the channel's frozen bounds."""
     bound = record['evaluation']['bounds'][cell['channel']]
     return cell['failures'] == 0 and all(cell[k] <= bound[k] for k in ('median', 'p95', 'neutral'))
+
+
+def feature_cell_passes(record: dict, cell: dict) -> bool:
+    """A feature cell passes if nothing was missed and its largest error is within the feature's frozen tolerance."""
+    feature = next(f for f in record['features'] if (f['channel'], f['feature']) == (cell['channel'], cell['feature']))
+    return cell['failures'] == 0 and cell['max'] <= feature['tolerance']
+
+
+def channel_passes(record: dict, channel: str) -> bool:
+    """Whether a channel passes: every shape cell passes, or, if the record gives the channel features, every
+    feature has a passing feature cell for every held-out identity of the channel's shape cells."""
+    cells = [c for c in record.get('cells', []) if c['channel'] == channel]
+    if not cells:
+        return False
+    if all(cell_passes(record, c) for c in cells):
+        return True
+    features = [f['feature'] for f in record.get('features', []) if f['channel'] == channel]
+    if not features:
+        return False
+    found = {}
+    for cell in record.get('feature_cells', []):
+        if cell['channel'] == channel:
+            found.setdefault((cell['feature'], cell['identity']), []).append(cell)
+    return all(found.get((f, c['identity'])) and all(feature_cell_passes(record, x) for x in found[(f, c['identity'])])
+               for f in features for c in cells)
 
 
 def pack_rules(root: Path = ROOT) -> list[dict]:
@@ -556,8 +639,12 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
                 cells = [c for c in valid[cited]['cells'] if c['channel'] == channel]
                 if not cells:
                     problems.append(f'{label}, which has no held-out cell for {[channel]}')
-                problems += [f'{label}, but its cell for {c["stimulus"]}, {c["identity"]}, side {c["side"]} fails '
-                             'the frozen bounds' for c in cells if not cell_passes(valid[cited], c)]
+                elif not channel_passes(valid[cited], channel):
+                    gated = any(f['channel'] == channel for f in valid[cited].get('features', []))
+                    problems += [f'{label}, but its cell for {c["stimulus"]}, {c["identity"]}, side {c["side"]} fails '
+                                 'the frozen bounds' + (', and not every feature cell of the channel passes its '
+                                                        'tolerance' if gated else '')
+                                 for c in cells if not cell_passes(valid[cited], c)]
     return problems
 
 
