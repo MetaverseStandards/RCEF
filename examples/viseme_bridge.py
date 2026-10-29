@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Drive ARKit faces with META viseme frames through RCEF's viseme pose bridge, and compare with Rocketbox Male.
+"""Drive ARKit faces with META viseme frames through RCEF's viseme pose bridge, and compare with a Rocketbox rig.
 
-Usage: python examples/viseme_bridge.py [--frames CSV] [--rig-cache DIR] [--ict-cache DIR] [--out DIR]
+Usage: python examples/viseme_bridge.py [--frames CSV] [--rig RIG] [--rig-cache DIR] [--ict-cache DIR] [--out DIR]
 
 The frames default to "bed car toe book" (examples/data/viseme_talk_frames.csv). Route carries them from META
 visemes through the canonical viseme set, the pose bridge and the canonical expression set to ARKit weights
 (bridge_arkit.csv). The ARKit weights then pose two faces that have ARKit shapes:
 
-- Rocketbox Male_Adult_01, the rig the bridge's calibration record held out. Its own META viseme shapes, driven by
-  the same frames by name, are the comparison ("direct"). Per frame, the error is |bridged - direct| / |direct|
+- a Rocketbox rig (default rocketbox-female-04, Female_Adult_04, one of the 4 rigs that the bridge's calibration
+  record held out; the others are rocketbox-female-13, rocketbox-male-05 and rocketbox-male-11). Its own META
+  viseme shapes, driven by the same frames by name, are the comparison ("direct"). Per frame, the error is |bridged - direct| / |direct|
   over every vertex except the tongue (the vertices its tongueOut moves), as in the calibration record, and the
   RMS vertex distance in millimetres over the vertices that either face moves.
 - ICT-FaceKit, which has no viseme shapes, from its OBJ files (all 53 expression shapes; the cache of
-  tools/calibration/k4_mediapipe.py). Its ARKit weights are Rocketbox Female's units, so the geometry is only
-  indicative (record rig-gains.ict-rocketbox-female).
+  tools/calibration/k4_mediapipe.py). Its ARKit weights are in Rocketbox units, so the geometry is only indicative
+  (record rig-gains.ict-rocketbox-female).
+
+It also prints one line per META viseme at weight 1: on the Rocketbox rig the error ratio and the RMS distance
+between the bridged and the direct face, and on ICT the RMS distance between the bridged face and its neutral face.
 
 Positions go to OUT/mesh/RIG/PANEL/NNNN.f32 (little-endian float32 xyz), with OUT/frames.json, so the frames can be
 rendered later. Rig files go to ~/.cache/rcef-face-rigs and ~/.cache/rcef-ict-full, outputs to
@@ -38,13 +42,17 @@ import rigs
 
 HERE = Path(__file__).resolve().parent
 ARKIT = 'arkit.coefficient.'
-CAPTION = ("ARKit weights from META visemes through RCEF's viseme pose bridge: poses of Rocketbox Female, held out on "
-           'Rocketbox Male; classes that failed their bounds are not read.')
+CAPTION = ("ARKit weights from META visemes through RCEF's viseme pose bridge: poses fitted to 10 Rocketbox rigs, held "
+           'out on 4 others; classes that failed their bounds are not read.')
+HELD_OUT = ['rocketbox-female-04', 'rocketbox-female-13', 'rocketbox-male-05', 'rocketbox-male-11']
 
 
 def arguments(argv=None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('--frames', type=Path, default=HERE / 'data/viseme_talk_frames.csv')
+    names = sorted(rigs.rocketbox_name(*avatar.split('_Adult_')) for avatar in rigs.ROCKETBOX_SHA256)
+    parser.add_argument('--rig', choices=names, default=HELD_OUT[0],
+                        help=f'the Rocketbox rig to compare with (default {HELD_OUT[0]}; held out: {", ".join(HELD_OUT)})')
     parser.add_argument('--rig-cache', type=Path, help='Rocketbox files (default: ~/.cache/rcef-face-rigs)')
     parser.add_argument('--ict-cache', type=Path, help='ICT-FaceKit OBJ files (default: ~/.cache/rcef-ict-full)')
     parser.add_argument('--out', type=Path, help='output directory (default: ~/.cache/rcef-examples/viseme-bridge)')
@@ -57,8 +65,8 @@ def arguments(argv=None) -> argparse.Namespace:
 
 
 class Rocketbox:
-    def __init__(self, cache: Path):
-        self.rig = rigs.load('rocketbox-male', cache)
+    def __init__(self, cache: Path, name: str):
+        self.rig = rigs.load(name, cache)
         self.arkit = {a: i for i, a, _ in self.rig.shapes}
         self.rest = self.positions({})
         moved = [math.dist(p, q) for p, q in zip(self.positions({self.arkit['tongueOut']: 1.0}), self.rest)]
@@ -127,12 +135,13 @@ def main(argv=None) -> int:
             writer.writerow([f'{r["time"]:.6f}', r['segment'],
                              *(repr(r['values'][ARKIT + c]) if ARKIT + c in r['values'] else '' for c in columns),
                              '; '.join(labels), ' '.join(reader.short(s) for s in r['dropped'])])
-    rb, ict = Rocketbox(args.rig_cache), ICT(args.ict_cache)
-    panels = {'rocketbox-male/bridged', 'rocketbox-male/direct', 'rocketbox-male/difference', 'ict/bridged'}
+    rb, ict = Rocketbox(args.rig_cache, args.rig), ICT(args.ict_cache)
+    name = args.rig
+    panels = {f'{name}/bridged', f'{name}/direct', f'{name}/difference', 'ict/bridged'}
     for panel in panels:
         (args.out / 'mesh' / panel).mkdir(parents=True, exist_ok=True)
-    for name, indices in (('rocketbox-male', rb.rig.indices()), ('ict', ict.indices)):
-        (args.out / 'mesh' / name / 'indices.u32').write_bytes(struct.pack(f'<{len(indices)}I', *indices))
+    for panel, indices in ((name, rb.rig.indices()), ('ict', ict.indices)):
+        (args.out / 'mesh' / panel / 'indices.u32').write_bytes(struct.pack(f'<{len(indices)}I', *indices))
     manifest = []
     for number, (frame, result) in enumerate(zip(frames, results)):
         stem = f'{number:04d}.f32'
@@ -143,9 +152,9 @@ def main(argv=None) -> int:
         entry = {'frame': number, 'time': frame['time'], 'segment': frame['segment'],
                  'viseme': frame['labels'].get('viseme', ''), 'refused': sorted(result['refused']),
                  'dropped': [reader.short(s) for s in result['dropped']], **compare(rb, bridged, direct)}
-        face_pipeline.write_f32(args.out / 'mesh/rocketbox-male/bridged' / stem, bridged)
-        face_pipeline.write_f32(args.out / 'mesh/rocketbox-male/direct' / stem, direct)
-        face_pipeline.write_f32(args.out / 'mesh/rocketbox-male/difference' / stem,
+        face_pipeline.write_f32(args.out / 'mesh' / name / 'bridged' / stem, bridged)
+        face_pipeline.write_f32(args.out / 'mesh' / name / 'direct' / stem, direct)
+        face_pipeline.write_f32(args.out / 'mesh' / name / 'difference' / stem,
                                 (face_pipeline.heat(math.dist(p, q), 0.004) for p, q in zip(bridged, direct)))
         face_pipeline.write_f32(args.out / 'mesh/ict/bridged' / stem, ict.positions(arkit))
         manifest.append(entry)
@@ -154,13 +163,27 @@ def main(argv=None) -> int:
         'credits': [rb.rig.credit, 'ICT-FaceKit (c) 2020 USC Institute for Creative Technologies, MIT license'],
         'positions_format': 'little-endian float32 xyz per vertex, rig units (Rocketbox metres, ICT centimetres)',
         'difference_colors_format': 'little-endian float32 RGB per vertex; blue = 0, red >= 4 mm',
-        'error': '|bridged - direct| / |direct - rest| over Rocketbox Male vertices except the tongue; rms_mm over '
-                 'the vertices either face moves', 'frames': manifest}, indent=1), encoding='utf-8')
+        'error': f'|bridged - direct| / |direct - rest| over {name} vertices except the tongue; rms_mm over the '
+                 'vertices either face moves', 'frames': manifest}, indent=1), encoding='utf-8')
     ratios = [m['ratio'] for m in manifest if m['ratio'] is not None]
     print(f'{len(frames)} frames -> {args.out}')
     median = sorted(ratios)[len(ratios) // 2]
-    print(f'Rocketbox Male, bridged against its own visemes: error ratio median {median:.3f}, max {max(ratios):.3f}; '
+    print(f'{name}, bridged against its own visemes: error ratio median {median:.3f}, max {max(ratios):.3f}; '
           f'RMS distance max {max(m["rms_mm"] for m in manifest):.2f} mm')
+    print(f'Each META viseme at weight 1 ({name}: error ratio and RMS mm against its own viseme; ICT: RMS mm from '
+          'neutral over the vertices that move):')
+    for meta in rigs.META_VISEME_ORDER:
+        values = {f'{reader.prefix}{n}{reader.suffix}': float(n == meta) for n in rigs.META_VISEME_ORDER}
+        result, = route.translate([{'time': 0.0, 'values': values, 'flags': {'isValid': True}}])
+        arkit = {o[len(ARKIT):]: v for o, v in result['values'].items()}
+        found = compare(rb, rb.positions({rb.arkit[a]: w for a, w in arkit.items() if a in rb.arkit}),
+                        rb.positions({rb.rig.visemes[meta]: 1.0}))
+        posed = ict.positions(arkit)
+        moved = [math.dist(p, q) for p, q in zip(posed, ict.rest) if math.dist(p, q) > 1e-2]
+        ict_mm = 10 * math.sqrt(math.fsum(d * d for d in moved) / len(moved)) if moved else 0.0
+        ratio = 'n/a' if found['ratio'] is None else f'{found["ratio"]:.3f}'
+        print(f'  {meta:4} {"read" if not result["dropped"] else "dropped":7} ratio {ratio:6} '
+              f'RMS {found["rms_mm"]:5.2f} mm   ICT RMS {ict_mm:5.2f} mm')
     return 0
 
 
