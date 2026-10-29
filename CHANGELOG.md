@@ -198,7 +198,8 @@ exclusive, and the data now builds this in.
   expression signals by the ARKit in-maps. Frozen with bounds of 0.5 on the
   median and p95 error (the error is the distance to the held-out rig's own
   viseme shape divided by that shape's motion) before the held-out run on
-  Rocketbox Male. 9 of 15 classes pass; `vowel_mid_spread` (0.51),
+  Rocketbox Male. 9 of 15 classes pass (`sil` trivially: 8 of 14 speech
+  classes); the neutral bound cannot fail; `vowel_mid_spread` (0.51),
   `postalveolar` (0.52), `vowel_close_rounded` (0.59), `alveolar_sibilant`
   (0.64), `bilabial` (0.67) and `labiodental` (0.92) fail and are published
   as negative results. Made by `tools/calibration/viseme_poses.py`.
