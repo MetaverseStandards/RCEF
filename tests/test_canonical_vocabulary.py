@@ -4,8 +4,9 @@
 docs/canonical-set.md is the meaning source; docs/canonical-set-audit.md holds
 one audit row for each pair of canonical signal and source that maps it. The
 pack holds the groups that have maps today; the groups listed in
-scripts/build_canonical.py LATER_GROUPS, and the canonical viseme profile,
-come later; each adds its own expectations here when it joins the pack.
+scripts/build_canonical.py LATER_GROUPS come later, and each adds its own
+expectations here when it joins the pack. The canonical viseme profile has its
+own tests in tests/test_canonical_visemes.py.
 """
 import json
 from pathlib import Path
