@@ -3,7 +3,6 @@
 
 Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards Forum.
 
-<!-- D28: affiliation statement, wording from the release owners, pending -->
 **Author affiliation: to be added by the release owners before this document goes to the working group.**
 
 **Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. The data in this repository does not hold these profiles yet. Today the pack has the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
@@ -131,8 +130,8 @@ The table gives every signal of `rcef.canonical_expression`. 0 is the neutral fa
 | `brow_lower_right` | Brow lower, right | right | Brows | face | The right brow lowers and draws toward the middle of the face. This is the whole action: the inner and outer parts move together. | 4 (`main`) | BROW_LOWERER_R | browDownRight |
 | `eye_close_left` | Eye close, left | left | Eyes and eyelids | blink | The upper lid of the left eye lowers until it covers the eye. 1 is the eye fully closed. | 43 (`gross_behavior`) | EYES_CLOSED_L | eyeBlinkLeft |
 | `eye_close_right` | Eye close, right | right | Eyes and eyelids | blink | The upper lid of the right eye lowers until it covers the eye. 1 is the eye fully closed. | 43 (`gross_behavior`) | EYES_CLOSED_R | eyeBlinkRight |
-| `lid_tighten_left` | Lid tighten, left | left | Eyes and eyelids | face | The lids of the left eye tighten and narrow the eye opening. The lower lid rises toward the inner corner. | 7 (`main`) | LID_TIGHTENER_L | eyeSquintLeft |
-| `lid_tighten_right` | Lid tighten, right | right | Eyes and eyelids | face | The lids of the right eye tighten and narrow the eye opening. The lower lid rises toward the inner corner. | 7 (`main`) | LID_TIGHTENER_R | eyeSquintRight |
+| `lid_tighten_left` | Lid tighten, left | left | Eyes and eyelids | face | The lids of the left eye tighten and narrow the eye opening. The lower lid moves toward the inner corner. | 7 (`main`) | LID_TIGHTENER_L | eyeSquintLeft |
+| `lid_tighten_right` | Lid tighten, right | right | Eyes and eyelids | face | The lids of the right eye tighten and narrow the eye opening. The lower lid moves toward the inner corner. | 7 (`main`) | LID_TIGHTENER_R | eyeSquintRight |
 | `upper_lid_raise_left` | Upper lid raise, left | left | Eyes and eyelids | face | The upper lid of the left eye lifts and the eye opens wider. | 5 (`main`) | UPPER_LID_RAISER_L | eyeWideLeft |
 | `upper_lid_raise_right` | Upper lid raise, right | right | Eyes and eyelids | face | The upper lid of the right eye lifts and the eye opens wider. | 5 (`main`) | UPPER_LID_RAISER_R | eyeWideRight |
 | `gaze_in_left` | Gaze in, left | left | Gaze | gaze | The left eye turns toward the nose, as a fraction of the source's maximum gaze in that direction (see [Gaze](#gaze)). | none | EYES_LOOK_RIGHT_L | eyeLookInLeft |
@@ -145,13 +144,13 @@ The table gives every signal of `rcef.canonical_expression`. 0 is the neutral fa
 | `gaze_down_right` | Gaze down, right | right | Gaze | gaze | The right eye turns down, as a fraction of the source's maximum gaze in that direction (see [Gaze](#gaze)). | none | EYES_LOOK_DOWN_R | eyeLookDownRight |
 | `cheek_puff_left` | Cheek puff, left | left | Cheeks | cheek_puff | Air fills the left cheek and pushes it outward. | 34 (`gross_behavior`) | CHEEK_PUFF_L | cheekPuff (copied to both sides) |
 | `cheek_puff_right` | Cheek puff, right | right | Cheeks | cheek_puff | Air fills the right cheek and pushes it outward. | 34 (`gross_behavior`) | CHEEK_PUFF_R | cheekPuff (copied to both sides) |
-| `cheek_raise_left` | Cheek raise, left | left | Cheeks | face | The outer part of the muscle ring around the left eye tightens and squeezes the outer corner of the eye. No cheek movement is part of the definition. | 6 (`main`) | CHEEK_RAISER_L | cheekSquintLeft |
-| `cheek_raise_right` | Cheek raise, right | right | Cheeks | face | The outer part of the muscle ring around the right eye tightens and squeezes the outer corner of the eye. No cheek movement is part of the definition. | 6 (`main`) | CHEEK_RAISER_R | cheekSquintRight |
+| `cheek_raise_left` | Cheek raise, left | left | Cheeks | face | The outer part of the muscle ring around the left eye tightens, narrowing the outer corner of the eye; the skin below the eye and the upper cheek are pushed up. | 6 (`main`) | CHEEK_RAISER_L | cheekSquintLeft |
+| `cheek_raise_right` | Cheek raise, right | right | Cheeks | face | The outer part of the muscle ring around the right eye tightens, narrowing the outer corner of the eye; the skin below the eye and the upper cheek are pushed up. | 6 (`main`) | CHEEK_RAISER_R | cheekSquintRight |
 | `cheek_suck_left` | Cheek suck, left | left | Cheeks | cheek_suck | The left cheek draws in against the teeth and hollows. | 35 (`gross_behavior`) | CHEEK_SUCK_L | none |
 | `cheek_suck_right` | Cheek suck, right | right | Cheeks | cheek_suck | The right cheek draws in against the teeth and hollows. | 35 (`gross_behavior`) | CHEEK_SUCK_R | none |
 | `nose_wrinkle_left` | Nose wrinkle, left | left | Nose | face | The left side of the nose and the nostril lift, and the skin over the nose wrinkles. | 9 (`main`) | NOSE_WRINKLER_L | noseSneerLeft |
 | `nose_wrinkle_right` | Nose wrinkle, right | right | Nose | face | The right side of the nose and the nostril lift, and the skin over the nose wrinkles. | 9 (`main`) | NOSE_WRINKLER_R | noseSneerRight |
-| `jaw_drop` | Jaw drop | shared | Jaw | face | The lower jaw moves down and back, and the mouth opens. This is the whole opening of the jaw. | 26 (`main`) | JAW_DROP | jawOpen |
+| `jaw_drop` | Jaw drop | shared | Jaw | face | The lower jaw moves down and the mouth opens. This is the whole opening of the jaw. | 26 (`main`) | JAW_DROP | jawOpen |
 | `jaw_thrust` | Jaw thrust | shared | Jaw | jaw_thrust | The lower jaw moves forward. | 29 (`gross_behavior`) | JAW_THRUST | jawForward |
 | `jaw_sideways_left` | Jaw sideways left | shared | Jaw | jaw_sideways | The lower jaw moves toward the subject's own left. | 30 (L30, R30 read as directions) (`gross_behavior`) | JAW_SIDEWAYS_LEFT | jawLeft |
 | `jaw_sideways_right` | Jaw sideways right | shared | Jaw | jaw_sideways | The lower jaw moves toward the subject's own right. | 30 (L30, R30 read as directions) (`gross_behavior`) | JAW_SIDEWAYS_RIGHT | jawRight |
@@ -192,7 +191,7 @@ The table gives every signal of `rcef.canonical_expression`. 0 is the neutral fa
 | `tongue_tip_alveolar` | Tongue tip behind the upper teeth | shared | Tongue | tongue_place | The tongue tip touches the back of the upper teeth, as for the NN viseme. | none | TONGUE_TIP_ALVEOLAR | none |
 | `tongue_front_dorsal_palate` | Tongue front on the palate | shared | Tongue | tongue_place | The front of the tongue presses on the palate, as for the CH viseme. | none | TONGUE_FRONT_DORSAL_PALATE | none |
 | `tongue_mid_dorsal_palate` | Tongue middle on the palate | shared | Tongue | tongue_place | The middle of the tongue presses on the palate, as for the DD viseme. | none | TONGUE_MID_DORSAL_PALATE | none |
-| `tongue_back_dorsal_velar` | Tongue back on the soft palate | shared | Tongue | tongue_place | The back of the tongue presses on the soft palate, as for the KK viseme. | none | TONGUE_BACK_DORSAL_VELAR | none |
+| `tongue_back_dorsal_velar` | Tongue back on the palate | shared | Tongue | tongue_place | The back of the tongue presses on the palate, as for the KK viseme. | none | TONGUE_BACK_DORSAL_VELAR | none |
 | `pupil_diameter_mm_left` | Pupil diameter (mm), left | left | Pupils | pupil_mm | The diameter of the left pupil in millimetres, as the tracker reports it (VRCFaceTracking eye `Left.PupilDiameter_MM`). Units `mm`; no range is declared. | none | none | none |
 | `pupil_diameter_mm_right` | Pupil diameter (mm), right | right | Pupils | pupil_mm | The diameter of the right pupil in millimetres, as the tracker reports it (VRCFaceTracking eye `Right.PupilDiameter_MM`). Units `mm`; no range is declared. | none | none | none |
 
