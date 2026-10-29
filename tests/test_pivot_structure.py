@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""The maps between the canonical expression set and each expression set: structure, losses, evidence, assumptions.
+"""The maps between the canonical sets and each expression set: structure, losses, evidence, assumptions.
 
 Every translation runs source -> canonical -> target. These tests check the
 hop maps against the rules in docs/canonical-set.md and the definitions audit
@@ -18,9 +18,9 @@ tests/fixtures/baseline-dea1713.pack.json:
 - the composed hop weights equal today's weights (M1s);
 - which canonical groups other sets could fill (the capability matrix).
 
-The META viseme maps are not in the pack yet. Today's viseme map
-(visemes.to_vrm) is therefore left out of the route checks; VISEME_PENDING
-counts the assumptions it leaves out; that count becomes 0 when those maps join.
+The viseme hops (META and the VRM vowels to and from the canonical viseme set)
+follow the same rules; their one fan-in, the aggregate alveolar_floor, is a
+census exception scoped to its map.
 """
 import json
 from pathlib import Path
@@ -36,13 +36,17 @@ import rcef_route  # noqa: E402
 import rcef_translate  # noqa: E402
 
 PREFIX = 'rcef.canonical_expression.'
+VISEME = 'rcef.canonical_viseme.'
+CANONICAL = (PREFIX, VISEME)
 INTERMEDIATE = 'rcef.intermediate.'
-PROFILES = {'arkit': 'arkit.coefficient', 'fb2': 'openxr.fb2', 'vrcft_artist': 'vrcft.artist.base', 'vrm': 'vrm.preset'}
-IN_MAP = re.compile(r'^(arkit|fb2|vrcft_artist|vrm)_([a-z_]+)\.to_rcef$')
-OUT_MAP = re.compile(r'^rcef_([a-z_]+)\.to_(arkit|fb2|vrcft_artist|vrm)$')
-# Mappings per set: (in-maps, out-maps). The FB2 gaze out-map has 4 internal steps.
-COUNTS = {'arkit': (60, 52), 'fb2': (60, 64), 'vrcft_artist': (0, 68), 'vrm': (0, 2)}
-MAPS = 46
+SUM = build_canonical.INTERMEDIATE_SUM
+PROFILES = {'arkit': 'arkit.coefficient', 'fb2': 'openxr.fb2', 'vrcft_artist': 'vrcft.artist.base', 'vrm': 'vrm.preset',
+            'visemes': 'openxr.visemes'}
+IN_MAP = re.compile(r'^(arkit|fb2|vrcft_artist|vrm|visemes)_([a-z_]+)\.to_rcef$')
+OUT_MAP = re.compile(r'^rcef_([a-z_]+)\.to_(arkit|fb2|vrcft_artist|vrm|visemes)$')
+# Mappings per set: (in-maps, out-maps). The FB2 gaze out-map has 4 internal steps, the META aggregate in-map 1.
+COUNTS = {'arkit': (60, 52), 'fb2': (60, 64), 'vrcft_artist': (0, 68), 'vrm': (5, 7), 'visemes': (17, 15)}
+MAPS = 55
 # Pairs of a rule's two ends whose sides may differ although neither is shared. None today.
 SIDE_EXCEPTIONS = []
 # Operators allowed on a hop: today's operator census, with power-of-two weights.
@@ -51,14 +55,16 @@ OPERATORS = [{'id': 'affine', 'scale': 1.0, 'offset': 0.0}, {'id': 'weighted_sum
              {'id': 'weighted_sum', 'weights': [1.0, -1.0]},
              {'id': 'piecewise_linear', 'knots': [[-1.0, 0.0], [0.0, 0.0], [1.0, 1.0]]},
              {'id': 'piecewise_linear', 'knots': [[-1.0, 1.0], [0.0, 0.0], [1.0, 0.0]]}]
+# Census exceptions, each allowed in one map only: the viseme aggregate's fan-in and its clamp.
+EXCEPTIONS = {'visemes_aggregate.to_rcef': [{'id': 'weighted_sum', 'weights': [1.0, 1.0, 1.0]},
+                                            {'id': 'piecewise_linear', 'knots': [[0.0, 0.0], [1.0, 1.0], [3.0, 1.0]]}]}
 KEYS = {'correspondence', 'endpoints', 'transfer.provider', 'transfer.withdrawn', 'transfer.facs_crosswalk',
         'fan_out.vrcft_ue', 'net.fb2_gaze', 'gaze.fb2_exclusive', 'mean.arkit', 'evidence.vrcft_tables_not_cited',
         'evidence.godot_only_mouth_shift', 'vrm.downstream_effects', 'vrm.side_caveat', 'vrm.definitional_only',
-        'lips_toward.jaw_not_compensated'}
+        'lips_toward.jaw_not_compensated', 'vrm.probability_as_weight', 'vrm.phoneme_label_only'}
 A1_PAIRS = {'fb2.to_arkit': 'FB2 -> ARKit', 'fb2_gaze.to_arkit': 'FB2 -> ARKit', 'arkit.to_fb2': 'ARKit -> FB2',
             'arkit_gaze.to_fb2': 'ARKit -> FB2', 'arkit.to_vrcft_artist': 'ARKit -> VRCFT UE',
-            'fb2.to_vrm': 'FB2 -> VRM blink'}
-VISEME_PAIR = 'META -> VRM'
+            'fb2.to_vrm': 'FB2 -> VRM blink', 'visemes.to_vrm': 'META -> VRM'}
 # Today's assumption templates (docs/canonical-set-audit.md, assumption catalogue): a pattern for each, and the
 # hop assumption keys its home needs on the route. None means superseded by the canonical definition.
 TEMPLATES = [
@@ -77,9 +83,9 @@ TEMPLATES = [
     ('a13', r'blended Unified Expressions shape; .* defines the blended shape as', ['fan_out.vrcft_ue']),
     ('a14', r"^VRCFaceTracking's tables are not cited: .* not an OpenXR name", ['evidence.vrcft_tables_not_cited']),
     ('a15', r'^VRM isBinary and override effects', ['vrm.downstream_effects']),
-    ('a16', r'^META viseme \w+ corresponds to VRM preset', None),
-    ('a17', r'^META viseme probability', None),
-    ('a18', r'^Phoneme-label correspondence only', None),
+    ('a16', r'^META viseme \w+ corresponds to VRM preset', ['correspondence']),
+    ('a17', r'^META viseme probability', ['vrm.probability_as_weight']),
+    ('a18', r'^Phoneme-label correspondence only', ['vrm.phoneme_label_only']),
     ('a19', r'read back, taking \w+ minus \w+ where it is above zero\.$', ['net.fb2_gaze', 'correspondence']),
     ('a20', r'read back, taking how far \w+ minus \w+ is below zero\.$', ['net.fb2_gaze', 'correspondence']),
     ('a21', r'blended Unified Expressions shape; .* Godot builds the blended shape', ['fan_out.vrcft_ue']),
@@ -103,8 +109,7 @@ TEMPLATES = [
 # a10 on these Unified Expressions parts is superseded: the canonical set holds the parts, so the out-hop copies.
 A10_SUPERSEDED = re.compile(r'\.(BrowInnerUp|CheekPuff|LipFunnel|LipSuck)\w+$')
 # Where each loss of today's maps lives on the route (docs/canonical-set-audit.md, mapping today's losses to keys):
-# a pattern for the loss reason, and the audit keys or the exact non-audit losses the route must hold. None:
-# the viseme map's losses, whose route joins with the canonical visemes.
+# a pattern for the loss reason, and the audit keys or the exact non-audit losses the route must hold.
 LOSS_HOMES = [
     (r'^provider gain and full-activation pose are not published', ['gain']),
     (r'^Unified Expressions splits this shape into parts', ['split']),
@@ -116,9 +121,9 @@ LOSS_HOMES = [
     (r'^FB2 opposing directions are mutually exclusive', ['fb2_gaze_exclusive']),
     (r'^ARKit and Unified Expressions both describe eyelid', ['arkit_gaze_eyelid', 'vrcft_ue_gaze_no_angle']),
     (r'^asymmetry irrecoverable$', ['asymmetry irrecoverable']),
-    (r'^consonant visemes are dropped', None),
-    (r'^a viseme probability becomes', None),
-    (r'^vowel quality differs', None),
+    (r'^consonant visemes are dropped', [build_canonical.VRM_DROPPED]),
+    (r'^a viseme probability becomes', ['vrm_vowel_asset_weight']),
+    (r'^vowel quality differs', ['vrm_ih_vowel_quality']),
     (r'^both are extension shapes with no stated length$', ['the tongue extension has no stated length']),
     (r'^FB2 also pulls the corner back and laterally', ['arkit_mouthsmile_upward']),
     (r'^an FB2 weight becomes an asset-authored expression weight$',
@@ -142,9 +147,8 @@ ADDED = {
                                         'vrcft_ue_mouthclosed_jaw_relative',
                                         'vrcft_ue_mouthlowerdown_direction_unresolved'},
     'FB2 -> VRM blink': {'vrm_blink_side_unresolved'},
+    'META -> VRM': {build_canonical.VISEME_SCOPE_KEY},
 }
-# The template entries of the viseme map, whose route joins with the canonical visemes.
-VISEME_PENDING = 20
 # Names in other sets that the capability matrix reads as a canonical name (the planned reading of
 # XR_ML_facial_expression's single chin raiser, as for FACS 17).
 ALIASES = {'XR_ML_facial_expression': {'CHIN_RAISER': 'CHIN_RAISER_B'}}
@@ -174,13 +178,17 @@ class PivotStructure(unittest.TestCase):
         cls.signals = {s['id']: s for s in cls.pack['signals']}
         cls.members = {p['id']: set(p['signal_ids']) for p in cls.pack['profiles']}
         cls.docs = build_canonical.read_documents(ROOT)
-        cls.hops = []  # (map, direction, set, group, rules)
+        cls.visemes = build_canonical.VisemeBuilder(ROOT)
+        cls.group = {sid: s['metadata']['group'] for sid, s in cls.signals.items() if sid.startswith(CANONICAL)}
+        groups = set(cls.group.values())
+        cls.hops = []  # (map, direction, set, group, rules); a viseme in-map names its group without "viseme_"
         for mapping in cls.pack['mappings']:
             if m := IN_MAP.match(mapping['id']):
-                cls.hops.append((mapping['id'], 'in', m.group(1), m.group(2), mapping['rules']))
+                group = m.group(2) if m.group(2) in groups else 'viseme_' + m.group(2)
+                cls.hops.append((mapping['id'], 'in', m.group(1), group, mapping['rules']))
             elif m := OUT_MAP.match(mapping['id']):
                 cls.hops.append((mapping['id'], 'out', m.group(2), m.group(1), mapping['rules']))
-        cls.group = {sid: s['metadata']['group'] for sid, s in cls.signals.items() if sid.startswith(PREFIX)}
+        cls.sum_target = next(r['outputs'][0] for m in cls.pack['mappings'] for r in m['rules'] if r['inputs'] == [SUM])
         cls.pairs = ab_compare.b_pairs(cls.pack)
         cls.aligned = build_canonical.Builder(ROOT).aligned
         cls.groups = next(p['metadata']['groups'] for p in cls.pack['profiles'] if p['id'] == 'rcef.canonical_expression')
@@ -191,13 +199,26 @@ class PivotStructure(unittest.TestCase):
                 yield map_id, direction, key, group, rule
 
     def canonical(self, rule):
-        """The canonical signals a rule reads or writes; a netting step's, through the helper it reads."""
-        if rule['operator']['id'] == 'piecewise_linear':
+        """The canonical signals a rule reads or writes; a netting split's, through the FB2 name it writes; the
+        aggregate sum step's, through the aggregate its sum goes to."""
+        if rule['outputs'] == [SUM]:
+            return [self.sum_target]
+        if rule['operator']['id'] == 'piecewise_linear' and rule['inputs'] != [SUM]:
             return [PREFIX + s for s in self.aligned['fb2'][rule['outputs'][0]]]
-        return [s for s in rule['inputs'] + rule['outputs'] if s.startswith(PREFIX)]
+        return [s for s in rule['inputs'] + rule['outputs'] if s.startswith(CANONICAL)]
 
     def provider(self, key, rule):
         return [s for s in rule['inputs'] + rule['outputs'] if s in self.members[PROFILES[key]]]
+
+    def spec(self, key, rule):
+        """The generator's description of the set at the far end of a hop."""
+        viseme = any(c.startswith(VISEME) for c in self.canonical(rule))
+        return (build_canonical.VISEME_PROVIDERS if viseme else build_canonical.PROVIDERS)[key]
+
+    def audit_row(self, key, canonical):
+        if canonical.startswith(VISEME):
+            return self.visemes.audit[key].get(canonical[len(VISEME):], {'verdict': 'same', 'keys': []})
+        return self.docs['audit'][key][canonical[len(PREFIX):]]
 
     def test_generated_data_is_current(self):
         for path, content in build_canonical.render(ROOT).items():
@@ -208,7 +229,7 @@ class PivotStructure(unittest.TestCase):
     def test_every_map_with_a_canonical_signal_is_a_named_hop(self):
         named = {h[0] for h in self.hops}
         for mapping in self.pack['mappings']:
-            if any(s.startswith(PREFIX) for r in mapping['rules'] for s in r['inputs'] + r['outputs']):
+            if any(s.startswith(CANONICAL) for r in mapping['rules'] for s in r['inputs'] + r['outputs']):
                 self.assertIn(mapping['id'], named)
         self.assertEqual(len(self.hops), MAPS)
         counts = {key: [0, 0] for key in COUNTS}
@@ -247,7 +268,7 @@ class PivotStructure(unittest.TestCase):
             with self.subTest(rule=rule['id']):
                 self.assertEqual((rule['disposition'], rule['mapping_quality'], rule['evidence_status']),
                                  ('mapped', 'approximate', 'proposed'))
-                self.assertIn(rule['operator'], OPERATORS)
+                self.assertIn(rule['operator'], OPERATORS + EXCEPTIONS.get(map_id, []))
                 self.assertGreaterEqual(len(rule['evidence']), 2)
                 self.assertEqual(rule['evidence'][-1], 'rcef_canonical_v1')
                 self.assertLessEqual(keys_of(rule), KEYS)
@@ -275,8 +296,11 @@ class PivotStructure(unittest.TestCase):
                         self.assertNotIn(other, native)
 
     def kind(self, direction, key, rule, rules):
-        """in_copy, in_fan, out_copy, out_fan, out_mean, out_net or net_step, from the operator and the fan."""
+        """in_copy, in_fan, out_copy, out_fan, out_mean, out_net, net_step, sum_step or in_sum, from the operator
+        and the fan."""
         output = rule['outputs'][0]
+        if output == SUM or rule['inputs'] == [SUM]:
+            return 'sum_step' if output == SUM else 'in_sum'
         if output.startswith(INTERMEDIATE):
             return 'net_step'
         if rule['operator']['id'] == 'piecewise_linear':
@@ -303,8 +327,8 @@ class PivotStructure(unittest.TestCase):
 
     def test_endpoint_clause_matches_the_operator(self):
         for map_id, direction, key, _, rules in self.hops:
-            name = build_canonical.PROVIDERS[key]['name']
             for rule in rules:
+                name = self.spec(key, rule)['name']
                 kind = self.kind(direction, key, rule, rules)
                 endpoints = [a for a in rule['assumptions'] if a.startswith('endpoints: ')]
                 with self.subTest(rule=rule['id'], kind=kind):
@@ -315,23 +339,29 @@ class PivotStructure(unittest.TestCase):
                     self.assertEqual(len(endpoints), 1)
                     text = endpoints[0]
                     opening = build_canonical.OPENING.format(build_canonical.possessive(name))
-                    clause = build_canonical.CLAUSES[kind].format(name=name)
+                    if kind in ('sum_step', 'in_sum'):
+                        step = next(r for r in rules if r['outputs'] == [SUM])
+                        names = [s.rsplit('_', 2)[-2] for s in step['inputs']]
+                        clause = build_canonical.SUM_CLAUSE.format(build_canonical.join(names))
+                    else:
+                        clause = build_canonical.CLAUSES[kind].format(name=name)
                     self.assertTrue(text.startswith(f'endpoints: {opening}; {clause}'), text)
-                    shorts = [c[len(PREFIX):] for c in self.canonical(rule)]
-                    differs = any(self.docs['audit'][key][s]['verdict'] != 'same' for s in shorts)
+                    differs = any(self.audit_row(key, c)['verdict'] != 'same' for c in self.canonical(rule))
                     self.assertEqual('the endpoints are assumed equal although' in text, differs)
 
     def test_audit_loss_keys_sit_on_the_hops_the_audit_names(self):
-        audit = self.docs['audit']
         for map_id, direction, key, _, rules in self.hops:
             for rule in rules:
-                shorts = [c[len(PREFIX):] for c in self.canonical(rule)]
-                if rule['outputs'][0].startswith(INTERMEDIATE):
-                    shorts = []
-                expected = {k for s in shorts for k in audit[key][s]['keys']}
-                expected |= {k for s in shorts for k in build_canonical.HOP_KEYS.get((key, direction, self.group[PREFIX + s]), [])}
+                canonical = self.canonical(rule)
+                if rule['outputs'][0].startswith(INTERMEDIATE) and rule['outputs'] != [SUM]:
+                    canonical = []
+                expected = {k for c in canonical for k in self.audit_row(key, c)['keys']}
+                expected |= {k for c in canonical for k in build_canonical.HOP_KEYS.get((key, direction, self.group[c]), [])}
                 if key == 'arkit':
-                    expected |= {k for s in shorts for k in self.docs['ict'].get(s, {}).get('keys', [])}
+                    expected |= {k for c in canonical for k in self.docs['ict'].get(c[len(PREFIX):], {}).get('keys', [])}
+                # The audit's META viseme scope row owns every META copy hop.
+                if key == 'visemes' and self.kind(direction, key, rule, rules).endswith('_copy'):
+                    expected.add(build_canonical.VISEME_SCOPE_KEY)
                 self.assertEqual(loss_keys(rule, self.docs['keys']), expected, rule['id'])
 
     def test_hop_loss_keys_are_the_ones_the_audit_gives_a_whole_hop(self):
@@ -352,9 +382,9 @@ class PivotStructure(unittest.TestCase):
                 self.assertGreater(counts['outputs'], 0)
                 self.assertEqual(failures, [])
         for map_id, _, key, _, rule in self.hop_rules():
-            if not rule['outputs'][0].startswith(INTERMEDIATE):
-                self.assertEqual(rule['evidence'][:len(build_canonical.PROVIDERS[key]['records'])],
-                                 build_canonical.PROVIDERS[key]['records'], rule['id'])
+            if self.canonical(rule) and not rule['inputs'][0].startswith(INTERMEDIATE):
+                records = self.spec(key, rule)['records']
+                self.assertEqual(rule['evidence'][:len(records)], records, rule['id'])
 
     def test_a_withdrawn_transfer_names_a_loss_on_the_route_of_its_signal(self):
         keys = self.docs['keys']
@@ -399,7 +429,7 @@ class PivotStructure(unittest.TestCase):
         rules, leaves = ab_compare.upstream(out_rules, output)
         for leaf in leaves:
             rules += ab_compare.upstream(in_rules, leaf)[0]
-        sources = {i for r in rules for i in r['inputs'] if not i.startswith((PREFIX, INTERMEDIATE))}
+        sources = {i for r in rules for i in r['inputs'] if not i.startswith((*CANONICAL, INTERMEDIATE))}
         if not rule['inputs'][0].startswith(INTERMEDIATE):
             self.assertLessEqual(set(rule['inputs']), sources, rule['id'])
         return rules
@@ -409,7 +439,7 @@ class PivotStructure(unittest.TestCase):
                       for r in build_canonical.table((ROOT / build_canonical.AUDIT_DOC).read_text(encoding='utf-8'),
                                                      '## Assumption catalogue')}
         found = dict.fromkeys(documented, 0)
-        superseded = pending = 0
+        superseded = 0
         records = {k: set(v['records']) for k, v in build_canonical.PROVIDERS.items()}
         for mapping in self.a1['mappings']:
             if mapping['id'] not in build_canonical.A1_MAPS:
@@ -420,9 +450,6 @@ class PivotStructure(unittest.TestCase):
                     self.assertEqual(len(hits), 1, text)
                     template, need = hits[0]
                     found[template] += 1
-                    if mapping['id'] == 'visemes.to_vrm':
-                        pending += 1
-                        continue
                     if need is None or (template == 'a10' and A10_SUPERSEDED.search(rule['outputs'][0])):
                         superseded += 1
                         continue
@@ -439,18 +466,17 @@ class PivotStructure(unittest.TestCase):
                         self.assertLessEqual(wanted, present)
         self.assertEqual(found, documented)
         self.assertEqual(superseded, 178)
-        self.assertEqual(pending, VISEME_PENDING)
 
     def test_every_loss_of_today_has_a_home_on_the_route(self):
         keys = self.docs['keys']
         documented = {r['A1 loss reason'] for r in build_canonical.table(
             (ROOT / build_canonical.AUDIT_DOC).read_text(encoding='utf-8'), "## Mapping today's losses to keys")}
-        reasons, pending = set(), 0
+        reasons = set()
         for mapping in self.a1['mappings']:
             if mapping['id'] not in build_canonical.A1_MAPS:
                 continue
             for rule in mapping['rules']:
-                route = [] if mapping['id'] == 'visemes.to_vrm' else self.a1_route(mapping['id'], rule)
+                route = self.a1_route(mapping['id'], rule)
                 held = {l['reason'] for hop in route for l in hop['loss_annotations']}
                 held_keys = {r.split(':', 1)[0] for r in held} & set(keys)
                 covered = set()
@@ -459,9 +485,6 @@ class PivotStructure(unittest.TestCase):
                     reasons.add(reason)
                     homes = [h for pattern, h in LOSS_HOMES if re.search(pattern, reason)]
                     self.assertEqual(len(homes), 1, reason)
-                    if homes[0] is None:
-                        pending += 1
-                        continue
                     with self.subTest(rule=rule['id'], reason=reason):
                         for home in homes[0]:
                             if home == 'gain':
@@ -483,14 +506,13 @@ class PivotStructure(unittest.TestCase):
                             else:
                                 self.assertIn(home, held)
                 # Today's internal gaze steps write no output of the pair; the splits that read them carry its keys.
-                if mapping['id'] == 'visemes.to_vrm' or rule['outputs'][0].startswith(INTERMEDIATE):
+                if rule['outputs'][0].startswith(INTERMEDIATE):
                     continue
                 pair = A1_PAIRS[mapping['id']]
                 with self.subTest(rule=rule['id'], added=pair):
                     self.assertLessEqual(held_keys - covered, ADDED[pair])
         self.assertEqual(len(reasons), 21)
         self.assertEqual(len(documented), 21)
-        self.assertGreater(pending, 0)
 
     def test_composed_hop_weights_equal_todays_weights(self):
         for pair in sorted(set(A1_PAIRS.values())):
@@ -498,7 +520,6 @@ class PivotStructure(unittest.TestCase):
                 counts, failures = ab_compare.m1s(self.a1, self.pack, pair, self.pairs[pair])
                 self.assertGreater(counts['linear_outputs'], 0)
                 self.assertEqual(failures, [])
-        self.assertNotIn(VISEME_PAIR, self.pairs)
 
     def test_todays_direct_maps_are_unchanged(self):
         baseline = {m['id']: m for m in self.a1['mappings'] if m['id'] in build_canonical.A1_MAPS}
