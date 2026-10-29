@@ -25,7 +25,9 @@ expression set to a target set. The 7 direct maps do not change.
 - Each new mapping states, as assumptions: the correspondence; the
   endpoints, with a clause that matches its operator; whether the evidence
   of today's direct maps carries over to the canonical signal or is
-  withdrawn, with the loss that withdraws it; and every other assumption of
+  withdrawn, with the loss that withdraws it (a transfer is withdrawn when
+  the hop's own audit row or the other set's row for the canonical signal is
+  `differs` or `unresolved`); and every other assumption of
   today's direct maps, as the assumption catalogue in
   `docs/canonical-set-audit.md` places it.
 - Evidence status: every canonical expression signal and every new mapping
