@@ -16,12 +16,14 @@ import provenance  # noqa: E402
 # The last commit that changed the calibration code, and the one that published the rig-gains results. The code
 # changed after the rig-gains and MediaPipe records (code_commit 7cd8ff9) when check.py learnt geometry-only records
 # and pose sums, and viseme_poses.py was added; those two records are reproduced from their freeze commit, dd9ecd2.
-# check.py changed again (16a698f) after the viseme-poses record (code_commit d7e0f50), which is reproduced from its
-# freeze commit, a0381b2.
-CODE_COMMIT = '16a698fa1e59118c845cf6aef09c4cd9feec3213'
+# check.py changed again (16a698f) after viseme-poses.rocketbox-female (code_commit d7e0f50), which is reproduced from
+# its freeze commit, a0381b2. viseme_poses.py then learnt the multi-rig fit (c0b8b8b), the code_commit of
+# viseme-poses.rocketbox-multi.
+CODE_COMMIT = 'c0b8b8bc2389578f4b7270eecd3c325e5c6f9a67'
 RECORD_COMMIT = '2fa1be4'
 CODE = ['check.py', 'examples/rig_gains.py', 'examples/rigs.py', 'examples/ict_facekit.py', 'examples/rcef_translate.py',
-        'examples/data/rig_landmarks.json', 'tools/calibration/ict_files.json', 'tools/render/']
+        'examples/data/rig_landmarks.json', 'tools/calibration/ict_files.json', 'tools/calibration/viseme_rigs.json',
+        'tools/render/']
 RECORD = ['calibration/rig-gains.ict-rocketbox-female.cal']
 # The commit that published the viseme-poses results.
 POSES_COMMIT = 'e43a0ca'
