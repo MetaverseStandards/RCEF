@@ -142,7 +142,8 @@ class Regression(unittest.TestCase):
         old = ab_compare.sha256_bytes(generator.read_bytes())
         source = {'channels': ['a', 'b'], 'flags': [], 'gaze_pairs': []}
         self.first = {'id': 'ab.pivot', 'version': 1, 'kind': 'first', 'sources': {'s': source},
-                      'families': [{'name': 'u', 'kind': 'uniform', 'source': 's', 'count': 3}],
+                      'families': [{'name': 'u', 'kind': 'uniform', 'source': 's', 'count': 3,
+                                    'range': [0.0, 1.0]}],
                       'pins': {'code': {'generator': old}}}
         self.first['seed_root'] = ab_compare.seed_root(self.first)
         (self.root / 'ab/ab.pivot-v1.abreg').write_text(json.dumps(self.first), encoding='utf-8')

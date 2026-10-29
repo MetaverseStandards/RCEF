@@ -99,17 +99,19 @@ CSV_INPUTS = [('examples/data/fb2_demo_frames.csv', 'openxr.fb2', *FB2),
               ('examples/data/viseme_talk_frames.csv', 'openxr.visemes', *VISEMES)]
 # The seeded families and their default sizes (ab/README.md). A family whose source the B pack cannot route is
 # left out of a draft.
-FAMILIES = [{'name': 'fb2_contract', 'kind': 'fb2_contract', 'source': 'openxr.fb2', 'count': 2000},
-            {'name': 'fb2_breaking', 'kind': 'uniform', 'source': 'openxr.fb2', 'count': 2000},
-            {'name': 'arkit_uniform', 'kind': 'uniform', 'source': 'arkit.coefficient', 'count': 2000},
-            {'name': 'viseme_simplex', 'kind': 'simplex', 'source': 'openxr.visemes', 'count': 500},
-            {'name': 'vrm', 'kind': 'vrm', 'source': 'vrm.preset', 'count': 200, 'blink': 'vrm.preset.blink',
+UNIT = [0.0, 1.0]
+FAMILIES = [{'name': 'fb2_contract', 'kind': 'fb2_contract', 'source': 'openxr.fb2', 'count': 2000, 'range': UNIT},
+            {'name': 'fb2_breaking', 'kind': 'uniform', 'source': 'openxr.fb2', 'count': 2000, 'range': UNIT},
+            {'name': 'arkit_uniform', 'kind': 'uniform', 'source': 'arkit.coefficient', 'count': 2000, 'range': UNIT},
+            {'name': 'viseme_simplex', 'kind': 'simplex', 'source': 'openxr.visemes', 'count': 500, 'decimals': 6},
+            {'name': 'vrm', 'kind': 'vrm', 'source': 'vrm.preset', 'count': 200, 'range': UNIT,
+             'blink': 'vrm.preset.blink',
              'vowels': [f'vrm.preset.{v}' for v in ('aa', 'ih', 'ou', 'ee', 'oh')]},
-            {'name': 'vrcft_eye', 'kind': 'uniform', 'source': 'vrcft.eye', 'count': 200,
+            {'name': 'vrcft_eye', 'kind': 'uniform', 'source': 'vrcft.eye', 'count': 200, 'range': UNIT,
              'outside': {'every': 10, 'channels': ['vrcft.eye.Left.Openness', 'vrcft.eye.Right.Openness'],
                          'values': [1.2, -0.1]}},
-            {'name': 'facs_uniform', 'kind': 'uniform', 'source': 'facs.code', 'count': 2000},
-            {'name': 'facs_letters', 'kind': 'facs_letters', 'count': 500}]
+            {'name': 'facs_uniform', 'kind': 'uniform', 'source': 'facs.code', 'count': 2000, 'range': UNIT},
+            {'name': 'facs_letters', 'kind': 'facs_letters', 'count': 500, 'values': list(ab_frames.LETTER_VALUES)}]
 PERTURB_BASES = 4
 # FACS channels that A3 and B share: every mapped facs.code signal but AU19 and AU43, which A3's table lacks.
 FACS_UNSHARED = ('facs.code.au19', 'facs.code.au43_left', 'facs.code.au43_right')

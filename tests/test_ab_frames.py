@@ -20,10 +20,14 @@ def registration(seed_root):
     sources = {p: ab_frames.pinned_source(document, p) for p in ('openxr.fb2', 'arkit.coefficient', 'openxr.visemes')}
     letters = [f'facs.code.au{n:02d}_{s}' for n in (1, 12) for s in ('left', 'right')] + ['facs.code.au17']
     return {'seed_root': seed_root, 'sources': sources,
-            'families': [{'name': 'fb2_contract', 'kind': 'fb2_contract', 'source': 'openxr.fb2', 'count': 20},
-                         {'name': 'arkit_uniform', 'kind': 'uniform', 'source': 'arkit.coefficient', 'count': 20},
-                         {'name': 'viseme_simplex', 'kind': 'simplex', 'source': 'openxr.visemes', 'count': 10},
-                         {'name': 'facs_letters', 'kind': 'facs_letters', 'count': 10, 'channels': letters}],
+            'families': [{'name': 'fb2_contract', 'kind': 'fb2_contract', 'source': 'openxr.fb2', 'count': 20,
+                          'range': [0.0, 1.0]},
+                         {'name': 'arkit_uniform', 'kind': 'uniform', 'source': 'arkit.coefficient', 'count': 20,
+                          'range': [0.0, 1.0]},
+                         {'name': 'viseme_simplex', 'kind': 'simplex', 'source': 'openxr.visemes', 'count': 10,
+                          'decimals': 6},
+                         {'name': 'facs_letters', 'kind': 'facs_letters', 'count': 10, 'channels': letters,
+                          'values': list(ab_frames.LETTER_VALUES)}],
             'perturbations': [{'family': 'arkit_uniform', 'bases': 2}]}
 
 
@@ -83,6 +87,17 @@ class Families(unittest.TestCase):
         self.assertEqual(len(frames), len(ab_frames.EDGE_VALUES) * 53 + 4 * 4)
         self.assertIn(5e-324, ab_frames.EDGE_VALUES)
         self.assertIn(math.copysign(0.0, -1), [math.copysign(0.0, v) for v in ab_frames.EDGE_VALUES if v == 0])
+
+    def test_every_family_pins_its_values_and_the_generator_has_no_defaults(self):
+        import ab_compare
+        needs = {'uniform': 'range', 'fb2_contract': 'range', 'vrm': 'range', 'simplex': 'decimals',
+                 'facs_letters': 'values'}
+        for spec in ab_compare.FAMILIES:
+            self.assertIn(needs[spec['kind']], spec, spec['name'])
+        source = self.first['sources']['arkit.coefficient']
+        for kind, family in (('uniform', ab_frames.uniform_family), ('simplex', ab_frames.simplex_family)):
+            with self.subTest(kind), self.assertRaises(KeyError):
+                family({'name': 'x', 'kind': kind, 'count': 1}, source, random.Random(0))
 
     def test_files_and_sums_are_written_with_every_bit(self):
         families = {'edge:x': [{'family': 'edge:x', 'label': 'z', 'values': {'a': -0.0, 'b': 5e-324}, 'flags': {}}]}

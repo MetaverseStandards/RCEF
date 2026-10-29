@@ -74,7 +74,7 @@ These families are fixed lists. They do not depend on `seed_root`, so every A1 f
 - **Grid frames:** every channel at k/16 for k = 0 to 16, then each pattern of validity flags on a frame with every channel at 0.5.
 - **Other fixed inputs:** the goldens in `tests/fixtures/fb2_goldens.json` (each on its source set, every other channel 0), the four example CSVs, the 221 FACS library frames and the 132 FACS key impulses. The registration pins the SHA-256 of each input file.
 
-The seeded families mix full-mantissa binary64 values with 6-decimal values. The perturbation families leave out each input of a few seeded frames, set it to 1.5 and to −0.1, and clear each validity flag.
+The seeded families mix full-mantissa binary64 values with 6-decimal values. Each family's value range (or, for the FACS letter family, its value set, and for the viseme family its number of decimals) is written in the registration, and the generator has no default for it, so a change to the generator cannot change a registered family. The viseme simplex family uses 6-decimal values only: it splits 10⁶ at random cut points, so each frame's probabilities sum to exactly 1 in decimal, which full-mantissa values cannot do. The perturbation families leave out each input of a few seeded frames, set it to 1.5 and to −0.1, and clear each validity flag.
 
 ## Registration order
 
