@@ -12,7 +12,9 @@ import json
 from pathlib import Path
 import struct
 import sys
+from types import SimpleNamespace
 import unittest
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'examples'))
@@ -268,6 +270,17 @@ class TwoHop(unittest.TestCase):
                                                                      'refs': ['rules/out.jaw_double']}})
         self.assertEqual(results[0]['labels']['tgt.jaw'], 'refused at rcef_jaw.to_tgt')
         self.assertEqual(results[1]['values']['tgt.jaw_double'], 0.5)
+
+    def test_a_failed_call_with_no_error_diagnostic_stops_instead_of_retrying(self):
+        class Report:
+            diagnostics = (SimpleNamespace(severity='warning', ref='/samples/0/src.jaw', code='W'),)
+
+            def to_dict(self):
+                return {'diagnostics': ['W']}
+        failed = SimpleNamespace(ok=False, report=Report())
+        with mock.patch.object(rcef_route.msf, 'evaluate_mapping', return_value=failed), \
+                self.assertRaises(SystemExit):
+            self.route.translate([self.frame()])
 
     def test_meta_validity_is_never_asserted_for_another_source(self):
         route = copy(self.route)
