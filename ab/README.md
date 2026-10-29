@@ -98,6 +98,6 @@ Freeze ids, hashes and paths are only in `manifest.json`. So a `reproduce` run c
 
 ## What the tools compute today
 
-`ab_compare.py` computes M1, M1s, M2, M2b, M2c, M3, M4 (observed loss), M5, M8 (B against A2), M10, M10b and B against O on every pair. The scoreboard marks the rest as pending until their frozen tables exist: the rule-scoped loss-key table for M4, the assumption catalogue for M4b, the geometry harness for M6, the mutation set for M7, the R3 goldens and the ICT-FaceKit comparison for M11. A run with a pending gate cannot pass.
+`ab_compare.py` computes M1, M1s, M2, M2b, M2c, M3, M4 (observed loss), M5, M8 (B against A2), M10, M10b and B against O on every pair. The draft takes the M3 list of flat links from O: links of the composed hop weights that enter a piecewise operator on its flat side, so their impulse changes nothing. A `fix` or `revise` run makes the seeded families of every earlier freeze again with the generator that freeze pinned, taken from Git history, and checks their hashes against the earlier run's `SHA256SUMS`. The scoreboard marks the rest as pending until their frozen tables exist: the rule-scoped loss-key table for M4, the assumption catalogue for M4b, the geometry harness for M6, the mutation set for M7, the R3 goldens and the ICT-FaceKit comparison for M11. A run with a pending gate cannot pass.
 
 A1's observed loss on the fixed impulse frames is 0 on all five A1 pairs (`python3 -B scripts/ab_compare.py a1-loss`). The first registration records it as A1's baseline.
