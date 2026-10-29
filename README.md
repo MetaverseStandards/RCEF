@@ -337,7 +337,7 @@ Each open item below is stated in full in the linked document.
 
 ## More documentation
 
-- [Architecture guide](docs/architecture.md): what `check.py` does, how TOML is discovered and validated, how maps compile and run in memory, the generated reports, and worked examples of each operator. The [TOML file index](docs/toml-index.csv) describes the same data 0.5.0 tree as the guide. The [visual architecture report](docs/architecture.html) and [standalone diagram](docs/architecture.svg) still show the data 0.4.0 tree, without the canonical expression set.
+- [Architecture guide](docs/architecture.md): what `check.py` does, how TOML is discovered and validated, how maps compile and run in memory, the generated reports, and worked examples of each operator. The [visual architecture report](docs/architecture.html), [standalone diagram](docs/architecture.svg) and [TOML file index](docs/toml-index.csv) describe the same data 0.5.0 tree as the guide. The PNG copy of the diagram, `docs/architecture.png`, still shows data 0.4.0 until it is rendered again from the SVG.
 - [Expression sets](docs/expression-sets.md): every profile file, with its documentation, pinned source and licence.
 - [Godot comparison](docs/godot_comparison.md): RCEF's FB2 → ARKit mappings compared with the routes in Godot's public sources.
 - [Canonical expression set (draft)](docs/canonical-set.md): the proposed pivot vocabulary, with its [definitions audit](docs/canonical-set-audit.md) and the [FACS intensity codec](docs/facs-intensity.md). It is a proposal for review. Data 0.5.0 holds its expression part as the draft profile `rcef.canonical_expression`, with its maps; the visemes and the later signal groups are not in the data yet.
