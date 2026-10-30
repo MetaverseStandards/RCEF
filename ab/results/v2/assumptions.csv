@@ -1,0 +1,590 @@
+pair,A1 rule,template,"B keys by side, or superseded"
+FB2 -> ARKit,fb2_arkit.browDownLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.browDownLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.browDownLeft,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.browDownRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.browDownRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.browDownRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.browInnerUp,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.browInnerUp,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.browInnerUp,a32,out: mean.arkit
+FB2 -> ARKit,fb2_arkit.browOuterUpLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.browOuterUpLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.browOuterUpLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.browOuterUpRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.browOuterUpRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.browOuterUpRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.cheekPuff,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.cheekPuff,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.cheekPuff,a33,out: mean.arkit
+FB2 -> ARKit,fb2_arkit.cheekSquintLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.cheekSquintLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.cheekSquintLeft,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.cheekSquintRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.cheekSquintRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.cheekSquintRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeBlinkLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeBlinkLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeBlinkLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.eyeBlinkRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeBlinkRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeBlinkRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.eyeLookDownLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeLookDownLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeLookDownLeft,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeLookDownRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeLookDownRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeLookDownRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeLookInLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeLookInLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeLookInLeft,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeLookInRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeLookInRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeLookInRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeLookOutLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeLookOutLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeLookOutLeft,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeLookOutRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeLookOutRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeLookOutRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeLookUpLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeLookUpLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeLookUpLeft,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeLookUpRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeLookUpRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeLookUpRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeSquintLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeSquintLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeSquintLeft,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeSquintLeft,a14,in: evidence.vrcft_tables_not_cited
+FB2 -> ARKit,fb2_arkit.eyeSquintRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeSquintRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeSquintRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.eyeSquintRight,a14,in: evidence.vrcft_tables_not_cited
+FB2 -> ARKit,fb2_arkit.eyeWideLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeWideLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeWideLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.eyeWideLeft,a14,in: evidence.vrcft_tables_not_cited
+FB2 -> ARKit,fb2_arkit.eyeWideRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.eyeWideRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.eyeWideRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.eyeWideRight,a14,in: evidence.vrcft_tables_not_cited
+FB2 -> ARKit,fb2_arkit.jawForward,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.jawForward,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.jawLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.jawLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.jawLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.jawOpen,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.jawOpen,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.jawRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.jawRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.jawRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthClose,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthClose,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.mouthClose,a35,out: lips_toward.jaw_not_compensated
+FB2 -> ARKit,fb2_arkit.mouthDimpleLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthDimpleLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthDimpleLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthDimpleRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthDimpleRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthDimpleRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthFrownLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthFrownLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthFrownLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthFrownRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthFrownRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthFrownRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthFunnel,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthFunnel,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthFunnel,a34,out: mean.arkit
+FB2 -> ARKit,fb2_arkit.mouthLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthLeft,a29,in: evidence.godot_only_mouth_shift; out: evidence.godot_only_mouth_shift
+FB2 -> ARKit,fb2_arkit.mouthLowerDownLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthLowerDownLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthLowerDownLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthLowerDownLeft,a31,in: evidence.vrcft_tables_not_cited
+FB2 -> ARKit,fb2_arkit.mouthLowerDownRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthLowerDownRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthLowerDownRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthPressLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthPressLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthPressLeft,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.mouthPressRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthPressRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthPressRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.mouthPucker,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthPucker,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthPucker,a25,out: mean.arkit
+FB2 -> ARKit,fb2_arkit.mouthRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthRight,a29,in: evidence.godot_only_mouth_shift; out: evidence.godot_only_mouth_shift
+FB2 -> ARKit,fb2_arkit.mouthRollLower,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthRollLower,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthRollLower,a25,out: mean.arkit
+FB2 -> ARKit,fb2_arkit.mouthRollUpper,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthRollUpper,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthRollUpper,a25,out: mean.arkit
+FB2 -> ARKit,fb2_arkit.mouthShrugLower,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthShrugLower,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.mouthShrugUpper,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthShrugUpper,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.mouthSmileLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthSmileLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthSmileLeft,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.mouthSmileRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthSmileRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthSmileRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.mouthStretchLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthStretchLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthStretchLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthStretchRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthStretchRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthStretchRight,a07,in: correspondence; out: correspondence; any: transfer.withdrawn
+FB2 -> ARKit,fb2_arkit.mouthUpperUpLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthUpperUpLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthUpperUpLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.mouthUpperUpRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.mouthUpperUpRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.mouthUpperUpRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.noseSneerLeft,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.noseSneerLeft,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.noseSneerLeft,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.noseSneerRight,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.noseSneerRight,a06,"superseded: the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same"
+FB2 -> ARKit,fb2_arkit.noseSneerRight,a07,in: correspondence; out: correspondence; any: transfer.provider
+FB2 -> ARKit,fb2_arkit.tongueOut,a05,in: endpoints; out: endpoints
+FB2 -> ARKit,fb2_arkit.tongueOut,a07,in: correspondence; out: correspondence; any: transfer.provider
+ARKit -> FB2,arkit_fb2.BROW_LOWERER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.BROW_LOWERER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.BROW_LOWERER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.BROW_LOWERER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.BROW_LOWERER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.BROW_LOWERER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.CHEEK_PUFF_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.CHEEK_PUFF_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.CHEEK_PUFF_L,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.CHEEK_PUFF_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.CHEEK_PUFF_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.CHEEK_PUFF_R,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.CHEEK_RAISER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.CHEEK_RAISER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.CHEEK_RAISER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.CHEEK_RAISER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.CHEEK_RAISER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.CHEEK_RAISER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.CHIN_RAISER_B,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.CHIN_RAISER_B,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.CHIN_RAISER_T,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.CHIN_RAISER_T,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.DIMPLER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.DIMPLER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.DIMPLER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.DIMPLER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.DIMPLER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.DIMPLER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.EYES_CLOSED_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_CLOSED_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_CLOSED_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.EYES_CLOSED_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_CLOSED_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_CLOSED_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.EYES_LOOK_DOWN_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_LOOK_DOWN_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_LOOK_DOWN_L,a12,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_DOWN_L,a20,out: correspondence net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_DOWN_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_LOOK_DOWN_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_LOOK_DOWN_R,a12,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_DOWN_R,a20,out: correspondence net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_LEFT_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_LOOK_LEFT_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_LOOK_LEFT_L,a12,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_LEFT_L,a20,out: correspondence net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_LEFT_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_LOOK_LEFT_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_LOOK_LEFT_R,a12,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_LEFT_R,a19,out: correspondence net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_RIGHT_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_LOOK_RIGHT_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_LOOK_RIGHT_L,a12,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_RIGHT_L,a19,out: correspondence net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_RIGHT_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_LOOK_RIGHT_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_LOOK_RIGHT_R,a12,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_RIGHT_R,a20,out: correspondence net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_UP_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_LOOK_UP_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_LOOK_UP_L,a12,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_UP_L,a19,out: correspondence net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_UP_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.EYES_LOOK_UP_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.EYES_LOOK_UP_R,a12,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.EYES_LOOK_UP_R,a19,out: correspondence net.fb2_gaze
+ARKit -> FB2,arkit_fb2.INNER_BROW_RAISER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.INNER_BROW_RAISER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.INNER_BROW_RAISER_L,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.INNER_BROW_RAISER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.INNER_BROW_RAISER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.INNER_BROW_RAISER_R,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.JAW_DROP,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.JAW_DROP,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.JAW_SIDEWAYS_LEFT,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.JAW_SIDEWAYS_LEFT,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.JAW_SIDEWAYS_LEFT,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.JAW_SIDEWAYS_RIGHT,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.JAW_SIDEWAYS_RIGHT,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.JAW_SIDEWAYS_RIGHT,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.JAW_THRUST,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.JAW_THRUST,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LID_TIGHTENER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LID_TIGHTENER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LID_TIGHTENER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LID_TIGHTENER_L,a14,out: evidence.vrcft_tables_not_cited
+ARKit -> FB2,arkit_fb2.LID_TIGHTENER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LID_TIGHTENER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LID_TIGHTENER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LID_TIGHTENER_R,a14,out: evidence.vrcft_tables_not_cited
+ARKit -> FB2,arkit_fb2.LIPS_TOWARD,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIPS_TOWARD,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LIP_CORNER_DEPRESSOR_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_CORNER_DEPRESSOR_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_CORNER_DEPRESSOR_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LIP_CORNER_DEPRESSOR_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_CORNER_DEPRESSOR_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_CORNER_DEPRESSOR_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LIP_CORNER_PULLER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_CORNER_PULLER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_CORNER_PULLER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LIP_CORNER_PULLER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_CORNER_PULLER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_CORNER_PULLER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_LB,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_LB,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_LB,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_LT,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_LT,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_LT,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_RB,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_RB,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_RB,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_RT,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_RT,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_FUNNELER_RT,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LIP_PRESSOR_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_PRESSOR_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_PRESSOR_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LIP_PRESSOR_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_PRESSOR_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_PRESSOR_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LIP_PUCKER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_PUCKER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_PUCKER_L,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LIP_PUCKER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_PUCKER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_PUCKER_R,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LIP_STRETCHER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_STRETCHER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_STRETCHER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LIP_STRETCHER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_STRETCHER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_STRETCHER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LIP_SUCK_LB,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_SUCK_LB,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_SUCK_LB,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LIP_SUCK_LT,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_SUCK_LT,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_SUCK_LT,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LIP_SUCK_RB,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_SUCK_RB,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_SUCK_RB,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LIP_SUCK_RT,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LIP_SUCK_RT,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LIP_SUCK_RT,a11,in: endpoints
+ARKit -> FB2,arkit_fb2.LOWER_LIP_DEPRESSOR_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LOWER_LIP_DEPRESSOR_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LOWER_LIP_DEPRESSOR_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.LOWER_LIP_DEPRESSOR_L,a31,out: evidence.vrcft_tables_not_cited
+ARKit -> FB2,arkit_fb2.LOWER_LIP_DEPRESSOR_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.LOWER_LIP_DEPRESSOR_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.LOWER_LIP_DEPRESSOR_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.MOUTH_LEFT,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.MOUTH_LEFT,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.MOUTH_LEFT,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.MOUTH_LEFT,a30,in: evidence.godot_only_mouth_shift; out: evidence.godot_only_mouth_shift
+ARKit -> FB2,arkit_fb2.MOUTH_RIGHT,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.MOUTH_RIGHT,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.MOUTH_RIGHT,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.MOUTH_RIGHT,a30,in: evidence.godot_only_mouth_shift; out: evidence.godot_only_mouth_shift
+ARKit -> FB2,arkit_fb2.NOSE_WRINKLER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.NOSE_WRINKLER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.NOSE_WRINKLER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.NOSE_WRINKLER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.NOSE_WRINKLER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.NOSE_WRINKLER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.OUTER_BROW_RAISER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.OUTER_BROW_RAISER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.OUTER_BROW_RAISER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.OUTER_BROW_RAISER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.OUTER_BROW_RAISER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.OUTER_BROW_RAISER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.TONGUE_OUT,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.TONGUE_OUT,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.UPPER_LID_RAISER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.UPPER_LID_RAISER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.UPPER_LID_RAISER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.UPPER_LID_RAISER_L,a14,out: evidence.vrcft_tables_not_cited
+ARKit -> FB2,arkit_fb2.UPPER_LID_RAISER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.UPPER_LID_RAISER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.UPPER_LID_RAISER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.UPPER_LID_RAISER_R,a14,out: evidence.vrcft_tables_not_cited
+ARKit -> FB2,arkit_fb2.UPPER_LIP_RAISER_L,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.UPPER_LIP_RAISER_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.UPPER_LIP_RAISER_L,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.UPPER_LIP_RAISER_R,a03,in: endpoints; out: endpoints
+ARKit -> FB2,arkit_fb2.UPPER_LIP_RAISER_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.UPPER_LIP_RAISER_R,a09,in: correspondence; out: correspondence
+ARKit -> FB2,arkit_fb2.gaze_in_minus_out_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.gaze_in_minus_out_L,a22,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.gaze_in_minus_out_L,a23,out: gaze.fb2_exclusive
+ARKit -> FB2,arkit_fb2.gaze_in_minus_out_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.gaze_in_minus_out_R,a22,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.gaze_in_minus_out_R,a23,out: gaze.fb2_exclusive
+ARKit -> FB2,arkit_fb2.gaze_up_minus_down_L,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.gaze_up_minus_down_L,a22,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.gaze_up_minus_down_L,a23,out: gaze.fb2_exclusive
+ARKit -> FB2,arkit_fb2.gaze_up_minus_down_R,a04,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same"
+ARKit -> FB2,arkit_fb2.gaze_up_minus_down_R,a22,out: net.fb2_gaze
+ARKit -> FB2,arkit_fb2.gaze_up_minus_down_R,a23,out: gaze.fb2_exclusive
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowInnerUpLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowInnerUpLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowInnerUpLeft,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowInnerUpRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowInnerUpRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowInnerUpRight,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowLowererLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowLowererLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowLowererLeft,a13,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowLowererRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowLowererRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowLowererRight,a13,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowOuterUpLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowOuterUpLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowOuterUpLeft,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowOuterUpRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowOuterUpRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowOuterUpRight,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowPinchLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowPinchLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowPinchLeft,a13,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowPinchRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowPinchRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.BrowPinchRight,a13,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekPuffLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekPuffLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekPuffLeft,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekPuffRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekPuffRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekPuffRight,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekSquintLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekSquintLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekSquintLeft,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekSquintRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekSquintRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.CheekSquintRight,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeClosedLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeClosedLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeClosedLeft,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeClosedRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeClosedRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeClosedRight,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookDownLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookDownLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookDownLeft,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookDownRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookDownRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookDownRight,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookInLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookInLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookInLeft,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookInRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookInRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookInRight,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookOutLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookOutLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookOutLeft,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookOutRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookOutRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookOutRight,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookUpLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookUpLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookUpLeft,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookUpRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookUpRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeLookUpRight,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeSquintLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeSquintLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeSquintLeft,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeSquintRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeSquintRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeSquintRight,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeWideLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeWideLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeWideLeft,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeWideRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeWideRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.EyeWideRight,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawForward,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawForward,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawLeft,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawOpen,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawOpen,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.JawRight,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelLowerLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelLowerLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelLowerLeft,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelLowerRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelLowerRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelLowerRight,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelUpperLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelUpperLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelUpperLeft,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelUpperRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelUpperRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipFunnelUpperRight,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerLowerLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerLowerLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerLowerLeft,a10,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerLowerRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerLowerRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerLowerRight,a10,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerUpperLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerUpperLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerUpperLeft,a10,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerUpperRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerUpperRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipPuckerUpperRight,a10,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckLowerLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckLowerLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckLowerLeft,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckLowerRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckLowerRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckLowerRight,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckUpperLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckUpperLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckUpperLeft,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckUpperRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckUpperRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.LipSuckUpperRight,a10,"superseded: the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a 1:1 copy and the copy into each part moves to the ARKit in-hop"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthClosed,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthClosed,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerPullLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerPullLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerPullLeft,a13,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerPullRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerPullRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerPullRight,a13,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerSlantLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerSlantLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerSlantLeft,a13,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerSlantRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerSlantRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthCornerSlantRight,a13,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthDimpleLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthDimpleLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthDimpleLeft,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthDimpleRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthDimpleRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthDimpleRight,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthFrownLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthFrownLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthFrownLeft,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthFrownRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthFrownRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthFrownRight,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerDownLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerDownLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerDownLeft,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerDownRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerDownRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerDownRight,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerLeft,a21,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerLeft,a24,out: evidence.godot_only_mouth_shift
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerRight,a21,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthLowerRight,a24,out: evidence.godot_only_mouth_shift
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthPressLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthPressLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthPressLeft,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthPressRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthPressRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthPressRight,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthRaiserLower,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthRaiserLower,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthRaiserUpper,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthRaiserUpper,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthStretchLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthStretchLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthStretchLeft,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthStretchRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthStretchRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthStretchRight,a08,in: correspondence; out: transfer.withdrawn
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperLeft,a21,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperLeft,a24,out: evidence.godot_only_mouth_shift
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperRight,a21,out: fan_out.vrcft_ue
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperRight,a24,out: evidence.godot_only_mouth_shift
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperUpLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperUpLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperUpLeft,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperUpRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperUpRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.MouthUpperUpRight,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.NoseSneerLeft,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.NoseSneerLeft,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.NoseSneerLeft,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.NoseSneerRight,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.NoseSneerRight,a02,"superseded: the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same"
+ARKit -> VRCFT UE,arkit_vrcft_artist.NoseSneerRight,a08,in: correspondence; out: transfer.provider
+ARKit -> VRCFT UE,arkit_vrcft_artist.TongueOut,a01,in: endpoints; out: endpoints
+ARKit -> VRCFT UE,arkit_vrcft_artist.TongueOut,a08,in: correspondence; out: transfer.provider
+FB2 -> VRM blink,fb2_vrm.blinkLeft,a15,out: vrm.downstream_effects
+FB2 -> VRM blink,fb2_vrm.blinkLeft,a26,out: vrm.side_caveat
+FB2 -> VRM blink,fb2_vrm.blinkLeft,a27,in: correspondence; out: correspondence vrm.definitional_only
+FB2 -> VRM blink,fb2_vrm.blinkLeft,a28,out: endpoints
+FB2 -> VRM blink,fb2_vrm.blinkRight,a15,out: vrm.downstream_effects
+FB2 -> VRM blink,fb2_vrm.blinkRight,a26,out: vrm.side_caveat
+FB2 -> VRM blink,fb2_vrm.blinkRight,a27,in: correspondence; out: correspondence vrm.definitional_only
+FB2 -> VRM blink,fb2_vrm.blinkRight,a28,out: endpoints
+META -> VRM,visemes_vrm.aa,a15,out: vrm.downstream_effects
+META -> VRM,visemes_vrm.aa,a16,in: correspondence; out: correspondence
+META -> VRM,visemes_vrm.aa,a17,out: vrm.probability_as_weight
+META -> VRM,visemes_vrm.aa,a18,out: vrm.phoneme_label_only
+META -> VRM,visemes_vrm.ee,a15,out: vrm.downstream_effects
+META -> VRM,visemes_vrm.ee,a16,in: correspondence; out: correspondence
+META -> VRM,visemes_vrm.ee,a17,out: vrm.probability_as_weight
+META -> VRM,visemes_vrm.ee,a18,out: vrm.phoneme_label_only
+META -> VRM,visemes_vrm.ih,a15,out: vrm.downstream_effects
+META -> VRM,visemes_vrm.ih,a16,in: correspondence; out: correspondence
+META -> VRM,visemes_vrm.ih,a17,out: vrm.probability_as_weight
+META -> VRM,visemes_vrm.ih,a18,out: vrm.phoneme_label_only
+META -> VRM,visemes_vrm.oh,a15,out: vrm.downstream_effects
+META -> VRM,visemes_vrm.oh,a16,in: correspondence; out: correspondence
+META -> VRM,visemes_vrm.oh,a17,out: vrm.probability_as_weight
+META -> VRM,visemes_vrm.oh,a18,out: vrm.phoneme_label_only
+META -> VRM,visemes_vrm.ou,a15,out: vrm.downstream_effects
+META -> VRM,visemes_vrm.ou,a16,in: correspondence; out: correspondence
+META -> VRM,visemes_vrm.ou,a17,out: vrm.probability_as_weight
+META -> VRM,visemes_vrm.ou,a18,out: vrm.phoneme_label_only
