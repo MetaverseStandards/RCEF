@@ -3,13 +3,13 @@
 # its hash written to calibration/FREEZES, before the held-out run.
 format = "rcef.calibration/1"
 id = "viseme-poses.rocketbox-features"
-version = 1
+version = 2
 status = "calibrated_software"
 scope = "software-only; not a measurement of any tracker"
 method = "minimax_bounded_least_squares_pose_fit with a perceptual gate: for each canonical viseme class, one set of ARKit weights in [0, 1] for all 18 training rigs, from the 37 ARKit shapes of the groups face, cheek_puff, jaw_thrust and chin_raise_upper_lip, each Left and Right pair sharing one weight. On each training rig the shape error is |fit - viseme| / |viseme| over every vertex except the tongue (the vertices that the rig's tongueOut moves by more than 1% of its largest move). Every class starts from the weights with the smallest largest shape error (Lawson reweighting: 100 rounds of bounded least squares, each by cyclic coordinate descent to a change below 1e-13). For the gated classes (bilabial, vowel_close_rounded, vowel_mid_spread, alveolar_sibilant), 8 Gauss-Newton steps with Levenberg damping then lower the sum over the training rigs of 1 times the squared shape error plus each squared feature error divided by its tolerance (a range feature: its distance from the middle of the range, divided by half the width). The weights are rounded to 3 decimals and carried to canonical signals by the ARKit in-maps. Each curve gives the canonical value at class weight 1. Features are measured on landmark vertices that each rig's own ARKit shapes pick out (tools/calibration/viseme_poses.py, Mouth). The tolerance of a difference feature is the largest distance of a training rig's own viseme feature from the median over the training rigs, at least 0.5 mm or 0.02, rounded up to 3 decimals. The features and the fit weight 1 were chosen by leave-one-rig-out cross-validation within the training rigs; labiodental and coronal_nasal_lateral have no gate. Shape cell error, one cell per class and held-out rig: |reconstruction - target| / |target - neutral| over the rig's vertices except the tongue, where the target is the rig's own viseme shapes and the reconstruction is the rig's ARKit shapes at the weights that the ARKit out-maps give for clamp(sum of pose times class weight, 0, 1); neutral is that error at weight 0. A condition is a failure if the rig has no shape for the class, or if the target does not move the face but the reconstruction does; its error counts as 1. Feature cell error, one cell per gated class, feature and held-out rig, on the same 24 conditions: the absolute difference between the feature of the reconstruction and of the target, or how far the feature of the reconstruction lies outside its range; whole_face_error is the shape error of the condition. Pass rule: a class passes if its shape cells pass on every held-out rig, or if every one of its feature cells passes (largest error within the tolerance) on every held-out rig. Use: the viseme pose bridge is written from this record alone and reads exactly the classes that pass; it replaces viseme-poses.rocketbox-multi and viseme-poses.rocketbox-female for every class, whether more or fewer classes pass."
 channels = ["rcef.canonical_viseme.vowel_open", "rcef.canonical_viseme.vowel_mid_spread", "rcef.canonical_viseme.vowel_close_spread", "rcef.canonical_viseme.vowel_mid_rounded", "rcef.canonical_viseme.vowel_close_rounded", "rcef.canonical_viseme.bilabial", "rcef.canonical_viseme.labiodental", "rcef.canonical_viseme.dental", "rcef.canonical_viseme.alveolar_sibilant", "rcef.canonical_viseme.postalveolar", "rcef.canonical_viseme.coronal_stop", "rcef.canonical_viseme.coronal_nasal_lateral", "rcef.canonical_viseme.dorsal", "rcef.canonical_viseme.rhotic", "rcef.canonical_viseme.sil"]
 reference_rig = "Microsoft Rocketbox facial FBX files (0943055) of the 18 training rigs Female_Adult_01, _04, _06, _08, _10, _12, _13, _14, _17, Male_Adult_01, _02, _03, _05, _10, _11, _13, _17 and _19: each has 15 viseme shapes and 52 ARKit shapes on one mesh. Held out: Female_Adult_09, _15, Male_Adult_08 and _15. Rig sets by round 3 of the rules in tools/calibration/viseme_rigs.json"
-code_commit = "1393cefd7ac6c1d483ceeb75ef0931d1befc63d5"
+code_commit = "ea7a8bd6292bf2c7c97792002cfc0ad5c0f53083"
 licence = "CC-BY-SA-4.0"
 limitations = [
   "Software-only geometry of example rigs: the poses are the sculpted viseme shapes of 18 Rocketbox rigs measured in their own ARKit shapes. They say nothing about any tracker, any real face or how people articulate.",
@@ -129,7 +129,7 @@ description = "The 15 viseme shapes of each of the 18 training rigs (Female_Adul
 [held_out]
 seed_rule = "rcef.calibration.seeds/1"
 count = 24
-frozen_sha256 = "ddde4315edf7071c85293b94641191983f59091107ceb4b70f0c9eb7c926c9c1"
+frozen_sha256 = "b7b63bae4b02196d5d0c1fb290dcdae65ebe056d33da79728c9dd1e8d29db064"
 
 [evaluation]
 min_conditions = 24
