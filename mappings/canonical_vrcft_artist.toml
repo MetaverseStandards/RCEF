@@ -1311,3 +1311,89 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_out", "vrcft.artist.base.TongueOut"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "the tongue extension has no stated length", "refs" = ["rcef.canonical_expression.tongue_out", "vrcft.artist.base.TongueOut"], "units" = "1" },
 ]
+
+[[mappings]]
+id = "rcef_cheek_suck.to_vrcft_artist"
+
+[[mappings.rules]]
+id = "rcef_vrcft_artist.CheekSuckLeft"
+inputs = ["rcef.canonical_expression.cheek_suck_left"]
+outputs = ["vrcft.artist.base.CheekSuckLeft"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: Unified Expressions CheekSuckLeft corresponds to canonical cheek_suck_left.",
+  "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is FB2↔Unified Expressions (vrcft_docs_movement); it carries over because canonical cheek_suck_left is defined to match FB2 CHEEK_SUCK_L.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 238) and Godot↔Unified Expressions (godot_enum lines 38-40 and 87; godot_face_modifier lines 48-54 and 130-131, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_left is defined to match FB2 CHEEK_SUCK_L.",
+]
+evidence = ["vrcft_artist", "vrcft_docs_shapes", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.cheek_suck_left", "vrcft.artist.base.CheekSuckLeft"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions", "refs" = ["rcef.canonical_expression.cheek_suck_left", "vrcft.artist.base.CheekSuckLeft"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_vrcft_artist.CheekSuckRight"
+inputs = ["rcef.canonical_expression.cheek_suck_right"]
+outputs = ["vrcft.artist.base.CheekSuckRight"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: Unified Expressions CheekSuckRight corresponds to canonical cheek_suck_right.",
+  "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is FB2↔Unified Expressions (vrcft_docs_movement); it carries over because canonical cheek_suck_right is defined to match FB2 CHEEK_SUCK_R.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 237) and Godot↔Unified Expressions (godot_enum lines 38-40 and 86; godot_face_modifier lines 48-54 and 128-129, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_right is defined to match FB2 CHEEK_SUCK_R.",
+]
+evidence = ["vrcft_artist", "vrcft_docs_shapes", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.cheek_suck_right", "vrcft.artist.base.CheekSuckRight"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions", "refs" = ["rcef.canonical_expression.cheek_suck_right", "vrcft.artist.base.CheekSuckRight"], "units" = "1" },
+]
+
+[[mappings]]
+id = "rcef_lip_tighten.to_vrcft_artist"
+
+[[mappings.rules]]
+id = "rcef_vrcft_artist.MouthTightenerLeft"
+inputs = ["rcef.canonical_expression.lip_tighten_left"]
+outputs = ["vrcft.artist.base.MouthTightenerLeft"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: Unified Expressions MouthTightenerLeft corresponds to canonical lip_tighten_left.",
+  "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is FB2↔Unified Expressions (vrcft_docs_movement); it carries over because canonical lip_tighten_left is defined to match FB2 LIP_TIGHTENER_L.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 286) and Godot↔Unified Expressions (godot_enum lines 38-40 and 135; godot_face_modifier lines 48-54 and 226-227, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_left is defined to match FB2 LIP_TIGHTENER_L.",
+]
+evidence = ["vrcft_artist", "vrcft_docs_shapes", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.lip_tighten_left", "vrcft.artist.base.MouthTightenerLeft"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions", "refs" = ["rcef.canonical_expression.lip_tighten_left", "vrcft.artist.base.MouthTightenerLeft"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_vrcft_artist.MouthTightenerRight"
+inputs = ["rcef.canonical_expression.lip_tighten_right"]
+outputs = ["vrcft.artist.base.MouthTightenerRight"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: Unified Expressions MouthTightenerRight corresponds to canonical lip_tighten_right.",
+  "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is FB2↔Unified Expressions (vrcft_docs_movement); it carries over because canonical lip_tighten_right is defined to match FB2 LIP_TIGHTENER_R.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 285) and Godot↔Unified Expressions (godot_enum lines 38-40 and 134; godot_face_modifier lines 48-54 and 224-225, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_right is defined to match FB2 LIP_TIGHTENER_R.",
+]
+evidence = ["vrcft_artist", "vrcft_docs_shapes", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.lip_tighten_right", "vrcft.artist.base.MouthTightenerRight"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions", "refs" = ["rcef.canonical_expression.lip_tighten_right", "vrcft.artist.base.MouthTightenerRight"], "units" = "1" },
+]

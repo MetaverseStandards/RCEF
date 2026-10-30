@@ -1147,6 +1147,193 @@ loss_annotations = [
 ]
 
 [[mappings]]
+id = "fb2_cheek_suck.to_rcef"
+
+[[mappings.rules]]
+id = "fb2_rcef.cheek_suck_left"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB"]
+outputs = ["rcef.canonical_expression.cheek_suck_left"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 CHEEK_SUCK_L corresponds to canonical cheek_suck_left.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical cheek_suck_left is defined to match Unified Expressions CheekSuckLeft.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 238) and Godot↔Unified Expressions (godot_enum lines 38-40 and 87; godot_face_modifier lines 48-54 and 130-131, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_left is defined to match Unified Expressions CheekSuckLeft.",
+]
+evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB", "rcef.canonical_expression.cheek_suck_left"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "fb2_rcef.cheek_suck_right"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB"]
+outputs = ["rcef.canonical_expression.cheek_suck_right"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 CHEEK_SUCK_R corresponds to canonical cheek_suck_right.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical cheek_suck_right is defined to match Unified Expressions CheekSuckRight.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 237) and Godot↔Unified Expressions (godot_enum lines 38-40 and 86; godot_face_modifier lines 48-54 and 128-129, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_right is defined to match Unified Expressions CheekSuckRight.",
+]
+evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB", "rcef.canonical_expression.cheek_suck_right"], "units" = "1" },
+]
+
+[[mappings]]
+id = "fb2_lip_tighten.to_rcef"
+
+[[mappings.rules]]
+id = "fb2_rcef.lip_tighten_left"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB"]
+outputs = ["rcef.canonical_expression.lip_tighten_left"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 LIP_TIGHTENER_L corresponds to canonical lip_tighten_left.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical lip_tighten_left is defined to match Unified Expressions MouthTightenerLeft.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 286) and Godot↔Unified Expressions (godot_enum lines 38-40 and 135; godot_face_modifier lines 48-54 and 226-227, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_left is defined to match Unified Expressions MouthTightenerLeft.",
+]
+evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB", "rcef.canonical_expression.lip_tighten_left"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "fb2_rcef.lip_tighten_right"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB"]
+outputs = ["rcef.canonical_expression.lip_tighten_right"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 LIP_TIGHTENER_R corresponds to canonical lip_tighten_right.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical lip_tighten_right is defined to match Unified Expressions MouthTightenerRight.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 285) and Godot↔Unified Expressions (godot_enum lines 38-40 and 134; godot_face_modifier lines 48-54 and 224-225, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_right is defined to match Unified Expressions MouthTightenerRight.",
+]
+evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB", "rcef.canonical_expression.lip_tighten_right"], "units" = "1" },
+]
+
+[[mappings]]
+id = "fb2_tongue_place.to_rcef"
+
+[[mappings.rules]]
+id = "fb2_rcef.tongue_retreat"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB"]
+outputs = ["rcef.canonical_expression.tongue_retreat"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_RETREAT corresponds to canonical tongue_retreat.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB", "rcef.canonical_expression.tongue_retreat"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "fb2_rcef.tongue_tip_interdental"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB"]
+outputs = ["rcef.canonical_expression.tongue_tip_interdental"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_TIP_INTERDENTAL corresponds to canonical tongue_tip_interdental.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB", "rcef.canonical_expression.tongue_tip_interdental"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "fb2_rcef.tongue_tip_alveolar"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB"]
+outputs = ["rcef.canonical_expression.tongue_tip_alveolar"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_TIP_ALVEOLAR corresponds to canonical tongue_tip_alveolar.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB", "rcef.canonical_expression.tongue_tip_alveolar"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "fb2_rcef.tongue_front_dorsal_palate"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB"]
+outputs = ["rcef.canonical_expression.tongue_front_dorsal_palate"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_FRONT_DORSAL_PALATE corresponds to canonical tongue_front_dorsal_palate.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB", "rcef.canonical_expression.tongue_front_dorsal_palate"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "fb2_rcef.tongue_mid_dorsal_palate"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB"]
+outputs = ["rcef.canonical_expression.tongue_mid_dorsal_palate"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_MID_DORSAL_PALATE corresponds to canonical tongue_mid_dorsal_palate.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB", "rcef.canonical_expression.tongue_mid_dorsal_palate"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "fb2_rcef.tongue_back_dorsal_velar"
+inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB"]
+outputs = ["rcef.canonical_expression.tongue_back_dorsal_velar"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_BACK_DORSAL_VELAR corresponds to canonical tongue_back_dorsal_velar.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB", "rcef.canonical_expression.tongue_back_dorsal_velar"], "units" = "1" },
+]
+
+[[mappings]]
 id = "rcef_face.to_fb2"
 
 [[mappings.rules]]
@@ -2363,4 +2550,191 @@ evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_ar
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_out", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "the tongue extension has no stated length", "refs" = ["rcef.canonical_expression.tongue_out", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"], "units" = "1" },
+]
+
+[[mappings]]
+id = "rcef_cheek_suck.to_fb2"
+
+[[mappings.rules]]
+id = "rcef_fb2.CHEEK_SUCK_L"
+inputs = ["rcef.canonical_expression.cheek_suck_left"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 CHEEK_SUCK_L corresponds to canonical cheek_suck_left.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical cheek_suck_left is defined to match Unified Expressions CheekSuckLeft.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 238) and Godot↔Unified Expressions (godot_enum lines 38-40 and 87; godot_face_modifier lines 48-54 and 130-131, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_left is defined to match Unified Expressions CheekSuckLeft.",
+]
+evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.cheek_suck_left", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_fb2.CHEEK_SUCK_R"
+inputs = ["rcef.canonical_expression.cheek_suck_right"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 CHEEK_SUCK_R corresponds to canonical cheek_suck_right.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical cheek_suck_right is defined to match Unified Expressions CheekSuckRight.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 237) and Godot↔Unified Expressions (godot_enum lines 38-40 and 86; godot_face_modifier lines 48-54 and 128-129, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_right is defined to match Unified Expressions CheekSuckRight.",
+]
+evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.cheek_suck_right", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB"], "units" = "1" },
+]
+
+[[mappings]]
+id = "rcef_lip_tighten.to_fb2"
+
+[[mappings.rules]]
+id = "rcef_fb2.LIP_TIGHTENER_L"
+inputs = ["rcef.canonical_expression.lip_tighten_left"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 LIP_TIGHTENER_L corresponds to canonical lip_tighten_left.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical lip_tighten_left is defined to match Unified Expressions MouthTightenerLeft.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 286) and Godot↔Unified Expressions (godot_enum lines 38-40 and 135; godot_face_modifier lines 48-54 and 226-227, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_left is defined to match Unified Expressions MouthTightenerLeft.",
+]
+evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.lip_tighten_left", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_fb2.LIP_TIGHTENER_R"
+inputs = ["rcef.canonical_expression.lip_tighten_right"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 LIP_TIGHTENER_R corresponds to canonical lip_tighten_right.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+  "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical lip_tighten_right is defined to match Unified Expressions MouthTightenerRight.",
+  "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 285) and Godot↔Unified Expressions (godot_enum lines 38-40 and 134; godot_face_modifier lines 48-54 and 224-225, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_right is defined to match Unified Expressions MouthTightenerRight.",
+]
+evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", "godot_face_modifier", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.lip_tighten_right", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB"], "units" = "1" },
+]
+
+[[mappings]]
+id = "rcef_tongue_place.to_fb2"
+
+[[mappings.rules]]
+id = "rcef_fb2.TONGUE_RETREAT"
+inputs = ["rcef.canonical_expression.tongue_retreat"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_RETREAT corresponds to canonical tongue_retreat.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_retreat", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_fb2.TONGUE_TIP_INTERDENTAL"
+inputs = ["rcef.canonical_expression.tongue_tip_interdental"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_TIP_INTERDENTAL corresponds to canonical tongue_tip_interdental.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_tip_interdental", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_fb2.TONGUE_TIP_ALVEOLAR"
+inputs = ["rcef.canonical_expression.tongue_tip_alveolar"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_TIP_ALVEOLAR corresponds to canonical tongue_tip_alveolar.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_tip_alveolar", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE"
+inputs = ["rcef.canonical_expression.tongue_front_dorsal_palate"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_FRONT_DORSAL_PALATE corresponds to canonical tongue_front_dorsal_palate.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_front_dorsal_palate", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_fb2.TONGUE_MID_DORSAL_PALATE"
+inputs = ["rcef.canonical_expression.tongue_mid_dorsal_palate"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_MID_DORSAL_PALATE corresponds to canonical tongue_mid_dorsal_palate.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_mid_dorsal_palate", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_fb2.TONGUE_BACK_DORSAL_VELAR"
+inputs = ["rcef.canonical_expression.tongue_back_dorsal_velar"]
+outputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: FB2 TONGUE_BACK_DORSAL_VELAR corresponds to canonical tongue_back_dorsal_velar.",
+  "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_fb2", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_back_dorsal_velar", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB"], "units" = "1" },
 ]

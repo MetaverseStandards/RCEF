@@ -16,6 +16,9 @@ rule on its own, so that a fault in the generator fails here even when the data 
   a crosswalk set that the hop cites;
 - a hop withdraws a crosswalk transfer exactly when its own audit row or the other set's audit row for the
   canonical signal is `differs` or `unresolved`, and names those rows' loss keys;
+- the FB2-only signals that Unified Expressions also has take their crosswalks from the audit's table of them:
+  their FB2 and Unified Expressions hops cite its one-step record (provider form) and its Godot records (chain
+  form), and only the Unified Expressions out-hops state the two-step loss;
 - a Unified Expressions fan-out names only the parts that its canonical value goes to;
 - the jaw caveat of today's FB2 -> ARKit mouthClose rule is on the ARKit out-hop only;
 - every VRM vowel hop, in and out, states the unit change from probability to VRM weight, and no other hop does;
@@ -50,6 +53,10 @@ VRM_VOWEL_WEIGHT = 'vrm_vowel_asset_weight: '
 TRANSFER = re.compile(r'^transfer\.(?:provider|withdrawn): correspondence evidence is (.+?)↔(.+?) \(([^)]+)\)')
 ICT_TRANSFER = re.compile(r'^transfer\.(?:facs_crosswalk|withdrawn): ict_facekit ')
 NO_LENGTH = 'no stated length'
+CHAIN = re.compile(r'^transfer\.chain: correspondence evidence is FB2↔Godot \((.+?)\) and Godot↔Unified Expressions '
+                   r'\((.+?), which give')
+CHAIN_LOSS = 'two-step crosswalk through Godot: '
+SOURCED = '## Crosswalks of the FB2-only signals'
 ROUNDED = {f'openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_{d}_FB' for d in ('LEFT_L', 'DOWN_L', 'RIGHT_R', 'DOWN_R')}
 RANK = {'same': 0, 'differs': 1, 'unresolved': 2}
 
@@ -80,10 +87,18 @@ class PivotRules(unittest.TestCase):
         # Audit rows: the worst verdict per (set, canonical short name), and the keys of the rows.
         cls.audit = {key: {} for key in SETS}
         text = (ROOT / 'docs/canonical-set-audit.md').read_text(encoding='utf-8')
-        section = None
+        section, sourced = None, False
+        cls.sourced = {}  # canonical short name -> the audit's crosswalk row of an FB2-only signal
         for line in text.splitlines():
             if line.startswith('## '):
                 section = AUDIT_SECTIONS.get(line)
+                sourced = line == SOURCED
+                continue
+            if sourced and line.startswith('| `'):
+                cells = [c.strip() for c in line.strip().strip('|').split(' | ')]
+                cls.sourced[re.findall(r'`([a-z_]+)`', cells[0])[0]] = {
+                    'fb2': cells[1], 'vrcft_artist': cells[2], 'one_step': set(re.findall(r'`(\w+)`', cells[3])),
+                    'chain': set(re.findall(r'`(\w+)`', cells[4] + cells[5]))}
                 continue
             if section is None or not line.startswith('| `'):
                 continue
@@ -142,7 +157,7 @@ class PivotRules(unittest.TestCase):
         # on its sum and on its clamp.
         ins = [r for k, r in self.rules if r['id'] in self.in_rules]
         outs = [r for k, r in self.rules if r not in ins]
-        self.assertEqual((len(ins), len(outs)), (142, 202))
+        self.assertEqual((len(ins), len(outs)), (152, 216))
 
     def test_each_tongue_out_hop_states_the_missing_length(self):
         tongue = [(k, r) for k, r in self.rules if 'tongue_out' in self.canonical(k, r)]
@@ -168,6 +183,8 @@ class PivotRules(unittest.TestCase):
                 expected |= records
             if key == 'arkit':
                 expected |= self.ict(key, rule)
+            if row := self.sourced_row(key, rule):
+                expected |= row['chain']
             with self.subTest(rule=rule['id']):
                 self.assertEqual(set(rule['evidence']), expected)
                 self.assertEqual(len(rule['evidence']), len(expected))
@@ -184,13 +201,23 @@ class PivotRules(unittest.TestCase):
                     yield other, set(evidence)
 
     def crosswalks(self, key, rule):
-        """The crosswalk records per other set: today's evidence on the linking chains, less both sets' own."""
+        """The crosswalk records per other set: today's evidence on the linking chains, less both sets' own, and
+        the one-step record of an FB2-only signal's row in the audit."""
         found = {}
         for other, evidence in self.linked(key, rule):
             records = evidence - set(SETS[key][2]) - set(SETS[other][2]) - {'ict_facekit'}
             if records:
                 found.setdefault(other, set()).update(records)
+        if row := self.sourced_row(key, rule):
+            found.setdefault('vrcft_artist' if key == 'fb2' else 'fb2', set()).update(row['one_step'])
         return found
+
+    def sourced_row(self, key, rule):
+        """The audit's crosswalk row of an FB2-only signal, on its FB2 and Unified Expressions hops."""
+        if key not in ('fb2', 'vrcft_artist') or is_viseme(rule):
+            return None
+        rows = [self.sourced[s] for s in self.canonical(key, rule) if s in self.sourced]
+        return rows[0] if rows else None
 
     def ict(self, key, rule):
         return {'ict_facekit'} & set().union(*(evidence for _, evidence in self.linked(key, rule)))
@@ -215,6 +242,14 @@ class PivotRules(unittest.TestCase):
         ict = [text for text in rule['assumptions'] if ICT_TRANSFER.match(text)]
         if len(ict) != ('ict_facekit' in rule['evidence']):
             failures.append(f'ict_facekit: {len(ict)} transfer assumptions')
+        row = self.sourced_row(key, rule)
+        chains = [text for text in rule['assumptions'] if text.startswith('transfer.chain: ')]
+        if len(chains) != (row is not None):
+            failures.append(f'{len(chains)} chain transfers')
+        elif row and not (found := CHAIN.match(chains[0])):
+            failures.append(f'a chain transfer not through Godot: {chains[0]}')
+        elif row and set(re.findall(r'\b(godot_\w+)', found.group(1) + ' ' + found.group(2))) != row['chain']:
+            failures.append(f'the chain transfer names other records than {sorted(row["chain"])}: {chains[0]}')
         return failures
 
     def test_each_crosswalk_set_cited_has_exactly_one_transfer_assumption(self):
@@ -252,6 +287,20 @@ class PivotRules(unittest.TestCase):
         self.assertGreater(counts['withdrawn'], 0)
         self.assertGreater(counts['carried'], 0)
 
+
+    def test_only_the_unified_out_hops_of_the_fb2_only_signals_state_the_two_step_loss(self):
+        self.assertEqual(set(self.sourced), {'cheek_suck_left', 'cheek_suck_right', 'lip_tighten_left',
+                                             'lip_tighten_right'})
+        stated = {r['id'] for _, r in self.rules if any(x.startswith(CHAIN_LOSS) for x in self.reasons(r))}
+        expected = {r['id'] for k, r in self.rules if k == 'vrcft_artist' and self.sourced_row(k, r)}
+        self.assertEqual(len(expected), 4)
+        self.assertEqual(stated, expected)
+        chained = {r['id'] for _, r in self.rules if any(a.startswith('transfer.chain: ') for a in r['assumptions'])}
+        self.assertEqual(len(chained), 12)  # 4 FB2 in-hops, 4 FB2 out-hops, 4 Unified Expressions out-hops
+        for _, rule in self.rules:
+            if rule['id'] in chained:
+                name = self.sourced_row(set_of([s for s in rule['inputs'] + rule['outputs'] if set_of(s)][0]), rule)
+                self.assertIsNotNone(name, rule['id'])
 
     def test_a_fan_out_names_only_the_parts_its_canonical_value_goes_to(self):
         fans = 0

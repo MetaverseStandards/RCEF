@@ -21,7 +21,8 @@ EXPRESSION = 'rcef.canonical_expression'
 PREFIX = EXPRESSION + '.'
 # Group sizes in the pack, after the face splits. Update with each new group.
 GROUPS = {'face': 41, 'cheek_puff': 2, 'jaw_thrust': 1, 'jaw_sideways': 2, 'mouth_shift': 2,
-          'chin_raise_upper_lip': 1, 'blink': 2, 'gaze': 8, 'tongue_out': 1}
+          'chin_raise_upper_lip': 1, 'blink': 2, 'gaze': 8, 'tongue_out': 1, 'cheek_suck': 2, 'lip_tighten': 2,
+          'tongue_place': 6}
 METADATA = {'definition', 'zero', 'one', 'facs_au', 'facs_table', 'group', 'aligned_names', 'audit'}
 PUPILS = {PREFIX + 'pupil_diameter_mm_left', PREFIX + 'pupil_diameter_mm_right'}
 DIRECTION_EVIDENCE = {'xr_fb2', 'xr_fb2_fig_eyes_closed_l', 'xr_fb2_fig_eyes_look_left_l', 'xr_fb2_fig_mouth_left',
