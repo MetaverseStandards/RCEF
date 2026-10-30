@@ -20,7 +20,7 @@ tests/fixtures/baseline-dea1713.pack.json:
 - which canonical groups other sets could fill (the capability matrix);
 - every hop map, the signal records it reads and writes (without metadata) and
   the evidence records it uses are as in the B pack of the latest passing A/B
-  freeze, byte for byte (tests/fixtures/b-maps-ab.pivot-v3.json);
+  freeze, byte for byte (tests/fixtures/b-maps-ab.pivot-v4.json);
 - the viseme aggregate: its chain gives the clamped binary64 sum of its META
   inputs, no route reads it, and no out-map reads an aggregate or refinement
   together with any of its parts.
@@ -51,7 +51,7 @@ CANONICAL = (PREFIX, VISEME)
 INTERMEDIATE = 'rcef.intermediate.'
 SUM = build_canonical.INTERMEDIATE_SUM
 # The hop maps of the latest passing A/B freeze, and the registration that pinned their pack.
-FROZEN = 'tests/fixtures/b-maps-ab.pivot-v3.json'
+FROZEN = 'tests/fixtures/b-maps-ab.pivot-v4.json'
 PROFILES = {'arkit': 'arkit.coefficient', 'fb2': 'openxr.fb2', 'vrcft_artist': 'vrcft.artist.base', 'vrm': 'vrm.preset',
             'visemes': 'openxr.visemes', 'facs': 'facs.code', 'vrcft_eye': 'vrcft.eye'}
 SETS = 'arkit|fb2|vrcft_artist|vrcft_eye|vrm|visemes|facs'

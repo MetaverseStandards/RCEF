@@ -3,7 +3,7 @@
 
 Definitions, zero and one, FACS codes, aligned names and the viseme validity fields are metadata, and a change
 to any of them needs a "revise" freeze first (ab/README.md). tests/test_pivot_structure.py freezes the rest of
-each signal record; this file freezes its metadata, from tests/fixtures/b-maps-ab.pivot-v3.json.
+each signal record; this file freezes its metadata, from tests/fixtures/b-maps-ab.pivot-v4.json.
 """
 import hashlib
 import json
@@ -28,7 +28,7 @@ def metadata_digests(document: dict, signal_ids) -> dict:
 class HopMetadataFreeze(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.frozen = json.loads((ROOT / 'tests/fixtures/b-maps-ab.pivot-v3.json').read_text(encoding='utf-8'))
+        cls.frozen = json.loads((ROOT / 'tests/fixtures/b-maps-ab.pivot-v4.json').read_text(encoding='utf-8'))
 
     def test_every_hop_signal_has_a_frozen_metadata_digest(self):
         self.assertEqual(set(self.frozen['signal_metadata']), set(self.frozen['signals']))
