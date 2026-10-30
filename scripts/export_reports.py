@@ -265,15 +265,17 @@ def render(raw):
             mapping_text += 'Assumptions:\n\n' + ''.join('- ' + _cell(x) + '\n' for x in rule.get('assumptions', []))
             mapping_text += '\nLoss annotations: ' + _cell(rule.get('loss_annotations', [])) + '\n\n'
             mapping_text += 'Evidence: ' + _cell(', '.join(rule.get('evidence', []))) + '\n\n'
-    canonical = profiles.get('rcef.canonical')
-    other_profiles = [p for p in profiles.values() if p is not canonical]
+    canonical = [profiles[c] for c in ('rcef.canonical_expression', 'rcef.canonical_viseme') if c in profiles]
+    other_profiles = [p for p in profiles.values() if p not in canonical]
     wide_columns = ['canonical_id', 'label', 'units', 'disposition', *[p['id'] for p in other_profiles]]
     wide_rows = []
     correspondence_text = '# RCEF canonical correspondences\n\n' + notice
-    correspondence_text += ('Only authored mappings appear here. A dash means no authored mapping. '
+    correspondence_text += ('Each signal of the canonical expression and viseme sets, with the authored mappings that '
+                            'write it from each other profile. Only authored mappings appear here. A dash means no '
+                            'authored mapping. '
                             'Unresolved mappings stay labeled unresolved. A mapping with the `mapped` disposition keeps '
                             'its declared provider basis. It does not show cross-provider or anatomical equality.\n\n')
-    for sid in canonical['signal_ids'] if canonical else []:
+    for sid in [sid for profile in canonical for sid in profile['signal_ids']]:
         signal = signals[sid]
         row = [sid, signal['label'], signal['units'], signal['disposition']]
         details = []

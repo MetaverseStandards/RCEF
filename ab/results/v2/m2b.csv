@@ -1,0 +1,6 @@
+pair,a1,b
+FB2 -> ARKit,proposed,proposed
+ARKit -> FB2,proposed,proposed
+ARKit -> VRCFT UE,proposed,proposed
+FB2 -> VRM blink,proposed,proposed
+META -> VRM,proposed,proposed

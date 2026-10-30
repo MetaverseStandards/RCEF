@@ -5,7 +5,7 @@ Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards For
 
 This audit goes with the draft [canonical expression set](canonical-set.md). It compares each canonical signal with the public definition of each source that maps it. It also lists the assumptions of today's direct maps and where each one goes in the pivot routes. The audit is fixed before the pre-registered comparison of the pivot routes with today's maps.
 
-"Today's maps" (A1) means the direct maps at commit `dea1713`: `arkit.to_fb2`, `arkit_gaze.to_fb2`, `fb2.to_arkit`, `fb2_gaze.to_arkit`, `arkit.to_vrcft_artist`, `fb2.to_vrm` and `visemes.to_vrm`.
+"Today's maps" (A1) means the direct maps at commit `dea1713`: `arkit.to_fb2`, `arkit_gaze.to_fb2`, `fb2.to_arkit`, `fb2_gaze.to_arkit`, `arkit.to_vrcft_artist`, `fb2.to_vrm` and `visemes.to_vrm`. Data 0.5.0 retires them, with tombstones in [retired-ids.csv](retired-ids.csv). They stay frozen in `tests/fixtures/baseline-dea1713.pack.json`, which the A/B comparison and this audit's tests read.
 
 ## How to read the audit
 

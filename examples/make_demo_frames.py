@@ -17,38 +17,42 @@ tests one behaviour of the translation:
 - eye following lost: the face stays valid while the gaze weights are invalid
   (FB2 then reports them as zero), during a blink;
 - face lost: the whole frame is invalid;
-- every other channel an RCEF FB2 mapping reads, alone and briefly;
+- every other channel that the FB2 -> ARKit maps read (RULE_INPUTS), alone and
+  briefly;
 - tongue: a channel with no RCEF mapping (TONGUE_TIP_ALVEOLAR), with the jaw half open.
 
 All values are multiples of 1/16, so sums and halves are exact in binary.
 """
 from __future__ import annotations
+import argparse
 import csv
-import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
 DATA = Path(__file__).resolve().parent / 'data'
 FPS = 15
-FB2_PREFIX, FB2_SUFFIX = 'openxr.fb2.XR_FACE_EXPRESSION2_', '_FB'
-VIS_PREFIX, VIS_SUFFIX = 'openxr.visemes.XR_FACE_TRACKING_VISEME_', '_META'
-
-
-def names(profile, prefix, suffix):
-    pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
-    signals = {s['id']: s for s in pack['signals']}
-    members = next(p['signal_ids'] for p in pack['profiles'] if p['id'] == profile)
-    # Count sentinels are inventory records, not weights a runtime reports.
-    return [sid[len(prefix):-len(suffix)] for sid in members if signals[sid]['disposition'] != 'excluded']
-
-
-def rule_inputs():
-    """The FB2 channels RCEF's FB2 -> ARKit mappings read, in profile order."""
-    pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
-    read = {i for m in pack['mappings'] if m['id'] in ('fb2.to_arkit', 'fb2_gaze.to_arkit')
-            for r in m['rules'] for i in r['inputs']}
-    order = next(p['signal_ids'] for p in pack['profiles'] if p['id'] == 'openxr.fb2')
-    return [sid[len(FB2_PREFIX):-len(FB2_SUFFIX)] for sid in order if sid in read]
+# The channel lists are fixed, so the frames do not change when the pack does. They are the FB2 and META channels
+# of the A1 pack at dea1713 (count sentinels left out: they are inventory records, not weights), and the FB2
+# channels that its FB2 -> ARKit maps read, in the order of the FB2 profile.
+FB2_CHANNELS = (
+    'BROW_LOWERER_L', 'BROW_LOWERER_R', 'CHEEK_PUFF_L', 'CHEEK_PUFF_R', 'CHEEK_RAISER_L', 'CHEEK_RAISER_R',
+    'CHEEK_SUCK_L', 'CHEEK_SUCK_R', 'CHIN_RAISER_B', 'CHIN_RAISER_T', 'DIMPLER_L', 'DIMPLER_R', 'EYES_CLOSED_L',
+    'EYES_CLOSED_R', 'EYES_LOOK_DOWN_L', 'EYES_LOOK_DOWN_R', 'EYES_LOOK_LEFT_L', 'EYES_LOOK_LEFT_R',
+    'EYES_LOOK_RIGHT_L', 'EYES_LOOK_RIGHT_R', 'EYES_LOOK_UP_L', 'EYES_LOOK_UP_R', 'INNER_BROW_RAISER_L',
+    'INNER_BROW_RAISER_R', 'JAW_DROP', 'JAW_SIDEWAYS_LEFT', 'JAW_SIDEWAYS_RIGHT', 'JAW_THRUST', 'LID_TIGHTENER_L',
+    'LID_TIGHTENER_R', 'LIP_CORNER_DEPRESSOR_L', 'LIP_CORNER_DEPRESSOR_R', 'LIP_CORNER_PULLER_L',
+    'LIP_CORNER_PULLER_R', 'LIP_FUNNELER_LB', 'LIP_FUNNELER_LT', 'LIP_FUNNELER_RB', 'LIP_FUNNELER_RT',
+    'LIP_PRESSOR_L', 'LIP_PRESSOR_R', 'LIP_PUCKER_L', 'LIP_PUCKER_R', 'LIP_STRETCHER_L', 'LIP_STRETCHER_R',
+    'LIP_SUCK_LB', 'LIP_SUCK_LT', 'LIP_SUCK_RB', 'LIP_SUCK_RT', 'LIP_TIGHTENER_L', 'LIP_TIGHTENER_R', 'LIPS_TOWARD',
+    'LOWER_LIP_DEPRESSOR_L', 'LOWER_LIP_DEPRESSOR_R', 'MOUTH_LEFT', 'MOUTH_RIGHT', 'NOSE_WRINKLER_L',
+    'NOSE_WRINKLER_R', 'OUTER_BROW_RAISER_L', 'OUTER_BROW_RAISER_R', 'UPPER_LID_RAISER_L', 'UPPER_LID_RAISER_R',
+    'UPPER_LIP_RAISER_L', 'UPPER_LIP_RAISER_R', 'TONGUE_TIP_INTERDENTAL', 'TONGUE_TIP_ALVEOLAR',
+    'TONGUE_FRONT_DORSAL_PALATE', 'TONGUE_MID_DORSAL_PALATE', 'TONGUE_BACK_DORSAL_VELAR', 'TONGUE_OUT',
+    'TONGUE_RETREAT')
+VISEME_CHANNELS = ('SIL', 'PP', 'FF', 'TH', 'DD', 'KK', 'CH', 'SS', 'NN', 'RR', 'AA', 'E', 'IH', 'OH', 'OU')
+NOT_READ = {'CHEEK_SUCK_L', 'CHEEK_SUCK_R', 'LIP_TIGHTENER_L', 'LIP_TIGHTENER_R', 'TONGUE_TIP_INTERDENTAL',
+            'TONGUE_TIP_ALVEOLAR', 'TONGUE_FRONT_DORSAL_PALATE', 'TONGUE_MID_DORSAL_PALATE',
+            'TONGUE_BACK_DORSAL_VELAR', 'TONGUE_RETREAT'}
+RULE_INPUTS = tuple(c for c in FB2_CHANNELS if c not in NOT_READ)
 
 
 def ramp(steps):
@@ -77,7 +81,7 @@ def fb2_frames():
     # Every other channel an RCEF FB2 mapping reads, alone, so each mapping is the only one moving somewhere.
     alone = {[k for k, v in f.items() if v][0] for _, frames, *_ in segments for f in frames
              if len([v for v in f.values() if v]) == 1}
-    for channel in rule_inputs():
+    for channel in RULE_INPUTS:
         if channel not in alone:
             segments.append((f'{channel} alone', [{channel: v} for v in ramp(2)], True, True))
     segments.append(('eye following lost', [{'EYES_CLOSED_L': v, 'EYES_CLOSED_R': v} for v in ramp(5)], True, False))
@@ -114,14 +118,15 @@ def write(path, channels, flags, segments):
     return frame
 
 
-def main() -> int:
-    DATA.mkdir(exist_ok=True)
-    count = write(DATA / 'fb2_demo_frames.csv', names('openxr.fb2', FB2_PREFIX, FB2_SUFFIX),
-                  ['isValid', 'isEyeFollowingBlendshapesValid'], fb2_frames())
-    print(f'examples/data/fb2_demo_frames.csv: {count} frames')
-    count = write(DATA / 'viseme_demo_frames.csv', names('openxr.visemes', VIS_PREFIX, VIS_SUFFIX),
-                  ['isValid'], viseme_frames())
-    print(f'examples/data/viseme_demo_frames.csv: {count} frames')
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument('--out', type=Path, default=DATA, help='output directory (default: examples/data)')
+    out = parser.parse_args(argv).out
+    out.mkdir(exist_ok=True)
+    count = write(out / 'fb2_demo_frames.csv', FB2_CHANNELS, ['isValid', 'isEyeFollowingBlendshapesValid'], fb2_frames())
+    print(f'{out / "fb2_demo_frames.csv"}: {count} frames')
+    count = write(out / 'viseme_demo_frames.csv', VISEME_CHANNELS, ['isValid'], viseme_frames())
+    print(f'{out / "viseme_demo_frames.csv"}: {count} frames')
     return 0
 
 

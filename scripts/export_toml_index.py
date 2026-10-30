@@ -28,14 +28,12 @@ def authoring_files(root: Path = ROOT) -> list[Path]:
     return sorted(files)
 
 # RCEF's canonical profiles, counted in the canonical_signals column.
-CANONICAL = ('rcef.canonical', 'rcef.canonical_expression', 'rcef.canonical_viseme')
+CANONICAL = ('rcef.canonical_expression', 'rcef.canonical_viseme')
 
 
 def role(path: str, document: dict) -> str:
     if path == 'pack.toml':
         return 'pack metadata'
-    if path == 'data/canonical.toml':
-        return 'canonical signals and profile'
     if path == 'data/canonical_expression.toml':
         return 'canonical expression signals and profile'
     if path == 'data/canonical_viseme.toml':

@@ -7,32 +7,31 @@ The [offline visual report](architecture.html), the [SVG](architecture.svg) and 
 
 ## Scope of this guide
 
-This guide describes `rcef.parity` data version **0.5.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-character-tools 0.5.0, installed from its release wheels. The locked commit is in [tooling.lock.json](../evidence/tooling.lock.json). The counts below were recomputed with the Python standard library from all 45 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
+This guide describes `rcef.parity` data version **0.5.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-character-tools 0.5.0, installed from its release wheels. The locked commit is in [tooling.lock.json](../evidence/tooling.lock.json). The counts below were recomputed with the Python standard library from all 36 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
 
 | Measure | Total |
 | --- | ---: |
-| Distinct signal IDs | 1190 |
-| Profiles | 27 |
-| Profile membership rows | 1195 |
-| Maps (`[[mappings]]` records) | 98 |
-| Mappings (rules) | 800 |
+| Distinct signal IDs | 1165 |
+| Profiles | 26 |
+| Profile membership rows | 1170 |
+| Maps (`[[mappings]]` records) | 88 |
+| Mappings (rules) | 588 |
 | Evidence records | 81 |
-| Provider-specific canonical signals | 21 |
 | Canonical expression signals (draft) | 72 |
 | Canonical viseme signals (draft) | 16 |
-| RCEF intermediate signals | 65 |
+| RCEF intermediate signals | 61 |
 | FACS code signals (draft, `facs.code`) | 92 |
 
 Five fixture signals are in both the aggregate fixture profile and its source and target profiles. That gives 5 distinct signals but 10 memberships, which explains the difference of five rows. Also, `godot.blended.toml` has 42 actual rows, while its selected interface has 41; the counts here include every actual row. See the full [inventory](../reports/inventory.md).
 
-Signal dispositions: 448 mapped, 682 unresolved, 6 unsupported and 54 excluded. Mappings: 799 mapped (26 exact, 773 approximate) and 1 unresolved. Operators: 645 `affine`, 22 `identity`, 71 `weighted_sum` and 62 `piecewise_linear`. A `mapped` signal does not guarantee that every requested map or frame can be executed.
+Signal dispositions: 423 mapped, 682 unresolved, 6 unsupported and 54 excluded. Mappings: 587 mapped (5 exact, 582 approximate) and 1 unresolved. Operators: 472 `affine`, 1 `identity`, 61 `weighted_sum` and 54 `piecewise_linear`. A `mapped` signal does not guarantee that every requested map or frame can be executed.
 
 ## 1. Architecture and ownership
 
 ```mermaid
 flowchart TD
     L["check.py: installed msf-character-tools against tooling.lock.json (format 2)"] --> K["check.py: calibration records, FREEZES and the mappings that cite them"]
-    K --> B["msf-character-tools discovery: 45 TOML files, sorted"]
+    K --> B["msf-character-tools discovery: 36 TOML files, sorted"]
     B --> C["Strict UTF-8 TOML parsing; schema, numeric and reference validation"]
     C --> D["compile_pack: immutable validated document and byte hash"]
     D --> E["Generated pack JSON, matrix CSV, coverage and checksums"]
@@ -105,9 +104,9 @@ Directory discovery walks the tree and includes every file name that ends in low
 | Location | Role | Files | Signals | Profiles | Memberships | Maps / mappings | Evidence |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [pack.toml](../pack.toml) | Root metadata | 1 | 0 | 0 | 0 | 0 / 0 | 0 |
-| [data/canonical.toml](../data/canonical.toml), [data/canonical_expression.toml](../data/canonical_expression.toml), [data/canonical_viseme.toml](../data/canonical_viseme.toml) and [data/intermediate.toml](../data/intermediate.toml) | Provider-specific projections, the draft canonical expression and viseme sets and intermediate values, each with its profile | 4 | 174 | 4 | 174 | 0 / 0 | 0 |
+| [data/canonical_expression.toml](../data/canonical_expression.toml), [data/canonical_viseme.toml](../data/canonical_viseme.toml) and [data/intermediate.toml](../data/intermediate.toml) | The draft canonical expression and viseme sets and the intermediate values, each with its profile | 3 | 149 | 3 | 149 | 0 / 0 | 0 |
 | [profiles/fixture.toml](../profiles/fixture.toml) and the provider profile files | Signal arrays and profile arrays | 21 | 1016 | 23 | 1021 | 0 / 0 | 0 |
-| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 18 | 0 | 0 | 0 | 98 / 800 | 0 |
+| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 10 | 0 | 0 | 0 | 88 / 588 | 0 |
 | [evidence/sources.toml](../evidence/sources.toml) | Evidence array | 1 | 0 | 0 | 0 | 0 / 0 | 81 |
 
 Each of the five root metadata keys appears once in the whole directory. A repeated metadata key is refused, even if its value is the same. The top-level `signals`, `profiles`, `mappings` and `evidence` must be arrays. They are added in file order, and each file's array order is kept.
@@ -161,11 +160,11 @@ These tables describe the strict validator. Format-specific inventory details go
 | `confidence` | Optional: a non-blank description or a finite number in [0,1]. It does not imply a threshold. |
 | `metadata` | Optional object for inventory details, reasons and definitions. It is never executed. |
 
-The ARKit left blink input and its canonical output are both scalar, with units `1`, domain `[0,1]`, side `left`, neutral `0.0`, and the same calibration:
+The ARKit left blink input is scalar, with units `1`, domain `[0,1]`, side `left`, neutral `0.0`, and this calibration:
 
 `arkit.coefficient.v1:eyeBlinkLeft: face-relative native neutral-to-maximum coefficient`
 
-The input's native ID is `eyeBlinkLeft`. Its canonical counterpart is `rcef.arkit.coefficient.eyeBlinkLeft`, which keeps the provider basis. See the [ARKit source record](../profiles/arkit.coefficient.toml) and the [canonical definitions](../data/canonical.toml).
+Its native ID is `eyeBlinkLeft`. Its canonical counterpart, `rcef.canonical_expression.eye_close_left`, has the same value type, units, domain, side and neutral. Its calibration is the canonical one, `rcef.canonical.v1:eye_close_left`, which is assumed, not measured, to agree with each source at 0 and 1. See the [ARKit source record](../profiles/arkit.coefficient.toml) and the [canonical expression definitions](../data/canonical_expression.toml).
 
 ### Profiles and evidence
 
@@ -174,7 +173,7 @@ The input's native ID is `eyeBlinkLeft`. Its canonical counterpart is `rcef.arki
 | Profile | `id`, `label`, `signal_ids` | `evidence`, `metadata`. Membership is an ordered array of signal IDs; it does not repeat the signal definitions. |
 | Evidence | `id`, `claim`, `status` | Only `url`, `revision`, `retrieved`, `sha256`, `locator`, `license`, `authorship`. All values are non-blank strings. |
 | Public evidence | Evidence fields, an HTTPS `url`, `locator`, and at least one of `revision`, `retrieved` or `sha256` | A digest, if given, is exactly 64 lowercase hexadecimal characters. The source verifier needs digests on the URL records it downloads. |
-| Original evidence | Evidence fields, with `license` and `authorship` when there is no URL | `rcef_definitions` credits the original provider projections and synthetic fixtures to RCEF contributors (2026), CC-BY-SA-4.0. |
+| Original evidence | Evidence fields, with `license` and `authorship` when there is no URL | `rcef_definitions` credits the synthetic fixtures and the intermediate values to RCEF contributors (2026), CC-BY-SA-4.0. |
 
 Example: evidence `apple_blendshapes` claims 52 coefficient identifiers, a native 0..1 domain and face-relative sides. It records the locator `topicSections except initializer; Discussion`, retrieval `2026-10-26`, revision `retrieval-digest`, and digest `c7a074ab7e8b14bfe15d727a8a856a8bdf8f83cb84f1b08d0f8b4a2b458300e3`. This pins the cited source bytes. It does not measure a face. See [sources.toml](../evidence/sources.toml).
 
@@ -207,33 +206,43 @@ There are four operators. All of them have one output.
 
 The arithmetic uses checked binary64 steps. They refuse non-finite results, and non-zero products or quotients that underflow to zero. Weighted sums add in input order, without compensated summation. Affine multiplication and addition are two separate steps, not a fused multiply-add. `piecewise_linear` finds the segment that holds x and interpolates linearly. It then keeps the result between that segment's two y values, so rounding cannot break monotonicity.
 
-### ARKit identity
+### Identity, and the ARKit blink hop
 
-This is the left-blink mapping, written out as nested tables so that it is easier to read. It comes from `arkit.to_canonical`, which has nine mappings. It is not a complete pack. The source file stores the rules as inline object arrays.
+`identity` gives `y = x`. It compiles only if the input and output have the same units, value type, domain and calibration, and the same presence and value of neutral, side and coupling. No mapped rule uses it, because every hop changes the calibration basis between a provider and a canonical set. The one identity rule is a record: `survey.mediapipe_rcef.blink` in [unresolved.toml](../mappings/unresolved.toml) is unresolved, so it never runs (section 6).
+
+An `affine` rule with scale `1` and offset `0` carries a value over unchanged across such a change of basis. This is the left-blink mapping of `arkit_blink.to_rcef`, written out as nested tables so that it is easier to read. It is abridged: three transfer assumptions, one loss annotation and five evidence IDs are left out. The source file stores the rules as inline object arrays.
 
 ```toml
 [[mappings]]
-id = "arkit.to_canonical"
+id = "arkit_blink.to_rcef"
 
 [[mappings.rules]]
-id = "arkit.coefficient.eyeBlinkLeft.identity"
+id = "arkit_rcef.eye_close_left"
 inputs = ["arkit.coefficient.eyeBlinkLeft"]
-outputs = ["rcef.arkit.coefficient.eyeBlinkLeft"]
+outputs = ["rcef.canonical_expression.eye_close_left"]
 disposition = "mapped"
-mapping_quality = "exact"
+mapping_quality = "approximate"
 assumptions = [
-  "Valid scalar sample supplied with native calibration arkit.coefficient.v1:eyeBlinkLeft: face-relative native neutral-to-maximum coefficient.",
-  "Output preserves native coefficient meaning only; no cross-provider or visual equivalence.",
+  "correspondence: ARKit eyeBlinkLeft corresponds to canonical eye_close_left.",
+  "endpoints: ARKit's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
 ]
-evidence = ["apple_blendshapes", "rcef_definitions"]
-evidence_status = "verified_current"
-loss_annotations = []
+evidence = ["apple_blendshapes", "rcef_canonical_v1"]
+evidence_status = "proposed"
 
 [mappings.rules.operator]
-id = "identity"
+id = "affine"
+scale = 1.0
+offset = 0.0
+
+[[mappings.rules.loss_annotations]]
+category = "signal"
+effect = "approximated"
+reason = "ARKit gain and full-activation pose not published"
+refs = ["arkit.coefficient.eyeBlinkLeft", "rcef.canonical_expression.eye_close_left"]
+units = "1"
 ```
 
-`y = x`, so a valid `0.25` gives `0.25`. An identity mapping compiles only if the input and output have the same units, value type, domain and calibration, and the same presence and value of neutral, side and coupling. It keeps this provider coefficient only. See [arkit.toml](../mappings/arkit.toml).
+A valid `0.25` gives `0.25`. The rule is approximate and declares a loss, so it needs the approximation opt-in. See [canonical_arkit.toml](../mappings/canonical_arkit.toml).
 
 ### Affine fixture
 
@@ -256,14 +265,14 @@ The runtime starts at `0.0`, multiplies each input by its weight, and adds the t
 
 ### Gaze difference and piecewise-linear split
 
-`arkit_gaze.to_fb2` builds FB2's requirement that only one of two opposing gaze directions is non-zero. For each eye and axis, a `weighted_sum` with weights `[1.0, -1.0]` takes ARKit in minus out (or up minus down). The result goes to an RCEF intermediate signal, for example `rcef.intermediate.arkit_gaze_in_minus_out_L`, with domain `[-1,1]`. Two one-sided `piecewise_linear` mappings then split that difference into the two FB2 directions:
+`rcef_gaze.to_fb2` builds FB2's requirement that only one of two opposing gaze directions is non-zero. For each eye and axis, a `weighted_sum` with weights `[1.0, -1.0]` takes the canonical in minus out (or up minus down). The result goes to an RCEF intermediate signal, for example `rcef.intermediate.gaze_in_minus_out_left`, with domain `[-1,1]`. Two one-sided `piecewise_linear` mappings then split that difference into the two FB2 directions:
 
 | Mapping | Knots | Difference -0.5 | 0 | 0.5 |
 | --- | --- | ---: | ---: | ---: |
-| `arkit_fb2.EYES_LOOK_RIGHT_L` | `[[-1.0, 0.0], [0.0, 0.0], [1.0, 1.0]]` | 0 | 0 | 0.5 |
-| `arkit_fb2.EYES_LOOK_LEFT_L` | `[[-1.0, 1.0], [0.0, 0.0], [1.0, 0.0]]` | 0.5 | 0 | 0 |
+| `rcef_fb2.EYES_LOOK_RIGHT_L` | `[[-1.0, 0.0], [0.0, 0.0], [1.0, 1.0]]` | 0 | 0 | 0.5 |
+| `rcef_fb2.EYES_LOOK_LEFT_L` | `[[-1.0, 1.0], [0.0, 0.0], [1.0, 0.0]]` | 0.5 | 0 | 0 |
 
-Each split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero. When ARKit sets both directions, only their difference is kept. Each of these mappings declares that as a loss. The intermediate signals are in the `rcef.intermediate` profile, not in the source or target profile, so they stay virtual inside the compiled map. All 12 mappings in this map are proposed and approximate. See [arkit_fb2.toml](../mappings/arkit_fb2.toml) and [intermediate.toml](../data/intermediate.toml).
+Each split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero. When both canonical directions are non-zero, only their difference is kept. Each of these mappings declares that as a loss. The intermediate signals are in the `rcef.intermediate` profile, not in the source or target profile, so they stay virtual inside the compiled map. All 12 mappings in this map are proposed and approximate. See [canonical_fb2.toml](../mappings/canonical_fb2.toml) and [intermediate.toml](../data/intermediate.toml).
 
 Sources: operator dispatch and `piecewise` in the C++ core's [mapping.cpp](../../msf_character_tools/core/src/mapping.cpp), and `product`, `add`, `sub` and `divide` in [math3d.cpp](../../msf_character_tools/core/src/math3d.cpp). [math3d.py](../../msf_character_tools/msf_character_tools/math3d.py) exports them as `_product`, `_add`, `_sub` and `_divide`, with `_sum`, which applies `add` in order ([math_module.cpp](../../msf_character_tools/core/python/math_module.cpp)).
 
@@ -285,7 +294,7 @@ An unresolved inventory that is well formed can compile into a pack. A requested
 
 Compilation refuses unknown channels, more than one writer for a signal, an output that is also a source channel, and dependency cycles. Intermediate outputs can stay virtual. Terminal outputs must be in the target snapshot. A `piecewise_linear` mapping's first and last knots must be its input's domain bounds. A change of units needs explicit affine coefficients and assumptions. A non-identity mapping with a changed basis, or with a declared approximation or loss, needs written assumptions. The validator does not prove that those assumptions are correct.
 
-[unresolved.toml](../mappings/unresolved.toml) records `survey.mediapipe_arkit.blink` as unresolved on purpose, with unresolved evidence status and no quality. Its `identity` operator does not admit the relationship. The authored reason is that names alone cannot establish model or provider calibration.
+[unresolved.toml](../mappings/unresolved.toml) records `survey.mediapipe_rcef.blink`, MediaPipe `eyeBlinkLeft` to canonical `eye_close_left`, as unresolved on purpose, with unresolved evidence status and no quality. Its `identity` operator does not admit the relationship. The authored reason is that names alone cannot establish model or provider calibration.
 
 ### Frame shape and failure behaviour
 
@@ -301,7 +310,7 @@ A frame array for the **affine** fixture can hold this source channel:
 ]
 ```
 
-With source `fixture.source`, target `fixture.target` and map `fixture.affine`, the output is `fixture.affine.unit: 0.5`, with validity `true`. The required inputs are the map's external inputs. Other source-profile channels can be left out when the map does not need them. The stored `mapping_samples.json` holds expected numbers; it is not in this frame format. For `arkit.to_canonical`, all nine inputs are required, so a blink value alone does not run the nine-mapping map.
+With source `fixture.source`, target `fixture.target` and map `fixture.affine`, the output is `fixture.affine.unit: 0.5`, with validity `true`. The required inputs are the map's external inputs. Other source-profile channels can be left out when the map does not need them. The stored `mapping_samples.json` holds expected numbers; it is not in this frame format. For `arkit_blink.to_rcef`, both blink inputs are required, so a left blink value alone does not run it.
 
 | Frame condition | Behaviour |
 | --- | --- |
@@ -314,15 +323,15 @@ With source `fixture.source`, target `fixture.target` and map `fixture.affine`, 
 | Any frame has an error | The whole Result has `value=None`. Callers must check `.ok` and the diagnostics. |
 | Valid frames | Output frame order is kept, and each written output has validity `true`. There is no smoothing, resampling or hidden state. |
 
-The signal fields `validity`, `confidence` and `time` describe a provider contract. They are not executable expressions. For example, the FB2 gaze records state `isValid AND isEyeFollowingBlendshapesValid`, upper and lower region confidences with no implied threshold, and `XrTime`, which needs an explicit conversion to seconds. The caller must supply the actual boolean and convert the time. The `opposing_direction_exclusive` coupling on those records is a declaration, not a runtime check. The ARKit → FB2 gaze map meets it by construction (section 5). Elsewhere, tests that focus on direction should move one direction at a time.
+The signal fields `validity`, `confidence` and `time` describe a provider contract. They are not executable expressions. For example, the FB2 gaze records state `isValid AND isEyeFollowingBlendshapesValid`, upper and lower region confidences with no implied threshold, and `XrTime`, which needs an explicit conversion to seconds. The caller must supply the actual boolean and convert the time. The `opposing_direction_exclusive` coupling on those records is a declaration, not a runtime check. The canonical → FB2 gaze hop meets it by construction (section 5). Elsewhere, tests that focus on direction should move one direction at a time.
 
 ### Neutral, native defaults and unresolved quantities
 
-ARKit blink declares neutral `0.0`. VRCFT left and right raw openness instead declare `native_default=1.0` and no neutral, with `initialization_is_measured_neutral=false`. Both raw openness identities keep their storage meaning. The left and right raw `PupilDiameter_MM` records have units `mm`, no declared bounds and a storage-specific calibration. This does not qualify the physical measurement.
+ARKit blink declares neutral `0.0`. VRCFT left and right raw openness instead declare `native_default=1.0` and no neutral, with `initialization_is_measured_neutral=false`. The hops between raw openness and canonical `eye_close` compute `1 − Openness` and do not treat the default as a neutral. The left and right raw `PupilDiameter_MM` records have units `mm`, no declared bounds and a storage-specific calibration. This does not qualify the physical measurement.
 
-`vrcft.eye.Combined.PupilDiameter_MM` has units `1`, domain `[0,1]`, metadata `actual_quantity = "normalized dilation"`, dynamic extrema, `normalization_execution = "unsupported"`, and disposition unresolved. Do not read its name as millimetres. Combined openness and the combined gaze and state policy are also unresolved. A documented contradiction between the code and the documentation for combined gaze stays visible. This guide does not infer a replacement mapping. See [vrcft.eye.toml](../profiles/vrcft.eye.toml), the [vrcft_eye map](../mappings/vrcft_eye.toml) and the [canonical definitions](../data/canonical.toml).
+`vrcft.eye.Combined.PupilDiameter_MM` has units `1`, domain `[0,1]`, metadata `actual_quantity = "normalized dilation"`, dynamic extrema, `normalization_execution = "unsupported"`, and disposition unresolved. Do not read its name as millimetres. Combined openness and the combined gaze and state policy are also unresolved. A documented contradiction between the code and the documentation for combined gaze stays visible. This guide does not infer a replacement mapping. See [vrcft.eye.toml](../profiles/vrcft.eye.toml) and the [VRCFT eye hops](../mappings/canonical_vrcft_eye.toml).
 
-The 21 canonical projections are 9 ARKit identities, 8 FB2 directional gaze identities and 4 VRCFT raw-eye identities. The FB2 values are native, direction-specific fractions of an angle whose maximum is not specified, so no radians are inferred. "Canonical" does not mean one universal anatomy or one shared calibration.
+The FB2 gaze values are native, direction-specific fractions of an angle whose maximum is not specified, so no radians are inferred, for FB2 or for the canonical gaze signals. "Canonical" does not mean one universal anatomy or one shared calibration.
 
 ### Authoring maps and asset binding
 
@@ -340,9 +349,9 @@ msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases 
 | [generated/rcef_mapping.csv](../generated/rcef_mapping.csv) | msf-character-tools signal and profile membership matrix: one row per distinct signal, one column per profile. Despite its name, it is not a table of executable mappings. |
 | [generated/coverage.json](../generated/coverage.json) | msf-character-tools coverage: dispositions, quality partitions, memberships per profile, evidence and rule uses. It records the pack hash. |
 | [generated/SHA256SUMS](../generated/SHA256SUMS) | Hashes of the pack, the matrix CSV and coverage, in that order. It does not list itself. |
-| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 1195 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
-| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 800 authored one-way mappings with their status, operators, assumptions and losses. |
-| [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: the 21 canonical projections against the authored relationships. A dash means no authored mapping. Unresolved relationships stay labeled. |
+| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 1170 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
+| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 588 authored one-way mappings with their status, operators, assumptions and losses. |
+| [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: the canonical expression and viseme signals against the authored relationships. A dash means no authored mapping. Unresolved relationships stay labeled. |
 | [reports/SHA256SUMS](../reports/SHA256SUMS) | Hashes of the six report files, sorted by file name. It does not list itself. The Markdown reports record the SHA-256 of the pack they read. |
 
 JSON uses sorted object keys, indent=2, UTF-8 with a final LF, finite numbers and normalized negative zero. Arrays keep the authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All shared output bytes are rendered and validated before any file is written. Each file is replaced atomically on its own. The four generated files and the seven report files are not replaced in one transaction, so after a failure, review all outputs and run the check again.
@@ -366,7 +375,7 @@ python3 -B check.py
 python3 -B -m unittest discover -s tests
 ```
 
-What the tests show: the 21 provider identities and 63 scalar comparisons keep the declared storage and the provider-specific assumptions. The FB2 direction tests move one direction at a time. Raw pupil fields and native defaults do not show a physical measurement, a calibrated neutral or cross-provider equivalence. Provider frame context, devices, capture and physiology are separate gates.
+What the tests show: the provider profiles keep the declared storage and the provider-specific assumptions, and every hop keeps the bytes of the latest passing A/B freeze. The FB2 direction tests move one direction at a time. Raw pupil fields and native defaults do not show a physical measurement, a calibrated neutral or cross-provider equivalence. Provider frame context, devices, capture and physiology are separate gates.
 
 Generating matching bytes does not run the tests. On these repositories, `scripts/ci_local.sh` runs `check.py` and the tests on the local Python 3.11 and 3.12 venvs and prints a summary for the pull request.
 
@@ -396,10 +405,10 @@ Before you extend or release the inventory, read [CONTRIBUTING](../CONTRIBUTING.
 
 ## 9. Independent validation checklist
 
-- Recompute the counts from all 45 TOML files, and the uniqueness and reference relationships. Compare the merged data with the current pack. Count memberships separately from distinct signals and from selected-interface metadata.
-- Review the ARKit identity checks for calibration, domain, neutral, side and coupling. Check the independent expected values: identity `0.25`, affine `-1/0/1 → 0/0.5/1`, the ordered bilateral pairs, and the gaze splits. Require the approximation opt-in, and keep every authored loss.
+- Recompute the counts from all 36 TOML files, and the uniqueness and reference relationships. Compare the merged data with the current pack. Count memberships separately from distinct signals and from selected-interface metadata.
+- Review the identity checks for calibration, domain, neutral, side and coupling. Check the independent expected values: affine `-1/0/1 → 0/0.5/1`, the ordered bilateral pairs, and the gaze splits. Require the approximation opt-in, and keep every authored loss.
 - Try a missing value or validity, false or non-boolean validity, missing required inputs, extra or non-source channels, non-finite or out-of-domain values, and one failing frame in a batch. Require no Result value on error.
-- Confirm that the unresolved MediaPipe → ARKit mapping refuses to run. Keep evidence status, disposition and quality apart. Do not infer inverse or cross-provider mappings from names.
+- Confirm that the unresolved MediaPipe → canonical mapping refuses to run. Keep evidence status, disposition and quality apart. Do not infer inverse or cross-provider mappings from names.
 - Run the no-write drift check and the tests. `check.py` first checks the installed msf-character-tools against `evidence/tooling.lock.json`, and then the calibration records against `calibration/FREEZES`. Test the native backend separately.
 - When the data changes, update the HTML report, SVG, PNG and TOML index with it. Regenerate the TOML index with `python3 -B scripts/export_toml_index.py --write`; without `--write` it shows a diff and fails if the index does not match the TOML files, and `tests/test_toml_index.py` checks the same. Render the PNG from the SVG at the same size. Review the HTML in offline, narrow-screen and print modes. Tab through the stage and file explorer, operate the selectors and sliders with the keyboard, and test reset and invalid or missing modes. Compare all static and displayed fixture values. Check the content with JavaScript turned off and with a screen reader.
 - Check relative links with a sibling `msf_character_tools` checkout, and check the MIT notice on inline code and the CC-BY-SA-4.0 attribution on original documentation.

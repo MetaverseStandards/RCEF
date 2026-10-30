@@ -1,0 +1,250 @@
+id,kind,retired_in,replaced_by,note
+arkit.to_canonical,map,data 0.5.0,,identity map into the retired profile rcef.canonical
+arkit.coefficient.eyeBlinkLeft.identity,mapping,data 0.5.0,,mapping of the retired identity map arkit.to_canonical
+arkit.coefficient.eyeBlinkRight.identity,mapping,data 0.5.0,,mapping of the retired identity map arkit.to_canonical
+arkit.coefficient.jawForward.identity,mapping,data 0.5.0,,mapping of the retired identity map arkit.to_canonical
+arkit.coefficient.jawOpen.identity,mapping,data 0.5.0,,mapping of the retired identity map arkit.to_canonical
+arkit.coefficient.browDownLeft.identity,mapping,data 0.5.0,,mapping of the retired identity map arkit.to_canonical
+arkit.coefficient.browDownRight.identity,mapping,data 0.5.0,,mapping of the retired identity map arkit.to_canonical
+arkit.coefficient.browInnerUp.identity,mapping,data 0.5.0,,mapping of the retired identity map arkit.to_canonical
+arkit.coefficient.browOuterUpLeft.identity,mapping,data 0.5.0,,mapping of the retired identity map arkit.to_canonical
+arkit.coefficient.browOuterUpRight.identity,mapping,data 0.5.0,,mapping of the retired identity map arkit.to_canonical
+arkit.to_fb2,map,data 0.5.0,route arkit.coefficient -> rcef.canonical_expression -> openxr.fb2,direct map; translations run through the canonical sets
+arkit_fb2.BROW_LOWERER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.BROW_LOWERER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.INNER_BROW_RAISER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.INNER_BROW_RAISER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.OUTER_BROW_RAISER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.OUTER_BROW_RAISER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.CHEEK_PUFF_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.CHEEK_PUFF_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.CHEEK_RAISER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.CHEEK_RAISER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.EYES_CLOSED_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.EYES_CLOSED_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LID_TIGHTENER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LID_TIGHTENER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.UPPER_LID_RAISER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.UPPER_LID_RAISER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.JAW_THRUST,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.JAW_SIDEWAYS_LEFT,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.JAW_DROP,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.JAW_SIDEWAYS_RIGHT,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIPS_TOWARD,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.DIMPLER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.DIMPLER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_CORNER_DEPRESSOR_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_CORNER_DEPRESSOR_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_FUNNELER_LB,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_FUNNELER_LT,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_FUNNELER_RB,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_FUNNELER_RT,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.MOUTH_LEFT,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LOWER_LIP_DEPRESSOR_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LOWER_LIP_DEPRESSOR_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_PRESSOR_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_PRESSOR_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_PUCKER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_PUCKER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.MOUTH_RIGHT,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_SUCK_LB,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_SUCK_RB,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_SUCK_LT,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_SUCK_RT,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.CHIN_RAISER_B,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.CHIN_RAISER_T,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_CORNER_PULLER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_CORNER_PULLER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_STRETCHER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.LIP_STRETCHER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.UPPER_LIP_RAISER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.UPPER_LIP_RAISER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.NOSE_WRINKLER_L,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.NOSE_WRINKLER_R,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_fb2.TONGUE_OUT,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_fb2
+arkit_gaze.to_fb2,map,data 0.5.0,route arkit.coefficient -> rcef.canonical_expression -> openxr.fb2 (gaze group),direct map; translations run through the canonical sets
+arkit_fb2.gaze_in_minus_out_L,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.EYES_LOOK_RIGHT_L,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.EYES_LOOK_LEFT_L,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.gaze_up_minus_down_L,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.EYES_LOOK_UP_L,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.EYES_LOOK_DOWN_L,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.gaze_in_minus_out_R,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.EYES_LOOK_LEFT_R,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.EYES_LOOK_RIGHT_R,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.gaze_up_minus_down_R,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.EYES_LOOK_UP_R,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit_fb2.EYES_LOOK_DOWN_R,mapping,data 0.5.0,,mapping of the retired direct map arkit_gaze.to_fb2
+arkit.to_vrcft_artist,map,data 0.5.0,route arkit.coefficient -> rcef.canonical_expression -> vrcft.artist.base,direct map; translations run through the canonical sets
+arkit_vrcft_artist.BrowLowererLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.BrowPinchLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.BrowLowererRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.BrowPinchRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.BrowInnerUpRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.BrowInnerUpLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.BrowOuterUpLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.BrowOuterUpRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.CheekPuffRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.CheekPuffLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.CheekSquintLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.CheekSquintRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeClosedLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeClosedRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeLookDownLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeLookDownRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeLookInLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeLookInRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeLookOutLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeLookOutRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeLookUpLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeLookUpRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeSquintLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeSquintRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeWideLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.EyeWideRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.JawForward,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.JawLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.JawOpen,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.JawRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthClosed,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthDimpleLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthDimpleRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthFrownLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthFrownRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipFunnelUpperRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipFunnelUpperLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipFunnelLowerRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipFunnelLowerLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthUpperLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthLowerLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthLowerDownLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthLowerDownRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthPressLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthPressRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipPuckerUpperRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipPuckerUpperLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipPuckerLowerRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipPuckerLowerLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthUpperRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthLowerRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipSuckLowerRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipSuckLowerLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipSuckUpperRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.LipSuckUpperLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthRaiserLower,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthRaiserUpper,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthCornerPullLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthCornerSlantLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthCornerPullRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthCornerSlantRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthStretchLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthStretchRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthUpperUpLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.MouthUpperUpRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.NoseSneerLeft,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.NoseSneerRight,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+arkit_vrcft_artist.TongueOut,mapping,data 0.5.0,,mapping of the retired direct map arkit.to_vrcft_artist
+fb2.to_canonical,map,data 0.5.0,,identity map into the retired profile rcef.canonical
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB.identity,mapping,data 0.5.0,,mapping of the retired identity map fb2.to_canonical
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB.identity,mapping,data 0.5.0,,mapping of the retired identity map fb2.to_canonical
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB.identity,mapping,data 0.5.0,,mapping of the retired identity map fb2.to_canonical
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB.identity,mapping,data 0.5.0,,mapping of the retired identity map fb2.to_canonical
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB.identity,mapping,data 0.5.0,,mapping of the retired identity map fb2.to_canonical
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB.identity,mapping,data 0.5.0,,mapping of the retired identity map fb2.to_canonical
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB.identity,mapping,data 0.5.0,,mapping of the retired identity map fb2.to_canonical
+openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB.identity,mapping,data 0.5.0,,mapping of the retired identity map fb2.to_canonical
+fb2.to_arkit,map,data 0.5.0,route openxr.fb2 -> rcef.canonical_expression -> arkit.coefficient,direct map; translations run through the canonical sets
+fb2_arkit.eyeBlinkLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.eyeBlinkRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.jawOpen,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthClose,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.browInnerUp,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.cheekPuff,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthSmileLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthSmileRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthShrugUpper,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthShrugLower,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.browDownLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.browDownRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.browOuterUpLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.browOuterUpRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.cheekSquintLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.cheekSquintRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.eyeSquintLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.eyeSquintRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.eyeWideLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.eyeWideRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.jawForward,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.jawLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.jawRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthDimpleLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthDimpleRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthFrownLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthFrownRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthFunnel,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthLowerDownLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthLowerDownRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthPressLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthPressRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthPucker,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthRollLower,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthRollUpper,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthStretchLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthStretchRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthUpperUpLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.mouthUpperUpRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.noseSneerLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.noseSneerRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_arkit.tongueOut,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_arkit
+fb2_gaze.to_arkit,map,data 0.5.0,route openxr.fb2 -> rcef.canonical_expression -> arkit.coefficient (gaze group),direct map; translations run through the canonical sets
+fb2_arkit.eyeLookOutLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2_gaze.to_arkit
+fb2_arkit.eyeLookInLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2_gaze.to_arkit
+fb2_arkit.eyeLookOutRight,mapping,data 0.5.0,,mapping of the retired direct map fb2_gaze.to_arkit
+fb2_arkit.eyeLookInRight,mapping,data 0.5.0,,mapping of the retired direct map fb2_gaze.to_arkit
+fb2_arkit.eyeLookDownLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2_gaze.to_arkit
+fb2_arkit.eyeLookDownRight,mapping,data 0.5.0,,mapping of the retired direct map fb2_gaze.to_arkit
+fb2_arkit.eyeLookUpLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2_gaze.to_arkit
+fb2_arkit.eyeLookUpRight,mapping,data 0.5.0,,mapping of the retired direct map fb2_gaze.to_arkit
+fb2.to_vrm,map,data 0.5.0,route openxr.fb2 -> rcef.canonical_expression -> vrm.preset (blink group),direct map; translations run through the canonical sets
+fb2_vrm.blinkLeft,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_vrm
+fb2_vrm.blinkRight,mapping,data 0.5.0,,mapping of the retired direct map fb2.to_vrm
+survey.mediapipe_arkit.blink,mapping,data 0.5.0,survey.mediapipe_rcef.blink,retargeted from the retired rcef.canonical to rcef.canonical_expression.eye_close_left; still unresolved
+visemes.to_vrm,map,data 0.5.0,route openxr.visemes -> rcef.canonical_viseme -> vrm.preset,direct map; translations run through the canonical sets
+visemes_vrm.aa,mapping,data 0.5.0,,mapping of the retired direct map visemes.to_vrm
+visemes_vrm.ih,mapping,data 0.5.0,,mapping of the retired direct map visemes.to_vrm
+visemes_vrm.ou,mapping,data 0.5.0,,mapping of the retired direct map visemes.to_vrm
+visemes_vrm.ee,mapping,data 0.5.0,,mapping of the retired direct map visemes.to_vrm
+visemes_vrm.oh,mapping,data 0.5.0,,mapping of the retired direct map visemes.to_vrm
+vrcft_eye.to_canonical,map,data 0.5.0,,identity map into the retired profile rcef.canonical
+vrcft.eye.Left.Openness.identity,mapping,data 0.5.0,,mapping of the retired identity map vrcft_eye.to_canonical
+vrcft.eye.Left.PupilDiameter_MM.identity,mapping,data 0.5.0,,mapping of the retired identity map vrcft_eye.to_canonical
+vrcft.eye.Right.Openness.identity,mapping,data 0.5.0,,mapping of the retired identity map vrcft_eye.to_canonical
+vrcft.eye.Right.PupilDiameter_MM.identity,mapping,data 0.5.0,,mapping of the retired identity map vrcft_eye.to_canonical
+rcef.canonical,profile,data 0.5.0,,old 21-signal canonical set of provider-calibrated projections; superseded by rcef.canonical_expression and rcef.canonical_viseme
+rcef.arkit.coefficient.eyeBlinkLeft,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.arkit.coefficient.eyeBlinkRight,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.arkit.coefficient.jawForward,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.arkit.coefficient.jawOpen,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.arkit.coefficient.browDownLeft,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.arkit.coefficient.browDownRight,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.arkit.coefficient.browInnerUp,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.arkit.coefficient.browOuterUpLeft,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.arkit.coefficient.browOuterUpRight,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.vrcft.eye.Left.Openness,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.vrcft.eye.Left.PupilDiameter_MM,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.vrcft.eye.Right.Openness,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.vrcft.eye.Right.PupilDiameter_MM,signal,data 0.5.0,,signal of the retired profile rcef.canonical
+rcef.intermediate.arkit_gaze_in_minus_out_L,signal,data 0.5.0,,intermediate value of the retired direct map arkit_gaze.to_fb2
+rcef.intermediate.arkit_gaze_up_minus_down_L,signal,data 0.5.0,,intermediate value of the retired direct map arkit_gaze.to_fb2
+rcef.intermediate.arkit_gaze_in_minus_out_R,signal,data 0.5.0,,intermediate value of the retired direct map arkit_gaze.to_fb2
+rcef.intermediate.arkit_gaze_up_minus_down_R,signal,data 0.5.0,,intermediate value of the retired direct map arkit_gaze.to_fb2

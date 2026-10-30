@@ -46,7 +46,7 @@ evidence_status = "verified_current"
 native_id = "Left.Openness"
 surface = "vrcft.eye"
 side = "left"
-metadata = { "inventory_ordinal" = 2, "reason" = "Identity preserves this explicitly declared provider calibration. The proposed approximate hops vrcft_eye_blink.to_rcef and rcef_blink.to_vrcft_eye also read and write it, with eye_close = 1 − Openness.", "native_field" = "Openness", "combination" = "raw storage", "unit_status" = "verified_current", "initialization_is_measured_neutral" = false, "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 2, "reason" = "Native identifier evidenced; used by the proposed approximate hops rcef_blink.to_vrcft_eye and vrcft_eye_blink.to_rcef, with eye_close = 1 − Openness; calibration correspondence is assumed, not measured.", "native_field" = "Openness", "combination" = "raw storage", "unit_status" = "verified_current", "initialization_is_measured_neutral" = false, "mapping_quality" = "exact" }
 native_default = 1.0
 region = "eyelid"
 
@@ -63,7 +63,7 @@ evidence_status = "verified_current"
 native_id = "Left.PupilDiameter_MM"
 surface = "vrcft.eye"
 side = "left"
-metadata = { "inventory_ordinal" = 3, "reason" = "Identity preserves this explicitly declared provider calibration. The exact verified_current hops vrcft_eye_pupil_mm.to_rcef and rcef_pupil_mm.to_vrcft_eye also copy it to and from the canonical pupil diameter.", "native_field" = "PupilDiameter_MM", "combination" = "raw storage", "unit_status" = "verified_current", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 3, "reason" = "Native identifier evidenced; copied exactly by the verified_current hops rcef_pupil_mm.to_vrcft_eye and vrcft_eye_pupil_mm.to_rcef, which keep its declared calibration.", "native_field" = "PupilDiameter_MM", "combination" = "raw storage", "unit_status" = "verified_current", "mapping_quality" = "exact" }
 region = "pupil"
 
 [[signals]]
@@ -111,7 +111,7 @@ evidence_status = "verified_current"
 native_id = "Right.Openness"
 surface = "vrcft.eye"
 side = "right"
-metadata = { "inventory_ordinal" = 6, "reason" = "Identity preserves this explicitly declared provider calibration. The proposed approximate hops vrcft_eye_blink.to_rcef and rcef_blink.to_vrcft_eye also read and write it, with eye_close = 1 − Openness.", "native_field" = "Openness", "combination" = "raw storage", "unit_status" = "verified_current", "initialization_is_measured_neutral" = false, "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 6, "reason" = "Native identifier evidenced; used by the proposed approximate hops rcef_blink.to_vrcft_eye and vrcft_eye_blink.to_rcef, with eye_close = 1 − Openness; calibration correspondence is assumed, not measured.", "native_field" = "Openness", "combination" = "raw storage", "unit_status" = "verified_current", "initialization_is_measured_neutral" = false, "mapping_quality" = "exact" }
 native_default = 1.0
 region = "eyelid"
 
@@ -128,7 +128,7 @@ evidence_status = "verified_current"
 native_id = "Right.PupilDiameter_MM"
 surface = "vrcft.eye"
 side = "right"
-metadata = { "inventory_ordinal" = 7, "reason" = "Identity preserves this explicitly declared provider calibration. The exact verified_current hops vrcft_eye_pupil_mm.to_rcef and rcef_pupil_mm.to_vrcft_eye also copy it to and from the canonical pupil diameter.", "native_field" = "PupilDiameter_MM", "combination" = "raw storage", "unit_status" = "verified_current", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 7, "reason" = "Native identifier evidenced; copied exactly by the verified_current hops rcef_pupil_mm.to_vrcft_eye and vrcft_eye_pupil_mm.to_rcef, which keep its declared calibration.", "native_field" = "PupilDiameter_MM", "combination" = "raw storage", "unit_status" = "verified_current", "mapping_quality" = "exact" }
 region = "pupil"
 
 [[signals]]

@@ -30,10 +30,10 @@ def fixture():
                            metadata={'reason': 'Keep provider calibration', 'native_index': 4}),
                     signal('source.right', 'Right', disposition='unresolved', native_id='Right'),
                     signal('orphan', '<hidden>', disposition='excluded')],
-        'profiles': [dict(id='rcef.canonical', label='Canonical', signal_ids=['canonical.blink']),
+        'profiles': [dict(id='rcef.canonical_expression', label='Canonical', signal_ids=['canonical.blink']),
                      dict(id='source', label='Source', signal_ids=['source.left', 'source.right'])],
-        'mappings': [dict(id='source.to_canonical', source_profile='source',
-                         target_profile='rcef.canonical', rules=[
+        'mappings': [dict(id='source.to_rcef', source_profile='source',
+                         target_profile='rcef.canonical_expression', rules=[
                              dict(id='left.identity', inputs=['source.left'], outputs=['canonical.blink'],
                                   operator={'id': 'identity'}, disposition='mapped', mapping_quality='exact',
                                   assumptions=['Provider only'], loss_annotations=[], evidence=['source']),
@@ -205,11 +205,11 @@ class ReadableReports(unittest.TestCase):
         self.pack.write_text(json.dumps(value))
         self.write()
         text = (self.root / 'reports/mappings.md').read_text(encoding='utf-8')
-        summary, details = text.split('## source.to_canonical', 1)
+        summary, details = text.split('## source.to_rcef', 1)
         self.assertIn('## Proposed rules', summary)
-        self.assertIn('| source.to_canonical | left.scaled | source → rcef.canonical | blink = 0.5·Left + 0.25 '
+        self.assertIn('| source.to_rcef | left.scaled | source → rcef.canonical_expression | blink = 0.5·Left + 0.25 '
                       '| gain unknown | proposed |', summary)
-        self.assertIn('| source.to_canonical | coupled.mean | source + outside → rcef.canonical | '
+        self.assertIn('| source.to_rcef | coupled.mean | source + outside → rcef.canonical_expression | '
                       'blink = 0.5·Left + 0.5·Partner | asymmetry irrecoverable; gain unknown | proposed |', summary)
         self.assertNotIn('right.ambiguous', summary)
         self.assertIn('{"id":"weighted_sum","weights":[0.5,0.5]}', details)

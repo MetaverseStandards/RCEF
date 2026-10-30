@@ -292,11 +292,11 @@ Binary parameter encoding surface and sign parameter evidence; numeric transform
 
 ## rcef_definitions
 
-Original provider-calibrated scalar projections and synthetic affine/bilateral fixture definitions; no cross-provider equivalence.
+Original synthetic affine/bilateral fixture definitions and the profile of intermediate values computed inside translations; no cross-provider equivalence.
 
 - Original authorship: RCEF contributors (2026)
 - License or terms: CC-BY-SA-4.0
-- Locator: data/canonical.toml; fixtures/mapping_samples.json
+- Locator: profiles/fixture.toml; mappings/fixtures.toml; fixtures/mapping_samples.json; data/intermediate.toml
 
 ## vrcft_docs_arkit
 

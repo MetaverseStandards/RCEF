@@ -1,0 +1,6 @@
+pair,linear_outputs,differences
+FB2 -> ARKit,52,0
+ARKit -> FB2,52,0
+ARKit -> VRCFT UE,68,0
+FB2 -> VRM blink,2,0
+META -> VRM,5,0

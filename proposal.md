@@ -12,11 +12,11 @@ The six shared APIs return a typed `Result(value, report)`, with no value when t
 
 ## Executable examples
 
-`arkit.to_canonical` keeps nine Apple-native coefficients. `fb2.to_canonical` keeps eight FB2 eye-rotation fractions, one per direction. `vrcft_eye.to_canonical` keeps left and right raw openness and pupil diameter. Each target's calibration explicitly matches its input provider's basis, and the target IDs include that provider's name.
+`arkit_blink.to_rcef` carries Apple's two blink coefficients into the canonical expression set unchanged, with an affine scale of 1. The calibration changes from the ARKit basis to the canonical one, so the mapping is approximate and declares the loss. `vrcft_eye_blink.to_rcef` computes canonical eye closure as `1 − Openness`.
 
 `fixture.affine` applies `0.5*x + 0.5` to an original signed basis: `-1 → 0`, `0 → 0.5`, `1 → 1`. This is an explicit basis conversion, with no hidden clamp.
 
-`fixture.bilateral` averages original left and right brow channels with weights `[0.5, 0.5]`. Both `[1,0]` and `[0,1]` give `0.5`, so the difference between the sides cannot be recovered. Its signal loss is approximate, its effect on geometry is unknown, and it compiles only with the approximation opt-in. `survey.ambiguous` is an unresolved candidate from MediaPipe to Apple. It cannot be compiled for evaluation.
+`fixture.bilateral` averages original left and right brow channels with weights `[0.5, 0.5]`. Both `[1,0]` and `[0,1]` give `0.5`, so the difference between the sides cannot be recovered. Its signal loss is approximate, its effect on geometry is unknown, and it compiles only with the approximation opt-in. `survey.ambiguous` is an unresolved candidate from MediaPipe to the canonical expression set. It cannot be compiled for evaluation.
 
 A sample has a timestamp in seconds, typed values by signal ID, and validity by signal ID. A missing or invalid required input gives errors and no evaluated value. Domains are checked before and after each operator. Profile snapshots do not bind to physical assets. To use a mapping with an asset, a sidecar must give structural indices and the asset and resource hashes.
 

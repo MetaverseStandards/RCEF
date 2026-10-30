@@ -44,9 +44,5 @@
       ],
       "expected": 1.0
     }
-  ],
-  "identity": {
-    "input": 0.25,
-    "expected": 0.25
-  }
+  ]
 }

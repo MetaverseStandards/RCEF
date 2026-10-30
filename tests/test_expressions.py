@@ -11,8 +11,8 @@ sys.path.insert(0, str(ROOT / 'examples'))
 import make_demo_frames  # noqa: E402
 import make_expression_frames as gen  # noqa: E402
 
-FB2 = make_demo_frames.names('openxr.fb2', make_demo_frames.FB2_PREFIX, make_demo_frames.FB2_SUFFIX)
-VISEMES = make_demo_frames.names('openxr.visemes', make_demo_frames.VIS_PREFIX, make_demo_frames.VIS_SUFFIX)
+FB2 = list(make_demo_frames.FB2_CHANNELS)
+VISEMES = list(make_demo_frames.VISEME_CHANNELS)
 
 
 def read(path):

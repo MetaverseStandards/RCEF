@@ -11,9 +11,9 @@ The output is data. The script only reads:
   verdicts and loss keys), the ICT-FaceKit table and the loss-key texts;
 - tests/fixtures/ipa_chart_symbols.json: the IPA chart symbols of each viseme
   class, with their chart cells and evidence levels;
-- tests/fixtures/baseline-dea1713.pack.json: today's direct maps. They give
-  the operators, weight order and knots of the ARKit and FB2 out-maps, the
-  crosswalk evidence each hop takes over, and the assumptions that the
+- tests/fixtures/baseline-dea1713.pack.json: the retired A1 direct maps. They
+  give the operators, weight order and knots of the ARKit and FB2 out-maps,
+  the crosswalk evidence each hop takes over, and the assumptions that the
   assumption catalogue carries over.
 
 It writes data/canonical_expression.toml, data/canonical_viseme.toml and
@@ -1461,9 +1461,9 @@ def value(v) -> str:
 HEADER = '''# SPDX-License-Identifier: CC-BY-SA-4.0
 # Original RCEF data; attributed source identifiers are factual inventories.
 # Written by scripts/build_canonical.py from docs/canonical-set.md,
-# docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and today's
-# direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run
-# the script.
+# docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and the
+# retired A1 direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit
+# those, then run the script.
 '''
 
 

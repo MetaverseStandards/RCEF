@@ -1,0 +1,13 @@
+pair,rig,family,frames,posed,frames_with_difference,max_vertex_difference,arkit_outputs_bound,oracle_problems
+FB2 -> ARKit,rocketbox-female,goldens:openxr.fb2,124,124,0,0.0,52 of 52,0
+FB2 -> ARKit,rocketbox-female,csv:openxr.fb2:fb2_demo_frames,441,436,0,0.0,52 of 52,0
+FB2 -> ARKit,rocketbox-female,csv:openxr.fb2:fb2_expression_frames,221,221,0,0.0,52 of 52,0
+FACS -> ARKit,rocketbox-female,facs_library,221,221,0,0.0,52 of 52,0
+FACS -> ARKit,rocketbox-female,facs_key_impulses,132,132,0,0.0,52 of 52,0
+FACS -> ARKit,rocketbox-female,facs_letters,500,500,0,0.0,52 of 52,0
+FB2 -> ARKit,ict,goldens:openxr.fb2,124,124,0,0.0,14 of 52,0
+FB2 -> ARKit,ict,csv:openxr.fb2:fb2_demo_frames,441,436,0,0.0,14 of 52,0
+FB2 -> ARKit,ict,csv:openxr.fb2:fb2_expression_frames,221,221,0,0.0,14 of 52,0
+FACS -> ARKit,ict,facs_library,221,221,0,0.0,14 of 52,0
+FACS -> ARKit,ict,facs_key_impulses,132,132,0,0.0,14 of 52,0
+FACS -> ARKit,ict,facs_letters,500,500,0,0.0,14 of 52,0

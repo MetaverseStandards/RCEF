@@ -3,4 +3,4 @@
 
 [[mappings]]
 id = "survey.ambiguous"
-rules = [{ "id" = "survey.mediapipe_arkit.blink", "inputs" = ["mediapipe.label.eyeBlinkLeft"], "outputs" = ["rcef.arkit.coefficient.eyeBlinkLeft"], "operator" = { "id" = "identity" }, "disposition" = "unresolved", "assumptions" = ["Names alone cannot establish model/provider calibration."], "evidence" = ["mediapipe", "apple_blendshapes"], "evidence_status" = "unresolved", "loss_annotations" = [] }]
+rules = [{ "id" = "survey.mediapipe_rcef.blink", "inputs" = ["mediapipe.label.eyeBlinkLeft"], "outputs" = ["rcef.canonical_expression.eye_close_left"], "operator" = { "id" = "identity" }, "disposition" = "unresolved", "assumptions" = ["Names alone cannot establish model/provider calibration."], "evidence" = ["mediapipe", "rcef_canonical_v1"], "evidence_status" = "unresolved", "loss_annotations" = [] }]

@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: MIT
-"""The translation examples on the committed demo frames, run in process on the shared pack."""
+"""The translation examples on the committed demo frames, run in process on the shared pack.
+
+The examples translate through the canonical sets (examples/rcef_frames.py), so a refusal names a hop map.
+"""
 import contextlib
 import copy
 import csv
@@ -23,20 +26,13 @@ FB2 = 'openxr.fb2.XR_FACE_EXPRESSION2_{}_FB'.format
 sys.path.insert(0, str(ROOT / 'examples'))
 import face_pipeline  # noqa: E402
 import ict_facekit  # noqa: E402
-import rcef_translate  # noqa: E402
+import rcef_frames  # noqa: E402
 import rigs  # noqa: E402
 import translate_visemes_to_vrm  # noqa: E402
 
 ICT = face_pipeline.face_targets(rigs.ict_shapes(ict_facekit.SHAPES), ict_facekit.SHAPES)
 ARKIT_52 = list(face_pipeline.source_routes())
 FULL = face_pipeline.face_targets([(i, a, None) for i, a in enumerate(ARKIT_52)], ARKIT_52)
-
-
-def compiled():
-    """The example maps, compiled once from the shared pack."""
-    return {m: shared_pack.mapping(m, s, t) for m, s, t in (('fb2.to_arkit', 'openxr.fb2', 'arkit.coefficient'),
-                                                          ('fb2_gaze.to_arkit', 'openxr.fb2', 'arkit.coefficient'),
-                                                          ('visemes.to_vrm', 'openxr.visemes', 'vrm.preset'))}
 
 
 def translate(translator, source):
@@ -59,7 +55,7 @@ class Fb2Example(unittest.TestCase):
     def setUpClass(cls):
         source = ROOT / 'examples/data/fb2_demo_frames.csv'
         cls.inputs = read(source)
-        cls.rows = translate(rcef_translate.fb2_to_arkit(pack=shared_pack.pack(), compiled=compiled()), source)
+        cls.rows = translate(shared_pack.frames('fb2_to_arkit'), source)
 
     def frames(self, segment):
         return [(i, o) for i, o in zip(self.inputs, self.rows) if i['segment'] == segment]
@@ -83,14 +79,17 @@ class Fb2Example(unittest.TestCase):
         for source, output in frames:
             self.assertEqual(float(output['eyeBlinkLeft']), float(source['EYES_CLOSED_L']))
             self.assertEqual(output['eyeLookOutLeft'], '')
-            self.assertIn('fb2_gaze.to_arkit', output['refused'])
-            self.assertNotIn('fb2.to_arkit:', output['refused'])
+            # The whole cell: the hop map, its code and the refused inputs by the provider's own names.
+            self.assertEqual(output['refused'],
+                             'fb2_gaze.to_rcef: E_INVALID_SAMPLE on 8 inputs (EYES_LOOK_DOWN_L, EYES_LOOK_DOWN_R, '
+                             'EYES_LOOK_LEFT_L, EYES_LOOK_LEFT_R, EYES_LOOK_RIGHT_L, EYES_LOOK_RIGHT_R, EYES_LOOK_UP_L, '
+                             'EYES_LOOK_UP_R)')
 
     def test_lost_face_refuses_everything(self):
         for _, output in self.frames('face lost'):
             self.assertEqual(output['jawOpen'], '')
-            self.assertIn('fb2.to_arkit', output['refused'])
-            self.assertIn('fb2_gaze.to_arkit', output['refused'])
+            self.assertIn('fb2_face.to_rcef', output['refused'])
+            self.assertIn('fb2_gaze.to_rcef', output['refused'])
 
     def test_unmapped_tongue_is_listed_as_dropped(self):
         frames = [(s, o) for s, o in self.frames('tongue') if float(s['TONGUE_TIP_ALVEOLAR']) > 0]
@@ -100,26 +99,9 @@ class Fb2Example(unittest.TestCase):
             self.assertEqual(float(output['jawOpen']), 0.5)
 
 
-def fb2_arkit_document(pack, mapping_ids):
-    """The pack cut down to some FB2 -> ARKit maps and the records they use.
-
-    msf-character-tools rechecks the whole pack on every call, so the many changed copies
-    the oracle tests build stay fast only when the pack is small.
-    """
-    mappings = [m for m in pack['mappings'] if m['id'] in mapping_ids]
-    members = {sid for m in mappings for r in m['rules'] for sid in r['inputs'] + r['outputs']}
-    profiles = [{**p, 'signal_ids': [sid for sid in p['signal_ids'] if sid in members]}
-                for p in pack['profiles'] if p['id'] in ('openxr.fb2', 'arkit.coefficient')]
-    signals = [s for s in pack['signals'] if s['id'] in members]
-    cited = {e for record in profiles + signals + [r for m in mappings for r in m['rules']]
-             for e in record.get('evidence', [])}
-    return {**pack, 'profiles': profiles, 'signals': signals, 'mappings': mappings,
-            'evidence': [e for e in pack['evidence'] if e['id'] in cited]}
-
-
 class ReadFrames(unittest.TestCase):
     def test_label_columns_are_kept_and_are_not_validity_flags(self):
-        translator = rcef_translate.fb2_to_arkit(pack=shared_pack.pack(), compiled=compiled())
+        translator = shared_pack.frames('fb2_to_arkit')
         with tempfile.TemporaryDirectory(prefix='rcef-frames-') as tmp:
             path = Path(tmp) / 'frames.csv'
             path.write_text('time,segment,phase,amount,JAW_DROP,isValid,isEyeFollowingBlendshapesValid\n'
@@ -131,13 +113,13 @@ class ReadFrames(unittest.TestCase):
 
 
 def side_free(sid):
-    return re.sub(r'(Left|Right)$', '#', sid)
+    """The ID without its side: ARKit names end in Left or Right, canonical names in _left or _right."""
+    return re.sub(r'(Left|Right|_left|_right)$', '#', sid)
 
 
 class ArkitToFb2(unittest.TestCase):
     def test_opposing_gaze_is_netted_so_fb2_exclusivity_holds(self):
-        translator = rcef_translate.arkit_to_fb2(pack=shared_pack.pack(), compiled={
-            m: shared_pack.mapping(m, 'arkit.coefficient', 'openxr.fb2') for m in ('arkit.to_fb2', 'arkit_gaze.to_fb2')})
+        translator = shared_pack.frames('arkit_to_fb2')
         zero = dict.fromkeys(translator.inputs, 0.0)
         frames = [{'time': 0.0, 'segment': 'both ways', 'flags': {}, 'labels': {},
                    'values': {**zero, 'arkit.coefficient.eyeLookInLeft': 0.5, 'arkit.coefficient.eyeLookOutLeft': 0.25,
@@ -153,19 +135,23 @@ class ArkitToFb2(unittest.TestCase):
 
 
 class Fb2Oracles(unittest.TestCase):
-    """The face pipeline's weight oracles catch every wrong FB2 mapping on the demo frames.
+    """The face pipeline's weight oracles catch every wrong mapping of the FB2 -> ARKit route on the demo frames.
 
-    Each mapping writes one coefficient and none reads another mapping's output,
-    so changing every mapping at once and asking which shapes fail is the same
-    as changing them one at a time. Every shape's own input moves alone in
+    The route has two hops: the in-maps (FB2 -> canonical) and the out-maps
+    (canonical -> ARKit). Each mutation changes the maps of one hop. Each
+    mapping writes one signal, and none reads another mapping's output, so
+    changing every mapping of a hop at once and asking which shapes fail is the
+    same as changing them one at a time. Every shape's own input moves alone in
     some demo frame, so no change can hide behind another.
     """
-    MAPPINGS = ('fb2.to_arkit', 'fb2_gaze.to_arkit')
 
     @classmethod
     def setUpClass(cls):
         cls.pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
-        cls.translator = cls.translator_for(fb2_arkit_document(cls.pack, cls.MAPPINGS))
+        route = shared_pack.frames('fb2_to_arkit').route
+        cls.hops = {'in': route.in_maps, 'out': route.out_maps}
+        cls.document = shared_pack.cut(cls.pack, route.in_maps + route.out_maps)
+        cls.translator = cls.translator_for(cls.document)
         # A refused frame has no weights to compare, so only fully valid frames
         # can show a wrong mapping, and each map then needs one evaluation. The
         # ramps go up and back down, so each pose is kept once.
@@ -178,18 +164,18 @@ class Fb2Oracles(unittest.TestCase):
 
     @staticmethod
     def translator_for(document):
-        return rcef_translate.fb2_to_arkit(pack=rcef_translate.load_pack(document))
+        return rcef_frames.fb2_to_arkit(pack=rcef_frames.load_pack(document))
 
     def failing_shapes(self, results, targets=FULL):
         return {c['arkit'] for frame, result in zip(self.frames, results)
                 for c in face_pipeline.check_channels(self.translator, frame, result, targets) if not c['passes']}
 
-    def after(self, change):
-        """Translate the demo frames with a copy of both maps in which `change` has edited the rules."""
-        document = fb2_arkit_document(self.pack, self.MAPPINGS)
-        document['mappings'] = copy.deepcopy(document['mappings'])
+    def after(self, change, hop):
+        """Translate the demo frames with a copy of the route in which `change` has edited the rules of one hop."""
+        document = copy.deepcopy(self.document)
         for mapping in document['mappings']:
-            change(mapping['rules'])
+            if mapping['id'] in self.hops[hop]:
+                change(mapping['rules'])
         return self.translator_for(document).translate(self.frames)
 
     def test_the_published_rules_pass(self):
@@ -223,7 +209,9 @@ class Fb2Oracles(unittest.TestCase):
                     operator['scale'] *= 0.5
                 else:
                     operator['weights'] = [w * 0.5 for w in operator['weights']]
-        self.assertEqual(self.failing_shapes(self.after(halve)), {t['arkit'] for t in FULL})
+        for hop in self.hops:
+            with self.subTest(hop=hop):
+                self.assertEqual(self.failing_shapes(self.after(halve, hop)), {t['arkit'] for t in FULL})
 
     def test_swapping_every_left_and_right_rule_fails_both_shapes(self):
         def swap(rules):
@@ -235,13 +223,18 @@ class Fb2Oracles(unittest.TestCase):
                     pair[0]['inputs'], pair[1]['inputs'] = pair[1]['inputs'], pair[0]['inputs']
         sided = {t['arkit'] for t in FULL if side_free(t['arkit']) != t['arkit']}
         self.assertEqual(len(sided), 40)
-        self.assertEqual(sided - self.failing_shapes(self.after(swap)), set())
+        for hop in self.hops:
+            with self.subTest(hop=hop):
+                self.assertEqual(sided - self.failing_shapes(self.after(swap, hop)), set())
 
     def test_dropping_any_input_of_an_averaged_rule_fails(self):
+        # Only the out-maps average: every in-map mapping copies one FB2 weight.
         averaged = {r['outputs'][0][len('arkit.coefficient.'):]: len(r['inputs'])
-                    for m in self.pack['mappings'] if m['id'] in self.MAPPINGS for r in m['rules']
+                    for m in self.document['mappings'] if m['id'] in self.hops['out'] for r in m['rules']
                     if r['operator']['id'] == 'weighted_sum'}
         self.assertEqual(len(averaged), 6)
+        self.assertFalse([r for m in self.document['mappings'] if m['id'] in self.hops['in'] for r in m['rules']
+                          if len(r['inputs']) > 1])
         for position in range(4):
             def drop(rules):
                 for rule in rules:
@@ -249,18 +242,19 @@ class Fb2Oracles(unittest.TestCase):
                         rule['operator']['weights'][position] = 0.0
             with self.subTest(position=position):
                 expected = {name for name, count in averaged.items() if position < count}
-                self.assertEqual(expected - self.failing_shapes(self.after(drop)), set())
+                self.assertEqual(expected - self.failing_shapes(self.after(drop, 'out')), set())
 
 
 class VisemeExample(unittest.TestCase):
     def test_vowels_pass_through_and_consonants_are_dropped(self):
         source = ROOT / 'examples/data/viseme_demo_frames.csv'
         inputs = read(source)
-        rows = translate(rcef_translate.visemes_to_vrm(pack=shared_pack.pack(), compiled=compiled()), source)
+        rows = translate(shared_pack.frames('visemes_to_vrm'), source)
         self.assertEqual(len(rows), len(inputs))
         for source_row, output in zip(inputs, rows):
             if source_row['isValid'] == '0':
-                self.assertIn('visemes.to_vrm', output['refused'])
+                self.assertEqual(output['refused'],
+                                 'visemes_vowel.to_rcef: E_INVALID_SAMPLE on 5 inputs (AA, E, IH, OH, OU)')
                 continue
             for viseme, preset in (('AA', 'aa'), ('E', 'ee'), ('IH', 'ih'), ('OH', 'oh'), ('OU', 'ou')):
                 self.assertEqual(float(output[preset]), float(source_row[viseme]))
@@ -268,12 +262,32 @@ class VisemeExample(unittest.TestCase):
                 self.assertIn('PP', output['dropped'])
 
 
+class Columns(unittest.TestCase):
+    def test_the_output_columns_keep_the_order_of_the_a1_maps(self):
+        # The published example outputs must not change, so each CSV keeps the column order that the direct maps
+        # gave it, read here from the A1 pack at dea1713 (tests/fixtures/baseline-dea1713.pack.json).
+        pack = json.loads((ROOT / 'tests/fixtures/baseline-dea1713.pack.json').read_text(encoding='utf-8'))
+        rules = {m['id']: m['rules'] for m in pack['mappings']}
+        for kind, maps in (('fb2_to_arkit', ('fb2.to_arkit', 'fb2_gaze.to_arkit')),
+                           ('visemes_to_vrm', ('visemes.to_vrm',)), ('fb2_to_vrm', ('fb2.to_vrm',))):
+            with self.subTest(kind):
+                computed = {i for m in maps for r in rules[m] for i in r['inputs']}
+                expected = [o.rsplit('.', 1)[1] for m in maps for r in rules[m] for o in r['outputs']
+                            if o not in computed]
+                translator = shared_pack.frames(kind)
+                with tempfile.TemporaryDirectory(prefix='rcef-columns-') as tmp:
+                    out = Path(tmp) / 'out.csv'
+                    translator.write([], out)
+                    header = out.read_text(encoding='utf-8').splitlines()[0].split(',')
+                self.assertEqual(header, ['time', 'segment', *expected, 'refused', 'dropped'])
+
+
 class DefaultOutputs(unittest.TestCase):
     def test_examples_write_outside_the_checkout_by_default(self):
-        shared = rcef_translate.visemes_to_vrm(pack=shared_pack.pack(), compiled=compiled())
+        shared = shared_pack.frames('visemes_to_vrm')
         with tempfile.TemporaryDirectory(prefix='rcef-cache-') as tmp, \
                 mock.patch.dict(os.environ, {'XDG_CACHE_HOME': tmp}), \
-                mock.patch.object(rcef_translate, 'visemes_to_vrm', lambda: shared), \
+                mock.patch.object(rcef_frames, 'visemes_to_vrm', lambda: shared), \
                 contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(translate_visemes_to_vrm.main([]), 0)
             self.assertTrue((Path(tmp) / 'rcef-examples/visemes_to_vrm.csv').is_file())
