@@ -137,7 +137,11 @@ mappings are the same.
   a gaze partner outside 0 to 1 as 0 in its bound, because partial
   evaluation now writes the other direction of such a pair. v3 passes
   every gate. The hop maps are
-  frozen against `tests/fixtures/b-maps-ab.pivot-v3.json`.
+  frozen against `tests/fixtures/b-maps-ab.pivot-v3.json`. An earlier
+  draft of the v3 registration (hash `877324a9…`) was committed and run
+  before this branch was published, then replaced so that its change list
+  and acceptance text are accurate. It was never published, and its run
+  gave the same Revise totals.
 - `tools/calibration/viseme_poses.py` reads the poses through the new map
   IDs, so its code commit in `tests/test_calibration_tripwire.py` changes.
   No calibration record changes.
