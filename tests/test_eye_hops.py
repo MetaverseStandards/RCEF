@@ -2,7 +2,7 @@
 """The VRCFaceTracking eye and VRM blink hops, against docs/canonical-set.md and its audit, without the generator.
 
 - VRCFaceTracking eye blink, both ways: eye_close = 1 - Openness (affine -1, 1), with the Openness assumption and
-  its loss key on both hops; the in-hop refuses an Openness outside 0 to 1 with E_DOMAIN;
+  its loss key on both hops; the in-hop refuses an Openness outside 0 to 1 with E_DOMAIN, and only for that eye;
 - the pupil copies, both ways: exact and verified_current, citing only verified_current records, and the
   canonical pupils are verified_current; a round trip gives every diameter back;
 - the VRM blink in-hop reads blinkLeft and blinkRight only and states that blink (both eyes) is not read; a route
@@ -25,6 +25,8 @@ EYE = 'vrcft.eye.'
 INVERT = {'id': 'affine', 'scale': -1.0, 'offset': 1.0}
 COPY = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
 SIDES = {'left': 'Left', 'right': 'Right'}
+EYE_IN, EYE_OUT = 'vrcft_eye.to_rcef_expression', 'rcef_expression.to_vrcft_eye'
+VRM_IN, VRM_OUT = 'vrm.to_rcef_expression', 'rcef_expression.to_vrm'
 
 
 class EyeHops(unittest.TestCase):
@@ -37,9 +39,15 @@ class EyeHops(unittest.TestCase):
         cls.records = {e['id']: e for e in cls.document['evidence']}
         audit = (ROOT / 'docs/canonical-set-audit.md').read_text(encoding='utf-8')
         cls.keys = dict(re.findall(r'^\| `(\w+)` \| \w+ \| [^|]+ \| (.+) \|$', audit, re.M))
+
         doc = (ROOT / 'docs/canonical-set.md').read_text(encoding='utf-8')
         cls.not_read = re.search(r'It declares the loss "([^"]+)", and the route lists a non-zero `blink` as dropped',
                                  doc).group(1)
+
+    def part(self, map_id, group):
+        """The rules of a map that read or write a canonical signal of one group."""
+        return [r for r in self.maps[map_id] if any(self.signals[s].get('metadata', {}).get('group') == group
+                                                     for s in r['inputs'] + r['outputs'] if s.startswith(PREFIX))]
 
     def reasons(self, rule):
         return [loss['reason'] for loss in rule['loss_annotations']]
@@ -51,8 +59,8 @@ class EyeHops(unittest.TestCase):
         key = 'vrcft_eye_openness_neutral_unresolved'
         text = self.keys[key]
         self.assertTrue(text.startswith('eye_close is 1 − Openness. Openness 1 is taken as eye_close 0'))
-        for map_id, into in (('vrcft_eye_blink.to_rcef', True), ('rcef_blink.to_vrcft_eye', False)):
-            rules = self.maps[map_id]
+        for map_id, into in ((EYE_IN, True), (EYE_OUT, False)):
+            rules = self.part(map_id, 'blink')
             self.assertEqual(len(rules), 2)
             for side, name in SIDES.items():
                 eye, canonical = f'{EYE}{name}.Openness', f'{PREFIX}eye_close_{side}'
@@ -73,9 +81,11 @@ class EyeHops(unittest.TestCase):
                    'flags': {}} for n, x in enumerate((1.2, -0.1, 0.0, 0.5, 1.0))]
         results = route.translate(frames)
         for result in results[:2]:
-            self.assertEqual(result['refused'], {'vrcft_eye_blink.to_rcef': {
-                'codes': ['E_DOMAIN'], 'refs': ['rules/vrcft_eye_rcef.eye_close_left']}})
-            self.assertNotIn(f'{EYE}Right.Openness', result['values'])
+            self.assertEqual(result['refused'], {EYE_IN: {
+                'codes': ['E_DOMAIN'], 'refs': ['rules/vrcft_eye_rcef.eye_close_left'],
+                'outputs': [f'{PREFIX}eye_close_left']}})
+            self.assertEqual(result['labels'], {f'{EYE}Left.Openness': f'refused upstream at {EYE_IN}'})
+            self.assertEqual(result['values'][f'{EYE}Right.Openness'], 0.5)
             self.assertEqual(result['values'][f'{EYE}Left.PupilDiameter_MM'], 3.0)
         for result in results[2:]:
             self.assertEqual(result['refused'], {})
@@ -93,8 +103,8 @@ class EyeHops(unittest.TestCase):
             self.assertEqual(result['values'][f'{EYE}Right.PupilDiameter_MM'], x * 8)
 
     def test_the_pupil_hops_are_exact_verified_copies(self):
-        for map_id, into in (('vrcft_eye_pupil_mm.to_rcef', True), ('rcef_pupil_mm.to_vrcft_eye', False)):
-            rules = self.maps[map_id]
+        for map_id, into in ((EYE_IN, True), (EYE_OUT, False)):
+            rules = self.part(map_id, 'pupil_mm')
             self.assertEqual(len(rules), 2)
             for side, name in SIDES.items():
                 eye, canonical = f'{EYE}{name}.PupilDiameter_MM', f'{PREFIX}pupil_diameter_mm_{side}'
@@ -114,7 +124,7 @@ class EyeHops(unittest.TestCase):
     def test_the_vrm_blink_in_hop_reads_only_the_per_eye_presets(self):
         self.assertEqual(self.not_read, 'VRM blink (both eyes) not read; when a model drives only blink, '
                                         'eye_close reads open')
-        rules = self.maps['vrm_blink.to_rcef']
+        rules = self.maps[VRM_IN]
         self.assertEqual(sorted(i for r in rules for i in r['inputs']),
                          ['vrm.preset.blinkLeft', 'vrm.preset.blinkRight'])
         for rule in rules:
@@ -127,7 +137,7 @@ class EyeHops(unittest.TestCase):
 
     def test_both_vrm_blink_hops_carry_the_side_caveat_and_the_side_key(self):
         key = 'vrm_blink_side_unresolved'
-        for map_id in ('vrm_blink.to_rcef', 'rcef_blink.to_vrm'):
+        for map_id in (VRM_IN, VRM_OUT):
             for rule in self.maps[map_id]:
                 preset = next(s for s in rule['inputs'] + rule['outputs'] if s.startswith('vrm.preset.'))
                 side = preset.removeprefix('vrm.preset.blink').lower()
@@ -139,7 +149,7 @@ class EyeHops(unittest.TestCase):
 
     def test_a_route_lists_a_non_zero_vrm_blink_as_dropped(self):
         route = self.route('vrm.preset', 'arkit.coefficient')
-        self.assertIn('vrm_blink.to_rcef', route.in_maps)
+        self.assertIn(VRM_IN, route.in_maps)
         presets = {f'vrm.preset.{p}': 0.0 for p in ('aa', 'ee', 'ih', 'oh', 'ou')}
         on, off = route.translate([
             {'time': 0.0, 'values': {**presets, 'vrm.preset.blink': 0.7, 'vrm.preset.blinkLeft': 0.25,

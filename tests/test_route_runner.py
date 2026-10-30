@@ -5,7 +5,8 @@ The anchor runs Route's one-hop mode and rcef_translate.Translator on the A1
 baseline pack (tests/fixtures/baseline-dea1713.pack.json) and requires the
 same bits and the same refused frames per map, so a runner bug cannot hide in
 both arms of the A/B comparison. The synthetic pack checks what only the
-two-hop mode does.
+two-hop mode does: one map per set pair and direction, evaluated partially, so
+a bad or missing input stops only the outputs that read it.
 """
 from copy import copy
 import json
@@ -163,8 +164,8 @@ class TranslatorAnchor(unittest.TestCase):
 def synthetic_document():
     """A small pack with one source set, the canonical expression set, a second source and one target set.
 
-    Canonical groups: brow (2), jaw, eye, tongue and cheek. No out-map reads
-    tongue, so its in-map must not run; only the second source writes cheek.
+    One in-map per source and one out-map. The out-map reads no tongue, so a bad tongue value refuses nothing; only
+    the second source writes cheek.
     """
     base = json.loads(FIXTURE.read_text(encoding='utf-8'))
     unit = {'min': 0.0, 'max': 1.0}
@@ -194,19 +195,16 @@ def synthetic_document():
                 {'id': 'rcef.canonical_expression', 'label': 'canonical', 'signal_ids': canonical},
                 {'id': 'tgt', 'label': 'target', 'signal_ids': target}]
     mappings = [
-        {'id': 'src_brow.to_rcef', 'rules': [rule('in.brow_l', ['src.brow_l'], c['brow_left'], copy),
-                                             rule('in.brow_r', ['src.brow_r'], c['brow_right'], copy)]},
-        {'id': 'src_jaw.to_rcef', 'rules': [rule('in.jaw', ['src.jaw'], c['jaw'], copy)]},
-        {'id': 'src_eye.to_rcef', 'rules': [rule('in.eye', ['src.eye'], c['eye'], copy)]},
-        {'id': 'src_tongue.to_rcef', 'rules': [rule('in.tongue', ['src.tongue'], c['tongue'], copy)]},
-        {'id': 'other_cheek.to_rcef', 'rules': [rule('in.cheek', ['other.cheek'], c['cheek'], copy)]},
-        {'id': 'rcef_brow.to_tgt', 'rules': [rule('out.brow', [c['brow_left'], c['brow_right']], 'tgt.brow',
-                                                  {'id': 'weighted_sum', 'weights': [0.5, 0.5]})]},
-        {'id': 'rcef_jaw.to_tgt', 'rules': [rule('out.jaw', [c['jaw']], 'tgt.jaw', copy),
-                                            rule('out.jaw_double', [c['jaw']], 'tgt.jaw_double',
-                                                 {'id': 'affine', 'scale': 2.0, 'offset': 0.0})]},
-        {'id': 'rcef_eye.to_tgt', 'rules': [rule('out.eye', [c['eye']], 'tgt.eye', copy)]},
-        {'id': 'rcef_cheek.to_tgt', 'rules': [rule('out.cheek', [c['cheek']], 'tgt.cheek', copy)]},
+        {'id': 'src.to_rcef_expression', 'rules': [
+            rule('in.brow_l', ['src.brow_l'], c['brow_left'], copy), rule('in.brow_r', ['src.brow_r'], c['brow_right'], copy),
+            rule('in.jaw', ['src.jaw'], c['jaw'], copy), rule('in.eye', ['src.eye'], c['eye'], copy),
+            rule('in.tongue', ['src.tongue'], c['tongue'], copy)]},
+        {'id': 'other.to_rcef_expression', 'rules': [rule('in.cheek', ['other.cheek'], c['cheek'], copy)]},
+        {'id': 'rcef_expression.to_tgt', 'rules': [
+            rule('out.brow', [c['brow_left'], c['brow_right']], 'tgt.brow', {'id': 'weighted_sum', 'weights': [0.5, 0.5]}),
+            rule('out.jaw', [c['jaw']], 'tgt.jaw', copy),
+            rule('out.jaw_double', [c['jaw']], 'tgt.jaw_double', {'id': 'affine', 'scale': 2.0, 'offset': 0.0}),
+            rule('out.eye', [c['eye']], 'tgt.eye', copy), rule('out.cheek', [c['cheek']], 'tgt.cheek', copy)]},
     ]
     evidence = [e for e in base['evidence'] if e['id'] == 'rcef_definitions']
     return {**{k: base[k] for k in ('schema_version', 'data_version', 'operator_version', 'license')},
@@ -230,48 +228,63 @@ class TwoHop(unittest.TestCase):
                 'flags': {'isValid': True, 'isEyeValid': True, **(flags or {})}}
 
     def test_maps_are_found_by_profile_and_unselected_in_maps_are_not_compiled(self):
-        self.assertEqual(self.route.in_maps, ['src_brow.to_rcef', 'src_jaw.to_rcef', 'src_eye.to_rcef'])
-        self.assertEqual(self.route.out_maps, ['rcef_brow.to_tgt', 'rcef_jaw.to_tgt', 'rcef_eye.to_tgt',
-                                               'rcef_cheek.to_tgt'])
-        self.assertNotIn('src_tongue.to_rcef', self.route.mappings)
-        self.assertNotIn('other_cheek.to_rcef', self.route.mappings)
+        self.assertEqual(self.route.in_maps, ['src.to_rcef_expression'])
+        self.assertEqual(self.route.out_maps, ['rcef_expression.to_tgt'])
+        self.assertNotIn('other.to_rcef_expression', self.route.mappings)
 
     def test_values_pass_through_both_hops(self):
         result, = self.route.translate([self.frame()])
         self.assertEqual(result['values'], {'tgt.brow': 0.5, 'tgt.jaw': 0.25, 'tgt.jaw_double': 0.5, 'tgt.eye': 0.5})
         self.assertEqual(result['refused'], {})
 
-    def test_a_group_no_selected_in_map_writes_is_not_available_and_not_a_refusal(self):
+    def test_an_output_no_selected_in_map_can_write_is_not_available_and_not_a_refusal(self):
         result, = self.route.translate([self.frame()])
         self.assertEqual(result['labels'], {'tgt.cheek': rcef_route.NOT_AVAILABLE})
-        self.assertNotIn('rcef_cheek.to_tgt', result['refused'])
+        self.assertEqual(result['refused'], {})
 
-    def test_an_invalid_input_refuses_only_its_group_and_labels_the_outputs(self):
+    def test_an_invalid_input_refuses_only_the_outputs_that_read_it(self):
         result, = self.route.translate([self.frame({'isEyeValid': False})])
-        self.assertEqual(result['refused'], {'src_eye.to_rcef': {'codes': ['E_INVALID_SAMPLE'], 'refs': ['src.eye']}})
-        self.assertEqual(result['labels']['tgt.eye'], 'refused upstream at src_eye.to_rcef')
+        self.assertEqual(result['refused'], {'src.to_rcef_expression': {
+            'codes': ['E_INVALID_SAMPLE'], 'refs': ['src.eye'], 'outputs': ['rcef.canonical_expression.eye']}})
+        self.assertEqual(result['labels'], {'tgt.eye': 'refused upstream at src.to_rcef_expression',
+                                            'tgt.cheek': rcef_route.NOT_AVAILABLE})
         self.assertEqual(set(result['values']), {'tgt.brow', 'tgt.jaw', 'tgt.jaw_double'})
 
-    def test_bad_values_that_no_selected_in_map_reads_are_never_sent(self):
+    def test_bad_values_that_no_target_output_reads_refuse_nothing(self):
+        # The in-map refuses canonical tongue (out of domain), but no out-map reads it; no map reads src.extra.
         result, = self.route.translate([self.frame(tongue=-1.0, extra=5.0)])
         self.assertEqual(result['refused'], {})
         self.assertEqual(result['dropped'], ['src.extra', 'src.tongue'])
+        self.assertEqual(len(result['values']), 4)
 
-    def test_a_missing_input_is_left_out_so_its_in_map_refuses_the_frame(self):
+    def test_a_missing_input_makes_the_outputs_that_read_it_not_available(self):
         results = self.route.translate([self.frame(jaw=None), self.frame()])
-        self.assertEqual(results[0]['refused'], {'src_jaw.to_rcef': {'codes': ['E_MISSING_SAMPLE'],
-                                                                     'refs': ['src.jaw']}})
-        self.assertEqual(results[0]['labels']['tgt.jaw'], 'refused upstream at src_jaw.to_rcef')
+        self.assertEqual(results[0]['refused'], {})
+        self.assertEqual(results[0]['labels'], dict.fromkeys(('tgt.jaw', 'tgt.jaw_double', 'tgt.cheek'),
+                                                             rcef_route.NOT_AVAILABLE))
+        self.assertEqual(results[0]['values'], {'tgt.brow': 0.5, 'tgt.eye': 0.5})
         self.assertEqual(results[1]['values']['tgt.jaw'], 0.25)
+
+    def test_an_output_with_a_refused_and_a_missing_input_is_not_available(self):
+        refused, mixed = self.route.translate([self.frame(brow_l=1.5), self.frame(brow_l=1.5, brow_r=None)])
+        self.assertEqual(refused['labels']['tgt.brow'], 'refused upstream at src.to_rcef_expression')
+        self.assertEqual(mixed['labels']['tgt.brow'], rcef_route.NOT_AVAILABLE)
+        for result in (refused, mixed):
+            self.assertEqual(result['refused']['src.to_rcef_expression']['outputs'],
+                             ['rcef.canonical_expression.brow_left'])
 
     def test_an_out_map_refusal_is_labelled_with_the_out_map(self):
         results = self.route.translate([self.frame(jaw=0.75), self.frame()])
-        self.assertEqual(results[0]['refused'], {'rcef_jaw.to_tgt': {'codes': ['E_DOMAIN'],
-                                                                     'refs': ['rules/out.jaw_double']}})
-        self.assertEqual(results[0]['labels']['tgt.jaw'], 'refused at rcef_jaw.to_tgt')
+        self.assertEqual(results[0]['refused'], {'rcef_expression.to_tgt': {
+            'codes': ['E_DOMAIN'], 'refs': ['rules/out.jaw_double'], 'outputs': ['tgt.jaw_double']}})
+        self.assertEqual(results[0]['labels']['tgt.jaw_double'], 'refused at rcef_expression.to_tgt')
+        self.assertEqual(results[0]['values']['tgt.jaw'], 0.75)
+        # Only the refused output is labelled; a written output never has a label.
+        self.assertNotIn('tgt.jaw', results[0]['labels'])
+        self.assertEqual(set(results[0]['labels']) & set(results[0]['values']), set())
         self.assertEqual(results[1]['values']['tgt.jaw_double'], 0.5)
 
-    def test_a_failed_call_with_no_error_diagnostic_stops_instead_of_retrying(self):
+    def test_a_failed_call_stops_instead_of_retrying(self):
         class Report:
             diagnostics = (SimpleNamespace(severity='warning', ref='/samples/0/src.jaw', code='W'),)
 

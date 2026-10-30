@@ -84,10 +84,12 @@ class FacePipeline(unittest.TestCase):
         for frame in manifest['frames']:
             by_segment.setdefault(frame['segment'], []).append(frame)
         for frame in by_segment['eye following lost']:
-            self.assertTrue(any('fb2_gaze.to_rcef' in label for label in frame['labels']))
-            self.assertFalse(any('fb2_face.to_rcef:' in label for label in frame['labels']))
+            # Only the eight gaze inputs are bad, so the in-map refuses only the outputs that read them.
+            self.assertTrue(any('fb2.to_rcef_expression: E_INVALID_SAMPLE on 8 inputs' in label
+                                for label in frame['labels']))
         for frame in by_segment['face lost']:
-            self.assertTrue(any('fb2_face.to_rcef:' in label for label in frame['labels']))
+            self.assertTrue(any('fb2.to_rcef_expression: E_INVALID_SAMPLE on 60 inputs' in label
+                                for label in frame['labels']))
         self.assertTrue(any('TONGUE_TIP_ALVEOLAR' in label for f in by_segment['tongue'] for label in f['labels']))
 
     def test_renderer_files_have_the_declared_sizes(self):

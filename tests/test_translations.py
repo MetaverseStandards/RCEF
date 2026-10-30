@@ -65,12 +65,22 @@ class Translations(unittest.TestCase):
     def rules(self, mapping):
         return next(m['rules'] for m in self.document['mappings'] if m['id'] == mapping)
 
+    def part(self, mapping, group):
+        """The rules of a map that read or write a canonical signal of one group (a netting step counts)."""
+        def touches(rule):
+            return any(self.signals[s].get('metadata', {}).get('group') == group for s in rule['inputs'] + rule['outputs']
+                       if s.startswith('rcef.canonical_expression.'))
+        rules = self.rules(mapping)
+        steps = {r['outputs'][0] for r in rules if touches(r)}
+        return [r for r in rules if touches(r) or set(r['inputs']) & steps]
+
     def hop(self, kind, hop):
         """The in-maps of the route, or the out-maps that the source can feed (those that write its outputs)."""
         route = frames(kind).route
         if hop == 'in':
             return route.in_maps
-        return [m for m in route.out_maps if all(i in route.writer for i in route.mappings[m].required_inputs)]
+        return [m for m in route.out_maps if any(all(i in route.writer for i in route.mappings[m].output_inputs[o])
+                                                 for o in route.mappings[m].output_ids)]
 
     def inputs(self, kind):
         return frames(kind).inputs
@@ -189,7 +199,7 @@ class Translations(unittest.TestCase):
                                 # A gaze split keeps only the larger of two directions, so a halved
                                 # direction shows only on the side where it is the larger one.
                                 # Each difference is split into a pair of opposing FB2 directions.
-                                net = self.rules('rcef_gaze.to_fb2')
+                                net = self.part('rcef_expression.to_fb2', 'gaze')
                                 pairs = [sorted(o for r in net if r['inputs'] == d['outputs'] for o in r['outputs'])
                                          for d in net if d['outputs'][0].startswith('rcef.intermediate.')]
                                 self.assertTrue(failing)
@@ -225,6 +235,7 @@ class Translations(unittest.TestCase):
                     swapped |= {r['outputs'][0] for pair in pairs.values() if len(pair) == 2
                                 and [behind.get(i, [i]) for i in pair[0]['inputs']]
                                 != [behind.get(i, [i]) for i in pair[1]['inputs']] for r in pair}
+                swapped &= self.outputs(kind)
                 self.assertTrue(swapped)
                 matches = self.check_whole_frames(kind, self.changed_copy(kind, swap))
                 self.assertEqual(sorted(o for o in swapped if matches[o]), [])
@@ -280,11 +291,13 @@ class Translations(unittest.TestCase):
                         self.assertFalse(values[toward_a] and values[toward_b])
                         self.assertEqual((values[toward_a], values[toward_b]),
                                          (max(frame[a] - frame[b], 0.0), max(frame[b] - frame[a], 0.0)))
-        for rule in self.rules('rcef_gaze.to_fb2'):
+        gaze_rules = self.part('rcef_expression.to_fb2', 'gaze')
+        self.assertEqual(len(gaze_rules), 12)
+        for rule in gaze_rules:
             with self.subTest(rule['id']):
                 self.assertTrue(any('only their difference is kept' in loss['reason']
                                     for loss in rule['loss_annotations']))
-        gaze, face = (set(rcef_route.map_ends(self.rules(m))[0]) for m in ('arkit_gaze.to_rcef', 'arkit_face.to_rcef'))
+        gaze, face = (set(rcef_route.map_ends(self.part('arkit.to_rcef_expression', g))[0]) for g in ('gaze', 'face'))
         self.assertTrue(gaze and face)
         self.assertFalse(gaze & face)
 
@@ -404,26 +417,32 @@ class Translations(unittest.TestCase):
         # FB2 may report the face valid while eye following is not; the eight gaze
         # weights are then zero and their validity false.
         route = frames('fb2_to_arkit').route
-        gaze = set(route.mappings['fb2_gaze.to_rcef'].required_inputs)
+        gaze = set(rcef_route.map_ends(self.part('fb2.to_rcef_expression', 'gaze'))[0])
         face = self.inputs('fb2_to_arkit') - gaze
         self.assertTrue(gaze and face)
         values = {**dict.fromkeys(face, 0.5), **dict.fromkeys(gaze, 0.0)}
         result, = route.translate([{'time': 0.0, 'values': values,
                                     'flags': {'isValid': True, 'isEyeFollowingBlendshapesValid': False}}])
-        gaze_outputs = set(rcef_route.map_ends(self.rules('rcef_gaze.to_arkit'))[1])
+        gaze_outputs = set(rcef_route.map_ends(self.part('rcef_expression.to_arkit', 'gaze'))[1])
         self.assertEqual(set(result['values']), self.outputs('fb2_to_arkit') - gaze_outputs)
         self.assertEqual(result['values']['arkit.coefficient.eyeBlinkLeft'], 0.5)
         self.assertEqual({m: r['codes'] for m, r in result['refused'].items()},
-                         {'fb2_gaze.to_rcef': ['E_INVALID_SAMPLE']})
-        self.assertEqual(result['labels'], dict.fromkeys(gaze_outputs, 'refused upstream at fb2_gaze.to_rcef'))
-        # msf-character-tools refuses any supplied channel marked invalid, even one the map
-        # does not use, so consumers must give each map only its own inputs.
-        compiled = route.mappings['fb2_face.to_rcef']
-        validity = {s: s not in gaze for s in values}
-        outcome = msf.evaluate_mapping(compiled, [{'timestamp': 0.0, 'values': values, 'validity': validity}])
+                         {'fb2.to_rcef_expression': ['E_INVALID_SAMPLE']})
+        self.assertEqual(result['labels'], dict.fromkeys(gaze_outputs, 'refused upstream at fb2.to_rcef_expression'))
+        # Whole-map evaluation refuses the whole frame for one invalid input; partial evaluation, which Route uses,
+        # refuses only the outputs that read the invalid inputs.
+        compiled = route.mappings['fb2.to_rcef_expression']
+        given = {s: values.get(s, 0.0) for s in compiled.required_inputs}
+        sample = {'timestamp': 0.0, 'values': given, 'validity': {s: s not in gaze for s in given}}
+        outcome = msf.evaluate_mapping(compiled, [sample])
         self.assertIsNone(outcome.value)
         self.assertEqual({d.code for d in outcome.report.diagnostics}, {'E_INVALID_SAMPLE'})
         self.assertEqual({d.ref.rsplit('/', 1)[-1] for d in outcome.report.diagnostics}, gaze)
+        partial = msf.evaluate_mapping(compiled, [sample], partial=True)
+        refused = {r['output'] for r in partial.value.refusals}
+        self.assertEqual(refused, {o for o in compiled.output_ids if set(compiled.output_inputs[o]) & gaze})
+        self.assertEqual(len(refused), 8)
+        self.assertEqual(set(partial.value.samples[0]['values']), set(compiled.output_ids) - refused)
 
     def hop_maps(self):
         """Every map of every route here, with its source and target profile."""

@@ -81,15 +81,14 @@ class Fb2Example(unittest.TestCase):
             self.assertEqual(output['eyeLookOutLeft'], '')
             # The whole cell: the hop map, its code and the refused inputs by the provider's own names.
             self.assertEqual(output['refused'],
-                             'fb2_gaze.to_rcef: E_INVALID_SAMPLE on 8 inputs (EYES_LOOK_DOWN_L, EYES_LOOK_DOWN_R, '
+                             'fb2.to_rcef_expression: E_INVALID_SAMPLE on 8 inputs (EYES_LOOK_DOWN_L, EYES_LOOK_DOWN_R, '
                              'EYES_LOOK_LEFT_L, EYES_LOOK_LEFT_R, EYES_LOOK_RIGHT_L, EYES_LOOK_RIGHT_R, EYES_LOOK_UP_L, '
                              'EYES_LOOK_UP_R)')
 
     def test_lost_face_refuses_everything(self):
         for _, output in self.frames('face lost'):
             self.assertEqual(output['jawOpen'], '')
-            self.assertIn('fb2_face.to_rcef', output['refused'])
-            self.assertIn('fb2_gaze.to_rcef', output['refused'])
+            self.assertTrue(output['refused'].startswith('fb2.to_rcef_expression: E_INVALID_SAMPLE on 60 inputs'))
 
     def test_unmapped_tongue_is_listed_as_dropped(self):
         frames = [(s, o) for s, o in self.frames('tongue') if float(s['TONGUE_TIP_ALVEOLAR']) > 0]
@@ -254,7 +253,7 @@ class VisemeExample(unittest.TestCase):
         for source_row, output in zip(inputs, rows):
             if source_row['isValid'] == '0':
                 self.assertEqual(output['refused'],
-                                 'visemes_vowel.to_rcef: E_INVALID_SAMPLE on 5 inputs (AA, E, IH, OH, OU)')
+                                 'visemes.to_rcef_viseme: E_INVALID_SAMPLE on 5 inputs (AA, E, IH, OH, OU)')
                 continue
             for viseme, preset in (('AA', 'aa'), ('E', 'ee'), ('IH', 'ih'), ('OH', 'oh'), ('OU', 'ou')):
                 self.assertEqual(float(output[preset]), float(source_row[viseme]))

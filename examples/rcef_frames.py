@@ -5,13 +5,15 @@ Used by translate_fb2_to_arkit.py, translate_visemes_to_vrm.py, face_pipeline.py
 viseme_pipeline.py and viseme_bridge.py. rcef_route.Route does the translation
 (source -> canonical -> target); this module adds the CSV format of the examples.
 
-- A refusal names the hop map that refused the frame, its codes and the inputs
-  it refused, for example "fb2_gaze.to_rcef: E_INVALID_SAMPLE on 8 inputs (...)".
+- A refusal names the map that refused outputs of the frame, its codes and the
+  inputs it refused, for example "fb2.to_rcef_expression: E_INVALID_SAMPLE on 8
+  inputs (...)" when only the eye-following flag is off.
 - "dropped" lists the non-zero inputs that do not reach the target, by the
   provider's own channel names.
 - The output columns are the target signals that the route can write from the
-  source, unless a column order is given. A target signal whose canonical group
-  the source cannot write is left out (Route labels it "not available from source").
+  source, unless a column order is given. A target signal that reads a canonical
+  value the source cannot write is left out (Route labels it "not available from
+  source").
 """
 from __future__ import annotations
 import csv
@@ -54,13 +56,13 @@ class Frames:
         self.pack, self.signals = route.pack, route.signals
         self.source, self.target, self.prefix, self.suffix = source, target, prefix, suffix
         self.affixes = [(prefix, suffix), target_affixes or (f'{target}.', '')]
-        writable = [o for m in route.out_maps if all(i in route.writer for i in route.mappings[m].required_inputs)
-                    for o in rcef_route.map_ends(route.rules[m])[1]]
+        writable = [o for m in route.out_maps for o in rcef_route.map_ends(route.rules[m])[1]
+                    if all(i in route.writer for i in route.mappings[m].output_inputs[o])]
         self.outputs = writable if columns is None else [f'{target}.{c}' for c in columns]
         if sorted(self.outputs) != sorted(writable):
             raise SystemExit(f'{source} -> {target}: the columns are not the signals that the route writes')
-        # A frame that lacks one of these is refused (E_MISSING_SAMPLE).
-        self.inputs = {i for m in route.in_maps for i in route.mappings[m].required_inputs}
+        # The source inputs that reach the target. A frame that lacks one leaves the outputs that read it not available.
+        self.inputs = set(route.kept)
 
     def signal_id(self, name: str) -> str:
         return f'{self.prefix}{name}{self.suffix}'
