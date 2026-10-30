@@ -57,6 +57,14 @@ class Metrics(unittest.TestCase):
              {'values': {}, 'refused': {'m': {'codes': ['E_DOMAIN'], 'refs': ['in']}}, 'labels': {}}]
         counts, failures = ab_compare.equals_oracle(b, o)
         self.assertEqual((counts['differences'], [f[0] for f in failures]), (2, [0, 2]))
+        self.assertEqual(failures[0], [0, 'value', 'x', '0.0', '-0.0'])
+        self.assertEqual(failures[1][:2], [2, 'refusal'])
+        # Labels and notes are compared and listed too.
+        b = [result(labels={'y': 'not available from source'})]
+        b[0]['notes'] = ['META validity not asserted']
+        o = [{'values': {}, 'refused': {}, 'labels': {'y': 'refused at m'}, 'notes': []}]
+        counts, failures = ab_compare.equals_oracle(b, o)
+        self.assertEqual([f[1] for f in failures], ['label', 'notes'])
 
     def test_observed_loss_ignores_dropped_and_declared_inputs(self):
         frames = [{'values': {'a': 0.0, 'b': 0.0, 'c': 0.0, 'd': 0.0}}] + [
@@ -166,6 +174,39 @@ class Metrics(unittest.TestCase):
         outputs = {o for c in reference['cases'] for o in c['expected']}
         self.assertLessEqual(set(ab_compare.R3_DEPARTURES), outputs)
         self.assertEqual(len(ab_compare.R3_DEPARTURES), 9)
+
+
+class Pins(unittest.TestCase):
+    def test_m5_r2_needs_its_reference_pinned_with_the_right_hash(self):
+        b_path = ROOT / ab_compare.B_PACK
+        pins = {'a1_sha256': ab_compare.A1_SHA256, 'b_pack_sha256': ab_compare.sha256_bytes(b_path.read_bytes()),
+                'code': ab_compare.code_hashes(), 'runtime': ab_compare.runtime_pins()}
+        abreg = {'pins': pins, 'pairs': {'FB2 -> ARKit': {}}, 'fixed_inputs': {}}
+        self.assertEqual(ab_compare.pin_problems(abreg, ROOT, b_path),
+                         [f'M5 R2 reads {ab_compare.R2_FILE}, but the registration does not pin it'])
+        abreg['fixed_inputs']['r2'] = {'path': ab_compare.R2_FILE, 'sha256': '0' * 64}
+        self.assertEqual(ab_compare.pin_problems(abreg, ROOT, b_path),
+                         [f'{ab_compare.R2_FILE} does not have the SHA-256 the registration pins'])
+        abreg['fixed_inputs']['r2']['sha256'] = ab_compare.sha256_bytes((ROOT / ab_compare.R2_FILE).read_bytes())
+        self.assertEqual(ab_compare.pin_problems(abreg, ROOT, b_path), [])
+
+    def test_the_code_pins_cover_the_files_the_checks_read(self):
+        for path in ('examples/rcef_translate.py', 'scripts/build_canonical.py', 'docs/canonical-set-audit.md',
+                     'tests/test_pose_bridge.py', 'examples/rigs.py', 'examples/ict_facekit.py', 'check.py'):
+            self.assertIn(path, ab_compare.CODE.values())
+
+
+class RestInputs(unittest.TestCase):
+    def test_sil_is_declared_only_while_it_has_no_link_to_an_output(self):
+        pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+        route = ab_compare.rcef_route.Route('openxr.visemes', 'arkit.coefficient')
+        pairs = {'META -> ARKit': {'source': 'openxr.visemes', 'target': 'arkit.coefficient',
+                                   **ab_compare.route_hops(route)}}
+        sil = 'openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META'
+        self.assertEqual([e['input'] for e in ab_compare.rest_inputs(pack, pairs)], [sil])
+        rule = next(r for m in pack['mappings'] for r in m['rules'] if r['id'] == 'rcef_viseme_pose.jaw_drop_sum')
+        rule['operator']['weights'][rule['inputs'].index('rcef.intermediate.viseme_pose_sil')] = 0.25
+        self.assertEqual(ab_compare.rest_inputs(pack, pairs), [])
 
 
 class RequiredRows(unittest.TestCase):
@@ -382,6 +423,7 @@ class DryRun(unittest.TestCase):
         self.assertFalse(manifest['passed'])
         scoreboard = (self.tmp / 'out/scoreboard.md').read_text(encoding='utf-8')
         self.assertIn('Dry run', scoreboard)
+        self.assertNotIn('were committed before this run', scoreboard)
         self.assertNotIn(manifest['abreg_sha256'], scoreboard)
         sums = (self.tmp / 'out/SHA256SUMS').read_text(encoding='utf-8')
         self.assertIn('frames/edge__openxr.fb2.jsonl', sums)

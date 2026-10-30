@@ -12,15 +12,22 @@ catches a mutation when it fails on the changed pack:
 - M10: FACS to FB2 against arm A3 on the 221 library frames;
 - M4 keys and M4b: the registration's frozen tables on the changed pack;
 - the side test, the direction-suffix test, the one-group test and the audit
-  loss-key test of tests/test_pivot_structure.py, run on the changed pack.
+  loss-key test of tests/test_pivot_structure.py, and the weight and chain
+  tests of tests/test_pose_bridge.py, run on the changed pack;
+- the calibration check of check.py: each rule that cites a calibration
+  record holds exactly the record's frozen values.
 
-The unchanged pack must pass every check first. The changes are data in the
-registration, so a run plants exactly what was registered.
+The unchanged pack must pass every check first. A test class that cannot even
+be set up on a changed pack catches nothing: the row counts it as a setup
+error, which fails M7. The changes are data in the registration, so a run
+plants exactly what was registered.
 
 Usage: python scripts/ab_mutations.py   (prints the mutation set a draft registers)
 """
 from __future__ import annotations
 from copy import deepcopy
+import importlib
+import importlib.util
 import io
 import json
 from pathlib import Path
@@ -28,11 +35,17 @@ import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-STRUCTURE_TESTS = {'side test': 'test_sides_agree_at_both_ends',
-                   'direction-suffix test': 'test_direction_suffixes_keep_their_direction',
-                   'one-group test': 'test_each_map_reads_and_writes_one_group',
-                   'audit loss-key test': 'test_audit_loss_keys_sit_on_the_hops_the_audit_names'}
-CHECKS = ('M1', 'M2', 'M3 exact', 'M10', 'M4 keys', 'M4b', *STRUCTURE_TESTS)
+# Check name: (test module, test class, test method). Each class reads its pack through load_pack().
+TEST_CHECKS = {
+    'side test': ('test_pivot_structure', 'PivotStructure', 'test_sides_agree_at_both_ends'),
+    'direction-suffix test': ('test_pivot_structure', 'PivotStructure', 'test_direction_suffixes_keep_their_direction'),
+    'one-group test': ('test_pivot_structure', 'PivotStructure', 'test_each_map_reads_and_writes_one_group'),
+    'audit loss-key test': ('test_pivot_structure', 'PivotStructure',
+                            'test_audit_loss_keys_sit_on_the_hops_the_audit_names'),
+    'pose-bridge weight test': ('test_pose_bridge', 'PoseBridge', 'test_each_weight_is_the_frozen_pose_of_the_record'),
+    'pose-bridge chain test': ('test_pose_bridge', 'PoseBridge', 'test_the_chain_is_copy_then_sum_then_clamp'),
+}
+CHECKS = ('M1', 'M2', 'M3 exact', 'M10', 'M4 keys', 'M4b', *TEST_CHECKS, 'calibration check')
 # The registered mutation set: the faults of the A/B design, each with the checks that must catch it.
 MUTATIONS = [
     {'id': 'halve one hop', 'caught_by': ['M1'],
@@ -60,6 +73,11 @@ MUTATIONS = [
      'change': {'op': 'swap_outputs', 'pairs': [['facs_rcef.jaw_sideways_left', 'facs_rcef.jaw_sideways_right']]}},
     {'id': 'delete facs_ordinal_intensity from one FACS hop', 'caught_by': ['audit loss-key test'],
      'change': {'op': 'delete_loss', 'rule': 'facs_rcef.brow_lower_left', 'key': 'facs_ordinal_intensity'}},
+    {'id': 'change one pose weight of the viseme bridge', 'caught_by': ['pose-bridge weight test', 'calibration check'],
+     'change': {'op': 'weight', 'rule': 'rcef_viseme_pose.jaw_drop_sum', 'index': 1, 'weight': 0.5}},
+    {'id': 'move one clamp knot of the viseme bridge', 'caught_by': ['pose-bridge chain test'],
+     'change': {'op': 'operator', 'rule': 'rcef_viseme_pose.jaw_drop',
+                'operator': {'id': 'piecewise_linear', 'knots': [[0.0, 0.0], [0.5, 1.0], [11.0, 1.0]]}}},
 ]
 
 
@@ -83,6 +101,8 @@ def mutate(document: dict, change: dict) -> dict:
     op = change['op']
     if op == 'operator':
         rule_of(out, change['rule'])['operator'] = change['operator']
+    elif op == 'weight':
+        rule_of(out, change['rule'])['operator']['weights'][change['index']] = change['weight']
     elif op == 'swap_outputs':
         for a, b in change['pairs']:
             ra, rb = rule_of(out, a), rule_of(out, b)
@@ -112,24 +132,36 @@ def mutate(document: dict, change: dict) -> dict:
     return out
 
 
-def structure_failures(document: dict, names: list[str]) -> set[str]:
-    """The structure tests (by check name) that fail on a pack document."""
+def test_failures(document: dict, names: list[str]) -> tuple[set[str], set[str]]:
+    """The test checks (by name) that fail on a pack document, and those whose test class could not be set up."""
     if str(ROOT / 'tests') not in sys.path:
         sys.path.insert(0, str(ROOT / 'tests'))
-    import test_pivot_structure
+    failed, errors = set(), set()
+    for module_name, class_name in dict.fromkeys(TEST_CHECKS[n][:2] for n in names):
+        base = getattr(importlib.import_module(module_name), class_name)
+        changed = type(f'Changed{class_name}', (base,), {'load_pack': classmethod(lambda cls: document)})
+        mine = [n for n in names if TEST_CHECKS[n][:2] == (module_name, class_name)]
+        suite = unittest.TestSuite(changed(TEST_CHECKS[n][2]) for n in mine)
+        try:
+            result = unittest.TextTestRunner(stream=io.StringIO(), verbosity=0).run(suite)
+        except SystemExit:  # msf-character-tools refused the pack while the class was set up
+            errors.update(mine)
+            continue
+        if any(not hasattr(test, '_testMethodName') for test, _ in result.errors):
+            errors.update(mine)  # the class could not be set up on this pack: no test ran, so none caught it
+            continue
+        # A failure inside a subTest is reported on the subtest, which names its test case.
+        methods = {getattr(test, 'test_case', test)._testMethodName for test, _ in result.failures + result.errors}
+        failed.update(n for n in mine if TEST_CHECKS[n][2] in methods)
+    return failed, errors
 
-    class Changed(test_pivot_structure.PivotStructure):
-        @classmethod
-        def load_pack(cls):
-            return document
 
-    suite = unittest.TestSuite(Changed(STRUCTURE_TESTS[n]) for n in names)
-    result = unittest.TextTestRunner(stream=io.StringIO(), verbosity=0).run(suite)
-    if any(not hasattr(test, '_testMethodName') for test, _ in result.errors):
-        return set(names)  # the class could not even be set up on this pack
-    # A failure inside a subTest is reported on the subtest, which names its test case.
-    failed = {getattr(test, 'test_case', test)._testMethodName for test, _ in result.failures + result.errors}
-    return {n for n in names if STRUCTURE_TESTS[n] in failed}
+def calibration_fails(document: dict) -> bool:
+    """check.py's calibration check on the pack's rules: a rule that cites a record must hold its frozen values."""
+    spec = importlib.util.spec_from_file_location('rcef_check', ROOT / 'check.py')
+    check = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(check)
+    return bool(check.calibration_problems(ROOT / 'calibration', [r for m in document['mappings'] for r in m['rules']]))
 
 
 def metric_failures(abreg: dict, document: dict, a1_document: dict, families: dict) -> set[str]:
@@ -185,8 +217,13 @@ def metric_failures(abreg: dict, document: dict, a1_document: dict, families: di
     return failed
 
 
-def caught(abreg: dict, document: dict, a1_document: dict, families: dict) -> set[str]:
-    return metric_failures(abreg, document, a1_document, families) | structure_failures(document, list(STRUCTURE_TESTS))
+def caught(abreg: dict, document: dict, a1_document: dict, families: dict) -> tuple[set[str], set[str]]:
+    """The checks that fail on a pack document, and the test checks that could not run on it."""
+    failed, errors = test_failures(document, list(TEST_CHECKS))
+    failed |= metric_failures(abreg, document, a1_document, families)
+    if calibration_fails(document):
+        failed.add('calibration check')
+    return failed, errors
 
 
 def m7(abreg: dict, document: dict, a1_document: dict, families: dict) -> tuple[list, list]:
@@ -200,20 +237,25 @@ def m7(abreg: dict, document: dict, a1_document: dict, families: dict) -> tuple[
             changed = mutate(document, mutation['change'])
         except SystemExit as problem:  # the B pack lacks a rule the mutation names: nothing can catch it
             rows.append({'mutation': mutation['id'], 'required': ' '.join(mutation['caught_by']), 'caught_by': '',
-                         'missed': len(mutation['caught_by'])})
+                         'missed': len(mutation['caught_by']), 'setup_errors': 0})
             failures.append([mutation['id'], ' '.join(mutation['caught_by']), str(problem)])
             continue
-        found = caught(abreg, changed, a1_document, families)
+        found, errors = caught(abreg, changed, a1_document, families)
         missed = sorted(set(mutation['caught_by']) - found)
         rows.append({'mutation': mutation['id'], 'required': ' '.join(mutation['caught_by']),
-                     'caught_by': ' '.join(c for c in CHECKS if c in found), 'missed': len(missed)})
+                     'caught_by': ' '.join(c for c in CHECKS if c in found), 'missed': len(missed),
+                     'setup_errors': len(errors)})
         if missed:
             failures.append([mutation['id'], ' '.join(missed), 'a required check did not catch it'])
-    baseline = caught(abreg, document, a1_document, families)
+        if errors:
+            failures.append([mutation['id'], ' '.join(sorted(errors)), 'the test class could not be set up'])
+    baseline, errors = caught(abreg, document, a1_document, families)
     rows.append({'mutation': 'unchanged pack', 'required': '',
-                 'caught_by': ' '.join(c for c in CHECKS if c in baseline), 'missed': len(baseline)})
-    if baseline:
-        failures.append(['unchanged pack', ' '.join(sorted(baseline)), 'fails before any mutation'])
+                 'caught_by': ' '.join(c for c in CHECKS if c in baseline), 'missed': len(baseline),
+                 'setup_errors': len(errors)})
+    if baseline or errors:
+        failures.append(['unchanged pack', ' '.join(sorted(baseline | errors)),
+                         'fails or cannot run before any mutation'])
     return rows, failures
 
 

@@ -16,6 +16,10 @@ the harness checks itself on each rig (its oracles):
 - rest: all-zero weights give the positions of the rig with no weights;
 - bindings: each bound ARKit shape at weight 1 moves at least one vertex;
 - repeatable: the same weights give the same positions twice.
+
+Each M6 row says how many ARKit outputs the rig binds: Rocketbox has all 52,
+ICT-FaceKit 14 (its 16 shapes include halves of browInnerUp and cheekPuff), so
+on ICT a difference on any other output cannot show.
 """
 from __future__ import annotations
 from pathlib import Path
@@ -30,6 +34,7 @@ import rigs  # noqa: E402
 
 RIGS = ('rocketbox-female', 'ict')
 ARKIT = 'arkit.coefficient.'
+ARKIT_COUNT = 52
 
 
 def rig_pins() -> dict:
@@ -48,6 +53,11 @@ def positions(rig, weights: dict[str, float]) -> bytes:
     values = [c for instance in geometry.instances for primitive in instance['primitives']
               for p in primitive['positions'] for c in p]
     return struct.pack(f'>{len(values)}d', *values)
+
+
+def bound(rig) -> str:
+    """How many of the 52 ARKit outputs the rig has a shape for: an output it lacks cannot differ on it."""
+    return f'{len({name for _, name, _ in rig.shapes})} of {ARKIT_COUNT}'
 
 
 def oracle_problems(rig) -> list[str]:
