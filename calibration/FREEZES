@@ -7,3 +7,4 @@ rig-gains.ict-rocketbox-female v1 5193181a3795817fcb739eeb9ea18927fec718edfac609
 mediapipe.ict-response v2 07752ac4272e151f8c9295152bdd6254716d0420037943a603634304d4057d90 2026-10-28 history rewritten for publication: new code_commit, msf-character-tools 0.5.0 and renderer
 rig-gains.ict-rocketbox-female v2 18afee0a4da98aac15e4ae2a33fb06a3ee4153525d26e49b510f108dff06a5f5 2026-10-28 history rewritten for publication: new code_commit, msf-character-tools 0.5.0 and renderer
 viseme-poses.rocketbox-female v1 62eef93078e22288acbc1bcb03c5c284e2d05ad98236dc6809f90b1acc55e9cb 2026-10-29
+viseme-poses.rocketbox-female v2 645a9eb61227f1651cc2ceea8863571bd61b008a9de97be6a4bcad3bd37300d0 2026-10-30 history rewritten for publication: new code_commit, same code and inputs
