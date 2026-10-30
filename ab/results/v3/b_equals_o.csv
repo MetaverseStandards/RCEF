@@ -1,0 +1,356 @@
+pair,family,frames,differences
+ARKit -> ARKit,goldens:arkit.coefficient,4,0
+ARKit -> ARKit,grid:arkit.coefficient,18,0
+ARKit -> ARKit,edge:arkit.coefficient,1129,0
+ARKit -> ARKit,impulse:arkit.coefficient,105,0
+ARKit -> ARKit,arkit_uniform,2000,0
+ARKit -> ARKit,perturb:arkit_uniform,624,0
+ARKit -> ARKit,regression:v1:arkit_uniform,2000,0
+ARKit -> ARKit,regression:v1:perturb:arkit_uniform,624,0
+ARKit -> FACS,goldens:arkit.coefficient,4,0
+ARKit -> FACS,grid:arkit.coefficient,18,0
+ARKit -> FACS,edge:arkit.coefficient,1129,0
+ARKit -> FACS,impulse:arkit.coefficient,105,0
+ARKit -> FACS,arkit_uniform,2000,0
+ARKit -> FACS,perturb:arkit_uniform,624,0
+ARKit -> FACS,regression:v1:arkit_uniform,2000,0
+ARKit -> FACS,regression:v1:perturb:arkit_uniform,624,0
+ARKit -> FB2,goldens:arkit.coefficient,4,0
+ARKit -> FB2,grid:arkit.coefficient,18,0
+ARKit -> FB2,edge:arkit.coefficient,1129,0
+ARKit -> FB2,impulse:arkit.coefficient,105,0
+ARKit -> FB2,arkit_uniform,2000,0
+ARKit -> FB2,perturb:arkit_uniform,624,0
+ARKit -> FB2,regression:v1:arkit_uniform,2000,0
+ARKit -> FB2,regression:v1:perturb:arkit_uniform,624,0
+ARKit -> VRCFT UE,goldens:arkit.coefficient,4,0
+ARKit -> VRCFT UE,grid:arkit.coefficient,18,0
+ARKit -> VRCFT UE,edge:arkit.coefficient,1129,0
+ARKit -> VRCFT UE,impulse:arkit.coefficient,105,0
+ARKit -> VRCFT UE,arkit_uniform,2000,0
+ARKit -> VRCFT UE,perturb:arkit_uniform,624,0
+ARKit -> VRCFT UE,regression:v1:arkit_uniform,2000,0
+ARKit -> VRCFT UE,regression:v1:perturb:arkit_uniform,624,0
+ARKit -> VRCFT eye,goldens:arkit.coefficient,4,0
+ARKit -> VRCFT eye,grid:arkit.coefficient,18,0
+ARKit -> VRCFT eye,edge:arkit.coefficient,1129,0
+ARKit -> VRCFT eye,impulse:arkit.coefficient,105,0
+ARKit -> VRCFT eye,arkit_uniform,2000,0
+ARKit -> VRCFT eye,perturb:arkit_uniform,624,0
+ARKit -> VRCFT eye,regression:v1:arkit_uniform,2000,0
+ARKit -> VRCFT eye,regression:v1:perturb:arkit_uniform,624,0
+ARKit -> VRM blink,goldens:arkit.coefficient,4,0
+ARKit -> VRM blink,grid:arkit.coefficient,18,0
+ARKit -> VRM blink,edge:arkit.coefficient,1129,0
+ARKit -> VRM blink,impulse:arkit.coefficient,105,0
+ARKit -> VRM blink,arkit_uniform,2000,0
+ARKit -> VRM blink,perturb:arkit_uniform,624,0
+ARKit -> VRM blink,regression:v1:arkit_uniform,2000,0
+ARKit -> VRM blink,regression:v1:perturb:arkit_uniform,624,0
+FACS -> ARKit,facs_key_impulses,132,0
+FACS -> ARKit,grid:facs.code,18,0
+FACS -> ARKit,edge:facs.code,1050,0
+FACS -> ARKit,impulse:facs.code,99,0
+FACS -> ARKit,facs_uniform,2000,0
+FACS -> ARKit,facs_letters,500,0
+FACS -> ARKit,perturb:facs_uniform,588,0
+FACS -> ARKit,regression:v1:facs_uniform,2000,0
+FACS -> ARKit,regression:v1:facs_letters,500,0
+FACS -> ARKit,regression:v1:perturb:facs_uniform,588,0
+FACS -> ARKit,facs_library,221,0
+FACS -> FACS,facs_key_impulses,132,0
+FACS -> FACS,grid:facs.code,18,0
+FACS -> FACS,edge:facs.code,1050,0
+FACS -> FACS,impulse:facs.code,99,0
+FACS -> FACS,facs_uniform,2000,0
+FACS -> FACS,facs_letters,500,0
+FACS -> FACS,perturb:facs_uniform,588,0
+FACS -> FACS,regression:v1:facs_uniform,2000,0
+FACS -> FACS,regression:v1:facs_letters,500,0
+FACS -> FACS,regression:v1:perturb:facs_uniform,588,0
+FACS -> FACS,facs_library,221,0
+FACS -> FB2,facs_key_impulses,132,0
+FACS -> FB2,grid:facs.code,18,0
+FACS -> FB2,edge:facs.code,1050,0
+FACS -> FB2,impulse:facs.code,99,0
+FACS -> FB2,facs_uniform,2000,0
+FACS -> FB2,facs_letters,500,0
+FACS -> FB2,perturb:facs_uniform,588,0
+FACS -> FB2,regression:v1:facs_uniform,2000,0
+FACS -> FB2,regression:v1:facs_letters,500,0
+FACS -> FB2,regression:v1:perturb:facs_uniform,588,0
+FACS -> FB2,facs_library,221,0
+FACS -> VRCFT UE,facs_key_impulses,132,0
+FACS -> VRCFT UE,grid:facs.code,18,0
+FACS -> VRCFT UE,edge:facs.code,1050,0
+FACS -> VRCFT UE,impulse:facs.code,99,0
+FACS -> VRCFT UE,facs_uniform,2000,0
+FACS -> VRCFT UE,facs_letters,500,0
+FACS -> VRCFT UE,perturb:facs_uniform,588,0
+FACS -> VRCFT UE,regression:v1:facs_uniform,2000,0
+FACS -> VRCFT UE,regression:v1:facs_letters,500,0
+FACS -> VRCFT UE,regression:v1:perturb:facs_uniform,588,0
+FACS -> VRCFT UE,facs_library,221,0
+FACS -> VRCFT eye,facs_key_impulses,132,0
+FACS -> VRCFT eye,grid:facs.code,18,0
+FACS -> VRCFT eye,edge:facs.code,1050,0
+FACS -> VRCFT eye,impulse:facs.code,99,0
+FACS -> VRCFT eye,facs_uniform,2000,0
+FACS -> VRCFT eye,facs_letters,500,0
+FACS -> VRCFT eye,perturb:facs_uniform,588,0
+FACS -> VRCFT eye,regression:v1:facs_uniform,2000,0
+FACS -> VRCFT eye,regression:v1:facs_letters,500,0
+FACS -> VRCFT eye,regression:v1:perturb:facs_uniform,588,0
+FACS -> VRCFT eye,facs_library,221,0
+FACS -> VRM blink,facs_key_impulses,132,0
+FACS -> VRM blink,grid:facs.code,18,0
+FACS -> VRM blink,edge:facs.code,1050,0
+FACS -> VRM blink,impulse:facs.code,99,0
+FACS -> VRM blink,facs_uniform,2000,0
+FACS -> VRM blink,facs_letters,500,0
+FACS -> VRM blink,perturb:facs_uniform,588,0
+FACS -> VRM blink,regression:v1:facs_uniform,2000,0
+FACS -> VRM blink,regression:v1:facs_letters,500,0
+FACS -> VRM blink,regression:v1:perturb:facs_uniform,588,0
+FACS -> VRM blink,facs_library,221,0
+FB2 -> ARKit,goldens:openxr.fb2,124,0
+FB2 -> ARKit,csv:openxr.fb2:fb2_demo_frames,441,0
+FB2 -> ARKit,csv:openxr.fb2:fb2_expression_frames,221,0
+FB2 -> ARKit,r3:openxr.fb2,132,0
+FB2 -> ARKit,grid:openxr.fb2,21,0
+FB2 -> ARKit,edge:openxr.fb2,1507,0
+FB2 -> ARKit,impulse:openxr.fb2,141,0
+FB2 -> ARKit,fb2_contract,2000,0
+FB2 -> ARKit,fb2_breaking,2000,0
+FB2 -> ARKit,perturb:fb2_contract,848,0
+FB2 -> ARKit,perturb:fb2_breaking,848,0
+FB2 -> ARKit,regression:v1:fb2_contract,2000,0
+FB2 -> ARKit,regression:v1:fb2_breaking,2000,0
+FB2 -> ARKit,regression:v1:perturb:fb2_contract,848,0
+FB2 -> ARKit,regression:v1:perturb:fb2_breaking,848,0
+FB2 -> FACS,goldens:openxr.fb2,124,0
+FB2 -> FACS,csv:openxr.fb2:fb2_demo_frames,441,0
+FB2 -> FACS,csv:openxr.fb2:fb2_expression_frames,221,0
+FB2 -> FACS,r3:openxr.fb2,132,0
+FB2 -> FACS,grid:openxr.fb2,21,0
+FB2 -> FACS,edge:openxr.fb2,1507,0
+FB2 -> FACS,impulse:openxr.fb2,141,0
+FB2 -> FACS,fb2_contract,2000,0
+FB2 -> FACS,fb2_breaking,2000,0
+FB2 -> FACS,perturb:fb2_contract,848,0
+FB2 -> FACS,perturb:fb2_breaking,848,0
+FB2 -> FACS,regression:v1:fb2_contract,2000,0
+FB2 -> FACS,regression:v1:fb2_breaking,2000,0
+FB2 -> FACS,regression:v1:perturb:fb2_contract,848,0
+FB2 -> FACS,regression:v1:perturb:fb2_breaking,848,0
+FB2 -> FB2,goldens:openxr.fb2,124,0
+FB2 -> FB2,csv:openxr.fb2:fb2_demo_frames,441,0
+FB2 -> FB2,csv:openxr.fb2:fb2_expression_frames,221,0
+FB2 -> FB2,r3:openxr.fb2,132,0
+FB2 -> FB2,grid:openxr.fb2,21,0
+FB2 -> FB2,edge:openxr.fb2,1507,0
+FB2 -> FB2,impulse:openxr.fb2,141,0
+FB2 -> FB2,fb2_contract,2000,0
+FB2 -> FB2,fb2_breaking,2000,0
+FB2 -> FB2,perturb:fb2_contract,848,0
+FB2 -> FB2,perturb:fb2_breaking,848,0
+FB2 -> FB2,regression:v1:fb2_contract,2000,0
+FB2 -> FB2,regression:v1:fb2_breaking,2000,0
+FB2 -> FB2,regression:v1:perturb:fb2_contract,848,0
+FB2 -> FB2,regression:v1:perturb:fb2_breaking,848,0
+FB2 -> VRCFT UE,goldens:openxr.fb2,124,0
+FB2 -> VRCFT UE,csv:openxr.fb2:fb2_demo_frames,441,0
+FB2 -> VRCFT UE,csv:openxr.fb2:fb2_expression_frames,221,0
+FB2 -> VRCFT UE,r3:openxr.fb2,132,0
+FB2 -> VRCFT UE,grid:openxr.fb2,21,0
+FB2 -> VRCFT UE,edge:openxr.fb2,1507,0
+FB2 -> VRCFT UE,impulse:openxr.fb2,141,0
+FB2 -> VRCFT UE,fb2_contract,2000,0
+FB2 -> VRCFT UE,fb2_breaking,2000,0
+FB2 -> VRCFT UE,perturb:fb2_contract,848,0
+FB2 -> VRCFT UE,perturb:fb2_breaking,848,0
+FB2 -> VRCFT UE,regression:v1:fb2_contract,2000,0
+FB2 -> VRCFT UE,regression:v1:fb2_breaking,2000,0
+FB2 -> VRCFT UE,regression:v1:perturb:fb2_contract,848,0
+FB2 -> VRCFT UE,regression:v1:perturb:fb2_breaking,848,0
+FB2 -> VRCFT eye,goldens:openxr.fb2,124,0
+FB2 -> VRCFT eye,csv:openxr.fb2:fb2_demo_frames,441,0
+FB2 -> VRCFT eye,csv:openxr.fb2:fb2_expression_frames,221,0
+FB2 -> VRCFT eye,r3:openxr.fb2,132,0
+FB2 -> VRCFT eye,grid:openxr.fb2,21,0
+FB2 -> VRCFT eye,edge:openxr.fb2,1507,0
+FB2 -> VRCFT eye,impulse:openxr.fb2,141,0
+FB2 -> VRCFT eye,fb2_contract,2000,0
+FB2 -> VRCFT eye,fb2_breaking,2000,0
+FB2 -> VRCFT eye,perturb:fb2_contract,848,0
+FB2 -> VRCFT eye,perturb:fb2_breaking,848,0
+FB2 -> VRCFT eye,regression:v1:fb2_contract,2000,0
+FB2 -> VRCFT eye,regression:v1:fb2_breaking,2000,0
+FB2 -> VRCFT eye,regression:v1:perturb:fb2_contract,848,0
+FB2 -> VRCFT eye,regression:v1:perturb:fb2_breaking,848,0
+FB2 -> VRM blink,goldens:openxr.fb2,124,0
+FB2 -> VRM blink,csv:openxr.fb2:fb2_demo_frames,441,0
+FB2 -> VRM blink,csv:openxr.fb2:fb2_expression_frames,221,0
+FB2 -> VRM blink,r3:openxr.fb2,132,0
+FB2 -> VRM blink,grid:openxr.fb2,21,0
+FB2 -> VRM blink,edge:openxr.fb2,1507,0
+FB2 -> VRM blink,impulse:openxr.fb2,141,0
+FB2 -> VRM blink,fb2_contract,2000,0
+FB2 -> VRM blink,fb2_breaking,2000,0
+FB2 -> VRM blink,perturb:fb2_contract,848,0
+FB2 -> VRM blink,perturb:fb2_breaking,848,0
+FB2 -> VRM blink,regression:v1:fb2_contract,2000,0
+FB2 -> VRM blink,regression:v1:fb2_breaking,2000,0
+FB2 -> VRM blink,regression:v1:perturb:fb2_contract,848,0
+FB2 -> VRM blink,regression:v1:perturb:fb2_breaking,848,0
+META -> ARKit,goldens:openxr.visemes,1,0
+META -> ARKit,csv:openxr.visemes:viseme_demo_frames,57,0
+META -> ARKit,csv:openxr.visemes:viseme_talk_frames,62,0
+META -> ARKit,grid:openxr.visemes,19,0
+META -> ARKit,edge:openxr.visemes,336,0
+META -> ARKit,impulse:openxr.visemes,31,0
+META -> ARKit,viseme_simplex,500,0
+META -> ARKit,perturb:viseme_simplex,184,0
+META -> ARKit,regression:v1:viseme_simplex,500,0
+META -> ARKit,regression:v1:perturb:viseme_simplex,184,0
+META -> FACS,goldens:openxr.visemes,1,0
+META -> FACS,csv:openxr.visemes:viseme_demo_frames,57,0
+META -> FACS,csv:openxr.visemes:viseme_talk_frames,62,0
+META -> FACS,grid:openxr.visemes,19,0
+META -> FACS,edge:openxr.visemes,336,0
+META -> FACS,impulse:openxr.visemes,31,0
+META -> FACS,viseme_simplex,500,0
+META -> FACS,perturb:viseme_simplex,184,0
+META -> FACS,regression:v1:viseme_simplex,500,0
+META -> FACS,regression:v1:perturb:viseme_simplex,184,0
+META -> FB2,goldens:openxr.visemes,1,0
+META -> FB2,csv:openxr.visemes:viseme_demo_frames,57,0
+META -> FB2,csv:openxr.visemes:viseme_talk_frames,62,0
+META -> FB2,grid:openxr.visemes,19,0
+META -> FB2,edge:openxr.visemes,336,0
+META -> FB2,impulse:openxr.visemes,31,0
+META -> FB2,viseme_simplex,500,0
+META -> FB2,perturb:viseme_simplex,184,0
+META -> FB2,regression:v1:viseme_simplex,500,0
+META -> FB2,regression:v1:perturb:viseme_simplex,184,0
+META -> META,goldens:openxr.visemes,1,0
+META -> META,csv:openxr.visemes:viseme_demo_frames,57,0
+META -> META,csv:openxr.visemes:viseme_talk_frames,62,0
+META -> META,grid:openxr.visemes,19,0
+META -> META,edge:openxr.visemes,336,0
+META -> META,impulse:openxr.visemes,31,0
+META -> META,viseme_simplex,500,0
+META -> META,perturb:viseme_simplex,184,0
+META -> META,regression:v1:viseme_simplex,500,0
+META -> META,regression:v1:perturb:viseme_simplex,184,0
+META -> VRCFT UE,goldens:openxr.visemes,1,0
+META -> VRCFT UE,csv:openxr.visemes:viseme_demo_frames,57,0
+META -> VRCFT UE,csv:openxr.visemes:viseme_talk_frames,62,0
+META -> VRCFT UE,grid:openxr.visemes,19,0
+META -> VRCFT UE,edge:openxr.visemes,336,0
+META -> VRCFT UE,impulse:openxr.visemes,31,0
+META -> VRCFT UE,viseme_simplex,500,0
+META -> VRCFT UE,perturb:viseme_simplex,184,0
+META -> VRCFT UE,regression:v1:viseme_simplex,500,0
+META -> VRCFT UE,regression:v1:perturb:viseme_simplex,184,0
+META -> VRM,goldens:openxr.visemes,1,0
+META -> VRM,csv:openxr.visemes:viseme_demo_frames,57,0
+META -> VRM,csv:openxr.visemes:viseme_talk_frames,62,0
+META -> VRM,grid:openxr.visemes,19,0
+META -> VRM,edge:openxr.visemes,336,0
+META -> VRM,impulse:openxr.visemes,31,0
+META -> VRM,viseme_simplex,500,0
+META -> VRM,perturb:viseme_simplex,184,0
+META -> VRM,regression:v1:viseme_simplex,500,0
+META -> VRM,regression:v1:perturb:viseme_simplex,184,0
+VRCFT eye -> ARKit,grid:vrcft.eye,18,0
+VRCFT eye -> ARKit,edge:vrcft.eye,273,0
+VRCFT eye -> ARKit,impulse:vrcft.eye,25,0
+VRCFT eye -> ARKit,vrcft_eye,200,0
+VRCFT eye -> ARKit,perturb:vrcft_eye,144,0
+VRCFT eye -> ARKit,regression:v1:vrcft_eye,200,0
+VRCFT eye -> ARKit,regression:v1:perturb:vrcft_eye,144,0
+VRCFT eye -> FACS,grid:vrcft.eye,18,0
+VRCFT eye -> FACS,edge:vrcft.eye,273,0
+VRCFT eye -> FACS,impulse:vrcft.eye,25,0
+VRCFT eye -> FACS,vrcft_eye,200,0
+VRCFT eye -> FACS,perturb:vrcft_eye,144,0
+VRCFT eye -> FACS,regression:v1:vrcft_eye,200,0
+VRCFT eye -> FACS,regression:v1:perturb:vrcft_eye,144,0
+VRCFT eye -> FB2,grid:vrcft.eye,18,0
+VRCFT eye -> FB2,edge:vrcft.eye,273,0
+VRCFT eye -> FB2,impulse:vrcft.eye,25,0
+VRCFT eye -> FB2,vrcft_eye,200,0
+VRCFT eye -> FB2,perturb:vrcft_eye,144,0
+VRCFT eye -> FB2,regression:v1:vrcft_eye,200,0
+VRCFT eye -> FB2,regression:v1:perturb:vrcft_eye,144,0
+VRCFT eye -> VRCFT UE,grid:vrcft.eye,18,0
+VRCFT eye -> VRCFT UE,edge:vrcft.eye,273,0
+VRCFT eye -> VRCFT UE,impulse:vrcft.eye,25,0
+VRCFT eye -> VRCFT UE,vrcft_eye,200,0
+VRCFT eye -> VRCFT UE,perturb:vrcft_eye,144,0
+VRCFT eye -> VRCFT UE,regression:v1:vrcft_eye,200,0
+VRCFT eye -> VRCFT UE,regression:v1:perturb:vrcft_eye,144,0
+VRCFT eye -> VRCFT eye,grid:vrcft.eye,18,0
+VRCFT eye -> VRCFT eye,edge:vrcft.eye,273,0
+VRCFT eye -> VRCFT eye,impulse:vrcft.eye,25,0
+VRCFT eye -> VRCFT eye,vrcft_eye,200,0
+VRCFT eye -> VRCFT eye,perturb:vrcft_eye,144,0
+VRCFT eye -> VRCFT eye,regression:v1:vrcft_eye,200,0
+VRCFT eye -> VRCFT eye,regression:v1:perturb:vrcft_eye,144,0
+VRCFT eye -> VRM,grid:vrcft.eye,18,0
+VRCFT eye -> VRM,edge:vrcft.eye,273,0
+VRCFT eye -> VRM,impulse:vrcft.eye,25,0
+VRCFT eye -> VRM,vrcft_eye,200,0
+VRCFT eye -> VRM,perturb:vrcft_eye,144,0
+VRCFT eye -> VRM,regression:v1:vrcft_eye,200,0
+VRCFT eye -> VRM,regression:v1:perturb:vrcft_eye,144,0
+VRM -> ARKit,grid:vrm.preset,18,0
+VRM -> ARKit,edge:vrm.preset,399,0
+VRM -> ARKit,impulse:vrm.preset,37,0
+VRM -> ARKit,vrm,200,0
+VRM -> ARKit,perturb:vrm,216,0
+VRM -> ARKit,regression:v1:vrm,200,0
+VRM -> ARKit,regression:v1:perturb:vrm,216,0
+VRM -> FACS,grid:vrm.preset,18,0
+VRM -> FACS,edge:vrm.preset,399,0
+VRM -> FACS,impulse:vrm.preset,37,0
+VRM -> FACS,vrm,200,0
+VRM -> FACS,perturb:vrm,216,0
+VRM -> FACS,regression:v1:vrm,200,0
+VRM -> FACS,regression:v1:perturb:vrm,216,0
+VRM -> FB2,grid:vrm.preset,18,0
+VRM -> FB2,edge:vrm.preset,399,0
+VRM -> FB2,impulse:vrm.preset,37,0
+VRM -> FB2,vrm,200,0
+VRM -> FB2,perturb:vrm,216,0
+VRM -> FB2,regression:v1:vrm,200,0
+VRM -> FB2,regression:v1:perturb:vrm,216,0
+VRM -> META,grid:vrm.preset,18,0
+VRM -> META,edge:vrm.preset,399,0
+VRM -> META,impulse:vrm.preset,37,0
+VRM -> META,vrm,200,0
+VRM -> META,perturb:vrm,216,0
+VRM -> META,regression:v1:vrm,200,0
+VRM -> META,regression:v1:perturb:vrm,216,0
+VRM -> VRCFT UE,grid:vrm.preset,18,0
+VRM -> VRCFT UE,edge:vrm.preset,399,0
+VRM -> VRCFT UE,impulse:vrm.preset,37,0
+VRM -> VRCFT UE,vrm,200,0
+VRM -> VRCFT UE,perturb:vrm,216,0
+VRM -> VRCFT UE,regression:v1:vrm,200,0
+VRM -> VRCFT UE,regression:v1:perturb:vrm,216,0
+VRM -> VRCFT eye,grid:vrm.preset,18,0
+VRM -> VRCFT eye,edge:vrm.preset,399,0
+VRM -> VRCFT eye,impulse:vrm.preset,37,0
+VRM -> VRCFT eye,vrm,200,0
+VRM -> VRCFT eye,perturb:vrm,216,0
+VRM -> VRCFT eye,regression:v1:vrm,200,0
+VRM -> VRCFT eye,regression:v1:perturb:vrm,216,0
+VRM -> VRM,grid:vrm.preset,18,0
+VRM -> VRM,edge:vrm.preset,399,0
+VRM -> VRM,impulse:vrm.preset,37,0
+VRM -> VRM,vrm,200,0
+VRM -> VRM,perturb:vrm,216,0
+VRM -> VRM,regression:v1:vrm,200,0
+VRM -> VRM,regression:v1:perturb:vrm,216,0

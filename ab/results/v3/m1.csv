@@ -1,0 +1,57 @@
+pair,family,compared,value_differences,sign_differences
+FB2 -> ARKit,goldens:openxr.fb2,6448,0,0
+FB2 -> ARKit,csv:openxr.fb2:fb2_demo_frames,22584,0,0
+FB2 -> ARKit,csv:openxr.fb2:fb2_expression_frames,11492,0,0
+FB2 -> ARKit,r3:openxr.fb2,6864,0,0
+FB2 -> ARKit,grid:openxr.fb2,980,0,0
+FB2 -> ARKit,edge:openxr.fb2,77704,0,0
+FB2 -> ARKit,impulse:openxr.fb2,7332,0,0
+FB2 -> ARKit,fb2_contract,104000,0,0
+FB2 -> ARKit,fb2_breaking,104000,0,0
+FB2 -> ARKit,perturb:fb2_contract,15632,0,0
+FB2 -> ARKit,perturb:fb2_breaking,15632,0,0
+FB2 -> ARKit,regression:v1:fb2_contract,104000,0,0
+FB2 -> ARKit,regression:v1:fb2_breaking,104000,0,0
+FB2 -> ARKit,regression:v1:perturb:fb2_contract,15632,0,0
+FB2 -> ARKit,regression:v1:perturb:fb2_breaking,15632,0,0
+ARKit -> FB2,goldens:arkit.coefficient,240,0,0
+ARKit -> FB2,grid:arkit.coefficient,1080,0,0
+ARKit -> FB2,edge:arkit.coefficient,67740,0,0
+ARKit -> FB2,impulse:arkit.coefficient,6300,0,0
+ARKit -> FB2,arkit_uniform,120000,0,0
+ARKit -> FB2,perturb:arkit_uniform,9216,0,0
+ARKit -> FB2,regression:v1:arkit_uniform,120000,0,0
+ARKit -> FB2,regression:v1:perturb:arkit_uniform,9216,0,0
+ARKit -> VRCFT UE,goldens:arkit.coefficient,272,0,0
+ARKit -> VRCFT UE,grid:arkit.coefficient,1224,0,0
+ARKit -> VRCFT UE,edge:arkit.coefficient,76772,0,0
+ARKit -> VRCFT UE,impulse:arkit.coefficient,7140,0,0
+ARKit -> VRCFT UE,arkit_uniform,136000,0,0
+ARKit -> VRCFT UE,perturb:arkit_uniform,0,0,0
+ARKit -> VRCFT UE,regression:v1:arkit_uniform,136000,0,0
+ARKit -> VRCFT UE,regression:v1:perturb:arkit_uniform,0,0,0
+FB2 -> VRM blink,goldens:openxr.fb2,248,0,0
+FB2 -> VRM blink,csv:openxr.fb2:fb2_demo_frames,872,0,0
+FB2 -> VRM blink,csv:openxr.fb2:fb2_expression_frames,442,0,0
+FB2 -> VRM blink,r3:openxr.fb2,264,0,0
+FB2 -> VRM blink,grid:openxr.fb2,38,0,0
+FB2 -> VRM blink,edge:openxr.fb2,3014,0,0
+FB2 -> VRM blink,impulse:openxr.fb2,282,0,0
+FB2 -> VRM blink,fb2_contract,4000,0,0
+FB2 -> VRM blink,fb2_breaking,4000,0,0
+FB2 -> VRM blink,perturb:fb2_contract,1640,0,0
+FB2 -> VRM blink,perturb:fb2_breaking,1640,0,0
+FB2 -> VRM blink,regression:v1:fb2_contract,4000,0,0
+FB2 -> VRM blink,regression:v1:fb2_breaking,4000,0,0
+FB2 -> VRM blink,regression:v1:perturb:fb2_contract,1640,0,0
+FB2 -> VRM blink,regression:v1:perturb:fb2_breaking,1640,0,0
+META -> VRM,goldens:openxr.visemes,5,0,0
+META -> VRM,csv:openxr.visemes:viseme_demo_frames,270,0,0
+META -> VRM,csv:openxr.visemes:viseme_talk_frames,310,0,0
+META -> VRM,grid:openxr.visemes,90,0,0
+META -> VRM,edge:openxr.visemes,1680,0,0
+META -> VRM,impulse:openxr.visemes,155,0,0
+META -> VRM,viseme_simplex,2500,0,0
+META -> VRM,perturb:viseme_simplex,600,0,0
+META -> VRM,regression:v1:viseme_simplex,2500,0,0
+META -> VRM,regression:v1:perturb:viseme_simplex,600,0,0

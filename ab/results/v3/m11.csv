@@ -1,0 +1,30 @@
+line,unit,ict,b,verdict
+156,AU1 Inner brow raiser,browInnerUp,browInnerUp,same
+157,AU2 Outer brow raiser,browOuterUpLeft browOuterUpRight,browOuterUpLeft browOuterUpRight,same
+158,AU4 Brow lowerer,browDownLeft browDownRight,browDownLeft browDownRight,same
+159,AU6 Cheek raiser,cheekSquintLeft cheekSquintRight,cheekSquintLeft cheekSquintRight,same
+160,AU5 Upper lid raiser,eyeWideLeft eyeWideRight,eyeWideLeft eyeWideRight,same
+161,AU7 Lid tightener,eyeSquintLeft eyeSquintRight,eyeSquintLeft eyeSquintRight,same
+162,AU9 Nose Wrinkler,noseSneerLeft noseSneerRight,noseSneerLeft noseSneerRight,same
+163,AU10 Upper lip raiser,mouthShrugUpper,mouthUpperUpLeft mouthUpperUpRight,listed difference
+164,AU11 Nasolabial deepener,mouthUpperUpLeft mouthUpperUpRight,none,listed difference
+165,AU12 Lip corner puller,mouthSmileLeft mouthSmileRight,mouthSmileLeft mouthSmileRight,same
+166,AU14 Dimpler,mouthDimpleLeft mouthDimpleRight,mouthDimpleLeft mouthDimpleRight,same
+167,AU15 Lip corner depressor,mouthFrownLeft mouthFrownRight,mouthFrownLeft mouthFrownRight,same
+168,AU16 Lower lip depressor,mouthLowerDownLeft mouthLowerDownRight,mouthLowerDownLeft mouthLowerDownRight,same
+169,AU17 Chin raiser,mouthShrugLower,mouthShrugLower,same
+170,AU18 Lip Pucker,mouthPucker,mouthPucker,same
+171,AU20 Lip stretcher,mouthStretchLeft mouthStretchRight,mouthStretchLeft mouthStretchRight,same
+172,AU22 Lip Funneler,mouthFunnel,mouthFunnel,same
+173,AU24 Lip pressor,mouthPressLeft mouthPressRight,mouthPressLeft mouthPressRight,same
+174,AU27 Mouth stretch,jawOpen,none,listed difference
+175,AU28 Lip Suck,mouthRollLower mouthRollUpper,mouthRollLower mouthRollUpper,same
+176,AU29 Jaw thrust,jawForward,jawForward,same
+177,AU30 Jaw sideways (left),jawLeft,jawLeft,same
+178,AU30 Jaw sideways (right),jawRight,jawRight,same
+179,AU33 Cheek blow,cheekPuff,none,listed difference
+180,AU45 Blink,eyeBlinkLeft eyeBlinkRight,none,listed difference
+181,AU61 Eyes turn left,eyeLookInRight eyeLookOutLeft,none,listed difference
+182,AU62 Eyes turn right,eyeLookInLeft eyeLookOutRight,none,listed difference
+183,AU63 Eyes up,eyeLookUpLeft eyeLookUpRight,none,listed difference
+184,AU64 Eyes down,eyeLookDownLeft eyeLookDownRight,none,listed difference
