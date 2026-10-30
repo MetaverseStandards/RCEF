@@ -925,18 +925,15 @@ CALIBRATION_STATUS = ('calibration_status: the record is calibrated_software, a 
                       'not a measurement of any tracker; pack schema 1.0 has no such evidence status, so the mapping '
                       'is proposed.')
 POSE_COMMON = [
-    'example_rigs: the poses are fitted to the sculpted viseme shapes of 18 Rocketbox rigs, measured in their own '
-    'ARKit units by one bounded fit for all of them, with Left and Right tied; on each of 4 other Rocketbox rigs, '
-    "which the fit did not use, each pose read here either reproduces its class's own shape to within half of its "
-    "motion (shape gate) or meets its class's visible mouth features within their frozen tolerances (perceptual "
-    'gate); all 22 rigs come from one library, and rigs from other libraries render the same ARKit weights '
-    'differently (calibration record rig-gains.ict-rocketbox-female).',
     'coarticulation: not modelled; each class is one static pose, and the poses of a blend of classes add up; RCEF '
     'has no operator over time.',
     'teeth_tongue: teeth and tongue are not represented; the bridge writes no tongue_out, blink, gaze, jaw_sideways '
     'or mouth_shift value.',
     CALIBRATION_STATUS,
 ]
+# Measured by examples/viseme_bridge.py (examples/README.md, section 7), not by the record.
+ICT_BILABIAL = ('on ICT-FaceKit, a rig from another library, the bilabial pose opens the lips on the mid line from '
+                '0.61 to 2.95 mm instead of keeping them closed')
 
 
 def load_check():
@@ -966,12 +963,30 @@ class PoseBridge:
             self.poses.setdefault(curve['output'], {})[curve['input']] = curve['knots'][1][1]
         moving = [x['p95'] for x in cells if x['channel'] in self.classes and x['channel'] not in self.by_features
                   and x['p95'] > 0]
+        self.training = record['training']['conditions'] // len(record['channels'])
+        self.held_out = len({x['identity'] for x in cells})
         self.residual = (min(moving), max(moving)) if moving else (0.0, 0.0)
         self.visemes = visemes
         self.expression = {s['id']: s for s in expression}
 
     def short(self, sid: str) -> str:
         return sid.rsplit('.', 1)[1]
+
+    def common(self) -> list[str]:
+        """The assumptions every sum and clamp of the bridge states, with the rig counts of the record."""
+        out = [f'example_rigs: the poses are fitted to the sculpted viseme shapes of {self.training} Rocketbox rigs, '
+               'measured in their own ARKit units by one bounded fit for all of them, with Left and Right tied; on '
+               f'each of {self.held_out} other Rocketbox rigs, which the fit did not use, each pose read here either '
+               "reproduces its class's own shape to within half of its motion (shape gate) or meets its class's "
+               'visible mouth features within their frozen tolerances (perceptual gate); all '
+               f'{self.training + self.held_out} rigs come from one library, and rigs from other libraries render '
+               'the same ARKit weights differently (calibration record rig-gains.ict-rocketbox-female)'
+               + (f'; {ICT_BILABIAL}.' if f'{VISEME_PROFILE}.bilabial' in self.classes else '.')]
+        if self.by_features:
+            out.append('perceptual_tolerance: the tolerances of the perceptual gate are the spread of one library\'s '
+                       'sculpts (the training rigs\' own visemes), not measured perceptual thresholds; no viewer '
+                       'judged them.')
+        return out + POSE_COMMON
 
     def helper(self, cid: str) -> str:
         return f'{INTERMEDIATE}viseme_pose_{self.short(cid)}'
@@ -1011,7 +1026,8 @@ class PoseBridge:
             rules.append(self.rule(
                 f'rcef_viseme_pose.{self.short(cid)}', [cid], [self.helper(cid)], copy(),
                 [f'correspondence: canonical {self.short(cid)} at weight 1 reaches its pose, the face of the META '
-                 f'{meta} viseme shapes of 10 Rocketbox rigs measured in their ARKit shapes (calibration record '
+                 f'{meta} viseme shapes of {self.training} Rocketbox rigs measured in their ARKit shapes (calibration '
+                 'record '
                  f'{POSE_RECORD}).',
                  'units: the class probability (0 to 1) is read as the activation of the class\'s pose (0 to 1); '
                  'the unit changes from probability to 1.'],
@@ -1025,7 +1041,7 @@ class PoseBridge:
         for sid, poses in self.poses.items():
             short = self.short(sid)
             assumptions = [f'pose: canonical {short} is the sum of each class weight times the frozen pose of the '
-                           f'class in {short} (calibration record {POSE_RECORD}), clamped at 1.', read, *POSE_COMMON]
+                           f'class in {short} (calibration record {POSE_RECORD}), clamped at 1.', read, *self.common()]
             rules.append(self.rule(f'rcef_viseme_pose.{short}_sum', [self.helper(c) for c in self.classes],
                                    [self.sum_helper(sid)], {'id': 'weighted_sum',
                                                             'weights': [poses[c] for c in self.classes]},
