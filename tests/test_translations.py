@@ -193,7 +193,8 @@ class Translations(unittest.TestCase):
                             # A changed value shows in the target outputs computed from it.
                             reached = {o for m in (out_maps if hop == 'in' else [mapping]) for i in rule['outputs']
                                        for o in rcef_route.reaches(self.rules(m), i)} | set(rule['outputs'])
-                            if hop == 'out':
+                            if hop == 'out' or not reached & outputs:
+                                # A part of the in-map that the target does not read changes nothing.
                                 self.assertEqual(sorted(failing), sorted(reached & outputs))
                             else:
                                 # A gaze split keeps only the larger of two directions, so a halved
