@@ -1,21 +1,29 @@
 # SPDX-License-Identifier: MIT
 """Translate frames from one expression set to another through RCEF's canonical sets.
 
-A route runs source -> canonical -> target. An in-map reads one group of the
-source set and writes one canonical group; an out-map reads one canonical
-group and writes signals of the target set. The maps are found in the pack by
-the profiles their signals belong to, not by their names.
+A route runs source -> canonical -> target. RCEF has one map per set pair and
+direction: an in-map from the source into a canonical set, and an out-map from
+a canonical set to the target. The maps are found in the pack by the profiles
+their signals belong to, not by their names. VRM has maps to and from both
+canonical sets (blinks and vowels), so a VRM route can run two in-maps or two
+out-maps.
 
-- Route runs only the in-maps whose canonical group some out-map of the
-  target reads, so a bad value that no selected in-map reads refuses nothing.
-- Each map gets only its own inputs. An input missing from a frame is left
-  out, so msf-character-tools refuses that frame (E_MISSING_SAMPLE).
-- An out-map runs only on frames that hold its whole group. Otherwise its
-  outputs are labelled "refused upstream at <in-map>" (a refusal) or, when no
-  selected in-map writes part of the group, "not available from source" (not
-  a refusal).
-- A non-zero source value is "dropped" when no selected in-map reads it, or
-  when no out-map reads what it is mapped to.
+Each map runs once on all frames, with msf-character-tools' partial
+evaluation, so a bad input refuses only the outputs that read it:
+
+- Each map gets only its own inputs. An input missing from a frame makes the
+  outputs that read it "not available": a target output that reads one is
+  labelled "not available from source" (not a refusal).
+- An in-map output that is refused (an invalid or out-of-domain input) makes
+  every target output that reads it "refused upstream at <in-map>". Only the
+  canonical values that an out-map or a bridge reads count: a bad value that
+  no target output reads refuses nothing.
+- An out-map output that is refused is labelled "refused at <out-map>".
+- A target output that no selected in-map can write is "not available from
+  source". So is one that reads a value that is not available as well as one
+  that is refused: it would not be written without the refusal either.
+- A non-zero source value is "dropped" when no in-map output that reaches the
+  target reads it.
 - Toward META visemes from another set, Route writes no isValid flag and says
   so in the frame's notes.
 - A bridge is a map from one canonical set to the other: the viseme pose
@@ -23,12 +31,15 @@ the profiles their signals belong to, not by their names.
   it only when the target reads what it writes, the source cannot write that
   itself, and the source writes some of what the bridge reads. Then the route
   is in-maps -> bridge -> out-maps. A class that no selected in-map can write
-  counts as 0 in the bridge, and the notes of each frame it runs on say so; a
-  class refused upstream refuses the bridge's outputs on that frame.
+  counts as 0 in the bridge, and the notes of each frame where the bridge
+  writes a value say so. A class refused upstream refuses the bridge outputs
+  that read it.
 
 One-hop mode (`maps=[...]`) runs the named maps straight from source to
-target, as rcef_translate.Translator does. The A/B comparison runs the retired
-direct maps this way, on the frozen pack that still holds them (ab/README.md).
+target, as rcef_translate.Translator does, with whole-map evaluation: a
+refusal refuses all outputs of that map on that frame. The A/B comparison runs
+the retired direct maps this way, on the frozen pack that still holds them
+(ab/README.md).
 """
 from __future__ import annotations
 import json
@@ -66,6 +77,12 @@ def reaches(rules: list[dict], sid: str) -> set[str]:
                 found |= new
                 todo += new
     return found
+
+
+def refusal(diagnostics) -> dict:
+    """Codes and references (after "/samples/<n>/") of a refusal's diagnostics."""
+    return {'codes': sorted({d.code for d in diagnostics}),
+            'refs': sorted({d.ref.split('/', 3)[3] for d in diagnostics if d.ref.count('/') >= 3})}
 
 
 class Route:
@@ -130,17 +147,18 @@ class Route:
                 raise SystemExit(result.report.to_dict())
             self.mappings[mapping] = result.value
         self.outputs = [o for m in self.out_maps for o in ends[m][1]]
-        # Which in-map or bridge writes each canonical signal, and which source signals reach an out-map.
+        # The canonical values that count: those an out-map or a bridge reads.
+        self.read = {i for m in self.out_maps + self.bridges for i in self.mappings[m].required_inputs}
+        # Which in-map or bridge writes each canonical signal; a bridge input that none writes counts as 0.
         self.writer = {o: m for m in self.in_maps for o in ends[m][1]}
         self.fill = {m: sorted(s for s in self.mappings[m].required_inputs if s not in self.writer)
                      for m in self.bridges}
         self.writer.update({o: m for m in self.bridges for o in ends[m][1]})
-        read = {i for m in self.out_maps + self.bridges for i in self.mappings[m].required_inputs}
         if self.one_hop:
-            self.kept = read
+            self.kept = self.read
         else:
             self.kept = {i for m in self.in_maps for i in self.mappings[m].required_inputs
-                         if reaches(self.rules[m], i) & read}
+                         if reaches(self.rules[m], i) & self.read}
 
     def valid(self, sid: str, flags: dict[str, bool]) -> bool:
         """A signal's validity is the AND of the provider flags its record names; canonical signals name none."""
@@ -148,88 +166,110 @@ class Route:
         return all(flags[name.strip()] for name in validity.split(' AND ')) if validity else True
 
     def translate(self, frames: list[dict]) -> list[dict]:
-        """Per frame: output values, refusals by map, labels of outputs not written, and dropped inputs.
+        """Per frame: output values, refusals by map, labels of outputs not written, dropped inputs and notes.
 
         A frame is {'time', 'values': {signal ID: value}, 'flags': {flag: bool}},
-        with an optional 'segment' label, as rcef_frames.Frames.read gives.
+        with an optional 'segment' label, as rcef_frames.Frames.read gives. A
+        refusal holds the codes and references of the map's refused outputs that
+        count, and those outputs.
         """
         results = [{'time': f['time'], 'segment': f.get('segment', ''), 'values': {}, 'refused': {}, 'labels': {},
                     'dropped': sorted(s for s, v in f['values'].items() if v != 0 and s not in self.kept),
                     'notes': [META_NOT_ASSERTED] if self.target == META and self.source != META else []}
                    for f in frames]
         if self.one_hop:
-            middle = frames
-        else:
-            middle = [{'time': f['time'], 'values': {}, 'flags': {}} for f in frames]
-            for mapping in self.in_maps:
-                for i, values in enumerate(self._run(mapping, frames, range(len(frames)), results)):
-                    if values is not None:
-                        middle[i]['values'].update(values)
-        # Per frame, the maps that kept a bridge from writing each of its outputs.
-        blocked = [{} for _ in frames]
+            for mapping in self.out_maps:
+                outputs = self.mappings[mapping].output_ids
+                for i, values in enumerate(self._whole(mapping, frames, results)):
+                    if values is None:
+                        results[i]['labels'].update(dict.fromkeys(outputs, f'refused at {mapping}'))
+                    else:
+                        results[i]['values'].update(values)
+            return results
+        middle = [{'time': f['time'], 'values': {}} for f in frames]
+        # Per frame, the maps that refused each canonical value that is not written.
+        causes = [{} for _ in frames]
+        for mapping in self.in_maps:
+            self._keep(mapping, self._partial(mapping, frames), middle, results, causes)
         for mapping in self.bridges:
-            self._bridge(mapping, middle, results, blocked)
+            fill = dict.fromkeys(self.fill[mapping], 0.0)
+            evaluated = self._partial(mapping, [{'time': f['time'], 'values': {**fill, **f['values']}} for f in middle])
+            self._keep(mapping, evaluated, middle, results, causes)
+            # A bridge output that is not available because its inputs were refused upstream is refused upstream too.
+            for row in evaluated.unavailable:
+                found = causes[row['sample']]
+                if all(s in found for s in row['inputs']):
+                    found[row['output']] = set().union(*(found[s] for s in row['inputs']))
+            if fill:
+                note = ZERO_FILLED.format(mapping, ', '.join(s.rsplit('.', 1)[1] for s in fill))
+                for i, sample in enumerate(evaluated.samples):
+                    if sample['values']:
+                        results[i]['notes'].append(note)
         for mapping in self.out_maps:
-            required = self.mappings[mapping].required_inputs
-            outputs = self.mappings[mapping].output_ids
-            span = []
-            for i, frame in enumerate(middle):
-                missing = [s for s in required if s not in frame['values']]
-                if not missing:
-                    span.append(i)
-                    continue
-                if self.one_hop:
-                    span.append(i)  # msf-character-tools refuses it with E_MISSING_SAMPLE
-                    continue
-                if any(s not in self.writer for s in missing):
+            evaluated = self._partial(mapping, middle)
+            for i, sample in enumerate(evaluated.samples):
+                results[i]['values'].update(sample['values'])
+            self._refusals(mapping, evaluated, results)
+            for row in evaluated.refusals:
+                results[row['sample']]['labels'][row['output']] = f'refused at {mapping}'
+            for row in evaluated.unavailable:
+                found, missing = causes[row['sample']], row['inputs']
+                if all(s in found for s in missing):
+                    label = f'refused upstream at {", ".join(sorted(set().union(*(found[s] for s in missing))))}'
+                else:
                     label = NOT_AVAILABLE
-                else:
-                    causes = set().union(*(blocked[i].get(s, {self.writer[s]}) for s in missing))
-                    label = f'refused upstream at {", ".join(sorted(causes))}'
-                results[i]['labels'].update(dict.fromkeys(outputs, label))
-            for i, values in zip(span, self._run(mapping, middle, span, results)):
-                if values is None:
-                    results[i]['labels'].update(dict.fromkeys(outputs, f'refused at {mapping}'))
-                else:
-                    results[i]['values'].update(values)
+                results[row['sample']]['labels'][row['output']] = label
         return results
 
-    def _bridge(self, mapping: str, middle: list[dict], results: list[dict], blocked: list[dict]) -> None:
-        """Run a bridge on the canonical frames, adding its values to them, with its unwritable inputs at 0."""
-        fill = dict.fromkeys(self.fill[mapping], 0.0)
-        frames = [{'time': f['time'], 'values': {**fill, **f['values']}} for f in middle]
-        outputs, span = self.mappings[mapping].output_ids, []
-        for i, frame in enumerate(frames):
-            missing = [s for s in self.mappings[mapping].required_inputs if s not in frame['values']]
-            if missing:
-                blocked[i].update(dict.fromkeys(outputs, {self.writer[s] for s in missing}))
-            else:
-                span.append(i)
-        short = ', '.join(s.rsplit('.', 1)[1] for s in fill)
-        for i, values in zip(span, self._run(mapping, frames, span, results)):
-            if values is None:
-                continue  # the out-maps label its outputs "refused upstream at" the bridge, their writer
-            middle[i]['values'].update(values)
-            if fill:
-                results[i]['notes'].append(ZERO_FILLED.format(mapping, short))
+    def _partial(self, mapping: str, frames: list[dict]):
+        """One map on every frame with partial evaluation: its written values, refusals and unavailable outputs."""
+        outcome = msf.evaluate_mapping(self.mappings[mapping], self._samples(mapping, frames), partial=True)
+        if not outcome.ok:
+            # Only a fault that no output owns fails a partial evaluation; Route gives each map only its own inputs.
+            raise SystemExit(outcome.report.to_dict())
+        return outcome.value
 
-    def _run(self, mapping: str, frames: list[dict], span, results: list[dict]) -> list[dict | None]:
-        """The map's output values for each frame in `span`, or None where it refused the frame."""
-        compiled = self.mappings[mapping]
-        samples = {}
-        for i in span:
-            values, flags = frames[i]['values'], frames[i].get('flags', {})
+    def _samples(self, mapping: str, frames: list[dict]) -> list[dict]:
+        """Each frame as a sample of the map: only its own inputs that the frame holds, with their validity."""
+        compiled, samples = self.mappings[mapping], []
+        for frame in frames:
+            values, flags = frame['values'], frame.get('flags', {})
             given = [s for s in compiled.required_inputs if s in values]
-            samples[i] = {'timestamp': frames[i]['time'], 'values': {s: values[s] for s in given},
-                          'validity': {s: self.valid(s, flags) for s in given}}
-        written = dict.fromkeys(span)
-        self._evaluate(mapping, compiled, samples, list(span), results, written)
-        return [written[i] for i in span]
+            samples.append({'timestamp': frame['time'], 'values': {s: values[s] for s in given},
+                            'validity': {s: self.valid(s, flags) for s in given}})
+        return samples
 
-    def _evaluate(self, mapping, compiled, samples, span, results, written):
+    def _refusals(self, mapping: str, evaluated, results: list[dict]) -> None:
+        """Record each frame's refused outputs of a map that count: all of an out-map's, and the canonical values
+        that an out-map or a bridge reads."""
+        counted = None if mapping in self.out_maps else self.read
+        by_frame = {}
+        for row in evaluated.refusals:
+            if counted is None or row['output'] in counted:
+                by_frame.setdefault(row['sample'], []).append(row)
+        for i, rows in by_frame.items():
+            results[i]['refused'][mapping] = {**refusal([d for r in rows for d in r['diagnostics']]),
+                                              'outputs': sorted(r['output'] for r in rows)}
+
+    def _keep(self, mapping: str, evaluated, middle: list[dict], results: list[dict], causes: list[dict]) -> None:
+        """Add an in-map's or a bridge's values to the canonical frames, and note its refused outputs that count."""
+        for i, sample in enumerate(evaluated.samples):
+            middle[i]['values'].update(sample['values'])
+        self._refusals(mapping, evaluated, results)
+        for row in evaluated.refusals:
+            if row['output'] in self.read:
+                causes[row['sample']][row['output']] = {mapping}
+
+    def _whole(self, mapping: str, frames: list[dict], results: list[dict]) -> list[dict | None]:
+        """One-hop mode: the map's output values for each frame, or None where it refused the frame."""
+        written = [None] * len(frames)
+        self._evaluate(mapping, self._samples(mapping, frames), list(range(len(frames))), results, written)
+        return written
+
+    def _evaluate(self, mapping, samples, span, results, written):
         if not span:
             return
-        outcome = msf.evaluate_mapping(compiled, [samples[i] for i in span])
+        outcome = msf.evaluate_mapping(self.mappings[mapping], [samples[i] for i in span])
         if outcome.ok:
             for i, sample in zip(span, outcome.value.samples):
                 written[i] = dict(sample['values'])
@@ -248,7 +288,5 @@ class Route:
         if not refused:
             raise SystemExit(outcome.report.to_dict())  # a failure that names no frame: retrying cannot help
         for i, diagnostics in refused.items():
-            results[i]['refused'][mapping] = {'codes': sorted({d.code for d in diagnostics}),
-                                              'refs': sorted({d.ref.split('/', 3)[3] for d in diagnostics
-                                                              if d.ref.count('/') >= 3})}
-        self._evaluate(mapping, compiled, samples, [i for i in span if i not in refused], results, written)
+            results[i]['refused'][mapping] = refusal(diagnostics)
+        self._evaluate(mapping, samples, [i for i in span if i not in refused], results, written)
