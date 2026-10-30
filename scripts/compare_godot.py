@@ -22,8 +22,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'docs/godot_comparison.md'
 FB2_PREFIX, FB2_SUFFIX = 'openxr.fb2.XR_FACE_EXPRESSION2_', '_FB'
-CANONICAL_PREFIX = 'rcef.canonical_expression.'
 ARKIT_PREFIX = 'arkit.coefficient.'
+FB2, CANONICAL, ARKIT = 'openxr.fb2', 'rcef.canonical_expression', 'arkit.coefficient'
 # Disagreements about meaning that a weight comparison cannot show. Each was
 # found while writing the mappings; the sources are in the evidence records.
 SEMANTIC = (
@@ -59,21 +59,29 @@ def combination(rule) -> dict[str, Fraction]:
     elif operator['id'] == 'weighted_sum':
         weights = operator['weights']
     else:
-        weights = [1.0]
+        raise ValueError(f"{rule['id']}: operator {operator['id']} is not compared")
     return {i: Fraction(w) for i, w in zip(rule['inputs'], weights)}
 
 
 def hops(pack: dict) -> dict[str, tuple[list[str], dict[str, Fraction]]]:
-    """ARKit name -> (the maps of its two hops, its composed weight on each FB2 channel)."""
+    """ARKit name -> (the maps of its two hops, its composed weight on each FB2 channel).
+
+    The hops are found as examples/rcef_route.py finds them, by the profiles of their signals: an in-map reads
+    only FB2 signals and writes only canonical ones; an out-map reads only canonical signals and writes ARKit ones.
+    """
+    members = {p['id']: set(p['signal_ids']) for p in pack['profiles']}
     # canonical signal -> (its FB2 -> canonical map, its rule); ARKit signal -> (its canonical -> ARKit map, its rule)
     writers = {}
     for mapping in pack['mappings']:
-        for rule in mapping['rules']:
-            for start, end in ((FB2_PREFIX, CANONICAL_PREFIX), (CANONICAL_PREFIX, ARKIT_PREFIX)):
-                if all(i.startswith(start) for i in rule['inputs']) and rule['outputs'][0].startswith(end):
-                    if rule['outputs'][0] in writers:
-                        raise ValueError(f'{rule["outputs"][0]}: written by two hop maps')
-                    writers[rule['outputs'][0]] = (mapping['id'], rule)
+        inputs = {i for r in mapping['rules'] for i in r['inputs']}
+        outputs = {o for r in mapping['rules'] for o in r['outputs']}
+        for start, end in ((FB2, CANONICAL), (CANONICAL, ARKIT)):
+            if not inputs <= members[start] or not outputs <= members[end]:
+                continue
+            for rule in mapping['rules']:
+                if rule['outputs'][0] in writers:
+                    raise ValueError(f'{rule["outputs"][0]}: written by two hop maps')
+                writers[rule['outputs'][0]] = (mapping['id'], rule)
     composed = {}
     for sid, (out_map, rule) in writers.items():
         if not sid.startswith(ARKIT_PREFIX):
