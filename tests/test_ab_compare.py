@@ -96,6 +96,22 @@ class Metrics(unittest.TestCase):
         # The unwritten outputs must be the whole frozen list: B writing a listed output is a violation too.
         self.assertEqual(ab_compare.facs_compare(b, expected, ['a', 'b', 'c'])[0]['coverage_violations'], 1)
 
+    def test_a_family_that_names_its_channels_is_held_only_to_the_outputs_they_reach(self):
+        pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+        route = ab_compare.rcef_route.Route('facs.code', 'arkit.coefficient')
+        pair = {'in_hops': [[m] for m in route.in_maps], 'out_hops': [[m] for m in route.out_maps]}
+        flat = [list(link) for link in ab_compare.links(pack, pair, route.outputs)]
+        zero = result(dict.fromkeys({o for _, o in flat}, 0.0))
+        # The letter family leaves AU19 and AU43 at 0, so the outputs only they reach stay 0.
+        unvaried = {'facs.code.au19', 'facs.code.au43_left', 'facs.code.au43_right'}
+        only = {o for s, o in flat if s in unvaried} - {o for s, o in flat if s not in unvaried}
+        self.assertEqual(only, {ARKIT + 'eyeBlinkLeft', ARKIT + 'eyeBlinkRight', ARKIT + 'tongueOut'})
+        seeded = {'facs_letters': [result({o: 0.0 if o in only else 0.5 for o in zero['values']})]}
+        channels = {'facs_letters': {s for s, _ in flat} - unvaried}
+        args = (pack, pair, [zero], [zero], [zero], flat, seeded)
+        self.assertEqual(ab_compare.m3_coverage(*args)[0]['violations'], 3)
+        self.assertEqual(ab_compare.m3_coverage(*args, channels)[0]['violations'], 0)
+
     def test_r3_counts_listed_departures_and_finds_other_differences(self):
         reference = {'cases': [{'expected': {'a': 0.5, 'b': 0.0, 'c': 0.25}}, {'expected': {'a': 1.0, 't': 1.0}}]}
         b = [result({'a': 0.5, 'b': 0.5, 'c': 0.25}), result({'a': 1.0})]

@@ -481,9 +481,10 @@ def flat_links(document: dict, pair: dict, impulse: list[dict], o: list[dict]) -
 
 
 def m3_coverage(document: dict, pair: dict, impulse: list[dict], b: list[dict], o: list[dict], flat: list,
-                seeded: dict) -> tuple[dict, list]:
+                seeded: dict, channels: dict | None = None) -> tuple[dict, list]:
     """Impulse frames change exactly O's outputs; every composed link is in O's set or the frozen flat list; every
-    reached output is non-zero on at least 1% of each seeded family of the pair's source."""
+    reached output is non-zero on at least 1% of each seeded family of the pair's source. A family that names its
+    channels (the FACS letter family) is held only to the outputs that those channels reach."""
     counts, failures = {'impulse_frames': len(impulse) - 1, 'violations': 0}, []
     changed_b = {}
     for n in range(1, len(impulse)):
@@ -499,7 +500,8 @@ def m3_coverage(document: dict, pair: dict, impulse: list[dict], b: list[dict], 
             counts['violations'] += 1
             failures.append([f'{s} -> {output}', 'linked but never changed, and not in the flat list'])
     for name, results in seeded.items():
-        for output in sorted({o for s, o in linked}):
+        varied = (channels or {}).get(name)
+        for output in sorted({o for s, o in linked if varied is None or s in varied}):
             share = sum(bool(r['values'].get(output)) for r in results) / max(len(results), 1)
             if share < 0.01:
                 counts['violations'] += 1
@@ -985,9 +987,10 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
         record('M4', {'pair': name, 'arm': 'B'}, {'observed_loss': len(lost), 'baseline': '', 'matches_baseline': ''})
         seeded = {f: b_runs[name, f] for f in by_source[pair['source']]
                   if any(s['name'] == f for s in abreg['families'])}
+        channels = {s['name']: set(s['channels']) for s in abreg['families'] if 'channels' in s}
         record('M3 coverage', {'pair': name}, *m3_coverage(
             b_document, pair, families[impulse_name], b_runs[name, impulse_name], o_runs[name, impulse_name],
-            abreg['lists']['m3_flat_links'], seeded))
+            abreg['lists']['m3_flat_links'], seeded, channels))
         if pair['source'] == pair['target']:
             for family in by_source[pair['source']]:
                 record('M3 exact', {'pair': name, 'family': family},
