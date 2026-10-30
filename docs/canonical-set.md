@@ -5,7 +5,7 @@ Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards For
 
 **Author affiliation: to be added by the release owners before this document goes to the working group.**
 
-**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with its 72 signals, and the maps of ARKit, FB2, Unified Expressions, VRCFaceTracking eye data, VRM blinks and FACS codes, with the [FACS](#facs) profile `facs.code`. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels, and the [viseme pose bridge](#viseme-pose-bridge) from the viseme set to the expression set. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
+**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with its 72 signals, and the maps of ARKit, FB2, Unified Expressions, VRCFaceTracking eye data, VRM blinks and FACS codes, with the [FACS](#facs) profile `facs.code`. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels, and the [viseme pose bridge](#viseme-pose-bridge) from the viseme set to the expression set. Data 0.5.0 retires the direct maps and the older `rcef.canonical` set of 21 signals, with tombstones in [retired-ids.csv](retired-ids.csv). In this document, "today's maps" are those retired direct maps. They stay frozen in `tests/fixtures/baseline-dea1713.pack.json` for the [A/B comparison](../ab/README.md).
 
 This document uses the proposal form of [GOVERNANCE.md](../GOVERNANCE.md): the problem, the proposal, the public evidence, the effect on compatibility, the alternatives, the tests and the open questions. Two documents go with it:
 
@@ -14,7 +14,7 @@ This document uses the proposal form of [GOVERNANCE.md](../GOVERNANCE.md): the p
 
 ## Problem
 
-Today RCEF maps one provider directly to another: 7 maps with 187 cross-provider mappings ([README](../README.md#mappings)). Each new pair needs a new map. Where no map exists, the only route is through ARKit. The 21 signals of `rcef.canonical` each keep their provider's calibration, so they cannot act as a common point between providers.
+Before data 0.5.0, RCEF mapped one provider directly to another: 7 maps with 187 cross-provider mappings. Each new pair needed a new map. Where no map existed, the only route was through ARKit. The 21 signals of the old `rcef.canonical` set each kept their provider's calibration, so they could not act as a common point between providers.
 
 RCSF does this job for skeletons. It calls itself a pivot for translating between formats, not a new universal skeleton that everyone must adopt (`rcsf_readme`, README line 9, RCSF `f6c3ea8`). This proposal does the same for face expressions.
 
@@ -265,10 +265,10 @@ There are 15 partition signals: 14 speech classes and `sil`. Together they parti
 - **Meaning:** the fraction of the source's maximum gaze in that direction. The value describes eye rotation, or the eyelid movement that goes with it, as the source reports it. No angle is claimed, and no curve is claimed.
 - **Why both rotation and eyelids:** ARKit's eye-look coefficients describe eyelid movement (`apple_blendshapes`), and FB2 describes eye rotation (`xr_fb2` lines 643-649). A definition that says rotation only would add a claim that today's ARKit → Unified Expressions map does not make.
 - **Whose side.** Apple names left and right from the face, so `eyeLookInLeft` (left eyelids, rightward gaze) is toward the nose (`apple_blendshapes`, Discussion). FB2's figure for EYES_LOOK_LEFT_L turns the subject's own left eye toward the temple (record `xr_fb2_fig_eyes_look_left_l`).
-- **FB2 names:** LOOK_LEFT_L → `gaze_out_left`, LOOK_RIGHT_L → `gaze_in_left`, LOOK_LEFT_R → `gaze_in_right`, LOOK_RIGHT_R → `gaze_out_right`. Today's `fb2_gaze.to_arkit` and the Godot OpenXR vendors plugin route the values the same way (`godot_vendors_fb2` lines 201-208).
-- **FB2 out-map helpers.** The FB2 gaze out-map nets each opposing pair through 4 helper values, with today's orientation and knots: `rcef.intermediate.gaze_in_minus_out_left`, `gaze_in_minus_out_right`, `gaze_up_minus_down_left` and `gaze_up_minus_down_right`. They replace today's 4 helpers, `rcef.intermediate.arkit_gaze_in_minus_out_L`, `arkit_gaze_up_minus_down_L`, `arkit_gaze_in_minus_out_R` and `arkit_gaze_up_minus_down_R` (`data/intermediate.toml`), which get tombstones when the direct maps are retired.
+- **FB2 names:** LOOK_LEFT_L → `gaze_out_left`, LOOK_RIGHT_L → `gaze_in_left`, LOOK_LEFT_R → `gaze_in_right`, LOOK_RIGHT_R → `gaze_out_right`. The retired `fb2_gaze.to_arkit` routed the values the same way, and so does the Godot OpenXR vendors plugin (`godot_vendors_fb2` lines 201-208).
+- **FB2 out-map helpers.** The FB2 gaze out-map nets each opposing pair through 4 helper values, with the orientation and knots of the retired `arkit_gaze.to_fb2`: `rcef.intermediate.gaze_in_minus_out_left`, `gaze_in_minus_out_right`, `gaze_up_minus_down_left` and `gaze_up_minus_down_right`. They replace that map's 4 helpers, `rcef.intermediate.arkit_gaze_in_minus_out_L`, `arkit_gaze_up_minus_down_L`, `arkit_gaze_in_minus_out_R` and `arkit_gaze_up_minus_down_R`, which data 0.5.0 retires with tombstones.
 - **No exclusivity claim.** FB2 says that only one of two opposing directions is non-zero (`xr_fb2` lines 648-649). The canonical set states no such constraint, so the FB2 gaze in-hop carries the loss `fb2_gaze_exclusive`. The FB2 out-map keeps only the difference of each opposing pair. When both directions of a pair are non-zero, each FB2 output loses up to the smaller of the two values.
-- **Rounding on the FB2 out-map.** The four outputs on the negative knot segment may change by up to 2⁻⁵⁴ when below 0.5, and values at or below 2⁻⁵⁴ become 0. The design goal is that these values equal those of today's `arkit_gaze.to_fb2`; the pre-registered comparison tests this.
+- **Rounding on the FB2 out-map.** The four outputs on the negative knot segment may change by up to 2⁻⁵⁴ when below 0.5, and values at or below 2⁻⁵⁴ become 0. The design goal was that these values equal those of the retired `arkit_gaze.to_fb2`; the pre-registered comparison found that they do ([scoreboard](../ab/results/v1/scoreboard.md), M1).
 - **Why directions, not signed angles:** the design keeps the values of every current gaze route (the comparison tests this), and FB2's 0 to 1 range stays. **Why in and out:** the names do not change under mirroring, and they match ARKit, Unified Expressions and Godot.
 - **No FACS code on gaze.** FACS 61 and 62 turn both eyes left or right together. Which eye turns toward the nose depends on whose "left" Wikipedia means, and the article does not say. Public crosswalks disagree on it. So the gaze signals have no `facs_au` for now. A later step may add 61-64 with the loss key `facs_side_frame_unresolved`.
 
@@ -621,9 +621,9 @@ The data change that adds `facs.code` adds four more records. The last two suppo
 ## Effect on compatibility
 
 - New profiles and maps are added. No existing value changes. In the META viseme profile, the 10 consonant and SIL signals become `mapped`, because the new hops use them.
-- The 7 direct maps, the 3 identity maps, the old `rcef.canonical` profile and its 21 signals, and the 4 old intermediate signals are retired later, with tombstones. Until then they stay as they are.
-- Every hop is `approximate` and `proposed`, except the 4 pupil copies, which are `exact` and `verified_current`. So 19 of the 21 `verified_current` mappings in today's three identity maps have only `proposed` routes in their place.
-- The design goal is that two-hop routes give the same values as today's direct maps on every output that both write. A pre-registered comparison tests this before the direct maps are retired; until then it is a goal, not a result.
+- Data 0.5.0 retires the 7 direct maps, the 3 identity maps, the old `rcef.canonical` profile and its 21 signals, and the 4 old intermediate signals, with tombstones in [retired-ids.csv](retired-ids.csv). There is no deprecation period.
+- Every hop is `approximate` and `proposed`, except the 4 pupil copies, which are `exact` and `verified_current`. So 19 of the 21 `verified_current` mappings in the three retired identity maps have only `proposed` routes in their place.
+- The design goal was that two-hop routes give the same values as the direct maps on every output that both write. The pre-registered comparison tested this before the direct maps were retired, and B equalled A1 on every such output ([scoreboard](../ab/results/v1/scoreboard.md), M1).
 
 ## Alternatives considered
 
