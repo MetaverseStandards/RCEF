@@ -4,11 +4,13 @@
 # print a pass/fail summary to paste into a pull request. GitHub Actions is not
 # turned on for this repository, so this is the CI run.
 #
-# The venvs default to $MSF/_tools/rcef-venv3.11 and rcef-venv3.12; each must
-# have the msf-character-tools release wheel recorded in
+# The venv of Python X.Y is $RCEF_VENVS/X.Y (for example $RCEF_VENVS/3.11).
+# RCEF_VENVS defaults to ${XDG_DATA_HOME:-$HOME/.local/share}/rcef/venvs, the
+# XDG data directory; a symbolic link to an existing venv is fine. Each venv
+# must have the msf-character-tools release wheel recorded in
 # evidence/tooling.lock.json installed by hash.
 set -u
-MSF=${MSF:-$HOME/.local/share/msf}
+VENVS=${RCEF_VENVS:-${XDG_DATA_HOME:-$HOME/.local/share}/rcef/venvs}
 ROOT=$(cd "$(dirname "$0")/.." && pwd -P)
 LOGS=$(mktemp -d "${TMPDIR:-/tmp}/rcef-ci.XXXXXX")
 cd "$ROOT" || exit 2
@@ -19,7 +21,7 @@ unset PYTHONPATH
 overall=PASS
 rows=''
 for version in 3.11 3.12; do
-    python="$MSF/_tools/rcef-venv$version/bin/python"
+    python="$VENVS/$version/bin/python"
     if [ ! -x "$python" ]; then
         rows="$rows| $version | missing venv | not run |
 "

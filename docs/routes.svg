@@ -1,0 +1,229 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0; RCEF contributors (2026). Written by scripts/export_figures.py. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 634" width="950" height="634" role="img" aria-labelledby="title desc" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<title id="title">Which canonical groups each expression set fills</title>
+<desc id="desc">One row per group of the canonical expression and viseme sets, one column per expression set. &quot;in&quot; means an in-map writes the group from the set; &quot;out&quot; means an out-map writes the set from the group. The last column shows the groups that the viseme pose bridge reads and writes.</desc>
+<rect width="950" height="634" fill="#f4f5ef"/>
+<text x="24" y="32" font-size="17" fill="#182b29" font-weight="600" text-anchor="start">Which canonical groups each expression set fills</text>
+<text x="24" y="52" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">Data 0.5.0. &quot;in&quot;: an in-map writes the group from the set. &quot;out&quot;: an out-map writes the set from the group. A route needs both ends.</text>
+<text x="24" y="70" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">Both canonical sets are drafts (vocabulary status &quot;draft&quot;).</text>
+<text x="236" y="96" font-size="12" fill="#182b29" font-weight="600" text-anchor="middle">ARKit</text>
+<text x="328" y="96" font-size="12" fill="#182b29" font-weight="600" text-anchor="middle">FB2</text>
+<text x="420" y="96" font-size="12" fill="#182b29" font-weight="600" text-anchor="middle">FACS</text>
+<text x="512" y="96" font-size="12" fill="#182b29" font-weight="600" text-anchor="middle">VRCFT UE</text>
+<text x="604" y="96" font-size="12" fill="#182b29" font-weight="600" text-anchor="middle">VRCFT eye</text>
+<text x="696" y="96" font-size="12" fill="#182b29" font-weight="600" text-anchor="middle">VRM</text>
+<text x="788" y="96" font-size="12" fill="#182b29" font-weight="600" text-anchor="middle">META</text>
+<text x="880" y="96" font-size="12" fill="#182b29" font-weight="600" text-anchor="middle">Pose bridge</text>
+<text x="24" y="121" font-size="12" fill="#415b57" font-weight="600" text-anchor="start">Canonical expression set</text>
+<text x="36" y="144" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">face</text>
+<rect x="192" y="130" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="236" y="144" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="284" y="130" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="144" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="130" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="420" y="144" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="468" y="130" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="144" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="130" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="130" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="130" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="130" width="88" height="20" rx="4" fill="#d6e6ef" stroke="#c8d5cc" stroke-width="1"/>
+<text x="880" y="144" font-size="11" fill="#155576" font-weight="600" text-anchor="middle">written</text>
+<text x="36" y="168" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">blink</text>
+<rect x="192" y="154" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="236" y="168" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="284" y="154" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="168" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="154" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="420" y="168" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="468" y="154" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="168" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="154" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="604" y="168" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="652" y="154" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="696" y="168" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="744" y="154" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="154" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="36" y="192" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">gaze</text>
+<rect x="192" y="178" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="236" y="192" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="284" y="178" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="192" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="178" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="468" y="178" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="192" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="178" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="178" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="178" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="178" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="36" y="216" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">cheek puff</text>
+<rect x="192" y="202" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="236" y="216" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="284" y="202" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="216" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="202" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="420" y="216" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="468" y="202" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="216" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="202" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="202" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="202" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="202" width="88" height="20" rx="4" fill="#d6e6ef" stroke="#c8d5cc" stroke-width="1"/>
+<text x="880" y="216" font-size="11" fill="#155576" font-weight="600" text-anchor="middle">written</text>
+<text x="36" y="240" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">cheek suck</text>
+<rect x="192" y="226" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="284" y="226" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="240" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="226" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="420" y="240" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="468" y="226" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="240" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="226" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="226" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="226" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="226" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="36" y="264" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">jaw thrust</text>
+<rect x="192" y="250" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="236" y="264" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="284" y="250" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="264" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="250" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="420" y="264" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="468" y="250" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="264" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="250" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="250" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="250" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="250" width="88" height="20" rx="4" fill="#d6e6ef" stroke="#c8d5cc" stroke-width="1"/>
+<text x="880" y="264" font-size="11" fill="#155576" font-weight="600" text-anchor="middle">written</text>
+<text x="36" y="288" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">jaw sideways</text>
+<rect x="192" y="274" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="236" y="288" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="284" y="274" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="288" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="274" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="420" y="288" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="468" y="274" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="288" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="274" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="274" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="274" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="274" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="36" y="312" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">mouth shift</text>
+<rect x="192" y="298" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="236" y="312" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="284" y="298" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="312" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="298" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="468" y="298" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="312" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="298" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="298" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="298" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="298" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="36" y="336" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">chin raise upper lip</text>
+<rect x="192" y="322" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="236" y="336" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="284" y="322" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="336" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="322" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="468" y="322" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="336" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="322" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="322" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="322" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="322" width="88" height="20" rx="4" fill="#d6e6ef" stroke="#c8d5cc" stroke-width="1"/>
+<text x="880" y="336" font-size="11" fill="#155576" font-weight="600" text-anchor="middle">written</text>
+<text x="36" y="360" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">lip tighten</text>
+<rect x="192" y="346" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="284" y="346" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="360" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="346" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="420" y="360" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="468" y="346" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="360" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="346" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="346" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="346" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="346" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="36" y="384" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">tongue out</text>
+<rect x="192" y="370" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="236" y="384" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="284" y="370" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="384" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="370" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="420" y="384" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="468" y="370" width="88" height="20" rx="4" fill="#f1e3c8" stroke="#c8d5cc" stroke-width="1"/>
+<text x="512" y="384" font-size="11" fill="#75500e" font-weight="600" text-anchor="middle">out</text>
+<rect x="560" y="370" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="370" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="370" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="370" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="36" y="408" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">tongue place</text>
+<rect x="192" y="394" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="284" y="394" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="328" y="408" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="376" y="394" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="468" y="394" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="560" y="394" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="394" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="394" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="394" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="36" y="432" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">pupil mm</text>
+<rect x="192" y="418" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="284" y="418" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="376" y="418" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="468" y="418" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="560" y="418" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="604" y="432" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="652" y="418" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="418" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="836" y="418" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="24" y="457" font-size="12" fill="#415b57" font-weight="600" text-anchor="start">Canonical viseme set</text>
+<text x="36" y="480" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">viseme rest</text>
+<rect x="192" y="466" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="284" y="466" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="376" y="466" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="468" y="466" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="560" y="466" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="466" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="466" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="788" y="480" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="836" y="466" width="88" height="20" rx="4" fill="#d6e6ef" stroke="#c8d5cc" stroke-width="1"/>
+<text x="880" y="480" font-size="11" fill="#155576" font-weight="600" text-anchor="middle">read</text>
+<text x="36" y="504" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">viseme consonant</text>
+<rect x="192" y="490" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="284" y="490" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="376" y="490" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="468" y="490" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="560" y="490" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="490" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="490" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="788" y="504" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="836" y="490" width="88" height="20" rx="4" fill="#d6e6ef" stroke="#c8d5cc" stroke-width="1"/>
+<text x="880" y="504" font-size="11" fill="#155576" font-weight="600" text-anchor="middle">read</text>
+<text x="36" y="528" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">viseme vowel</text>
+<rect x="192" y="514" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="284" y="514" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="376" y="514" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="468" y="514" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="560" y="514" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="514" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="696" y="528" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="744" y="514" width="88" height="20" rx="4" fill="#d7eadf" stroke="#c8d5cc" stroke-width="1"/>
+<text x="788" y="528" font-size="11" fill="#17614c" font-weight="600" text-anchor="middle">in + out</text>
+<rect x="836" y="514" width="88" height="20" rx="4" fill="#d6e6ef" stroke="#c8d5cc" stroke-width="1"/>
+<text x="880" y="528" font-size="11" fill="#155576" font-weight="600" text-anchor="middle">read</text>
+<text x="36" y="552" font-size="12" fill="#182b29" font-weight="normal" text-anchor="start">viseme aggregate</text>
+<rect x="192" y="538" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="284" y="538" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="376" y="538" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="468" y="538" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="560" y="538" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="652" y="538" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<rect x="744" y="538" width="88" height="20" rx="4" fill="#d6e6ef" stroke="#c8d5cc" stroke-width="1"/>
+<text x="788" y="552" font-size="11" fill="#155576" font-weight="600" text-anchor="middle">in</text>
+<rect x="836" y="538" width="88" height="20" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
+<text x="24" y="584" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">The bridge reads only the viseme classes that passed its calibration record; it maps no expression back to visemes.</text>
+<text x="24" y="602" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">Source: generated/rcef.pack.json. README &quot;Routes&quot; lists every route.</text>
+</svg>

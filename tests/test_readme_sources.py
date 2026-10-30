@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""The README's mapping table and the expression-set table in docs/expression-sets.md agree with the data."""
+"""The README's pivot sentence, routes, mapping and expression-set tables, and docs/expression-sets.md agree with the data."""
 import json
 from pathlib import Path
 import re
@@ -7,6 +7,10 @@ import tomllib
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
+PIVOT = ('RCEF is a pivot for translating between expression sets. It is not a set that everyone must adopt. '
+         'Each canonical signal has a declared meaning, but no shared or measured gain.')
+THROUGH = {'canonical expression set': 'expression', 'canonical viseme set': 'viseme',
+           'canonical viseme set, viseme pose bridge, canonical expression set': 'bridge'}
 LINK = re.compile(r'\[[^\]]*\]\(([^)]+)\)')
 
 
@@ -130,6 +134,51 @@ class ReadmeSources(unittest.TestCase):
                 self.assertLessEqual(computed, self.members.get('rcef.intermediate', set()))
                 self.assertLessEqual({s for r in rules for s in r['inputs']} - computed, self.members[source])
                 self.assertLessEqual({s for r in rules for s in r['outputs']} - computed, self.members[target])
+
+
+class ReadmeRoutes(unittest.TestCase):
+    """The README states the pivot sentence, and its Routes table lists every route Route can run."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.readme = (ROOT / 'README.md').read_text(encoding='utf-8')
+
+    def test_pivot_sentence(self):
+        purpose = self.readme[self.readme.index('## Purpose'):self.readme.index('## Contents')]
+        self.assertIn(PIVOT, ' '.join(purpose.split()))
+
+    def test_routes_table_matches_route(self):
+        import sys
+        sys.path.insert(0, str(ROOT / 'examples'))
+        from rcef_route import Route
+        from rcef_translate import load_pack
+        section = self.readme[self.readme.index('### Routes'):self.readme.index('### Mappings')]
+        listed = set()
+        for line in section.splitlines():
+            if line.startswith('| `'):
+                source, through, targets = [c.strip() for c in line.strip('|').split(' | ')]
+                for target in re.findall(r'`([^`]+)`', targets):
+                    listed.add((source.strip('`'), THROUGH[through], target))
+        pack = load_pack(json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8')))
+        sets = [p['id'] for p in pack.document['profiles'] if not p['id'].startswith(('rcef.', 'fixture'))]
+        found, compiled = set(), {}
+        for source in sets:
+            for target in sets:
+                route = Route(source, target, pack=pack, compiled=compiled)
+                compiled.update(route.mappings)
+                if not route.in_maps:
+                    continue
+                into = {m: dst for m, _, dst in route.hops}
+                out_of = {m: src for m, src, _ in route.hops}
+                if any(into[m] == 'rcef.canonical_expression' for m in route.in_maps):
+                    found.add((source, 'expression', target))
+                if (any(into[m] == 'rcef.canonical_viseme' for m in route.in_maps)
+                        and any(out_of[m] == 'rcef.canonical_viseme' for m in route.out_maps)):
+                    found.add((source, 'viseme', target))
+                if route.bridges:
+                    found.add((source, 'bridge', target))
+        self.assertEqual(listed, found)
+        self.assertIn(f'the {len({(s, t) for s, _, t in found})} routes', section)
 
 
 if __name__ == '__main__':
