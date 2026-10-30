@@ -10,12 +10,12 @@ from a source set through a canonical set to a target set. The 7 direct maps
 do not change.
 
 - New profile `rcef.canonical_expression` in
-  `data/canonical_expression.toml`: 70 signals, vocabulary version `1.0`,
+  `data/canonical_expression.toml`: 72 signals, vocabulary version `1.0`,
   status `draft`, as `docs/canonical-set.md` defines them. The groups are
   `face` (41), `cheek_puff` (2), `jaw_thrust` (1), `jaw_sideways` (2),
   `mouth_shift` (2), `chin_raise_upper_lip` (1), `blink` (2), `gaze` (8),
-  `tongue_out` (1), `cheek_suck` (2), `lip_tighten` (2) and `tongue_place`
-  (6). Each signal's metadata gives its definition, its 0 and 1,
+  `tongue_out` (1), `cheek_suck` (2), `lip_tighten` (2), `tongue_place` (6)
+  and `pupil_mm` (2). Each signal's metadata gives its definition, its 0 and 1,
   its FACS code where it has one, its group, the provider names aligned to
   it and its rows in the definitions audit.
 - 330 new mappings in 54 maps, one map per group and direction: ARKit and FB2
@@ -63,10 +63,21 @@ do not change.
   `facs_gross_code_no_intensity`. FACS fills 8 of the 12 groups: FACS → ARKit
   writes 41 of 52 outputs, and FACS → FB2 53 of 70. FACS → canonical → FACS
   gives every value back.
+- VRCFaceTracking eye data and VRM blinks map into the canonical expression
+  set, and VRCFaceTracking eye data also out of it (10 mappings in 5 maps).
+  The blink hops of VRCFaceTracking eye data take `eye_close` as
+  1 − `Openness` (affine −1, 1); both state that VRCFaceTracking does not say
+  that `Openness` 1 is neutral (`vrcft_eye_openness_neutral_unresolved`), and
+  the in-hop refuses an `Openness` outside 0 to 1 with `E_DOMAIN`. The 2 pupil
+  diameters join as the group `pupil_mm`, copied in millimetres both ways.
+  The VRM in-hop reads `blinkLeft` and `blinkRight` only, with the loss
+  "VRM blink (both eyes) not read; when a model drives only blink,
+  eye_close reads open"; a route lists a non-zero `blink` as dropped. Both
+  VRM blink hops keep the side caveat and the key `vrm_blink_side_unresolved`.
 - Evidence status: every canonical expression signal and every new mapping
-  is `proposed` and `approximate`. The identity maps into `rcef.canonical`
-  stay `verified_current`. The canonical pupils, which would be
-  `verified_current`, are not in this version.
+  is `proposed` and `approximate`, except the 2 canonical pupils and the 4
+  pupil copies, which are `verified_current` (the copies `exact`). The
+  identity maps into `rcef.canonical` stay `verified_current`.
 - Losses added by the definitions audit, on the hops that the audit names:
   the ARKit `mouthClose` jaw relation (`arkit_mouthclose_jaw_unresolved`),
   the ARKit definitions that differ from the canonical ones, the VRM blink
@@ -90,7 +101,7 @@ do not change.
   `ozel_arkit_facs` (an ARKit to FACS cheat sheet, archived); the last two
   support audit notes only.
 - `scripts/build_canonical.py` writes both canonical profiles, the
-  `facs.code` profile and the 79 maps from `docs/canonical-set.md`, its
+  `facs.code` profile and the 84 maps from `docs/canonical-set.md`, its
   audit, the IPA chart assignment in `tests/fixtures/ipa_chart_symbols.json`,
   the FACS code table in `examples/data/facs_codes.json`, the Rocketbox
   shape names in `tests/fixtures/rocketbox_au_names.json` (which
