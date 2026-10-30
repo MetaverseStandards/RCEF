@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT / 'examples'))
 import face_pipeline  # noqa: E402
 import make_expression_frames  # noqa: E402
 import ict_facekit  # noqa: E402
-import rcef_translate  # noqa: E402
+import rcef_frames  # noqa: E402
 import rigs  # noqa: E402
 import viseme_pipeline  # noqa: E402
 import vrm_presets  # noqa: E402
@@ -27,10 +27,6 @@ ROCKETBOX_LIKE = ([f'AA_VI_{i:02d}_{n}' for i, n in enumerate(rigs.ROCKETBOX_VIS
                   + [f'AK_{i + 1:02d}_{a[0].upper()}{a[1:]}' for i, a in enumerate(ARKIT_52)]
                   + ['AU_01_InnerBrowRaiser', 'AU_02_L_OuterBrowRaiser', 'AU_02_OuterBrowRaiser',
                      'AU_02_R_OuterBrowRaiser', 'AU_14_Dimpler', 'AU_43_L_EyeClosed', 'AU_43_R_EyeClosed', '_Neutral'])
-
-
-def compiled():
-    return {m: shared_pack.mapping(m, 'openxr.fb2', 'arkit.coefficient') for m in ('fb2.to_arkit', 'fb2_gaze.to_arkit')}
 
 
 class RigNames(unittest.TestCase):
@@ -114,8 +110,7 @@ class VowelPresets(unittest.TestCase):
             self.assertEqual(viseme_pipeline.blink_presets(path), {'EYES_CLOSED_L': 'blink'})
 
     def test_the_wink_frames_close_one_vrm_eye(self):
-        translator = rcef_translate.fb2_to_vrm(pack=shared_pack.pack(), compiled={
-            'fb2.to_vrm': shared_pack.mapping('fb2.to_vrm', 'openxr.fb2', 'vrm.preset')})
+        translator = shared_pack.frames('fb2_to_vrm')
         frames = viseme_pipeline.wink_frames(translator)
         self.assertEqual({f['segment'] for f in frames}, {'wink left', 'wink right'})
         hold = next(f for f in frames if f['segment'] == 'wink left' and f['labels']['phase'] == 'hold')
@@ -131,7 +126,7 @@ class FullArkitRig(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.translator = rcef_translate.fb2_to_arkit(pack=shared_pack.pack(), compiled=compiled())
+        cls.translator = shared_pack.frames('fb2_to_arkit')
         cls.targets = face_pipeline.face_targets([(i, a, None) for i, a in rigs.rocketbox_arkit(ROCKETBOX_LIKE).items()],
                                                  ROCKETBOX_LIKE)
         cls.frames = cls.translator.read(ROOT / 'examples/data/fb2_expression_frames.csv')
@@ -154,9 +149,13 @@ class FullArkitRig(unittest.TestCase):
                             for c in anger))
 
     def test_shapes_without_a_rule_are_labelled_not_failed(self):
-        face_only = rcef_translate.Translator('openxr.fb2', 'arkit.coefficient', ['fb2.to_arkit'],
-                                              self.translator.prefix, self.translator.suffix,
-                                              pack=shared_pack.pack(), compiled=compiled())
+        # The route without its gaze hops writes no eyeLook* coefficient.
+        route = self.translator.route
+        maps = [m for m in route.in_maps + route.out_maps if m not in ('fb2_gaze.to_rcef', 'rcef_gaze.to_arkit')]
+        self.assertEqual(len(maps), len(route.in_maps + route.out_maps) - 2)
+        document = shared_pack.cut(shared_pack.document(), maps, ['openxr.fb2'])
+        face_only = rcef_frames.Frames('openxr.fb2', 'arkit.coefficient', *rcef_frames.FB2,
+                                       pack=rcef_frames.load_pack(document))
         frames = [f for f in self.frames if f['segment'] == 'look up']
         channels = [c for f, r in zip(frames, face_only.translate(frames))
                     for c in face_pipeline.check_channels(face_only, f, r, self.targets)]
