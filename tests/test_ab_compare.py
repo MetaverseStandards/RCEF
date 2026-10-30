@@ -83,6 +83,11 @@ class Metrics(unittest.TestCase):
         counts, failures = ab_compare.m3_exact(frames, back, source)
         self.assertEqual((counts['errors'], counts['non_exclusive_frames']), (1, 1))
         self.assertEqual(failures, [[2, c, '0.25', '0.5']])
+        # VRCFaceTracking Openness comes back as 1 - (1 - x), so its rounding is reported, not counted.
+        openness = 'vrcft.eye.Left.Openness'
+        counts, _ = ab_compare.m3_exact([{'values': {openness: 0.3}}], [result({openness: 0.30000000000000004})],
+                                        {'gaze_pairs': []})
+        self.assertEqual((counts['errors'], counts['max_excluded_error']), (0, 0.30000000000000004 - 0.3))
 
     def test_facs_coverage_must_follow_the_frozen_list(self):
         expected = [{'a': 0.5, 'b': 0.0, 'c': 0.0}]

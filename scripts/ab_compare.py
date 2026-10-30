@@ -130,8 +130,10 @@ M10_NOT_AVAILABLE = [f'{FB2[0]}{c}{FB2[1]}' for c in (
     *(f'EYES_LOOK_{d}_{s}' for d in ('LEFT', 'RIGHT', 'UP', 'DOWN') for s in 'LR'))]
 M10B_NOT_AVAILABLE = [ARKIT + c for c in ('mouthLeft', 'mouthRight', 'mouthShrugUpper', *(
     f'eyeLook{d}{s}' for d in ('In', 'Out', 'Up', 'Down') for s in ('Left', 'Right')))]
-# FB2 gaze outputs on the negative knot segment: fl(1 - fl(1 - b)) rounds, so M3 reports their error.
-M3_ROUNDING = [f'{FB2[0]}EYES_LOOK_{c}_FB' for c in ('LEFT_L', 'RIGHT_R', 'DOWN_L', 'DOWN_R')]
+# FB2 gaze outputs on the negative knot segment, and VRCFaceTracking Openness through the blink hops: both give
+# fl(1 - fl(1 - x)), which rounds, so M3 reports their error.
+M3_ROUNDING = [f'{FB2[0]}EYES_LOOK_{c}_FB' for c in ('LEFT_L', 'RIGHT_R', 'DOWN_L', 'DOWN_R')] + [
+    f'vrcft.eye.{side}.Openness' for side in ('Left', 'Right')]
 TINY = 2.0 ** -1020
 THRESHOLDS = {
     'M1': 'B equals A1 on every output both write, sign of zero included; on the edge set B equals O',
