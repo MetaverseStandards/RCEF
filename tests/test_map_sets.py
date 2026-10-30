@@ -6,10 +6,13 @@ scripts/export_map_sets.py writes the pages; these tests check that they are cur
 the pages show against the pack without the script: the mappings of each part, the parts the map does not have,
 and the evidence records.
 """
+import contextlib
+import io
 import json
 from pathlib import Path
 import re
 import sys
+import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +30,7 @@ class MapSetPages(unittest.TestCase):
         cls.members = {p['id']: p['signal_ids'] for p in cls.pack['profiles']}
         cls.groups = {s: cls.signals[s]['metadata']['group'] for c in CANONICAL for s in cls.members[c]}
         cls.pages = {p.stem: p.read_text(encoding='utf-8') for p in (ROOT / 'docs/map-sets').glob('*.md')}
+        cls.files = [f'docs/map-sets/{name}.md' for name in cls.pages]
 
     def test_the_pages_are_current(self):
         rendered = export_map_sets.render(ROOT)
@@ -101,7 +105,7 @@ class MapSetPages(unittest.TestCase):
                         expected[record] = expected.get(record, 0) + 1
                 self.assertEqual({k: int(v) for k, v in rows.items()}, expected)
 
-    def test_a_split_map_is_two_pages_and_a_stale_page_is_reported(self):
+    def test_a_split_map_is_two_pages_and_a_stale_page_is_reported_and_removed(self):
         document = json.loads(json.dumps(self.pack))
         mapping = next(m for m in document['mappings'] if m['id'] == 'fb2.to_rcef_expression')
         gaze = [r for r in mapping['rules'] if self.groups.get(r['outputs'][0]) == 'gaze']
@@ -110,6 +114,23 @@ class MapSetPages(unittest.TestCase):
         sets = {e['id'] for e in export_map_sets.map_sets(document)}
         self.assertIn('fb2_gaze.to_rcef_expression', sets)
         self.assertEqual(len(sets), 17)
+        # A page with no map behind it is reported as out of date, and --write removes it.
+        with tempfile.TemporaryDirectory(prefix='rcef-map-sets-') as temp:
+            root = Path(temp)
+            for path in ('generated/rcef.pack.json', 'docs/canonical-set-audit.md', *self.files):
+                (root / path).parent.mkdir(parents=True, exist_ok=True)
+                (root / path).write_bytes((ROOT / path).read_bytes())
+            stale = root / 'docs/map-sets/fb2_face.to_rcef.md'
+            stale.write_text('old page\n', encoding='utf-8')
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                self.assertEqual(export_map_sets.main([], root), 1)
+            self.assertIn('docs/map-sets/fb2_face.to_rcef.md out of date', out.getvalue())
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(export_map_sets.main(['--write'], root), 0)
+            self.assertFalse(stale.exists())
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(export_map_sets.main([], root), 0)
 
 
 if __name__ == '__main__':

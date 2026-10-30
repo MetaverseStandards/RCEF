@@ -123,6 +123,7 @@ def page(entry: dict, document: dict, keys: set[str], siblings: list[dict]) -> s
     bridge = entry['source'] in CANONICAL and entry['target'] in CANONICAL
     rules, found = entry['rules'], parts(entry['rules'], groups)
     statuses = counted(r['evidence_status'] for r in rules)
+    prefix = ', '.join(sorted({r['id'].split('.', 1)[0] for r in rules}))
     lines = [HEADER, f'# Map set `{entry["id"]}`', '']
     direction = 'into' if entry['target'] in CANONICAL and not bridge else 'out of'
     if bridge:
@@ -135,6 +136,8 @@ def page(entry: dict, document: dict, keys: set[str], siblings: list[dict]) -> s
               f'- Evidence status of its mappings: {statuses}.',
               f'- Every mapping, with its assumptions and losses: [reports/mappings.md](../../reports/mappings.md#'
               f'{anchor(entry["id"])}).', '',
+              *([f'Its mapping IDs keep the prefix `{prefix}.` by design: a mapping ID never changes when its map is '
+                 'renamed ([docs/retired-ids.csv](../retired-ids.csv) gives the old map ID).', ''] if bridge else []),
               'A part is the mappings of the map that read or write one group of a canonical set. The groups are '
               'metadata of the canonical signals (`metadata.group`); they document the parts of the set. The map runs '
               'as one whole: a bad or missing input stops only the outputs that read it '
@@ -185,13 +188,17 @@ def page(entry: dict, document: dict, keys: set[str], siblings: list[dict]) -> s
         where = f'the [{name} section](../canonical-set-audit.md#{section}) of the definitions audit' if section else \
             'the definitions audit'
         if bridge:
-            lines.append('The bridge writes only the groups of a mouth pose. Teeth, tongue, blink, gaze, the sideways '
-                         'jaw and the mouth shifts are not represented ([canonical-set.md]'
-                         '(../canonical-set.md#viseme-pose-bridge)):')
+            lines.append('The bridge writes only the groups of a mouth pose. Its calibration record fits no pose for '
+                         'the groups below, so it writes none of them, and a route labels the outputs that need them '
+                         '"not available from source" ([canonical-set.md](../canonical-set.md#viseme-pose-bridge)):')
+        elif direction == 'into':
+            lines.append(f'{where[0].upper()}{where[1:]} names no `{provider}` signal for the canonical signals of '
+                         f'these groups, so no mapping {verb} them. A route labels the outputs that need them "not '
+                         'available from source", which is not a refusal.')
         else:
             lines.append(f'{where[0].upper()}{where[1:]} names no `{provider}` signal for the canonical signals of '
-                         f'these groups, so no mapping {verb} them. A route labels the outputs that need them "not available from '
-                         'source", which is not a refusal.')
+                         f'these groups, so no mapping {verb} them. On a route to `{provider}`, a source input that '
+                         'reaches only these groups is listed as dropped.')
         lines.append('')
         for group in absent:
             members = [s.rsplit('.', 1)[1] for s in profiles[canonical]['signal_ids'] if groups[s] == group]
@@ -224,16 +231,16 @@ def render(root: Path = ROOT) -> dict[str, str]:
             for e in sets}
 
 
-def main(argv: list[str]) -> int:
+def main(argv: list[str], root: Path = ROOT) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split('\n', 1)[0])
     parser.add_argument('--write', action='store_true', help='rewrite the pages')
     args = parser.parse_args(argv)
-    pages, stale = render(), []
-    folder = ROOT / OUTPUT
-    extra = sorted(p.relative_to(ROOT).as_posix() for p in folder.glob('*.md')) if folder.exists() else []
+    pages, stale = render(root), []
+    folder = root / OUTPUT
+    extra = sorted(p.relative_to(root).as_posix() for p in folder.glob('*.md')) if folder.exists() else []
     extra = [p for p in extra if p not in pages]
     for path, content in pages.items():
-        target = ROOT / path
+        target = root / path
         current = target.read_text(encoding='utf-8') if target.exists() else ''
         if current == content:
             continue
@@ -246,7 +253,7 @@ def main(argv: list[str]) -> int:
                   end='')
     for path in extra:
         if args.write:
-            (ROOT / path).unlink()
+            (root / path).unlink()
         else:
             stale.append(path)
     if stale:

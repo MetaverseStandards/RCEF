@@ -9,6 +9,8 @@ The viseme pose bridge: one map from the canonical viseme set (`rcef.canonical_v
 - Evidence status of its mappings: proposed (101).
 - Every mapping, with its assumptions and losses: [reports/mappings.md](../../reports/mappings.md#rcef_visemeto_rcef_expression).
 
+Its mapping IDs keep the prefix `rcef_viseme_pose.` by design: a mapping ID never changes when its map is renamed ([docs/retired-ids.csv](../retired-ids.csv) gives the old map ID).
+
 A part is the mappings of the map that read or write one group of a canonical set. The groups are metadata of the canonical signals (`metadata.group`); they document the parts of the set. The map runs as one whole: a bad or missing input stops only the outputs that read it ([examples/rcef_route.py](../../examples/rcef_route.py)).
 
 ## Parts
@@ -47,7 +49,7 @@ A part is the mappings of the map that read or write one group of a canonical se
 
 ## Parts this map does not have
 
-The bridge writes only the groups of a mouth pose. Teeth, tongue, blink, gaze, the sideways jaw and the mouth shifts are not represented ([canonical-set.md](../canonical-set.md#viseme-pose-bridge)):
+The bridge writes only the groups of a mouth pose. Its calibration record fits no pose for the groups below, so it writes none of them, and a route labels the outputs that need them "not available from source" ([canonical-set.md](../canonical-set.md#viseme-pose-bridge)):
 
 - `jaw_sideways` (2): `jaw_sideways_left`, `jaw_sideways_right`
 - `mouth_shift` (2): `mouth_shift_left`, `mouth_shift_right`

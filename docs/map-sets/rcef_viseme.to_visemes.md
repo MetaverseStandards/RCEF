@@ -42,7 +42,7 @@ Loss keys of the [definitions audit](../canonical-set-audit.md#loss-keys) that i
 
 ## Parts this map does not have
 
-The [META visemes section](../canonical-set-audit.md#meta-visemes) of the definitions audit names no `openxr.visemes` signal for the canonical signals of these groups, so no mapping reads them. A route labels the outputs that need them "not available from source", which is not a refusal.
+The [META visemes section](../canonical-set-audit.md#meta-visemes) of the definitions audit names no `openxr.visemes` signal for the canonical signals of these groups, so no mapping reads them. On a route to `openxr.visemes`, a source input that reaches only these groups is listed as dropped.
 
 - `viseme_aggregate` (1): `alveolar_floor`
 

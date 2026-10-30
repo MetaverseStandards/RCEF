@@ -38,7 +38,7 @@ Loss keys of the [definitions audit](../canonical-set-audit.md#loss-keys) that i
 
 ## Parts this map does not have
 
-The [VRM section](../canonical-set-audit.md#vrm) of the definitions audit names no `vrm.preset` signal for the canonical signals of these groups, so no mapping reads them. A route labels the outputs that need them "not available from source", which is not a refusal.
+The [VRM section](../canonical-set-audit.md#vrm) of the definitions audit names no `vrm.preset` signal for the canonical signals of these groups, so no mapping reads them. On a route to `vrm.preset`, a source input that reaches only these groups is listed as dropped.
 
 - `viseme_consonant` (9): `bilabial`, `labiodental`, `dental`, `alveolar_sibilant`, `postalveolar`, `coronal_stop`, `coronal_nasal_lateral`, `dorsal`, `rhotic`
 - `viseme_rest` (1): `sil`

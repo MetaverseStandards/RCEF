@@ -72,7 +72,7 @@ Loss keys of the [definitions audit](../canonical-set-audit.md#loss-keys) that i
 
 ## Parts this map does not have
 
-The [ARKit section](../canonical-set-audit.md#arkit) of the definitions audit names no `arkit.coefficient` signal for the canonical signals of these groups, so no mapping reads them. A route labels the outputs that need them "not available from source", which is not a refusal.
+The [ARKit section](../canonical-set-audit.md#arkit) of the definitions audit names no `arkit.coefficient` signal for the canonical signals of these groups, so no mapping reads them. On a route to `arkit.coefficient`, a source input that reaches only these groups is listed as dropped.
 
 - `cheek_suck` (2): `cheek_suck_left`, `cheek_suck_right`
 - `lip_tighten` (2): `lip_tighten_left`, `lip_tighten_right`

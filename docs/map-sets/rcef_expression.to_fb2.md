@@ -69,7 +69,7 @@ Loss keys of the [definitions audit](../canonical-set-audit.md#loss-keys) that i
 
 ## Parts this map does not have
 
-The [FB2 section](../canonical-set-audit.md#fb2) of the definitions audit names no `openxr.fb2` signal for the canonical signals of these groups, so no mapping reads them. A route labels the outputs that need them "not available from source", which is not a refusal.
+The [FB2 section](../canonical-set-audit.md#fb2) of the definitions audit names no `openxr.fb2` signal for the canonical signals of these groups, so no mapping reads them. On a route to `openxr.fb2`, a source input that reaches only these groups is listed as dropped.
 
 - `pupil_mm` (2): `pupil_diameter_mm_left`, `pupil_diameter_mm_right`
 
