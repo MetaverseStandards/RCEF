@@ -93,6 +93,13 @@ GOLDEN_KINDS = {'fb2_to_arkit': 'openxr.fb2', 'arkit_to_fb2': 'arkit.coefficient
                 'fb2_to_vrm': 'openxr.fb2', 'visemes_to_vrm': 'openxr.visemes'}
 GOLDEN_PAIRS = {'fb2_to_arkit': 'FB2 -> ARKit', 'arkit_to_fb2': 'ARKit -> FB2', 'arkit_to_ue': 'ARKit -> VRCFT UE',
                 'fb2_to_vrm': 'FB2 -> VRM blink', 'visemes_to_vrm': 'META -> VRM'}
+# R3: FB2 -> Unified Expressions as Godot's plugin gives it, in a file of its own (scripts/derive_fb2_goldens.py).
+R3_FILE, R3_KINDS, R3_PAIR = 'tests/fixtures/fb2_vrcft_ue_goldens.json', {'fb2_to_ue': 'openxr.fb2'}, 'FB2 -> VRCFT UE'
+# Where B departs from R3 by design: Godot sets these parts to 0 ("Not measured") where the canonical value is
+# copied into each part, and Godot fills TongueFlat from TONGUE_RETREAT, which RCEF does not map.
+R3_DEPARTURES = [f'vrcft.artist.base.{n}' for n in (
+    'BrowPinchLeft', 'BrowPinchRight', 'MouthCornerSlantLeft', 'MouthCornerSlantRight', 'MouthUpperLeft',
+    'MouthUpperRight', 'MouthLowerLeft', 'MouthLowerRight', 'TongueFlat')]
 CSV_INPUTS = [('examples/data/fb2_demo_frames.csv', 'openxr.fb2', *FB2),
               ('examples/data/fb2_expression_frames.csv', 'openxr.fb2', *FB2),
               ('examples/data/viseme_demo_frames.csv', 'openxr.visemes', *VISEMES),
@@ -136,6 +143,7 @@ THRESHOLDS = {
           'reached output non-zero on at least 1% of each seeded family that sets a linked input',
     'M4': 'B observed loss 0; A1 observed loss equals the registered baseline',
     'M5': 'R1: 129 of 129 goldens exact through B; R2: composed B weights equal the 52 rows but the listed departures',
+    'M8 R3': 'report: FB2 -> VRCFT UE, B equals R3 (the Godot route) on every R3 output but the listed departures',
     'M10': 'FACS -> FB2: B equals A3 on outputs both write; coverage list frozen; B refuses 0 frames',
     'M10b': 'FACS -> ARKit: B equals A3 then A1 on outputs both write; coverage list frozen',
 }
@@ -555,6 +563,27 @@ def r2(b_document: dict, pair: dict, rows: list[dict], departures: list[str]) ->
     return counts, failures
 
 
+def r3(results: list[dict], goldens: dict, departures: list[str]) -> tuple[dict, list]:
+    """M8 R3: each R3 case through B gives its expected value on every output, except the listed departures."""
+    counts = {'cases': len(goldens['cases']), 'outputs': 0, 'exact': 0, 'departures': 0, 'departures_not_seen': 0,
+              'differences': 0}
+    failures, seen = [], set()
+    for n, (case, result) in enumerate(zip(goldens['cases'], results, strict=True)):
+        for output, value in sorted(case['expected'].items()):
+            counts['outputs'] += 1
+            same = output in result['values'] and bits(result['values'][output]) == bits(value)
+            if same:
+                counts['exact'] += 1
+            elif output in departures:
+                counts['departures'] += 1
+                seen.add(output)
+            else:
+                counts['differences'] += 1
+                failures.append([n, output, repr(value), repr(result['values'].get(output, 'not written'))])
+    counts['departures_not_seen'] = len(set(departures) - seen)
+    return counts, failures
+
+
 # ---------------------------------------------------------------- A1 figures (fixed inputs only)
 
 def a1_figures(abreg: dict, document: dict) -> dict:
@@ -639,11 +668,12 @@ def draft(root: Path = ROOT, b_path: Path | None = None, date: str = '') -> dict
             'csv': [{'path': p, 'source': s, 'prefix': pre, 'suffix': suf,
                      'sha256': sha256_bytes((root / p).read_bytes())} for p, s, pre, suf in CSV_INPUTS],
             'facs_keys': keys,
+            'r3': {'path': R3_FILE, 'kinds': R3_KINDS, 'sha256': sha256_bytes((root / R3_FILE).read_bytes())},
             'a3': ab_a3.SHA256},
         'pairs': pairs,
         'metrics': THRESHOLDS,
         'lists': {'intended_differences': [], 'a1_loss_corrections': [], 'audit_added_keys': [], 'side_exceptions': [],
-                  'reason_key_table': {}, 'assumption_catalogue': {}, 'no_target': [], 'r3': [],
+                  'reason_key_table': {}, 'assumption_catalogue': {}, 'no_target': [], 'r3': R3_DEPARTURES,
                   'r2_departures': ['browInnerUp'], 'm3_flat_links': [], 'm3_rounding': M3_ROUNDING,
                   'm10_not_available': M10_NOT_AVAILABLE, 'm10b_not_available': M10B_NOT_AVAILABLE,
                   'm11_differences': []},
@@ -1002,6 +1032,10 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
             rows = list(csv.DictReader(handle))
         record('M5 R2', {'reference': 'R2'}, *r2(b_document, abreg['pairs']['FB2 -> ARKit'], rows,
                                                  abreg['lists']['r2_departures']))
+    if (R3_PAIR, f'r3:{R3_KINDS["fb2_to_ue"]}') in b_runs:
+        reference = json.loads((root / abreg['fixed_inputs']['r3']['path']).read_text(encoding='utf-8'))
+        record('M8 R3', {'reference': 'R3'}, *r3(b_runs[R3_PAIR, f'r3:{R3_KINDS["fb2_to_ue"]}'], reference,
+                                                 abreg['lists']['r3']))
     timings['total'] = round(time.perf_counter() - started, 3)
     return write_results(out, abreg, report, frame_sums, timings, pins, dry_run, b_path, root)
 
@@ -1012,7 +1046,7 @@ GATES = {'M1': ('value_differences', 'sign_differences'), 'B equals O': ('differ
          'M2': ('violations',), 'M2c': ('shortfall',), 'M3 exact': ('errors',), 'M3 coverage': ('violations',),
          'M5 R2': ('differences',), 'M10': ('value_differences', 'coverage_violations', 'b_refusals'),
          'M10b': ('value_differences', 'coverage_violations')}
-REPORT_ONLY = ('M2b', 'M8')
+REPORT_ONLY = ('M2b', 'M8', 'M8 R3')
 
 
 def status(metric: str, rows: list[dict]) -> str:
@@ -1093,7 +1127,8 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
         threshold = THRESHOLDS.get(metric) or THRESHOLDS.get(metric.split()[0], 'report only')
         shown = gate_statuses[metric] + (f' (no rows for {", ".join(missing[metric])})' if metric in missing else '')
         lines.append(f'| {metric} | {threshold} | {shown} |')
-    for metric, needs in PENDING.items():
+    pending = {m: needs for m, needs in PENDING.items() if m not in report['metrics']}
+    for metric, needs in pending.items():
         lines.append(f'| {metric} | needs {needs} | pending |')
     lines += ['', '| Pair | Evidence status (A1 / B) | M2c shortfall | M4b | External reference |',
               '|---|---|---|---|---|']
@@ -1109,11 +1144,11 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
     files['scoreboard.md'] = '\n'.join(lines) + '\n'
     for name, text in files.items():
         (out / name).write_text(text, encoding='utf-8')
-    passed = all(s in ('pass', 'report') for s in gate_statuses.values()) and not PENDING and not dry_run
+    passed = all(s in ('pass', 'report') for s in gate_statuses.values()) and not pending and not dry_run
     manifest = {'id': abreg['id'], 'version': abreg['version'], 'kind': abreg['kind'],
                 'abreg_sha256': abreg_sha256(abreg), 'seed_root': abreg['seed_root'], 'dry_run': dry_run,
                 'pin_problems': pins, 'passed': passed, 'statuses': gate_statuses, 'row_statuses': row_statuses,
-                'missing_rows': missing, 'pending': PENDING,
+                'missing_rows': missing, 'pending': pending,
                 'a1_sha256': A1_SHA256, 'b_pack': b_path.name, 'b_pack_sha256': sha256_bytes(b_path.read_bytes()),
                 'code': code_hashes(root), 'runtime': runtime_pins(root)}
     (out / 'manifest.json').write_text(json.dumps(manifest, indent=1, sort_keys=True) + '\n', encoding='utf-8')
