@@ -341,6 +341,10 @@ def fixed_inputs(abreg: dict, root: Path = ROOT) -> dict[str, list[dict]]:
         name = f'csv:{entry["source"]}:{Path(entry["path"]).stem}'
         families[name] = csv_family(name, read(entry), abreg['sources'][entry['source']], entry['prefix'],
                                     entry['suffix'])
+    if 'r3' in spec:
+        reference = json.loads(read(spec['r3']).read_text(encoding='utf-8'))
+        for source in dict.fromkeys(spec['r3']['kinds'].values()):
+            families[f'r3:{source}'] = golden_family(f'r3:{source}', reference, abreg['sources'], spec['r3']['kinds'])
     if 'facs_keys' in spec:
         keys = spec['facs_keys']
         families['facs_key_impulses'] = facs_key_impulses('facs_key_impulses', keys['sided'], keys['shared'],

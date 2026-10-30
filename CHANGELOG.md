@@ -2,7 +2,191 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-## Data 0.4.0 — unreleased
+## Data 0.5.0 — unreleased
+
+The draft canonical expression set and the draft canonical viseme set join
+the data, with maps into them and out of them. A translation can now run
+from a source set through a canonical set to a target set. The 7 direct maps
+do not change.
+
+- New profile `rcef.canonical_expression` in
+  `data/canonical_expression.toml`: 72 signals, vocabulary version `1.0`,
+  status `draft`, as `docs/canonical-set.md` defines them. The groups are
+  `face` (41), `cheek_puff` (2), `jaw_thrust` (1), `jaw_sideways` (2),
+  `mouth_shift` (2), `chin_raise_upper_lip` (1), `blink` (2), `gaze` (8),
+  `tongue_out` (1), `cheek_suck` (2), `lip_tighten` (2), `tongue_place` (6)
+  and `pupil_mm` (2). Each signal's metadata gives its definition, its 0 and 1,
+  its FACS code where it has one, its group, the provider names aligned to
+  it and its rows in the definitions audit.
+- 330 new mappings in 54 maps, one map per group and direction: ARKit and FB2
+  into the canonical expression set (130 mappings in 21 maps), and the
+  canonical expression set to ARKit, FB2, VRCFaceTracking Unified
+  Expressions and VRM per-eye blinks (200 mappings in 33 maps). The FB2 gaze
+  out-map has 4 internal steps, which write 4 new `rcef.intermediate`
+  signals.
+- Each new mapping states, as assumptions: the correspondence; the
+  endpoints, with a clause that matches its operator; whether the evidence
+  of today's direct maps carries over to the canonical signal or is
+  withdrawn, with the loss that withdraws it (a transfer is withdrawn when
+  the hop's own audit row or the other set's row for the canonical signal is
+  `differs` or `unresolved`); and every other assumption of
+  today's direct maps, as the assumption catalogue in
+  `docs/canonical-set-audit.md` places it.
+- The 10 FB2-only signals join the canonical expression set: cheek suck (2),
+  lip tighten (2) and the 6 tongue positions. FB2 maps into and out of them
+  (20 mappings in 6 maps), and the canonical set writes Unified Expressions
+  CheekSuck and MouthTightener (4 mappings in 2 maps). No direct map links
+  these signals, so their FB2 and Unified Expressions hops take their
+  crosswalks from a new table in the definitions audit: VRCFaceTracking's
+  Movement table in one step (`vrcft_docs_movement`, provider form), and
+  Godot in two steps (`godot_vendors_fb2`, `godot_enum`,
+  `godot_face_modifier`, a new chain form of the transfer assumption). The
+  Unified Expressions out-hops state the loss "two-step crosswalk through
+  Godot". The 10 FB2 signals and the 4 Unified Expressions shapes change
+  from `unresolved` to `mapped`. TONGUE_RETREAT is not mapped to TongueFlat,
+  as Godot maps it: the two names do not name one action.
+  `scripts/check_audit_locators.py` checks the table's line locators against
+  the cached source bytes.
+- New profile `facs.code` in `profiles/facs.code.toml`: FACS codes as an
+  expression set, vocabulary version `1.0`, status `draft`. 92 rows, one per
+  code number from a public list (`facs_wikipedia`), split by side where the
+  canonical signal is: 49 `mapped`, 25 `unresolved` and 18 `excluded`, each
+  with its reason. The values are RCEF's own numeric encoding of the FACS
+  intensity letters, not FACS scores, and RCEF does not code faces. The
+  aligned names are the 48 Rocketbox FACS shapes.
+- 102 new mappings in 16 maps between FACS codes and the canonical expression
+  set: 53 into it (copies, and 8 fan-outs for AU22 and AU28, which FACS does
+  not split into upper and lower parts) and 49 out of it (copies, and 4
+  means). Each states the FACS opening (intensity E or, for the gross
+  behaviour codes, the action at its fullest is canonical 1; absent is 0)
+  and the losses `facs_ordinal_intensity`, `facs_side_frame_unresolved` and,
+  where the audit names them, `facs_au30_direction_unresolved`,
+  `facs_au17_no_split`, `facs_mouth_opening_split`, `facs_eyelid_events` and
+  `facs_gross_code_no_intensity`. FACS fills 8 of the 13 groups: FACS → ARKit
+  writes 41 of 52 outputs, and FACS → FB2 53 of 70. FACS → canonical → FACS
+  gives every value back.
+- VRCFaceTracking eye data and VRM blinks map into the canonical expression
+  set, and VRCFaceTracking eye data also out of it (10 mappings in 5 maps).
+  The blink hops of VRCFaceTracking eye data take `eye_close` as
+  1 − `Openness` (affine −1, 1); both state that VRCFaceTracking does not say
+  that `Openness` 1 is neutral (`vrcft_eye_openness_neutral_unresolved`), and
+  the in-hop refuses an `Openness` outside 0 to 1 with `E_DOMAIN`. The 2 pupil
+  diameters join as the group `pupil_mm`, copied in millimetres both ways.
+  The VRM in-hop reads `blinkLeft` and `blinkRight` only, with the loss
+  "VRM blink (both eyes) not read; when a model drives only blink,
+  eye_close reads open"; a route lists a non-zero `blink` as dropped. Both
+  VRM blink hops keep the side caveat and the key `vrm_blink_side_unresolved`.
+- Evidence status: every canonical expression signal and every new mapping
+  is `proposed` and `approximate`, except the 2 canonical pupils and the 4
+  pupil copies, which are `verified_current` (the copies `exact`). The
+  identity maps into `rcef.canonical` stay `verified_current`.
+- Losses added by the definitions audit, on the hops that the audit names:
+  the ARKit `mouthClose` jaw relation (`arkit_mouthclose_jaw_unresolved`),
+  the ARKit definitions that differ from the canonical ones, the VRM blink
+  side (`vrm_blink_side_unresolved`, until now an assumption only), the
+  Unified Expressions definitions that differ, and the ICT-FaceKit FACS
+  crosswalk codes that differ from the canonical codes
+  (`ict_au33_cheek_blow`, `ict_au45_blink`). No loss of today's maps is
+  corrected.
+- On the pairs that the direct maps also translate (FB2 → ARKit,
+  ARKit → FB2, ARKit → Unified Expressions, FB2 → VRM blinks), the route
+  through the canonical expression set gives the same weights as the direct
+  maps. FB2 → Unified Expressions is new: it runs through the canonical
+  expression set.
+- New evidence records: `rcef_canonical_v1` (the original canonical
+  expression vocabulary), `facs_wikipedia` (FACS code numbers, Wikipedia
+  revision 1357638399), `rcsf_proposal` (the RCSF proposal at `f6c3ea8`),
+  and six figure records for the FB2 and Unified Expressions figures that
+  the definitions cite. For FACS: `facs_hager_2002` (the publisher's page
+  on the 2002 manual, archived), `rocketbox_avatars` (Microsoft Rocketbox at
+  `0943055`), `pyfeat_au_reference` (Py-Feat at `4ebb4ec`) and
+  `ozel_arkit_facs` (an ARKit to FACS cheat sheet, archived); the last two
+  support audit notes only.
+- `scripts/build_canonical.py` writes both canonical profiles, the
+  `facs.code` profile and the 84 maps from `docs/canonical-set.md`, its
+  audit, the IPA chart assignment in `tests/fixtures/ipa_chart_symbols.json`,
+  the FACS code table in `examples/data/facs_codes.json`, the Rocketbox
+  shape names in `tests/fixtures/rocketbox_au_names.json` (which
+  `scripts/derive_rocketbox_au_names.py` reads from the pinned rig files)
+  and the direct maps. New tests: `tests/test_canonical_vocabulary.py`,
+  `tests/test_pivot_structure.py` and `tests/test_facs_profile.py`.
+  The capability matrix in the second reads the names of FACS,
+  `XR_FB_face_tracking`, `XR_ANDROID_face_tracking` and
+  `XR_ML_facial_expression` from `tests/fixtures/capability_sets.json`,
+  which `scripts/derive_capability_sets.py` writes from cached source bytes.
+- New profile `rcef.canonical_viseme` in `data/canonical_viseme.toml`: 16
+  signals, vocabulary version `1.0`, status `draft`. 15 are partition
+  classes: `viseme_vowel` (5) and `viseme_consonant` (9), mouth-shape
+  classes that hold the IPA chart (2020 revision), and `viseme_rest` (1,
+  `sil`). They are the fewest
+  classes that keep every META viseme and every VRM vowel apart, and every
+  symbol of the chart falls in exactly one of them; the IPA symbols that no
+  provider names are assigned by place and manner, as
+  `docs/canonical-set.md` shows. The 15 are coupled as a
+  `probability_simplex`: from a valid META frame they sum to 1. The 16th
+  signal, `alveolar_floor` (group `viseme_aggregate`), is the sum of
+  `alveolar_sibilant`, `coronal_stop`, `coronal_nasal_lateral` and
+  `rhotic`, clamped at 1; it is outside the simplex. Sums and argmax over
+  the profile use the 15 partition signals only.
+- 42 new mappings in 9 maps: META visemes and the VRM vowel presets into the
+  canonical viseme set (22 mappings in 5 maps), and the canonical viseme set
+  to META visemes and the VRM vowel presets (20 mappings in 4 maps). The map
+  to `alveolar_floor` has 1 internal step, which writes 1 new
+  `rcef.intermediate` signal (9 in all). Every viseme mapping is `proposed`
+  and `approximate`.
+- META visemes to VRM through the canonical viseme set gives the same
+  weights and the same refusals as `visemes.to_vrm`. The 10 META consonant
+  and silence visemes, which no map read before, are now `mapped`.
+- Losses added for the visemes: `meta_viseme_class_scope` (META's classes
+  are named by example sounds, and the canonical classes by the IPA chart)
+  on every META viseme hop, and `meta_viseme_aggregate_sum` on the map to
+  `alveolar_floor`.
+- New evidence records for the visemes: the IPA chart (2020, Kiel and
+  Doulos SIL files), Amazon Polly's archived licence and en-US phoneme
+  table, four Wikipedia articles (roundedness, labialization, interdental
+  and linguolabial consonants), ten META viseme reference images, and the
+  viseme literature that the definitions cite.
+- New tests: `tests/test_canonical_visemes.py` checks the viseme
+  vocabulary, that every IPA chart symbol is in exactly one class, the IPA
+  rules, the aggregate and the coupling.
+- New map `rcef_viseme_pose.to_rcef_expression`, the viseme pose bridge, in
+  `mappings/canonical_viseme_pose.toml`: 101 mappings from the canonical
+  viseme set to the canonical expression set. Each signal of the groups
+  `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` is the sum of
+  each class weight times the class's pose, clamped at 1: a copy per class
+  (the unit changes from probability to 1), a `weighted_sum` per signal with
+  the frozen poses as weights, and a clamp. The poses come from the
+  calibration record `viseme-poses.rocketbox-features`. The bridge reads
+  only the 11 classes that pass on all 4 held-out rigs, 7 by their shape
+  (`vowel_open`, `vowel_close_spread`, `vowel_mid_rounded`, `dental`,
+  `coronal_stop`, `dorsal` and `sil`) and 4 by the perceptual gate
+  (`bilabial`, `vowel_close_rounded`, `vowel_mid_spread` and
+  `alveolar_sibilant`); weight on the 4 that fail moves nothing. On
+  Rocketbox rigs, META PP keeps the lips closed and draws them back about
+  1 mm, like the rigs' own PP; the lips at rest are already closed, so the
+  gate's added evidence is the retraction and the overlap. The bridge was
+  first written from `viseme-poses.rocketbox-female`, then from `viseme-poses.rocketbox-multi`
+  version 1 and version 2; each time, as decided before the new record's
+  held-out run, the new record replaced the old one for every class. 56 new
+  `rcef.intermediate` signals (65 in all),
+  which `scripts/build_canonical.py` writes below a marker line in
+  `data/intermediate.toml`. Every bridge mapping is `proposed` and
+  `approximate`: pack schema 1.0 has no `calibrated_software`. Its losses
+  are `viseme_pose_example_rigs`, `viseme_pose_residual`,
+  `viseme_pose_perceptual_gate` and `viseme_pose_classes_not_read`. No map goes from expressions to visemes.
+- New evidence record `calibration.viseme-poses.rocketbox-features`, which
+  the 45 weighted sums of the bridge cite. It replaced the evidence records
+  of the earlier viseme pose records.
+- `examples/rcef_route.py` runs a bridge between the canonical sets when the
+  target reads what it writes, the source cannot write that itself, and the
+  source writes some of what it reads: META or VRM to ARKit, FB2 or Unified
+  Expressions. Classes that the source cannot write count as 0 in the
+  bridge, with a note. Every other route gives the same values as before;
+  the A/B dry run gives byte-identical files.
+- New tests: `tests/test_pose_bridge.py` checks the bridge against the
+  record and Route without the generator.
+
+## Data 0.4.0 — not released (A/B baseline at `dea1713`, pack SHA-256 `630d37a5…`)
 
 Adopt msf-tools (now msf-character-tools) operators 1.1
 (`operator_version = "1.1"`). FB2 requires opposing gaze directions to be
@@ -67,6 +251,69 @@ exclusive, and the data now builds this in.
   stays 0.4.0.
 
 ## Calibration and examples — unreleased
+
+- Calibration record `calibration/viseme-poses.rocketbox-female.cal`
+  (software-only; mesh geometry only, so it has no renderer): each of
+  Rocketbox Female's 15 META viseme shapes fitted as a mirror-symmetric
+  combination of her ARKit shapes, with weights from 0 to 1 (bounded least
+  squares over every vertex except the tongue), carried to canonical
+  expression signals by the ARKit in-maps. Frozen with bounds of 0.5 on the
+  median and p95 error (the error is the distance to the held-out rig's own
+  viseme shape divided by that shape's motion) before the held-out run on
+  Rocketbox Male. 9 of 15 classes pass (`sil` trivially: 8 of 14 speech
+  classes); the neutral bound cannot fail; `vowel_mid_spread` (0.51),
+  `postalveolar` (0.52), `vowel_close_rounded` (0.59), `alveolar_sibilant`
+  (0.64), `bilabial` (0.67) and `labiodental` (0.92) fail and are published
+  as negative results. Made by `tools/calibration/viseme_poses.py` at its
+  freeze commit. No mapping cites it now.
+- Calibration record `calibration/viseme-poses.rocketbox-multi.cal`
+  (software-only; mesh geometry only): one pose per class for 10 Rocketbox
+  training rigs at once, with Left and Right weights apart and the largest
+  training-rig error made small (Lawson reweighting of bounded least
+  squares). A rule in `tools/calibration/viseme_rigs.json` chose the
+  training and held-out rigs before any new rig was downloaded; the method
+  was chosen by leave-one-rig-out cross-validation on the training rigs
+  (`viseme_poses.py cv`). Same bounds as the single-rig record. Held out on
+  Female_Adult_04, Female_Adult_13, Male_Adult_05 and Male_Adult_11: 9 of
+  15 classes pass on every rig (`sil` trivially: 8 of 14 speech classes).
+  `coronal_nasal_lateral` (0.46 to 0.51), `vowel_mid_spread` (0.54 to
+  0.59), `vowel_close_rounded` (0.55 to 0.60), `bilabial` (0.56 to 0.70),
+  `alveolar_sibilant` (0.62 to 0.64) and `labiodental` (0.90 to 0.93) fail
+  and are published as negative results. `examples/rigs.py` pins the 12 new
+  Rocketbox files.
+- Its version 1 left Left and Right apart, and its poses moved the two
+  sides differently by up to 0.56, more than its limitations said. Version
+  2 ties each Left and Right pair, keeps the training rigs and the bounds,
+  and is held out on 4 fresh rigs (Female_Adult_06, Female_Adult_17,
+  Male_Adult_02 and Male_Adult_19): 7 of 15 classes pass. The reason is in
+  its `FREEZES` line. Report-only lip measures of version 2 for PP, FF and
+  OU are in `tools/calibration/results/viseme_lips.json`.
+- `check.py` accepts a perceptual gate in a calibration record: frozen
+  `features` (kind `difference` or `range`, each with a tolerance) and
+  `feature_cells` with the median, p95 and largest error. A channel passes
+  if all its shape cells pass, or if every feature cell passes for every
+  held-out identity. Tests and a fixture cover each rule.
+- Calibration record `calibration/viseme-poses.rocketbox-features.cal`:
+  tied poses from 18 Rocketbox training rigs (the 10 earlier ones and the 8
+  rigs held out so far), and a perceptual gate for `bilabial` (lips closed
+  on the mid line, from −2.0 to 0.5 mm, and drawn back),
+  `vowel_close_rounded` (corner width and protrusion), `vowel_mid_spread`
+  (corner width and lip opening) and `alveolar_sibilant` (lip opening and
+  jaw drop), each with a whole-face guard. Tolerances are the spread of the
+  training rigs' own visemes. The features and fit weight were chosen by
+  leave-one-rig-out cross-validation; `labiodental` got no gate, because
+  its only achievable feature is met by the neutral face. Held out on
+  Female_Adult_09, Female_Adult_15, Male_Adult_08 and Male_Adult_15: 11 of
+  15 classes pass, 7 by shape and 4 by the perceptual gate. `labiodental`,
+  `postalveolar`, `coronal_nasal_lateral` and `rhotic` fail.
+- `check.py` accepts a record with no `renderer` (a fit that renders
+  nothing), and a `weighted_sum` that cites a record of poses: each input a
+  copy of one channel, one clamp reading the sum, and weights exactly the
+  frozen poses. `calibration/README.md` describes both.
+- `examples/viseme_bridge.py` drives a Rocketbox rig (default the held-out
+  Female_Adult_04) and ICT-FaceKit with META viseme frames through the
+  bridge, writes the meshes for rendering, compares the Rocketbox rig with
+  its own viseme shapes, and prints a line per META viseme.
 
 - Calibration record `calibration/rig-gains.ict-rocketbox-female.cal`
   (software-only; not a measurement of any tracker): one monotone curve per

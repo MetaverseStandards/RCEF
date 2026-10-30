@@ -1,0 +1,610 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; attributed source identifiers are factual inventories.
+# Written by scripts/build_canonical.py from docs/canonical-set.md,
+# docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and today's
+# direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run
+# the script.
+# The maps between the canonical sets and META visemes: one map per canonical group and
+# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
+
+[[mappings]]
+id = "visemes_vowel.to_rcef"
+
+[[mappings.rules]]
+id = "visemes_rcef.vowel_open"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META"]
+outputs = ["rcef.canonical_viseme.vowel_open"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme AA (META \"A:\" as in car) corresponds to canonical vowel_open; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META", "rcef.canonical_viseme.vowel_open"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META", "rcef.canonical_viseme.vowel_open"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.vowel_mid_spread"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_E_META"]
+outputs = ["rcef.canonical_viseme.vowel_mid_spread"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme E (META \"e\" as in bed) corresponds to canonical vowel_mid_spread; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_E_META", "rcef.canonical_viseme.vowel_mid_spread"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_E_META", "rcef.canonical_viseme.vowel_mid_spread"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.vowel_close_spread"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META"]
+outputs = ["rcef.canonical_viseme.vowel_close_spread"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme IH (META \"ih\" as in tip) corresponds to canonical vowel_close_spread; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META", "rcef.canonical_viseme.vowel_close_spread"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META", "rcef.canonical_viseme.vowel_close_spread"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.vowel_mid_rounded"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META"]
+outputs = ["rcef.canonical_viseme.vowel_mid_rounded"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme OH (META \"oh\" as in toe) corresponds to canonical vowel_mid_rounded; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META", "rcef.canonical_viseme.vowel_mid_rounded"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META", "rcef.canonical_viseme.vowel_mid_rounded"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.vowel_close_rounded"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"]
+outputs = ["rcef.canonical_viseme.vowel_close_rounded"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme OU (META \"ou\" as in book) corresponds to canonical vowel_close_rounded; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META", "rcef.canonical_viseme.vowel_close_rounded"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META", "rcef.canonical_viseme.vowel_close_rounded"], "units" = "1" },
+]
+
+[[mappings]]
+id = "visemes_consonant.to_rcef"
+
+[[mappings.rules]]
+id = "visemes_rcef.bilabial"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META"]
+outputs = ["rcef.canonical_viseme.bilabial"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme PP (META p, b, m) corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META", "rcef.canonical_viseme.bilabial"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META", "rcef.canonical_viseme.bilabial"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.labiodental"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META"]
+outputs = ["rcef.canonical_viseme.labiodental"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme FF (META f, v) corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META", "rcef.canonical_viseme.labiodental"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META", "rcef.canonical_viseme.labiodental"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.dental"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META"]
+outputs = ["rcef.canonical_viseme.dental"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme TH (META th, read as θ ð) corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META", "rcef.canonical_viseme.dental"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META", "rcef.canonical_viseme.dental"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.alveolar_sibilant"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META"]
+outputs = ["rcef.canonical_viseme.alveolar_sibilant"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme SS (META s, z) corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "rcef.canonical_viseme.alveolar_sibilant"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "rcef.canonical_viseme.alveolar_sibilant"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.postalveolar"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META"]
+outputs = ["rcef.canonical_viseme.postalveolar"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme CH (META tS, dZ, S, read as tʃ dʒ ʃ) corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META", "rcef.canonical_viseme.postalveolar"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META", "rcef.canonical_viseme.postalveolar"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.coronal_stop"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META"]
+outputs = ["rcef.canonical_viseme.coronal_stop"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme DD (META t, d) corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "rcef.canonical_viseme.coronal_stop"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "rcef.canonical_viseme.coronal_stop"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.coronal_nasal_lateral"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"]
+outputs = ["rcef.canonical_viseme.coronal_nasal_lateral"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme NN (META n, l) corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "rcef.canonical_viseme.coronal_nasal_lateral"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "rcef.canonical_viseme.coronal_nasal_lateral"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.dorsal"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META"]
+outputs = ["rcef.canonical_viseme.dorsal"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme KK (META k, g) corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META", "rcef.canonical_viseme.dorsal"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META", "rcef.canonical_viseme.dorsal"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.rhotic"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"]
+outputs = ["rcef.canonical_viseme.rhotic"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme RR (META r, as in red) corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META", "rcef.canonical_viseme.rhotic"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META", "rcef.canonical_viseme.rhotic"], "units" = "1" },
+]
+
+[[mappings]]
+id = "visemes_rest.to_rcef"
+
+[[mappings.rules]]
+id = "visemes_rcef.sil"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META"]
+outputs = ["rcef.canonical_viseme.sil"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme SIL, which META calls neutral, corresponds to canonical sil: no speech articulation.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META", "rcef.canonical_viseme.sil"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META", "rcef.canonical_viseme.sil"], "units" = "1" },
+]
+
+[[mappings]]
+id = "visemes_aggregate.to_rcef"
+
+[[mappings.rules]]
+id = "visemes_rcef.viseme_alveolar_floor_sum"
+inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"]
+outputs = ["rcef.intermediate.viseme_alveolar_floor_sum"]
+operator = { "id" = "weighted_sum", "weights" = [1.0, 1.0, 1.0, 1.0] }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META", "rcef.intermediate.viseme_alveolar_floor_sum"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META", "rcef.intermediate.viseme_alveolar_floor_sum"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "visemes_rcef.alveolar_floor"
+inputs = ["rcef.intermediate.viseme_alveolar_floor_sum"]
+outputs = ["rcef.canonical_viseme.alveolar_floor"]
+operator = { "id" = "piecewise_linear", "knots" = [[0.0, 0.0], [1.0, 1.0], [4.0, 1.0]] }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: canonical alveolar_floor is the union of the classes alveolar_sibilant, coronal_stop, coronal_nasal_lateral and rhotic, which META SS, DD, NN and RR carry one to one.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss meta_viseme_aggregate_sum.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.intermediate.viseme_alveolar_floor_sum", "rcef.canonical_viseme.alveolar_floor"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_aggregate_sum: sum of the listed classes, clamped at 1; META has no such class", "refs" = ["rcef.intermediate.viseme_alveolar_floor_sum", "rcef.canonical_viseme.alveolar_floor"], "units" = "1" },
+]
+
+[[mappings]]
+id = "rcef_viseme_vowel.to_visemes"
+
+[[mappings.rules]]
+id = "rcef_visemes.AA"
+inputs = ["rcef.canonical_viseme.vowel_open"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme AA (META \"A:\" as in car) corresponds to canonical vowel_open; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.vowel_open", "openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.vowel_open", "openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met", "refs" = ["rcef.canonical_viseme.vowel_open", "openxr.visemes.XR_FACE_TRACKING_VISEME_AA_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.E"
+inputs = ["rcef.canonical_viseme.vowel_mid_spread"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_E_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme E (META \"e\" as in bed) corresponds to canonical vowel_mid_spread; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.vowel_mid_spread", "openxr.visemes.XR_FACE_TRACKING_VISEME_E_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.vowel_mid_spread", "openxr.visemes.XR_FACE_TRACKING_VISEME_E_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met", "refs" = ["rcef.canonical_viseme.vowel_mid_spread", "openxr.visemes.XR_FACE_TRACKING_VISEME_E_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.IH"
+inputs = ["rcef.canonical_viseme.vowel_close_spread"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme IH (META \"ih\" as in tip) corresponds to canonical vowel_close_spread; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.vowel_close_spread", "openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.vowel_close_spread", "openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met", "refs" = ["rcef.canonical_viseme.vowel_close_spread", "openxr.visemes.XR_FACE_TRACKING_VISEME_IH_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.OH"
+inputs = ["rcef.canonical_viseme.vowel_mid_rounded"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme OH (META \"oh\" as in toe) corresponds to canonical vowel_mid_rounded; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.vowel_mid_rounded", "openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.vowel_mid_rounded", "openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met", "refs" = ["rcef.canonical_viseme.vowel_mid_rounded", "openxr.visemes.XR_FACE_TRACKING_VISEME_OH_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.OU"
+inputs = ["rcef.canonical_viseme.vowel_close_rounded"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme OU (META \"ou\" as in book) corresponds to canonical vowel_close_rounded; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.vowel_close_rounded", "openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.vowel_close_rounded", "openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met", "refs" = ["rcef.canonical_viseme.vowel_close_rounded", "openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"], "units" = "1" },
+]
+
+[[mappings]]
+id = "rcef_viseme_consonant.to_visemes"
+
+[[mappings.rules]]
+id = "rcef_visemes.PP"
+inputs = ["rcef.canonical_viseme.bilabial"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme PP (META p, b, m) corresponds to canonical bilabial; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.bilabial", "openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.bilabial", "openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.FF"
+inputs = ["rcef.canonical_viseme.labiodental"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme FF (META f, v) corresponds to canonical labiodental; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.labiodental", "openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.labiodental", "openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.TH"
+inputs = ["rcef.canonical_viseme.dental"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme TH (META th, read as θ ð) corresponds to canonical dental; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.dental", "openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.dental", "openxr.visemes.XR_FACE_TRACKING_VISEME_TH_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.SS"
+inputs = ["rcef.canonical_viseme.alveolar_sibilant"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme SS (META s, z) corresponds to canonical alveolar_sibilant; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.alveolar_sibilant", "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.alveolar_sibilant", "openxr.visemes.XR_FACE_TRACKING_VISEME_SS_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.CH"
+inputs = ["rcef.canonical_viseme.postalveolar"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme CH (META tS, dZ, S, read as tʃ dʒ ʃ) corresponds to canonical postalveolar; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.postalveolar", "openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.postalveolar", "openxr.visemes.XR_FACE_TRACKING_VISEME_CH_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.DD"
+inputs = ["rcef.canonical_viseme.coronal_stop"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme DD (META t, d) corresponds to canonical coronal_stop; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.coronal_stop", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.coronal_stop", "openxr.visemes.XR_FACE_TRACKING_VISEME_DD_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.NN"
+inputs = ["rcef.canonical_viseme.coronal_nasal_lateral"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme NN (META n, l) corresponds to canonical coronal_nasal_lateral; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.coronal_nasal_lateral", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.coronal_nasal_lateral", "openxr.visemes.XR_FACE_TRACKING_VISEME_NN_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.KK"
+inputs = ["rcef.canonical_viseme.dorsal"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme KK (META k, g) corresponds to canonical dorsal; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.dorsal", "openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.dorsal", "openxr.visemes.XR_FACE_TRACKING_VISEME_KK_META"], "units" = "1" },
+]
+
+[[mappings.rules]]
+id = "rcef_visemes.RR"
+inputs = ["rcef.canonical_viseme.rhotic"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme RR (META r, as in red) corresponds to canonical rhotic; RCEF reads META's example sounds as members of this IPA shape class.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.rhotic", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.rhotic", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"], "units" = "1" },
+]
+
+[[mappings]]
+id = "rcef_viseme_rest.to_visemes"
+
+[[mappings.rules]]
+id = "rcef_visemes.SIL"
+inputs = ["rcef.canonical_viseme.sil"]
+outputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META"]
+operator = { "id" = "affine", "scale" = 1.0, "offset" = 0.0 }
+disposition = "mapped"
+mapping_quality = "approximate"
+evidence_status = "proposed"
+assumptions = [
+  "correspondence: META viseme SIL, which META calls neutral, corresponds to canonical sil: no speech articulation.",
+  "endpoints: META's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+]
+evidence = ["xr_visemes", "xr_registry", "ipa_chart_doulos_2020", "rcef_canonical_v1"]
+loss_annotations = [
+  { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.sil", "openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META"], "units" = "1" },
+  { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.sil", "openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META"], "units" = "1" },
+]

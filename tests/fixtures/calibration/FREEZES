@@ -1,4 +1,6 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # Test fixture freeze ledger (format: calibration/README.md).
 # id version frozen_sha256 date [reason]
+fixture.poses v1 828caa0d591460c27a6dbd22f839b26905bfcb40be2fb3a4864201084f570e39 2026-10-27
+fixture.poses-features v1 119a9386ae3ae0393bd0ee11c4a63bff9ce0f6f9ef2ca9b237e7e08a294c18d5 2026-10-27
 fixture.jaw-gain v1 a0b64c522c27cd70ee641f516c3ffcb18ae01029a6bbdcfb20cae8e98ace6a89 2026-10-27

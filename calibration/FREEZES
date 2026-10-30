@@ -6,3 +6,7 @@ mediapipe.ict-response v1 bf10b92b55476dd550fb9882e0c7427d9e4ddda05af0cd3e143ddf
 rig-gains.ict-rocketbox-female v1 5193181a3795817fcb739eeb9ea18927fec718edfac6097573ed61975add67d6 2026-10-27
 mediapipe.ict-response v2 07752ac4272e151f8c9295152bdd6254716d0420037943a603634304d4057d90 2026-10-28 history rewritten for publication: new code_commit, msf-character-tools 0.5.0 and renderer
 rig-gains.ict-rocketbox-female v2 18afee0a4da98aac15e4ae2a33fb06a3ee4153525d26e49b510f108dff06a5f5 2026-10-28 history rewritten for publication: new code_commit, msf-character-tools 0.5.0 and renderer
+viseme-poses.rocketbox-female v1 62eef93078e22288acbc1bcb03c5c284e2d05ad98236dc6809f90b1acc55e9cb 2026-10-29
+viseme-poses.rocketbox-multi v1 2693e7aab6b06556d760d41e7aa0104408fe92d7e01e0fe3a5bacaa6f88460b3 2026-10-29
+viseme-poses.rocketbox-multi v2 f2251681ae72d864d8478e2aa62fdb6dfaa8e0d923fbbd310636dac2633e09e3 2026-10-29 Left and Right tied: version 1 poses differed between the sides by up to 0.56 and its limitation called that slight; fresh held-out rigs
+viseme-poses.rocketbox-features v1 ddde4315edf7071c85293b94641191983f59091107ceb4b70f0c9eb7c926c9c1 2026-10-29
