@@ -264,8 +264,8 @@ exclusive, and the data now builds this in.
   `cheekPuff` (ICT AU33) and `eyeBlink` (ICT AU45), and new gaze text: the
   FB2 figures show the subject's own side.
 - `examples/make_demo_frames.py` and `examples/make_expression_frames.py`
-  use channel lists fixed in the code (the lists of data 0.3.0), not the
-  live pack. `tests/test_demo_frames.py` checks that the demo frames are
+  use channel lists fixed in the code (the lists of the A1 pack at
+  dea1713), not the live pack. `tests/test_demo_frames.py` checks that the demo frames are
   written byte for byte.
 - The translation tests run through the routes. A mutation changes the maps
   of one hop.

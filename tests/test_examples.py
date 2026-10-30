@@ -79,8 +79,11 @@ class Fb2Example(unittest.TestCase):
         for source, output in frames:
             self.assertEqual(float(output['eyeBlinkLeft']), float(source['EYES_CLOSED_L']))
             self.assertEqual(output['eyeLookOutLeft'], '')
-            self.assertIn('fb2_gaze.to_rcef', output['refused'])
-            self.assertNotIn('fb2_face.to_rcef:', output['refused'])
+            # The whole cell: the hop map, its code and the refused inputs by the provider's own names.
+            self.assertEqual(output['refused'],
+                             'fb2_gaze.to_rcef: E_INVALID_SAMPLE on 8 inputs (EYES_LOOK_DOWN_L, EYES_LOOK_DOWN_R, '
+                             'EYES_LOOK_LEFT_L, EYES_LOOK_LEFT_R, EYES_LOOK_RIGHT_L, EYES_LOOK_RIGHT_R, EYES_LOOK_UP_L, '
+                             'EYES_LOOK_UP_R)')
 
     def test_lost_face_refuses_everything(self):
         for _, output in self.frames('face lost'):
@@ -250,7 +253,8 @@ class VisemeExample(unittest.TestCase):
         self.assertEqual(len(rows), len(inputs))
         for source_row, output in zip(inputs, rows):
             if source_row['isValid'] == '0':
-                self.assertIn('visemes_vowel.to_rcef', output['refused'])
+                self.assertEqual(output['refused'],
+                                 'visemes_vowel.to_rcef: E_INVALID_SAMPLE on 5 inputs (AA, E, IH, OH, OU)')
                 continue
             for viseme, preset in (('AA', 'aa'), ('E', 'ee'), ('IH', 'ih'), ('OH', 'oh'), ('OU', 'ou')):
                 self.assertEqual(float(output[preset]), float(source_row[viseme]))
@@ -259,9 +263,9 @@ class VisemeExample(unittest.TestCase):
 
 
 class Columns(unittest.TestCase):
-    def test_the_output_columns_keep_the_order_of_the_data_0_3_0_maps(self):
+    def test_the_output_columns_keep_the_order_of_the_a1_maps(self):
         # The published example outputs must not change, so each CSV keeps the column order that the direct maps
-        # of data 0.3.0 gave it, read here from the frozen pack of that release.
+        # gave it, read here from the A1 pack at dea1713 (tests/fixtures/baseline-dea1713.pack.json).
         pack = json.loads((ROOT / 'tests/fixtures/baseline-dea1713.pack.json').read_text(encoding='utf-8'))
         rules = {m['id']: m['rules'] for m in pack['mappings']}
         for kind, maps in (('fb2_to_arkit', ('fb2.to_arkit', 'fb2_gaze.to_arkit')),

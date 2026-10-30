@@ -31,8 +31,8 @@ from pathlib import Path
 DATA = Path(__file__).resolve().parent / 'data'
 FPS = 15
 # The channel lists are fixed, so the frames do not change when the pack does. They are the FB2 and META channels
-# that the pack of data 0.3.0 listed (count sentinels left out: they are inventory records, not weights), and the
-# FB2 channels that its FB2 -> ARKit maps read, in the order of the FB2 profile.
+# of the A1 pack at dea1713 (count sentinels left out: they are inventory records, not weights), and the FB2
+# channels that its FB2 -> ARKit maps read, in the order of the FB2 profile.
 FB2_CHANNELS = (
     'BROW_LOWERER_L', 'BROW_LOWERER_R', 'CHEEK_PUFF_L', 'CHEEK_PUFF_R', 'CHEEK_RAISER_L', 'CHEEK_RAISER_R',
     'CHEEK_SUCK_L', 'CHEEK_SUCK_R', 'CHIN_RAISER_B', 'CHIN_RAISER_T', 'DIMPLER_L', 'DIMPLER_R', 'EYES_CLOSED_L',

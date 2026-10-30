@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: MIT
-"""examples/make_demo_frames.py writes the committed demo frames byte for byte, from channel lists fixed in the code."""
+"""examples/make_demo_frames.py writes the committed demo frames byte for byte, from channel lists fixed in the code.
+
+The lists are those of the A1 pack at dea1713 (tests/fixtures/baseline-dea1713.pack.json).
+"""
 import contextlib
 import io
 import json
@@ -24,7 +27,7 @@ class DemoFrames(unittest.TestCase):
                 with self.subTest(name):
                     self.assertEqual((Path(tmp) / name).read_bytes(), (ROOT / 'examples/data' / name).read_bytes())
 
-    def test_the_channel_lists_are_those_of_the_data_0_3_0_pack(self):
+    def test_the_channel_lists_are_those_of_the_a1_pack(self):
         pack = json.loads((ROOT / 'tests/fixtures/baseline-dea1713.pack.json').read_text(encoding='utf-8'))
         signals = {s['id']: s for s in pack['signals']}
 
