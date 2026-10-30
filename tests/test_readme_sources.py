@@ -110,30 +110,46 @@ class ReadmeSources(unittest.TestCase):
                 inventory_only = self.row_for(name)[3].startswith('inventory only')
                 self.assertEqual(columns[Path(name).stem], 2 if inventory_only else 1)
 
-    def test_mapping_table_matches_the_pack(self):
+    def test_mapping_table_lists_each_map_set_once_with_its_page(self):
         listed = {}
         for row in self.mappings:
-            mapping_id = re.match(r'\[`([^`]+)`\]\(reports/mappings\.md#([^)]+)\)', row[0])
-            self.assertEqual(mapping_id.group(2), mapping_id.group(1).replace('.', ''))
+            found = re.match(r'\[`([^`]+)`\]\(docs/map-sets/([^)]+)\.md\)$', row[0])
+            self.assertIsNotNone(found, row[0])
+            self.assertEqual(found.group(1), found.group(2))
+            self.assertTrue((ROOT / f'docs/map-sets/{found.group(1)}.md').is_file(), found.group(1))
             source, target = re.match(r'`([^`]+)` → `([^`]+)`', row[1]).groups()
-            listed[mapping_id.group(1)] = (source, target, int(row[2]), row[3].split(' (')[0])
+            listed[found.group(1)] = (source, target, int(row[2]), int(row[3]), set(row[4].split(', ')))
+        self.assertEqual(len(listed), len(self.mappings))
         # Synthetic test maps and unresolved maps are left out of the table.
         fixture = self.members['fixture.source'] | self.members['fixture.target']
         shown = [m for m in self.pack['mappings']
                  if any(r['disposition'] == 'mapped' for r in m['rules'])
                  and not {s for r in m['rules'] for s in r['inputs'] + r['outputs']} <= fixture]
         self.assertEqual(set(listed), {m['id'] for m in shown})
+        signals = {s['id']: s for s in self.pack['signals']}
+        canonical = self.members['rcef.canonical_expression'] | self.members['rcef.canonical_viseme']
+        seen = set()
         for mapping in shown:
             with self.subTest(mapping=mapping['id']):
-                source, target, count, status = listed[mapping['id']]
+                source, target, count, parts, statuses = listed[mapping['id']]
                 rules = mapping['rules']
                 self.assertEqual(count, len(rules))
-                self.assertEqual({status}, {r['evidence_status'] for r in rules})
+                self.assertEqual(statuses, {r['evidence_status'] for r in rules})
                 # Values a map computes for its own later rules are RCEF intermediates.
                 computed = {s for r in rules for s in r['outputs']} & {s for r in rules for s in r['inputs']}
                 self.assertLessEqual(computed, self.members.get('rcef.intermediate', set()))
                 self.assertLessEqual({s for r in rules for s in r['inputs']} - computed, self.members[source])
                 self.assertLessEqual({s for r in rules for s in r['outputs']} - computed, self.members[target])
+                # One map per set pair and direction, named <from>.to_<to>.
+                self.assertNotIn((source, target), seen)
+                seen.add((source, target))
+                keys = {'rcef.canonical_expression': 'rcef_expression', 'rcef.canonical_viseme': 'rcef_viseme'}
+                start, end = mapping['id'].split('.to_')
+                self.assertEqual(keys.get(source, start) == start and keys.get(target, end) == end, True)
+                # Its parts: the canonical groups that its mappings read or write directly.
+                groups = {signals[s]['metadata']['group'] for r in rules for s in r['inputs'] + r['outputs']
+                          if s in canonical}
+                self.assertEqual(parts, len(groups))
 
 
 class ReadmeRoutes(unittest.TestCase):
