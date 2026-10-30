@@ -167,30 +167,33 @@ RCEF_SLOW_TESTS=1 RCEF_K3_ICT_CACHE=DIR RCEF_RIG_CACHE=DIR RCEF_RENDERER=/tmp/me
 ## 7. Visemes on faces without viseme shapes: the pose bridge
 
 ```sh
-python examples/viseme_bridge.py                                       # "bed car toe book" on Female_Adult_04
-python examples/viseme_bridge.py --rig rocketbox-male-11               # another held-out rig
+python examples/viseme_bridge.py                                       # "bed car toe book" on Female_Adult_09
+python examples/viseme_bridge.py --rig rocketbox-male-15               # another held-out rig
 python examples/viseme_bridge.py --frames examples/data/viseme_demo_frames.csv
 ```
 
-Route carries the META frames through the canonical viseme set, the [viseme pose bridge](../docs/canonical-set.md#viseme-pose-bridge) and the canonical expression set to ARKit weights (`bridge_arkit.csv`). The weights then pose a Rocketbox rig and ICT-FaceKit. The default rig, `rocketbox-female-04` (Female_Adult_04), is one of the 4 rigs that the bridge's calibration record held out; the others are `rocketbox-female-13`, `rocketbox-male-05` and `rocketbox-male-11`. `--rig` takes any Rocketbox rig that `rigs.py` pins. ICT has no viseme shapes; the script reads all 53 of its expression shapes from the OBJ files in `~/.cache/rcef-ict-full` (`--ict-cache`), the cache of `tools/calibration/k4_mediapipe.py fetch`. The Rocketbox rig's own viseme shapes, driven by the same frames by name, are the comparison. For each frame the script writes the meshes (bridged and direct for the Rocketbox rig, with a difference colour map, and bridged for ICT) to `~/.cache/rcef-examples/viseme-bridge/mesh/`, and in `frames.json` the error `|bridged - direct| / |direct|` over the rig's vertices except the tongue, as in the calibration record, and the RMS distance in millimetres. It then prints one line per META viseme at weight 1.
+Route carries the META frames through the canonical viseme set, the [viseme pose bridge](../docs/canonical-set.md#viseme-pose-bridge) and the canonical expression set to ARKit weights (`bridge_arkit.csv`). The weights then pose a Rocketbox rig and ICT-FaceKit. The default rig, `rocketbox-female-09` (Female_Adult_09), is one of the 4 rigs that the bridge's calibration record held out; the others are `rocketbox-female-15`, `rocketbox-male-08` and `rocketbox-male-15`. `--rig` takes any Rocketbox rig that `rigs.py` pins. ICT has no viseme shapes; the script reads all 53 of its expression shapes from the OBJ files in `~/.cache/rcef-ict-full` (`--ict-cache`), the cache of `tools/calibration/k4_mediapipe.py fetch`. The Rocketbox rig's own viseme shapes, driven by the same frames by name, are the comparison. For each frame the script writes the meshes (bridged and direct for the Rocketbox rig, with a difference colour map, and bridged for ICT) to `~/.cache/rcef-examples/viseme-bridge/mesh/`, and in `frames.json` the error `|bridged - direct| / |direct|` over the rig's vertices except the tongue, and the RMS distance in millimetres. It then prints one line per META viseme at weight 1.
 
-Per META viseme at weight 1, on the 4 held-out rigs: the RMS distance between the bridged and the direct face, over the vertices that either face moves, in mm. On ICT, the RMS distance between the bridged face and its neutral face, over the vertices that move, in mm.
+Per META viseme at weight 1: on the 4 held-out rigs, the RMS distance between the bridged and the direct face over the vertices that either face moves, in mm; on ICT, the RMS distance between the bridged face and its neutral face over the vertices that move, the signed lip opening on the mid line (neutral: 0.61 mm) and the mirror RMS (how differently the two sides move), in mm. "Gate" is the gate by which the class passes.
 
-| META | Class | Read | Female_Adult_04 | Female_Adult_13 | Male_Adult_05 | Male_Adult_11 | ICT motion |
-|---|---|---|---|---|---|---|---|
-| AA | `vowel_open` | yes | 3.43 | 3.30 | 3.82 | 3.67 | 20.58 |
-| IH | `vowel_close_spread` | yes | 1.04 | 1.09 | 1.05 | 0.97 | 4.98 |
-| OH | `vowel_mid_rounded` | yes | 1.84 | 1.85 | 1.82 | 1.71 | 12.63 |
-| TH | `dental` | yes | 0.48 | 0.47 | 0.51 | 0.49 | 3.83 |
-| CH | `postalveolar` | yes | 1.19 | 1.38 | 1.27 | 1.17 | 2.44 |
-| DD | `coronal_stop` | yes | 1.09 | 1.08 | 1.20 | 1.07 | 7.17 |
-| KK | `dorsal` | yes | 0.62 | 0.72 | 0.66 | 0.64 | 2.12 |
-| RR | `rhotic` | yes | 0.67 | 0.69 | 0.63 | 0.63 | 2.08 |
-| PP | `bilabial` | no | 1.94 | 2.12 | 1.79 | 1.94 | 0 |
-| FF | `labiodental` | no | 1.79 | 1.73 | 1.90 | 1.89 | 0 |
-| SS | `alveolar_sibilant` | no | 4.28 | 4.40 | 4.40 | 3.91 | 0 |
-| NN | `coronal_nasal_lateral` | no | 3.07 | 2.99 | 3.50 | 2.99 | 0 |
-| E | `vowel_mid_spread` | no | 3.40 | 3.36 | 3.54 | 3.52 | 0 |
-| OU | `vowel_close_rounded` | no | 2.10 | 2.02 | 2.23 | 2.02 | 0 |
+| META | Class | Gate | Female_Adult_09 | Female_Adult_15 | Male_Adult_08 | Male_Adult_15 | ICT motion | ICT lip opening | ICT mirror RMS |
+|---|---|---|---|---|---|---|---|---|---|
+| AA | `vowel_open` | shape | 3.58 | 3.53 | 3.88 | 3.84 | 20.37 | 46.63 | 0.15 |
+| IH | `vowel_close_spread` | shape | 1.08 | 1.07 | 1.06 | 1.03 | 4.97 | 12.58 | 0.03 |
+| OH | `vowel_mid_rounded` | shape | 1.95 | 1.86 | 1.84 | 1.81 | 12.56 | 33.44 | 0.11 |
+| TH | `dental` | shape | 0.58 | 0.57 | 0.58 | 0.55 | 3.76 | 12.63 | 0.04 |
+| DD | `coronal_stop` | shape | 1.14 | 1.16 | 1.18 | 1.14 | 7.24 | 21.67 | 0.06 |
+| KK | `dorsal` | shape | 0.83 | 0.68 | 0.62 | 0.67 | 2.12 | 10.42 | 0.02 |
+| PP | `bilabial` | perceptual | 1.32 | 1.15 | 1.13 | 1.19 | 2.37 | 2.95 | 0.08 |
+| E | `vowel_mid_spread` | perceptual | 1.98 | 1.95 | 1.91 | 1.82 | 6.13 | 14.06 | 0.09 |
+| OU | `vowel_close_rounded` | perceptual | 1.08 | 1.10 | 1.09 | 1.08 | 1.58 | 6.92 | 0.04 |
+| SS | `alveolar_sibilant` | perceptual | 2.07 | 2.04 | 1.97 | 1.99 | 3.76 | 7.15 | 0.05 |
+| FF | `labiodental` | not read | 1.77 | 1.80 | 1.92 | 1.89 | 0 | 0.61 | 0 |
+| CH | `postalveolar` | not read | 4.33 | 4.32 | 4.18 | 4.19 | 0 | 0.61 | 0 |
+| NN | `coronal_nasal_lateral` | not read | 3.01 | 3.04 | 3.19 | 3.09 | 0 | 0.61 | 0 |
+| RR | `rhotic` | not read | 2.14 | 2.03 | 1.91 | 1.97 | 0 | 0.61 | 0 |
+| SIL | `sil` | shape | 0 | 0 | 0 | 0 | 0 | 0.61 | 0 |
 
-The error ratios of the classes read are 0.20 to 0.50, as in the calibration record. A frame on one of the six classes that are not read gives a neutral face, error 1, and the route lists its value as dropped; the RMS distance for those rows is the whole motion of the rig's own viseme. SIL moves no face. On ICT the same ARKit weights give other geometry, often much larger motion (20.6 mm RMS for AA): the weights are in Rocketbox units, and the two libraries render ARKit names differently (section 6). The poses also move Left and Right by different amounts ([canonical-set.md](../docs/canonical-set.md#viseme-pose-bridge)), which shows on ICT, whose Left and Right shapes are close to mirror images.
+The error ratios of the classes read by their shape are 0.24 to 0.38, as in the calibration record; those read by the perceptual gate are 0.57 to 0.75, because that gate checks visible mouth features, not the whole face. A frame on one of the four classes that are not read gives a neutral face, error 1, and the route lists its value as dropped; the RMS distance for those rows is the whole motion of the rig's own viseme. SIL moves no face.
+
+Every Left and Right ARKit weight that the bridge gives is equal (largest difference 0.000), and on ICT the two sides move alike (mirror RMS at most 0.15 mm). On ICT the same ARKit weights give other geometry, often much larger motion (20.4 mm RMS for AA): the weights are in Rocketbox units, and the two libraries render ARKit names differently (section 6). In particular, the bridged PP pose closes the lips of the Rocketbox rigs (lip opening −0.55 to −1.02 mm at full weight on the held-out rigs) but opens ICT's lips from 0.61 to 2.95 mm.

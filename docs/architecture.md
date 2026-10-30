@@ -11,16 +11,16 @@ This guide describes `rcef.parity` data version **0.5.0** (unreleased), schema *
 
 | Measure | Total |
 | --- | ---: |
-| Distinct signal IDs | 1084 |
+| Distinct signal IDs | 1086 |
 | Profiles | 26 |
-| Profile membership rows | 1089 |
+| Profile membership rows | 1091 |
 | Maps (`[[mappings]]` records) | 69 |
-| Mappings (rules) | 662 |
+| Mappings (rules) | 664 |
 | Evidence records | 77 |
 | Provider-specific canonical signals | 21 |
 | Canonical expression signals (draft) | 60 |
 | Canonical viseme signals (draft) | 16 |
-| RCEF intermediate signals | 63 |
+| RCEF intermediate signals | 65 |
 
 Five fixture signals are in both the aggregate fixture profile and its source and target profiles. That gives 5 distinct signals but 10 memberships, which explains the difference of five rows. Also, `godot.blended.toml` has 42 actual rows, while its selected interface has 41; the counts here include every actual row. See the full [inventory](../reports/inventory.md).
 
@@ -88,7 +88,8 @@ A calibration record is a software-only fit, made from renders or mesh geometry 
 - `mediapipe.ict-response`: a negative result. 25 of MediaPipe's 51 ARKit-named scores could be fitted, and none passed on held-out data.
 - `rig-gains.ict-rocketbox-female`: 3 of 51 ARKit shapes pass; 48 fail and are published as negative results.
 - `viseme-poses.rocketbox-female`: the pose of each canonical viseme class, fitted to Rocketbox Female's viseme shapes in her ARKit shapes, on mesh geometry only. 9 of 15 classes pass on Rocketbox Male. No mapping cites it now.
-- `viseme-poses.rocketbox-multi`: the pose of each canonical viseme class, fitted to the viseme shapes of 10 Rocketbox rigs in their ARKit shapes, on mesh geometry only. 9 of 15 classes pass on all 4 held-out Rocketbox rigs (`sil` trivially, so 8 of 14 speech classes); the viseme pose bridge reads only those.
+- `viseme-poses.rocketbox-multi`: the pose of each canonical viseme class, fitted to the viseme shapes of 10 Rocketbox rigs. Version 2 (Left and Right tied) passes 7 of 15 classes on its 4 held-out rigs. No mapping cites it now.
+- `viseme-poses.rocketbox-features`: the pose of each canonical viseme class, fitted to 18 Rocketbox rigs with Left and Right tied, with a perceptual gate (visible mouth features with frozen tolerances) for 4 classes. 11 of 15 classes pass on all 4 held-out Rocketbox rigs, 7 by their shape and 4 by the perceptual gate; the viseme pose bridge reads only those.
 
 The calibration tools in [tools/calibration/](../tools/calibration/README.md) run the held-out step. Before they render anything, [provenance.py](../tools/calibration/provenance.py) checks that the record's `code_commit` is in the checkout's history and that no file the run imports has changed since that commit. The tools also check that every cached input has the SHA-256 the record pins and that the installed msf-character-tools passes the lock check. `k3_heldout.py` also requires the renderer binary that the record names. `check.py` cannot see Git history, so reviewers check that the ledger line was committed before the results.
 
@@ -103,9 +104,9 @@ Directory discovery walks the tree and includes every file name that ends in low
 | Location | Role | Files | Signals | Profiles | Memberships | Maps / mappings | Evidence |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [pack.toml](../pack.toml) | Root metadata | 1 | 0 | 0 | 0 | 0 / 0 | 0 |
-| [data/canonical.toml](../data/canonical.toml), [data/canonical_expression.toml](../data/canonical_expression.toml), [data/canonical_viseme.toml](../data/canonical_viseme.toml) and [data/intermediate.toml](../data/intermediate.toml) | Provider-specific projections, the draft canonical expression and viseme sets and intermediate values, each with its profile | 4 | 160 | 4 | 160 | 0 / 0 | 0 |
+| [data/canonical.toml](../data/canonical.toml), [data/canonical_expression.toml](../data/canonical_expression.toml), [data/canonical_viseme.toml](../data/canonical_viseme.toml) and [data/intermediate.toml](../data/intermediate.toml) | Provider-specific projections, the draft canonical expression and viseme sets and intermediate values, each with its profile | 4 | 162 | 4 | 162 | 0 / 0 | 0 |
 | [profiles/fixture.toml](../profiles/fixture.toml) and the provider profile files | Signal arrays and profile arrays | 20 | 924 | 22 | 929 | 0 / 0 | 0 |
-| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 16 | 0 | 0 | 0 | 69 / 662 | 0 |
+| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 16 | 0 | 0 | 0 | 69 / 664 | 0 |
 | [evidence/sources.toml](../evidence/sources.toml) | Evidence array | 1 | 0 | 0 | 0 | 0 / 0 | 77 |
 
 Each of the five root metadata keys appears once in the whole directory. A repeated metadata key is refused, even if its value is the same. The top-level `signals`, `profiles`, `mappings` and `evidence` must be arrays. They are added in file order, and each file's array order is kept.
@@ -338,8 +339,8 @@ msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases 
 | [generated/rcef_mapping.csv](../generated/rcef_mapping.csv) | msf-character-tools signal and profile membership matrix: one row per distinct signal, one column per profile. Despite its name, it is not a table of executable mappings. |
 | [generated/coverage.json](../generated/coverage.json) | msf-character-tools coverage: dispositions, quality partitions, memberships per profile, evidence and rule uses. It records the pack hash. |
 | [generated/SHA256SUMS](../generated/SHA256SUMS) | Hashes of the pack, the matrix CSV and coverage, in that order. It does not list itself. |
-| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 1089 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
-| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 662 authored one-way mappings with their status, operators, assumptions and losses. |
+| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 1091 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
+| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 664 authored one-way mappings with their status, operators, assumptions and losses. |
 | [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: the 21 canonical projections against the authored relationships. A dash means no authored mapping. Unresolved relationships stay labeled. |
 | [reports/SHA256SUMS](../reports/SHA256SUMS) | Hashes of the six report files, sorted by file name. It does not list itself. The Markdown reports record the SHA-256 of the pack they read. |
 

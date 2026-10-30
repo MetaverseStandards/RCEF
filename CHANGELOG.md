@@ -97,28 +97,31 @@ do not change.
   vocabulary, that every IPA chart symbol is in exactly one class, the IPA
   rules, the aggregate and the coupling.
 - New map `rcef_viseme_pose.to_rcef_expression`, the viseme pose bridge, in
-  `mappings/canonical_viseme_pose.toml`: 99 mappings from the canonical
+  `mappings/canonical_viseme_pose.toml`: 101 mappings from the canonical
   viseme set to the canonical expression set. Each signal of the groups
   `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` is the sum of
   each class weight times the class's pose, clamped at 1: a copy per class
   (the unit changes from probability to 1), a `weighted_sum` per signal with
   the frozen poses as weights, and a clamp. The poses come from the
-  calibration record `viseme-poses.rocketbox-multi`. The bridge reads only
-  the 9 classes whose held-out cells pass on all 4 held-out rigs
+  calibration record `viseme-poses.rocketbox-features`. The bridge reads
+  only the 11 classes that pass on all 4 held-out rigs, 7 by their shape
   (`vowel_open`, `vowel_close_spread`, `vowel_mid_rounded`, `dental`,
-  `postalveolar`, `coronal_stop`, `dorsal`, `rhotic` and `sil`); weight on
-  the 6 that fail moves nothing. The bridge was first written from
-  `viseme-poses.rocketbox-female`; as decided before the multi-rig record's
-  held-out run, the multi-rig record replaced it for every class. It reads
-  `postalveolar` now and no longer reads `coronal_nasal_lateral`. 54 new `rcef.intermediate` signals (63 in all),
+  `coronal_stop`, `dorsal` and `sil`) and 4 by the perceptual gate
+  (`bilabial`, `vowel_close_rounded`, `vowel_mid_spread` and
+  `alveolar_sibilant`); weight on the 4 that fail moves nothing. META PP now
+  closes the lips of Rocketbox rigs. The bridge was first written from
+  `viseme-poses.rocketbox-female`, then from `viseme-poses.rocketbox-multi`
+  version 1 and version 2; each time, as decided before the new record's
+  held-out run, the new record replaced the old one for every class. 56 new
+  `rcef.intermediate` signals (65 in all),
   which `scripts/build_canonical.py` writes below a marker line in
   `data/intermediate.toml`. Every bridge mapping is `proposed` and
   `approximate`: pack schema 1.0 has no `calibrated_software`. Its losses
-  are `viseme_pose_example_rigs`, `viseme_pose_residual` and
-  `viseme_pose_classes_not_read`. No map goes from expressions to visemes.
-- New evidence record `calibration.viseme-poses.rocketbox-multi`, which the
-  45 weighted sums of the bridge cite. It replaced the evidence record
-  `calibration.viseme-poses.rocketbox-female`.
+  are `viseme_pose_example_rigs`, `viseme_pose_residual`,
+  `viseme_pose_perceptual_gate` and `viseme_pose_classes_not_read`. No map goes from expressions to visemes.
+- New evidence record `calibration.viseme-poses.rocketbox-features`, which
+  the 45 weighted sums of the bridge cite. It replaced the evidence records
+  of the earlier viseme pose records.
 - `examples/rcef_route.py` runs a bridge between the canonical sets when the
   target reads what it writes, the source cannot write that itself, and the
   source writes some of what it reads: META or VRM to ARKit, FB2 or Unified
@@ -223,6 +226,31 @@ exclusive, and the data now builds this in.
   `alveolar_sibilant` (0.62 to 0.64) and `labiodental` (0.90 to 0.93) fail
   and are published as negative results. `examples/rigs.py` pins the 12 new
   Rocketbox files.
+- Its version 1 left Left and Right apart, and its poses moved the two
+  sides differently by up to 0.56, more than its limitations said. Version
+  2 ties each Left and Right pair, keeps the training rigs and the bounds,
+  and is held out on 4 fresh rigs (Female_Adult_06, Female_Adult_17,
+  Male_Adult_02 and Male_Adult_19): 7 of 15 classes pass. The reason is in
+  its `FREEZES` line. Report-only lip measures of version 2 for PP, FF and
+  OU are in `tools/calibration/results/viseme_lips.json`.
+- `check.py` accepts a perceptual gate in a calibration record: frozen
+  `features` (kind `difference` or `range`, each with a tolerance) and
+  `feature_cells` with the median, p95 and largest error. A channel passes
+  if all its shape cells pass, or if every feature cell passes for every
+  held-out identity. Tests and a fixture cover each rule.
+- Calibration record `calibration/viseme-poses.rocketbox-features.cal`:
+  tied poses from 18 Rocketbox training rigs (the 10 earlier ones and the 8
+  rigs held out so far), and a perceptual gate for `bilabial` (lips closed
+  on the mid line, from −2.0 to 0.5 mm, and drawn back),
+  `vowel_close_rounded` (corner width and protrusion), `vowel_mid_spread`
+  (corner width and lip opening) and `alveolar_sibilant` (lip opening and
+  jaw drop), each with a whole-face guard. Tolerances are the spread of the
+  training rigs' own visemes. The features and fit weight were chosen by
+  leave-one-rig-out cross-validation; `labiodental` got no gate, because
+  its only achievable feature is met by the neutral face. Held out on
+  Female_Adult_09, Female_Adult_15, Male_Adult_08 and Male_Adult_15: 11 of
+  15 classes pass, 7 by shape and 4 by the perceptual gate. `labiodental`,
+  `postalveolar`, `coronal_nasal_lateral` and `rhotic` fail.
 - `check.py` accepts a record with no `renderer` (a fit that renders
   nothing), and a `weighted_sum` that cites a record of poses: each input a
   copy of one channel, one clamp reading the sum, and weights exactly the
