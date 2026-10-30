@@ -31,7 +31,7 @@ In short, since data 0.3.0:
   evaluates each map with partial evaluation, so a bad or missing input
   stops only the outputs that read it.
 - The registered A/B comparison of the routes with the direct maps
-  (`ab/`): `ab.pivot` v1, v2 and v3 pass every gate.
+  (`ab/`): `ab.pivot` v1, v2, v3 and v4 pass every gate.
 - The direct maps and the old 21-signal set `rcef.canonical` are retired,
   with a tombstone for each ID.
 - Operators 1.1 (from data 0.4.0) and the msf-character-tools 0.6.0 lock.
@@ -51,7 +51,9 @@ expression library's FACS table (A3) and a pure-Python oracle (O).
 apart from the manifest, its line in `SHA256SUMS` and the timings. v3
 (`revise` of v2) runs one map per set pair and direction with partial
 evaluation: the Revise gate finds every value of v2 kept and no output
-refused that v2 wrote. All three pass every gate: on every frame
+refused that v2 wrote. v4 (`revise` of v3) follows the history rewrite:
+the Revise gate finds every value of v3 kept, every output kept and no
+new refusal. All four pass every gate: on every frame
 of the 37 routes, B gives the oracle's values, and on the 5 routes of the
 direct maps B gives the same values and refuses the same frames as A1.
 `ab/README.md` gives the ledger, the freeze kinds and the metrics.

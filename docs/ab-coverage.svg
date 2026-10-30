@@ -1,10 +1,10 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0; RCEF contributors (2026). Written by scripts/export_figures.py. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 624" width="960" height="624" role="img" aria-labelledby="title desc" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
-<title id="title">A/B comparison ab.pivot v3: the result for each route</title>
+<title id="title">A/B comparison ab.pivot v4: the result for each route</title>
 <desc id="desc">One cell per source and target set. The colour and the first line give the external reference; the cell gives the frames and the frames that B refuses. A dashed border marks a route through the viseme pose bridge.</desc>
 <rect width="960" height="624" fill="#f4f5ef"/>
-<text x="24" y="32" font-size="17" fill="#182b29" font-weight="600" text-anchor="start">A/B comparison ab.pivot v3 (revise): every gate passes</text>
-<text x="24" y="52" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">B (the route through the canonical sets) runs on 37 routes and 195,344 frames, and gives the oracle&#x27;s values on every frame.</text>
+<text x="24" y="32" font-size="17" fill="#182b29" font-weight="600" text-anchor="start">A/B comparison ab.pivot v4 (revise): every gate passes</text>
+<text x="24" y="52" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">B (the route through the canonical sets) runs on 37 routes and 272,872 frames, and gives the oracle&#x27;s values on every frame.</text>
 <text x="24" y="70" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">A1: the retired direct map. A2: two retired direct maps in turn. A3: the expression library&#x27;s FACS table. On each A1 route, B equals A1.</text>
 <text x="24" y="88" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">Most routes have no external reference: they are checked against the oracle only.</text>
 <text x="523" y="102" font-size="12" fill="#415b57" font-weight="600" text-anchor="middle">Target set</text>
@@ -20,206 +20,206 @@
 <rect x="112" y="130" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="112" y="130" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="123" y="147" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="123" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">6,504 frames</text>
-<text x="123" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 839</text>
+<text x="123" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">9,128 frames</text>
+<text x="123" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 1,255</text>
 <rect x="230" y="130" width="114" height="60" rx="4" fill="#d6e6ef"/>
 <rect x="230" y="130" width="5" height="60" rx="2" fill="#155576"/>
 <text x="241" y="147" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">A1</text>
-<text x="241" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">6,504 frames</text>
-<text x="241" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 832</text>
+<text x="241" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">9,128 frames</text>
+<text x="241" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 1,248</text>
 <rect x="348" y="130" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="348" y="130" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="359" y="147" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="359" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">6,504 frames</text>
-<text x="359" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 660</text>
+<text x="359" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">9,128 frames</text>
+<text x="359" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 988</text>
 <rect x="466" y="130" width="114" height="60" rx="4" fill="#d6e6ef"/>
 <rect x="466" y="130" width="5" height="60" rx="2" fill="#155576"/>
 <text x="477" y="147" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">A1</text>
-<text x="477" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">6,504 frames</text>
-<text x="477" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 832</text>
+<text x="477" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">9,128 frames</text>
+<text x="477" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 1,248</text>
 <rect x="584" y="130" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="584" y="130" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="595" y="147" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="595" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">6,504 frames</text>
-<text x="595" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 32</text>
+<text x="595" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">9,128 frames</text>
+<text x="595" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 48</text>
 <rect x="702" y="130" width="114" height="60" rx="4" fill="#f1e3c8"/>
 <rect x="702" y="130" width="5" height="60" rx="2" fill="#75500e"/>
 <text x="713" y="147" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">A2</text>
-<text x="713" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">6,504 frames</text>
-<text x="713" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 32</text>
+<text x="713" y="163" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">9,128 frames</text>
+<text x="713" y="179" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 48</text>
 <rect x="820" y="130" width="114" height="60" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
 <text x="877" y="164" font-size="11" fill="#415b57" font-weight="normal" text-anchor="middle">no route</text>
 <text x="24" y="228" font-size="12" fill="#182b29" font-weight="600" text-anchor="start">FB2</text>
 <rect x="112" y="194" width="114" height="60" rx="4" fill="#d6e6ef"/>
 <rect x="112" y="194" width="5" height="60" rx="2" fill="#155576"/>
 <text x="123" y="211" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">A1</text>
-<text x="123" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">13,979 frames</text>
-<text x="123" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 1,986</text>
+<text x="123" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">19,675 frames</text>
+<text x="123" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 2,962</text>
 <rect x="230" y="194" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="230" y="194" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="241" y="211" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="241" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">13,979 frames</text>
-<text x="241" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 2,291</text>
+<text x="241" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">19,675 frames</text>
+<text x="241" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 3,427</text>
 <rect x="348" y="194" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="348" y="194" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="359" y="211" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="359" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">13,979 frames</text>
-<text x="359" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 1,728</text>
+<text x="359" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">19,675 frames</text>
+<text x="359" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 2,584</text>
 <rect x="466" y="194" width="114" height="60" rx="4" fill="#f1e3c8"/>
 <rect x="466" y="194" width="5" height="60" rx="2" fill="#75500e"/>
 <text x="477" y="211" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">A2</text>
-<text x="477" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">13,979 frames</text>
-<text x="477" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 2,099</text>
+<text x="477" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">19,675 frames</text>
+<text x="477" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 3,139</text>
 <rect x="584" y="194" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="584" y="194" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="595" y="211" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="595" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">13,979 frames</text>
-<text x="595" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 87</text>
+<text x="595" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">19,675 frames</text>
+<text x="595" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 127</text>
 <rect x="702" y="194" width="114" height="60" rx="4" fill="#d6e6ef"/>
 <rect x="702" y="194" width="5" height="60" rx="2" fill="#155576"/>
 <text x="713" y="211" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">A1</text>
-<text x="713" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">13,979 frames</text>
-<text x="713" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 87</text>
+<text x="713" y="227" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">19,675 frames</text>
+<text x="713" y="243" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 127</text>
 <rect x="820" y="194" width="114" height="60" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
 <text x="877" y="228" font-size="11" fill="#415b57" font-weight="normal" text-anchor="middle">no route</text>
 <text x="24" y="292" font-size="12" fill="#182b29" font-weight="600" text-anchor="start">FACS</text>
 <rect x="112" y="258" width="114" height="60" rx="4" fill="#d7eadf"/>
 <rect x="112" y="258" width="5" height="60" rx="2" fill="#17614c"/>
 <text x="123" y="275" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">A3, then A1</text>
-<text x="123" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">7,696 frames</text>
-<text x="123" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 731</text>
+<text x="123" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">10,784 frames</text>
+<text x="123" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 1,091</text>
 <rect x="230" y="258" width="114" height="60" rx="4" fill="#d7eadf"/>
 <rect x="230" y="258" width="5" height="60" rx="2" fill="#17614c"/>
 <text x="241" y="275" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">A3</text>
-<text x="241" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">7,696 frames</text>
-<text x="241" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 784</text>
+<text x="241" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">10,784 frames</text>
+<text x="241" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 1,176</text>
 <rect x="348" y="258" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="348" y="258" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="359" y="275" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="359" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">7,696 frames</text>
-<text x="359" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 789</text>
+<text x="359" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">10,784 frames</text>
+<text x="359" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 1,181</text>
 <rect x="466" y="258" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="466" y="258" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="477" y="275" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="477" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">7,696 frames</text>
-<text x="477" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 784</text>
+<text x="477" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">10,784 frames</text>
+<text x="477" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 1,176</text>
 <rect x="584" y="258" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="584" y="258" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="595" y="275" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="595" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">7,696 frames</text>
-<text x="595" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 32</text>
+<text x="595" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">10,784 frames</text>
+<text x="595" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 48</text>
 <rect x="702" y="258" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="702" y="258" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="713" y="275" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="713" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">7,696 frames</text>
-<text x="713" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 32</text>
+<text x="713" y="291" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">10,784 frames</text>
+<text x="713" y="307" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 48</text>
 <rect x="820" y="258" width="114" height="60" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
 <text x="877" y="292" font-size="11" fill="#415b57" font-weight="normal" text-anchor="middle">no route</text>
 <text x="24" y="356" font-size="12" fill="#182b29" font-weight="600" text-anchor="start">VRCFT eye</text>
 <rect x="112" y="322" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="112" y="322" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="123" y="339" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="123" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,004 frames</text>
-<text x="123" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 134</text>
+<text x="123" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,348 frames</text>
+<text x="123" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 201</text>
 <rect x="230" y="322" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="230" y="322" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="241" y="339" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="241" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,004 frames</text>
-<text x="241" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 134</text>
+<text x="241" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,348 frames</text>
+<text x="241" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 201</text>
 <rect x="348" y="322" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="348" y="322" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="359" y="339" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="359" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,004 frames</text>
-<text x="359" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 134</text>
+<text x="359" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,348 frames</text>
+<text x="359" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 201</text>
 <rect x="466" y="322" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="466" y="322" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="477" y="339" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="477" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,004 frames</text>
-<text x="477" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 134</text>
+<text x="477" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,348 frames</text>
+<text x="477" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 201</text>
 <rect x="584" y="322" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="584" y="322" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="595" y="339" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="595" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,004 frames</text>
-<text x="595" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 134</text>
+<text x="595" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,348 frames</text>
+<text x="595" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 201</text>
 <rect x="702" y="322" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="702" y="322" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="713" y="339" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="713" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,004 frames</text>
-<text x="713" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 134</text>
+<text x="713" y="355" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,348 frames</text>
+<text x="713" y="371" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 201</text>
 <rect x="820" y="322" width="114" height="60" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
 <text x="877" y="356" font-size="11" fill="#415b57" font-weight="normal" text-anchor="middle">no route</text>
 <text x="24" y="420" font-size="12" fill="#182b29" font-weight="600" text-anchor="start">VRM</text>
 <rect x="112" y="386" width="114" height="60" rx="4" fill="#eceee9" stroke="#182b29" stroke-width="1.5" stroke-dasharray="5 3"/>
 <rect x="112" y="386" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="123" y="403" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="123" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,286 frames</text>
-<text x="123" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 124</text>
+<text x="123" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,702 frames</text>
+<text x="123" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 180</text>
 <rect x="230" y="386" width="114" height="60" rx="4" fill="#eceee9" stroke="#182b29" stroke-width="1.5" stroke-dasharray="5 3"/>
 <rect x="230" y="386" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="241" y="403" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="241" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,286 frames</text>
-<text x="241" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 123</text>
+<text x="241" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,702 frames</text>
+<text x="241" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 179</text>
 <rect x="348" y="386" width="114" height="60" rx="4" fill="#eceee9" stroke="#182b29" stroke-width="1.5" stroke-dasharray="5 3"/>
 <rect x="348" y="386" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="359" y="403" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="359" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,286 frames</text>
-<text x="359" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 124</text>
+<text x="359" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,702 frames</text>
+<text x="359" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 180</text>
 <rect x="466" y="386" width="114" height="60" rx="4" fill="#eceee9" stroke="#182b29" stroke-width="1.5" stroke-dasharray="5 3"/>
 <rect x="466" y="386" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="477" y="403" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="477" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,286 frames</text>
-<text x="477" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 123</text>
+<text x="477" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,702 frames</text>
+<text x="477" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 179</text>
 <rect x="584" y="386" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="584" y="386" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="595" y="403" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="595" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,286 frames</text>
-<text x="595" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 32</text>
+<text x="595" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,702 frames</text>
+<text x="595" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 48</text>
 <rect x="702" y="386" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="702" y="386" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="713" y="403" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="713" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,286 frames</text>
-<text x="713" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 112</text>
+<text x="713" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,702 frames</text>
+<text x="713" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 168</text>
 <rect x="820" y="386" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="820" y="386" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="831" y="403" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="831" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,286 frames</text>
-<text x="831" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 80</text>
+<text x="831" y="419" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,702 frames</text>
+<text x="831" y="435" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 120</text>
 <text x="24" y="484" font-size="12" fill="#182b29" font-weight="600" text-anchor="start">META</text>
 <rect x="112" y="450" width="114" height="60" rx="4" fill="#eceee9" stroke="#182b29" stroke-width="1.5" stroke-dasharray="5 3"/>
 <rect x="112" y="450" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="123" y="467" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="123" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,874 frames</text>
-<text x="123" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 210</text>
+<text x="123" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">2,558 frames</text>
+<text x="123" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 302</text>
 <rect x="230" y="450" width="114" height="60" rx="4" fill="#eceee9" stroke="#182b29" stroke-width="1.5" stroke-dasharray="5 3"/>
 <rect x="230" y="450" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="241" y="467" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="241" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,874 frames</text>
-<text x="241" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 209</text>
+<text x="241" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">2,558 frames</text>
+<text x="241" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 301</text>
 <rect x="348" y="450" width="114" height="60" rx="4" fill="#eceee9" stroke="#182b29" stroke-width="1.5" stroke-dasharray="5 3"/>
 <rect x="348" y="450" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="359" y="467" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="359" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,874 frames</text>
-<text x="359" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 210</text>
+<text x="359" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">2,558 frames</text>
+<text x="359" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 302</text>
 <rect x="466" y="450" width="114" height="60" rx="4" fill="#eceee9" stroke="#182b29" stroke-width="1.5" stroke-dasharray="5 3"/>
 <rect x="466" y="450" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="477" y="467" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="477" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,874 frames</text>
-<text x="477" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 209</text>
+<text x="477" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">2,558 frames</text>
+<text x="477" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 301</text>
 <rect x="584" y="450" width="114" height="60" rx="4" fill="#ffffff" stroke="#c8d5cc" stroke-width="1"/>
 <text x="641" y="484" font-size="11" fill="#415b57" font-weight="normal" text-anchor="middle">no route</text>
 <rect x="702" y="450" width="114" height="60" rx="4" fill="#d6e6ef"/>
 <rect x="702" y="450" width="5" height="60" rx="2" fill="#155576"/>
 <text x="713" y="467" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">A1</text>
-<text x="713" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,874 frames</text>
-<text x="713" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 92</text>
+<text x="713" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">2,558 frames</text>
+<text x="713" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 136</text>
 <rect x="820" y="450" width="114" height="60" rx="4" fill="#eceee9"/>
 <rect x="820" y="450" width="5" height="60" rx="2" fill="#7d8b87"/>
 <text x="831" y="467" font-size="11" fill="#182b29" font-weight="600" text-anchor="start">no ext. ref.</text>
-<text x="831" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">1,874 frames</text>
-<text x="831" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 252</text>
+<text x="831" y="483" font-size="11" fill="#182b29" font-weight="normal" text-anchor="start">2,558 frames</text>
+<text x="831" y="499" font-size="11" fill="#415b57" font-weight="normal" text-anchor="start">B refuses 376</text>
 <rect x="24" y="526" width="18" height="14" rx="4" fill="#ffffff" stroke="#182b29" stroke-width="1.5" stroke-dasharray="5 3"/>
 <text x="48" y="538" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">Dashed border: the route runs the viseme pose bridge.</text>
 <text x="24" y="558" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">&quot;B refuses&quot; counts frames on which at least one map refuses. Refusals are expected: the frames include planted faults (values out of range,</text>
 <text x="24" y="576" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">missing or invalid channels, non-finite edge values). On each A1 route, A1 refuses the same frames as B.</text>
-<text x="24" y="596" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">Source: ab/results/v3/ (scoreboard.md, b_equals_o.csv, refusals.csv, manifest.json) and the registration.</text>
+<text x="24" y="596" font-size="12" fill="#415b57" font-weight="normal" text-anchor="start">Source: ab/results/v4/ (scoreboard.md, b_equals_o.csv, refusals.csv, manifest.json) and the registration.</text>
 </svg>
