@@ -45,6 +45,24 @@ do not change.
   Godot". The 10 FB2 signals and the 4 Unified Expressions shapes change
   from `unresolved` to `mapped`. TONGUE_RETREAT is not mapped to TongueFlat,
   as Godot maps it: the two names do not name one action.
+- New profile `facs.code` in `profiles/facs.code.toml`: FACS codes as an
+  expression set, vocabulary version `1.0`, status `draft`. 92 rows, one per
+  code number from a public list (`facs_wikipedia`), split by side where the
+  canonical signal is: 49 `mapped`, 25 `unresolved` and 18 `excluded`, each
+  with its reason. The values are RCEF's own numeric encoding of the FACS
+  intensity letters, not FACS scores, and RCEF does not code faces. The
+  aligned names are the 48 Rocketbox FACS shapes.
+- 102 new mappings in 16 maps between FACS codes and the canonical expression
+  set: 53 into it (copies, and 8 fan-outs for AU22 and AU28, which FACS does
+  not split into upper and lower parts) and 49 out of it (copies, and 4
+  means). Each states the FACS opening (intensity E or, for the gross
+  behaviour codes, the action at its fullest is canonical 1; absent is 0)
+  and the losses `facs_ordinal_intensity`, `facs_side_frame_unresolved` and,
+  where the audit names them, `facs_au30_direction_unresolved`,
+  `facs_au17_no_split`, `facs_mouth_opening_split`, `facs_eyelid_events` and
+  `facs_gross_code_no_intensity`. FACS fills 8 of the 12 groups: FACS → ARKit
+  writes 41 of 52 outputs, and FACS → FB2 53 of 70. FACS → canonical → FACS
+  gives every value back.
 - Evidence status: every canonical expression signal and every new mapping
   is `proposed` and `approximate`. The identity maps into `rcef.canonical`
   stay `verified_current`. The canonical pupils, which would be
@@ -66,11 +84,19 @@ do not change.
   expression vocabulary), `facs_wikipedia` (FACS code numbers, Wikipedia
   revision 1357638399), `rcsf_proposal` (the RCSF proposal at `f6c3ea8`),
   and six figure records for the FB2 and Unified Expressions figures that
-  the definitions cite.
-- `scripts/build_canonical.py` writes both profiles and the 63 maps from
-  `docs/canonical-set.md`, its audit, the IPA chart assignment in
-  `tests/fixtures/ipa_chart_symbols.json` and the direct maps. New tests:
-  `tests/test_canonical_vocabulary.py` and `tests/test_pivot_structure.py`.
+  the definitions cite. For FACS: `facs_hager_2002` (the publisher's page
+  on the 2002 manual, archived), `rocketbox_avatars` (Microsoft Rocketbox at
+  `0943055`), `pyfeat_au_reference` (Py-Feat at `4ebb4ec`) and
+  `ozel_arkit_facs` (an ARKit to FACS cheat sheet, archived); the last two
+  support audit notes only.
+- `scripts/build_canonical.py` writes both canonical profiles, the
+  `facs.code` profile and the 79 maps from `docs/canonical-set.md`, its
+  audit, the IPA chart assignment in `tests/fixtures/ipa_chart_symbols.json`,
+  the FACS code table in `examples/data/facs_codes.json`, the Rocketbox
+  shape names in `tests/fixtures/rocketbox_au_names.json` (which
+  `scripts/derive_rocketbox_au_names.py` reads from the pinned rig files)
+  and the direct maps. New tests: `tests/test_canonical_vocabulary.py`,
+  `tests/test_pivot_structure.py` and `tests/test_facs_profile.py`.
   The capability matrix in the second reads the names of FACS,
   `XR_FB_face_tracking`, `XR_ANDROID_face_tracking` and
   `XR_ML_facial_expression` from `tests/fixtures/capability_sets.json`,
