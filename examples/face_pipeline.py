@@ -17,7 +17,8 @@ evaluates both with msf_character_tools.evaluate_geometry:
   route them (tests/fixtures/godot_fb2_rules.csv, derived from the pinned
   source bytes). ICT splits browInnerUp and cheekPuff into halves, so on ICT
   each half takes its own FB2 side.
-- translated: the ARKit weights RCEF's proposed mappings produce. A shape that
+- translated: the ARKit weights that RCEF's proposed mappings produce through
+  the canonical expression set (examples/rcef_frames.py). A shape that
   no RCEF mapping writes yet stays at rest here and is labelled. This is not an
   oracle failure, but its whole direct movement counts towards the mesh bound.
 
@@ -46,7 +47,7 @@ import struct
 import msf_character_tools as msf
 
 import make_expression_frames
-import rcef_translate
+import rcef_frames
 import rigs
 
 HERE = Path(__file__).resolve().parent
@@ -183,7 +184,7 @@ def arguments(argv=None) -> argparse.Namespace:
     parser.add_argument('--out', type=Path, help='output directory (default: ~/.cache/rcef-examples/face/RIG)')
     parser.add_argument('--frames', type=Path, default=HERE / 'data/fb2_expression_frames.csv')
     args = parser.parse_args(argv)
-    home = rcef_translate.cache_home()
+    home = rcef_frames.cache_home()
     args.cache = args.cache or home / ('rcef-ict-facekit' if args.rig == 'ict' else 'rcef-face-rigs')
     args.out = args.out or home / 'rcef-examples/face' / args.rig
     return args
@@ -201,7 +202,7 @@ def main(argv=None) -> int:
     library = make_expression_frames.library()
     expressions = {e['name']: e for e in library['expressions']}
 
-    translator = rcef_translate.fb2_to_arkit()
+    translator = rcef_frames.fb2_to_arkit()
     frames = translator.read(args.frames)
     translated = translator.translate(frames)
     translator.write(translated, out / 'fb2_to_arkit.csv')
