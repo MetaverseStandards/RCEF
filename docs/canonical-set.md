@@ -9,7 +9,7 @@ Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards For
 
 This document uses the proposal form of [GOVERNANCE.md](../GOVERNANCE.md): the problem, the proposal, the public evidence, the effect on compatibility, the alternatives, the tests and the open questions. Two documents go with it:
 
-- the [definitions audit](canonical-set-audit.md), which compares each canonical signal with each public source that maps it, and records the assumptions of today's maps;
+- the [definitions audit](canonical-set-audit.md), which compares each canonical signal with each public source that maps it, and records the assumptions of the retired A1 direct maps;
 - [facs-intensity.md](facs-intensity.md), which says how FACS intensity letters become numbers.
 
 ## Problem
