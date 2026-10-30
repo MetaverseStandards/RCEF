@@ -1,0 +1,38 @@
+pair,impulse_frames,violations
+ARKit -> ARKit,104,0
+ARKit -> FACS,104,0
+ARKit -> FB2,104,0
+ARKit -> VRCFT UE,104,0
+ARKit -> VRCFT eye,104,0
+ARKit -> VRM blink,104,0
+FACS -> ARKit,98,0
+FACS -> FACS,98,0
+FACS -> FB2,98,0
+FACS -> VRCFT UE,98,0
+FACS -> VRCFT eye,98,0
+FACS -> VRM blink,98,0
+FB2 -> ARKit,140,0
+FB2 -> FACS,140,0
+FB2 -> FB2,140,0
+FB2 -> VRCFT UE,140,0
+FB2 -> VRCFT eye,140,0
+FB2 -> VRM blink,140,0
+META -> ARKit,30,0
+META -> FACS,30,0
+META -> FB2,30,0
+META -> META,30,0
+META -> VRCFT UE,30,0
+META -> VRM,30,0
+VRCFT eye -> ARKit,24,0
+VRCFT eye -> FACS,24,0
+VRCFT eye -> FB2,24,0
+VRCFT eye -> VRCFT UE,24,0
+VRCFT eye -> VRCFT eye,24,0
+VRCFT eye -> VRM,24,0
+VRM -> ARKit,36,0
+VRM -> FACS,36,0
+VRM -> FB2,36,0
+VRM -> META,36,0
+VRM -> VRCFT UE,36,0
+VRM -> VRCFT eye,36,0
+VRM -> VRM,36,0

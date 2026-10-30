@@ -1,0 +1,237 @@
+{
+ "record": "ict_facekit",
+ "url": "https://raw.githubusercontent.com/USC-ICT/ICT-FaceKit/da5f95a607f5e6b37755b38d3385d7f2853732e5/README.md",
+ "sha256": "614116987854431bbdadbf7772f7352edeeca55580f62021dccb78aaf76febf6",
+ "license": "MIT",
+ "credit": "ICT-FaceKit, Copyright (c) 2020 USC Institute for Creative Technologies, MIT license",
+ "lines": [
+  154,
+  184
+ ],
+ "rows": [
+  {
+   "line": 156,
+   "unit": "AU1 Inner brow raiser",
+   "shapes": [
+    "browInnerUp_L",
+    "browInnerUp_R"
+   ]
+  },
+  {
+   "line": 157,
+   "unit": "AU2 Outer brow raiser",
+   "shapes": [
+    "browOuterUp_L",
+    "browOuterUp_R"
+   ]
+  },
+  {
+   "line": 158,
+   "unit": "AU4 Brow lowerer",
+   "shapes": [
+    "browDown_L",
+    "browDown_R"
+   ]
+  },
+  {
+   "line": 159,
+   "unit": "AU6 Cheek raiser",
+   "shapes": [
+    "cheekSquint_L",
+    "cheekSquint_R"
+   ]
+  },
+  {
+   "line": 160,
+   "unit": "AU5 Upper lid raiser",
+   "shapes": [
+    "eyeWide_L",
+    "eyeWide_R"
+   ]
+  },
+  {
+   "line": 161,
+   "unit": "AU7 Lid tightener",
+   "shapes": [
+    "eyeSquint_L",
+    "eyeSquint_R"
+   ]
+  },
+  {
+   "line": 162,
+   "unit": "AU9 Nose Wrinkler",
+   "shapes": [
+    "noseSneer_L",
+    "noseSneer_R"
+   ]
+  },
+  {
+   "line": 163,
+   "unit": "AU10 Upper lip raiser",
+   "shapes": [
+    "mouthShrugUpper"
+   ]
+  },
+  {
+   "line": 164,
+   "unit": "AU11 Nasolabial deepener",
+   "shapes": [
+    "mouthUpperUp_L",
+    "mouthUpperUp_R"
+   ]
+  },
+  {
+   "line": 165,
+   "unit": "AU12 Lip corner puller",
+   "shapes": [
+    "mouthSmile_L",
+    "mouthSmile_R"
+   ]
+  },
+  {
+   "line": 166,
+   "unit": "AU14 Dimpler",
+   "shapes": [
+    "mouthDimple_L",
+    "mouthDimple_R"
+   ]
+  },
+  {
+   "line": 167,
+   "unit": "AU15 Lip corner depressor",
+   "shapes": [
+    "mouthFrown_L",
+    "mouthFrown_R"
+   ]
+  },
+  {
+   "line": 168,
+   "unit": "AU16 Lower lip depressor",
+   "shapes": [
+    "mouthLowerDown_L",
+    "mouthLowerDown_R"
+   ]
+  },
+  {
+   "line": 169,
+   "unit": "AU17 Chin raiser",
+   "shapes": [
+    "mouthShrugLower"
+   ]
+  },
+  {
+   "line": 170,
+   "unit": "AU18 Lip Pucker",
+   "shapes": [
+    "mouthPucker"
+   ]
+  },
+  {
+   "line": 171,
+   "unit": "AU20 Lip stretcher",
+   "shapes": [
+    "mouthStretch_L",
+    "mouthStretch_R"
+   ]
+  },
+  {
+   "line": 172,
+   "unit": "AU22 Lip Funneler",
+   "shapes": [
+    "mouthFunnel"
+   ]
+  },
+  {
+   "line": 173,
+   "unit": "AU24 Lip pressor",
+   "shapes": [
+    "mouthPress_L",
+    "mouthPress_R"
+   ]
+  },
+  {
+   "line": 174,
+   "unit": "AU27 Mouth stretch",
+   "shapes": [
+    "jawOpen"
+   ]
+  },
+  {
+   "line": 175,
+   "unit": "AU28 Lip Suck",
+   "shapes": [
+    "mouthRollLower",
+    "mouthRollUpper"
+   ]
+  },
+  {
+   "line": 176,
+   "unit": "AU29 Jaw thrust",
+   "shapes": [
+    "jawForward"
+   ]
+  },
+  {
+   "line": 177,
+   "unit": "AU30 Jaw sideways (left)",
+   "shapes": [
+    "jawLeft"
+   ]
+  },
+  {
+   "line": 178,
+   "unit": "AU30 Jaw sideways (right)",
+   "shapes": [
+    "jawRight"
+   ]
+  },
+  {
+   "line": 179,
+   "unit": "AU33 Cheek blow",
+   "shapes": [
+    "cheekPuff_L",
+    "cheekPuff_R"
+   ]
+  },
+  {
+   "line": 180,
+   "unit": "AU45 Blink",
+   "shapes": [
+    "eyeBlink_L",
+    "eyeBlink_R"
+   ]
+  },
+  {
+   "line": 181,
+   "unit": "AU61 Eyes turn left",
+   "shapes": [
+    "eyeLookOut_L",
+    "eyeLookIn_R"
+   ]
+  },
+  {
+   "line": 182,
+   "unit": "AU62 Eyes turn right",
+   "shapes": [
+    "eyeLookOut_R",
+    "eyeLookIn_L"
+   ]
+  },
+  {
+   "line": 183,
+   "unit": "AU63 Eyes up",
+   "shapes": [
+    "eyeLookUp_L",
+    "eyeLookUp_R"
+   ]
+  },
+  {
+   "line": 184,
+   "unit": "AU64 Eyes down",
+   "shapes": [
+    "eyeLookDown_L",
+    "eyeLookDown_R"
+   ]
+  }
+ ]
+}

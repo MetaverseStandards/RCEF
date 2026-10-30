@@ -210,11 +210,18 @@ SHA256 = re.compile(r'[0-9a-f]{64}')
 COMMIT = re.compile(r'[0-9a-f]{40}')
 RECORD_ID = re.compile(r'[a-z0-9][a-z0-9._-]*')
 RECORD_FIELDS = {'format': str, 'id': str, 'version': int, 'status': str, 'scope': str, 'method': str,
-                 'channels': list, 'reference_rig': str, 'inputs': list, 'renderer': dict, 'code_commit': str,
+                 'channels': list, 'reference_rig': str, 'inputs': list, 'code_commit': str,
                  'training': dict, 'held_out': dict, 'evaluation': dict, 'curves': list,
                  'licence': str, 'limitations': list}
-# A record without cells is a pre-registration: frozen and in the ledger, with no results yet.
-OPTIONAL_FIELDS = {'scan_origin': str, 'cells': list}
+# A record without cells is a pre-registration: frozen and in the ledger, with no results yet. A fit that renders
+# nothing (mesh geometry only) has no renderer. features (frozen) and feature_cells (results) add the perceptual gate.
+OPTIONAL_FIELDS = {'scan_origin': str, 'cells': list, 'renderer': dict, 'features': list, 'feature_cells': list}
+RESULTS = ('cells', 'feature_cells')
+FEATURE_KINDS = ('difference', 'range')
+# Every channel with features also bounds its whole-mesh error, so a feature gate cannot pass a face that is further
+# from the target than the neutral face is.
+GUARD = 'whole_face_error'
+COPY = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
 SCOPE = 'software-only; not a measurement of any tracker'
 SCAN_ORIGIN = 'light-stage scans of real people'
 ICT = re.compile(r'\bict\b|identity\d{3}', re.IGNORECASE)
@@ -229,12 +236,12 @@ def load_record(path: Path) -> dict:
 
 
 def frozen_sha256(record: dict) -> str:
-    """The sha256 of everything in a record except its metrics (cells) and this hash itself.
+    """The sha256 of everything in a record except its metrics (cells and feature_cells) and this hash itself.
 
     The part is serialised as compact, key-sorted JSON, so the hash depends on
     the values, not on how the TOML is laid out.
     """
-    frozen = {k: v for k, v in record.items() if k != 'cells'}
+    frozen = {k: v for k, v in record.items() if k not in RESULTS}
     if isinstance(frozen.get('held_out'), dict):
         frozen['held_out'] = {k: v for k, v in frozen['held_out'].items() if k != 'frozen_sha256'}
     text = json.dumps(frozen, sort_keys=True, ensure_ascii=False, separators=(',', ':'), allow_nan=False)
@@ -417,6 +424,69 @@ def record_problems(record: dict, name: str) -> list[str]:
             problems.append(f'{where}channel {cell["channel"]} is not one of the channels')
         if _number(cell.get('median')) and _number(cell.get('p95')) and cell['median'] > cell['p95']:
             problems.append(f'{where}median {cell["median"]} is above p95 {cell["p95"]}')
+    problems += feature_problems(record, channels, minimum, count)
+    return problems
+
+
+def feature_problems(record: dict, channels, minimum, count) -> list[str]:
+    """How the perceptual part of a record (features, feature_cells) departs from calibration/README.md."""
+    problems, declared = [], set()
+    metric = (lambda v: _number(v) and v >= 0, 'a finite number >= 0')
+    features = record.get('features') if isinstance(record.get('features'), list) else None
+    if features is not None and not features:
+        problems.append('features must list at least one feature')
+    for i, feature in enumerate(features or ()):
+        where = f'features[{i}].'
+        if not isinstance(feature, dict):
+            problems.append(f'features[{i}] must be a table')
+            continue
+        fields = {'channel': (_text, 'text'), 'feature': (_text, 'text'), 'units': (_text, 'text'),
+                  'kind': (lambda v: v in FEATURE_KINDS, ' or '.join(FEATURE_KINDS)), 'tolerance': metric,
+                  'description': (_text, 'text')}
+        if feature.get('kind') == 'range':
+            fields.update(low=(_number, 'a finite number'), high=(_number, 'a finite number'))
+        problems += _fields(feature, fields, where)
+        if feature.get('kind') == 'range' and _number(feature.get('low')) and _number(feature.get('high')) \
+                and feature['low'] >= feature['high']:
+            problems.append(f'{where}low must be below high')
+        if channels is not None and _text(feature.get('channel')) and feature['channel'] not in channels:
+            problems.append(f'{where}channel {feature["channel"]} is not one of the channels')
+        key = (feature.get('channel'), feature.get('feature'))
+        if key in declared:
+            problems.append(f'the feature {key[1]} of {key[0]} appears twice')
+        declared.add(key)
+    for channel in sorted({f['channel'] for f in features or () if isinstance(f, dict) and _text(f.get('channel'))}):
+        guard = next((f for f in features if isinstance(f, dict)
+                      and (f.get('channel'), f.get('feature')) == (channel, GUARD)), {})
+        if not (guard.get('kind') == 'range' and guard.get('low') == 0 and _number(guard.get('high'))
+                and _number(guard.get('tolerance')) and guard['high'] + guard['tolerance'] <= 1):
+            problems.append(f'channel {channel} has features but no {GUARD} guard (a range from 0 whose high plus '
+                            'tolerance is at most 1)')
+    cells = record.get('feature_cells') if isinstance(record.get('feature_cells'), list) else None
+    if cells is not None and not cells:
+        problems.append('feature_cells must list at least one cell')
+    if cells and 'cells' not in record:
+        problems.append('feature_cells come with the cells of the same held-out run')
+    for i, cell in enumerate(cells or ()):
+        where = f'feature_cells[{i}].'
+        if not isinstance(cell, dict):
+            problems.append(f'feature_cells[{i}] must be a table')
+            continue
+        problems += _fields(cell, {'channel': (_text, 'text'), 'feature': (_text, 'text'), 'identity': (_text, 'text'),
+                                   'conditions': (lambda v: type(v) is int and v >= (minimum or MIN_CONDITIONS),
+                                                  'an integer >= evaluation.min_conditions'),
+                                   'failures': (lambda v: type(v) is int and v >= 0, 'an integer >= 0'),
+                                   'median': metric, 'p95': metric, 'max': metric}, where)
+        if (cell.get('channel'), cell.get('feature')) not in declared:
+            problems.append(f'{where}{cell.get("feature")} of {cell.get("channel")} is not one of the features')
+        conditions = cell.get('conditions')
+        if type(conditions) is int and count is not None and conditions > count:
+            problems.append(f'{where}conditions {conditions} is more than held_out.count {count}')
+        if type(cell.get('failures')) is int and type(conditions) is int and cell['failures'] > conditions:
+            problems.append(f'{where}failures {cell["failures"]} is more than its conditions {conditions}')
+        values = [cell.get(k) for k in ('median', 'p95', 'max')]
+        if all(_number(v) for v in values) and not values[0] <= values[1] <= values[2]:
+            problems.append(f'{where}median, p95 and max must not decrease')
     return problems
 
 
@@ -484,6 +554,31 @@ def cell_passes(record: dict, cell: dict) -> bool:
     return cell['failures'] == 0 and all(cell[k] <= bound[k] for k in ('median', 'p95', 'neutral'))
 
 
+def feature_cell_passes(record: dict, cell: dict) -> bool:
+    """A feature cell passes if nothing was missed and its largest error is within the feature's frozen tolerance."""
+    feature = next(f for f in record['features'] if (f['channel'], f['feature']) == (cell['channel'], cell['feature']))
+    return cell['failures'] == 0 and cell['max'] <= feature['tolerance']
+
+
+def channel_passes(record: dict, channel: str) -> bool:
+    """Whether a channel passes: every shape cell passes, or, if the record gives the channel features, every
+    feature has a passing feature cell for every held-out identity of the channel's shape cells."""
+    cells = [c for c in record.get('cells', []) if c['channel'] == channel]
+    if not cells:
+        return False
+    if all(cell_passes(record, c) for c in cells):
+        return True
+    features = [f['feature'] for f in record.get('features', []) if f['channel'] == channel]
+    if not features:
+        return False
+    found = {}
+    for cell in record.get('feature_cells', []):
+        if cell['channel'] == channel:
+            found.setdefault((cell['feature'], cell['identity']), []).append(cell)
+    return all(found.get((f, c['identity'])) and all(feature_cell_passes(record, x) for x in found[(f, c['identity'])])
+               for f in features for c in cells)
+
+
 def pack_rules(root: Path = ROOT) -> list[dict]:
     """Every mapping rule in the checkout's authoring files, found the way msf-character-tools finds them."""
     rules = []
@@ -529,24 +624,79 @@ def calibration_problems(records: Path, rules: list[dict]) -> list[str]:
                 problems.append(f'{label}, which does not exist in {records.name}/')
                 continue
             operator = rule.get('operator', {})
-            if operator.get('id') != 'piecewise_linear':
-                problems.append(f'{label} but its operator is {operator.get("id")}, not piecewise_linear')
+            if operator.get('id') == 'weighted_sum':
+                found, channels = pose_sum_problems(rule, valid[cited], rules)
+                problems += [f'{label}, but {p}' for p in found]
+            elif operator.get('id') != 'piecewise_linear':
+                problems.append(f'{label} but its operator is {operator.get("id")}, not piecewise_linear or '
+                                'weighted_sum')
                 continue
-            curve = [c for c in valid[cited]['curves'] if [c['input']] == rule.get('inputs')
-                     and [c['output']] == rule.get('outputs')]
-            if not curve:
-                problems.append(f'{label}, which has no curve from {rule.get("inputs")} to {rule.get("outputs")}')
-            elif operator.get('knots') != curve[0]['knots']:
-                problems.append(f'{label}, but its knots are not exactly the frozen knots of that curve')
+            else:
+                channels = rule.get('inputs') or []
+                if not channels:
+                    problems.append(f'{label}, but it reads no channel')
+                    continue
+                curve = [c for c in valid[cited]['curves'] if [c['input']] == rule.get('inputs')
+                         and [c['output']] == rule.get('outputs')]
+                if not curve:
+                    problems.append(f'{label}, which has no curve from {rule.get("inputs")} to {rule.get("outputs")}')
+                elif operator.get('knots') != curve[0]['knots']:
+                    problems.append(f'{label}, but its knots are not exactly the frozen knots of that curve')
             if 'cells' not in valid[cited]:
                 problems.append(f'{label}, which has no results yet')
                 continue
-            cells = [c for c in valid[cited]['cells'] if [c['channel']] == rule.get('inputs')]
-            if not cells:
-                problems.append(f'{label}, which has no held-out cell for {rule.get("inputs")}')
-            problems += [f'{label}, but its cell for {c["stimulus"]}, {c["identity"]}, side {c["side"]} fails the '
-                         'frozen bounds' for c in cells if not cell_passes(valid[cited], c)]
+            for channel in channels:
+                cells = [c for c in valid[cited]['cells'] if c['channel'] == channel]
+                if not cells:
+                    problems.append(f'{label}, which has no held-out cell for {[channel]}')
+                elif not channel_passes(valid[cited], channel):
+                    gated = any(f['channel'] == channel for f in valid[cited].get('features', []))
+                    problems += [f'{label}, but its cell for {c["stimulus"]}, {c["identity"]}, side {c["side"]} fails '
+                                 'the frozen bounds' + (', and not every feature cell of the channel passes its '
+                                                        'tolerance' if gated else '')
+                                 for c in cells if not cell_passes(valid[cited], c)]
     return problems
+
+
+def pose_sum_problems(rule: dict, record: dict, rules: list[dict]) -> tuple[list[str], list[str]]:
+    """How a weighted_sum rule departs from its record's pose curves, and the channels it reads.
+
+    Each input must be a copy of one channel, made by one rule, and have one weight. The sum must be read by
+    exactly one rule, the clamp: a piecewise_linear rule with the sum as its only input, one output, and the knots
+    [[0, 0], [1, 1], [n, 1]] for n inputs ([[0, 0], [1, 1]] for one). Its output is the output of the curves. Each weight w must be the pose of
+    its channel: the curve from that channel to that output has exactly the knots [[0.0, 0.0], [1.0, w]].
+    """
+    inputs, weights = rule.get('inputs') or [], rule['operator'].get('weights') or []
+    outputs = rule.get('outputs') or []
+    if not inputs or len(weights) != len(inputs) or len(outputs) != 1:
+        return ['it does not have one weight per input and one output'], []
+    writers = {}
+    for other in rules:
+        for sid in other.get('outputs', []):
+            writers.setdefault(sid, []).append(other)
+    readers = [r for r in rules if outputs[0] in (r.get('inputs') or [])]
+    clamp = readers[0] if len(readers) == 1 else {}
+    if len(readers) != 1 or clamp.get('operator', {}).get('id') != 'piecewise_linear' \
+            or clamp.get('inputs') != outputs or len(clamp.get('outputs', [])) != 1:
+        return ['its sum is not read by exactly one rule, a piecewise_linear clamp'], []
+    expected = [[0.0, 0.0], [1.0, 1.0]] + ([[float(len(inputs)), 1.0]] if len(inputs) > 1 else [])
+    if clamp['operator'].get('knots') != expected:
+        return [f'its clamp {clamp.get("id")} does not have the knots {expected}'], []
+    output = clamp['outputs'][0]
+    knots = {c['input']: c['knots'] for c in record['curves'] if c['output'] == output}
+    problems, channels = [], []
+    for sid, weight in zip(inputs, weights, strict=True):
+        steps = writers.get(sid, [])
+        if len(steps) != 1 or steps[0].get('operator') != COPY or len(steps[0].get('inputs', [])) != 1:
+            problems.append(f'its input {sid} is not a copy of one channel made by one rule')
+            continue
+        channel = steps[0]['inputs'][0]
+        channels.append(channel)
+        if channel not in knots:
+            problems.append(f'the record has no curve from {channel} to {output}')
+        elif knots[channel] != [[0.0, 0.0], [1.0, weight]]:
+            problems.append(f'its weight for {channel} is not the frozen pose of the curve to {output}')
+    return problems, channels
 
 
 def verify_environment() -> list[str]:

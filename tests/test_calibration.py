@@ -16,6 +16,8 @@ check = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(check)
 FIXTURES = ROOT / 'tests/fixtures/calibration'
 RECORD = FIXTURES / 'fixture.jaw-gain.cal'
+POSES = FIXTURES / 'fixture.poses.cal'
+GATED = FIXTURES / 'fixture.poses-features.cal'
 CHANNEL = 'fixture.source.jaw'
 SCAN_NOTE = ('Identity modes come from ICT-FaceKit, which derives them from light-stage scans of real people; '
              'they are used only as geometry.')
@@ -23,6 +25,11 @@ SCAN_NOTE = ('Identity modes come from ICT-FaceKit, which derives them from ligh
 
 def fixture_rule():
     return json.loads((FIXTURES / 'fixture_rule.json').read_text(encoding='utf-8'))
+
+
+def pose_rules():
+    """Two copies of the channels, their weighted sum, which cites fixture.poses, and the clamp of the sum."""
+    return json.loads((FIXTURES / 'fixture_pose_rules.json').read_text(encoding='utf-8'))
 
 
 def refreeze(record):
@@ -55,7 +62,7 @@ class Records(unittest.TestCase):
         self.assertTrue(any('fixture.other' in p for p in self.problems(name='fixture.other')))
 
     def test_required_fields_and_their_types(self):
-        for field in ('version', 'scope', 'method', 'channels', 'reference_rig', 'inputs', 'renderer', 'code_commit',
+        for field in ('version', 'scope', 'method', 'channels', 'reference_rig', 'inputs', 'code_commit',
                       'training', 'held_out', 'evaluation', 'curves', 'licence', 'limitations'):
             with self.subTest(field):
                 self.assertRefused(lambda r: r.pop(field), field)
@@ -96,6 +103,11 @@ class Records(unittest.TestCase):
         for field in ('os', 'gpu', 'compiler'):
             with self.subTest(field):
                 self.assertRefused(lambda r: r['renderer'].pop(field), field)
+        self.assertRefused(lambda r: r.update(renderer='meshrender'), 'renderer')
+
+    def test_a_fit_on_mesh_geometry_alone_has_no_renderer(self):
+        self.assertEqual(self.changed(lambda r: r.pop('renderer'), freeze=True), [])
+        self.assertEqual(check.record_problems(check.load_record(POSES), 'fixture.poses'), [])
 
     def test_curves_are_monotone_with_strictly_increasing_inputs(self):
         self.assertRefused(lambda r: r['curves'][0].update(knots=[[0.0, 0.0]]), 'knots')
@@ -295,6 +307,11 @@ class CitingRules(unittest.TestCase):
         rule['evidence'] = ['calibration.fixture.missing']
         self.assertTrue(any('fixture.missing' in p for p in self.problems(rule)))
 
+    def test_a_rule_citing_a_record_with_no_inputs_is_refused_with_a_message(self):
+        rule = fixture_rule()
+        del rule['inputs']
+        self.assertTrue(any('reads no channel' in p for p in self.problems(rule)))
+
     def test_a_rule_citing_a_record_must_use_its_curve(self):
         rule = fixture_rule()
         rule['operator'] = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
@@ -316,6 +333,193 @@ class CitingRules(unittest.TestCase):
         rule['evidence'] = ['xr_fb2']
         rule['operator'] = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
         self.assertEqual(self.problems(rule), [])
+
+
+class CitingPoseSums(unittest.TestCase):
+    """A weighted_sum rule cites a record of poses: its weights are the poses, read through copies and a clamp."""
+
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory(prefix='rcef-cal-')
+        self.addCleanup(temp.cleanup)
+        self.records = Path(temp.name)
+        shutil.copy(POSES, self.records)
+        shutil.copy(FIXTURES / 'FREEZES', self.records)
+        self.rules = pose_rules()
+
+    def problems(self, rules=None):
+        return check.calibration_problems(self.records, self.rules if rules is None else rules)
+
+    def assertRefused(self, *words):
+        problems = self.problems()
+        self.assertTrue(problems, 'the rules were accepted')
+        for word in words:
+            self.assertTrue(any(word in p for p in problems), problems)
+
+    def test_weights_equal_to_the_frozen_poses_are_accepted(self):
+        self.assertEqual(self.problems(), [])
+
+    def test_each_weight_must_equal_its_pose_exactly(self):
+        self.rules[2]['operator']['weights'][1] = 0.25 + 1e-12
+        self.assertRefused('fixture.source.lip', 'frozen pose')
+
+    def test_each_input_must_be_a_copy_of_one_channel(self):
+        self.rules[0]['operator'] = {'id': 'affine', 'scale': 0.5, 'offset': 0.0}
+        self.assertRefused('fixture.helper.jaw', 'copy')
+        self.rules = pose_rules()[1:]
+        self.assertRefused('fixture.helper.jaw', 'copy')
+
+    def test_the_sum_must_be_read_by_one_clamp_whose_output_has_the_curves(self):
+        self.rules[3]['operator'] = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
+        self.assertRefused('piecewise_linear')
+        self.rules = pose_rules()
+        self.rules[3]['outputs'] = ['fixture.target.other']
+        self.assertRefused('no curve', 'fixture.target.other')
+
+    def test_every_cell_of_every_channel_read_must_pass(self):
+        path = self.records / POSES.name
+        path.write_text(POSES.read_text(encoding='utf-8').replace('median = 0.3\np95 = 0.4', 'median = 0.3\np95 = 0.6'),
+                        encoding='utf-8')
+        self.assertEqual(check.calibration_problems(self.records, []), [], 'a negative result is valid')
+        self.assertRefused('fails', 'fixture.pose.sum')
+        # Without the failing channel's input, the sum may cite the record.
+        self.rules = pose_rules()
+        del self.rules[1]
+        self.rules[1]['inputs'], self.rules[1]['operator']['weights'] = ['fixture.helper.jaw'], [0.4]
+        self.rules[2]['operator']['knots'] = [[0.0, 0.0], [1.0, 1.0]]
+        self.assertEqual(self.problems(), [])
+
+    def test_the_clamp_must_have_the_clamp_knots(self):
+        self.rules[3]['operator']['knots'] = [[0.0, 0.0], [0.5, 1.0], [2.0, 1.0]]
+        self.assertRefused('fixture.pose.clamp', 'knots')
+        self.rules[3]['operator']['knots'] = [[0.0, 0.0], [1.0, 1.0], [3.0, 1.0]]
+        self.assertRefused('knots')
+
+    def test_no_other_rule_may_read_the_sum(self):
+        self.rules.append({'id': 'fixture.pose.extra', 'inputs': ['fixture.helper.sum', 'fixture.source.lip'],
+                           'outputs': ['fixture.target.other'],
+                           'operator': {'id': 'weighted_sum', 'weights': [3.0, 1.0]}, 'evidence': []})
+        self.assertRefused('exactly one rule')
+
+    def test_each_input_needs_exactly_one_weight(self):
+        self.rules[2]['operator']['weights'] = [0.4]
+        self.assertRefused('one weight per input')
+        self.rules[2]['operator']['weights'] = [0.4, 0.25, 0.1]
+        self.assertRefused('one weight per input')
+
+    def test_a_pose_sum_cannot_cite_a_record_that_has_no_results_yet(self):
+        text = POSES.read_text(encoding='utf-8')
+        (self.records / POSES.name).write_text(text[:text.index('[[cells]]')], encoding='utf-8')
+        self.assertRefused('no results')
+
+
+class PerceptualGate(unittest.TestCase):
+    """A record may give a channel features; the channel then passes if its shape cells or its feature cells pass."""
+
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory(prefix='rcef-cal-')
+        self.addCleanup(temp.cleanup)
+        self.records = Path(temp.name)
+        shutil.copy(GATED, self.records)
+        shutil.copy(FIXTURES / 'FREEZES', self.records)
+        self.rules = pose_rules()
+        self.rules[2]['evidence'] = ['calibration.fixture.poses-features']
+        self.record = check.load_record(GATED)
+
+    def edit(self, old, new):
+        path = self.records / GATED.name
+        text = path.read_text(encoding='utf-8')
+        self.assertIn(old, text)
+        path.write_text(text.replace(old, new), encoding='utf-8')
+
+    def problems(self, record):
+        return check.record_problems(record, 'fixture.poses-features')
+
+    def test_the_fixture_is_valid_and_its_lip_channel_passes_by_its_features(self):
+        self.assertEqual(self.problems(self.record), [])
+        self.assertFalse(check.cell_passes(self.record, self.record['cells'][1]))
+        self.assertTrue(check.channel_passes(self.record, 'fixture.source.lip'))
+        self.assertTrue(check.channel_passes(self.record, 'fixture.source.jaw'))
+        self.assertEqual(check.calibration_problems(self.records, self.rules), [])
+
+    def test_a_feature_cell_beyond_its_tolerance_fails_the_channel(self):
+        self.edit('median = 0.1\np95 = 0.3\nmax = 0.4', 'median = 0.1\np95 = 0.3\nmax = 0.51')
+        self.assertEqual(check.calibration_problems(self.records, []), [], 'a negative result is valid')
+        problems = check.calibration_problems(self.records, self.rules)
+        self.assertTrue(any('feature cell' in p and 'fixture.pose.sum' in p for p in problems), problems)
+
+    def test_a_range_feature_fails_on_any_error(self):
+        record = deepcopy(self.record)
+        record['feature_cells'][0].update(max=0.01, p95=0.01)
+        self.assertFalse(check.channel_passes(record, 'fixture.source.lip'))
+
+    def test_a_feature_cell_with_failures_fails_even_within_its_tolerance(self):
+        record = deepcopy(self.record)
+        record['feature_cells'][1]['failures'] = 1
+        self.assertFalse(check.feature_cell_passes(record, record['feature_cells'][1]))
+        self.assertFalse(check.channel_passes(record, 'fixture.source.lip'))
+
+    def test_every_channel_with_features_needs_the_whole_face_guard(self):
+        cases = [
+            lambda r: r.update(features=[f for f in r['features'] if f['feature'] != check.GUARD]),
+            lambda r: r['features'][2].update(high=1.5),
+            lambda r: r['features'][2].update(low=-0.5),
+            lambda r: r['features'][2].update(tolerance=0.1),
+            lambda r: r['features'][2].update(kind='difference'),
+        ]
+        for i, change in enumerate(cases):
+            with self.subTest(i):
+                record = deepcopy(self.record)
+                change(record)
+                record['feature_cells'] = [c for c in record['feature_cells'] if c['feature'] != check.GUARD]
+                refreeze(record)
+                problems = self.problems(record)
+                self.assertTrue(any('whole_face_error guard' in p for p in problems), problems)
+
+    def test_every_feature_needs_a_cell_for_every_held_out_identity(self):
+        record = deepcopy(self.record)
+        del record['feature_cells'][1]
+        self.assertFalse(check.channel_passes(record, 'fixture.source.lip'))
+        record = deepcopy(self.record)
+        record['cells'].append(dict(record['cells'][1], identity='fixture rig 3'))
+        self.assertFalse(check.channel_passes(record, 'fixture.source.lip'))
+
+    def test_a_channel_without_features_needs_its_shape_cells(self):
+        record = deepcopy(self.record)
+        record['features'] = [f for f in record['features'] if f['feature'] != 'lip_opening_mm']
+        self.assertTrue(check.channel_passes(record, 'fixture.source.lip'))
+        record['features'] = []
+        self.assertFalse(check.channel_passes(record, 'fixture.source.lip'))
+
+    def test_features_are_frozen_and_feature_cells_are_not(self):
+        record = deepcopy(self.record)
+        record['features'][1]['tolerance'] = 0.6
+        self.assertTrue(any('frozen_sha256' in p for p in self.problems(record)))
+        record = deepcopy(self.record)
+        record['feature_cells'][1]['max'] = 0.45
+        self.assertEqual(self.problems(record), [])
+
+    def test_features_and_feature_cells_are_well_formed(self):
+        cases = [
+            (lambda r: r['features'][0].update(kind='ratio'), 'kind'),
+            (lambda r: r['features'][0].pop('low'), 'low'),
+            (lambda r: r['features'][0].update(low=0.5), 'low must be below high'),
+            (lambda r: r['features'][1].update(channel='fixture.source.other'), 'fixture.source.other'),
+            (lambda r: r['features'].append(dict(r['features'][1])), 'appears twice'),
+            (lambda r: r['features'][1].update(tolerance=-0.1), 'tolerance'),
+            (lambda r: r['feature_cells'][1].update(feature='lip_width'), 'not one of the features'),
+            (lambda r: r['feature_cells'][1].update(conditions=23), 'min_conditions'),
+            (lambda r: r['feature_cells'][1].update(failures=25), 'failures'),
+            (lambda r: r['feature_cells'][1].update(p95=0.5), 'must not decrease'),
+            (lambda r: r['feature_cells'][1].pop('max'), 'max'),
+            (lambda r: r.pop('cells'), 'feature_cells come with the cells'),
+        ]
+        for change, word in cases:
+            with self.subTest(word):
+                record = deepcopy(self.record)
+                change(record)
+                refreeze(record)
+                problems = self.problems(record)
+                self.assertTrue(any(word in p for p in problems), problems)
 
 
 class Repository(unittest.TestCase):

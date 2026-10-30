@@ -584,13 +584,13 @@ value_type = "scalar"
 units = "unknown"
 domain = {  }
 calibration = "vrcft.artist.base: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["vrcft_artist"]
 evidence_status = "verified_current"
 native_id = "CheekSuckRight"
 surface = "vrcft.artist.base"
 side = "right"
-metadata = { "inventory_ordinal" = 36, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "CheekSuckRight", "selected" = true }
+metadata = { "inventory_ordinal" = 36, "reason" = "Native identifier evidenced; written from the canonical expression signal cheek_suck_right by the proposed approximate hop rcef_cheek_suck.to_vrcft_artist; calibration correspondence is assumed, not measured.", "source_display_label" = "CheekSuckRight", "selected" = true }
 region = "cheek"
 
 [[signals]]
@@ -600,13 +600,13 @@ value_type = "scalar"
 units = "unknown"
 domain = {  }
 calibration = "vrcft.artist.base: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["vrcft_artist"]
 evidence_status = "verified_current"
 native_id = "CheekSuckLeft"
 surface = "vrcft.artist.base"
 side = "left"
-metadata = { "inventory_ordinal" = 37, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "CheekSuckLeft", "selected" = true }
+metadata = { "inventory_ordinal" = 37, "reason" = "Native identifier evidenced; written from the canonical expression signal cheek_suck_left by the proposed approximate hop rcef_cheek_suck.to_vrcft_artist; calibration correspondence is assumed, not measured.", "source_display_label" = "CheekSuckLeft", "selected" = true }
 region = "cheek"
 
 [[signals]]
@@ -1352,13 +1352,13 @@ value_type = "scalar"
 units = "unknown"
 domain = {  }
 calibration = "vrcft.artist.base: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["vrcft_artist"]
 evidence_status = "verified_current"
 native_id = "MouthTightenerRight"
 surface = "vrcft.artist.base"
 side = "right"
-metadata = { "inventory_ordinal" = 84, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthTightenerRight", "selected" = true }
+metadata = { "inventory_ordinal" = 84, "reason" = "Native identifier evidenced; written from the canonical expression signal lip_tighten_right by the proposed approximate hop rcef_lip_tighten.to_vrcft_artist; calibration correspondence is assumed, not measured.", "source_display_label" = "MouthTightenerRight", "selected" = true }
 region = "mouth"
 
 [[signals]]
@@ -1368,13 +1368,13 @@ value_type = "scalar"
 units = "unknown"
 domain = {  }
 calibration = "vrcft.artist.base: native basis; no canonical calibration established"
-disposition = "unresolved"
+disposition = "mapped"
 evidence = ["vrcft_artist"]
 evidence_status = "verified_current"
 native_id = "MouthTightenerLeft"
 surface = "vrcft.artist.base"
 side = "left"
-metadata = { "inventory_ordinal" = 85, "reason" = "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.", "source_display_label" = "MouthTightenerLeft", "selected" = true }
+metadata = { "inventory_ordinal" = 85, "reason" = "Native identifier evidenced; written from the canonical expression signal lip_tighten_left by the proposed approximate hop rcef_lip_tighten.to_vrcft_artist; calibration correspondence is assumed, not measured.", "source_display_label" = "MouthTightenerLeft", "selected" = true }
 region = "mouth"
 
 [[signals]]

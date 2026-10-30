@@ -1,0 +1,43 @@
+pair,family,frames,violations
+FB2 -> ARKit,goldens:openxr.fb2,124,0
+FB2 -> ARKit,csv:openxr.fb2:fb2_demo_frames,441,0
+FB2 -> ARKit,csv:openxr.fb2:fb2_expression_frames,221,0
+FB2 -> ARKit,r3:openxr.fb2,132,0
+FB2 -> ARKit,grid:openxr.fb2,21,0
+FB2 -> ARKit,edge:openxr.fb2,1507,0
+FB2 -> ARKit,impulse:openxr.fb2,141,0
+FB2 -> ARKit,fb2_contract,2000,0
+FB2 -> ARKit,fb2_breaking,2000,0
+FB2 -> ARKit,perturb:fb2_contract,848,0
+FB2 -> ARKit,perturb:fb2_breaking,848,0
+ARKit -> FB2,goldens:arkit.coefficient,4,0
+ARKit -> FB2,grid:arkit.coefficient,18,0
+ARKit -> FB2,edge:arkit.coefficient,1129,0
+ARKit -> FB2,impulse:arkit.coefficient,105,0
+ARKit -> FB2,arkit_uniform,2000,0
+ARKit -> FB2,perturb:arkit_uniform,624,0
+ARKit -> VRCFT UE,goldens:arkit.coefficient,4,0
+ARKit -> VRCFT UE,grid:arkit.coefficient,18,0
+ARKit -> VRCFT UE,edge:arkit.coefficient,1129,0
+ARKit -> VRCFT UE,impulse:arkit.coefficient,105,0
+ARKit -> VRCFT UE,arkit_uniform,2000,0
+ARKit -> VRCFT UE,perturb:arkit_uniform,624,0
+FB2 -> VRM blink,goldens:openxr.fb2,124,0
+FB2 -> VRM blink,csv:openxr.fb2:fb2_demo_frames,441,0
+FB2 -> VRM blink,csv:openxr.fb2:fb2_expression_frames,221,0
+FB2 -> VRM blink,r3:openxr.fb2,132,0
+FB2 -> VRM blink,grid:openxr.fb2,21,0
+FB2 -> VRM blink,edge:openxr.fb2,1507,0
+FB2 -> VRM blink,impulse:openxr.fb2,141,0
+FB2 -> VRM blink,fb2_contract,2000,0
+FB2 -> VRM blink,fb2_breaking,2000,0
+FB2 -> VRM blink,perturb:fb2_contract,848,0
+FB2 -> VRM blink,perturb:fb2_breaking,848,0
+META -> VRM,goldens:openxr.visemes,1,0
+META -> VRM,csv:openxr.visemes:viseme_demo_frames,57,0
+META -> VRM,csv:openxr.visemes:viseme_talk_frames,62,0
+META -> VRM,grid:openxr.visemes,19,0
+META -> VRM,edge:openxr.visemes,336,0
+META -> VRM,impulse:openxr.visemes,31,0
+META -> VRM,viseme_simplex,500,0
+META -> VRM,perturb:viseme_simplex,184,0

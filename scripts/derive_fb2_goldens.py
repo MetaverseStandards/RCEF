@@ -17,6 +17,10 @@ Outputs:
   to its parts), ARKit -> Unified Expressions base shapes, FB2 -> VRM blink and
   META visemes -> VRM. Each direction also gets frames in which every input
   has its own value, so a halved or wrong-input rule cannot hide.
+- tests/fixtures/fb2_vrcft_ue_goldens.json: FB2 -> Unified Expressions base
+  shapes as Godot's OpenXR vendors plugin and face modifier give them (the A/B
+  reference R3). It is a file of its own, so the A/B registrations that pin
+  fb2_goldens.json keep their hash.
 """
 from __future__ import annotations
 import argparse
@@ -32,6 +36,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ('godot_vendors_fb2', 'godot_face_modifier', 'vrcft_docs_arkit', 'vrcft_docs_movement',
            'vrcft_code_parameters', 'vrcft_simple_expressions', 'ict_facekit', 'apple_blendshapes', 'xr_fb2',
            'xr_registry', 'xr_visemes', 'vrm_expressions')
+UE_SOURCES = ('godot_vendors_fb2', 'godot_face_modifier', 'godot_enum', 'vrcft_docs_shapes')
 FB2 = 'openxr.fb2.XR_FACE_EXPRESSION2_{}_FB'
 ARKIT = 'arkit.coefficient.{}'
 VISEME = 'openxr.visemes.XR_FACE_TRACKING_VISEME_{}_META'
@@ -46,7 +51,7 @@ QUADS = ((0.125, 0.25, 0.5, 1.0), (1.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.75, 0.25))
 def load_sources(cache: Path) -> tuple[dict[str, list[str]], dict[str, str]]:
     records = {r['id']: r for r in tomllib.loads((ROOT / 'evidence/sources.toml').read_text())['evidence']}
     texts, digests = {}, {}
-    for name in SOURCES:
+    for name in dict.fromkeys(SOURCES + UE_SOURCES):
         data = (cache / name).read_bytes()
         digest = hashlib.sha256(data).hexdigest()
         if digest != records[name]['sha256']:
@@ -404,6 +409,66 @@ def ue_routes(texts) -> list[dict]:
     return routes
 
 
+def godot_base_lines(lines: list[str]) -> list[str]:
+    """The FT shapes the vendors plugin sets under its "Base Shapes" comment, before "Blended Shapes"."""
+    start = next(n for n, line in enumerate(lines) if line.strip() == '// Base Shapes')
+    end = next(n for n, line in enumerate(lines) if line.strip() == '// Blended Shapes')
+    assign = re.compile(r'xr_weights\[XRFaceTracker::(FT_\w+)\]\s*=')
+    return [m.group(1) for line in lines[start:end] if (m := assign.search(line))]
+
+
+def godot_based_on_unified(lines: list[str]) -> int:
+    """The line of the XRFaceTracker header that says its shapes are based on Unified Expressions."""
+    found = [n for n, line in enumerate(lines, 1) if 'based on the Unified Expressions' in line]
+    if len(found) != 1:
+        raise SystemExit('godot_enum no longer says once that its shapes follow Unified Expressions')
+    return found[0]
+
+
+def fb2_ue_routes(texts) -> list[dict]:
+    """FB2 -> Unified Expressions base shapes, as an avatar with those shapes gets them from Godot (R3).
+
+    Godot's OpenXR vendors plugin sets each XRFaceTracker shape from an FB2 weight or to a constant. Godot
+    says its shapes follow Unified Expressions; each FT name, written in PascalCase, must be one of the
+    names the face modifier lists for the shape and a shape in the Unified Expressions table. The face
+    modifier drives an avatar's part shapes instead of a blended shape when the avatar has every part.
+    So a base shape set from FB2 gets that
+    weight, and a base shape set to 0 that is a part of a blended shape set from FB2 gets 0 (the plugin
+    marks such parts "Not measured", or leaves them at 0). Other constant shapes are not in the table.
+    """
+    vendors, modifier = texts['godot_vendors_fb2'], texts['godot_face_modifier']
+    weights = godot_weights(vendors)
+    names = godot_names(modifier)
+    blends = godot_unified(modifier)
+    based = ('godot_enum', godot_based_on_unified(texts['godot_enum']))
+    remove = next(n for n, line in enumerate(modifier, 1) if 'remove the unified blend shape' in line)
+    listed = {m.group(1): n for n, line in enumerate(texts['vrcft_docs_shapes'], 1)
+              if (m := re.fullmatch(r"\s*'([A-Z]\w+)',\s*", line))}
+    routes = []
+    for shape in godot_base_lines(vendors):
+        combination, lines = weights[shape]
+        parents = [(blend, line) for blend, (parts, line) in blends.items() if shape in parts and weights[blend][0]]
+        if not combination and not parents:
+            continue
+        labels, name_line = names[shape]
+        ue = ft_to_unified(shape)
+        if ue.lower() not in labels or ue not in listed:
+            raise SystemExit(f'{shape}: {ue} is not a name the face modifier and the Unified table both list')
+        cites = [based, ('godot_face_modifier', name_line), ('vrcft_docs_shapes', listed[ue])]
+        cites += [('godot_vendors_fb2', n) for n in lines]
+        if combination:
+            if set(combination.values()) != {1.0} or len(combination) != 1:
+                raise SystemExit(f'{shape}: a base shape is not one FB2 weight')
+            routes.append({'ue': ue, 'inputs': combination, 'basis': 'set from one FB2 weight', 'cites': cites})
+            continue
+        blend, line = parents[0]
+        cites += [('godot_face_modifier', line), ('godot_face_modifier', remove)]
+        cites += [('godot_vendors_fb2', n) for n in weights[blend][1][:1]]
+        routes.append({'ue': ue, 'inputs': {}, 'basis': f'set to 0; a part of {ft_to_unified(blend)}, which '
+                       'the plugin sets from FB2', 'blend_inputs': sorted(weights[blend][0]), 'cites': cites})
+    return routes
+
+
 def vrm_blinks(texts) -> list[dict]:
     """FB2 EYES_CLOSED_L/R -> VRM blinkLeft/Right, by the side each text names."""
     xr, vrm = texts['xr_fb2'], texts['vrm_expressions']
@@ -533,9 +598,35 @@ def main() -> int:
               'cases': cases}
     (ROOT / 'tests/fixtures/fb2_goldens.json').write_text(json.dumps(output, indent=1, sort_keys=True) + '\n',
                                                           encoding='utf-8')
+    ue = fb2_ue_routes(texts)
+    ue_cases = []
+    # Each FB2 input moves the shapes set from it, and leaves at 0 the parts of the blended shapes set from it.
+    readers = {}
+    for r in ue:
+        for name in [*r['inputs'], *r.get('blend_inputs', [])]:
+            readers.setdefault(name, []).append(r)
+    for name in sorted(readers):
+        for level in LEVELS:
+            ue_cases.append({'mapping_kind': 'fb2_to_ue', 'inputs': {FB2.format(name): level},
+                             'expected': {UE.format(r['ue']): r['inputs'].get(name, 0.0) * level
+                                          for r in readers[name]},
+                             'sources': cite([c for r in readers[name] for c in r['cites']])})
+    for flip in (False, True):
+        values = distinct(list(readers), flip)
+        ue_cases.append({'mapping_kind': 'fb2_to_ue', 'inputs': {FB2.format(n): v for n, v in values.items()},
+                         'expected': {UE.format(r['ue']): sum((w * values[n] for n, w in r['inputs'].items()), 0.0)
+                                      for r in ue},
+                         'sources': cite([c for r in ue for c in r['cites']])})
+    r3 = {'generated_by': 'scripts/derive_fb2_goldens.py',
+          'sources': {name: digests[name] for name in UE_SOURCES},
+          'routes': [{k: v for k, v in r.items() if k != 'cites'} | {'sources': cite(r['cites'])} for r in ue],
+          'cases': ue_cases}
+    (ROOT / 'tests/fixtures/fb2_vrcft_ue_goldens.json').write_text(json.dumps(r3, indent=1, sort_keys=True) + '\n',
+                                                                   encoding='utf-8')
     print(f'{len(routes)} ARKit routes, {len(unified_routes)} Unified routes '
           f'({sum(len(r["outputs"]) for r in unified_routes)} outputs), {len(blinks)} blink pairs, '
-          f'{len(pairs)} viseme pairs, {len(cases)} cases')
+          f'{len(pairs)} viseme pairs, {len(cases)} cases; R3: {len(ue)} Unified outputs from FB2, '
+          f'{len(ue_cases)} cases')
     return 0
 
 

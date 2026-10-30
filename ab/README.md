@@ -10,7 +10,9 @@ The tools are in the repository, not in this folder:
 | [examples/rcef_route.py](../examples/rcef_route.py) | `Route`: runs B, and runs A1 in its one-hop mode. `tests/test_route_runner.py` anchors the one-hop mode to `rcef_translate.Translator`. |
 | [scripts/ab_frames.py](../scripts/ab_frames.py) | Makes the input frames from a registration only. It never reads the live pack. |
 | [scripts/ab_compare.py](../scripts/ab_compare.py) | Writes a registration draft, checks the pins, runs every arm and writes the results. It also checks this folder. |
-| [tests/ab_oracle.py](../tests/ab_oracle.py) | The oracle (O): a pure-Python copy of how msf-character-tools evaluates a map. It gives B's expected values and refusal codes. |
+| [tests/ab_oracle.py](../tests/ab_oracle.py) | The oracle (O): a pure-Python copy of how msf-character-tools evaluates a map, and of how `Route` chains in-maps, the viseme pose bridge and out-maps. It gives B's expected values, refusal codes, labels and notes. |
+| [scripts/ab_mutations.py](../scripts/ab_mutations.py) | Metric M7: plants each registered fault in a copy of the B pack and runs the checks that must catch it. |
+| [scripts/ab_geometry.py](../scripts/ab_geometry.py) | Metric M6: poses face rigs with each arm's ARKit values and compares the vertices. |
 | [tests/ab_a3.py](../tests/ab_a3.py) | Arm A3: the expression library's AU → FB2 table, frozen at dea1713 in `tests/fixtures/a3-dea1713/`. |
 | [examples/facs_codec.py](../examples/facs_codec.py) | Reads FACS notation into `facs.code` values, for B's FACS input. Its table is `examples/data/facs_codes.json`. |
 
@@ -20,7 +22,8 @@ The tools are in the repository, not in this folder:
 - **A2:** two direct maps in turn, only where no direct map exists: FB2 → ARKit → VRCFT UE, and ARKit → FB2 → VRM blink.
 - **A3:** the expression library's AU table, for FACS → FB2. **A3 then A1** gives FACS → ARKit.
 - **B:** `Route` on the B pack.
-- **O:** the oracle, on B's maps.
+- **O:** the oracle, on B's maps. On a route through the viseme pose bridge, O runs the in-maps, then the bridge (copy, weighted sum, clamp), then the out-maps. A bridge input that no in-map of the route writes counts as 0, and the frame gets the same note as from `Route`. A bridge input that an in-map writes but refused leaves the bridge's outputs unwritten, labelled "refused upstream at" that in-map.
+- **References:** R1 and R2 (M5), R3 (M8 R3) and **R5**, ICT-FaceKit's FACS table (M11). `python3 -B scripts/ab_compare.py r5 README` writes R5 to `tests/fixtures/ict_facekit_facs.json` from the README of record `ict_facekit`, after checking the record's SHA-256.
 
 ## Files in this folder
 
@@ -72,14 +75,14 @@ These families are fixed lists. They do not depend on `seed_root`, so every A1 f
 - **Edge set:** each of these values on every channel at once, and on each channel alone: ±0, 1, 2⁻³⁰, 0.1, 0.3, 2⁻⁵⁴, 2⁻⁵³, 0.5 and its two neighbours, the value below 1, float32 roundings of 0.1, 0.3, 1/3 and 0.7, 5e-324, 1.5e-323, (1 + 2⁻⁵²)·2⁻¹⁰²¹, 2⁻¹⁰²⁰ and 2⁻¹⁰²². Then each pair of opposing gaze directions at (0.3, 0.1), (0.1, 0.3), (0.3, 0.3) and (1, 1).
 - **Impulse frames:** the all-zero frame, then each channel alone at 1 and at 0.5.
 - **Grid frames:** every channel at k/16 for k = 0 to 16, then each pattern of validity flags on a frame with every channel at 0.5.
-- **Other fixed inputs:** the goldens in `tests/fixtures/fb2_goldens.json` (each on its source set, every other channel 0), the four example CSVs, the 221 FACS library frames and the 132 FACS key impulses. The registration pins the SHA-256 of each input file.
+- **Other fixed inputs:** the goldens in `tests/fixtures/fb2_goldens.json` (each on its source set, every other channel 0), the R3 goldens in `tests/fixtures/fb2_vrcft_ue_goldens.json` (the same way), the four example CSVs, the 221 FACS library frames and the 132 FACS key impulses. The registration pins the SHA-256 of each input file.
 
 The seeded families mix full-mantissa binary64 values with 6-decimal values. Each family's value range (or, for the FACS letter family, its value set, and for the viseme family its number of decimals) is written in the registration, and the generator has no default for it, so a change to the generator cannot change a registered family. The viseme simplex family uses 6-decimal values only: it splits 10⁶ at random cut points, so each frame's probabilities sum to exactly 1 in decimal, which full-mantissa values cannot do. The perturbation families leave out each input of a few seeded frames, set it to 1.5 and to −0.1, and clear each validity flag.
 
 ## Registration order
 
-1. `python3 -B scripts/ab_compare.py draft OUT.abreg --date YYYY-MM-DD` writes a draft outside this folder. It pins the channel lists, the input hashes, the code hashes, the runtime and the B pack, freezes the maps of each B pair, and computes the A1 figures.
-2. Fill in the frozen lists that the definitions audit and the data give (the loss-key table, the assumption catalogue, the audit-added keys and the others in `lists`). The project's release owners review the registration. Then compute `seed_root` again (`ab_compare.seed_root`).
+1. `python3 -B scripts/ab_compare.py draft OUT.abreg --date YYYY-MM-DD` writes a draft outside this folder. It pins the channel lists, the input hashes (R2, R3 and R5 included), the hashes of every file a run reads (`ab_compare.CODE`: the code of each arm and metric, and the generator, documents, calibration record and fixtures that M7's checks read), the runtime, the rig files and the B pack, freezes the maps of each pair B routes (in-maps, bridges and out-maps), computes the A1 figures and writes the frozen lists below.
+2. The project's release owners review the registration, the frozen lists most of all. If a list must change, change it in the draft and compute `seed_root` again (`ab_compare.seed_root`).
 3. Commit the registration to this folder. Then, in a later commit, add its line to `FREEZES`.
 4. Run it: `python3 -B scripts/ab_compare.py run ab/ab.pivot-v1.abreg ab/results/v1`. A run whose pins do not match the checkout is refused. `--dry-run` runs anyway and marks the results as not registered.
 5. Commit the results. Merge without squashing, so the commit order stays visible.
@@ -96,8 +99,31 @@ The seeded families mix full-mantissa binary64 values with 6-decimal values. Eac
 
 Freeze ids, hashes and paths are only in `manifest.json`. So a `reproduce` run can match the results of the freeze it reproduces byte for byte, apart from `manifest.json`, its line in `SHA256SUMS`, and `timings.json`, which has no line there.
 
+## Frozen lists
+
+A draft writes these lists from the definitions audit, the R5 fixture and the data. Each is frozen with the registration.
+
+- `reason_key_table` (M4 keys): one entry per (A1 rule, A1 loss reason), 313 in all over the 21 reasons of [Mapping today's losses to keys](../docs/canonical-set-audit.md#mapping-todays-losses-to-keys). Each entry names the B losses that must be on the route of that rule, by side: an audit key, or the exact text of a loss that has no key (for example the gain loss of each hop). `audit_keys` lists the audit's keys, and `audit_added_keys` holds, for each pair, the keys of [Keys added on today's pairs](../docs/canonical-set-audit.md#keys-added-on-todays-pairs).
+- `assumption_catalogue` (M4b): one entry per (A1 rule, template), 589 in all over the 35 templates of the [assumption catalogue](../docs/canonical-set-audit.md#assumption-catalogue). The templates are read from the audit's table, and every assumption string of today's maps must match exactly one. An entry names the hop assumption keys the route needs, by side, or the cited reason why the canonical definition supersedes it (178 entries). Where the rule cites a crosswalk, the entry needs `transfer.provider` when both sets' audit rows for the canonical signal are `same`, and `transfer.withdrawn` when either is `differs` or `unresolved`.
+- `no_target` (M4): source inputs whose impulse moves no output by design: inputs that write a bridge class whose pose is the rest face (every weight 0) and have no link to any output. Today these are META SIL on the four META routes through the pose bridge.
+- `m7_mutations` (M7): the planted faults and the checks that must catch each.
+- `m11_differences` (M11): the ICT-FaceKit rows where B departs on purpose.
+- `m3_flat_links`, `m3_rounding`, `m10_not_available`, `m10b_not_available`, `r3` and `r2_departures`, as before. A weighted-sum input with weight 0 carries nothing, so it is not a link for M3.
+
 ## What the tools compute today
 
-`ab_compare.py` computes M1, M1s, M2, M2b, M2c, M3, M4 (observed loss), M5, M8 (B against A2), M10, M10b and B against O on every pair. The draft takes the M3 list of flat links from O: links of the composed hop weights that enter a piecewise operator on its flat side, so their impulse changes nothing. A `fix` or `revise` run makes the seeded families of every earlier freeze again with the generator that freeze pinned, taken from Git history, and checks their hashes against the earlier run's `SHA256SUMS`. The scoreboard marks the rest as pending until their frozen tables exist: the rule-scoped loss-key table for M4, the assumption catalogue for M4b, the geometry harness for M6, the mutation set for M7, the R3 goldens and the ICT-FaceKit comparison for M11. A run with a pending gate cannot pass.
+`ab_compare.py` computes every metric of the design:
+
+- M1, M1s, M2, M2b, M2c, M3, M4 (observed loss), M5, M8 (B against A2 and against R3), M10, M10b, and B against O on every pair, the pairs through the pose bridge included.
+- **M3 exact** also bounds the outputs it does not hold to 0 error: the rounding outputs (FB2 gaze on the negative knot segment, and VRCFaceTracking Openness) within 2⁻⁵⁴ on exclusive frames, because fl(1 − fl(1 − x)) is within 2⁻⁵⁴ of x; and each FB2 gaze output, on frames that break FB2's exclusivity, within the smaller input of its pair plus 2⁻⁵². A value past its bound fails.
+- **M4 keys:** on each A1 pair, every entry of `reason_key_table` must find its B losses on the route of its rule, on the named side; and every audit key on the route that no entry names must be in `audit_added_keys`. Today's internal gaze steps write no output, so their route is the routes of the rules that read them.
+- **M4b:** every entry of `assumption_catalogue` must find its hop assumption keys on the route, on the named side, or be superseded with its reason. `assumptions.csv` lists every entry.
+- **M6 (report):** with `--rig rocketbox-female=DIR --rig ict=DIR`, FB2 → ARKit (B and A1, on the goldens and the example CSVs) and FACS → ARKit (B and A3 then A1, on the FACS frames) pose Rocketbox Female_Adult_01 and ICT-FaceKit. Only the outputs that both arms write pose the rig. Each row says how many ARKit outputs the rig binds: 52 on Rocketbox, 14 on ICT-FaceKit, whose 16 shapes include halves of browInnerUp and cheekPuff. The harness first checks itself: zero weights give the rest positions, each bound shape moves a vertex, and the same weights give the same positions. Without `--rig`, M6 stays pending.
+- **M7:** each of the 12 mutations is applied to a copy of the B pack. The checks are M1 and M2 on the A1 pairs, M3 exact on the round trips, M10, M4 keys, M4b, the side, direction-suffix, one-group and audit loss-key tests of `tests/test_pivot_structure.py`, the weight and chain tests of `tests/test_pose_bridge.py`, and the calibration check of `check.py`. Each check a mutation names must fail on the changed pack, and none may fail on the unchanged pack. A test class that cannot be set up on a changed pack catches nothing and fails M7. The VRCFaceTracking eye swap changes both of its hops, so only the side test can catch it: no other set reaches those signals. The pose bridge has no external reference and O reads the same pack as B, so two mutations change its data: a pose weight (caught by the weight test and the calibration check) and a clamp knot (caught by the chain test).
+- **M11 (report):** for each of the 29 rows of R5, the ARKit shapes that B links to the row's `facs.code` outputs on ARKit → FACS, against ICT's shapes. A row is `same`, a listed difference, an unlisted difference, or listed but the same.
+
+The draft takes the M3 list of flat links from O: links of the composed hop weights that enter a piecewise operator on its flat side, so their impulse changes nothing. A `fix` or `revise` run makes the seeded families of every earlier freeze again with the generator that freeze pinned, taken from Git history, and checks their hashes against the earlier run's `SHA256SUMS`. A metric whose table a registration does not hold stays pending, and a run with a pending metric cannot pass.
+
+**R3** is FB2 → Unified Expressions as an avatar with the Unified base shapes gets it from Godot: the OpenXR vendors plugin sets each Godot shape from an FB2 weight or to a constant, and the face modifier drives the part shapes instead of a blended shape when the avatar has every part. `scripts/derive_fb2_goldens.py` writes it from the pinned Godot and VRCFaceTracking sources and never reads RCEF's maps: 73 shapes, 65 set from one FB2 weight and 8 left at 0 inside a blended shape that Godot sets from FB2. M8 R3 is a report. B departs from R3 by design on 9 shapes, which a draft lists in `lists.r3`: BrowPinch and MouthCornerSlant on each side and the four MouthUpper and MouthLower shapes (Godot leaves them at 0, where B copies the canonical value into each part), and TongueFlat (Godot fills it from TONGUE_RETREAT, which RCEF does not map).
 
 A1's observed loss on the fixed impulse frames is 0 on all five A1 pairs (`python3 -B scripts/ab_compare.py a1-loss`). The first registration records it as A1's baseline.

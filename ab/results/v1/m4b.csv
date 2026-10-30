@@ -1,0 +1,6 @@
+pair,entries,superseded,shortfall
+FB2 -> ARKit,158,46,0
+ARKit -> FB2,201,58,0
+ARKit -> VRCFT UE,202,74,0
+FB2 -> VRM blink,8,0,0
+META -> VRM,20,0,0

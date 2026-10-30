@@ -1,0 +1,3998 @@
+{
+ "cases": [
+  {
+   "expected": {
+    "vrcft.artist.base.BrowLowererLeft": 0.25,
+    "vrcft.artist.base.BrowPinchLeft": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L94",
+    "vrcft_docs_shapes:L126",
+    "godot_vendors_fb2:L220",
+    "godot_face_modifier:L406",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L311",
+    "godot_enum:L38",
+    "godot_face_modifier:L98",
+    "vrcft_docs_shapes:L136",
+    "godot_vendors_fb2:L222"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowLowererLeft": 1.0,
+    "vrcft.artist.base.BrowPinchLeft": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L94",
+    "vrcft_docs_shapes:L126",
+    "godot_vendors_fb2:L220",
+    "godot_face_modifier:L406",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L311",
+    "godot_enum:L38",
+    "godot_face_modifier:L98",
+    "vrcft_docs_shapes:L136",
+    "godot_vendors_fb2:L222"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowLowererRight": 0.25,
+    "vrcft.artist.base.BrowPinchRight": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L92",
+    "vrcft_docs_shapes:L121",
+    "godot_vendors_fb2:L219",
+    "godot_face_modifier:L404",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L310",
+    "godot_enum:L38",
+    "godot_face_modifier:L96",
+    "vrcft_docs_shapes:L131",
+    "godot_vendors_fb2:L221"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowLowererRight": 1.0,
+    "vrcft.artist.base.BrowPinchRight": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L92",
+    "vrcft_docs_shapes:L121",
+    "godot_vendors_fb2:L219",
+    "godot_face_modifier:L404",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L310",
+    "godot_enum:L38",
+    "godot_face_modifier:L96",
+    "vrcft_docs_shapes:L131",
+    "godot_vendors_fb2:L221"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekPuffLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L126",
+    "vrcft_docs_shapes:L206",
+    "godot_vendors_fb2:L236"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekPuffLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L126",
+    "vrcft_docs_shapes:L206",
+    "godot_vendors_fb2:L236"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekPuffRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L124",
+    "vrcft_docs_shapes:L201",
+    "godot_vendors_fb2:L235"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekPuffRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L124",
+    "vrcft_docs_shapes:L201",
+    "godot_vendors_fb2:L235"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekSquintLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L122",
+    "vrcft_docs_shapes:L196",
+    "godot_vendors_fb2:L234"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekSquintLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L122",
+    "vrcft_docs_shapes:L196",
+    "godot_vendors_fb2:L234"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekSquintRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L120",
+    "vrcft_docs_shapes:L191",
+    "godot_vendors_fb2:L233"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekSquintRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L120",
+    "vrcft_docs_shapes:L191",
+    "godot_vendors_fb2:L233"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekSuckLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L130",
+    "vrcft_docs_shapes:L216",
+    "godot_vendors_fb2:L238"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekSuckLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L130",
+    "vrcft_docs_shapes:L216",
+    "godot_vendors_fb2:L238"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekSuckRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L128",
+    "vrcft_docs_shapes:L211",
+    "godot_vendors_fb2:L237"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.CheekSuckRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L128",
+    "vrcft_docs_shapes:L211",
+    "godot_vendors_fb2:L237"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthRaiserLower": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L218",
+    "vrcft_docs_shapes:L436",
+    "godot_vendors_fb2:L282"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthRaiserLower": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L218",
+    "vrcft_docs_shapes:L436",
+    "godot_vendors_fb2:L282"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthRaiserUpper": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L216",
+    "vrcft_docs_shapes:L431",
+    "godot_vendors_fb2:L281"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthRaiserUpper": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L216",
+    "vrcft_docs_shapes:L431",
+    "godot_vendors_fb2:L281"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthDimpleLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L214",
+    "vrcft_docs_shapes:L426",
+    "godot_vendors_fb2:L280"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthDimpleLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L214",
+    "vrcft_docs_shapes:L426",
+    "godot_vendors_fb2:L280"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthDimpleRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L212",
+    "vrcft_docs_shapes:L421",
+    "godot_vendors_fb2:L279"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthDimpleRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L212",
+    "vrcft_docs_shapes:L421",
+    "godot_vendors_fb2:L279"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeClosedLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L74",
+    "vrcft_docs_shapes:L76",
+    "godot_vendors_fb2:L210"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeClosedLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L74",
+    "vrcft_docs_shapes:L76",
+    "godot_vendors_fb2:L210"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeClosedRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L72",
+    "vrcft_docs_shapes:L71",
+    "godot_vendors_fb2:L209"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeClosedRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L72",
+    "vrcft_docs_shapes:L71",
+    "godot_vendors_fb2:L209"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookDownLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L70",
+    "vrcft_docs_shapes:L66",
+    "godot_vendors_fb2:L208"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookDownLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L70",
+    "vrcft_docs_shapes:L66",
+    "godot_vendors_fb2:L208"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookDownRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L62",
+    "vrcft_docs_shapes:L46",
+    "godot_vendors_fb2:L204"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookDownRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L62",
+    "vrcft_docs_shapes:L46",
+    "godot_vendors_fb2:L204"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookOutLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L64",
+    "vrcft_docs_shapes:L51",
+    "godot_vendors_fb2:L205"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookOutLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L64",
+    "vrcft_docs_shapes:L51",
+    "godot_vendors_fb2:L205"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookInRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L58",
+    "vrcft_docs_shapes:L36",
+    "godot_vendors_fb2:L202"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookInRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L58",
+    "vrcft_docs_shapes:L36",
+    "godot_vendors_fb2:L202"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookInLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L66",
+    "vrcft_docs_shapes:L56",
+    "godot_vendors_fb2:L206"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookInLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L66",
+    "vrcft_docs_shapes:L56",
+    "godot_vendors_fb2:L206"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookOutRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L56",
+    "vrcft_docs_shapes:L31",
+    "godot_vendors_fb2:L201"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookOutRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L56",
+    "vrcft_docs_shapes:L31",
+    "godot_vendors_fb2:L201"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookUpLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L68",
+    "vrcft_docs_shapes:L61",
+    "godot_vendors_fb2:L207"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookUpLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L68",
+    "vrcft_docs_shapes:L61",
+    "godot_vendors_fb2:L207"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookUpRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L60",
+    "vrcft_docs_shapes:L41",
+    "godot_vendors_fb2:L203"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeLookUpRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L60",
+    "vrcft_docs_shapes:L41",
+    "godot_vendors_fb2:L203"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowInnerUpLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L102",
+    "vrcft_docs_shapes:L146",
+    "godot_vendors_fb2:L224"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowInnerUpLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L102",
+    "vrcft_docs_shapes:L146",
+    "godot_vendors_fb2:L224"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowInnerUpRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L100",
+    "vrcft_docs_shapes:L141",
+    "godot_vendors_fb2:L223"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowInnerUpRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L100",
+    "vrcft_docs_shapes:L141",
+    "godot_vendors_fb2:L223"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.JawOpen": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L132",
+    "vrcft_docs_shapes:L221",
+    "godot_vendors_fb2:L239"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.JawOpen": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L132",
+    "vrcft_docs_shapes:L221",
+    "godot_vendors_fb2:L239"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.JawLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L138",
+    "vrcft_docs_shapes:L236",
+    "godot_vendors_fb2:L242"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.JawLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L138",
+    "vrcft_docs_shapes:L236",
+    "godot_vendors_fb2:L242"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.JawRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L136",
+    "vrcft_docs_shapes:L231",
+    "godot_vendors_fb2:L241"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.JawRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L136",
+    "vrcft_docs_shapes:L231",
+    "godot_vendors_fb2:L241"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.JawForward": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L140",
+    "vrcft_docs_shapes:L241",
+    "godot_vendors_fb2:L243"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.JawForward": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L140",
+    "vrcft_docs_shapes:L241",
+    "godot_vendors_fb2:L243"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeSquintLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L78",
+    "vrcft_docs_shapes:L86",
+    "godot_vendors_fb2:L212"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeSquintLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L78",
+    "vrcft_docs_shapes:L86",
+    "godot_vendors_fb2:L212"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeSquintRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L76",
+    "vrcft_docs_shapes:L81",
+    "godot_vendors_fb2:L211"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeSquintRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L76",
+    "vrcft_docs_shapes:L81",
+    "godot_vendors_fb2:L211"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthClosed": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L134",
+    "vrcft_docs_shapes:L226",
+    "godot_vendors_fb2:L240"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthClosed": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L134",
+    "vrcft_docs_shapes:L226",
+    "godot_vendors_fb2:L240"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthFrownLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L206",
+    "vrcft_docs_shapes:L406",
+    "godot_vendors_fb2:L276"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthFrownLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L206",
+    "vrcft_docs_shapes:L406",
+    "godot_vendors_fb2:L276"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthFrownRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L204",
+    "vrcft_docs_shapes:L401",
+    "godot_vendors_fb2:L275"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthFrownRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L204",
+    "vrcft_docs_shapes:L401",
+    "godot_vendors_fb2:L275"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthCornerPullLeft": 0.25,
+    "vrcft.artist.base.MouthCornerSlantLeft": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L198",
+    "vrcft_docs_shapes:L386",
+    "godot_vendors_fb2:L272",
+    "godot_enum:L38",
+    "godot_face_modifier:L202",
+    "vrcft_docs_shapes:L396",
+    "godot_vendors_fb2:L274",
+    "godot_face_modifier:L458",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L337"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthCornerPullLeft": 1.0,
+    "vrcft.artist.base.MouthCornerSlantLeft": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L198",
+    "vrcft_docs_shapes:L386",
+    "godot_vendors_fb2:L272",
+    "godot_enum:L38",
+    "godot_face_modifier:L202",
+    "vrcft_docs_shapes:L396",
+    "godot_vendors_fb2:L274",
+    "godot_face_modifier:L458",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L337"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthCornerPullRight": 0.25,
+    "vrcft.artist.base.MouthCornerSlantRight": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L196",
+    "vrcft_docs_shapes:L381",
+    "godot_vendors_fb2:L271",
+    "godot_enum:L38",
+    "godot_face_modifier:L200",
+    "vrcft_docs_shapes:L391",
+    "godot_vendors_fb2:L273",
+    "godot_face_modifier:L456",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L336"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthCornerPullRight": 1.0,
+    "vrcft.artist.base.MouthCornerSlantRight": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L196",
+    "vrcft_docs_shapes:L381",
+    "godot_vendors_fb2:L271",
+    "godot_enum:L38",
+    "godot_face_modifier:L200",
+    "vrcft_docs_shapes:L391",
+    "godot_vendors_fb2:L273",
+    "godot_face_modifier:L456",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L336"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipFunnelLowerLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L166",
+    "vrcft_docs_shapes:L306",
+    "godot_vendors_fb2:L256"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipFunnelLowerLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L166",
+    "vrcft_docs_shapes:L306",
+    "godot_vendors_fb2:L256"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipFunnelUpperLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L162",
+    "vrcft_docs_shapes:L296",
+    "godot_vendors_fb2:L254"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipFunnelUpperLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L162",
+    "vrcft_docs_shapes:L296",
+    "godot_vendors_fb2:L254"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipFunnelLowerRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L164",
+    "vrcft_docs_shapes:L301",
+    "godot_vendors_fb2:L255"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipFunnelLowerRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L164",
+    "vrcft_docs_shapes:L301",
+    "godot_vendors_fb2:L255"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipFunnelUpperRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L160",
+    "vrcft_docs_shapes:L291",
+    "godot_vendors_fb2:L253"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipFunnelUpperRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L160",
+    "vrcft_docs_shapes:L291",
+    "godot_vendors_fb2:L253"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthPressLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L222",
+    "vrcft_docs_shapes:L446",
+    "godot_vendors_fb2:L284"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthPressLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L222",
+    "vrcft_docs_shapes:L446",
+    "godot_vendors_fb2:L284"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthPressRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L220",
+    "vrcft_docs_shapes:L441",
+    "godot_vendors_fb2:L283"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthPressRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L220",
+    "vrcft_docs_shapes:L441",
+    "godot_vendors_fb2:L283"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipPuckerLowerLeft": 0.25,
+    "vrcft.artist.base.LipPuckerUpperLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L170",
+    "vrcft_docs_shapes:L316",
+    "godot_vendors_fb2:L258",
+    "godot_enum:L38",
+    "godot_face_modifier:L174",
+    "vrcft_docs_shapes:L326",
+    "godot_vendors_fb2:L260"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipPuckerLowerLeft": 1.0,
+    "vrcft.artist.base.LipPuckerUpperLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L170",
+    "vrcft_docs_shapes:L316",
+    "godot_vendors_fb2:L258",
+    "godot_enum:L38",
+    "godot_face_modifier:L174",
+    "vrcft_docs_shapes:L326",
+    "godot_vendors_fb2:L260"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipPuckerLowerRight": 0.25,
+    "vrcft.artist.base.LipPuckerUpperRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L168",
+    "vrcft_docs_shapes:L311",
+    "godot_vendors_fb2:L257",
+    "godot_enum:L38",
+    "godot_face_modifier:L172",
+    "vrcft_docs_shapes:L321",
+    "godot_vendors_fb2:L259"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipPuckerLowerRight": 1.0,
+    "vrcft.artist.base.LipPuckerUpperRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L168",
+    "vrcft_docs_shapes:L311",
+    "godot_vendors_fb2:L257",
+    "godot_enum:L38",
+    "godot_face_modifier:L172",
+    "vrcft_docs_shapes:L321",
+    "godot_vendors_fb2:L259"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthStretchLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L210",
+    "vrcft_docs_shapes:L416",
+    "godot_vendors_fb2:L278"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthStretchLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L210",
+    "vrcft_docs_shapes:L416",
+    "godot_vendors_fb2:L278"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthStretchRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L208",
+    "vrcft_docs_shapes:L411",
+    "godot_vendors_fb2:L277"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthStretchRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L208",
+    "vrcft_docs_shapes:L411",
+    "godot_vendors_fb2:L277"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipSuckLowerLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L154",
+    "vrcft_docs_shapes:L276",
+    "godot_vendors_fb2:L250"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipSuckLowerLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L154",
+    "vrcft_docs_shapes:L276",
+    "godot_vendors_fb2:L250"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipSuckUpperLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L150",
+    "vrcft_docs_shapes:L266",
+    "godot_vendors_fb2:L248"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipSuckUpperLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L150",
+    "vrcft_docs_shapes:L266",
+    "godot_vendors_fb2:L248"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipSuckLowerRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L152",
+    "vrcft_docs_shapes:L271",
+    "godot_vendors_fb2:L249"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipSuckLowerRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L152",
+    "vrcft_docs_shapes:L271",
+    "godot_vendors_fb2:L249"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipSuckUpperRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L148",
+    "vrcft_docs_shapes:L261",
+    "godot_vendors_fb2:L247"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.LipSuckUpperRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L148",
+    "vrcft_docs_shapes:L261",
+    "godot_vendors_fb2:L247"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthTightenerLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L226",
+    "vrcft_docs_shapes:L456",
+    "godot_vendors_fb2:L286"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthTightenerLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L226",
+    "vrcft_docs_shapes:L456",
+    "godot_vendors_fb2:L286"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthTightenerRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L224",
+    "vrcft_docs_shapes:L451",
+    "godot_vendors_fb2:L285"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthTightenerRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L224",
+    "vrcft_docs_shapes:L451",
+    "godot_vendors_fb2:L285"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthLowerDownLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L182",
+    "vrcft_docs_shapes:L346",
+    "godot_vendors_fb2:L264"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthLowerDownLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L182",
+    "vrcft_docs_shapes:L346",
+    "godot_vendors_fb2:L264"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthLowerDownRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L180",
+    "vrcft_docs_shapes:L341",
+    "godot_vendors_fb2:L263"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthLowerDownRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L180",
+    "vrcft_docs_shapes:L341",
+    "godot_vendors_fb2:L263"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthLowerLeft": 0.0,
+    "vrcft.artist.base.MouthUpperLeft": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L190",
+    "vrcft_docs_shapes:L366",
+    "godot_vendors_fb2:L268",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335",
+    "godot_enum:L38",
+    "godot_face_modifier:L194",
+    "vrcft_docs_shapes:L376",
+    "godot_vendors_fb2:L270",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthLowerLeft": 0.0,
+    "vrcft.artist.base.MouthUpperLeft": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L190",
+    "vrcft_docs_shapes:L366",
+    "godot_vendors_fb2:L268",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335",
+    "godot_enum:L38",
+    "godot_face_modifier:L194",
+    "vrcft_docs_shapes:L376",
+    "godot_vendors_fb2:L270",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthLowerRight": 0.0,
+    "vrcft.artist.base.MouthUpperRight": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L188",
+    "vrcft_docs_shapes:L361",
+    "godot_vendors_fb2:L267",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334",
+    "godot_enum:L38",
+    "godot_face_modifier:L192",
+    "vrcft_docs_shapes:L371",
+    "godot_vendors_fb2:L269",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthLowerRight": 0.0,
+    "vrcft.artist.base.MouthUpperRight": 0.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L188",
+    "vrcft_docs_shapes:L361",
+    "godot_vendors_fb2:L267",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334",
+    "godot_enum:L38",
+    "godot_face_modifier:L192",
+    "vrcft_docs_shapes:L371",
+    "godot_vendors_fb2:L269",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.NoseSneerLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L110",
+    "vrcft_docs_shapes:L166",
+    "godot_vendors_fb2:L228"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.NoseSneerLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L110",
+    "vrcft_docs_shapes:L166",
+    "godot_vendors_fb2:L228"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.NoseSneerRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L108",
+    "vrcft_docs_shapes:L161",
+    "godot_vendors_fb2:L227"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.NoseSneerRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L108",
+    "vrcft_docs_shapes:L161",
+    "godot_vendors_fb2:L227"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowOuterUpLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L106",
+    "vrcft_docs_shapes:L156",
+    "godot_vendors_fb2:L226"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowOuterUpLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L106",
+    "vrcft_docs_shapes:L156",
+    "godot_vendors_fb2:L226"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowOuterUpRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L104",
+    "vrcft_docs_shapes:L151",
+    "godot_vendors_fb2:L225"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowOuterUpRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L104",
+    "vrcft_docs_shapes:L151",
+    "godot_vendors_fb2:L225"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.TongueOut": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L228",
+    "vrcft_docs_shapes:L461",
+    "godot_vendors_fb2:L287"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.TongueOut": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L228",
+    "vrcft_docs_shapes:L461",
+    "godot_vendors_fb2:L287"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.TongueFlat": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L246",
+    "vrcft_docs_shapes:L506",
+    "godot_vendors_fb2:L296"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.TongueFlat": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L246",
+    "vrcft_docs_shapes:L506",
+    "godot_vendors_fb2:L296"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeWideLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L82",
+    "vrcft_docs_shapes:L96",
+    "godot_vendors_fb2:L214"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeWideLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L82",
+    "vrcft_docs_shapes:L96",
+    "godot_vendors_fb2:L214"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeWideRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L80",
+    "vrcft_docs_shapes:L91",
+    "godot_vendors_fb2:L213"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.EyeWideRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L80",
+    "vrcft_docs_shapes:L91",
+    "godot_vendors_fb2:L213"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthUpperUpLeft": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L178",
+    "vrcft_docs_shapes:L336",
+    "godot_vendors_fb2:L262"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthUpperUpLeft": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L178",
+    "vrcft_docs_shapes:L336",
+    "godot_vendors_fb2:L262"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthUpperUpRight": 0.25
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB": 0.25
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L176",
+    "vrcft_docs_shapes:L331",
+    "godot_vendors_fb2:L261"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.MouthUpperUpRight": 1.0
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB": 1.0
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L176",
+    "vrcft_docs_shapes:L331",
+    "godot_vendors_fb2:L261"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowInnerUpLeft": 0.1796875,
+    "vrcft.artist.base.BrowInnerUpRight": 0.1875,
+    "vrcft.artist.base.BrowLowererLeft": 0.0078125,
+    "vrcft.artist.base.BrowLowererRight": 0.015625,
+    "vrcft.artist.base.BrowOuterUpLeft": 0.453125,
+    "vrcft.artist.base.BrowOuterUpRight": 0.4609375,
+    "vrcft.artist.base.BrowPinchLeft": 0.0,
+    "vrcft.artist.base.BrowPinchRight": 0.0,
+    "vrcft.artist.base.CheekPuffLeft": 0.0234375,
+    "vrcft.artist.base.CheekPuffRight": 0.03125,
+    "vrcft.artist.base.CheekSquintLeft": 0.0390625,
+    "vrcft.artist.base.CheekSquintRight": 0.046875,
+    "vrcft.artist.base.CheekSuckLeft": 0.0546875,
+    "vrcft.artist.base.CheekSuckRight": 0.0625,
+    "vrcft.artist.base.EyeClosedLeft": 0.1015625,
+    "vrcft.artist.base.EyeClosedRight": 0.109375,
+    "vrcft.artist.base.EyeLookDownLeft": 0.1171875,
+    "vrcft.artist.base.EyeLookDownRight": 0.125,
+    "vrcft.artist.base.EyeLookInLeft": 0.1484375,
+    "vrcft.artist.base.EyeLookInRight": 0.140625,
+    "vrcft.artist.base.EyeLookOutLeft": 0.1328125,
+    "vrcft.artist.base.EyeLookOutRight": 0.15625,
+    "vrcft.artist.base.EyeLookUpLeft": 0.1640625,
+    "vrcft.artist.base.EyeLookUpRight": 0.171875,
+    "vrcft.artist.base.EyeSquintLeft": 0.2265625,
+    "vrcft.artist.base.EyeSquintRight": 0.234375,
+    "vrcft.artist.base.EyeWideLeft": 0.484375,
+    "vrcft.artist.base.EyeWideRight": 0.4921875,
+    "vrcft.artist.base.JawForward": 0.21875,
+    "vrcft.artist.base.JawLeft": 0.203125,
+    "vrcft.artist.base.JawOpen": 0.1953125,
+    "vrcft.artist.base.JawRight": 0.2109375,
+    "vrcft.artist.base.LipFunnelLowerLeft": 0.28125,
+    "vrcft.artist.base.LipFunnelLowerRight": 0.296875,
+    "vrcft.artist.base.LipFunnelUpperLeft": 0.2890625,
+    "vrcft.artist.base.LipFunnelUpperRight": 0.3046875,
+    "vrcft.artist.base.LipPuckerLowerLeft": 0.328125,
+    "vrcft.artist.base.LipPuckerLowerRight": 0.3359375,
+    "vrcft.artist.base.LipPuckerUpperLeft": 0.328125,
+    "vrcft.artist.base.LipPuckerUpperRight": 0.3359375,
+    "vrcft.artist.base.LipSuckLowerLeft": 0.359375,
+    "vrcft.artist.base.LipSuckLowerRight": 0.375,
+    "vrcft.artist.base.LipSuckUpperLeft": 0.3671875,
+    "vrcft.artist.base.LipSuckUpperRight": 0.3828125,
+    "vrcft.artist.base.MouthClosed": 0.2421875,
+    "vrcft.artist.base.MouthCornerPullLeft": 0.265625,
+    "vrcft.artist.base.MouthCornerPullRight": 0.2734375,
+    "vrcft.artist.base.MouthCornerSlantLeft": 0.0,
+    "vrcft.artist.base.MouthCornerSlantRight": 0.0,
+    "vrcft.artist.base.MouthDimpleLeft": 0.0859375,
+    "vrcft.artist.base.MouthDimpleRight": 0.09375,
+    "vrcft.artist.base.MouthFrownLeft": 0.25,
+    "vrcft.artist.base.MouthFrownRight": 0.2578125,
+    "vrcft.artist.base.MouthLowerDownLeft": 0.40625,
+    "vrcft.artist.base.MouthLowerDownRight": 0.4140625,
+    "vrcft.artist.base.MouthLowerLeft": 0.0,
+    "vrcft.artist.base.MouthLowerRight": 0.0,
+    "vrcft.artist.base.MouthPressLeft": 0.3125,
+    "vrcft.artist.base.MouthPressRight": 0.3203125,
+    "vrcft.artist.base.MouthRaiserLower": 0.0703125,
+    "vrcft.artist.base.MouthRaiserUpper": 0.078125,
+    "vrcft.artist.base.MouthStretchLeft": 0.34375,
+    "vrcft.artist.base.MouthStretchRight": 0.3515625,
+    "vrcft.artist.base.MouthTightenerLeft": 0.390625,
+    "vrcft.artist.base.MouthTightenerRight": 0.3984375,
+    "vrcft.artist.base.MouthUpperLeft": 0.0,
+    "vrcft.artist.base.MouthUpperRight": 0.0,
+    "vrcft.artist.base.MouthUpperUpLeft": 0.5,
+    "vrcft.artist.base.MouthUpperUpRight": 0.5078125,
+    "vrcft.artist.base.NoseSneerLeft": 0.4375,
+    "vrcft.artist.base.NoseSneerRight": 0.4453125,
+    "vrcft.artist.base.TongueFlat": 0.4765625,
+    "vrcft.artist.base.TongueOut": 0.46875
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB": 0.0078125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB": 0.015625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB": 0.0234375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB": 0.03125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB": 0.0390625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB": 0.046875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB": 0.0546875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB": 0.0625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB": 0.0703125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB": 0.078125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB": 0.0859375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB": 0.09375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB": 0.1015625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB": 0.109375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB": 0.1171875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB": 0.125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB": 0.1328125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB": 0.140625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB": 0.1484375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB": 0.15625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB": 0.1640625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB": 0.171875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB": 0.1796875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB": 0.1875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB": 0.1953125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB": 0.203125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB": 0.2109375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB": 0.21875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB": 0.2265625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB": 0.234375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB": 0.2421875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB": 0.25,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB": 0.2578125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB": 0.265625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB": 0.2734375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB": 0.28125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB": 0.2890625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB": 0.296875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB": 0.3046875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB": 0.3125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB": 0.3203125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB": 0.328125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB": 0.3359375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB": 0.34375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB": 0.3515625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB": 0.359375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB": 0.3671875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB": 0.375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB": 0.3828125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB": 0.390625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB": 0.3984375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB": 0.40625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB": 0.4140625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB": 0.421875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB": 0.4296875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB": 0.4375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB": 0.4453125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB": 0.453125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB": 0.4609375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB": 0.46875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB": 0.4765625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB": 0.484375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB": 0.4921875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB": 0.5,
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB": 0.5078125
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L56",
+    "vrcft_docs_shapes:L31",
+    "godot_vendors_fb2:L201",
+    "godot_enum:L38",
+    "godot_face_modifier:L58",
+    "vrcft_docs_shapes:L36",
+    "godot_vendors_fb2:L202",
+    "godot_enum:L38",
+    "godot_face_modifier:L60",
+    "vrcft_docs_shapes:L41",
+    "godot_vendors_fb2:L203",
+    "godot_enum:L38",
+    "godot_face_modifier:L62",
+    "vrcft_docs_shapes:L46",
+    "godot_vendors_fb2:L204",
+    "godot_enum:L38",
+    "godot_face_modifier:L64",
+    "vrcft_docs_shapes:L51",
+    "godot_vendors_fb2:L205",
+    "godot_enum:L38",
+    "godot_face_modifier:L66",
+    "vrcft_docs_shapes:L56",
+    "godot_vendors_fb2:L206",
+    "godot_enum:L38",
+    "godot_face_modifier:L68",
+    "vrcft_docs_shapes:L61",
+    "godot_vendors_fb2:L207",
+    "godot_enum:L38",
+    "godot_face_modifier:L70",
+    "vrcft_docs_shapes:L66",
+    "godot_vendors_fb2:L208",
+    "godot_enum:L38",
+    "godot_face_modifier:L72",
+    "vrcft_docs_shapes:L71",
+    "godot_vendors_fb2:L209",
+    "godot_enum:L38",
+    "godot_face_modifier:L74",
+    "vrcft_docs_shapes:L76",
+    "godot_vendors_fb2:L210",
+    "godot_enum:L38",
+    "godot_face_modifier:L76",
+    "vrcft_docs_shapes:L81",
+    "godot_vendors_fb2:L211",
+    "godot_enum:L38",
+    "godot_face_modifier:L78",
+    "vrcft_docs_shapes:L86",
+    "godot_vendors_fb2:L212",
+    "godot_enum:L38",
+    "godot_face_modifier:L80",
+    "vrcft_docs_shapes:L91",
+    "godot_vendors_fb2:L213",
+    "godot_enum:L38",
+    "godot_face_modifier:L82",
+    "vrcft_docs_shapes:L96",
+    "godot_vendors_fb2:L214",
+    "godot_enum:L38",
+    "godot_face_modifier:L92",
+    "vrcft_docs_shapes:L121",
+    "godot_vendors_fb2:L219",
+    "godot_face_modifier:L404",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L310",
+    "godot_enum:L38",
+    "godot_face_modifier:L94",
+    "vrcft_docs_shapes:L126",
+    "godot_vendors_fb2:L220",
+    "godot_face_modifier:L406",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L311",
+    "godot_enum:L38",
+    "godot_face_modifier:L96",
+    "vrcft_docs_shapes:L131",
+    "godot_vendors_fb2:L221",
+    "godot_enum:L38",
+    "godot_face_modifier:L98",
+    "vrcft_docs_shapes:L136",
+    "godot_vendors_fb2:L222",
+    "godot_enum:L38",
+    "godot_face_modifier:L100",
+    "vrcft_docs_shapes:L141",
+    "godot_vendors_fb2:L223",
+    "godot_enum:L38",
+    "godot_face_modifier:L102",
+    "vrcft_docs_shapes:L146",
+    "godot_vendors_fb2:L224",
+    "godot_enum:L38",
+    "godot_face_modifier:L104",
+    "vrcft_docs_shapes:L151",
+    "godot_vendors_fb2:L225",
+    "godot_enum:L38",
+    "godot_face_modifier:L106",
+    "vrcft_docs_shapes:L156",
+    "godot_vendors_fb2:L226",
+    "godot_enum:L38",
+    "godot_face_modifier:L108",
+    "vrcft_docs_shapes:L161",
+    "godot_vendors_fb2:L227",
+    "godot_enum:L38",
+    "godot_face_modifier:L110",
+    "vrcft_docs_shapes:L166",
+    "godot_vendors_fb2:L228",
+    "godot_enum:L38",
+    "godot_face_modifier:L120",
+    "vrcft_docs_shapes:L191",
+    "godot_vendors_fb2:L233",
+    "godot_enum:L38",
+    "godot_face_modifier:L122",
+    "vrcft_docs_shapes:L196",
+    "godot_vendors_fb2:L234",
+    "godot_enum:L38",
+    "godot_face_modifier:L124",
+    "vrcft_docs_shapes:L201",
+    "godot_vendors_fb2:L235",
+    "godot_enum:L38",
+    "godot_face_modifier:L126",
+    "vrcft_docs_shapes:L206",
+    "godot_vendors_fb2:L236",
+    "godot_enum:L38",
+    "godot_face_modifier:L128",
+    "vrcft_docs_shapes:L211",
+    "godot_vendors_fb2:L237",
+    "godot_enum:L38",
+    "godot_face_modifier:L130",
+    "vrcft_docs_shapes:L216",
+    "godot_vendors_fb2:L238",
+    "godot_enum:L38",
+    "godot_face_modifier:L132",
+    "vrcft_docs_shapes:L221",
+    "godot_vendors_fb2:L239",
+    "godot_enum:L38",
+    "godot_face_modifier:L134",
+    "vrcft_docs_shapes:L226",
+    "godot_vendors_fb2:L240",
+    "godot_enum:L38",
+    "godot_face_modifier:L136",
+    "vrcft_docs_shapes:L231",
+    "godot_vendors_fb2:L241",
+    "godot_enum:L38",
+    "godot_face_modifier:L138",
+    "vrcft_docs_shapes:L236",
+    "godot_vendors_fb2:L242",
+    "godot_enum:L38",
+    "godot_face_modifier:L140",
+    "vrcft_docs_shapes:L241",
+    "godot_vendors_fb2:L243",
+    "godot_enum:L38",
+    "godot_face_modifier:L148",
+    "vrcft_docs_shapes:L261",
+    "godot_vendors_fb2:L247",
+    "godot_enum:L38",
+    "godot_face_modifier:L150",
+    "vrcft_docs_shapes:L266",
+    "godot_vendors_fb2:L248",
+    "godot_enum:L38",
+    "godot_face_modifier:L152",
+    "vrcft_docs_shapes:L271",
+    "godot_vendors_fb2:L249",
+    "godot_enum:L38",
+    "godot_face_modifier:L154",
+    "vrcft_docs_shapes:L276",
+    "godot_vendors_fb2:L250",
+    "godot_enum:L38",
+    "godot_face_modifier:L160",
+    "vrcft_docs_shapes:L291",
+    "godot_vendors_fb2:L253",
+    "godot_enum:L38",
+    "godot_face_modifier:L162",
+    "vrcft_docs_shapes:L296",
+    "godot_vendors_fb2:L254",
+    "godot_enum:L38",
+    "godot_face_modifier:L164",
+    "vrcft_docs_shapes:L301",
+    "godot_vendors_fb2:L255",
+    "godot_enum:L38",
+    "godot_face_modifier:L166",
+    "vrcft_docs_shapes:L306",
+    "godot_vendors_fb2:L256",
+    "godot_enum:L38",
+    "godot_face_modifier:L168",
+    "vrcft_docs_shapes:L311",
+    "godot_vendors_fb2:L257",
+    "godot_enum:L38",
+    "godot_face_modifier:L170",
+    "vrcft_docs_shapes:L316",
+    "godot_vendors_fb2:L258",
+    "godot_enum:L38",
+    "godot_face_modifier:L172",
+    "vrcft_docs_shapes:L321",
+    "godot_vendors_fb2:L259",
+    "godot_enum:L38",
+    "godot_face_modifier:L174",
+    "vrcft_docs_shapes:L326",
+    "godot_vendors_fb2:L260",
+    "godot_enum:L38",
+    "godot_face_modifier:L176",
+    "vrcft_docs_shapes:L331",
+    "godot_vendors_fb2:L261",
+    "godot_enum:L38",
+    "godot_face_modifier:L178",
+    "vrcft_docs_shapes:L336",
+    "godot_vendors_fb2:L262",
+    "godot_enum:L38",
+    "godot_face_modifier:L180",
+    "vrcft_docs_shapes:L341",
+    "godot_vendors_fb2:L263",
+    "godot_enum:L38",
+    "godot_face_modifier:L182",
+    "vrcft_docs_shapes:L346",
+    "godot_vendors_fb2:L264",
+    "godot_enum:L38",
+    "godot_face_modifier:L188",
+    "vrcft_docs_shapes:L361",
+    "godot_vendors_fb2:L267",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334",
+    "godot_enum:L38",
+    "godot_face_modifier:L190",
+    "vrcft_docs_shapes:L366",
+    "godot_vendors_fb2:L268",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335",
+    "godot_enum:L38",
+    "godot_face_modifier:L192",
+    "vrcft_docs_shapes:L371",
+    "godot_vendors_fb2:L269",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334",
+    "godot_enum:L38",
+    "godot_face_modifier:L194",
+    "vrcft_docs_shapes:L376",
+    "godot_vendors_fb2:L270",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335",
+    "godot_enum:L38",
+    "godot_face_modifier:L196",
+    "vrcft_docs_shapes:L381",
+    "godot_vendors_fb2:L271",
+    "godot_enum:L38",
+    "godot_face_modifier:L198",
+    "vrcft_docs_shapes:L386",
+    "godot_vendors_fb2:L272",
+    "godot_enum:L38",
+    "godot_face_modifier:L200",
+    "vrcft_docs_shapes:L391",
+    "godot_vendors_fb2:L273",
+    "godot_face_modifier:L456",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L336",
+    "godot_enum:L38",
+    "godot_face_modifier:L202",
+    "vrcft_docs_shapes:L396",
+    "godot_vendors_fb2:L274",
+    "godot_face_modifier:L458",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L337",
+    "godot_enum:L38",
+    "godot_face_modifier:L204",
+    "vrcft_docs_shapes:L401",
+    "godot_vendors_fb2:L275",
+    "godot_enum:L38",
+    "godot_face_modifier:L206",
+    "vrcft_docs_shapes:L406",
+    "godot_vendors_fb2:L276",
+    "godot_enum:L38",
+    "godot_face_modifier:L208",
+    "vrcft_docs_shapes:L411",
+    "godot_vendors_fb2:L277",
+    "godot_enum:L38",
+    "godot_face_modifier:L210",
+    "vrcft_docs_shapes:L416",
+    "godot_vendors_fb2:L278",
+    "godot_enum:L38",
+    "godot_face_modifier:L212",
+    "vrcft_docs_shapes:L421",
+    "godot_vendors_fb2:L279",
+    "godot_enum:L38",
+    "godot_face_modifier:L214",
+    "vrcft_docs_shapes:L426",
+    "godot_vendors_fb2:L280",
+    "godot_enum:L38",
+    "godot_face_modifier:L216",
+    "vrcft_docs_shapes:L431",
+    "godot_vendors_fb2:L281",
+    "godot_enum:L38",
+    "godot_face_modifier:L218",
+    "vrcft_docs_shapes:L436",
+    "godot_vendors_fb2:L282",
+    "godot_enum:L38",
+    "godot_face_modifier:L220",
+    "vrcft_docs_shapes:L441",
+    "godot_vendors_fb2:L283",
+    "godot_enum:L38",
+    "godot_face_modifier:L222",
+    "vrcft_docs_shapes:L446",
+    "godot_vendors_fb2:L284",
+    "godot_enum:L38",
+    "godot_face_modifier:L224",
+    "vrcft_docs_shapes:L451",
+    "godot_vendors_fb2:L285",
+    "godot_enum:L38",
+    "godot_face_modifier:L226",
+    "vrcft_docs_shapes:L456",
+    "godot_vendors_fb2:L286",
+    "godot_enum:L38",
+    "godot_face_modifier:L228",
+    "vrcft_docs_shapes:L461",
+    "godot_vendors_fb2:L287",
+    "godot_enum:L38",
+    "godot_face_modifier:L246",
+    "vrcft_docs_shapes:L506",
+    "godot_vendors_fb2:L296"
+   ]
+  },
+  {
+   "expected": {
+    "vrcft.artist.base.BrowInnerUpLeft": 0.8203125,
+    "vrcft.artist.base.BrowInnerUpRight": 0.8125,
+    "vrcft.artist.base.BrowLowererLeft": 0.9921875,
+    "vrcft.artist.base.BrowLowererRight": 0.984375,
+    "vrcft.artist.base.BrowOuterUpLeft": 0.546875,
+    "vrcft.artist.base.BrowOuterUpRight": 0.5390625,
+    "vrcft.artist.base.BrowPinchLeft": 0.0,
+    "vrcft.artist.base.BrowPinchRight": 0.0,
+    "vrcft.artist.base.CheekPuffLeft": 0.9765625,
+    "vrcft.artist.base.CheekPuffRight": 0.96875,
+    "vrcft.artist.base.CheekSquintLeft": 0.9609375,
+    "vrcft.artist.base.CheekSquintRight": 0.953125,
+    "vrcft.artist.base.CheekSuckLeft": 0.9453125,
+    "vrcft.artist.base.CheekSuckRight": 0.9375,
+    "vrcft.artist.base.EyeClosedLeft": 0.8984375,
+    "vrcft.artist.base.EyeClosedRight": 0.890625,
+    "vrcft.artist.base.EyeLookDownLeft": 0.8828125,
+    "vrcft.artist.base.EyeLookDownRight": 0.875,
+    "vrcft.artist.base.EyeLookInLeft": 0.8515625,
+    "vrcft.artist.base.EyeLookInRight": 0.859375,
+    "vrcft.artist.base.EyeLookOutLeft": 0.8671875,
+    "vrcft.artist.base.EyeLookOutRight": 0.84375,
+    "vrcft.artist.base.EyeLookUpLeft": 0.8359375,
+    "vrcft.artist.base.EyeLookUpRight": 0.828125,
+    "vrcft.artist.base.EyeSquintLeft": 0.7734375,
+    "vrcft.artist.base.EyeSquintRight": 0.765625,
+    "vrcft.artist.base.EyeWideLeft": 0.515625,
+    "vrcft.artist.base.EyeWideRight": 0.5078125,
+    "vrcft.artist.base.JawForward": 0.78125,
+    "vrcft.artist.base.JawLeft": 0.796875,
+    "vrcft.artist.base.JawOpen": 0.8046875,
+    "vrcft.artist.base.JawRight": 0.7890625,
+    "vrcft.artist.base.LipFunnelLowerLeft": 0.71875,
+    "vrcft.artist.base.LipFunnelLowerRight": 0.703125,
+    "vrcft.artist.base.LipFunnelUpperLeft": 0.7109375,
+    "vrcft.artist.base.LipFunnelUpperRight": 0.6953125,
+    "vrcft.artist.base.LipPuckerLowerLeft": 0.671875,
+    "vrcft.artist.base.LipPuckerLowerRight": 0.6640625,
+    "vrcft.artist.base.LipPuckerUpperLeft": 0.671875,
+    "vrcft.artist.base.LipPuckerUpperRight": 0.6640625,
+    "vrcft.artist.base.LipSuckLowerLeft": 0.640625,
+    "vrcft.artist.base.LipSuckLowerRight": 0.625,
+    "vrcft.artist.base.LipSuckUpperLeft": 0.6328125,
+    "vrcft.artist.base.LipSuckUpperRight": 0.6171875,
+    "vrcft.artist.base.MouthClosed": 0.7578125,
+    "vrcft.artist.base.MouthCornerPullLeft": 0.734375,
+    "vrcft.artist.base.MouthCornerPullRight": 0.7265625,
+    "vrcft.artist.base.MouthCornerSlantLeft": 0.0,
+    "vrcft.artist.base.MouthCornerSlantRight": 0.0,
+    "vrcft.artist.base.MouthDimpleLeft": 0.9140625,
+    "vrcft.artist.base.MouthDimpleRight": 0.90625,
+    "vrcft.artist.base.MouthFrownLeft": 0.75,
+    "vrcft.artist.base.MouthFrownRight": 0.7421875,
+    "vrcft.artist.base.MouthLowerDownLeft": 0.59375,
+    "vrcft.artist.base.MouthLowerDownRight": 0.5859375,
+    "vrcft.artist.base.MouthLowerLeft": 0.0,
+    "vrcft.artist.base.MouthLowerRight": 0.0,
+    "vrcft.artist.base.MouthPressLeft": 0.6875,
+    "vrcft.artist.base.MouthPressRight": 0.6796875,
+    "vrcft.artist.base.MouthRaiserLower": 0.9296875,
+    "vrcft.artist.base.MouthRaiserUpper": 0.921875,
+    "vrcft.artist.base.MouthStretchLeft": 0.65625,
+    "vrcft.artist.base.MouthStretchRight": 0.6484375,
+    "vrcft.artist.base.MouthTightenerLeft": 0.609375,
+    "vrcft.artist.base.MouthTightenerRight": 0.6015625,
+    "vrcft.artist.base.MouthUpperLeft": 0.0,
+    "vrcft.artist.base.MouthUpperRight": 0.0,
+    "vrcft.artist.base.MouthUpperUpLeft": 0.5,
+    "vrcft.artist.base.MouthUpperUpRight": 0.4921875,
+    "vrcft.artist.base.NoseSneerLeft": 0.5625,
+    "vrcft.artist.base.NoseSneerRight": 0.5546875,
+    "vrcft.artist.base.TongueFlat": 0.5234375,
+    "vrcft.artist.base.TongueOut": 0.53125
+   },
+   "inputs": {
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB": 0.9921875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_R_FB": 0.984375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB": 0.9765625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB": 0.96875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB": 0.9609375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB": 0.953125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB": 0.9453125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB": 0.9375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB": 0.9296875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB": 0.921875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB": 0.9140625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_R_FB": 0.90625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_L_FB": 0.8984375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB": 0.890625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB": 0.8828125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB": 0.875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB": 0.8671875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_R_FB": 0.859375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_L_FB": 0.8515625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_RIGHT_R_FB": 0.84375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB": 0.8359375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB": 0.828125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB": 0.8203125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB": 0.8125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB": 0.8046875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_LEFT_FB": 0.796875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB": 0.7890625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB": 0.78125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_L_FB": 0.7734375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LID_TIGHTENER_R_FB": 0.765625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB": 0.7578125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_L_FB": 0.75,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_DEPRESSOR_R_FB": 0.7421875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_L_FB": 0.734375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_CORNER_PULLER_R_FB": 0.7265625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LB_FB": 0.71875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_LT_FB": 0.7109375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RB_FB": 0.703125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_FUNNELER_RT_FB": 0.6953125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_L_FB": 0.6875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PRESSOR_R_FB": 0.6796875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_L_FB": 0.671875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_PUCKER_R_FB": 0.6640625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_L_FB": 0.65625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_STRETCHER_R_FB": 0.6484375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LB_FB": 0.640625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB": 0.6328125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB": 0.625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB": 0.6171875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB": 0.609375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB": 0.6015625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB": 0.59375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB": 0.5859375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB": 0.578125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB": 0.5703125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_L_FB": 0.5625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB": 0.5546875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB": 0.546875,
+    "openxr.fb2.XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_R_FB": 0.5390625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB": 0.53125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB": 0.5234375,
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_L_FB": 0.515625,
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB": 0.5078125,
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB": 0.5,
+    "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB": 0.4921875
+   },
+   "mapping_kind": "fb2_to_ue",
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L56",
+    "vrcft_docs_shapes:L31",
+    "godot_vendors_fb2:L201",
+    "godot_enum:L38",
+    "godot_face_modifier:L58",
+    "vrcft_docs_shapes:L36",
+    "godot_vendors_fb2:L202",
+    "godot_enum:L38",
+    "godot_face_modifier:L60",
+    "vrcft_docs_shapes:L41",
+    "godot_vendors_fb2:L203",
+    "godot_enum:L38",
+    "godot_face_modifier:L62",
+    "vrcft_docs_shapes:L46",
+    "godot_vendors_fb2:L204",
+    "godot_enum:L38",
+    "godot_face_modifier:L64",
+    "vrcft_docs_shapes:L51",
+    "godot_vendors_fb2:L205",
+    "godot_enum:L38",
+    "godot_face_modifier:L66",
+    "vrcft_docs_shapes:L56",
+    "godot_vendors_fb2:L206",
+    "godot_enum:L38",
+    "godot_face_modifier:L68",
+    "vrcft_docs_shapes:L61",
+    "godot_vendors_fb2:L207",
+    "godot_enum:L38",
+    "godot_face_modifier:L70",
+    "vrcft_docs_shapes:L66",
+    "godot_vendors_fb2:L208",
+    "godot_enum:L38",
+    "godot_face_modifier:L72",
+    "vrcft_docs_shapes:L71",
+    "godot_vendors_fb2:L209",
+    "godot_enum:L38",
+    "godot_face_modifier:L74",
+    "vrcft_docs_shapes:L76",
+    "godot_vendors_fb2:L210",
+    "godot_enum:L38",
+    "godot_face_modifier:L76",
+    "vrcft_docs_shapes:L81",
+    "godot_vendors_fb2:L211",
+    "godot_enum:L38",
+    "godot_face_modifier:L78",
+    "vrcft_docs_shapes:L86",
+    "godot_vendors_fb2:L212",
+    "godot_enum:L38",
+    "godot_face_modifier:L80",
+    "vrcft_docs_shapes:L91",
+    "godot_vendors_fb2:L213",
+    "godot_enum:L38",
+    "godot_face_modifier:L82",
+    "vrcft_docs_shapes:L96",
+    "godot_vendors_fb2:L214",
+    "godot_enum:L38",
+    "godot_face_modifier:L92",
+    "vrcft_docs_shapes:L121",
+    "godot_vendors_fb2:L219",
+    "godot_face_modifier:L404",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L310",
+    "godot_enum:L38",
+    "godot_face_modifier:L94",
+    "vrcft_docs_shapes:L126",
+    "godot_vendors_fb2:L220",
+    "godot_face_modifier:L406",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L311",
+    "godot_enum:L38",
+    "godot_face_modifier:L96",
+    "vrcft_docs_shapes:L131",
+    "godot_vendors_fb2:L221",
+    "godot_enum:L38",
+    "godot_face_modifier:L98",
+    "vrcft_docs_shapes:L136",
+    "godot_vendors_fb2:L222",
+    "godot_enum:L38",
+    "godot_face_modifier:L100",
+    "vrcft_docs_shapes:L141",
+    "godot_vendors_fb2:L223",
+    "godot_enum:L38",
+    "godot_face_modifier:L102",
+    "vrcft_docs_shapes:L146",
+    "godot_vendors_fb2:L224",
+    "godot_enum:L38",
+    "godot_face_modifier:L104",
+    "vrcft_docs_shapes:L151",
+    "godot_vendors_fb2:L225",
+    "godot_enum:L38",
+    "godot_face_modifier:L106",
+    "vrcft_docs_shapes:L156",
+    "godot_vendors_fb2:L226",
+    "godot_enum:L38",
+    "godot_face_modifier:L108",
+    "vrcft_docs_shapes:L161",
+    "godot_vendors_fb2:L227",
+    "godot_enum:L38",
+    "godot_face_modifier:L110",
+    "vrcft_docs_shapes:L166",
+    "godot_vendors_fb2:L228",
+    "godot_enum:L38",
+    "godot_face_modifier:L120",
+    "vrcft_docs_shapes:L191",
+    "godot_vendors_fb2:L233",
+    "godot_enum:L38",
+    "godot_face_modifier:L122",
+    "vrcft_docs_shapes:L196",
+    "godot_vendors_fb2:L234",
+    "godot_enum:L38",
+    "godot_face_modifier:L124",
+    "vrcft_docs_shapes:L201",
+    "godot_vendors_fb2:L235",
+    "godot_enum:L38",
+    "godot_face_modifier:L126",
+    "vrcft_docs_shapes:L206",
+    "godot_vendors_fb2:L236",
+    "godot_enum:L38",
+    "godot_face_modifier:L128",
+    "vrcft_docs_shapes:L211",
+    "godot_vendors_fb2:L237",
+    "godot_enum:L38",
+    "godot_face_modifier:L130",
+    "vrcft_docs_shapes:L216",
+    "godot_vendors_fb2:L238",
+    "godot_enum:L38",
+    "godot_face_modifier:L132",
+    "vrcft_docs_shapes:L221",
+    "godot_vendors_fb2:L239",
+    "godot_enum:L38",
+    "godot_face_modifier:L134",
+    "vrcft_docs_shapes:L226",
+    "godot_vendors_fb2:L240",
+    "godot_enum:L38",
+    "godot_face_modifier:L136",
+    "vrcft_docs_shapes:L231",
+    "godot_vendors_fb2:L241",
+    "godot_enum:L38",
+    "godot_face_modifier:L138",
+    "vrcft_docs_shapes:L236",
+    "godot_vendors_fb2:L242",
+    "godot_enum:L38",
+    "godot_face_modifier:L140",
+    "vrcft_docs_shapes:L241",
+    "godot_vendors_fb2:L243",
+    "godot_enum:L38",
+    "godot_face_modifier:L148",
+    "vrcft_docs_shapes:L261",
+    "godot_vendors_fb2:L247",
+    "godot_enum:L38",
+    "godot_face_modifier:L150",
+    "vrcft_docs_shapes:L266",
+    "godot_vendors_fb2:L248",
+    "godot_enum:L38",
+    "godot_face_modifier:L152",
+    "vrcft_docs_shapes:L271",
+    "godot_vendors_fb2:L249",
+    "godot_enum:L38",
+    "godot_face_modifier:L154",
+    "vrcft_docs_shapes:L276",
+    "godot_vendors_fb2:L250",
+    "godot_enum:L38",
+    "godot_face_modifier:L160",
+    "vrcft_docs_shapes:L291",
+    "godot_vendors_fb2:L253",
+    "godot_enum:L38",
+    "godot_face_modifier:L162",
+    "vrcft_docs_shapes:L296",
+    "godot_vendors_fb2:L254",
+    "godot_enum:L38",
+    "godot_face_modifier:L164",
+    "vrcft_docs_shapes:L301",
+    "godot_vendors_fb2:L255",
+    "godot_enum:L38",
+    "godot_face_modifier:L166",
+    "vrcft_docs_shapes:L306",
+    "godot_vendors_fb2:L256",
+    "godot_enum:L38",
+    "godot_face_modifier:L168",
+    "vrcft_docs_shapes:L311",
+    "godot_vendors_fb2:L257",
+    "godot_enum:L38",
+    "godot_face_modifier:L170",
+    "vrcft_docs_shapes:L316",
+    "godot_vendors_fb2:L258",
+    "godot_enum:L38",
+    "godot_face_modifier:L172",
+    "vrcft_docs_shapes:L321",
+    "godot_vendors_fb2:L259",
+    "godot_enum:L38",
+    "godot_face_modifier:L174",
+    "vrcft_docs_shapes:L326",
+    "godot_vendors_fb2:L260",
+    "godot_enum:L38",
+    "godot_face_modifier:L176",
+    "vrcft_docs_shapes:L331",
+    "godot_vendors_fb2:L261",
+    "godot_enum:L38",
+    "godot_face_modifier:L178",
+    "vrcft_docs_shapes:L336",
+    "godot_vendors_fb2:L262",
+    "godot_enum:L38",
+    "godot_face_modifier:L180",
+    "vrcft_docs_shapes:L341",
+    "godot_vendors_fb2:L263",
+    "godot_enum:L38",
+    "godot_face_modifier:L182",
+    "vrcft_docs_shapes:L346",
+    "godot_vendors_fb2:L264",
+    "godot_enum:L38",
+    "godot_face_modifier:L188",
+    "vrcft_docs_shapes:L361",
+    "godot_vendors_fb2:L267",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334",
+    "godot_enum:L38",
+    "godot_face_modifier:L190",
+    "vrcft_docs_shapes:L366",
+    "godot_vendors_fb2:L268",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335",
+    "godot_enum:L38",
+    "godot_face_modifier:L192",
+    "vrcft_docs_shapes:L371",
+    "godot_vendors_fb2:L269",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334",
+    "godot_enum:L38",
+    "godot_face_modifier:L194",
+    "vrcft_docs_shapes:L376",
+    "godot_vendors_fb2:L270",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335",
+    "godot_enum:L38",
+    "godot_face_modifier:L196",
+    "vrcft_docs_shapes:L381",
+    "godot_vendors_fb2:L271",
+    "godot_enum:L38",
+    "godot_face_modifier:L198",
+    "vrcft_docs_shapes:L386",
+    "godot_vendors_fb2:L272",
+    "godot_enum:L38",
+    "godot_face_modifier:L200",
+    "vrcft_docs_shapes:L391",
+    "godot_vendors_fb2:L273",
+    "godot_face_modifier:L456",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L336",
+    "godot_enum:L38",
+    "godot_face_modifier:L202",
+    "vrcft_docs_shapes:L396",
+    "godot_vendors_fb2:L274",
+    "godot_face_modifier:L458",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L337",
+    "godot_enum:L38",
+    "godot_face_modifier:L204",
+    "vrcft_docs_shapes:L401",
+    "godot_vendors_fb2:L275",
+    "godot_enum:L38",
+    "godot_face_modifier:L206",
+    "vrcft_docs_shapes:L406",
+    "godot_vendors_fb2:L276",
+    "godot_enum:L38",
+    "godot_face_modifier:L208",
+    "vrcft_docs_shapes:L411",
+    "godot_vendors_fb2:L277",
+    "godot_enum:L38",
+    "godot_face_modifier:L210",
+    "vrcft_docs_shapes:L416",
+    "godot_vendors_fb2:L278",
+    "godot_enum:L38",
+    "godot_face_modifier:L212",
+    "vrcft_docs_shapes:L421",
+    "godot_vendors_fb2:L279",
+    "godot_enum:L38",
+    "godot_face_modifier:L214",
+    "vrcft_docs_shapes:L426",
+    "godot_vendors_fb2:L280",
+    "godot_enum:L38",
+    "godot_face_modifier:L216",
+    "vrcft_docs_shapes:L431",
+    "godot_vendors_fb2:L281",
+    "godot_enum:L38",
+    "godot_face_modifier:L218",
+    "vrcft_docs_shapes:L436",
+    "godot_vendors_fb2:L282",
+    "godot_enum:L38",
+    "godot_face_modifier:L220",
+    "vrcft_docs_shapes:L441",
+    "godot_vendors_fb2:L283",
+    "godot_enum:L38",
+    "godot_face_modifier:L222",
+    "vrcft_docs_shapes:L446",
+    "godot_vendors_fb2:L284",
+    "godot_enum:L38",
+    "godot_face_modifier:L224",
+    "vrcft_docs_shapes:L451",
+    "godot_vendors_fb2:L285",
+    "godot_enum:L38",
+    "godot_face_modifier:L226",
+    "vrcft_docs_shapes:L456",
+    "godot_vendors_fb2:L286",
+    "godot_enum:L38",
+    "godot_face_modifier:L228",
+    "vrcft_docs_shapes:L461",
+    "godot_vendors_fb2:L287",
+    "godot_enum:L38",
+    "godot_face_modifier:L246",
+    "vrcft_docs_shapes:L506",
+    "godot_vendors_fb2:L296"
+   ]
+  }
+ ],
+ "generated_by": "scripts/derive_fb2_goldens.py",
+ "routes": [
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_LOOK_RIGHT_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L56",
+    "vrcft_docs_shapes:L31",
+    "godot_vendors_fb2:L201"
+   ],
+   "ue": "EyeLookOutRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_LOOK_LEFT_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L58",
+    "vrcft_docs_shapes:L36",
+    "godot_vendors_fb2:L202"
+   ],
+   "ue": "EyeLookInRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_LOOK_UP_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L60",
+    "vrcft_docs_shapes:L41",
+    "godot_vendors_fb2:L203"
+   ],
+   "ue": "EyeLookUpRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_LOOK_DOWN_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L62",
+    "vrcft_docs_shapes:L46",
+    "godot_vendors_fb2:L204"
+   ],
+   "ue": "EyeLookDownRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_LOOK_LEFT_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L64",
+    "vrcft_docs_shapes:L51",
+    "godot_vendors_fb2:L205"
+   ],
+   "ue": "EyeLookOutLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_LOOK_RIGHT_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L66",
+    "vrcft_docs_shapes:L56",
+    "godot_vendors_fb2:L206"
+   ],
+   "ue": "EyeLookInLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_LOOK_UP_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L68",
+    "vrcft_docs_shapes:L61",
+    "godot_vendors_fb2:L207"
+   ],
+   "ue": "EyeLookUpLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_LOOK_DOWN_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L70",
+    "vrcft_docs_shapes:L66",
+    "godot_vendors_fb2:L208"
+   ],
+   "ue": "EyeLookDownLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_CLOSED_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L72",
+    "vrcft_docs_shapes:L71",
+    "godot_vendors_fb2:L209"
+   ],
+   "ue": "EyeClosedRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "EYES_CLOSED_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L74",
+    "vrcft_docs_shapes:L76",
+    "godot_vendors_fb2:L210"
+   ],
+   "ue": "EyeClosedLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LID_TIGHTENER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L76",
+    "vrcft_docs_shapes:L81",
+    "godot_vendors_fb2:L211"
+   ],
+   "ue": "EyeSquintRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LID_TIGHTENER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L78",
+    "vrcft_docs_shapes:L86",
+    "godot_vendors_fb2:L212"
+   ],
+   "ue": "EyeSquintLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "UPPER_LID_RAISER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L80",
+    "vrcft_docs_shapes:L91",
+    "godot_vendors_fb2:L213"
+   ],
+   "ue": "EyeWideRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "UPPER_LID_RAISER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L82",
+    "vrcft_docs_shapes:L96",
+    "godot_vendors_fb2:L214"
+   ],
+   "ue": "EyeWideLeft"
+  },
+  {
+   "basis": "set to 0; a part of BrowDownRight, which the plugin sets from FB2",
+   "blend_inputs": [
+    "BROW_LOWERER_R"
+   ],
+   "inputs": {},
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L92",
+    "vrcft_docs_shapes:L121",
+    "godot_vendors_fb2:L219",
+    "godot_face_modifier:L404",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L310"
+   ],
+   "ue": "BrowPinchRight"
+  },
+  {
+   "basis": "set to 0; a part of BrowDownLeft, which the plugin sets from FB2",
+   "blend_inputs": [
+    "BROW_LOWERER_L"
+   ],
+   "inputs": {},
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L94",
+    "vrcft_docs_shapes:L126",
+    "godot_vendors_fb2:L220",
+    "godot_face_modifier:L406",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L311"
+   ],
+   "ue": "BrowPinchLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "BROW_LOWERER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L96",
+    "vrcft_docs_shapes:L131",
+    "godot_vendors_fb2:L221"
+   ],
+   "ue": "BrowLowererRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "BROW_LOWERER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L98",
+    "vrcft_docs_shapes:L136",
+    "godot_vendors_fb2:L222"
+   ],
+   "ue": "BrowLowererLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "INNER_BROW_RAISER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L100",
+    "vrcft_docs_shapes:L141",
+    "godot_vendors_fb2:L223"
+   ],
+   "ue": "BrowInnerUpRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "INNER_BROW_RAISER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L102",
+    "vrcft_docs_shapes:L146",
+    "godot_vendors_fb2:L224"
+   ],
+   "ue": "BrowInnerUpLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "OUTER_BROW_RAISER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L104",
+    "vrcft_docs_shapes:L151",
+    "godot_vendors_fb2:L225"
+   ],
+   "ue": "BrowOuterUpRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "OUTER_BROW_RAISER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L106",
+    "vrcft_docs_shapes:L156",
+    "godot_vendors_fb2:L226"
+   ],
+   "ue": "BrowOuterUpLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "NOSE_WRINKLER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L108",
+    "vrcft_docs_shapes:L161",
+    "godot_vendors_fb2:L227"
+   ],
+   "ue": "NoseSneerRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "NOSE_WRINKLER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L110",
+    "vrcft_docs_shapes:L166",
+    "godot_vendors_fb2:L228"
+   ],
+   "ue": "NoseSneerLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "CHEEK_RAISER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L120",
+    "vrcft_docs_shapes:L191",
+    "godot_vendors_fb2:L233"
+   ],
+   "ue": "CheekSquintRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "CHEEK_RAISER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L122",
+    "vrcft_docs_shapes:L196",
+    "godot_vendors_fb2:L234"
+   ],
+   "ue": "CheekSquintLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "CHEEK_PUFF_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L124",
+    "vrcft_docs_shapes:L201",
+    "godot_vendors_fb2:L235"
+   ],
+   "ue": "CheekPuffRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "CHEEK_PUFF_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L126",
+    "vrcft_docs_shapes:L206",
+    "godot_vendors_fb2:L236"
+   ],
+   "ue": "CheekPuffLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "CHEEK_SUCK_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L128",
+    "vrcft_docs_shapes:L211",
+    "godot_vendors_fb2:L237"
+   ],
+   "ue": "CheekSuckRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "CHEEK_SUCK_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L130",
+    "vrcft_docs_shapes:L216",
+    "godot_vendors_fb2:L238"
+   ],
+   "ue": "CheekSuckLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "JAW_DROP": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L132",
+    "vrcft_docs_shapes:L221",
+    "godot_vendors_fb2:L239"
+   ],
+   "ue": "JawOpen"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIPS_TOWARD": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L134",
+    "vrcft_docs_shapes:L226",
+    "godot_vendors_fb2:L240"
+   ],
+   "ue": "MouthClosed"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "JAW_SIDEWAYS_RIGHT": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L136",
+    "vrcft_docs_shapes:L231",
+    "godot_vendors_fb2:L241"
+   ],
+   "ue": "JawRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "JAW_SIDEWAYS_LEFT": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L138",
+    "vrcft_docs_shapes:L236",
+    "godot_vendors_fb2:L242"
+   ],
+   "ue": "JawLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "JAW_THRUST": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L140",
+    "vrcft_docs_shapes:L241",
+    "godot_vendors_fb2:L243"
+   ],
+   "ue": "JawForward"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_SUCK_RT": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L148",
+    "vrcft_docs_shapes:L261",
+    "godot_vendors_fb2:L247"
+   ],
+   "ue": "LipSuckUpperRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_SUCK_LT": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L150",
+    "vrcft_docs_shapes:L266",
+    "godot_vendors_fb2:L248"
+   ],
+   "ue": "LipSuckUpperLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_SUCK_RB": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L152",
+    "vrcft_docs_shapes:L271",
+    "godot_vendors_fb2:L249"
+   ],
+   "ue": "LipSuckLowerRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_SUCK_LB": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L154",
+    "vrcft_docs_shapes:L276",
+    "godot_vendors_fb2:L250"
+   ],
+   "ue": "LipSuckLowerLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_FUNNELER_RT": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L160",
+    "vrcft_docs_shapes:L291",
+    "godot_vendors_fb2:L253"
+   ],
+   "ue": "LipFunnelUpperRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_FUNNELER_LT": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L162",
+    "vrcft_docs_shapes:L296",
+    "godot_vendors_fb2:L254"
+   ],
+   "ue": "LipFunnelUpperLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_FUNNELER_RB": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L164",
+    "vrcft_docs_shapes:L301",
+    "godot_vendors_fb2:L255"
+   ],
+   "ue": "LipFunnelLowerRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_FUNNELER_LB": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L166",
+    "vrcft_docs_shapes:L306",
+    "godot_vendors_fb2:L256"
+   ],
+   "ue": "LipFunnelLowerLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_PUCKER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L168",
+    "vrcft_docs_shapes:L311",
+    "godot_vendors_fb2:L257"
+   ],
+   "ue": "LipPuckerUpperRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_PUCKER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L170",
+    "vrcft_docs_shapes:L316",
+    "godot_vendors_fb2:L258"
+   ],
+   "ue": "LipPuckerUpperLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_PUCKER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L172",
+    "vrcft_docs_shapes:L321",
+    "godot_vendors_fb2:L259"
+   ],
+   "ue": "LipPuckerLowerRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_PUCKER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L174",
+    "vrcft_docs_shapes:L326",
+    "godot_vendors_fb2:L260"
+   ],
+   "ue": "LipPuckerLowerLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "UPPER_LIP_RAISER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L176",
+    "vrcft_docs_shapes:L331",
+    "godot_vendors_fb2:L261"
+   ],
+   "ue": "MouthUpperUpRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "UPPER_LIP_RAISER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L178",
+    "vrcft_docs_shapes:L336",
+    "godot_vendors_fb2:L262"
+   ],
+   "ue": "MouthUpperUpLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LOWER_LIP_DEPRESSOR_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L180",
+    "vrcft_docs_shapes:L341",
+    "godot_vendors_fb2:L263"
+   ],
+   "ue": "MouthLowerDownRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LOWER_LIP_DEPRESSOR_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L182",
+    "vrcft_docs_shapes:L346",
+    "godot_vendors_fb2:L264"
+   ],
+   "ue": "MouthLowerDownLeft"
+  },
+  {
+   "basis": "set to 0; a part of MouthRight, which the plugin sets from FB2",
+   "blend_inputs": [
+    "MOUTH_RIGHT"
+   ],
+   "inputs": {},
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L188",
+    "vrcft_docs_shapes:L361",
+    "godot_vendors_fb2:L267",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334"
+   ],
+   "ue": "MouthUpperRight"
+  },
+  {
+   "basis": "set to 0; a part of MouthLeft, which the plugin sets from FB2",
+   "blend_inputs": [
+    "MOUTH_LEFT"
+   ],
+   "inputs": {},
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L190",
+    "vrcft_docs_shapes:L366",
+    "godot_vendors_fb2:L268",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335"
+   ],
+   "ue": "MouthUpperLeft"
+  },
+  {
+   "basis": "set to 0; a part of MouthRight, which the plugin sets from FB2",
+   "blend_inputs": [
+    "MOUTH_RIGHT"
+   ],
+   "inputs": {},
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L192",
+    "vrcft_docs_shapes:L371",
+    "godot_vendors_fb2:L269",
+    "godot_face_modifier:L452",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L334"
+   ],
+   "ue": "MouthLowerRight"
+  },
+  {
+   "basis": "set to 0; a part of MouthLeft, which the plugin sets from FB2",
+   "blend_inputs": [
+    "MOUTH_LEFT"
+   ],
+   "inputs": {},
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L194",
+    "vrcft_docs_shapes:L376",
+    "godot_vendors_fb2:L270",
+    "godot_face_modifier:L454",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L335"
+   ],
+   "ue": "MouthLowerLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_CORNER_PULLER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L196",
+    "vrcft_docs_shapes:L381",
+    "godot_vendors_fb2:L271"
+   ],
+   "ue": "MouthCornerPullRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_CORNER_PULLER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L198",
+    "vrcft_docs_shapes:L386",
+    "godot_vendors_fb2:L272"
+   ],
+   "ue": "MouthCornerPullLeft"
+  },
+  {
+   "basis": "set to 0; a part of MouthSmileRight, which the plugin sets from FB2",
+   "blend_inputs": [
+    "LIP_CORNER_PULLER_R"
+   ],
+   "inputs": {},
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L200",
+    "vrcft_docs_shapes:L391",
+    "godot_vendors_fb2:L273",
+    "godot_face_modifier:L456",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L336"
+   ],
+   "ue": "MouthCornerSlantRight"
+  },
+  {
+   "basis": "set to 0; a part of MouthSmileLeft, which the plugin sets from FB2",
+   "blend_inputs": [
+    "LIP_CORNER_PULLER_L"
+   ],
+   "inputs": {},
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L202",
+    "vrcft_docs_shapes:L396",
+    "godot_vendors_fb2:L274",
+    "godot_face_modifier:L458",
+    "godot_face_modifier:L489",
+    "godot_vendors_fb2:L337"
+   ],
+   "ue": "MouthCornerSlantLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_CORNER_DEPRESSOR_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L204",
+    "vrcft_docs_shapes:L401",
+    "godot_vendors_fb2:L275"
+   ],
+   "ue": "MouthFrownRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_CORNER_DEPRESSOR_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L206",
+    "vrcft_docs_shapes:L406",
+    "godot_vendors_fb2:L276"
+   ],
+   "ue": "MouthFrownLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_STRETCHER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L208",
+    "vrcft_docs_shapes:L411",
+    "godot_vendors_fb2:L277"
+   ],
+   "ue": "MouthStretchRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_STRETCHER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L210",
+    "vrcft_docs_shapes:L416",
+    "godot_vendors_fb2:L278"
+   ],
+   "ue": "MouthStretchLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "DIMPLER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L212",
+    "vrcft_docs_shapes:L421",
+    "godot_vendors_fb2:L279"
+   ],
+   "ue": "MouthDimpleRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "DIMPLER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L214",
+    "vrcft_docs_shapes:L426",
+    "godot_vendors_fb2:L280"
+   ],
+   "ue": "MouthDimpleLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "CHIN_RAISER_T": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L216",
+    "vrcft_docs_shapes:L431",
+    "godot_vendors_fb2:L281"
+   ],
+   "ue": "MouthRaiserUpper"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "CHIN_RAISER_B": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L218",
+    "vrcft_docs_shapes:L436",
+    "godot_vendors_fb2:L282"
+   ],
+   "ue": "MouthRaiserLower"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_PRESSOR_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L220",
+    "vrcft_docs_shapes:L441",
+    "godot_vendors_fb2:L283"
+   ],
+   "ue": "MouthPressRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_PRESSOR_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L222",
+    "vrcft_docs_shapes:L446",
+    "godot_vendors_fb2:L284"
+   ],
+   "ue": "MouthPressLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_TIGHTENER_R": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L224",
+    "vrcft_docs_shapes:L451",
+    "godot_vendors_fb2:L285"
+   ],
+   "ue": "MouthTightenerRight"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "LIP_TIGHTENER_L": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L226",
+    "vrcft_docs_shapes:L456",
+    "godot_vendors_fb2:L286"
+   ],
+   "ue": "MouthTightenerLeft"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "TONGUE_OUT": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L228",
+    "vrcft_docs_shapes:L461",
+    "godot_vendors_fb2:L287"
+   ],
+   "ue": "TongueOut"
+  },
+  {
+   "basis": "set from one FB2 weight",
+   "inputs": {
+    "TONGUE_RETREAT": 1.0
+   },
+   "sources": [
+    "godot_enum:L38",
+    "godot_face_modifier:L246",
+    "vrcft_docs_shapes:L506",
+    "godot_vendors_fb2:L296"
+   ],
+   "ue": "TongueFlat"
+  }
+ ],
+ "sources": {
+  "godot_enum": "e8d4144834598faa862262c41e246d932e07be5d52d9116042a75618c683a2a3",
+  "godot_face_modifier": "6b2c8305a0d8067f6a8f1e90544cbcab6895a0d0207b8a3c3e0ff4fe51db918d",
+  "godot_vendors_fb2": "fd53cd284527bc544ff51eb60ed1aef28fce0a5a22c0b9a74a28454f91d65789",
+  "vrcft_docs_shapes": "208dce0a6bfdb9e5139de3933c26b0a4f0a5cefb9030d60023f17024cabc2dcb"
+ }
+}

@@ -12,7 +12,8 @@ This audit goes with the draft [canonical expression set](canonical-set.md). It 
 - **Rows.** There are three kinds of row:
   - one row for each pair of canonical signal and phase-1 source that maps it;
   - one row for each pair of canonical signal with a FACS code and FACS crosswalk record that a hop of that signal cites. Today the only such record is `ict_facekit`. A crosswalk difference on a signal whose hops do not cite the record is a [note](#crosswalk-notes) with no key;
-  - one row for each canonical signal that a FACS hop links, plus rows for the FACS encoding and frame.
+  - one row for each canonical signal that a FACS hop links, plus rows for the FACS encoding and frame;
+  - for the visemes, one IPA reference row for each IPA shape class, and one row for the scope of META's classes.
 - **Each row** gives the source's name, the evidence record and locator, and an RCEF paraphrase of the source's definition. A paraphrase says what moves, which way and on which side, in RCEF's own words. Whose side is settled once per source in [Frames](#frames-whose-left). The canonical definitions are in the [signal table](canonical-set.md#expression-signals). Records whose licence is "reference only", or that state no licence, allow no copying of prose: the Apple, VRM and VRCFaceTracking documentation records. RCEF paraphrases every row in the same way, whatever the licence.
 - **Verdicts:**
   - `same`: the source's own text or figure names the action that the canonical definition describes. It needs a cited locator. Without evidence the verdict is `unresolved`.
@@ -185,7 +186,7 @@ Record `apple_blendshapes` (Apple documentation data, reference only). Each coef
 
 ## VRCFaceTracking Unified Expressions
 
-Record `vrcft_docs_shapes` (VRCFaceTracking docs `3036f46`, reference only). Phase 1 has out-maps only. 64 rows: 39 `same`, 23 `differs`, 2 `unresolved`. The out-hops for `cheek_suck_*` and `lip_tighten_*` come with the FB2-only signals.
+Record `vrcft_docs_shapes` (VRCFaceTracking docs `3036f46`, reference only). Phase 1 has out-maps only. 64 rows: 39 `same`, 23 `differs`, 2 `unresolved`. The out-hops for `cheek_suck_*` and `lip_tighten_*` take their crosswalks from the [table of the FB2-only signals](#crosswalks-of-the-fb2-only-signals).
 
 On gaze, the row paraphrase says only what this table states: a direction, with no largest angle. The loss that the hop carries keeps the wording of today's ARKit → Unified Expressions loss, "eyelid and eye movement; no maximum angle stated". The eyelid part comes from today's map, not from this table row; the key `vrcft_ue_gaze_no_angle` carries both.
 
@@ -215,8 +216,8 @@ On gaze, the row paraphrase says only what this table states: a direction, with 
 | `cheek_puff_right` | CheekPuffRight | `vrcft_docs_shapes` 202 | air bulges the right cheek | same | — |
 | `cheek_raise_left` | CheekSquintLeft | `vrcft_docs_shapes` 197 | the left cheek goes up; names only the cheek lift; the ring tightening and the narrowing of the eye corner are not stated | differs | VRCFT UE out, `vrcft_ue_cheeksquint_cheek` |
 | `cheek_raise_right` | CheekSquintRight | `vrcft_docs_shapes` 192 | the right cheek goes up; names only the cheek lift; the ring tightening and the narrowing of the eye corner are not stated | differs | VRCFT UE out, `vrcft_ue_cheeksquint_cheek` |
-| `cheek_suck_left` | CheekSuckLeft | `vrcft_docs_shapes` 217 | the left cheek is drawn inward and hollows (out-hop added with the FB2-only signals) | same | — |
-| `cheek_suck_right` | CheekSuckRight | `vrcft_docs_shapes` 212 | the right cheek is drawn inward and hollows (out-hop added with the FB2-only signals) | same | — |
+| `cheek_suck_left` | CheekSuckLeft | `vrcft_docs_shapes` 217 | the left cheek is drawn inward and hollows | same | — |
+| `cheek_suck_right` | CheekSuckRight | `vrcft_docs_shapes` 212 | the right cheek is drawn inward and hollows | same | — |
 | `nose_wrinkle_left` | NoseSneerLeft | `vrcft_docs_shapes` 167 | the left half of the face curls into a snarl; the shape is named for the nose | same | — |
 | `nose_wrinkle_right` | NoseSneerRight | `vrcft_docs_shapes` 162 | the right half of the face curls into a snarl; the shape is named for the nose | same | — |
 | `jaw_drop` | JawOpen | `vrcft_docs_shapes` 222 | the jaw drops and the mouth gapes | same | — |
@@ -247,8 +248,8 @@ On gaze, the row paraphrase says only what this table states: a direction, with 
 | `lip_suck_lower_right` | LipSuckLowerRight | `vrcft_docs_shapes` 272 | the lower right quarter of the lips rolls inward | same | — |
 | `lip_press_left` | MouthPressLeft | `vrcft_docs_shapes` 447 | on the left, the top and bottom lips squeeze shut and go thin | same | — |
 | `lip_press_right` | MouthPressRight | `vrcft_docs_shapes` 442 | on the right, the top and bottom lips squeeze shut and go thin | same | — |
-| `lip_tighten_left` | MouthTightenerLeft | `vrcft_docs_shapes` 457 | on the left, the lips draw in and narrow across the mouth (out-hop added with the FB2-only signals) | same | — |
-| `lip_tighten_right` | MouthTightenerRight | `vrcft_docs_shapes` 452 | on the right, the lips draw in and narrow across the mouth (out-hop added with the FB2-only signals) | same | — |
+| `lip_tighten_left` | MouthTightenerLeft | `vrcft_docs_shapes` 457 | on the left, the lips draw in and narrow across the mouth | same | — |
+| `lip_tighten_right` | MouthTightenerRight | `vrcft_docs_shapes` 452 | on the right, the lips draw in and narrow across the mouth | same | — |
 | `lips_toward` | MouthClosed | `vrcft_docs_shapes` 227 | the lips meet, measured against how open the jaw is; the canonical signal is defined at any jaw opening | differs | VRCFT UE out, `vrcft_ue_mouthclosed_jaw_relative` |
 | `upper_lip_raise_left` | MouthUpperUpLeft | `vrcft_docs_shapes` 337 | the top lip rises on the left | same | — |
 | `upper_lip_raise_right` | MouthUpperUpRight | `vrcft_docs_shapes` 332 | the top lip rises on the right | same | — |
@@ -275,33 +276,63 @@ Record `vrm_expressions` (vrm-specification `94e82dd`, reference only). 7 rows: 
 |---|---|---|---|---|---|
 | `eye_close_left` | `blinkLeft` | `vrm_expressions` 178 | shuts one eye, named as the left; whose left is not stated ([Frames](#frames-whose-left)) | unresolved | VRM blink in and out, `vrm_blink_side_unresolved` |
 | `eye_close_right` | `blinkRight` | `vrm_expressions` 179 | shuts one eye, named as the right; whose right is not stated | unresolved | VRM blink in and out, `vrm_blink_side_unresolved` |
-| `aa` | `aa` | `vrm_expressions` 163 | a mouth-shape preset for speech, weighted as each model's author chose; remark "aa" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
-| `ih` | `ih` | `vrm_expressions` 164 | a mouth-shape preset for speech; remark "i", while META's IH is the vowel of "tip" | differs | VRM vowel in and out, `vrm_vowel_asset_weight`, `vrm_ih_vowel_quality` |
-| `ou` | `ou` | `vrm_expressions` 165 | a mouth-shape preset for speech; remark "u" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
-| `e` | `ee` | `vrm_expressions` 166 | a mouth-shape preset for speech; remark "eh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
-| `oh` | `oh` | `vrm_expressions` 167 | a mouth-shape preset for speech; remark "oh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `vowel_open` | `aa` | `vrm_expressions` 163 | a mouth-shape preset for speech, weighted as each model's author chose; remark "aa" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `vowel_close_spread` | `ih` | `vrm_expressions` 164 | a mouth-shape preset for speech; remark "i", while META's IH is the vowel of "tip" | differs | VRM vowel in and out, `vrm_vowel_asset_weight`, `vrm_ih_vowel_quality` |
+| `vowel_close_rounded` | `ou` | `vrm_expressions` 165 | a mouth-shape preset for speech; remark "u". Read as Japanese [ɯᵝ] it stays in this class; VRM states no language | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `vowel_mid_spread` | `ee` | `vrm_expressions` 166 | a mouth-shape preset for speech; remark "eh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
+| `vowel_mid_rounded` | `oh` | `vrm_expressions` 167 | a mouth-shape preset for speech; remark "oh" | differs | VRM vowel in and out, `vrm_vowel_asset_weight` |
 
 ## META visemes
 
-Record `xr_visemes` (OpenXR-Docs `5a82d45`, CC-BY-4.0). Each value is a probability from 0 to 1, and the values sum to 1 when `isValid` is true (lines 104-107). The canonical visemes follow META, so all 15 rows are `same`.
+Record `xr_visemes` (OpenXR-Docs `5a82d45`, CC-BY-4.0). Each value is a probability from 0 to 1, and the values sum to 1 when `isValid` is true (lines 104-107). The canonical classes contain META's classes one to one; the IPA readings are RCEF's. 16 rows: 15 `same`, 1 `differs`.
 
 | Signal | Source name | Locator | Paraphrase | Verdict | Owning hop, key |
 |---|---|---|---|---|---|
-| `sil` | SIL | `xr_visemes` 142 | the frame is silent; META's table calls this class neutral | same | — |
-| `pp` | PP | `xr_visemes` 149 | class probability for the sounds p, b, m | same | — |
-| `ff` | FF | `xr_visemes` 156 | class probability for the sounds f, v | same | — |
-| `th` | TH | `xr_visemes` 163 | class probability for the sounds th | same | — |
-| `dd` | DD | `xr_visemes` 170 | class probability for the sounds t, d | same | — |
-| `kk` | KK | `xr_visemes` 177 | class probability for the sounds k, g | same | — |
-| `ch` | CH | `xr_visemes` 184 | class probability for the sounds tS, dZ, S | same | — |
-| `ss` | SS | `xr_visemes` 191 | class probability for the sounds s, z | same | — |
-| `nn` | NN | `xr_visemes` 198 | class probability for the sounds n, l | same | — |
-| `rr` | RR | `xr_visemes` 205 | class probability for the sounds r | same | — |
-| `aa` | AA | `xr_visemes` 212 | class probability for the sounds A:, as in car | same | — |
-| `e` | E | `xr_visemes` 219 | class probability for the sounds e, as in bed | same | — |
-| `ih` | IH | `xr_visemes` 226 | class probability for the sounds ih, as in tip | same | — |
-| `oh` | OH | `xr_visemes` 233 | class probability for the sounds oh, as in toe | same | — |
-| `ou` | OU | `xr_visemes` 240 | class probability for the sounds ou, as in book | same | — |
+| `sil` | SIL | `xr_visemes` 142 | the frame is silent; META's table calls this class neutral. Not an IPA segment, so it has no IPA reference row. META's image shows the lips together and relaxed; RCEF asserts no pose for other sources | same | — |
+| `bilabial` | PP | `xr_visemes` 149 | class probability for the sounds p, b, m | same | — |
+| `labiodental` | FF | `xr_visemes` 156 | class probability for the sounds f, v | same | — |
+| `dental` | TH | `xr_visemes` 163 | class probability for the sounds th (θ ð) | same | — |
+| `coronal_stop` | DD | `xr_visemes` 170 | class probability for the sounds t, d. META renders it in isolation with the teeth close; RCEF's class has no front target of its own, so META's pose is one rig choice | same | — |
+| `dorsal` | KK | `xr_visemes` 177 | class probability for the sounds k, g. META renders it in isolation with the teeth close; RCEF's class has no front target of its own, so META's pose is one rig choice | same | — |
+| `postalveolar` | CH | `xr_visemes` 184 | class probability for the sounds tS, dZ, S (tʃ dʒ ʃ) | same | — |
+| `alveolar_sibilant` | SS | `xr_visemes` 191 | class probability for the sounds s, z | same | — |
+| `coronal_nasal_lateral` | NN | `xr_visemes` 198 | class probability for the sounds n, l. META renders it in isolation with the teeth close; RCEF's class has no front target of its own, so META's pose is one rig choice | same | — |
+| `rhotic` | RR | `xr_visemes` 205 | class probability for the sound r, as in red: read literally as the trill r or as English ɹ, one class. META's images: no clear protrusion from the front, slight protrusion in the three-quarter view (one speaker; weak support) | same | — |
+| `vowel_open` | AA | `xr_visemes` 212 | class probability for the sounds A:, as in car (ɑ) | same | — |
+| `vowel_mid_spread` | E | `xr_visemes` 219 | class probability for the sounds e, as in bed (e or ɛ, one class) | same | — |
+| `vowel_close_spread` | IH | `xr_visemes` 226 | class probability for the sounds ih, as in tip (ɪ) | same | — |
+| `vowel_mid_rounded` | OH | `xr_visemes` 233 | class probability for the sounds oh, as in toe (o) | same | — |
+| `vowel_close_rounded` | OU | `xr_visemes` 240 | class probability for the sounds ou, as in book (ʊ) | same | — |
+| `alveolar_floor` | SS, DD, NN and RR | `xr_visemes` 170, 191, 198, 205 | the sum of the META classes SS, DD, NN and RR, clamped at 1; META has no such class | differs | META aggregate in (`visemes_aggregate.to_rcef`), `meta_viseme_aggregate_sum` |
+
+## META viseme scope
+
+One row, in its own category, like the FACS encoding rows.
+
+| Topic | Locator | Paraphrase | Verdict | Owning hop, key |
+|---|---|---|---|---|
+| META's class membership outside its examples | `xr_visemes` 142-245 | META lists English example phonemes for each class; how META classifies other IPA sounds is not stated; RCEF assigns them by shape | unresolved | every META copy hop, `meta_viseme_class_scope` |
+
+## IPA reference rows
+
+Record `ipa_chart_doulos_2020` (the IPA chart, revised to 2020). One row for each IPA shape class: its members and the chart cells they come from. The members are the chart's definitions, so every row is `same`; the evidence column names the A-level members ([IPA chart assignment](canonical-set.md#ipa-chart-assignment)). There is no row for `sil` or for aggregates.
+
+| Signal | IPA members | Chart cells | Evidence | Verdict | Owning hop, key |
+|---|---|---|---|---|---|
+| `bilabial` | p b m ʙ ɸ β ʘ ɓ | pulmonic: Plosive × Bilabial; pulmonic: Nasal × Bilabial; pulmonic: Trill × Bilabial; pulmonic: Fricative × Bilabial; non-pulmonic: Clicks × Bilabial; non-pulmonic: Voiced implosives × Bilabial | A: ʙ ɸ β ʘ ɓ | same | — |
+| `labiodental` | ɱ ⱱ f v ʋ | pulmonic: Nasal × Labiodental; pulmonic: Tap or Flap × Labiodental; pulmonic: Fricative × Labiodental; pulmonic: Approximant × Labiodental | A: ɱ ⱱ ʋ | same | — |
+| `dental` | θ ð | pulmonic: Fricative × Dental | E | same | — |
+| `alveolar_sibilant` | s z | pulmonic: Fricative × Alveolar | E | same | — |
+| `postalveolar` | ʃ ʒ ʂ ʐ ɕ ʑ ɧ | pulmonic: Fricative × Postalveolar; pulmonic: Fricative × Retroflex; other symbols: Alveolo-palatal fricatives; other symbols: Simultaneous ʃ and x | A: ʂ ʐ ɕ ʑ ɧ | same | — |
+| `coronal_stop` | t d ʈ ɖ ɾ ɽ ǀ ǃ ǂ ɗ | pulmonic: Plosive × Alveolar; pulmonic: Plosive × Retroflex; pulmonic: Tap or Flap × Alveolar; pulmonic: Tap or Flap × Retroflex; non-pulmonic: Clicks × Dental; non-pulmonic: Clicks × (Post)alveolar; non-pulmonic: Clicks × Palatoalveolar; non-pulmonic: Voiced implosives × Dental/alveolar | A: ʈ ɖ ɾ ɽ ǀ ǃ ǂ ɗ | same | — |
+| `coronal_nasal_lateral` | n ɳ ɬ ɮ l ɭ ǁ ɺ | pulmonic: Nasal × Alveolar; pulmonic: Nasal × Retroflex; pulmonic: Lateral fricative × Alveolar; pulmonic: Lateral approximant × Alveolar; pulmonic: Lateral approximant × Retroflex; non-pulmonic: Clicks × Alveolar lateral; other symbols: Voiced alveolar lateral flap | A: ɳ ɬ ɮ ɭ ǁ ɺ | same | — |
+| `dorsal` | c ɟ k ɡ q ɢ ʔ ɲ ŋ ɴ ʀ ç ʝ x ɣ χ ʁ ħ ʕ h ɦ ʎ ʟ ʄ ɠ ʛ ʜ ʢ ʡ | pulmonic: Plosive × Palatal; pulmonic: Plosive × Velar; pulmonic: Plosive × Uvular; pulmonic: Plosive × Glottal; pulmonic: Nasal × Palatal; pulmonic: Nasal × Velar; pulmonic: Nasal × Uvular; pulmonic: Trill × Uvular; pulmonic: Fricative × Palatal; pulmonic: Fricative × Velar; pulmonic: Fricative × Uvular; pulmonic: Fricative × Pharyngeal; pulmonic: Fricative × Glottal; pulmonic: Lateral approximant × Palatal; pulmonic: Lateral approximant × Velar; non-pulmonic: Voiced implosives × Palatal; non-pulmonic: Voiced implosives × Velar; non-pulmonic: Voiced implosives × Uvular; other symbols: Voiceless epiglottal fricative; other symbols: Voiced epiglottal fricative; other symbols: Epiglottal plosive | A: c ɟ q ɢ ʔ ɲ ɴ ʀ ç ʝ x ɣ χ ʁ ħ ʕ h ɦ ʎ ʟ ʄ ɠ ʛ ʜ ʢ ʡ | same | — |
+| `rhotic` | r ɹ ɻ | pulmonic: Trill × Alveolar; pulmonic: Approximant × Alveolar; pulmonic: Approximant × Retroflex | A: r ɻ | same | — |
+| `vowel_open` | æ ɐ a ɑ | vowels: Near-open × Front, unrounded; vowels: Near-open × Central, unrounded; vowels: Open × Front, unrounded; vowels: Open × Back, unrounded | A: æ ɐ | same | — |
+| `vowel_mid_spread` | e ɘ ɤ ə ɛ ɜ ʌ | vowels: Close-mid × Front, unrounded; vowels: Close-mid × Central, unrounded; vowels: Close-mid × Back, unrounded; vowels: Mid × Central, unrounded; vowels: Open-mid × Front, unrounded; vowels: Open-mid × Central, unrounded; vowels: Open-mid × Back, unrounded | A: ɘ ɤ ə ɜ ʌ | same | — |
+| `vowel_close_spread` | j ɰ i ɨ ɯ ɪ | pulmonic: Approximant × Palatal; pulmonic: Approximant × Velar; vowels: Close × Front, unrounded; vowels: Close × Central, unrounded; vowels: Close × Back, unrounded; vowels: Near-close × Near-front, unrounded | A: j ɰ ɨ ɯ | same | — |
+| `vowel_mid_rounded` | ø ɵ o œ ɞ ɔ ɶ ɒ | vowels: Close-mid × Front, rounded; vowels: Close-mid × Central, rounded; vowels: Close-mid × Back, rounded; vowels: Open-mid × Front, rounded; vowels: Open-mid × Central, rounded; vowels: Open-mid × Back, rounded; vowels: Open × Front, rounded; vowels: Open × Back, rounded | A: ɶ ɒ; contested: ɶ ɒ | same | — |
+| `vowel_close_rounded` | ʍ w ɥ y ʉ u ʏ ʊ | other symbols: Voiceless labial-velar fricative; other symbols: Voiced labial-velar approximant; other symbols: Voiced labial-palatal approximant; vowels: Close × Front, rounded; vowels: Close × Central, rounded; vowels: Close × Back, rounded; vowels: Near-close × Near-front, rounded; vowels: Near-close × Near-back, rounded | A: ʍ w ɥ; contested: ʊ | same | — |
 
 ## FACS
 
@@ -427,6 +458,17 @@ No hop cites these sources for the signals named, so they get no loss key.
 - **Py-Feat** (`pyfeat_au_reference`, Py-Feat `docs/pages/au_reference.md` at `4ebb4ec`, MIT; the page calls its ARKit column approximate, line 13). It relates AU10 to mouthUpperUp (line 74), as the canonical set does. It relates both AU23 and AU24 to mouthPress (lines 87-88); the canonical set gives AU23 to `lip_tighten`, which has no ARKit shape. It relates AU25, AU26 and AU27 to jawOpen at different strengths (lines 89-91), and AU43, AU45 and AU46 all to eyeBlink (lines 106, 108 and 109). It relates AU61 to eyeLookInLeft and eyeLookOutRight, but its muscle column for AU61 describes a gaze toward the subject's own left (line 118), and the two columns disagree.
 - **Melinda Ozel, "ARKit to FACS"** (`ozel_arkit_facs`, reference only; paraphrased). Its eyeBlink entry gives AU45. Its jawOpen entry allows AU26 or AU27. Its mouthShrugUpper entry treats the shape as the upper part of AU17 that depends on mouthShrugLower, and says that ICT's AU10 reading is a mistake. This supports `chin_raise_upper_lip` as a part of chin raising. Its eye-look note pairs eyeLookInRight with eyeLookOutLeft for a leftward gaze.
 
+## Crosswalks of the FB2-only signals
+
+No direct map links these signals to another set, so today's maps give their hops no crosswalk. Two public sources link their FB2 names to Unified Expressions. VRCFaceTracking's Movement table pairs each Unified Expressions shape with its FB2 name, in one step (`vrcft_docs_movement`). Godot links them in two steps: its OpenXR vendors plugin copies each FB2 weight to a Godot shape (`godot_vendors_fb2`), its shapes are based on Unified Expressions (`godot_enum` lines 38-40), and its face modifier gives the Unified Expressions name of each Godot shape first (`godot_face_modifier` lines 48-54). The FB2 hops and the Unified Expressions out-hops of these signals cite both sources. The one-step table takes the provider form of the transfer, and Godot takes the chain form. The Unified Expressions out-hop also carries the loss "two-step crosswalk through Godot". The tongue positions have no Unified Expressions shape. Godot fills TongueFlat from TONGUE_RETREAT (`godot_vendors_fb2` line 296), but RCEF does not map them: in Unified Expressions the tongue flattens and thins (`vrcft_docs_shapes` line 507), while `tongue_retreat` draws the tongue back, so the two names do not name one action.
+
+| Signal | FB2 | Unified Expressions | One step | FB2 to Godot | Godot to Unified Expressions |
+|---|---|---|---|---|---|
+| `cheek_suck_left` | CHEEK_SUCK_L | CheekSuckLeft | `vrcft_docs_movement` line 53 | `godot_vendors_fb2` line 238 | `godot_enum` lines 38-40 and 87; `godot_face_modifier` lines 48-54 and 130-131 |
+| `cheek_suck_right` | CHEEK_SUCK_R | CheekSuckRight | `vrcft_docs_movement` line 52 | `godot_vendors_fb2` line 237 | `godot_enum` lines 38-40 and 86; `godot_face_modifier` lines 48-54 and 128-129 |
+| `lip_tighten_left` | LIP_TIGHTENER_L | MouthTightenerLeft | `vrcft_docs_movement` line 86 | `godot_vendors_fb2` line 286 | `godot_enum` lines 38-40 and 135; `godot_face_modifier` lines 48-54 and 226-227 |
+| `lip_tighten_right` | LIP_TIGHTENER_R | MouthTightenerRight | `vrcft_docs_movement` line 85 | `godot_vendors_fb2` line 285 | `godot_enum` lines 38-40 and 134; `godot_face_modifier` lines 48-54 and 224-225 |
+
 ## Reason scan
 
 - Every `mapped` provider signal's `metadata.reason` was scanned for "unresolved", "conflict", "contradict", "while", "differs" and "unclear". Only Unified Expressions `MouthLowerDownLeft` and `MouthLowerDownRight` match (`profiles/vrcft.artist.base.toml` lines 1009 and 1025). Their rows are `unresolved`.
@@ -460,9 +502,11 @@ No hop cites these sources for the signals named, so they get no loss key.
 | `vrcft_ue_mouthclosed_jaw_relative` | differs | Unified Expressions face out | Unified Expressions defines MouthClosed relative to JawOpen; the canonical signal is defined at any jaw opening |
 | `vrcft_ue_mouthlowerdown_direction_unresolved` | unresolved | Unified Expressions face out | provider direction unresolved (native name versus artist wording) |
 | `vrcft_eye_openness_neutral_unresolved` | unresolved | VRCFaceTracking eye blink in and out | eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused |
-| `vrm_blink_side_unresolved` | unresolved | VRM blink in and out | VRM gives no normative side; RCEF reads blinkLeft as the subject's own left |
+| `vrm_blink_side_unresolved` | unresolved | VRM blink in and out | VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right |
 | `vrm_vowel_asset_weight` | differs | VRM vowel in and out | in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight |
-| `vrm_ih_vowel_quality` | differs | VRM vowel in and out (`ih`) | vowel quality differs: META IH is the vowel in "tip", VRM ih is remarked "i" |
+| `vrm_ih_vowel_quality` | differs | VRM vowel in and out (`ih`) | META IH (ɪ, "tip") and VRM ih (remark "i") are different vowels in one shape class |
+| `meta_viseme_class_scope` | unresolved | every META copy hop (30) | META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape |
+| `meta_viseme_aggregate_sum` | differs | META aggregate in (`visemes_aggregate.to_rcef`, 2) | sum of the listed classes, clamped at 1; META has no such class |
 | `facs_ordinal_intensity` | differs | every FACS hop (102) | FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured |
 | `facs_side_frame_unresolved` | unresolved | every sided FACS hop and both AU30 hops | FACS names L and R without saying whose side; RCEF reads them as the subject's own |
 | `facs_au30_direction_unresolved` | unresolved | FACS AU30 in and out | FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left |
@@ -471,7 +515,7 @@ No hop cites these sources for the signals named, so they get no loss key.
 | `facs_eyelid_events` | differs | FACS AU43 in and out | FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43 |
 | `facs_gross_code_no_intensity` | differs | the 18 FACS hops of 29, 30, 34, 35 and 43 | the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption |
 
-Hops also carry losses that are not audit verdicts: the gain loss of each hop, "asymmetry unknown: symmetry is invented" (ARKit in-hop fan-outs, FACS AU22 and AU28 in-hop fan-outs), "asymmetry irrecoverable" (ARKit and FACS out-hop means), "only their difference is kept" and the rounding loss (FB2 gaze out-hop), "no stated length" (every `tongue_out` hop) and the other VRM losses (consonants dropped, `isBinary`, `blink` not set or not read).
+Hops also carry losses that are not audit verdicts: the gain loss of each hop, "asymmetry unknown: symmetry is invented" (ARKit in-hop fan-outs, FACS AU22 and AU28 in-hop fan-outs), "asymmetry irrecoverable" (ARKit and FACS out-hop means), "only their difference is kept" and the rounding loss (FB2 gaze out-hop), "no stated length" (every `tongue_out` hop), "two-step crosswalk through Godot" (the Unified Expressions out-hops of `cheek_suck_*` and `lip_tighten_*`) and the other VRM losses (consonants dropped, `isBinary`, `blink` not set or not read). The viseme hops add the META gain loss on every META hop, "consonant and rest classes are dropped, so outputs no longer sum to 1" on the VRM vowel out-hop, and "from a source other than META: consonant and rest classes not produced; …" on the META vowel out-hop.
 
 ## Mapping today's losses to keys
 
@@ -489,7 +533,7 @@ Each loss reason of today's maps maps to the keys that cover it on the pivot rou
 | FB2 opposing directions are mutually exclusive; ARKit states no such constraint (on `fb2_gaze.to_arkit`) | 8 | `fb2_gaze_exclusive` on the FB2 gaze in-hop |
 | ARKit and Unified Expressions both describe eyelid and eye movement for gaze; neither states a maximum angle | 8 | `arkit_gaze_eyelid` and `vrcft_ue_gaze_no_angle` |
 | asymmetry irrecoverable | 6 | the ARKit out-hop's mean loss |
-| consonant visemes are dropped, so outputs no longer sum to 1 | 5 | the VRM vowel out-hop's consonant loss |
+| consonant visemes are dropped, so outputs no longer sum to 1 | 5 | the VRM vowel out-hop's consonant and rest loss |
 | a viseme probability becomes an asset-authored expression weight | 5 | `vrm_vowel_asset_weight` |
 | both are extension shapes with no stated length | 3 | "no stated length" on each `tongue_out` hop |
 | FB2 also pulls the corner back and laterally; ARKit describes upward movement only | 2 | `arkit_mouthsmile_upward` |
@@ -503,7 +547,7 @@ Each loss reason of today's maps maps to the keys that cover it on the pivot rou
 
 ## Keys added on today's pairs
 
-A pivot route may carry an audit key that today's rule for the same pair does not carry. Each such key is listed here. Any other added key is an error.
+A pivot route may carry an audit key that today's rule for the same pair does not carry. Each such key is listed here, and an A/B registration lists the same keys in `audit_added_keys` ([ab/README.md](../ab/README.md)). Any other added key is an error.
 
 | Key | Pairs where it is added |
 |---|---|
@@ -512,6 +556,7 @@ A pivot route may carry an audit key that today's rule for the same pair does no
 | `arkit_mouthclose_jaw_unresolved` | ARKit → FB2, ARKit → Unified Expressions (on FB2 → ARKit it covers today's jaw loss) |
 | `vrcft_ue_eyesquint_socket`, `vrcft_ue_cheeksquint_cheek`, `vrcft_ue_mouthstretch_down`, `vrcft_ue_mouthclosed_jaw_relative`, `vrcft_ue_mouthlowerdown_direction_unresolved` | ARKit → Unified Expressions |
 | `vrm_blink_side_unresolved` | FB2 → VRM blink (today an assumption only) |
+| `meta_viseme_class_scope` | META → VRM |
 
 ## Corrections to today's losses
 
@@ -533,13 +578,13 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 | a04 | `Both providers name sides from the subject's own face (ARKit coefficients are face-relative; FB2 describes <q>).` | 58 | `arkit.to_fb2` (46): every rule except `arkit_fb2.JAW_THRUST`, `arkit_fb2.JAW_DROP`, `arkit_fb2.LIPS_TOWARD`, `arkit_fb2.CHIN_RAISER_B`, `arkit_fb2.CHIN_RAISER_T`, `arkit_fb2.TONGUE_OUT`; every rule of `arkit_gaze.to_fb2` (12) | Superseded by the canonical `side` field ([Fields](canonical-set.md#fields)), with the frame rows ARKit `same` and FB2 `same` ([Frames](#frames-whose-left)) |
 | a05 | `FB2 weight 0 (not active) and 1 (fully active) are taken to equal ARKit neutral (0) and maximum (1), linear in between; neither provider publishes its gain curve or full-activation pose.` | 52 | every rule of `fb2.to_arkit` (44); every rule of `fb2_gaze.to_arkit` (8) | `endpoints` on the FB2 in-hop and the ARKit out-hop; on the 6 means the clause is "the ARKit value is the mean of the canonical parts" |
 | a06 | `Both providers name sides from the subject's own face (FB2 describes <q>; ARKit coefficients are face-relative).` | 46 | `fb2.to_arkit` (38): every rule except `fb2_arkit.jawOpen`, `fb2_arkit.mouthClose`, `fb2_arkit.mouthShrugUpper`, `fb2_arkit.mouthShrugLower`, `fb2_arkit.jawForward`, `fb2_arkit.tongueOut`; every rule of `fb2_gaze.to_arkit` (8) | Superseded by the canonical `side` field ([Fields](canonical-set.md#fields)), with the frame rows FB2 `same` and ARKit `same` ([Frames](#frames-whose-left)) |
-| a07 | `FB2 <FB2> corresponds to ARKit <ARKit>.` | 46 | `fb2.to_arkit` (38): every rule except `fb2_arkit.browInnerUp`, `fb2_arkit.cheekPuff`, `fb2_arkit.mouthFunnel`, `fb2_arkit.mouthPucker`, `fb2_arkit.mouthRollLower`, `fb2_arkit.mouthRollUpper`; every rule of `fb2_gaze.to_arkit` (8) | `correspondence` on the FB2 in-hop and the ARKit out-hop, with `transfer.provider` for the crosswalk records the rule cites; withdrawn, with the loss, where the ARKit row is `differs` or `unresolved` |
-| a08 | `ARKit <ARKit> corresponds to Unified Expressions <UE> (VRCFaceTracking ARKit table; Godot face-modifier name table).` | 40 | `arkit.to_vrcft_artist` (40): every rule except the 28 rules of a10, a13 and a21 | `transfer.provider` on the Unified Expressions out-hop (P = ARKit), and `correspondence` on the ARKit in-hop. Withdrawn, with the loss, where the ARKit row is `differs` or `unresolved`: `lid_tighten`, `cheek_raise`, `lip_press`, `chin_raise`, `chin_raise_upper_lip`, `lips_toward`, `lip_stretch_right` and the 8 gaze signals; and for `lower_lip_depress`, whose Unified Expressions row is `unresolved` |
+| a07 | `FB2 <FB2> corresponds to ARKit <ARKit>.` | 46 | `fb2.to_arkit` (38): every rule except `fb2_arkit.browInnerUp`, `fb2_arkit.cheekPuff`, `fb2_arkit.mouthFunnel`, `fb2_arkit.mouthPucker`, `fb2_arkit.mouthRollLower`, `fb2_arkit.mouthRollUpper`; every rule of `fb2_gaze.to_arkit` (8) | `correspondence` on the FB2 in-hop and the ARKit out-hop, with `transfer.provider` for the crosswalk records the rule cites; withdrawn, with the loss, where the FB2 row or the ARKit row is `differs` or `unresolved` |
+| a08 | `ARKit <ARKit> corresponds to Unified Expressions <UE> (VRCFaceTracking ARKit table; Godot face-modifier name table).` | 40 | `arkit.to_vrcft_artist` (40): every rule except the 28 rules of a10, a13 and a21 | `transfer.provider` on the Unified Expressions out-hop (P = ARKit), and `correspondence` on the ARKit in-hop. Withdrawn, with the loss, where the ARKit row or the Unified Expressions row is `differs` or `unresolved`: `lid_tighten`, `cheek_raise`, `lip_press`, `chin_raise`, `chin_raise_upper_lip`, `lips_toward`, `lip_stretch_left`, `lip_stretch_right`, `lower_lip_depress` and the 8 gaze signals |
 | a09 | `ARKit <ARKit> corresponds to FB2 <FB2>; this is the FB2 -> ARKit rule read back.` | 38 | `arkit.to_fb2` (38): every rule except the 14 rules of a11 | `correspondence` on the ARKit in-hop and the FB2 out-hop. "Read back" holds by construction: both directions pass through the same canonical signal |
-| a10 | `ARKit <ARKit> is a blended Unified Expressions shape; <UE> is set to the ARKit value, as is <UE…>. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.` | 16 | `arkit.to_vrcft_artist` (16): `arkit_vrcft_artist.BrowInnerUpRight`, `arkit_vrcft_artist.BrowInnerUpLeft`, `arkit_vrcft_artist.CheekPuffRight`, `arkit_vrcft_artist.CheekPuffLeft`, `arkit_vrcft_artist.LipFunnelUpperRight`, `arkit_vrcft_artist.LipFunnelUpperLeft`, `arkit_vrcft_artist.LipFunnelLowerRight`, `arkit_vrcft_artist.LipFunnelLowerLeft`, `arkit_vrcft_artist.LipPuckerUpperRight`, `arkit_vrcft_artist.LipPuckerUpperLeft`, `arkit_vrcft_artist.LipPuckerLowerRight`, `arkit_vrcft_artist.LipPuckerLowerLeft`, `arkit_vrcft_artist.LipSuckLowerRight`, `arkit_vrcft_artist.LipSuckLowerLeft`, `arkit_vrcft_artist.LipSuckUpperRight`, `arkit_vrcft_artist.LipSuckUpperLeft` | 12 rules (BrowInnerUp, CheekPuff, LipFunnel, LipSuck): superseded by the canonical split. The canonical set holds these parts, so the out-hop is a 1:1 copy (Unified Expressions rows `same`), and the copy into each part moves to the ARKit in-hop (`endpoints`, fan-out clause). 4 rules (LipPucker): `fan_out.vrcft_ue`, with the mean rationale kept; their ARKit transfer is withdrawn with `arkit_mouthpucker_compression` |
+| a10 | `ARKit <ARKit> is a blended Unified Expressions shape; <UE> is set to the ARKit value, as is <UE…>. VRCFaceTracking computes the blended shape as the mean of these parts, so copying the ARKit value into each part gives it back.` | 16 | `arkit.to_vrcft_artist` (16): `arkit_vrcft_artist.BrowInnerUpRight`, `arkit_vrcft_artist.BrowInnerUpLeft`, `arkit_vrcft_artist.CheekPuffRight`, `arkit_vrcft_artist.CheekPuffLeft`, `arkit_vrcft_artist.LipFunnelUpperRight`, `arkit_vrcft_artist.LipFunnelUpperLeft`, `arkit_vrcft_artist.LipFunnelLowerRight`, `arkit_vrcft_artist.LipFunnelLowerLeft`, `arkit_vrcft_artist.LipPuckerUpperRight`, `arkit_vrcft_artist.LipPuckerUpperLeft`, `arkit_vrcft_artist.LipPuckerLowerRight`, `arkit_vrcft_artist.LipPuckerLowerLeft`, `arkit_vrcft_artist.LipSuckLowerRight`, `arkit_vrcft_artist.LipSuckLowerLeft`, `arkit_vrcft_artist.LipSuckUpperRight`, `arkit_vrcft_artist.LipSuckUpperLeft` | 12 rules (BrowInnerUp, CheekPuff, LipFunnel, LipSuck): superseded by the canonical split. The canonical set holds these parts, so the out-hop is a 1:1 copy (Unified Expressions rows `same`), and the copy into each part moves to the ARKit in-hop (`endpoints`, fan-out clause). 4 rules (LipPucker): `fan_out.vrcft_ue`, which states that each canonical side goes to the two parts of its own side and that the mean of the four parts is the mean of the two sides; their ARKit transfer is withdrawn with `arkit_mouthpucker_compression` and `vrcft_ue_set_equal` |
 | a11 | `ARKit <ARKit> is one coefficient; FB2 <FB2> is set to it, as are <FB2…>, so that FB2 -> ARKit gives <ARKit> back. How the coefficient divides between the FB2 parts is unknown.` | 14 | `arkit.to_fb2` (14): `arkit_fb2.INNER_BROW_RAISER_L`, `arkit_fb2.INNER_BROW_RAISER_R`, `arkit_fb2.CHEEK_PUFF_L`, `arkit_fb2.CHEEK_PUFF_R`, `arkit_fb2.LIP_FUNNELER_LB`, `arkit_fb2.LIP_FUNNELER_LT`, `arkit_fb2.LIP_FUNNELER_RB`, `arkit_fb2.LIP_FUNNELER_RT`, `arkit_fb2.LIP_PUCKER_L`, `arkit_fb2.LIP_PUCKER_R`, `arkit_fb2.LIP_SUCK_LB`, `arkit_fb2.LIP_SUCK_RB`, `arkit_fb2.LIP_SUCK_LT`, `arkit_fb2.LIP_SUCK_RT` | `endpoints` on the ARKit in-hop, fan-out clause ("the one ARKit value is copied into each part"), with the loss "asymmetry unknown: symmetry is invented" |
 | a12 | `A one-sided split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero.` | 8 | `arkit_gaze.to_fb2` (8): every rule except `arkit_fb2.gaze_in_minus_out_L`, `arkit_fb2.gaze_up_minus_down_L`, `arkit_fb2.gaze_in_minus_out_R`, `arkit_fb2.gaze_up_minus_down_R` | `net.fb2_gaze` on the FB2 gaze out-hop |
-| a13 | `ARKit <ARKit> is a blended Unified Expressions shape; <UE> is set to the ARKit value, as is <UE…>. VRCFaceTracking defines the blended shape as <w> x <UE> + <w> x <UE>; the weights sum to 1, so copying the ARKit value into both parts gives it back.` | 8 | `arkit.to_vrcft_artist` (8): `arkit_vrcft_artist.BrowLowererLeft`, `arkit_vrcft_artist.BrowPinchLeft`, `arkit_vrcft_artist.BrowLowererRight`, `arkit_vrcft_artist.BrowPinchRight`, `arkit_vrcft_artist.MouthCornerPullLeft`, `arkit_vrcft_artist.MouthCornerSlantLeft`, `arkit_vrcft_artist.MouthCornerPullRight`, `arkit_vrcft_artist.MouthCornerSlantRight` | `fan_out.vrcft_ue` on the Unified Expressions out-hop, with the blend weights kept as the rationale; the ARKit transfer is withdrawn with `arkit_browdown_outer` (brow) and `arkit_mouthsmile_upward` (corner) |
+| a13 | `ARKit <ARKit> is a blended Unified Expressions shape; <UE> is set to the ARKit value, as is <UE…>. VRCFaceTracking defines the blended shape as <w> x <UE> + <w> x <UE>; the weights sum to 1, so copying the ARKit value into both parts gives it back.` | 8 | `arkit.to_vrcft_artist` (8): `arkit_vrcft_artist.BrowLowererLeft`, `arkit_vrcft_artist.BrowPinchLeft`, `arkit_vrcft_artist.BrowLowererRight`, `arkit_vrcft_artist.BrowPinchRight`, `arkit_vrcft_artist.MouthCornerPullLeft`, `arkit_vrcft_artist.MouthCornerSlantLeft`, `arkit_vrcft_artist.MouthCornerPullRight`, `arkit_vrcft_artist.MouthCornerSlantRight` | `fan_out.vrcft_ue` on the Unified Expressions out-hop, with the blend weights kept as the rationale; the ARKit transfer is withdrawn with `arkit_browdown_outer` (brow) and `arkit_mouthsmile_upward` (corner), and with `vrcft_ue_set_equal` |
 | a14 | `VRCFaceTracking's tables are not cited: its Movement row for this shape is labelled <FB2>, not an OpenXR name (not counted: non-OpenXR label), and without that row its ARKit table does not reach FB2.` | 8 | `arkit.to_fb2` (4): `arkit_fb2.LID_TIGHTENER_L`, `arkit_fb2.LID_TIGHTENER_R`, `arkit_fb2.UPPER_LID_RAISER_L`, `arkit_fb2.UPPER_LID_RAISER_R`; `fb2.to_arkit` (4): `fb2_arkit.eyeSquintLeft`, `fb2_arkit.eyeSquintRight`, `fb2_arkit.eyeWideLeft`, `fb2_arkit.eyeWideRight` | `evidence.vrcft_tables_not_cited` on the FB2 in-hop and out-hop of the same FB2 signal |
 | a15 | `VRM isBinary and override effects happen downstream in the VRM runtime and are not modelled.` | 7 | every rule of `fb2.to_vrm` (2); every rule of `visemes.to_vrm` (5) | `vrm.downstream_effects` on `rcef_blink.to_vrm` and `rcef_viseme_vowel.to_vrm` |
 | a16 | `META viseme <META> corresponds to VRM preset <VRM> (META <q> as in <w>; VRM remark <q>).` | 5 | every rule of `visemes.to_vrm` (5) | `correspondence` on the META in-hop and the VRM vowel out-hop |
@@ -547,7 +592,7 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 | a18 | `Phoneme-label correspondence only; no published table maps META visemes to VRM presets.` | 5 | every rule of `visemes.to_vrm` (5) | `vrm.phoneme_label_only` on the VRM vowel out-hop |
 | a19 | `ARKit <ARKit> corresponds to FB2 <FB2>; this is the FB2 -> ARKit rule read back, taking <ARKit> minus <ARKit> where it is above zero.` | 4 | `arkit_gaze.to_fb2` (4): `arkit_fb2.EYES_LOOK_RIGHT_L`, `arkit_fb2.EYES_LOOK_UP_L`, `arkit_fb2.EYES_LOOK_LEFT_R`, `arkit_fb2.EYES_LOOK_UP_R` | `net.fb2_gaze` and `correspondence` (FB2 gaze names, [Gaze](canonical-set.md#gaze)) on the FB2 gaze out-hop, positive segment |
 | a20 | `ARKit <ARKit> corresponds to FB2 <FB2>; this is the FB2 -> ARKit rule read back, taking how far <ARKit> minus <ARKit> is below zero.` | 4 | `arkit_gaze.to_fb2` (4): `arkit_fb2.EYES_LOOK_LEFT_L`, `arkit_fb2.EYES_LOOK_DOWN_L`, `arkit_fb2.EYES_LOOK_RIGHT_R`, `arkit_fb2.EYES_LOOK_DOWN_R` | `net.fb2_gaze` and `correspondence` on the FB2 gaze out-hop, negative segment |
-| a21 | `ARKit <ARKit> is a blended Unified Expressions shape; <UE> is set to the ARKit value, as is <UE…>. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 <FB2> with the blended shape.` | 4 | `arkit.to_vrcft_artist` (4): `arkit_vrcft_artist.MouthUpperLeft`, `arkit_vrcft_artist.MouthLowerLeft`, `arkit_vrcft_artist.MouthUpperRight`, `arkit_vrcft_artist.MouthLowerRight` | `fan_out.vrcft_ue` on the Unified Expressions out-hop |
+| a21 | `ARKit <ARKit> is a blended Unified Expressions shape; <UE> is set to the ARKit value, as is <UE…>. Godot builds the blended shape from these two parts; VRCFaceTracking pairs FB2 <FB2> with the blended shape.` | 4 | `arkit.to_vrcft_artist` (4): `arkit_vrcft_artist.MouthUpperLeft`, `arkit_vrcft_artist.MouthLowerLeft`, `arkit_vrcft_artist.MouthUpperRight`, `arkit_vrcft_artist.MouthLowerRight` | `fan_out.vrcft_ue` on the Unified Expressions out-hop; the ARKit transfer is withdrawn with `vrcft_ue_set_equal` |
 | a22 | `ARKit <ARKit…> are opposing directions of one eye; their difference, from -1 to 1, carries both.` | 4 | `arkit_gaze.to_fb2` (4): `arkit_fb2.gaze_in_minus_out_L`, `arkit_fb2.gaze_up_minus_down_L`, `arkit_fb2.gaze_in_minus_out_R`, `arkit_fb2.gaze_up_minus_down_R` | `net.fb2_gaze` on the FB2 gaze out-hop (the 4 helper values `rcef.intermediate.gaze_in_minus_out_*` and `gaze_up_minus_down_*`) |
 | a23 | `FB2 says only one of two opposing gaze directions is non-zero at a time (xr_fb2 lines 648-649).` | 4 | `arkit_gaze.to_fb2` (4): `arkit_fb2.gaze_in_minus_out_L`, `arkit_fb2.gaze_up_minus_down_L`, `arkit_fb2.gaze_in_minus_out_R`, `arkit_fb2.gaze_up_minus_down_R` | `gaze.fb2_exclusive` on the FB2 gaze out-hop |
 | a24 | `FLAGGED: VRCFaceTracking's ARKit table has no <ARKit> row; only Godot names the ARKit coefficient for the blended Unified shape.` | 4 | `arkit.to_vrcft_artist` (4): `arkit_vrcft_artist.MouthUpperLeft`, `arkit_vrcft_artist.MouthLowerLeft`, `arkit_vrcft_artist.MouthUpperRight`, `arkit_vrcft_artist.MouthLowerRight` | `evidence.godot_only_mouth_shift` on the Unified Expressions out-hop for `mouth_shift_*` |
@@ -570,6 +615,8 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 | `endpoints` | the opening assumption and the operator clause ([Meaning of 0, 1 and neutral](canonical-set.md#meaning-of-0-1-and-neutral)) |
 | `correspondence` | "provider name X corresponds to canonical `<short_name>`", from `aligned_names` |
 | `transfer.provider` | "correspondence evidence is P↔provider; it carries over because `<short_name>` is defined to match P `<name>`" |
+| `transfer.chain` | a crosswalk in two steps, through Godot: "correspondence evidence is FB2↔Godot (…) and Godot↔Unified Expressions (…); it carries over because `<short_name>` is defined to match `<name>`", on the FB2 hops and Unified Expressions out-hops of `cheek_suck_*` and `lip_tighten_*` |
+| `transfer.withdrawn` | the same crosswalk, withdrawn: "it does not carry over for the defined action, because the audit finds that …; see loss …". A hop withdraws the transfer when either set's audit row for the canonical signal is `differs` or `unresolved`: its own row or P's row. The keys of those rows are the losses it names |
 | `fan_out.vrcft_ue` | why the parts are set equal, with the blend rule the source gives |
 | `net.fb2_gaze` | the FB2 gaze netting: the difference of each opposing pair is split back into two one-sided values, each exactly zero on its flat side |
 | `gaze.fb2_exclusive` | FB2 says only one of two opposing gaze directions is non-zero at a time (`xr_fb2` 648-649). This is an assumption on the out-hop, kept from today's ARKit → FB2 map; it is not the loss key `fb2_gaze_exclusive`, which is on the in-hop |
@@ -582,6 +629,7 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 | `vrm.side_caveat` | the A1 text: VRM gives no normative side; on the VRM 1.0 Twist sample `blinkLeft` moves the avatar's own left eyelid |
 | `vrm.definitional_only` | the definitions agree, but no published table maps FB2 to VRM |
 | `lips_toward.jaw_not_compensated` | the value is copied without compensating for the jaw |
+| `vrcft_eye.openness` | the text of the loss key `vrcft_eye_openness_neutral_unresolved`, as an assumption on both VRCFaceTracking eye blink hops |
 
 ## Summary
 
@@ -592,9 +640,11 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 | Unified Expressions | 39 | 23 | 2 | 64 |
 | VRCFaceTracking eye | 2 | 0 | 2 | 4 |
 | VRM | 0 | 5 | 2 | 7 |
-| META visemes | 15 | 0 | 0 | 15 |
+| META visemes | 15 | 1 | 0 | 16 |
+| META viseme scope | 0 | 0 | 1 | 1 |
+| IPA reference rows | 14 | 0 | 0 | 14 |
 | FACS signal rows | 49 | 2 | 2 | 53 |
 | FACS encoding rows | 0 | 3 | 0 | 3 |
 | ICT-FaceKit crosswalk | 37 | 4 | 0 | 41 |
 | Frames | 4 | 0 | 2 | 6 |
-| **All** | 244 | 67 | 12 | 323 |
+| **All** | 258 | 68 | 13 | 339 |

@@ -18,6 +18,13 @@ the profiles their signals belong to, not by their names.
   when no out-map reads what it is mapped to.
 - Toward META visemes from another set, Route writes no isValid flag and says
   so in the frame's notes.
+- A bridge is a map from one canonical set to the other: the viseme pose
+  bridge writes canonical expression signals from viseme classes. Route runs
+  it only when the target reads what it writes, the source cannot write that
+  itself, and the source writes some of what the bridge reads. Then the route
+  is in-maps -> bridge -> out-maps. A class that no selected in-map can write
+  counts as 0 in the bridge, and the notes of each frame it runs on say so; a
+  class refused upstream refuses the bridge's outputs on that frame.
 
 One-hop mode (`maps=[...]`) runs the named maps straight from source to
 target, as rcef_translate.Translator does. The A/B comparison runs today's
@@ -36,6 +43,7 @@ CANONICAL = ('rcef.canonical_expression', 'rcef.canonical_viseme')
 META = 'openxr.visemes'
 NOT_AVAILABLE = 'not available from source'
 META_NOT_ASSERTED = 'META validity not asserted'
+ZERO_FILLED = 'bridge {}: the source writes no {}; counted as 0'
 
 
 def map_ends(rules: list[dict]) -> tuple[list[str], list[str]]:
@@ -87,15 +95,22 @@ class Route:
             return next(iter(common)) if sids and len(common) == 1 else None
 
         ends = {m: map_ends(r) for m, r in self.rules.items()}
+        self.bridges, self.fill = [], {}
         if self.one_hop:
             self.in_maps, self.out_maps = [], list(maps)
             hops = [(m, source, target) for m in maps]
         else:
             self.out_maps = [m for m, (i, o) in ends.items() if home(i, canonical) and home(o, [target])]
             wanted = {i for m in self.out_maps for i in ends[m][0]}
+            direct = {s for m, (i, o) in ends.items() if home(i, [source]) and home(o, canonical) for s in o}
+            self.bridges = [m for m, (i, o) in ends.items() if home(i, canonical) and home(o, canonical)
+                            and home(i, canonical) != home(o, canonical)
+                            and wanted & set(o) and not direct & set(o) and direct & set(i)]
+            wanted |= {i for m in self.bridges for i in ends[m][0]}
             self.in_maps = [m for m, (i, o) in ends.items()
                             if home(i, [source]) and home(o, canonical) and wanted & set(o)]
             hops = ([(m, source, home(ends[m][1], canonical)) for m in self.in_maps]
+                    + [(m, home(ends[m][0], canonical), home(ends[m][1], canonical)) for m in self.bridges]
                     + [(m, home(ends[m][0], canonical), target) for m in self.out_maps])
         self.hops = hops
         snapshots, self.mappings = {}, {}
@@ -112,9 +127,12 @@ class Route:
                 raise SystemExit(result.report.to_dict())
             self.mappings[mapping] = result.value
         self.outputs = [o for m in self.out_maps for o in ends[m][1]]
-        # Which in-map writes each canonical signal, and which source signals reach an out-map.
+        # Which in-map or bridge writes each canonical signal, and which source signals reach an out-map.
         self.writer = {o: m for m in self.in_maps for o in ends[m][1]}
-        read = {i for m in self.out_maps for i in self.mappings[m].required_inputs}
+        self.fill = {m: sorted(s for s in self.mappings[m].required_inputs if s not in self.writer)
+                     for m in self.bridges}
+        self.writer.update({o: m for m in self.bridges for o in ends[m][1]})
+        read = {i for m in self.out_maps + self.bridges for i in self.mappings[m].required_inputs}
         if self.one_hop:
             self.kept = read
         else:
@@ -144,6 +162,10 @@ class Route:
                 for i, values in enumerate(self._run(mapping, frames, range(len(frames)), results)):
                     if values is not None:
                         middle[i]['values'].update(values)
+        # Per frame, the maps that kept a bridge from writing each of its outputs.
+        blocked = [{} for _ in frames]
+        for mapping in self.bridges:
+            self._bridge(mapping, middle, results, blocked)
         for mapping in self.out_maps:
             required = self.mappings[mapping].required_inputs
             outputs = self.mappings[mapping].output_ids
@@ -159,7 +181,8 @@ class Route:
                 if any(s not in self.writer for s in missing):
                     label = NOT_AVAILABLE
                 else:
-                    label = f'refused upstream at {", ".join(sorted({self.writer[s] for s in missing}))}'
+                    causes = set().union(*(blocked[i].get(s, {self.writer[s]}) for s in missing))
+                    label = f'refused upstream at {", ".join(sorted(causes))}'
                 results[i]['labels'].update(dict.fromkeys(outputs, label))
             for i, values in zip(span, self._run(mapping, middle, span, results)):
                 if values is None:
@@ -167,6 +190,25 @@ class Route:
                 else:
                     results[i]['values'].update(values)
         return results
+
+    def _bridge(self, mapping: str, middle: list[dict], results: list[dict], blocked: list[dict]) -> None:
+        """Run a bridge on the canonical frames, adding its values to them, with its unwritable inputs at 0."""
+        fill = dict.fromkeys(self.fill[mapping], 0.0)
+        frames = [{'time': f['time'], 'values': {**fill, **f['values']}} for f in middle]
+        outputs, span = self.mappings[mapping].output_ids, []
+        for i, frame in enumerate(frames):
+            missing = [s for s in self.mappings[mapping].required_inputs if s not in frame['values']]
+            if missing:
+                blocked[i].update(dict.fromkeys(outputs, {self.writer[s] for s in missing}))
+            else:
+                span.append(i)
+        short = ', '.join(s.rsplit('.', 1)[1] for s in fill)
+        for i, values in zip(span, self._run(mapping, frames, span, results)):
+            if values is None:
+                continue  # the out-maps label its outputs "refused upstream at" the bridge, their writer
+            middle[i]['values'].update(values)
+            if fill:
+                results[i]['notes'].append(ZERO_FILLED.format(mapping, short))
 
     def _run(self, mapping: str, frames: list[dict], span, results: list[dict]) -> list[dict | None]:
         """The map's output values for each frame in `span`, or None where it refused the frame."""

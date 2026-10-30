@@ -1,0 +1,1536 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; FACS code numbers and names are facts from a public list
+# (record facs_wikipedia). This is not FACS coding, and the values are not FACS
+# scores. Written by scripts/build_canonical.py from docs/canonical-set.md,
+# docs/canonical-set-audit.md, examples/data/facs_codes.json and
+# tests/fixtures/rocketbox_au_names.json. Edit those, then run the script.
+# FACS codes as an expression set, vocabulary version 1.0 (draft). See the FACS
+# section of docs/canonical-set.md and docs/facs-intensity.md.
+
+[[signals]]
+id = "facs.code.au01_left"
+label = "AU 1 Inner brow raiser, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au01_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L1"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "1", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_01_InnerBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "brow"
+
+[[signals]]
+id = "facs.code.au01_right"
+label = "AU 1 Inner brow raiser, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au01_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R1"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "1", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_01_InnerBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "brow"
+
+[[signals]]
+id = "facs.code.au02_left"
+label = "AU 2 Outer brow raiser, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au02_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L2"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "2", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_02_L_OuterBrowRaiser", "AU_02_OuterBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "brow"
+
+[[signals]]
+id = "facs.code.au02_right"
+label = "AU 2 Outer brow raiser, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au02_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R2"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "2", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_02_OuterBrowRaiser", "AU_02_R_OuterBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "brow"
+
+[[signals]]
+id = "facs.code.au04_left"
+label = "AU 4 Brow lowerer, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au04_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L4"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "4", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_04_BrowLowerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_lower_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "brow"
+
+[[signals]]
+id = "facs.code.au04_right"
+label = "AU 4 Brow lowerer, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au04_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R4"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "4", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_04_BrowLowerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_lower_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "brow"
+
+[[signals]]
+id = "facs.code.au05_left"
+label = "AU 5 Upper lid raiser, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au05_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L5"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "5", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_05_L_UpperLidRaiser", "AU_05_UpperLidRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au05_right"
+label = "AU 5 Upper lid raiser, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au05_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R5"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "5", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_05_R_UpperLidRaiser", "AU_05_UpperLidRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au06_left"
+label = "AU 6 Cheek raiser, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au06_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L6"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "6", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_06_CheekRaiser", "AU_06_L_CheekRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "cheek"
+
+[[signals]]
+id = "facs.code.au06_right"
+label = "AU 6 Cheek raiser, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au06_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R6"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "6", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_06_CheekRaiser", "AU_06_R_CheekRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "cheek"
+
+[[signals]]
+id = "facs.code.au07_left"
+label = "AU 7 Lid tightener, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au07_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L7"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "7", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_07_LidTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lid_tighten_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au07_right"
+label = "AU 7 Lid tightener, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au07_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R7"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "7", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_07_LidTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lid_tighten_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au08"
+label = "AU 8 Lips toward each other"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au08: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "8"
+surface = "facs.code"
+side = "shared"
+neutral = 0.0
+metadata = { "facs_code" = "8", "facs_table" = "main", "group" = "face", "reason" = "Code number and name from facs_wikipedia; read into canonical lips_toward by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au09_left"
+label = "AU 9 Nose wrinkler, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au09_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L9"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "9", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_09_NoseWrinkler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "nose"
+
+[[signals]]
+id = "facs.code.au09_right"
+label = "AU 9 Nose wrinkler, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au09_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R9"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "9", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_09_NoseWrinkler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "nose"
+
+[[signals]]
+id = "facs.code.au10_left"
+label = "AU 10 Upper lip raiser, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au10_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L10"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "10", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_10_UpperLipRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au10_right"
+label = "AU 10 Upper lip raiser, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au10_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R10"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "10", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_10_UpperLipRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au11"
+label = "AU 11 Nasolabial deepener"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "11"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "11", "facs_table" = "main", "aligned_names" = { "rocketbox_avatars" = ["AU_11_NasolabialDeepener"] }, "reason" = "No canonical signal; the name nasolabial_deepen is reserved; the codec does not read it." }
+region = "cheek"
+
+[[signals]]
+id = "facs.code.au12_left"
+label = "AU 12 Lip corner puller, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au12_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L12"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "12", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_12_LipCornerPuller", "AU_12_L_LipCornerPuller"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au12_right"
+label = "AU 12 Lip corner puller, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au12_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R12"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "12", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_12_LipCornerPuller", "AU_12_R_LipCornerPuller"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au13"
+label = "AU 13 Sharp lip puller"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "13"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "13", "facs_table" = "main", "aligned_names" = { "rocketbox_avatars" = ["AU_13_CheekPuffer", "AU_13_L_CheekPuffer", "AU_13_R_CheekPuffer"] }, "reason" = "No canonical signal; the name sharp_lip_pull is reserved; the codec does not read it. Rocketbox names its AU 13 shape AU_13_CheekPuffer, but Wikipedia names 13 Sharp lip puller; it is not cheek puff (34)." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au14_left"
+label = "AU 14 Dimpler, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au14_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L14"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "14", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_14_Dimpler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical dimple_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au14_right"
+label = "AU 14 Dimpler, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au14_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R14"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "14", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_14_Dimpler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical dimple_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au15_left"
+label = "AU 15 Lip corner depressor, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au15_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L15"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "15", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_15_LipCornerDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au15_right"
+label = "AU 15 Lip corner depressor, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au15_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R15"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "15", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_15_LipCornerDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au16_left"
+label = "AU 16 Lower lip depressor, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au16_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L16"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "16", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_16_LowerLipDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au16_right"
+label = "AU 16 Lower lip depressor, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au16_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R16"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "16", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_16_LowerLipDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au17"
+label = "AU 17 Chin raiser"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au17: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "17"
+surface = "facs.code"
+side = "shared"
+neutral = 0.0
+metadata = { "facs_code" = "17", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_17_ChinRaiser"] }, "reason" = "Code number and name from facs_wikipedia; read into canonical chin_raise by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au18_left"
+label = "AU 18 Lip pucker, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au18_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L18"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "18", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_18_LipPuckerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_pucker_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au18_right"
+label = "AU 18 Lip pucker, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au18_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R18"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "18", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_18_LipPuckerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_pucker_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au19"
+label = "AU 19 Tongue show"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au19: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "19"
+surface = "facs.code"
+side = "shared"
+neutral = 0.0
+metadata = { "facs_code" = "19", "facs_table" = "main", "group" = "tongue_out", "reason" = "Code number and name from facs_wikipedia; read into canonical tongue_out by facs_tongue_out.to_rcef and written from it by rcef_tongue_out.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "tongue"
+
+[[signals]]
+id = "facs.code.au20_left"
+label = "AU 20 Lip stretcher, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au20_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L20"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "20", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_20_LipStretcher"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_stretch_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au20_right"
+label = "AU 20 Lip stretcher, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au20_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R20"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "20", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_20_LipStretcher"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_stretch_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au21"
+label = "AU 21 Neck tightener"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "21"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "21", "facs_table" = "main", "reason" = "No canonical signal; the name neck_tighten is reserved; the codec does not read it." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au22_left"
+label = "AU 22 Lip funneler, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au22_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L22"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_22_LipFunneler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_left and lip_funnel_lower_left by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au22_right"
+label = "AU 22 Lip funneler, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au22_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R22"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_22_LipFunneler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_right and lip_funnel_lower_right by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au23_left"
+label = "AU 23 Lip tightener, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au23_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L23"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "23", "facs_table" = "main", "group" = "lip_tighten", "aligned_names" = { "rocketbox_avatars" = ["AU_23_LipTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_tighten_left by facs_lip_tighten.to_rcef and written from it by rcef_lip_tighten.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au23_right"
+label = "AU 23 Lip tightener, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au23_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R23"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "23", "facs_table" = "main", "group" = "lip_tighten", "aligned_names" = { "rocketbox_avatars" = ["AU_23_LipTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_tighten_right by facs_lip_tighten.to_rcef and written from it by rcef_lip_tighten.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au24_left"
+label = "AU 24 Lip pressor, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au24_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L24"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "24", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_24_LipPressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_press_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au24_right"
+label = "AU 24 Lip pressor, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au24_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R24"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "24", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_24_LipPressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_press_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au25"
+label = "AU 25 Lips part"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "25"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "25", "facs_table" = "main", "aligned_names" = { "rocketbox_avatars" = ["AU_25_LipsPart"] }, "reason" = "No canonical signal; the name lips_part is reserved; the codec does not read it, and toward FACS all mouth opening is written as 26." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au26"
+label = "AU 26 Jaw drop"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au26: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "26"
+surface = "facs.code"
+side = "shared"
+neutral = 0.0
+metadata = { "facs_code" = "26", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_26_JawDrop"] }, "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_drop by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "jaw"
+
+[[signals]]
+id = "facs.code.au27"
+label = "AU 27 Mouth stretch"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "27"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "27", "facs_table" = "main", "aligned_names" = { "rocketbox_avatars" = ["AU_27_MouthStretch"] }, "reason" = "No signal of its own; the name mouth_stretch is reserved; the codec reads it as AU26, and toward FACS all mouth opening is written as 26." }
+region = "jaw"
+
+[[signals]]
+id = "facs.code.au28_left"
+label = "AU 28 Lip suck, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au28_left: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "L28"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_28_LipSuck"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_left and lip_suck_lower_left by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au28_right"
+label = "AU 28 Lip suck, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au28_right: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "R28"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_28_LipSuck"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_right and lip_suck_lower_right by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au29"
+label = "AU 29 Jaw thrust"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au29: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "29"
+surface = "facs.code"
+side = "shared"
+neutral = 0.0
+metadata = { "facs_code" = "29", "facs_table" = "gross_behavior", "group" = "jaw_thrust", "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_thrust by facs_jaw_thrust.to_rcef and written from it by rcef_jaw_thrust.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "jaw"
+
+[[signals]]
+id = "facs.code.au30_left"
+label = "AU 30 Jaw sideways, toward the left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au30_left: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "L30"
+surface = "facs.code"
+side = "shared"
+neutral = 0.0
+metadata = { "facs_code" = "30", "facs_table" = "gross_behavior", "group" = "jaw_sideways", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_sideways_left by facs_jaw_sideways.to_rcef and written from it by rcef_jaw_sideways.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "jaw"
+
+[[signals]]
+id = "facs.code.au30_right"
+label = "AU 30 Jaw sideways, toward the right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au30_right: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "R30"
+surface = "facs.code"
+side = "shared"
+neutral = 0.0
+metadata = { "facs_code" = "30", "facs_table" = "gross_behavior", "group" = "jaw_sideways", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_sideways_right by facs_jaw_sideways.to_rcef and written from it by rcef_jaw_sideways.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "jaw"
+
+[[signals]]
+id = "facs.code.au31"
+label = "AU 31 Jaw clencher"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "31"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "31", "facs_table" = "gross_behavior", "reason" = "No canonical signal; the codec does not read it." }
+region = "jaw"
+
+[[signals]]
+id = "facs.code.au32"
+label = "AU 32 [Lip] bite"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "32"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "32", "facs_table" = "gross_behavior", "reason" = "No canonical signal; the codec does not read it." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au33"
+label = "AU 33 [Cheek] blow"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "33"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "33", "facs_table" = "gross_behavior", "reason" = "No canonical signal; a coder may score it instead of 34, so the codec leaves the cheek_puff signals out." }
+region = "cheek"
+
+[[signals]]
+id = "facs.code.au34_left"
+label = "AU 34 [Cheek] puff, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au34_left: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "L34"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "34", "facs_table" = "gross_behavior", "group" = "cheek_puff", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_puff_left by facs_cheek_puff.to_rcef and written from it by rcef_cheek_puff.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "cheek"
+
+[[signals]]
+id = "facs.code.au34_right"
+label = "AU 34 [Cheek] puff, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au34_right: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "R34"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "34", "facs_table" = "gross_behavior", "group" = "cheek_puff", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_puff_right by facs_cheek_puff.to_rcef and written from it by rcef_cheek_puff.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "cheek"
+
+[[signals]]
+id = "facs.code.au35_left"
+label = "AU 35 [Cheek] suck, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au35_left: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "L35"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "35", "facs_table" = "gross_behavior", "group" = "cheek_suck", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_suck_left by facs_cheek_suck.to_rcef and written from it by rcef_cheek_suck.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "cheek"
+
+[[signals]]
+id = "facs.code.au35_right"
+label = "AU 35 [Cheek] suck, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au35_right: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "R35"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "35", "facs_table" = "gross_behavior", "group" = "cheek_suck", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_suck_right by facs_cheek_suck.to_rcef and written from it by rcef_cheek_suck.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "cheek"
+
+[[signals]]
+id = "facs.code.au36"
+label = "AU 36 [Tongue] bulge"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "36"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "36", "facs_table" = "gross_behavior", "reason" = "No canonical signal; the codec does not read it." }
+region = "tongue"
+
+[[signals]]
+id = "facs.code.au37"
+label = "AU 37 Lip wipe"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "37"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "37", "facs_table" = "gross_behavior", "reason" = "No canonical signal; a coder may score it instead of 19, so the codec leaves tongue_out out." }
+region = "mouth"
+
+[[signals]]
+id = "facs.code.au38"
+label = "AU 38 Nostril dilator"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "38"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "38", "facs_table" = "gross_behavior", "reason" = "No canonical signal; the names nostril_dilate and nostril_compress are reserved; the codec does not read it." }
+region = "nose"
+
+[[signals]]
+id = "facs.code.au39"
+label = "AU 39 Nostril compressor"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "39"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "39", "facs_table" = "gross_behavior", "reason" = "No canonical signal; the names nostril_dilate and nostril_compress are reserved; the codec does not read it." }
+region = "nose"
+
+[[signals]]
+id = "facs.code.au40"
+label = "AU 40 Sniff"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "40"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "40", "facs_table" = "gross_behavior", "reason" = "No canonical signal; the codec does not read it." }
+region = "nose"
+
+[[signals]]
+id = "facs.code.au41"
+label = "AU 41 Lid droop"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars", "facs_hager_2002"]
+evidence_status = "proposed"
+native_id = "41"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "41", "facs_table" = "gross_behavior", "aligned_names" = { "rocketbox_avatars" = ["AU_41_LidDroop"] }, "reason" = "FACS 2002 folds it into AU43 intensity, with letters that no public source gives; the codec leaves the blink signals out." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au42"
+label = "AU 42 Slit"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars", "facs_hager_2002"]
+evidence_status = "proposed"
+native_id = "42"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "42", "facs_table" = "gross_behavior", "aligned_names" = { "rocketbox_avatars" = ["AU_42_L_Slit", "AU_42_R_Slit", "AU_42_Slit"] }, "reason" = "FACS 2002 folds it into AU43 intensity, with letters that no public source gives; the codec leaves the blink signals out." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au43_left"
+label = "AU 43 Eyes closed, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au43_left: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars", "facs_hager_2002"]
+evidence_status = "proposed"
+native_id = "L43"
+surface = "facs.code"
+side = "left"
+neutral = 0.0
+metadata = { "facs_code" = "43", "facs_table" = "gross_behavior", "group" = "blink", "aligned_names" = { "rocketbox_avatars" = ["AU_43_L_EyeClosed"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical eye_close_left by facs_blink.to_rcef and written from it by rcef_blink.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au43_right"
+label = "AU 43 Eyes closed, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.facs.v1:au43_right: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure"
+disposition = "mapped"
+evidence = ["facs_wikipedia", "rocketbox_avatars", "facs_hager_2002"]
+evidence_status = "proposed"
+native_id = "R43"
+surface = "facs.code"
+side = "right"
+neutral = 0.0
+metadata = { "facs_code" = "43", "facs_table" = "gross_behavior", "group" = "blink", "aligned_names" = { "rocketbox_avatars" = ["AU_43_R_EyeClosed"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical eye_close_right by facs_blink.to_rcef and written from it by rcef_blink.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au44"
+label = "AU 44 Squint"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars", "facs_hager_2002"]
+evidence_status = "proposed"
+native_id = "44"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "44", "facs_table" = "gross_behavior", "aligned_names" = { "rocketbox_avatars" = ["AU_44_L_Squint", "AU_44_R_Squint", "AU_44_Squint"] }, "reason" = "FACS 2002 folds it into AU43 intensity, with letters that no public source gives; the codec leaves the blink signals and lid_tighten out." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au45"
+label = "AU 45 Blink"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "45"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "45", "facs_table" = "gross_behavior", "aligned_names" = { "rocketbox_avatars" = ["AU_45_Blink"] }, "reason" = "No signal of its own; the codec reads it as AU43, and toward FACS all eye closure is written as 43." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au46"
+label = "AU 46 Wink"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "46"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "46", "facs_table" = "gross_behavior", "reason" = "No signal of its own; the codec reads it as AU43, and toward FACS all eye closure is written as 43." }
+region = "eyelid"
+
+[[signals]]
+id = "facs.code.au50"
+label = "AU 50 Speech"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "50"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "50", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au51"
+label = "AU 51 Head turn left"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "51"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "51", "facs_table" = "head", "reason" = "Head pose is out of scope." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au52"
+label = "AU 52 Head turn right"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "52"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "52", "facs_table" = "head", "reason" = "Head pose is out of scope." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au53"
+label = "AU 53 Head up"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "53"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "53", "facs_table" = "head", "reason" = "Head pose is out of scope." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au54"
+label = "AU 54 Head down"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "54"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "54", "facs_table" = "head", "reason" = "Head pose is out of scope." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au55"
+label = "AU 55 Head tilt left"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "55"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "55", "facs_table" = "head", "reason" = "Head pose is out of scope." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au56"
+label = "AU 56 Head tilt right"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "56"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "56", "facs_table" = "head", "reason" = "Head pose is out of scope." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au57"
+label = "AU 57 Head forward"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "57"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "57", "facs_table" = "head", "reason" = "Head pose is out of scope." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au58"
+label = "AU 58 Head back"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "58"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "58", "facs_table" = "head", "reason" = "Head pose is out of scope." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au61"
+label = "AU 61 Eyes turn left"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "61"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "61", "facs_table" = "eye", "aligned_names" = { "rocketbox_avatars" = ["AU_61_EyesTurnLeft"] }, "reason" = "Canonical gaze has no FACS code, because the source does not say whose left it means (Gaze in docs/canonical-set.md); the codec does not read it." }
+region = "gaze"
+
+[[signals]]
+id = "facs.code.au62"
+label = "AU 62 Eyes turn right"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "62"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "62", "facs_table" = "eye", "aligned_names" = { "rocketbox_avatars" = ["AU_62_EyesTurnRight"] }, "reason" = "Canonical gaze has no FACS code, because the source does not say whose left it means (Gaze in docs/canonical-set.md); the codec does not read it." }
+region = "gaze"
+
+[[signals]]
+id = "facs.code.au63"
+label = "AU 63 Eyes up"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "63"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "63", "facs_table" = "eye", "aligned_names" = { "rocketbox_avatars" = ["AU_63_EyesUp"] }, "reason" = "Canonical gaze has no FACS code, because the source does not say whose left it means (Gaze in docs/canonical-set.md); the codec does not read it." }
+region = "gaze"
+
+[[signals]]
+id = "facs.code.au64"
+label = "AU 64 Eyes down"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia", "rocketbox_avatars"]
+evidence_status = "proposed"
+native_id = "64"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "64", "facs_table" = "eye", "aligned_names" = { "rocketbox_avatars" = ["AU_64_EyesDown"] }, "reason" = "Canonical gaze has no FACS code, because the source does not say whose left it means (Gaze in docs/canonical-set.md); the codec does not read it." }
+region = "gaze"
+
+[[signals]]
+id = "facs.code.au65"
+label = "AU 65 Walleye"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "65"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "65", "facs_table" = "eye", "reason" = "No canonical signal; the codec does not read it." }
+region = "gaze"
+
+[[signals]]
+id = "facs.code.au66"
+label = "AU 66 Cross-eye"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "66"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "66", "facs_table" = "eye", "reason" = "No canonical signal; the codec does not read it." }
+region = "gaze"
+
+[[signals]]
+id = "facs.code.au69"
+label = "AU 69 Eyes positioned to look at other person"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "unresolved"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "69"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "69", "facs_table" = "eye", "reason" = "No canonical signal; the codec does not read it." }
+region = "gaze"
+
+[[signals]]
+id = "facs.code.au80"
+label = "AU 80 Swallow"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "80"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "80", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au81"
+label = "AU 81 Chewing"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "81"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "81", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au82"
+label = "AU 82 Shoulder shrug"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "82"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "82", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au84"
+label = "AU 84 Head shake back and forth"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "84"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "84", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au85"
+label = "AU 85 Head nod up and down"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "85"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "85", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au91"
+label = "AU 91 Flash"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "91"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "91", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au92"
+label = "AU 92 Partial flash"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "92"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "92", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au97"
+label = "AU 97* Shiver/tremble"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "97*"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "97*", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[signals]]
+id = "facs.code.au98"
+label = "AU 98* Fast up-down look"
+value_type = "scalar"
+units = "unknown"
+domain = {  }
+calibration = "facs.code: no RCEF value of its own; see metadata.reason"
+disposition = "excluded"
+evidence = ["facs_wikipedia"]
+evidence_status = "proposed"
+native_id = "98*"
+surface = "facs.code"
+side = "shared"
+metadata = { "facs_code" = "98*", "facs_table" = "gross_behavior", "reason" = "A behaviour event, not a face weight." }
+region = "other"
+
+[[profiles]]
+id = "facs.code"
+label = "FACS codes in RCEF numeric encoding (draft)"
+signal_ids = ["facs.code.au01_left", "facs.code.au01_right", "facs.code.au02_left", "facs.code.au02_right", "facs.code.au04_left", "facs.code.au04_right", "facs.code.au05_left", "facs.code.au05_right", "facs.code.au06_left", "facs.code.au06_right", "facs.code.au07_left", "facs.code.au07_right", "facs.code.au08", "facs.code.au09_left", "facs.code.au09_right", "facs.code.au10_left", "facs.code.au10_right", "facs.code.au11", "facs.code.au12_left", "facs.code.au12_right", "facs.code.au13", "facs.code.au14_left", "facs.code.au14_right", "facs.code.au15_left", "facs.code.au15_right", "facs.code.au16_left", "facs.code.au16_right", "facs.code.au17", "facs.code.au18_left", "facs.code.au18_right", "facs.code.au19", "facs.code.au20_left", "facs.code.au20_right", "facs.code.au21", "facs.code.au22_left", "facs.code.au22_right", "facs.code.au23_left", "facs.code.au23_right", "facs.code.au24_left", "facs.code.au24_right", "facs.code.au25", "facs.code.au26", "facs.code.au27", "facs.code.au28_left", "facs.code.au28_right", "facs.code.au29", "facs.code.au30_left", "facs.code.au30_right", "facs.code.au31", "facs.code.au32", "facs.code.au33", "facs.code.au34_left", "facs.code.au34_right", "facs.code.au35_left", "facs.code.au35_right", "facs.code.au36", "facs.code.au37", "facs.code.au38", "facs.code.au39", "facs.code.au40", "facs.code.au41", "facs.code.au42", "facs.code.au43_left", "facs.code.au43_right", "facs.code.au44", "facs.code.au45", "facs.code.au46", "facs.code.au50", "facs.code.au51", "facs.code.au52", "facs.code.au53", "facs.code.au54", "facs.code.au55", "facs.code.au56", "facs.code.au57", "facs.code.au58", "facs.code.au61", "facs.code.au62", "facs.code.au63", "facs.code.au64", "facs.code.au65", "facs.code.au66", "facs.code.au69", "facs.code.au80", "facs.code.au81", "facs.code.au82", "facs.code.au84", "facs.code.au85", "facs.code.au91", "facs.code.au92", "facs.code.au97", "facs.code.au98"]
+evidence = ["facs_wikipedia"]
+metadata = { "vocabulary_version" = "1.0", "vocabulary_status" = "draft", "scope" = "FACS code numbers and names from a public list; not FACS coding; values are not FACS scores", "groups" = ["face", "cheek_puff", "jaw_thrust", "jaw_sideways", "blink", "tongue_out", "cheek_suck", "lip_tighten"] }
