@@ -359,7 +359,7 @@ evidence_status = "proposed"
 native_id = "13"
 surface = "facs.code"
 side = "shared"
-metadata = { "facs_code" = "13", "facs_table" = "main", "aligned_names" = { "rocketbox_avatars" = ["AU_13_CheekPuffer", "AU_13_L_CheekPuffer", "AU_13_R_CheekPuffer"] }, "reason" = "No canonical signal; the name sharp_lip_pull is reserved; the codec does not read it." }
+metadata = { "facs_code" = "13", "facs_table" = "main", "aligned_names" = { "rocketbox_avatars" = ["AU_13_CheekPuffer", "AU_13_L_CheekPuffer", "AU_13_R_CheekPuffer"] }, "reason" = "No canonical signal; the name sharp_lip_pull is reserved; the codec does not read it. Rocketbox names its AU 13 shape AU_13_CheekPuffer, but Wikipedia names 13 Sharp lip puller; it is not cheek puff (34)." }
 region = "mouth"
 
 [[signals]]

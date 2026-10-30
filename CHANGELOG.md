@@ -45,6 +45,8 @@ do not change.
   Godot". The 10 FB2 signals and the 4 Unified Expressions shapes change
   from `unresolved` to `mapped`. TONGUE_RETREAT is not mapped to TongueFlat,
   as Godot maps it: the two names do not name one action.
+  `scripts/check_audit_locators.py` checks the table's line locators against
+  the cached source bytes.
 - New profile `facs.code` in `profiles/facs.code.toml`: FACS codes as an
   expression set, vocabulary version `1.0`, status `draft`. 92 rows, one per
   code number from a public list (`facs_wikipedia`), split by side where the
@@ -60,7 +62,7 @@ do not change.
   and the losses `facs_ordinal_intensity`, `facs_side_frame_unresolved` and,
   where the audit names them, `facs_au30_direction_unresolved`,
   `facs_au17_no_split`, `facs_mouth_opening_split`, `facs_eyelid_events` and
-  `facs_gross_code_no_intensity`. FACS fills 8 of the 12 groups: FACS → ARKit
+  `facs_gross_code_no_intensity`. FACS fills 8 of the 13 groups: FACS → ARKit
   writes 41 of 52 outputs, and FACS → FB2 53 of 70. FACS → canonical → FACS
   gives every value back.
 - VRCFaceTracking eye data and VRM blinks map into the canonical expression

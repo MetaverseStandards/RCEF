@@ -3,7 +3,7 @@ data/canonical.toml,canonical signals and profile,[[signals]]; [[profiles]],21,1
 data/canonical_expression.toml,canonical expression signals and profile,[[signals]]; [[profiles]],72,1,72,0,0,0,72,100879,b849484dafe7aab90106ed710af9e58f2f2d5e0e2edac2a3564ba77b83616fc8,CC-BY-SA-4.0
 data/canonical_viseme.toml,canonical viseme signals and profile,[[signals]]; [[profiles]],16,1,16,0,0,0,16,24881,de54fa88ae8e46e06e4464e360000fcfc5fd0620f00b877b730b8992ca4a0447,CC-BY-SA-4.0
 data/intermediate.toml,intermediate signals and profile,[[signals]]; [[profiles]],65,1,65,0,0,0,0,57296,84cc2dc72915c9c53ae02e079d9f942ef51cbe85da3a0b1749e77a0ea660c127,CC-BY-SA-4.0
-evidence/sources.toml,source evidence,[[evidence]],0,0,0,0,0,81,0,51706,5c7bbde2cacf4bb7a70789baf6eb3acbe27dacde0ca5863a43837ce1e1ed6836,CC-BY-SA-4.0
+evidence/sources.toml,source evidence,[[evidence]],0,0,0,0,0,81,0,51688,b099989cad09cc26c1674968942fd826e53ea3de1761dae20754bb6cba63374a,CC-BY-SA-4.0
 mappings/arkit.toml,directional maps,[[mappings]],0,0,0,1,9,0,0,5768,6f517ea1fcf885a241ad8c0ea41fa2d9fb3160564ea25adf796da7eb50ac8084,CC-BY-SA-4.0
 mappings/arkit_fb2.toml,directional maps,[[mappings]],0,0,0,2,64,0,0,90520,f6c958b30b6c8c13f8091ba294018c5ed5a358a8a4f537bf2434ccbb3b194bc3,CC-BY-SA-4.0
 mappings/arkit_vrcft.toml,directional maps,[[mappings]],0,0,0,1,68,0,0,95202,4fc813c50a2b88c9334af2a141c2ac4b8dc797794f8def8350d7bf86b9097150,CC-BY-SA-4.0
@@ -25,7 +25,7 @@ mappings/vrcft_eye.toml,directional maps,[[mappings]],0,0,0,1,4,0,0,2410,84e468d
 pack.toml,pack metadata,root scalar keys,0,0,0,0,0,0,0,155,2e0f6337e4a38dabc702776f4046792dfeb1352a3823710292255c5bcd8758d1,CC-BY-SA-4.0
 profiles/arkit.ancillary.toml,signal inventory and profiles,[[signals]]; [[profiles]],2,1,2,0,0,0,0,1402,a7b435367d4cbfb14e016fad446d03f26620b6425d08b426976d653edd2641f8,CC-BY-SA-4.0
 profiles/arkit.coefficient.toml,signal inventory and profiles,[[signals]]; [[profiles]],52,1,52,0,0,0,0,37158,96bce6e750ea0e3f4ea171311e7a4825438c5fe06404dca2c395f6599f8fa30b,CC-BY-SA-4.0
-profiles/facs.code.toml,signal inventory and profiles,[[signals]]; [[profiles]],92,1,92,0,0,0,0,84100,c6e1d3378afaf16a6d5d67f30ae5a3b60217d61f1f73af250488613d8929827c,CC-BY-SA-4.0
+profiles/facs.code.toml,signal inventory and profiles,[[signals]]; [[profiles]],92,1,92,0,0,0,0,84219,ab58ea4fdebbbb40be5576890732fc55f184c6f99c02d716c9cff3de16105391,CC-BY-SA-4.0
 profiles/fixture.toml,signal inventory and profiles,[[signals]]; [[profiles]],5,3,10,0,0,0,0,3443,28dafdb3bf68864a0317a9d193e4bb228cdbfe2bb2ac2afcd012857e605fbba3,CC-BY-SA-4.0
 profiles/godot.base.toml,signal inventory and profiles,[[signals]]; [[profiles]],102,1,102,0,0,0,0,68903,9c09fdabb720ebaa9d3bc7c63b16d790b0c0ca91f55e3b50debc0edf08b3f591,CC-BY-SA-4.0
 profiles/godot.blended.toml,signal inventory and profiles,[[signals]]; [[profiles]],42,1,42,0,0,0,0,28260,b35e1fcff36833cc51532a28f79286fb68a97332616f2a83dd74204e1927f43e,CC-BY-SA-4.0

@@ -8,7 +8,7 @@ RCEF does five things:
 
 - It records each public expression interface as data, with its calibration limits and a pinned public source.
 - It defines a small canonical set of 21 signals. Each canonical signal keeps the calibration of its provider.
-- It defines a draft canonical expression set of 70 signals and a draft canonical viseme set of 16 signals, each with a meaning that RCEF declares, and maps into and out of them. A translation can then run from a source set through a canonical set to a target set.
+- It defines a draft canonical expression set of 72 signals and a draft canonical viseme set of 16 signals, each with a meaning that RCEF declares, and maps into and out of them. A translation can then run from a source set through a canonical set to a target set.
 - It defines explicit one-way scalar mappings from one set to another. Each mapping states its assumptions and its losses.
 - It checks all of this with [msf-character-tools](https://github.com/MetaverseStandards/msf_character_tools), which is maintained separately.
 
@@ -29,7 +29,7 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 ### The data (edit these)
 
 - `profiles/`: one file per public expression set, for example ARKit, OpenXR FB2 or VRM. Each file lists the set's signals: name, value range (often 0 to 1), face side, neutral value and public source.
-- `data/`: RCEF's own sets. `canonical.toml` is the canonical set of 21 signals. `canonical_expression.toml` is the draft canonical expression set of 70 signals, and `canonical_viseme.toml` the draft canonical viseme set of 16 signals. `intermediate.toml` holds 65 helper values: 4 that the ARKit → FB2 gaze map uses inside, 4 that the map from the canonical expression set to FB2 gaze uses inside, 1 that the META map to `alveolar_floor` uses inside, and 56 that the viseme pose bridge uses inside (`scripts/build_canonical.py` writes those).
+- `data/`: RCEF's own sets. `canonical.toml` is the canonical set of 21 signals. `canonical_expression.toml` is the draft canonical expression set of 72 signals, and `canonical_viseme.toml` the draft canonical viseme set of 16 signals. `intermediate.toml` holds 65 helper values: 4 that the ARKit → FB2 gaze map uses inside, 4 that the map from the canonical expression set to FB2 gaze uses inside, 1 that the META map to `alveolar_floor` uses inside, and 56 that the viseme pose bridge uses inside (`scripts/build_canonical.py` writes those).
 - `mappings/`: the maps. A map turns the signals of one set into those of another, for example FB2 into ARKit. Each mapping names its inputs, outputs and formula (a copy, a scale and offset, a weighted sum or a curve), and states its assumptions and losses. The `canonical_*.toml` files hold the maps into and out of the canonical expression set.
 - `evidence/`: `sources.toml` lists each public source with its exact revision and SHA-256. `tooling.lock.json` pins the msf-character-tools build that checks the data. `input-contracts/` holds an optional schema that RCEF does not use.
 - `calibration/`: curves fitted to software renders of example faces. The `FREEZES` ledger only grows. It shows that each fit was fixed before it was tested.
@@ -46,7 +46,7 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 ### Code and tests
 
 - `check.py`: the main check. It verifies the locked msf-character-tools, the calibration records and the generated files in `generated/` and `reports/`. `--write` rebuilds those files.
-- `scripts/`: helper programs. They write the canonical expression set and its maps, the source list and the TOML index, compare RCEF with Godot, check the public sources and run the local CI.
+- `scripts/`: helper programs. They write the canonical expression set and its maps, the source list and the TOML index, compare RCEF with Godot, check the public sources and the audit's source locators, and run the local CI.
 - `tests/`: the automated tests, with their inputs in `tests/fixtures/`. `scripts/derive_fb2_goldens.py` makes three of those inputs from cached public sources, `scripts/derive_capability_sets.py` makes the name lists in `capability_sets.json`, and `scripts/derive_rocketbox_au_names.py` reads the 48 Rocketbox FACS shape names from the pinned rig files into `rocketbox_au_names.json`.
 - `fixtures/`: small made-up inputs with known answers. They show how the formulas behave.
 - `tools/`: optional tools that make the calibration records, and the small macOS renderer they use.
@@ -101,7 +101,7 @@ So a translation can run from ARKit, FB2, FACS codes, VRCFaceTracking eye data o
 
 VRCFaceTracking eye data fills two groups. In `blink`, `eye_close` is 1 − `Openness`; an `Openness` outside 0 to 1 is refused, and VRCFaceTracking does not say that 1 is a relaxed open eye. In `pupil_mm`, the pupil diameters in millimetres are copied exactly; these 4 mappings and the 2 canonical pupil signals are `verified_current`. VRM fills `blink` from `blinkLeft` and `blinkRight`. VRM `blink`, which closes both eyes, is not read, and a route lists a non-zero `blink` as dropped.
 
-The FACS codes are an expression set of their own, `facs.code` (draft): 92 rows, one per code number from a public list (record `facs_wikipedia`), split by side where the canonical signal is. 49 are mapped, 25 `unresolved` and 18 `excluded`. Their values are RCEF's own numeric encoding of the FACS intensity letters, not FACS scores, and RCEF does not code faces. [docs/facs-intensity.md](docs/facs-intensity.md) gives the letter codec, and `examples/facs_codec.py` implements it. FACS fills 8 of the 12 groups; it has no code for mouth shift, the upper-lip part of chin raise, gaze or the tongue places.
+The FACS codes are an expression set of their own, `facs.code` (draft): 92 rows, one per code number from a public list (record `facs_wikipedia`), split by side where the canonical signal is. 49 are mapped, 25 `unresolved` and 18 `excluded`. Their values are RCEF's own numeric encoding of the FACS intensity letters, not FACS scores, and RCEF does not code faces. [docs/facs-intensity.md](docs/facs-intensity.md) gives the letter codec, and `examples/facs_codec.py` implements it. FACS fills 8 of the 13 groups; it has no code for mouth shift, the upper-lip part of chin raise, gaze, the tongue places or the pupils.
 
 The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are partition classes (vowel 5, consonant 9, rest 1): 14 mouth-shape classes that hold every symbol of the IPA chart, and the rest class `sil`. From a valid META frame their values sum to 1. The 16th, `alveolar_floor`, is the sum of the three alveolar classes and `rhotic`, clamped at 1: the class that joins them in the IPA strict floor. 42 mappings in 9 maps go into and out of it:
 
