@@ -181,8 +181,13 @@ def loss_keys(rule: dict, audit_keys) -> set[str]:
 
 class PivotStructure(unittest.TestCase):
     @classmethod
+    def load_pack(cls) -> dict:
+        """The pack under test; the A/B mutation check (scripts/ab_mutations.py) gives a changed copy instead."""
+        return json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+
+    @classmethod
     def setUpClass(cls):
-        cls.pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+        cls.pack = cls.load_pack()
         cls.a1 = json.loads((ROOT / build_canonical.A1_FIXTURE).read_text(encoding='utf-8'))
         cls.signals = {s['id']: s for s in cls.pack['signals']}
         cls.members = {p['id']: set(p['signal_ids']) for p in cls.pack['profiles']}
@@ -198,11 +203,18 @@ class PivotStructure(unittest.TestCase):
             elif m := OUT_MAP.match(mapping['id']):
                 cls.hops.append((mapping['id'], 'out', m.group(2), m.group(1), mapping['rules']))
         cls.sum_target = next(r['outputs'][0] for m in cls.pack['mappings'] for r in m['rules'] if r['inputs'] == [SUM])
-        cls.pairs = ab_compare.b_pairs(cls.pack)
+        cls._pairs = None
         builder = build_canonical.Builder(ROOT)
         cls.aligned = builder.aligned
         cls.facs = build_canonical.FacsBuilder(ROOT, builder)
         cls.groups = next(p['metadata']['groups'] for p in cls.pack['profiles'] if p['id'] == 'rcef.canonical_expression')
+
+    @property
+    def pairs(self):
+        """The B pairs, compiled on first use: the tests that the A/B mutation check runs do not need them."""
+        if type(self)._pairs is None:
+            type(self)._pairs = ab_compare.b_pairs(self.pack)
+        return type(self)._pairs
 
     def hop_rules(self):
         for map_id, direction, key, group, rules in self.hops:
