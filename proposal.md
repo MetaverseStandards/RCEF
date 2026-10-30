@@ -12,7 +12,7 @@ The six shared APIs return a typed `Result(value, report)`, with no value when t
 
 ## Executable examples
 
-`arkit_blink.to_rcef` carries Apple's two blink coefficients into the canonical expression set unchanged, with an affine scale of 1. The calibration changes from the ARKit basis to the canonical one, so the mapping is approximate and declares the loss. `vrcft_eye_blink.to_rcef` computes canonical eye closure as `1 − Openness`.
+The blink part of `arkit.to_rcef_expression` carries Apple's two blink coefficients into the canonical expression set unchanged, with an affine scale of 1. The calibration changes from the ARKit basis to the canonical one, so the mapping is approximate and declares the loss. The blink part of `vrcft_eye.to_rcef_expression` computes canonical eye closure as `1 − Openness`.
 
 `fixture.affine` applies `0.5*x + 0.5` to an original signed basis: `-1 → 0`, `0 → 0.5`, `1 → 1`. This is an explicit basis conversion, with no hidden clamp.
 

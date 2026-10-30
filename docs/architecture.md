@@ -14,7 +14,7 @@ This guide describes `rcef.parity` data version **0.5.0**, schema **1.0** and op
 | Distinct signal IDs | 1165 |
 | Profiles | 26 |
 | Profile membership rows | 1170 |
-| Maps (`[[mappings]]` records) | 88 |
+| Maps (`[[mappings]]` records) | 19 |
 | Mappings (rules) | 588 |
 | Evidence records | 81 |
 | Canonical expression signals (draft) | 72 |
@@ -106,7 +106,7 @@ Directory discovery walks the tree and includes every file name that ends in low
 | [pack.toml](../pack.toml) | Root metadata | 1 | 0 | 0 | 0 | 0 / 0 | 0 |
 | [data/canonical_expression.toml](../data/canonical_expression.toml), [data/canonical_viseme.toml](../data/canonical_viseme.toml) and [data/intermediate.toml](../data/intermediate.toml) | The draft canonical expression and viseme sets and the intermediate values, each with its profile | 3 | 149 | 3 | 149 | 0 / 0 | 0 |
 | [profiles/fixture.toml](../profiles/fixture.toml) and the provider profile files | Signal arrays and profile arrays | 21 | 1016 | 23 | 1021 | 0 / 0 | 0 |
-| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 10 | 0 | 0 | 0 | 88 / 588 | 0 |
+| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 10 | 0 | 0 | 0 | 19 / 588 | 0 |
 | [evidence/sources.toml](../evidence/sources.toml) | Evidence array | 1 | 0 | 0 | 0 | 0 / 0 | 81 |
 
 Each of the five root metadata keys appears once in the whole directory. A repeated metadata key is refused, even if its value is the same. The top-level `signals`, `profiles`, `mappings` and `evidence` must be arrays. They are added in file order, and each file's array order is kept.
@@ -206,15 +206,15 @@ There are four operators. All of them have one output.
 
 The arithmetic uses checked binary64 steps. They refuse non-finite results, and non-zero products or quotients that underflow to zero. Weighted sums add in input order, without compensated summation. Affine multiplication and addition are two separate steps, not a fused multiply-add. `piecewise_linear` finds the segment that holds x and interpolates linearly. It then keeps the result between that segment's two y values, so rounding cannot break monotonicity.
 
-### Identity, and the ARKit blink hop
+### Identity, and the ARKit blink mapping
 
 `identity` gives `y = x`. It compiles only if the input and output have the same units, value type, domain and calibration, and the same presence and value of neutral, side and coupling. No mapped rule uses it, because every hop changes the calibration basis between a provider and a canonical set. The one identity rule is a record: `survey.mediapipe_rcef.blink` in [unresolved.toml](../mappings/unresolved.toml) is unresolved, so it never runs (section 6).
 
-An `affine` rule with scale `1` and offset `0` carries a value over unchanged across such a change of basis. This is the left-blink mapping of `arkit_blink.to_rcef`, written out as nested tables so that it is easier to read. It is abridged: three transfer assumptions, one loss annotation and five evidence IDs are left out. The source file stores the rules as inline object arrays.
+An `affine` rule with scale `1` and offset `0` carries a value over unchanged across such a change of basis. This is the left-blink mapping of `arkit.to_rcef_expression`, written out as nested tables so that it is easier to read. It is abridged: the map's other 59 mappings, three transfer assumptions, one loss annotation and five evidence IDs are left out. The source file stores the rules as inline object arrays.
 
 ```toml
 [[mappings]]
-id = "arkit_blink.to_rcef"
+id = "arkit.to_rcef_expression"
 
 [[mappings.rules]]
 id = "arkit_rcef.eye_close_left"
@@ -265,14 +265,14 @@ The runtime starts at `0.0`, multiplies each input by its weight, and adds the t
 
 ### Gaze difference and piecewise-linear split
 
-`rcef_gaze.to_fb2` builds FB2's requirement that only one of two opposing gaze directions is non-zero. For each eye and axis, a `weighted_sum` with weights `[1.0, -1.0]` takes the canonical in minus out (or up minus down). The result goes to an RCEF intermediate signal, for example `rcef.intermediate.gaze_in_minus_out_left`, with domain `[-1,1]`. Two one-sided `piecewise_linear` mappings then split that difference into the two FB2 directions:
+The gaze part of `rcef_expression.to_fb2` builds FB2's requirement that only one of two opposing gaze directions is non-zero. For each eye and axis, a `weighted_sum` with weights `[1.0, -1.0]` takes the canonical in minus out (or up minus down). The result goes to an RCEF intermediate signal, for example `rcef.intermediate.gaze_in_minus_out_left`, with domain `[-1,1]`. Two one-sided `piecewise_linear` mappings then split that difference into the two FB2 directions:
 
 | Mapping | Knots | Difference -0.5 | 0 | 0.5 |
 | --- | --- | ---: | ---: | ---: |
 | `rcef_fb2.EYES_LOOK_RIGHT_L` | `[[-1.0, 0.0], [0.0, 0.0], [1.0, 1.0]]` | 0 | 0 | 0.5 |
 | `rcef_fb2.EYES_LOOK_LEFT_L` | `[[-1.0, 1.0], [0.0, 0.0], [1.0, 0.0]]` | 0.5 | 0 | 0 |
 
-Each split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero. When both canonical directions are non-zero, only their difference is kept. Each of these mappings declares that as a loss. The intermediate signals are in the `rcef.intermediate` profile, not in the source or target profile, so they stay virtual inside the compiled map. All 12 mappings in this map are proposed and approximate. See [canonical_fb2.toml](../mappings/canonical_fb2.toml) and [intermediate.toml](../data/intermediate.toml).
+Each split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero. When both canonical directions are non-zero, only their difference is kept. Each of these mappings declares that as a loss. The intermediate signals are in the `rcef.intermediate` profile, not in the source or target profile, so they stay virtual inside the compiled map. All 12 mappings in this part are proposed and approximate. See [canonical_fb2.toml](../mappings/canonical_fb2.toml) and [intermediate.toml](../data/intermediate.toml).
 
 Sources: operator dispatch and `piecewise` in the C++ core's [mapping.cpp](../../msf_character_tools/core/src/mapping.cpp), and `product`, `add`, `sub` and `divide` in [math3d.cpp](../../msf_character_tools/core/src/math3d.cpp). [math3d.py](../../msf_character_tools/msf_character_tools/math3d.py) exports them as `_product`, `_add`, `_sub` and `_divide`, with `_sum`, which applies `add` in order ([math_module.cpp](../../msf_character_tools/core/python/math_module.cpp)).
 
@@ -310,7 +310,7 @@ A frame array for the **affine** fixture can hold this source channel:
 ]
 ```
 
-With source `fixture.source`, target `fixture.target` and map `fixture.affine`, the output is `fixture.affine.unit: 0.5`, with validity `true`. The required inputs are the map's external inputs. Other source-profile channels can be left out when the map does not need them. The stored `mapping_samples.json` holds expected numbers; it is not in this frame format. For `arkit_blink.to_rcef`, both blink inputs are required, so a left blink value alone does not run it.
+With source `fixture.source`, target `fixture.target` and map `fixture.affine`, the output is `fixture.affine.unit: 0.5`, with validity `true`. The required inputs are the map's external inputs. Other source-profile channels can be left out when the map does not need them. The stored `mapping_samples.json` holds expected numbers; it is not in this frame format. For `arkit.to_rcef_expression`, all 52 ARKit inputs are required, so a left blink value alone does not run it. With `partial=True`, the same frame writes `eye_close_left: 0.25` and lists the other 59 outputs as unavailable.
 
 | Frame condition | Behaviour |
 | --- | --- |
@@ -321,9 +321,10 @@ With source `fixture.source`, target `fixture.target` and map `fixture.affine`, 
 | An unknown or non-source channel | `E_SAMPLE_REFERENCE`. |
 | A non-finite, boolean or out-of-domain value | A numeric or domain diagnostic. There is no clamping. Values are checked before and after each operator. |
 | Any frame has an error | The whole Result has `value=None`. Callers must check `.ok` and the diagnostics. |
+| Any frame has an error, with `partial=True` | Each output that reads a bad input is in `refusals`, with its diagnostics, and each output that reads a missing input is in `unavailable`. The other outputs are written. Route uses this mode. |
 | Valid frames | Output frame order is kept, and each written output has validity `true`. There is no smoothing, resampling or hidden state. |
 
-The signal fields `validity`, `confidence` and `time` describe a provider contract. They are not executable expressions. For example, the FB2 gaze records state `isValid AND isEyeFollowingBlendshapesValid`, upper and lower region confidences with no implied threshold, and `XrTime`, which needs an explicit conversion to seconds. The caller must supply the actual boolean and convert the time. The `opposing_direction_exclusive` coupling on those records is a declaration, not a runtime check. The canonical → FB2 gaze hop meets it by construction (section 5). Elsewhere, tests that focus on direction should move one direction at a time.
+The signal fields `validity`, `confidence` and `time` describe a provider contract. They are not executable expressions. For example, the FB2 gaze records state `isValid AND isEyeFollowingBlendshapesValid`, upper and lower region confidences with no implied threshold, and `XrTime`, which needs an explicit conversion to seconds. The caller must supply the actual boolean and convert the time. The `opposing_direction_exclusive` coupling on those records is a declaration, not a runtime check. The gaze part of the canonical → FB2 map meets it by construction (section 5). Elsewhere, tests that focus on direction should move one direction at a time.
 
 ### Neutral, native defaults and unresolved quantities
 

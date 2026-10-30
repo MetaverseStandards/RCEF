@@ -31,20 +31,20 @@ This reads `examples/data/fb2_demo_frames.csv` and writes `~/.cache/rcef-example
 
 The input has one row per frame: `time`, a `segment` label, all 70 FB2 weights, and FB2's two validity flags, `isValid` and `isEyeFollowingBlendshapesValid`. The output has all 52 ARKit weights that RCEF's mappings produce, plus two columns:
 
-- `refused`: which hop map refused the frame, and why. For example, when eye following is lost, the gaze in-map `fb2_gaze.to_rcef` is refused, but the face weights still come through.
+- `refused`: which map refused outputs on the frame, and why. For example, when eye following is lost, the FB2 in-map `fb2.to_rcef_expression` refuses the outputs that read the 8 gaze inputs, but the face weights still come through.
 - `dropped`: non-zero inputs that do not reach ARKit, such as the tongue positions other than `TONGUE_OUT`.
 
 The demo frames come from `examples/make_demo_frames.py`. Its channel lists are fixed in the code, so the frames do not change when the pack does; `tests/test_demo_frames.py` checks that it writes the committed files byte for byte. They cover a neutral pose, a jaw sweep, gaze left and right with both eyes and then with each eye alone, asymmetric brows, asymmetric cheeks both ways round, closed lips with the jaw closed, each smile, chin raiser and blink channel on its own, every other channel that the route reads, on its own; lost eye following during a blink; a lost face; and a tongue position with no mapping. Each of the 60 FB2 channels that the route reads is the only thing moving in some frame. Section 4 explains how the tests use this.
 
 How it works (see `examples/rcef_frames.py`, which reads and writes the CSV files, and `examples/rcef_route.py`, which translates):
 
-- Route loads `generated/rcef.pack.json`. It finds the in-maps (FB2 → canonical expression set) and the out-maps (canonical → ARKit) by the profiles of their signals, and compiles them with the approximation opt-in, because RCEF's cross-provider mappings are proposed approximations. For FB2 → ARKit there are 9 of each, one per canonical group: face, gaze, blink, cheek puff and so on.
-- Each map gets only its own `required_inputs`. msf-character-tools refuses a frame if any channel it is given is marked invalid, even a channel that the map does not use. If each map got the whole FB2 frame, invalid gaze would also stop the face.
+- Route loads `generated/rcef.pack.json`. It finds the in-map (`fb2.to_rcef_expression`, FB2 → canonical expression set) and the out-map (`rcef_expression.to_arkit`, canonical → ARKit) by the profiles of their signals, and compiles them with the approximation opt-in, because RCEF's cross-provider mappings are proposed approximations. Each map has one part per canonical group: face, gaze, blink, cheek puff and so on.
+- Route evaluates each map with msf-character-tools' partial evaluation (`partial=True`). An invalid input refuses only the outputs that read it, so invalid gaze does not stop the face.
 - Each input's validity is the AND of the provider flags its signal record names, for example `isValid AND isEyeFollowingBlendshapesValid` for gaze.
-- An out-map runs only on frames where its whole canonical group was written. If an in-map refused the frame, the out-map's outputs are left empty.
+- An out-map output is left empty when it reads a canonical value that the in-map refused ("refused upstream at" the in-map) or that the source does not have ("not available from source").
 - The columns of the output are the 52 ARKit coefficients in a fixed order, the order the examples have always written.
 
-`rcef_frames.arkit_to_fb2()` goes the other way, from ARKit to FB2, through the same canonical set. FB2 allows only one of two opposing gaze weights (left/right, up/down) to be non-zero. The FB2 gaze out-map takes the difference of the two canonical directions and splits it into its two sides. So when ARKit sets both, only the larger one survives, reduced by the smaller one, and the two are never both non-zero.
+`rcef_frames.arkit_to_fb2()` goes the other way, from ARKit to FB2, through the same canonical set. FB2 allows only one of two opposing gaze weights (left/right, up/down) to be non-zero. The gaze part of the FB2 out-map takes the difference of the two canonical directions and splits it into its two sides. So when ARKit sets both, only the larger one survives, reduced by the smaller one, and the two are never both non-zero.
 
 ## 3. Translate META visemes to VRM
 
@@ -54,7 +54,7 @@ python examples/translate_visemes_to_vrm.py
 
 This writes `~/.cache/rcef-examples/visemes_to_vrm.csv`; it takes the same optional input and output paths.
 
-The five vowel visemes become VRM `aa`, `ih`, `ou`, `ee` and `oh`, through the canonical viseme set (`visemes_vowel.to_rcef`, then `rcef_viseme_vowel.to_vrm`). Consonant visemes have no VRM preset, so they appear in `dropped`. This is a phoneme-label correspondence; no published table maps META visemes to VRM.
+The five vowel visemes become VRM `aa`, `ih`, `ou`, `ee` and `oh`, through the canonical viseme set (`visemes.to_rcef_viseme`, then `rcef_viseme.to_vrm`). Consonant visemes have no VRM preset, so they appear in `dropped`. This is a phoneme-label correspondence; no published table maps META visemes to VRM.
 
 ## 4. Drive a face and compare
 
@@ -124,7 +124,7 @@ python examples/viseme_pipeline.py --rig vrm-twist  # the VRM sample, through RC
 The frames (`examples/data/viseme_talk_frames.csv`) say "bed car toe book", which are the example words of the META viseme specification. Each viseme is held for two frames and crossfaded into the next, so every frame sums to one.
 
 - **Rocketbox** has a shape for each of the 15 META visemes, numbered in the same order (it spells IH, OH and OU as I, O and U), so the frames drive them directly by name.
-- **VRM1_Constraint_Twist_Sample** (pixiv Inc., VRM Public License 1.0, redistribution and modification allowed, credit not required; vrm-specification commit `94e82dd`) has the five vowel presets. Route translates the frames through the canonical viseme set, and `examples/vrm_presets.py` turns presets into morph weights through the model's own binds, following the VRM 1.0 expression specification (values clamped to [0, 1], `isBinary`, binds accumulated). The same binds driven through the vowel pairs that `scripts/derive_fb2_goldens.py` reads from the pinned VRM and META texts (`tests/fixtures/fb2_goldens.json`) must give the same morph weights within 1e-9. Consonants have no VRM preset and are labelled as dropped. Overrides are not applied and are labelled if a frame would need one. After the talk come the two winks from the expression library. The blink hops (`fb2_blink.to_rcef`, then `rcef_blink.to_vrm`) turn FB2 `EYES_CLOSED_L` and `_R` into `blinkLeft` and `blinkRight`. This is checked in the same way, against the blink pairs read from the pinned OpenXR and VRM texts. `blink` (both eyes) is left unset, so a model that binds all three is not driven twice.
+- **VRM1_Constraint_Twist_Sample** (pixiv Inc., VRM Public License 1.0, redistribution and modification allowed, credit not required; vrm-specification commit `94e82dd`) has the five vowel presets. Route translates the frames through the canonical viseme set, and `examples/vrm_presets.py` turns presets into morph weights through the model's own binds, following the VRM 1.0 expression specification (values clamped to [0, 1], `isBinary`, binds accumulated). The same binds driven through the vowel pairs that `scripts/derive_fb2_goldens.py` reads from the pinned VRM and META texts (`tests/fixtures/fb2_goldens.json`) must give the same morph weights within 1e-9. Consonants have no VRM preset and are labelled as dropped. Overrides are not applied and are labelled if a frame would need one. After the talk come the two winks from the expression library. The blink parts of the maps (`fb2.to_rcef_expression`, then `rcef_expression.to_vrm`) turn FB2 `EYES_CLOSED_L` and `_R` into `blinkLeft` and `blinkRight`. This is checked in the same way, against the blink pairs read from the pinned OpenXR and VRM texts. `blink` (both eyes) is left unset, so a model that binds all three is not driven twice.
 
 Outputs go to `~/.cache/rcef-examples/visemes/RIG`, in the same format as section 4.
 
@@ -135,7 +135,7 @@ RCEF_SLOW_TESTS=1 RCEF_ICT_CACHE=~/.cache/rcef-ict-facekit RCEF_RIG_CACHE=~/.cac
   python -B -m unittest tests/test_examples_slow.py
 ```
 
-With `RCEF_SLOW_TESTS=1`, `tests/test_translations.py` also halves each mapping of each hop on its own and checks that only the outputs computed from it change (about a minute).
+With `RCEF_SLOW_TESTS=1`, `tests/test_translations.py` also halves each mapping of each map on its own and checks that only the outputs computed from it change (about a minute).
 
 ## 6. Rig gains: how strongly two rigs render the same ARKit name
 

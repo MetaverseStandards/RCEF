@@ -18,14 +18,18 @@ In short, since data 0.3.0:
   the working group has not reviewed their meaning yet.
 - In-maps and out-maps for ARKit, FB2, FACS codes, VRCFaceTracking eye data,
   VRM blinks and vowels and META visemes, and out-maps to Unified
-  Expressions: 484 mappings in 84 maps. The README's Routes table lists the
-  37 routes.
+  Expressions: 484 mappings in 15 maps, one per expression set, canonical
+  set and direction. The parts of each map follow the canonical groups, and
+  each map has a page in `docs/map-sets/`. The README's Routes table lists
+  the 37 routes.
 - The 10 FB2-only signals (cheek suck, lip tighten, tongue positions), the
   VRCFaceTracking eye blink and pupil hops, and the VRM blink hops.
 - FACS codes as a draft expression set, `facs.code`, with an example codec.
 - The viseme pose bridge from visemes to expressions, from a frozen
   software calibration record, and the perceptual gate in `check.py`.
-- `examples/rcef_route.py` (`Route`), which every example now uses.
+- `examples/rcef_route.py` (`Route`), which every example now uses. It
+  evaluates each map with partial evaluation, so a bad or missing input
+  stops only the outputs that read it.
 - The registered A/B comparison of the routes with the direct maps
   (`ab/`): `ab.pivot` v1 and v2 pass every gate.
 - The direct maps and the old 21-signal set `rcef.canonical` are retired,
@@ -77,6 +81,60 @@ direct maps B gives the same values and refuses the same frames as A1.
 - The notices credit the Godot XR contributors (`godot_vendors_fb2`) and
   the Khronos copyright of the META viseme reference images, and give the
   glTF specification licence.
+
+**Breaking: one map per set pair and direction.** A map is now named by
+its two sets, and a canonical group is a part of a map, not a map of its
+own. The map IDs change; no mapping ID changes, and no value changes. The
+entries below this one count the maps as they were then, one per group; the
+mappings are the same.
+
+- The 84 maps into and out of the canonical sets become 15 maps, one for
+  each pair of an expression set and a canonical set, in each direction.
+  The ID is `<from>.to_<to>`: the expression set by the key that its mapping
+  IDs use (`arkit`, `fb2`, `facs`, `visemes`, `vrm`, `vrcft_eye`,
+  `vrcft_artist`) and the canonical set as `rcef_expression` or
+  `rcef_viseme`. For example, the 12 FB2 group maps into the canonical
+  expression set become `fb2.to_rcef_expression`, and the 9 ARKit group maps
+  out of it become `rcef_expression.to_arkit`. Each new map holds the
+  mappings of its old maps, in their old order. The viseme pose bridge
+  `rcef_viseme_pose.to_rcef_expression` is renamed
+  `rcef_viseme.to_rcef_expression`, to the same form. Totals: 19 maps
+  (was 88) and 588 mappings.
+- `docs/retired-ids.csv` has a tombstone for each of the 85 old map IDs,
+  with the ID that holds its mappings now (334 lines in all).
+- The groups stay in the metadata of the canonical signals. The rule "one
+  map per group and direction" becomes "one map per set pair and direction,
+  and each part of a map reads or writes one whole group"
+  (`tests/test_pivot_structure.py`).
+- `Route` selects one in-map, one out-map and the bridge where it is needed,
+  and evaluates each map with msf-character-tools 0.6.0's
+  `partial=True`. A bad input refuses only the outputs that read it. An
+  out-map output that reads a refused canonical value is labelled
+  "refused upstream at" the in-map, and one that reads a value the source
+  does not have is labelled "not available from source". A missing source
+  input now makes its outputs "not available from source" instead of
+  refusing the in-map. Each refusal record also lists the refused outputs.
+  The one-hop mode, which runs the direct maps of the A/B baseline, still
+  evaluates whole maps.
+- The examples' `refused` column names the one in-map, for example
+  `fb2.to_rcef_expression: E_INVALID_SAMPLE on 8 inputs (...)` when eye
+  following is lost, where it named the gaze map before. When the face is
+  lost, one entry with 60 inputs replaces the 9 entries of the group maps.
+- The README lists the map sets only, one row per set and direction, with
+  their mappings and parts. `scripts/export_map_sets.py` writes one page per
+  map set, `docs/map-sets/<map-id>.md`: its parts, the mappings, operators,
+  evidence and loss keys of each part, and the groups it does not have,
+  with the reason. `tests/test_map_sets.py` checks that the pages are
+  current.
+- `ab.pivot` v3 (`revise` of v2) registers the new map IDs, with the frozen
+  old → new map renames. The new **Revise** gate runs v2's `Route` and pack
+  from Git on the same frames and checks that B keeps every value, writes
+  every output it wrote and refuses no output that v2 wrote. The M7
+  mutation that merged two group maps now splits one map. The hop maps are
+  frozen against `tests/fixtures/b-maps-ab.pivot-v3.json`.
+- `tools/calibration/viseme_poses.py` reads the poses through the new map
+  IDs, so its code commit in `tests/test_calibration_tripwire.py` changes.
+  No calibration record changes.
 
 **Breaking: the direct maps are retired.** No deprecation period and no
 replacement maps: every translation runs through the canonical sets

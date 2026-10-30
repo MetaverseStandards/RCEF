@@ -87,27 +87,27 @@ Two original fixtures, one affine and one lossy bilateral, show the shared runti
 
 Data 0.5.0 retires the direct maps of earlier data versions: the 187 direct cross-provider mappings (FB2 to and from ARKit, ARKit to VRCFaceTracking Unified Expressions, FB2 to VRM blinks and META visemes to VRM), their 4 internal gaze steps, and the 21 identity mappings into the old 21-signal canonical set `rcef.canonical`, which is retired too. Every translation now runs through the canonical sets. [docs/retired-ids.csv](docs/retired-ids.csv) lists every retired ID. The A/B comparison keeps the direct maps in its frozen baseline, `tests/fixtures/baseline-dea1713.pack.json` ([ab/README.md](ab/README.md)).
 
-The canonical expression set, `rcef.canonical_expression`, is a draft: 72 signals in 13 groups (face 41, cheek puff 2, jaw thrust 1, jaw sideways 2, mouth shift 2, chin raise upper lip 1, blink 2, gaze 8, tongue out 1, cheek suck 2, lip tighten 2, tongue place 6, pupil diameter 2). [docs/canonical-set.md](docs/canonical-set.md) defines each signal, and the [definitions audit](docs/canonical-set-audit.md) compares it with each source. 442 mappings in 75 maps go into and out of it:
+The canonical expression set, `rcef.canonical_expression`, is a draft: 72 signals in 13 groups (face 41, cheek puff 2, jaw thrust 1, jaw sideways 2, mouth shift 2, chin raise upper lip 1, blink 2, gaze 8, tongue out 1, cheek suck 2, lip tighten 2, tongue place 6, pupil diameter 2). [docs/canonical-set.md](docs/canonical-set.md) defines each signal, and the [definitions audit](docs/canonical-set-audit.md) compares it with each source. 442 mappings in 11 maps go into and out of it:
 
-- ARKit, FB2, FACS codes, VRCFaceTracking eye data and VRM per-eye blinks into the canonical expression set (189 mappings in 32 maps);
-- the canonical expression set to ARKit, FB2, VRCFaceTracking Unified Expressions, VRCFaceTracking eye data, VRM per-eye blinks and FACS codes (253 mappings in 43 maps, with 4 internal steps in the FB2 gaze map).
+- ARKit, FB2, FACS codes, VRCFaceTracking eye data and VRM per-eye blinks into the canonical expression set (189 mappings in 5 maps);
+- the canonical expression set to ARKit, FB2, VRCFaceTracking Unified Expressions, VRCFaceTracking eye data, VRM per-eye blinks and FACS codes (253 mappings in 6 maps, with 4 internal steps in the gaze part of the FB2 out-map).
 
-So a translation can run from ARKit, FB2, FACS codes, VRCFaceTracking eye data or VRM blinks through the canonical expression set to ARKit, FB2, Unified Expressions, VRCFaceTracking eye data, VRM blinks or FACS codes. Each group has one map in each direction.
+So a translation can run from ARKit, FB2, FACS codes, VRCFaceTracking eye data or VRM blinks through the canonical expression set to ARKit, FB2, Unified Expressions, VRCFaceTracking eye data, VRM blinks or FACS codes. Each expression set has one map in each direction, and each map has one part per group that it fills.
 
 VRCFaceTracking eye data fills two groups. In `blink`, `eye_close` is 1 − `Openness`; an `Openness` outside 0 to 1 is refused, and VRCFaceTracking does not say that 1 is a relaxed open eye. In `pupil_mm`, the pupil diameters in millimetres are copied exactly; these 4 mappings and the 2 canonical pupil signals are `verified_current`. VRM fills `blink` from `blinkLeft` and `blinkRight`. VRM `blink`, which closes both eyes, is not read, and a route lists a non-zero `blink` as dropped.
 
 The FACS codes are an expression set of their own, `facs.code` (draft): 92 rows, one per code number from a public list (record `facs_wikipedia`), split by side where the canonical signal is. 49 are mapped, 25 `unresolved` and 18 `excluded`. Their values are RCEF's own numeric encoding of the FACS intensity letters, not FACS scores, and RCEF does not code faces. [docs/facs-intensity.md](docs/facs-intensity.md) gives the letter codec, and `examples/facs_codec.py` implements it. FACS fills 8 of the 13 groups; it has no code for mouth shift, the upper-lip part of chin raise, gaze, the tongue places or the pupils.
 
-The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are partition classes (vowel 5, consonant 9, rest 1): 14 mouth-shape classes that hold every symbol of the IPA chart, and the rest class `sil`. From a valid META frame their values sum to 1. The 16th, `alveolar_floor`, is the sum of the three alveolar classes and `rhotic`, clamped at 1: the class that joins them in the IPA strict floor. 42 mappings in 9 maps go into and out of it:
+The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are partition classes (vowel 5, consonant 9, rest 1): 14 mouth-shape classes that hold every symbol of the IPA chart, and the rest class `sil`. From a valid META frame their values sum to 1. The 16th, `alveolar_floor`, is the sum of the three alveolar classes and `rhotic`, clamped at 1: the class that joins them in the IPA strict floor. 42 mappings in 4 maps go into and out of it:
 
-- META visemes and the VRM vowel presets into the canonical viseme set (22 mappings in 5 maps, with 1 internal step in the map that writes `alveolar_floor`);
-- the canonical viseme set to META visemes and the VRM vowel presets (20 mappings in 4 maps).
+- META visemes and the VRM vowel presets into the canonical viseme set (22 mappings in 2 maps, with 1 internal step in the part that writes `alveolar_floor`);
+- the canonical viseme set to META visemes and the VRM vowel presets (20 mappings in 2 maps).
 
-On the pairs that the retired direct maps translated, the composed route gives the same weights as they did (`tests/test_pivot_structure.py` compares it with the frozen baseline). The registered A/B comparison checks this on every frame ([ab/README.md](ab/README.md)). Of the 484 mappings in the 84 maps of the two canonical sets, all but the 4 pupil copies are proposed and approximate; the pupil copies are exact and `verified_current`. `scripts/build_canonical.py` writes both canonical profiles, the `facs.code` profile and these maps from the two documents.
+On the pairs that the retired direct maps translated, the composed route gives the same weights as they did (`tests/test_pivot_structure.py` compares it with the frozen baseline). The registered A/B comparison checks this on every frame ([ab/README.md](ab/README.md)). Of the 484 mappings in the 15 maps of the two canonical sets, all but the 4 pupil copies are proposed and approximate; the pupil copies are exact and `verified_current`. `scripts/build_canonical.py` writes both canonical profiles, the `facs.code` profile and these maps from the two documents.
 
 Data 0.5.0 downgrades 19 mappings. The 21 retired identity mappings into `rcef.canonical` were exact and `verified_current`. Their signals now go through the hops of the canonical expression set, which are proposed and approximate, because each canonical signal has RCEF's own declared meaning. Only the 2 pupil diameters keep an exact, `verified_current` copy.
 
-The viseme pose bridge, `rcef_viseme_pose.to_rcef_expression`, joins the two canonical sets: 101 proposed mappings in 1 map, with 56 helper values in `rcef.intermediate`. It writes canonical expression values from the 11 viseme classes that pass the shape or the perceptual gate on all 4 held-out rigs in the calibration record `viseme-poses.rocketbox-features`. `scripts/build_canonical.py` writes it from the record.
+The viseme pose bridge, `rcef_viseme.to_rcef_expression`, joins the two canonical sets: 101 proposed mappings in 1 map, with 56 helper values in `rcef.intermediate`. It writes canonical expression values from the 11 viseme classes that pass the shape or the perceptual gate on all 4 held-out rigs in the calibration record `viseme-poses.rocketbox-features`. `scripts/build_canonical.py` writes it from the record.
 
 ### Routes
 
@@ -131,127 +131,46 @@ A route runs from a source set through a canonical set to a target set. [example
 
 ### Mappings
 
-Each row is one map: a group of mappings that turns values in the source set into values in the target set. `verified_current` means that the mapping restates a verified source fact (it copies a provider value exactly). `proposed` means an approximate cross-provider translation that is backed by sources and compiles only with the approximation opt-in. [reports/mappings.md](reports/mappings.md) lists every mapping with its assumptions, losses and evidence. That report also lists the maps that these tables leave out: RCEF's synthetic test maps (`fixture.affine`, `fixture.bilateral`) and `survey.ambiguous`, which is recorded but cannot be executed.
+RCEF has one map for each pair of an expression set and a canonical set, in each direction: a map set. Its ID is `<from>.to_<to>`, for example `fb2.to_rcef_expression` (FB2 into the canonical expression set) and `rcef_expression.to_fb2` (back out). An expression set is named by the key that its mapping IDs use (`fb2_rcef.*`, `rcef_fb2.*`); a canonical set is `rcef_expression` or `rcef_viseme`. A map turns values of its source set into values of its target set as one whole. Its parts are its mappings for each group of the canonical set; the groups are metadata of the canonical signals. Each map set has a page in [docs/map-sets/](docs/map-sets/) that shows its parts, the mappings, operators, evidence and loss keys of each part, and the groups it does not have, with the reason.
 
-#### Maps into the canonical expression set
+`verified_current` means that the mapping restates a verified source fact (it copies a provider value exactly). `proposed` means an approximate cross-provider translation that is backed by sources and compiles only with the approximation opt-in. [reports/mappings.md](reports/mappings.md) lists every mapping with its assumptions, losses and evidence. That report also lists the maps that these tables leave out: RCEF's synthetic test maps (`fixture.affine`, `fixture.bilateral`) and `survey.ambiguous`, which is recorded but cannot be executed.
 
-Each map reads one source set and writes one whole group of the canonical expression set.
+A route evaluates each map once per frame, with msf-character-tools' partial evaluation: a bad input refuses only the outputs that read it, and a missing input makes only those outputs "not available" ([examples/rcef_route.py](examples/rcef_route.py)).
 
-| Map | Source set → target set | Mappings | Evidence status |
-|---|---|---|---|
-| [`arkit_face.to_rcef`](reports/mappings.md#arkit_faceto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 41 | proposed |
-| [`arkit_cheek_puff.to_rcef`](reports/mappings.md#arkit_cheek_puffto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 2 | proposed |
-| [`arkit_jaw_thrust.to_rcef`](reports/mappings.md#arkit_jaw_thrustto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 1 | proposed |
-| [`arkit_jaw_sideways.to_rcef`](reports/mappings.md#arkit_jaw_sidewaysto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 2 | proposed |
-| [`arkit_mouth_shift.to_rcef`](reports/mappings.md#arkit_mouth_shiftto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 2 | proposed |
-| [`arkit_chin_raise_upper_lip.to_rcef`](reports/mappings.md#arkit_chin_raise_upper_lipto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 1 | proposed |
-| [`arkit_blink.to_rcef`](reports/mappings.md#arkit_blinkto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 2 | proposed |
-| [`arkit_gaze.to_rcef`](reports/mappings.md#arkit_gazeto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 8 | proposed |
-| [`arkit_tongue_out.to_rcef`](reports/mappings.md#arkit_tongue_outto_rcef) | `arkit.coefficient` → `rcef.canonical_expression` | 1 | proposed |
-| [`fb2_face.to_rcef`](reports/mappings.md#fb2_faceto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 41 | proposed |
-| [`fb2_cheek_puff.to_rcef`](reports/mappings.md#fb2_cheek_puffto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
-| [`fb2_jaw_thrust.to_rcef`](reports/mappings.md#fb2_jaw_thrustto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 1 | proposed |
-| [`fb2_jaw_sideways.to_rcef`](reports/mappings.md#fb2_jaw_sidewaysto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
-| [`fb2_mouth_shift.to_rcef`](reports/mappings.md#fb2_mouth_shiftto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
-| [`fb2_chin_raise_upper_lip.to_rcef`](reports/mappings.md#fb2_chin_raise_upper_lipto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 1 | proposed |
-| [`fb2_blink.to_rcef`](reports/mappings.md#fb2_blinkto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
-| [`fb2_gaze.to_rcef`](reports/mappings.md#fb2_gazeto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 8 | proposed |
-| [`fb2_tongue_out.to_rcef`](reports/mappings.md#fb2_tongue_outto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 1 | proposed |
-| [`fb2_cheek_suck.to_rcef`](reports/mappings.md#fb2_cheek_suckto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
-| [`fb2_lip_tighten.to_rcef`](reports/mappings.md#fb2_lip_tightento_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 2 | proposed |
-| [`fb2_tongue_place.to_rcef`](reports/mappings.md#fb2_tongue_placeto_rcef) | `openxr.fb2` → `rcef.canonical_expression` | 6 | proposed |
-| [`vrcft_eye_blink.to_rcef`](reports/mappings.md#vrcft_eye_blinkto_rcef) | `vrcft.eye` → `rcef.canonical_expression` | 2 | proposed |
-| [`vrcft_eye_pupil_mm.to_rcef`](reports/mappings.md#vrcft_eye_pupil_mmto_rcef) | `vrcft.eye` → `rcef.canonical_expression` | 2 | verified_current |
-| [`vrm_blink.to_rcef`](reports/mappings.md#vrm_blinkto_rcef) | `vrm.preset` → `rcef.canonical_expression` | 2 | proposed |
-| [`facs_face.to_rcef`](reports/mappings.md#facs_faceto_rcef) | `facs.code` → `rcef.canonical_expression` | 41 | proposed |
-| [`facs_cheek_puff.to_rcef`](reports/mappings.md#facs_cheek_puffto_rcef) | `facs.code` → `rcef.canonical_expression` | 2 | proposed |
-| [`facs_jaw_thrust.to_rcef`](reports/mappings.md#facs_jaw_thrustto_rcef) | `facs.code` → `rcef.canonical_expression` | 1 | proposed |
-| [`facs_jaw_sideways.to_rcef`](reports/mappings.md#facs_jaw_sidewaysto_rcef) | `facs.code` → `rcef.canonical_expression` | 2 | proposed |
-| [`facs_blink.to_rcef`](reports/mappings.md#facs_blinkto_rcef) | `facs.code` → `rcef.canonical_expression` | 2 | proposed |
-| [`facs_tongue_out.to_rcef`](reports/mappings.md#facs_tongue_outto_rcef) | `facs.code` → `rcef.canonical_expression` | 1 | proposed |
-| [`facs_cheek_suck.to_rcef`](reports/mappings.md#facs_cheek_suckto_rcef) | `facs.code` → `rcef.canonical_expression` | 2 | proposed |
-| [`facs_lip_tighten.to_rcef`](reports/mappings.md#facs_lip_tightento_rcef) | `facs.code` → `rcef.canonical_expression` | 2 | proposed |
+#### Map sets into and out of the canonical expression set
 
-#### Maps out of the canonical expression set
+| Map set | Source set → target set | Mappings | Parts | Evidence status |
+|---|---|---|---|---|
+| [`arkit.to_rcef_expression`](docs/map-sets/arkit.to_rcef_expression.md) | `arkit.coefficient` → `rcef.canonical_expression` | 60 | 9 | proposed |
+| [`facs.to_rcef_expression`](docs/map-sets/facs.to_rcef_expression.md) | `facs.code` → `rcef.canonical_expression` | 53 | 8 | proposed |
+| [`fb2.to_rcef_expression`](docs/map-sets/fb2.to_rcef_expression.md) | `openxr.fb2` → `rcef.canonical_expression` | 70 | 12 | proposed |
+| [`vrcft_eye.to_rcef_expression`](docs/map-sets/vrcft_eye.to_rcef_expression.md) | `vrcft.eye` → `rcef.canonical_expression` | 4 | 2 | proposed, verified_current |
+| [`vrm.to_rcef_expression`](docs/map-sets/vrm.to_rcef_expression.md) | `vrm.preset` → `rcef.canonical_expression` | 2 | 1 | proposed |
+| [`rcef_expression.to_arkit`](docs/map-sets/rcef_expression.to_arkit.md) | `rcef.canonical_expression` → `arkit.coefficient` | 52 | 9 | proposed |
+| [`rcef_expression.to_facs`](docs/map-sets/rcef_expression.to_facs.md) | `rcef.canonical_expression` → `facs.code` | 49 | 8 | proposed |
+| [`rcef_expression.to_fb2`](docs/map-sets/rcef_expression.to_fb2.md) | `rcef.canonical_expression` → `openxr.fb2` | 74 | 12 | proposed |
+| [`rcef_expression.to_vrcft_artist`](docs/map-sets/rcef_expression.to_vrcft_artist.md) | `rcef.canonical_expression` → `vrcft.artist.base` | 72 | 11 | proposed |
+| [`rcef_expression.to_vrcft_eye`](docs/map-sets/rcef_expression.to_vrcft_eye.md) | `rcef.canonical_expression` → `vrcft.eye` | 4 | 2 | proposed, verified_current |
+| [`rcef_expression.to_vrm`](docs/map-sets/rcef_expression.to_vrm.md) | `rcef.canonical_expression` → `vrm.preset` | 2 | 1 | proposed |
 
-Each map reads one group and writes the target set's signals for it. An out-map gives values only when the in-map of its group gave values for the whole group.
+#### Map sets into and out of the canonical viseme set
 
-| Map | Source set → target set | Mappings | Evidence status |
-|---|---|---|---|
-| [`rcef_face.to_arkit`](reports/mappings.md#rcef_faceto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 34 | proposed |
-| [`rcef_cheek_puff.to_arkit`](reports/mappings.md#rcef_cheek_puffto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 1 | proposed |
-| [`rcef_jaw_thrust.to_arkit`](reports/mappings.md#rcef_jaw_thrustto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 1 | proposed |
-| [`rcef_jaw_sideways.to_arkit`](reports/mappings.md#rcef_jaw_sidewaysto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 2 | proposed |
-| [`rcef_mouth_shift.to_arkit`](reports/mappings.md#rcef_mouth_shiftto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 2 | proposed |
-| [`rcef_chin_raise_upper_lip.to_arkit`](reports/mappings.md#rcef_chin_raise_upper_lipto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 1 | proposed |
-| [`rcef_blink.to_arkit`](reports/mappings.md#rcef_blinkto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 2 | proposed |
-| [`rcef_gaze.to_arkit`](reports/mappings.md#rcef_gazeto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 8 | proposed |
-| [`rcef_tongue_out.to_arkit`](reports/mappings.md#rcef_tongue_outto_arkit) | `rcef.canonical_expression` → `arkit.coefficient` | 1 | proposed |
-| [`rcef_face.to_fb2`](reports/mappings.md#rcef_faceto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 41 | proposed |
-| [`rcef_cheek_puff.to_fb2`](reports/mappings.md#rcef_cheek_puffto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
-| [`rcef_jaw_thrust.to_fb2`](reports/mappings.md#rcef_jaw_thrustto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 1 | proposed |
-| [`rcef_jaw_sideways.to_fb2`](reports/mappings.md#rcef_jaw_sidewaysto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
-| [`rcef_mouth_shift.to_fb2`](reports/mappings.md#rcef_mouth_shiftto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
-| [`rcef_chin_raise_upper_lip.to_fb2`](reports/mappings.md#rcef_chin_raise_upper_lipto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 1 | proposed |
-| [`rcef_blink.to_fb2`](reports/mappings.md#rcef_blinkto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
-| [`rcef_gaze.to_fb2`](reports/mappings.md#rcef_gazeto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 12 | proposed |
-| [`rcef_tongue_out.to_fb2`](reports/mappings.md#rcef_tongue_outto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 1 | proposed |
-| [`rcef_cheek_suck.to_fb2`](reports/mappings.md#rcef_cheek_suckto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
-| [`rcef_lip_tighten.to_fb2`](reports/mappings.md#rcef_lip_tightento_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 2 | proposed |
-| [`rcef_tongue_place.to_fb2`](reports/mappings.md#rcef_tongue_placeto_fb2) | `rcef.canonical_expression` → `openxr.fb2` | 6 | proposed |
-| [`rcef_face.to_vrcft_artist`](reports/mappings.md#rcef_faceto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 47 | proposed |
-| [`rcef_cheek_puff.to_vrcft_artist`](reports/mappings.md#rcef_cheek_puffto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 2 | proposed |
-| [`rcef_jaw_thrust.to_vrcft_artist`](reports/mappings.md#rcef_jaw_thrustto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 1 | proposed |
-| [`rcef_jaw_sideways.to_vrcft_artist`](reports/mappings.md#rcef_jaw_sidewaysto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 2 | proposed |
-| [`rcef_mouth_shift.to_vrcft_artist`](reports/mappings.md#rcef_mouth_shiftto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 4 | proposed |
-| [`rcef_chin_raise_upper_lip.to_vrcft_artist`](reports/mappings.md#rcef_chin_raise_upper_lipto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 1 | proposed |
-| [`rcef_blink.to_vrcft_artist`](reports/mappings.md#rcef_blinkto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 2 | proposed |
-| [`rcef_gaze.to_vrcft_artist`](reports/mappings.md#rcef_gazeto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 8 | proposed |
-| [`rcef_tongue_out.to_vrcft_artist`](reports/mappings.md#rcef_tongue_outto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 1 | proposed |
-| [`rcef_cheek_suck.to_vrcft_artist`](reports/mappings.md#rcef_cheek_suckto_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 2 | proposed |
-| [`rcef_lip_tighten.to_vrcft_artist`](reports/mappings.md#rcef_lip_tightento_vrcft_artist) | `rcef.canonical_expression` → `vrcft.artist.base` | 2 | proposed |
-| [`rcef_blink.to_vrm`](reports/mappings.md#rcef_blinkto_vrm) | `rcef.canonical_expression` → `vrm.preset` | 2 | proposed |
-| [`rcef_blink.to_vrcft_eye`](reports/mappings.md#rcef_blinkto_vrcft_eye) | `rcef.canonical_expression` → `vrcft.eye` | 2 | proposed |
-| [`rcef_pupil_mm.to_vrcft_eye`](reports/mappings.md#rcef_pupil_mmto_vrcft_eye) | `rcef.canonical_expression` → `vrcft.eye` | 2 | verified_current |
-| [`rcef_face.to_facs`](reports/mappings.md#rcef_faceto_facs) | `rcef.canonical_expression` → `facs.code` | 37 | proposed |
-| [`rcef_cheek_puff.to_facs`](reports/mappings.md#rcef_cheek_puffto_facs) | `rcef.canonical_expression` → `facs.code` | 2 | proposed |
-| [`rcef_jaw_thrust.to_facs`](reports/mappings.md#rcef_jaw_thrustto_facs) | `rcef.canonical_expression` → `facs.code` | 1 | proposed |
-| [`rcef_jaw_sideways.to_facs`](reports/mappings.md#rcef_jaw_sidewaysto_facs) | `rcef.canonical_expression` → `facs.code` | 2 | proposed |
-| [`rcef_blink.to_facs`](reports/mappings.md#rcef_blinkto_facs) | `rcef.canonical_expression` → `facs.code` | 2 | proposed |
-| [`rcef_tongue_out.to_facs`](reports/mappings.md#rcef_tongue_outto_facs) | `rcef.canonical_expression` → `facs.code` | 1 | proposed |
-| [`rcef_cheek_suck.to_facs`](reports/mappings.md#rcef_cheek_suckto_facs) | `rcef.canonical_expression` → `facs.code` | 2 | proposed |
-| [`rcef_lip_tighten.to_facs`](reports/mappings.md#rcef_lip_tightento_facs) | `rcef.canonical_expression` → `facs.code` | 2 | proposed |
+`visemes.to_rcef_viseme` also writes `alveolar_floor`, the sum of the three alveolar classes and `rhotic` clamped at 1, through one helper value. No map reads `alveolar_floor`.
 
-#### Maps into the canonical viseme set
-
-Each map reads one source set and writes one group of the canonical viseme set. `visemes_aggregate.to_rcef` writes `alveolar_floor`, the sum of the three alveolar classes and `rhotic` clamped at 1, through one helper value.
-
-| Map | Source set → target set | Mappings | Evidence status |
-|---|---|---|---|
-| [`visemes_vowel.to_rcef`](reports/mappings.md#visemes_vowelto_rcef) | `openxr.visemes` → `rcef.canonical_viseme` | 5 | proposed |
-| [`visemes_consonant.to_rcef`](reports/mappings.md#visemes_consonantto_rcef) | `openxr.visemes` → `rcef.canonical_viseme` | 9 | proposed |
-| [`visemes_rest.to_rcef`](reports/mappings.md#visemes_restto_rcef) | `openxr.visemes` → `rcef.canonical_viseme` | 1 | proposed |
-| [`visemes_aggregate.to_rcef`](reports/mappings.md#visemes_aggregateto_rcef) | `openxr.visemes` → `rcef.canonical_viseme` | 2 | proposed |
-| [`vrm_vowel.to_rcef`](reports/mappings.md#vrm_vowelto_rcef) | `vrm.preset` → `rcef.canonical_viseme` | 5 | proposed |
-
-#### Maps out of the canonical viseme set
-
-Each map reads one group and writes the target set's visemes for it. No map reads `alveolar_floor`.
-
-| Map | Source set → target set | Mappings | Evidence status |
-|---|---|---|---|
-| [`rcef_viseme_vowel.to_visemes`](reports/mappings.md#rcef_viseme_vowelto_visemes) | `rcef.canonical_viseme` → `openxr.visemes` | 5 | proposed |
-| [`rcef_viseme_consonant.to_visemes`](reports/mappings.md#rcef_viseme_consonantto_visemes) | `rcef.canonical_viseme` → `openxr.visemes` | 9 | proposed |
-| [`rcef_viseme_rest.to_visemes`](reports/mappings.md#rcef_viseme_restto_visemes) | `rcef.canonical_viseme` → `openxr.visemes` | 1 | proposed |
-| [`rcef_viseme_vowel.to_vrm`](reports/mappings.md#rcef_viseme_vowelto_vrm) | `rcef.canonical_viseme` → `vrm.preset` | 5 | proposed |
+| Map set | Source set → target set | Mappings | Parts | Evidence status |
+|---|---|---|---|---|
+| [`visemes.to_rcef_viseme`](docs/map-sets/visemes.to_rcef_viseme.md) | `openxr.visemes` → `rcef.canonical_viseme` | 17 | 4 | proposed |
+| [`vrm.to_rcef_viseme`](docs/map-sets/vrm.to_rcef_viseme.md) | `vrm.preset` → `rcef.canonical_viseme` | 5 | 1 | proposed |
+| [`rcef_viseme.to_visemes`](docs/map-sets/rcef_viseme.to_visemes.md) | `rcef.canonical_viseme` → `openxr.visemes` | 15 | 3 | proposed |
+| [`rcef_viseme.to_vrm`](docs/map-sets/rcef_viseme.to_vrm.md) | `rcef.canonical_viseme` → `vrm.preset` | 5 | 1 | proposed |
 
 #### The viseme pose bridge
 
 The bridge goes from the canonical viseme set to the canonical expression set. Each canonical expression signal of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` is the sum of each class weight times the class's pose, clamped at 1. The poses come from the calibration record [`viseme-poses.rocketbox-features`](calibration/README.md): the viseme shapes of 18 Rocketbox rigs, measured in their own ARKit shapes with Left and Right tied, and held out on 4 others. A class passes by its whole-face shape or by a perceptual gate of visible mouth features. The bridge reads only the 11 classes that pass on every held-out rig, among them `bilabial` (p, b and m), whose pose keeps the lips closed and draws them back like the rigs' own. `labiodental`, `postalveolar`, `coronal_nasal_lateral` and `rhotic` fail and move nothing. So META visemes and VRM vowels can drive ARKit, FB2 and Unified Expressions faces, and FACS values, with the limits that [canonical-set.md](docs/canonical-set.md#viseme-pose-bridge) gives.
 
-| Map | Source set → target set | Mappings | Evidence status |
-|---|---|---|---|
-| [`rcef_viseme_pose.to_rcef_expression`](reports/mappings.md#rcef_viseme_poseto_rcef_expression) | `rcef.canonical_viseme` → `rcef.canonical_expression` | 101 | proposed |
+| Map set | Source set → target set | Mappings | Parts | Evidence status |
+|---|---|---|---|---|
+| [`rcef_viseme.to_rcef_expression`](docs/map-sets/rcef_viseme.to_rcef_expression.md) | `rcef.canonical_viseme` → `rcef.canonical_expression` | 101 | 7 | proposed |
 
 Not translated yet, and why:
 
@@ -345,16 +264,16 @@ GitHub Actions is not turned on for this repository. Run `sh scripts/ci_local.sh
      The maps of the canonical sets are frozen as in the latest passing A/B freeze: `tests/test_pivot_structure.py` fails if one differs from `tests/fixtures/b-maps-ab.pivot-v1.json`. A change that keeps every value needs a "revise" freeze first ([ab/README.md](ab/README.md)).
   2. Cite only evidence IDs that are in `evidence/sources.toml`. To add a source, follow the evidence steps in the next tasks.
   3. Run `python3 -B check.py --write` and `python3 -B scripts/export_toml_index.py --write`. If you changed an FB2 in-map or an ARKit out-map, also run `python3 -B scripts/compare_godot.py --write`.
-  4. If the number of mappings changed, update the map's row in the [Mappings](#mappings) table, the totals in [What RCEF covers](#what-rcef-covers) and AGENTS.md, and the counts in `docs/architecture.md`.
+  4. Run `python3 -B scripts/export_map_sets.py --write` to update the map's page in `docs/map-sets/`. If the number of mappings changed, update the map's row in the [Mappings](#mappings) table, the totals in [What RCEF covers](#what-rcef-covers) and AGENTS.md, and the counts in `docs/architecture.md`.
   5. Add a CHANGELOG entry, and run the tests.
 
   Commit the TOML, `generated/`, `reports/`, `docs/toml-index.csv`, any other changed generated file, the README and the CHANGELOG together.
 
 - **Add a new map**
 
-  1. Add a `[[mappings]]` record with a new `id` and its `rules`, in a file in `mappings/`. Mapping IDs must be unique across all maps. The file name must end in lowercase `.toml`.
-  2. Regenerate as in the first task.
-  3. Add a row for the map to the [Mappings](#mappings) table: a link to `reports/mappings.md#` followed by the map ID without dots, the source and target sets, the number of mappings and the evidence status. `tests/test_readme_sources.py` fails until the row agrees with the pack.
+  1. Add a `[[mappings]]` record with a new `id` and its `rules`, in a file in `mappings/`. Mapping IDs must be unique across all maps. The file name must end in lowercase `.toml`. A map between an expression set and a canonical set is the one map of that pair and direction, `<from>.to_<to>`: a new group is a new part of it, not a new map. The maps of the canonical sets are written by `scripts/build_canonical.py`.
+  2. Regenerate as in the first task, and run `python3 -B scripts/export_map_sets.py --write` to write its page in `docs/map-sets/`.
+  3. Add a row for the map set to the [Mappings](#mappings) table: a link to its page, the source and target sets, the number of mappings and parts, and the evidence status. `tests/test_readme_sources.py` fails until the row agrees with the pack.
   4. Update the counts in `docs/architecture.md`, and the hand-made visuals. See [the validation checklist](docs/architecture.md#9-independent-validation-checklist).
   5. Add a CHANGELOG entry, and run the tests.
 

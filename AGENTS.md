@@ -24,7 +24,7 @@ The README's [Routes](README.md#routes) table lists each source and target set t
 
 ### Translate tracker values
 
-Use the msf-character-tools public API on the pack. A translation runs two maps: one from the source into a canonical set, and one from the canonical set to the target. The maps are `proposed`, so `compile_mapping` refuses them (`E_APPROXIMATION`) unless you give `allow_approximation=True`. Run this from the RCEF checkout. It runs the FB2 face map into the canonical expression set and prints `0.5`:
+Use the msf-character-tools public API on the pack. A translation runs two maps: one from the source into a canonical set, and one from the canonical set to the target. The maps are `proposed`, so `compile_mapping` refuses them (`E_APPROXIMATION`) unless you give `allow_approximation=True`. Run this from the RCEF checkout. It runs the FB2 in-map, `fb2.to_rcef_expression`, and prints `0.5`:
 
 ```python
 import json
@@ -34,7 +34,7 @@ doc = json.load(open('generated/rcef.pack.json', encoding='utf-8'))
 pack = msf.compile_pack(msf.validate_authoring(doc).value).value
 fb2 = msf.profile_snapshot(pack, 'openxr.fb2').value
 canonical = msf.profile_snapshot(pack, 'rcef.canonical_expression').value
-result = msf.compile_mapping(pack, fb2, canonical, 'fb2_face.to_rcef', allow_approximation=True)
+result = msf.compile_mapping(pack, fb2, canonical, 'fb2.to_rcef_expression', allow_approximation=True)
 assert result.ok, result.report.to_dict()
 mapping = result.value
 inputs = sorted(mapping.required_inputs)
@@ -46,13 +46,13 @@ assert out.ok, out.report.to_dict()
 print(out.value.samples[0]['values']['rcef.canonical_expression.jaw_drop'])
 ```
 
-The examples translate through the draft canonical sets with [examples/rcef_route.py](examples/rcef_route.py): source → canonical → target. Route finds the in-maps and out-maps of a source and target set, runs each group's in-map and out-map, and reports a refused group without refusing the others. [examples/rcef_frames.py](examples/rcef_frames.py) reads and writes their CSV files. What Route does, and why:
+The examples translate through the draft canonical sets with [examples/rcef_route.py](examples/rcef_route.py): source → canonical → target. Route finds the in-map of the source set and the out-map of the target set, with the bridge when the two are in different canonical sets. It evaluates each map with `partial=True`, so a refused output does not refuse the others. [examples/rcef_frames.py](examples/rcef_frames.py) reads and writes their CSV files. What Route does, and why:
 
-- Every input in `required_inputs` must be in the frame, or the frame is refused (`E_MISSING_SAMPLE`).
-- If any channel you give is marked invalid, msf-character-tools refuses the whole frame (`E_INVALID_SAMPLE`), even a channel that the map does not read. So give each map only its own inputs.
+- Without `partial=True`, every input in `required_inputs` must be in the frame, or the frame is refused (`E_MISSING_SAMPLE`). An invalid channel refuses the whole frame (`E_INVALID_SAMPLE`), even one that the map does not read.
+- With `partial=True`, msf-character-tools writes every output whose inputs are present and valid. An output that reads a bad input is in `refusals`; an output that reads a missing input is in `unavailable`. `CompiledMapping.output_inputs` gives the inputs of each output.
 - An input's validity is the AND of the provider flags in its signal's `validity` field, for example `isValid AND isEyeFollowingBlendshapesValid` for FB2 gaze.
-- If one frame in a call is refused, the call returns no values for any frame. Each error's `ref` begins with `/samples/<n>`, for example `/samples/1/openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB`. Use it to find the refused frames, then evaluate the rest again.
-- Face and gaze are separate groups, with separate maps: for example `fb2_face.to_rcef` and `fb2_gaze.to_rcef` in, `rcef_face.to_arkit` and `rcef_gaze.to_arkit` out. A refusal names the hop map that refused.
+- Without `partial=True`, if one frame in a call is refused, the call returns no values for any frame. Each error's `ref` begins with `/samples/<n>`, for example `/samples/1/openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB`. Use it to find the refused frames, then evaluate the rest again.
+- There is one map per source set, canonical set and direction: for example `fb2.to_rcef_expression` in and `rcef_expression.to_arkit` out. Face and gaze are groups of canonical signals, and so parts of these maps, not maps of their own. Lost eye following refuses only the gaze outputs. A refusal names the map that refused; an output that reads a refused canonical value is labelled `refused upstream at` the in-map. An output that reads a value the source does not have is labelled `not available from source`.
 - Data 0.5.0 retired the direct maps (`fb2.to_arkit` and the others); [docs/retired-ids.csv](docs/retired-ids.csv) lists every retired ID. The A/B comparison runs them from its frozen baseline pack through Route's one-hop mode ([ab/README.md](ab/README.md)).
 
 [examples/README.md](examples/README.md) shows complete runs from CSV to CSV and onto face meshes.
@@ -88,7 +88,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | `pack.toml` | Root metadata, including `data_version`. |
 | `data/` | RCEF's own sets: the draft `rcef.canonical_expression` (72 signals), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (61). `canonical_expression.toml` and `canonical_viseme.toml` are generated, and so is the part of `intermediate.toml` below its marker line (the 56 helpers of the viseme pose bridge, and the profile). |
 | `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. `facs.code.toml`, the FACS codes in RCEF's own encoding, is generated. |
-| `mappings/` | Maps. Each map is a group of one-way mappings. `canonical_*.toml` hold the maps into and out of the canonical sets, and `canonical_viseme_pose.toml` the viseme pose bridge between them; they are generated. |
+| `mappings/` | Maps. Each map is a set of one-way mappings. `canonical_*.toml` hold the maps into and out of the canonical sets, one per set and direction, and `canonical_viseme_pose.toml` the viseme pose bridge between them; they are generated. |
 | `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` (the msf-character-tools lock), `input-contracts/`. |
 | `calibration/` | `*.cal` software-only calibration records and the `FREEZES` ledger. |
 | `generated/`, `reports/` | Outputs of `check.py --write`. Do not edit them by hand. |
@@ -115,6 +115,7 @@ python3 -B scripts/compare_godot.py --write       # docs/godot_comparison.md
 python3 -B scripts/export_toml_index.py --write   # docs/toml-index.csv
 python3 -B scripts/build_canonical.py --write     # data/canonical_expression.toml, data/canonical_viseme.toml, profiles/facs.code.toml, mappings/canonical_*.toml
 python3 -B scripts/export_figures.py --write      # docs/routes.svg, docs/ab-coverage.svg
+python3 -B scripts/export_map_sets.py --write     # docs/map-sets/<map-id>.md, one page per map
 python3 -B scripts/ab_compare.py check            # the ab/ folder: ledger, registrations, results
 sh scripts/ci_local.sh                       # check.py and tests on Python 3.11 and 3.12
 ```
@@ -136,7 +137,7 @@ Without `--write`, each script checks its output and exits non-zero if the outpu
 |---|---|
 | Every provider fact cites a public source in `evidence/sources.toml`. The record needs the items that CONTRIBUTING lists. | msf-character-tools refuses a reference to a missing evidence id (`E_REFERENCE`). It also refuses a record with no `url`, unless the record is original work with `authorship` and `license` (`E_EVIDENCE`). No offline check reads the digests. Run `scripts/verify_sources.py --cache DIR` (outside the repo) and review the result. With the same cache, `scripts/check_audit_locators.py --cache DIR` checks the line locators of the audit's table of crosswalks of the FB2-only signals; the tests cannot read the cache. |
 | Generated files and reports change only through the commands above, in the same commit as the source change. | `check.py` (byte drift), `tests/test_metadata.py`, `tests/test_readable_reports.py`. |
-| The README's pivot sentence and its Routes, Mappings and Expression sets tables, the table in `docs/expression-sets.md`, `references.md`, `docs/toml-index.csv`, `docs/godot_comparison.md` and the two figures agree with the data. You edit the README text and the tables by hand; scripts write the others. | `tests/test_readme_sources.py`, `test_references.py`, `test_toml_index.py`, `test_godot_comparison.py`, `test_figures.py`. The README test reads the pivot sentence in `## Purpose`, and the README text between `### Routes`, `### Mappings`, `### Expression sets` and `## Getting started`, and the `docs/expression-sets.md` text between `## Where each set comes from` and `## Signal counts`. Keep those headings. |
+| The README's pivot sentence and its Routes, Mappings and Expression sets tables, the table in `docs/expression-sets.md`, `references.md`, `docs/toml-index.csv`, `docs/godot_comparison.md`, the map-set pages in `docs/map-sets/` and the two figures agree with the data. You edit the README text and the tables by hand; scripts write the others. | `tests/test_readme_sources.py`, `test_references.py`, `test_toml_index.py`, `test_godot_comparison.py`, `test_map_sets.py`, `test_figures.py`. The README test reads the pivot sentence in `## Purpose`, and the README text between `### Routes`, `### Mappings`, `### Expression sets` and `## Getting started`, and the `docs/expression-sets.md` text between `## Where each set comes from` and `## Signal counts`. Keep those headings. |
 | No document states as fact what the definitions audit leaves `unresolved` (for example whose left a VRM blink or a FACS side letter means). Say that it is an assumption, or name the loss key. | `tests/test_unresolved_claims.py`. |
 | No tracked file names a path under a home directory (except the XDG defaults), the local host, a private address or an internal host. Every GitHub file link and every evidence record is pinned to a commit or a digest. No document claims public access that does not exist. | `tests/test_public_sources.py`. List more hosts to refuse, one per line, in an untracked `.private-hosts` file. `scripts/check_visibility.py` also requests the links. |
 | Test expectations come from public sources, not from RCEF's mappings. | `scripts/derive_fb2_goldens.py` writes `tests/fixtures/fb2_goldens.json`, `godot_fb2_rules.csv` and `fb2_vrcft_ue_goldens.json` from cached source bytes, and never reads `mappings/`, `profiles/` or `data/`. `scripts/derive_rocketbox_au_names.py` writes `tests/fixtures/rocketbox_au_names.json` from the pinned Rocketbox rig files. Reviewers check that nobody edits them by hand. |
@@ -153,10 +154,11 @@ To adopt a new msf-character-tools release: install its wheel by hash, then run 
 - `tests/test_dependency.py` builds fake msf-character-tools installs and checks that `check.py` refuses each one before msf-character-tools runs (a marker file shows whether it ran). If you change the lock format or the order of steps in `check.py`, keep these tests meaningful. For example, the tampered-package fake must use a version and wheel tag that the lock has, or it is refused for the wrong reason.
 - Any change to a string in any TOML file changes the pack bytes and so the pack hash. Then `rcef.pack.json`, `coverage.json`, `generated/SHA256SUMS`, all three Markdown reports, `reports/SHA256SUMS` and `docs/toml-index.csv` change. A CSV report changes only if the string is one of its columns. `rcef_mapping.csv` changes only if a signal's id, label, value type, units, disposition, evidence status or profile membership changes. Regenerate everything, and commit what changed.
 - `data/canonical_expression.toml`, `data/canonical_viseme.toml`, `profiles/facs.code.toml`, `mappings/canonical_*.toml` and the part of `data/intermediate.toml` below its marker line are written by `scripts/build_canonical.py` from `docs/canonical-set.md`, `docs/canonical-set-audit.md`, `tests/fixtures/ipa_chart_symbols.json`, `tests/fixtures/baseline-dea1713.pack.json`, for the FACS codes `examples/data/facs_codes.json` and `tests/fixtures/rocketbox_au_names.json`, and, for the viseme pose bridge, `calibration/viseme-poses.rocketbox-features.cal`. Do not edit them by hand: `tests/test_pivot_structure.py` fails if they differ from what the script writes. Change the documents, then run the script with `--write`.
-- The hop maps are frozen. `tests/test_pivot_structure.py` compares each with `tests/fixtures/b-maps-ab.pivot-v1.json`, the maps of the latest passing A/B freeze. A change that keeps every value needs a "revise" freeze first, and a change of value needs a new A/B ([ab/README.md](ab/README.md)).
+- The hop maps are frozen. `tests/test_pivot_structure.py` compares each with `tests/fixtures/b-maps-ab.pivot-v3.json`, the maps of the latest passing A/B freeze. A change that keeps every value needs a "revise" freeze first, and a change of value needs a new A/B ([ab/README.md](ab/README.md)).
 - Retired IDs are never reused. `tests/test_retired_ids.py` checks that every ID of the A/B baseline that is not in the pack has one line in [docs/retired-ids.csv](docs/retired-ids.csv).
 - msf-character-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
 - `docs/architecture.html`, `.svg` and `.png` are made by hand, and no test checks them. When the data changes, update them and the counts in `docs/architecture.md`, and render the PNG from the SVG at the same size (1160 × 560). See the checklist in [docs/architecture.md](docs/architecture.md#9-independent-validation-checklist).
+- `docs/map-sets/*.md` are not made by hand: `scripts/export_map_sets.py --write` writes one page per map from the pack, and `tests/test_map_sets.py` fails when they are out of date.
 - `docs/routes.svg` and `docs/ab-coverage.svg` are not made by hand: `scripts/export_figures.py --write` writes them from the pack and the latest A/B results, and `tests/test_figures.py` fails when they are out of date. A new A/B run or a map change needs the script.
 - The face and viseme pipelines download rigs on first use and check their hashes (`--cache DIR` for rig files, `--out DIR` for outputs; the defaults are under `~/.cache`). The slow tests skip unless their variables are set. See [examples/README.md](examples/README.md).
   - `tests/test_examples_slow.py`: `RCEF_SLOW_TESTS=1`, plus `RCEF_ICT_CACHE` for the ICT tests and `RCEF_RIG_CACHE` for the Rocketbox and VRM tests.
@@ -177,5 +179,5 @@ To adopt a new msf-character-tools release: install its wheel by hash, then run 
 ## Writing style
 
 - Use plain English in the style of ASD-STE100: short sentences, active voice, common words, one instruction per sentence. Leave out filler.
-- In prose, one rule is a **mapping** and a group such as `fb2_face.to_rcef` is a **map** ("the FB2 face map has 41 mappings").
+- In prose, one rule is a **mapping** and a set such as `fb2.to_rcef_expression` is a **map** ("the FB2 in-map has 70 mappings"). A **part** of a map is its mappings for one canonical group, such as gaze.
 - Do not change code and schema names, such as `[[mappings]]` and `rules`.

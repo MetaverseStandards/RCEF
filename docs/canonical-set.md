@@ -81,13 +81,13 @@ These rules apply to the expression signals. The pupils are a length. [Gaze](#ga
 | affine(1,0) fan-out (ARKit in-hop) | "the one ARKit value is copied into each part" |
 | affine(1,0) fan-out (Unified Expressions out-hop) | "the one canonical value is copied into each Unified Expressions part" |
 | weighted_sum mean (ARKit out-hop) | "the ARKit value is the mean of the canonical parts" |
-| weighted_sum [1, −1] and knots (FB2 gaze out-hop) | "the larger of two opposing directions is reduced by the smaller; only the difference is kept" |
+| weighted_sum [1, −1] and knots (gaze part of the FB2 out-map) | "the larger of two opposing directions is reduced by the smaller; only the difference is kept" |
 | affine(−1,1) (VRCFaceTracking eye blink hops) | "eye_close is 1 − Openness" |
 | affine(1,0) on millimetres (pupils) | "the tracker-reported diameter is carried over unchanged" |
 | affine(1,0), FACS, one input, one output | "the value is carried over unchanged" |
 | affine(1,0) fan-out (FACS in-hop, AU22 and AU28 per side) | "the one FACS side value is copied into the upper and the lower part" |
 | weighted_sum mean (FACS out-hop, AU22 and AU28 per side) | "the FACS side value is the mean of the upper and lower canonical parts" |
-| weighted_sum [1, 1, 1, 1] and clamp knots (viseme aggregate in-hop) | "the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1" |
+| weighted_sum [1, 1, 1, 1] and clamp knots (aggregate part of the META in-map) | "the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1" |
 
 FACS hops start with their own assumption instead: "FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding ([facs-intensity.md](facs-intensity.md)) and correspond as the operator passes them; no evidence supports this, and no response curve is measured". On the hops of the gross behaviour codes (29, 30, 34, 35 and 43) it reads: "the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding ([facs-intensity.md](facs-intensity.md)) and correspond as the operator passes them; no evidence supports this, and no response curve is measured".
 
@@ -97,7 +97,7 @@ Where the [audit](canonical-set-audit.md) marks a row `differs` or `unresolved`,
 
 ### Groups
 
-A group is the set of signals that one in-map writes and one out-map reads. A source must fill a whole group, or the out-maps that read it give no values.
+A group is a set of canonical signals that a source fills together. There is one map per source set, canonical set and direction, and each map has one part per group that it fills: the part writes, or reads, that whole group. A source must fill a whole group, or fill none of it. An out-map output that reads a signal the source does not fill is "not available from source".
 
 | Group | Signals | Contents |
 |---|---:|---|
@@ -266,8 +266,8 @@ There are 15 partition signals: 14 speech classes and `sil`. Together they parti
 - **Why both rotation and eyelids:** ARKit's eye-look coefficients describe eyelid movement (`apple_blendshapes`), and FB2 describes eye rotation (`xr_fb2` lines 643-649). A definition that says rotation only would add a claim that today's ARKit → Unified Expressions map does not make.
 - **Whose side.** Apple names left and right from the face, so `eyeLookInLeft` (left eyelids, rightward gaze) is toward the nose (`apple_blendshapes`, Discussion). FB2's figure for EYES_LOOK_LEFT_L turns the subject's own left eye toward the temple (record `xr_fb2_fig_eyes_look_left_l`).
 - **FB2 names:** LOOK_LEFT_L → `gaze_out_left`, LOOK_RIGHT_L → `gaze_in_left`, LOOK_LEFT_R → `gaze_in_right`, LOOK_RIGHT_R → `gaze_out_right`. The retired `fb2_gaze.to_arkit` routed the values the same way, and so does the Godot OpenXR vendors plugin (`godot_vendors_fb2` lines 201-208).
-- **FB2 out-map helpers.** The FB2 gaze out-map nets each opposing pair through 4 helper values, with the orientation and knots of the retired `arkit_gaze.to_fb2`: `rcef.intermediate.gaze_in_minus_out_left`, `gaze_in_minus_out_right`, `gaze_up_minus_down_left` and `gaze_up_minus_down_right`. They replace that map's 4 helpers, `rcef.intermediate.arkit_gaze_in_minus_out_L`, `arkit_gaze_up_minus_down_L`, `arkit_gaze_in_minus_out_R` and `arkit_gaze_up_minus_down_R`, which data 0.5.0 retires with tombstones.
-- **No exclusivity claim.** FB2 says that only one of two opposing directions is non-zero (`xr_fb2` lines 648-649). The canonical set states no such constraint, so the FB2 gaze in-hop carries the loss `fb2_gaze_exclusive`. The FB2 out-map keeps only the difference of each opposing pair. When both directions of a pair are non-zero, each FB2 output loses up to the smaller of the two values.
+- **FB2 out-map helpers.** The gaze part of the FB2 out-map nets each opposing pair through 4 helper values, with the orientation and knots of the retired `arkit_gaze.to_fb2`: `rcef.intermediate.gaze_in_minus_out_left`, `gaze_in_minus_out_right`, `gaze_up_minus_down_left` and `gaze_up_minus_down_right`. They replace that map's 4 helpers, `rcef.intermediate.arkit_gaze_in_minus_out_L`, `arkit_gaze_up_minus_down_L`, `arkit_gaze_in_minus_out_R` and `arkit_gaze_up_minus_down_R`, which data 0.5.0 retires with tombstones.
+- **No exclusivity claim.** FB2 says that only one of two opposing directions is non-zero (`xr_fb2` lines 648-649). The canonical set states no such constraint, so the gaze part of the FB2 in-map carries the loss `fb2_gaze_exclusive`. The FB2 out-map keeps only the difference of each opposing pair. When both directions of a pair are non-zero, each FB2 output loses up to the smaller of the two values.
 - **Rounding on the FB2 out-map.** The four outputs on the negative knot segment may change by up to 2⁻⁵⁴ when below 0.5, and values at or below 2⁻⁵⁴ become 0. The design goal was that these values equal those of the retired `arkit_gaze.to_fb2`; the pre-registered comparison found that they do ([scoreboard](../ab/results/v1/scoreboard.md), M1).
 - **Why directions, not signed angles:** the design keeps the values of every current gaze route (the comparison tests this), and FB2's 0 to 1 range stays. **Why in and out:** the names do not change under mirroring, and they match ARKit, Unified Expressions and Godot.
 - **No FACS code on gaze.** FACS 61 and 62 turn both eyes left or right together. Which eye turns toward the nose depends on whose "left" Wikipedia means, and the article does not say. Public crosswalks disagree on it. So the gaze signals have no `facs_au` for now. A later step may add 61-64 with the loss key `facs_side_frame_unresolved`.
@@ -354,8 +354,8 @@ These rules place symbols that are not single chart cells. `tests/ipa_classes.py
 
 - An **aggregate** is a derived signal whose members are the union of two or more whole partition classes of one group (`metadata.aggregates`). Its value is the sum of their values, clamped at 1. It is outside the simplex sum: `coupling = "aggregate_of_simplex_classes"`, no `shape_class`, and its own group (`viseme_aggregate` for consonant aggregates).
 - **The one class exception.** [Base shapes only](#whole-actions-first) has one exception: viseme aggregates, which are unions of whole simplex classes in one group, written as clamped sums with weights 1 and their own coupling. Weighted blends stay excluded. `alveolar_floor` is the only aggregate in this version.
-- **`alveolar_floor`** = `alveolar_sibilant` + `coronal_stop` + `coronal_nasal_lateral` + `rhotic` (23 chart symbols). Its in-map, `visemes_aggregate.to_rcef`, has two mappings. The first is a `weighted_sum` with weights [1, 1, 1, 1] of META SS, DD, NN and RR into the helper `rcef.intermediate.viseme_alveolar_floor_sum`, which runs from 0 to 4 and has the source units, `probability`, because these operators cannot change units. The second clamps it with the `piecewise_linear` knots (0, 0), (1, 1), (4, 1). These two operators are named exceptions to the census of hop operators (weights of powers of two and today's knots); they are allowed only in this map. Both mappings carry the loss `meta_viseme_aggregate_sum`.
-- No out-map reads an aggregate in this version, so a route never selects the aggregate in-map. A later out-map that reads one selects it on its own routes only.
+- **`alveolar_floor`** = `alveolar_sibilant` + `coronal_stop` + `coronal_nasal_lateral` + `rhotic` (23 chart symbols). Its part of the META in-map, `visemes.to_rcef_viseme`, has two mappings. The first is a `weighted_sum` with weights [1, 1, 1, 1] of META SS, DD, NN and RR into the helper `rcef.intermediate.viseme_alveolar_floor_sum`, which runs from 0 to 4 and has the source units, `probability`, because these operators cannot change units. The second clamps it with the `piecewise_linear` knots (0, 0), (1, 1), (4, 1). These two operators are named exceptions to the census of hop operators (weights of powers of two and today's knots); they are allowed only in this part. Both mappings carry the loss `meta_viseme_aggregate_sum`.
+- No out-map reads an aggregate in this version, so Route does not count a refusal of the aggregate. A later out-map that reads one counts it on its own routes only.
 - **Reserved aggregates** (not signals yet). A later aggregate needs no new exception, but its fan-in is named here, as a census exception, when it ships.
 
 | Reserved aggregate | Classes | Note |
@@ -391,7 +391,7 @@ The copy rule for coarse sources does not apply to viseme classes, because copie
 
 - An in-map never copies one source class into two partition classes, and an out-map never reads two partition classes back by a mean. Copies into a parent and its refinement, or into an aggregate, are allowed.
 - A coarse source splits a class by halves (`affine(0.5, 0)`) or leaves the parts unwritten, which splits the group.
-- Every fan-in of k inputs is a `weighted_sum` with weights 1 into a helper from 0 to k in the input units, then the clamp knots (0, 0), (1, 1), (k, 1), then a copy where the units change. Each such fan-in is a named census exception, scoped to its map. This version has one: `visemes_aggregate.to_rcef`.
+- Every fan-in of k inputs is a `weighted_sum` with weights 1 into a helper from 0 to k in the input units, then the clamp knots (0, 0), (1, 1), (k, 1), then a copy where the units change. Each such fan-in is a named census exception, scoped to its map. This version has one, in the aggregate part of `visemes.to_rcef_viseme`.
 
 ### Viseme metadata
 
@@ -406,7 +406,7 @@ Each viseme signal has these metadata fields, in addition to the [fields](#field
 
 ### Viseme pose bridge
 
-A viseme is a mouth shape, so each class reaches a pose of the face. The bridge `rcef_viseme_pose.to_rcef_expression` writes canonical expression values from canonical viseme values:
+A viseme is a mouth shape, so each class reaches a pose of the face. The bridge `rcef_viseme.to_rcef_expression` writes canonical expression values from canonical viseme values:
 
 expression_j = clamp(Σ_c pose[c][j] · viseme_c, 0, 1)
 
@@ -422,7 +422,7 @@ Here pose[c][j] is the value that class *c* at weight 1 gives expression signal 
 - **What it writes.** All 45 signals of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip`, with equal values for each Left and Right pair. A pose that the fit found as 0 is written as a definite 0, not left out. A consumer that merges the bridge's output with an eye tracker or another face source must decide which source owns the eye, brow and cheek signals; the bridge's 0 is a pose, not an absent value. The bridge writes no `blink`, `gaze`, `jaw_sideways`, `mouth_shift`, `tongue_out`, `cheek_suck`, `lip_tighten` or `tongue_place` value, so out-maps of those groups label their outputs "not available from source".
 - **How it is written.** For each class, a copy into a helper `rcef.intermediate.viseme_pose_<class>`; the unit changes there from probability to 1. For each expression signal, a `weighted_sum` of the 11 helpers, with the frozen poses as weights, into `rcef.intermediate.viseme_pose_sum_<signal>` (0 to 11), then the clamp knots (0, 0), (1, 1), (11, 1). The weighted sums cite the record, and `check.py` refuses them unless each weight is exactly the record's frozen pose and every class read passes one of the two gates ([calibration/README.md](../calibration/README.md#mappings-that-cite-a-record)). These weights and knots are named census exceptions, allowed only in this map. `scripts/build_canonical.py` writes the map and its 56 helpers from the record.
 - **Evidence status.** The record's status is `calibrated_software`. Pack schema 1.0 has no such value, so every mapping of the bridge is `proposed` and `approximate`, and says so in its assumptions.
-- **Routes.** Route runs the bridge only when the target reads what it writes, the source cannot write that itself, and the source writes some of what the bridge reads: from META or VRM to ARKit, FB2, Unified Expressions or FACS. Then the route runs in-maps, the bridge, then out-maps. A class that no selected in-map can write (VRM has no consonants and no `sil`) counts as 0 in the bridge's sum, and the frame's notes say so. A refused in-map refuses the bridge's outputs on that frame. Every other route gives the same values as without the bridge.
+- **Routes.** Route runs the bridge only when the target reads what it writes, the source cannot write that itself, and the source writes some of what the bridge reads: from META or VRM to ARKit, FB2, Unified Expressions or FACS. Then the route runs the in-map, the bridge, then the out-map. A class that no selected in-map can write (VRM has no consonants and no `sil`) counts as 0 in the bridge's sum, and the frame's notes say so. A refused in-map output refuses, on that frame, the bridge outputs that read it. Every other route gives the same values as without the bridge.
 
 **Limits.**
 
@@ -490,7 +490,7 @@ A version 1 signal stands for the whole action. For example, `brow_lower` is the
 
 ### Group splits
 
-If a later source cannot fill a whole group, RCEF splits the group into smaller groups with new out-map IDs. The old out-map IDs get tombstones. An in-map never writes a made-up 0 to fill a group.
+If a later source cannot fill a whole group, RCEF splits the group into smaller groups. The maps keep their IDs, because a map is named by its two sets, not by its groups; only their parts change. An in-map never writes a made-up 0 to fill a group.
 
 ### Reserved names
 
@@ -513,7 +513,7 @@ Some pairs may name one action: Godot nasal dilation and constriction and FACS 3
 
 ## Calibrated MediaPipe records
 
-A future MediaPipe calibration record that passes its held-out test becomes a MediaPipe in-hop (`mediapipe_<group>.to_rcef`), never a direct MediaPipe → ARKit map. The in-hop cites the record and the ARKit in-hop's audit rows. `tools/calibration/k4_record.py` stays as it is until a record passes. Then it changes under a new `code_commit`, and the record is frozen again. [calibration/README.md](../calibration/README.md#mappings-that-cite-a-record) states the same rule.
+A future MediaPipe calibration record that passes its held-out test becomes part of a MediaPipe in-map (`mediapipe.to_rcef_expression`), never a direct MediaPipe → ARKit map. The in-hop cites the record and the ARKit in-hop's audit rows. `tools/calibration/k4_record.py` stays as it is until a record passes. Then it changes under a new `code_commit`, and the record is frozen again. [calibration/README.md](../calibration/README.md#mappings-that-cite-a-record) states the same rule.
 
 ## FACS
 
