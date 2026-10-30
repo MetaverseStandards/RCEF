@@ -72,7 +72,7 @@ Each mapping (and each signal) has an `evidence_status` field. It says how well 
 ### Limits
 
 - The mappings connect names and meanings the way the public sources do. Intensities are not calibrated: no provider publishes its gain, so equal weights are assumed to mean equal expressions. Each mapping states its assumptions and losses in `reports/mappings.md`.
-- The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass. In `viseme-poses.rocketbox-multi`, 9 of 15 viseme classes pass on all 4 held-out rigs (`sil` trivially, so 8 of 14 speech classes), and the viseme pose bridge reads only those. The earlier `viseme-poses.rocketbox-female` stays as history; no mapping cites it.
+- The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass. In `viseme-poses.rocketbox-features`, 11 of 15 viseme classes pass on all 4 held-out rigs: 7 by their shape and 4 by a perceptual gate of visible mouth features. The viseme pose bridge reads only those. The earlier `viseme-poses.rocketbox-female` and `viseme-poses.rocketbox-multi` stay as history; no mapping cites them.
 - The viseme pose bridge lets META visemes and VRM vowels drive ARKit, FB2 and Unified Expressions faces. Its poses are one rig's (Rocketbox Female's) viseme shapes in its own ARKit units. Classes that failed (among them `bilabial` and `vowel_mid_spread`) move nothing. There is no map from expressions back to visemes.
 - The VRM maps come from specification texts only. No published table maps META visemes to VRM; `visemes.to_vrm` is a phoneme-label correspondence.
 - The README lists what is [not translated yet](README.md#mappings), and why.
@@ -86,7 +86,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | Path | Contents |
 |---|---|
 | `pack.toml` | Root metadata, including `data_version`. |
-| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (60), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (63). `canonical_expression.toml` and `canonical_viseme.toml` are generated, and so is the part of `intermediate.toml` below its marker line (the 54 helpers of the viseme pose bridge, and the profile). |
+| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (60), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (65). `canonical_expression.toml` and `canonical_viseme.toml` are generated, and so is the part of `intermediate.toml` below its marker line (the 54 helpers of the viseme pose bridge, and the profile). |
 | `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. |
 | `mappings/` | Maps. Each map is a group of one-way mappings. `canonical_*.toml` hold the maps into and out of the canonical sets, and `canonical_viseme_pose.toml` the viseme pose bridge between them; they are generated. |
 | `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` (the msf-character-tools lock), `input-contracts/`. |

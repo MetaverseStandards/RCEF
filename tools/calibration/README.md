@@ -58,29 +58,60 @@ A second held-out run, with the same code, msf-character-tools build and rendere
 
 ## Viseme poses: META viseme shapes in ARKit shapes (`viseme_poses.py`)
 
-This tool makes the record `viseme-poses.rocketbox-multi`. For each canonical viseme class, it fits one combination of ARKit shapes, with weights from 0 to 1, to the META viseme shapes of the 10 training rigs at once. It carries the weights to canonical expression signals through the ARKit in-maps. The result is one pose per canonical viseme class. The pose bridge in the [canonical set](../../docs/canonical-set.md#viseme-pose-bridge) uses the poses of the classes that pass. The earlier record `viseme-poses.rocketbox-female` was made by this tool at its freeze commit `a0381b2` (see [calibration/README.md](../../calibration/README.md#frozen-part-ledger-and-held-out-seeds)); the tool no longer makes it.
+This tool makes the record `viseme-poses.rocketbox-features`. For each canonical viseme class, it fits one combination of ARKit shapes, with weights from 0 to 1 and each Left and Right pair tied, to the META viseme shapes of the 18 training rigs at once. For 4 classes it also fits visible mouth features, which the record's perceptual gate checks. It carries the weights to canonical expression signals through the ARKit in-maps. The pose bridge in the [canonical set](../../docs/canonical-set.md#viseme-pose-bridge) uses the poses of the classes that pass.
+
+The earlier records were made by earlier versions of this tool, and each is reproduced from its own freeze commit (see [calibration/README.md](../../calibration/README.md#frozen-part-ledger-and-held-out-seeds)): `viseme-poses.rocketbox-female` from `a0381b2`, `viseme-poses.rocketbox-multi` version 1 from `d53567c` and version 2 from `8354daf`. The method choice of version 1 (the table below, left and right apart) was made with the `cv` step at `c0b8b8b`; version 2 took the best mirror-symmetric candidate of that table.
 
 The tool uses only mesh geometry, so it needs no renderer and no extra packages: Python 3.11+ and the locked msf-character-tools release wheel, which reads the Rocketbox FBX files. The rig sets are in [viseme_rigs.json](viseme_rigs.json) (see [below](#rig-sets-for-the-multi-rig-viseme-poses-viseme_rigsjson)). Do these steps in this order:
 
-1. Commit the code. `python tools/calibration/viseme_poses.py cv --rig-cache DIR` prints the leave-one-rig-out comparison of the candidate methods. It loads only the training rigs. It takes about 6 minutes.
-2. `freeze --rig-cache DIR` checks that the rig sets follow their rule, fits the training rigs, writes `calibration/viseme-poses.rocketbox-multi.cal` without cells and adds its line to `calibration/FREEZES`. It never loads a held-out rig. **Commit the record and the ledger line before step 3.**
-3. `heldout --rig-cache DIR` refuses to run unless the record and its ledger line are committed, the installed msf-character-tools passes `check.py`'s lock check, the rig files and the pack have the SHA-256 that the record pins, and every repository file that the run imports, and `viseme_rigs.json`, is as at the record's `code_commit`. It then loads the held-out rigs, scores one cell per class and rig on the held-out seeds and adds the cells to the record. `--out FILE` also writes the cells, each cell's error at full weight and the list of code files as JSON. It takes under a minute.
+1. Commit the code. `python tools/calibration/viseme_poses.py cv --rig-cache DIR` prints the leave-one-rig-out comparison of the feature sets and fit weights. It loads only the training rigs. It takes about 6 minutes.
+2. `freeze --rig-cache DIR` checks that the rig sets follow their rules, fits the training rigs, sets the feature tolerances, writes `calibration/viseme-poses.rocketbox-features.cal` without cells and adds its line to `calibration/FREEZES`. It never loads a held-out rig. **Commit the record and the ledger line before step 3.**
+3. `heldout --rig-cache DIR` refuses to run unless the record and its ledger line are committed, the installed msf-character-tools passes `check.py`'s lock check, the rig files and the pack have the SHA-256 that the record pins, and every repository file that the run imports, and `viseme_rigs.json`, is as at the record's `code_commit`. It then loads the held-out rigs and adds one shape cell per class and rig, and one feature cell per gated class, feature and rig, all on the held-out seeds. `--out FILE` also writes them as JSON. It takes under a minute.
 
 The fit:
 
-- **Basis:** the 37 ARKit shapes that the in-maps of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` read. Left and Right shapes have their own weights. The blink and gaze shapes (`eyeBlink*`, `eyeLook*`), `jawLeft`, `jawRight`, `mouthLeft`, `mouthRight` and `tongueOut` are left out; the lid and cheek shapes (`eyeSquint`, `eyeWide`, `cheekSquint`) are in.
+- **Basis:** the 37 ARKit shapes that the in-maps of the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip` read, each Left and Right pair sharing one weight (24 weights). The blink and gaze shapes (`eyeBlink*`, `eyeLook*`), `jawLeft`, `jawRight`, `mouthLeft`, `mouthRight` and `tongueOut` are left out.
 - **Region:** on each rig, every vertex except the tongue, which is every vertex that the rig's `tongueOut` moves by more than 1% of its largest move.
-- **Objective:** on each training rig, the error is the distance between the fit and the rig's viseme shape, divided by how far the viseme shape moves the face. The fit makes the largest error over the training rigs as small as it can.
-- **Solver:** Lawson reweighting, 100 rounds. Each round fits bounded least squares (weights from 0 to 1) to the sum of each rig's weight times its squared error, by cyclic coordinate descent on the normal equations until no weight changes by more than 10⁻¹³. Each rig's weight starts at 1 and is then multiplied by its error. Weights are rounded to 3 decimals.
+- **Every class:** the weights with the smallest largest whole-mesh error over the training rigs (Lawson reweighting of bounded least squares, 100 rounds, each by cyclic coordinate descent to a change below 10⁻¹³).
+- **Gated classes** (`bilabial`, `vowel_close_rounded`, `vowel_mid_spread`, `alveolar_sibilant`): from there, 8 Gauss-Newton steps with Levenberg damping on the sum over the training rigs of the squared whole-mesh error plus each squared feature error divided by its tolerance (for a range feature, its distance from the middle of the range divided by half the width).
+- Weights are rounded to 3 decimals.
 
-How the method was chosen, on the training rigs only. Each candidate was fitted to 9 training rigs and scored on the 10th, for each of the 10 rigs. The candidates were: an objective that sums the squared errors or makes the largest error small (minimax); Left and Right with their own weights or one shared weight (mirror-symmetric, as in the earlier record); and the lip region (the vertices that `mouthFunnel` moves by more than 20% of its largest move) weighted 5 times or not. The rule was to take the candidate with the most classes at or below 0.5 on every left-out rig, then the lowest mean of the largest error per class. Results (`cv` at `c0b8b8b`):
+The features (class `Mouth` in the tool) are measured on landmark vertices that each rig's own ARKit shapes pick out, so the same rule applies to any Rocketbox rig. The centre is the vertex that `jawOpen` moves most. The lips are the vertices that `mouthFunnel` moves by more than 20% of its largest move, within 1 cm of the centre's height. A lip vertex is upper lip if `jawOpen` moves it by less than 30% of its largest move, and lower lip if by more than 60%. The mid line is |x| ≤ 3 mm. The corners are the lip vertices that `mouthSmileLeft` and `mouthSmileRight` move most. The lower teeth are vertices that `jawOpen` moves by more than 80% and `mouthFunnel` by less than 5%, behind the lips and near the centre.
+
+- `lip_opening_mm`: the lowest mid-line upper-lip landmark minus the highest mid-line lower-lip landmark. It is negative when the inner edges overlap.
+- `lip_protrusion_mm`: the mean forward movement of the mid-line lip landmarks within 2 cm of the centre's height.
+- `corner_width_ratio`: the distance between the corners, divided by the neutral distance.
+- `jaw_drop_mm`: the mean downward movement of the lower-teeth landmarks.
+- `teeth_to_lower_lip_mm` (tried for `labiodental`, not used): the smallest distance from an upper-teeth landmark to a lower-lip landmark.
+- `whole_face_error`, the guard of every gated class: the whole-mesh error of the condition, which must be at most 1.
+
+The tolerance of a difference feature is the largest distance of a training rig's own viseme feature from the median over the 18 training rigs, at least 0.5 mm or 0.02, rounded up to 3 decimals. The `bilabial` lip opening has a fixed range instead, from −2.0 to 0.5 mm. The upper end is the largest neutral opening of any training rig (0.49 mm), rounded up: lips at rest count as closed. The lower end allows the overlap of the rigs' own PP shapes (down to −1.4 mm) and no deeper pass-through.
+
+How the gate was chosen, on the training rigs only. For each candidate feature set, the poses were fitted to 17 training rigs and scored on the 18th, for each of the 18 rigs, at class weights 1, 0.6 and 0.2. A set was kept if every fold passed and the neutral face passes it on at most half of the training rigs, so that it tests something. The fit weight of the whole-mesh error, 1 or 4, was the one with the most classes kept, then the lowest largest error over tolerance. Results (`cv` at `295f4d7`; largest error over tolerance in the folds, range features in mm outside the range):
+
+| Class | Features | Shape-only pose: folds failing | Fit weight 1: folds failing | Largest error / tolerance (weight 1) | Whole-mesh error (largest) | Neutral face passes |
+|---|---|---|---|---|---|---|
+| `bilabial` | lip opening (range), protrusion | 18 of 18 | 0 of 18 | 0.000 mm, 0.178 | 0.819 | 0 of 18 |
+| `vowel_close_rounded` | corner width, protrusion | 18 of 18 | 0 of 18 | 0.584, 0.466 | 0.928 | 0 of 18 |
+| `vowel_mid_spread` | corner width, lip opening | 18 of 18 | 0 of 18 | 0.450, 0.643 | 0.635 | 0 of 18 |
+| `alveolar_sibilant` | lip opening, jaw drop | 0 of 18 | 0 of 18 | 0.665, 0.001 | 0.780 | 1 of 18 |
+| `labiodental` | teeth to lower lip | 0 of 18 | 0 of 18 | 0.282 | 0.933 | 18 of 18 (rejected) |
+| `labiodental` | teeth to lower lip, lip opening | 14 of 18 | 1 of 18 (rejected) | 0.169, 2.671 | 0.969 | 0 of 18 |
+
+Fit weight 4 kept the same classes with slightly larger errors over tolerance, so weight 1 was chosen. A first trial for `bilabial` asked for the lip compression of the rigs' own PP shapes (the lips get about 5 mm thinner). No combination of the ARKit shapes met it without moving the inner lip edges past each other, so the gate asks for closed and drawn-back lips instead.
+
+The held-out cells use 24 conditions, one per seed: the class at a weight from 0.2 to 1, and in half the conditions `sil` at 1 minus that weight. The shape error is as in the earlier records. The feature error of a condition compares the reconstruction with the rig's own viseme shapes at the same weights. A shape cell passes if its median and p95 errors are at most 0.5 and its neutral error is at most 0.01. A feature cell passes if its largest error is within the tolerance. A class passes if its shape cells pass on all 4 held-out rigs, or if all its feature cells do.
+
+### Version 1 and 2 of `viseme-poses.rocketbox-multi`
+
+How version 1's method was chosen, on its 10 training rigs only. Each candidate was fitted to 9 training rigs and scored on the 10th, for each of the 10 rigs. The candidates were: an objective that sums the squared errors or makes the largest error small (minimax); Left and Right with their own weights or one shared weight (mirror-symmetric); and the lip region (the vertices that `mouthFunnel` moves by more than 20% of its largest move) weighted 5 times or not. The rule was to take the candidate with the most classes at or below 0.5 on every left-out rig, then the lowest mean of the largest error per class. Results (`cv` at `c0b8b8b`):
 
 | Candidate | Classes at or below 0.5 on every left-out rig | Mean of the largest error per class |
 |---|---|---|
-| Female_Adult_01 alone, mirror-symmetric, least squares (the earlier method) | 7 | 0.514 |
-| minimax, Left and Right apart (chosen) | 8 | 0.479 |
+| Female_Adult_01 alone, mirror-symmetric, least squares (the method of `viseme-poses.rocketbox-female`) | 7 | 0.514 |
+| minimax, Left and Right apart (version 1) | 8 | 0.479 |
 | least squares, Left and Right apart | 7 | 0.484 |
-| minimax, mirror-symmetric | 8 | 0.506 |
+| minimax, mirror-symmetric (version 2) | 8 | 0.506 |
 | least squares, mirror-symmetric | 7 | 0.513 |
 | minimax, Left and Right apart, lip region ×5 | 6 | 0.499 |
 | least squares, Left and Right apart, lip region ×5 | 7 | 0.495 |
@@ -88,9 +119,7 @@ How the method was chosen, on the training rigs only. Each candidate was fitted 
 | least squares, mirror-symmetric, lip region ×5 | 7 | 0.522 |
 | each rig fitted to itself (a floor, not a candidate) | 9 | 0.443 |
 
-With the chosen method, the 8 classes are `vowel_open`, `vowel_close_spread`, `vowel_mid_rounded`, `dental`, `postalveolar` (largest 0.497), `coronal_stop`, `dorsal` and `sil`. `rhotic` reached 0.628 and `coronal_nasal_lateral` 0.590 on one left-out rig, Female_Adult_12. The lip weighting gave no lip class a pass: `bilabial` stayed at 0.71 or more and `labiodental` at 0.91 or more on its worst left-out rig. Even when each rig is fitted to itself, `vowel_mid_spread`, `vowel_close_rounded`, `bilabial`, `labiodental` and `alveolar_sibilant` stay above 0.5 on every rig, and `coronal_nasal_lateral` reaches 0.511 on one.
-
-The held-out cell of a class on a rig has 24 conditions, one per seed: the class at a weight from 0.2 to 1, and in half the conditions `sil` at 1 minus that weight. The error is the distance between the rig's own viseme shapes at those weights and the reconstruction, divided by how far the viseme shapes move the face. The reconstruction is the rig's ARKit shapes at the weights that the pack's ARKit out-maps give for the clamped sum of the frozen poses. Distances are Euclidean norms over all vertices except the rig's tongue. A cell passes if its median and p95 errors are at most 0.5 (the error is at most half the motion) and its neutral error is at most 0.01. A class passes if its cells pass on all 4 held-out rigs. The neutral bound cannot fail: at weight 0 the bridged weights are 0, so both faces are neutral.
+Version 1 left Left and Right apart. Its poses differed between the sides by up to 0.56, more than its limitations said, so version 2 tied them and was held out on fresh rigs. Its report-only lips step wrote [results/viseme_lips.json](results/viseme_lips.json).
 
 ## Rig sets for the multi-rig viseme poses (`viseme_rigs.json`)
 
