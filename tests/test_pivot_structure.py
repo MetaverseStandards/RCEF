@@ -6,8 +6,9 @@ hop maps against the rules in docs/canonical-set.md and the definitions audit
 (docs/canonical-set-audit.md), and against the retired direct maps, frozen in
 tests/fixtures/baseline-dea1713.pack.json:
 
-- names, directions and groups: one canonical group per map, a whole group
-  per in-map;
+- names and directions: one map per set pair and direction, named
+  <from>.to_<to>; the rules of a map, split by the canonical group they read
+  or write (its parts), write whole groups into the canonical sets;
 - sides and direction suffixes agree at both ends of every mapping;
 - split losses only on fan-outs and means; the endpoint clause matches the
   operator; the audit loss keys sit exactly on the hops the audit names;
@@ -19,10 +20,10 @@ tests/fixtures/baseline-dea1713.pack.json:
 - which canonical groups other sets could fill (the capability matrix);
 - every hop map, the signal records it reads and writes (without metadata) and
   the evidence records it uses are as in the B pack of the latest passing A/B
-  freeze, byte for byte (tests/fixtures/b-maps-ab.pivot-v1.json);
+  freeze, byte for byte (tests/fixtures/b-maps-ab.pivot-v3.json);
 - the viseme aggregate: its chain gives the clamped binary64 sum of its META
-  inputs, no route selects its in-map, and no out-map reads an aggregate or
-  refinement together with any of its parts.
+  inputs, no route reads it, and no out-map reads an aggregate or refinement
+  together with any of its parts.
 
 The viseme hops (META and the VRM vowels to and from the canonical viseme set)
 follow the same rules; their one fan-in, the aggregate alveolar_floor, is a
@@ -49,14 +50,19 @@ VISEME = 'rcef.canonical_viseme.'
 CANONICAL = (PREFIX, VISEME)
 INTERMEDIATE = 'rcef.intermediate.'
 SUM = build_canonical.INTERMEDIATE_SUM
+# The hop maps of the latest passing A/B freeze, and the registration that pinned their pack.
+FROZEN = 'tests/fixtures/b-maps-ab.pivot-v3.json'
 PROFILES = {'arkit': 'arkit.coefficient', 'fb2': 'openxr.fb2', 'vrcft_artist': 'vrcft.artist.base', 'vrm': 'vrm.preset',
             'visemes': 'openxr.visemes', 'facs': 'facs.code', 'vrcft_eye': 'vrcft.eye'}
-IN_MAP = re.compile(r'^(arkit|fb2|vrcft_artist|vrcft_eye|vrm|visemes|facs)_([a-z_]+)\.to_rcef$')
-OUT_MAP = re.compile(r'^rcef_([a-z_]+)\.to_(arkit|fb2|vrcft_artist|vrcft_eye|vrm|visemes|facs)$')
+SETS = 'arkit|fb2|vrcft_artist|vrcft_eye|vrm|visemes|facs'
+IN_MAP = re.compile(rf'^({SETS})\.to_(rcef_expression|rcef_viseme)$')
+OUT_MAP = re.compile(rf'^(rcef_expression|rcef_viseme)\.to_({SETS})$')
+CANONICAL_PROFILES = {'rcef_expression': 'rcef.canonical_expression', 'rcef_viseme': 'rcef.canonical_viseme'}
 # Mappings per set: (in-maps, out-maps). The FB2 gaze out-map has 4 internal steps, the META aggregate in-map 1.
 COUNTS = {'arkit': (60, 52), 'fb2': (70, 74), 'vrcft_artist': (0, 72), 'vrm': (7, 7), 'visemes': (17, 15),
           'facs': (53, 49), 'vrcft_eye': (4, 4)}
-MAPS = 84
+# Maps between a set and a canonical set, and their parts: the rules of a map that read or write one canonical group.
+MAPS, PARTS = 15, 84
 # FACS hop keys that come from the code, not from an audit row: every hop, the side letters, AU43 and the gross codes.
 FACS_GROSS = ('29', '30', '34', '35', '43')
 # Pairs of a rule's two ends whose sides may differ although neither is shared. None today.
@@ -69,7 +75,7 @@ OPERATORS = [{'id': 'affine', 'scale': 1.0, 'offset': 0.0}, {'id': 'affine', 'sc
              {'id': 'piecewise_linear', 'knots': [[-1.0, 0.0], [0.0, 0.0], [1.0, 1.0]]},
              {'id': 'piecewise_linear', 'knots': [[-1.0, 1.0], [0.0, 0.0], [1.0, 0.0]]}]
 # Census exceptions, each allowed in one map only: the viseme aggregate's fan-in and its clamp.
-EXCEPTIONS = {'visemes_aggregate.to_rcef': [{'id': 'weighted_sum', 'weights': [1.0, 1.0, 1.0, 1.0]},
+EXCEPTIONS = {'visemes.to_rcef_viseme': [{'id': 'weighted_sum', 'weights': [1.0, 1.0, 1.0, 1.0]},
                                             {'id': 'piecewise_linear', 'knots': [[0.0, 0.0], [1.0, 1.0], [4.0, 1.0]]}]}
 KEYS = {'correspondence', 'endpoints', 'transfer.provider', 'transfer.withdrawn', 'transfer.facs_crosswalk',
         'transfer.chain', 'fan_out.vrcft_ue', 'net.fb2_gaze', 'gaze.fb2_exclusive', 'mean.arkit',
@@ -217,19 +223,27 @@ class PivotStructure(unittest.TestCase):
         cls.docs = build_canonical.read_documents(ROOT)
         cls.visemes = build_canonical.VisemeBuilder(ROOT)
         cls.group = {sid: s['metadata']['group'] for sid, s in cls.signals.items() if sid.startswith(CANONICAL)}
-        groups = set(cls.group.values())
-        cls.hops = []  # (map, direction, set, group, rules); a viseme in-map names its group without "viseme_"
-        for mapping in cls.pack['mappings']:
-            if m := IN_MAP.match(mapping['id']):
-                group = m.group(2) if m.group(2) in groups else 'viseme_' + m.group(2)
-                cls.hops.append((mapping['id'], 'in', m.group(1), group, mapping['rules']))
-            elif m := OUT_MAP.match(mapping['id']):
-                cls.hops.append((mapping['id'], 'out', m.group(2), m.group(1), mapping['rules']))
         cls.sum_target = next(r['outputs'][0] for m in cls.pack['mappings'] for r in m['rules'] if r['inputs'] == [SUM])
         cls._pairs = None
         builder = build_canonical.Builder(ROOT)
         cls.aligned = builder.aligned
         cls.facs = build_canonical.FacsBuilder(ROOT, builder)
+        # The parts of each map: (map, direction, set, group, rules), one per canonical group its rules read or write.
+        cls.maps, cls.hops = [], []
+        for mapping in cls.pack['mappings']:
+            if m := IN_MAP.match(mapping['id']):
+                direction, key = 'in', m.group(1)
+            elif m := OUT_MAP.match(mapping['id']):
+                direction, key = 'out', m.group(2)
+            else:
+                continue
+            cls.maps.append((mapping['id'], direction, key, mapping['rules']))
+            parts = {}
+            for rule in mapping['rules']:
+                groups = {cls.group[c] for c in cls.canonical(cls, rule)}
+                parts.setdefault(groups.pop() if len(groups) == 1 else None, []).append(rule)
+            for group, rules in parts.items():
+                cls.hops.append((mapping['id'], direction, key, group, rules))
         cls.groups = next(p['metadata']['groups'] for p in cls.pack['profiles'] if p['id'] == 'rcef.canonical_expression')
 
     @property
@@ -278,26 +292,53 @@ class PivotStructure(unittest.TestCase):
 
     def test_every_map_with_a_canonical_signal_is_a_named_hop(self):
         # The pose bridge joins the two canonical sets; tests/test_pose_bridge.py checks it.
-        named = {h[0] for h in self.hops} | {build_canonical.POSE_MAP}
+        named = {m[0] for m in self.maps} | {build_canonical.POSE_MAP}
         for mapping in self.pack['mappings']:
             if all(r['disposition'] == 'unresolved' for r in mapping['rules']):
                 continue  # a record, such as survey.ambiguous: msf-character-tools never compiles it
             if any(s.startswith(CANONICAL) for r in mapping['rules'] for s in r['inputs'] + r['outputs']):
                 self.assertIn(mapping['id'], named)
-        self.assertEqual(len(self.hops), MAPS)
+        self.assertEqual((len(self.maps), len(self.hops)), (MAPS, PARTS))
         counts = {key: [0, 0] for key in COUNTS}
         for _, direction, key, _, rules in self.hops:
             counts[key][direction == 'out'] += len(rules)
         self.assertEqual({k: tuple(v) for k, v in counts.items()}, COUNTS)
 
-    def test_each_map_reads_and_writes_one_group(self):
+    def test_one_map_per_set_pair_and_direction(self):
+        seen = {}
+        for mapping in self.pack['mappings']:
+            rules = mapping['rules']
+            if all(r['disposition'] == 'unresolved' for r in rules) or mapping['id'] == build_canonical.POSE_MAP:
+                continue
+            inputs, outputs = rcef_route.map_ends(rules)
+            touched = {p for p, members in self.members.items() if p in CANONICAL_PROFILES.values()
+                       and members & set(inputs + outputs)}
+            if not touched:
+                continue
+            with self.subTest(map=mapping['id']):
+                found = IN_MAP.match(mapping['id']) or OUT_MAP.match(mapping['id'])
+                self.assertIsNotNone(found, 'a map between a set and a canonical set is named <from>.to_<to>')
+                if IN_MAP.match(mapping['id']):
+                    key, canonical, direction = found.group(1), found.group(2), 'in'
+                    self.assertLessEqual(set(inputs), self.members[PROFILES[key]])
+                    self.assertLessEqual(set(outputs), self.members[CANONICAL_PROFILES[canonical]])
+                else:
+                    canonical, key, direction = found.group(1), found.group(2), 'out'
+                    self.assertLessEqual(set(inputs), self.members[CANONICAL_PROFILES[canonical]])
+                    self.assertLessEqual(set(outputs), self.members[PROFILES[key]])
+                self.assertNotIn((key, canonical, direction), seen, 'one map per set pair and direction')
+                seen[key, canonical, direction] = mapping['id']
+        self.assertEqual(len(seen), MAPS)
+
+    def test_each_part_of_a_map_reads_or_writes_one_whole_group(self):
         whole = {}
         for sid, group in self.group.items():
             whole.setdefault(group, set()).add(sid)
         for map_id, direction, key, group, rules in self.hops:
             inputs, outputs = rcef_route.map_ends(rules)
             computed = {o for r in rules for o in r['outputs']} - set(outputs)
-            with self.subTest(map=map_id):
+            with self.subTest(map=map_id, group=group):
+                self.assertIn(group, whole)
                 self.assertLessEqual(computed, self.members['rcef.intermediate'])
                 if direction == 'in':
                     self.assertLessEqual(set(inputs), self.members[PROFILES[key]])
@@ -603,16 +644,16 @@ class PivotStructure(unittest.TestCase):
         # sets, the records of the signals they read and write (without metadata) and the evidence records they use
         # must stay byte for byte as in the B pack of the latest passing freeze, unless a "revise" freeze comes first
         # (ab/README.md).
-        frozen = json.loads((ROOT / 'tests/fixtures/b-maps-ab.pivot-v1.json').read_text(encoding='utf-8'))
+        frozen = json.loads((ROOT / FROZEN).read_text(encoding='utf-8'))
         hops = {m['id'] for m in self.pack['mappings'] if m['id'] != 'survey.ambiguous'
                 and not m['id'].startswith('fixture.')}
         self.assertEqual(hops, set(frozen['maps']))
         self.assertEqual(frozen_parts(self.pack, hops), {k: frozen[k] for k in ('maps', 'signals', 'evidence')})
         self.assertFalse(set(build_canonical.A1_MAPS) & {m['id'] for m in self.pack['mappings']})
         self.assertEqual(set(A1_PAIRS), set(build_canonical.A1_MAPS))
-        registration = json.loads((ROOT / 'ab/ab.pivot-v1.abreg').read_text(encoding='utf-8'))
+        registration = json.loads((ROOT / frozen['registration']).read_text(encoding='utf-8'))
         self.assertEqual(frozen['b_pack_sha256'], registration['pins']['b_pack_sha256'])
-        registered = shared_pack.registered_pack('ab/ab.pivot-v1.abreg')
+        registered = shared_pack.registered_pack(frozen['registration'])
         if registered is None:
             self.skipTest('no Git history for the registered pack')
         self.assertEqual(frozen_parts(registered, hops), {k: frozen[k] for k in ('maps', 'signals', 'evidence')})
@@ -653,14 +694,15 @@ class PivotStructure(unittest.TestCase):
 
     def test_the_aggregate_chain_gives_the_clamped_sum(self):
         pack = rcef_translate.load_pack(self.pack)
-        route = rcef_route.Route('openxr.visemes', VISEME[:-1], pack=pack, maps=['visemes_aggregate.to_rcef'])
+        route = rcef_route.Route('openxr.visemes', VISEME[:-1], pack=pack, maps=['visemes.to_rcef_viseme'])
         step = next(r for _, _, _, _, r in self.hop_rules() if r['outputs'] == [SUM])
-        target = route.outputs[0]
-        self.assertEqual(route.outputs, [self.sum_target])
+        target = self.sum_target
+        self.assertIn(target, route.outputs)
+        others = dict.fromkeys(route.kept - set(step['inputs']), 0.0)
         rng = random.Random(4)
         frames = [[0.0] * 4, [1.0] * 4, [0.25] * 4, [0.5, 0.5, 0.0, 0.0], [1.0, 0.0, 0.0, 0.0]]
         frames += [[rng.random() * rng.choice((0.25, 0.5, 1.0)) for _ in step['inputs']] for _ in range(20000)]
-        results = route.translate([{'time': n / 60, 'values': dict(zip(step['inputs'], x)),
+        results = route.translate([{'time': n / 60, 'values': {**others, **dict(zip(step['inputs'], x))},
                                     'flags': {'isValid': True}}
                                    for n, x in enumerate(frames)])
         for x, result in zip(frames, results):
@@ -669,14 +711,15 @@ class PivotStructure(unittest.TestCase):
                 total += value
             self.assertEqual(result['values'][target], min(total, 1.0), x)
 
-    def test_no_route_selects_the_aggregate_in_map(self):
+    def test_no_route_reads_the_aggregate(self):
         pack = rcef_translate.load_pack(self.pack)
         for source, target in [('openxr.visemes', 'vrm.preset'), ('openxr.visemes', 'openxr.visemes'),
-                               ('vrm.preset', 'openxr.visemes'), ('vrm.preset', 'vrm.preset')]:
+                               ('vrm.preset', 'openxr.visemes'), ('vrm.preset', 'vrm.preset'),
+                               ('openxr.visemes', 'arkit.coefficient')]:
             with self.subTest(source=source, target=target):
                 route = rcef_route.Route(source, target, pack=pack)
-                self.assertNotIn('visemes_aggregate.to_rcef', route.in_maps)
-                self.assertNotIn(SUM, {o for m in route.in_maps for o in route.rules[m][0]['outputs']})
+                self.assertNotIn(self.sum_target, route.read)
+                self.assertNotIn(self.sum_target, route.outputs)
 
     def test_no_out_map_reads_an_aggregate_or_refinement_with_its_parts(self):
         parts = {}
@@ -694,24 +737,42 @@ class PivotStructure(unittest.TestCase):
                 with self.subTest(map=map_id, signal=derived):
                     self.assertFalse(derived in read and read & members)
 
-    def test_a_missing_face_input_refuses_only_the_face_outputs(self):
+    def depends_on(self, map_ids, sid):
+        """Every signal that the rules of these maps compute from `sid`, read from the rules, not from Route."""
+        rules = [r for m in self.pack['mappings'] if m['id'] in map_ids for r in m['rules']]
+        found, todo = set(), [sid]
+        while todo:
+            current = todo.pop()
+            for rule in rules:
+                if current in rule['inputs'] and rule['outputs'][0] not in found:
+                    found.add(rule['outputs'][0])
+                    todo.append(rule['outputs'][0])
+        return found
+
+    def test_a_missing_or_bad_input_stops_only_the_outputs_that_read_it(self):
         pack = rcef_translate.load_pack(self.pack)
         route = rcef_route.Route('arkit.coefficient', 'openxr.fb2', pack=pack)
-        values = {s: 0.25 for s in self.members['arkit.coefficient'] if s in route.kept}
-        del values['arkit.coefficient.browDownLeft']
-        result, = route.translate([{'time': 0.0, 'values': values, 'flags': {}}])
-        face = set(rcef_route.map_ends(next(r for m, _, k, g, r in self.hops if m == 'rcef_face.to_fb2'))[1])
-        # ARKit fills no FB2-only group, so those outputs are not available, which is not a refusal.
+        self.assertEqual((route.in_maps, route.out_maps), (['arkit.to_rcef_expression'], ['rcef_expression.to_fb2']))
+        gone = 'arkit.coefficient.browDownLeft'
+        reads = self.depends_on(set(route.in_maps + route.out_maps), gone) & set(route.outputs)
+        # ARKit fills no FB2-only group, so those outputs are never available.
         fb2_only = {o for m, d, k, g, r in self.hops if d == 'out' and k == 'fb2'
                     and g in ('cheek_suck', 'lip_tighten', 'tongue_place') for o in rcef_route.map_ends(r)[1]}
         self.assertEqual(len(fb2_only), 10)
-        refused = {o for o, label in result['labels'].items() if label != rcef_route.NOT_AVAILABLE}
-        self.assertEqual(refused, face)
-        self.assertEqual(set(result['labels']) - face, fb2_only)
-        self.assertEqual({result['labels'][o] for o in face}, {'refused upstream at arkit_face.to_rcef'})
-        self.assertEqual(set(result['values']), set(route.outputs) - face - fb2_only)
-        self.assertIn('openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB', result['values'])
-
+        self.assertEqual(reads, {'openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB'})
+        values = {s: 0.25 for s in self.members['arkit.coefficient'] if s in route.kept}
+        del values[gone]
+        missing, = route.translate([{'time': 0.0, 'values': values, 'flags': {}}])
+        bad, = route.translate([{'time': 0.0, 'values': {**values, gone: 1.5}, 'flags': {}}])
+        for result, label in ((missing, rcef_route.NOT_AVAILABLE),
+                              (bad, 'refused upstream at arkit.to_rcef_expression')):
+            with self.subTest(label=label):
+                self.assertEqual(result['labels'], {**dict.fromkeys(fb2_only, rcef_route.NOT_AVAILABLE),
+                                                    **dict.fromkeys(reads, label)})
+                self.assertEqual(set(result['values']), set(route.outputs) - reads - fb2_only)
+        self.assertEqual(missing['refused'], {})
+        self.assertEqual(bad['refused'], {'arkit.to_rcef_expression': {
+            'codes': ['E_DOMAIN'], 'refs': [gone], 'outputs': [PREFIX + 'brow_lower_left']}})
 
 if __name__ == '__main__':
     unittest.main()

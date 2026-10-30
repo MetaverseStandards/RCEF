@@ -149,11 +149,19 @@ class FullArkitRig(unittest.TestCase):
                             for c in anger))
 
     def test_shapes_without_a_rule_are_labelled_not_failed(self):
-        # The route without its gaze hops writes no eyeLook* coefficient.
+        # The route without the gaze mappings of its maps writes no eyeLook* coefficient.
         route = self.translator.route
-        maps = [m for m in route.in_maps + route.out_maps if m not in ('fb2_gaze.to_rcef', 'rcef_gaze.to_arkit')]
-        self.assertEqual(len(maps), len(route.in_maps + route.out_maps) - 2)
-        document = shared_pack.cut(shared_pack.document(), maps, ['openxr.fb2'])
+        maps = route.in_maps + route.out_maps
+        document = shared_pack.document()
+        gaze = {s['id'] for s in document['signals'] if s.get('metadata', {}).get('group') == 'gaze'}
+        removed = 0
+        for mapping in document['mappings']:
+            if mapping['id'] in maps:
+                kept = [r for r in mapping['rules'] if not gaze & set(r['inputs'] + r['outputs'])]
+                removed += len(mapping['rules']) - len(kept)
+                mapping['rules'] = kept
+        self.assertEqual(removed, 16)
+        document = shared_pack.cut(document, maps, ['openxr.fb2'])
         face_only = rcef_frames.Frames('openxr.fb2', 'arkit.coefficient', *rcef_frames.FB2,
                                        pack=rcef_frames.load_pack(document))
         frames = [f for f in self.frames if f['segment'] == 'look up']

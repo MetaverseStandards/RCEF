@@ -42,6 +42,9 @@ def local(sid: str) -> str:
     return sid[len(PROFILE) + 1:]
 
 
+# One map per direction between FACS codes and the canonical expression set.
+IN_MAP, OUT_MAP = 'facs.to_rcef_expression', 'rcef_expression.to_facs'
+
 class FacsProfile(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -51,8 +54,7 @@ class FacsProfile(unittest.TestCase):
         cls.profile = profile
         cls.rows = [cls.signals[s] for s in profile['signal_ids']]
         cls.mapped = [s for s in cls.rows if s['disposition'] == 'mapped']
-        cls.maps = {m['id']: m['rules'] for m in cls.pack['mappings']
-                    if m['id'].startswith('facs_') or m['id'].endswith('.to_facs')}
+        cls.maps = {m['id']: m['rules'] for m in cls.pack['mappings'] if m['id'] in (IN_MAP, OUT_MAP)}
         cls.hops = [(m, r) for m, rules in cls.maps.items() for r in rules]
         cls.doc = (ROOT / 'docs/canonical-set.md').read_text(encoding='utf-8')
         cls.keys = {}
@@ -174,10 +176,10 @@ class FacsProfile(unittest.TestCase):
             rows = [s['disposition'] for s in self.rows if self.code(s) == code]
             self.assertEqual(set(rows) or {'none'}, {entry['disposition']}, code)
 
-    def test_16_maps_with_102_mappings_and_their_operators(self):
-        self.assertEqual(len(self.maps), 16)
-        ins = [r for m, r in self.hops if m.startswith('facs_')]
-        outs = [r for m, r in self.hops if m.endswith('.to_facs')]
+    def test_2_maps_with_102_mappings_and_their_operators(self):
+        self.assertEqual(list(self.maps), [IN_MAP, OUT_MAP])
+        ins = [r for m, r in self.hops if m == IN_MAP]
+        outs = [r for m, r in self.hops if m == OUT_MAP]
         self.assertEqual((len(ins), len(outs)), (53, 49))
         self.assertTrue(all(r['operator'] == COPY for r in ins))
         means = [r for r in outs if r['operator'] == MEAN]
@@ -196,7 +198,7 @@ class FacsProfile(unittest.TestCase):
     def test_facs_au_agrees_with_the_maps_both_ways(self):
         written = {}
         for map_id, rule in self.hops:
-            if map_id.startswith('facs_'):
+            if map_id == IN_MAP:
                 written[rule['outputs'][0]] = self.code(self.signals[rule['inputs'][0]])
         canonical = [s for s in self.pack['signals'] if s['id'].startswith(PREFIX)]
         for s in canonical:
@@ -204,7 +206,7 @@ class FacsProfile(unittest.TestCase):
                 self.assertEqual(written.get(s['id'], ''), s['metadata']['facs_au'])
         for s in self.mapped:
             readers = [self.canonical_ends(r) for m, r in self.hops
-                       if m.endswith('.to_facs') and r['outputs'] == [s['id']]]
+                       if m == OUT_MAP and r['outputs'] == [s['id']]]
             self.assertEqual(len(readers), 1, s['id'])
             for short in readers[0]:
                 self.assertEqual(self.signals[PREFIX + short]['metadata']['facs_au'], self.code(s), s['id'])
@@ -239,7 +241,7 @@ class FacsProfile(unittest.TestCase):
                 self.assertEqual(keys, expected)
                 for key in keys:
                     self.assertIn(f'{key}: {self.keys[key]}', reasons)
-                fan = map_id.startswith('facs_') and code in PARTS
+                fan = map_id == IN_MAP and code in PARTS
                 mean = rule['operator'] == MEAN
                 self.assertEqual('asymmetry unknown: symmetry is invented' in reasons, fan)
                 self.assertEqual('asymmetry irrecoverable' in reasons, mean)

@@ -6,7 +6,7 @@
 # classes whose held-out cells pass. See docs/canonical-set.md.
 
 [[mappings]]
-id = "rcef_viseme_pose.to_rcef_expression"
+id = "rcef_viseme.to_rcef_expression"
 
 [[mappings.rules]]
 id = "rcef_viseme_pose.vowel_open"

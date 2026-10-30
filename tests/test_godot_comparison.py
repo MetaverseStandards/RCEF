@@ -30,14 +30,14 @@ class GodotComparison(unittest.TestCase):
 
     def test_rows_name_both_hops(self):
         rows = {r['arkit']: r for r in compare_godot.compare(self.pack, self.routes)}
-        self.assertEqual(rows['cheekPuff']['mapping'], '`fb2_cheek_puff.to_rcef` → `rcef_cheek_puff.to_arkit`')
-        self.assertEqual(rows['eyeLookInLeft']['mapping'], '`fb2_gaze.to_rcef` → `rcef_gaze.to_arkit`')
+        self.assertEqual(rows['cheekPuff']['mapping'], '`fb2.to_rcef_expression` → `rcef_expression.to_arkit`')
+        self.assertEqual(rows['eyeLookInLeft']['mapping'], '`fb2.to_rcef_expression` → `rcef_expression.to_arkit`')
 
     def test_a_changed_weight_is_reported(self):
         # A change in either hop changes the composed weights.
         for mapping, output, change in (
-                ('rcef_cheek_puff.to_arkit', 'arkit.coefficient.cheekPuff', {'weights': [0.75, 0.25]}),
-                ('fb2_cheek_puff.to_rcef', 'rcef.canonical_expression.cheek_puff_left', {'scale': 0.5})):
+                ('rcef_expression.to_arkit', 'arkit.coefficient.cheekPuff', {'weights': [0.75, 0.25]}),
+                ('fb2.to_rcef_expression', 'rcef.canonical_expression.cheek_puff_left', {'scale': 0.5})):
             with self.subTest(mapping):
                 pack = json.loads(json.dumps(self.pack))
                 rule = next(r for m in pack['mappings'] if m['id'] == mapping for r in m['rules']

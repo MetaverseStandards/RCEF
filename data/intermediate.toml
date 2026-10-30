@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # Original RCEF data. Values computed inside a mapping and never read or written
-# by a provider. The first four belong to the out-map rcef_gaze.to_fb2 and the
-# fifth to the viseme in-map visemes_aggregate.to_rcef. Its units are the
+# by a provider. The first four belong to the out-map rcef_expression.to_fb2 and the
+# fifth to the viseme in-map visemes.to_rcef_viseme. Its units are the
 # source's, probability, because a weighted sum cannot change units; its range,
 # 0 to 4, is not a probability range. The rest belong to the viseme pose bridge
-# rcef_viseme_pose.to_rcef_expression; scripts/build_canonical.py writes them and
+# rcef_viseme.to_rcef_expression; scripts/build_canonical.py writes them and
 # the profile.
 
 [[signals]]
@@ -19,7 +19,7 @@ evidence = ["rcef_canonical_v1", "xr_fb2"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The left eye's canonical gaze toward the nose minus toward the temple, from -1 to 1. Computed inside rcef_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The left eye's canonical gaze toward the nose minus toward the temple, from -1 to 1. Computed inside rcef_expression.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "gaze"
 
 [[signals]]
@@ -34,7 +34,7 @@ evidence = ["rcef_canonical_v1", "xr_fb2"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The left eye's canonical gaze up minus down, from -1 to 1. Computed inside rcef_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The left eye's canonical gaze up minus down, from -1 to 1. Computed inside rcef_expression.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "gaze"
 
 [[signals]]
@@ -49,7 +49,7 @@ evidence = ["rcef_canonical_v1", "xr_fb2"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The right eye's canonical gaze toward the nose minus toward the temple, from -1 to 1. Computed inside rcef_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The right eye's canonical gaze toward the nose minus toward the temple, from -1 to 1. Computed inside rcef_expression.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "gaze"
 
 [[signals]]
@@ -64,7 +64,7 @@ evidence = ["rcef_canonical_v1", "xr_fb2"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The right eye's canonical gaze up minus down, from -1 to 1. Computed inside rcef_gaze.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The right eye's canonical gaze up minus down, from -1 to 1. Computed inside rcef_expression.to_fb2 and split into the two opposing FB2 directions; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "gaze"
 
 [[signals]]
@@ -78,7 +78,7 @@ disposition = "mapped"
 evidence = ["xr_visemes", "rcef_canonical_v1"]
 evidence_status = "proposed"
 side = "shared"
-metadata = { "definition" = "The sum of META's SS, DD, NN and RR class probabilities, from 0 to 4. Computed inside visemes_aggregate.to_rcef and clamped at 1 into the canonical aggregate alveolar_floor; no provider reads or writes it. The viseme domain of 0 to 1 does not apply to this helper.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of META's SS, DD, NN and RR class probabilities, from 0 to 4. Computed inside visemes.to_rcef_viseme and clamped at 1 into the canonical aggregate alveolar_floor; no provider reads or writes it. The viseme domain of 0 to 1 does not apply to this helper.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 
@@ -97,7 +97,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical vowel_open, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical vowel_open, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -112,7 +112,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical vowel_mid_spread, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical vowel_mid_spread, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -127,7 +127,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical vowel_close_spread, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical vowel_close_spread, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -142,7 +142,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical vowel_mid_rounded, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical vowel_mid_rounded, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -157,7 +157,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical vowel_close_rounded, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical vowel_close_rounded, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -172,7 +172,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical bilabial, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical bilabial, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -187,7 +187,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical dental, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical dental, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -202,7 +202,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical alveolar_sibilant, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical alveolar_sibilant, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -217,7 +217,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical coronal_stop, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical coronal_stop, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -232,7 +232,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical dorsal, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical dorsal, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -247,7 +247,7 @@ evidence = ["rcef_canonical_v1", "ipa_chart_doulos_2020"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The weight of canonical sil, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme_pose.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The weight of canonical sil, read as how far its viseme pose is reached, from 0 to 1. Computed inside rcef_viseme.to_rcef_expression; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -262,7 +262,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_inner_raise_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_inner_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_inner_raise_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into brow_inner_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "brow"
 
 [[signals]]
@@ -277,7 +277,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_inner_raise_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_inner_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_inner_raise_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into brow_inner_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "brow"
 
 [[signals]]
@@ -292,7 +292,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_outer_raise_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_outer_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_outer_raise_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into brow_outer_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "brow"
 
 [[signals]]
@@ -307,7 +307,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_outer_raise_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_outer_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_outer_raise_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into brow_outer_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "brow"
 
 [[signals]]
@@ -322,7 +322,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_lower_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_lower_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_lower_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into brow_lower_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "brow"
 
 [[signals]]
@@ -337,7 +337,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_lower_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into brow_lower_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical brow_lower_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into brow_lower_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "brow"
 
 [[signals]]
@@ -352,7 +352,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lid_tighten_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lid_tighten_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lid_tighten_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lid_tighten_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "eyelid"
 
 [[signals]]
@@ -367,7 +367,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lid_tighten_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lid_tighten_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lid_tighten_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lid_tighten_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "eyelid"
 
 [[signals]]
@@ -382,7 +382,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lid_raise_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into upper_lid_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lid_raise_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into upper_lid_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "eyelid"
 
 [[signals]]
@@ -397,7 +397,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lid_raise_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into upper_lid_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lid_raise_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into upper_lid_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "eyelid"
 
 [[signals]]
@@ -412,7 +412,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_raise_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into cheek_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_raise_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into cheek_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "cheek"
 
 [[signals]]
@@ -427,7 +427,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_raise_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into cheek_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_raise_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into cheek_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "cheek"
 
 [[signals]]
@@ -442,7 +442,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical nose_wrinkle_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into nose_wrinkle_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical nose_wrinkle_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into nose_wrinkle_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "nose"
 
 [[signals]]
@@ -457,7 +457,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical nose_wrinkle_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into nose_wrinkle_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical nose_wrinkle_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into nose_wrinkle_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "nose"
 
 [[signals]]
@@ -472,7 +472,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical jaw_drop, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into jaw_drop; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical jaw_drop, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into jaw_drop; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "jaw"
 
 [[signals]]
@@ -487,7 +487,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_pull_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_corner_pull_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_pull_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_corner_pull_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -502,7 +502,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_pull_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_corner_pull_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_pull_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_corner_pull_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -517,7 +517,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_depress_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_corner_depress_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_depress_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_corner_depress_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -532,7 +532,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_depress_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_corner_depress_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_corner_depress_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_corner_depress_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -547,7 +547,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical dimple_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into dimple_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical dimple_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into dimple_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -562,7 +562,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical dimple_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into dimple_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical dimple_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into dimple_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -577,7 +577,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_stretch_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_stretch_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_stretch_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_stretch_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -592,7 +592,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_stretch_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_stretch_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_stretch_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_stretch_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -607,7 +607,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical chin_raise, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into chin_raise; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical chin_raise, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into chin_raise; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -622,7 +622,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_upper_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_funnel_upper_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_upper_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_funnel_upper_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -637,7 +637,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_upper_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_funnel_upper_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_upper_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_funnel_upper_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -652,7 +652,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_lower_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_funnel_lower_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_lower_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_funnel_lower_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -667,7 +667,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_lower_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_funnel_lower_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_funnel_lower_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_funnel_lower_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -682,7 +682,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_pucker_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_pucker_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_pucker_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_pucker_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -697,7 +697,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_pucker_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_pucker_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_pucker_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_pucker_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -712,7 +712,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_upper_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_suck_upper_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_upper_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_suck_upper_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -727,7 +727,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_upper_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_suck_upper_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_upper_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_suck_upper_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -742,7 +742,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_lower_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_suck_lower_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_lower_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_suck_lower_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -757,7 +757,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_lower_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_suck_lower_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_suck_lower_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_suck_lower_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -772,7 +772,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_press_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_press_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_press_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_press_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -787,7 +787,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_press_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lip_press_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lip_press_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lip_press_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -802,7 +802,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lips_toward, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lips_toward; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lips_toward, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lips_toward; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -817,7 +817,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lip_raise_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into upper_lip_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lip_raise_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into upper_lip_raise_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -832,7 +832,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lip_raise_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into upper_lip_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical upper_lip_raise_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into upper_lip_raise_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -847,7 +847,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lower_lip_depress_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lower_lip_depress_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lower_lip_depress_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lower_lip_depress_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -862,7 +862,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lower_lip_depress_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into lower_lip_depress_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical lower_lip_depress_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into lower_lip_depress_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[signals]]
@@ -877,7 +877,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "left"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_puff_left, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into cheek_puff_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_puff_left, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into cheek_puff_left; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "cheek"
 
 [[signals]]
@@ -892,7 +892,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "right"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_puff_right, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into cheek_puff_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical cheek_puff_right, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into cheek_puff_right; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "cheek"
 
 [[signals]]
@@ -907,7 +907,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical jaw_thrust, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into jaw_thrust; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical jaw_thrust, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into jaw_thrust; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "jaw"
 
 [[signals]]
@@ -922,7 +922,7 @@ evidence = ["rcef_canonical_v1", "apple_blendshapes"]
 evidence_status = "proposed"
 side = "shared"
 neutral = 0.0
-metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical chin_raise_upper_lip, from 0 to 11. Computed inside rcef_viseme_pose.to_rcef_expression and clamped at 1 into chin_raise_upper_lip; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
+metadata = { "definition" = "The sum of each viseme class activation times its pose in canonical chin_raise_upper_lip, from 0 to 11. Computed inside rcef_viseme.to_rcef_expression and clamped at 1 into chin_raise_upper_lip; no provider reads or writes it.", "reason" = "Intermediate value of a proposed approximate translation." }
 region = "mouth"
 
 [[profiles]]

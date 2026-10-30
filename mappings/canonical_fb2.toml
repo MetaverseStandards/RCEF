@@ -4,11 +4,13 @@
 # docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and the
 # retired A1 direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit
 # those, then run the script.
-# The maps between the canonical sets and FB2: one map per canonical group and
-# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
+# The maps between the canonical sets and FB2: one map per set pair and direction,
+# <set>.to_rcef_expression or .to_rcef_viseme in, and rcef_expression.to_<set> or
+# rcef_viseme.to_<set> out. Their rules are in canonical group order;
+# docs/map-sets/ has a page per map that lists them by group.
 
 [[mappings]]
-id = "fb2_face.to_rcef"
+id = "fb2.to_rcef_expression"
 
 [[mappings.rules]]
 id = "fb2_rcef.brow_inner_raise_left"
@@ -753,9 +755,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB", "rcef.canonical_expression.lower_lip_depress_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "fb2_cheek_puff.to_rcef"
-
 [[mappings.rules]]
 id = "fb2_rcef.cheek_puff_left"
 inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_L_FB"]
@@ -792,9 +791,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB", "rcef.canonical_expression.cheek_puff_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "fb2_jaw_thrust.to_rcef"
-
 [[mappings.rules]]
 id = "fb2_rcef.jaw_thrust"
 inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB"]
@@ -812,9 +808,6 @@ evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_ar
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB", "rcef.canonical_expression.jaw_thrust"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "fb2_jaw_sideways.to_rcef"
 
 [[mappings.rules]]
 id = "fb2_rcef.jaw_sideways_left"
@@ -851,9 +844,6 @@ evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_ar
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB", "rcef.canonical_expression.jaw_sideways_right"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "fb2_mouth_shift.to_rcef"
 
 [[mappings.rules]]
 id = "fb2_rcef.mouth_shift_left"
@@ -893,9 +883,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB", "rcef.canonical_expression.mouth_shift_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "fb2_chin_raise_upper_lip.to_rcef"
-
 [[mappings.rules]]
 id = "fb2_rcef.chin_raise_upper_lip"
 inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB"]
@@ -913,9 +900,6 @@ evidence = ["xr_fb2", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB", "rcef.canonical_expression.chin_raise_upper_lip"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "fb2_blink.to_rcef"
 
 [[mappings.rules]]
 id = "fb2_rcef.eye_close_left"
@@ -952,9 +936,6 @@ evidence = ["xr_fb2", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB", "rcef.canonical_expression.eye_close_right"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "fb2_gaze.to_rcef"
 
 [[mappings.rules]]
 id = "fb2_rcef.gaze_in_left"
@@ -1124,9 +1105,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "fb2_gaze_exclusive: FB2 opposing directions are mutually exclusive; the canonical set states no such constraint", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB", "rcef.canonical_expression.gaze_down_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "fb2_tongue_out.to_rcef"
-
 [[mappings.rules]]
 id = "fb2_rcef.tongue_out"
 inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"]
@@ -1145,9 +1123,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB", "rcef.canonical_expression.tongue_out"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "the tongue extension has no stated length", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB", "rcef.canonical_expression.tongue_out"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "fb2_cheek_suck.to_rcef"
 
 [[mappings.rules]]
 id = "fb2_rcef.cheek_suck_left"
@@ -1187,9 +1162,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB", "rcef.canonical_expression.cheek_suck_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "fb2_lip_tighten.to_rcef"
-
 [[mappings.rules]]
 id = "fb2_rcef.lip_tighten_left"
 inputs = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB"]
@@ -1227,9 +1199,6 @@ evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", 
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB", "rcef.canonical_expression.lip_tighten_right"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "fb2_tongue_place.to_rcef"
 
 [[mappings.rules]]
 id = "fb2_rcef.tongue_retreat"
@@ -1334,7 +1303,7 @@ loss_annotations = [
 ]
 
 [[mappings]]
-id = "rcef_face.to_fb2"
+id = "rcef_expression.to_fb2"
 
 [[mappings.rules]]
 id = "rcef_fb2.BROW_LOWERER_L"
@@ -2079,9 +2048,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.nose_wrinkle_right", "openxr.fb2.XR_FACE_EXPRESSION2_NOSE_WRINKLER_R_FB"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_cheek_puff.to_fb2"
-
 [[mappings.rules]]
 id = "rcef_fb2.CHEEK_PUFF_L"
 inputs = ["rcef.canonical_expression.cheek_puff_left"]
@@ -2118,9 +2084,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.cheek_puff_right", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_jaw_thrust.to_fb2"
-
 [[mappings.rules]]
 id = "rcef_fb2.JAW_THRUST"
 inputs = ["rcef.canonical_expression.jaw_thrust"]
@@ -2138,9 +2101,6 @@ evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_ar
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.jaw_thrust", "openxr.fb2.XR_FACE_EXPRESSION2_JAW_THRUST_FB"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_jaw_sideways.to_fb2"
 
 [[mappings.rules]]
 id = "rcef_fb2.JAW_SIDEWAYS_LEFT"
@@ -2177,9 +2137,6 @@ evidence = ["xr_fb2", "godot_vendors_fb2", "godot_face_modifier", "vrcft_docs_ar
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.jaw_sideways_right", "openxr.fb2.XR_FACE_EXPRESSION2_JAW_SIDEWAYS_RIGHT_FB"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_mouth_shift.to_fb2"
 
 [[mappings.rules]]
 id = "rcef_fb2.MOUTH_LEFT"
@@ -2219,9 +2176,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.mouth_shift_right", "openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_RIGHT_FB"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_chin_raise_upper_lip.to_fb2"
-
 [[mappings.rules]]
 id = "rcef_fb2.CHIN_RAISER_T"
 inputs = ["rcef.canonical_expression.chin_raise_upper_lip"]
@@ -2239,9 +2193,6 @@ evidence = ["xr_fb2", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.chin_raise_upper_lip", "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_blink.to_fb2"
 
 [[mappings.rules]]
 id = "rcef_fb2.EYES_CLOSED_L"
@@ -2278,9 +2229,6 @@ evidence = ["xr_fb2", "vrcft_docs_movement", "vrcft_docs_arkit", "godot_vendors_
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.eye_close_right", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_CLOSED_R_FB"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_gaze.to_fb2"
 
 [[mappings.rules]]
 id = "rcef_fb2.gaze_in_minus_out_left"
@@ -2530,9 +2478,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "fb2_gaze_max_angle_unspecified: FB2 maximum gaze angle is unspecified", "refs" = ["rcef.intermediate.gaze_up_minus_down_right", "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_tongue_out.to_fb2"
-
 [[mappings.rules]]
 id = "rcef_fb2.TONGUE_OUT"
 inputs = ["rcef.canonical_expression.tongue_out"]
@@ -2551,9 +2496,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_out", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "the tongue extension has no stated length", "refs" = ["rcef.canonical_expression.tongue_out", "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_cheek_suck.to_fb2"
 
 [[mappings.rules]]
 id = "rcef_fb2.CHEEK_SUCK_L"
@@ -2593,9 +2535,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.cheek_suck_right", "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_lip_tighten.to_fb2"
-
 [[mappings.rules]]
 id = "rcef_fb2.LIP_TIGHTENER_L"
 inputs = ["rcef.canonical_expression.lip_tighten_left"]
@@ -2633,9 +2572,6 @@ evidence = ["xr_fb2", "vrcft_docs_movement", "godot_vendors_fb2", "godot_enum", 
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "FB2 gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.lip_tighten_right", "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_tongue_place.to_fb2"
 
 [[mappings.rules]]
 id = "rcef_fb2.TONGUE_RETREAT"

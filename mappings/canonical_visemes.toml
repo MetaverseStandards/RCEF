@@ -4,11 +4,13 @@
 # docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and the
 # retired A1 direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit
 # those, then run the script.
-# The maps between the canonical sets and META visemes: one map per canonical group and
-# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
+# The maps between the canonical sets and META visemes: one map per set pair and direction,
+# <set>.to_rcef_expression or .to_rcef_viseme in, and rcef_expression.to_<set> or
+# rcef_viseme.to_<set> out. Their rules are in canonical group order;
+# docs/map-sets/ has a page per map that lists them by group.
 
 [[mappings]]
-id = "visemes_vowel.to_rcef"
+id = "visemes.to_rcef_viseme"
 
 [[mappings.rules]]
 id = "visemes_rcef.vowel_open"
@@ -99,9 +101,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META", "rcef.canonical_viseme.vowel_close_rounded"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META", "rcef.canonical_viseme.vowel_close_rounded"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "visemes_consonant.to_rcef"
 
 [[mappings.rules]]
 id = "visemes_rcef.bilabial"
@@ -265,9 +264,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META", "rcef.canonical_viseme.rhotic"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "visemes_rest.to_rcef"
-
 [[mappings.rules]]
 id = "visemes_rcef.sil"
 inputs = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META"]
@@ -285,9 +281,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META", "rcef.canonical_viseme.sil"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META", "rcef.canonical_viseme.sil"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "visemes_aggregate.to_rcef"
 
 [[mappings.rules]]
 id = "visemes_rcef.viseme_alveolar_floor_sum"
@@ -326,7 +319,7 @@ loss_annotations = [
 ]
 
 [[mappings]]
-id = "rcef_viseme_vowel.to_visemes"
+id = "rcef_viseme.to_visemes"
 
 [[mappings.rules]]
 id = "rcef_visemes.AA"
@@ -422,9 +415,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.vowel_close_rounded", "openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "from a source other than META: consonant and rest classes not produced; outputs may sum to 0 or above 1; META validity contract (sum 1 when valid; invalid arrays are zero) not met", "refs" = ["rcef.canonical_viseme.vowel_close_rounded", "openxr.visemes.XR_FACE_TRACKING_VISEME_OU_META"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_viseme_consonant.to_visemes"
 
 [[mappings.rules]]
 id = "rcef_visemes.PP"
@@ -587,9 +577,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "META gain and full-activation pose not published", "refs" = ["rcef.canonical_viseme.rhotic", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "meta_viseme_class_scope: META lists English example phonemes; how META classifies other IPA sounds is not stated; RCEF assigns them by shape", "refs" = ["rcef.canonical_viseme.rhotic", "openxr.visemes.XR_FACE_TRACKING_VISEME_RR_META"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_viseme_rest.to_visemes"
 
 [[mappings.rules]]
 id = "rcef_visemes.SIL"

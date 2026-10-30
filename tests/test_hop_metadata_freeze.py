@@ -3,7 +3,7 @@
 
 Definitions, zero and one, FACS codes, aligned names and the viseme validity fields are metadata, and a change
 to any of them needs a "revise" freeze first (ab/README.md). tests/test_pivot_structure.py freezes the rest of
-each signal record; this file freezes its metadata, from tests/fixtures/b-maps-ab.pivot-v1.json.
+each signal record; this file freezes its metadata, from tests/fixtures/b-maps-ab.pivot-v3.json.
 """
 import hashlib
 import json
@@ -28,7 +28,7 @@ def metadata_digests(document: dict, signal_ids) -> dict:
 class HopMetadataFreeze(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.frozen = json.loads((ROOT / 'tests/fixtures/b-maps-ab.pivot-v1.json').read_text(encoding='utf-8'))
+        cls.frozen = json.loads((ROOT / 'tests/fixtures/b-maps-ab.pivot-v3.json').read_text(encoding='utf-8'))
 
     def test_every_hop_signal_has_a_frozen_metadata_digest(self):
         self.assertEqual(set(self.frozen['signal_metadata']), set(self.frozen['signals']))
@@ -38,7 +38,7 @@ class HopMetadataFreeze(unittest.TestCase):
                          self.frozen['signal_metadata'])
 
     def test_the_registered_pack_has_the_frozen_metadata(self):
-        registered = shared_pack.registered_pack('ab/ab.pivot-v1.abreg')
+        registered = shared_pack.registered_pack(self.frozen['registration'])
         if registered is None:
             self.skipTest('no Git history for the registered pack')
         self.assertEqual(metadata_digests(registered, self.frozen['signal_metadata']), self.frozen['signal_metadata'])

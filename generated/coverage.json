@@ -7904,7 +7904,7 @@
     "approximate": 582,
     "exact": 5
   },
-  "pack_sha256": "8a6313df4f28ab679da511f964637d2a17dabbf388285527e36a1ad31dca0f94",
+  "pack_sha256": "7e9fe1f4ff6b465b60eb8bc0567ca7a0053a94d9d54bf81b964ca792c39e70ad",
   "profiles": [
     {
       "count": 72,
@@ -49475,7 +49475,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_blink.to_rcef and rcef_blink.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.eye_close_left",
         "rcef_arkit.eyeBlinkLeft"
@@ -49487,7 +49487,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.gaze_down_left",
         "rcef_arkit.eyeLookDownLeft"
@@ -49499,7 +49499,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.gaze_in_left",
         "rcef_arkit.eyeLookInLeft"
@@ -49511,7 +49511,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.gaze_out_left",
         "rcef_arkit.eyeLookOutLeft"
@@ -49523,7 +49523,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.gaze_up_left",
         "rcef_arkit.eyeLookUpLeft"
@@ -49535,7 +49535,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lid_tighten_left",
         "rcef_arkit.eyeSquintLeft"
@@ -49547,7 +49547,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.upper_lid_raise_left",
         "rcef_arkit.eyeWideLeft"
@@ -49559,7 +49559,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_blink.to_rcef and rcef_blink.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.eye_close_right",
         "rcef_arkit.eyeBlinkRight"
@@ -49571,7 +49571,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.gaze_down_right",
         "rcef_arkit.eyeLookDownRight"
@@ -49583,7 +49583,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.gaze_in_right",
         "rcef_arkit.eyeLookInRight"
@@ -49595,7 +49595,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.gaze_out_right",
         "rcef_arkit.eyeLookOutRight"
@@ -49607,7 +49607,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.gaze_up_right",
         "rcef_arkit.eyeLookUpRight"
@@ -49619,7 +49619,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lid_tighten_right",
         "rcef_arkit.eyeSquintRight"
@@ -49631,7 +49631,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.upper_lid_raise_right",
         "rcef_arkit.eyeWideRight"
@@ -49643,7 +49643,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_jaw_thrust.to_rcef and rcef_jaw_thrust.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.jaw_thrust",
         "rcef_arkit.jawForward"
@@ -49655,7 +49655,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_jaw_sideways.to_rcef and rcef_jaw_sideways.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.jaw_sideways_left",
         "rcef_arkit.jawLeft"
@@ -49667,7 +49667,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_jaw_sideways.to_rcef and rcef_jaw_sideways.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.jaw_sideways_right",
         "rcef_arkit.jawRight"
@@ -49679,7 +49679,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.jaw_drop",
         "rcef_arkit.jawOpen"
@@ -49691,7 +49691,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lips_toward",
         "rcef_arkit.mouthClose"
@@ -49703,7 +49703,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_funnel_upper_left",
         "arkit_rcef.lip_funnel_upper_right",
@@ -49718,7 +49718,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_pucker_left",
         "arkit_rcef.lip_pucker_right",
@@ -49731,7 +49731,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_mouth_shift.to_rcef and rcef_mouth_shift.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.mouth_shift_left",
         "rcef_arkit.mouthLeft"
@@ -49743,7 +49743,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_mouth_shift.to_rcef and rcef_mouth_shift.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.mouth_shift_right",
         "rcef_arkit.mouthRight"
@@ -49755,7 +49755,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_corner_pull_left",
         "rcef_arkit.mouthSmileLeft"
@@ -49767,7 +49767,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_corner_pull_right",
         "rcef_arkit.mouthSmileRight"
@@ -49779,7 +49779,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_corner_depress_left",
         "rcef_arkit.mouthFrownLeft"
@@ -49791,7 +49791,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_corner_depress_right",
         "rcef_arkit.mouthFrownRight"
@@ -49803,7 +49803,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.dimple_left",
         "rcef_arkit.mouthDimpleLeft"
@@ -49815,7 +49815,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.dimple_right",
         "rcef_arkit.mouthDimpleRight"
@@ -49827,7 +49827,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_stretch_left",
         "rcef_arkit.mouthStretchLeft"
@@ -49839,7 +49839,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_stretch_right",
         "rcef_arkit.mouthStretchRight"
@@ -49851,7 +49851,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_suck_lower_left",
         "arkit_rcef.lip_suck_lower_right",
@@ -49864,7 +49864,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_suck_upper_left",
         "arkit_rcef.lip_suck_upper_right",
@@ -49877,7 +49877,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.chin_raise",
         "rcef_arkit.mouthShrugLower"
@@ -49889,7 +49889,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_chin_raise_upper_lip.to_rcef and rcef_chin_raise_upper_lip.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.chin_raise_upper_lip",
         "rcef_arkit.mouthShrugUpper"
@@ -49901,7 +49901,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_press_left",
         "rcef_arkit.mouthPressLeft"
@@ -49913,7 +49913,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lip_press_right",
         "rcef_arkit.mouthPressRight"
@@ -49925,7 +49925,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lower_lip_depress_left",
         "rcef_arkit.mouthLowerDownLeft"
@@ -49937,7 +49937,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.lower_lip_depress_right",
         "rcef_arkit.mouthLowerDownRight"
@@ -49949,7 +49949,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.upper_lip_raise_left",
         "rcef_arkit.mouthUpperUpLeft"
@@ -49961,7 +49961,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.upper_lip_raise_right",
         "rcef_arkit.mouthUpperUpRight"
@@ -49973,7 +49973,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.brow_lower_left",
         "rcef_arkit.browDownLeft"
@@ -49985,7 +49985,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.brow_lower_right",
         "rcef_arkit.browDownRight"
@@ -49997,7 +49997,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.brow_inner_raise_left",
         "arkit_rcef.brow_inner_raise_right",
@@ -50010,7 +50010,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.brow_outer_raise_left",
         "rcef_arkit.browOuterUpLeft"
@@ -50022,7 +50022,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.brow_outer_raise_right",
         "rcef_arkit.browOuterUpRight"
@@ -50034,7 +50034,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_cheek_puff.to_rcef and rcef_cheek_puff.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.cheek_puff_left",
         "arkit_rcef.cheek_puff_right",
@@ -50047,7 +50047,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.cheek_raise_left",
         "rcef_arkit.cheekSquintLeft"
@@ -50059,7 +50059,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.cheek_raise_right",
         "rcef_arkit.cheekSquintRight"
@@ -50071,7 +50071,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.nose_wrinkle_left",
         "rcef_arkit.noseSneerLeft"
@@ -50083,7 +50083,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.nose_wrinkle_right",
         "rcef_arkit.noseSneerRight"
@@ -50095,7 +50095,7 @@
       "profiles": [
         "arkit.coefficient"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops arkit_tongue_out.to_rcef and rcef_tongue_out.to_arkit; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in arkit.to_rcef_expression and rcef_expression.to_arkit; calibration correspondence is assumed, not measured.",
       "rules": [
         "arkit_rcef.tongue_out",
         "rcef_arkit.tongueOut"
@@ -50107,7 +50107,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.brow_inner_raise_left",
         "rcef_facs.au01_left"
@@ -50119,7 +50119,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.brow_inner_raise_right",
         "rcef_facs.au01_right"
@@ -50131,7 +50131,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.brow_outer_raise_left",
         "rcef_facs.au02_left"
@@ -50143,7 +50143,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.brow_outer_raise_right",
         "rcef_facs.au02_right"
@@ -50155,7 +50155,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical brow_lower_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical brow_lower_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.brow_lower_left",
         "rcef_facs.au04_left"
@@ -50167,7 +50167,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical brow_lower_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical brow_lower_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.brow_lower_right",
         "rcef_facs.au04_right"
@@ -50179,7 +50179,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.upper_lid_raise_left",
         "rcef_facs.au05_left"
@@ -50191,7 +50191,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.upper_lid_raise_right",
         "rcef_facs.au05_right"
@@ -50203,7 +50203,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.cheek_raise_left",
         "rcef_facs.au06_left"
@@ -50215,7 +50215,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.cheek_raise_right",
         "rcef_facs.au06_right"
@@ -50227,7 +50227,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lid_tighten_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lid_tighten_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lid_tighten_left",
         "rcef_facs.au07_left"
@@ -50239,7 +50239,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lid_tighten_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lid_tighten_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lid_tighten_right",
         "rcef_facs.au07_right"
@@ -50251,7 +50251,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lips_toward by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lips_toward by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lips_toward",
         "rcef_facs.au08"
@@ -50263,7 +50263,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.nose_wrinkle_left",
         "rcef_facs.au09_left"
@@ -50275,7 +50275,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.nose_wrinkle_right",
         "rcef_facs.au09_right"
@@ -50287,7 +50287,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.upper_lip_raise_left",
         "rcef_facs.au10_left"
@@ -50299,7 +50299,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.upper_lip_raise_right",
         "rcef_facs.au10_right"
@@ -50320,7 +50320,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_corner_pull_left",
         "rcef_facs.au12_left"
@@ -50332,7 +50332,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_corner_pull_right",
         "rcef_facs.au12_right"
@@ -50353,7 +50353,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical dimple_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical dimple_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.dimple_left",
         "rcef_facs.au14_left"
@@ -50365,7 +50365,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical dimple_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical dimple_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.dimple_right",
         "rcef_facs.au14_right"
@@ -50377,7 +50377,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_corner_depress_left",
         "rcef_facs.au15_left"
@@ -50389,7 +50389,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_corner_depress_right",
         "rcef_facs.au15_right"
@@ -50401,7 +50401,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lower_lip_depress_left",
         "rcef_facs.au16_left"
@@ -50413,7 +50413,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lower_lip_depress_right",
         "rcef_facs.au16_right"
@@ -50425,7 +50425,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical chin_raise by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical chin_raise by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.chin_raise",
         "rcef_facs.au17"
@@ -50437,7 +50437,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_pucker_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_pucker_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_pucker_left",
         "rcef_facs.au18_left"
@@ -50449,7 +50449,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_pucker_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_pucker_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_pucker_right",
         "rcef_facs.au18_right"
@@ -50461,7 +50461,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical tongue_out by facs_tongue_out.to_rcef and written from it by rcef_tongue_out.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical tongue_out by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.tongue_out",
         "rcef_facs.au19"
@@ -50473,7 +50473,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_stretch_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_stretch_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_stretch_left",
         "rcef_facs.au20_left"
@@ -50485,7 +50485,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_stretch_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_stretch_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_stretch_right",
         "rcef_facs.au20_right"
@@ -50506,7 +50506,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_left and lip_funnel_lower_left by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_left and lip_funnel_lower_left by facs.to_rcef_expression and written from them by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_funnel_upper_left",
         "facs_rcef.lip_funnel_lower_left",
@@ -50519,7 +50519,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_right and lip_funnel_lower_right by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_right and lip_funnel_lower_right by facs.to_rcef_expression and written from them by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_funnel_upper_right",
         "facs_rcef.lip_funnel_lower_right",
@@ -50532,7 +50532,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_tighten_left by facs_lip_tighten.to_rcef and written from it by rcef_lip_tighten.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_tighten_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_tighten_left",
         "rcef_facs.au23_left"
@@ -50544,7 +50544,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_tighten_right by facs_lip_tighten.to_rcef and written from it by rcef_lip_tighten.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_tighten_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_tighten_right",
         "rcef_facs.au23_right"
@@ -50556,7 +50556,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_press_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_press_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_press_left",
         "rcef_facs.au24_left"
@@ -50568,7 +50568,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_press_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_press_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_press_right",
         "rcef_facs.au24_right"
@@ -50589,7 +50589,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical jaw_drop by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical jaw_drop by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.jaw_drop",
         "rcef_facs.au26"
@@ -50610,7 +50610,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_left and lip_suck_lower_left by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_left and lip_suck_lower_left by facs.to_rcef_expression and written from them by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_suck_upper_left",
         "facs_rcef.lip_suck_lower_left",
@@ -50623,7 +50623,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_right and lip_suck_lower_right by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_right and lip_suck_lower_right by facs.to_rcef_expression and written from them by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.lip_suck_upper_right",
         "facs_rcef.lip_suck_lower_right",
@@ -50636,7 +50636,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical jaw_thrust by facs_jaw_thrust.to_rcef and written from it by rcef_jaw_thrust.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical jaw_thrust by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.jaw_thrust",
         "rcef_facs.au29"
@@ -50648,7 +50648,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical jaw_sideways_left by facs_jaw_sideways.to_rcef and written from it by rcef_jaw_sideways.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical jaw_sideways_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.jaw_sideways_left",
         "rcef_facs.au30_left"
@@ -50660,7 +50660,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical jaw_sideways_right by facs_jaw_sideways.to_rcef and written from it by rcef_jaw_sideways.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical jaw_sideways_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.jaw_sideways_right",
         "rcef_facs.au30_right"
@@ -50699,7 +50699,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_puff_left by facs_cheek_puff.to_rcef and written from it by rcef_cheek_puff.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_puff_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.cheek_puff_left",
         "rcef_facs.au34_left"
@@ -50711,7 +50711,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_puff_right by facs_cheek_puff.to_rcef and written from it by rcef_cheek_puff.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_puff_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.cheek_puff_right",
         "rcef_facs.au34_right"
@@ -50723,7 +50723,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_suck_left by facs_cheek_suck.to_rcef and written from it by rcef_cheek_suck.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_suck_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.cheek_suck_left",
         "rcef_facs.au35_left"
@@ -50735,7 +50735,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_suck_right by facs_cheek_suck.to_rcef and written from it by rcef_cheek_suck.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical cheek_suck_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.cheek_suck_right",
         "rcef_facs.au35_right"
@@ -50810,7 +50810,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical eye_close_left by facs_blink.to_rcef and written from it by rcef_blink.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical eye_close_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.eye_close_left",
         "rcef_facs.au43_left"
@@ -50822,7 +50822,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "Code number and name from facs_wikipedia; read into canonical eye_close_right by facs_blink.to_rcef and written from it by rcef_blink.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
+      "reason": "Code number and name from facs_wikipedia; read into canonical eye_close_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score.",
       "rules": [
         "facs_rcef.eye_close_right",
         "rcef_facs.au43_right"
@@ -54064,7 +54064,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.brow_lower_left",
         "rcef_fb2.BROW_LOWERER_L"
@@ -54076,7 +54076,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.brow_lower_right",
         "rcef_fb2.BROW_LOWERER_R"
@@ -54088,7 +54088,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_cheek_puff.to_rcef and rcef_cheek_puff.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.cheek_puff_left",
         "rcef_fb2.CHEEK_PUFF_L"
@@ -54100,7 +54100,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_cheek_puff.to_rcef and rcef_cheek_puff.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.cheek_puff_right",
         "rcef_fb2.CHEEK_PUFF_R"
@@ -54112,7 +54112,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.cheek_raise_left",
         "rcef_fb2.CHEEK_RAISER_L"
@@ -54124,7 +54124,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.cheek_raise_right",
         "rcef_fb2.CHEEK_RAISER_R"
@@ -54136,7 +54136,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal cheek_suck_left by the proposed approximate hops fb2_cheek_suck.to_rcef and rcef_cheek_suck.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal cheek_suck_left by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.cheek_suck_left",
         "rcef_fb2.CHEEK_SUCK_L"
@@ -54148,7 +54148,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal cheek_suck_right by the proposed approximate hops fb2_cheek_suck.to_rcef and rcef_cheek_suck.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal cheek_suck_right by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.cheek_suck_right",
         "rcef_fb2.CHEEK_SUCK_R"
@@ -54160,7 +54160,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.chin_raise",
         "rcef_fb2.CHIN_RAISER_B"
@@ -54172,7 +54172,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_chin_raise_upper_lip.to_rcef and rcef_chin_raise_upper_lip.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.chin_raise_upper_lip",
         "rcef_fb2.CHIN_RAISER_T"
@@ -54184,7 +54184,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.dimple_left",
         "rcef_fb2.DIMPLER_L"
@@ -54196,7 +54196,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.dimple_right",
         "rcef_fb2.DIMPLER_R"
@@ -54208,7 +54208,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_blink.to_rcef and rcef_blink.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.eye_close_left",
         "rcef_fb2.EYES_CLOSED_L"
@@ -54220,7 +54220,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_blink.to_rcef and rcef_blink.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.eye_close_right",
         "rcef_fb2.EYES_CLOSED_R"
@@ -54232,7 +54232,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_gaze.to_rcef and rcef_gaze.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.gaze_down_left",
         "rcef_fb2.EYES_LOOK_DOWN_L"
@@ -54244,7 +54244,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_gaze.to_rcef and rcef_gaze.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.gaze_down_right",
         "rcef_fb2.EYES_LOOK_DOWN_R"
@@ -54256,7 +54256,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_gaze.to_rcef and rcef_gaze.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.gaze_out_left",
         "rcef_fb2.EYES_LOOK_LEFT_L"
@@ -54268,7 +54268,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_gaze.to_rcef and rcef_gaze.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.gaze_in_right",
         "rcef_fb2.EYES_LOOK_LEFT_R"
@@ -54280,7 +54280,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_gaze.to_rcef and rcef_gaze.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.gaze_in_left",
         "rcef_fb2.EYES_LOOK_RIGHT_L"
@@ -54292,7 +54292,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_gaze.to_rcef and rcef_gaze.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.gaze_out_right",
         "rcef_fb2.EYES_LOOK_RIGHT_R"
@@ -54304,7 +54304,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_gaze.to_rcef and rcef_gaze.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.gaze_up_left",
         "rcef_fb2.EYES_LOOK_UP_L"
@@ -54316,7 +54316,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_gaze.to_rcef and rcef_gaze.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.gaze_up_right",
         "rcef_fb2.EYES_LOOK_UP_R"
@@ -54328,7 +54328,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.brow_inner_raise_left",
         "rcef_fb2.INNER_BROW_RAISER_L"
@@ -54340,7 +54340,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.brow_inner_raise_right",
         "rcef_fb2.INNER_BROW_RAISER_R"
@@ -54352,7 +54352,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.jaw_drop",
         "rcef_fb2.JAW_DROP"
@@ -54364,7 +54364,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_jaw_sideways.to_rcef and rcef_jaw_sideways.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.jaw_sideways_left",
         "rcef_fb2.JAW_SIDEWAYS_LEFT"
@@ -54376,7 +54376,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_jaw_sideways.to_rcef and rcef_jaw_sideways.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.jaw_sideways_right",
         "rcef_fb2.JAW_SIDEWAYS_RIGHT"
@@ -54388,7 +54388,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_jaw_thrust.to_rcef and rcef_jaw_thrust.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.jaw_thrust",
         "rcef_fb2.JAW_THRUST"
@@ -54400,7 +54400,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lid_tighten_left",
         "rcef_fb2.LID_TIGHTENER_L"
@@ -54412,7 +54412,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lid_tighten_right",
         "rcef_fb2.LID_TIGHTENER_R"
@@ -54424,7 +54424,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_corner_depress_left",
         "rcef_fb2.LIP_CORNER_DEPRESSOR_L"
@@ -54436,7 +54436,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_corner_depress_right",
         "rcef_fb2.LIP_CORNER_DEPRESSOR_R"
@@ -54448,7 +54448,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_corner_pull_left",
         "rcef_fb2.LIP_CORNER_PULLER_L"
@@ -54460,7 +54460,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_corner_pull_right",
         "rcef_fb2.LIP_CORNER_PULLER_R"
@@ -54472,7 +54472,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_funnel_lower_left",
         "rcef_fb2.LIP_FUNNELER_LB"
@@ -54484,7 +54484,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_funnel_upper_left",
         "rcef_fb2.LIP_FUNNELER_LT"
@@ -54496,7 +54496,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_funnel_lower_right",
         "rcef_fb2.LIP_FUNNELER_RB"
@@ -54508,7 +54508,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_funnel_upper_right",
         "rcef_fb2.LIP_FUNNELER_RT"
@@ -54520,7 +54520,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_press_left",
         "rcef_fb2.LIP_PRESSOR_L"
@@ -54532,7 +54532,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_press_right",
         "rcef_fb2.LIP_PRESSOR_R"
@@ -54544,7 +54544,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_pucker_left",
         "rcef_fb2.LIP_PUCKER_L"
@@ -54556,7 +54556,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_pucker_right",
         "rcef_fb2.LIP_PUCKER_R"
@@ -54568,7 +54568,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_stretch_left",
         "rcef_fb2.LIP_STRETCHER_L"
@@ -54580,7 +54580,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_stretch_right",
         "rcef_fb2.LIP_STRETCHER_R"
@@ -54592,7 +54592,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_suck_lower_left",
         "rcef_fb2.LIP_SUCK_LB"
@@ -54604,7 +54604,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_suck_upper_left",
         "rcef_fb2.LIP_SUCK_LT"
@@ -54616,7 +54616,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_suck_lower_right",
         "rcef_fb2.LIP_SUCK_RB"
@@ -54628,7 +54628,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_suck_upper_right",
         "rcef_fb2.LIP_SUCK_RT"
@@ -54640,7 +54640,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal lip_tighten_left by the proposed approximate hops fb2_lip_tighten.to_rcef and rcef_lip_tighten.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal lip_tighten_left by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_tighten_left",
         "rcef_fb2.LIP_TIGHTENER_L"
@@ -54652,7 +54652,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal lip_tighten_right by the proposed approximate hops fb2_lip_tighten.to_rcef and rcef_lip_tighten.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal lip_tighten_right by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lip_tighten_right",
         "rcef_fb2.LIP_TIGHTENER_R"
@@ -54664,7 +54664,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lips_toward",
         "rcef_fb2.LIPS_TOWARD"
@@ -54676,7 +54676,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lower_lip_depress_left",
         "rcef_fb2.LOWER_LIP_DEPRESSOR_L"
@@ -54688,7 +54688,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.lower_lip_depress_right",
         "rcef_fb2.LOWER_LIP_DEPRESSOR_R"
@@ -54700,7 +54700,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_mouth_shift.to_rcef and rcef_mouth_shift.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.mouth_shift_left",
         "rcef_fb2.MOUTH_LEFT"
@@ -54712,7 +54712,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_mouth_shift.to_rcef and rcef_mouth_shift.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.mouth_shift_right",
         "rcef_fb2.MOUTH_RIGHT"
@@ -54724,7 +54724,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.nose_wrinkle_left",
         "rcef_fb2.NOSE_WRINKLER_L"
@@ -54736,7 +54736,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.nose_wrinkle_right",
         "rcef_fb2.NOSE_WRINKLER_R"
@@ -54748,7 +54748,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.brow_outer_raise_left",
         "rcef_fb2.OUTER_BROW_RAISER_L"
@@ -54760,7 +54760,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.brow_outer_raise_right",
         "rcef_fb2.OUTER_BROW_RAISER_R"
@@ -54772,7 +54772,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.upper_lid_raise_left",
         "rcef_fb2.UPPER_LID_RAISER_L"
@@ -54784,7 +54784,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.upper_lid_raise_right",
         "rcef_fb2.UPPER_LID_RAISER_R"
@@ -54796,7 +54796,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.upper_lip_raise_left",
         "rcef_fb2.UPPER_LIP_RAISER_L"
@@ -54808,7 +54808,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_face.to_rcef and rcef_face.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.upper_lip_raise_right",
         "rcef_fb2.UPPER_LIP_RAISER_R"
@@ -54820,7 +54820,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_tip_interdental by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_tip_interdental by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.tongue_tip_interdental",
         "rcef_fb2.TONGUE_TIP_INTERDENTAL"
@@ -54832,7 +54832,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_tip_alveolar by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_tip_alveolar by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.tongue_tip_alveolar",
         "rcef_fb2.TONGUE_TIP_ALVEOLAR"
@@ -54844,7 +54844,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_front_dorsal_palate by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_front_dorsal_palate by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.tongue_front_dorsal_palate",
         "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE"
@@ -54856,7 +54856,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_mid_dorsal_palate by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_mid_dorsal_palate by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.tongue_mid_dorsal_palate",
         "rcef_fb2.TONGUE_MID_DORSAL_PALATE"
@@ -54868,7 +54868,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_back_dorsal_velar by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_back_dorsal_velar by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.tongue_back_dorsal_velar",
         "rcef_fb2.TONGUE_BACK_DORSAL_VELAR"
@@ -54880,7 +54880,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops fb2_tongue_out.to_rcef and rcef_tongue_out.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.tongue_out",
         "rcef_fb2.TONGUE_OUT"
@@ -54892,7 +54892,7 @@
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_retreat by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_retreat by proposed approximate mappings in fb2.to_rcef_expression and rcef_expression.to_fb2; calibration correspondence is assumed, not measured.",
       "rules": [
         "fb2_rcef.tongue_retreat",
         "rcef_fb2.TONGUE_RETREAT"
@@ -54913,7 +54913,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class sil by the proposed approximate hops visemes_rest.to_rcef and rcef_viseme_rest.to_visemes; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class sil by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.sil",
         "rcef_visemes.SIL"
@@ -54925,7 +54925,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class bilabial by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class bilabial by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.bilabial",
         "rcef_visemes.PP"
@@ -54937,7 +54937,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class labiodental by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class labiodental by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.labiodental",
         "rcef_visemes.FF"
@@ -54949,7 +54949,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class dental by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class dental by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.dental",
         "rcef_visemes.TH"
@@ -54961,7 +54961,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class coronal_stop by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes, and summed into the aggregate alveolar_floor by visemes_aggregate.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class coronal_stop by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes, and summed into the aggregate alveolar_floor by the same in-map; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.coronal_stop",
         "visemes_rcef.viseme_alveolar_floor_sum",
@@ -54974,7 +54974,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class dorsal by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class dorsal by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.dorsal",
         "rcef_visemes.KK"
@@ -54986,7 +54986,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class postalveolar by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class postalveolar by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.postalveolar",
         "rcef_visemes.CH"
@@ -54998,7 +54998,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class alveolar_sibilant by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes, and summed into the aggregate alveolar_floor by visemes_aggregate.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class alveolar_sibilant by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes, and summed into the aggregate alveolar_floor by the same in-map; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.alveolar_sibilant",
         "visemes_rcef.viseme_alveolar_floor_sum",
@@ -55011,7 +55011,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class coronal_nasal_lateral by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes, and summed into the aggregate alveolar_floor by visemes_aggregate.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class coronal_nasal_lateral by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes, and summed into the aggregate alveolar_floor by the same in-map; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.coronal_nasal_lateral",
         "visemes_rcef.viseme_alveolar_floor_sum",
@@ -55024,7 +55024,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; copied to the canonical viseme class rhotic by the proposed approximate hops visemes_consonant.to_rcef and rcef_viseme_consonant.to_visemes, and summed into the aggregate alveolar_floor by visemes_aggregate.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; copied to the canonical viseme class rhotic by proposed approximate mappings in visemes.to_rcef_viseme and rcef_viseme.to_visemes, and summed into the aggregate alveolar_floor by the same in-map; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.rhotic",
         "visemes_rcef.viseme_alveolar_floor_sum",
@@ -55037,7 +55037,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_visemes and visemes_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_visemes and visemes.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.vowel_open",
         "rcef_visemes.AA"
@@ -55049,7 +55049,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_visemes and visemes_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_visemes and visemes.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.vowel_mid_spread",
         "rcef_visemes.E"
@@ -55061,7 +55061,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_visemes and visemes_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_visemes and visemes.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.vowel_close_spread",
         "rcef_visemes.IH"
@@ -55073,7 +55073,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_visemes and visemes_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_visemes and visemes.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.vowel_mid_rounded",
         "rcef_visemes.OH"
@@ -55085,7 +55085,7 @@
       "profiles": [
         "openxr.visemes"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_visemes and visemes_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_visemes and visemes.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "visemes_rcef.vowel_close_rounded",
         "rcef_visemes.OU"
@@ -55547,7 +55547,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_gaze.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeLookOutRight"
       ]
@@ -55558,7 +55558,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_gaze.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeLookInRight"
       ]
@@ -55569,7 +55569,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_gaze.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeLookUpRight"
       ]
@@ -55580,7 +55580,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_gaze.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeLookDownRight"
       ]
@@ -55591,7 +55591,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_gaze.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeLookOutLeft"
       ]
@@ -55602,7 +55602,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_gaze.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeLookInLeft"
       ]
@@ -55613,7 +55613,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_gaze.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeLookUpLeft"
       ]
@@ -55624,7 +55624,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_gaze.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeLookDownLeft"
       ]
@@ -55635,7 +55635,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_blink.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeClosedRight"
       ]
@@ -55646,7 +55646,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_blink.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeClosedLeft"
       ]
@@ -55657,7 +55657,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeSquintRight"
       ]
@@ -55668,7 +55668,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeSquintLeft"
       ]
@@ -55679,7 +55679,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeWideRight"
       ]
@@ -55690,7 +55690,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.EyeWideLeft"
       ]
@@ -55737,7 +55737,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.BrowPinchRight"
       ]
@@ -55748,7 +55748,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.BrowPinchLeft"
       ]
@@ -55759,7 +55759,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.BrowLowererRight"
       ]
@@ -55770,7 +55770,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.BrowLowererLeft"
       ]
@@ -55781,7 +55781,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.BrowInnerUpRight"
       ]
@@ -55792,7 +55792,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.BrowInnerUpLeft"
       ]
@@ -55803,7 +55803,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.BrowOuterUpRight"
       ]
@@ -55814,7 +55814,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.BrowOuterUpLeft"
       ]
@@ -55825,7 +55825,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.NoseSneerRight"
       ]
@@ -55836,7 +55836,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.NoseSneerLeft"
       ]
@@ -55883,7 +55883,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.CheekSquintRight"
       ]
@@ -55894,7 +55894,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.CheekSquintLeft"
       ]
@@ -55905,7 +55905,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_cheek_puff.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.CheekPuffRight"
       ]
@@ -55916,7 +55916,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_cheek_puff.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.CheekPuffLeft"
       ]
@@ -55927,7 +55927,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; written from the canonical expression signal cheek_suck_right by the proposed approximate hop rcef_cheek_suck.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; written from the canonical expression signal cheek_suck_right by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.CheekSuckRight"
       ]
@@ -55938,7 +55938,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; written from the canonical expression signal cheek_suck_left by the proposed approximate hop rcef_cheek_suck.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; written from the canonical expression signal cheek_suck_left by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.CheekSuckLeft"
       ]
@@ -55949,7 +55949,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.JawOpen"
       ]
@@ -55960,7 +55960,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthClosed"
       ]
@@ -55971,7 +55971,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_jaw_sideways.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.JawRight"
       ]
@@ -55982,7 +55982,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_jaw_sideways.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.JawLeft"
       ]
@@ -55993,7 +55993,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_jaw_thrust.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.JawForward"
       ]
@@ -56031,7 +56031,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipSuckUpperRight"
       ]
@@ -56042,7 +56042,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipSuckUpperLeft"
       ]
@@ -56053,7 +56053,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipSuckLowerRight"
       ]
@@ -56064,7 +56064,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipSuckLowerLeft"
       ]
@@ -56093,7 +56093,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipFunnelUpperRight"
       ]
@@ -56104,7 +56104,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipFunnelUpperLeft"
       ]
@@ -56115,7 +56115,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipFunnelLowerRight"
       ]
@@ -56126,7 +56126,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipFunnelLowerLeft"
       ]
@@ -56137,7 +56137,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipPuckerUpperRight"
       ]
@@ -56148,7 +56148,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipPuckerUpperLeft"
       ]
@@ -56159,7 +56159,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipPuckerLowerRight"
       ]
@@ -56170,7 +56170,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.LipPuckerLowerLeft"
       ]
@@ -56181,7 +56181,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthUpperUpRight"
       ]
@@ -56192,7 +56192,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthUpperUpLeft"
       ]
@@ -56243,7 +56243,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_mouth_shift.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthUpperRight"
       ]
@@ -56254,7 +56254,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_mouth_shift.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthUpperLeft"
       ]
@@ -56265,7 +56265,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_mouth_shift.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthLowerRight"
       ]
@@ -56276,7 +56276,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_mouth_shift.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthLowerLeft"
       ]
@@ -56287,7 +56287,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthCornerPullRight"
       ]
@@ -56298,7 +56298,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthCornerPullLeft"
       ]
@@ -56309,7 +56309,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthCornerSlantRight"
       ]
@@ -56320,7 +56320,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthCornerSlantLeft"
       ]
@@ -56331,7 +56331,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthFrownRight"
       ]
@@ -56342,7 +56342,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthFrownLeft"
       ]
@@ -56353,7 +56353,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthStretchRight"
       ]
@@ -56364,7 +56364,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthStretchLeft"
       ]
@@ -56375,7 +56375,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthDimpleRight"
       ]
@@ -56386,7 +56386,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthDimpleLeft"
       ]
@@ -56397,7 +56397,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_chin_raise_upper_lip.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthRaiserUpper"
       ]
@@ -56408,7 +56408,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthRaiserLower"
       ]
@@ -56419,7 +56419,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthPressRight"
       ]
@@ -56430,7 +56430,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_face.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthPressLeft"
       ]
@@ -56441,7 +56441,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; written from the canonical expression signal lip_tighten_right by the proposed approximate hop rcef_lip_tighten.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; written from the canonical expression signal lip_tighten_right by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthTightenerRight"
       ]
@@ -56452,7 +56452,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; written from the canonical expression signal lip_tighten_left by the proposed approximate hop rcef_lip_tighten.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; written from the canonical expression signal lip_tighten_left by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.MouthTightenerLeft"
       ]
@@ -56463,7 +56463,7 @@
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hop rcef_tongue_out.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_artist; calibration correspondence is assumed, not measured.",
       "rules": [
         "rcef_vrcft_artist.TongueOut"
       ]
@@ -57005,7 +57005,7 @@
       "profiles": [
         "vrcft.eye"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_blink.to_vrcft_eye and vrcft_eye_blink.to_rcef, with eye_close = 1 − Openness; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_eye and vrcft_eye.to_rcef_expression, with eye_close = 1 − Openness; calibration correspondence is assumed, not measured.",
       "rules": [
         "vrcft_eye_rcef.eye_close_left",
         "rcef_vrcft_eye.Left.Openness"
@@ -57017,7 +57017,7 @@
       "profiles": [
         "vrcft.eye"
       ],
-      "reason": "Native identifier evidenced; copied exactly by the verified_current hops rcef_pupil_mm.to_vrcft_eye and vrcft_eye_pupil_mm.to_rcef, which keep its declared calibration.",
+      "reason": "Native identifier evidenced; copied exactly by verified_current mappings in rcef_expression.to_vrcft_eye and vrcft_eye.to_rcef_expression, which keep its declared calibration.",
       "rules": [
         "vrcft_eye_rcef.pupil_diameter_mm_left",
         "rcef_vrcft_eye.Left.PupilDiameter_MM"
@@ -57047,7 +57047,7 @@
       "profiles": [
         "vrcft.eye"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_blink.to_vrcft_eye and vrcft_eye_blink.to_rcef, with eye_close = 1 − Openness; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrcft_eye and vrcft_eye.to_rcef_expression, with eye_close = 1 − Openness; calibration correspondence is assumed, not measured.",
       "rules": [
         "vrcft_eye_rcef.eye_close_right",
         "rcef_vrcft_eye.Right.Openness"
@@ -57059,7 +57059,7 @@
       "profiles": [
         "vrcft.eye"
       ],
-      "reason": "Native identifier evidenced; copied exactly by the verified_current hops rcef_pupil_mm.to_vrcft_eye and vrcft_eye_pupil_mm.to_rcef, which keep its declared calibration.",
+      "reason": "Native identifier evidenced; copied exactly by verified_current mappings in rcef_expression.to_vrcft_eye and vrcft_eye.to_rcef_expression, which keep its declared calibration.",
       "rules": [
         "vrcft_eye_rcef.pupil_diameter_mm_right",
         "rcef_vrcft_eye.Right.PupilDiameter_MM"
@@ -59231,7 +59231,7 @@
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_vrm and vrm_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_vrm and vrm.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "vrm_rcef.vowel_open",
         "rcef_vrm.aa"
@@ -59243,7 +59243,7 @@
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_vrm and vrm_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_vrm and vrm.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "vrm_rcef.vowel_close_spread",
         "rcef_vrm.ih"
@@ -59255,7 +59255,7 @@
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_vrm and vrm_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_vrm and vrm.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "vrm_rcef.vowel_close_rounded",
         "rcef_vrm.ou"
@@ -59267,7 +59267,7 @@
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_vrm and vrm_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_vrm and vrm.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "vrm_rcef.vowel_mid_spread",
         "rcef_vrm.ee"
@@ -59279,7 +59279,7 @@
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_viseme_vowel.to_vrm and vrm_vowel.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_viseme.to_vrm and vrm.to_rcef_viseme; calibration correspondence is assumed, not measured.",
       "rules": [
         "vrm_rcef.vowel_mid_rounded",
         "rcef_vrm.oh"
@@ -59291,7 +59291,7 @@
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; not read: the in-map vrm_blink.to_rcef reads blinkLeft and blinkRight only, with the loss \"VRM blink (both eyes) not read\", and the route lists a non-zero blink as dropped.",
+      "reason": "Native identifier evidenced; not read: the in-map vrm.to_rcef_expression reads blinkLeft and blinkRight only, with the loss \"VRM blink (both eyes) not read\", and the route lists a non-zero blink as dropped.",
       "rules": []
     },
     {
@@ -59300,7 +59300,7 @@
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_blink.to_vrm and vrm_blink.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrm and vrm.to_rcef_expression; calibration correspondence is assumed, not measured.",
       "rules": [
         "vrm_rcef.eye_close_left",
         "rcef_vrm.blinkLeft"
@@ -59312,7 +59312,7 @@
       "profiles": [
         "vrm.preset"
       ],
-      "reason": "Native identifier evidenced; used by the proposed approximate hops rcef_blink.to_vrm and vrm_blink.to_rcef; calibration correspondence is assumed, not measured.",
+      "reason": "Native identifier evidenced; used by proposed approximate mappings in rcef_expression.to_vrm and vrm.to_rcef_expression; calibration correspondence is assumed, not measured.",
       "rules": [
         "vrm_rcef.eye_close_right",
         "rcef_vrm.blinkRight"

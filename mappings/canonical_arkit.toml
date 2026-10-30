@@ -4,11 +4,13 @@
 # docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and the
 # retired A1 direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit
 # those, then run the script.
-# The maps between the canonical sets and ARKit: one map per canonical group and
-# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
+# The maps between the canonical sets and ARKit: one map per set pair and direction,
+# <set>.to_rcef_expression or .to_rcef_viseme in, and rcef_expression.to_<set> or
+# rcef_viseme.to_<set> out. Their rules are in canonical group order;
+# docs/map-sets/ has a page per map that lists them by group.
 
 [[mappings]]
-id = "arkit_face.to_rcef"
+id = "arkit.to_rcef_expression"
 
 [[mappings.rules]]
 id = "arkit_rcef.brow_inner_raise_left"
@@ -852,9 +854,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["arkit.coefficient.mouthLowerDownRight", "rcef.canonical_expression.lower_lip_depress_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "arkit_cheek_puff.to_rcef"
-
 [[mappings.rules]]
 id = "arkit_rcef.cheek_puff_left"
 inputs = ["arkit.coefficient.cheekPuff"]
@@ -899,9 +898,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ict_au33_cheek_blow: ICT relates cheekPuff to AU33 cheek blow; the canonical code is AU34; the ICT crosswalk does not carry over for the FACS code", "refs" = ["arkit.coefficient.cheekPuff", "rcef.canonical_expression.cheek_puff_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "arkit_jaw_thrust.to_rcef"
-
 [[mappings.rules]]
 id = "arkit_rcef.jaw_thrust"
 inputs = ["arkit.coefficient.jawForward"]
@@ -921,9 +917,6 @@ evidence = ["apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vr
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["arkit.coefficient.jawForward", "rcef.canonical_expression.jaw_thrust"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "arkit_jaw_sideways.to_rcef"
 
 [[mappings.rules]]
 id = "arkit_rcef.jaw_sideways_left"
@@ -962,9 +955,6 @@ evidence = ["apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vr
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["arkit.coefficient.jawRight", "rcef.canonical_expression.jaw_sideways_right"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "arkit_mouth_shift.to_rcef"
 
 [[mappings.rules]]
 id = "arkit_rcef.mouth_shift_left"
@@ -1006,9 +996,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["arkit.coefficient.mouthRight", "rcef.canonical_expression.mouth_shift_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "arkit_chin_raise_upper_lip.to_rcef"
-
 [[mappings.rules]]
 id = "arkit_rcef.chin_raise_upper_lip"
 inputs = ["arkit.coefficient.mouthShrugUpper"]
@@ -1028,9 +1015,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["arkit.coefficient.mouthShrugUpper", "rcef.canonical_expression.chin_raise_upper_lip"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "arkit_mouthshrug_outward: ARKit describes outward lip movement; the canonical signals push up", "refs" = ["arkit.coefficient.mouthShrugUpper", "rcef.canonical_expression.chin_raise_upper_lip"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "arkit_blink.to_rcef"
 
 [[mappings.rules]]
 id = "arkit_rcef.eye_close_left"
@@ -1073,9 +1057,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["arkit.coefficient.eyeBlinkRight", "rcef.canonical_expression.eye_close_right"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "ict_au45_blink: ICT relates eyeBlink to AU45 blink; the canonical code is AU43; the ICT crosswalk does not carry over for the FACS code", "refs" = ["arkit.coefficient.eyeBlinkRight", "rcef.canonical_expression.eye_close_right"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "arkit_gaze.to_rcef"
 
 [[mappings.rules]]
 id = "arkit_rcef.gaze_in_left"
@@ -1245,9 +1226,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "arkit_gaze_eyelid: source describes eyelid movement consistent with the gaze", "refs" = ["arkit.coefficient.eyeLookDownRight", "rcef.canonical_expression.gaze_down_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "arkit_tongue_out.to_rcef"
-
 [[mappings.rules]]
 id = "arkit_rcef.tongue_out"
 inputs = ["arkit.coefficient.tongueOut"]
@@ -1269,7 +1247,7 @@ loss_annotations = [
 ]
 
 [[mappings]]
-id = "rcef_face.to_arkit"
+id = "rcef_expression.to_arkit"
 
 [[mappings.rules]]
 id = "rcef_arkit.jawOpen"
@@ -1971,9 +1949,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.nose_wrinkle_right", "arkit.coefficient.noseSneerRight"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_cheek_puff.to_arkit"
-
 [[mappings.rules]]
 id = "rcef_arkit.cheekPuff"
 inputs = ["rcef.canonical_expression.cheek_puff_left", "rcef.canonical_expression.cheek_puff_right"]
@@ -1997,9 +1972,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ict_au33_cheek_blow: ICT relates cheekPuff to AU33 cheek blow; the canonical code is AU34; the ICT crosswalk does not carry over for the FACS code", "refs" = ["rcef.canonical_expression.cheek_puff_left", "rcef.canonical_expression.cheek_puff_right", "arkit.coefficient.cheekPuff"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_jaw_thrust.to_arkit"
-
 [[mappings.rules]]
 id = "rcef_arkit.jawForward"
 inputs = ["rcef.canonical_expression.jaw_thrust"]
@@ -2019,9 +1991,6 @@ evidence = ["apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vr
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.jaw_thrust", "arkit.coefficient.jawForward"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_jaw_sideways.to_arkit"
 
 [[mappings.rules]]
 id = "rcef_arkit.jawLeft"
@@ -2060,9 +2029,6 @@ evidence = ["apple_blendshapes", "godot_vendors_fb2", "godot_face_modifier", "vr
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.jaw_sideways_right", "arkit.coefficient.jawRight"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_mouth_shift.to_arkit"
 
 [[mappings.rules]]
 id = "rcef_arkit.mouthLeft"
@@ -2104,9 +2070,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.mouth_shift_right", "arkit.coefficient.mouthRight"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_chin_raise_upper_lip.to_arkit"
-
 [[mappings.rules]]
 id = "rcef_arkit.mouthShrugUpper"
 inputs = ["rcef.canonical_expression.chin_raise_upper_lip"]
@@ -2126,9 +2089,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.chin_raise_upper_lip", "arkit.coefficient.mouthShrugUpper"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "arkit_mouthshrug_outward: ARKit describes outward lip movement; the canonical signals push up", "refs" = ["rcef.canonical_expression.chin_raise_upper_lip", "arkit.coefficient.mouthShrugUpper"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_blink.to_arkit"
 
 [[mappings.rules]]
 id = "rcef_arkit.eyeBlinkLeft"
@@ -2171,9 +2131,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.eye_close_right", "arkit.coefficient.eyeBlinkRight"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "ict_au45_blink: ICT relates eyeBlink to AU45 blink; the canonical code is AU43; the ICT crosswalk does not carry over for the FACS code", "refs" = ["rcef.canonical_expression.eye_close_right", "arkit.coefficient.eyeBlinkRight"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_gaze.to_arkit"
 
 [[mappings.rules]]
 id = "rcef_arkit.eyeLookOutLeft"
@@ -2342,9 +2299,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "ARKit gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.gaze_up_right", "arkit.coefficient.eyeLookUpRight"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "arkit_gaze_eyelid: source describes eyelid movement consistent with the gaze", "refs" = ["rcef.canonical_expression.gaze_up_right", "arkit.coefficient.eyeLookUpRight"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_tongue_out.to_arkit"
 
 [[mappings.rules]]
 id = "rcef_arkit.tongueOut"

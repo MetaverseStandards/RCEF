@@ -44,6 +44,24 @@ A1_MAPS = ('arkit.to_fb2', 'arkit_gaze.to_fb2', 'fb2.to_arkit', 'fb2_gaze.to_ark
            'fb2.to_vrm', 'visemes.to_vrm')
 OLD_HELPER = re.compile(r'^rcef\.intermediate\.arkit_gaze_(in_minus_out|up_minus_down)_([LR])$')
 INTERMEDIATE = 'rcef.intermediate.'
+# Map IDs: one map per set pair and direction, named <from>.to_<to>. A provider set is named by the key its mapping
+# IDs use (arkit_rcef.*, rcef_arkit.*); a canonical set by rcef_expression or rcef_viseme. A map's rules are in the
+# order of the canonical groups they read or write.
+EXPRESSION, VISEME_KEY = 'rcef_expression', 'rcef_viseme'
+
+
+def in_map_id(key: str, canonical: str = EXPRESSION) -> str:
+    return f'{key}.to_{canonical}'
+
+
+def out_map_id(key: str, canonical: str = EXPRESSION) -> str:
+    return f'{canonical}.to_{key}'
+
+
+def set_map(map_id: str, parts: list[list[dict]]) -> list[dict]:
+    """One map from the rules of its parts (one part per canonical group, in group order); none if it has no rule."""
+    rules = [r for part in parts for r in part]
+    return [{'id': map_id, 'rules': rules}] if rules else []
 
 # One entry per expression set that has hops. `audit` is the heading of its table in the audit; `records` are
 # its own definition records, which every hop of the set cites first; `maps` names the directions it has.
@@ -498,7 +516,7 @@ class Builder:
         return (f'{end}_invert', invert()) if group == 'blink' else (f'{end}_mm', copy())
 
     def in_maps(self, key: str) -> list[dict]:
-        maps = []
+        parts = []
         for group in self.groups:
             rules = []
             for s in self.signals:
@@ -515,9 +533,9 @@ class Builder:
             if rules:
                 written = {r['outputs'][0] for r in rules}
                 if written != {self.cid(s['short']) for s in self.signals if s['group'] == group}:
-                    raise SystemExit(f'{key}_{group}.to_rcef does not write its whole group')
-                maps.append({'id': f'{key}_{group}.to_rcef', 'rules': rules})
-        return maps
+                    raise SystemExit(f'{in_map_id(key)} does not write the whole group {group}')
+                parts.append(rules)
+        return set_map(in_map_id(key), parts)
 
     def out_rules(self, key: str) -> list[tuple[str, dict]]:
         """(group, rule) for every out-map rule of a set, in the order of today's map into that set."""
@@ -610,12 +628,7 @@ class Builder:
 
     def out_maps(self, key: str) -> list[dict]:
         rules = self.out_rules(key)
-        maps = []
-        for group in self.groups:
-            mine = [r for g, r in rules if g == group]
-            if mine:
-                maps.append({'id': f'rcef_{group}.to_{key}', 'rules': mine})
-        return maps
+        return set_map(out_map_id(key), [[r for g, r in rules if g == group] for group in self.groups])
 
     def maps(self, key: str) -> list[dict]:
         spec = PROVIDERS[key]
@@ -859,7 +872,7 @@ class FacsBuilder:
                     metadata['side_note'] = self.side_note
                 verb = 'them' if len(shorts) > 1 else 'it'
                 metadata['reason'] = (f'Code number and name from {FACS_RECORD}; read into canonical {join(shorts)} '
-                                      f'by facs_{group}.to_rcef and written from {verb} by rcef_{group}.to_facs, both '
+                                      f'by {in_map_id("facs")} and written from {verb} by {out_map_id("facs")}, both '
                                       f"proposed approximate hops; the numeric encoding is RCEF's own, not a FACS "
                                       f'score.')
                 calibration = self.calibration[entry['table']].replace('au<NN>', self.local(fid))
@@ -910,24 +923,24 @@ class FacsBuilder:
         return self.b.rule(rid, inputs, outputs, operator, [correspondence, endpoints + '.'], losses, evidence)
 
     def in_maps(self) -> list[dict]:
-        maps = []
+        parts = []
         for group in self.b.groups:
             members = [s['short'] for s in self.b.signals if s['group'] == group]
             mine = [s for s in members if s in self.audit]
             if not mine:
                 continue
             if mine != members:
-                raise SystemExit(f'facs_{group}.to_rcef does not write its whole group')
+                raise SystemExit(f'{in_map_id("facs")} does not write the whole group {group}')
             rules = []
             for short in mine:
                 fid = self.audit[short]['id']
                 kind = 'in_fan' if len(self.aligned[fid]) > 1 else 'in_copy'
                 rules.append(self.hop(kind, f'facs_rcef.{short}', fid, [short], [fid], [self.b.cid(short)], copy()))
-            maps.append({'id': f'facs_{group}.to_rcef', 'rules': rules})
-        return maps
+            parts.append(rules)
+        return set_map(in_map_id('facs'), parts)
 
     def out_maps(self, signals: list[dict]) -> list[dict]:
-        maps = []
+        parts = []
         for group in self.b.groups:
             rules = []
             for s in signals:
@@ -938,9 +951,8 @@ class FacsBuilder:
                 operator = {'id': 'weighted_sum', 'weights': [0.5] * len(shorts)} if mean else copy()
                 rules.append(self.hop('out_mean' if mean else 'out_copy', f'rcef_facs.{self.local(s["id"])}', s['id'],
                                       shorts, [self.b.cid(x) for x in shorts], [s['id']], operator))
-            if rules:
-                maps.append({'id': f'rcef_{group}.to_facs', 'rules': rules})
-        return maps
+            parts.append(rules)
+        return set_map(out_map_id('facs'), parts)
 
     def files(self) -> dict[str, str]:
         signals = self.signals()
@@ -950,8 +962,8 @@ class FacsBuilder:
         parts += ['\n[[signals]]\n' + ''.join(f'{k} = {value(v)}\n' for k, v in s.items()) for s in signals]
         parts.append('\n[[profiles]]\n' + ''.join(f'{k} = {value(v)}\n' for k, v in profile.items()))
         intro = ('# The maps between the canonical expression set and FACS codes (facs.code): one map\n'
-                 '# per canonical group and direction. In-maps are facs_<group>.to_rcef; out-maps are\n'
-                 '# rcef_<group>.to_facs.\n')
+                 f'# per direction, {in_map_id("facs")} and {out_map_id("facs")}. Their rules are in\n'
+                 '# canonical group order; docs/map-sets/ has a page per map that lists them by group.\n')
         return {FACS_FILE: ''.join(parts),
                 FACS_MAPS_FILE: maps_toml('FACS', self.in_maps() + self.out_maps(signals), intro, FACS_HEADER)}
 
@@ -1223,34 +1235,30 @@ class VisemeBuilder:
         return self.rule(rid, inputs, outputs, copy(), assumptions, losses, self.evidence('vrm'))
 
     def meta_maps(self) -> list[dict]:
-        maps = []
+        parts = []
         for group in self.groups:
             members = [s for s in self.signals if s['group'] == group]
             if group == 'viseme_aggregate':
-                maps.append({'id': 'visemes_aggregate.to_rcef',
-                             'rules': [r for s in members for r in self.aggregate_rules(s)]})
+                parts.append([r for s in members for r in self.aggregate_rules(s)])
             else:
-                maps.append({'id': f'visemes_{group[len("viseme_"):]}.to_rcef',
-                             'rules': [self.meta_hop(s, 'in') for s in members]})
-        for group in self.groups:
-            if group != 'viseme_aggregate':
-                maps.append({'id': f'rcef_{group}.to_visemes',
-                             'rules': [self.meta_hop(s, 'out') for s in self.signals if s['group'] == group]})
-        return maps
+                parts.append([self.meta_hop(s, 'in') for s in members])
+        out = [[self.meta_hop(s, 'out') for s in self.signals if s['group'] == group]
+               for group in self.groups if group != 'viseme_aggregate']
+        return set_map(in_map_id('visemes', VISEME_KEY), parts) + set_map(out_map_id('visemes', VISEME_KEY), out)
 
     def vrm_maps(self) -> list[dict]:
         vowels = [s for s in self.signals if s['vrm']]
         by_preset = {s['vrm']: s for s in vowels}
         order = [r['outputs'][0].rsplit('.', 1)[1] for r in self.a1['maps']['visemes.to_vrm']]
-        return [{'id': 'vrm_vowel.to_rcef', 'rules': [self.vrm_hop(s, 'in') for s in vowels]},
-                {'id': 'rcef_viseme_vowel.to_vrm', 'rules': [self.vrm_hop(by_preset[p], 'out') for p in order]}]
+        return (set_map(in_map_id('vrm', VISEME_KEY), [[self.vrm_hop(s, 'in') for s in vowels]])
+                + set_map(out_map_id('vrm', VISEME_KEY), [[self.vrm_hop(by_preset[p], 'out') for p in order]]))
 
 
 # ---------------------------------------------------------------- the viseme pose bridge
 
 POSE_RECORD = 'viseme-poses.rocketbox-features'
 POSE_EVIDENCE = f'calibration.{POSE_RECORD}'
-POSE_MAP = 'rcef_viseme_pose.to_rcef_expression'
+POSE_MAP = f'{VISEME_KEY}.to_{EXPRESSION}'
 POSE_FILE = 'mappings/canonical_viseme_pose.toml'
 INTERMEDIATE_FILE = 'data/intermediate.toml'
 POSE_MARKER = ('# Below this line: written by scripts/build_canonical.py from the calibration record\n'
@@ -1476,8 +1484,10 @@ def signals_toml(signals: list[dict], profile: dict, title: str = 'canonical exp
 
 
 def maps_toml(name: str, maps: list[dict], intro: str | None = None, header: str = HEADER) -> str:
-    parts = [header, intro or f'# The maps between the canonical sets and {name}: one map per canonical group and\n'
-                              '# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.\n']
+    parts = [header, intro or f'# The maps between the canonical sets and {name}: one map per set pair and direction,\n'
+                              '# <set>.to_rcef_expression or .to_rcef_viseme in, and rcef_expression.to_<set> or\n'
+                              '# rcef_viseme.to_<set> out. Their rules are in canonical group order;\n'
+                              '# docs/map-sets/ has a page per map that lists them by group.\n']
     for m in maps:
         parts.append(f'\n[[mappings]]\nid = {value(m["id"])}\n')
         for r in m['rules']:

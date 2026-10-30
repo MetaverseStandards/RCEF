@@ -4,11 +4,13 @@
 # docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and the
 # retired A1 direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit
 # those, then run the script.
-# The maps between the canonical sets and Unified Expressions: one map per canonical group and
-# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
+# The maps between the canonical sets and Unified Expressions: one map per set pair and direction,
+# <set>.to_rcef_expression or .to_rcef_viseme in, and rcef_expression.to_<set> or
+# rcef_viseme.to_<set> out. Their rules are in canonical group order;
+# docs/map-sets/ has a page per map that lists them by group.
 
 [[mappings]]
-id = "rcef_face.to_vrcft_artist"
+id = "rcef_expression.to_vrcft_artist"
 
 [[mappings.rules]]
 id = "rcef_vrcft_artist.BrowLowererLeft"
@@ -889,9 +891,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.nose_wrinkle_right", "vrcft.artist.base.NoseSneerRight"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_cheek_puff.to_vrcft_artist"
-
 [[mappings.rules]]
 id = "rcef_vrcft_artist.CheekPuffRight"
 inputs = ["rcef.canonical_expression.cheek_puff_right"]
@@ -928,9 +927,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.cheek_puff_left", "vrcft.artist.base.CheekPuffLeft"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_jaw_thrust.to_vrcft_artist"
-
 [[mappings.rules]]
 id = "rcef_vrcft_artist.JawForward"
 inputs = ["rcef.canonical_expression.jaw_thrust"]
@@ -948,9 +944,6 @@ evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_d
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.jaw_thrust", "vrcft.artist.base.JawForward"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_jaw_sideways.to_vrcft_artist"
 
 [[mappings.rules]]
 id = "rcef_vrcft_artist.JawLeft"
@@ -987,9 +980,6 @@ evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_d
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.jaw_sideways_right", "vrcft.artist.base.JawRight"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_mouth_shift.to_vrcft_artist"
 
 [[mappings.rules]]
 id = "rcef_vrcft_artist.MouthUpperLeft"
@@ -1075,9 +1065,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "vrcft_ue_set_equal: Unified Expressions splits this shape into parts whose ratio the canonical set does not record; the parts are set equal", "refs" = ["rcef.canonical_expression.mouth_shift_right", "vrcft.artist.base.MouthLowerRight"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_chin_raise_upper_lip.to_vrcft_artist"
-
 [[mappings.rules]]
 id = "rcef_vrcft_artist.MouthRaiserUpper"
 inputs = ["rcef.canonical_expression.chin_raise_upper_lip"]
@@ -1095,9 +1082,6 @@ evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_d
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.chin_raise_upper_lip", "vrcft.artist.base.MouthRaiserUpper"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_blink.to_vrcft_artist"
 
 [[mappings.rules]]
 id = "rcef_vrcft_artist.EyeClosedLeft"
@@ -1134,9 +1118,6 @@ evidence = ["vrcft_artist", "vrcft_docs_shapes", "godot_face_modifier", "vrcft_d
 loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.eye_close_right", "vrcft.artist.base.EyeClosedRight"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_gaze.to_vrcft_artist"
 
 [[mappings.rules]]
 id = "rcef_vrcft_artist.EyeLookDownLeft"
@@ -1290,9 +1271,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "vrcft_ue_gaze_no_angle: source describes eyelid and eye movement; no maximum angle stated", "refs" = ["rcef.canonical_expression.gaze_up_right", "vrcft.artist.base.EyeLookUpRight"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_tongue_out.to_vrcft_artist"
-
 [[mappings.rules]]
 id = "rcef_vrcft_artist.TongueOut"
 inputs = ["rcef.canonical_expression.tongue_out"]
@@ -1311,9 +1289,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.tongue_out", "vrcft.artist.base.TongueOut"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "the tongue extension has no stated length", "refs" = ["rcef.canonical_expression.tongue_out", "vrcft.artist.base.TongueOut"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_cheek_suck.to_vrcft_artist"
 
 [[mappings.rules]]
 id = "rcef_vrcft_artist.CheekSuckLeft"
@@ -1354,9 +1329,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "Unified Expressions gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.cheek_suck_right", "vrcft.artist.base.CheekSuckRight"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions", "refs" = ["rcef.canonical_expression.cheek_suck_right", "vrcft.artist.base.CheekSuckRight"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_lip_tighten.to_vrcft_artist"
 
 [[mappings.rules]]
 id = "rcef_vrcft_artist.MouthTightenerLeft"
