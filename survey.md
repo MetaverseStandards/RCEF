@@ -9,7 +9,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 | ARKit coefficient | 52 | Native 0..1, face-relative sides; 9 identities preserve this native coefficient basis. Eye transforms stay separate. |
 | MediaPipe label | 52 | 51 names shared with ARKit, plus `_neutral`, no `tongueOut`; model calibration unresolved. `_neutral` is excluded. |
 | OpenXR FB | 63 | Validity, eye-following validity, confidence and time retained. Explicit numeric range unresolved in the pinned extension text. No tongue entries. |
-| OpenXR FB2 | 70 | Native 0..1, seven tongue entries, visual/audio negotiation; eight gaze identities preserve native directional fractions. Maximum angles unresolved. |
+| OpenXR FB2 | 70 | Native 0..1, seven tongue entries, visual/audio negotiation; eight native directional gaze fractions. Maximum angles unresolved. |
 | Optional META visemes | 15 | FB2 dependency, probabilities, valid sum 1, separate validity; valid silence differs from invalid all-zero data. |
 | VRCFT transport | 88 | Active enum separated from eye data and artist vocabulary. Byte transport clamps and truncates; those losses are inventory, not an implicit runtime operation. |
 | VRCFT eye | 12 scalar components | Left/right/combined gaze x/y, openness, pupil field. Four raw openness/diameter identities; combined computation unresolved. |

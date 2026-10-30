@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 # A/B comparison of the pivot route with the direct maps
 
-The pivot route (arm B) translates every pair of expression sets through RCEF's canonical sets: source → canonical → target. This folder holds the pre-registered comparison of B with today's direct maps (arm A1) and with the other arms. Each run is registered before it starts, and its thresholds and frozen lists never change inside a registration.
+The pivot route (arm B) translates every pair of expression sets through RCEF's canonical sets: source → canonical → target. This folder holds the pre-registered comparison of B with the direct maps (arm A1) and with the other arms. Data 0.5.0 retires the direct maps from the pack; A1 still runs them from its frozen baseline. Each run is registered before it starts, and its thresholds and frozen lists never change inside a registration.
 
 The tools are in the repository, not in this folder:
 

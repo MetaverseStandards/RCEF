@@ -17,14 +17,14 @@ RCEF is an open catalogue of face-expression standards (ARKit, OpenXR FB2, META 
 | `generated/rcef_mapping.csv` | A matrix: one row per signal, one column per profile. It is not a list of mappings. |
 | `reports/mappings.md`, `.csv` | Every mapping with its operator, status, assumptions and losses. |
 | `reports/inventory.md`, `.csv` | Every signal in every profile: native names, indices, ranges, calibration, evidence and reasons. |
-| `reports/canonical_correspondence.md`, `.csv` | The 21 signals of `rcef.canonical` against the authored mappings. |
+| `reports/canonical_correspondence.md`, `.csv` | The signals of the canonical expression and viseme sets against the authored mappings. |
 | `reports/SHA256SUMS` | SHA-256 of the six report files. Each Markdown report also records the pack's SHA-256. |
 
 The README's [Mappings](README.md#mappings) table lists each map with its source and target profile.
 
 ### Translate tracker values
 
-Use the msf-character-tools public API on the pack. Cross-provider maps are `proposed`, so `compile_mapping` refuses them (`E_APPROXIMATION`) unless you give `allow_approximation=True`. Run this from the RCEF checkout. It prints `0.5`:
+Use the msf-character-tools public API on the pack. A translation runs two maps: one from the source into a canonical set, and one from the canonical set to the target. The maps are `proposed`, so `compile_mapping` refuses them (`E_APPROXIMATION`) unless you give `allow_approximation=True`. Run this from the RCEF checkout. It runs the FB2 face map into the canonical expression set and prints `0.5`:
 
 ```python
 import json
@@ -33,8 +33,8 @@ import msf_character_tools as msf
 doc = json.load(open('generated/rcef.pack.json', encoding='utf-8'))
 pack = msf.compile_pack(msf.validate_authoring(doc).value).value
 fb2 = msf.profile_snapshot(pack, 'openxr.fb2').value
-arkit = msf.profile_snapshot(pack, 'arkit.coefficient').value
-result = msf.compile_mapping(pack, fb2, arkit, 'fb2.to_arkit', allow_approximation=True)
+canonical = msf.profile_snapshot(pack, 'rcef.canonical_expression').value
+result = msf.compile_mapping(pack, fb2, canonical, 'fb2_face.to_rcef', allow_approximation=True)
 assert result.ok, result.report.to_dict()
 mapping = result.value
 inputs = sorted(mapping.required_inputs)
@@ -43,7 +43,7 @@ values['openxr.fb2.XR_FACE_EXPRESSION2_JAW_DROP_FB'] = 0.5
 frame = {'timestamp': 0.0, 'values': values, 'validity': dict.fromkeys(inputs, True)}
 out = msf.evaluate_mapping(mapping, [frame])
 assert out.ok, out.report.to_dict()
-print(out.value.samples[0]['values']['arkit.coefficient.jawOpen'])
+print(out.value.samples[0]['values']['rcef.canonical_expression.jaw_drop'])
 ```
 
 The examples translate through the draft canonical sets with [examples/rcef_route.py](examples/rcef_route.py): source → canonical → target. Route finds the in-maps and out-maps of a source and target set, runs each group's in-map and out-map, and reports a refused group without refusing the others. [examples/rcef_frames.py](examples/rcef_frames.py) reads and writes their CSV files. What Route does, and why:
@@ -53,7 +53,7 @@ The examples translate through the draft canonical sets with [examples/rcef_rout
 - An input's validity is the AND of the provider flags in its signal's `validity` field, for example `isValid AND isEyeFollowingBlendshapesValid` for FB2 gaze.
 - If one frame in a call is refused, the call returns no values for any frame. Each error's `ref` begins with `/samples/<n>`, for example `/samples/1/openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB`. Use it to find the refused frames, then evaluate the rest again.
 - Face and gaze are separate groups, with separate maps: for example `fb2_face.to_rcef` and `fb2_gaze.to_rcef` in, `rcef_face.to_arkit` and `rcef_gaze.to_arkit` out. A refusal names the hop map that refused.
-- The direct maps (`fb2.to_arkit` and the others) are still in the pack, but no example reads them. The A/B comparison runs them through Route's one-hop mode ([ab/README.md](ab/README.md)).
+- Data 0.5.0 retired the direct maps (`fb2.to_arkit` and the others); [docs/retired-ids.csv](docs/retired-ids.csv) lists every retired ID. The A/B comparison runs them from its frozen baseline pack through Route's one-hop mode ([ab/README.md](ab/README.md)).
 
 [examples/README.md](examples/README.md) shows complete runs from CSV to CSV and onto face meshes.
 
@@ -61,9 +61,9 @@ The examples translate through the draft canonical sets with [examples/rcef_rout
 
 Each mapping (and each signal) has an `evidence_status` field. It says how well the mapping itself is supported. It is not the `status` of the evidence records it cites: all records in `evidence/sources.toml` are `verified_current`, including the records that `proposed` mappings cite. The values of `evidence_status` are:
 
-- `verified_current`: the mapping restates a verified source fact. The three `*.to_canonical` maps, the 4 pupil copies between VRCFaceTracking eye data and the canonical expression set, and the synthetic `fixture.affine` and `fixture.bilateral` use it.
-- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 direct cross-provider mappings and their 4 internal gaze steps are `proposed`, and so are the other 480 mappings into and out of the canonical expression and viseme sets, their signals except the 2 pupils, and the 92 signals of the FACS code profile `facs.code`, and the 101 mappings of the viseme pose bridge between the two sets.
-- `unresolved`: recorded but not executable. `compile_mapping` refuses it, even with the opt-in. The MediaPipe → ARKit map `survey.ambiguous` is the example.
+- `verified_current`: the mapping restates a verified source fact. The 4 pupil copies between VRCFaceTracking eye data and the canonical expression set, and the synthetic `fixture.affine` and `fixture.bilateral`, use it.
+- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. So are the other 480 mappings into and out of the canonical expression and viseme sets, their signals except the 2 pupils, and the 92 signals of the FACS code profile `facs.code`, and the 101 mappings of the viseme pose bridge between the two sets.
+- `unresolved`: recorded but not executable. `compile_mapping` refuses it, even with the opt-in. The MediaPipe → canonical expression map `survey.ambiguous` is the example.
 
 `calibrated_software` is the `status` of the records in [calibration/](calibration/README.md). They are fits to renders or mesh geometry of example rigs, not measurements of a tracker. The pack uses schema 1.0, which does not have this value. So the mappings that cite a calibration record, the 45 weighted sums of the viseme pose bridge (`calibration.viseme-poses.rocketbox-features`), are `proposed`, and their assumptions say why.
 
@@ -74,7 +74,7 @@ Each mapping (and each signal) has an `evidence_status` field. It says how well 
 - The mappings connect names and meanings the way the public sources do. Intensities are not calibrated: no provider publishes its gain, so equal weights are assumed to mean equal expressions. Each mapping states its assumptions and losses in `reports/mappings.md`.
 - The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass. In `viseme-poses.rocketbox-features`, 11 of 15 viseme classes pass on all 4 held-out rigs: 7 by their shape and 4 by a perceptual gate of visible mouth features. The viseme pose bridge reads only those. The earlier `viseme-poses.rocketbox-female` and `viseme-poses.rocketbox-multi` stay as history; no mapping cites them.
 - The viseme pose bridge lets META visemes and VRM vowels drive ARKit, FB2 and Unified Expressions faces, and FACS values. Its poses are fitted to the viseme shapes of 18 Rocketbox rigs, in their own ARKit units. The 4 classes that fail (`labiodental`, `postalveolar`, `coronal_nasal_lateral` and `rhotic`) move nothing. There is no map from expressions back to visemes.
-- The VRM maps come from specification texts only. No published table maps META visemes to VRM; `visemes.to_vrm` is a phoneme-label correspondence.
+- The VRM maps come from specification texts only. No published table maps META visemes to VRM; the VRM vowel hops are a phoneme-label correspondence.
 - The README lists what is [not translated yet](README.md#mappings), and why.
 
 ## Part 2: Contributing
@@ -86,7 +86,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | Path | Contents |
 |---|---|
 | `pack.toml` | Root metadata, including `data_version`. |
-| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (72), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (65). `canonical_expression.toml` and `canonical_viseme.toml` are generated, and so is the part of `intermediate.toml` below its marker line (the 56 helpers of the viseme pose bridge, and the profile). |
+| `data/` | RCEF's own sets: the draft `rcef.canonical_expression` (72 signals), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (61). `canonical_expression.toml` and `canonical_viseme.toml` are generated, and so is the part of `intermediate.toml` below its marker line (the 56 helpers of the viseme pose bridge, and the profile). |
 | `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. `facs.code.toml`, the FACS codes in RCEF's own encoding, is generated. |
 | `mappings/` | Maps. Each map is a group of one-way mappings. `canonical_*.toml` hold the maps into and out of the canonical sets, and `canonical_viseme_pose.toml` the viseme pose bridge between them; they are generated. |
 | `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` (the msf-character-tools lock), `input-contracts/`. |
@@ -97,7 +97,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | `tools/render/` | `meshrender.swift`, the macOS offscreen renderer for calibration fits. |
 | `examples/` | End-to-end translations and face pipelines; inputs in `examples/data/`. |
 | `docs/` | Architecture guide and visuals, `expression-sets.md`, `toml-index.csv`, `godot_comparison.md`, calibration notes, and the draft canonical expression set: `canonical-set.md`, `canonical-set-audit.md` and `facs-intensity.md`. |
-| `fixtures/` | `mapping_samples.json`: sample inputs and expected outputs for the affine, bilateral and identity checks in `tests/test_parity.py`. It is not `tests/fixtures/`, and it holds no signals (those are in `profiles/fixture.toml`). |
+| `fixtures/` | `mapping_samples.json`: sample inputs and expected outputs for the affine and bilateral checks in `tests/test_parity.py`. It is not `tests/fixtures/`, and it holds no signals (those are in `profiles/fixture.toml`). |
 | `tests/` | The `unittest` suite and its inputs in `tests/fixtures/`. |
 
 ### Commands
@@ -139,7 +139,8 @@ To adopt a new msf-character-tools release: install its wheel by hash, then run 
 - `tests/test_dependency.py` builds fake msf-character-tools installs and checks that `check.py` refuses each one before msf-character-tools runs (a marker file shows whether it ran). If you change the lock format or the order of steps in `check.py`, keep these tests meaningful. For example, the tampered-package fake must use a version and wheel tag that the lock has, or it is refused for the wrong reason.
 - Any change to a string in any TOML file changes the pack bytes and so the pack hash. Then `rcef.pack.json`, `coverage.json`, `generated/SHA256SUMS`, all three Markdown reports, `reports/SHA256SUMS` and `docs/toml-index.csv` change. A CSV report changes only if the string is one of its columns. `rcef_mapping.csv` changes only if a signal's id, label, value type, units, disposition, evidence status or profile membership changes. Regenerate everything, and commit what changed.
 - `data/canonical_expression.toml`, `data/canonical_viseme.toml`, `profiles/facs.code.toml`, `mappings/canonical_*.toml` and the part of `data/intermediate.toml` below its marker line are written by `scripts/build_canonical.py` from `docs/canonical-set.md`, `docs/canonical-set-audit.md`, `tests/fixtures/ipa_chart_symbols.json`, `tests/fixtures/baseline-dea1713.pack.json`, for the FACS codes `examples/data/facs_codes.json` and `tests/fixtures/rocketbox_au_names.json`, and, for the viseme pose bridge, `calibration/viseme-poses.rocketbox-features.cal`. Do not edit them by hand: `tests/test_pivot_structure.py` fails if they differ from what the script writes. Change the documents, then run the script with `--write`.
-- The 7 direct maps (`fb2.to_arkit`, `fb2_gaze.to_arkit`, `arkit.to_fb2`, `arkit_gaze.to_fb2`, `arkit.to_vrcft_artist`, `fb2.to_vrm`, `visemes.to_vrm`) are frozen. `tests/test_pivot_structure.py` compares them, their signals and their evidence records with `tests/fixtures/baseline-dea1713.pack.json`.
+- The hop maps are frozen. `tests/test_pivot_structure.py` compares each with `tests/fixtures/b-maps-ab.pivot-v1.json`, the maps of the latest passing A/B freeze. A change to a hop's values needs a new A/B freeze ([ab/README.md](ab/README.md)).
+- Retired IDs are never reused. `tests/test_retired_ids.py` checks that every ID of the A/B baseline that is not in the pack has one line in [docs/retired-ids.csv](docs/retired-ids.csv).
 - msf-character-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
 - `docs/architecture.html`, `.svg` and `.png` are made by hand, and no test checks them. When the data changes, update them and the counts in `docs/architecture.md`, and render the PNG from the SVG at the same size (1160 × 560). See the checklist in [docs/architecture.md](docs/architecture.md#9-independent-validation-checklist).
 - The face and viseme pipelines download rigs on first use and check their hashes (`--cache DIR` for rig files, `--out DIR` for outputs; the defaults are under `~/.cache`). The slow tests skip unless their variables are set. See [examples/README.md](examples/README.md).
@@ -157,5 +158,5 @@ To adopt a new msf-character-tools release: install its wheel by hash, then run 
 ## Writing style
 
 - Use plain English in the style of ASD-STE100: short sentences, active voice, common words, one instruction per sentence. Leave out filler.
-- In prose, one rule is a **mapping** and a group such as `fb2.to_arkit` is a **map** ("the FB2 → ARKit map has 44 mappings").
+- In prose, one rule is a **mapping** and a group such as `fb2_face.to_rcef` is a **map** ("the FB2 face map has 41 mappings").
 - Do not change code and schema names, such as `[[mappings]]` and `rules`.
