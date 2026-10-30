@@ -433,6 +433,28 @@ exclusive, and the data now builds this in.
 
 ## Calibration and examples — 2026-10-30, with data 0.5.0
 
+- The Git history from the first merge commit onward was rewritten for
+  publication. The merge commits were re-authored, and two kinds of
+  commit messages were reworded: the subjects of the merge commits and one
+  subject that named a work step. The trees did not change, but every
+  commit hash from the first merge commit onward changed. The documents
+  and the calibration tripwire name the new hashes. The three
+  viseme-poses records named a `code_commit` that is no longer in the
+  history, so they were frozen again as new versions of the same fit:
+  `viseme-poses.rocketbox-female` v2, `viseme-poses.rocketbox-multi` v3
+  and `viseme-poses.rocketbox-features` v2. Each was frozen and held out
+  on a branch from the freeze commit of the version before it, and the
+  branch was merged. Only `version`, `code_commit` and `frozen_sha256`
+  change in the frozen parts, so the poses and the bridge do not change.
+  The held-out conditions come from the new frozen hash: the shape cells
+  are equal, and 26 of the 48 feature cells of
+  `viseme-poses.rocketbox-features` moved (largest change 0.0044 in `max`
+  and 0.024 in `median`). Every cell keeps its verdict, and the same 11
+  classes pass. The evidence claim of the bridge's record names version 2.
+  That claim is in the frozen hop parts, so `ab.pivot` v4 is a `revise`
+  freeze of v3. It passes every gate, and its Revise gate finds no value
+  difference, no lost output and no new refusal.
+
 - The examples, the face and viseme pipelines and `scripts/compare_godot.py`
   translate through the canonical sets (source → canonical → target), with
   `examples/rcef_route.py`. `examples/rcef_frames.py` reads and writes the
