@@ -218,6 +218,9 @@ RECORD_FIELDS = {'format': str, 'id': str, 'version': int, 'status': str, 'scope
 OPTIONAL_FIELDS = {'scan_origin': str, 'cells': list, 'renderer': dict, 'features': list, 'feature_cells': list}
 RESULTS = ('cells', 'feature_cells')
 FEATURE_KINDS = ('difference', 'range')
+# Every channel with features also bounds its whole-mesh error, so a feature gate cannot pass a face that is further
+# from the target than the neutral face is.
+GUARD = 'whole_face_error'
 COPY = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
 SCOPE = 'software-only; not a measurement of any tracker'
 SCAN_ORIGIN = 'light-stage scans of real people'
@@ -452,6 +455,13 @@ def feature_problems(record: dict, channels, minimum, count) -> list[str]:
         if key in declared:
             problems.append(f'the feature {key[1]} of {key[0]} appears twice')
         declared.add(key)
+    for channel in sorted({f['channel'] for f in features or () if isinstance(f, dict) and _text(f.get('channel'))}):
+        guard = next((f for f in features if isinstance(f, dict)
+                      and (f.get('channel'), f.get('feature')) == (channel, GUARD)), {})
+        if not (guard.get('kind') == 'range' and guard.get('low') == 0 and _number(guard.get('high'))
+                and _number(guard.get('tolerance')) and guard['high'] + guard['tolerance'] <= 1):
+            problems.append(f'channel {channel} has features but no {GUARD} guard (a range from 0 whose high plus '
+                            'tolerance is at most 1)')
     cells = record.get('feature_cells') if isinstance(record.get('feature_cells'), list) else None
     if cells is not None and not cells:
         problems.append('feature_cells must list at least one cell')

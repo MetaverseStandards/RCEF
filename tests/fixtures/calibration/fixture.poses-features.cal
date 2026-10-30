@@ -28,7 +28,7 @@ description = "Each fixture source shape fitted once."
 [held_out]
 seed_rule = "rcef.calibration.seeds/1"
 count = 24
-frozen_sha256 = "f58a579bdccabb1f647a669489ab558a4b419ac189336374e84a33052f2f0d23"
+frozen_sha256 = "119a9386ae3ae0393bd0ee11c4a63bff9ce0f6f9ef2ca9b237e7e08a294c18d5"
 
 [evaluation]
 min_conditions = 24
@@ -60,6 +60,16 @@ kind = "difference"
 units = "mm"
 tolerance = 0.5
 description = "Forward movement of the lips, compared with the rig's own shape."
+
+[[features]]
+channel = "fixture.source.lip"
+feature = "whole_face_error"
+kind = "range"
+units = "1"
+low = 0.0
+high = 1.0
+tolerance = 0.0
+description = "Whole-mesh shape error of the condition; at most 1 is no further from the target than neutral."
 
 [[curves]]
 input = "fixture.source.jaw"
@@ -112,3 +122,13 @@ failures = 0
 median = 0.1
 p95 = 0.3
 max = 0.4
+
+[[feature_cells]]
+channel = "fixture.source.lip"
+feature = "whole_face_error"
+identity = "fixture rig 2"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+max = 0.0
