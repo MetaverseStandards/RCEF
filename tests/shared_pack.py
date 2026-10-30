@@ -5,7 +5,10 @@ Loading and compiling the full pack takes about a second, and msf-character-tool
 records are immutable, so modules share one copy instead of compiling their own.
 """
 from functools import cache
+import hashlib
+import json
 from pathlib import Path
+import subprocess
 import sys
 
 import msf_character_tools as msf
@@ -32,6 +35,24 @@ def pack():
     if compiled.value is None:
         raise AssertionError(compiled.report.to_dict())
     return compiled.value
+
+
+def registered_pack(abreg: str):
+    """The B pack that a committed A/B registration (such as 'ab/ab.pivot-v1.abreg') pinned, as a document.
+
+    It is read from the commit that added the registration, and its SHA-256 must be the registration's
+    b_pack_sha256. None when the checkout has no Git history.
+    """
+    added = subprocess.run(['git', 'log', '--format=%H', '--diff-filter=A', '--', abreg], cwd=ROOT,
+                           capture_output=True, text=True)
+    if added.returncode or not added.stdout.split():
+        return None
+    shown = subprocess.run(['git', 'show', f'{added.stdout.split()[-1]}:generated/rcef.pack.json'], cwd=ROOT,
+                           capture_output=True, check=True)
+    pinned = json.loads((ROOT / abreg).read_text(encoding='utf-8'))['pins']['b_pack_sha256']
+    if hashlib.sha256(shown.stdout).hexdigest() != pinned:
+        raise AssertionError(f'{abreg}: the pack of the commit that added it is not the pack it pins')
+    return json.loads(shown.stdout)
 
 
 @cache

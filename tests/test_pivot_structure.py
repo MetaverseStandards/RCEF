@@ -17,8 +17,9 @@ tests/fixtures/baseline-dea1713.pack.json:
   only the audit keys that the audit lists for its pair;
 - the composed hop weights equal today's weights (M1s);
 - which canonical groups other sets could fill (the capability matrix);
-- every hop map is as in the B pack of the latest passing A/B freeze, byte for
-  byte (tests/fixtures/b-maps-ab.pivot-v1.json);
+- every hop map, the signal records it reads and writes (without metadata) and
+  the evidence records it uses are as in the B pack of the latest passing A/B
+  freeze, byte for byte (tests/fixtures/b-maps-ab.pivot-v1.json);
 - the viseme aggregate: its chain gives the clamped binary64 sum of its META
   inputs, no route selects its in-map, and no out-map reads an aggregate or
   refinement together with any of its parts.
@@ -32,7 +33,6 @@ import json
 from pathlib import Path
 import random
 import re
-import subprocess
 import sys
 import unittest
 
@@ -42,6 +42,7 @@ import ab_compare  # noqa: E402
 import build_canonical  # noqa: E402
 import rcef_route  # noqa: E402
 import rcef_translate  # noqa: E402
+import shared_pack  # noqa: E402
 
 PREFIX = 'rcef.canonical_expression.'
 VISEME = 'rcef.canonical_viseme.'
@@ -75,9 +76,8 @@ KEYS = {'correspondence', 'endpoints', 'transfer.provider', 'transfer.withdrawn'
         'evidence.vrcft_tables_not_cited', 'evidence.godot_only_mouth_shift', 'vrm.downstream_effects',
         'vrm.side_caveat', 'vrm.definitional_only', 'lips_toward.jaw_not_compensated', 'vrm.probability_as_weight',
         'vrm.phoneme_label_only', 'vrcft_eye.openness'}
-A1_PAIRS = {'fb2.to_arkit': 'FB2 -> ARKit', 'fb2_gaze.to_arkit': 'FB2 -> ARKit', 'arkit.to_fb2': 'ARKit -> FB2',
-            'arkit_gaze.to_fb2': 'ARKit -> FB2', 'arkit.to_vrcft_artist': 'ARKit -> VRCFT UE',
-            'fb2.to_vrm': 'FB2 -> VRM blink', 'visemes.to_vrm': 'META -> VRM'}
+# The A1 pair of each retired direct map.
+A1_PAIRS = {m: pair for pair, (_, _, maps) in ab_compare.A1_PAIRS.items() for m in maps}
 # Today's assumption templates (docs/canonical-set-audit.md, assumption catalogue): a pattern for each, and the
 # hop assumption keys its home needs on the route. None means superseded by the canonical definition.
 TEMPLATES = [
@@ -182,6 +182,25 @@ def keys_of(rule: dict) -> set[str]:
 def loss_keys(rule: dict, audit_keys) -> set[str]:
     return {l['reason'].split(':', 1)[0] for l in rule['loss_annotations'] if l['reason'].split(':', 1)[0] in audit_keys}
 
+
+
+def digest(record: dict) -> str:
+    return hashlib.sha256(json.dumps(record, sort_keys=True, separators=(',', ':'),
+                                     ensure_ascii=False).encode('utf-8')).hexdigest()
+
+
+def frozen_parts(document: dict, hops: set[str]) -> dict:
+    """SHA-256 of each hop map, of each signal record it reads or writes without its metadata, and of each evidence
+    record that its mappings or those signals cite."""
+    signals = {s['id']: s for s in document['signals']}
+    records = {e['id']: e for e in document['evidence']}
+    maps = [m for m in document['mappings'] if m['id'] in hops]
+    used = sorted({i for m in maps for r in m['rules'] for i in r['inputs'] + r['outputs']})
+    cited = sorted({e for m in maps for r in m['rules'] for e in r['evidence']}
+                   | {e for s in used for e in signals[s].get('evidence', [])})
+    return {'maps': {m['id']: digest(m) for m in maps},
+            'signals': {s: digest({k: v for k, v in signals[s].items() if k != 'metadata'}) for s in used},
+            'evidence': {e: digest(records[e]) for e in cited}}
 
 class PivotStructure(unittest.TestCase):
     @classmethod
@@ -581,29 +600,22 @@ class PivotStructure(unittest.TestCase):
 
     def test_hop_maps_are_those_of_the_latest_passing_freeze(self):
         # The direct maps are retired; the A/B comparison reads them from the A1 fixture. Every map of the canonical
-        # sets must stay byte for byte as in the B pack of the latest passing freeze, unless a "revise" freeze comes
-        # first (ab/README.md).
+        # sets, the records of the signals they read and write (without metadata) and the evidence records they use
+        # must stay byte for byte as in the B pack of the latest passing freeze, unless a "revise" freeze comes first
+        # (ab/README.md).
         frozen = json.loads((ROOT / 'tests/fixtures/b-maps-ab.pivot-v1.json').read_text(encoding='utf-8'))
-
-        def digest(mapping):
-            return hashlib.sha256(json.dumps(mapping, sort_keys=True, separators=(',', ':'),
-                                             ensure_ascii=False).encode('utf-8')).hexdigest()
-        current = {m['id']: digest(m) for m in self.pack['mappings']
-                   if m['id'] != 'survey.ambiguous' and not m['id'].startswith('fixture.')}
-        self.assertEqual(current, frozen['maps'])
+        hops = {m['id'] for m in self.pack['mappings'] if m['id'] != 'survey.ambiguous'
+                and not m['id'].startswith('fixture.')}
+        self.assertEqual(hops, set(frozen['maps']))
+        self.assertEqual(frozen_parts(self.pack, hops), {k: frozen[k] for k in ('maps', 'signals', 'evidence')})
         self.assertFalse(set(build_canonical.A1_MAPS) & {m['id'] for m in self.pack['mappings']})
+        self.assertEqual(set(A1_PAIRS), set(build_canonical.A1_MAPS))
         registration = json.loads((ROOT / 'ab/ab.pivot-v1.abreg').read_text(encoding='utf-8'))
         self.assertEqual(frozen['b_pack_sha256'], registration['pins']['b_pack_sha256'])
-        # With the history, the hashes are those of the registered pack itself.
-        commit = subprocess.run(['git', 'log', '--format=%H', '--diff-filter=A', '--', 'ab/ab.pivot-v1.abreg'],
-                                cwd=ROOT, capture_output=True, text=True).stdout.split()
-        shown = subprocess.run(['git', 'show', f'{commit[-1]}:generated/rcef.pack.json'], cwd=ROOT,
-                               capture_output=True) if commit else None
-        if shown is None or shown.returncode:
+        registered = shared_pack.registered_pack('ab/ab.pivot-v1.abreg')
+        if registered is None:
             self.skipTest('no Git history for the registered pack')
-        self.assertEqual(hashlib.sha256(shown.stdout).hexdigest(), frozen['b_pack_sha256'])
-        registered = {m['id']: digest(m) for m in json.loads(shown.stdout)['mappings'] if m['id'] in frozen['maps']}
-        self.assertEqual(registered, frozen['maps'])
+        self.assertEqual(frozen_parts(registered, hops), {k: frozen[k] for k in ('maps', 'signals', 'evidence')})
 
     def capability(self, names, aliases=None, facs=False):
         """The canonical groups that a set with these names can fill completely."""
