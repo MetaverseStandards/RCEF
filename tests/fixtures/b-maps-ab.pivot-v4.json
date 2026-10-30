@@ -1,6 +1,6 @@
 {
  "b_pack_sha256": "6cc6f73be0341403df23cd24ba31ba21d53ecb5a4b39b5ce2b9160c092ed8049",
- "description": "SHA-256 of the compact, key-sorted JSON of each map of the canonical sets (one map per set pair and direction, and the viseme pose bridge), of each signal record those maps read or write without its metadata, of that metadata without its reason (signal_metadata), and of each evidence record that their mappings or those signals cite, in the B pack of ab.pivot v4, a \"reproduce\" freeze of v3. tests/test_pivot_structure.py checks maps, signals and evidence, and tests/test_hop_metadata_freeze.py checks signal_metadata, against the pack and the registered pack.",
+ "description": "SHA-256 of the compact, key-sorted JSON of each map of the canonical sets (one map per set pair and direction, and the viseme pose bridge), of each signal record those maps read or write without its metadata, of that metadata without its reason (signal_metadata), and of each evidence record that their mappings or those signals cite, in the B pack of ab.pivot v4, a \"revise\" freeze of v3. tests/test_pivot_structure.py checks maps, signals and evidence, and tests/test_hop_metadata_freeze.py checks signal_metadata, against the pack and the registered pack.",
  "evidence": {
   "apple_blendshapes": "912f4990963aeff71a731adac8a48f428b5fef6de9c5c3e4b58c601356df12f1",
   "calibration.viseme-poses.rocketbox-features": "6688b2be055fb53262c308154daf9181119a8c903660cdc3dfac28b881b1edb5",
