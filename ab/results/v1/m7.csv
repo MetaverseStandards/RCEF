@@ -1,0 +1,14 @@
+mutation,required,caught_by,missed,setup_errors
+halve one hop,M1,M1 M3 exact,0,0
+swap left and right in one hop,side test M1,M1 M3 exact side test,0,0
+drop an averaged input,M1,M1 M2 M3 exact,0,0
+merge two in-maps,M2 one-group test,M2 one-group test,0,0
+swap left and right in both VRCFaceTracking eye blink hops,side test,side test,0,0
+swap jaw_sideways_left and jaw_sideways_right in one hop,direction-suffix test M1,M1 M3 exact direction-suffix test,0,0
+delete one assumption from one hop,M4b,M4b,0,0
+swap left and right in one FACS hop,side test,M3 exact side test,0,0
+swap au30_left and au30_right in one FACS hop,direction-suffix test,M3 exact M10 direction-suffix test,0,0
+delete facs_ordinal_intensity from one FACS hop,audit loss-key test,audit loss-key test,0,0
+change one pose weight of the viseme bridge,pose-bridge weight test calibration check,pose-bridge weight test calibration check,0,0
+move one clamp knot of the viseme bridge,pose-bridge chain test,pose-bridge chain test calibration check,0,0
+unchanged pack,,,0,0
