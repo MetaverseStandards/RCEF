@@ -23,24 +23,26 @@ import provenance  # noqa: E402
 # then learnt the perceptual gate, and viseme_poses.py the features (333d928), the code of
 # viseme-poses.rocketbox-features. check.py then required the whole-face guard of every gated channel
 # (fd07416). viseme_poses.py then read the poses through the one map per set pair and direction (aa43116);
-# the correspondences and ARKit weights it computes are unchanged, so no record is fitted again.
+# the correspondences and ARKit weights it computes are unchanged, so no record is fitted again. The history was then
+# rewritten for publication, and the three viseme-poses records were frozen again as new versions that name the new
+# hashes of their code commits. Each new version was frozen and held out on a branch from the freeze commit of the
+# version before it, where the code is as at its code_commit, and that branch was merged.
 CODE_COMMIT = 'aa4311623f6cafe201446a57abafd914a6fa5ca3'
 RECORD_COMMIT = '2fa1be4'
 CODE = ['check.py', 'examples/rig_gains.py', 'examples/rigs.py', 'examples/ict_facekit.py', 'examples/rcef_translate.py',
         'examples/data/rig_landmarks.json', 'tools/calibration/ict_files.json', 'tools/calibration/viseme_rigs.json',
         'tools/render/']
 RECORD = ['calibration/rig-gains.ict-rocketbox-female.cal']
-# The commits that published the results of the two viseme-poses records.
-POSES_COMMIT = 'ba58c88'
+# The commits that published the results of the versions in the checkout: viseme-poses.rocketbox-female v2,
+# viseme-poses.rocketbox-multi v3 and viseme-poses.rocketbox-features v2.
+POSES_COMMIT = '303d8a2'
 POSES = ['calibration/viseme-poses.rocketbox-female.cal']
-# Version 1 of viseme-poses.rocketbox-multi, replaced in the checkout by version 2, is kept in the history.
-MULTI_V1_COMMIT = 'f166568'
 MULTI = 'calibration/viseme-poses.rocketbox-multi.cal'
-# The commit that published the results of version 2.
-MULTI_COMMIT = '7873008'
-# The commit that published the results of the perceptual record.
-FEATURES_COMMIT = '43a5735'
+MULTI_COMMIT = 'b299b62'
+FEATURES_COMMIT = '24a4af1'
 FEATURES = ['calibration/viseme-poses.rocketbox-features.cal']
+# The earlier versions, replaced in the checkout, are kept in the history: (results commit, record, version).
+EARLIER = [('ba58c88', POSES[0], 1), ('f166568', MULTI, 1), ('7873008', MULTI, 2), ('43a5735', FEATURES[0], 1)]
 
 
 def has_history():
@@ -67,15 +69,17 @@ class Protected(unittest.TestCase):
     def test_the_perceptual_viseme_poses_record_is_unchanged(self):
         self.assertIsNone(provenance.code_problem(ROOT, FEATURES_COMMIT, FEATURES))
 
-    def test_version_1_of_the_multi_rig_record_is_kept_in_the_history(self):
-        text = subprocess.run(['git', 'show', f'{MULTI_V1_COMMIT}:{MULTI}'], cwd=ROOT, check=True,
-                              capture_output=True, text=True).stdout
-        self.assertIn('version = 1\n', text)
-        self.assertIn('[[cells]]', text)
-        frozen = text.split('frozen_sha256 = "', 1)[1][:64]
+    def test_the_earlier_versions_are_kept_in_the_history(self):
         ledger = (ROOT / 'calibration/FREEZES').read_text(encoding='utf-8')
-        self.assertIn(f'viseme-poses.rocketbox-multi v1 {frozen} ', ledger)
-
+        for commit, path, version in EARLIER:
+            with self.subTest(commit=commit):
+                text = subprocess.run(['git', 'show', f'{commit}:{path}'], cwd=ROOT, check=True,
+                                      capture_output=True, text=True).stdout
+                self.assertIn(f'version = {version}\n', text)
+                self.assertIn('[[cells]]', text)
+                frozen = text.split('frozen_sha256 = "', 1)[1][:64]
+                record_id = path.removeprefix('calibration/').removesuffix('.cal')
+                self.assertIn(f'{record_id} v{version} {frozen} ', ledger)
 
 if __name__ == '__main__':
     unittest.main()
