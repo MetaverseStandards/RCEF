@@ -114,6 +114,10 @@ class Metrics(unittest.TestCase):
             'over_bound'], 0)
         counts, failures = ab_compare.m3_exact(frame, [result({a: 0.1, b: 0.0})], source)
         self.assertEqual((counts['over_bound'], failures), (1, [[0, a, '0.3', '0.1']]))
+        # A partner outside 0 to 1 (a perturbed frame) is refused, so it nets nothing: the output must be exact.
+        frame = [{'values': {a: 0.3, b: -0.1}}]
+        self.assertEqual(ab_compare.m3_exact(frame, [result({a: 0.3})], source)[0]['over_bound'], 0)
+        self.assertEqual(ab_compare.m3_exact(frame, [result({a: 0.25})], source)[0]['over_bound'], 1)
         # VRCFaceTracking Openness: a planted error larger than the rounding fails.
         openness = 'vrcft.eye.Right.Openness'
         counts, _ = ab_compare.m3_exact([{'values': {openness: 0.3}}], [result({openness: 0.31})], {'gaze_pairs': []})
