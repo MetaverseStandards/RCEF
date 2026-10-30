@@ -452,6 +452,29 @@ class PerceptualGate(unittest.TestCase):
         record['feature_cells'][0].update(max=0.01, p95=0.01)
         self.assertFalse(check.channel_passes(record, 'fixture.source.lip'))
 
+    def test_a_feature_cell_with_failures_fails_even_within_its_tolerance(self):
+        record = deepcopy(self.record)
+        record['feature_cells'][1]['failures'] = 1
+        self.assertFalse(check.feature_cell_passes(record, record['feature_cells'][1]))
+        self.assertFalse(check.channel_passes(record, 'fixture.source.lip'))
+
+    def test_every_channel_with_features_needs_the_whole_face_guard(self):
+        cases = [
+            lambda r: r.update(features=[f for f in r['features'] if f['feature'] != check.GUARD]),
+            lambda r: r['features'][2].update(high=1.5),
+            lambda r: r['features'][2].update(low=-0.5),
+            lambda r: r['features'][2].update(tolerance=0.1),
+            lambda r: r['features'][2].update(kind='difference'),
+        ]
+        for i, change in enumerate(cases):
+            with self.subTest(i):
+                record = deepcopy(self.record)
+                change(record)
+                record['feature_cells'] = [c for c in record['feature_cells'] if c['feature'] != check.GUARD]
+                refreeze(record)
+                problems = self.problems(record)
+                self.assertTrue(any('whole_face_error guard' in p for p in problems), problems)
+
     def test_every_feature_needs_a_cell_for_every_held_out_identity(self):
         record = deepcopy(self.record)
         del record['feature_cells'][1]
