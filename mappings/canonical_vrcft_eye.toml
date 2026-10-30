@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 # Original RCEF data; attributed source identifiers are factual inventories.
 # Written by scripts/build_canonical.py from docs/canonical-set.md,
-# docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and today's
-# direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit those, then run
-# the script.
+# docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and the
+# retired A1 direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit
+# those, then run the script.
 # The maps between the canonical sets and VRCFaceTracking eye: one map per canonical group and
 # direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
 
