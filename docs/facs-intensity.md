@@ -12,7 +12,7 @@ This page says how RCEF turns FACS codes with intensity letters, such as `1C+2C+
 - FACS writes intensity as a letter from A (trace) to E (maximum) after the code number. E is the maximum possible for the individual person (`facs_wikipedia` raw lines 69-75). FACS defines no numeric scale.
 - msf-character-tools 0.5.0 holds scalar values only. So letters cannot be in the pack.
 - A `piecewise_linear` step from letters to numbers would only imitate a step with steep segments. That adds precision that the source does not have. RCEF does not do this.
-- So the conversion happens outside the pack, in this documented codec. The planned example `examples/facs_codec.py` implements it. It reads its code and region tables from a CC-BY-SA-4.0 data file, `examples/data/facs_codes.json`, not from code.
+- So the conversion happens outside the pack, in this documented codec. The example `examples/facs_codec.py` implements it, and `tests/test_facs_codec.py` checks every rule. It reads its code and region tables from a CC-BY-SA-4.0 data file, `examples/data/facs_codes.json`, not from code.
 
 ## Inputs
 
