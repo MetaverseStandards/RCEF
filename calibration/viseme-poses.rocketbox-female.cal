@@ -3,13 +3,13 @@
 # calibration/FREEZES, before the held-out run.
 format = "rcef.calibration/1"
 id = "viseme-poses.rocketbox-female"
-version = 1
+version = 2
 status = "calibrated_software"
 scope = "software-only; not a measurement of any tracker"
 method = "bounded_least_squares_pose_fit: for each Rocketbox Female viseme shape, the ARKit weights in [0, 1] that minimise the squared vertex distance to it over every vertex except the tongue (the vertices that tongueOut moves by more than 1% of its largest move), with the 37 ARKit shapes of the groups face, cheek_puff, jaw_thrust and chin_raise_upper_lip, each Left and Right pair sharing one weight; cyclic coordinate descent on the normal equations to a change below 1e-13, rounded to 3 decimals, and carried to canonical signals by the ARKit in-maps. Each curve gives the canonical value at class weight 1. Cell error: |reconstruction - target| / |target - neutral| over Rocketbox Male's vertices except the tongue, where the target is Male's own viseme shapes and the reconstruction is Male's ARKit shapes at the weights that the ARKit out-maps give for clamp(sum of pose times class weight, 0, 1); neutral is that error at weight 0. A condition is a failure if Male has no shape for the class, or if the target does not move the face but the reconstruction does; its error counts as 1."
 channels = ["rcef.canonical_viseme.vowel_open", "rcef.canonical_viseme.vowel_mid_spread", "rcef.canonical_viseme.vowel_close_spread", "rcef.canonical_viseme.vowel_mid_rounded", "rcef.canonical_viseme.vowel_close_rounded", "rcef.canonical_viseme.bilabial", "rcef.canonical_viseme.labiodental", "rcef.canonical_viseme.dental", "rcef.canonical_viseme.alveolar_sibilant", "rcef.canonical_viseme.postalveolar", "rcef.canonical_viseme.coronal_stop", "rcef.canonical_viseme.coronal_nasal_lateral", "rcef.canonical_viseme.dorsal", "rcef.canonical_viseme.rhotic", "rcef.canonical_viseme.sil"]
 reference_rig = "Microsoft Rocketbox Female_Adult_01 facial FBX (0943055): its 15 viseme shapes and 52 ARKit shapes on one mesh"
-code_commit = "d7e0f507c65de73f332bd398b83156ed1ed98f9a"
+code_commit = "703ee7c949ae7022fe41ecb569d52bdea1896a61"
 licence = "CC-BY-SA-4.0"
 limitations = [
   "Software-only geometry of two example rigs: the poses are Rocketbox Female's sculpted viseme shapes measured in her own ARKit shapes. They say nothing about any tracker, any real face or how people articulate.",
@@ -47,7 +47,7 @@ description = "Each of Rocketbox Female's 15 viseme shapes at weight 1, fitted o
 [held_out]
 seed_rule = "rcef.calibration.seeds/1"
 count = 24
-frozen_sha256 = "62eef93078e22288acbc1bcb03c5c284e2d05ad98236dc6809f90b1acc55e9cb"
+frozen_sha256 = "645a9eb61227f1651cc2ceea8863571bd61b008a9de97be6a4bcad3bd37300d0"
 
 [evaluation]
 min_conditions = 24
