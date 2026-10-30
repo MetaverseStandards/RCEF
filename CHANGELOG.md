@@ -108,9 +108,11 @@ do not change.
   (`vowel_open`, `vowel_close_spread`, `vowel_mid_rounded`, `dental`,
   `coronal_stop`, `dorsal` and `sil`) and 4 by the perceptual gate
   (`bilabial`, `vowel_close_rounded`, `vowel_mid_spread` and
-  `alveolar_sibilant`); weight on the 4 that fail moves nothing. META PP now
-  closes the lips of Rocketbox rigs. The bridge was first written from
-  `viseme-poses.rocketbox-female`, then from `viseme-poses.rocketbox-multi`
+  `alveolar_sibilant`); weight on the 4 that fail moves nothing. On
+  Rocketbox rigs, META PP keeps the lips closed and draws them back about
+  1 mm, like the rigs' own PP; the lips at rest are already closed, so the
+  gate's added evidence is the retraction and the overlap. The bridge was
+  first written from `viseme-poses.rocketbox-female`, then from `viseme-poses.rocketbox-multi`
   version 1 and version 2; each time, as decided before the new record's
   held-out run, the new record replaced the old one for every class. 56 new
   `rcef.intermediate` signals (65 in all),
