@@ -204,8 +204,9 @@ class RestInputs(unittest.TestCase):
                                    **ab_compare.route_hops(route)}}
         sil = 'openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META'
         self.assertEqual([e['input'] for e in ab_compare.rest_inputs(pack, pairs)], [sil])
-        rule = next(r for m in pack['mappings'] for r in m['rules'] if r['id'] == 'rcef_viseme_pose.jaw_drop_sum')
-        rule['operator']['weights'][rule['inputs'].index('rcef.intermediate.viseme_pose_sil')] = 0.25
+        # Give SIL a second path, into vowel_open, whose pose moves the face: SIL is linked, so it is not declared.
+        rule = next(r for m in pack['mappings'] for r in m['rules'] if r['id'] == 'visemes_rcef.vowel_open')
+        rule['inputs'] = [sil]
         self.assertEqual(ab_compare.rest_inputs(pack, pairs), [])
 
 
