@@ -14,7 +14,7 @@ evidence_status = "verified_current"
 native_id = "eyeBlinkLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 0, "reason" = "Identity preserves this explicitly declared provider calibration.", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 0, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_blink.to_rcef and rcef_blink.to_arkit; calibration correspondence is assumed, not measured.", "mapping_quality" = "exact" }
 neutral = 0.0
 region = "eyelid"
 
@@ -31,7 +31,7 @@ evidence_status = "verified_current"
 native_id = "eyeLookDownLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 1, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2_gaze.to_arkit, arkit_gaze.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 1, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -48,7 +48,7 @@ evidence_status = "verified_current"
 native_id = "eyeLookInLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 2, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2_gaze.to_arkit, arkit_gaze.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 2, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -65,7 +65,7 @@ evidence_status = "verified_current"
 native_id = "eyeLookOutLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 3, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2_gaze.to_arkit, arkit_gaze.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 3, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -82,7 +82,7 @@ evidence_status = "verified_current"
 native_id = "eyeLookUpLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 4, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2_gaze.to_arkit, arkit_gaze.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 4, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -99,7 +99,7 @@ evidence_status = "verified_current"
 native_id = "eyeSquintLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 5, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 5, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "eyelid"
 
@@ -116,7 +116,7 @@ evidence_status = "verified_current"
 native_id = "eyeWideLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 6, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 6, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "eyelid"
 
@@ -133,7 +133,7 @@ evidence_status = "verified_current"
 native_id = "eyeBlinkRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 7, "reason" = "Identity preserves this explicitly declared provider calibration.", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 7, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_blink.to_rcef and rcef_blink.to_arkit; calibration correspondence is assumed, not measured.", "mapping_quality" = "exact" }
 neutral = 0.0
 region = "eyelid"
 
@@ -150,7 +150,7 @@ evidence_status = "verified_current"
 native_id = "eyeLookDownRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 8, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2_gaze.to_arkit, arkit_gaze.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 8, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -167,7 +167,7 @@ evidence_status = "verified_current"
 native_id = "eyeLookInRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 9, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2_gaze.to_arkit, arkit_gaze.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 9, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -184,7 +184,7 @@ evidence_status = "verified_current"
 native_id = "eyeLookOutRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 10, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2_gaze.to_arkit, arkit_gaze.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 10, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -201,7 +201,7 @@ evidence_status = "verified_current"
 native_id = "eyeLookUpRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 11, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2_gaze.to_arkit, arkit_gaze.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 11, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_gaze.to_rcef and rcef_gaze.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "gaze"
 
@@ -218,7 +218,7 @@ evidence_status = "verified_current"
 native_id = "eyeSquintRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 12, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 12, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "eyelid"
 
@@ -235,7 +235,7 @@ evidence_status = "verified_current"
 native_id = "eyeWideRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 13, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 13, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "eyelid"
 
@@ -252,7 +252,7 @@ evidence_status = "verified_current"
 native_id = "jawForward"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 14, "reason" = "Identity preserves this explicitly declared provider calibration.", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 14, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_jaw_thrust.to_rcef and rcef_jaw_thrust.to_arkit; calibration correspondence is assumed, not measured.", "mapping_quality" = "exact" }
 neutral = 0.0
 region = "jaw"
 
@@ -269,7 +269,7 @@ evidence_status = "verified_current"
 native_id = "jawLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 15, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 15, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_jaw_sideways.to_rcef and rcef_jaw_sideways.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "jaw"
 
@@ -286,7 +286,7 @@ evidence_status = "verified_current"
 native_id = "jawRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 16, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 16, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_jaw_sideways.to_rcef and rcef_jaw_sideways.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "jaw"
 
@@ -303,7 +303,7 @@ evidence_status = "verified_current"
 native_id = "jawOpen"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 17, "reason" = "Identity preserves this explicitly declared provider calibration.", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 17, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.", "mapping_quality" = "exact" }
 neutral = 0.0
 region = "jaw"
 
@@ -320,7 +320,7 @@ evidence_status = "verified_current"
 native_id = "mouthClose"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 18, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 18, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -337,7 +337,7 @@ evidence_status = "verified_current"
 native_id = "mouthFunnel"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 19, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 19, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -354,7 +354,7 @@ evidence_status = "verified_current"
 native_id = "mouthPucker"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 20, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 20, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -371,7 +371,7 @@ evidence_status = "verified_current"
 native_id = "mouthLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 21, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 21, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_mouth_shift.to_rcef and rcef_mouth_shift.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -388,7 +388,7 @@ evidence_status = "verified_current"
 native_id = "mouthRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 22, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 22, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_mouth_shift.to_rcef and rcef_mouth_shift.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -405,7 +405,7 @@ evidence_status = "verified_current"
 native_id = "mouthSmileLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 23, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 23, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -422,7 +422,7 @@ evidence_status = "verified_current"
 native_id = "mouthSmileRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 24, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 24, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -439,7 +439,7 @@ evidence_status = "verified_current"
 native_id = "mouthFrownLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 25, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 25, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -456,7 +456,7 @@ evidence_status = "verified_current"
 native_id = "mouthFrownRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 26, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 26, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -473,7 +473,7 @@ evidence_status = "verified_current"
 native_id = "mouthDimpleLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 27, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 27, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -490,7 +490,7 @@ evidence_status = "verified_current"
 native_id = "mouthDimpleRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 28, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 28, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -507,7 +507,7 @@ evidence_status = "verified_current"
 native_id = "mouthStretchLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 29, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 29, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -524,7 +524,7 @@ evidence_status = "verified_current"
 native_id = "mouthStretchRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 30, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 30, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -541,7 +541,7 @@ evidence_status = "verified_current"
 native_id = "mouthRollLower"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 31, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 31, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -558,7 +558,7 @@ evidence_status = "verified_current"
 native_id = "mouthRollUpper"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 32, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 32, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -575,7 +575,7 @@ evidence_status = "verified_current"
 native_id = "mouthShrugLower"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 33, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 33, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -592,7 +592,7 @@ evidence_status = "verified_current"
 native_id = "mouthShrugUpper"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 34, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 34, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_chin_raise_upper_lip.to_rcef and rcef_chin_raise_upper_lip.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -609,7 +609,7 @@ evidence_status = "verified_current"
 native_id = "mouthPressLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 35, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 35, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -626,7 +626,7 @@ evidence_status = "verified_current"
 native_id = "mouthPressRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 36, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 36, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -643,7 +643,7 @@ evidence_status = "verified_current"
 native_id = "mouthLowerDownLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 37, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 37, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -660,7 +660,7 @@ evidence_status = "verified_current"
 native_id = "mouthLowerDownRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 38, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 38, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -677,7 +677,7 @@ evidence_status = "verified_current"
 native_id = "mouthUpperUpLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 39, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 39, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -694,7 +694,7 @@ evidence_status = "verified_current"
 native_id = "mouthUpperUpRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 40, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 40, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "mouth"
 
@@ -711,7 +711,7 @@ evidence_status = "verified_current"
 native_id = "browDownLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 41, "reason" = "Identity preserves this explicitly declared provider calibration.", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 41, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.", "mapping_quality" = "exact" }
 neutral = 0.0
 region = "brow"
 
@@ -728,7 +728,7 @@ evidence_status = "verified_current"
 native_id = "browDownRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 42, "reason" = "Identity preserves this explicitly declared provider calibration.", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 42, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.", "mapping_quality" = "exact" }
 neutral = 0.0
 region = "brow"
 
@@ -746,7 +746,7 @@ native_id = "browInnerUp"
 surface = "arkit.coefficient"
 side = "shared"
 coupling = "bilateral_shared"
-metadata = { "inventory_ordinal" = 43, "reason" = "Identity preserves this explicitly declared provider calibration.", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 43, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.", "mapping_quality" = "exact" }
 neutral = 0.0
 region = "brow"
 
@@ -763,7 +763,7 @@ evidence_status = "verified_current"
 native_id = "browOuterUpLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 44, "reason" = "Identity preserves this explicitly declared provider calibration.", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 44, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.", "mapping_quality" = "exact" }
 neutral = 0.0
 region = "brow"
 
@@ -780,7 +780,7 @@ evidence_status = "verified_current"
 native_id = "browOuterUpRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 45, "reason" = "Identity preserves this explicitly declared provider calibration.", "mapping_quality" = "exact" }
+metadata = { "inventory_ordinal" = 45, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured.", "mapping_quality" = "exact" }
 neutral = 0.0
 region = "brow"
 
@@ -797,7 +797,7 @@ evidence_status = "verified_current"
 native_id = "cheekPuff"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 46, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 46, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_cheek_puff.to_rcef and rcef_cheek_puff.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "cheek"
 coupling = "bilateral_shared"
@@ -815,7 +815,7 @@ evidence_status = "verified_current"
 native_id = "cheekSquintLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 47, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 47, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "cheek"
 
@@ -832,7 +832,7 @@ evidence_status = "verified_current"
 native_id = "cheekSquintRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 48, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 48, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "cheek"
 
@@ -849,7 +849,7 @@ evidence_status = "verified_current"
 native_id = "noseSneerLeft"
 surface = "arkit.coefficient"
 side = "left"
-metadata = { "inventory_ordinal" = 49, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 49, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "nose"
 
@@ -866,7 +866,7 @@ evidence_status = "verified_current"
 native_id = "noseSneerRight"
 surface = "arkit.coefficient"
 side = "right"
-metadata = { "inventory_ordinal" = 50, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 50, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_face.to_rcef and rcef_face.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "nose"
 
@@ -883,7 +883,7 @@ evidence_status = "verified_current"
 native_id = "tongueOut"
 surface = "arkit.coefficient"
 side = "shared"
-metadata = { "inventory_ordinal" = 51, "reason" = "Native identifier evidenced; used by the proposed approximate translations fb2.to_arkit, arkit.to_fb2 and arkit.to_vrcft_artist; calibration correspondence is assumed, not measured." }
+metadata = { "inventory_ordinal" = 51, "reason" = "Native identifier evidenced; used by the proposed approximate hops arkit_tongue_out.to_rcef and rcef_tongue_out.to_arkit; calibration correspondence is assumed, not measured." }
 neutral = 0.0
 region = "tongue"
 

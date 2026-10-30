@@ -529,8 +529,9 @@ class Repository(unittest.TestCase):
 
     def test_pack_rules_are_read_from_every_authoring_file(self):
         ids = {r['id'] for r in check.pack_rules(ROOT)}
-        self.assertIn('fb2_vrm.blinkLeft', ids)
-        self.assertIn('arkit.coefficient.eyeBlinkLeft.identity', ids)
+        self.assertIn('rcef_vrm.blinkLeft', ids)
+        self.assertIn('fixture.affine.convert', ids)
+        self.assertIn('rcef_viseme_pose.bilabial', ids)
 
     def test_records_are_not_toml_files_so_msf_character_tools_does_not_read_them_as_authoring(self):
         for directory in (ROOT / 'calibration', FIXTURES):

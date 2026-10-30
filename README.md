@@ -4,12 +4,11 @@
 
 The Reference Canonical Expression Framework (RCEF) is about face expression signals. Face trackers and avatar systems each publish their own set of these signals. ARKit, OpenXR FB2, MediaPipe, VRCFaceTracking, VRM, Godot and Roblox use different names, scales and calibrations. So you cannot simply copy a value from one system into another.
 
-RCEF does five things:
+RCEF does four things:
 
 - It records each public expression interface as data, with its calibration limits and a pinned public source.
-- It defines a small canonical set of 21 signals. Each canonical signal keeps the calibration of its provider.
-- It defines a draft canonical expression set of 72 signals and a draft canonical viseme set of 16 signals, each with a meaning that RCEF declares, and maps into and out of them. A translation can then run from a source set through a canonical set to a target set.
-- It defines explicit one-way scalar mappings from one set to another. Each mapping states its assumptions and its losses.
+- It defines a draft canonical expression set of 72 signals and a draft canonical viseme set of 16 signals, each with a meaning that RCEF declares.
+- It defines explicit one-way scalar mappings into and out of the canonical sets. Each mapping states its assumptions and its losses. A translation runs from a source set through a canonical set to a target set.
 - It checks all of this with [msf-character-tools](https://github.com/MetaverseStandards/msf_character_tools), which is maintained separately.
 
 RCEF records provider names as facts, with attribution. Its definitions and examples are original.
@@ -29,7 +28,7 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 ### The data (edit these)
 
 - `profiles/`: one file per public expression set, for example ARKit, OpenXR FB2 or VRM. Each file lists the set's signals: name, value range (often 0 to 1), face side, neutral value and public source.
-- `data/`: RCEF's own sets. `canonical.toml` is the canonical set of 21 signals. `canonical_expression.toml` is the draft canonical expression set of 72 signals, and `canonical_viseme.toml` the draft canonical viseme set of 16 signals. `intermediate.toml` holds 65 helper values: 4 that the ARKit → FB2 gaze map uses inside, 4 that the map from the canonical expression set to FB2 gaze uses inside, 1 that the META map to `alveolar_floor` uses inside, and 56 that the viseme pose bridge uses inside (`scripts/build_canonical.py` writes those).
+- `data/`: RCEF's own sets. `canonical_expression.toml` is the draft canonical expression set of 72 signals, and `canonical_viseme.toml` the draft canonical viseme set of 16 signals. `intermediate.toml` holds 61 helper values: 4 that the map from the canonical expression set to FB2 gaze uses inside, 1 that the META map to `alveolar_floor` uses inside, and 56 that the viseme pose bridge uses inside (`scripts/build_canonical.py` writes those).
 - `mappings/`: the maps. A map turns the signals of one set into those of another, for example FB2 into ARKit. Each mapping names its inputs, outputs and formula (a copy, a scale and offset, a weighted sum or a curve), and states its assumptions and losses. The `canonical_*.toml` files hold the maps into and out of the canonical expression set.
 - `evidence/`: `sources.toml` lists each public source with its exact revision and SHA-256. `tooling.lock.json` pins the msf-character-tools build that checks the data. `input-contracts/` holds an optional schema that RCEF does not use.
 - `calibration/`: curves fitted to software renders of example faces. The `FREEZES` ledger only grows. It shows that each fit was fixed before it was tested.
@@ -81,18 +80,11 @@ RCEF records these selected inventories. The numbers describe interfaces. They d
 
 RCEF also records ancillary enums, sentinels and encoding surfaces.
 
-The canonical set has 21 scalar projections, and each one states its provider's calibration. They cover blink, jaw, brow, directional gaze and physical pupil diameter. The identity mappings keep the stated provider basis. Two original fixtures, one affine and one lossy bilateral, show the shared runtime. They do not claim visual equivalence.
+Two original fixtures, one affine and one lossy bilateral, show the shared runtime. They do not claim visual equivalence.
 
-Data 0.5.0 keeps the 187 direct cross-provider mappings of data 0.4.0 unchanged. They translate:
+Data 0.5.0 retires the direct maps of earlier data versions: the 187 direct cross-provider mappings (FB2 to and from ARKit, ARKit to VRCFaceTracking Unified Expressions, FB2 to VRM blinks and META visemes to VRM), their 4 internal gaze steps, and the 21 identity mappings into the old 21-signal canonical set `rcef.canonical`, which is retired too. Every translation now runs through the canonical sets. [docs/retired-ids.csv](docs/retired-ids.csv) lists every retired ID. The A/B comparison keeps the direct maps in its frozen baseline, `tests/fixtures/baseline-dea1713.pack.json` ([ab/README.md](ab/README.md)).
 
-- FB2 to all 52 ARKit coefficients, and back (face and, separately, gaze);
-- ARKit to VRCFaceTracking Unified Expressions;
-- FB2 eye closure to VRM per-eye blinks;
-- META visemes to VRM lip-sync presets.
-
-The ARKit → FB2 gaze map also has 4 internal steps. Each step takes one eye's two opposing ARKit gaze directions (in and out, or up and down) to one intermediate difference. All of these mappings are proposed and approximate. They compile only with the approximation opt-in. Each one states its calibration assumptions and losses (see the [CHANGELOG](CHANGELOG.md)). Their tests compare results with expected values that `scripts/derive_fb2_goldens.py` derives from the pinned public sources, not from RCEF's own mappings.
-
-Data 0.5.0 also adds the draft canonical expression set, `rcef.canonical_expression`: 72 signals in 13 groups (face 41, cheek puff 2, jaw thrust 1, jaw sideways 2, mouth shift 2, chin raise upper lip 1, blink 2, gaze 8, tongue out 1, cheek suck 2, lip tighten 2, tongue place 6, pupil diameter 2). [docs/canonical-set.md](docs/canonical-set.md) defines each signal, and the [definitions audit](docs/canonical-set-audit.md) compares it with each source. 442 mappings in 75 maps go into and out of it:
+The canonical expression set, `rcef.canonical_expression`, is a draft: 72 signals in 13 groups (face 41, cheek puff 2, jaw thrust 1, jaw sideways 2, mouth shift 2, chin raise upper lip 1, blink 2, gaze 8, tongue out 1, cheek suck 2, lip tighten 2, tongue place 6, pupil diameter 2). [docs/canonical-set.md](docs/canonical-set.md) defines each signal, and the [definitions audit](docs/canonical-set-audit.md) compares it with each source. 442 mappings in 75 maps go into and out of it:
 
 - ARKit, FB2, FACS codes, VRCFaceTracking eye data and VRM per-eye blinks into the canonical expression set (189 mappings in 32 maps);
 - the canonical expression set to ARKit, FB2, VRCFaceTracking Unified Expressions, VRCFaceTracking eye data, VRM per-eye blinks and FACS codes (253 mappings in 43 maps, with 4 internal steps in the FB2 gaze map).
@@ -108,28 +100,13 @@ The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are 
 - META visemes and the VRM vowel presets into the canonical viseme set (22 mappings in 5 maps, with 1 internal step in the map that writes `alveolar_floor`);
 - the canonical viseme set to META visemes and the VRM vowel presets (20 mappings in 4 maps).
 
-On the pairs that the direct maps also translate, the composed route gives the same weights as the direct maps (`tests/test_pivot_structure.py`); for META visemes to VRM that is `visemes.to_vrm`. Of the 484 mappings in the 84 maps of the two canonical sets, all but the 4 pupil copies are proposed and approximate; the pupil copies are exact and `verified_current`. `scripts/build_canonical.py` writes both canonical profiles, the `facs.code` profile and these maps from the two documents.
+On the pairs that the retired direct maps translated, the composed route gives the same weights as they did (`tests/test_pivot_structure.py` compares it with the frozen baseline). Of the 484 mappings in the 84 maps of the two canonical sets, all but the 4 pupil copies are proposed and approximate; the pupil copies are exact and `verified_current`. `scripts/build_canonical.py` writes both canonical profiles, the `facs.code` profile and these maps from the two documents.
 
 The viseme pose bridge, `rcef_viseme_pose.to_rcef_expression`, joins the two canonical sets: 101 proposed mappings in 1 map, with 56 helper values in `rcef.intermediate`. It writes canonical expression values from the 11 viseme classes that pass the shape or the perceptual gate on all 4 held-out rigs in the calibration record `viseme-poses.rocketbox-features`. `scripts/build_canonical.py` writes it from the record.
 
 ### Mappings
 
-Each row is one map: a group of mappings that turns values in the source set into values in the target set. `verified_current` means that the mapping restates a verified source fact (it copies a provider value to the canonical set). `proposed` means an approximate cross-provider translation that is backed by sources and compiles only with the approximation opt-in. [reports/mappings.md](reports/mappings.md) lists every mapping with its assumptions, losses and evidence. That report also lists the maps that these tables leave out: RCEF's synthetic test maps (`fixture.affine`, `fixture.bilateral`) and `survey.ambiguous`, which is recorded but cannot be executed.
-
-#### Direct maps
-
-| Map | Source set → target set | Mappings | Evidence status |
-|---|---|---|---|
-| [`arkit.to_canonical`](reports/mappings.md#arkitto_canonical) | `arkit.coefficient` → `rcef.canonical` | 9 | verified_current |
-| [`fb2.to_canonical`](reports/mappings.md#fb2to_canonical) | `openxr.fb2` → `rcef.canonical` | 8 | verified_current |
-| [`vrcft_eye.to_canonical`](reports/mappings.md#vrcft_eyeto_canonical) | `vrcft.eye` → `rcef.canonical` | 4 | verified_current |
-| [`fb2.to_arkit`](reports/mappings.md#fb2to_arkit) | `openxr.fb2` → `arkit.coefficient` | 44 | proposed |
-| [`fb2_gaze.to_arkit`](reports/mappings.md#fb2_gazeto_arkit) | `openxr.fb2` → `arkit.coefficient` | 8 | proposed |
-| [`arkit.to_fb2`](reports/mappings.md#arkitto_fb2) | `arkit.coefficient` → `openxr.fb2` | 52 | proposed |
-| [`arkit_gaze.to_fb2`](reports/mappings.md#arkit_gazeto_fb2) | `arkit.coefficient` → `openxr.fb2` | 12 | proposed |
-| [`arkit.to_vrcft_artist`](reports/mappings.md#arkitto_vrcft_artist) | `arkit.coefficient` → `vrcft.artist.base` | 68 | proposed |
-| [`fb2.to_vrm`](reports/mappings.md#fb2to_vrm) | `openxr.fb2` → `vrm.preset` | 2 | proposed |
-| [`visemes.to_vrm`](reports/mappings.md#visemesto_vrm) | `openxr.visemes` → `vrm.preset` | 5 | proposed |
+Each row is one map: a group of mappings that turns values in the source set into values in the target set. `verified_current` means that the mapping restates a verified source fact (it copies a provider value exactly). `proposed` means an approximate cross-provider translation that is backed by sources and compiles only with the approximation opt-in. [reports/mappings.md](reports/mappings.md) lists every mapping with its assumptions, losses and evidence. That report also lists the maps that these tables leave out: RCEF's synthetic test maps (`fixture.affine`, `fixture.bilateral`) and `survey.ambiguous`, which is recorded but cannot be executed.
 
 #### Maps into the canonical expression set
 
@@ -264,7 +241,7 @@ Not translated yet, and why:
 
 ### Expression sets
 
-This table shows which expression sets the maps read or write. Each name is a file in `profiles/` without `.toml`, except `rcef.canonical`, `rcef.canonical_expression`, `rcef.canonical_viseme` and `rcef.intermediate`, which are in `data/`. [docs/expression-sets.md](docs/expression-sets.md) gives each file's revision, signal count, role, documentation, pinned source and licence or terms. It also explains the signal counts and RCEF's own sets.
+This table shows which expression sets the maps read or write. Each name is a file in `profiles/` without `.toml`, except `rcef.canonical_expression`, `rcef.canonical_viseme` and `rcef.intermediate`, which are in `data/`. [docs/expression-sets.md](docs/expression-sets.md) gives each file's revision, signal count, role, documentation, pinned source and licence or terms. It also explains the signal counts and RCEF's own sets.
 
 | Provider | Read or written by a map | Inventory only |
 |---|---|---|
@@ -276,7 +253,7 @@ This table shows which expression sets the maps read or write. Each name is a fi
 | MediaPipe | none | `mediapipe.label`, `mediapipe.score` |
 | Godot | none | `godot.base`, `godot.blended` |
 | Roblox | none | `roblox.control` |
-| RCEF | `rcef.canonical`, `rcef.canonical_expression`, `rcef.canonical_viseme`, `rcef.intermediate` (RCEF's own sets), `fixture` (synthetic) | none |
+| RCEF | `rcef.canonical_expression`, `rcef.canonical_viseme`, `rcef.intermediate` (RCEF's own sets), `fixture` (synthetic) | none |
 
 ## Getting started
 
@@ -338,10 +315,10 @@ GitHub Actions is not turned on for this repository. Run `sh scripts/ci_local.sh
 - **Fix or add a mapping in an existing map**
 
   1. Edit or add the mapping in its file in `mappings/`. In the TOML, a mapping is one entry in the map's `rules` array. It needs `id`, `inputs`, `outputs`, `operator`, `disposition`, `assumptions`, `evidence`, `evidence_status` and `loss_annotations`, and `mapping_quality` when its disposition is `mapped`. See [Maps, mappings and loss annotations](docs/architecture.md#maps-mappings-and-loss-annotations).
-     Do not edit `data/canonical_expression.toml`, `data/canonical_viseme.toml` or `mappings/canonical_*.toml` by hand. `scripts/build_canonical.py --write` writes them from `docs/canonical-set.md`, its definitions audit, the IPA chart assignment in `tests/fixtures/ipa_chart_symbols.json` and the direct maps as frozen in `tests/fixtures/baseline-dea1713.pack.json`; change the documents, then run it.
-     The 7 direct maps are frozen: `tests/test_pivot_structure.py` fails if they differ from that file.
+     Do not edit `data/canonical_expression.toml`, `data/canonical_viseme.toml` or `mappings/canonical_*.toml` by hand. `scripts/build_canonical.py --write` writes them from `docs/canonical-set.md`, its definitions audit, the IPA chart assignment in `tests/fixtures/ipa_chart_symbols.json` and the retired direct maps as frozen in `tests/fixtures/baseline-dea1713.pack.json`; change the documents, then run it.
+     The maps of the canonical sets are frozen as in the latest passing A/B freeze: `tests/test_pivot_structure.py` fails if one differs from `tests/fixtures/b-maps-ab.pivot-v1.json`. A change that keeps every value needs a "revise" freeze first ([ab/README.md](ab/README.md)).
   2. Cite only evidence IDs that are in `evidence/sources.toml`. To add a source, follow the evidence steps in the next tasks.
-  3. Run `python3 -B check.py --write` and `python3 -B scripts/export_toml_index.py --write`. If you changed `fb2.to_arkit` or `fb2_gaze.to_arkit`, also run `python3 -B scripts/compare_godot.py --write`.
+  3. Run `python3 -B check.py --write` and `python3 -B scripts/export_toml_index.py --write`. If you changed an FB2 in-map or an ARKit out-map, also run `python3 -B scripts/compare_godot.py --write`.
   4. If the number of mappings changed, update the map's row in the [Mappings](#mappings) table, the totals in [What RCEF covers](#what-rcef-covers) and AGENTS.md, and the counts in `docs/architecture.md`.
   5. Add a CHANGELOG entry, and run the tests.
 

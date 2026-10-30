@@ -3,7 +3,7 @@
 
 Every translation runs source -> canonical -> target. These tests check the
 hop maps against the rules in docs/canonical-set.md and the definitions audit
-(docs/canonical-set-audit.md), and against today's direct maps, frozen in
+(docs/canonical-set-audit.md), and against the retired direct maps, frozen in
 tests/fixtures/baseline-dea1713.pack.json:
 
 - names, directions and groups: one canonical group per map, a whole group
@@ -17,6 +17,8 @@ tests/fixtures/baseline-dea1713.pack.json:
   only the audit keys that the audit lists for its pair;
 - the composed hop weights equal today's weights (M1s);
 - which canonical groups other sets could fill (the capability matrix);
+- every hop map is as in the B pack of the latest passing A/B freeze, byte for
+  byte (tests/fixtures/b-maps-ab.pivot-v1.json);
 - the viseme aggregate: its chain gives the clamped binary64 sum of its META
   inputs, no route selects its in-map, and no out-map reads an aggregate or
   refinement together with any of its parts.
@@ -25,10 +27,12 @@ The viseme hops (META and the VRM vowels to and from the canonical viseme set)
 follow the same rules; their one fan-in, the aggregate alveolar_floor, is a
 census exception scoped to its map.
 """
+import hashlib
 import json
 from pathlib import Path
 import random
 import re
+import subprocess
 import sys
 import unittest
 
@@ -257,6 +261,8 @@ class PivotStructure(unittest.TestCase):
         # The pose bridge joins the two canonical sets; tests/test_pose_bridge.py checks it.
         named = {h[0] for h in self.hops} | {build_canonical.POSE_MAP}
         for mapping in self.pack['mappings']:
+            if all(r['disposition'] == 'unresolved' for r in mapping['rules']):
+                continue  # a record, such as survey.ambiguous: msf-character-tools never compiles it
             if any(s.startswith(CANONICAL) for r in mapping['rules'] for s in r['inputs'] + r['outputs']):
                 self.assertIn(mapping['id'], named)
         self.assertEqual(len(self.hops), MAPS)
@@ -573,19 +579,31 @@ class PivotStructure(unittest.TestCase):
                 self.assertGreater(counts['linear_outputs'], 0)
                 self.assertEqual(failures, [])
 
-    def test_todays_direct_maps_are_unchanged(self):
-        baseline = {m['id']: m for m in self.a1['mappings'] if m['id'] in build_canonical.A1_MAPS}
-        current = {m['id']: m for m in self.pack['mappings'] if m['id'] in build_canonical.A1_MAPS}
-        self.assertEqual(current, baseline)
-        a1_signals = {s['id']: s for s in self.a1['signals']}
-        a1_records = {e['id']: e for e in self.a1['evidence']}
-        records = {e['id']: e for e in self.pack['evidence']}
-        for mapping in baseline.values():
-            for rule in mapping['rules']:
-                for sid in rule['inputs'] + rule['outputs']:
-                    self.assertEqual(self.signals[sid], a1_signals[sid], sid)
-                for eid in rule['evidence']:
-                    self.assertEqual(records[eid], a1_records[eid], eid)
+    def test_hop_maps_are_those_of_the_latest_passing_freeze(self):
+        # The direct maps are retired; the A/B comparison reads them from the A1 fixture. Every map of the canonical
+        # sets must stay byte for byte as in the B pack of the latest passing freeze, unless a "revise" freeze comes
+        # first (ab/README.md).
+        frozen = json.loads((ROOT / 'tests/fixtures/b-maps-ab.pivot-v1.json').read_text(encoding='utf-8'))
+
+        def digest(mapping):
+            return hashlib.sha256(json.dumps(mapping, sort_keys=True, separators=(',', ':'),
+                                             ensure_ascii=False).encode('utf-8')).hexdigest()
+        current = {m['id']: digest(m) for m in self.pack['mappings']
+                   if m['id'] != 'survey.ambiguous' and not m['id'].startswith('fixture.')}
+        self.assertEqual(current, frozen['maps'])
+        self.assertFalse(set(build_canonical.A1_MAPS) & {m['id'] for m in self.pack['mappings']})
+        registration = json.loads((ROOT / 'ab/ab.pivot-v1.abreg').read_text(encoding='utf-8'))
+        self.assertEqual(frozen['b_pack_sha256'], registration['pins']['b_pack_sha256'])
+        # With the history, the hashes are those of the registered pack itself.
+        commit = subprocess.run(['git', 'log', '--format=%H', '--diff-filter=A', '--', 'ab/ab.pivot-v1.abreg'],
+                                cwd=ROOT, capture_output=True, text=True).stdout.split()
+        shown = subprocess.run(['git', 'show', f'{commit[-1]}:generated/rcef.pack.json'], cwd=ROOT,
+                               capture_output=True) if commit else None
+        if shown is None or shown.returncode:
+            self.skipTest('no Git history for the registered pack')
+        self.assertEqual(hashlib.sha256(shown.stdout).hexdigest(), frozen['b_pack_sha256'])
+        registered = {m['id']: digest(m) for m in json.loads(shown.stdout)['mappings'] if m['id'] in frozen['maps']}
+        self.assertEqual(registered, frozen['maps'])
 
     def capability(self, names, aliases=None, facs=False):
         """The canonical groups that a set with these names can fill completely."""
