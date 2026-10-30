@@ -585,7 +585,8 @@ def m3_exact(frames: list[dict], back: list[dict], source: dict) -> tuple[dict, 
     output on frames that break FB2's exclusivity; values below 2**-1020 are not claimed.
 
     The excluded outputs have bounds: the rounding outputs within ROUNDING_BOUND, and a gaze output on a
-    non-exclusive frame within the smaller input of its pair plus NON_EXCLUSIVE_SLACK. A value past its bound
+    non-exclusive frame within the smaller input of its pair (0 if its partner is outside 0 to 1) plus
+    NON_EXCLUSIVE_SLACK. A value past its bound
     counts in over_bound, which fails the gate.
     """
     counts = {'frames': len(frames), 'non_exclusive_frames': 0, 'errors': 0, 'max_excluded_error': 0.0,
@@ -611,7 +612,9 @@ def m3_exact(frames: list[dict], back: list[dict], source: dict) -> tuple[dict, 
                     counts['max_rounding_error'] = max(counts['max_rounding_error'], error)
                     bound = ROUNDING_BOUND
                 else:
-                    bound = min(original, frame['values'].get(partner[sid], 0.0)) + NON_EXCLUSIVE_SLACK
+                    # A partner outside 0 to 1 is refused, so no output nets it: it counts as 0.
+                    other = frame['values'].get(partner[sid], 0.0)
+                    bound = min(original, other if 0.0 <= other <= 1.0 else 0.0) + NON_EXCLUSIVE_SLACK
                 if error > bound:
                     counts['over_bound'] += 1
                     failures.append([n, sid, repr(original), repr(value)])
