@@ -111,6 +111,17 @@ class Tables(unittest.TestCase):
     def test_today_b_holds_every_catalogue_entry(self):
         self.assertEqual(self.m4b(self.b), (0, []))
 
+    def test_m4b_accepts_a_withdrawn_transfer_only_where_the_audit_row_is_not_same(self):
+        # fb2_arkit.eyeBlinkLeft: both audit rows of eye_close_left are same, so its route must keep transfer.provider.
+        changed = deepcopy(self.b)
+        for rule_id in ('fb2_rcef.eye_close_left', 'rcef_arkit.eyeBlinkLeft'):
+            r = rule(changed, rule_id)
+            r['assumptions'] = [a.replace('transfer.provider:', 'transfer.withdrawn:', 1) for a in r['assumptions']]
+        shortfall, failures = self.m4b(changed)
+        self.assertEqual(shortfall, 1)
+        self.assertEqual(failures[0][:3], ['FB2 -> ARKit', 'fb2_arkit.eyeBlinkLeft', 'a07'])
+        self.assertIn('transfer.provider', failures[0][3])
+
     def test_m4b_fails_when_one_hop_loses_one_assumption(self):
         for rule_id, key, side in (('rcef_arkit.eyeBlinkLeft', 'correspondence', 'out'),
                                    ('fb2_rcef.eye_close_left', 'endpoints', 'in'),
@@ -142,22 +153,38 @@ class Mutations(unittest.TestCase):
 
     def test_the_set_covers_the_planned_faults_and_names_a_check_for_each(self):
         ops = [m['change']['op'] for m in ab_mutations.MUTATIONS]
-        self.assertEqual((len(ops), ops.count('swap_outputs')), (10, 5))
+        self.assertEqual((len(ops), ops.count('swap_outputs')), (12, 5))
         for mutation in ab_mutations.MUTATIONS:
             self.assertLessEqual(set(mutation['caught_by']), set(ab_mutations.CHECKS))
             if mutation['change']['op'] == 'swap_outputs':
                 self.assertTrue({'side test', 'direction-suffix test'} & set(mutation['caught_by']), mutation['id'])
 
-    def test_the_structure_tests_catch_a_swap_on_a_changed_pack_and_pass_on_the_unchanged_one(self):
+    def test_the_test_checks_catch_a_swap_on_a_changed_pack_and_pass_on_the_unchanged_one(self):
         names = ['side test', 'direction-suffix test']
-        self.assertEqual(ab_mutations.structure_failures(self.b, names), set())
+        self.assertEqual(ab_mutations.test_failures(self.b, names), (set(), set()))
         eye = next(m for m in ab_mutations.MUTATIONS if 'VRCFaceTracking eye' in m['id'])
-        self.assertEqual(ab_mutations.structure_failures(ab_mutations.mutate(self.b, eye['change']), names),
-                         {'side test'})
+        self.assertEqual(ab_mutations.test_failures(ab_mutations.mutate(self.b, eye['change']), names),
+                         ({'side test'}, set()))
         # The direction-suffix test fails inside a subTest; that counts as a catch too.
         au30 = next(m for m in ab_mutations.MUTATIONS if 'au30' in m['id'])
-        self.assertEqual(ab_mutations.structure_failures(ab_mutations.mutate(self.b, au30['change']), names),
-                         {'direction-suffix test'})
+        self.assertEqual(ab_mutations.test_failures(ab_mutations.mutate(self.b, au30['change']), names),
+                         ({'direction-suffix test'}, set()))
+
+    def test_a_test_class_that_cannot_be_set_up_catches_nothing(self):
+        broken = {k: v for k, v in self.b.items() if k != 'profiles'}
+        self.assertEqual(ab_mutations.test_failures(broken, ['side test', 'pose-bridge chain test']),
+                         (set(), {'side test', 'pose-bridge chain test'}))
+
+    def test_the_bridge_mutations_are_caught_by_the_pose_bridge_tests_and_the_calibration_check(self):
+        names = ['pose-bridge weight test', 'pose-bridge chain test']
+        self.assertEqual(ab_mutations.test_failures(self.b, names), (set(), set()))
+        self.assertFalse(ab_mutations.calibration_fails(self.b))
+        weight, knot = (next(m for m in ab_mutations.MUTATIONS if word in m['id']) for word in ('weight', 'knot'))
+        changed = ab_mutations.mutate(self.b, weight['change'])
+        self.assertEqual(ab_mutations.test_failures(changed, names), ({'pose-bridge weight test'}, set()))
+        self.assertTrue(ab_mutations.calibration_fails(changed))
+        changed = ab_mutations.mutate(self.b, knot['change'])
+        self.assertEqual(ab_mutations.test_failures(changed, names), ({'pose-bridge chain test'}, set()))
 
     def test_an_unknown_or_empty_change_is_refused(self):
         with self.assertRaises(SystemExit):
@@ -235,6 +262,10 @@ class Geometry(unittest.TestCase):
         planted = ab_geometry.vertex_difference(rig, a, b)
         self.assertEqual(planted['frames_with_difference'], 1)
         self.assertGreater(planted['max_vertex_difference'], 0.0)
+
+    def test_the_row_says_how_many_arkit_outputs_the_rig_binds(self):
+        # ICT's 16 shapes name 14 ARKit outputs: browInnerUp and cheekPuff come in halves.
+        self.assertEqual(ab_geometry.bound(self.rig()), '14 of 52')
 
     def test_the_rig_pins_are_the_files_the_examples_check(self):
         pins = ab_geometry.rig_pins()
