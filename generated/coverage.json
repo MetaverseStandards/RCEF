@@ -1,8 +1,8 @@
 {
   "disposition_counts": {
     "excluded": 36,
-    "mapped": 373,
-    "unresolved": 671,
+    "mapped": 397,
+    "unresolved": 657,
     "unsupported": 6
   },
   "dispositions": {
@@ -90,6 +90,8 @@
       "rcef.canonical_expression.cheek_puff_right",
       "rcef.canonical_expression.cheek_raise_left",
       "rcef.canonical_expression.cheek_raise_right",
+      "rcef.canonical_expression.cheek_suck_left",
+      "rcef.canonical_expression.cheek_suck_right",
       "rcef.canonical_expression.nose_wrinkle_left",
       "rcef.canonical_expression.nose_wrinkle_right",
       "rcef.canonical_expression.jaw_drop",
@@ -120,12 +122,20 @@
       "rcef.canonical_expression.lip_suck_lower_right",
       "rcef.canonical_expression.lip_press_left",
       "rcef.canonical_expression.lip_press_right",
+      "rcef.canonical_expression.lip_tighten_left",
+      "rcef.canonical_expression.lip_tighten_right",
       "rcef.canonical_expression.lips_toward",
       "rcef.canonical_expression.upper_lip_raise_left",
       "rcef.canonical_expression.upper_lip_raise_right",
       "rcef.canonical_expression.lower_lip_depress_left",
       "rcef.canonical_expression.lower_lip_depress_right",
       "rcef.canonical_expression.tongue_out",
+      "rcef.canonical_expression.tongue_retreat",
+      "rcef.canonical_expression.tongue_tip_interdental",
+      "rcef.canonical_expression.tongue_tip_alveolar",
+      "rcef.canonical_expression.tongue_front_dorsal_palate",
+      "rcef.canonical_expression.tongue_mid_dorsal_palate",
+      "rcef.canonical_expression.tongue_back_dorsal_velar",
       "rcef.canonical_viseme.sil",
       "rcef.canonical_viseme.bilabial",
       "rcef.canonical_viseme.labiodental",
@@ -270,6 +280,8 @@
       "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB",
@@ -310,6 +322,8 @@
       "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB",
@@ -323,7 +337,13 @@
       "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB",
       "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB",
+      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB",
       "openxr.visemes.XR_FACE_TRACKING_VISEME_SIL_META",
       "openxr.visemes.XR_FACE_TRACKING_VISEME_PP_META",
       "openxr.visemes.XR_FACE_TRACKING_VISEME_FF_META",
@@ -367,6 +387,8 @@
       "vrcft.artist.base.CheekSquintLeft",
       "vrcft.artist.base.CheekPuffRight",
       "vrcft.artist.base.CheekPuffLeft",
+      "vrcft.artist.base.CheekSuckRight",
+      "vrcft.artist.base.CheekSuckLeft",
       "vrcft.artist.base.JawOpen",
       "vrcft.artist.base.MouthClosed",
       "vrcft.artist.base.JawRight",
@@ -406,6 +428,8 @@
       "vrcft.artist.base.MouthRaiserLower",
       "vrcft.artist.base.MouthPressRight",
       "vrcft.artist.base.MouthPressLeft",
+      "vrcft.artist.base.MouthTightenerRight",
+      "vrcft.artist.base.MouthTightenerLeft",
       "vrcft.artist.base.TongueOut",
       "vrcft.eye.Left.Openness",
       "vrcft.eye.Left.PupilDiameter_MM",
@@ -728,16 +752,6 @@
       "openxr.fb.XR_FACE_EXPRESSION_UPPER_LID_RAISER_R_FB",
       "openxr.fb.XR_FACE_EXPRESSION_UPPER_LIP_RAISER_L_FB",
       "openxr.fb.XR_FACE_EXPRESSION_UPPER_LIP_RAISER_R_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB",
-      "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB",
       "roblox.control.ChinRaiser",
       "roblox.control.ChinRaiserUpperLip",
       "roblox.control.Corrugator",
@@ -796,8 +810,6 @@
       "vrcft.artist.base.NasalDilationLeft",
       "vrcft.artist.base.NasalConstrictRight",
       "vrcft.artist.base.NasalConstrictLeft",
-      "vrcft.artist.base.CheekSuckRight",
-      "vrcft.artist.base.CheekSuckLeft",
       "vrcft.artist.base.JawBackward",
       "vrcft.artist.base.JawClench",
       "vrcft.artist.base.JawMandibleRaise",
@@ -805,8 +817,6 @@
       "vrcft.artist.base.LipSuckCornerLeft",
       "vrcft.artist.base.MouthUpperDeepenRight",
       "vrcft.artist.base.MouthUpperDeepenLeft",
-      "vrcft.artist.base.MouthTightenerRight",
-      "vrcft.artist.base.MouthTightenerLeft",
       "vrcft.artist.base.TongueUp",
       "vrcft.artist.base.TongueDown",
       "vrcft.artist.base.TongueRight",
@@ -2030,6 +2040,16 @@
         "fb2_rcef.gaze_down_left",
         "fb2_rcef.gaze_down_right",
         "fb2_rcef.tongue_out",
+        "fb2_rcef.cheek_suck_left",
+        "fb2_rcef.cheek_suck_right",
+        "fb2_rcef.lip_tighten_left",
+        "fb2_rcef.lip_tighten_right",
+        "fb2_rcef.tongue_retreat",
+        "fb2_rcef.tongue_tip_interdental",
+        "fb2_rcef.tongue_tip_alveolar",
+        "fb2_rcef.tongue_front_dorsal_palate",
+        "fb2_rcef.tongue_mid_dorsal_palate",
+        "fb2_rcef.tongue_back_dorsal_velar",
         "rcef_fb2.BROW_LOWERER_L",
         "rcef_fb2.BROW_LOWERER_R",
         "rcef_fb2.INNER_BROW_RAISER_L",
@@ -2094,6 +2114,16 @@
         "rcef_fb2.EYES_LOOK_UP_R",
         "rcef_fb2.EYES_LOOK_DOWN_R",
         "rcef_fb2.TONGUE_OUT",
+        "rcef_fb2.CHEEK_SUCK_L",
+        "rcef_fb2.CHEEK_SUCK_R",
+        "rcef_fb2.LIP_TIGHTENER_L",
+        "rcef_fb2.LIP_TIGHTENER_R",
+        "rcef_fb2.TONGUE_RETREAT",
+        "rcef_fb2.TONGUE_TIP_INTERDENTAL",
+        "rcef_fb2.TONGUE_TIP_ALVEOLAR",
+        "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE",
+        "rcef_fb2.TONGUE_MID_DORSAL_PALATE",
+        "rcef_fb2.TONGUE_BACK_DORSAL_VELAR",
         "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB.identity",
         "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB.identity",
         "openxr.fb2.XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB.identity",
@@ -3059,7 +3089,11 @@
         "rcef_vrcft_artist.EyeLookOutRight",
         "rcef_vrcft_artist.EyeLookUpLeft",
         "rcef_vrcft_artist.EyeLookUpRight",
-        "rcef_vrcft_artist.TongueOut"
+        "rcef_vrcft_artist.TongueOut",
+        "rcef_vrcft_artist.CheekSuckLeft",
+        "rcef_vrcft_artist.CheekSuckRight",
+        "rcef_vrcft_artist.MouthTightenerLeft",
+        "rcef_vrcft_artist.MouthTightenerRight"
       ],
       "sha256": "10f91ba8ed0c534139d3a1860b52f58978da80b401825896bfeb92af34c2a245",
       "signal_ids": [
@@ -3222,7 +3256,20 @@
       ],
       "retrieved": "2026-10-07",
       "revision": "e7b12e749220a75ef87e800e080bd2732ad46854",
-      "rule_ids": [],
+      "rule_ids": [
+        "fb2_rcef.cheek_suck_left",
+        "fb2_rcef.cheek_suck_right",
+        "fb2_rcef.lip_tighten_left",
+        "fb2_rcef.lip_tighten_right",
+        "rcef_fb2.CHEEK_SUCK_L",
+        "rcef_fb2.CHEEK_SUCK_R",
+        "rcef_fb2.LIP_TIGHTENER_L",
+        "rcef_fb2.LIP_TIGHTENER_R",
+        "rcef_vrcft_artist.CheekSuckLeft",
+        "rcef_vrcft_artist.CheekSuckRight",
+        "rcef_vrcft_artist.MouthTightenerLeft",
+        "rcef_vrcft_artist.MouthTightenerRight"
+      ],
       "sha256": "e8d4144834598faa862262c41e246d932e07be5d52d9116042a75618c683a2a3",
       "signal_ids": [
         "godot.base.FT_EYE_LOOK_OUT_RIGHT",
@@ -4936,6 +4983,10 @@
         "fb2_rcef.gaze_down_left",
         "fb2_rcef.gaze_down_right",
         "fb2_rcef.tongue_out",
+        "fb2_rcef.cheek_suck_left",
+        "fb2_rcef.cheek_suck_right",
+        "fb2_rcef.lip_tighten_left",
+        "fb2_rcef.lip_tighten_right",
         "rcef_fb2.BROW_LOWERER_L",
         "rcef_fb2.BROW_LOWERER_R",
         "rcef_fb2.INNER_BROW_RAISER_L",
@@ -4985,10 +5036,18 @@
         "rcef_fb2.EYES_LOOK_UP_R",
         "rcef_fb2.EYES_LOOK_DOWN_R",
         "rcef_fb2.TONGUE_OUT",
+        "rcef_fb2.CHEEK_SUCK_L",
+        "rcef_fb2.CHEEK_SUCK_R",
+        "rcef_fb2.LIP_TIGHTENER_L",
+        "rcef_fb2.LIP_TIGHTENER_R",
         "rcef_vrcft_artist.MouthUpperLeft",
         "rcef_vrcft_artist.MouthLowerLeft",
         "rcef_vrcft_artist.MouthUpperRight",
         "rcef_vrcft_artist.MouthLowerRight",
+        "rcef_vrcft_artist.CheekSuckLeft",
+        "rcef_vrcft_artist.CheekSuckRight",
+        "rcef_vrcft_artist.MouthTightenerLeft",
+        "rcef_vrcft_artist.MouthTightenerRight",
         "fb2_arkit.eyeBlinkLeft",
         "fb2_arkit.eyeBlinkRight",
         "fb2_arkit.jawOpen",
@@ -5140,6 +5199,10 @@
         "rcef_vrcft_artist.EyeLookUpLeft",
         "rcef_vrcft_artist.EyeLookUpRight",
         "rcef_vrcft_artist.TongueOut",
+        "rcef_vrcft_artist.CheekSuckLeft",
+        "rcef_vrcft_artist.CheekSuckRight",
+        "rcef_vrcft_artist.MouthTightenerLeft",
+        "rcef_vrcft_artist.MouthTightenerRight",
         "fb2_arkit.mouthClose"
       ],
       "sha256": "208dce0a6bfdb9e5139de3933c26b0a4f0a5cefb9030d60023f17024cabc2dcb",
@@ -5496,6 +5559,10 @@
         "fb2_rcef.gaze_down_left",
         "fb2_rcef.gaze_down_right",
         "fb2_rcef.tongue_out",
+        "fb2_rcef.cheek_suck_left",
+        "fb2_rcef.cheek_suck_right",
+        "fb2_rcef.lip_tighten_left",
+        "fb2_rcef.lip_tighten_right",
         "rcef_fb2.BROW_LOWERER_L",
         "rcef_fb2.BROW_LOWERER_R",
         "rcef_fb2.OUTER_BROW_RAISER_L",
@@ -5554,6 +5621,14 @@
         "rcef_fb2.EYES_LOOK_UP_R",
         "rcef_fb2.EYES_LOOK_DOWN_R",
         "rcef_fb2.TONGUE_OUT",
+        "rcef_fb2.CHEEK_SUCK_L",
+        "rcef_fb2.CHEEK_SUCK_R",
+        "rcef_fb2.LIP_TIGHTENER_L",
+        "rcef_fb2.LIP_TIGHTENER_R",
+        "rcef_vrcft_artist.CheekSuckLeft",
+        "rcef_vrcft_artist.CheekSuckRight",
+        "rcef_vrcft_artist.MouthTightenerLeft",
+        "rcef_vrcft_artist.MouthTightenerRight",
         "fb2_arkit.eyeBlinkLeft",
         "fb2_arkit.eyeBlinkRight",
         "fb2_arkit.jawOpen",
@@ -5916,6 +5991,10 @@
         "fb2_rcef.gaze_down_left",
         "fb2_rcef.gaze_down_right",
         "fb2_rcef.tongue_out",
+        "fb2_rcef.cheek_suck_left",
+        "fb2_rcef.cheek_suck_right",
+        "fb2_rcef.lip_tighten_left",
+        "fb2_rcef.lip_tighten_right",
         "rcef_fb2.BROW_LOWERER_L",
         "rcef_fb2.BROW_LOWERER_R",
         "rcef_fb2.OUTER_BROW_RAISER_L",
@@ -5974,6 +6053,10 @@
         "rcef_fb2.EYES_LOOK_UP_R",
         "rcef_fb2.EYES_LOOK_DOWN_R",
         "rcef_fb2.TONGUE_OUT",
+        "rcef_fb2.CHEEK_SUCK_L",
+        "rcef_fb2.CHEEK_SUCK_R",
+        "rcef_fb2.LIP_TIGHTENER_L",
+        "rcef_fb2.LIP_TIGHTENER_R",
         "rcef_vrcft_artist.BrowLowererLeft",
         "rcef_vrcft_artist.BrowPinchLeft",
         "rcef_vrcft_artist.BrowLowererRight",
@@ -6042,6 +6125,10 @@
         "rcef_vrcft_artist.EyeLookUpLeft",
         "rcef_vrcft_artist.EyeLookUpRight",
         "rcef_vrcft_artist.TongueOut",
+        "rcef_vrcft_artist.CheekSuckLeft",
+        "rcef_vrcft_artist.CheekSuckRight",
+        "rcef_vrcft_artist.MouthTightenerLeft",
+        "rcef_vrcft_artist.MouthTightenerRight",
         "fb2_arkit.eyeBlinkLeft",
         "fb2_arkit.eyeBlinkRight",
         "fb2_arkit.jawOpen",
@@ -6597,6 +6684,16 @@
         "fb2_rcef.gaze_down_left",
         "fb2_rcef.gaze_down_right",
         "fb2_rcef.tongue_out",
+        "fb2_rcef.cheek_suck_left",
+        "fb2_rcef.cheek_suck_right",
+        "fb2_rcef.lip_tighten_left",
+        "fb2_rcef.lip_tighten_right",
+        "fb2_rcef.tongue_retreat",
+        "fb2_rcef.tongue_tip_interdental",
+        "fb2_rcef.tongue_tip_alveolar",
+        "fb2_rcef.tongue_front_dorsal_palate",
+        "fb2_rcef.tongue_mid_dorsal_palate",
+        "fb2_rcef.tongue_back_dorsal_velar",
         "rcef_fb2.BROW_LOWERER_L",
         "rcef_fb2.BROW_LOWERER_R",
         "rcef_fb2.INNER_BROW_RAISER_L",
@@ -6661,6 +6758,16 @@
         "rcef_fb2.EYES_LOOK_UP_R",
         "rcef_fb2.EYES_LOOK_DOWN_R",
         "rcef_fb2.TONGUE_OUT",
+        "rcef_fb2.CHEEK_SUCK_L",
+        "rcef_fb2.CHEEK_SUCK_R",
+        "rcef_fb2.LIP_TIGHTENER_L",
+        "rcef_fb2.LIP_TIGHTENER_R",
+        "rcef_fb2.TONGUE_RETREAT",
+        "rcef_fb2.TONGUE_TIP_INTERDENTAL",
+        "rcef_fb2.TONGUE_TIP_ALVEOLAR",
+        "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE",
+        "rcef_fb2.TONGUE_MID_DORSAL_PALATE",
+        "rcef_fb2.TONGUE_BACK_DORSAL_VELAR",
         "rcef_viseme_pose.vowel_open",
         "rcef_viseme_pose.vowel_mid_spread",
         "rcef_viseme_pose.vowel_close_spread",
@@ -6862,6 +6969,10 @@
         "rcef_vrcft_artist.EyeLookUpLeft",
         "rcef_vrcft_artist.EyeLookUpRight",
         "rcef_vrcft_artist.TongueOut",
+        "rcef_vrcft_artist.CheekSuckLeft",
+        "rcef_vrcft_artist.CheekSuckRight",
+        "rcef_vrcft_artist.MouthTightenerLeft",
+        "rcef_vrcft_artist.MouthTightenerRight",
         "rcef_vrm.blinkLeft",
         "rcef_vrm.blinkRight",
         "vrm_rcef.vowel_open",
@@ -6900,6 +7011,8 @@
         "rcef.canonical_expression.cheek_puff_right",
         "rcef.canonical_expression.cheek_raise_left",
         "rcef.canonical_expression.cheek_raise_right",
+        "rcef.canonical_expression.cheek_suck_left",
+        "rcef.canonical_expression.cheek_suck_right",
         "rcef.canonical_expression.nose_wrinkle_left",
         "rcef.canonical_expression.nose_wrinkle_right",
         "rcef.canonical_expression.jaw_drop",
@@ -6930,12 +7043,20 @@
         "rcef.canonical_expression.lip_suck_lower_right",
         "rcef.canonical_expression.lip_press_left",
         "rcef.canonical_expression.lip_press_right",
+        "rcef.canonical_expression.lip_tighten_left",
+        "rcef.canonical_expression.lip_tighten_right",
         "rcef.canonical_expression.lips_toward",
         "rcef.canonical_expression.upper_lip_raise_left",
         "rcef.canonical_expression.upper_lip_raise_right",
         "rcef.canonical_expression.lower_lip_depress_left",
         "rcef.canonical_expression.lower_lip_depress_right",
         "rcef.canonical_expression.tongue_out",
+        "rcef.canonical_expression.tongue_retreat",
+        "rcef.canonical_expression.tongue_tip_interdental",
+        "rcef.canonical_expression.tongue_tip_alveolar",
+        "rcef.canonical_expression.tongue_front_dorsal_palate",
+        "rcef.canonical_expression.tongue_mid_dorsal_palate",
+        "rcef.canonical_expression.tongue_back_dorsal_velar",
         "rcef.canonical_viseme.sil",
         "rcef.canonical_viseme.bilabial",
         "rcef.canonical_viseme.labiodental",
@@ -7100,6 +7221,8 @@
         "rcef.canonical_expression.cheek_puff_right",
         "rcef.canonical_expression.cheek_raise_left",
         "rcef.canonical_expression.cheek_raise_right",
+        "rcef.canonical_expression.cheek_suck_left",
+        "rcef.canonical_expression.cheek_suck_right",
         "rcef.canonical_expression.nose_wrinkle_left",
         "rcef.canonical_expression.nose_wrinkle_right",
         "rcef.canonical_expression.jaw_drop",
@@ -7127,6 +7250,8 @@
         "rcef.canonical_expression.lip_suck_lower_right",
         "rcef.canonical_expression.lip_press_left",
         "rcef.canonical_expression.lip_press_right",
+        "rcef.canonical_expression.lip_tighten_left",
+        "rcef.canonical_expression.lip_tighten_right",
         "rcef.canonical_expression.lips_toward",
         "rcef.canonical_expression.upper_lip_raise_left",
         "rcef.canonical_expression.upper_lip_raise_right",
@@ -8137,6 +8262,16 @@
       "fb2_rcef.gaze_down_left",
       "fb2_rcef.gaze_down_right",
       "fb2_rcef.tongue_out",
+      "fb2_rcef.cheek_suck_left",
+      "fb2_rcef.cheek_suck_right",
+      "fb2_rcef.lip_tighten_left",
+      "fb2_rcef.lip_tighten_right",
+      "fb2_rcef.tongue_retreat",
+      "fb2_rcef.tongue_tip_interdental",
+      "fb2_rcef.tongue_tip_alveolar",
+      "fb2_rcef.tongue_front_dorsal_palate",
+      "fb2_rcef.tongue_mid_dorsal_palate",
+      "fb2_rcef.tongue_back_dorsal_velar",
       "rcef_fb2.BROW_LOWERER_L",
       "rcef_fb2.BROW_LOWERER_R",
       "rcef_fb2.INNER_BROW_RAISER_L",
@@ -8201,6 +8336,16 @@
       "rcef_fb2.EYES_LOOK_UP_R",
       "rcef_fb2.EYES_LOOK_DOWN_R",
       "rcef_fb2.TONGUE_OUT",
+      "rcef_fb2.CHEEK_SUCK_L",
+      "rcef_fb2.CHEEK_SUCK_R",
+      "rcef_fb2.LIP_TIGHTENER_L",
+      "rcef_fb2.LIP_TIGHTENER_R",
+      "rcef_fb2.TONGUE_RETREAT",
+      "rcef_fb2.TONGUE_TIP_INTERDENTAL",
+      "rcef_fb2.TONGUE_TIP_ALVEOLAR",
+      "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE",
+      "rcef_fb2.TONGUE_MID_DORSAL_PALATE",
+      "rcef_fb2.TONGUE_BACK_DORSAL_VELAR",
       "rcef_viseme_pose.vowel_open",
       "rcef_viseme_pose.vowel_mid_spread",
       "rcef_viseme_pose.vowel_close_spread",
@@ -8402,6 +8547,10 @@
       "rcef_vrcft_artist.EyeLookUpLeft",
       "rcef_vrcft_artist.EyeLookUpRight",
       "rcef_vrcft_artist.TongueOut",
+      "rcef_vrcft_artist.CheekSuckLeft",
+      "rcef_vrcft_artist.CheekSuckRight",
+      "rcef_vrcft_artist.MouthTightenerLeft",
+      "rcef_vrcft_artist.MouthTightenerRight",
       "rcef_vrm.blinkLeft",
       "rcef_vrm.blinkRight",
       "vrm_rcef.vowel_open",
@@ -8501,10 +8650,10 @@
     ]
   },
   "mapping_quality_counts": {
-    "approximate": 641,
+    "approximate": 665,
     "exact": 22
   },
-  "pack_sha256": "8a9c1aba51fcc1fa34cd9c594433751bafc95acb3cb8af4b803870bc88ff5c30",
+  "pack_sha256": "f7fcd1ab4cbb4338042d1e10756eff14c0d6f3b102d91479f673b11c38ae2684",
   "profiles": [
     {
       "count": 21,
@@ -8601,10 +8750,10 @@
       ]
     },
     {
-      "count": 60,
+      "count": 70,
       "disposition_counts": {
         "excluded": 0,
-        "mapped": 60,
+        "mapped": 70,
         "unresolved": 0,
         "unsupported": 0
       },
@@ -8635,6 +8784,8 @@
           "rcef.canonical_expression.cheek_puff_right",
           "rcef.canonical_expression.cheek_raise_left",
           "rcef.canonical_expression.cheek_raise_right",
+          "rcef.canonical_expression.cheek_suck_left",
+          "rcef.canonical_expression.cheek_suck_right",
           "rcef.canonical_expression.nose_wrinkle_left",
           "rcef.canonical_expression.nose_wrinkle_right",
           "rcef.canonical_expression.jaw_drop",
@@ -8665,12 +8816,20 @@
           "rcef.canonical_expression.lip_suck_lower_right",
           "rcef.canonical_expression.lip_press_left",
           "rcef.canonical_expression.lip_press_right",
+          "rcef.canonical_expression.lip_tighten_left",
+          "rcef.canonical_expression.lip_tighten_right",
           "rcef.canonical_expression.lips_toward",
           "rcef.canonical_expression.upper_lip_raise_left",
           "rcef.canonical_expression.upper_lip_raise_right",
           "rcef.canonical_expression.lower_lip_depress_left",
           "rcef.canonical_expression.lower_lip_depress_right",
-          "rcef.canonical_expression.tongue_out"
+          "rcef.canonical_expression.tongue_out",
+          "rcef.canonical_expression.tongue_retreat",
+          "rcef.canonical_expression.tongue_tip_interdental",
+          "rcef.canonical_expression.tongue_tip_alveolar",
+          "rcef.canonical_expression.tongue_front_dorsal_palate",
+          "rcef.canonical_expression.tongue_mid_dorsal_palate",
+          "rcef.canonical_expression.tongue_back_dorsal_velar"
         ],
         "unresolved": [],
         "unsupported": []
@@ -8850,6 +9009,16 @@
           "fb2_rcef.gaze_down_left",
           "fb2_rcef.gaze_down_right",
           "fb2_rcef.tongue_out",
+          "fb2_rcef.cheek_suck_left",
+          "fb2_rcef.cheek_suck_right",
+          "fb2_rcef.lip_tighten_left",
+          "fb2_rcef.lip_tighten_right",
+          "fb2_rcef.tongue_retreat",
+          "fb2_rcef.tongue_tip_interdental",
+          "fb2_rcef.tongue_tip_alveolar",
+          "fb2_rcef.tongue_front_dorsal_palate",
+          "fb2_rcef.tongue_mid_dorsal_palate",
+          "fb2_rcef.tongue_back_dorsal_velar",
           "rcef_fb2.BROW_LOWERER_L",
           "rcef_fb2.BROW_LOWERER_R",
           "rcef_fb2.INNER_BROW_RAISER_L",
@@ -8906,6 +9075,16 @@
           "rcef_fb2.gaze_in_minus_out_right",
           "rcef_fb2.gaze_up_minus_down_right",
           "rcef_fb2.TONGUE_OUT",
+          "rcef_fb2.CHEEK_SUCK_L",
+          "rcef_fb2.CHEEK_SUCK_R",
+          "rcef_fb2.LIP_TIGHTENER_L",
+          "rcef_fb2.LIP_TIGHTENER_R",
+          "rcef_fb2.TONGUE_RETREAT",
+          "rcef_fb2.TONGUE_TIP_INTERDENTAL",
+          "rcef_fb2.TONGUE_TIP_ALVEOLAR",
+          "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE",
+          "rcef_fb2.TONGUE_MID_DORSAL_PALATE",
+          "rcef_fb2.TONGUE_BACK_DORSAL_VELAR",
           "rcef_viseme_pose.brow_inner_raise_left",
           "rcef_viseme_pose.brow_inner_raise_right",
           "rcef_viseme_pose.brow_outer_raise_left",
@@ -9019,13 +9198,17 @@
           "rcef_vrcft_artist.EyeLookUpLeft",
           "rcef_vrcft_artist.EyeLookUpRight",
           "rcef_vrcft_artist.TongueOut",
+          "rcef_vrcft_artist.CheekSuckLeft",
+          "rcef_vrcft_artist.CheekSuckRight",
+          "rcef_vrcft_artist.MouthTightenerLeft",
+          "rcef_vrcft_artist.MouthTightenerRight",
           "rcef_vrm.blinkLeft",
           "rcef_vrm.blinkRight"
         ],
         "exact": []
       },
       "mapping_quality_counts": {
-        "approximate": 343,
+        "approximate": 367,
         "exact": 0
       },
       "metadata": {
@@ -9038,7 +9221,10 @@
           "chin_raise_upper_lip",
           "blink",
           "gaze",
-          "tongue_out"
+          "tongue_out",
+          "cheek_suck",
+          "lip_tighten",
+          "tongue_place"
         ],
         "scope": "a pivot for translating between expression sets; each signal has a declared meaning, but no shared or measured gain",
         "vocabulary_status": "draft",
@@ -9069,6 +9255,8 @@
         "rcef.canonical_expression.cheek_puff_right",
         "rcef.canonical_expression.cheek_raise_left",
         "rcef.canonical_expression.cheek_raise_right",
+        "rcef.canonical_expression.cheek_suck_left",
+        "rcef.canonical_expression.cheek_suck_right",
         "rcef.canonical_expression.nose_wrinkle_left",
         "rcef.canonical_expression.nose_wrinkle_right",
         "rcef.canonical_expression.jaw_drop",
@@ -9099,12 +9287,20 @@
         "rcef.canonical_expression.lip_suck_lower_right",
         "rcef.canonical_expression.lip_press_left",
         "rcef.canonical_expression.lip_press_right",
+        "rcef.canonical_expression.lip_tighten_left",
+        "rcef.canonical_expression.lip_tighten_right",
         "rcef.canonical_expression.lips_toward",
         "rcef.canonical_expression.upper_lip_raise_left",
         "rcef.canonical_expression.upper_lip_raise_right",
         "rcef.canonical_expression.lower_lip_depress_left",
         "rcef.canonical_expression.lower_lip_depress_right",
-        "rcef.canonical_expression.tongue_out"
+        "rcef.canonical_expression.tongue_out",
+        "rcef.canonical_expression.tongue_retreat",
+        "rcef.canonical_expression.tongue_tip_interdental",
+        "rcef.canonical_expression.tongue_tip_alveolar",
+        "rcef.canonical_expression.tongue_front_dorsal_palate",
+        "rcef.canonical_expression.tongue_mid_dorsal_palate",
+        "rcef.canonical_expression.tongue_back_dorsal_velar"
       ]
     },
     {
@@ -10943,8 +11139,8 @@
       "count": 71,
       "disposition_counts": {
         "excluded": 1,
-        "mapped": 60,
-        "unresolved": 10,
+        "mapped": 70,
+        "unresolved": 0,
         "unsupported": 0
       },
       "dispositions": {
@@ -10958,6 +11154,8 @@
           "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_PUFF_R_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_L_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_RAISER_R_FB",
+          "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB",
+          "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_B_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_CHIN_RAISER_T_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_DIMPLER_L_FB",
@@ -10998,6 +11196,8 @@
           "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_LT_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RB_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_LIP_SUCK_RT_FB",
+          "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB",
+          "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_LIPS_TOWARD_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_L_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_LOWER_LIP_DEPRESSOR_R_FB",
@@ -11011,20 +11211,15 @@
           "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LID_RAISER_R_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_L_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_UPPER_LIP_RAISER_R_FB",
-          "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"
-        ],
-        "unresolved": [
-          "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB",
-          "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB",
-          "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB",
-          "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB",
+          "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB",
           "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB"
         ],
+        "unresolved": [],
         "unsupported": []
       },
       "id": "openxr.fb2",
@@ -11150,6 +11345,16 @@
           "fb2_rcef.gaze_down_left",
           "fb2_rcef.gaze_down_right",
           "fb2_rcef.tongue_out",
+          "fb2_rcef.cheek_suck_left",
+          "fb2_rcef.cheek_suck_right",
+          "fb2_rcef.lip_tighten_left",
+          "fb2_rcef.lip_tighten_right",
+          "fb2_rcef.tongue_retreat",
+          "fb2_rcef.tongue_tip_interdental",
+          "fb2_rcef.tongue_tip_alveolar",
+          "fb2_rcef.tongue_front_dorsal_palate",
+          "fb2_rcef.tongue_mid_dorsal_palate",
+          "fb2_rcef.tongue_back_dorsal_velar",
           "rcef_fb2.BROW_LOWERER_L",
           "rcef_fb2.BROW_LOWERER_R",
           "rcef_fb2.INNER_BROW_RAISER_L",
@@ -11210,6 +11415,16 @@
           "rcef_fb2.EYES_LOOK_UP_R",
           "rcef_fb2.EYES_LOOK_DOWN_R",
           "rcef_fb2.TONGUE_OUT",
+          "rcef_fb2.CHEEK_SUCK_L",
+          "rcef_fb2.CHEEK_SUCK_R",
+          "rcef_fb2.LIP_TIGHTENER_L",
+          "rcef_fb2.LIP_TIGHTENER_R",
+          "rcef_fb2.TONGUE_RETREAT",
+          "rcef_fb2.TONGUE_TIP_INTERDENTAL",
+          "rcef_fb2.TONGUE_TIP_ALVEOLAR",
+          "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE",
+          "rcef_fb2.TONGUE_MID_DORSAL_PALATE",
+          "rcef_fb2.TONGUE_BACK_DORSAL_VELAR",
           "fb2_arkit.eyeBlinkLeft",
           "fb2_arkit.eyeBlinkRight",
           "fb2_arkit.jawOpen",
@@ -11277,7 +11492,7 @@
         ]
       },
       "mapping_quality_counts": {
-        "approximate": 234,
+        "approximate": 254,
         "exact": 8
       },
       "metadata": {
@@ -11638,8 +11853,8 @@
       "count": 102,
       "disposition_counts": {
         "excluded": 0,
-        "mapped": 68,
-        "unresolved": 30,
+        "mapped": 72,
+        "unresolved": 26,
         "unsupported": 4
       },
       "dispositions": {
@@ -11673,6 +11888,8 @@
           "vrcft.artist.base.CheekSquintLeft",
           "vrcft.artist.base.CheekPuffRight",
           "vrcft.artist.base.CheekPuffLeft",
+          "vrcft.artist.base.CheekSuckRight",
+          "vrcft.artist.base.CheekSuckLeft",
           "vrcft.artist.base.JawOpen",
           "vrcft.artist.base.MouthClosed",
           "vrcft.artist.base.JawRight",
@@ -11712,6 +11929,8 @@
           "vrcft.artist.base.MouthRaiserLower",
           "vrcft.artist.base.MouthPressRight",
           "vrcft.artist.base.MouthPressLeft",
+          "vrcft.artist.base.MouthTightenerRight",
+          "vrcft.artist.base.MouthTightenerLeft",
           "vrcft.artist.base.TongueOut"
         ],
         "unresolved": [
@@ -11723,8 +11942,6 @@
           "vrcft.artist.base.NasalDilationLeft",
           "vrcft.artist.base.NasalConstrictRight",
           "vrcft.artist.base.NasalConstrictLeft",
-          "vrcft.artist.base.CheekSuckRight",
-          "vrcft.artist.base.CheekSuckLeft",
           "vrcft.artist.base.JawBackward",
           "vrcft.artist.base.JawClench",
           "vrcft.artist.base.JawMandibleRaise",
@@ -11732,8 +11949,6 @@
           "vrcft.artist.base.LipSuckCornerLeft",
           "vrcft.artist.base.MouthUpperDeepenRight",
           "vrcft.artist.base.MouthUpperDeepenLeft",
-          "vrcft.artist.base.MouthTightenerRight",
-          "vrcft.artist.base.MouthTightenerLeft",
           "vrcft.artist.base.TongueUp",
           "vrcft.artist.base.TongueDown",
           "vrcft.artist.base.TongueRight",
@@ -11891,12 +12106,16 @@
           "rcef_vrcft_artist.EyeLookOutRight",
           "rcef_vrcft_artist.EyeLookUpLeft",
           "rcef_vrcft_artist.EyeLookUpRight",
-          "rcef_vrcft_artist.TongueOut"
+          "rcef_vrcft_artist.TongueOut",
+          "rcef_vrcft_artist.CheekSuckLeft",
+          "rcef_vrcft_artist.CheekSuckRight",
+          "rcef_vrcft_artist.MouthTightenerLeft",
+          "rcef_vrcft_artist.MouthTightenerRight"
         ],
         "exact": []
       },
       "mapping_quality_counts": {
-        "approximate": 136,
+        "approximate": 140,
         "exact": 0
       },
       "metadata": {
@@ -28006,6 +28225,400 @@
     },
     {
       "assumptions": [
+        "correspondence: FB2 CHEEK_SUCK_L corresponds to canonical cheek_suck_left.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical cheek_suck_left is defined to match Unified Expressions CheekSuckLeft.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 238) and Godot↔Unified Expressions (godot_enum lines 38-40 and 87; godot_face_modifier lines 48-54 and 130-131, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_left is defined to match Unified Expressions CheekSuckLeft."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.cheek_suck_left",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB",
+            "rcef.canonical_expression.cheek_suck_left"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.cheek_suck_left"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 CHEEK_SUCK_R corresponds to canonical cheek_suck_right.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical cheek_suck_right is defined to match Unified Expressions CheekSuckRight.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 237) and Godot↔Unified Expressions (godot_enum lines 38-40 and 86; godot_face_modifier lines 48-54 and 128-129, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_right is defined to match Unified Expressions CheekSuckRight."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.cheek_suck_right",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB",
+            "rcef.canonical_expression.cheek_suck_right"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.cheek_suck_right"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 LIP_TIGHTENER_L corresponds to canonical lip_tighten_left.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical lip_tighten_left is defined to match Unified Expressions MouthTightenerLeft.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 286) and Godot↔Unified Expressions (godot_enum lines 38-40 and 135; godot_face_modifier lines 48-54 and 226-227, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_left is defined to match Unified Expressions MouthTightenerLeft."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.lip_tighten_left",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB",
+            "rcef.canonical_expression.lip_tighten_left"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.lip_tighten_left"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 LIP_TIGHTENER_R corresponds to canonical lip_tighten_right.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical lip_tighten_right is defined to match Unified Expressions MouthTightenerRight.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 285) and Godot↔Unified Expressions (godot_enum lines 38-40 and 134; godot_face_modifier lines 48-54 and 224-225, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_right is defined to match Unified Expressions MouthTightenerRight."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.lip_tighten_right",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB",
+            "rcef.canonical_expression.lip_tighten_right"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.lip_tighten_right"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_RETREAT corresponds to canonical tongue_retreat.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.tongue_retreat",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB",
+            "rcef.canonical_expression.tongue_retreat"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.tongue_retreat"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_TIP_INTERDENTAL corresponds to canonical tongue_tip_interdental.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.tongue_tip_interdental",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB",
+            "rcef.canonical_expression.tongue_tip_interdental"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.tongue_tip_interdental"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_TIP_ALVEOLAR corresponds to canonical tongue_tip_alveolar.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.tongue_tip_alveolar",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB",
+            "rcef.canonical_expression.tongue_tip_alveolar"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.tongue_tip_alveolar"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_FRONT_DORSAL_PALATE corresponds to canonical tongue_front_dorsal_palate.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.tongue_front_dorsal_palate",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB",
+            "rcef.canonical_expression.tongue_front_dorsal_palate"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.tongue_front_dorsal_palate"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_MID_DORSAL_PALATE corresponds to canonical tongue_mid_dorsal_palate.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.tongue_mid_dorsal_palate",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB",
+            "rcef.canonical_expression.tongue_mid_dorsal_palate"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.tongue_mid_dorsal_palate"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_BACK_DORSAL_VELAR corresponds to canonical tongue_back_dorsal_velar.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "fb2_rcef.tongue_back_dorsal_velar",
+      "inputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB",
+            "rcef.canonical_expression.tongue_back_dorsal_velar"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "rcef.canonical_expression.tongue_back_dorsal_velar"
+      ]
+    },
+    {
+      "assumptions": [
         "correspondence: FB2 BROW_LOWERER_L corresponds to canonical brow_lower_left.",
         "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
         "transfer.withdrawn: correspondence evidence is ARKit↔FB2 (godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement); it does not carry over for the defined action, because the audit finds that ARKit browDownLeft differs from canonical brow_lower_left; see loss arkit_browdown_outer."
@@ -31075,6 +31688,400 @@
       },
       "outputs": [
         "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_OUT_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 CHEEK_SUCK_L corresponds to canonical cheek_suck_left.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical cheek_suck_left is defined to match Unified Expressions CheekSuckLeft.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 238) and Godot↔Unified Expressions (godot_enum lines 38-40 and 87; godot_face_modifier lines 48-54 and 130-131, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_left is defined to match Unified Expressions CheekSuckLeft."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.CHEEK_SUCK_L",
+      "inputs": [
+        "rcef.canonical_expression.cheek_suck_left"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.cheek_suck_left",
+            "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 CHEEK_SUCK_R corresponds to canonical cheek_suck_right.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical cheek_suck_right is defined to match Unified Expressions CheekSuckRight.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 237) and Godot↔Unified Expressions (godot_enum lines 38-40 and 86; godot_face_modifier lines 48-54 and 128-129, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_right is defined to match Unified Expressions CheekSuckRight."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.CHEEK_SUCK_R",
+      "inputs": [
+        "rcef.canonical_expression.cheek_suck_right"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.cheek_suck_right",
+            "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 LIP_TIGHTENER_L corresponds to canonical lip_tighten_left.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical lip_tighten_left is defined to match Unified Expressions MouthTightenerLeft.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 286) and Godot↔Unified Expressions (godot_enum lines 38-40 and 135; godot_face_modifier lines 48-54 and 226-227, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_left is defined to match Unified Expressions MouthTightenerLeft."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.LIP_TIGHTENER_L",
+      "inputs": [
+        "rcef.canonical_expression.lip_tighten_left"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.lip_tighten_left",
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 LIP_TIGHTENER_R corresponds to canonical lip_tighten_right.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is Unified Expressions↔FB2 (vrcft_docs_movement); it carries over because canonical lip_tighten_right is defined to match Unified Expressions MouthTightenerRight.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 285) and Godot↔Unified Expressions (godot_enum lines 38-40 and 134; godot_face_modifier lines 48-54 and 224-225, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_right is defined to match Unified Expressions MouthTightenerRight."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.LIP_TIGHTENER_R",
+      "inputs": [
+        "rcef.canonical_expression.lip_tighten_right"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.lip_tighten_right",
+            "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_RETREAT corresponds to canonical tongue_retreat.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.TONGUE_RETREAT",
+      "inputs": [
+        "rcef.canonical_expression.tongue_retreat"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.tongue_retreat",
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_TIP_INTERDENTAL corresponds to canonical tongue_tip_interdental.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.TONGUE_TIP_INTERDENTAL",
+      "inputs": [
+        "rcef.canonical_expression.tongue_tip_interdental"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.tongue_tip_interdental",
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_TIP_ALVEOLAR corresponds to canonical tongue_tip_alveolar.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.TONGUE_TIP_ALVEOLAR",
+      "inputs": [
+        "rcef.canonical_expression.tongue_tip_alveolar"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.tongue_tip_alveolar",
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_FRONT_DORSAL_PALATE corresponds to canonical tongue_front_dorsal_palate.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE",
+      "inputs": [
+        "rcef.canonical_expression.tongue_front_dorsal_palate"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.tongue_front_dorsal_palate",
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_MID_DORSAL_PALATE corresponds to canonical tongue_mid_dorsal_palate.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.TONGUE_MID_DORSAL_PALATE",
+      "inputs": [
+        "rcef.canonical_expression.tongue_mid_dorsal_palate"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.tongue_mid_dorsal_palate",
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: FB2 TONGUE_BACK_DORSAL_VELAR corresponds to canonical tongue_back_dorsal_velar.",
+        "endpoints: FB2's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "xr_fb2",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_fb2.TONGUE_BACK_DORSAL_VELAR",
+      "inputs": [
+        "rcef.canonical_expression.tongue_back_dorsal_velar"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "FB2 gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.tongue_back_dorsal_velar",
+            "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB"
       ]
     },
     {
@@ -46643,6 +47650,222 @@
     },
     {
       "assumptions": [
+        "correspondence: Unified Expressions CheekSuckLeft corresponds to canonical cheek_suck_left.",
+        "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is FB2↔Unified Expressions (vrcft_docs_movement); it carries over because canonical cheek_suck_left is defined to match FB2 CHEEK_SUCK_L.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 238) and Godot↔Unified Expressions (godot_enum lines 38-40 and 87; godot_face_modifier lines 48-54 and 130-131, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_left is defined to match FB2 CHEEK_SUCK_L."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "vrcft_artist",
+        "vrcft_docs_shapes",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_vrcft_artist.CheekSuckLeft",
+      "inputs": [
+        "rcef.canonical_expression.cheek_suck_left"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "Unified Expressions gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.cheek_suck_left",
+            "vrcft.artist.base.CheekSuckLeft"
+          ],
+          "units": "1"
+        },
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions",
+          "refs": [
+            "rcef.canonical_expression.cheek_suck_left",
+            "vrcft.artist.base.CheekSuckLeft"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "vrcft.artist.base.CheekSuckLeft"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: Unified Expressions CheekSuckRight corresponds to canonical cheek_suck_right.",
+        "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is FB2↔Unified Expressions (vrcft_docs_movement); it carries over because canonical cheek_suck_right is defined to match FB2 CHEEK_SUCK_R.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 237) and Godot↔Unified Expressions (godot_enum lines 38-40 and 86; godot_face_modifier lines 48-54 and 128-129, which give the Unified Expressions name of each Godot shape); it carries over because canonical cheek_suck_right is defined to match FB2 CHEEK_SUCK_R."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "vrcft_artist",
+        "vrcft_docs_shapes",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_vrcft_artist.CheekSuckRight",
+      "inputs": [
+        "rcef.canonical_expression.cheek_suck_right"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "Unified Expressions gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.cheek_suck_right",
+            "vrcft.artist.base.CheekSuckRight"
+          ],
+          "units": "1"
+        },
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions",
+          "refs": [
+            "rcef.canonical_expression.cheek_suck_right",
+            "vrcft.artist.base.CheekSuckRight"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "vrcft.artist.base.CheekSuckRight"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: Unified Expressions MouthTightenerLeft corresponds to canonical lip_tighten_left.",
+        "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is FB2↔Unified Expressions (vrcft_docs_movement); it carries over because canonical lip_tighten_left is defined to match FB2 LIP_TIGHTENER_L.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 286) and Godot↔Unified Expressions (godot_enum lines 38-40 and 135; godot_face_modifier lines 48-54 and 226-227, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_left is defined to match FB2 LIP_TIGHTENER_L."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "vrcft_artist",
+        "vrcft_docs_shapes",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_vrcft_artist.MouthTightenerLeft",
+      "inputs": [
+        "rcef.canonical_expression.lip_tighten_left"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "Unified Expressions gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.lip_tighten_left",
+            "vrcft.artist.base.MouthTightenerLeft"
+          ],
+          "units": "1"
+        },
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions",
+          "refs": [
+            "rcef.canonical_expression.lip_tighten_left",
+            "vrcft.artist.base.MouthTightenerLeft"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "vrcft.artist.base.MouthTightenerLeft"
+      ]
+    },
+    {
+      "assumptions": [
+        "correspondence: Unified Expressions MouthTightenerRight corresponds to canonical lip_tighten_right.",
+        "endpoints: Unified Expressions' 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.",
+        "transfer.provider: correspondence evidence is FB2↔Unified Expressions (vrcft_docs_movement); it carries over because canonical lip_tighten_right is defined to match FB2 LIP_TIGHTENER_R.",
+        "transfer.chain: correspondence evidence is FB2↔Godot (godot_vendors_fb2 line 285) and Godot↔Unified Expressions (godot_enum lines 38-40 and 134; godot_face_modifier lines 48-54 and 224-225, which give the Unified Expressions name of each Godot shape); it carries over because canonical lip_tighten_right is defined to match FB2 LIP_TIGHTENER_R."
+      ],
+      "disposition": "mapped",
+      "evidence": [
+        "vrcft_artist",
+        "vrcft_docs_shapes",
+        "vrcft_docs_movement",
+        "godot_vendors_fb2",
+        "godot_enum",
+        "godot_face_modifier",
+        "rcef_canonical_v1"
+      ],
+      "evidence_status": "proposed",
+      "id": "rcef_vrcft_artist.MouthTightenerRight",
+      "inputs": [
+        "rcef.canonical_expression.lip_tighten_right"
+      ],
+      "loss_annotations": [
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "Unified Expressions gain and full-activation pose not published",
+          "refs": [
+            "rcef.canonical_expression.lip_tighten_right",
+            "vrcft.artist.base.MouthTightenerRight"
+          ],
+          "units": "1"
+        },
+        {
+          "category": "signal",
+          "effect": "approximated",
+          "reason": "two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions",
+          "refs": [
+            "rcef.canonical_expression.lip_tighten_right",
+            "vrcft.artist.base.MouthTightenerRight"
+          ],
+          "units": "1"
+        }
+      ],
+      "mapping_quality": "approximate",
+      "operator": {
+        "id": "affine",
+        "offset": 0.0,
+        "scale": 1.0
+      },
+      "outputs": [
+        "vrcft.artist.base.MouthTightenerRight"
+      ]
+    },
+    {
+      "assumptions": [
         "correspondence: VRM blinkLeft corresponds to canonical eye_close_left.",
         "endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_blink_side_unresolved.",
         "vrm.definitional_only: canonical eye_close_left (the upper lid of the left eye lowers until it covers the eye) corresponds to VRM preset blinkLeft (closes the left eyelid); definitional only: the definitions agree, but no published table maps FB2 or the canonical set to VRM.",
@@ -51244,6 +52467,32 @@
     },
     {
       "disposition": "mapped",
+      "id": "rcef.canonical_expression.cheek_suck_left",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.cheek_suck_left",
+        "rcef_fb2.CHEEK_SUCK_L",
+        "rcef_vrcft_artist.CheekSuckLeft"
+      ]
+    },
+    {
+      "disposition": "mapped",
+      "id": "rcef.canonical_expression.cheek_suck_right",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.cheek_suck_right",
+        "rcef_fb2.CHEEK_SUCK_R",
+        "rcef_vrcft_artist.CheekSuckRight"
+      ]
+    },
+    {
+      "disposition": "mapped",
       "id": "rcef.canonical_expression.nose_wrinkle_left",
       "profiles": [
         "rcef.canonical_expression"
@@ -51726,6 +52975,32 @@
     },
     {
       "disposition": "mapped",
+      "id": "rcef.canonical_expression.lip_tighten_left",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.lip_tighten_left",
+        "rcef_fb2.LIP_TIGHTENER_L",
+        "rcef_vrcft_artist.MouthTightenerLeft"
+      ]
+    },
+    {
+      "disposition": "mapped",
+      "id": "rcef.canonical_expression.lip_tighten_right",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.lip_tighten_right",
+        "rcef_fb2.LIP_TIGHTENER_R",
+        "rcef_vrcft_artist.MouthTightenerRight"
+      ]
+    },
+    {
+      "disposition": "mapped",
       "id": "rcef.canonical_expression.lips_toward",
       "profiles": [
         "rcef.canonical_expression"
@@ -51817,6 +53092,78 @@
         "fb2_rcef.tongue_out",
         "rcef_fb2.TONGUE_OUT",
         "rcef_vrcft_artist.TongueOut"
+      ]
+    },
+    {
+      "disposition": "mapped",
+      "id": "rcef.canonical_expression.tongue_retreat",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.tongue_retreat",
+        "rcef_fb2.TONGUE_RETREAT"
+      ]
+    },
+    {
+      "disposition": "mapped",
+      "id": "rcef.canonical_expression.tongue_tip_interdental",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.tongue_tip_interdental",
+        "rcef_fb2.TONGUE_TIP_INTERDENTAL"
+      ]
+    },
+    {
+      "disposition": "mapped",
+      "id": "rcef.canonical_expression.tongue_tip_alveolar",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.tongue_tip_alveolar",
+        "rcef_fb2.TONGUE_TIP_ALVEOLAR"
+      ]
+    },
+    {
+      "disposition": "mapped",
+      "id": "rcef.canonical_expression.tongue_front_dorsal_palate",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.tongue_front_dorsal_palate",
+        "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE"
+      ]
+    },
+    {
+      "disposition": "mapped",
+      "id": "rcef.canonical_expression.tongue_mid_dorsal_palate",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.tongue_mid_dorsal_palate",
+        "rcef_fb2.TONGUE_MID_DORSAL_PALATE"
+      ]
+    },
+    {
+      "disposition": "mapped",
+      "id": "rcef.canonical_expression.tongue_back_dorsal_velar",
+      "profiles": [
+        "rcef.canonical_expression"
+      ],
+      "reason": null,
+      "rules": [
+        "fb2_rcef.tongue_back_dorsal_velar",
+        "rcef_fb2.TONGUE_BACK_DORSAL_VELAR"
       ]
     },
     {
@@ -57205,22 +58552,28 @@
       ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_L_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal cheek_suck_left by the proposed approximate hops fb2_cheek_suck.to_rcef and rcef_cheek_suck.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.cheek_suck_left",
+        "rcef_fb2.CHEEK_SUCK_L"
+      ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_CHEEK_SUCK_R_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal cheek_suck_right by the proposed approximate hops fb2_cheek_suck.to_rcef and rcef_cheek_suck.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.cheek_suck_right",
+        "rcef_fb2.CHEEK_SUCK_R"
+      ]
     },
     {
       "disposition": "mapped",
@@ -57793,22 +59146,28 @@
       ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_L_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal lip_tighten_left by the proposed approximate hops fb2_lip_tighten.to_rcef and rcef_lip_tighten.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.lip_tighten_left",
+        "rcef_fb2.LIP_TIGHTENER_L"
+      ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_LIP_TIGHTENER_R_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal lip_tighten_right by the proposed approximate hops fb2_lip_tighten.to_rcef and rcef_lip_tighten.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.lip_tighten_right",
+        "rcef_fb2.LIP_TIGHTENER_R"
+      ]
     },
     {
       "disposition": "mapped",
@@ -57993,49 +59352,64 @@
       ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_INTERDENTAL_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_tip_interdental by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.tongue_tip_interdental",
+        "rcef_fb2.TONGUE_TIP_INTERDENTAL"
+      ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_TIP_ALVEOLAR_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_tip_alveolar by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.tongue_tip_alveolar",
+        "rcef_fb2.TONGUE_TIP_ALVEOLAR"
+      ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_FRONT_DORSAL_PALATE_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_front_dorsal_palate by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.tongue_front_dorsal_palate",
+        "rcef_fb2.TONGUE_FRONT_DORSAL_PALATE"
+      ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_MID_DORSAL_PALATE_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_mid_dorsal_palate by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.tongue_mid_dorsal_palate",
+        "rcef_fb2.TONGUE_MID_DORSAL_PALATE"
+      ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_BACK_DORSAL_VELAR_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_back_dorsal_velar by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.tongue_back_dorsal_velar",
+        "rcef_fb2.TONGUE_BACK_DORSAL_VELAR"
+      ]
     },
     {
       "disposition": "mapped",
@@ -58052,13 +59426,16 @@
       ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "openxr.fb2.XR_FACE_EXPRESSION2_TONGUE_RETREAT_FB",
       "profiles": [
         "openxr.fb2"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; copied to the canonical expression signal tongue_retreat by the proposed approximate hops fb2_tongue_place.to_rcef and rcef_tongue_place.to_fb2; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "fb2_rcef.tongue_retreat",
+        "rcef_fb2.TONGUE_RETREAT"
+      ]
     },
     {
       "disposition": "excluded",
@@ -59117,22 +60494,26 @@
       ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "vrcft.artist.base.CheekSuckRight",
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; written from the canonical expression signal cheek_suck_right by the proposed approximate hop rcef_cheek_suck.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "rcef_vrcft_artist.CheekSuckRight"
+      ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "vrcft.artist.base.CheekSuckLeft",
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; written from the canonical expression signal cheek_suck_left by the proposed approximate hop rcef_cheek_suck.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "rcef_vrcft_artist.CheekSuckLeft"
+      ]
     },
     {
       "disposition": "mapped",
@@ -59666,22 +61047,26 @@
       ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "vrcft.artist.base.MouthTightenerRight",
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; written from the canonical expression signal lip_tighten_right by the proposed approximate hop rcef_lip_tighten.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "rcef_vrcft_artist.MouthTightenerRight"
+      ]
     },
     {
-      "disposition": "unresolved",
+      "disposition": "mapped",
       "id": "vrcft.artist.base.MouthTightenerLeft",
       "profiles": [
         "vrcft.artist.base"
       ],
-      "reason": "Native identifier evidenced; canonical calibration and executable mapping remain unresolved.",
-      "rules": []
+      "reason": "Native identifier evidenced; written from the canonical expression signal lip_tighten_left by the proposed approximate hop rcef_lip_tighten.to_vrcft_artist; calibration correspondence is assumed, not measured.",
+      "rules": [
+        "rcef_vrcft_artist.MouthTightenerLeft"
+      ]
     },
     {
       "disposition": "mapped",
@@ -62595,7 +63980,7 @@
   "totals": {
     "evidence": 77,
     "profiles": 26,
-    "rules": 664,
-    "signals": 1086
+    "rules": 688,
+    "signals": 1096
   }
 }

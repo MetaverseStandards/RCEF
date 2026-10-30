@@ -367,6 +367,36 @@ metadata = { "definition" = "The outer part of the muscle ring around the right 
 region = "cheek"
 
 [[signals]]
+id = "rcef.canonical_expression.cheek_suck_left"
+label = "Cheek suck, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:cheek_suck_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left cheek draws in against the teeth and hollows.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "35", "facs_table" = "gross_behavior", "group" = "cheek_suck", "aligned_names" = { "openxr.fb2" = ["CHEEK_SUCK_L"], "vrcft.artist.base" = ["CheekSuckLeft"] }, "audit" = ["docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "cheek"
+
+[[signals]]
+id = "rcef.canonical_expression.cheek_suck_right"
+label = "Cheek suck, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:cheek_suck_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right cheek draws in against the teeth and hollows.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "35", "facs_table" = "gross_behavior", "group" = "cheek_suck", "aligned_names" = { "openxr.fb2" = ["CHEEK_SUCK_R"], "vrcft.artist.base" = ["CheekSuckRight"] }, "audit" = ["docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "cheek"
+
+[[signals]]
 id = "rcef.canonical_expression.nose_wrinkle_left"
 label = "Nose wrinkle, left"
 value_type = "scalar"
@@ -817,6 +847,36 @@ metadata = { "definition" = "The right halves of the upper and lower lips press 
 region = "mouth"
 
 [[signals]]
+id = "rcef.canonical_expression.lip_tighten_left"
+label = "Lip tighten, left"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_tighten_left: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "left"
+neutral = 0.0
+metadata = { "definition" = "The left halves of the lips narrow and tighten.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "23", "facs_table" = "main", "group" = "lip_tighten", "aligned_names" = { "openxr.fb2" = ["LIP_TIGHTENER_L"], "vrcft.artist.base" = ["MouthTightenerLeft"] }, "audit" = ["docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "mouth"
+
+[[signals]]
+id = "rcef.canonical_expression.lip_tighten_right"
+label = "Lip tighten, right"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:lip_tighten_right: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1", "facs_wikipedia"]
+evidence_status = "proposed"
+side = "right"
+neutral = 0.0
+metadata = { "definition" = "The right halves of the lips narrow and tighten.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "23", "facs_table" = "main", "group" = "lip_tighten", "aligned_names" = { "openxr.fb2" = ["LIP_TIGHTENER_R"], "vrcft.artist.base" = ["MouthTightenerRight"] }, "audit" = ["docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
+region = "mouth"
+
+[[signals]]
 id = "rcef.canonical_expression.lips_toward"
 label = "Lips toward each other"
 value_type = "scalar"
@@ -906,9 +966,99 @@ neutral = 0.0
 metadata = { "definition" = "The tongue moves forward and out of the mouth. No length is stated.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "19", "facs_table" = "main", "group" = "tongue_out", "aligned_names" = { "arkit.coefficient" = ["tongueOut"], "openxr.fb2" = ["TONGUE_OUT"], "vrcft.artist.base" = ["TongueOut"] }, "audit" = ["docs/canonical-set-audit.md#arkit", "docs/canonical-set-audit.md#fb2", "docs/canonical-set-audit.md#vrcfacetracking-unified-expressions", "docs/canonical-set-audit.md#facs"] }
 region = "tongue"
 
+[[signals]]
+id = "rcef.canonical_expression.tongue_retreat"
+label = "Tongue retreat"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:tongue_retreat: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The tongue draws back toward the throat and stays low in the mouth.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "", "facs_table" = "", "group" = "tongue_place", "aligned_names" = { "openxr.fb2" = ["TONGUE_RETREAT"] }, "audit" = ["docs/canonical-set-audit.md#fb2"] }
+region = "tongue"
+
+[[signals]]
+id = "rcef.canonical_expression.tongue_tip_interdental"
+label = "Tongue tip between the teeth"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:tongue_tip_interdental: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The tongue tip touches the upper teeth and shows between the teeth, as for META's TH viseme (canonical dental).", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "", "facs_table" = "", "group" = "tongue_place", "aligned_names" = { "openxr.fb2" = ["TONGUE_TIP_INTERDENTAL"] }, "audit" = ["docs/canonical-set-audit.md#fb2"] }
+region = "tongue"
+
+[[signals]]
+id = "rcef.canonical_expression.tongue_tip_alveolar"
+label = "Tongue tip behind the upper teeth"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:tongue_tip_alveolar: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The tongue tip touches the back of the upper teeth, as for META's NN viseme (canonical coronal_nasal_lateral).", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "", "facs_table" = "", "group" = "tongue_place", "aligned_names" = { "openxr.fb2" = ["TONGUE_TIP_ALVEOLAR"] }, "audit" = ["docs/canonical-set-audit.md#fb2"] }
+region = "tongue"
+
+[[signals]]
+id = "rcef.canonical_expression.tongue_front_dorsal_palate"
+label = "Tongue front on the palate"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:tongue_front_dorsal_palate: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The front of the tongue presses on the palate, as for META's CH viseme (canonical postalveolar).", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "", "facs_table" = "", "group" = "tongue_place", "aligned_names" = { "openxr.fb2" = ["TONGUE_FRONT_DORSAL_PALATE"] }, "audit" = ["docs/canonical-set-audit.md#fb2"] }
+region = "tongue"
+
+[[signals]]
+id = "rcef.canonical_expression.tongue_mid_dorsal_palate"
+label = "Tongue middle on the palate"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:tongue_mid_dorsal_palate: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The middle of the tongue presses on the palate, as for the DD viseme. FB2 describes DD's tongue this way; RCEF's coronal_stop is the IPA coronal class.", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "", "facs_table" = "", "group" = "tongue_place", "aligned_names" = { "openxr.fb2" = ["TONGUE_MID_DORSAL_PALATE"] }, "audit" = ["docs/canonical-set-audit.md#fb2"] }
+region = "tongue"
+
+[[signals]]
+id = "rcef.canonical_expression.tongue_back_dorsal_velar"
+label = "Tongue back on the palate"
+value_type = "scalar"
+units = "1"
+domain = { "min" = 0.0, "max" = 1.0 }
+calibration = "rcef.canonical.v1:tongue_back_dorsal_velar: declared 0 = neutral face, 1 = full activation of the action RCEF defines; assumed to agree with each source at 0 and 1; values between are passed through by the hop operator, and RCEF assumes, without evidence, that each source's in-between values correspond in this way; no measured gain or response curve"
+disposition = "mapped"
+evidence = ["rcef_canonical_v1"]
+evidence_status = "proposed"
+side = "shared"
+neutral = 0.0
+metadata = { "definition" = "The back of the tongue presses on the palate, as for META's KK viseme (canonical dorsal).", "zero" = "the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, tongue at rest", "one" = "full activation of the action, as the definition describes it", "facs_au" = "", "facs_table" = "", "group" = "tongue_place", "aligned_names" = { "openxr.fb2" = ["TONGUE_BACK_DORSAL_VELAR"] }, "audit" = ["docs/canonical-set-audit.md#fb2"] }
+region = "tongue"
+
 [[profiles]]
 id = "rcef.canonical_expression"
 label = "RCEF canonical expression set (draft)"
-signal_ids = ["rcef.canonical_expression.brow_inner_raise_left", "rcef.canonical_expression.brow_inner_raise_right", "rcef.canonical_expression.brow_outer_raise_left", "rcef.canonical_expression.brow_outer_raise_right", "rcef.canonical_expression.brow_lower_left", "rcef.canonical_expression.brow_lower_right", "rcef.canonical_expression.eye_close_left", "rcef.canonical_expression.eye_close_right", "rcef.canonical_expression.lid_tighten_left", "rcef.canonical_expression.lid_tighten_right", "rcef.canonical_expression.upper_lid_raise_left", "rcef.canonical_expression.upper_lid_raise_right", "rcef.canonical_expression.gaze_in_left", "rcef.canonical_expression.gaze_in_right", "rcef.canonical_expression.gaze_out_left", "rcef.canonical_expression.gaze_out_right", "rcef.canonical_expression.gaze_up_left", "rcef.canonical_expression.gaze_up_right", "rcef.canonical_expression.gaze_down_left", "rcef.canonical_expression.gaze_down_right", "rcef.canonical_expression.cheek_puff_left", "rcef.canonical_expression.cheek_puff_right", "rcef.canonical_expression.cheek_raise_left", "rcef.canonical_expression.cheek_raise_right", "rcef.canonical_expression.nose_wrinkle_left", "rcef.canonical_expression.nose_wrinkle_right", "rcef.canonical_expression.jaw_drop", "rcef.canonical_expression.jaw_thrust", "rcef.canonical_expression.jaw_sideways_left", "rcef.canonical_expression.jaw_sideways_right", "rcef.canonical_expression.lip_corner_pull_left", "rcef.canonical_expression.lip_corner_pull_right", "rcef.canonical_expression.lip_corner_depress_left", "rcef.canonical_expression.lip_corner_depress_right", "rcef.canonical_expression.dimple_left", "rcef.canonical_expression.dimple_right", "rcef.canonical_expression.lip_stretch_left", "rcef.canonical_expression.lip_stretch_right", "rcef.canonical_expression.mouth_shift_left", "rcef.canonical_expression.mouth_shift_right", "rcef.canonical_expression.chin_raise", "rcef.canonical_expression.chin_raise_upper_lip", "rcef.canonical_expression.lip_funnel_upper_left", "rcef.canonical_expression.lip_funnel_upper_right", "rcef.canonical_expression.lip_funnel_lower_left", "rcef.canonical_expression.lip_funnel_lower_right", "rcef.canonical_expression.lip_pucker_left", "rcef.canonical_expression.lip_pucker_right", "rcef.canonical_expression.lip_suck_upper_left", "rcef.canonical_expression.lip_suck_upper_right", "rcef.canonical_expression.lip_suck_lower_left", "rcef.canonical_expression.lip_suck_lower_right", "rcef.canonical_expression.lip_press_left", "rcef.canonical_expression.lip_press_right", "rcef.canonical_expression.lips_toward", "rcef.canonical_expression.upper_lip_raise_left", "rcef.canonical_expression.upper_lip_raise_right", "rcef.canonical_expression.lower_lip_depress_left", "rcef.canonical_expression.lower_lip_depress_right", "rcef.canonical_expression.tongue_out"]
+signal_ids = ["rcef.canonical_expression.brow_inner_raise_left", "rcef.canonical_expression.brow_inner_raise_right", "rcef.canonical_expression.brow_outer_raise_left", "rcef.canonical_expression.brow_outer_raise_right", "rcef.canonical_expression.brow_lower_left", "rcef.canonical_expression.brow_lower_right", "rcef.canonical_expression.eye_close_left", "rcef.canonical_expression.eye_close_right", "rcef.canonical_expression.lid_tighten_left", "rcef.canonical_expression.lid_tighten_right", "rcef.canonical_expression.upper_lid_raise_left", "rcef.canonical_expression.upper_lid_raise_right", "rcef.canonical_expression.gaze_in_left", "rcef.canonical_expression.gaze_in_right", "rcef.canonical_expression.gaze_out_left", "rcef.canonical_expression.gaze_out_right", "rcef.canonical_expression.gaze_up_left", "rcef.canonical_expression.gaze_up_right", "rcef.canonical_expression.gaze_down_left", "rcef.canonical_expression.gaze_down_right", "rcef.canonical_expression.cheek_puff_left", "rcef.canonical_expression.cheek_puff_right", "rcef.canonical_expression.cheek_raise_left", "rcef.canonical_expression.cheek_raise_right", "rcef.canonical_expression.cheek_suck_left", "rcef.canonical_expression.cheek_suck_right", "rcef.canonical_expression.nose_wrinkle_left", "rcef.canonical_expression.nose_wrinkle_right", "rcef.canonical_expression.jaw_drop", "rcef.canonical_expression.jaw_thrust", "rcef.canonical_expression.jaw_sideways_left", "rcef.canonical_expression.jaw_sideways_right", "rcef.canonical_expression.lip_corner_pull_left", "rcef.canonical_expression.lip_corner_pull_right", "rcef.canonical_expression.lip_corner_depress_left", "rcef.canonical_expression.lip_corner_depress_right", "rcef.canonical_expression.dimple_left", "rcef.canonical_expression.dimple_right", "rcef.canonical_expression.lip_stretch_left", "rcef.canonical_expression.lip_stretch_right", "rcef.canonical_expression.mouth_shift_left", "rcef.canonical_expression.mouth_shift_right", "rcef.canonical_expression.chin_raise", "rcef.canonical_expression.chin_raise_upper_lip", "rcef.canonical_expression.lip_funnel_upper_left", "rcef.canonical_expression.lip_funnel_upper_right", "rcef.canonical_expression.lip_funnel_lower_left", "rcef.canonical_expression.lip_funnel_lower_right", "rcef.canonical_expression.lip_pucker_left", "rcef.canonical_expression.lip_pucker_right", "rcef.canonical_expression.lip_suck_upper_left", "rcef.canonical_expression.lip_suck_upper_right", "rcef.canonical_expression.lip_suck_lower_left", "rcef.canonical_expression.lip_suck_lower_right", "rcef.canonical_expression.lip_press_left", "rcef.canonical_expression.lip_press_right", "rcef.canonical_expression.lip_tighten_left", "rcef.canonical_expression.lip_tighten_right", "rcef.canonical_expression.lips_toward", "rcef.canonical_expression.upper_lip_raise_left", "rcef.canonical_expression.upper_lip_raise_right", "rcef.canonical_expression.lower_lip_depress_left", "rcef.canonical_expression.lower_lip_depress_right", "rcef.canonical_expression.tongue_out", "rcef.canonical_expression.tongue_retreat", "rcef.canonical_expression.tongue_tip_interdental", "rcef.canonical_expression.tongue_tip_alveolar", "rcef.canonical_expression.tongue_front_dorsal_palate", "rcef.canonical_expression.tongue_mid_dorsal_palate", "rcef.canonical_expression.tongue_back_dorsal_velar"]
 evidence = ["rcef_canonical_v1"]
-metadata = { "vocabulary_version" = "1.0", "vocabulary_status" = "draft", "scope" = "a pivot for translating between expression sets; each signal has a declared meaning, but no shared or measured gain", "groups" = ["face", "cheek_puff", "jaw_thrust", "jaw_sideways", "mouth_shift", "chin_raise_upper_lip", "blink", "gaze", "tongue_out"] }
+metadata = { "vocabulary_version" = "1.0", "vocabulary_status" = "draft", "scope" = "a pivot for translating between expression sets; each signal has a declared meaning, but no shared or measured gain", "groups" = ["face", "cheek_puff", "jaw_thrust", "jaw_sideways", "mouth_shift", "chin_raise_upper_lip", "blink", "gaze", "tongue_out", "cheek_suck", "lip_tighten", "tongue_place"] }

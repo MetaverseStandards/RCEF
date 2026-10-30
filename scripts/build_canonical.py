@@ -37,9 +37,8 @@ A1_FIXTURE = 'tests/fixtures/baseline-dea1713.pack.json'
 PROFILE = 'rcef.canonical_expression'
 OWN = 'rcef_canonical_v1'
 FACS_RECORD = 'facs_wikipedia'
-# Groups of the signal table that are not in the pack yet: the FB2-only signals (cheek_suck, lip_tighten,
-# tongue_place) and the VRCFaceTracking pupils (pupil_mm) come with their own in-maps.
-LATER_GROUPS = ('cheek_suck', 'lip_tighten', 'tongue_place', 'pupil_mm')
+# Groups of the signal table that are not in the pack yet: the VRCFaceTracking pupils come with their own in-maps.
+LATER_GROUPS = ('pupil_mm',)
 # Today's direct maps (A1). The viseme map is read only for its source signals.
 A1_MAPS = ('arkit.to_fb2', 'arkit_gaze.to_fb2', 'fb2.to_arkit', 'fb2_gaze.to_arkit', 'arkit.to_vrcft_artist',
            'fb2.to_vrm', 'visemes.to_vrm')
@@ -74,6 +73,10 @@ ROUNDING = ('outputs below 0.5 on the negative knot segment may change by up to 
             'below 2⁻⁵⁴ become 0')
 GAIN = '{} gain and full-activation pose not published'
 NO_LENGTH = 'the tongue extension has no stated length'
+CHAIN_LOSS = ('two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions '
+              'by name; neither step alone links FB2 to Unified Expressions')
+# The crosswalk records of the FB2-only signals that Unified Expressions also has (the audit's table of them).
+SOURCE_CROSSWALKS = ['vrcft_docs_movement', 'godot_vendors_fb2', 'godot_enum', 'godot_face_modifier']
 SPLIT_KEY = 'vrcft_ue_set_equal'
 # Audit loss keys that belong to a whole hop, not to one signal's audit row: (set, direction, group) -> keys.
 HOP_KEYS = {('fb2', 'in', 'gaze'): ['fb2_gaze_exclusive']}
@@ -160,8 +163,13 @@ def read_documents(root: Path) -> dict:
                                         'verdict': row['Verdict'],
                                         'keys': [k for k in ticks(row['Owning hop, key']) if k in keys]}
     facs = {ticks(r['Signal'])[0] for r in table(audit_doc, '## FACS')}
+    sourced = {}
+    for row in table(audit_doc, '## Crosswalks of the FB2-only signals'):
+        sourced[ticks(row['Signal'])[0]] = {'names': {'fb2': row['FB2'], 'vrcft_artist': row['Unified Expressions']},
+                                            'one_step': plain(row['One step']), 'to_godot': plain(row['FB2 to Godot']),
+                                            'from_godot': plain(row['Godot to Unified Expressions'])}
     return {'calibration': calibration, 'groups': groups, 'signals': signals, 'keys': keys, 'audit': audit,
-            'ict': ict, 'facs_rows': facs}
+            'ict': ict, 'facs_rows': facs, 'sourced': sourced}
 
 
 # ---------------------------------------------------------------- today's direct maps
@@ -250,11 +258,18 @@ class Builder:
                 records += [e for e in chain['evidence'] if e not in own and e not in records]
         return found
 
-    def evidence(self, key: str, sid: str) -> list[str]:
+    def evidence(self, key: str, sid: str, shorts: list[str]) -> list[str]:
         records = list(PROVIDERS[key]['records'])
         for found in self.crosswalks(key, sid).values():
             records += [e for e in found if e not in records and (e != 'ict_facekit' or key == 'arkit')]
+        if self.sourced(key, shorts):
+            records += [e for e in SOURCE_CROSSWALKS if e not in records]
         return records + [OWN]
+
+    def sourced(self, key: str, shorts: list[str]) -> dict | None:
+        """The audit's crosswalk row of an FB2-only signal, on its FB2 and Unified Expressions hops."""
+        rows = [self.docs['sourced'][s] for s in shorts if s in self.docs['sourced']]
+        return rows[0] if rows and key in rows[0]['names'] else None
 
     # -- assumptions
     def correspondence(self, key: str, kind: str, sid: str, shorts: list[str]) -> str:
@@ -314,6 +329,15 @@ class Builder:
                            f'defined to match {other_name} {join(other_names)}.')
         if key == 'arkit' and any('ict_facekit' in r for r in crosswalks.values()):
             out += self.ict_transfer(native, shorts)
+        if row := self.sourced(key, shorts):
+            other = 'vrcft_artist' if key == 'fb2' else 'fb2'
+            match = (f'it carries over because canonical {shorts[0]} is defined to match {PROVIDERS[other]["name"]} '
+                     f'{row["names"][other]}.')
+            out.append(f'transfer.provider: correspondence evidence is {PROVIDERS[other]["name"]}↔{name} '
+                       f'(vrcft_docs_movement); {match}')
+            out.append(f'transfer.chain: correspondence evidence is FB2↔Godot ({row["to_godot"]}) and Godot↔Unified '
+                       f'Expressions ({row["from_godot"]}, which give the Unified Expressions name of each Godot '
+                       f'shape); {match}')
         return out
 
     def ict_transfer(self, native: str, shorts: list[str]) -> list[str]:
@@ -416,6 +440,8 @@ class Builder:
             out += [f'{k}: {self.docs["keys"][k]}' for k in HOP_KEYS.get((key, kind.split('_')[0], group), [])]
         if 'tongue_out' in shorts:
             out.append(NO_LENGTH)
+        if key == 'vrcft_artist' and self.sourced(key, shorts):
+            out.append(CHAIN_LOSS)
         return out
 
     def vrm_losses(self) -> list[str]:
@@ -435,7 +461,7 @@ class Builder:
         assumptions = [self.correspondence(key, kind, sid, shorts), self.endpoints(key, kind, shorts),
                        *self.transfers(key, sid, shorts), *self.extras(key, kind, end, sid, shorts)]
         return self.rule(rid, inputs, outputs, operator, assumptions, self.losses(key, kind, shorts, negative),
-                         self.evidence(key, sid))
+                         self.evidence(key, sid, shorts))
 
     def in_maps(self, key: str) -> list[dict]:
         maps = []
@@ -510,6 +536,18 @@ class Builder:
                 shorts = self.aligned[key][sid]
                 found.append((self.group(shorts), self.hop(key, 'out_copy', 'out', f'rcef_vrm.{self.native(key, sid)}',
                                                           sid, shorts, [self.cid(shorts[0])], [sid], copy())))
+        if key in ('fb2', 'vrcft_artist'):
+            # Signals that today's map into this set does not write (the FB2-only signals), in signal-table order.
+            written = {r['outputs'][0] for _, r in found}
+            for s in self.signals:
+                row = self.audit[key].get(s['short'])
+                if not row or set(row['names']) & written:
+                    continue
+                if len(row['names']) != 1:
+                    raise SystemExit(f'{key} out-map: {s["short"]} needs one target name, not {row["names"]}')
+                sid = row['names'][0]
+                found.append((s['group'], self.hop(key, 'out_copy', 'out', f'rcef_{key}.{self.native(key, sid)}', sid,
+                                                   [s['short']], [self.cid(s['short'])], [sid], copy())))
         return found
 
     def net_pair(self, shorts: list[str]) -> str:

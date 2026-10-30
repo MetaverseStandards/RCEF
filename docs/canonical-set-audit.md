@@ -186,7 +186,7 @@ Record `apple_blendshapes` (Apple documentation data, reference only). Each coef
 
 ## VRCFaceTracking Unified Expressions
 
-Record `vrcft_docs_shapes` (VRCFaceTracking docs `3036f46`, reference only). Phase 1 has out-maps only. 64 rows: 39 `same`, 23 `differs`, 2 `unresolved`. The out-hops for `cheek_suck_*` and `lip_tighten_*` come with the FB2-only signals.
+Record `vrcft_docs_shapes` (VRCFaceTracking docs `3036f46`, reference only). Phase 1 has out-maps only. 64 rows: 39 `same`, 23 `differs`, 2 `unresolved`. The out-hops for `cheek_suck_*` and `lip_tighten_*` take their crosswalks from the [table of the FB2-only signals](#crosswalks-of-the-fb2-only-signals).
 
 On gaze, the row paraphrase says only what this table states: a direction, with no largest angle. The loss that the hop carries keeps the wording of today's ARKit → Unified Expressions loss, "eyelid and eye movement; no maximum angle stated". The eyelid part comes from today's map, not from this table row; the key `vrcft_ue_gaze_no_angle` carries both.
 
@@ -216,8 +216,8 @@ On gaze, the row paraphrase says only what this table states: a direction, with 
 | `cheek_puff_right` | CheekPuffRight | `vrcft_docs_shapes` 202 | air bulges the right cheek | same | — |
 | `cheek_raise_left` | CheekSquintLeft | `vrcft_docs_shapes` 197 | the left cheek goes up; names only the cheek lift; the ring tightening and the narrowing of the eye corner are not stated | differs | VRCFT UE out, `vrcft_ue_cheeksquint_cheek` |
 | `cheek_raise_right` | CheekSquintRight | `vrcft_docs_shapes` 192 | the right cheek goes up; names only the cheek lift; the ring tightening and the narrowing of the eye corner are not stated | differs | VRCFT UE out, `vrcft_ue_cheeksquint_cheek` |
-| `cheek_suck_left` | CheekSuckLeft | `vrcft_docs_shapes` 217 | the left cheek is drawn inward and hollows (out-hop added with the FB2-only signals) | same | — |
-| `cheek_suck_right` | CheekSuckRight | `vrcft_docs_shapes` 212 | the right cheek is drawn inward and hollows (out-hop added with the FB2-only signals) | same | — |
+| `cheek_suck_left` | CheekSuckLeft | `vrcft_docs_shapes` 217 | the left cheek is drawn inward and hollows | same | — |
+| `cheek_suck_right` | CheekSuckRight | `vrcft_docs_shapes` 212 | the right cheek is drawn inward and hollows | same | — |
 | `nose_wrinkle_left` | NoseSneerLeft | `vrcft_docs_shapes` 167 | the left half of the face curls into a snarl; the shape is named for the nose | same | — |
 | `nose_wrinkle_right` | NoseSneerRight | `vrcft_docs_shapes` 162 | the right half of the face curls into a snarl; the shape is named for the nose | same | — |
 | `jaw_drop` | JawOpen | `vrcft_docs_shapes` 222 | the jaw drops and the mouth gapes | same | — |
@@ -248,8 +248,8 @@ On gaze, the row paraphrase says only what this table states: a direction, with 
 | `lip_suck_lower_right` | LipSuckLowerRight | `vrcft_docs_shapes` 272 | the lower right quarter of the lips rolls inward | same | — |
 | `lip_press_left` | MouthPressLeft | `vrcft_docs_shapes` 447 | on the left, the top and bottom lips squeeze shut and go thin | same | — |
 | `lip_press_right` | MouthPressRight | `vrcft_docs_shapes` 442 | on the right, the top and bottom lips squeeze shut and go thin | same | — |
-| `lip_tighten_left` | MouthTightenerLeft | `vrcft_docs_shapes` 457 | on the left, the lips draw in and narrow across the mouth (out-hop added with the FB2-only signals) | same | — |
-| `lip_tighten_right` | MouthTightenerRight | `vrcft_docs_shapes` 452 | on the right, the lips draw in and narrow across the mouth (out-hop added with the FB2-only signals) | same | — |
+| `lip_tighten_left` | MouthTightenerLeft | `vrcft_docs_shapes` 457 | on the left, the lips draw in and narrow across the mouth | same | — |
+| `lip_tighten_right` | MouthTightenerRight | `vrcft_docs_shapes` 452 | on the right, the lips draw in and narrow across the mouth | same | — |
 | `lips_toward` | MouthClosed | `vrcft_docs_shapes` 227 | the lips meet, measured against how open the jaw is; the canonical signal is defined at any jaw opening | differs | VRCFT UE out, `vrcft_ue_mouthclosed_jaw_relative` |
 | `upper_lip_raise_left` | MouthUpperUpLeft | `vrcft_docs_shapes` 337 | the top lip rises on the left | same | — |
 | `upper_lip_raise_right` | MouthUpperUpRight | `vrcft_docs_shapes` 332 | the top lip rises on the right | same | — |
@@ -458,6 +458,17 @@ No hop cites these sources for the signals named, so they get no loss key.
 - **Py-Feat** (`pyfeat_au_reference`, Py-Feat `docs/pages/au_reference.md` at `4ebb4ec`, MIT; the page calls its ARKit column approximate, line 13). It relates AU10 to mouthUpperUp (line 74), as the canonical set does. It relates both AU23 and AU24 to mouthPress (lines 87-88); the canonical set gives AU23 to `lip_tighten`, which has no ARKit shape. It relates AU25, AU26 and AU27 to jawOpen at different strengths (lines 89-91), and AU43, AU45 and AU46 all to eyeBlink (lines 106, 108 and 109). It relates AU61 to eyeLookInLeft and eyeLookOutRight, but its muscle column for AU61 describes a gaze toward the subject's own left (line 118), and the two columns disagree.
 - **Melinda Ozel, "ARKit to FACS"** (`ozel_arkit_facs`, reference only; paraphrased). Its eyeBlink entry gives AU45. Its jawOpen entry allows AU26 or AU27. Its mouthShrugUpper entry treats the shape as the upper part of AU17 that depends on mouthShrugLower, and says that ICT's AU10 reading is a mistake. This supports `chin_raise_upper_lip` as a part of chin raising. Its eye-look note pairs eyeLookInRight with eyeLookOutLeft for a leftward gaze.
 
+## Crosswalks of the FB2-only signals
+
+No direct map links these signals to another set, so today's maps give their hops no crosswalk. Two public sources link their FB2 names to Unified Expressions. VRCFaceTracking's Movement table pairs each Unified Expressions shape with its FB2 name, in one step (`vrcft_docs_movement`). Godot links them in two steps: its OpenXR vendors plugin copies each FB2 weight to a Godot shape (`godot_vendors_fb2`), its shapes are based on Unified Expressions (`godot_enum` lines 38-40), and its face modifier gives the Unified Expressions name of each Godot shape first (`godot_face_modifier` lines 48-54). The FB2 hops and the Unified Expressions out-hops of these signals cite both sources. The one-step table takes the provider form of the transfer, and Godot takes the chain form. The Unified Expressions out-hop also carries the loss "two-step crosswalk through Godot". The tongue positions have no Unified Expressions shape. Godot fills TongueFlat from TONGUE_RETREAT (`godot_vendors_fb2` line 296), but RCEF does not map them: in Unified Expressions the tongue flattens and thins (`vrcft_docs_shapes` line 507), while `tongue_retreat` draws the tongue back, so the two names do not name one action.
+
+| Signal | FB2 | Unified Expressions | One step | FB2 to Godot | Godot to Unified Expressions |
+|---|---|---|---|---|---|
+| `cheek_suck_left` | CHEEK_SUCK_L | CheekSuckLeft | `vrcft_docs_movement` line 53 | `godot_vendors_fb2` line 238 | `godot_enum` lines 38-40 and 87; `godot_face_modifier` lines 48-54 and 130-131 |
+| `cheek_suck_right` | CHEEK_SUCK_R | CheekSuckRight | `vrcft_docs_movement` line 52 | `godot_vendors_fb2` line 237 | `godot_enum` lines 38-40 and 86; `godot_face_modifier` lines 48-54 and 128-129 |
+| `lip_tighten_left` | LIP_TIGHTENER_L | MouthTightenerLeft | `vrcft_docs_movement` line 86 | `godot_vendors_fb2` line 286 | `godot_enum` lines 38-40 and 135; `godot_face_modifier` lines 48-54 and 226-227 |
+| `lip_tighten_right` | LIP_TIGHTENER_R | MouthTightenerRight | `vrcft_docs_movement` line 85 | `godot_vendors_fb2` line 285 | `godot_enum` lines 38-40 and 134; `godot_face_modifier` lines 48-54 and 224-225 |
+
 ## Reason scan
 
 - Every `mapped` provider signal's `metadata.reason` was scanned for "unresolved", "conflict", "contradict", "while", "differs" and "unclear". Only Unified Expressions `MouthLowerDownLeft` and `MouthLowerDownRight` match (`profiles/vrcft.artist.base.toml` lines 1009 and 1025). Their rows are `unresolved`.
@@ -504,7 +515,7 @@ No hop cites these sources for the signals named, so they get no loss key.
 | `facs_eyelid_events` | differs | FACS AU43 in and out | FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43 |
 | `facs_gross_code_no_intensity` | differs | the 18 FACS hops of 29, 30, 34, 35 and 43 | the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption |
 
-Hops also carry losses that are not audit verdicts: the gain loss of each hop, "asymmetry unknown: symmetry is invented" (ARKit in-hop fan-outs, FACS AU22 and AU28 in-hop fan-outs), "asymmetry irrecoverable" (ARKit and FACS out-hop means), "only their difference is kept" and the rounding loss (FB2 gaze out-hop), "no stated length" (every `tongue_out` hop) and the other VRM losses (consonants dropped, `isBinary`, `blink` not set or not read). The viseme hops add the META gain loss on every META hop, "consonant and rest classes are dropped, so outputs no longer sum to 1" on the VRM vowel out-hop, and "from a source other than META: consonant and rest classes not produced; …" on the META vowel out-hop.
+Hops also carry losses that are not audit verdicts: the gain loss of each hop, "asymmetry unknown: symmetry is invented" (ARKit in-hop fan-outs, FACS AU22 and AU28 in-hop fan-outs), "asymmetry irrecoverable" (ARKit and FACS out-hop means), "only their difference is kept" and the rounding loss (FB2 gaze out-hop), "no stated length" (every `tongue_out` hop), "two-step crosswalk through Godot" (the Unified Expressions out-hops of `cheek_suck_*` and `lip_tighten_*`) and the other VRM losses (consonants dropped, `isBinary`, `blink` not set or not read). The viseme hops add the META gain loss on every META hop, "consonant and rest classes are dropped, so outputs no longer sum to 1" on the VRM vowel out-hop, and "from a source other than META: consonant and rest classes not produced; …" on the META vowel out-hop.
 
 ## Mapping today's losses to keys
 
@@ -604,6 +615,7 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 | `endpoints` | the opening assumption and the operator clause ([Meaning of 0, 1 and neutral](canonical-set.md#meaning-of-0-1-and-neutral)) |
 | `correspondence` | "provider name X corresponds to canonical `<short_name>`", from `aligned_names` |
 | `transfer.provider` | "correspondence evidence is P↔provider; it carries over because `<short_name>` is defined to match P `<name>`" |
+| `transfer.chain` | a crosswalk in two steps, through Godot: "correspondence evidence is FB2↔Godot (…) and Godot↔Unified Expressions (…); it carries over because `<short_name>` is defined to match `<name>`", on the FB2 hops and Unified Expressions out-hops of `cheek_suck_*` and `lip_tighten_*` |
 | `transfer.withdrawn` | the same crosswalk, withdrawn: "it does not carry over for the defined action, because the audit finds that …; see loss …". A hop withdraws the transfer when either set's audit row for the canonical signal is `differs` or `unresolved`: its own row or P's row. The keys of those rows are the losses it names |
 | `fan_out.vrcft_ue` | why the parts are set equal, with the blend rule the source gives |
 | `net.fb2_gaze` | the FB2 gaze netting: the difference of each opposing pair is split back into two one-sided values, each exactly zero on its flat side |

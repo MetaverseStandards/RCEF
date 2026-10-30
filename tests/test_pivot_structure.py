@@ -49,8 +49,8 @@ PROFILES = {'arkit': 'arkit.coefficient', 'fb2': 'openxr.fb2', 'vrcft_artist': '
 IN_MAP = re.compile(r'^(arkit|fb2|vrcft_artist|vrm|visemes)_([a-z_]+)\.to_rcef$')
 OUT_MAP = re.compile(r'^rcef_([a-z_]+)\.to_(arkit|fb2|vrcft_artist|vrm|visemes)$')
 # Mappings per set: (in-maps, out-maps). The FB2 gaze out-map has 4 internal steps, the META aggregate in-map 1.
-COUNTS = {'arkit': (60, 52), 'fb2': (60, 64), 'vrcft_artist': (0, 68), 'vrm': (5, 7), 'visemes': (17, 15)}
-MAPS = 55
+COUNTS = {'arkit': (60, 52), 'fb2': (70, 74), 'vrcft_artist': (0, 72), 'vrm': (5, 7), 'visemes': (17, 15)}
+MAPS = 63
 # Pairs of a rule's two ends whose sides may differ although neither is shared. None today.
 SIDE_EXCEPTIONS = []
 # Operators allowed on a hop: today's operator census, with power-of-two weights.
@@ -63,9 +63,10 @@ OPERATORS = [{'id': 'affine', 'scale': 1.0, 'offset': 0.0}, {'id': 'weighted_sum
 EXCEPTIONS = {'visemes_aggregate.to_rcef': [{'id': 'weighted_sum', 'weights': [1.0, 1.0, 1.0, 1.0]},
                                             {'id': 'piecewise_linear', 'knots': [[0.0, 0.0], [1.0, 1.0], [4.0, 1.0]]}]}
 KEYS = {'correspondence', 'endpoints', 'transfer.provider', 'transfer.withdrawn', 'transfer.facs_crosswalk',
-        'fan_out.vrcft_ue', 'net.fb2_gaze', 'gaze.fb2_exclusive', 'mean.arkit', 'evidence.vrcft_tables_not_cited',
-        'evidence.godot_only_mouth_shift', 'vrm.downstream_effects', 'vrm.side_caveat', 'vrm.definitional_only',
-        'lips_toward.jaw_not_compensated', 'vrm.probability_as_weight', 'vrm.phoneme_label_only'}
+        'transfer.chain', 'fan_out.vrcft_ue', 'net.fb2_gaze', 'gaze.fb2_exclusive', 'mean.arkit',
+        'evidence.vrcft_tables_not_cited', 'evidence.godot_only_mouth_shift', 'vrm.downstream_effects',
+        'vrm.side_caveat', 'vrm.definitional_only', 'lips_toward.jaw_not_compensated', 'vrm.probability_as_weight',
+        'vrm.phoneme_label_only'}
 A1_PAIRS = {'fb2.to_arkit': 'FB2 -> ARKit', 'fb2_gaze.to_arkit': 'FB2 -> ARKit', 'arkit.to_fb2': 'ARKit -> FB2',
             'arkit_gaze.to_fb2': 'ARKit -> FB2', 'arkit.to_vrcft_artist': 'ARKit -> VRCFT UE',
             'fb2.to_vrm': 'FB2 -> VRM blink', 'visemes.to_vrm': 'META -> VRM'}
@@ -157,12 +158,12 @@ ADDED = {
 # XR_ML_facial_expression's single chin raiser, as for FACS 17).
 ALIASES = {'XR_ML_facial_expression': {'CHIN_RAISER': 'CHIN_RAISER_B'}}
 CAPABILITY = {
-    'FACS': ['face', 'cheek_puff', 'jaw_thrust', 'jaw_sideways', 'blink', 'tongue_out'],
+    'FACS': ['face', 'cheek_puff', 'jaw_thrust', 'jaw_sideways', 'blink', 'tongue_out', 'cheek_suck', 'lip_tighten'],
     'FB v1': ['face', 'cheek_puff', 'jaw_thrust', 'jaw_sideways', 'mouth_shift', 'chin_raise_upper_lip', 'blink',
-              'gaze'],
+              'gaze', 'cheek_suck', 'lip_tighten'],
     'XR_ANDROID_face_tracking': ['face', 'cheek_puff', 'jaw_thrust', 'jaw_sideways', 'mouth_shift',
-                                 'chin_raise_upper_lip', 'blink', 'gaze', 'tongue_out'],
-    'XR_ML_facial_expression': ['face', 'blink', 'tongue_out'],
+                                 'chin_raise_upper_lip', 'blink', 'gaze', 'tongue_out', 'cheek_suck', 'lip_tighten'],
+    'XR_ML_facial_expression': ['face', 'blink', 'tongue_out', 'lip_tighten'],
 }
 
 
@@ -626,9 +627,15 @@ class PivotStructure(unittest.TestCase):
         del values['arkit.coefficient.browDownLeft']
         result, = route.translate([{'time': 0.0, 'values': values, 'flags': {}}])
         face = set(rcef_route.map_ends(next(r for m, _, k, g, r in self.hops if m == 'rcef_face.to_fb2'))[1])
-        self.assertEqual(set(result['labels']), face)
-        self.assertEqual(set(result['labels'].values()), {'refused upstream at arkit_face.to_rcef'})
-        self.assertEqual(set(result['values']), set(route.outputs) - face)
+        # ARKit fills no FB2-only group, so those outputs are not available, which is not a refusal.
+        fb2_only = {o for m, d, k, g, r in self.hops if d == 'out' and k == 'fb2'
+                    and g in ('cheek_suck', 'lip_tighten', 'tongue_place') for o in rcef_route.map_ends(r)[1]}
+        self.assertEqual(len(fb2_only), 10)
+        refused = {o for o, label in result['labels'].items() if label != rcef_route.NOT_AVAILABLE}
+        self.assertEqual(refused, face)
+        self.assertEqual(set(result['labels']) - face, fb2_only)
+        self.assertEqual({result['labels'][o] for o in face}, {'refused upstream at arkit_face.to_rcef'})
+        self.assertEqual(set(result['values']), set(route.outputs) - face - fb2_only)
         self.assertIn('openxr.fb2.XR_FACE_EXPRESSION2_MOUTH_LEFT_FB', result['values'])
 
 
