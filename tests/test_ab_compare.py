@@ -96,6 +96,22 @@ class Metrics(unittest.TestCase):
         # The unwritten outputs must be the whole frozen list: B writing a listed output is a violation too.
         self.assertEqual(ab_compare.facs_compare(b, expected, ['a', 'b', 'c'])[0]['coverage_violations'], 1)
 
+    def test_r3_counts_listed_departures_and_finds_other_differences(self):
+        reference = {'cases': [{'expected': {'a': 0.5, 'b': 0.0, 'c': 0.25}}, {'expected': {'a': 1.0, 't': 1.0}}]}
+        b = [result({'a': 0.5, 'b': 0.5, 'c': 0.25}), result({'a': 1.0})]
+        counts, failures = ab_compare.r3(b, reference, ['b', 't', 'u'])
+        self.assertEqual(counts, {'cases': 2, 'outputs': 5, 'exact': 3, 'departures': 2, 'departures_not_seen': 1,
+                                  'differences': 0})
+        counts, failures = ab_compare.r3(b, reference, ['b'])
+        self.assertEqual((counts['differences'], failures), (1, [[1, 't', '1.0', "'not written'"]]))
+
+    def test_the_draft_pins_r3_and_its_departures(self):
+        self.assertEqual(ab_compare.R3_KINDS, {'fb2_to_ue': 'openxr.fb2'})
+        reference = json.loads((ROOT / ab_compare.R3_FILE).read_text(encoding='utf-8'))
+        outputs = {o for c in reference['cases'] for o in c['expected']}
+        self.assertLessEqual(set(ab_compare.R3_DEPARTURES), outputs)
+        self.assertEqual(len(ab_compare.R3_DEPARTURES), 9)
+
 
 class RequiredRows(unittest.TestCase):
     def test_a_gate_with_no_rows_for_a_required_pair_or_family_fails(self):
