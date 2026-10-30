@@ -4,11 +4,13 @@
 # docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and the
 # retired A1 direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit
 # those, then run the script.
-# The maps between the canonical sets and VRCFaceTracking eye: one map per canonical group and
-# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
+# The maps between the canonical sets and VRCFaceTracking eye: one map per set pair and direction,
+# <set>.to_rcef_expression or .to_rcef_viseme in, and rcef_expression.to_<set> or
+# rcef_viseme.to_<set> out. Their rules are in canonical group order;
+# docs/map-sets/ has a page per map that lists them by group.
 
 [[mappings]]
-id = "vrcft_eye_blink.to_rcef"
+id = "vrcft_eye.to_rcef_expression"
 
 [[mappings.rules]]
 id = "vrcft_eye_rcef.eye_close_left"
@@ -48,9 +50,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused", "refs" = ["vrcft.eye.Right.Openness", "rcef.canonical_expression.eye_close_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "vrcft_eye_pupil_mm.to_rcef"
-
 [[mappings.rules]]
 id = "vrcft_eye_rcef.pupil_diameter_mm_left"
 inputs = ["vrcft.eye.Left.PupilDiameter_MM"]
@@ -82,7 +81,7 @@ evidence = ["vrcft_data", "rcef_canonical_v1"]
 loss_annotations = []
 
 [[mappings]]
-id = "rcef_blink.to_vrcft_eye"
+id = "rcef_expression.to_vrcft_eye"
 
 [[mappings.rules]]
 id = "rcef_vrcft_eye.Left.Openness"
@@ -121,9 +120,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "VRCFaceTracking eye gain and full-activation pose not published", "refs" = ["rcef.canonical_expression.eye_close_right", "vrcft.eye.Right.Openness"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused", "refs" = ["rcef.canonical_expression.eye_close_right", "vrcft.eye.Right.Openness"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_pupil_mm.to_vrcft_eye"
 
 [[mappings.rules]]
 id = "rcef_vrcft_eye.Left.PupilDiameter_MM"

@@ -4,11 +4,13 @@
 # docs/canonical-set-audit.md, tests/fixtures/ipa_chart_symbols.json and the
 # retired A1 direct maps (tests/fixtures/baseline-dea1713.pack.json). Edit
 # those, then run the script.
-# The maps between the canonical sets and VRM: one map per canonical group and
-# direction. In-maps are <set>_<group>.to_rcef; out-maps are rcef_<group>.to_<set>.
+# The maps between the canonical sets and VRM: one map per set pair and direction,
+# <set>.to_rcef_expression or .to_rcef_viseme in, and rcef_expression.to_<set> or
+# rcef_viseme.to_<set> out. Their rules are in canonical group order;
+# docs/map-sets/ has a page per map that lists them by group.
 
 [[mappings]]
-id = "vrm_blink.to_rcef"
+id = "vrm.to_rcef_expression"
 
 [[mappings.rules]]
 id = "vrm_rcef.eye_close_left"
@@ -53,7 +55,7 @@ loss_annotations = [
 ]
 
 [[mappings]]
-id = "rcef_blink.to_vrm"
+id = "rcef_expression.to_vrm"
 
 [[mappings.rules]]
 id = "rcef_vrm.blinkLeft"
@@ -102,7 +104,7 @@ loss_annotations = [
 ]
 
 [[mappings]]
-id = "vrm_vowel.to_rcef"
+id = "vrm.to_rcef_viseme"
 
 [[mappings.rules]]
 id = "vrm_rcef.vowel_open"
@@ -196,7 +198,7 @@ loss_annotations = [
 ]
 
 [[mappings]]
-id = "rcef_viseme_vowel.to_vrm"
+id = "rcef_viseme.to_vrm"
 
 [[mappings.rules]]
 id = "rcef_vrm.aa"

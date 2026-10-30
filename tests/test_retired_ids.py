@@ -78,8 +78,12 @@ class RetiredIds(unittest.TestCase):
         for row in self.rows:
             kinds[row['kind']] = kinds.get(row['kind'], 0) + 1
         # 7 direct maps and 3 identity maps; their 191 + 21 mappings and the old survey.ambiguous rule; the old
-        # canonical profile, its 21 signals and the 4 intermediate values of the old ARKit -> FB2 gaze map.
-        self.assertEqual(kinds, {'map': 10, 'mapping': 213, 'profile': 1, 'signal': 25})
+        # canonical profile, its 21 signals and the 4 intermediate values of the old ARKit -> FB2 gaze map. Then the
+        # 84 maps of one canonical group each, whose mappings moved unchanged into the 15 maps of one set pair and
+        # direction, and the old ID of the viseme pose bridge.
+        self.assertEqual(kinds, {'map': 95, 'mapping': 213, 'profile': 1, 'signal': 25})
+        merged = [r for r in self.rows if r['kind'] == 'map' and r['replaced_by'] and not r['replaced_by'].startswith('route ')]
+        self.assertEqual((len(merged), len({r['replaced_by'] for r in merged})), (85, 16))
 
 
 if __name__ == '__main__':

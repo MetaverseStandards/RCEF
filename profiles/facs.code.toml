@@ -21,7 +21,7 @@ native_id = "L1"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "1", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_01_InnerBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "1", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_01_InnerBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "brow"
 
 [[signals]]
@@ -38,7 +38,7 @@ native_id = "R1"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "1", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_01_InnerBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "1", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_01_InnerBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_inner_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "brow"
 
 [[signals]]
@@ -55,7 +55,7 @@ native_id = "L2"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "2", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_02_L_OuterBrowRaiser", "AU_02_OuterBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "2", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_02_L_OuterBrowRaiser", "AU_02_OuterBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "brow"
 
 [[signals]]
@@ -72,7 +72,7 @@ native_id = "R2"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "2", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_02_OuterBrowRaiser", "AU_02_R_OuterBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "2", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_02_OuterBrowRaiser", "AU_02_R_OuterBrowRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_outer_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "brow"
 
 [[signals]]
@@ -89,7 +89,7 @@ native_id = "L4"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "4", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_04_BrowLowerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_lower_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "4", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_04_BrowLowerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_lower_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "brow"
 
 [[signals]]
@@ -106,7 +106,7 @@ native_id = "R4"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "4", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_04_BrowLowerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_lower_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "4", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_04_BrowLowerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical brow_lower_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "brow"
 
 [[signals]]
@@ -123,7 +123,7 @@ native_id = "L5"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "5", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_05_L_UpperLidRaiser", "AU_05_UpperLidRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "5", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_05_L_UpperLidRaiser", "AU_05_UpperLidRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "eyelid"
 
 [[signals]]
@@ -140,7 +140,7 @@ native_id = "R5"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "5", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_05_R_UpperLidRaiser", "AU_05_UpperLidRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "5", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_05_R_UpperLidRaiser", "AU_05_UpperLidRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lid_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "eyelid"
 
 [[signals]]
@@ -157,7 +157,7 @@ native_id = "L6"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "6", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_06_CheekRaiser", "AU_06_L_CheekRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "6", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_06_CheekRaiser", "AU_06_L_CheekRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "cheek"
 
 [[signals]]
@@ -174,7 +174,7 @@ native_id = "R6"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "6", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_06_CheekRaiser", "AU_06_R_CheekRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "6", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_06_CheekRaiser", "AU_06_R_CheekRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "cheek"
 
 [[signals]]
@@ -191,7 +191,7 @@ native_id = "L7"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "7", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_07_LidTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lid_tighten_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "7", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_07_LidTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lid_tighten_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "eyelid"
 
 [[signals]]
@@ -208,7 +208,7 @@ native_id = "R7"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "7", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_07_LidTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lid_tighten_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "7", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_07_LidTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lid_tighten_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "eyelid"
 
 [[signals]]
@@ -225,7 +225,7 @@ native_id = "8"
 surface = "facs.code"
 side = "shared"
 neutral = 0.0
-metadata = { "facs_code" = "8", "facs_table" = "main", "group" = "face", "reason" = "Code number and name from facs_wikipedia; read into canonical lips_toward by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "8", "facs_table" = "main", "group" = "face", "reason" = "Code number and name from facs_wikipedia; read into canonical lips_toward by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -242,7 +242,7 @@ native_id = "L9"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "9", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_09_NoseWrinkler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "9", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_09_NoseWrinkler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "nose"
 
 [[signals]]
@@ -259,7 +259,7 @@ native_id = "R9"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "9", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_09_NoseWrinkler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "9", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_09_NoseWrinkler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical nose_wrinkle_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "nose"
 
 [[signals]]
@@ -276,7 +276,7 @@ native_id = "L10"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "10", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_10_UpperLipRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "10", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_10_UpperLipRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -293,7 +293,7 @@ native_id = "R10"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "10", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_10_UpperLipRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "10", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_10_UpperLipRaiser"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical upper_lip_raise_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -326,7 +326,7 @@ native_id = "L12"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "12", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_12_LipCornerPuller", "AU_12_L_LipCornerPuller"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "12", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_12_LipCornerPuller", "AU_12_L_LipCornerPuller"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -343,7 +343,7 @@ native_id = "R12"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "12", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_12_LipCornerPuller", "AU_12_R_LipCornerPuller"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "12", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_12_LipCornerPuller", "AU_12_R_LipCornerPuller"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_pull_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -376,7 +376,7 @@ native_id = "L14"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "14", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_14_Dimpler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical dimple_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "14", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_14_Dimpler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical dimple_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -393,7 +393,7 @@ native_id = "R14"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "14", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_14_Dimpler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical dimple_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "14", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_14_Dimpler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical dimple_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -410,7 +410,7 @@ native_id = "L15"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "15", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_15_LipCornerDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "15", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_15_LipCornerDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -427,7 +427,7 @@ native_id = "R15"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "15", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_15_LipCornerDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "15", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_15_LipCornerDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_corner_depress_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -444,7 +444,7 @@ native_id = "L16"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "16", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_16_LowerLipDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "16", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_16_LowerLipDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -461,7 +461,7 @@ native_id = "R16"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "16", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_16_LowerLipDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "16", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_16_LowerLipDepressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lower_lip_depress_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -478,7 +478,7 @@ native_id = "17"
 surface = "facs.code"
 side = "shared"
 neutral = 0.0
-metadata = { "facs_code" = "17", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_17_ChinRaiser"] }, "reason" = "Code number and name from facs_wikipedia; read into canonical chin_raise by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "17", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_17_ChinRaiser"] }, "reason" = "Code number and name from facs_wikipedia; read into canonical chin_raise by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -495,7 +495,7 @@ native_id = "L18"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "18", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_18_LipPuckerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_pucker_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "18", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_18_LipPuckerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_pucker_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -512,7 +512,7 @@ native_id = "R18"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "18", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_18_LipPuckerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_pucker_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "18", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_18_LipPuckerer"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_pucker_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -529,7 +529,7 @@ native_id = "19"
 surface = "facs.code"
 side = "shared"
 neutral = 0.0
-metadata = { "facs_code" = "19", "facs_table" = "main", "group" = "tongue_out", "reason" = "Code number and name from facs_wikipedia; read into canonical tongue_out by facs_tongue_out.to_rcef and written from it by rcef_tongue_out.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "19", "facs_table" = "main", "group" = "tongue_out", "reason" = "Code number and name from facs_wikipedia; read into canonical tongue_out by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "tongue"
 
 [[signals]]
@@ -546,7 +546,7 @@ native_id = "L20"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "20", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_20_LipStretcher"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_stretch_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "20", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_20_LipStretcher"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_stretch_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -563,7 +563,7 @@ native_id = "R20"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "20", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_20_LipStretcher"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_stretch_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "20", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_20_LipStretcher"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_stretch_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -596,7 +596,7 @@ native_id = "L22"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_22_LipFunneler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_left and lip_funnel_lower_left by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_22_LipFunneler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_left and lip_funnel_lower_left by facs.to_rcef_expression and written from them by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -613,7 +613,7 @@ native_id = "R22"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_22_LipFunneler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_right and lip_funnel_lower_right by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "22", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_22_LipFunneler"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_funnel_upper_right and lip_funnel_lower_right by facs.to_rcef_expression and written from them by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -630,7 +630,7 @@ native_id = "L23"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "23", "facs_table" = "main", "group" = "lip_tighten", "aligned_names" = { "rocketbox_avatars" = ["AU_23_LipTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_tighten_left by facs_lip_tighten.to_rcef and written from it by rcef_lip_tighten.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "23", "facs_table" = "main", "group" = "lip_tighten", "aligned_names" = { "rocketbox_avatars" = ["AU_23_LipTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_tighten_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -647,7 +647,7 @@ native_id = "R23"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "23", "facs_table" = "main", "group" = "lip_tighten", "aligned_names" = { "rocketbox_avatars" = ["AU_23_LipTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_tighten_right by facs_lip_tighten.to_rcef and written from it by rcef_lip_tighten.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "23", "facs_table" = "main", "group" = "lip_tighten", "aligned_names" = { "rocketbox_avatars" = ["AU_23_LipTightener"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_tighten_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -664,7 +664,7 @@ native_id = "L24"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "24", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_24_LipPressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_press_left by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "24", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_24_LipPressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_press_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -681,7 +681,7 @@ native_id = "R24"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "24", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_24_LipPressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_press_right by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "24", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_24_LipPressor"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_press_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -714,7 +714,7 @@ native_id = "26"
 surface = "facs.code"
 side = "shared"
 neutral = 0.0
-metadata = { "facs_code" = "26", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_26_JawDrop"] }, "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_drop by facs_face.to_rcef and written from it by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "26", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_26_JawDrop"] }, "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_drop by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "jaw"
 
 [[signals]]
@@ -747,7 +747,7 @@ native_id = "L28"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_28_LipSuck"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_left and lip_suck_lower_left by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_28_LipSuck"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_left and lip_suck_lower_left by facs.to_rcef_expression and written from them by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -764,7 +764,7 @@ native_id = "R28"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_28_LipSuck"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_right and lip_suck_lower_right by facs_face.to_rcef and written from them by rcef_face.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "28", "facs_table" = "main", "group" = "face", "aligned_names" = { "rocketbox_avatars" = ["AU_28_LipSuck"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical lip_suck_upper_right and lip_suck_lower_right by facs.to_rcef_expression and written from them by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "mouth"
 
 [[signals]]
@@ -781,7 +781,7 @@ native_id = "29"
 surface = "facs.code"
 side = "shared"
 neutral = 0.0
-metadata = { "facs_code" = "29", "facs_table" = "gross_behavior", "group" = "jaw_thrust", "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_thrust by facs_jaw_thrust.to_rcef and written from it by rcef_jaw_thrust.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "29", "facs_table" = "gross_behavior", "group" = "jaw_thrust", "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_thrust by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "jaw"
 
 [[signals]]
@@ -798,7 +798,7 @@ native_id = "L30"
 surface = "facs.code"
 side = "shared"
 neutral = 0.0
-metadata = { "facs_code" = "30", "facs_table" = "gross_behavior", "group" = "jaw_sideways", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_sideways_left by facs_jaw_sideways.to_rcef and written from it by rcef_jaw_sideways.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "30", "facs_table" = "gross_behavior", "group" = "jaw_sideways", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_sideways_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "jaw"
 
 [[signals]]
@@ -815,7 +815,7 @@ native_id = "R30"
 surface = "facs.code"
 side = "shared"
 neutral = 0.0
-metadata = { "facs_code" = "30", "facs_table" = "gross_behavior", "group" = "jaw_sideways", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_sideways_right by facs_jaw_sideways.to_rcef and written from it by rcef_jaw_sideways.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "30", "facs_table" = "gross_behavior", "group" = "jaw_sideways", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical jaw_sideways_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "jaw"
 
 [[signals]]
@@ -880,7 +880,7 @@ native_id = "L34"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "34", "facs_table" = "gross_behavior", "group" = "cheek_puff", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_puff_left by facs_cheek_puff.to_rcef and written from it by rcef_cheek_puff.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "34", "facs_table" = "gross_behavior", "group" = "cheek_puff", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_puff_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "cheek"
 
 [[signals]]
@@ -897,7 +897,7 @@ native_id = "R34"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "34", "facs_table" = "gross_behavior", "group" = "cheek_puff", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_puff_right by facs_cheek_puff.to_rcef and written from it by rcef_cheek_puff.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "34", "facs_table" = "gross_behavior", "group" = "cheek_puff", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_puff_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "cheek"
 
 [[signals]]
@@ -914,7 +914,7 @@ native_id = "L35"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "35", "facs_table" = "gross_behavior", "group" = "cheek_suck", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_suck_left by facs_cheek_suck.to_rcef and written from it by rcef_cheek_suck.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "35", "facs_table" = "gross_behavior", "group" = "cheek_suck", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_suck_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "cheek"
 
 [[signals]]
@@ -931,7 +931,7 @@ native_id = "R35"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "35", "facs_table" = "gross_behavior", "group" = "cheek_suck", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_suck_right by facs_cheek_suck.to_rcef and written from it by rcef_cheek_suck.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "35", "facs_table" = "gross_behavior", "group" = "cheek_suck", "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical cheek_suck_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "cheek"
 
 [[signals]]
@@ -1060,7 +1060,7 @@ native_id = "L43"
 surface = "facs.code"
 side = "left"
 neutral = 0.0
-metadata = { "facs_code" = "43", "facs_table" = "gross_behavior", "group" = "blink", "aligned_names" = { "rocketbox_avatars" = ["AU_43_L_EyeClosed"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical eye_close_left by facs_blink.to_rcef and written from it by rcef_blink.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "43", "facs_table" = "gross_behavior", "group" = "blink", "aligned_names" = { "rocketbox_avatars" = ["AU_43_L_EyeClosed"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical eye_close_left by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "eyelid"
 
 [[signals]]
@@ -1077,7 +1077,7 @@ native_id = "R43"
 surface = "facs.code"
 side = "right"
 neutral = 0.0
-metadata = { "facs_code" = "43", "facs_table" = "gross_behavior", "group" = "blink", "aligned_names" = { "rocketbox_avatars" = ["AU_43_R_EyeClosed"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical eye_close_right by facs_blink.to_rcef and written from it by rcef_blink.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
+metadata = { "facs_code" = "43", "facs_table" = "gross_behavior", "group" = "blink", "aligned_names" = { "rocketbox_avatars" = ["AU_43_R_EyeClosed"] }, "side_note" = "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key facs_side_frame_unresolved)", "reason" = "Code number and name from facs_wikipedia; read into canonical eye_close_right by facs.to_rcef_expression and written from it by rcef_expression.to_facs, both proposed approximate hops; the numeric encoding is RCEF's own, not a FACS score." }
 region = "eyelid"
 
 [[signals]]

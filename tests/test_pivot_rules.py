@@ -49,7 +49,7 @@ AUDIT_SECTIONS = {'## FB2': 'fb2', '## ARKit': 'arkit', '## VRCFaceTracking Unif
 SET_KEYS = 'arkit|fb2|vrcft_artist|vrcft_eye|vrm|visemes|facs'
 VRM_IN_WEIGHT = 'an asset-authored expression weight becomes a canonical value'
 FACS_ORDINAL = 'facs_ordinal_intensity: '
-HOP = re.compile(rf'^(?:({SET_KEYS})_\w+\.to_rcef|rcef_\w+\.to_({SET_KEYS}))$')
+HOP = re.compile(rf'^(?:({SET_KEYS})\.to_rcef_(?:expression|viseme)|rcef_(?:expression|viseme)\.to_({SET_KEYS}))$')
 DIRECT = ('arkit.to_fb2', 'arkit_gaze.to_fb2', 'fb2.to_arkit', 'fb2_gaze.to_arkit', 'arkit.to_vrcft_artist',
           'fb2.to_vrm', 'visemes.to_vrm')
 VRM_WEIGHT = 'a canonical value becomes an asset-authored expression weight'

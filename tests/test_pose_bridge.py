@@ -26,7 +26,7 @@ _spec = importlib.util.spec_from_file_location('rcef_check', ROOT / 'check.py')
 check = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(check)
 
-BRIDGE = 'rcef_viseme_pose.to_rcef_expression'
+BRIDGE = 'rcef_viseme.to_rcef_expression'
 RECORD = 'viseme-poses.rocketbox-features'
 VISEME, EXPRESSION = 'rcef.canonical_viseme', 'rcef.canonical_expression'
 GROUPS = {'face', 'cheek_puff', 'jaw_thrust', 'chin_raise_upper_lip'}
@@ -171,7 +171,8 @@ class PoseBridge(unittest.TestCase):
                 self.assertEqual(route.bridges, [BRIDGE] if expected else [])
                 if expected:
                     self.assertTrue(route.in_maps)
-                    self.assertNotIn('visemes_aggregate.to_rcef', route.in_maps)
+                    self.assertLessEqual(set(route.in_maps), {'visemes.to_rcef_viseme', 'vrm.to_rcef_expression',
+                                                              'vrm.to_rcef_viseme'})
 
     def test_every_other_route_is_as_without_the_bridge(self):
         without = dict(self.document, mappings=[m for m in self.document['mappings'] if m['id'] != BRIDGE])
@@ -217,8 +218,7 @@ class PoseBridge(unittest.TestCase):
         self.assertIn('arkit.coefficient.jawLeft', aa['labels'])
         self.assertEqual(set(bad['values']), set())
         refused = {lab for lab in bad['labels'].values() if lab != rcef_route.NOT_AVAILABLE}
-        self.assertEqual(refused, {'refused upstream at visemes_consonant.to_rcef, visemes_rest.to_rcef, '
-                                   'visemes_vowel.to_rcef'})
+        self.assertEqual(refused, {'refused upstream at visemes.to_rcef_viseme'})
         self.assertNotIn(BRIDGE, bad['refused'])
         self.assertEqual(aa['notes'], [])
 
@@ -246,15 +246,15 @@ class PoseBridge(unittest.TestCase):
 
     def test_no_bridge_where_the_source_writes_the_bridge_outputs_itself(self):
         def add_jaw_in_map(document):
-            rule = json.loads(json.dumps(next(m for m in document['mappings']
-                                              if m['id'] == 'vrm_vowel.to_rcef')['rules'][0]))
+            maps = {m['id']: m for m in document['mappings']}
+            rule = json.loads(json.dumps(maps['vrm.to_rcef_viseme']['rules'][0]))
             rule.update(id='synthetic.jaw', outputs=[f'{EXPRESSION}.jaw_drop'])
             for loss in rule['loss_annotations']:
                 loss['refs'] = rule['inputs'] + rule['outputs']
-            document['mappings'].append({'id': 'vrm_synthetic.to_rcef', 'rules': [rule]})
+            maps['vrm.to_rcef_expression']['rules'].append(rule)
         route = rcef_route.Route('vrm.preset', 'arkit.coefficient', pack=self.synthetic(add_jaw_in_map))
         self.assertEqual(route.bridges, [])
-        self.assertEqual(route.in_maps, ['vrm_blink.to_rcef', 'vrm_synthetic.to_rcef'])
+        self.assertEqual(route.in_maps, ['vrm.to_rcef_expression'])
 
     def test_a_frame_the_bridge_refuses_labels_its_outputs_and_gets_no_note(self):
         def narrow(document):

@@ -5,11 +5,11 @@
 # docs/canonical-set-audit.md, examples/data/facs_codes.json and
 # tests/fixtures/rocketbox_au_names.json. Edit those, then run the script.
 # The maps between the canonical expression set and FACS codes (facs.code): one map
-# per canonical group and direction. In-maps are facs_<group>.to_rcef; out-maps are
-# rcef_<group>.to_facs.
+# per direction, facs.to_rcef_expression and rcef_expression.to_facs. Their rules are in
+# canonical group order; docs/map-sets/ has a page per map that lists them by group.
 
 [[mappings]]
-id = "facs_face.to_rcef"
+id = "facs.to_rcef_expression"
 
 [[mappings.rules]]
 id = "facs_rcef.brow_inner_raise_left"
@@ -756,9 +756,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own", "refs" = ["facs.code.au16_right", "rcef.canonical_expression.lower_lip_depress_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "facs_cheek_puff.to_rcef"
-
 [[mappings.rules]]
 id = "facs_rcef.cheek_puff_left"
 inputs = ["facs.code.au34_left"]
@@ -797,9 +794,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["facs.code.au34_right", "rcef.canonical_expression.cheek_puff_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "facs_jaw_thrust.to_rcef"
-
 [[mappings.rules]]
 id = "facs_rcef.jaw_thrust"
 inputs = ["facs.code.au29"]
@@ -817,9 +811,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured", "refs" = ["facs.code.au29", "rcef.canonical_expression.jaw_thrust"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["facs.code.au29", "rcef.canonical_expression.jaw_thrust"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "facs_jaw_sideways.to_rcef"
 
 [[mappings.rules]]
 id = "facs_rcef.jaw_sideways_left"
@@ -861,9 +852,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["facs.code.au30_right", "rcef.canonical_expression.jaw_sideways_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "facs_blink.to_rcef"
-
 [[mappings.rules]]
 id = "facs_rcef.eye_close_left"
 inputs = ["facs.code.au43_left"]
@@ -904,9 +892,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["facs.code.au43_right", "rcef.canonical_expression.eye_close_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "facs_tongue_out.to_rcef"
-
 [[mappings.rules]]
 id = "facs_rcef.tongue_out"
 inputs = ["facs.code.au19"]
@@ -924,9 +909,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured", "refs" = ["facs.code.au19", "rcef.canonical_expression.tongue_out"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "the tongue extension has no stated length", "refs" = ["facs.code.au19", "rcef.canonical_expression.tongue_out"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "facs_cheek_suck.to_rcef"
 
 [[mappings.rules]]
 id = "facs_rcef.cheek_suck_left"
@@ -966,9 +948,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["facs.code.au35_right", "rcef.canonical_expression.cheek_suck_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "facs_lip_tighten.to_rcef"
-
 [[mappings.rules]]
 id = "facs_rcef.lip_tighten_left"
 inputs = ["facs.code.au23_left"]
@@ -1006,7 +985,7 @@ loss_annotations = [
 ]
 
 [[mappings]]
-id = "rcef_face.to_facs"
+id = "rcef_expression.to_facs"
 
 [[mappings.rules]]
 id = "rcef_facs.au01_left"
@@ -1677,9 +1656,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own", "refs" = ["rcef.canonical_expression.lip_suck_upper_right", "rcef.canonical_expression.lip_suck_lower_right", "facs.code.au28_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_cheek_puff.to_facs"
-
 [[mappings.rules]]
 id = "rcef_facs.au34_left"
 inputs = ["rcef.canonical_expression.cheek_puff_left"]
@@ -1718,9 +1694,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["rcef.canonical_expression.cheek_puff_right", "facs.code.au34_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_jaw_thrust.to_facs"
-
 [[mappings.rules]]
 id = "rcef_facs.au29"
 inputs = ["rcef.canonical_expression.jaw_thrust"]
@@ -1738,9 +1711,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured", "refs" = ["rcef.canonical_expression.jaw_thrust", "facs.code.au29"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["rcef.canonical_expression.jaw_thrust", "facs.code.au29"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_jaw_sideways.to_facs"
 
 [[mappings.rules]]
 id = "rcef_facs.au30_left"
@@ -1782,9 +1752,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["rcef.canonical_expression.jaw_sideways_right", "facs.code.au30_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_blink.to_facs"
-
 [[mappings.rules]]
 id = "rcef_facs.au43_left"
 inputs = ["rcef.canonical_expression.eye_close_left"]
@@ -1825,9 +1792,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["rcef.canonical_expression.eye_close_right", "facs.code.au43_right"], "units" = "1" },
 ]
 
-[[mappings]]
-id = "rcef_tongue_out.to_facs"
-
 [[mappings.rules]]
 id = "rcef_facs.au19"
 inputs = ["rcef.canonical_expression.tongue_out"]
@@ -1845,9 +1809,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured", "refs" = ["rcef.canonical_expression.tongue_out", "facs.code.au19"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "the tongue extension has no stated length", "refs" = ["rcef.canonical_expression.tongue_out", "facs.code.au19"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_cheek_suck.to_facs"
 
 [[mappings.rules]]
 id = "rcef_facs.au35_left"
@@ -1886,9 +1847,6 @@ loss_annotations = [
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own", "refs" = ["rcef.canonical_expression.cheek_suck_right", "facs.code.au35_right"], "units" = "1" },
   { "category" = "signal", "effect" = "approximated", "reason" = "facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption", "refs" = ["rcef.canonical_expression.cheek_suck_right", "facs.code.au35_right"], "units" = "1" },
 ]
-
-[[mappings]]
-id = "rcef_lip_tighten.to_facs"
 
 [[mappings.rules]]
 id = "rcef_facs.au23_left"

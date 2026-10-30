@@ -15,7 +15,7 @@ RCEF translates 52 ARKit coefficients from FB2. Weight disagreements with Godot:
 
 ## Every difference from Godot
 
-- **browInnerUp** (`fb2_face.to_rcef` → `rcef_face.to_arkit`): Godot has no route; RCEF follows VRCFT's average (0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R).
+- **browInnerUp** (`fb2.to_rcef_expression` → `rcef_expression.to_arkit`): Godot has no route; RCEF follows VRCFT's average (0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R).
 - **mouthClose** (meaning, not weights): FB2 LIPS_TOWARD closes the lips "regardless of the position of the jaw"; VRCFT's Unified Expressions table defines MouthClosed relative to JawOpen (`vrcft_docs_shapes`), and SRanipal requires Jaw_Open to be inactive. Godot and VRCFT both copy the value directly, as RCEF does. For ARKit, RCEF's audit leaves the jaw relation unresolved: Apple's text says that mouthClose does not depend on the jaw, but RCEF's own calibration record reads it together with jawOpen (`arkit_mouthclose_jaw_unresolved`).
 - **mouthShrugUpper** (meaning, not weights): ICT-FaceKit relates mouthShrugUpper to FACS AU10 (upper lip raiser), while Godot, VRCFT and RCEF use FB2 CHIN_RAISER_T; FB2 has separate UPPER_LIP_RAISER_L/R weights.
 - **jawOpen** (meaning, not weights): ICT-FaceKit relates jawOpen to FACS AU27 (mouth stretch); FB2 JAW_DROP is the jaw drop.
@@ -29,58 +29,58 @@ RCEF translates 52 ARKit coefficients from FB2. Weight disagreements with Godot:
 
 | ARKit | RCEF maps | RCEF | Source route | Result | Source lines |
 |---|---|---|---|---|---|
-| browDownLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·BROW_LOWERER_L | 1·BROW_LOWERER_L | agrees with Godot | godot_face_modifier:L272;godot_vendors_fb2:L311 |
-| browDownRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·BROW_LOWERER_R | 1·BROW_LOWERER_R | agrees with Godot | godot_face_modifier:L270;godot_vendors_fb2:L310 |
-| browInnerUp | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R | 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R | Godot has no route; RCEF follows VRCFT's average | vrcft_docs_arkit:L41;vrcft_code_parameters:L87;vrcft_code_parameters:L88;godot_face_modifier:L102;godot_vendors_fb2:L224;godot_face_modifier:L100;godot_vendors_fb2:L223 |
-| browOuterUpLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·OUTER_BROW_RAISER_L | 1·OUTER_BROW_RAISER_L | agrees with Godot | godot_face_modifier:L106;godot_vendors_fb2:L226 |
-| browOuterUpRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·OUTER_BROW_RAISER_R | 1·OUTER_BROW_RAISER_R | agrees with Godot | godot_face_modifier:L104;godot_vendors_fb2:L225 |
-| cheekPuff | `fb2_cheek_puff.to_rcef` → `rcef_cheek_puff.to_arkit` | 0.5·CHEEK_PUFF_L + 0.5·CHEEK_PUFF_R | 0.5·CHEEK_PUFF_L + 0.5·CHEEK_PUFF_R | agrees with Godot | godot_face_modifier:L288;godot_vendors_fb2:L235;godot_vendors_fb2:L236;godot_vendors_fb2:L319 |
-| cheekSquintLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·CHEEK_RAISER_L | 1·CHEEK_RAISER_L | agrees with Godot | godot_face_modifier:L122;godot_vendors_fb2:L234 |
-| cheekSquintRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·CHEEK_RAISER_R | 1·CHEEK_RAISER_R | agrees with Godot | godot_face_modifier:L120;godot_vendors_fb2:L233 |
-| eyeBlinkLeft | `fb2_blink.to_rcef` → `rcef_blink.to_arkit` | 1·EYES_CLOSED_L | 1·EYES_CLOSED_L | agrees with Godot | godot_face_modifier:L74;godot_vendors_fb2:L210 |
-| eyeBlinkRight | `fb2_blink.to_rcef` → `rcef_blink.to_arkit` | 1·EYES_CLOSED_R | 1·EYES_CLOSED_R | agrees with Godot | godot_face_modifier:L72;godot_vendors_fb2:L209 |
-| eyeLookDownLeft | `fb2_gaze.to_rcef` → `rcef_gaze.to_arkit` | 1·EYES_LOOK_DOWN_L | 1·EYES_LOOK_DOWN_L | agrees with Godot | godot_face_modifier:L70;godot_vendors_fb2:L208 |
-| eyeLookDownRight | `fb2_gaze.to_rcef` → `rcef_gaze.to_arkit` | 1·EYES_LOOK_DOWN_R | 1·EYES_LOOK_DOWN_R | agrees with Godot | godot_face_modifier:L62;godot_vendors_fb2:L204 |
-| eyeLookInLeft | `fb2_gaze.to_rcef` → `rcef_gaze.to_arkit` | 1·EYES_LOOK_RIGHT_L | 1·EYES_LOOK_RIGHT_L | agrees with Godot | godot_face_modifier:L66;godot_vendors_fb2:L206 |
-| eyeLookInRight | `fb2_gaze.to_rcef` → `rcef_gaze.to_arkit` | 1·EYES_LOOK_LEFT_R | 1·EYES_LOOK_LEFT_R | agrees with Godot | godot_face_modifier:L58;godot_vendors_fb2:L202 |
-| eyeLookOutLeft | `fb2_gaze.to_rcef` → `rcef_gaze.to_arkit` | 1·EYES_LOOK_LEFT_L | 1·EYES_LOOK_LEFT_L | agrees with Godot | godot_face_modifier:L64;godot_vendors_fb2:L205 |
-| eyeLookOutRight | `fb2_gaze.to_rcef` → `rcef_gaze.to_arkit` | 1·EYES_LOOK_RIGHT_R | 1·EYES_LOOK_RIGHT_R | agrees with Godot | godot_face_modifier:L56;godot_vendors_fb2:L201 |
-| eyeLookUpLeft | `fb2_gaze.to_rcef` → `rcef_gaze.to_arkit` | 1·EYES_LOOK_UP_L | 1·EYES_LOOK_UP_L | agrees with Godot | godot_face_modifier:L68;godot_vendors_fb2:L207 |
-| eyeLookUpRight | `fb2_gaze.to_rcef` → `rcef_gaze.to_arkit` | 1·EYES_LOOK_UP_R | 1·EYES_LOOK_UP_R | agrees with Godot | godot_face_modifier:L60;godot_vendors_fb2:L203 |
-| eyeSquintLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LID_TIGHTENER_L | 1·LID_TIGHTENER_L | agrees with Godot | godot_face_modifier:L78;godot_vendors_fb2:L212 |
-| eyeSquintRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LID_TIGHTENER_R | 1·LID_TIGHTENER_R | agrees with Godot | godot_face_modifier:L76;godot_vendors_fb2:L211 |
-| eyeWideLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·UPPER_LID_RAISER_L | 1·UPPER_LID_RAISER_L | agrees with Godot | godot_face_modifier:L82;godot_vendors_fb2:L214 |
-| eyeWideRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·UPPER_LID_RAISER_R | 1·UPPER_LID_RAISER_R | agrees with Godot | godot_face_modifier:L80;godot_vendors_fb2:L213 |
-| jawForward | `fb2_jaw_thrust.to_rcef` → `rcef_jaw_thrust.to_arkit` | 1·JAW_THRUST | 1·JAW_THRUST | agrees with Godot | godot_face_modifier:L140;godot_vendors_fb2:L243 |
-| jawLeft | `fb2_jaw_sideways.to_rcef` → `rcef_jaw_sideways.to_arkit` | 1·JAW_SIDEWAYS_LEFT | 1·JAW_SIDEWAYS_LEFT | agrees with Godot | godot_face_modifier:L138;godot_vendors_fb2:L242 |
-| jawOpen | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·JAW_DROP | 1·JAW_DROP | agrees with Godot | godot_face_modifier:L132;godot_vendors_fb2:L239 |
-| jawRight | `fb2_jaw_sideways.to_rcef` → `rcef_jaw_sideways.to_arkit` | 1·JAW_SIDEWAYS_RIGHT | 1·JAW_SIDEWAYS_RIGHT | agrees with Godot | godot_face_modifier:L136;godot_vendors_fb2:L241 |
-| mouthClose | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LIPS_TOWARD | 1·LIPS_TOWARD | agrees with Godot | godot_face_modifier:L134;godot_vendors_fb2:L240 |
-| mouthDimpleLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·DIMPLER_L | 1·DIMPLER_L | agrees with Godot | godot_face_modifier:L214;godot_vendors_fb2:L280 |
-| mouthDimpleRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·DIMPLER_R | 1·DIMPLER_R | agrees with Godot | godot_face_modifier:L212;godot_vendors_fb2:L279 |
-| mouthFrownLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LIP_CORNER_DEPRESSOR_L | 1·LIP_CORNER_DEPRESSOR_L | agrees with Godot | godot_face_modifier:L206;godot_vendors_fb2:L276 |
-| mouthFrownRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LIP_CORNER_DEPRESSOR_R | 1·LIP_CORNER_DEPRESSOR_R | agrees with Godot | godot_face_modifier:L204;godot_vendors_fb2:L275 |
-| mouthFunnel | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 0.25·LIP_FUNNELER_LB + 0.25·LIP_FUNNELER_LT + 0.25·LIP_FUNNELER_RB + 0.25·LIP_FUNNELER_RT | 0.25·LIP_FUNNELER_LB + 0.25·LIP_FUNNELER_LT + 0.25·LIP_FUNNELER_RB + 0.25·LIP_FUNNELER_RT | agrees with Godot | godot_face_modifier:L304;godot_vendors_fb2:L253;godot_vendors_fb2:L254;godot_vendors_fb2:L255;godot_vendors_fb2:L256;godot_vendors_fb2:L325;godot_vendors_fb2:L326;godot_vendors_fb2:L327 |
-| mouthLeft | `fb2_mouth_shift.to_rcef` → `rcef_mouth_shift.to_arkit` | 1·MOUTH_LEFT | 1·MOUTH_LEFT | agrees with Godot | godot_face_modifier:L320;godot_vendors_fb2:L335 |
-| mouthLowerDownLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LOWER_LIP_DEPRESSOR_L | 1·LOWER_LIP_DEPRESSOR_L | agrees with Godot | godot_face_modifier:L182;godot_vendors_fb2:L264 |
-| mouthLowerDownRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LOWER_LIP_DEPRESSOR_R | 1·LOWER_LIP_DEPRESSOR_R | agrees with Godot | godot_face_modifier:L180;godot_vendors_fb2:L263 |
-| mouthPressLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LIP_PRESSOR_L | 1·LIP_PRESSOR_L | agrees with Godot | godot_face_modifier:L222;godot_vendors_fb2:L284 |
-| mouthPressRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LIP_PRESSOR_R | 1·LIP_PRESSOR_R | agrees with Godot | godot_face_modifier:L220;godot_vendors_fb2:L283 |
-| mouthPucker | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 0.5·LIP_PUCKER_L + 0.5·LIP_PUCKER_R | 0.5·LIP_PUCKER_L + 0.5·LIP_PUCKER_R | agrees with Godot | godot_face_modifier:L310;godot_vendors_fb2:L257;godot_vendors_fb2:L258;godot_vendors_fb2:L259;godot_vendors_fb2:L260;godot_vendors_fb2:L328;godot_vendors_fb2:L329;godot_vendors_fb2:L330 |
-| mouthRight | `fb2_mouth_shift.to_rcef` → `rcef_mouth_shift.to_arkit` | 1·MOUTH_RIGHT | 1·MOUTH_RIGHT | agrees with Godot | godot_face_modifier:L318;godot_vendors_fb2:L334 |
-| mouthRollLower | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 0.5·LIP_SUCK_LB + 0.5·LIP_SUCK_RB | 0.5·LIP_SUCK_LB + 0.5·LIP_SUCK_RB | agrees with Godot | godot_face_modifier:L296;godot_vendors_fb2:L249;godot_vendors_fb2:L250;godot_vendors_fb2:L323 |
-| mouthRollUpper | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 0.5·LIP_SUCK_LT + 0.5·LIP_SUCK_RT | 0.5·LIP_SUCK_LT + 0.5·LIP_SUCK_RT | agrees with Godot | godot_face_modifier:L294;godot_vendors_fb2:L247;godot_vendors_fb2:L248;godot_vendors_fb2:L322 |
-| mouthShrugLower | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·CHIN_RAISER_B | 1·CHIN_RAISER_B | agrees with Godot | godot_face_modifier:L218;godot_vendors_fb2:L282 |
-| mouthShrugUpper | `fb2_chin_raise_upper_lip.to_rcef` → `rcef_chin_raise_upper_lip.to_arkit` | 1·CHIN_RAISER_T | 1·CHIN_RAISER_T | agrees with Godot | godot_face_modifier:L216;godot_vendors_fb2:L281 |
-| mouthSmileLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LIP_CORNER_PULLER_L | 1·LIP_CORNER_PULLER_L | agrees with Godot | godot_face_modifier:L324;godot_vendors_fb2:L337 |
-| mouthSmileRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LIP_CORNER_PULLER_R | 1·LIP_CORNER_PULLER_R | agrees with Godot | godot_face_modifier:L322;godot_vendors_fb2:L336 |
-| mouthStretchLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LIP_STRETCHER_L | 1·LIP_STRETCHER_L | agrees with Godot | godot_face_modifier:L210;godot_vendors_fb2:L278 |
-| mouthStretchRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·LIP_STRETCHER_R | 1·LIP_STRETCHER_R | agrees with Godot | godot_face_modifier:L208;godot_vendors_fb2:L277 |
-| mouthUpperUpLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·UPPER_LIP_RAISER_L | 1·UPPER_LIP_RAISER_L | agrees with Godot | godot_face_modifier:L178;godot_vendors_fb2:L262 |
-| mouthUpperUpRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·UPPER_LIP_RAISER_R | 1·UPPER_LIP_RAISER_R | agrees with Godot | godot_face_modifier:L176;godot_vendors_fb2:L261 |
-| noseSneerLeft | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·NOSE_WRINKLER_L | 1·NOSE_WRINKLER_L | agrees with Godot | godot_face_modifier:L110;godot_vendors_fb2:L228 |
-| noseSneerRight | `fb2_face.to_rcef` → `rcef_face.to_arkit` | 1·NOSE_WRINKLER_R | 1·NOSE_WRINKLER_R | agrees with Godot | godot_face_modifier:L108;godot_vendors_fb2:L227 |
-| tongueOut | `fb2_tongue_out.to_rcef` → `rcef_tongue_out.to_arkit` | 1·TONGUE_OUT | 1·TONGUE_OUT | agrees with Godot | godot_face_modifier:L228;godot_vendors_fb2:L287 |
+| browDownLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·BROW_LOWERER_L | 1·BROW_LOWERER_L | agrees with Godot | godot_face_modifier:L272;godot_vendors_fb2:L311 |
+| browDownRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·BROW_LOWERER_R | 1·BROW_LOWERER_R | agrees with Godot | godot_face_modifier:L270;godot_vendors_fb2:L310 |
+| browInnerUp | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R | 0.5·INNER_BROW_RAISER_L + 0.5·INNER_BROW_RAISER_R | Godot has no route; RCEF follows VRCFT's average | vrcft_docs_arkit:L41;vrcft_code_parameters:L87;vrcft_code_parameters:L88;godot_face_modifier:L102;godot_vendors_fb2:L224;godot_face_modifier:L100;godot_vendors_fb2:L223 |
+| browOuterUpLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·OUTER_BROW_RAISER_L | 1·OUTER_BROW_RAISER_L | agrees with Godot | godot_face_modifier:L106;godot_vendors_fb2:L226 |
+| browOuterUpRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·OUTER_BROW_RAISER_R | 1·OUTER_BROW_RAISER_R | agrees with Godot | godot_face_modifier:L104;godot_vendors_fb2:L225 |
+| cheekPuff | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 0.5·CHEEK_PUFF_L + 0.5·CHEEK_PUFF_R | 0.5·CHEEK_PUFF_L + 0.5·CHEEK_PUFF_R | agrees with Godot | godot_face_modifier:L288;godot_vendors_fb2:L235;godot_vendors_fb2:L236;godot_vendors_fb2:L319 |
+| cheekSquintLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·CHEEK_RAISER_L | 1·CHEEK_RAISER_L | agrees with Godot | godot_face_modifier:L122;godot_vendors_fb2:L234 |
+| cheekSquintRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·CHEEK_RAISER_R | 1·CHEEK_RAISER_R | agrees with Godot | godot_face_modifier:L120;godot_vendors_fb2:L233 |
+| eyeBlinkLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_CLOSED_L | 1·EYES_CLOSED_L | agrees with Godot | godot_face_modifier:L74;godot_vendors_fb2:L210 |
+| eyeBlinkRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_CLOSED_R | 1·EYES_CLOSED_R | agrees with Godot | godot_face_modifier:L72;godot_vendors_fb2:L209 |
+| eyeLookDownLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_LOOK_DOWN_L | 1·EYES_LOOK_DOWN_L | agrees with Godot | godot_face_modifier:L70;godot_vendors_fb2:L208 |
+| eyeLookDownRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_LOOK_DOWN_R | 1·EYES_LOOK_DOWN_R | agrees with Godot | godot_face_modifier:L62;godot_vendors_fb2:L204 |
+| eyeLookInLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_LOOK_RIGHT_L | 1·EYES_LOOK_RIGHT_L | agrees with Godot | godot_face_modifier:L66;godot_vendors_fb2:L206 |
+| eyeLookInRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_LOOK_LEFT_R | 1·EYES_LOOK_LEFT_R | agrees with Godot | godot_face_modifier:L58;godot_vendors_fb2:L202 |
+| eyeLookOutLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_LOOK_LEFT_L | 1·EYES_LOOK_LEFT_L | agrees with Godot | godot_face_modifier:L64;godot_vendors_fb2:L205 |
+| eyeLookOutRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_LOOK_RIGHT_R | 1·EYES_LOOK_RIGHT_R | agrees with Godot | godot_face_modifier:L56;godot_vendors_fb2:L201 |
+| eyeLookUpLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_LOOK_UP_L | 1·EYES_LOOK_UP_L | agrees with Godot | godot_face_modifier:L68;godot_vendors_fb2:L207 |
+| eyeLookUpRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·EYES_LOOK_UP_R | 1·EYES_LOOK_UP_R | agrees with Godot | godot_face_modifier:L60;godot_vendors_fb2:L203 |
+| eyeSquintLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LID_TIGHTENER_L | 1·LID_TIGHTENER_L | agrees with Godot | godot_face_modifier:L78;godot_vendors_fb2:L212 |
+| eyeSquintRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LID_TIGHTENER_R | 1·LID_TIGHTENER_R | agrees with Godot | godot_face_modifier:L76;godot_vendors_fb2:L211 |
+| eyeWideLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·UPPER_LID_RAISER_L | 1·UPPER_LID_RAISER_L | agrees with Godot | godot_face_modifier:L82;godot_vendors_fb2:L214 |
+| eyeWideRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·UPPER_LID_RAISER_R | 1·UPPER_LID_RAISER_R | agrees with Godot | godot_face_modifier:L80;godot_vendors_fb2:L213 |
+| jawForward | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·JAW_THRUST | 1·JAW_THRUST | agrees with Godot | godot_face_modifier:L140;godot_vendors_fb2:L243 |
+| jawLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·JAW_SIDEWAYS_LEFT | 1·JAW_SIDEWAYS_LEFT | agrees with Godot | godot_face_modifier:L138;godot_vendors_fb2:L242 |
+| jawOpen | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·JAW_DROP | 1·JAW_DROP | agrees with Godot | godot_face_modifier:L132;godot_vendors_fb2:L239 |
+| jawRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·JAW_SIDEWAYS_RIGHT | 1·JAW_SIDEWAYS_RIGHT | agrees with Godot | godot_face_modifier:L136;godot_vendors_fb2:L241 |
+| mouthClose | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LIPS_TOWARD | 1·LIPS_TOWARD | agrees with Godot | godot_face_modifier:L134;godot_vendors_fb2:L240 |
+| mouthDimpleLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·DIMPLER_L | 1·DIMPLER_L | agrees with Godot | godot_face_modifier:L214;godot_vendors_fb2:L280 |
+| mouthDimpleRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·DIMPLER_R | 1·DIMPLER_R | agrees with Godot | godot_face_modifier:L212;godot_vendors_fb2:L279 |
+| mouthFrownLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LIP_CORNER_DEPRESSOR_L | 1·LIP_CORNER_DEPRESSOR_L | agrees with Godot | godot_face_modifier:L206;godot_vendors_fb2:L276 |
+| mouthFrownRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LIP_CORNER_DEPRESSOR_R | 1·LIP_CORNER_DEPRESSOR_R | agrees with Godot | godot_face_modifier:L204;godot_vendors_fb2:L275 |
+| mouthFunnel | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 0.25·LIP_FUNNELER_LB + 0.25·LIP_FUNNELER_LT + 0.25·LIP_FUNNELER_RB + 0.25·LIP_FUNNELER_RT | 0.25·LIP_FUNNELER_LB + 0.25·LIP_FUNNELER_LT + 0.25·LIP_FUNNELER_RB + 0.25·LIP_FUNNELER_RT | agrees with Godot | godot_face_modifier:L304;godot_vendors_fb2:L253;godot_vendors_fb2:L254;godot_vendors_fb2:L255;godot_vendors_fb2:L256;godot_vendors_fb2:L325;godot_vendors_fb2:L326;godot_vendors_fb2:L327 |
+| mouthLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·MOUTH_LEFT | 1·MOUTH_LEFT | agrees with Godot | godot_face_modifier:L320;godot_vendors_fb2:L335 |
+| mouthLowerDownLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LOWER_LIP_DEPRESSOR_L | 1·LOWER_LIP_DEPRESSOR_L | agrees with Godot | godot_face_modifier:L182;godot_vendors_fb2:L264 |
+| mouthLowerDownRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LOWER_LIP_DEPRESSOR_R | 1·LOWER_LIP_DEPRESSOR_R | agrees with Godot | godot_face_modifier:L180;godot_vendors_fb2:L263 |
+| mouthPressLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LIP_PRESSOR_L | 1·LIP_PRESSOR_L | agrees with Godot | godot_face_modifier:L222;godot_vendors_fb2:L284 |
+| mouthPressRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LIP_PRESSOR_R | 1·LIP_PRESSOR_R | agrees with Godot | godot_face_modifier:L220;godot_vendors_fb2:L283 |
+| mouthPucker | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 0.5·LIP_PUCKER_L + 0.5·LIP_PUCKER_R | 0.5·LIP_PUCKER_L + 0.5·LIP_PUCKER_R | agrees with Godot | godot_face_modifier:L310;godot_vendors_fb2:L257;godot_vendors_fb2:L258;godot_vendors_fb2:L259;godot_vendors_fb2:L260;godot_vendors_fb2:L328;godot_vendors_fb2:L329;godot_vendors_fb2:L330 |
+| mouthRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·MOUTH_RIGHT | 1·MOUTH_RIGHT | agrees with Godot | godot_face_modifier:L318;godot_vendors_fb2:L334 |
+| mouthRollLower | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 0.5·LIP_SUCK_LB + 0.5·LIP_SUCK_RB | 0.5·LIP_SUCK_LB + 0.5·LIP_SUCK_RB | agrees with Godot | godot_face_modifier:L296;godot_vendors_fb2:L249;godot_vendors_fb2:L250;godot_vendors_fb2:L323 |
+| mouthRollUpper | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 0.5·LIP_SUCK_LT + 0.5·LIP_SUCK_RT | 0.5·LIP_SUCK_LT + 0.5·LIP_SUCK_RT | agrees with Godot | godot_face_modifier:L294;godot_vendors_fb2:L247;godot_vendors_fb2:L248;godot_vendors_fb2:L322 |
+| mouthShrugLower | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·CHIN_RAISER_B | 1·CHIN_RAISER_B | agrees with Godot | godot_face_modifier:L218;godot_vendors_fb2:L282 |
+| mouthShrugUpper | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·CHIN_RAISER_T | 1·CHIN_RAISER_T | agrees with Godot | godot_face_modifier:L216;godot_vendors_fb2:L281 |
+| mouthSmileLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LIP_CORNER_PULLER_L | 1·LIP_CORNER_PULLER_L | agrees with Godot | godot_face_modifier:L324;godot_vendors_fb2:L337 |
+| mouthSmileRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LIP_CORNER_PULLER_R | 1·LIP_CORNER_PULLER_R | agrees with Godot | godot_face_modifier:L322;godot_vendors_fb2:L336 |
+| mouthStretchLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LIP_STRETCHER_L | 1·LIP_STRETCHER_L | agrees with Godot | godot_face_modifier:L210;godot_vendors_fb2:L278 |
+| mouthStretchRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·LIP_STRETCHER_R | 1·LIP_STRETCHER_R | agrees with Godot | godot_face_modifier:L208;godot_vendors_fb2:L277 |
+| mouthUpperUpLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·UPPER_LIP_RAISER_L | 1·UPPER_LIP_RAISER_L | agrees with Godot | godot_face_modifier:L178;godot_vendors_fb2:L262 |
+| mouthUpperUpRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·UPPER_LIP_RAISER_R | 1·UPPER_LIP_RAISER_R | agrees with Godot | godot_face_modifier:L176;godot_vendors_fb2:L261 |
+| noseSneerLeft | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·NOSE_WRINKLER_L | 1·NOSE_WRINKLER_L | agrees with Godot | godot_face_modifier:L110;godot_vendors_fb2:L228 |
+| noseSneerRight | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·NOSE_WRINKLER_R | 1·NOSE_WRINKLER_R | agrees with Godot | godot_face_modifier:L108;godot_vendors_fb2:L227 |
+| tongueOut | `fb2.to_rcef_expression` → `rcef_expression.to_arkit` | 1·TONGUE_OUT | 1·TONGUE_OUT | agrees with Godot | godot_face_modifier:L228;godot_vendors_fb2:L287 |
 
 ## Coefficients Godot translates and RCEF does not yet
 

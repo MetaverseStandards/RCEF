@@ -179,7 +179,7 @@ class CanonicalVocabulary(unittest.TestCase):
             with self.subTest(signal=sid):
                 self.assertIn(sid, self.profiles['rcef.intermediate']['signal_ids'])
                 self.assertEqual(self.signals[sid]['domain'], {'min': -1.0, 'max': 1.0})
-                self.assertEqual(users[sid], {'rcef_gaze.to_fb2'})
+                self.assertEqual(users[sid], {'rcef_expression.to_fb2'})
 
 
 if __name__ == '__main__':

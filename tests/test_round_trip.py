@@ -55,13 +55,15 @@ class RoundTrip(unittest.TestCase):
     def setUpClass(cls):
         document = shared_pack.document()
         rules = {m['id']: m['rules'] for m in document['mappings']}
+        groups = {s['id']: s.get('metadata', {}).get('group') for s in document['signals']}
         by_output = {o: i for i, o in source_pairs()}
         cls.routes, cls.one_to_one, backs = {}, {}, []
         for kind, (source, target) in FORWARD.items():
             route = cls.routes[kind] = rcef_frames.Frames(source, target, '', '', pack=shared_pack.pack()).route
             copies = {r['outputs'][0]: r['inputs'][0] for m in route.in_maps for r in rules[m] if len(r['inputs']) == 1}
-            # (source signal, target signal, out-map) for each one-to-one translation
-            cls.one_to_one[kind] = [(copies[r['inputs'][0]], r['outputs'][0], m) for m in route.out_maps
+            # (source signal, target signal, canonical group) for each one-to-one translation
+            cls.one_to_one[kind] = [(copies[r['inputs'][0]], r['outputs'][0], groups[r['inputs'][0]])
+                                    for m in route.out_maps
                                     for r in rules[m] if len(r['inputs']) == 1 and r['inputs'][0] in copies]
             back = []
             for _, output, _ in cls.one_to_one[kind]:
@@ -112,9 +114,9 @@ class RoundTrip(unittest.TestCase):
                 for frame, returned in zip(frames, back.value.samples):
                     self.assertEqual(dict(returned['values']),
                                      {k: v for k, v in frame.items() if k in one_to_one_inputs})
-                for _, _, mapping in pairs:
+                for _, _, canonical_group in pairs:
                     group = ('viseme' if kind == 'visemes_to_vrm' else
-                             'gaze' if mapping == 'rcef_gaze.to_arkit' else 'face')
+                             'gaze' if canonical_group == 'gaze' else 'face')
                     checked[group] = checked.get(group, 0) + 1
         self.assertEqual(checked, {'face': 38, 'gaze': 8, 'viseme': 5})
         self.assertEqual(sum(checked.values()), 51)  # 38 face, 8 gaze, 5 viseme one-to-one mappings
