@@ -117,6 +117,28 @@ class FacsProfile(unittest.TestCase):
                 self.assertEqual((s['units'], s['domain'], s['neutral']), ('1', {'min': 0.0, 'max': 1.0}, 0.0))
                 self.assertEqual(s['metadata'].get('side_note'), note if s['native_id'][0] in 'LR' else None)
 
+    def test_each_canonical_facs_table_agrees_with_its_facs_rows(self):
+        # The FACS column of the signal table, read here without the generator: "43 (`gross_behavior`)".
+        table = re.search(r'^### Expression signals\n(.*?)\n### ', self.doc, re.M | re.S).group(1)
+        documented = {}
+        for line in table.splitlines():
+            cells = [c.strip() for c in line.strip('|').split(' | ')]
+            if line.startswith('| `') and (found := re.match(r'(\d+)\b.*\(`(main|gross_behavior)`\)$', cells[6])):
+                documented[cells[0].strip('`')] = found.groups()
+        self.assertEqual(len(documented), 53)
+        main = re.search(r'Main codes: `(rcef\.facs\.v1:au<NN>: [^`]+)`', self.doc).group(1)
+        for short, (code, table_name) in documented.items():
+            signal = self.signals[PREFIX + short]
+            rows = [s for s in self.mapped if self.code(s) == code]
+            with self.subTest(signal=short):
+                self.assertEqual((signal['metadata']['facs_au'], signal['metadata']['facs_table']), (code, table_name))
+                self.assertTrue(rows)
+                for row in rows:
+                    self.assertEqual(row['metadata']['facs_table'], table_name)
+                    gross = row['calibration'] != main.replace('au<NN>', local(row['id']))
+                    self.assertEqual(gross, table_name == 'gross_behavior')
+                    self.assertEqual(table_name == 'gross_behavior', code in GROSS)
+
     def test_evidence_and_rocketbox_names(self):
         fixture = json.loads((ROOT / 'tests/fixtures/rocketbox_au_names.json').read_text(encoding='utf-8'))
         self.assertEqual(len(fixture['names']), 48)
