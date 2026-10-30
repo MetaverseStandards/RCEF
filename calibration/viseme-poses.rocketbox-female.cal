@@ -3501,3 +3501,168 @@ knots = [[0.0, 0.0], [1.0, 0.0]]
 input = "rcef.canonical_viseme.sil"
 output = "rcef.canonical_expression.chin_raise_upper_lip"
 knots = [[0.0, 0.0], [1.0, 0.0]]
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_open"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.294244
+p95 = 0.294244
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_spread"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.512603
+p95 = 0.512603
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_spread"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.312845
+p95 = 0.312845
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_mid_rounded"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.26063
+p95 = 0.26063
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.vowel_close_rounded"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.586094
+p95 = 0.586094
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.bilabial"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.667225
+p95 = 0.667225
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.labiodental"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.914501
+p95 = 0.914501
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dental"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.221589
+p95 = 0.221589
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.alveolar_sibilant"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.641573
+p95 = 0.641573
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.postalveolar"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.522892
+p95 = 0.522892
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_stop"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.267121
+p95 = 0.267121
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.coronal_nasal_lateral"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.450282
+p95 = 0.450282
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.dorsal"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.359611
+p95 = 0.359611
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.rhotic"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.479905
+p95 = 0.479905
+neutral = 0.0
+
+[[cells]]
+channel = "rcef.canonical_viseme.sil"
+side = "shared"
+stimulus = "class weight w in [0.2, 1] from the held-out seed; in half the conditions the rest class sil gets 1 - w; Male ARKit weights from the frozen poses through the ARKit out-maps"
+identity = "Rocketbox Male_Adult_01 (held-out rig, not loaded by the fit)"
+conditions = 24
+failures = 0
+median = 0.0
+p95 = 0.0
+neutral = 0.0
