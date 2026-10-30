@@ -21,8 +21,9 @@ import provenance  # noqa: E402
 # code_commit ce56bb6, reproduced from its freeze commit d53567c), and then the tied Left and Right fit and the lips
 # step (05b8b0e), the code of viseme-poses.rocketbox-multi v2 (reproduced from its freeze commit 8354daf). check.py
 # then learnt the perceptual gate, and viseme_poses.py the features (295f4d7), the code of
-# viseme-poses.rocketbox-features.
-CODE_COMMIT = '295f4d76d8da53eb6b3936c5bec62ec8579ac2fe'
+# viseme-poses.rocketbox-features. check.py then required the whole-face guard of every gated channel
+# (8d10950).
+CODE_COMMIT = '8d10950e1463a670b301f24f9bf3fc4ebabdf3a4'
 RECORD_COMMIT = '2fa1be4'
 CODE = ['check.py', 'examples/rig_gains.py', 'examples/rigs.py', 'examples/ict_facekit.py', 'examples/rcef_translate.py',
         'examples/data/rig_landmarks.json', 'tools/calibration/ict_files.json', 'tools/calibration/viseme_rigs.json',
