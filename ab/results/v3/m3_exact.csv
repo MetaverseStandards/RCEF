@@ -1,0 +1,59 @@
+pair,family,frames,non_exclusive_frames,errors,max_excluded_error,excluded_became_zero,max_rounding_error,over_bound
+ARKit -> ARKit,goldens:arkit.coefficient,4,2,0,0.0,0,0.0,0
+ARKit -> ARKit,grid:arkit.coefficient,18,17,0,0.0,0,0.0,0
+ARKit -> ARKit,edge:arkit.coefficient,1129,35,0,1e-323,0,0.0,0
+ARKit -> ARKit,impulse:arkit.coefficient,105,0,0,0.0,0,0.0,0
+ARKit -> ARKit,arkit_uniform,2000,2000,0,0.0,0,0.0,0
+ARKit -> ARKit,perturb:arkit_uniform,624,624,0,0.0,0,0.0,0
+ARKit -> ARKit,regression:v1:arkit_uniform,2000,2000,0,0.0,0,0.0,0
+ARKit -> ARKit,regression:v1:perturb:arkit_uniform,624,624,0,0.0,0,0.0,0
+FACS -> FACS,facs_key_impulses,132,0,0,0.0,0,0.0,0
+FACS -> FACS,grid:facs.code,18,0,0,0.0,0,0.0,0
+FACS -> FACS,edge:facs.code,1050,0,0,5e-324,0,0.0,0
+FACS -> FACS,impulse:facs.code,99,0,0,0.0,0,0.0,0
+FACS -> FACS,facs_uniform,2000,0,0,0.0,0,0.0,0
+FACS -> FACS,facs_letters,500,0,0,0.0,0,0.0,0
+FACS -> FACS,perturb:facs_uniform,588,0,0,0.0,0,0.0,0
+FACS -> FACS,regression:v1:facs_uniform,2000,0,0,0.0,0,0.0,0
+FACS -> FACS,regression:v1:facs_letters,500,0,0,0.0,0,0.0,0
+FACS -> FACS,regression:v1:perturb:facs_uniform,588,0,0,0.0,0,0.0,0
+FACS -> FACS,facs_library,221,0,0,0.0,0,0.0,0
+FB2 -> FB2,goldens:openxr.fb2,124,2,0,0.8671875,8,0.0,0
+FB2 -> FB2,csv:openxr.fb2:fb2_demo_frames,441,0,0,0.0,0,0.0,0
+FB2 -> FB2,csv:openxr.fb2:fb2_expression_frames,221,0,0,5.551115123125783e-17,0,5.551115123125783e-17,0
+FB2 -> FB2,r3:openxr.fb2,132,2,0,0.8515625,8,0.0,0
+FB2 -> FB2,grid:openxr.fb2,21,20,0,1.0,136,0.0,0
+FB2 -> FB2,edge:openxr.fb2,1507,35,0,1.0,200,5.551115123125783e-17,0
+FB2 -> FB2,impulse:openxr.fb2,141,0,0,0.0,0,0.0,0
+FB2 -> FB2,fb2_contract,2000,0,0,5.551115123125783e-17,0,5.551115123125783e-17,0
+FB2 -> FB2,fb2_breaking,2000,2000,0,0.988663,8000,0.0,0
+FB2 -> FB2,perturb:fb2_contract,848,32,0,5.551115123125783e-17,0,5.551115123125783e-17,0
+FB2 -> FB2,perturb:fb2_breaking,848,848,0,0.8774846010433043,3264,0.0,0
+FB2 -> FB2,regression:v1:fb2_contract,2000,0,0,5.551115123125783e-17,0,5.551115123125783e-17,0
+FB2 -> FB2,regression:v1:fb2_breaking,2000,2000,0,0.9944058202049191,8000,0.0,0
+FB2 -> FB2,regression:v1:perturb:fb2_contract,848,32,0,5.551115123125783e-17,0,5.551115123125783e-17,0
+FB2 -> FB2,regression:v1:perturb:fb2_breaking,848,848,0,0.7922640281674674,3264,0.0,0
+META -> META,goldens:openxr.visemes,1,0,0,0.0,0,0.0,0
+META -> META,csv:openxr.visemes:viseme_demo_frames,57,0,0,0.0,0,0.0,0
+META -> META,csv:openxr.visemes:viseme_talk_frames,62,0,0,0.0,0,0.0,0
+META -> META,grid:openxr.visemes,19,0,0,0.0,0,0.0,0
+META -> META,edge:openxr.visemes,336,0,0,0.0,0,0.0,0
+META -> META,impulse:openxr.visemes,31,0,0,0.0,0,0.0,0
+META -> META,viseme_simplex,500,0,0,0.0,0,0.0,0
+META -> META,perturb:viseme_simplex,184,0,0,0.0,0,0.0,0
+META -> META,regression:v1:viseme_simplex,500,0,0,0.0,0,0.0,0
+META -> META,regression:v1:perturb:viseme_simplex,184,0,0,0.0,0,0.0,0
+VRCFT eye -> VRCFT eye,grid:vrcft.eye,18,0,0,0.0,0,0.0,0
+VRCFT eye -> VRCFT eye,edge:vrcft.eye,273,0,0,5.551115123125783e-17,24,5.551115123125783e-17,0
+VRCFT eye -> VRCFT eye,impulse:vrcft.eye,25,0,0,0.0,0,0.0,0
+VRCFT eye -> VRCFT eye,vrcft_eye,200,0,0,5.551115123125783e-17,0,5.551115123125783e-17,0
+VRCFT eye -> VRCFT eye,perturb:vrcft_eye,144,0,0,5.551115123125783e-17,0,5.551115123125783e-17,0
+VRCFT eye -> VRCFT eye,regression:v1:vrcft_eye,200,0,0,5.551115123125783e-17,0,5.551115123125783e-17,0
+VRCFT eye -> VRCFT eye,regression:v1:perturb:vrcft_eye,144,0,0,5.551115123125783e-17,0,5.551115123125783e-17,0
+VRM -> VRM,grid:vrm.preset,18,0,0,0.0,0,0.0,0
+VRM -> VRM,edge:vrm.preset,399,0,0,0.0,0,0.0,0
+VRM -> VRM,impulse:vrm.preset,37,0,0,0.0,0,0.0,0
+VRM -> VRM,vrm,200,0,0,0.0,0,0.0,0
+VRM -> VRM,perturb:vrm,216,0,0,0.0,0,0.0,0
+VRM -> VRM,regression:v1:vrm,200,0,0,0.0,0,0.0,0
+VRM -> VRM,regression:v1:perturb:vrm,216,0,0,0.0,0,0.0,0
