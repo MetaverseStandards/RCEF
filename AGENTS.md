@@ -5,7 +5,7 @@ This guide is for coding agents that use RCEF or change it. It gives the facts t
 
 ## Part 1: Using RCEF
 
-RCEF is an open catalogue of face-expression standards (ARKit, OpenXR FB2, META visemes, MediaPipe, VRCFaceTracking, VRM, Godot, Roblox) and the maps between them. The TOML files are the data. msf-character-tools is a separate package. It is the engine that checks the data, builds the pack and evaluates the maps. The current data is 0.5.0 (unreleased), checked with msf-character-tools 0.5.0.
+RCEF is an open catalogue of public face-expression interfaces (ARKit, OpenXR FB2, META visemes, MediaPipe, VRCFaceTracking, VRM, Godot, Roblox, FACS codes) and the maps between them, through two draft canonical sets. The TOML files are the data. msf-character-tools is a separate package. It is the engine that checks the data, builds the pack and evaluates the maps. The current data is 0.5.0, checked with msf-character-tools 0.5.0.
 
 ### Outputs
 
@@ -20,7 +20,7 @@ RCEF is an open catalogue of face-expression standards (ARKit, OpenXR FB2, META 
 | `reports/canonical_correspondence.md`, `.csv` | The signals of the canonical expression and viseme sets against the authored mappings. |
 | `reports/SHA256SUMS` | SHA-256 of the six report files. Each Markdown report also records the pack's SHA-256. |
 
-The README's [Mappings](README.md#mappings) table lists each map with its source and target profile.
+The README's [Routes](README.md#routes) table lists each source and target set that a translation can join, and its [Mappings](README.md#mappings) tables list each map with its source and target profile.
 
 ### Translate tracker values
 
@@ -96,7 +96,8 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | `tools/calibration/` | Optional tools that make calibration records. Most need extra packages; `viseme_poses.py` needs only msf-character-tools. `check.py` and the tests never run them; the tests check only the fitting and cell scoring. |
 | `tools/render/` | `meshrender.swift`, the macOS offscreen renderer for calibration fits. |
 | `examples/` | End-to-end translations and face pipelines; inputs in `examples/data/`. |
-| `docs/` | Architecture guide and visuals, `expression-sets.md`, `toml-index.csv`, `godot_comparison.md`, calibration notes, and the draft canonical expression set: `canonical-set.md`, `canonical-set-audit.md` and `facs-intensity.md`. |
+| `ab/` | The registered A/B comparison of the routes with the retired direct maps: the `FREEZES` ledger, the registrations (`*.abreg`) and the results in `results/v<N>/`. See [ab/README.md](ab/README.md). |
+| `docs/` | Architecture guide and visuals, the figures `routes.svg` and `ab-coverage.svg`, `expression-sets.md`, `toml-index.csv`, `godot_comparison.md`, calibration notes, and the draft canonical expression set: `canonical-set.md`, `canonical-set-audit.md` and `facs-intensity.md`. |
 | `fixtures/` | `mapping_samples.json`: sample inputs and expected outputs for the affine and bilateral checks in `tests/test_parity.py`. It is not `tests/fixtures/`, and it holds no signals (those are in `profiles/fixture.toml`). |
 | `tests/` | The `unittest` suite and its inputs in `tests/fixtures/`. |
 
@@ -113,10 +114,21 @@ python3 -B scripts/export_references.py --write   # references.md from evidence/
 python3 -B scripts/compare_godot.py --write       # docs/godot_comparison.md
 python3 -B scripts/export_toml_index.py --write   # docs/toml-index.csv
 python3 -B scripts/build_canonical.py --write     # data/canonical_expression.toml, data/canonical_viseme.toml, profiles/facs.code.toml, mappings/canonical_*.toml
+python3 -B scripts/export_figures.py --write      # docs/routes.svg, docs/ab-coverage.svg
+python3 -B scripts/ab_compare.py check            # the ab/ folder: ledger, registrations, results
 sh scripts/ci_local.sh                       # check.py and tests on Python 3.11 and 3.12
 ```
 
-Without `--write`, each script checks its output and exits non-zero if the output is out of date. `ci_local.sh` uses `$MSF/_tools/rcef-venv3.11` and `rcef-venv3.12`; `MSF` defaults to `~/.local/share/msf`.
+These need network access, so the tests do not run them. Run them before a release:
+
+```sh
+python3 -B scripts/verify_sources.py --cache DIR          # every evidence digest; DIR outside the repository
+python3 -B scripts/check_audit_locators.py --cache DIR    # the audit's crosswalk locators, from the same cache
+python3 -B scripts/audit_inventories.py --cache DIR       # selected names and indices, from the same cache
+python3 -B scripts/check_visibility.py                    # no document claims public access that does not exist
+```
+
+Without `--write`, each script checks its output and exits non-zero if the output is out of date. `ci_local.sh` runs the venvs `$RCEF_VENVS/3.11` and `$RCEF_VENVS/3.12`. `RCEF_VENVS` defaults to `rcef/venvs` in the XDG data directory (`$XDG_DATA_HOME`, by default `.local/share` in your home directory). A symbolic link to an existing venv is fine.
 
 ### Rules that must not break
 
@@ -124,11 +136,13 @@ Without `--write`, each script checks its output and exits non-zero if the outpu
 |---|---|
 | Every provider fact cites a public source in `evidence/sources.toml`. The record needs the items that CONTRIBUTING lists. | msf-character-tools refuses a reference to a missing evidence id (`E_REFERENCE`). It also refuses a record with no `url`, unless the record is original work with `authorship` and `license` (`E_EVIDENCE`). No offline check reads the digests. Run `scripts/verify_sources.py --cache DIR` (outside the repo) and review the result. With the same cache, `scripts/check_audit_locators.py --cache DIR` checks the line locators of the audit's table of crosswalks of the FB2-only signals; the tests cannot read the cache. |
 | Generated files and reports change only through the commands above, in the same commit as the source change. | `check.py` (byte drift), `tests/test_metadata.py`, `tests/test_readable_reports.py`. |
-| The README's Mappings and Expression sets tables, the table in `docs/expression-sets.md`, `references.md`, `docs/toml-index.csv` and `docs/godot_comparison.md` agree with the data. You edit the three tables by hand; scripts write the others. | `tests/test_readme_sources.py`, `test_references.py`, `test_toml_index.py`, `test_godot_comparison.py`. The README test reads the README text between `### Mappings`, `### Expression sets` and `## Getting started`, and the `docs/expression-sets.md` text between `## Where each set comes from` and `## Signal counts`. Keep those headings. |
+| The README's pivot sentence and its Routes, Mappings and Expression sets tables, the table in `docs/expression-sets.md`, `references.md`, `docs/toml-index.csv`, `docs/godot_comparison.md` and the two figures agree with the data. You edit the README text and the tables by hand; scripts write the others. | `tests/test_readme_sources.py`, `test_references.py`, `test_toml_index.py`, `test_godot_comparison.py`, `test_figures.py`. The README test reads the pivot sentence in `## Purpose`, and the README text between `### Routes`, `### Mappings`, `### Expression sets` and `## Getting started`, and the `docs/expression-sets.md` text between `## Where each set comes from` and `## Signal counts`. Keep those headings. |
+| No document states as fact what the definitions audit leaves `unresolved` (for example whose left a VRM blink or a FACS side letter means). Say that it is an assumption, or name the loss key. | `tests/test_unresolved_claims.py`. |
+| No tracked file names a path under a home directory (except the XDG defaults), the local host, a private address or an internal host. Every GitHub file link and every evidence record is pinned to a commit or a digest. No document claims public access that does not exist. | `tests/test_public_sources.py`. List more hosts to refuse, one per line, in an untracked `.private-hosts` file. `scripts/check_visibility.py` also requests the links. |
 | Test expectations come from public sources, not from RCEF's mappings. | `scripts/derive_fb2_goldens.py` writes `tests/fixtures/fb2_goldens.json`, `godot_fb2_rules.csv` and `fb2_vrcft_ue_goldens.json` from cached source bytes, and never reads `mappings/`, `profiles/` or `data/`. `scripts/derive_rocketbox_au_names.py` writes `tests/fixtures/rocketbox_au_names.json` from the pinned Rocketbox rig files. Reviewers check that nobody edits them by hand. |
 | Calibration records are frozen. `FREEZES` is append-only. A mapping can cite a record (`calibration.<id>`) only if its values are the frozen values and every held-out cell of every channel it reads passed: a `piecewise_linear` mapping has exactly the frozen knots; a `weighted_sum` (a pose sum) reads copies of the channels, is read only by one clamp with the knots (0, 0), (1, 1), (n, 1), and has exactly the frozen poses as weights. | `check.py`, before msf-character-tools runs; `tests/test_calibration.py`. `check.py` checks the ledger: the record must be the latest version, with its hash. Versions go up by one, dates never go back, and a re-freeze needs a reason. `check.py` cannot see Git history. Reviewers check that no line changed and that the ledger line came before the results. See [calibration/README.md](calibration/README.md). |
 | msf-character-tools is exactly a locked release wheel. | `check.py` exits 2 for any other build; `tests/test_dependency.py`. |
-| Each data change has an entry in [CHANGELOG.md](CHANGELOG.md). | Reviewers. The top section is `Data 0.5.0 — unreleased`: add entries there. Calibration records have their own ledger, so their entries go in the separate `Calibration and examples — unreleased` section. It sits below the two unreleased data sections (0.5.0 and 0.4.0) and above `Data 0.3.0`. `tests/test_metadata.py` checks that `data_version` in `pack.toml` equals the pack's and has the form `X.Y.Z`. |
+| Each data change has an entry in [CHANGELOG.md](CHANGELOG.md). | Reviewers. Data 0.5.0 is a release candidate: its section has its date, and only the project's release owners tag it. A data change after that opens a new top section, `Data X.Y.Z — unreleased`, with the next `data_version`, and adds its entries there. Calibration records have their own ledger, so their entries go in a separate `Calibration and examples` section below the data section of the same release. `tests/test_metadata.py` checks that `data_version` in `pack.toml` equals the pack's and has the form `X.Y.Z`. |
 | Code is MIT. Data and documentation are CC-BY-SA-4.0. Third-party facts are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Do not copy provider prose that has no open licence: write your own summary and cite the source. | Reviewers. Start each new file with a licence line, as the existing files do. |
 
 To adopt a new msf-character-tools release: install its wheel by hash, then run `python3 -B check.py --update-lock --wheel PATH/TO/WHEEL`. Do this once from each Python and platform whose wheel tag you support. If the lock has the same commit and the same version, the new tag's entry is merged into it. If the commit or the version is different, the old lock moves to `tooling.lock.previous.json` and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`, and the README's install-by-hash steps then fail for that tag. pip records the hash, so after a pip install `--wheel` is optional.
@@ -143,10 +157,15 @@ To adopt a new msf-character-tools release: install its wheel by hash, then run 
 - Retired IDs are never reused. `tests/test_retired_ids.py` checks that every ID of the A/B baseline that is not in the pack has one line in [docs/retired-ids.csv](docs/retired-ids.csv).
 - msf-character-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
 - `docs/architecture.html`, `.svg` and `.png` are made by hand, and no test checks them. When the data changes, update them and the counts in `docs/architecture.md`, and render the PNG from the SVG at the same size (1160 × 560). See the checklist in [docs/architecture.md](docs/architecture.md#9-independent-validation-checklist).
+- `docs/routes.svg` and `docs/ab-coverage.svg` are not made by hand: `scripts/export_figures.py --write` writes them from the pack and the latest A/B results, and `tests/test_figures.py` fails when they are out of date. A new A/B run or a map change needs the script.
 - The face and viseme pipelines download rigs on first use and check their hashes (`--cache DIR` for rig files, `--out DIR` for outputs; the defaults are under `~/.cache`). The slow tests skip unless their variables are set. See [examples/README.md](examples/README.md).
   - `tests/test_examples_slow.py`: `RCEF_SLOW_TESTS=1`, plus `RCEF_ICT_CACHE` for the ICT tests and `RCEF_RIG_CACHE` for the Rocketbox and VRM tests.
   - `tests/test_rig_gains.py` (slow part): `RCEF_SLOW_TESTS=1`, `RCEF_K3_ICT_CACHE`, `RCEF_RIG_CACHE` and `RCEF_RENDERER`.
   - `tests/test_translations.py` (slow part): `RCEF_SLOW_TESTS=1` only.
+
+### Releases
+
+[GOVERNANCE.md](GOVERNANCE.md) lists the release gates. A release candidate commit sets the date in the heading of its CHANGELOG section (`Data X.Y.Z — YYYY-MM-DD`). Run the network checks above, the slow tier and `scripts/ci_local.sh` on it. Agents never push, tag or publish a release: the project's release owners do that, on the release candidate commit. If anything changes after the date is set, set the date again.
 
 ### Change workflow
 
