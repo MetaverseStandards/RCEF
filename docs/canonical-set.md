@@ -543,7 +543,7 @@ FACS is the Facial Action Coding System. Other expression sets name their shapes
 | Codes | Disposition | Region | Reason |
 |---|---|---|---|
 | 11 | unresolved | cheek | no canonical signal; the name `nasolabial_deepen` is reserved; the codec does not read it |
-| 13 | unresolved | mouth | no canonical signal; the name `sharp_lip_pull` is reserved; the codec does not read it |
+| 13 | unresolved | mouth | no canonical signal; the name `sharp_lip_pull` is reserved; the codec does not read it. Rocketbox names its AU 13 shape `AU_13_CheekPuffer`, but Wikipedia names 13 Sharp lip puller; it is not cheek puff (34) |
 | 21 | unresolved | other | no canonical signal; the name `neck_tighten` is reserved; the codec does not read it |
 | 25 | unresolved | mouth | no canonical signal; the name `lips_part` is reserved; the codec does not read it, and toward FACS all mouth opening is written as 26 |
 | 27 | unresolved | jaw | no signal of its own; the name `mouth_stretch` is reserved; the codec reads it as AU26, and toward FACS all mouth opening is written as 26 |
@@ -613,10 +613,10 @@ The data change that adds `facs.code` adds four more records. The last two suppo
 
 | Record | Source | Licence or terms |
 |---|---|---|
-| `facs_hager_2002` | The FACS publisher's page on the 2002 manual, Internet Archive capture `20081218070149` (original bytes), lines 204-205. Another public page names 41, 42 and 43 instead, and does not name 44 | Reference only |
+| `facs_hager_2002` | The FACS publisher's page on the 2002 manual, Internet Archive capture `20081218070149` (original bytes), lines 204-205. The live page now returns HTTP 404 | Reference only |
 | `rocketbox_avatars` | Microsoft Rocketbox README at `0943055` (lines 21 and 55). The 48 `AU_*` shape names come from the facial files of Female_Adult_01 and Male_Adult_01 that `examples/rigs.py` pins, through `scripts/derive_rocketbox_au_names.py` | MIT |
 | `pyfeat_au_reference` | Py-Feat `docs/pages/au_reference.md` at `4ebb4ec` | MIT |
-| `ozel_arkit_facs` | Melinda Ozel, "ARKit to FACS" cheat sheet, Internet Archive capture `20261010185714` (original bytes); the live page changes its bytes on every request | Reference only; all rights reserved |
+| `ozel_arkit_facs` | Melinda Ozel, "ARKit to FACS" cheat sheet, Internet Archive capture `20261010185714` (original bytes). The live page's bytes change over time with template and plugin updates, so the record pins an archive capture | Reference only; all rights reserved |
 
 ## Effect on compatibility
 

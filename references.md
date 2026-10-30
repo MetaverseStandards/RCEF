@@ -446,7 +446,7 @@ FACS code numbers, short names, table membership, intensity letters, modifier le
 
 ## facs_hager_2002
 
-The FACS publisher's page on the 2002 manual lists the re-assignment of the old 41, 42 and 44 scores to intensities of AU 43, and revised scoring for AUs 25, 26 and 27 with intensities; it gives no letters. Another public page, at Carnegie Mellon, names 41, 42 and 43 instead and does not name 44; RCEF takes no value from either.
+The FACS publisher's page on the 2002 manual lists the re-assignment of the old 41, 42 and 44 scores to intensities of AU 43, and revised scoring for AUs 25, 26 and 27 with intensities; it gives no letters, and RCEF takes no value from it. The live page now returns HTTP 404, so the record pins an archived copy.
 
 - Source: [facs_hager_2002](https://web.archive.org/web/20081218070149id_/http://www.face-and-emotion.com:80/dataface/facs/new_version.jsp)
 - Revision: `Internet Archive capture 20081218070149, original bytes (id_)`

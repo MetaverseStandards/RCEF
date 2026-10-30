@@ -443,7 +443,7 @@ license = "CC-BY-SA-4.0"
 
 [[evidence]]
 id = "facs_hager_2002"
-claim = "The FACS publisher's page on the 2002 manual lists the re-assignment of the old 41, 42 and 44 scores to intensities of AU 43, and revised scoring for AUs 25, 26 and 27 with intensities; it gives no letters. Another public page, at Carnegie Mellon, names 41, 42 and 43 instead and does not name 44; RCEF takes no value from either."
+claim = "The FACS publisher's page on the 2002 manual lists the re-assignment of the old 41, 42 and 44 scores to intensities of AU 43, and revised scoring for AUs 25, 26 and 27 with intensities; it gives no letters, and RCEF takes no value from it. The live page now returns HTTP 404, so the record pins an archived copy."
 status = "verified_current"
 url = "https://web.archive.org/web/20081218070149id_/http://www.face-and-emotion.com:80/dataface/facs/new_version.jsp"
 retrieved = "2026-10-29"

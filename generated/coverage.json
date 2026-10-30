@@ -7680,7 +7680,7 @@
       "url": "https://en.wikipedia.org/w/index.php?title=Facial_Action_Coding_System&oldid=1357638399&action=raw"
     },
     {
-      "claim": "The FACS publisher's page on the 2002 manual lists the re-assignment of the old 41, 42 and 44 scores to intensities of AU 43, and revised scoring for AUs 25, 26 and 27 with intensities; it gives no letters. Another public page, at Carnegie Mellon, names 41, 42 and 43 instead and does not name 44; RCEF takes no value from either.",
+      "claim": "The FACS publisher's page on the 2002 manual lists the re-assignment of the old 41, 42 and 44 scores to intensities of AU 43, and revised scoring for AUs 25, 26 and 27 with intensities; it gives no letters, and RCEF takes no value from it. The live page now returns HTTP 404, so the record pins an archived copy.",
       "id": "facs_hager_2002",
       "license": "reference only; source prose not redistributed",
       "locator": "lines 204-205 (list of features of the 2002 manual)",
@@ -9302,7 +9302,7 @@
     "approximate": 773,
     "exact": 26
   },
-  "pack_sha256": "38bca36eccfa028c0c6c793da7d275ec3ecf95337193d55cf54f3f14715990a7",
+  "pack_sha256": "90e80bd4f0c1e61bf6a543c1c1cc3e295d72d7e9e9f4bd1ff9eaff696808bdc8",
   "profiles": [
     {
       "count": 21,
@@ -62553,7 +62553,7 @@
       "profiles": [
         "facs.code"
       ],
-      "reason": "No canonical signal; the name sharp_lip_pull is reserved; the codec does not read it.",
+      "reason": "No canonical signal; the name sharp_lip_pull is reserved; the codec does not read it. Rocketbox names its AU 13 shape AU_13_CheekPuffer, but Wikipedia names 13 Sharp lip puller; it is not cheek puff (34).",
       "rules": []
     },
     {
