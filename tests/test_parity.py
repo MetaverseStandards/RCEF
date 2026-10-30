@@ -78,25 +78,10 @@ class Parity(unittest.TestCase):
                          [f['expected'] for f in self.fixtures['bilateral']])
         self.assertEqual(samples[0]['values'], samples[1]['values'])
 
-    def test_all_provider_identities_share_explicit_calibration(self):
-        signals = {s['id']: s for s in self.document['signals']}
-        for mapping, profile in [('arkit.to_canonical', 'arkit.coefficient'),
-                                 ('fb2.to_canonical', 'openxr.fb2'),
-                                 ('vrcft_eye.to_canonical', 'vrcft.eye')]:
-            with self.subTest(mapping=mapping):
-                compiled = shared_pack.mapping(mapping, profile, 'rcef.canonical', False)
-                rules = next(m['rules'] for m in self.document['mappings'] if m['id'] == mapping)
-                values = {r['inputs'][0]: 0.25 for r in rules}
-                sample = self.ok(msf.evaluate_mapping(compiled, [self.frame(values)])).samples[0]
-                for rule in rules:
-                    input_id, output_id = rule['inputs'][0], rule['outputs'][0]
-                    self.assertEqual(signals[input_id]['calibration'], signals[output_id]['calibration'])
-                    self.assertIn('provider', rule['assumptions'][-1].lower())
-                    self.assertEqual(sample['values'][output_id], 0.25)
-
     def test_unresolved_cross_provider_refused(self):
         self.rejected(msf.compile_mapping(self.pack, shared_pack.snapshot('mediapipe.label'),
-                                          shared_pack.snapshot('rcef.canonical'), 'survey.ambiguous', True))
+                                          shared_pack.snapshot('rcef.canonical_expression'), 'survey.ambiguous',
+                                          True))
 
     def test_invalid_missing_boolean_nonfinite_and_domain_samples(self):
         compiled = self.ok(self.compile('fixture.affine'))
@@ -156,9 +141,9 @@ class Parity(unittest.TestCase):
                     for p in outputs.iterdir():
                         if p.name not in baseline:p.unlink()
                     for name, data in baseline.items(): (outputs / name).write_bytes(data)
-            canonical = path / 'data/canonical.toml'
-            blocks = canonical.read_text().split('[[signals]]')
-            canonical.write_text(blocks[0] + '[[signals]]' + blocks[2] + '[[signals]]' + blocks[1]
+            profile = path / 'profiles/vrm.preset.toml'
+            blocks = profile.read_text().split('[[signals]]')
+            profile.write_text(blocks[0] + '[[signals]]' + blocks[2] + '[[signals]]' + blocks[1]
                                  + ''.join('[[signals]]' + b for b in blocks[3:]))
             self.assertNotEqual(run().returncode, 0, 'authoring order drift must be detected')
 

@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: MIT
+"""docs/retired-ids.csv: one tombstone for each ID of the A1 baseline that the pack no longer has, and no other."""
+import csv
+import json
+from pathlib import Path
+import unittest
+
+try:
+    import shared_pack
+except ModuleNotFoundError:  # run by file path from the repository root
+    from tests import shared_pack
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def ids(document):
+    """Every ID in a pack document, with its kind."""
+    found = {}
+    for mapping in document['mappings']:
+        found[mapping['id']] = 'map'
+        found.update({rule['id']: 'mapping' for rule in mapping['rules']})
+    found.update({p['id']: 'profile' for p in document['profiles']})
+    found.update({s['id']: 'signal' for s in document['signals']})
+    found.update({e['id']: 'evidence' for e in document['evidence']})
+    return found
+
+
+class RetiredIds(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with (ROOT / 'docs/retired-ids.csv').open(encoding='utf-8', newline='') as handle:
+            cls.rows = list(csv.DictReader(handle))
+        cls.live = ids(shared_pack.document())
+        cls.baseline = ids(json.loads((ROOT / 'tests/fixtures/baseline-dea1713.pack.json').read_text(encoding='utf-8')))
+
+    def test_every_missing_baseline_id_has_exactly_one_tombstone(self):
+        tombstones = [r['id'] for r in self.rows]
+        self.assertEqual(len(tombstones), len(set(tombstones)))
+        self.assertEqual(set(tombstones), {i for i in self.baseline if i not in self.live})
+        for row in self.rows:
+            with self.subTest(row['id']):
+                self.assertEqual(row['kind'], self.baseline[row['id']])
+                self.assertTrue(row['retired_in'] and row['note'])
+
+    def test_no_retired_id_is_used_again(self):
+        self.assertEqual({r['id'] for r in self.rows} & set(self.live), set())
+
+    def test_a_replacement_exists_where_one_is_named(self):
+        for row in self.rows:
+            if row['replaced_by'] and not row['replaced_by'].startswith('route '):
+                self.assertIn(row['replaced_by'], self.live, row['id'])
+
+    def test_what_was_retired(self):
+        kinds = {}
+        for row in self.rows:
+            kinds[row['kind']] = kinds.get(row['kind'], 0) + 1
+        # 7 direct maps and 3 identity maps; their 191 + 21 mappings and the old survey.ambiguous rule; the old
+        # canonical profile, its 21 signals and the 4 intermediate values of the old ARKit -> FB2 gaze map.
+        self.assertEqual(kinds, {'map': 10, 'mapping': 213, 'profile': 1, 'signal': 25})
+
+
+if __name__ == '__main__':
+    unittest.main()
