@@ -4,3 +4,4 @@
 # id version abreg_sha256 date [reason]
 ab.pivot v1 86a3c26c8dcf9fca3e432af2a4e963b4d4d94e9ef94c30f50140cfd56003f17a 2026-10-29
 ab.pivot v2 93a86e006df4e5083b9c1674fdc2590f10b5c3509383a8dea7ac7a4a1e80ad8d 2026-10-29 reproduce of v1 after the direct maps are retired
+ab.pivot v3 4c65552511aedec32a660e5d3cb9103ea2830d3925b41619cae4a5149b13b4f5 2026-10-30 revise of v2: one map per set pair and direction, finer refusals
