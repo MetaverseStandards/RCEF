@@ -46,14 +46,14 @@ assert out.ok, out.report.to_dict()
 print(out.value.samples[0]['values']['arkit.coefficient.jawOpen'])
 ```
 
-What [examples/rcef_translate.py](examples/rcef_translate.py) does, and why:
+The examples translate through the draft canonical sets with [examples/rcef_route.py](examples/rcef_route.py): source → canonical → target. Route finds the in-maps and out-maps of a source and target set, runs each group's in-map and out-map, and reports a refused group without refusing the others. [examples/rcef_frames.py](examples/rcef_frames.py) reads and writes their CSV files. What Route does, and why:
 
 - Every input in `required_inputs` must be in the frame, or the frame is refused (`E_MISSING_SAMPLE`).
 - If any channel you give is marked invalid, msf-character-tools refuses the whole frame (`E_INVALID_SAMPLE`), even a channel that the map does not read. So give each map only its own inputs.
 - An input's validity is the AND of the provider flags in its signal's `validity` field, for example `isValid AND isEyeFollowingBlendshapesValid` for FB2 gaze.
 - If one frame in a call is refused, the call returns no values for any frame. Each error's `ref` begins with `/samples/<n>`, for example `/samples/1/openxr.fb2.XR_FACE_EXPRESSION2_BROW_LOWERER_L_FB`. Use it to find the refused frames, then evaluate the rest again.
-- Face and gaze are separate maps: `fb2.to_arkit` with `fb2_gaze.to_arkit`, and `arkit.to_fb2` with `arkit_gaze.to_fb2`.
-- To translate through the draft canonical expression set, use [examples/rcef_route.py](examples/rcef_route.py). It finds the in-maps and out-maps of a source and target set, runs each group's in-map and out-map, and reports a refused group without refusing the others.
+- Face and gaze are separate groups, with separate maps: for example `fb2_face.to_rcef` and `fb2_gaze.to_rcef` in, `rcef_face.to_arkit` and `rcef_gaze.to_arkit` out. A refusal names the hop map that refused.
+- The direct maps (`fb2.to_arkit` and the others) are still in the pack, but no example reads them. The A/B comparison runs them through Route's one-hop mode ([ab/README.md](ab/README.md)).
 
 [examples/README.md](examples/README.md) shows complete runs from CSV to CSV and onto face meshes.
 
