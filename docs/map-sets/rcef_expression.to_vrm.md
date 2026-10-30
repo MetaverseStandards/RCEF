@@ -36,7 +36,7 @@ Loss keys of the [definitions audit](../canonical-set-audit.md#loss-keys) that i
 
 ## Parts this map does not have
 
-The [VRM section](../canonical-set-audit.md#vrm) of the definitions audit names no `vrm.preset` signal for the canonical signals of these groups, so no mapping reads them. A route labels the outputs that need them "not available from source", which is not a refusal.
+The [VRM section](../canonical-set-audit.md#vrm) of the definitions audit names no `vrm.preset` signal for the canonical signals of these groups, so no mapping reads them. On a route to `vrm.preset`, a source input that reaches only these groups is listed as dropped.
 
 - `face` (41): `brow_inner_raise_left`, `brow_inner_raise_right`, `brow_outer_raise_left`, `brow_outer_raise_right`, `brow_lower_left`, `brow_lower_right`, `lid_tighten_left`, `lid_tighten_right`, `upper_lid_raise_left`, `upper_lid_raise_right`, `cheek_raise_left`, `cheek_raise_right`, `nose_wrinkle_left`, `nose_wrinkle_right`, `jaw_drop`, `lip_corner_pull_left`, `lip_corner_pull_right`, `lip_corner_depress_left`, `lip_corner_depress_right`, `dimple_left`, `dimple_right`, `lip_stretch_left`, `lip_stretch_right`, `chin_raise`, `lip_funnel_upper_left`, `lip_funnel_upper_right`, `lip_funnel_lower_left`, `lip_funnel_lower_right`, `lip_pucker_left`, `lip_pucker_right`, `lip_suck_upper_left`, `lip_suck_upper_right`, `lip_suck_lower_left`, `lip_suck_lower_right`, `lip_press_left`, `lip_press_right`, `lips_toward`, `upper_lip_raise_left`, `upper_lip_raise_right`, `lower_lip_depress_left`, `lower_lip_depress_right`
 - `cheek_puff` (2): `cheek_puff_left`, `cheek_puff_right`

@@ -70,7 +70,7 @@ Loss keys of the [definitions audit](../canonical-set-audit.md#loss-keys) that i
 
 ## Parts this map does not have
 
-The [VRCFaceTracking Unified Expressions section](../canonical-set-audit.md#vrcfacetracking-unified-expressions) of the definitions audit names no `vrcft.artist.base` signal for the canonical signals of these groups, so no mapping reads them. A route labels the outputs that need them "not available from source", which is not a refusal.
+The [VRCFaceTracking Unified Expressions section](../canonical-set-audit.md#vrcfacetracking-unified-expressions) of the definitions audit names no `vrcft.artist.base` signal for the canonical signals of these groups, so no mapping reads them. On a route to `vrcft.artist.base`, a source input that reaches only these groups is listed as dropped.
 
 - `tongue_place` (6): `tongue_retreat`, `tongue_tip_interdental`, `tongue_tip_alveolar`, `tongue_front_dorsal_palate`, `tongue_mid_dorsal_palate`, `tongue_back_dorsal_velar`
 - `pupil_mm` (2): `pupil_diameter_mm_left`, `pupil_diameter_mm_right`

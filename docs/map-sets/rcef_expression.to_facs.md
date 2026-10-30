@@ -57,7 +57,7 @@ Loss keys of the [definitions audit](../canonical-set-audit.md#loss-keys) that i
 
 ## Parts this map does not have
 
-The [FACS section](../canonical-set-audit.md#facs) of the definitions audit names no `facs.code` signal for the canonical signals of these groups, so no mapping reads them. A route labels the outputs that need them "not available from source", which is not a refusal.
+The [FACS section](../canonical-set-audit.md#facs) of the definitions audit names no `facs.code` signal for the canonical signals of these groups, so no mapping reads them. On a route to `facs.code`, a source input that reaches only these groups is listed as dropped.
 
 - `mouth_shift` (2): `mouth_shift_left`, `mouth_shift_right`
 - `chin_raise_upper_lip` (1): `chin_raise_upper_lip`

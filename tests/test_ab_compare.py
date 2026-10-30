@@ -418,10 +418,10 @@ def synthetic_b(document):
             ins.append(hop(rule, f'{source}_{group}.{name}', rule['inputs'], [canonical['id']]))
             outs.append(hop(rule, f'rcef_{group}.{name}', [canonical['id']], rule['outputs']))
             back.append(hop(rule, f'rcef_{group}.back.{name}', [canonical['id']], rule['inputs']))
-        doc['mappings'] += [{'id': f'{source}_{group}.to_rcef', 'rules': ins},
-                            {'id': f'rcef_{group}.to_vrm', 'rules': outs}]
+        canon = profile.replace('.canonical_', '_')  # rcef_viseme or rcef_expression, as the map IDs name them
+        doc['mappings'] += [{'id': f'{source}.to_{canon}', 'rules': ins}, {'id': f'{canon}.to_vrm', 'rules': outs}]
         if group == 'blink':
-            doc['mappings'].append({'id': 'rcef_blink.to_fb2', 'rules': back})
+            doc['mappings'].append({'id': f'{canon}.to_fb2', 'rules': back})
     doc['profiles'] += [{'id': p, 'label': p, 'signal_ids': s} for p, s in members.items()]
     return doc
 
@@ -470,7 +470,7 @@ class DryRun(unittest.TestCase):
         self.assertNotIn('timings.json', sums)
 
     def test_a_planted_fault_in_one_hop_fails_m1_and_m1s_but_not_the_oracle(self):
-        rule = next(r for m in self.document['mappings'] if m['id'] == 'rcef_vowel.to_vrm' for r in m['rules'])
+        rule = next(r for m in self.document['mappings'] if m['id'] == 'rcef_viseme.to_vrm' for r in m['rules'])
         rule['operator']['scale'] = 0.5
         _, b_path = self.register(self.document)
         statuses = ab_compare.run(self.tmp / 'x.abreg', self.tmp / 'out', b_path=b_path, dry_run=True)['row_statuses']
