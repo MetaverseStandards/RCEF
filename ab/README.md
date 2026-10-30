@@ -97,7 +97,7 @@ The seeded families mix full-mantissa binary64 values with 6-decimal values. Eac
 - `SHA256SUMS`: the hash of each result file and of each generated frame file;
 - `timings.json`, which no hash covers.
 
-Two registered runs have passed: `ab.pivot` v1 (`first`) and v2 (`reproduce`, after the direct maps were retired). Every gate of both passes. [docs/ab-coverage.svg](../docs/ab-coverage.svg) shows the latest run route by route: the external reference, the frames and the frames that B refuses. `scripts/export_figures.py` writes it from `results/v<N>/`, and `tests/test_figures.py` checks that it is current.
+Three registered runs have passed: `ab.pivot` v1 (`first`), v2 (`reproduce`, after the direct maps were retired) and v3 (`revise` of v2: one map per set pair and direction, evaluated with partial evaluation). Every gate of each passes. In v3 the Revise gate finds no value difference on 195,344 frames; on them B writes 611,836 outputs that v2 refused, and labels 30,472 outputs that v2 refused "not available from source". It refuses no frame that v2 did not refuse. [docs/ab-coverage.svg](../docs/ab-coverage.svg) shows the latest run route by route: the external reference, the frames and the frames that B refuses. `scripts/export_figures.py` writes it from `results/v<N>/`, and `tests/test_figures.py` checks that it is current.
 
 ![A/B result for each route](../docs/ab-coverage.svg)
 

@@ -31,7 +31,7 @@ In short, since data 0.3.0:
   evaluates each map with partial evaluation, so a bad or missing input
   stops only the outputs that read it.
 - The registered A/B comparison of the routes with the direct maps
-  (`ab/`): `ab.pivot` v1 and v2 pass every gate.
+  (`ab/`): `ab.pivot` v1, v2 and v3 pass every gate.
 - The direct maps and the old 21-signal set `rcef.canonical` are retired,
   with a tombstone for each ID.
 - Operators 1.1 (from data 0.4.0) and the msf-character-tools 0.6.0 lock.
@@ -48,7 +48,10 @@ the frozen baseline pack at `dea1713`), two direct maps in turn (A2), the
 expression library's FACS table (A3) and a pure-Python oracle (O).
 `ab.pivot` v1 (`first`) ran before the direct maps were retired, and v2
 (`reproduce`) after; v2 gives the same result files as v1, byte for byte,
-apart from the manifest, its line in `SHA256SUMS` and the timings. Both pass every gate: on every frame
+apart from the manifest, its line in `SHA256SUMS` and the timings. v3
+(`revise` of v2) runs one map per set pair and direction with partial
+evaluation: the Revise gate finds every value of v2 kept and no output
+refused that v2 wrote. All three pass every gate: on every frame
 of the 37 routes, B gives the oracle's values, and on the 5 routes of the
 direct maps B gives the same values and refuses the same frames as A1.
 `ab/README.md` gives the ledger, the freeze kinds and the metrics.
@@ -130,7 +133,10 @@ mappings are the same.
   old → new map renames. The new **Revise** gate runs v2's `Route` and pack
   from Git on the same frames and checks that B keeps every value, writes
   every output it wrote and refuses no output that v2 wrote. The M7
-  mutation that merged two group maps now splits one map. The hop maps are
+  mutation that merged two group maps now splits one map. M3 exact counts
+  a gaze partner outside 0 to 1 as 0 in its bound, because partial
+  evaluation now writes the other direction of such a pair. v3 passes
+  every gate. The hop maps are
   frozen against `tests/fixtures/b-maps-ab.pivot-v3.json`.
 - `tools/calibration/viseme_poses.py` reads the poses through the new map
   IDs, so its code commit in `tests/test_calibration_tripwire.py` changes.
