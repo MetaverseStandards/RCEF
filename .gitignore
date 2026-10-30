@@ -6,3 +6,5 @@ __pycache__/
 out/
 /fb2_to_arkit.csv
 /visemes_to_vrm.csv
+# Extra private hosts for tests/test_public_sources.py (local only)
+.private-hosts

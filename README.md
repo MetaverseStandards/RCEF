@@ -11,6 +11,8 @@ RCEF does four things:
 - It defines explicit one-way scalar mappings into and out of the canonical sets. Each mapping states its assumptions and its losses. A translation runs from a source set through a canonical set to a target set.
 - It checks all of this with [msf-character-tools](https://github.com/MetaverseStandards/msf_character_tools), which is maintained separately.
 
+RCEF is a pivot for translating between expression sets. It is not a set that everyone must adopt. Each canonical signal has a declared meaning, but no shared or measured gain.
+
 RCEF records provider names as facts, with attribution. Its definitions and examples are original.
 
 RCEF is not these things:
@@ -45,7 +47,7 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 ### Code and tests
 
 - `check.py`: the main check. It verifies the locked msf-character-tools, the calibration records and the generated files in `generated/` and `reports/`. `--write` rebuilds those files.
-- `scripts/`: helper programs. They write the canonical expression set and its maps, the source list and the TOML index, compare RCEF with Godot, check the public sources and the audit's source locators, and run the local CI.
+- `scripts/`: helper programs. They write the canonical expression set and its maps, the source list and the TOML index, compare RCEF with Godot, draw the two figures, check the public sources, the audit's source locators and the visibility claims, and run the local CI.
 - `tests/`: the automated tests, with their inputs in `tests/fixtures/`. `scripts/derive_fb2_goldens.py` makes three of those inputs from cached public sources, `scripts/derive_capability_sets.py` makes the name lists in `capability_sets.json`, and `scripts/derive_rocketbox_au_names.py` reads the 48 Rocketbox FACS shape names from the pinned rig files into `rocketbox_au_names.json`.
 - `fixtures/`: small made-up inputs with known answers. They show how the formulas behave.
 - `tools/`: optional tools that make the calibration records, and the small macOS renderer they use.
@@ -56,10 +58,11 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 
 ### Documents
 
-- `docs/`: the [architecture guide](docs/architecture.md) (also as a diagram and a web page), the [full table of expression sets](docs/expression-sets.md), calibration notes, and the draft [canonical expression set](docs/canonical-set.md) with its [definitions audit](docs/canonical-set-audit.md) and [FACS intensity codec](docs/facs-intensity.md).
+- `docs/`: the [architecture guide](docs/architecture.md) (also as a diagram and a web page), the figures [routes.svg](docs/routes.svg) and [ab-coverage.svg](docs/ab-coverage.svg), the [full table of expression sets](docs/expression-sets.md), calibration notes, and the draft [canonical expression set](docs/canonical-set.md) with its [definitions audit](docs/canonical-set-audit.md) and [FACS intensity codec](docs/facs-intensity.md).
 - `survey.md`: what RCEF selected from each system, and the limits of each.
 - `proposal.md`: the data format, the API and the release limits.
-- `CHANGELOG.md`, `CONTRIBUTING.md` and `GOVERNANCE.md`: the changes in each data version, what a change must include, and who owns releases.
+- `ab/`: the registered A/B comparison of the routes with the retired direct maps, and its results.
+- `CHANGELOG.md`, `CONTRIBUTING.md` and `GOVERNANCE.md`: the changes in each data version, what a change must include, and who owns releases and the release gates.
 - `REVIEW.md`: a self-review dated 2026-10-07.
 - `AGENTS.md`: instructions for AI coding assistants. `CLAUDE.md` points to it.
 - `LICENSE`, `LICENSES/` and `THIRD_PARTY_NOTICES.md`: the licences and the credits for public sources.
@@ -100,9 +103,31 @@ The draft canonical viseme set, `rcef.canonical_viseme`, has 16 signals. 15 are 
 - META visemes and the VRM vowel presets into the canonical viseme set (22 mappings in 5 maps, with 1 internal step in the map that writes `alveolar_floor`);
 - the canonical viseme set to META visemes and the VRM vowel presets (20 mappings in 4 maps).
 
-On the pairs that the retired direct maps translated, the composed route gives the same weights as they did (`tests/test_pivot_structure.py` compares it with the frozen baseline). Of the 484 mappings in the 84 maps of the two canonical sets, all but the 4 pupil copies are proposed and approximate; the pupil copies are exact and `verified_current`. `scripts/build_canonical.py` writes both canonical profiles, the `facs.code` profile and these maps from the two documents.
+On the pairs that the retired direct maps translated, the composed route gives the same weights as they did (`tests/test_pivot_structure.py` compares it with the frozen baseline). The registered A/B comparison checks this on every frame ([ab/README.md](ab/README.md)). Of the 484 mappings in the 84 maps of the two canonical sets, all but the 4 pupil copies are proposed and approximate; the pupil copies are exact and `verified_current`. `scripts/build_canonical.py` writes both canonical profiles, the `facs.code` profile and these maps from the two documents.
+
+Data 0.5.0 downgrades 19 mappings. The 21 retired identity mappings into `rcef.canonical` were exact and `verified_current`. Their signals now go through the hops of the canonical expression set, which are proposed and approximate, because each canonical signal has RCEF's own declared meaning. Only the 2 pupil diameters keep an exact, `verified_current` copy.
 
 The viseme pose bridge, `rcef_viseme_pose.to_rcef_expression`, joins the two canonical sets: 101 proposed mappings in 1 map, with 56 helper values in `rcef.intermediate`. It writes canonical expression values from the 11 viseme classes that pass the shape or the perceptual gate on all 4 held-out rigs in the calibration record `viseme-poses.rocketbox-features`. `scripts/build_canonical.py` writes it from the record.
+
+### Routes
+
+A route runs from a source set through a canonical set to a target set. [examples/rcef_route.py](examples/rcef_route.py) finds the maps of each route in the pack by the sets their signals belong to. This table lists the 37 routes that data 0.5.0 can run, and the registered A/B comparison runs all of them ([ab/README.md](ab/README.md)). A route writes only the target signals of the groups that both sets fill. Route labels the other outputs "not available from source". A target can be the source set itself (a round trip). VRM appears in three rows: its blinks go through the canonical expression set, and its vowels through the canonical viseme set.
+
+| Source set | Through | Target sets |
+|---|---|---|
+| `arkit.coefficient` | canonical expression set | `arkit.coefficient`, `facs.code`, `openxr.fb2`, `vrcft.artist.base`, `vrcft.eye`, `vrm.preset` |
+| `facs.code` | canonical expression set | `arkit.coefficient`, `facs.code`, `openxr.fb2`, `vrcft.artist.base`, `vrcft.eye`, `vrm.preset` |
+| `openxr.fb2` | canonical expression set | `arkit.coefficient`, `facs.code`, `openxr.fb2`, `vrcft.artist.base`, `vrcft.eye`, `vrm.preset` |
+| `openxr.visemes` | canonical viseme set | `openxr.visemes`, `vrm.preset` |
+| `openxr.visemes` | canonical viseme set, viseme pose bridge, canonical expression set | `arkit.coefficient`, `facs.code`, `openxr.fb2`, `vrcft.artist.base` |
+| `vrcft.eye` | canonical expression set | `arkit.coefficient`, `facs.code`, `openxr.fb2`, `vrcft.artist.base`, `vrcft.eye`, `vrm.preset` |
+| `vrm.preset` | canonical expression set | `arkit.coefficient`, `facs.code`, `openxr.fb2`, `vrcft.artist.base`, `vrcft.eye`, `vrm.preset` |
+| `vrm.preset` | canonical viseme set | `openxr.visemes`, `vrm.preset` |
+| `vrm.preset` | canonical viseme set, viseme pose bridge, canonical expression set | `arkit.coefficient`, `facs.code`, `openxr.fb2`, `vrcft.artist.base` |
+
+![Which canonical groups each expression set fills, in and out](docs/routes.svg)
+
+`tests/test_readme_sources.py` checks this table against the routes that `examples/rcef_route.py` finds. [docs/routes.svg](docs/routes.svg) shows which canonical groups each set fills, in and out, and [docs/ab-coverage.svg](docs/ab-coverage.svg) shows the A/B result for each route.
 
 ### Mappings
 
@@ -277,7 +302,7 @@ echo "msf-character-tools @ file://$DIR/$WHEEL --hash=sha256:$SHA" > "$DIR/msf-c
 uv pip install --python PATH/TO/python --require-hashes -r "$DIR/msf-character-tools.txt"
 ```
 
-The release is public, so the download needs no login or token. Without uv, `python3 -m pip install --require-hashes -r "$DIR/msf-character-tools.txt"` does the same.
+When the release is public, the download needs no login or token. Until then, download the wheel with a GitHub account that can read the repository, for example `gh release download v0.5.0 --repo MetaverseStandards/msf_character_tools --pattern "$WHEEL" --dir "$DIR"`, instead of `curl`. Without uv, `python3 -m pip install --require-hashes -r "$DIR/msf-character-tools.txt"` does the same.
 
 You can also build the wheels yourself with msf-character-tools' `scripts/build_release.sh` at the locked commit. Its `docs/building.md` lists the pinned inputs that give the same bytes. `check.py` refuses any other build: every installed file must match the lock.
 
@@ -297,16 +322,17 @@ python3 -B check.py            # CHECK: do the outputs still match the TOML? Wri
 python3 -B check.py --write    # APPLY: regenerate generated/ and reports/ from the TOML.
 ```
 
-Four more scripts write the other generated files. Without `--write`, each one only checks its files and fails if they are out of date:
+Five more scripts write the other generated files. Without `--write`, each one only checks its files and fails if they are out of date:
 
 ```sh
 python3 -B scripts/build_canonical.py --write     # data/canonical_expression.toml, data/canonical_viseme.toml, profiles/facs.code.toml and mappings/canonical_*.toml from docs/canonical-set.md and its audit
 python3 -B scripts/export_references.py --write   # references.md from evidence/sources.toml
 python3 -B scripts/export_toml_index.py --write   # docs/toml-index.csv from all TOML files
 python3 -B scripts/compare_godot.py --write       # docs/godot_comparison.md from the pack
+python3 -B scripts/export_figures.py --write      # docs/routes.svg and docs/ab-coverage.svg from the pack and the A/B results
 ```
 
-Any change to a TOML file changes `docs/toml-index.csv`. Any change to a string in a TOML file also changes the pack hash. Then `rcef.pack.json`, `coverage.json`, both `SHA256SUMS` files and the three Markdown reports change too. [AGENTS.md](AGENTS.md#known-traps) says when the CSV files change. Regenerate everything, review every diff, and commit the TOML and the generated files together. Each data change also needs an entry in [CHANGELOG.md](CHANGELOG.md), in the top section, `Data 0.5.0 — unreleased`.
+Any change to a TOML file changes `docs/toml-index.csv`. Any change to a string in a TOML file also changes the pack hash. Then `rcef.pack.json`, `coverage.json`, both `SHA256SUMS` files and the three Markdown reports change too. [AGENTS.md](AGENTS.md#known-traps) says when the CSV files change. Regenerate everything, review every diff, and commit the TOML and the generated files together. Each data change also needs an entry in [CHANGELOG.md](CHANGELOG.md), in the top section. Data 0.5.0 is a release candidate, so a data change after it opens a new section; [AGENTS.md](AGENTS.md#rules-that-must-not-break) says how.
 
 GitHub Actions is not turned on for this repository. Run `sh scripts/ci_local.sh` instead. It runs `check.py` and the tests on Python 3.11 and 3.12. Paste its summary into the pull request. It expects a venv for each version with the locked wheel installed. The comment at the top of the script gives the paths.
 
@@ -382,6 +408,8 @@ To check only the reports with Python's standard library, run `python3 -B script
 
 Each open item below is stated in full in the linked document.
 
+- **Meaning review.** The canonical expression set, the canonical viseme set and `facs.code` are drafts (`vocabulary_status = "draft"`). The working group has not reviewed their meaning yet. Acceptance would change only `vocabulary_status`, not IDs or maps ([GOVERNANCE.md](GOVERNANCE.md), [docs/canonical-set.md](docs/canonical-set.md)).
+
 - **Calibration between providers.** In general, how one provider's calibration relates to another's is still unresolved. Maximum angles and model calibration are unknown, so no cross-provider identity is possible ([survey.md](survey.md#semantics-that-remain-distinct)). No provider publishes its gain, so the mappings assume that equal weights mean equal expressions ([AGENTS.md](AGENTS.md#limits)).
 - **Missing evidence.** RCEF has no evidence yet for: MediaPipe model calibration and provenance, FB1 numeric bounds, FB2 maximum angles per direction, VRCFT raw gaze units and source contradictions, and which Roblox list of required poses is authoritative. These gaps block the derived mappings that depend on them ([proposal.md](proposal.md#release-limits-and-remaining-evidence), [REVIEW.md](REVIEW.md#evidence-and-gates-still-open)). [docs/calibration/mediapipe-licence.md](docs/calibration/mediapipe-licence.md) records a later check of the MediaPipe model's licence and training-data statements.
 - **VRM specification prose.** It is still unknown whether VRM specification prose may be redistributed. RCEF links to it and does not copy it ([REVIEW.md](REVIEW.md#evidence-and-gates-still-open)).
@@ -393,6 +421,7 @@ Each open item below is stated in full in the linked document.
 
 - [Architecture guide](docs/architecture.md): what `check.py` does, how TOML is discovered and validated, how maps compile and run in memory, the generated reports, and worked examples of each operator. The [visual architecture report](docs/architecture.html), [standalone diagram](docs/architecture.svg) and [TOML file index](docs/toml-index.csv) describe the same data 0.5.0 tree as the guide.
 - [Expression sets](docs/expression-sets.md): every profile file, with its documentation, pinned source and licence.
+- [A/B comparison](ab/README.md): the registered comparison of the routes with the retired direct maps; [docs/ab-coverage.svg](docs/ab-coverage.svg) shows its result for each route.
 - [Godot comparison](docs/godot_comparison.md): RCEF's FB2 → ARKit mappings compared with the routes in Godot's public sources.
 - [Canonical expression set (draft)](docs/canonical-set.md): the proposed pivot vocabulary, with its [definitions audit](docs/canonical-set-audit.md) and the [FACS intensity codec](docs/facs-intensity.md). It is a proposal for review. Data 0.5.0 holds its expression part as the draft profile `rcef.canonical_expression` and its visemes as the draft profile `rcef.canonical_viseme`, with their maps; the FACS codes are the draft profile `facs.code`.
 - [Survey](survey.md), [proposal](proposal.md), [references](references.md) and [source evidence](evidence/sources.toml).

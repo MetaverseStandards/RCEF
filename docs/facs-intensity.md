@@ -47,7 +47,7 @@ Every in-scope signal that a scored frame does not list is 0, "absent". This is 
 
 - A code with no side letter sets both sides of a sided signal to the same value.
 - `L` or `R` sets one side. RCEF reads L and R as the subject's own left and right. Wikipedia does not say whose side (raw line 78), so this is an assumption, with the loss key `facs_side_frame_unresolved`.
-- `L30` and `R30` are directions: the jaw moves toward the subject's own left or right. Loss key `facs_au30_direction_unresolved`.
+- RCEF reads `L30` and `R30` as directions: the jaw moves toward the subject's own left or right. The source does not say whose left, so this is an assumption too, with the loss key `facs_au30_direction_unresolved`.
 - RCEF splits a code by side where the canonical signal is split by side. Which codes FACS lets be one-sided is in the closed manual.
 
 ### Refusals

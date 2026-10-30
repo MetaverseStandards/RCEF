@@ -7,7 +7,7 @@ The [offline visual report](architecture.html), the [SVG](architecture.svg) and 
 
 ## Scope of this guide
 
-This guide describes `rcef.parity` data version **0.5.0** (unreleased), schema **1.0** and operators **1.1**, checked with msf-character-tools 0.5.0, installed from its release wheels. The locked commit is in [tooling.lock.json](../evidence/tooling.lock.json). The counts below were recomputed with the Python standard library from all 36 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
+This guide describes `rcef.parity` data version **0.5.0**, schema **1.0** and operators **1.1**, checked with msf-character-tools 0.5.0, installed from its release wheels. The locked commit is in [tooling.lock.json](../evidence/tooling.lock.json). The counts below were recomputed with the Python standard library from all 36 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
 
 | Measure | Total |
 | --- | ---: |
@@ -79,7 +79,7 @@ Before it does anything else, `check.py` checks all of these:
 
 **Adopt a new release.** Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
 
-**Roll back.** msf-character-tools 0.5.0 is the first release from the public repository, so this checkout has no previous lock yet. To roll back, copy `tooling.lock.previous.json` over `tooling.lock.json`, install msf-character-tools at its commit, and use the `check.py` from the same RCEF commit as that lock.
+**Roll back.** msf-character-tools 0.5.0 is the first release from its repository in the Metaverse Standards Forum organization, so this checkout has no previous lock yet. To roll back, copy `tooling.lock.previous.json` over `tooling.lock.json`, install msf-character-tools at its commit, and use the `check.py` from the same RCEF commit as that lock.
 
 ### Calibration records and the held-out provenance check
 
@@ -386,7 +386,7 @@ python3 -B scripts/export_reports.py --write
 python3 -B scripts/export_reports.py
 ```
 
-The native backend pilot is tested separately from RCEF.
+msf-character-tools has its own tests, in its own repository.
 
 Optional check of the public sources, with a cache that you name outside the RCEF repository:
 
@@ -395,9 +395,11 @@ export RCEF_SOURCE_CACHE="../rcef-source-cache"
 python3 -B scripts/verify_sources.py --source apple_blendshapes --cache "$RCEF_SOURCE_CACHE"
 python3 -B scripts/verify_sources.py --cache "$RCEF_SOURCE_CACHE"
 python3 -B scripts/audit_inventories.py --cache "$RCEF_SOURCE_CACHE"
+python3 -B scripts/check_audit_locators.py --cache "$RCEF_SOURCE_CACHE"
+python3 -B scripts/check_visibility.py
 ```
 
-The first command checks only the named evidence source. The inventory auditor needs every source ID it uses, so fill the cache with `verify_sources.py --cache "$RCEF_SOURCE_CACHE"` before you audit all inventories. If a digest does not match, review the source; do not accept the new bytes without review. These tools check source provenance and the selected names, order and native indices. They do not show physiological calibration, capture validity or visual equivalence.
+The first command checks only the named evidence source. The inventory auditor needs every source ID it uses, so fill the cache with `verify_sources.py --cache "$RCEF_SOURCE_CACHE"` before you audit all inventories. If a digest does not match, review the source; do not accept the new bytes without review. `check_audit_locators.py` checks the line locators of the audit's crosswalk table against the same cache. `check_visibility.py` requests the repository and release links signed out of GitHub, and fails if a document claims public access that does not exist. These tools check source provenance, the selected names, order and native indices, and the visibility claims. They do not show physiological calibration, capture validity or visual equivalence.
 
 To change a calibration record or add one, follow [calibration/README.md](../calibration/README.md) and [tools/calibration/README.md](../tools/calibration/README.md): freeze first, commit the ledger line, then run the held-out step.
 
@@ -409,7 +411,7 @@ Before you extend or release the inventory, read [CONTRIBUTING](../CONTRIBUTING.
 - Review the identity checks for calibration, domain, neutral, side and coupling. Check the independent expected values: affine `-1/0/1 → 0/0.5/1`, the ordered bilateral pairs, and the gaze splits. Require the approximation opt-in, and keep every authored loss.
 - Try a missing value or validity, false or non-boolean validity, missing required inputs, extra or non-source channels, non-finite or out-of-domain values, and one failing frame in a batch. Require no Result value on error.
 - Confirm that the unresolved MediaPipe → canonical mapping refuses to run. Keep evidence status, disposition and quality apart. Do not infer inverse or cross-provider mappings from names.
-- Run the no-write drift check and the tests. `check.py` first checks the installed msf-character-tools against `evidence/tooling.lock.json`, and then the calibration records against `calibration/FREEZES`. Test the native backend separately.
+- Run the no-write drift check and the tests. `check.py` first checks the installed msf-character-tools against `evidence/tooling.lock.json`, and then the calibration records against `calibration/FREEZES`. msf-character-tools has its own tests.
 - When the data changes, update the HTML report, SVG, PNG and TOML index with it. Regenerate the TOML index with `python3 -B scripts/export_toml_index.py --write`; without `--write` it shows a diff and fails if the index does not match the TOML files, and `tests/test_toml_index.py` checks the same. Render the PNG from the SVG at the same size. Review the HTML in offline, narrow-screen and print modes. Tab through the stage and file explorer, operate the selectors and sliders with the keyboard, and test reset and invalid or missing modes. Compare all static and displayed fixture values. Check the content with JavaScript turned off and with a screen reader.
 - Check relative links with a sibling `msf_character_tools` checkout, and check the MIT notice on inline code and the CC-BY-SA-4.0 attribution on original documentation.
 
