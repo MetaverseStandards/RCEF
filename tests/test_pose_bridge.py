@@ -33,13 +33,19 @@ GROUPS = {'face', 'cheek_puff', 'jaw_thrust', 'chin_raise_upper_lip'}
 COPY = {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
 META = 'openxr.visemes.XR_FACE_TRACKING_VISEME_{}_META'
 META_NAMES = ['SIL', 'PP', 'FF', 'TH', 'DD', 'KK', 'CH', 'SS', 'NN', 'RR', 'AA', 'E', 'IH', 'OH', 'OU']
-SETS = ['arkit.coefficient', 'openxr.fb2', 'openxr.visemes', 'vrm.preset', 'vrcft.artist.base', 'vrcft.eye']
+SETS = ['arkit.coefficient', 'openxr.fb2', 'openxr.visemes', 'vrm.preset', 'vrcft.artist.base', 'vrcft.eye',
+        'facs.code']
 
 
 class PoseBridge(unittest.TestCase):
     @classmethod
+    def load_pack(cls) -> dict:
+        """The pack under test; the A/B mutation check (scripts/ab_mutations.py) gives a changed copy instead."""
+        return json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+
+    @classmethod
     def setUpClass(cls):
-        cls.document = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+        cls.document = cls.load_pack()
         cls.pack = rcef_translate.load_pack(cls.document)
         cls.signals = {s['id']: s for s in cls.document['signals']}
         cls.members = {p['id']: p['signal_ids'] for p in cls.document['profiles']}
@@ -161,7 +167,7 @@ class PoseBridge(unittest.TestCase):
             with self.subTest(source=source, target=target):
                 route = self.route(source, target)
                 expected = source in ('openxr.visemes', 'vrm.preset') and target in (
-                    'arkit.coefficient', 'openxr.fb2', 'vrcft.artist.base')
+                    'arkit.coefficient', 'openxr.fb2', 'vrcft.artist.base', 'facs.code')
                 self.assertEqual(route.bridges, [BRIDGE] if expected else [])
                 if expected:
                     self.assertTrue(route.in_maps)
