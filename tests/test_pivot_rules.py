@@ -42,10 +42,12 @@ SETS = {'arkit': ('arkit.coefficient', 'ARKit', ['apple_blendshapes']),
         'vrcft_artist': ('vrcft.artist.base', 'Unified Expressions', ['vrcft_artist', 'vrcft_docs_shapes']),
         'vrm': ('vrm.preset', 'VRM', ['vrm_expressions']),
         'visemes': ('openxr.visemes', 'META', ['xr_visemes', 'xr_registry']),
-        'facs': ('facs.code', 'FACS', ['facs_wikipedia'])}
+        'facs': ('facs.code', 'FACS', ['facs_wikipedia']),
+        'vrcft_eye': ('vrcft.eye', 'VRCFaceTracking eye', ['vrcft_data'])}
 AUDIT_SECTIONS = {'## FB2': 'fb2', '## ARKit': 'arkit', '## VRCFaceTracking Unified Expressions': 'vrcft_artist',
-                  '## VRM': 'vrm', '## META visemes': 'visemes', '## FACS': 'facs'}
-SET_KEYS = 'arkit|fb2|vrcft_artist|vrm|visemes|facs'
+                  '## VRM': 'vrm', '## META visemes': 'visemes', '## FACS': 'facs', '## VRCFaceTracking eye': 'vrcft_eye'}
+SET_KEYS = 'arkit|fb2|vrcft_artist|vrcft_eye|vrm|visemes|facs'
+VRM_IN_WEIGHT = 'an asset-authored expression weight becomes a canonical value'
 FACS_ORDINAL = 'facs_ordinal_intensity: '
 HOP = re.compile(rf'^(?:({SET_KEYS})_\w+\.to_rcef|rcef_\w+\.to_({SET_KEYS}))$')
 DIRECT = ('arkit.to_fb2', 'arkit_gaze.to_fb2', 'fb2.to_arkit', 'fb2_gaze.to_arkit', 'arkit.to_vrcft_artist',
@@ -150,6 +152,10 @@ class PivotRules(unittest.TestCase):
             with self.subTest(rule=rule['id']):
                 if key == 'vrm' and is_viseme(rule):
                     self.assertTrue([r for r in self.reasons(rule) if r.startswith(VRM_VOWEL_WEIGHT)])
+                elif rule['mapping_quality'] == 'exact':
+                    self.assertEqual(self.reasons(rule), [])  # the pupil copies: one field in millimetres
+                elif key == 'vrm' and rule['id'] in self.in_rules:
+                    self.assertIn(VRM_IN_WEIGHT, self.reasons(rule))
                 elif key == 'facs':
                     self.assertTrue([r for r in self.reasons(rule) if r.startswith(FACS_ORDINAL)])
                     self.assertFalse([r for r in self.reasons(rule) if 'gain and full-activation pose' in r])
@@ -162,7 +168,7 @@ class PivotRules(unittest.TestCase):
         # on its sum and on its clamp.
         ins = [r for k, r in self.rules if r['id'] in self.in_rules]
         outs = [r for k, r in self.rules if r not in ins]
-        self.assertEqual((len(ins), len(outs)), (205, 265))
+        self.assertEqual((len(ins), len(outs)), (211, 269))
 
     def test_each_tongue_out_hop_states_the_missing_length(self):
         tongue = [(k, r) for k, r in self.rules if 'tongue_out' in self.canonical(k, r)]

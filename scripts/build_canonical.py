@@ -37,8 +37,8 @@ A1_FIXTURE = 'tests/fixtures/baseline-dea1713.pack.json'
 PROFILE = 'rcef.canonical_expression'
 OWN = 'rcef_canonical_v1'
 FACS_RECORD = 'facs_wikipedia'
-# Groups of the signal table that are not in the pack yet: the VRCFaceTracking pupils come with their own in-maps.
-LATER_GROUPS = ('pupil_mm',)
+# Groups of the signal table that are not in the pack yet. None today.
+LATER_GROUPS = ()
 # Today's direct maps (A1). The viseme map is read only for its source signals.
 A1_MAPS = ('arkit.to_fb2', 'arkit_gaze.to_fb2', 'fb2.to_arkit', 'fb2_gaze.to_arkit', 'arkit.to_vrcft_artist',
            'fb2.to_vrm', 'visemes.to_vrm')
@@ -54,10 +54,14 @@ PROVIDERS = {
             'maps': ('in', 'out')},
     'vrcft_artist': {'name': 'Unified Expressions', 'audit': 'VRCFaceTracking Unified Expressions',
                      'id': 'vrcft.artist.base.{}', 'records': ['vrcft_artist', 'vrcft_docs_shapes'], 'maps': ('out',)},
-    'vrm': {'name': 'VRM', 'audit': 'VRM', 'id': 'vrm.preset.{}', 'records': ['vrm_expressions'], 'maps': ('out',)},
+    'vrm': {'name': 'VRM', 'audit': 'VRM', 'id': 'vrm.preset.{}', 'records': ['vrm_expressions'],
+            'maps': ('in', 'out')},
+    'vrcft_eye': {'name': 'VRCFaceTracking eye', 'audit': 'VRCFaceTracking eye', 'id': 'vrcft.eye.{}',
+                  'records': ['vrcft_data'], 'maps': ('in', 'out')},
 }
 FILES = {'arkit': 'mappings/canonical_arkit.toml', 'fb2': 'mappings/canonical_fb2.toml',
-         'vrcft_artist': 'mappings/canonical_vrcft_artist.toml', 'vrm': 'mappings/canonical_vrm.toml'}
+         'vrcft_artist': 'mappings/canonical_vrcft_artist.toml', 'vrm': 'mappings/canonical_vrm.toml',
+         'vrcft_eye': 'mappings/canonical_vrcft_eye.toml'}
 REGION = {'Brows': 'brow', 'Eyes and eyelids': 'eyelid', 'Gaze': 'gaze', 'Cheeks': 'cheek', 'Nose': 'nose',
           'Jaw': 'jaw', 'Mouth': 'mouth', 'Lips': 'mouth', 'Tongue': 'tongue', 'Pupils': 'pupil'}
 AUDIT_ANCHORS = {'FB2': 'fb2', 'ARKit': 'arkit', 'VRCFaceTracking Unified Expressions':
@@ -87,7 +91,18 @@ CLAUSES = {'in_copy': 'the value is carried over unchanged',
            'out_copy': 'the value is carried over unchanged',
            'out_fan': 'the one canonical value is copied into each {name} part',
            'out_mean': 'the {name} value is the mean of the canonical parts',
-           'out_net': 'the larger of two opposing directions is reduced by the smaller; only the difference is kept'}
+           'out_net': 'the larger of two opposing directions is reduced by the smaller; only the difference is kept',
+           'in_invert': 'eye_close is 1 − Openness', 'out_invert': 'eye_close is 1 − Openness',
+           'in_mm': 'the tracker-reported diameter is carried over unchanged',
+           'out_mm': 'the tracker-reported diameter is carried over unchanged'}
+# The VRCFaceTracking eye hops: Openness runs the other way from eye_close, and the pupils are a length.
+INVERT_OPENING = ("{} Openness 1 and 0 are assumed to be canonical eye_close 0 and 1, and values between are assumed "
+                  'to correspond as the operator passes them; no evidence supports this, and no response curve is '
+                  'measured')
+MM_OPENING = 'both ends are the pupil diameter in millimetres, as the tracker reports it'
+OPENNESS_KEY = 'vrcft_eye_openness_neutral_unresolved'
+VRM_IN_WEIGHT = 'an asset-authored expression weight becomes a canonical value'
+VRM_BLINK_NOT_READ = 'VRM blink (both eyes) not read; when a model drives only blink, eye_close reads open'
 DIFFERS = 'the endpoints are assumed equal although the defined actions differ or are unresolved; see {}'
 
 
@@ -134,7 +149,7 @@ def read_documents(root: Path) -> dict:
     signal_doc = (root / SIGNAL_DOC).read_text(encoding='utf-8')
     audit_doc = (root / AUDIT_DOC).read_text(encoding='utf-8')
     calibration = {}
-    for kind, label in (('face', 'Expression signals'), ('gaze', 'Gaze')):
+    for kind, label in (('face', 'Expression signals'), ('gaze', 'Gaze'), ('pupil', 'Pupils')):
         found = re.search(rf'^- \*\*{label}:\*\* `(rcef\.canonical\.v1:<short_name>: [^`]+)`$', signal_doc, re.M)
         calibration[kind] = found.group(1)
     groups = [ticks(r['Group'])[0] for r in table(signal_doc, '### Groups')]
@@ -286,7 +301,9 @@ class Builder:
 
     def endpoints(self, key: str, kind: str, shorts: list[str]) -> str:
         name = PROVIDERS[key]['name']
-        text = f'endpoints: {OPENING.format(possessive(name))}; {CLAUSES[kind].format(name=name)}'
+        opening = {'invert': INVERT_OPENING.format(possessive(name)), 'mm': MM_OPENING}.get(
+            kind.split('_')[1], OPENING.format(possessive(name)))
+        text = f'endpoints: {opening}; {CLAUSES[kind].format(name=name)}'
         keys = list(dict.fromkeys(k for s in shorts if self.audit[key][s]['verdict'] != 'same'
                                   for k in self.audit[key][s]['keys']))
         if keys:
@@ -405,6 +422,8 @@ class Builder:
             out.append('lips_toward.jaw_not_compensated: the value is copied without compensating for the jaw. '
                        'Canonical lips_toward follows FB2 LIPS_TOWARD, which closes the lips whatever the jaw does; '
                        'the audit rows are FB2 same, ARKit unresolved and Unified Expressions differs.')
+        if kind.endswith('_invert'):
+            out.append(f'vrcft_eye.openness: {self.docs["keys"][OPENNESS_KEY]}.')
         if key == 'vrm':
             side = self.by_short[shorts[0]]['side']
             out += [f'vrm.definitional_only: canonical {shorts[0]} (the upper lid of the {side} eye lowers until it '
@@ -413,7 +432,8 @@ class Builder:
                     'to VRM.']
             for text in self.a1_strings(sid, 'out', r'Both name sides from the subject\'s own face\. FLAGGED: '):
                 out.append('vrm.side_caveat: ' + text.split('FLAGGED: ', 1)[1])
-            out += ['vrm.downstream_effects: ' + a for a in self.a1_strings(sid, 'out', r'VRM isBinary and override')]
+            if end == 'out':
+                out += ['vrm.downstream_effects: ' + a for a in self.a1_strings(sid, 'out', r'VRM isBinary and override')]
         return out
 
     def fb2_to_short(self) -> dict[str, str]:
@@ -422,10 +442,14 @@ class Builder:
     # -- losses
     def losses(self, key: str, kind: str, shorts: list[str], negative: bool = False) -> list[str]:
         name = PROVIDERS[key]['name']
+        if kind.endswith('_mm'):
+            return []
         out = {'in_fan': [SYMMETRY], 'out_mean': [ASYMMETRY], 'out_net': [NETTING]}.get(kind, [])
         if negative:
             out.append(ROUNDING)
-        if key == 'vrm':
+        if key == 'vrm' and kind.startswith('in_'):
+            out += [VRM_IN_WEIGHT, VRM_BLINK_NOT_READ]
+        elif key == 'vrm':
             out += [r.replace('an FB2 weight', 'a canonical value') for r in self.vrm_losses()]
         else:
             out.append(GAIN.format(name))
@@ -460,8 +484,18 @@ class Builder:
     def hop(self, key, kind, end, rid, sid, shorts, inputs, outputs, operator, negative=False) -> dict:
         assumptions = [self.correspondence(key, kind, sid, shorts), self.endpoints(key, kind, shorts),
                        *self.transfers(key, sid, shorts), *self.extras(key, kind, end, sid, shorts)]
-        return self.rule(rid, inputs, outputs, operator, assumptions, self.losses(key, kind, shorts, negative),
+        rule = self.rule(rid, inputs, outputs, operator, assumptions, self.losses(key, kind, shorts, negative),
                          self.evidence(key, sid, shorts))
+        if kind.endswith('_mm'):
+            # The pupil copies restate a verified fact: one field in millimetres at both ends.
+            rule.update(mapping_quality='exact', evidence_status='verified_current')
+        return rule
+
+    def eye_kind(self, key: str, group: str, end: str) -> tuple[str, dict] | None:
+        """The kind and operator of a VRCFaceTracking eye hop: inverted for blink, a copy for the pupils."""
+        if key != 'vrcft_eye':
+            return None
+        return (f'{end}_invert', invert()) if group == 'blink' else (f'{end}_mm', copy())
 
     def in_maps(self, key: str) -> list[dict]:
         maps = []
@@ -474,9 +508,10 @@ class Builder:
                 if len(names) != 1:
                     raise SystemExit(f'{key} in-map: {s["short"]} needs one source name, not {names}')
                 sid = names[0]
-                kind = 'in_fan' if len(self.aligned[key][sid]) > 1 else 'in_copy'
+                kind, op = self.eye_kind(key, group, 'in') or (
+                    'in_fan' if len(self.aligned[key][sid]) > 1 else 'in_copy', copy())
                 rules.append(self.hop(key, kind, 'in', f'{key}_rcef.{s["short"]}', sid, [s['short']], [sid],
-                                      [self.cid(s['short'])], copy()))
+                                      [self.cid(s['short'])], op))
             if rules:
                 written = {r['outputs'][0] for r in rules}
                 if written != {self.cid(s['short']) for s in self.signals if s['group'] == group}:
@@ -530,6 +565,13 @@ class Builder:
                 kind = 'out_fan' if len(self.audit[key][shorts[0]]['names']) > 1 else 'out_copy'
                 found.append((self.group(shorts), self.hop(key, kind, 'out', f'rcef_vrcft_artist.{self.native(key, sid)}',
                                                           sid, shorts, [self.cid(shorts[0])], [sid], copy())))
+        elif key == 'vrcft_eye':
+            for s in self.signals:
+                if s['short'] in self.audit[key]:
+                    sid = self.audit[key][s['short']]['names'][0]
+                    kind, op = self.eye_kind(key, s['group'], 'out')
+                    found.append((s['group'], self.hop(key, kind, 'out', f'rcef_vrcft_eye.{self.native(key, sid)}', sid,
+                                                       [s['short']], [self.cid(s['short'])], [sid], op)))
         elif key == 'vrm':
             for a1 in self.a1['maps']['fb2.to_vrm']:
                 sid = a1['outputs'][0]
@@ -584,7 +626,8 @@ class Builder:
         out = []
         for s in self.signals:
             gaze = s['group'] == 'gaze'
-            evidence = [OWN] + ([FACS_RECORD] if s['facs_au'] else [])
+            pupil = s['group'] == 'pupil_mm'
+            evidence = [OWN] + ([FACS_RECORD] if s['facs_au'] else []) + (['vrcft_data'] if pupil else [])
             if s['group'] in ('jaw_sideways', 'mouth_shift'):
                 evidence += ['xr_fb2', 'xr_fb2_fig_eyes_closed_l', 'xr_fb2_fig_eyes_look_left_l',
                              'xr_fb2_fig_mouth_left', 'apple_blendshapes']
@@ -598,18 +641,24 @@ class Builder:
             metadata = {
                 'definition': s['definition'],
                 'zero': ('the eye does not look in this direction' if gaze else
+                         'a reported diameter of 0 mm; the pupils have no neutral value' if pupil else
                          'the neutral face: relaxed, lids open and relaxed, eyes ahead, lips together, jaw closed, '
                          'tongue at rest'),
                 'one': ("the source's maximum gaze in this direction" if gaze else
+                        'a reported diameter of 1 mm' if pupil else
                         'full activation of the action, as the definition describes it'),
                 'facs_au': s['facs_au'], 'facs_table': s['facs_table'], 'group': s['group'],
                 'aligned_names': aligned, 'audit': anchors}
-            out.append({'id': self.cid(s['short']), 'label': s['label'], 'value_type': 'scalar', 'units': '1',
-                        'domain': {'min': 0.0, 'max': 1.0},
-                        'calibration': self.docs['calibration']['gaze' if gaze else 'face'].replace(
-                            '<short_name>', s['short']),
-                        'disposition': 'mapped', 'evidence': evidence, 'evidence_status': 'proposed',
-                        'side': s['side'], 'neutral': 0.0, 'metadata': metadata, 'region': s['region']})
+            kind = 'gaze' if gaze else 'pupil' if pupil else 'face'
+            signal = {'id': self.cid(s['short']), 'label': s['label'], 'value_type': 'scalar',
+                      'units': 'mm' if pupil else '1', 'domain': {} if pupil else {'min': 0.0, 'max': 1.0},
+                      'calibration': self.docs['calibration'][kind].replace('<short_name>', s['short']),
+                      'disposition': 'mapped', 'evidence': evidence,
+                      'evidence_status': 'verified_current' if pupil else 'proposed', 'side': s['side'],
+                      'neutral': 0.0, 'metadata': metadata, 'region': s['region']}
+            if pupil:
+                del signal['neutral']
+            out.append(signal)
         return out
 
     def profile(self) -> dict:
@@ -626,7 +675,7 @@ GAZE_EXCLUSIVE = 'gaze.fb2_exclusive: FB2 says only one of two opposing gaze dir
 
 def profile_of(key: str) -> str:
     return {'arkit': 'arkit.coefficient', 'fb2': 'openxr.fb2', 'vrcft_artist': 'vrcft.artist.base',
-            'vrm': 'vrm.preset'}[key]
+            'vrm': 'vrm.preset', 'vrcft_eye': 'vrcft.eye'}[key]
 
 
 def new_helper(old: str) -> str:
@@ -646,6 +695,10 @@ def operator(op: dict) -> dict:
 
 def copy() -> dict:
     return {'id': 'affine', 'scale': 1.0, 'offset': 0.0}
+
+
+def invert() -> dict:
+    return {'id': 'affine', 'scale': -1.0, 'offset': 1.0}
 
 
 def join(items: list[str]) -> str:
@@ -1430,7 +1483,7 @@ def maps_toml(name: str, maps: list[dict], intro: str | None = None, header: str
         for r in m['rules']:
             parts.append('\n[[mappings.rules]]\n')
             for k, v in r.items():
-                if k in ('assumptions', 'loss_annotations'):
+                if k in ('assumptions', 'loss_annotations') and v:
                     parts.append(f'{k} = [\n' + ''.join(f'  {value(x)},\n' for x in v) + ']\n')
                 else:
                     parts.append(f'{k} = {value(v)}\n')
