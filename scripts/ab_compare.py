@@ -7,6 +7,7 @@ Usage:
   python scripts/ab_compare.py run ABREG OUT_DIR [--b-pack PACK] [--dry-run]
   python scripts/ab_compare.py check
   python scripts/ab_compare.py a1-loss
+  python scripts/ab_compare.py r5 README
 
 - draft writes a first registration with every pin and A1 figure it can
   compute. Write it outside ab/, complete and review it, then commit it to
@@ -17,6 +18,9 @@ Usage:
 - check prints every way ab/FREEZES, the registrations and the results break
   the rules in ab/README.md. tests/test_ab_registration.py runs it.
 - a1-loss prints A1's observed loss on the fixed impulse frames (metric M4).
+- r5 writes tests/fixtures/ict_facekit_facs.json (reference R5, metric M11)
+  from ICT-FaceKit's README at the commit of record ict_facekit, after
+  checking the record's SHA-256.
 
 Freeze IDs, hashes and paths go only in the run manifest, never in
 scoreboard.md or a metric CSV, so a "reproduce" run can match the results of
@@ -43,6 +47,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT / 'examples'), str(ROOT / 'scripts'), str(ROOT / 'tests')]
 import ab_a3  # noqa: E402
 import ab_frames  # noqa: E402
+import ab_geometry  # noqa: E402
+import ab_mutations  # noqa: E402
 import ab_oracle  # noqa: E402
 import check  # noqa: E402
 import facs_codec  # noqa: E402
@@ -59,7 +65,8 @@ FORMAT = 'rcef.ab/1'
 FIRST = 'ab.pivot'
 KINDS = ('first', 'new', 'fix', 'revise', 'reproduce')
 CODE = {'route': 'examples/rcef_route.py', 'compare': 'scripts/ab_compare.py', 'generator': 'scripts/ab_frames.py',
-        'oracle': 'tests/ab_oracle.py', 'codec': 'examples/facs_codec.py',
+        'oracle': 'tests/ab_oracle.py', 'codec': 'examples/facs_codec.py', 'geometry': 'scripts/ab_geometry.py',
+        'mutations': 'scripts/ab_mutations.py', 'structure': 'tests/test_pivot_structure.py',
         'codec_data': 'examples/data/facs_codes.json', 'a3': 'tests/ab_a3.py'}
 FB2 = ('openxr.fb2.XR_FACE_EXPRESSION2_', '_FB')
 VISEMES = ('openxr.visemes.XR_FACE_TRACKING_VISEME_', '_META')
@@ -85,6 +92,12 @@ B_PAIRS = {**{name: (s, t) for name, (s, t, _) in A1_PAIRS.items()},
            'VRCFT eye -> VRCFT UE': ('vrcft.eye', 'vrcft.artist.base'), 'VRCFT eye -> VRM': ('vrcft.eye', 'vrm.preset'),
            'VRM -> ARKit': ('vrm.preset', 'arkit.coefficient'), 'VRM -> FB2': ('vrm.preset', 'openxr.fb2'),
            'VRM -> META': ('vrm.preset', 'openxr.visemes'),
+           # Through the viseme pose bridge: viseme classes become canonical expression signals.
+           'META -> ARKit': ('openxr.visemes', 'arkit.coefficient'), 'META -> FB2': ('openxr.visemes', 'openxr.fb2'),
+           'META -> VRCFT UE': ('openxr.visemes', 'vrcft.artist.base'), 'META -> FACS': ('openxr.visemes', 'facs.code'),
+           'VRM -> VRCFT UE': ('vrm.preset', 'vrcft.artist.base'),
+           **{f'{n} -> VRCFT eye': (p, 'vrcft.eye') for n, p in (('ARKit', 'arkit.coefficient'), ('FB2', 'openxr.fb2'),
+                                                                 ('FACS', 'facs.code'), ('VRM', 'vrm.preset'))},
            **{f'{n} -> {n}': (p, p) for n, p in (('ARKit', 'arkit.coefficient'), ('FB2', 'openxr.fb2'),
                                                 ('META', 'openxr.visemes'), ('VRM', 'vrm.preset'),
                                                 ('VRCFT eye', 'vrcft.eye'), ('FACS', 'facs.code'))}}
@@ -135,24 +148,41 @@ M10B_NOT_AVAILABLE = [ARKIT + c for c in ('mouthLeft', 'mouthRight', 'mouthShrug
 M3_ROUNDING = [f'{FB2[0]}EYES_LOOK_{c}_FB' for c in ('LEFT_L', 'RIGHT_R', 'DOWN_L', 'DOWN_R')] + [
     f'vrcft.eye.{side}.Openness' for side in ('Left', 'Right')]
 TINY = 2.0 ** -1020
+# fl(1 - fl(1 - x)) is within 2**-54 of x on [0, 1]: 1 - x rounds by at most half an ulp of [0.5, 1), and the outer
+# subtraction is exact (Sterbenz). On frames that break FB2's exclusivity only the difference of a pair is kept, so a
+# gaze output can be off by the smaller input of its pair, plus the rounding of the difference.
+ROUNDING_BOUND = 2.0 ** -54
+NON_EXCLUSIVE_SLACK = 2.0 ** -52
 THRESHOLDS = {
     'M1': 'B equals A1 on every output both write, sign of zero included; on the edge set B equals O',
     'M1s': 'exact Fraction composition of B equals A1 on every linear A1 output',
-    'B equals O': 'B gives the oracle\'s values, bit for bit, refusal codes and labels on every frame of every pair',
+    'B equals O': 'B gives the oracle\'s values, bit for bit, refusal codes, labels and notes on every frame of every '
+                  'pair',
     'M2': "in every frame B's refused outputs are among A1's, B writes every output A1 writes, dropped inputs equal",
     'M2c': "for every A1 output, B's hop evidence holds every evidence ID of the A1 rules that write it",
-    'M3': 'round trips exact on the listed channels; B equals O on every round-trip and impulse frame; every '
-          'reached output non-zero on at least 1% of each seeded family that sets a linked input',
+    'M3': 'round trips exact on the listed channels; the rounding outputs within 2**-54 on exclusive frames and each '
+          'gaze output within min(a, b) + 2**-52 on frames that break FB2 exclusivity; B equals O on every '
+          'round-trip and impulse frame; every reached output non-zero on at least 1% of each seeded family that '
+          'sets a linked input',
     'M4': 'B observed loss 0; A1 observed loss equals the registered baseline',
     'M5': 'R1: 129 of 129 goldens exact through B; R2: composed B weights equal the 52 rows but the listed departures',
     'M8 R3': 'report: FB2 -> VRCFT UE, B equals R3 (the Godot route) on every R3 output but the listed departures',
     'M10': 'FACS -> FB2: B equals A3 on outputs both write; coverage list frozen; B refuses 0 frames',
     'M10b': 'FACS -> ARKit: B equals A3 then A1 on outputs both write; coverage list frozen',
+    'M4 keys': 'every (A1 rule, A1 loss reason) of the frozen table is covered by the B losses it names on the route; '
+               'every audit key B adds on an A1 pair is on the audit-added list',
+    'M4b': 'every catalogue entry of each replaced A1 rule is held by the hop assumption keys it names on the route, '
+           'or is superseded with a cited reason',
+    'M6': 'report: B and A1 (A3 then A1 for FACS) pose each rig identically, vertex for vertex; the harness oracles '
+          'pass',
+    'M7': 'every registered mutation of the B pack is caught by each check it names',
+    'M11': 'report: per ICT-FaceKit FACS row, B ARKit -> FACS links give the same ARKit shapes, or a listed '
+           'difference',
 }
 # Gates these tools cannot compute yet: their frozen tables come from the definitions audit and the canonical data.
 PENDING = {'M4 keys': 'the rule-scoped reason -> key table', 'M4b': 'the assumption catalogue',
-           'M6': 'the geometry harness', 'M7': 'the mutation set', 'M11': 'B ARKit -> FACS links and the R5 table',
-           'M8 R3': 'the R3 goldens'}
+           'M6': 'the rig caches (run --rig NAME=DIR) and the pinned rig hashes', 'M7': 'the mutation set',
+           'M11': 'B ARKit -> FACS links and the R5 table', 'M8 R3': 'the R3 goldens'}
 
 
 # ---------------------------------------------------------------- hashes, files and pins
@@ -273,16 +303,18 @@ def m2(a1: list[dict], b: list[dict]) -> tuple[dict, list]:
 
 
 def oracle_results(oracle: ab_oracle.Oracle, pair: dict, frames: list[dict]) -> list[dict]:
+    bridges = [tuple(h) for h in pair.get('bridges', [])]
     return [oracle.route(pair['source'], pair['target'], [tuple(h) for h in pair['in_hops']],
-                         [tuple(h) for h in pair['out_hops']], f['values'], f['flags']) for f in frames]
+                         [tuple(h) for h in pair['out_hops']], f['values'], f['flags'], bridges) for f in frames]
 
 
 def equals_oracle(b: list[dict], o: list[dict]) -> tuple[dict, list]:
-    """B's values (bit for bit), refusals by map (codes and references) and labels equal O's."""
+    """B's values (bit for bit), refusals by map (codes and references), labels and notes equal O's."""
     counts, failures = {'frames': len(b), 'differences': 0}, []
     for n, (x, y) in enumerate(zip(b, o, strict=True)):
         if ({k: bits(v) for k, v in x['values'].items()} != {k: bits(v) for k, v in y['values'].items()}
-                or x['refused'] != y['refused'] or x['labels'] != y['labels']):
+                or x['refused'] != y['refused'] or x['labels'] != y['labels']
+                or x.get('notes', []) != y.get('notes', [])):
             counts['differences'] += 1
             failures.append([n, json.dumps(x['refused'], sort_keys=True), json.dumps(y['refused'], sort_keys=True)])
     return counts, failures
@@ -332,6 +364,21 @@ def upstream(rules: dict, sid: str) -> tuple[list[dict], set]:
     return found, leaves
 
 
+def weighted_upstream(rules: dict, sid: str) -> tuple[list[dict], set]:
+    """As upstream, but a weighted_sum input with weight 0 carries nothing, so it is not followed."""
+    found, leaves, todo = [], set(), [sid]
+    while todo:
+        current = todo.pop()
+        rule = rules.get(current)
+        if rule is None:
+            leaves.add(current)
+            continue
+        found.append(rule)
+        weights = rule['operator'].get('weights') if rule['operator']['id'] == 'weighted_sum' else None
+        todo += [s for n, s in enumerate(rule['inputs']) if weights is None or weights[n] != 0]
+    return found, leaves
+
+
 def linear_form(rules: dict, sid: str):
     """An output as exact constant + sum of Fraction weights over the inputs, or None through a piecewise operator."""
     rule = rules.get(sid)
@@ -372,10 +419,36 @@ def compose(outer, inner_forms: dict):
     return constant, {k: v for k, v in weights.items() if v}
 
 
+def trace(document: dict, pair: dict, output: str) -> tuple[list[dict], set]:
+    """The rules of every hop that an output of a pair depends on, and the source inputs at their far end.
+
+    Out-map, then any bridge, then in-maps. A canonical value that no hop
+    writes (not available, or a bridge input counted as 0) is not a source
+    input, and neither is a weighted_sum input with weight 0.
+    """
+    out_rules = rules_by_output(document, [h[0] for h in pair['out_hops']])
+    rules, leaves = weighted_upstream(out_rules, output)
+    if not pair['in_hops']:
+        return rules, leaves
+    bridge_rules = rules_by_output(document, [h[0] for h in pair.get('bridges', [])])
+    in_rules = rules_by_output(document, [h[0] for h in pair['in_hops']])
+    sources = set()
+    for leaf in leaves:
+        more, ends = weighted_upstream(bridge_rules, leaf) if leaf in bridge_rules else ([], {leaf})
+        rules += more
+        for end in ends:
+            if end in in_rules:
+                found, far = weighted_upstream(in_rules, end)
+                rules += found
+                sources |= far
+    return rules, sources
+
+
 def b_forms(document: dict, pair: dict) -> dict:
-    """The composed linear form of every B output of a pair, or None where it is not linear."""
+    """The composed linear form of every B output of a pair, or None where it is not linear (a bridge never is)."""
     out_rules = rules_by_output(document, [h[0] for h in pair['out_hops']])
     in_rules = rules_by_output(document, [h[0] for h in pair['in_hops']])
+    bridged = set(rules_by_output(document, [h[0] for h in pair.get('bridges', [])]))
     outputs = [o for h in pair['out_hops'] for o in rcef_route.map_ends(
         next(m['rules'] for m in document['mappings'] if m['id'] == h[0]))[1]]
     inner = {}
@@ -384,7 +457,7 @@ def b_forms(document: dict, pair: dict) -> dict:
         outer = linear_form(out_rules, output)
         if outer is not None:
             for leaf in outer[1]:
-                if leaf not in inner:
+                if leaf not in inner and leaf not in bridged:
                     inner[leaf] = linear_form(in_rules, leaf) if pair['in_hops'] else (Fraction(0), {leaf: Fraction(1)})
         forms[output] = compose(outer, inner) if pair['in_hops'] else outer
     return forms
@@ -436,21 +509,39 @@ def m2b(a1_document: dict, b_document: dict, pair_name: str, pair: dict) -> dict
 
 def m3_exact(frames: list[dict], back: list[dict], source: dict) -> tuple[dict, list]:
     """X -> C -> X: 0 error on every written channel, except the rounding outputs on exclusive frames and every gaze
-    output on frames that break FB2's exclusivity; values below 2**-1020 are not claimed."""
+    output on frames that break FB2's exclusivity; values below 2**-1020 are not claimed.
+
+    The excluded outputs have bounds: the rounding outputs within ROUNDING_BOUND, and a gaze output on a
+    non-exclusive frame within the smaller input of its pair plus NON_EXCLUSIVE_SLACK. A value past its bound
+    counts in over_bound, which fails the gate.
+    """
     counts = {'frames': len(frames), 'non_exclusive_frames': 0, 'errors': 0, 'max_excluded_error': 0.0,
-              'excluded_became_zero': 0}
-    failures, gaze = [], {s for pair in source['gaze_pairs'] for s in pair}
+              'excluded_became_zero': 0, 'max_rounding_error': 0.0, 'over_bound': 0}
+    failures, partner = [], {}
+    for a, b in source['gaze_pairs']:
+        partner[a], partner[b] = b, a
     for n, (frame, result) in enumerate(zip(frames, back, strict=True)):
         exclusive = not any(frame['values'].get(a) and frame['values'].get(b) for a, b in source['gaze_pairs'])
         counts['non_exclusive_frames'] += not exclusive
-        excluded = set(M3_ROUNDING) if exclusive else gaze
+        excluded = set(M3_ROUNDING) if exclusive else set(partner)
         for sid, value in result['values'].items():
             original = frame['values'].get(sid)
             if original is None:
                 continue
             if sid in excluded or 0 < abs(original) < TINY:
-                counts['max_excluded_error'] = max(counts['max_excluded_error'], abs(value - original))
+                error = abs(value - original)
+                counts['max_excluded_error'] = max(counts['max_excluded_error'], error)
                 counts['excluded_became_zero'] += value == 0 and original != 0
+                if 0 < abs(original) < TINY:
+                    continue
+                if exclusive:
+                    counts['max_rounding_error'] = max(counts['max_rounding_error'], error)
+                    bound = ROUNDING_BOUND
+                else:
+                    bound = min(original, frame['values'].get(partner[sid], 0.0)) + NON_EXCLUSIVE_SLACK
+                if error > bound:
+                    counts['over_bound'] += 1
+                    failures.append([n, sid, repr(original), repr(value)])
             elif value != original:
                 counts['errors'] += 1
                 failures.append([n, sid, repr(original), repr(value)])
@@ -459,15 +550,9 @@ def m3_exact(frames: list[dict], back: list[dict], source: dict) -> tuple[dict, 
 
 def links(document: dict, pair: dict, outputs) -> dict:
     """Each (source input, output) link of the composed hop weights: True when a piecewise operator is on the way."""
-    out_rules = rules_by_output(document, [h[0] for h in pair['out_hops']])
-    in_rules = rules_by_output(document, [h[0] for h in pair['in_hops']])
     found = {}
     for output in outputs:
-        rules, leaves = upstream(out_rules, output)
-        if pair['in_hops']:
-            inner = [(leaf, upstream(in_rules, leaf)) for leaf in leaves if leaf in in_rules]
-            rules = rules + [r for _, (more, _) in inner for r in more]
-            leaves = {s for _, (_, sources) in inner for s in sources}
+        rules, leaves = trace(document, pair, output)
         knots = any(r['operator']['id'] == 'piecewise_linear' for r in rules)
         found.update({(s, output): knots for s in leaves})
     return found
@@ -588,6 +673,445 @@ def r3(results: list[dict], goldens: dict, departures: list[str]) -> tuple[dict,
     return counts, failures
 
 
+# ---------------------------------------------------------------- M4 keys and M4b: today's losses and assumptions
+
+AUDIT_DOC = 'docs/canonical-set-audit.md'
+PROVIDER_TOKENS = {'FB2': 'openxr.fb2', 'ARKit': 'arkit.coefficient', 'UE': 'vrcft.artist.base', 'VRM': 'vrm.preset',
+                   'META': 'openxr.visemes'}
+PAIR_NAMES = {'Unified Expressions': 'VRCFT UE'}
+# The audit key's owning set, from the start of the key (docs/canonical-set-audit.md, loss keys).
+KEY_OWNERS = (('fb2_', 'FB2'), ('arkit_', 'ARKit'), ('ict_', 'ARKit'), ('vrcft_ue_', 'UE'), ('vrm_', 'VRM'),
+              ('meta_', 'META'))
+# The gain loss on each hop, by set; VRM has none (its out-hop has the weight loss instead).
+GAIN = {'FB2': 'FB2 gain and full-activation pose not published',
+        'ARKit': 'ARKit gain and full-activation pose not published',
+        'UE': 'Unified Expressions gain and full-activation pose not published',
+        'META': 'META gain and full-activation pose not published'}
+SYMMETRY = ('in', 'asymmetry unknown: symmetry is invented')
+ASYMMETRY = ('out', 'asymmetry irrecoverable')
+NETTING = ('out', 'FB2 allows only one of two opposing gaze directions to be non-zero; when both canonical directions '
+                  'of a pair are non-zero, only their difference is kept, as the larger direction reduced by the '
+                  'smaller')
+TONGUE = 'the tongue extension has no stated length'
+# The audit's table "Mapping today's losses to keys": the start of each loss reason of today's maps, and where it
+# lives on the pivot route of the same rule. A plain string is an audit key, on the hop of the set that owns it;
+# (side, text) is a loss reason on that side; 'gain' and 'split' are resolved per rule.
+REASON_HOMES = [
+    ('provider gain and full-activation pose are not published', ['gain']),
+    ('Unified Expressions splits this shape into parts', ['split']),
+    ('FB2 maximum gaze angle is unspecified', ['fb2_gaze_max_angle_unspecified']),
+    ('asymmetry unknown: symmetry is invented', [SYMMETRY]),
+    ('FB2 allows only one of two opposing gaze directions', [NETTING]),
+    ('ARKit describes eyelid movement consistent with the gaze; FB2', ['arkit_gaze_eyelid', 'fb2_gaze_rotation']),
+    ('FB2 describes eye rotation; ARKit describes eyelid', ['fb2_gaze_rotation', 'arkit_gaze_eyelid']),
+    ('FB2 opposing directions are mutually exclusive', ['fb2_gaze_exclusive']),
+    ('ARKit and Unified Expressions both describe eyelid', ['arkit_gaze_eyelid', 'vrcft_ue_gaze_no_angle']),
+    ('asymmetry irrecoverable', [ASYMMETRY]),
+    ('consonant visemes are dropped',
+     [('out', 'consonant and rest classes are dropped, so outputs no longer sum to 1')]),
+    ('a viseme probability becomes', ['vrm_vowel_asset_weight']),
+    ('both are extension shapes with no stated length', [('in', TONGUE), ('out', TONGUE)]),
+    ('FB2 also pulls the corner back and laterally', ['arkit_mouthsmile_upward']),
+    ('an FB2 weight becomes an asset-authored expression weight',
+     [('out', 'a canonical value becomes an asset-authored expression weight')]),
+    ('VRM blink (both eyes) is left unset', ['same']),
+    ('a model may mark the preset isBinary', ['same']),
+    ('jaw-relative versus jaw-independent lip closure', ['arkit_mouthclose_jaw_unresolved']),
+    ('FB2 describes upward lip motion induced by the chin raiser', ['arkit_mouthshrug_outward']),
+    ('FB2 describes upward chin and lower-lip motion', ['arkit_mouthshrug_outward']),
+    ('vowel quality differs', ['vrm_ih_vowel_quality']),
+]
+# Unified Expressions parts that the canonical set holds itself, so today's split moves to the ARKit in-hop fan-out.
+CANONICAL_PARTS = re.compile(r'\.(BrowInnerUp|CheekPuff|LipFunnel|LipSuck)\w+$')
+TRANSFER = 'transfer.provider|transfer.withdrawn'
+# Each provider's own definition records: a rule that cites more than these (and the FACS crosswalk) has a transfer.
+OWN_RECORDS = {'arkit.coefficient': {'apple_blendshapes'}, 'openxr.fb2': {'xr_fb2'},
+               'vrcft.artist.base': {'vrcft_artist', 'vrcft_docs_shapes'}, 'vrm.preset': {'vrm_expressions'},
+               'openxr.visemes': set()}
+# The audit's assumption catalogue: the hop assumption keys each template needs on the route, by set, or the cited
+# reason it is superseded. 'transfer' needs transfer.provider or transfer.withdrawn, where the rule cites a crosswalk.
+TEMPLATE_HOMES = {
+    'a01': {'ARKit': ['endpoints'], 'UE': ['endpoints']},
+    'a02': 'the canonical side field (canonical-set.md, Fields); frames ARKit same and Unified Expressions same',
+    'a03': {'ARKit': ['endpoints'], 'FB2': ['endpoints']},
+    'a04': 'the canonical side field (canonical-set.md, Fields); frames ARKit same and FB2 same',
+    'a05': {'FB2': ['endpoints'], 'ARKit': ['endpoints']},
+    'a06': 'the canonical side field (canonical-set.md, Fields); frames FB2 same and ARKit same',
+    'a07': {'FB2': ['correspondence'], 'ARKit': ['correspondence'], 'any': ['transfer']},
+    'a08': {'ARKit': ['correspondence'], 'UE': ['transfer']},
+    'a09': {'ARKit': ['correspondence'], 'FB2': ['correspondence']},
+    'a10': {'UE': ['fan_out.vrcft_ue']},
+    'a11': {'ARKit': ['endpoints']},
+    'a12': {'FB2': ['net.fb2_gaze']},
+    'a13': {'UE': ['fan_out.vrcft_ue']},
+    'a14': {'FB2': ['evidence.vrcft_tables_not_cited']},
+    'a15': {'VRM': ['vrm.downstream_effects']},
+    'a16': {'META': ['correspondence'], 'VRM': ['correspondence']},
+    'a17': {'VRM': ['vrm.probability_as_weight']},
+    'a18': {'VRM': ['vrm.phoneme_label_only']},
+    'a19': {'FB2': ['net.fb2_gaze', 'correspondence']},
+    'a20': {'FB2': ['net.fb2_gaze', 'correspondence']},
+    'a21': {'UE': ['fan_out.vrcft_ue']},
+    'a22': {'FB2': ['net.fb2_gaze']},
+    'a23': {'FB2': ['gaze.fb2_exclusive']},
+    'a24': {'UE': ['evidence.godot_only_mouth_shift']},
+    'a25': {'ARKit': ['mean.arkit']},
+    'a26': {'VRM': ['vrm.side_caveat']},
+    'a27': {'FB2': ['correspondence'], 'VRM': ['correspondence', 'vrm.definitional_only']},
+    'a28': {'VRM': ['endpoints']},
+    'a29': {'FB2': ['evidence.godot_only_mouth_shift'], 'ARKit': ['evidence.godot_only_mouth_shift']},
+    'a30': {'ARKit': ['evidence.godot_only_mouth_shift'], 'FB2': ['evidence.godot_only_mouth_shift']},
+    'a31': {'FB2': ['evidence.vrcft_tables_not_cited']},
+    'a32': {'ARKit': ['mean.arkit']},
+    'a33': {'ARKit': ['mean.arkit']},
+    'a34': {'ARKit': ['mean.arkit']},
+    'a35': {'ARKit': ['lips_toward.jaw_not_compensated']},
+}
+A10_SUPERSEDED = ('the canonical split: the canonical set holds these parts, so the Unified Expressions out-hop is a '
+                  '1:1 copy and the copy into each part moves to the ARKit in-hop')
+
+
+def doc_table(text: str, heading: str) -> list[dict]:
+    """The first Markdown table after a heading, as one dict per row (cells stripped)."""
+    lines = text.split('\n')
+    start = lines.index(heading)
+    rows = []
+    for line in lines[start + 1:]:
+        if line.startswith('#'):
+            break
+        if line.startswith('|'):
+            rows.append([c.strip() for c in line.strip().strip('|').split('|')])
+        elif rows:
+            break
+    return [dict(zip(rows[0], r)) for r in rows[2:]]
+
+
+def template_pattern(template: str) -> re.Pattern:
+    """A catalogue template (with <ARKit>, <q>, <w>, <side> and list placeholders) as a whole-string pattern."""
+    text = template.strip('`')
+    pattern = ''
+    for part in re.split(r'(<[^<>]+>)', text):
+        if not part.startswith('<'):
+            pattern += re.escape(part)
+        elif part.endswith('…>') or part == '<q>':
+            pattern += r'.+?'
+        elif part == '<w>':
+            pattern += r'[\w.]+'  # a decimal weight, or (a16) an example word
+        elif part == '<side>':
+            pattern += r'(?:left|right)'
+        else:
+            pattern += r'\w+'
+    return re.compile(pattern)
+
+
+def side_of(token: str, pair: dict) -> str | None:
+    """'in' or 'out': the hop side of a pair where a set's maps are; None if the set is at neither end."""
+    profile = PROVIDER_TOKENS[token]
+    return 'in' if profile == pair['source'] else 'out' if profile == pair['target'] else None
+
+
+def key_side(key: str, pair: dict) -> str | None:
+    owner = next(o for prefix, o in KEY_OWNERS if key.startswith(prefix))
+    return side_of(owner, pair)
+
+
+def a1_rule_routes(a1_document: dict, b_document: dict, pair_name: str, pair: dict) -> dict:
+    """For each rule of the pair's A1 maps: the B rules of its route, by side ('in', 'out').
+
+    The route of an output is traced from B's out-map back through its
+    in-maps. Today's internal gaze steps write no output, so their route is
+    the routes of the A1 rules that read them.
+    """
+    _, _, maps = A1_PAIRS[pair_name]
+    out_rules = rules_by_output(b_document, [h[0] for h in pair['out_hops']])
+    in_rules = rules_by_output(b_document, [h[0] for h in pair['in_hops']])
+    rules = [r for m in a1_document['mappings'] if m['id'] in maps for r in m['rules']]
+
+    def of_output(output):
+        found, leaves = upstream(out_rules, output)
+        return {'out': found, 'in': [r for leaf in leaves for r in upstream(in_rules, leaf)[0]]}
+
+    routes = {}
+    for rule in rules:
+        output = rule['outputs'][0]
+        if output in out_rules:
+            routes[rule['id']] = of_output(output)
+    for rule in rules:
+        if rule['id'] not in routes:
+            readers = [r for r in rules if rule['outputs'][0] in r['inputs']]
+            routes[rule['id']] = {side: [x for r in readers for x in routes.get(r['id'], {}).get(side, [])]
+                                  for side in ('in', 'out')}
+    return routes
+
+
+def loss_ids(rule: dict, keys) -> set:
+    """A rule's losses as identifiers: the audit key for an audit loss, else the exact loss reason."""
+    found = set()
+    for loss in rule['loss_annotations']:
+        head = loss['reason'].split(':', 1)[0]
+        found.add(head if head in keys else loss['reason'])
+    return found
+
+
+def audit_keys(root: Path = ROOT) -> list[str]:
+    text = (root / AUDIT_DOC).read_text(encoding='utf-8')
+    return [r['Key'].strip('`') for r in doc_table(text, '## Loss keys')]
+
+
+def reason_key_table(a1_document: dict, b_document: dict, pairs: dict, root: Path = ROOT) -> dict:
+    """The rule-scoped reason -> key table: per (A1 rule, A1 loss reason), the B losses that must cover it, by side."""
+    table = {}
+    for pair_name, (_, _, maps) in A1_PAIRS.items():
+        if pair_name not in pairs:
+            continue  # B cannot route it; M4 keys then has no row for it and fails
+        pair = pairs[pair_name]
+        for mapping in a1_document['mappings']:
+            if mapping['id'] not in maps:
+                continue
+            for rule in mapping['rules']:
+                for loss in rule['loss_annotations']:
+                    reason = loss['reason']
+                    homes = [h for start, h in REASON_HOMES if reason.startswith(start)]
+                    if len(homes) != 1:
+                        raise SystemExit(f'{rule["id"]}: loss reason {reason!r} has {len(homes)} homes in REASON_HOMES')
+                    need = {'in': set(), 'out': set()}
+                    for home in homes[0]:
+                        if home == 'gain':
+                            for token, text in GAIN.items():
+                                if side := side_of(token, pair):
+                                    need[side].add(text)
+                        elif home == 'split':
+                            if CANONICAL_PARTS.search(rule['outputs'][0]):
+                                need[SYMMETRY[0]].add(SYMMETRY[1])
+                            else:
+                                need[key_side('vrcft_ue_set_equal', pair)].add('vrcft_ue_set_equal')
+                        elif home == 'same':
+                            need['out'].add(reason)
+                        elif isinstance(home, tuple):
+                            need[home[0]].add(home[1])
+                        else:
+                            need[key_side(home, pair)].add(home)
+                    table[f'{rule["id"]} | {reason}'] = {'pair': pair_name,
+                                                          **{s: sorted(v) for s, v in need.items()}}
+    return table
+
+
+def audit_added_keys(root: Path = ROOT) -> dict:
+    """The audit's "Keys added on today's pairs" table, as {pair: [keys]}."""
+    text = (root / AUDIT_DOC).read_text(encoding='utf-8')
+    added = {}
+    for row in doc_table(text, "## Keys added on today's pairs"):
+        keys = re.findall(r'`([a-z0-9_]+)`', row['Key'])
+        for pair in re.sub(r'\(.*?\)', '', row['Pairs where it is added']).split(','):
+            name = pair.strip().replace('→', '->')
+            for long, short in PAIR_NAMES.items():
+                name = name.replace(long, short)
+            added.setdefault(name, set()).update(keys)
+    return {pair: sorted(keys) for pair, keys in sorted(added.items())}
+
+
+def assumption_catalogue(a1_document: dict, pairs: dict, root: Path = ROOT) -> dict:
+    """The frozen catalogue, per (A1 rule, template): the hop keys the route needs by side, or why it is superseded.
+
+    Templates come from the audit's catalogue table; every assumption string of
+    today's maps must match exactly one, and the count of strings per template
+    must be the table's.
+    """
+    text = (root / AUDIT_DOC).read_text(encoding='utf-8')
+    rows = doc_table(text, '## Assumption catalogue')
+    patterns = {r['ID']: template_pattern(r['Template']) for r in rows}
+    counts = dict.fromkeys(patterns, 0)
+    catalogue = {}
+    for pair_name, (_, _, maps) in A1_PAIRS.items():
+        if pair_name not in pairs:
+            continue  # B cannot route it; M4b then has no row for it and fails
+        pair = pairs[pair_name]
+        for mapping in a1_document['mappings']:
+            if mapping['id'] not in maps:
+                continue
+            for rule in mapping['rules']:
+                for assumption in rule['assumptions']:
+                    hits = [i for i, pattern in patterns.items() if pattern.fullmatch(assumption)]
+                    if len(hits) != 1:
+                        raise SystemExit(f'{rule["id"]}: {assumption!r} matches templates {hits}')
+                    template = hits[0]
+                    counts[template] += 1
+                    home = TEMPLATE_HOMES[template]
+                    entry = {'pair': pair_name}
+                    if isinstance(home, str):
+                        entry['superseded'] = home
+                    elif template == 'a10' and CANONICAL_PARTS.search(rule['outputs'][0]):
+                        entry['superseded'] = A10_SUPERSEDED
+                    else:
+                        ends = {e for e in (pair['source'], pair['target'])}
+                        own = set().union(*(OWN_RECORDS[e] for e in ends))
+                        crosswalk = bool(set(rule['evidence']) - own - {'ict_facekit'})
+                        need = {'in': set(), 'out': set(), 'any': set()}
+                        for token, keys in home.items():
+                            side = 'any' if token == 'any' else side_of(token, pair)
+                            for key in keys:
+                                if key == 'transfer':
+                                    if crosswalk:
+                                        need[side].add(TRANSFER)
+                                else:
+                                    need[side].add(key)
+                        entry.update({s: sorted(v) for s, v in need.items()})
+                    catalogue[f'{rule["id"]} | {template}'] = entry
+    expected = {r['ID']: int(r['Strings']) for r in rows}
+    if counts != expected and set(pairs) >= set(A1_PAIRS):
+        raise SystemExit(f'assumption strings per template {counts} differ from the catalogue {expected}')
+    return catalogue
+
+
+def hop_keys(rule: dict) -> set:
+    return {a.split(':', 1)[0] for a in rule['assumptions']}
+
+
+def held(need: str, present: set) -> bool:
+    return any(option in present for option in need.split('|'))
+
+
+def m4_keys(abreg: dict, a1_document: dict, b_document: dict, root: Path = ROOT) -> tuple[list, list]:
+    """Per A1 pair: the reason -> key table's B losses missing from the route, and audit keys B adds unlisted.
+
+    Returns (rows, failures). A1 loss corrections (by "rule | reason") are left out.
+    """
+    keys = set(abreg['lists']['audit_keys'])
+    table, corrections = abreg['lists']['reason_key_table'], set(abreg['lists']['a1_loss_corrections'])
+    added = abreg['lists']['audit_added_keys']
+    rows, failures = [], []
+    for pair_name in (p for p in A1_PAIRS if p in abreg['pairs']):
+        pair = abreg['pairs'][pair_name]
+        routes = a1_rule_routes(a1_document, b_document, pair_name, pair)
+        counts = {'entries': 0, 'shortfall': 0, 'unlisted_added': 0}
+        covered = {}
+        for entry_id, entry in table.items():
+            if entry['pair'] != pair_name or entry_id in corrections:
+                continue
+            counts['entries'] += 1
+            rule_id = entry_id.split(' | ', 1)[0]
+            for side in ('in', 'out'):
+                present = set().union(*(loss_ids(r, keys) for r in routes[rule_id][side]))
+                for need in entry[side]:
+                    if need not in present:
+                        counts['shortfall'] += 1
+                        failures.append([pair_name, entry_id, side, need, 'missing on the route'])
+                covered.setdefault(rule_id, set()).update(n for n in entry[side] if n in keys)
+        helpers = {r['id'] for m in a1_document['mappings'] for r in m['rules']
+                   if r['outputs'][0].startswith('rcef.intermediate.')}
+        for rule_id, route in routes.items():
+            if rule_id in helpers:
+                continue  # an internal gaze step writes no output; the rules that read it carry its keys
+            found = set().union(*(loss_ids(r, keys) & keys for side in ('in', 'out') for r in route[side]))
+            for key in sorted(found - covered.get(rule_id, set()) - set(added.get(pair_name, []))):
+                counts['unlisted_added'] += 1
+                failures.append([pair_name, rule_id, '', key, 'an audit key the route adds, not on the added list'])
+        rows.append({'pair': pair_name, **counts})
+    return rows, failures
+
+
+def m4b(abreg: dict, a1_document: dict, b_document: dict) -> tuple[list, list, list]:
+    """Per A1 pair: catalogue entries whose route lacks a needed hop assumption key. Also one row per entry."""
+    catalogue = abreg['lists']['assumption_catalogue']
+    rows, failures, entries = [], [], []
+    for pair_name in (p for p in A1_PAIRS if p in abreg['pairs']):
+        pair = abreg['pairs'][pair_name]
+        routes = a1_rule_routes(a1_document, b_document, pair_name, pair)
+        counts = {'entries': 0, 'superseded': 0, 'shortfall': 0}
+        for entry_id, entry in catalogue.items():
+            if entry['pair'] != pair_name:
+                continue
+            counts['entries'] += 1
+            rule_id, template = entry_id.split(' | ', 1)
+            if 'superseded' in entry:
+                counts['superseded'] += 1
+                entries.append([pair_name, rule_id, template, f'superseded: {entry["superseded"]}'])
+                continue
+            route = routes[rule_id]
+            present = {side: set().union(*(hop_keys(r) for r in route[side])) for side in ('in', 'out')}
+            present['any'] = present['in'] | present['out']
+            missing = [f'{side}: {need}' for side in ('in', 'out', 'any') for need in entry.get(side, [])
+                       if not held(need, present[side])]
+            if missing:
+                counts['shortfall'] += 1
+                failures.append([pair_name, rule_id, template, '; '.join(missing)])
+            entries.append([pair_name, rule_id, template, '; '.join(
+                f'{side}: {" ".join(entry[side])}' for side in ('in', 'out', 'any') if entry.get(side))])
+        rows.append({'pair': pair_name, **counts})
+    return rows, failures, entries
+
+
+# ---------------------------------------------------------------- M11: B's ARKit -> FACS links against R5 (ICT-FaceKit)
+
+R5_FILE = 'tests/fixtures/ict_facekit_facs.json'
+R5_LINES = (154, 184)
+# Where B departs from ICT-FaceKit's FACS table on purpose (the audit's ICT crosswalk rows and notes).
+M11_DIFFERENCES = {
+    'AU10': 'ICT relates mouthShrugUpper; B relates mouthUpperUp (canonical upper_lip_raise has code 10)',
+    'AU11': 'ICT relates mouthUpperUp; B has no AU11',
+    'AU27': 'ICT relates jawOpen; B reads AU27 as AU26 into jaw_drop and writes jawOpen back as AU26',
+    'AU33': 'ICT relates cheekPuff; B writes cheekPuff as AU34',
+    'AU45': 'ICT relates eyeBlink; B writes eyeBlink as AU43',
+    **{f'AU{n}': 'B has no FACS gaze in phase 1' for n in (61, 62, 63, 64)},
+}
+
+
+def write_r5(readme: Path, root: Path = ROOT) -> dict:
+    """The R5 fixture: ICT-FaceKit's FACS table with the record it comes from."""
+    import tomllib
+    record = next(r for r in tomllib.loads((root / 'evidence/sources.toml').read_text(encoding='utf-8'))['evidence']
+                  if r['id'] == 'ict_facekit')
+    fixture = {'record': record['id'], 'url': record['url'], 'sha256': record['sha256'], 'license': record['license'],
+               'credit': 'ICT-FaceKit, Copyright (c) 2020 USC Institute for Creative Technologies, MIT license',
+               'lines': list(R5_LINES), 'rows': r5_rows(readme.read_bytes(), record['sha256'])}
+    (root / R5_FILE).write_text(json.dumps(fixture, indent=1) + '\n', encoding='utf-8')
+    return fixture
+
+
+def r5_rows(readme: bytes, sha256: str) -> list[dict]:
+    """ICT-FaceKit's FACS table (README lines 154-184 at the pinned commit) as rows of FACS unit and shape names."""
+    if sha256_bytes(readme) != sha256:
+        raise SystemExit('the ICT-FaceKit README does not have the SHA-256 of record ict_facekit')
+    rows = []
+    for number, line in enumerate(readme.decode('utf-8').split('\n'), 1):
+        if R5_LINES[0] <= number <= R5_LINES[1] and (m := re.fullmatch(r'\| (AU\d+ [^|]*?)\s*\| ([^|]*?)\s*\|', line)):
+            rows.append({'line': number, 'unit': m[1], 'shapes': [s.strip() for s in m[2].split('+')]})
+    return rows
+
+
+def ict_arkit(shape: str) -> str:
+    """An ICT-FaceKit shape name as the ARKit coefficient it splits or renames: browInnerUp_L -> browInnerUp,
+    eyeBlink_L -> eyeBlinkLeft."""
+    base, _, side = shape.rpartition('_')
+    if not base:
+        return shape
+    return base if base in ('browInnerUp', 'cheekPuff') else base + {'L': 'Left', 'R': 'Right'}[side]
+
+
+def m11(document: dict, pair: dict, reference: dict, differences: dict) -> tuple[list, list]:
+    """Per R5 row: the ARKit shapes ICT relates to the FACS unit, and those B links to the same facs.code outputs."""
+    outputs = [o for h in pair['out_hops'] for o in rcef_route.map_ends(
+        next(m['rules'] for m in document['mappings'] if m['id'] == h[0]))[1]]
+    linked = links(document, pair, outputs)
+    rows, failures = [], []
+    for row in reference['rows']:
+        m = re.fullmatch(r'AU(\d+) (.*?)(?: \((left|right)\))?', row['unit'])
+        code, direction = f'AU{int(m[1])}', m[3]
+        sides = ('_' + direction,) if direction else ('', '_left', '_right')
+        wanted = {f'facs.code.au{int(m[1]):02d}{s}' for s in sides}
+        b = sorted({s[len(ARKIT):] for s, o in linked if o in wanted})
+        ict = sorted({ict_arkit(s) for s in row['shapes']})
+        if b == ict:
+            verdict = 'listed but the same' if code in differences else 'same'
+        else:
+            verdict = 'listed difference' if code in differences else 'unlisted difference'
+        rows.append({'line': row['line'], 'unit': row['unit'], 'ict': ' '.join(ict), 'b': ' '.join(b) or 'none',
+                     'verdict': verdict})
+        if verdict not in ('same', 'listed difference'):
+            failures.append([row['line'], row['unit'], ' '.join(ict), ' '.join(b), verdict])
+    return rows, failures
+
+
 # ---------------------------------------------------------------- A1 figures (fixed inputs only)
 
 def a1_figures(abreg: dict, document: dict) -> dict:
@@ -616,10 +1140,15 @@ def b_pairs(document: dict) -> dict:
             continue
         route = rcef_route.Route(source, target, pack=pack)
         if route.in_maps and route.out_maps:
-            pairs[name] = {'source': source, 'target': target,
-                           'in_hops': [[m, dst] for m, _, dst in route.hops if m in route.in_maps],
-                           'out_hops': [[m, src] for m, src, _ in route.hops if m in route.out_maps]}
+            pairs[name] = {'source': source, 'target': target, **route_hops(route)}
     return pairs
+
+
+def route_hops(route: rcef_route.Route) -> dict:
+    """The maps a route runs, as a registration freezes them: in-maps, bridges and out-maps, with their profiles."""
+    return {'in_hops': [[m, dst] for m, _, dst in route.hops if m in route.in_maps],
+            'bridges': [[m, src, dst] for m, src, dst in route.hops if m in route.bridges],
+            'out_hops': [[m, src] for m, src, _ in route.hops if m in route.out_maps]}
 
 
 def pinned_sources(a1: dict, b_document: dict, pairs: dict) -> dict:
@@ -673,17 +1202,21 @@ def draft(root: Path = ROOT, b_path: Path | None = None, date: str = '') -> dict
                      'sha256': sha256_bytes((root / p).read_bytes())} for p, s, pre, suf in CSV_INPUTS],
             'facs_keys': keys,
             'r3': {'path': R3_FILE, 'kinds': R3_KINDS, 'sha256': sha256_bytes((root / R3_FILE).read_bytes())},
+            'r5': {'path': R5_FILE, 'sha256': sha256_bytes((root / R5_FILE).read_bytes())},
             'a3': ab_a3.SHA256},
         'pairs': pairs,
         'metrics': THRESHOLDS,
-        'lists': {'intended_differences': [], 'a1_loss_corrections': [], 'audit_added_keys': [], 'side_exceptions': [],
-                  'reason_key_table': {}, 'assumption_catalogue': {}, 'no_target': [], 'r3': R3_DEPARTURES,
-                  'r2_departures': ['browInnerUp'], 'm3_flat_links': [], 'm3_rounding': M3_ROUNDING,
-                  'm10_not_available': M10_NOT_AVAILABLE, 'm10b_not_available': M10B_NOT_AVAILABLE,
-                  'm11_differences': []},
+        'lists': {'intended_differences': [], 'a1_loss_corrections': [], 'audit_added_keys': audit_added_keys(root),
+                  'side_exceptions': [], 'audit_keys': audit_keys(root),
+                  'reason_key_table': reason_key_table(a1, b_document, pairs, root),
+                  'assumption_catalogue': assumption_catalogue(a1, pairs, root), 'no_target': [],
+                  'r3': R3_DEPARTURES, 'r2_departures': ['browInnerUp'], 'm3_flat_links': [],
+                  'm3_rounding': M3_ROUNDING, 'm10_not_available': M10_NOT_AVAILABLE,
+                  'm10b_not_available': M10B_NOT_AVAILABLE, 'm11_differences': M11_DIFFERENCES,
+                  'm7_mutations': ab_mutations.MUTATIONS},
         'acceptance': {}, 'changes': [],
         'pins': {'a1_sha256': A1_SHA256, 'b_pack_sha256': sha256_bytes(b_path.read_bytes()),
-                 'code': code_hashes(root), 'runtime': runtime_pins(root)},
+                 'code': code_hashes(root), 'runtime': runtime_pins(root), 'rigs': ab_geometry.rig_pins()},
         'not_registered': sorted(set(B_PAIRS) - set(pairs)),
     }
     oracle, fixed = ab_oracle.Oracle(b_document), ab_frames.fixed_families(abreg)
@@ -692,9 +1225,36 @@ def draft(root: Path = ROOT, b_path: Path | None = None, date: str = '') -> dict
         impulse = fixed[f'impulse:{pair["source"]}']
         flat |= {tuple(link) for link in flat_links(b_document, pair, impulse, oracle_results(oracle, pair, impulse))}
     abreg['lists']['m3_flat_links'] = sorted(map(list, flat))
+    abreg['lists']['no_target'] = rest_inputs(b_document, pairs)
     abreg['a1_figures'] = a1_figures(abreg, a1)
     abreg['seed_root'] = seed_root(abreg)
     return abreg
+
+
+def rest_inputs(document: dict, pairs: dict) -> list[dict]:
+    """Source inputs that reach a bridge only through a class whose pose is the rest face (every weight 0).
+
+    Their impulse moves no output, by design, so M4's observed loss leaves them out.
+    """
+    found = []
+    for name, pair in sorted(pairs.items()):
+        for bridge, *_ in pair.get('bridges', []):
+            rules = next(m['rules'] for m in document['mappings'] if m['id'] == bridge)
+            weights = {}
+            for rule in rules:
+                if rule['operator']['id'] == 'weighted_sum':
+                    for weight, sid in zip(rule['operator']['weights'], rule['inputs']):
+                        weights.setdefault(sid, set()).add(weight)
+            helpers = {r['outputs'][0]: r['inputs'][0] for r in rules if r['operator']['id'] == 'affine'}
+            still = {helpers[h] for h, ws in weights.items() if ws == {0.0} and h in helpers}
+            in_rules = rules_by_output(document, [h[0] for h in pair['in_hops']])
+            for cls in sorted(still):
+                if cls in in_rules:
+                    for sid in sorted(upstream(in_rules, cls)[1]):
+                        found.append({'pair': name, 'input': sid, 'reason': (
+                            f'{sid.rsplit(".", 1)[1]} reaches {bridge} only as {cls.rsplit(".", 1)[1]}, whose pose '
+                            'is the rest face: every weight of it in the bridge is 0')})
+    return found
 
 
 # ---------------------------------------------------------------- registration checks
@@ -894,10 +1454,17 @@ def pin_problems(abreg: dict, root: Path, b_path: Path) -> list[str]:
             problems.append(f'{CODE[name]} differs from its pinned hash')
     if pins['runtime'] != runtime_pins(root):
         problems.append(f'the runtime {runtime_pins(root)} differs from the pinned {pins["runtime"]}')
+    if 'rigs' in pins and pins['rigs'] != ab_geometry.rig_pins():
+        problems.append('the rig files pinned in examples/rigs.py and examples/ict_facekit.py differ from the pins')
+    r5 = abreg.get('fixed_inputs', {}).get('r5')
+    if r5 and sha256_bytes((root / r5['path']).read_bytes()) != r5['sha256']:
+        problems.append(f'{r5["path"]} does not have the SHA-256 the registration pins')
     return problems + ab_a3.fixture_problems()
 
 
-def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = None, dry_run: bool = False) -> dict:
+def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = None, dry_run: bool = False,
+        rig_caches: dict | None = None) -> dict:
+    """Run a registration. rig_caches ({rig name: cache folder}) lets M6 pose the rigs; without them M6 is pending."""
     started = time.perf_counter()
     abreg = json.loads(abreg_path.read_text(encoding='utf-8'))
     b_path = b_path or root / B_PACK
@@ -932,7 +1499,8 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
     for name in families:
         source = regression_sources.get(name) or ab_frames.family_source(name, abreg)
         by_source.setdefault(source, []).append(name)
-    report = {'metrics': {}, 'failures': {}, 'refusals': [], 'observed_loss': [], 'regression': sorted(regression)}
+    report = {'metrics': {}, 'failures': {}, 'refusals': [], 'observed_loss': [], 'assumptions': [],
+              'regression': sorted(regression)}
 
     def record(metric, row, counts, failures=()):
         report['metrics'].setdefault(metric, []).append({**row, **counts})
@@ -942,9 +1510,8 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
     routes = {}
     for name, pair in abreg['pairs'].items():
         route = rcef_route.Route(pair['source'], pair['target'], pack=b_pack)
-        hops = {'in_hops': [[m, d] for m, _, d in route.hops if m in route.in_maps],
-                'out_hops': [[m, s] for m, s, _ in route.hops if m in route.out_maps]}
-        if hops != {k: pair[k] for k in hops}:
+        hops = route_hops(route)
+        if hops != {k: pair.get(k, []) for k in hops}:
             raise SystemExit(f'{name}: Route selects maps the registration did not freeze')
         routes[name] = route
     b_runs, o_runs = {}, {}
@@ -983,7 +1550,7 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
         impulse_name = f'impulse:{pair["source"]}'
         if (name, impulse_name) not in b_runs:
             continue
-        declared = set(abreg['lists']['no_target'])
+        declared = {e['input'] for e in abreg['lists']['no_target'] if e['pair'] == name}
         lost = observed_loss(b_runs[name, impulse_name], families[impulse_name], declared)
         report['observed_loss'] += [['B', name, sid] for sid in lost]
         record('M4', {'pair': name, 'arm': 'B'}, {'observed_loss': len(lost), 'baseline': '', 'matches_baseline': ''})
@@ -1013,13 +1580,14 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
             if family in families:
                 expected[family] = [dict(zip(a3_fb2, ab_a3.a3_keys(f['keys']).values())) for f in families[family]]
         a1 = rcef_route.Route(*A1_PAIRS['FB2 -> ARKit'][:2], pack=a1_pack, maps=A1_PAIRS['FB2 -> ARKit'][2])
+        a3a1_runs = {}
         for family, values in expected.items():
             if ('FACS -> FB2', family) in b_runs:
                 record('M10', {'family': family}, *facs_compare(b_runs['FACS -> FB2', family], values,
                                                                 abreg['lists']['m10_not_available']))
             if ('FACS -> ARKit', family) in b_runs:
                 flags = {'isValid': True, 'isEyeFollowingBlendshapesValid': True}
-                a3a1 = run_route(a1, [{'values': v, 'flags': flags} for v in values])
+                a3a1 = a3a1_runs[family] = run_route(a1, [{'values': v, 'flags': flags} for v in values])
                 record('M10b', {'family': family}, *facs_compare(b_runs['FACS -> ARKit', family],
                                                                  [r['values'] for r in a3a1],
                                                                  abreg['lists']['m10b_not_available']))
@@ -1041,6 +1609,44 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
         reference = json.loads((root / abreg['fixed_inputs']['r3']['path']).read_text(encoding='utf-8'))
         record('M8 R3', {'reference': 'R3'}, *r3(b_runs[R3_PAIR, f'r3:{R3_KINDS["fb2_to_ue"]}'], reference,
                                                  abreg['lists']['r3']))
+    lists = abreg['lists']
+    if lists.get('reason_key_table'):
+        rows, failures = timed('M4 keys', m4_keys, abreg, a1_document, b_document, root)
+        for row in rows:
+            record('M4 keys', {'pair': row['pair']}, {k: v for k, v in row.items() if k != 'pair'},
+                   [f[1:] for f in failures if f[0] == row['pair']])
+    if lists.get('assumption_catalogue'):
+        rows, failures, entries = timed('M4b', m4b, abreg, a1_document, b_document)
+        for row in rows:
+            record('M4b', {'pair': row['pair']}, {k: v for k, v in row.items() if k != 'pair'},
+                   [f[1:] for f in failures if f[0] == row['pair']])
+        report['assumptions'] = entries
+    if lists.get('m7_mutations'):
+        rows, failures = timed('M7', ab_mutations.m7, abreg, b_document, a1_document, families)
+        for row in rows:
+            record('M7', {'mutation': row['mutation']}, {k: v for k, v in row.items() if k != 'mutation'},
+                   [f[1:] for f in failures if f[0] == row['mutation']])
+    r5 = abreg.get('fixed_inputs', {}).get('r5')
+    if r5 and 'ARKit -> FACS' in abreg['pairs']:
+        reference = json.loads((root / r5['path']).read_text(encoding='utf-8'))
+        rows, failures = m11(b_document, abreg['pairs']['ARKit -> FACS'], reference, lists['m11_differences'])
+        for row in rows:
+            record('M11', {'line': row['line']}, {k: v for k, v in row.items() if k != 'line'},
+                   [f[1:] for f in failures if f[0] == row['line']])
+    if rig_caches and 'rigs' in abreg['pins']:
+        posed = timed('M6 rigs', ab_geometry.load, rig_caches)
+        arms = [('FB2 -> ARKit', f, a1_runs.get(('FB2 -> ARKit', f))) for f in by_source.get('openxr.fb2', [])
+                if f.startswith(('csv:', 'goldens:'))]
+        if 'facs.code' in abreg['sources']:
+            arms += [('FACS -> ARKit', f, a3a1_runs.get(f)) for f in FACS_FAMILIES]
+        for name, rig in posed.items():
+            problems = timed('M6 oracles', ab_geometry.oracle_problems, rig)
+            for pair_name, family, other in arms:
+                if other is None or (pair_name, family) not in b_runs:
+                    continue
+                counts = timed('M6', ab_geometry.vertex_difference, rig, other, b_runs[pair_name, family])
+                record('M6', {'pair': pair_name, 'rig': name, 'family': family},
+                       {**counts, 'oracle_problems': len(problems)}, [[p] for p in problems])
     timings['total'] = round(time.perf_counter() - started, 3)
     return write_results(out, abreg, report, frame_sums, timings, pins, dry_run, b_path, root)
 
@@ -1048,10 +1654,12 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
 # ---------------------------------------------------------------- results
 
 GATES = {'M1': ('value_differences', 'sign_differences'), 'B equals O': ('differences',), 'M1s': ('differences',),
-         'M2': ('violations',), 'M2c': ('shortfall',), 'M3 exact': ('errors',), 'M3 coverage': ('violations',),
+         'M2': ('violations',), 'M2c': ('shortfall',), 'M3 exact': ('errors', 'over_bound'),
+         'M3 coverage': ('violations',),
          'M5 R2': ('differences',), 'M10': ('value_differences', 'coverage_violations', 'b_refusals'),
-         'M10b': ('value_differences', 'coverage_violations')}
-REPORT_ONLY = ('M2b', 'M8', 'M8 R3')
+         'M10b': ('value_differences', 'coverage_violations'), 'M4 keys': ('shortfall', 'unlisted_added'),
+         'M4b': ('shortfall',), 'M7': ('missed',)}
+REPORT_ONLY = ('M2b', 'M8', 'M8 R3', 'M6', 'M11')
 
 
 def status(metric: str, rows: list[dict]) -> str:
@@ -1074,9 +1682,12 @@ def missing_rows(report: dict, abreg: dict) -> dict:
     rows = report['metrics']
     required = {**{m: ('pair', list(A1_PAIRS)) for m in ('M1', 'M1s', 'M2', 'M2c')},
                 'B equals O': ('pair', list(abreg['pairs'])), 'M3 coverage': ('pair', list(abreg['pairs'])),
-                'M10': ('family', FACS_FAMILIES), 'M10b': ('family', FACS_FAMILIES)}
+                'M10': ('family', FACS_FAMILIES), 'M10b': ('family', FACS_FAMILIES),
+                'M4 keys': ('pair', list(A1_PAIRS)), 'M4b': ('pair', list(A1_PAIRS))}
     missing = {}
     for metric, (key, names) in required.items():
+        if metric not in rows and metric in PENDING:
+            continue  # shown as pending instead
         have = {r.get(key) for r in rows.get(metric, [])}
         if absent := [n for n in names if n not in have]:
             missing[metric] = absent
@@ -1117,8 +1728,8 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
             files[f'{slug}_failures.csv'] = csv_text(report['failures'][metric])
     files['refusals.csv'] = csv_text([['arm', 'pair', 'family', 'frame', 'map', 'codes'], *report['refusals']])
     files['losses.csv'] = csv_text([['arm', 'pair', 'observed loss'], *report['observed_loss']])
-    files['assumptions.csv'] = csv_text([['pair', 'A1 rule', 'template', 'B key or superseded reason'],
-                                         ['pending', 'the assumption catalogue (M4b) is not frozen yet', '', '']])
+    files['assumptions.csv'] = csv_text([['pair', 'A1 rule', 'template', 'B keys by side, or superseded'],
+                                         *report['assumptions']])
     lines = ['# A/B comparison: scoreboard', '',
              'The pivot route (B) against the direct maps (A1) and the other arms. The held-out frames are held out '
              'by procedure: the registration and its ledger line were committed before this run.', '']
@@ -1139,13 +1750,18 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
               '|---|---|---|---|---|']
     m2b_rows = {r['pair']: r for r in report['metrics'].get('M2b', [])}
     m2c_rows = {r['pair']: r for r in report['metrics'].get('M2c', [])}
+    m4b_rows = {r['pair']: r for r in report['metrics'].get('M4b', [])}
     for name in abreg['pairs']:
         reference = 'A1' if name in A1_PAIRS else 'A2' if name in A2_PAIRS else (
             'A3' if name.startswith('FACS -> ') and name.split(' -> ')[1] in ('FB2', 'ARKit') else
             'no external reference')
         evidence = f'{m2b_rows[name]["a1"]} / {m2b_rows[name]["b"]}' if name in m2b_rows else ''
         shortfall = m2c_rows[name]['shortfall'] if name in m2c_rows else ''
-        lines.append(f'| {name} | {evidence} | {shortfall} | pending | {reference} |')
+        if name in m4b_rows:
+            m4b_cell = f'shortfall {m4b_rows[name]["shortfall"]} of {m4b_rows[name]["entries"]}'
+        else:
+            m4b_cell = 'pending' if 'M4b' not in report['metrics'] else 'no A1 rule'
+        lines.append(f'| {name} | {evidence} | {shortfall} | {m4b_cell} | {reference} |')
     files['scoreboard.md'] = '\n'.join(lines) + '\n'
     for name, text in files.items():
         (out / name).write_text(text, encoding='utf-8')
@@ -1193,8 +1809,12 @@ def main(argv: list[str]) -> int:
     p.add_argument('out', type=Path)
     p.add_argument('--b-pack', type=Path)
     p.add_argument('--dry-run', action='store_true')
+    p.add_argument('--rig', action='append', default=[], metavar='NAME=DIR',
+                   help=f'a rig cache for M6, for each of {", ".join(ab_geometry.RIGS)}')
     commands.add_parser('check')
     commands.add_parser('a1-loss')
+    p = commands.add_parser('r5')
+    p.add_argument('readme', type=Path)
     args = parser.parse_args(argv)
     if args.command == 'draft':
         if args.out.resolve().parent == (ROOT / 'ab').resolve():
@@ -1203,9 +1823,12 @@ def main(argv: list[str]) -> int:
                             encoding='utf-8')
         print(f'{args.out}: review it and fill in the frozen lists before you register it')
     elif args.command == 'run':
-        manifest = run(args.abreg, args.out, ROOT, args.b_pack, args.dry_run)
+        caches = {name: Path(folder).expanduser() for name, folder in (r.split('=', 1) for r in args.rig)}
+        manifest = run(args.abreg, args.out, ROOT, args.b_pack, args.dry_run, caches)
         print(json.dumps(manifest['statuses'], indent=1, sort_keys=True))
         return 0 if manifest['passed'] else 1
+    elif args.command == 'r5':
+        print(f'{R5_FILE}: {len(write_r5(args.readme)["rows"])} rows')
     elif args.command == 'check':
         problems = registration_problems(ROOT)
         print('\n'.join(problems) or 'ab/: no problems')

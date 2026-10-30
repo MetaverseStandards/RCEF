@@ -8,6 +8,7 @@ signal, so B must equal A1 there, and a planted fault must fail M1 and M1s.
 from copy import deepcopy
 from fractions import Fraction
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -89,6 +90,28 @@ class Metrics(unittest.TestCase):
                                         {'gaze_pairs': []})
         self.assertEqual((counts['errors'], counts['max_excluded_error']), (0, 0.30000000000000004 - 0.3))
 
+    def test_the_excluded_round_trip_outputs_have_bounds_and_a_larger_error_fails(self):
+        a, b = ab_compare.M3_ROUNDING[0], FB2 + 'EYES_LOOK_RIGHT_L_FB'
+        source = {'gaze_pairs': [[a, b]]}
+        up = math.nextafter(0.3, 1.0)
+        # Exclusive frames: one ulp of 0.3 is 2**-54, the bound; two ulps are past it.
+        for value, over in ((up, 0), (math.nextafter(up, 1.0), 1)):
+            counts, failures = ab_compare.m3_exact([{'values': {a: 0.3, b: 0.0}}], [result({a: value, b: 0.0})],
+                                                   source)
+            self.assertEqual((counts['errors'], counts['over_bound']), (0, over), value)
+        self.assertEqual(counts['max_rounding_error'], 2.0 ** -53)
+        # Frames that break exclusivity: off by the smaller input (0.1) passes, by more fails.
+        frame = [{'values': {a: 0.3, b: 0.1}}]
+        self.assertEqual(ab_compare.m3_exact(frame, [result({a: 0.19999999999999998, b: 0.0})], source)[0][
+            'over_bound'], 0)
+        counts, failures = ab_compare.m3_exact(frame, [result({a: 0.1, b: 0.0})], source)
+        self.assertEqual((counts['over_bound'], failures), (1, [[0, a, '0.3', '0.1']]))
+        # VRCFaceTracking Openness: a planted error larger than the rounding fails.
+        openness = 'vrcft.eye.Right.Openness'
+        counts, _ = ab_compare.m3_exact([{'values': {openness: 0.3}}], [result({openness: 0.31})], {'gaze_pairs': []})
+        self.assertEqual((counts['errors'], counts['over_bound']), (0, 1))
+        self.assertEqual(ab_compare.status('M3 exact', [counts]), 'FAIL')
+
     def test_facs_coverage_must_follow_the_frozen_list(self):
         expected = [{'a': 0.5, 'b': 0.0, 'c': 0.0}]
         b = [result({'a': 0.5}, {'b': ab_compare.rcef_route.NOT_AVAILABLE, 'c': 'refused at m'})]
@@ -117,6 +140,17 @@ class Metrics(unittest.TestCase):
         self.assertEqual(ab_compare.m3_coverage(*args)[0]['violations'], 3)
         self.assertEqual(ab_compare.m3_coverage(*args, channels)[0]['violations'], 0)
 
+    def test_a_weighted_sum_input_with_weight_0_is_not_a_link(self):
+        pack = json.loads((ROOT / 'generated/rcef.pack.json').read_text(encoding='utf-8'))
+        route = ab_compare.rcef_route.Route('openxr.visemes', 'arkit.coefficient')
+        pair = {'source': 'openxr.visemes', 'target': 'arkit.coefficient', **ab_compare.route_hops(route)}
+        found = ab_compare.links(pack, pair, route.outputs)
+        # Every pose weight of sil is 0, so META SIL reaches no ARKit output; the other classes reach some.
+        sources = {s.split('VISEME_')[1] for s, _ in found}
+        self.assertNotIn('SIL_META', sources)
+        self.assertIn('AA_META', sources)
+        self.assertTrue(all(knots for knots in found.values()))  # each path runs through the bridge's clamp
+
     def test_r3_counts_listed_departures_and_finds_other_differences(self):
         reference = {'cases': [{'expected': {'a': 0.5, 'b': 0.0, 'c': 0.25}}, {'expected': {'a': 1.0, 't': 1.0}}]}
         b = [result({'a': 0.5, 'b': 0.5, 'c': 0.25}), result({'a': 1.0})]
@@ -139,7 +173,7 @@ class RequiredRows(unittest.TestCase):
         abreg = {'pairs': {'META -> VRM': {}, 'FB2 -> FB2': {}}}
         report = {'metrics': {'M1': [{'pair': 'META -> VRM', 'value_differences': 0, 'sign_differences': 0}],
                               'B equals O': [{'pair': 'META -> VRM', 'differences': 0}],
-                              'M3 exact': [{'pair': 'FB2 -> FB2', 'errors': 0}]}}
+                              'M3 exact': [{'pair': 'FB2 -> FB2', 'errors': 0, 'over_bound': 0}]}}
         missing = ab_compare.missing_rows(report, abreg)
         self.assertEqual(set(missing['M1']), set(ab_compare.A1_PAIRS) - {'META -> VRM'})
         self.assertEqual(missing['B equals O'], ['FB2 -> FB2'])
@@ -160,7 +194,8 @@ class Manifest(unittest.TestCase):
             b_path = root / 'b.pack.json'
             b_path.write_text('{}', encoding='utf-8')
             abreg = {'id': 'ab.pivot', 'version': 1, 'kind': 'first', 'seed_root': 'a' * 64, 'pairs': {}}
-            report = {'metrics': {}, 'failures': {}, 'refusals': [], 'observed_loss': [], 'regression': []}
+            report = {'metrics': {}, 'failures': {}, 'refusals': [], 'observed_loss': [], 'assumptions': [],
+                      'regression': []}
             manifest = ab_compare.write_results(root / 'out', abreg, report, {}, {}, [], True, b_path, root)
             self.assertEqual(manifest['code'], ab_compare.code_hashes(root))
             self.assertNotEqual(manifest['code'], ab_compare.code_hashes(ROOT))
@@ -334,6 +369,8 @@ class DryRun(unittest.TestCase):
         manifest = ab_compare.run(self.tmp / 'x.abreg', self.tmp / 'out', b_path=b_path, dry_run=True)
         rows = manifest['row_statuses']
         self.assertEqual(rows.pop('M5 R1'), 'FAIL')  # 126 of the 129 goldens need pairs this B cannot route
+        # These hops carry today's assumption and loss text, not the hop keys, and lack the rules the mutations name.
+        self.assertEqual([rows.pop(m) for m in ('M4 keys', 'M4b', 'M7')], ['FAIL', 'FAIL', 'FAIL'])
         self.assertEqual(set(rows.values()), {'pass', 'report'})
         # The rows that exist pass, but the ARKit pairs, FACS -> FB2 and FACS -> ARKit have none: those gates fail.
         missing = {'ARKit -> FB2', 'ARKit -> VRCFT UE', 'FB2 -> ARKit'}
