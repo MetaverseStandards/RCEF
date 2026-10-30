@@ -252,6 +252,24 @@ exclusive, and the data now builds this in.
 
 ## Calibration and examples — unreleased
 
+- The examples, the face and viseme pipelines and `scripts/compare_godot.py`
+  translate through the canonical sets (source → canonical → target), with
+  `examples/rcef_route.py`. `examples/rcef_frames.py` reads and writes the
+  CSV files. The outputs are the same byte for byte, except one column: a
+  refusal now names the hop map that refused, for example
+  `fb2_gaze.to_rcef` instead of `fb2_gaze.to_arkit`. No example reads a
+  direct map now.
+- `docs/godot_comparison.md` composes the two hops exactly and names both
+  maps. It adds the ARKit `unresolved` verdict to `mouthClose`, notes for
+  `cheekPuff` (ICT AU33) and `eyeBlink` (ICT AU45), and new gaze text: the
+  FB2 figures show the subject's own side.
+- `examples/make_demo_frames.py` and `examples/make_expression_frames.py`
+  use channel lists fixed in the code (the lists of data 0.3.0), not the
+  live pack. `tests/test_demo_frames.py` checks that the demo frames are
+  written byte for byte.
+- The translation tests run through the routes. A mutation changes the maps
+  of one hop.
+
 - Calibration record `calibration/viseme-poses.rocketbox-female.cal`
   (software-only; mesh geometry only, so it has no renderer): each of
   Rocketbox Female's 15 META viseme shapes fitted as a mirror-symmetric

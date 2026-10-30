@@ -53,7 +53,7 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 
 ### Examples
 
-- `examples/`: programs you can run. They translate recorded FB2 face frames to ARKit, turn speech visemes into VRM mouth shapes, and drive 3D example faces. Their inputs are in `examples/data/`.
+- `examples/`: programs you can run. Through the canonical sets, they translate synthetic FB2 face frames to ARKit, turn speech visemes into VRM mouth shapes, and drive 3D example faces. Their inputs are in `examples/data/`.
 
 ### Documents
 
@@ -395,7 +395,7 @@ To check only the reports with Python's standard library, run `python3 -B script
 
 ## Examples
 
-[examples/README.md](examples/README.md) uses RCEF from start to end with the msf-character-tools public API. It translates FB2 frames to ARKit weights, and META visemes to VRM presets, from CSV. It then drives two Microsoft Rocketbox faces and the ICT-FaceKit face with a FACS-based expression library, both directly and through RCEF's mappings, and reports the residuals. It also renders a short spoken phrase as visemes on Rocketbox and on a VRM model, and drives a held-out Rocketbox rig and ICT-FaceKit with visemes through the viseme pose bridge.
+[examples/README.md](examples/README.md) uses RCEF from start to end with the msf-character-tools public API. It translates FB2 frames to ARKit weights, and META visemes to VRM presets, from CSV, through the canonical expression and viseme sets. It then drives two Microsoft Rocketbox faces and the ICT-FaceKit face with a FACS-based expression library, both directly and through RCEF's mappings, and reports the residuals. It also renders a short spoken phrase as visemes on Rocketbox and on a VRM model, and drives a held-out Rocketbox rig and ICT-FaceKit with visemes through the viseme pose bridge.
 
 ## Calibration
 
