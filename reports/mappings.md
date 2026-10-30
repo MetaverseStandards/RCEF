@@ -2,7 +2,7 @@
 
 Pack: rcef.parity; data version: 0.5.0.
 
-Generated from rcef.pack.json; SHA-256: 7e13c2369593e24215a3eadeb53a1fcd87fbaab7bb010f9c59be183fb91ee9b0.
+Generated from rcef.pack.json; SHA-256: 38bca36eccfa028c0c6c793da7d275ec3ecf95337193d55cf54f3f14715990a7.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Provider attribution and source terms are in ../THIRD_PARTY_NOTICES.md.
 
@@ -709,6 +709,12 @@ Proposed mappings translate between providers. Each formula assumes the calibrat
 | rcef_cheek_suck.to_vrcft_artist | rcef_vrcft_artist.CheekSuckRight | rcef.canonical_expression → vrcft.artist.base | CheekSuckRight = 1·cheek_suck_right | Unified Expressions gain and full-activation pose not published; two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions | proposed |
 | rcef_lip_tighten.to_vrcft_artist | rcef_vrcft_artist.MouthTightenerLeft | rcef.canonical_expression → vrcft.artist.base | MouthTightenerLeft = 1·lip_tighten_left | Unified Expressions gain and full-activation pose not published; two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions | proposed |
 | rcef_lip_tighten.to_vrcft_artist | rcef_vrcft_artist.MouthTightenerRight | rcef.canonical_expression → vrcft.artist.base | MouthTightenerRight = 1·lip_tighten_right | Unified Expressions gain and full-activation pose not published; two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions | proposed |
+| vrcft_eye_blink.to_rcef | vrcft_eye_rcef.eye_close_left | vrcft.eye → rcef.canonical_expression | eye_close_left = -1·Left.Openness + 1 | VRCFaceTracking eye gain and full-activation pose not published; vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused | proposed |
+| vrcft_eye_blink.to_rcef | vrcft_eye_rcef.eye_close_right | vrcft.eye → rcef.canonical_expression | eye_close_right = -1·Right.Openness + 1 | VRCFaceTracking eye gain and full-activation pose not published; vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused | proposed |
+| rcef_blink.to_vrcft_eye | rcef_vrcft_eye.Left.Openness | rcef.canonical_expression → vrcft.eye | Left.Openness = -1·eye_close_left + 1 | VRCFaceTracking eye gain and full-activation pose not published; vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused | proposed |
+| rcef_blink.to_vrcft_eye | rcef_vrcft_eye.Right.Openness | rcef.canonical_expression → vrcft.eye | Right.Openness = -1·eye_close_right + 1 | VRCFaceTracking eye gain and full-activation pose not published; vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused | proposed |
+| vrm_blink.to_rcef | vrm_rcef.eye_close_left | vrm.preset → rcef.canonical_expression | eye_close_left = 1·blinkLeft | an asset-authored expression weight becomes a canonical value; VRM blink (both eyes) not read; when a model drives only blink, eye_close reads open; vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right | proposed |
+| vrm_blink.to_rcef | vrm_rcef.eye_close_right | vrm.preset → rcef.canonical_expression | eye_close_right = 1·blinkRight | an asset-authored expression weight becomes a canonical value; VRM blink (both eyes) not read; when a model drives only blink, eye_close reads open; vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right | proposed |
 | rcef_blink.to_vrm | rcef_vrm.blinkLeft | rcef.canonical_expression → vrm.preset | blinkLeft = 1·eye_close_left | a canonical value becomes an asset-authored expression weight; VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink; a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed; vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right | proposed |
 | rcef_blink.to_vrm | rcef_vrm.blinkRight | rcef.canonical_expression → vrm.preset | blinkRight = 1·eye_close_right | a canonical value becomes an asset-authored expression weight; VRM blink (both eyes) is left unset, so a model that binds only blink, not blinkLeft and blinkRight, does not blink; a model may mark the preset isBinary, which turns a partial closure into fully open or fully closed; vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right | proposed |
 | vrm_vowel.to_rcef | vrm_rcef.vowel_open | vrm.preset → rcef.canonical_viseme | vowel_open = 1·aa | vrm_vowel_asset_weight: in: asset-authored weights treated as probabilities; no sum constraint (aa = 1 and oh = 1 give a sum of 2); sil not provided. Out: a viseme probability becomes an asset-authored expression weight | proposed |
@@ -12670,6 +12676,174 @@ Assumptions:
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"Unified Expressions gain and full-activation pose not published","refs":["rcef.canonical_expression.lip_tighten_right","vrcft.artist.base.MouthTightenerRight"],"units":"1"},{"category":"signal","effect":"approximated","reason":"two-step crosswalk through Godot: Godot links FB2 to its own shape, and its shape to Unified Expressions by name; neither step alone links FB2 to Unified Expressions","refs":["rcef.canonical_expression.lip_tighten_right","vrcft.artist.base.MouthTightenerRight"],"units":"1"}]
 
 Evidence: vrcft_artist, vrcft_docs_shapes, vrcft_docs_movement, godot_vendors_fb2, godot_enum, godot_face_modifier, rcef_canonical_v1
+
+## vrcft_eye_blink.to_rcef
+
+### vrcft_eye_rcef.eye_close_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| vrcft.eye.Left.Openness | rcef.canonical_expression.eye_close_left | {"id":"affine","offset":1.0,"scale":-1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: VRCFaceTracking eye Left.Openness corresponds to canonical eye_close_left.
+- endpoints: VRCFaceTracking eye's Openness 1 and 0 are assumed to be canonical eye_close 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; eye_close is 1 − Openness; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_eye_openness_neutral_unresolved.
+- vrcft_eye.openness: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"VRCFaceTracking eye gain and full-activation pose not published","refs":["vrcft.eye.Left.Openness","rcef.canonical_expression.eye_close_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused","refs":["vrcft.eye.Left.Openness","rcef.canonical_expression.eye_close_left"],"units":"1"}]
+
+Evidence: vrcft_data, rcef_canonical_v1
+
+### vrcft_eye_rcef.eye_close_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| vrcft.eye.Right.Openness | rcef.canonical_expression.eye_close_right | {"id":"affine","offset":1.0,"scale":-1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: VRCFaceTracking eye Right.Openness corresponds to canonical eye_close_right.
+- endpoints: VRCFaceTracking eye's Openness 1 and 0 are assumed to be canonical eye_close 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; eye_close is 1 − Openness; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_eye_openness_neutral_unresolved.
+- vrcft_eye.openness: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"VRCFaceTracking eye gain and full-activation pose not published","refs":["vrcft.eye.Right.Openness","rcef.canonical_expression.eye_close_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused","refs":["vrcft.eye.Right.Openness","rcef.canonical_expression.eye_close_right"],"units":"1"}]
+
+Evidence: vrcft_data, rcef_canonical_v1
+
+## vrcft_eye_pupil_mm.to_rcef
+
+### vrcft_eye_rcef.pupil_diameter_mm_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| vrcft.eye.Left.PupilDiameter_MM | rcef.canonical_expression.pupil_diameter_mm_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | exact |
+
+Assumptions:
+
+- correspondence: VRCFaceTracking eye Left.PupilDiameter_MM corresponds to canonical pupil_diameter_mm_left.
+- endpoints: both ends are the pupil diameter in millimetres, as the tracker reports it; the tracker-reported diameter is carried over unchanged.
+
+Loss annotations: []
+
+Evidence: vrcft_data, rcef_canonical_v1
+
+### vrcft_eye_rcef.pupil_diameter_mm_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| vrcft.eye.Right.PupilDiameter_MM | rcef.canonical_expression.pupil_diameter_mm_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | exact |
+
+Assumptions:
+
+- correspondence: VRCFaceTracking eye Right.PupilDiameter_MM corresponds to canonical pupil_diameter_mm_right.
+- endpoints: both ends are the pupil diameter in millimetres, as the tracker reports it; the tracker-reported diameter is carried over unchanged.
+
+Loss annotations: []
+
+Evidence: vrcft_data, rcef_canonical_v1
+
+## rcef_blink.to_vrcft_eye
+
+### rcef_vrcft_eye.Left.Openness
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.eye_close_left | vrcft.eye.Left.Openness | {"id":"affine","offset":1.0,"scale":-1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: VRCFaceTracking eye Left.Openness corresponds to canonical eye_close_left.
+- endpoints: VRCFaceTracking eye's Openness 1 and 0 are assumed to be canonical eye_close 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; eye_close is 1 − Openness; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_eye_openness_neutral_unresolved.
+- vrcft_eye.openness: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"VRCFaceTracking eye gain and full-activation pose not published","refs":["rcef.canonical_expression.eye_close_left","vrcft.eye.Left.Openness"],"units":"1"},{"category":"signal","effect":"approximated","reason":"vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused","refs":["rcef.canonical_expression.eye_close_left","vrcft.eye.Left.Openness"],"units":"1"}]
+
+Evidence: vrcft_data, rcef_canonical_v1
+
+### rcef_vrcft_eye.Right.Openness
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.eye_close_right | vrcft.eye.Right.Openness | {"id":"affine","offset":1.0,"scale":-1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: VRCFaceTracking eye Right.Openness corresponds to canonical eye_close_right.
+- endpoints: VRCFaceTracking eye's Openness 1 and 0 are assumed to be canonical eye_close 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; eye_close is 1 − Openness; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrcft_eye_openness_neutral_unresolved.
+- vrcft_eye.openness: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"VRCFaceTracking eye gain and full-activation pose not published","refs":["rcef.canonical_expression.eye_close_right","vrcft.eye.Right.Openness"],"units":"1"},{"category":"signal","effect":"approximated","reason":"vrcft_eye_openness_neutral_unresolved: eye_close is 1 − Openness. Openness 1 is taken as eye_close 0 (relaxed open lids); VRCFaceTracking does not state that 1 is neutral; Openness outside [0,1] gives an output outside [0,1] and is refused","refs":["rcef.canonical_expression.eye_close_right","vrcft.eye.Right.Openness"],"units":"1"}]
+
+Evidence: vrcft_data, rcef_canonical_v1
+
+## rcef_pupil_mm.to_vrcft_eye
+
+### rcef_vrcft_eye.Left.PupilDiameter_MM
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.pupil_diameter_mm_left | vrcft.eye.Left.PupilDiameter_MM | {"id":"affine","offset":0.0,"scale":1.0} | mapped | exact |
+
+Assumptions:
+
+- correspondence: VRCFaceTracking eye Left.PupilDiameter_MM corresponds to canonical pupil_diameter_mm_left.
+- endpoints: both ends are the pupil diameter in millimetres, as the tracker reports it; the tracker-reported diameter is carried over unchanged.
+
+Loss annotations: []
+
+Evidence: vrcft_data, rcef_canonical_v1
+
+### rcef_vrcft_eye.Right.PupilDiameter_MM
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.pupil_diameter_mm_right | vrcft.eye.Right.PupilDiameter_MM | {"id":"affine","offset":0.0,"scale":1.0} | mapped | exact |
+
+Assumptions:
+
+- correspondence: VRCFaceTracking eye Right.PupilDiameter_MM corresponds to canonical pupil_diameter_mm_right.
+- endpoints: both ends are the pupil diameter in millimetres, as the tracker reports it; the tracker-reported diameter is carried over unchanged.
+
+Loss annotations: []
+
+Evidence: vrcft_data, rcef_canonical_v1
+
+## vrm_blink.to_rcef
+
+### vrm_rcef.eye_close_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| vrm.preset.blinkLeft | rcef.canonical_expression.eye_close_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: VRM blinkLeft corresponds to canonical eye_close_left.
+- endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_blink_side_unresolved.
+- vrm.definitional_only: canonical eye_close_left (the upper lid of the left eye lowers until it covers the eye) corresponds to VRM preset blinkLeft (closes the left eyelid); definitional only: the definitions agree, but no published table maps FB2 or the canonical set to VRM.
+- vrm.side_caveat: VRM gives no normative side; on the VRM 1.0 Twist sample blinkLeft moves the avatar's own left eyelid.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"an asset-authored expression weight becomes a canonical value","refs":["vrm.preset.blinkLeft","rcef.canonical_expression.eye_close_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"VRM blink (both eyes) not read; when a model drives only blink, eye_close reads open","refs":["vrm.preset.blinkLeft","rcef.canonical_expression.eye_close_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right","refs":["vrm.preset.blinkLeft","rcef.canonical_expression.eye_close_left"],"units":"1"}]
+
+Evidence: vrm_expressions, rcef_canonical_v1
+
+### vrm_rcef.eye_close_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| vrm.preset.blinkRight | rcef.canonical_expression.eye_close_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: VRM blinkRight corresponds to canonical eye_close_right.
+- endpoints: VRM's 0 and 1 for this shape are assumed to be canonical 0 and 1, and values between are assumed to correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss vrm_blink_side_unresolved.
+- vrm.definitional_only: canonical eye_close_right (the upper lid of the right eye lowers until it covers the eye) corresponds to VRM preset blinkRight (closes the right eyelid); definitional only: the definitions agree, but no published table maps FB2 or the canonical set to VRM.
+- vrm.side_caveat: VRM gives no normative side; on the VRM 1.0 Twist sample blinkRight moves the avatar's own right eyelid.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"an asset-authored expression weight becomes a canonical value","refs":["vrm.preset.blinkRight","rcef.canonical_expression.eye_close_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"VRM blink (both eyes) not read; when a model drives only blink, eye_close reads open","refs":["vrm.preset.blinkRight","rcef.canonical_expression.eye_close_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"vrm_blink_side_unresolved: VRM gives no normative side; RCEF reads blinkLeft and blinkRight as the subject's own left and right","refs":["vrm.preset.blinkRight","rcef.canonical_expression.eye_close_right"],"units":"1"}]
+
+Evidence: vrm_expressions, rcef_canonical_v1
 
 ## rcef_blink.to_vrm
 

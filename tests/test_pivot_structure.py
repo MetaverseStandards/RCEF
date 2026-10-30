@@ -45,19 +45,20 @@ CANONICAL = (PREFIX, VISEME)
 INTERMEDIATE = 'rcef.intermediate.'
 SUM = build_canonical.INTERMEDIATE_SUM
 PROFILES = {'arkit': 'arkit.coefficient', 'fb2': 'openxr.fb2', 'vrcft_artist': 'vrcft.artist.base', 'vrm': 'vrm.preset',
-            'visemes': 'openxr.visemes', 'facs': 'facs.code'}
-IN_MAP = re.compile(r'^(arkit|fb2|vrcft_artist|vrm|visemes|facs)_([a-z_]+)\.to_rcef$')
-OUT_MAP = re.compile(r'^rcef_([a-z_]+)\.to_(arkit|fb2|vrcft_artist|vrm|visemes|facs)$')
+            'visemes': 'openxr.visemes', 'facs': 'facs.code', 'vrcft_eye': 'vrcft.eye'}
+IN_MAP = re.compile(r'^(arkit|fb2|vrcft_artist|vrcft_eye|vrm|visemes|facs)_([a-z_]+)\.to_rcef$')
+OUT_MAP = re.compile(r'^rcef_([a-z_]+)\.to_(arkit|fb2|vrcft_artist|vrcft_eye|vrm|visemes|facs)$')
 # Mappings per set: (in-maps, out-maps). The FB2 gaze out-map has 4 internal steps, the META aggregate in-map 1.
-COUNTS = {'arkit': (60, 52), 'fb2': (70, 74), 'vrcft_artist': (0, 72), 'vrm': (5, 7), 'visemes': (17, 15),
-          'facs': (53, 49)}
-MAPS = 79
+COUNTS = {'arkit': (60, 52), 'fb2': (70, 74), 'vrcft_artist': (0, 72), 'vrm': (7, 7), 'visemes': (17, 15),
+          'facs': (53, 49), 'vrcft_eye': (4, 4)}
+MAPS = 84
 # FACS hop keys that come from the code, not from an audit row: every hop, the side letters, AU43 and the gross codes.
 FACS_GROSS = ('29', '30', '34', '35', '43')
 # Pairs of a rule's two ends whose sides may differ although neither is shared. None today.
 SIDE_EXCEPTIONS = []
 # Operators allowed on a hop: today's operator census, with power-of-two weights.
-OPERATORS = [{'id': 'affine', 'scale': 1.0, 'offset': 0.0}, {'id': 'weighted_sum', 'weights': [0.5, 0.5]},
+OPERATORS = [{'id': 'affine', 'scale': 1.0, 'offset': 0.0}, {'id': 'affine', 'scale': -1.0, 'offset': 1.0},
+             {'id': 'weighted_sum', 'weights': [0.5, 0.5]},
              {'id': 'weighted_sum', 'weights': [0.25, 0.25, 0.25, 0.25]},
              {'id': 'weighted_sum', 'weights': [1.0, -1.0]},
              {'id': 'piecewise_linear', 'knots': [[-1.0, 0.0], [0.0, 0.0], [1.0, 1.0]]},
@@ -69,7 +70,7 @@ KEYS = {'correspondence', 'endpoints', 'transfer.provider', 'transfer.withdrawn'
         'transfer.chain', 'fan_out.vrcft_ue', 'net.fb2_gaze', 'gaze.fb2_exclusive', 'mean.arkit',
         'evidence.vrcft_tables_not_cited', 'evidence.godot_only_mouth_shift', 'vrm.downstream_effects',
         'vrm.side_caveat', 'vrm.definitional_only', 'lips_toward.jaw_not_compensated', 'vrm.probability_as_weight',
-        'vrm.phoneme_label_only'}
+        'vrm.phoneme_label_only', 'vrcft_eye.openness'}
 A1_PAIRS = {'fb2.to_arkit': 'FB2 -> ARKit', 'fb2_gaze.to_arkit': 'FB2 -> ARKit', 'arkit.to_fb2': 'ARKit -> FB2',
             'arkit_gaze.to_fb2': 'ARKit -> FB2', 'arkit.to_vrcft_artist': 'ARKit -> VRCFT UE',
             'fb2.to_vrm': 'FB2 -> VRM blink', 'visemes.to_vrm': 'META -> VRM'}
@@ -280,14 +281,17 @@ class PivotStructure(unittest.TestCase):
 
     def test_hop_fields_operators_and_assumption_keys(self):
         for map_id, _, _, _, rule in self.hop_rules():
+            # The pupil copies restate a verified fact, so they are exact and verified_current, with no loss.
+            pupil = any(self.signals[s]['units'] == 'mm' for s in rule['inputs'] + rule['outputs'])
             with self.subTest(rule=rule['id']):
                 self.assertEqual((rule['disposition'], rule['mapping_quality'], rule['evidence_status']),
+                                 ('mapped', 'exact', 'verified_current') if pupil else
                                  ('mapped', 'approximate', 'proposed'))
                 self.assertIn(rule['operator'], OPERATORS + EXCEPTIONS.get(map_id, []))
                 self.assertGreaterEqual(len(rule['evidence']), 2)
                 self.assertEqual(rule['evidence'][-1], 'rcef_canonical_v1')
                 self.assertLessEqual(keys_of(rule), KEYS)
-                self.assertTrue(rule['loss_annotations'])
+                self.assertEqual(bool(rule['loss_annotations']), not pupil)
 
     def test_sides_agree_at_both_ends(self):
         for _, _, _, _, rule in self.hop_rules():
@@ -322,6 +326,10 @@ class PivotStructure(unittest.TestCase):
             return 'out_net'
         if rule['operator']['id'] == 'weighted_sum':
             return 'out_mean'
+        if rule['operator'].get('scale') == -1.0:
+            return f'{direction}_invert'
+        if any(self.signals[s]['units'] == 'mm' for s in rule['inputs'] + rule['outputs']):
+            return f'{direction}_mm'
         readers = [r for r in rules if r['inputs'] == rule['inputs']]
         if len(readers) > 1:
             return f'{direction}_fan'
@@ -354,6 +362,10 @@ class PivotStructure(unittest.TestCase):
                     self.assertEqual(len(endpoints), 1)
                     text = endpoints[0]
                     opening = build_canonical.OPENING.format(build_canonical.possessive(name))
+                    if kind.endswith('_invert'):
+                        opening = build_canonical.INVERT_OPENING.format(build_canonical.possessive(name))
+                    elif kind.endswith('_mm'):
+                        opening = build_canonical.MM_OPENING
                     if key == 'facs':
                         signal = self.signals[self.provider(key, rule)[0]]
                         opening = self.facs.opening[signal['metadata']['facs_table']]
@@ -577,7 +589,7 @@ class PivotStructure(unittest.TestCase):
             if facs:
                 ok = all(self.signals[s]['metadata']['facs_au'] in have for s in members)
             else:
-                ok = all(native[s] in have for s in members)
+                ok = all(native.get(s) in have for s in members)
             if ok:
                 filled.add(group)
         return [g for g in self.groups if g in filled]
@@ -595,7 +607,7 @@ class PivotStructure(unittest.TestCase):
         fb2 = [s.removeprefix('openxr.fb2.XR_FACE_EXPRESSION2_').removesuffix('_FB')
                for s in self.members['openxr.fb2']]
         partial = self.capability([n for n in fb2 if n != 'BROW_LOWERER_L'])
-        self.assertEqual(partial, [g for g in self.groups if g != 'face'])
+        self.assertEqual(partial, [g for g in self.groups if g not in ('face', 'pupil_mm')])
 
     def test_the_aggregate_chain_gives_the_clamped_sum(self):
         pack = rcef_translate.load_pack(self.pack)

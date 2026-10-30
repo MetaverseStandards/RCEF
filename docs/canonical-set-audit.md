@@ -629,6 +629,7 @@ The catalogue is keyed on (A1 rule, template). For each entry, the pivot route h
 | `vrm.side_caveat` | the A1 text: VRM gives no normative side; on the VRM 1.0 Twist sample `blinkLeft` moves the avatar's own left eyelid |
 | `vrm.definitional_only` | the definitions agree, but no published table maps FB2 to VRM |
 | `lips_toward.jaw_not_compensated` | the value is copied without compensating for the jaw |
+| `vrcft_eye.openness` | the text of the loss key `vrcft_eye_openness_neutral_unresolved`, as an assumption on both VRCFaceTracking eye blink hops |
 
 ## Summary
 

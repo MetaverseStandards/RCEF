@@ -5,7 +5,7 @@ Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards For
 
 **Author affiliation: to be added by the release owners before this document goes to the working group.**
 
-**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with 70 of its 72 signals (every group except the pupils), and the maps of ARKit, FB2, Unified Expressions, VRM blinks and FACS codes, with the [FACS](#facs) profile `facs.code`. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels, and the [viseme pose bridge](#viseme-pose-bridge) from the viseme set to the expression set. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
+**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with its 72 signals, and the maps of ARKit, FB2, Unified Expressions, VRCFaceTracking eye data, VRM blinks and FACS codes, with the [FACS](#facs) profile `facs.code`. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels, and the [viseme pose bridge](#viseme-pose-bridge) from the viseme set to the expression set. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
 
 This document uses the proposal form of [GOVERNANCE.md](../GOVERNANCE.md): the problem, the proposal, the public evidence, the effect on compatibility, the alternatives, the tests and the open questions. Two documents go with it:
 
@@ -440,7 +440,8 @@ Here pose[c][j] is the value that class *c* at weight 1 gives expression signal 
 
 - **VRM `blink` is not read.** VRM has `blinkLeft`, `blinkRight` and `blink`, which closes both eyes (`vrm_expressions` lines 177-179). The VRM in-map reads only `blinkLeft` and `blinkRight`. It declares the loss "VRM blink (both eyes) not read; when a model drives only blink, eye_close reads open", and the route lists a non-zero `blink` as dropped. Toward VRM, the out-map writes `blinkLeft` and `blinkRight` and leaves `blink` unset, with today's loss.
 - **VRM side.** Both VRM blink hops keep today's caveat, "VRM gives no normative side; on the VRM 1.0 Twist sample blinkLeft moves the avatar's own left eyelid", and add the loss key `vrm_blink_side_unresolved` ([audit](canonical-set-audit.md#vrm)).
-- **VRCFaceTracking eye.** `eye_close` is 1 − `Openness`. `Openness` 1 is taken as `eye_close` 0, relaxed open lids, but VRCFaceTracking does not say that 1 is neutral (loss key `vrcft_eye_openness_neutral_unresolved`). An `Openness` outside 0 to 1 would give a value outside the canonical domain of 0 to 1, so the hop is designed to refuse it.
+- **VRCFaceTracking eye.** `eye_close` is 1 − `Openness`. `Openness` 1 is taken as `eye_close` 0, relaxed open lids, but VRCFaceTracking does not say that 1 is neutral (loss key `vrcft_eye_openness_neutral_unresolved`). An `Openness` outside 0 to 1 would give a value outside the canonical domain of 0 to 1, so the in-hop refuses it: msf-character-tools reports `E_DOMAIN`. Both blink hops state this as an assumption and as the loss.
+- **VRCFaceTracking pupils.** The pupil diameters are copied in millimetres both ways. These 4 mappings are `exact` and `verified_current`, and they cite only `vrcft_data` and `rcef_canonical_v1`.
 
 ## No equivalent
 

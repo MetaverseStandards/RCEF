@@ -22,13 +22,14 @@ PREFIX = EXPRESSION + '.'
 # Group sizes in the pack, after the face splits. Update with each new group.
 GROUPS = {'face': 41, 'cheek_puff': 2, 'jaw_thrust': 1, 'jaw_sideways': 2, 'mouth_shift': 2,
           'chin_raise_upper_lip': 1, 'blink': 2, 'gaze': 8, 'tongue_out': 1, 'cheek_suck': 2, 'lip_tighten': 2,
-          'tongue_place': 6}
+          'tongue_place': 6, 'pupil_mm': 2}
 METADATA = {'definition', 'zero', 'one', 'facs_au', 'facs_table', 'group', 'aligned_names', 'audit'}
 PUPILS = {PREFIX + 'pupil_diameter_mm_left', PREFIX + 'pupil_diameter_mm_right'}
 DIRECTION_EVIDENCE = {'xr_fb2', 'xr_fb2_fig_eyes_closed_l', 'xr_fb2_fig_eyes_look_left_l', 'xr_fb2_fig_mouth_left',
                       'apple_blendshapes'}
 # The provider whose hops cite a record, by the profile its signals belong to.
-SOURCES = {'arkit.coefficient': 'arkit', 'openxr.fb2': 'fb2', 'vrcft.artist.base': 'vrcft_artist', 'vrm.preset': 'vrm'}
+SOURCES = {'arkit.coefficient': 'arkit', 'openxr.fb2': 'fb2', 'vrcft.artist.base': 'vrcft_artist', 'vrm.preset': 'vrm',
+           'vrcft.eye': 'vrcft_eye'}
 
 
 class CanonicalVocabulary(unittest.TestCase):
@@ -83,7 +84,7 @@ class CanonicalVocabulary(unittest.TestCase):
     def test_calibration_strings_follow_the_signal_class(self):
         for signal in self.expression:
             short = signal['id'][len(PREFIX):]
-            kind = 'gaze' if signal['metadata']['group'] == 'gaze' else 'face'
+            kind = {'gaze': 'gaze', 'pupil_mm': 'pupil'}.get(signal['metadata']['group'], 'face')
             with self.subTest(signal=short):
                 self.assertEqual(signal['calibration'],
                                  self.docs['calibration'][kind].replace('<short_name>', short))
@@ -91,7 +92,13 @@ class CanonicalVocabulary(unittest.TestCase):
 
     def test_only_the_pupils_are_verified_current(self):
         verified = {s['id'] for s in self.expression if s['evidence_status'] == 'verified_current'}
-        self.assertLessEqual(verified, PUPILS)
+        self.assertEqual(verified, PUPILS)
+        records = {e['id']: e for e in self.pack['evidence']}
+        for sid in PUPILS:
+            signal = self.signals[sid]
+            self.assertEqual((signal['units'], signal['domain'], 'neutral' in signal), ('mm', {}, False))
+            self.assertEqual(signal['evidence'], ['rcef_canonical_v1', 'vrcft_data'])
+            self.assertTrue(all(records[e]['status'] == 'verified_current' for e in signal['evidence']))
         for signal in self.expression:
             if signal['id'] not in PUPILS:
                 self.assertEqual(signal['evidence_status'], 'proposed', signal['id'])

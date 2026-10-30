@@ -225,7 +225,9 @@ class PoseBridge(unittest.TestCase):
         vrm, = route.translate([{'time': 0.0, 'values': {**presets, 'vrm.preset.aa': 1.0, 'vrm.preset.ee': 0.5},
                                  'flags': {}}])
         meta, = self.route('openxr.visemes', 'arkit.coefficient').translate([self.meta_frame(AA=1.0, E=0.5)])
-        self.assertEqual(vrm['values'], meta['values'])
+        # VRM also writes the blink group itself, through its blink in-map.
+        blinks = {f'arkit.coefficient.eyeBlink{s}': 0.0 for s in ('Left', 'Right')}
+        self.assertEqual(vrm['values'], {**meta['values'], **blinks})
         self.assertEqual(vrm['dropped'], [])
         self.assertEqual(len(vrm['notes']), 1)
         self.assertIn('counted as 0', vrm['notes'][0])
@@ -246,18 +248,19 @@ class PoseBridge(unittest.TestCase):
             document['mappings'].append({'id': 'vrm_synthetic.to_rcef', 'rules': [rule]})
         route = rcef_route.Route('vrm.preset', 'arkit.coefficient', pack=self.synthetic(add_jaw_in_map))
         self.assertEqual(route.bridges, [])
-        self.assertEqual(route.in_maps, ['vrm_synthetic.to_rcef'])
+        self.assertEqual(route.in_maps, ['vrm_blink.to_rcef', 'vrm_synthetic.to_rcef'])
 
     def test_a_frame_the_bridge_refuses_labels_its_outputs_and_gets_no_note(self):
         def narrow(document):
             helper = next(s for s in document['signals'] if s['id'] == 'rcef.intermediate.viseme_pose_vowel_open')
             helper['domain'] = {'min': 0.0, 'max': 0.5}
         route = rcef_route.Route('vrm.preset', 'arkit.coefficient', pack=self.synthetic(narrow))
-        presets = {f'vrm.preset.{p}': 0.0 for p in ('aa', 'ee', 'ih', 'oh', 'ou')}
+        presets = {f'vrm.preset.{p}': 0.0 for p in ('aa', 'ee', 'ih', 'oh', 'ou', 'blinkLeft', 'blinkRight')}
         refused, ran = route.translate([{'time': 0.0, 'values': {**presets, 'vrm.preset.aa': 1.0}, 'flags': {}},
                                         {'time': 0.1, 'values': {**presets, 'vrm.preset.aa': 0.25}, 'flags': {}}])
         self.assertEqual(refused['refused'][BRIDGE]['codes'], ['E_DOMAIN'])
-        self.assertEqual(refused['values'], {})
+        # Only the blinks, which VRM writes through its own in-map, still have values.
+        self.assertEqual(refused['values'], {f'arkit.coefficient.eyeBlink{s}': 0.0 for s in ('Left', 'Right')})
         self.assertIn(f'refused upstream at {BRIDGE}', refused['labels'].values())
         self.assertEqual(refused['notes'], [])
         self.assertEqual(ran['refused'], {})
