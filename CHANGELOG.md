@@ -10,17 +10,18 @@ from a source set through a canonical set to a target set. The 7 direct maps
 do not change.
 
 - New profile `rcef.canonical_expression` in
-  `data/canonical_expression.toml`: 60 signals, vocabulary version `1.0`,
+  `data/canonical_expression.toml`: 70 signals, vocabulary version `1.0`,
   status `draft`, as `docs/canonical-set.md` defines them. The groups are
   `face` (41), `cheek_puff` (2), `jaw_thrust` (1), `jaw_sideways` (2),
-  `mouth_shift` (2), `chin_raise_upper_lip` (1), `blink` (2), `gaze` (8) and
-  `tongue_out` (1). Each signal's metadata gives its definition, its 0 and 1,
+  `mouth_shift` (2), `chin_raise_upper_lip` (1), `blink` (2), `gaze` (8),
+  `tongue_out` (1), `cheek_suck` (2), `lip_tighten` (2) and `tongue_place`
+  (6). Each signal's metadata gives its definition, its 0 and 1,
   its FACS code where it has one, its group, the provider names aligned to
   it and its rows in the definitions audit.
-- 306 new mappings in 46 maps, one map per group and direction: ARKit and FB2
-  into the canonical expression set (120 mappings in 18 maps), and the
+- 330 new mappings in 54 maps, one map per group and direction: ARKit and FB2
+  into the canonical expression set (130 mappings in 21 maps), and the
   canonical expression set to ARKit, FB2, VRCFaceTracking Unified
-  Expressions and VRM per-eye blinks (186 mappings in 28 maps). The FB2 gaze
+  Expressions and VRM per-eye blinks (200 mappings in 33 maps). The FB2 gaze
   out-map has 4 internal steps, which write 4 new `rcef.intermediate`
   signals.
 - Each new mapping states, as assumptions: the correspondence; the
@@ -31,6 +32,19 @@ do not change.
   `differs` or `unresolved`); and every other assumption of
   today's direct maps, as the assumption catalogue in
   `docs/canonical-set-audit.md` places it.
+- The 10 FB2-only signals join the canonical expression set: cheek suck (2),
+  lip tighten (2) and the 6 tongue positions. FB2 maps into and out of them
+  (20 mappings in 6 maps), and the canonical set writes Unified Expressions
+  CheekSuck and MouthTightener (4 mappings in 2 maps). No direct map links
+  these signals, so their FB2 and Unified Expressions hops take their
+  crosswalks from a new table in the definitions audit: VRCFaceTracking's
+  Movement table in one step (`vrcft_docs_movement`, provider form), and
+  Godot in two steps (`godot_vendors_fb2`, `godot_enum`,
+  `godot_face_modifier`, a new chain form of the transfer assumption). The
+  Unified Expressions out-hops state the loss "two-step crosswalk through
+  Godot". The 10 FB2 signals and the 4 Unified Expressions shapes change
+  from `unresolved` to `mapped`. TONGUE_RETREAT is not mapped to TongueFlat,
+  as Godot maps it: the two names do not name one action.
 - Evidence status: every canonical expression signal and every new mapping
   is `proposed` and `approximate`. The identity maps into `rcef.canonical`
   stay `verified_current`. The canonical pupils, which would be
@@ -53,7 +67,7 @@ do not change.
   revision 1357638399), `rcsf_proposal` (the RCSF proposal at `f6c3ea8`),
   and six figure records for the FB2 and Unified Expressions figures that
   the definitions cite.
-- `scripts/build_canonical.py` writes both profiles and the 55 maps from
+- `scripts/build_canonical.py` writes both profiles and the 63 maps from
   `docs/canonical-set.md`, its audit, the IPA chart assignment in
   `tests/fixtures/ipa_chart_symbols.json` and the direct maps. New tests:
   `tests/test_canonical_vocabulary.py` and `tests/test_pivot_structure.py`.

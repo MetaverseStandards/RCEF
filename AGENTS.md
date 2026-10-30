@@ -62,7 +62,7 @@ What [examples/rcef_translate.py](examples/rcef_translate.py) does, and why:
 Each mapping (and each signal) has an `evidence_status` field. It says how well the mapping itself is supported. It is not the `status` of the evidence records it cites: all records in `evidence/sources.toml` are `verified_current`, including the records that `proposed` mappings cite. The values of `evidence_status` are:
 
 - `verified_current`: the mapping restates a verified source fact. The three `*.to_canonical` maps and the synthetic `fixture.affine` and `fixture.bilateral` use it.
-- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 direct cross-provider mappings and their 4 internal gaze steps are `proposed`, and so are the 348 mappings into and out of the canonical expression and viseme sets and their 76 signals, and the 99 mappings of the viseme pose bridge between the two sets.
+- `proposed`: an approximate cross-provider translation, backed by sources. It compiles only with the approximation opt-in. All 187 direct cross-provider mappings and their 4 internal gaze steps are `proposed`, and so are the 372 mappings into and out of the canonical expression and viseme sets and their 86 signals, and the 101 mappings of the viseme pose bridge between the two sets.
 - `unresolved`: recorded but not executable. `compile_mapping` refuses it, even with the opt-in. The MediaPipe → ARKit map `survey.ambiguous` is the example.
 
 `calibrated_software` is the `status` of the records in [calibration/](calibration/README.md). They are fits to renders or mesh geometry of example rigs, not measurements of a tracker. The pack uses schema 1.0, which does not have this value. So the mappings that cite a calibration record, the 45 weighted sums of the viseme pose bridge (`calibration.viseme-poses.rocketbox-female`), are `proposed`, and their assumptions say why.
@@ -86,7 +86,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 | Path | Contents |
 |---|---|
 | `pack.toml` | Root metadata, including `data_version`. |
-| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (60), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (65). `canonical_expression.toml` and `canonical_viseme.toml` are generated, and so is the part of `intermediate.toml` below its marker line (the 54 helpers of the viseme pose bridge, and the profile). |
+| `data/` | RCEF's own sets: `rcef.canonical` (21 signals), the draft `rcef.canonical_expression` (70), the draft `rcef.canonical_viseme` (16) and `rcef.intermediate` (65). `canonical_expression.toml` and `canonical_viseme.toml` are generated, and so is the part of `intermediate.toml` below its marker line (the 56 helpers of the viseme pose bridge, and the profile). |
 | `profiles/` | One public expression set per file. `fixture.toml` holds synthetic fixtures. |
 | `mappings/` | Maps. Each map is a group of one-way mappings. `canonical_*.toml` hold the maps into and out of the canonical sets, and `canonical_viseme_pose.toml` the viseme pose bridge between them; they are generated. |
 | `evidence/` | `sources.toml` (pinned public sources), `tooling.lock.json` (the msf-character-tools lock), `input-contracts/`. |

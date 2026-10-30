@@ -11,20 +11,20 @@ This guide describes `rcef.parity` data version **0.5.0** (unreleased), schema *
 
 | Measure | Total |
 | --- | ---: |
-| Distinct signal IDs | 1086 |
+| Distinct signal IDs | 1096 |
 | Profiles | 26 |
-| Profile membership rows | 1091 |
-| Maps (`[[mappings]]` records) | 69 |
-| Mappings (rules) | 664 |
+| Profile membership rows | 1101 |
+| Maps (`[[mappings]]` records) | 77 |
+| Mappings (rules) | 688 |
 | Evidence records | 77 |
 | Provider-specific canonical signals | 21 |
-| Canonical expression signals (draft) | 60 |
+| Canonical expression signals (draft) | 70 |
 | Canonical viseme signals (draft) | 16 |
 | RCEF intermediate signals | 65 |
 
 Five fixture signals are in both the aggregate fixture profile and its source and target profiles. That gives 5 distinct signals but 10 memberships, which explains the difference of five rows. Also, `godot.blended.toml` has 42 actual rows, while its selected interface has 41; the counts here include every actual row. See the full [inventory](../reports/inventory.md).
 
-Signal dispositions: 371 mapped, 671 unresolved, 6 unsupported and 36 excluded. Mappings: 661 mapped (22 exact, 639 approximate) and 1 unresolved. Operators: 511 `affine`, 22 `identity`, 67 `weighted_sum` and 62 `piecewise_linear`. A `mapped` signal does not guarantee that every requested map or frame can be executed.
+Signal dispositions: 397 mapped, 657 unresolved, 6 unsupported and 36 excluded. Mappings: 687 mapped (22 exact, 665 approximate) and 1 unresolved. Operators: 537 `affine`, 22 `identity`, 67 `weighted_sum` and 62 `piecewise_linear`. A `mapped` signal does not guarantee that every requested map or frame can be executed.
 
 ## 1. Architecture and ownership
 
@@ -58,7 +58,7 @@ Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf_character_tools
 `check.py` runs these steps in order and stops at the first failure.
 
 1. **Locked msf-character-tools.** It checks the installed `msf_character_tools` package against [tooling.lock.json](../evidence/tooling.lock.json). If anything is different, it lists the problems, prints `Refusing to check` and exits 2. [The msf-character-tools lock](#the-msf-character-tools-lock) gives the rules.
-2. **Calibration records.** It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. Any mapping that cites a record (evidence id `calibration.<id>`) must use `piecewise_linear` with exactly the record's frozen knots, or be a `weighted_sum` pose sum whose weights are exactly the record's frozen poses, and every held-out cell of each channel it reads must pass. This step does not use msf-character-tools. In data 0.5.0 the 45 weighted sums of the viseme pose bridge cite `viseme-poses.rocketbox-female`.
+2. **Calibration records.** It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. Any mapping that cites a record (evidence id `calibration.<id>`) must use `piecewise_linear` with exactly the record's frozen knots, or be a `weighted_sum` pose sum whose weights are exactly the record's frozen poses, and every held-out cell of each channel it reads must pass. This step does not use msf-character-tools. In data 0.5.0 the 45 weighted sums of the viseme pose bridge cite `viseme-poses.rocketbox-features`.
 3. **Shared outputs.** It runs `python -B -P -m msf_character_tools check AUTHORING --pack PATH --csv PATH [--write]` on the checkout, with an empty bytecode cache, so that the subprocess imports the verified package. With `--write` it regenerates the pack, the CSV, coverage and checksums. Without it, it checks that they have not drifted.
 4. **Readable reports.** If step 3 passes, it runs [export_reports.py](../scripts/export_reports.py) with the same write or check choice.
 
@@ -104,9 +104,9 @@ Directory discovery walks the tree and includes every file name that ends in low
 | Location | Role | Files | Signals | Profiles | Memberships | Maps / mappings | Evidence |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [pack.toml](../pack.toml) | Root metadata | 1 | 0 | 0 | 0 | 0 / 0 | 0 |
-| [data/canonical.toml](../data/canonical.toml), [data/canonical_expression.toml](../data/canonical_expression.toml), [data/canonical_viseme.toml](../data/canonical_viseme.toml) and [data/intermediate.toml](../data/intermediate.toml) | Provider-specific projections, the draft canonical expression and viseme sets and intermediate values, each with its profile | 4 | 162 | 4 | 162 | 0 / 0 | 0 |
+| [data/canonical.toml](../data/canonical.toml), [data/canonical_expression.toml](../data/canonical_expression.toml), [data/canonical_viseme.toml](../data/canonical_viseme.toml) and [data/intermediate.toml](../data/intermediate.toml) | Provider-specific projections, the draft canonical expression and viseme sets and intermediate values, each with its profile | 4 | 172 | 4 | 172 | 0 / 0 | 0 |
 | [profiles/fixture.toml](../profiles/fixture.toml) and the provider profile files | Signal arrays and profile arrays | 20 | 924 | 22 | 929 | 0 / 0 | 0 |
-| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 16 | 0 | 0 | 0 | 69 / 664 | 0 |
+| [mappings/fixtures.toml](../mappings/fixtures.toml) and the other mapping files | Arrays of directional maps | 16 | 0 | 0 | 0 | 77 / 688 | 0 |
 | [evidence/sources.toml](../evidence/sources.toml) | Evidence array | 1 | 0 | 0 | 0 | 0 / 0 | 77 |
 
 Each of the five root metadata keys appears once in the whole directory. A repeated metadata key is refused, even if its value is the same. The top-level `signals`, `profiles`, `mappings` and `evidence` must be arrays. They are added in file order, and each file's array order is kept.
@@ -339,8 +339,8 @@ msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases 
 | [generated/rcef_mapping.csv](../generated/rcef_mapping.csv) | msf-character-tools signal and profile membership matrix: one row per distinct signal, one column per profile. Despite its name, it is not a table of executable mappings. |
 | [generated/coverage.json](../generated/coverage.json) | msf-character-tools coverage: dispositions, quality partitions, memberships per profile, evidence and rule uses. It records the pack hash. |
 | [generated/SHA256SUMS](../generated/SHA256SUMS) | Hashes of the pack, the matrix CSV and coverage, in that order. It does not list itself. |
-| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 1091 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
-| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 664 authored one-way mappings with their status, operators, assumptions and losses. |
+| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 1101 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
+| [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 688 authored one-way mappings with their status, operators, assumptions and losses. |
 | [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: the 21 canonical projections against the authored relationships. A dash means no authored mapping. Unresolved relationships stay labeled. |
 | [reports/SHA256SUMS](../reports/SHA256SUMS) | Hashes of the six report files, sorted by file name. It does not list itself. The Markdown reports record the SHA-256 of the pack they read. |
 
