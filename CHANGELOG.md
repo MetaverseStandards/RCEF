@@ -30,7 +30,13 @@ In short, since data 0.3.0:
   (`ab/`): `ab.pivot` v1 and v2 pass every gate.
 - The direct maps and the old 21-signal set `rcef.canonical` are retired,
   with a tombstone for each ID.
-- Operators 1.1 and the msf-character-tools 0.5.0 lock (from data 0.4.0).
+- Operators 1.1 (from data 0.4.0) and the msf-character-tools 0.6.0 lock.
+  0.6.0 adds partial evaluation (`evaluate_mapping(..., partial=True)`):
+  a bad input refuses only the outputs that read it. Its default
+  evaluation is the same as 0.5.0. The lock has the six release wheels of
+  v0.6.0 (`913403d`), as the 0.5.0 lock had.
+  `evidence/tooling.lock.previous.json` keeps the 0.5.0 lock for a roll
+  back.
 
 **A/B comparison.** `ab/` holds the pre-registered comparison of the route
 through the canonical sets (arm B) with the direct maps (arm A1, run from

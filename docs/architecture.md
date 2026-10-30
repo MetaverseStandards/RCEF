@@ -7,7 +7,7 @@ The [offline visual report](architecture.html), the [SVG](architecture.svg) and 
 
 ## Scope of this guide
 
-This guide describes `rcef.parity` data version **0.5.0**, schema **1.0** and operators **1.1**, checked with msf-character-tools 0.5.0, installed from its release wheels. The locked commit is in [tooling.lock.json](../evidence/tooling.lock.json). The counts below were recomputed with the Python standard library from all 36 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
+This guide describes `rcef.parity` data version **0.5.0**, schema **1.0** and operators **1.1**, checked with msf-character-tools 0.6.0, installed from its release wheels. The locked commit is in [tooling.lock.json](../evidence/tooling.lock.json). The counts below were recomputed with the Python standard library from all 36 authoritative TOML files, and they agree with `generated/rcef.pack.json`. They are inventory counts: they include ancillary, excluded, unsupported and unresolved rows. They are not counts of selected interfaces, and they do not measure tracking quality.
 
 | Measure | Total |
 | --- | ---: |
@@ -79,7 +79,7 @@ Before it does anything else, `check.py` checks all of these:
 
 **Adopt a new release.** Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
 
-**Roll back.** msf-character-tools 0.5.0 is the first release from its repository in the Metaverse Standards Forum organization, so this checkout has no previous lock yet. To roll back, copy `tooling.lock.previous.json` over `tooling.lock.json`, install msf-character-tools at its commit, and use the `check.py` from the same RCEF commit as that lock.
+**Roll back.** `tooling.lock.previous.json` holds the lock of msf-character-tools 0.5.0, the first release from its repository in the Metaverse Standards Forum organization. To roll back, copy `tooling.lock.previous.json` over `tooling.lock.json`, install msf-character-tools at its commit, and use the `check.py` from the same RCEF commit as that lock.
 
 ### Calibration records and the held-out provenance check
 
@@ -123,7 +123,7 @@ id = "rcef.parity"
 license = "CC-BY-SA-4.0"
 ```
 
-The merged document needs all five keys and the four arrays. msf-character-tools 0.5.0 accepts schema versions `"1.0"` and `"1.1"`, and operator versions `"1.0"` and `"1.1"`. Operators 1.1 add `piecewise_linear`; a mapping that uses it under operators 1.0 is refused. Schema 1.1 adds the evidence status `calibrated_software`; RCEF uses schema 1.0. `data_version` has its own version number, and it must be a semantic version: three numbers, with an optional prerelease suffix. Do not invent operators or extra root keys.
+The merged document needs all five keys and the four arrays. msf-character-tools 0.6.0 accepts schema versions `"1.0"` and `"1.1"`, and operator versions `"1.0"` and `"1.1"`. Operators 1.1 add `piecewise_linear`; a mapping that uses it under operators 1.0 is refused. Schema 1.1 adds the evidence status `calibrated_software`; RCEF uses schema 1.0. `data_version` has its own version number, and it must be a semantic version: three numbers, with an optional prerelease suffix. Do not invent operators or extra root keys.
 
 ### Arrays, tables and references
 
@@ -339,7 +339,7 @@ The FB2 gaze values are native, direction-specific fractions of an angle whose m
 
 A sidecar has `schema_version`, `asset_sha256`, `resource_hashes` and `bindings`, and optionally `metadata`. Reuse checks the exact asset hash and the hashes of the resources it reads. Names alone do not bind a target. `annotate_asset` makes a sidecar and does not change the original asset bytes. Asset-based CLI mapping needs explicit sidecars. Profile-based scalar fixtures need no asset.
 
-msf-character-tools 0.5.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way; msf-character-tools 0.5.0 reads FBX with no extra package. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf_character_tools/msf_character_tools/snapshot.py) and the [shared reference](../../msf_character_tools/docs/reference.md).
+msf-character-tools 0.6.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way; msf-character-tools 0.6.0 reads FBX with no extra package. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf_character_tools/msf_character_tools/snapshot.py) and the [shared reference](../../msf_character_tools/docs/reference.md).
 
 ## 7. Generated files and readable reports
 

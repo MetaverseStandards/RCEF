@@ -5,7 +5,7 @@ This guide is for coding agents that use RCEF or change it. It gives the facts t
 
 ## Part 1: Using RCEF
 
-RCEF is an open catalogue of public face-expression interfaces (ARKit, OpenXR FB2, META visemes, MediaPipe, VRCFaceTracking, VRM, Godot, Roblox, FACS codes) and the maps between them, through two draft canonical sets. The TOML files are the data. msf-character-tools is a separate package. It is the engine that checks the data, builds the pack and evaluates the maps. The current data is 0.5.0, checked with msf-character-tools 0.5.0.
+RCEF is an open catalogue of public face-expression interfaces (ARKit, OpenXR FB2, META visemes, MediaPipe, VRCFaceTracking, VRM, Godot, Roblox, FACS codes) and the maps between them, through two draft canonical sets. The TOML files are the data. msf-character-tools is a separate package. It is the engine that checks the data, builds the pack and evaluates the maps. The current data is 0.5.0, checked with msf-character-tools 0.6.0.
 
 ### Outputs
 
