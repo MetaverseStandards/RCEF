@@ -47,7 +47,7 @@ RCEF is mostly data in plain-text TOML files (`key = value` lines). Scripts buil
 
 - `check.py`: the main check. It verifies the locked msf-character-tools, the calibration records and the generated files in `generated/` and `reports/`. `--write` rebuilds those files.
 - `scripts/`: helper programs. They write the canonical expression set and its maps, the source list and the TOML index, compare RCEF with Godot, check the public sources and run the local CI.
-- `tests/`: the automated tests, with their inputs in `tests/fixtures/`. `scripts/derive_fb2_goldens.py` makes two of those inputs from cached public sources, and `scripts/derive_capability_sets.py` makes the name lists in `capability_sets.json`.
+- `tests/`: the automated tests, with their inputs in `tests/fixtures/`. `scripts/derive_fb2_goldens.py` makes three of those inputs from cached public sources, and `scripts/derive_capability_sets.py` makes the name lists in `capability_sets.json`.
 - `fixtures/`: small made-up inputs with known answers. They show how the formulas behave.
 - `tools/`: optional tools that make the calibration records, and the small macOS renderer they use.
 
