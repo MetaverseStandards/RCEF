@@ -34,6 +34,10 @@ In short, since data 0.3.0:
   (`ab/`): `ab.pivot` v1, v2, v3 and v4 pass every gate.
 - The direct maps and the old 21-signal set `rcef.canonical` are retired,
   with a tombstone for each ID.
+- The evidence claim of `calibration.viseme-poses.rocketbox-features`
+  names version 2 of the record, which was frozen again after the history
+  rewrite (see Calibration and examples). No value changes, but the pack
+  SHA-256 changes from `7e9fe1f4…` to `6cc6f73b…`.
 - Operators 1.1 (from data 0.4.0) and the msf-character-tools 0.6.0 lock.
   0.6.0 adds partial evaluation (`evaluate_mapping(..., partial=True)`):
   a bad input refuses only the outputs that read it. Its default
@@ -433,27 +437,36 @@ exclusive, and the data now builds this in.
 
 ## Calibration and examples — 2026-10-30, with data 0.5.0
 
-- The Git history from the first merge commit onward was rewritten for
-  publication. The merge commits were re-authored, and two kinds of
-  commit messages were reworded: the subjects of the merge commits and one
-  subject that named a work step. The trees did not change, but every
-  commit hash from the first merge commit onward changed. The documents
-  and the calibration tripwire name the new hashes. The three
-  viseme-poses records named a `code_commit` that is no longer in the
-  history, so they were frozen again as new versions of the same fit:
-  `viseme-poses.rocketbox-female` v2, `viseme-poses.rocketbox-multi` v3
-  and `viseme-poses.rocketbox-features` v2. Each was frozen and held out
-  on a branch from the freeze commit of the version before it, and the
-  branch was merged. Only `version`, `code_commit` and `frozen_sha256`
-  change in the frozen parts, so the poses and the bridge do not change.
-  The held-out conditions come from the new frozen hash: the shape cells
-  are equal, and 26 of the 48 feature cells of
-  `viseme-poses.rocketbox-features` moved (largest change 0.0044 in `max`
-  and 0.024 in `median`). Every cell keeps its verdict, and the same 11
-  classes pass. The evidence claim of the bridge's record names version 2.
-  That claim is in the frozen hop parts, so `ab.pivot` v4 is a `revise`
-  freeze of v3. It passes every gate, and its Revise gate finds no value
-  difference, no lost output and no new refusal.
+- The Git history was rewritten for publication from the first merge
+  commit (merge #1, now `2df689e`) onward. The rewrite also covers 14
+  commits that were made before merge #1 and merged later: `9c5eac9`
+  (before the rewrite `8dda539`) and the 13 commits after it on the branch
+  of pull request #4. The merge commits were re-authored. Three kinds of
+  text in commit messages changed: the merge commits' messages are now
+  `Merge <pull request title>`, one subject no longer names a work step,
+  and two messages name the new short hashes of the commits they cite. The
+  trees did not change, but the hashes of these commits and of every later
+  commit changed. The documents and the calibration tripwire name the new
+  hashes. The three viseme-poses records named a `code_commit` that is no
+  longer in the history, so they were frozen again as new versions of the
+  same fit: `viseme-poses.rocketbox-female` v2,
+  `viseme-poses.rocketbox-multi` v3 and `viseme-poses.rocketbox-features`
+  v2. Each was frozen and held out on a branch from the freeze commit of
+  the version before it, and the branch was merged. Only `version`,
+  `code_commit` and `frozen_sha256` change in the frozen parts, so the
+  poses and the bridge do not change. The held-out conditions come from
+  the new frozen hash: the shape cells are equal, and 26 of the 48 feature
+  cells of `viseme-poses.rocketbox-features` moved (largest change 0.0044
+  in `max` and 0.024 in `median`). Every cell keeps its verdict, and the
+  same 11 classes pass. The evidence claim of the bridge's record names
+  version 2. That claim is in the frozen hop parts, so `ab.pivot` v4 is a
+  `revise` freeze of v3. It passes every gate, and its Revise gate finds no
+  value difference, no lost output and no new refusal. An earlier v4
+  registration (hash `b3e91b5e…`, kind `reproduce`) was committed, given a
+  ledger line and run before this branch was published, then replaced by
+  the `revise` freeze, because the claim change is in the frozen hop parts.
+  It was never published, and its run gave the same metric files and
+  frame hashes as v3.
 
 - The examples, the face and viseme pipelines and `scripts/compare_godot.py`
   translate through the canonical sets (source → canonical → target), with
