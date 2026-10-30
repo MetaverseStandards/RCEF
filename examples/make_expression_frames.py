@@ -112,8 +112,7 @@ def write(path: Path, label_columns: list[str], channels: list[str], flags: list
 
 def write_all(folder: Path) -> dict[str, int]:
     lib = library()
-    fb2 = make_demo_frames.names('openxr.fb2', make_demo_frames.FB2_PREFIX, make_demo_frames.FB2_SUFFIX)
-    visemes = make_demo_frames.names('openxr.visemes', make_demo_frames.VIS_PREFIX, make_demo_frames.VIS_SUFFIX)
+    fb2, visemes = list(make_demo_frames.FB2_CHANNELS), list(make_demo_frames.VISEME_CHANNELS)
     return {
         'fb2_expression_frames.csv': write(folder / 'fb2_expression_frames.csv', ['phase', 'amount', 'note'], fb2,
                                            ['isValid', 'isEyeFollowingBlendshapesValid'], expression_rows(lib, fb2)),
