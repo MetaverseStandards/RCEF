@@ -141,6 +141,41 @@ class Rules(unittest.TestCase):
         self.add(registration(2, 'revise'), reason='working group renames of two maps')
         self.assertProblem('a "revise" freeze lists each change')
 
+    def revise(self, pairs, renames, revises=None):
+        accepted = {'changes': "accepted by the project's release owners on 2026-11-02"}
+        return registration(2, 'revise', pairs=pairs, map_renames=renames, changes=['one map per set pair'],
+                            acceptance=accepted,
+                            revises={'id': 'ab.pivot', 'version': 1} if revises is None else revises)
+
+    def test_a_revise_freeze_revises_the_previous_freeze_whose_results_passed(self):
+        first = registration()
+        self.add(first)
+        self.add(self.revise({}, {}, revises={}), reason='working group renames of two maps')
+        self.assertProblem('names the freeze it revises')
+        self.add(self.revise({}, {}), line=False)
+        self.ledger[-1] = self.ledger[-1].replace(self.ledger[-1].split()[2],
+                                                  ab_compare.abreg_sha256(self.revise({}, {})))
+        self.add(self.revise({}, {}), line=False)
+        self.assertProblem('revises the previous freeze, whose results passed')
+        self.results(first, passed=True)
+        self.assertEqual(self.problems(), [])
+
+    def test_a_revise_freeze_keeps_the_maps_of_the_revised_freeze_under_the_renames(self):
+        hops = {'in_hops': [['a_face.x', 'c'], ['a_gaze.x', 'c']], 'bridges': [], 'out_hops': [['c.y', 't']]}
+        first = registration(pairs={'A -> T': hops})
+        self.add(first)
+        self.results(first, passed=True)
+        renames = {'a_face.x': 'a.x', 'a_gaze.x': 'a.x'}
+        merged = {'in_hops': [['a.x', 'c']], 'bridges': [], 'out_hops': [['c.y', 't']]}
+        self.add(self.revise({'A -> T': merged}, renames), reason='one map per set pair and direction')
+        self.assertEqual(self.problems(), [])
+        moved = {**merged, 'out_hops': [['c.z', 't']]}
+        self.add(self.revise({'A -> T': moved}, renames), line=False)
+        self.ledger[-1] = self.ledger[-1].replace(self.ledger[-1].split()[2],
+                                                  ab_compare.abreg_sha256(self.revise({'A -> T': moved}, renames)))
+        self.add(self.revise({'A -> T': moved}, renames), line=False)
+        self.assertProblem('A -> T: the maps are not those of the revised freeze with the map renames')
+
     def test_a_fix_freeze_names_what_changed(self):
         self.add(registration())
         self.add(registration(2, 'fix'), reason='after the failing first run')

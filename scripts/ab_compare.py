@@ -4,6 +4,7 @@
 
 Usage:
   python scripts/ab_compare.py draft OUT.abreg [--b-pack PACK] [--date YYYY-MM-DD]
+                                [--revise ABREG --map-renames JSON]
   python scripts/ab_compare.py run ABREG OUT_DIR [--b-pack PACK] [--dry-run]
   python scripts/ab_compare.py check
   python scripts/ab_compare.py a1-loss
@@ -11,7 +12,10 @@ Usage:
 
 - draft writes a first registration with every pin and A1 figure it can
   compute. Write it outside ab/, complete and review it, then commit it to
-  ab/ and, in a later commit, its line in ab/FREEZES (ab/README.md).
+  ab/ and, in a later commit, its line in ab/FREEZES (ab/README.md). With
+  --revise it writes a "revise" freeze of that registration instead, with the
+  frozen old -> new map ID list from the JSON file; fill in its changes and
+  their acceptance, then compute seed_root again.
 - run checks the registration's pins, makes its frames (scripts/ab_frames.py),
   runs every arm and writes the results to OUT_DIR. A run whose pins do not
   match is refused, unless --dry-run, which marks the results unregistered.
@@ -191,6 +195,11 @@ THRESHOLDS = {
     'M11': 'report: per ICT-FaceKit FACS row, B ARKit -> FACS links give the same ARKit shapes, or a listed '
            'difference',
 }
+# The gate of a "revise" freeze: B against the B of the freeze it revises (ab/README.md, freeze kinds). It is a rule
+# of the freeze kind, not a registered threshold.
+KIND_GATES = {'Revise': "B equals the revised freeze's B, bit for bit, on every output both write; B writes every "
+                        "output it wrote; B's refused outputs are among its refused outputs; dropped inputs equal; "
+                        "its notes are kept, with the frozen map renames"}
 # Gates these tools cannot compute yet: their frozen tables come from the definitions audit and the canonical data.
 PENDING = {'M4 keys': 'the rule-scoped reason -> key table', 'M4b': 'the assumption catalogue',
            'M6': 'the rig caches (run --rig NAME=DIR) and the pinned rig hashes', 'M7': 'the mutation set',
@@ -311,6 +320,47 @@ def m2(a1: list[dict], b: list[dict]) -> tuple[dict, list]:
         if problems:
             counts['violations'] += 1
             failures.append([n, '; '.join(problems)])
+    return counts, failures
+
+
+def revise_compare(before: list[dict], after: list[dict], renames: dict) -> tuple[dict, list]:
+    """The "revise" gate: B (after) against the B of the revised freeze (before) on the same frames.
+
+    Values on outputs both write must be bit-identical; B must write every output it wrote before; an output B
+    refuses must have been refused before; dropped inputs must be equal; and every note it gave before, with the
+    frozen map renames, must still be there. Outputs that it now writes, and refusals that are now "not available",
+    are counted as finer refusals.
+    """
+    counts = {'frames': len(before), 'value_differences': 0, 'not_written': 0, 'newly_refused': 0,
+              'dropped_differences': 0, 'notes_lost': 0, 'newly_written': 0, 'refused_now_not_available': 0}
+    failures = []
+
+    def renamed(text):
+        for old, new in renames.items():
+            text = text.replace(f' {old}:', f' {new}:')
+        return text
+
+    for n, (x, y) in enumerate(zip(before, after, strict=True)):
+        for output in sorted(x['values'].keys() & y['values'].keys()):
+            if bits(x['values'][output]) != bits(y['values'][output]):
+                counts['value_differences'] += 1
+                failures.append([n, output, 'value', repr(x['values'][output]), repr(y['values'][output])])
+        for output in sorted(set(x['values']) - set(y['values'])):
+            counts['not_written'] += 1
+            failures.append([n, output, 'not written', repr(x['values'][output]), y['labels'].get(output, '')])
+        for output in sorted(refused_outputs(y) - refused_outputs(x)):
+            counts['newly_refused'] += 1
+            failures.append([n, output, 'refused', x['labels'].get(output, 'written'), y['labels'][output]])
+        if x['dropped'] != y['dropped']:
+            counts['dropped_differences'] += 1
+            failures.append([n, '', 'dropped', ' '.join(x['dropped']), ' '.join(y['dropped'])])
+        lost = [renamed(note) for note in x.get('notes', []) if renamed(note) not in y.get('notes', [])]
+        if lost:
+            counts['notes_lost'] += 1
+            failures.append([n, '', 'notes', ' | '.join(lost), ' | '.join(y.get('notes', []))])
+        counts['newly_written'] += len(set(y['values']) - set(x['values']))
+        counts['refused_now_not_available'] += sum(
+            1 for o in refused_outputs(x) if y['labels'].get(o) == rcef_route.NOT_AVAILABLE)
     return counts, failures
 
 
@@ -1290,6 +1340,36 @@ def draft(root: Path = ROOT, b_path: Path | None = None, date: str = '') -> dict
     return abreg
 
 
+def revise_draft(previous_path: Path, renames: dict, root: Path = ROOT, b_path: Path | None = None,
+                 date: str = '') -> dict:
+    """A "revise" freeze of a registration: every pin, list and A1 figure from the checkout, the earlier freeze's
+    sources, families and thresholds, and the frozen old -> new map IDs. Fill in "changes" and "acceptance" (and
+    "acceptance" for each list that changed), then compute seed_root again."""
+    previous = json.loads(previous_path.read_text(encoding='utf-8'))
+    abreg = draft(root, b_path, date)
+    for key in ('sources', 'families', 'perturbations'):
+        if abreg[key] != previous[key]:
+            raise SystemExit(f'the {key} of the checkout differ from those of {previous_path.name}')
+    abreg.update({'id': previous['id'], 'version': previous['version'] + 1, 'kind': 'revise',
+                  'revises': {'id': previous['id'], 'version': previous['version']}, 'map_renames': renames,
+                  'metrics': previous['metrics'], 'changes': [],
+                  'acceptance': {name: '' for name in sorted(abreg['lists'])
+                                 if abreg['lists'][name] != previous['lists'].get(name)}})
+    abreg['acceptance']['changes'] = ''
+    del abreg['seed_root']
+    abreg['seed_root'] = seed_root(abreg)
+    return abreg
+
+
+def renamed_hops(pair: dict, renames: dict) -> dict:
+    """A frozen pair's maps with the map renames applied; maps renamed to one ID become one hop."""
+    out = {}
+    for key in ('in_hops', 'bridges', 'out_hops'):
+        hops = [[renames.get(h[0], h[0]), *h[1:]] for h in pair.get(key, [])]
+        out[key] = [h for n, h in enumerate(hops) if h not in hops[:n]]
+    return out
+
+
 def rest_inputs(document: dict, pairs: dict) -> list[dict]:
     """Source inputs that write a bridge class whose pose is the rest face (every weight 0) and have no link to any
     output of the pair (weight-0 inputs are not links).
@@ -1436,6 +1516,21 @@ def abreg_problems(abreg: dict, abregs: dict, manifests: dict, root: Path, recom
         problems.append('a "fix" freeze names what changed in "changes"')
     if kind == 'revise' and (not abreg.get('changes') or not abreg.get('acceptance', {}).get('changes')):
         problems.append('a "revise" freeze lists each change, and the release owners accept the list before the run')
+    if kind == 'revise' and not abreg.get('revises'):
+        problems.append('a "revise" freeze names the freeze it revises in "revises"')
+    if kind == 'revise' and abreg.get('revises'):
+        target = abreg['revises']
+        revised = abregs.get((target.get('id'), target.get('version')))
+        manifest = manifests.get((target.get('id'), target.get('version')), (None, {}))[1]
+        if revised is None or not manifest.get('passed') or manifest.get('dry_run') or target.get('id') != abreg['id'] \
+                or target.get('version') != version - 1:
+            problems.append('a "revise" freeze revises the previous freeze, whose results passed')
+        else:
+            renames = abreg.get('map_renames', {})
+            for name, pair in revised['pairs'].items():
+                if renamed_hops(pair, renames) != {k: abreg['pairs'].get(name, {}).get(k, []) for k in
+                                                   ('in_hops', 'bridges', 'out_hops')}:
+                    problems.append(f'{name}: the maps are not those of the revised freeze with the map renames')
     if recompute and abreg.get('a1_figures') is not None:
         # Computed from the registration without its seed_root, so no figure can depend on it.
         unseeded = {k: v for k, v in abreg.items() if k != 'seed_root'}
@@ -1502,6 +1597,42 @@ def regression_families(abreg: dict, root: Path = ROOT) -> tuple[dict, dict, lis
                                if 'values' in f else f for f in frames]
             sources[label] = renames.get(ab_frames.family_source(name, earlier), ab_frames.family_source(name, earlier))
     return families, sources, problems
+
+
+def code_at(root: Path, name: str, digest: str):
+    """The module CODE[name] whose file has this SHA-256: the checkout's, or one from Git history; None if neither."""
+    path = CODE[name]
+    for commit in [None, *git(root, 'log', '--format=%H', '--', path).stdout.split()]:
+        if commit is None:
+            data = (root / path).read_bytes()
+        else:
+            shown = subprocess.run(['git', 'show', f'{commit}:{path}'], cwd=root, capture_output=True)
+            if shown.returncode:
+                continue
+            data = shown.stdout
+        if sha256_bytes(data) == digest:
+            module = types.ModuleType(f'{Path(path).stem}_{(commit or "checkout")[:12]}')
+            module.__file__ = str(root / path)
+            exec(compile(data, f'{path} at {(commit or "the checkout")[:12]}', 'exec'), module.__dict__)
+            return module
+    return None
+
+
+def revised_routes(abreg: dict, root: Path = ROOT) -> dict:
+    """The routes of the freeze that a "revise" freeze revises: its pinned Route code on its pinned B pack, both
+    from Git history, for each of its pairs. Empty when the history is missing (the gate then has no rows)."""
+    target = abreg['revises']
+    path = f'ab/{target["id"]}-v{target["version"]}.abreg'
+    revised = json.loads((root / path).read_text(encoding='utf-8'))
+    added = git(root, 'log', '--format=%H', '--diff-filter=A', '--', path).stdout.split()
+    module = code_at(root, 'route', revised['pins']['code']['route'])
+    if not added or module is None:
+        return {}
+    shown = subprocess.run(['git', 'show', f'{added[-1]}:{B_PACK}'], cwd=root, capture_output=True)
+    if shown.returncode or sha256_bytes(shown.stdout) != revised['pins']['b_pack_sha256']:
+        return {}
+    pack = rcef_translate.load_pack(json.loads(shown.stdout))
+    return {name: module.Route(pair['source'], pair['target'], pack=pack) for name, pair in revised['pairs'].items()}
 
 
 # ---------------------------------------------------------------- the run
@@ -1590,6 +1721,13 @@ def run(abreg_path: Path, out: Path, root: Path = ROOT, b_path: Path | None = No
             for n, result in enumerate(b_runs[name, family]):
                 for mapping, refusal in result['refused'].items():
                     report['refusals'].append(['B', name, family, n, mapping, ' '.join(refusal['codes'])])
+    if abreg['kind'] == 'revise':
+        before = revised_routes(abreg, root)
+        renames = abreg.get('map_renames', {})
+        for name, route in before.items():
+            for family in by_source.get(abreg['pairs'][name]['source'], []):
+                old = timed(f'Revise {name}', run_route, route, families[family])
+                record('Revise', {'pair': name, 'family': family}, *revise_compare(old, b_runs[name, family], renames))
     a1_runs = {}
     for name, (source, target, maps) in A1_PAIRS.items():
         route = rcef_route.Route(source, target, pack=a1_pack, maps=maps)
@@ -1726,7 +1864,8 @@ GATES = {'M1': ('value_differences', 'sign_differences'), 'B equals O': ('differ
          'M3 coverage': ('violations',),
          'M5 R2': ('differences',), 'M10': ('value_differences', 'coverage_violations', 'b_refusals'),
          'M10b': ('value_differences', 'coverage_violations'), 'M4 keys': ('shortfall', 'unlisted_added'),
-         'M4b': ('shortfall',), 'M7': ('missed', 'setup_errors')}
+         'M4b': ('shortfall',), 'M7': ('missed', 'setup_errors'),
+         'Revise': ('value_differences', 'not_written', 'newly_refused', 'dropped_differences', 'notes_lost')}
 REPORT_ONLY = ('M2b', 'M8', 'M8 R3', 'M6', 'M11')
 
 
@@ -1752,6 +1891,8 @@ def missing_rows(report: dict, abreg: dict) -> dict:
                 'B equals O': ('pair', list(abreg['pairs'])), 'M3 coverage': ('pair', list(abreg['pairs'])),
                 'M10': ('family', FACS_FAMILIES), 'M10b': ('family', FACS_FAMILIES),
                 'M4 keys': ('pair', list(A1_PAIRS)), 'M4b': ('pair', list(A1_PAIRS))}
+    if abreg.get('kind') == 'revise':
+        required['Revise'] = ('pair', list(abreg['pairs']))
     missing = {}
     for metric, (key, names) in required.items():
         if metric not in rows and metric in PENDING:
@@ -1811,7 +1952,7 @@ def write_results(out: Path, abreg: dict, report: dict, frame_sums: dict, timing
                   f'freeze pinned): {", ".join(report["regression"])}.', '']
     lines += ['| Metric | Threshold | Status |', '|---|---|---|']
     for metric in sorted(gate_statuses):
-        threshold = THRESHOLDS.get(metric, 'report only')
+        threshold = THRESHOLDS.get(metric, KIND_GATES.get(metric, 'report only'))
         shown = gate_statuses[metric] + (f' (no rows for {", ".join(missing[metric])})' if metric in missing else '')
         lines.append(f'| {metric} | {threshold} | {shown} |')
     pending = {m: needs for m, needs in PENDING.items() if m not in report['metrics']}
@@ -1875,6 +2016,8 @@ def main(argv: list[str]) -> int:
     p.add_argument('out', type=Path)
     p.add_argument('--b-pack', type=Path)
     p.add_argument('--date', default='')
+    p.add_argument('--revise', type=Path, help='write a "revise" freeze of this registration')
+    p.add_argument('--map-renames', type=Path, help='with --revise: a JSON object of old -> new map IDs')
     p = commands.add_parser('run')
     p.add_argument('abreg', type=Path)
     p.add_argument('out', type=Path)
@@ -1890,8 +2033,12 @@ def main(argv: list[str]) -> int:
     if args.command == 'draft':
         if args.out.resolve().parent == (ROOT / 'ab').resolve():
             raise SystemExit('write a draft outside ab/: every registration in ab/ needs a ledger line')
-        args.out.write_text(json.dumps(draft(ROOT, args.b_pack, args.date), indent=1, sort_keys=True) + '\n',
-                            encoding='utf-8')
+        if args.revise:
+            renames = json.loads(args.map_renames.read_text(encoding='utf-8')) if args.map_renames else {}
+            abreg = revise_draft(args.revise, renames, ROOT, args.b_pack, args.date)
+        else:
+            abreg = draft(ROOT, args.b_pack, args.date)
+        args.out.write_text(json.dumps(abreg, indent=1, sort_keys=True) + '\n', encoding='utf-8')
         print(f'{args.out}: review it and fill in the frozen lists before you register it')
     elif args.command == 'run':
         caches = {name: Path(folder).expanduser() for name, folder in (r.split('=', 1) for r in args.rig)}
