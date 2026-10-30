@@ -1,0 +1,6 @@
+pair,outputs,shortfall
+FB2 -> ARKit,52,0
+ARKit -> FB2,60,0
+ARKit -> VRCFT UE,68,0
+FB2 -> VRM blink,2,0
+META -> VRM,5,0
