@@ -22,8 +22,9 @@ import provenance  # noqa: E402
 # step (05b8b0e), the code of viseme-poses.rocketbox-multi v2 (reproduced from its freeze commit 8354daf). check.py
 # then learnt the perceptual gate, and viseme_poses.py the features (295f4d7), the code of
 # viseme-poses.rocketbox-features. check.py then required the whole-face guard of every gated channel
-# (8d10950).
-CODE_COMMIT = '8d10950e1463a670b301f24f9bf3fc4ebabdf3a4'
+# (8d10950). viseme_poses.py then read the poses through the one map per set pair and direction (b826a59);
+# the correspondences and ARKit weights it computes are unchanged, so no record is fitted again.
+CODE_COMMIT = 'b826a5929c8060c42c46eff1f6d7daa4d8d7e8cd'
 RECORD_COMMIT = '2fa1be4'
 CODE = ['check.py', 'examples/rig_gains.py', 'examples/rigs.py', 'examples/ict_facekit.py', 'examples/rcef_translate.py',
         'examples/data/rig_landmarks.json', 'tools/calibration/ict_files.json', 'tools/calibration/viseme_rigs.json',
