@@ -5,7 +5,7 @@ Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards For
 
 **Author affiliation: to be added by the release owners before this document goes to the working group.**
 
-**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with 70 of its 72 signals (every group except the pupils), and the maps of ARKit, FB2, Unified Expressions and VRM blinks. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels, and the [viseme pose bridge](#viseme-pose-bridge) from the viseme set to the expression set. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
+**Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with 70 of its 72 signals (every group except the pupils), and the maps of ARKit, FB2, Unified Expressions, VRM blinks and FACS codes, with the [FACS](#facs) profile `facs.code`. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels, and the [viseme pose bridge](#viseme-pose-bridge) from the viseme set to the expression set. The pack also keeps the older `rcef.canonical` set of 21 signals, and each of those keeps its provider's calibration ([expression-sets.md](expression-sets.md#rcefs-own-sets)).
 
 This document uses the proposal form of [GOVERNANCE.md](../GOVERNANCE.md): the problem, the proposal, the public evidence, the effect on compatibility, the alternatives, the tests and the open questions. Two documents go with it:
 
@@ -89,7 +89,7 @@ These rules apply to the expression signals. The pupils are a length. [Gaze](#ga
 | weighted_sum mean (FACS out-hop, AU22 and AU28 per side) | "the FACS side value is the mean of the upper and lower canonical parts" |
 | weighted_sum [1, 1, 1, 1] and clamp knots (viseme aggregate in-hop) | "the canonical value is the sum of the META classes SS, DD, NN and RR, clamped at 1" |
 
-FACS hops start with their own assumption instead: "FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding ([facs-intensity.md](facs-intensity.md)) and correspond as the operator passes them; no evidence supports this, and no response curve is measured". On the hops of the gross behaviour codes (29, 30, 34, 35 and 43) the first clause reads: "the action at its fullest, as RCEF assumes, is canonical 1; the source gives no intensity scale for gross behaviour codes".
+FACS hops start with their own assumption instead: "FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding ([facs-intensity.md](facs-intensity.md)) and correspond as the operator passes them; no evidence supports this, and no response curve is measured". On the hops of the gross behaviour codes (29, 30, 34, 35 and 43) it reads: "the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding ([facs-intensity.md](facs-intensity.md)) and correspond as the operator passes them; no evidence supports this, and no response curve is measured".
 
 Where the [audit](canonical-set-audit.md) marks a row `differs` or `unresolved`, the hop adds: "the endpoints are assumed equal although the defined actions differ or are unresolved; see loss `<key>`". Every hop also has its own gain loss, for example "FB2 gain and full-activation pose not published".
 
@@ -533,9 +533,34 @@ FACS is the Facial Action Coding System. Other expression sets name their shapes
 - **Groups** follow the canonical groups they fill: `face` (37), `cheek_puff` (2), `jaw_thrust` (1), `jaw_sideways` (2), `blink` (2), `cheek_suck` (2), `lip_tighten` (2) and `tongue_out` (1).
 - **Sides.** Wikipedia allows an L or R before a code (raw line 78). Which codes FACS lets be one-sided is in the closed manual. RCEF splits a code by side exactly where the canonical signal is split by side, so a FACS → canonical → FACS round trip loses nothing. AU22 and AU28 are split by side only, because FACS has no upper/lower split.
 - **Side note** on every sided row: "FACS names L and R without saying whose side; RCEF reads them as the subject's own (assumption; loss key `facs_side_frame_unresolved`)".
-- **Fields:** `value_type = "scalar"`, `units = "1"`, `domain = {min = 0.0, max = 1.0}`, `neutral = 0.0`, `evidence_status = "proposed"`. Evidence is `facs_wikipedia`, plus `rocketbox_avatars` where `aligned_names` holds a Rocketbox name, and `facs_hager_2002` on the AU43 signals. The code numbers are facts, but the scalar encoding is RCEF's, so the signals are `proposed`.
-- **Calibration strings.** Main codes: `rcef.facs.v1:au<NN>: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure`. Gross codes 29, 30, 34, 35 and 43: `… 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (raw lines 65, 224) …`. AU43 takes the gross form, because Wikipedia lists 43 as a gross code (raw line 257). A frame that is not coded is left out, never 0.
+- **Fields:** `value_type = "scalar"`, `units = "1"`, `domain = {min = 0.0, max = 1.0}`, `neutral = 0.0`, `evidence_status = "proposed"`. Evidence is `facs_wikipedia`, plus `rocketbox_avatars` where `aligned_names` holds a Rocketbox name, and `facs_hager_2002` on the AU43 signals and on 41, 42 and 44, whose reasons rest on it. The code numbers are facts, but the scalar encoding is RCEF's, so the signals are `proposed`.
+- **Calibration strings.** `au<NN>` stands for the local name of the signal, for example `au01_left`. Main codes: `rcef.facs.v1:au<NN>: 0 = absent (a scored frame does not list the code); 1 = intensity E, the maximum possible for the individual person (Wikipedia FACS, raw line 70); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure`. Gross codes 29, 30, 34, 35 and 43: `rcef.facs.v1:au<NN>: 0 = absent (a scored frame does not list the code); 1 = the action at its fullest, as RCEF assumes; the source gives no intensity scale for gross behaviour codes (Wikipedia FACS, raw lines 65, 224); FACS defines only the ordered letters A-E and no numeric scale, so values between are an RCEF encoding (docs/facs-intensity.md), not a FACS measure`. AU43 takes the gross form, because Wikipedia lists 43 as a gross code (raw line 257). A frame that is not coded is left out, never 0.
 - **Profile metadata:** `vocabulary_version = "1.0"` and `vocabulary_status = "draft"`, and the text "FACS code numbers and names from a public list; not FACS coding; values are not FACS scores".
+
+**Rows that are not mapped.** Each row's reason names the gap. The [codec](facs-intensity.md#codes-that-are-not-mapped) says how it reads each code.
+
+| Codes | Disposition | Region | Reason |
+|---|---|---|---|
+| 11 | unresolved | cheek | no canonical signal; the name `nasolabial_deepen` is reserved; the codec does not read it |
+| 13 | unresolved | mouth | no canonical signal; the name `sharp_lip_pull` is reserved; the codec does not read it |
+| 21 | unresolved | other | no canonical signal; the name `neck_tighten` is reserved; the codec does not read it |
+| 25 | unresolved | mouth | no canonical signal; the name `lips_part` is reserved; the codec does not read it, and toward FACS all mouth opening is written as 26 |
+| 27 | unresolved | jaw | no signal of its own; the name `mouth_stretch` is reserved; the codec reads it as AU26, and toward FACS all mouth opening is written as 26 |
+| 31 | unresolved | jaw | no canonical signal; the codec does not read it |
+| 32 | unresolved | mouth | no canonical signal; the codec does not read it |
+| 36 | unresolved | tongue | no canonical signal; the codec does not read it |
+| 40 | unresolved | nose | no canonical signal; the codec does not read it |
+| 33 | unresolved | cheek | no canonical signal; a coder may score it instead of 34, so the codec leaves the `cheek_puff` signals out |
+| 37 | unresolved | mouth | no canonical signal; a coder may score it instead of 19, so the codec leaves `tongue_out` out |
+| 38, 39 | unresolved | nose | no canonical signal; the names `nostril_dilate` and `nostril_compress` are reserved; the codec does not read it |
+| 41, 42 | unresolved | eyelid | FACS 2002 folds it into AU43 intensity, with letters that no public source gives; the codec leaves the `blink` signals out |
+| 44 | unresolved | eyelid | FACS 2002 folds it into AU43 intensity, with letters that no public source gives; the codec leaves the `blink` signals and `lid_tighten` out |
+| 45, 46 | unresolved | eyelid | no signal of its own; the codec reads it as AU43, and toward FACS all eye closure is written as 43 |
+| 61, 62, 63, 64 | unresolved | gaze | canonical gaze has no FACS code, because the source does not say whose left it means ([Gaze](#gaze)); the codec does not read it |
+| 65, 66, 69 | unresolved | gaze | no canonical signal; the codec does not read it |
+| 51, 52, 53, 54, 55, 56, 57, 58 | excluded | other | head pose is out of scope |
+| 50, 80, 81, 82, 84, 85, 91, 92, 97\*, 98\* | excluded | other | a behaviour event, not a face weight |
+
 
 **Maps.** Both directions, 102 mappings in 16 maps.
 
@@ -583,7 +608,14 @@ The data change that adds the profiles also adds these records. Each image recor
 | `bear_harvey_2017`, `fernandez_lopez_sukno_2017`, `zhou_visemenet_2018`, `jali_2016` | Viseme literature: versioned arXiv files and the JALI author copy | Reference only; facts, paraphrased |
 | `pubmed_owens_blazek_1985`, `pubmed_robert_ribes_1998`, `pubmed_montgomery_jackson_1983`, `pubmed_benguerel_pichora_fuller_1982`, `pubmed_auer_bernstein_1997`, `pubmed_valkenier_2012`, `pubmed_havenhill_do_2018` | PubMed abstracts, one pinned NCBI efetch file per article | Reference only; facts, paraphrased |
 
-The data change that adds `facs.code` adds four more records: `facs_hager_2002` (the FACS publisher's page on the 2002 edition, an archived copy of 2008-12-18; reference only), `rocketbox_avatars` (Microsoft Rocketbox at `0943055`, MIT; the 48 `AU_*` shape names), `pyfeat_au_reference` (Py-Feat `docs/pages/au_reference.md` at `4ebb4ec`, MIT) and `ozel_arkit_facs` (Melinda Ozel, "ARKit to FACS", reference only). The last two support audit notes only; no hop cites them.
+The data change that adds `facs.code` adds four more records. The last two support audit notes only; no hop cites them.
+
+| Record | Source | Licence or terms |
+|---|---|---|
+| `facs_hager_2002` | The FACS publisher's page on the 2002 manual, Internet Archive capture `20081218070149` (original bytes), lines 204-205. Another public page names 41, 42 and 43 instead, and does not name 44 | Reference only |
+| `rocketbox_avatars` | Microsoft Rocketbox README at `0943055` (lines 21 and 55). The 48 `AU_*` shape names come from the facial files of Female_Adult_01 and Male_Adult_01 that `examples/rigs.py` pins, through `scripts/derive_rocketbox_au_names.py` | MIT |
+| `pyfeat_au_reference` | Py-Feat `docs/pages/au_reference.md` at `4ebb4ec` | MIT |
+| `ozel_arkit_facs` | Melinda Ozel, "ARKit to FACS" cheat sheet, Internet Archive capture `20261010185714` (original bytes); the live page changes its bytes on every request | Reference only; all rights reserved |
 
 ## Effect on compatibility
 

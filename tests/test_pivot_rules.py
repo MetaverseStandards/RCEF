@@ -6,12 +6,12 @@ not import the generator: they read the pack, the audit document and the frozen 
 rule on its own, so that a fault in the generator fails here even when the data agrees with the generator.
 
 - every hop states its gain loss, so every route states it twice (VRM blink out-hops state the weight loss,
-  VRM vowel hops the asset-weight key);
+  VRM vowel hops the asset-weight key, FACS hops the ordinal-intensity key, which says no gain is measured);
 - each tongue_out hop states that the tongue extension has no stated length;
 - exactly the 4 FB2 gaze outputs on a negative knot segment state the 2⁻⁵⁴ rounding loss;
 - each hop cites exactly its evidence: its set's own records, every crosswalk record that today's direct maps
   cite on a rule that links its provider signal to another set (ict_facekit on ARKit hops only), the IPA chart
-  on viseme hops, and rcef_canonical_v1;
+  on viseme hops, facs_hager_2002 on the FACS AU43 hops, and rcef_canonical_v1;
 - each crosswalk set that a hop cites has exactly one transfer assumption, and each transfer assumption names
   a crosswalk set that the hop cites;
 - a hop withdraws a crosswalk transfer exactly when its own audit row or the other set's audit row for the
@@ -41,10 +41,12 @@ SETS = {'arkit': ('arkit.coefficient', 'ARKit', ['apple_blendshapes']),
         'fb2': ('openxr.fb2', 'FB2', ['xr_fb2']),
         'vrcft_artist': ('vrcft.artist.base', 'Unified Expressions', ['vrcft_artist', 'vrcft_docs_shapes']),
         'vrm': ('vrm.preset', 'VRM', ['vrm_expressions']),
-        'visemes': ('openxr.visemes', 'META', ['xr_visemes', 'xr_registry'])}
+        'visemes': ('openxr.visemes', 'META', ['xr_visemes', 'xr_registry']),
+        'facs': ('facs.code', 'FACS', ['facs_wikipedia'])}
 AUDIT_SECTIONS = {'## FB2': 'fb2', '## ARKit': 'arkit', '## VRCFaceTracking Unified Expressions': 'vrcft_artist',
-                  '## VRM': 'vrm', '## META visemes': 'visemes'}
-SET_KEYS = 'arkit|fb2|vrcft_artist|vrm|visemes'
+                  '## VRM': 'vrm', '## META visemes': 'visemes', '## FACS': 'facs'}
+SET_KEYS = 'arkit|fb2|vrcft_artist|vrm|visemes|facs'
+FACS_ORDINAL = 'facs_ordinal_intensity: '
 HOP = re.compile(rf'^(?:({SET_KEYS})_\w+\.to_rcef|rcef_\w+\.to_({SET_KEYS}))$')
 DIRECT = ('arkit.to_fb2', 'arkit_gaze.to_fb2', 'fb2.to_arkit', 'fb2_gaze.to_arkit', 'arkit.to_vrcft_artist',
           'fb2.to_vrm', 'visemes.to_vrm')
@@ -148,6 +150,9 @@ class PivotRules(unittest.TestCase):
             with self.subTest(rule=rule['id']):
                 if key == 'vrm' and is_viseme(rule):
                     self.assertTrue([r for r in self.reasons(rule) if r.startswith(VRM_VOWEL_WEIGHT)])
+                elif key == 'facs':
+                    self.assertTrue([r for r in self.reasons(rule) if r.startswith(FACS_ORDINAL)])
+                    self.assertFalse([r for r in self.reasons(rule) if 'gain and full-activation pose' in r])
                 else:
                     expected = VRM_WEIGHT if key == 'vrm' else f'{name} gain and full-activation pose not published'
                     self.assertIn(expected, self.reasons(rule))
@@ -157,11 +162,11 @@ class PivotRules(unittest.TestCase):
         # on its sum and on its clamp.
         ins = [r for k, r in self.rules if r['id'] in self.in_rules]
         outs = [r for k, r in self.rules if r not in ins]
-        self.assertEqual((len(ins), len(outs)), (152, 216))
+        self.assertEqual((len(ins), len(outs)), (205, 265))
 
     def test_each_tongue_out_hop_states_the_missing_length(self):
         tongue = [(k, r) for k, r in self.rules if 'tongue_out' in self.canonical(k, r)]
-        self.assertEqual(sorted(k for k, _ in tongue), ['arkit', 'arkit', 'fb2', 'fb2', 'vrcft_artist'])
+        self.assertEqual(sorted(k for k, _ in tongue), ['arkit', 'arkit', 'facs', 'facs', 'fb2', 'fb2', 'vrcft_artist'])
         for key, rule in self.hops:
             stated = any(NO_LENGTH in r for r in self.reasons(rule))
             self.assertEqual(stated, (key, rule) in tongue, rule['id'])
@@ -185,6 +190,8 @@ class PivotRules(unittest.TestCase):
                 expected |= self.ict(key, rule)
             if row := self.sourced_row(key, rule):
                 expected |= row['chain']
+            if key == 'facs' and self.canonical(key, rule)[0].startswith('eye_close_'):
+                expected.add('facs_hager_2002')
             with self.subTest(rule=rule['id']):
                 self.assertEqual(set(rule['evidence']), expected)
                 self.assertEqual(len(rule['evidence']), len(expected))

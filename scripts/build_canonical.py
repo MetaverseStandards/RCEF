@@ -653,6 +653,256 @@ def join(items: list[str]) -> str:
     return items[0] if len(items) == 1 else ', '.join(items[:-1]) + ' and ' + items[-1]
 
 
+# ---------------------------------------------------------------- FACS codes
+
+FACS_PROFILE = 'facs.code'
+FACS_FILE = 'profiles/facs.code.toml'
+FACS_MAPS_FILE = 'mappings/canonical_facs.toml'
+FACS_CODES = 'examples/data/facs_codes.json'
+ROCKETBOX_FIXTURE = 'tests/fixtures/rocketbox_au_names.json'
+HAGER = 'facs_hager_2002'
+ROCKETBOX = 'rocketbox_avatars'
+FACS_SPEC = {'name': 'FACS', 'records': [FACS_RECORD]}
+# The FACS 2002 page backs AU43's scoring and the reasons of the old eye codes it folds into AU43.
+HAGER_CODES = ('41', '42', '43', '44')
+SIDE_KEY = 'facs_side_frame_unresolved'
+FACS_CLAUSES = {'in_copy': 'the value is carried over unchanged',
+                'in_fan': 'the one FACS side value is copied into the upper and the lower part',
+                'out_copy': 'the value is carried over unchanged',
+                'out_mean': 'the FACS side value is the mean of the upper and lower canonical parts'}
+FACS_CALIBRATION_UNMAPPED = 'facs.code: no RCEF value of its own; see metadata.reason'
+FACS_HEADER = '''# SPDX-License-Identifier: CC-BY-SA-4.0
+# Original RCEF data; FACS code numbers and names are facts from a public list
+# (record facs_wikipedia). This is not FACS coding, and the values are not FACS
+# scores. Written by scripts/build_canonical.py from docs/canonical-set.md,
+# docs/canonical-set-audit.md, examples/data/facs_codes.json and
+# tests/fixtures/rocketbox_au_names.json. Edit those, then run the script.
+'''
+
+
+def section_tables(text: str, heading: str) -> list[list[dict]]:
+    """Every Markdown table in the section under a heading line, in order."""
+    lines = text.splitlines()
+    start = lines.index(heading)
+    end = next((n for n in range(start + 1, len(lines)) if lines[n].startswith('#')), len(lines))
+    found, n = [], start + 1
+    while n < end:
+        if lines[n].startswith('|'):
+            found.append(table('\n'.join([heading, *lines[n:end]]), heading))
+            while n < end and lines[n].startswith('|'):
+                n += 1
+        n += 1
+    return found
+
+
+def file_links(text: str) -> str:
+    """A Markdown link to another document becomes the document's path."""
+    return re.sub(r'\[[^\]]+\]\(([\w-]+\.md)\)', r'docs/\1', text)
+
+
+class FacsBuilder:
+    """The facs.code profile and its maps: codes from the FACS data file, rows and texts from the documents."""
+
+    def __init__(self, root: Path, builder: Builder):
+        self.b = builder
+        doc = (root / SIGNAL_DOC).read_text(encoding='utf-8')
+        audit_doc = (root / AUDIT_DOC).read_text(encoding='utf-8')
+        self.codes = json.loads((root / FACS_CODES).read_text(encoding='utf-8'))['codes']
+        self.rocketbox = json.loads((root / ROCKETBOX_FIXTURE).read_text(encoding='utf-8'))['names']
+        found = re.search(r'FACS hops start with their own assumption instead: "(.+?)"\. On the hops of the gross '
+                          r'behaviour codes \([^)]*\) it reads: "(.+?)"\.', doc)
+        self.opening = {'main': file_links(found.group(1)), 'gross_behavior': file_links(found.group(2))}
+        self.calibration = {
+            'main': re.search(r'Main codes: `(rcef\.facs\.v1:au<NN>: [^`]+)`', doc).group(1),
+            'gross_behavior': re.search(r'Gross codes [\d, and]+: `(rcef\.facs\.v1:au<NN>: [^`]+)`', doc).group(1)}
+        self.side_note = plain(re.search(r'\*\*Side note\*\* on every sided row: "([^"]+)"', doc).group(1))
+        self.scope = re.search(r'`vocabulary_status = "draft"`, and the text "([^"]+)"', doc).group(1)
+        self.unmapped = {}
+        for row in table_after(doc, '## FACS', '**Rows that are not mapped.**'):
+            for code in row['Codes'].replace('\\*', '*').split(', '):
+                self.unmapped[code] = {'disposition': row['Disposition'], 'region': row['Region'],
+                                       'reason': plain(row['Reason'])}
+        rows, extra = section_tables(audit_doc, '## FACS')
+        self.audit, self.aligned = {}, {}
+        for row in rows:
+            short = ticks(row['Signal'])[0]
+            fid = ticks(row['FACS code (`facs.code` ID)'])[0]
+            self.audit[short] = {'id': fid, 'verdict': row['Verdict'],
+                                 'keys': [k for k in ticks(row['Owning hop, key']) if k in builder.docs['keys']]}
+            self.aligned.setdefault(fid, []).append(short)
+        # Encoding rows: keys for the hops of the signals named, or of every FACS hop when the row names none.
+        self.encoding = []
+        for row in extra:
+            patterns = [t for t in ticks(row['Canonical signals']) if not t.startswith(FACS_PROFILE)]
+            shorts = {s for s in self.audit if any(re.fullmatch(p.replace('*', r'\w+'), s) for p in patterns)}
+            self.encoding.append((shorts or set(self.audit),
+                                  [k for k in ticks(row['Owning hop, key']) if k in builder.docs['keys']]))
+        for code, entry in self.codes.items():
+            if entry['disposition'] in ('mapped', 'none'):
+                continue
+            if self.unmapped.get(code, {}).get('disposition') != entry['disposition']:
+                raise SystemExit(f'FACS {code}: {FACS_CODES} and the rows that are not mapped disagree')
+
+    # -- names
+    def local(self, fid: str) -> str:
+        return fid[len(FACS_PROFILE) + 1:]
+
+    def code_of(self, fid: str) -> str:
+        return next(c for c in self.codes if f'au{int(c.rstrip("*")):02d}' == self.local(fid).split('_')[0])
+
+    def notation(self, fid: str) -> str:
+        local = self.local(fid)
+        side = local.split('_')[1] if '_' in local else ''
+        return {'left': 'L', 'right': 'R', '': ''}[side] + self.code_of(fid)
+
+    def shorts(self, fid: str) -> list[str]:
+        return [s['short'] for s in self.b.signals if s['short'] in self.aligned.get(fid, [])]
+
+    def rocketbox_names(self, code: str, side: str | None) -> list[str]:
+        """The Rocketbox shapes of a code that act on the row's side: that side's shape and the both-sides shape."""
+        found = []
+        for name in self.rocketbox:
+            match = re.fullmatch(r'AU_(\d\d)_(?:([LR])_)?\w+', name)
+            if code.rstrip('*').isdigit() and int(match.group(1)) == int(code.rstrip('*')):
+                if side is None or match.group(2) in (None, {'left': 'L', 'right': 'R'}[side]):
+                    found.append(name)
+        return found
+
+    # -- signals
+    def rows(self) -> list[dict]:
+        """(fid, code, side, mapped) for every row, in code order, left before right."""
+        out = []
+        for code, entry in self.codes.items():
+            if entry['disposition'] == 'none':
+                continue
+            base = f'{FACS_PROFILE}.au{int(code.rstrip("*")):02d}'
+            if entry['disposition'] != 'mapped':
+                out.append((base, code, None))
+            elif entry['read'] == 'shared':
+                out.append((base, code, None))
+            else:
+                out += [(f'{base}_{side}', code, side) for side in ('left', 'right')]
+        return out
+
+    def signals(self) -> list[dict]:
+        out = []
+        for fid, code, side in self.rows():
+            entry = self.codes[code]
+            names = self.rocketbox_names(code, side if entry['read'] == 'sided' else None)
+            evidence = [FACS_RECORD] + ([ROCKETBOX] if names else []) + ([HAGER] if code in HAGER_CODES else [])
+            label = f'AU {code} {entry["name"]}'
+            metadata = {'facs_code': code, 'facs_table': entry['table']}
+            if entry['disposition'] == 'mapped':
+                shorts = self.shorts(fid)
+                if not shorts:
+                    raise SystemExit(f'{fid}: no canonical signal in the FACS audit')
+                group = self.b.group(shorts)
+                direction = entry['read'] == 'direction'
+                label += f', toward the {side}' if direction else f', {side}' if side else ''
+                metadata['group'] = group
+                if names:
+                    metadata['aligned_names'] = {ROCKETBOX: names}
+                if side:
+                    metadata['side_note'] = self.side_note
+                verb = 'them' if len(shorts) > 1 else 'it'
+                metadata['reason'] = (f'Code number and name from {FACS_RECORD}; read into canonical {join(shorts)} '
+                                      f'by facs_{group}.to_rcef and written from {verb} by rcef_{group}.to_facs, both '
+                                      f"proposed approximate hops; the numeric encoding is RCEF's own, not a FACS "
+                                      f'score.')
+                calibration = self.calibration[entry['table']].replace('au<NN>', self.local(fid))
+                out.append({'id': fid, 'label': label, 'value_type': 'scalar', 'units': '1',
+                            'domain': {'min': 0.0, 'max': 1.0}, 'calibration': calibration, 'disposition': 'mapped',
+                            'evidence': evidence, 'evidence_status': 'proposed', 'native_id': self.notation(fid),
+                            'surface': FACS_PROFILE, 'side': 'shared' if direction else side or 'shared',
+                            'neutral': 0.0, 'metadata': metadata, 'region': self.b.by_short[shorts[0]]['region']})
+                continue
+            row = self.unmapped[code]
+            if names:
+                metadata['aligned_names'] = {ROCKETBOX: names}
+            metadata['reason'] = row['reason'][0].upper() + row['reason'][1:] + '.'
+            out.append({'id': fid, 'label': label, 'value_type': 'scalar', 'units': 'unknown', 'domain': {},
+                        'calibration': FACS_CALIBRATION_UNMAPPED, 'disposition': entry['disposition'],
+                        'evidence': evidence, 'evidence_status': 'proposed', 'native_id': code,
+                        'surface': FACS_PROFILE, 'side': 'shared', 'metadata': metadata, 'region': row['region']})
+        return out
+
+    def profile(self, signals: list[dict]) -> dict:
+        groups = [g for g in self.b.groups if any(s['metadata'].get('group') == g for s in signals)]
+        return {'id': FACS_PROFILE, 'label': 'FACS codes in RCEF numeric encoding (draft)',
+                'signal_ids': [s['id'] for s in signals], 'evidence': [FACS_RECORD],
+                'metadata': {'vocabulary_version': '1.0', 'vocabulary_status': 'draft', 'scope': self.scope,
+                             'groups': groups}}
+
+    # -- hops
+    def hop(self, kind: str, rid: str, fid: str, shorts: list[str], inputs, outputs, operator: dict) -> dict:
+        notation, code = self.notation(fid), self.code_of(fid)
+        if kind == 'in_fan':
+            correspondence = (f'correspondence: FACS {notation} is one value for canonical {join(self.shorts(fid))}; '
+                              f'this mapping writes {shorts[0]}.')
+        else:
+            correspondence = f'correspondence: FACS {notation} corresponds to canonical {join(shorts)}.'
+        endpoints = f'endpoints: {self.opening[self.codes[code]["table"]]}; {FACS_CLAUSES[kind]}'
+        rows = [self.audit[s] for s in shorts]
+        keys = list(dict.fromkeys(k for r in rows if r['verdict'] != 'same' for k in r['keys']))
+        if keys:
+            endpoints += '; ' + DIFFERS.format(('losses ' if len(keys) > 1 else 'loss ') + join(keys))
+        losses = {'in_fan': [SYMMETRY], 'out_mean': [ASYMMETRY]}.get(kind, [])
+        every = [k for named, ks in self.encoding if named == set(self.audit) for k in ks]
+        found = every + ([SIDE_KEY] if notation[0] in 'LR' else []) + [k for r in rows for k in r['keys']]
+        found += [k for named, ks in self.encoding if named != set(self.audit) and set(shorts) & named for k in ks]
+        losses += [f'{k}: {self.b.docs["keys"][k]}' for k in dict.fromkeys(found)]
+        if 'tongue_out' in shorts:
+            losses.append(NO_LENGTH)
+        evidence = [FACS_RECORD] + ([HAGER] if code == '43' else []) + [OWN]
+        return self.b.rule(rid, inputs, outputs, operator, [correspondence, endpoints + '.'], losses, evidence)
+
+    def in_maps(self) -> list[dict]:
+        maps = []
+        for group in self.b.groups:
+            members = [s['short'] for s in self.b.signals if s['group'] == group]
+            mine = [s for s in members if s in self.audit]
+            if not mine:
+                continue
+            if mine != members:
+                raise SystemExit(f'facs_{group}.to_rcef does not write its whole group')
+            rules = []
+            for short in mine:
+                fid = self.audit[short]['id']
+                kind = 'in_fan' if len(self.aligned[fid]) > 1 else 'in_copy'
+                rules.append(self.hop(kind, f'facs_rcef.{short}', fid, [short], [fid], [self.b.cid(short)], copy()))
+            maps.append({'id': f'facs_{group}.to_rcef', 'rules': rules})
+        return maps
+
+    def out_maps(self, signals: list[dict]) -> list[dict]:
+        maps = []
+        for group in self.b.groups:
+            rules = []
+            for s in signals:
+                if s['disposition'] != 'mapped' or s['metadata']['group'] != group:
+                    continue
+                shorts = self.shorts(s['id'])
+                mean = len(shorts) > 1
+                operator = {'id': 'weighted_sum', 'weights': [0.5] * len(shorts)} if mean else copy()
+                rules.append(self.hop('out_mean' if mean else 'out_copy', f'rcef_facs.{self.local(s["id"])}', s['id'],
+                                      shorts, [self.b.cid(x) for x in shorts], [s['id']], operator))
+            if rules:
+                maps.append({'id': f'rcef_{group}.to_facs', 'rules': rules})
+        return maps
+
+    def files(self) -> dict[str, str]:
+        signals = self.signals()
+        profile = self.profile(signals)
+        parts = [FACS_HEADER, '# FACS codes as an expression set, vocabulary version 1.0 (draft). See the FACS\n'
+                              '# section of docs/canonical-set.md and docs/facs-intensity.md.\n']
+        parts += ['\n[[signals]]\n' + ''.join(f'{k} = {value(v)}\n' for k, v in s.items()) for s in signals]
+        parts.append('\n[[profiles]]\n' + ''.join(f'{k} = {value(v)}\n' for k, v in profile.items()))
+        intro = ('# The maps between the canonical expression set and FACS codes (facs.code): one map\n'
+                 '# per canonical group and direction. In-maps are facs_<group>.to_rcef; out-maps are\n'
+                 '# rcef_<group>.to_facs.\n')
+        return {FACS_FILE: ''.join(parts),
+                FACS_MAPS_FILE: maps_toml('FACS', self.in_maps() + self.out_maps(signals), intro, FACS_HEADER)}
+
+
 # ---------------------------------------------------------------- the canonical visemes
 
 VISEME_PROFILE = 'rcef.canonical_viseme'
@@ -1200,6 +1450,7 @@ def render(root: Path = ROOT) -> dict[str, str]:
     bridge = PoseBridge(root, visemes, builder.canonical_signals())
     files[POSE_FILE] = maps_toml('', bridge.maps(), POSE_INTRO, POSE_HEADER)
     files[INTERMEDIATE_FILE] = bridge.intermediate_toml()
+    files.update(FacsBuilder(root, builder).files())
     return files
 
 
