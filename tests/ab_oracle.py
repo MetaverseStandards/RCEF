@@ -21,6 +21,12 @@ core/src/math3d.cpp), in binary64 and in the same order of operations:
 Domain bounds are compared as binary64 values. That is exact for the bounds
 RCEF uses (whole numbers); msf-character-tools compares the decimal text.
 
+A route is in-maps, then any bridges (maps from one canonical set to the
+other, such as the viseme pose bridge), then out-maps, as examples/rcef_route.py
+documents it. A bridge input that no in-map of the route writes counts as 0,
+and each frame the bridge writes gets a note saying so. A bridge input that an
+in-map writes but refused leaves the bridge's outputs unwritten on that frame.
+
 The A/B harness (scripts/ab_compare.py) uses it to give the pivot route's
 expected values and refusals before any registered run (ab/README.md).
 """
@@ -29,6 +35,13 @@ import bisect
 from dataclasses import dataclass
 import math
 import struct
+
+
+# Route's labels and notes (examples/rcef_route.py), written out here so that O does not read Route's code.
+NOT_AVAILABLE = 'not available from source'
+META = 'openxr.visemes'
+META_NOT_ASSERTED = 'META validity not asserted'
+ZERO_FILLED = 'bridge {}: the source writes no {}; counted as 0'
 
 
 class Fault(Exception):
@@ -199,16 +212,19 @@ class Oracle:
         return self.frame(mapping, source, target, {s: values[s] for s in given},
                           {s: self.valid(s, flags) for s in given})
 
-    def route(self, source: str, target: str, in_hops: list, out_maps: list, values: dict, flags: dict) -> dict:
+    def route(self, source: str, target: str, in_hops: list, out_maps: list, values: dict, flags: dict,
+              bridges: list = ()) -> dict:
         """The expected result of a route on one frame.
 
-        in_hops lists (in-map, canonical profile); out_maps lists (out-map,
-        canonical profile). With no in-hops the out-maps read the source frame
-        (one-hop mode). The result holds values, refusal codes by map and
-        labels of outputs not written, as rcef_route.Route gives them: a
-        refusal holds its codes and the references after "/samples/<n>/".
+        in_hops lists (in-map, canonical profile); bridges lists (bridge, the
+        canonical profile it reads, the one it writes); out_maps lists
+        (out-map, canonical profile). With no in-hops the out-maps read the
+        source frame (one-hop mode). The result holds values, refusal codes by
+        map, labels of outputs not written and notes, as rcef_route.Route gives
+        them: a refusal holds its codes and the references after "/samples/<n>/".
         """
-        result = {'values': {}, 'refused': {}, 'labels': {}}
+        notes = [META_NOT_ASSERTED] if target == META and source != META else []
+        result = {'values': {}, 'refused': {}, 'labels': {}, 'notes': notes}
         middle, writer = (dict(values), {}) if not in_hops else ({}, {})
         for mapping, canonical in in_hops:
             outputs, diagnostics = self.run(mapping, source, canonical, values, flags)
@@ -217,14 +233,34 @@ class Oracle:
                 result['refused'][mapping] = refusal(diagnostics)
             else:
                 middle.update(outputs)
+        # Per bridge output, the maps that kept the bridge from running; a bridge that refused is its own cause.
+        blocked = {}
+        fills = {m: [s for s in self.plan(m, dst).required if s not in writer] for m, _, dst in bridges}
+        for mapping, _, dst in bridges:
+            writer.update(dict.fromkeys(self.plan(mapping, dst).outputs, mapping))
+        for mapping, src, dst in bridges:
+            plan, fill = self.plan(mapping, dst), sorted(fills[mapping])
+            frame = {**dict.fromkeys(fill, 0.0), **middle}
+            missing = [s for s in plan.required if s not in frame]
+            if missing:
+                blocked.update(dict.fromkeys(plan.outputs, {writer[s] for s in missing}))
+                continue
+            outputs, diagnostics = self.run(mapping, src, dst, frame, {})
+            if outputs is None:
+                result['refused'][mapping] = refusal(diagnostics)
+                continue
+            middle.update(outputs)
+            if fill:
+                notes.append(ZERO_FILLED.format(mapping, ', '.join(s.rsplit('.', 1)[1] for s in fill)))
         for mapping, canonical in out_maps:
             plan = self.plan(mapping, target)
             missing = [s for s in plan.required if s not in middle]
             if in_hops and missing:
                 if any(s not in writer for s in missing):
-                    label = 'not available from source'
+                    label = NOT_AVAILABLE
                 else:
-                    label = f'refused upstream at {", ".join(sorted({writer[s] for s in missing}))}'
+                    causes = set().union(*(blocked.get(s, {writer[s]}) for s in missing))
+                    label = f'refused upstream at {", ".join(sorted(causes))}'
                 result['labels'].update(dict.fromkeys(plan.outputs, label))
                 continue
             outputs, diagnostics = self.run(mapping, canonical if in_hops else source, target, middle,

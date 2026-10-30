@@ -1,11 +1,16 @@
 # SPDX-License-Identifier: MIT
-"""The A/B oracle (tests/ab_oracle.py) against msf-character-tools on today's direct maps.
+"""The A/B oracle (tests/ab_oracle.py) against msf-character-tools on today's direct maps and the pose bridge.
 
 The oracle must give the same values, bit for bit, and the same refusals as
 msf-character-tools on the A1 baseline for every edge input and for 1,000
 random frames per source set, including gaze pairs that break FB2's
 exclusivity. On the fixed impulse frames, the outputs it says change must be
 the outputs that change in A1.
+
+The viseme pose bridge (copy, weighted sum, clamp) is checked the same way:
+alone against msf-character-tools, and inside the eight routes that run it
+(META and VRM to ARKit, FB2, Unified Expressions and FACS) against Route, with
+the zero-filled classes, their notes and the refusals upstream.
 """
 from copy import deepcopy
 import json
@@ -31,6 +36,12 @@ except ModuleNotFoundError:  # run by file path from the repository root
     from tests import ab_oracle, test_route_runner
 
 FIXTURE = ROOT / 'tests/fixtures/baseline-dea1713.pack.json'
+B_PACK = ROOT / 'generated/rcef.pack.json'
+BRIDGE = 'rcef_viseme_pose.to_rcef_expression'
+VISEME, EXPRESSION = 'rcef.canonical_viseme', 'rcef.canonical_expression'
+BRIDGE_SOURCES = {'META': 'openxr.visemes', 'VRM': 'vrm.preset'}
+BRIDGE_TARGETS = {'ARKit': 'arkit.coefficient', 'FB2': 'openxr.fb2', 'VRCFT UE': 'vrcft.artist.base',
+                  'FACS': 'facs.code'}
 MAPS = {'fb2.to_arkit': ('openxr.fb2', 'arkit.coefficient'), 'fb2_gaze.to_arkit': ('openxr.fb2', 'arkit.coefficient'),
         'arkit.to_fb2': ('arkit.coefficient', 'openxr.fb2'), 'arkit_gaze.to_fb2': ('arkit.coefficient', 'openxr.fb2'),
         'arkit.to_vrcft_artist': ('arkit.coefficient', 'vrcft.artist.base'), 'fb2.to_vrm': ('openxr.fb2', 'vrm.preset'),
@@ -46,6 +57,25 @@ def bits(values):
     return {k: struct.pack('>d', v) for k, v in values.items()}
 
 
+def msf_results(compiled, samples):
+    """Per sample: (values, []) or (None, sorted (code, ref) pairs), from batched msf-character-tools calls."""
+    outcome = msf.evaluate_mapping(compiled, samples)
+    if outcome.ok:
+        return [(dict(s['values']), []) for s in outcome.value.samples]
+    results, refused = [None] * len(samples), {}
+    for d in outcome.report.diagnostics:
+        refused.setdefault(int(d.ref.split('/')[2]), []).append((d.code, d.ref))
+    for n, diagnostics in refused.items():
+        results[n] = (None, sorted(diagnostics))
+    rest = [n for n in range(len(samples)) if n not in refused]
+    if rest:
+        again = msf.evaluate_mapping(compiled, [samples[n] for n in rest])
+        assert again.ok, again.report.to_dict()
+        for n, sample in zip(rest, again.value.samples):
+            results[n] = (dict(sample['values']), [])
+    return results
+
+
 class OracleMatchesMsf(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -59,32 +89,12 @@ class OracleMatchesMsf(unittest.TestCase):
             snapshots = [msf.profile_snapshot(cls.pack, p).value for p in (source, target)]
             cls.compiled[mapping] = msf.compile_mapping(cls.pack, *snapshots, mapping, True).value
 
-    def msf_results(self, mapping, samples):
-        """Per sample: (values, []) or (None, sorted (code, ref) pairs), from batched calls."""
-        outcome = msf.evaluate_mapping(self.compiled[mapping], samples)
-        results = [None] * len(samples)
-        if not outcome.ok:
-            refused = {}
-            for d in outcome.report.diagnostics:
-                refused.setdefault(int(d.ref.split('/')[2]), []).append((d.code, d.ref))
-            for n, diagnostics in refused.items():
-                results[n] = (None, sorted(diagnostics))
-            rest = [n for n in range(len(samples)) if n not in refused]
-            if rest:
-                again = msf.evaluate_mapping(self.compiled[mapping], [samples[n] for n in rest])
-                self.assertTrue(again.ok, again.report.to_dict())
-                for n, sample in zip(rest, again.value.samples):
-                    results[n] = (dict(sample['values']), [])
-        else:
-            results = [(dict(s['values']), []) for s in outcome.value.samples]
-        return results
-
     def compare(self, mapping, frames):
         source, target = MAPS[mapping]
         required = self.compiled[mapping].required_inputs
         samples = [{'timestamp': 0.0, 'values': {s: f['values'][s] for s in required},
                     'validity': {s: self.oracle.valid(s, f['flags']) for s in required}} for f in frames]
-        expected = self.msf_results(mapping, samples)
+        expected = msf_results(self.compiled[mapping], samples)
         mismatches, refused = [], 0
         for n, (sample, (values, diagnostics)) in enumerate(zip(samples, expected)):
             got, got_diagnostics = self.oracle.frame(mapping, source, target, sample['values'], sample['validity'], n)
@@ -243,6 +253,86 @@ class ImpulseLinks(unittest.TestCase):
         # The weight-linked LOOK_RIGHT_L stays 0: eyeLookOutLeft enters its knots on the flat side.
         self.assertEqual(links['ARKit -> FB2', f'{ARKIT.format("eyeLookOutLeft")} 1.0'],
                          {FB2.format('EYES_LOOK_LEFT_L')})
+
+
+class PoseBridge(unittest.TestCase):
+    """The pose bridge hop: O against msf-character-tools alone, and O's routes against Route on the bridge pairs."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.document = json.loads(B_PACK.read_text(encoding='utf-8'))
+        cls.pack = rcef_translate.load_pack(cls.document)
+        cls.oracle = ab_oracle.Oracle(cls.document)
+        snapshots = [msf.profile_snapshot(cls.pack, p).value for p in (VISEME, EXPRESSION)]
+        cls.compiled = msf.compile_mapping(cls.pack, *snapshots, BRIDGE, True).value
+
+    def test_the_bridge_alone_matches_msf_on_edge_random_and_simplex_frames(self):
+        source = {'channels': list(self.compiled.required_inputs), 'flags': [], 'gaze_pairs': []}
+        rng = random.Random('ab_oracle pose bridge')
+        frames = (ab_frames.edge_family('edge', source)
+                  + ab_frames.uniform_family({'name': 'random', 'count': RANDOM_FRAMES, 'range': [0.0, 1.0]}, source,
+                                             rng)
+                  + ab_frames.simplex_family({'name': 'simplex', 'count': 500, 'decimals': 6}, source, rng))
+        samples = [{'timestamp': 0.0, 'values': f['values'], 'validity': dict.fromkeys(f['values'], True)}
+                   for f in frames]
+        mismatches, refused, clamped = [], 0, 0
+        for n, (sample, (values, diagnostics)) in enumerate(zip(samples, msf_results(self.compiled, samples))):
+            got, got_diagnostics = self.oracle.frame(BRIDGE, VISEME, EXPRESSION, sample['values'],
+                                                     sample['validity'], n)
+            refused += values is None
+            clamped += values is not None and 1.0 in values.values()
+            if got_diagnostics != diagnostics or (got is None) != (values is None) or (
+                    got is not None and bits(got) != bits(values)):
+                mismatches.append((frames[n]['label'], diagnostics, got_diagnostics))
+        self.assertEqual(mismatches[:3], [], f'{len(mismatches)} frames differ')
+        # 5e-324 times a weight below 1 underflows, so the edge set refuses the bridge itself; the random frames
+        # reach the clamp at 1.
+        self.assertGreater(refused, 0)
+        self.assertGreater(clamped, 0)
+
+    def test_every_bridge_route_matches_route_with_its_zero_fill_notes_and_refusals(self):
+        seen = {'bridge refused': 0, 'blocked upstream': 0, 'refused at the bridge': 0, 'zero-fill notes': 0}
+        for (s, source), (t, target) in [(a, b) for a in BRIDGE_SOURCES.items() for b in BRIDGE_TARGETS.items()]:
+            route = rcef_route.Route(source, target, pack=self.pack)
+            self.assertEqual(route.bridges, [BRIDGE])
+            in_hops = [(m, d) for m, _, d in route.hops if m in route.in_maps]
+            bridges = [(m, a, b) for m, a, b in route.hops if m in route.bridges]
+            out_hops = [(m, a) for m, a, _ in route.hops if m in route.out_maps]
+            pinned = ab_frames.pinned_source(self.document, source)
+            rng = random.Random(f'ab_oracle {s} -> {t}')
+            frames = ab_frames.edge_family('edge', pinned) + ab_frames.uniform_family(
+                {'name': 'random', 'count': 300, 'range': [-0.2, 1.2]}, pinned, rng)
+            results = route.translate([{**f, 'time': 0.0} for f in frames])
+            with self.subTest(pair=f'{s} -> {t}'):
+                for frame, result in zip(frames, results):
+                    expected = self.oracle.route(source, target, in_hops, out_hops, frame['values'], frame['flags'],
+                                                 bridges)
+                    self.assertEqual(bits(result['values']), bits(expected['values']), frame['label'])
+                    self.assertEqual(result['refused'], expected['refused'], frame['label'])
+                    self.assertEqual(result['labels'], expected['labels'], frame['label'])
+                    self.assertEqual(result['notes'], expected['notes'], frame['label'])
+                    labels = set(expected['labels'].values())
+                    seen['bridge refused'] += BRIDGE in expected['refused']
+                    seen['refused at the bridge'] += f'refused upstream at {BRIDGE}' in labels
+                    seen['blocked upstream'] += any(x.startswith('refused upstream at') and BRIDGE not in x
+                                                    for x in labels)
+                    seen['zero-fill notes'] += any('counted as 0' in n for n in expected['notes'])
+        self.assertTrue(all(seen.values()), seen)
+
+    def test_classes_no_in_map_writes_count_as_zero_and_the_frame_says_which(self):
+        route = rcef_route.Route('vrm.preset', 'arkit.coefficient', pack=self.pack)
+        in_hops = [(m, d) for m, _, d in route.hops if m in route.in_maps]
+        bridges = [(m, a, b) for m, a, b in route.hops if m in route.bridges]
+        out_hops = [(m, a) for m, a, _ in route.hops if m in route.out_maps]
+        values = {**dict.fromkeys(ab_frames.pinned_source(self.document, 'vrm.preset')['channels'], 0.0),
+                  'vrm.preset.aa': 1.0}
+        expected = self.oracle.route('vrm.preset', 'arkit.coefficient', in_hops, out_hops, values, {}, bridges)
+        # VRM's five vowels fill five classes; the other six bridge inputs have no VRM source.
+        self.assertEqual(expected['notes'], [f'bridge {BRIDGE}: the source writes no alveolar_sibilant, bilabial, '
+                                             'coronal_stop, dental, dorsal, sil; counted as 0'])
+        self.assertGreater(expected['values']['arkit.coefficient.jawOpen'], 0.0)
+        result = route.translate([{'time': 0.0, 'values': values, 'flags': {}}])[0]
+        self.assertEqual((result['notes'], bits(result['values'])), (expected['notes'], bits(expected['values'])))
 
 
 if __name__ == '__main__':
