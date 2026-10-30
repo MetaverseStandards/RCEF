@@ -27,8 +27,8 @@ the profiles their signals belong to, not by their names.
   class refused upstream refuses the bridge's outputs on that frame.
 
 One-hop mode (`maps=[...]`) runs the named maps straight from source to
-target, as rcef_translate.Translator does. The A/B comparison runs today's
-direct maps this way (ab/README.md).
+target, as rcef_translate.Translator does. The A/B comparison runs the retired
+direct maps this way, on the frozen pack that still holds them (ab/README.md).
 """
 from __future__ import annotations
 import json
@@ -81,7 +81,10 @@ class Route:
         document = self.pack.document
         self.source, self.target, self.one_hop = source, target, maps is not None
         self.signals = {s['id']: s for s in document['signals']}
-        self.rules = {m['id']: m['rules'] for m in document['mappings']}
+        # A map whose every mapping is unresolved (survey.ambiguous) is a record, not a translation: msf-character-tools
+        # refuses to compile it, so Route never selects it.
+        self.rules = {m['id']: m['rules'] for m in document['mappings']
+                      if any(r['disposition'] != 'unresolved' for r in m['rules'])}
         homes = {}
         for profile in document['profiles']:
             for sid in profile['signal_ids']:
@@ -148,7 +151,7 @@ class Route:
         """Per frame: output values, refusals by map, labels of outputs not written, and dropped inputs.
 
         A frame is {'time', 'values': {signal ID: value}, 'flags': {flag: bool}},
-        with an optional 'segment' label, as rcef_translate.Translator.read gives.
+        with an optional 'segment' label, as rcef_frames.Frames.read gives.
         """
         results = [{'time': f['time'], 'segment': f.get('segment', ''), 'values': {}, 'refused': {}, 'labels': {},
                     'dropped': sorted(s for s, v in f['values'].items() if v != 0 and s not in self.kept),

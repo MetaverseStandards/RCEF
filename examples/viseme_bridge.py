@@ -39,8 +39,7 @@ import msf_character_tools as msf
 
 import face_pipeline
 import ict_facekit
-import rcef_route
-import rcef_translate
+import rcef_frames
 import rigs
 
 HERE = Path(__file__).resolve().parent
@@ -61,7 +60,7 @@ def arguments(argv=None) -> argparse.Namespace:
     parser.add_argument('--ict-cache', type=Path, help='ICT-FaceKit OBJ files (default: ~/.cache/rcef-ict-full)')
     parser.add_argument('--out', type=Path, help='output directory (default: ~/.cache/rcef-examples/viseme-bridge)')
     args = parser.parse_args(argv)
-    home = rcef_translate.cache_home()
+    home = rcef_frames.cache_home()
     args.rig_cache = args.rig_cache or home / 'rcef-face-rigs'
     args.ict_cache = args.ict_cache or home / 'rcef-ict-full'
     args.out = args.out or home / 'rcef-examples/viseme-bridge'
@@ -153,9 +152,9 @@ def compare(rb: Rocketbox, bridged, direct) -> dict:
 
 def main(argv=None) -> int:
     args = arguments(argv)
-    reader = rcef_translate.visemes_to_vrm()
+    reader = rcef_frames.visemes_to_arkit()
     frames = reader.read(args.frames)
-    route = rcef_route.Route('openxr.visemes', 'arkit.coefficient')
+    route = reader.route
     results = route.translate(frames)
     columns = [o[len(ARKIT):] for o in route.outputs]
     args.out.mkdir(parents=True, exist_ok=True)

@@ -6,8 +6,46 @@ Original documentation: CC-BY-SA-4.0.
 
 The draft canonical expression set and the draft canonical viseme set join
 the data, with maps into them and out of them. A translation can now run
-from a source set through a canonical set to a target set. The 7 direct maps
-do not change.
+from a source set through a canonical set to a target set, and the direct
+maps are retired.
+
+**Breaking: the direct maps are retired.** No deprecation period and no
+replacement maps: every translation runs through the canonical sets
+(`examples/rcef_route.py`). GOVERNANCE requires a tombstone for each retired
+ID, so the new `docs/retired-ids.csv` has one line per ID (249 lines), and
+`tests/test_retired_ids.py` checks it against the A/B baseline pack.
+
+- Removed: the 7 direct maps (`fb2.to_arkit`, `fb2_gaze.to_arkit`,
+  `arkit.to_fb2`, `arkit_gaze.to_fb2`, `arkit.to_vrcft_artist`, `fb2.to_vrm`
+  and `visemes.to_vrm`) with their 187 cross-provider mappings and 4 internal
+  gaze steps; the 3 identity maps (`arkit.to_canonical`, `fb2.to_canonical`
+  and `vrcft_eye.to_canonical`) with their 21 mappings; the profile
+  `rcef.canonical` and its 21 signals; and the 4 intermediate signals
+  `rcef.intermediate.arkit_gaze_*` of `arkit_gaze.to_fb2`. In all: 10 maps,
+  212 mappings, 1 profile and 25 signals, in 9 files (`data/canonical.toml`
+  and 8 files in `mappings/`). No evidence record is removed.
+- `survey.ambiguous` keeps its one unresolved mapping, retargeted from the
+  retired `rcef.arkit.coefficient.eyeBlinkLeft` to
+  `rcef.canonical_expression.eye_close_left`, and renamed
+  `survey.mediapipe_rcef.blink` (the old ID has a tombstone). It now cites
+  `rcef_canonical_v1` instead of `apple_blendshapes`. `Route` never selects
+  a map whose every mapping is unresolved.
+- The evidence record `rcef_definitions` no longer claims the provider
+  projections. It covers the synthetic fixtures and the intermediate values.
+- The `metadata.reason` of 194 provider signals named the direct maps. It now
+  names the hops that use the signal.
+- The canonical correspondence report covers the signals of
+  `rcef.canonical_expression` and `rcef.canonical_viseme` instead of the 21
+  retired signals.
+- The A/B comparison is unchanged: arm A1 runs the retired maps from
+  `tests/fixtures/baseline-dea1713.pack.json`. The hop maps are now frozen
+  against `tests/fixtures/b-maps-ab.pivot-v1.json`, the maps of the latest
+  passing freeze, instead of the direct maps against the baseline.
+- Removed tests: `tests/test_identity_literals.py` and its fixture, the
+  identity-map checks in `tests/test_parity.py` and `tests/test_metadata.py`,
+  and the identity sample in `fixtures/mapping_samples.json`.
+- Totals: 1165 signals, 26 profiles, 88 maps and 588 mappings in 36 TOML
+  files. The presentation outputs of the examples do not change.
 
 - New profile `rcef.canonical_expression` in
   `data/canonical_expression.toml`: 72 signals, vocabulary version `1.0`,
@@ -251,6 +289,24 @@ exclusive, and the data now builds this in.
   stays 0.4.0.
 
 ## Calibration and examples — unreleased
+
+- The examples, the face and viseme pipelines and `scripts/compare_godot.py`
+  translate through the canonical sets (source → canonical → target), with
+  `examples/rcef_route.py`. `examples/rcef_frames.py` reads and writes the
+  CSV files. The outputs are the same byte for byte, except one column: a
+  refusal now names the hop map that refused, for example
+  `fb2_gaze.to_rcef` instead of `fb2_gaze.to_arkit`. No example reads a
+  direct map now.
+- `docs/godot_comparison.md` composes the two hops exactly and names both
+  maps. It adds the ARKit `unresolved` verdict to `mouthClose`, notes for
+  `cheekPuff` (ICT AU33) and `eyeBlink` (ICT AU45), and new gaze text: the
+  FB2 figures show the subject's own side.
+- `examples/make_demo_frames.py` and `examples/make_expression_frames.py`
+  use channel lists fixed in the code (the lists of the A1 pack at
+  dea1713), not the live pack. `tests/test_demo_frames.py` checks that the demo frames are
+  written byte for byte.
+- The translation tests run through the routes. A mutation changes the maps
+  of one hop.
 
 - Calibration record `calibration/viseme-poses.rocketbox-female.cal`
   (software-only; mesh geometry only, so it has no renderer): each of

@@ -289,11 +289,11 @@ license = "documentation with no published license; reference only, source prose
 
 [[evidence]]
 id = "rcef_definitions"
-claim = "Original provider-calibrated scalar projections and synthetic affine/bilateral fixture definitions; no cross-provider equivalence."
+claim = "Original synthetic affine/bilateral fixture definitions and the profile of intermediate values computed inside translations; no cross-provider equivalence."
 status = "verified_current"
 license = "CC-BY-SA-4.0"
 authorship = "RCEF contributors (2026)"
-locator = "data/canonical.toml; fixtures/mapping_samples.json"
+locator = "profiles/fixture.toml; mappings/fixtures.toml; fixtures/mapping_samples.json; data/intermediate.toml"
 
 [[evidence]]
 id = "vrcft_docs_arkit"

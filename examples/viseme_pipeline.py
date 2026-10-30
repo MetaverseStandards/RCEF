@@ -12,15 +12,16 @@ it is set).
 
 - Rocketbox has its own shapes for all 15 META visemes, so the frames drive
   them directly, by name. No translation is involved.
-- The VRM sample has the five vowel presets. RCEF's visemes.to_vrm map
-  translates the frames, and vrm_presets.py turns the presets into morph
-  weights through the model's own binds ("translated"). The same binds driven
+- The VRM sample has the five vowel presets. Route translates the frames
+  through the canonical viseme set (examples/rcef_frames.py), and
+  vrm_presets.py turns the presets into morph weights through the model's
+  own binds ("translated"). The same binds driven
   through the vowel pairs scripts/derive_fb2_goldens.py read from the pinned
   sources (tests/fixtures/fb2_goldens.json) give "direct", independent of
   RCEF's mappings. The two morph weight vectors must agree within 1e-9.
   Consonants have no VRM preset and are labelled as dropped.
 - The VRM path then shows the two winks from the expression library
-  (examples/data/fb2_expression_frames.csv): RCEF's fb2.to_vrm map against
+  (examples/data/fb2_expression_frames.csv): RCEF's FB2 -> VRM route against
   the blink pairs read from the same sources, with the same check.
 """
 from __future__ import annotations
@@ -33,7 +34,7 @@ import struct
 import msf_character_tools as msf
 
 import face_pipeline
-import rcef_translate
+import rcef_frames
 import rigs
 import vrm_presets
 
@@ -53,7 +54,7 @@ def blink_presets(path: Path = GOLDENS) -> dict[str, str]:
     return {p['fb2']: p['vrm'] for p in json.loads(path.read_text(encoding='utf-8'))['blink_pairs']}
 
 
-def wink_frames(translator: rcef_translate.Translator, path: Path = EXPRESSIONS) -> list[dict]:
+def wink_frames(translator: rcef_frames.Frames, path: Path = EXPRESSIONS) -> list[dict]:
     return [f for f in translator.read(path) if f['segment'].startswith('wink')]
 
 
@@ -68,7 +69,7 @@ def arguments(argv=None) -> argparse.Namespace:
     parser.add_argument('--out', type=Path, help='output directory (default: ~/.cache/rcef-examples/visemes/RIG)')
     parser.add_argument('--frames', type=Path, default=HERE / 'data/viseme_talk_frames.csv')
     args = parser.parse_args(argv)
-    home = rcef_translate.cache_home()
+    home = rcef_frames.cache_home()
     args.cache = args.cache or home / 'rcef-face-rigs'
     args.out = args.out or home / 'rcef-examples/visemes' / args.rig
     return args
@@ -100,14 +101,14 @@ def main(argv=None) -> int:
     panels = ['direct', 'translated', 'difference'] if vrm else ['direct']
     for panel in panels:
         (out / 'mesh' / panel).mkdir(parents=True, exist_ok=True)
-    translator = rcef_translate.visemes_to_vrm()
+    translator = rcef_frames.visemes_to_vrm()
     frames = translator.read(args.frames)
     translated = translator.translate(frames) if vrm else [None] * len(frames)
     if translated[0] is not None:
         translator.write(translated, out / 'visemes_to_vrm.csv')
     jobs = [(translator, vowel_presets(), frame, result) for frame, result in zip(frames, translated)]
     if vrm:
-        blinker = rcef_translate.fb2_to_vrm()
+        blinker = rcef_frames.fb2_to_vrm()
         winks = wink_frames(blinker)
         # The winks follow the talk without a gap.
         shift = frames[-1]['time'] + (winks[1]['time'] - winks[0]['time']) - winks[0]['time']

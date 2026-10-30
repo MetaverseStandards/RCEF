@@ -65,16 +65,16 @@ def write_inventory_snapshot(document):
         writer.writerow(SNAPSHOT_FIELDS)
         writer.writerows(inventory_rows(document))
 
-# The exact admitted native subset, written independently of each map's rules.
-IDENTITIES = (
-    ('arkit.to_canonical', 'arkit.coefficient', (
+# Native scalar bases that sources state explicitly, written independently of any map.
+NATIVE_BASES = (
+    ('arkit.coefficient', (
         ('eyeBlinkLeft', 'eyelid', 'left'), ('eyeBlinkRight', 'eyelid', 'right'),
         ('jawForward', 'jaw', 'shared'), ('jawOpen', 'jaw', 'shared'),
         ('browDownLeft', 'brow', 'left'), ('browDownRight', 'brow', 'right'),
         ('browInnerUp', 'brow', 'shared'), ('browOuterUpLeft', 'brow', 'left'),
         ('browOuterUpRight', 'brow', 'right'),
     )),
-    ('fb2.to_canonical', 'openxr.fb2', (
+    ('openxr.fb2', (
         ('XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_L_FB', 'gaze', 'left'),
         ('XR_FACE_EXPRESSION2_EYES_LOOK_DOWN_R_FB', 'gaze', 'right'),
         ('XR_FACE_EXPRESSION2_EYES_LOOK_LEFT_L_FB', 'gaze', 'left'),
@@ -84,7 +84,7 @@ IDENTITIES = (
         ('XR_FACE_EXPRESSION2_EYES_LOOK_UP_L_FB', 'gaze', 'left'),
         ('XR_FACE_EXPRESSION2_EYES_LOOK_UP_R_FB', 'gaze', 'right'),
     )),
-    ('vrcft_eye.to_canonical', 'vrcft.eye', (
+    ('vrcft.eye', (
         ('Left.Openness', 'eyelid', 'left'), ('Left.PupilDiameter_MM', 'pupil', 'left'),
         ('Right.Openness', 'eyelid', 'right'), ('Right.PupilDiameter_MM', 'pupil', 'right'),
     )),
@@ -195,7 +195,7 @@ class Metadata(unittest.TestCase):
     def test_all_21_native_scalar_bases(self):
         signals = {s['id']: s for s in self.authoring['signals']}
         checked = 0
-        for _, profile, entries in IDENTITIES:
+        for profile, entries in NATIVE_BASES:
             for name, region, side in entries:
                 sid = profile + '.' + name
                 with self.subTest(signal=sid):
@@ -215,32 +215,11 @@ class Metadata(unittest.TestCase):
                     elif name == 'browInnerUp':
                         expected['coupling'] = 'bilateral_shared'
                     keys = ('value_type', 'calibration', 'region', 'side', 'units', 'domain', 'neutral', 'coupling')
-                    for row in (signals[sid], signals['rcef.' + sid]):
-                        self.assertEqual({k: row[k] for k in keys if k in row}, expected)
+                    self.assertEqual({k: signals[sid][k] for k in keys if k in signals[sid]}, expected)
                     if name in ('Left.Openness', 'Right.Openness'):
                         self.assertEqual(signals[sid]['native_default'], 1.0)
                     checked += 1
         self.assertEqual(checked, 21)
-
-    def test_63_independent_scalar_endpoints(self):
-        assertions = 0
-        for mapping, profile, entries in IDENTITIES:
-            compiled = shared_pack.mapping(mapping, profile, 'rcef.canonical', False)
-            input_ids = [profile + '.' + name for name, _, _ in entries]
-            frames = [{'timestamp': float(i), 'values': {sid: value for sid in input_ids},
-                       'validity': {sid: True for sid in input_ids}}
-                      for i, value in enumerate((0.0, 0.25, 1.0))]
-            samples = self.ok(msf.evaluate_mapping(compiled, frames)).samples
-            self.assertEqual(len(samples), 3)
-            for i, value in enumerate((0.0, 0.25, 1.0)):
-                self.assertEqual(samples[i]['timestamp'], float(i))
-                self.assertEqual(set(samples[i]['values']), {'rcef.' + sid for sid in input_ids})
-                self.assertEqual(dict(samples[i]['validity']), {'rcef.' + sid: True for sid in input_ids})
-                for sid in input_ids:
-                    with self.subTest(mapping=mapping, signal=sid, value=value):
-                        self.assertEqual(samples[i]['values']['rcef.' + sid], value)
-                    assertions += 1
-        self.assertEqual(assertions, 63)
 
     def test_csv_coverage_and_checksums_agree_with_pack(self):
         outputs = ROOT / 'generated'

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Run the A/B comparison of the pivot route (B) with today's direct maps (A1) and the other arms.
+"""Run the A/B comparison of the pivot route (B) with the retired A1 direct maps and the other arms.
 
 Usage:
   python scripts/ab_compare.py draft OUT.abreg [--b-pack PACK] [--date YYYY-MM-DD]
