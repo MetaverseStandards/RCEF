@@ -11,7 +11,7 @@ catches a mutation when it fails on the changed pack:
 - M3 exact: every round trip on the fixed impulse frames;
 - M10: FACS to FB2 against arm A3 on the 221 library frames;
 - M4 keys and M4b: the registration's frozen tables on the changed pack;
-- the side test, the direction-suffix test, the one-group test and the audit
+- the side test, the direction-suffix test, the one-map test and the audit
   loss-key test of tests/test_pivot_structure.py, and the weight and chain
   tests of tests/test_pose_bridge.py, run on the changed pack;
 - the calibration check of check.py: each rule that cites a calibration
@@ -39,7 +39,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TEST_CHECKS = {
     'side test': ('test_pivot_structure', 'PivotStructure', 'test_sides_agree_at_both_ends'),
     'direction-suffix test': ('test_pivot_structure', 'PivotStructure', 'test_direction_suffixes_keep_their_direction'),
-    'one-group test': ('test_pivot_structure', 'PivotStructure', 'test_each_map_reads_and_writes_one_group'),
+    'one-map test': ('test_pivot_structure', 'PivotStructure', 'test_one_map_per_set_pair_and_direction'),
     'audit loss-key test': ('test_pivot_structure', 'PivotStructure',
                             'test_audit_loss_keys_sit_on_the_hops_the_audit_names'),
     'pose-bridge weight test': ('test_pose_bridge', 'PoseBridge', 'test_each_weight_is_the_frozen_pose_of_the_record'),
@@ -56,8 +56,9 @@ MUTATIONS = [
     {'id': 'drop an averaged input', 'caught_by': ['M1'],
      'change': {'op': 'drop_input', 'rule': 'rcef_arkit.browInnerUp',
                 'input': 'rcef.canonical_expression.brow_inner_raise_right'}},
-    {'id': 'merge two in-maps', 'caught_by': ['M2', 'one-group test'],
-     'change': {'op': 'merge_maps', 'maps': ['fb2_face.to_rcef', 'fb2_gaze.to_rcef']}},
+    {'id': 'split one map', 'caught_by': ['one-map test'],
+     'change': {'op': 'split_map', 'map': 'fb2.to_rcef_expression', 'into': 'fb2_gaze.to_rcef_expression',
+                'rules': [f'fb2_rcef.gaze_{d}_{s}' for d in ('in', 'out', 'up', 'down') for s in ('left', 'right')]}},
     {'id': 'swap left and right in both VRCFaceTracking eye blink hops', 'caught_by': ['side test'],
      'change': {'op': 'swap_outputs', 'pairs': [
          ['vrcft_eye_rcef.eye_close_left', 'vrcft_eye_rcef.eye_close_right'],
@@ -118,6 +119,13 @@ def mutate(document: dict, change: dict) -> dict:
         keep, gone = change['maps']
         map_of(out, keep)['rules'] += map_of(out, gone)['rules']
         out['mappings'] = [m for m in out['mappings'] if m['id'] != gone]
+    elif op == 'split_map':
+        source = map_of(out, change['map'])
+        moved = [rule_of(out, r) for r in change['rules']]
+        if any(r not in source['rules'] for r in moved):
+            raise SystemExit(f'mutation: {change["map"]} does not hold every rule of {change["rules"]}')
+        source['rules'] = [r for r in source['rules'] if r not in moved]
+        out['mappings'].insert(out['mappings'].index(source) + 1, {'id': change['into'], 'rules': moved})
     elif op == 'delete_assumption':
         rule = rule_of(out, change['rule'])
         rule['assumptions'] = [a for a in rule['assumptions'] if a.split(':', 1)[0] != change['key']]

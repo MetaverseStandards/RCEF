@@ -176,6 +176,41 @@ class Metrics(unittest.TestCase):
         self.assertEqual(len(ab_compare.R3_DEPARTURES), 9)
 
 
+class Revise(unittest.TestCase):
+    """The "revise" gate compares B with the B of the revised freeze on the same frames."""
+
+    def test_finer_refusals_pass_and_are_counted(self):
+        before = [result({'x': 0.5}, {'y': 'refused at m', 'z': 'refused upstream at m'})]
+        after = [result({'x': 0.5, 'y': 0.25}, {'z': ab_compare.rcef_route.NOT_AVAILABLE})]
+        counts, failures = ab_compare.revise_compare(before, after, {})
+        self.assertEqual(failures, [])
+        self.assertEqual(counts, {'frames': 1, 'value_differences': 0, 'not_written': 0, 'newly_refused': 0,
+                                  'dropped_differences': 0, 'notes_lost': 0, 'newly_written': 1,
+                                  'refused_now_not_available': 1})
+
+    def test_a_changed_value_a_lost_output_a_new_refusal_and_changed_dropped_inputs_or_notes_fail(self):
+        before = [{**result({'x': 0.5, 'w': 1.0}, dropped=['s']), 'notes': ['bridge old.m: the source writes no a']}]
+        after = [{**result({'x': 0.5000000000000001}, {'w': 'refused at m', 'v': 'refused at m'}), 'notes': []}]
+        counts, failures = ab_compare.revise_compare(before, after, {})
+        self.assertEqual([counts[k] for k in ('value_differences', 'not_written', 'newly_refused',
+                                              'dropped_differences', 'notes_lost')], [1, 1, 2, 1, 1])
+        self.assertEqual([f[2] for f in failures], ['value', 'not written', 'refused', 'refused', 'dropped', 'notes'])
+
+    def test_notes_are_compared_under_the_map_renames(self):
+        before = [{**result({'x': 0.5}), 'notes': ['bridge old.m: the source writes no a; counted as 0']}]
+        after = [{**result({'x': 0.5}), 'notes': ['bridge new.m: the source writes no a; counted as 0']}]
+        self.assertEqual(ab_compare.revise_compare(before, after, {'old.m': 'new.m'})[0]['notes_lost'], 0)
+        self.assertEqual(ab_compare.revise_compare(before, after, {})[0]['notes_lost'], 1)
+
+    def test_maps_renamed_to_one_id_become_one_hop_in_their_first_place(self):
+        pair = {'in_hops': [['a_face.x', 'c'], ['a_gaze.x', 'c']], 'bridges': [['p.b', 'c2']],
+                'out_hops': [['c.y', 't'], ['c.z', 't']]}
+        renames = {'a_face.x': 'a.x', 'a_gaze.x': 'a.x', 'p.b': 'q.b'}
+        self.assertEqual(ab_compare.renamed_hops(pair, renames),
+                         {'in_hops': [['a.x', 'c']], 'bridges': [['q.b', 'c2']],
+                          'out_hops': [['c.y', 't'], ['c.z', 't']]})
+
+
 class Pins(unittest.TestCase):
     def test_m5_r2_needs_its_reference_pinned_with_the_right_hash(self):
         b_path = ROOT / ab_compare.B_PACK

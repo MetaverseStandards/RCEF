@@ -146,8 +146,10 @@ class Mutations(unittest.TestCase):
             touched = {r['id'] for m in changed['mappings'] for r in m['rules'] if r != before[r['id']]}
             named = {i for pair in change.get('pairs', []) for i in pair} | {change.get('rule')} - {None}
             with self.subTest(mutation=mutation['id']):
-                if change['op'] == 'merge_maps':
-                    self.assertEqual((len(changed['mappings']), touched), (len(self.b['mappings']) - 1, set()))
+                if change['op'] == 'split_map':
+                    moved = next(m for m in changed['mappings'] if m['id'] == change['into'])
+                    self.assertEqual((len(changed['mappings']), touched), (len(self.b['mappings']) + 1, set()))
+                    self.assertEqual([r['id'] for r in moved['rules']], change['rules'])
                 else:
                     self.assertEqual(touched, named)
 
@@ -185,6 +187,14 @@ class Mutations(unittest.TestCase):
         self.assertTrue(ab_mutations.calibration_fails(changed))
         changed = ab_mutations.mutate(self.b, knot['change'])
         self.assertEqual(ab_mutations.test_failures(changed, names), ({'pose-bridge chain test'}, set()))
+
+    def test_splitting_a_map_is_caught_by_the_one_map_test(self):
+        names = ['one-map test']
+        self.assertEqual(ab_mutations.test_failures(self.b, names), (set(), set()))
+        split = next(m for m in ab_mutations.MUTATIONS if m['change']['op'] == 'split_map')
+        self.assertEqual(split['caught_by'], names)
+        changed = ab_mutations.mutate(self.b, split['change'])
+        self.assertEqual(ab_mutations.test_failures(changed, names), ({'one-map test'}, set()))
 
     def test_an_unknown_or_empty_change_is_refused(self):
         with self.assertRaises(SystemExit):

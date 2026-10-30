@@ -11,6 +11,11 @@ The viseme pose bridge (copy, weighted sum, clamp) is checked the same way:
 alone against msf-character-tools, and inside the eight routes that run it
 (META and VRM to ARKit, FB2, Unified Expressions and FACS) against Route, with
 the zero-filled classes, their notes and the refusals upstream.
+
+Partial evaluation, which Route uses, is checked against msf-character-tools'
+partial mode on every in-map and out-map of the B pack: the written values,
+bit for bit, and for each refused output its codes and references, and for
+each output that is not available its missing inputs.
 """
 from copy import deepcopy
 import json
@@ -37,7 +42,7 @@ except ModuleNotFoundError:  # run by file path from the repository root
 
 FIXTURE = ROOT / 'tests/fixtures/baseline-dea1713.pack.json'
 B_PACK = ROOT / 'generated/rcef.pack.json'
-BRIDGE = 'rcef_viseme_pose.to_rcef_expression'
+BRIDGE = 'rcef_viseme.to_rcef_expression'
 VISEME, EXPRESSION = 'rcef.canonical_viseme', 'rcef.canonical_expression'
 BRIDGE_SOURCES = {'META': 'openxr.visemes', 'VRM': 'vrm.preset'}
 BRIDGE_TARGETS = {'ARKit': 'arkit.coefficient', 'FB2': 'openxr.fb2', 'VRCFT UE': 'vrcft.artist.base',
@@ -50,6 +55,8 @@ PAIRS = {'FB2 -> ARKit': ['fb2.to_arkit', 'fb2_gaze.to_arkit'], 'ARKit -> FB2': 
          'ARKit -> VRCFT UE': ['arkit.to_vrcft_artist'], 'FB2 -> VRM blink': ['fb2.to_vrm'],
          'META -> VRM': ['visemes.to_vrm']}
 RANDOM_FRAMES = 1000
+# The maps of the synthetic route pack (tests/test_route_runner.py).
+IN, OUT = 'src.to_rcef_expression', 'rcef_expression.to_tgt'
 ARKIT, FB2 = 'arkit.coefficient.{}', 'openxr.fb2.XR_FACE_EXPRESSION2_{}_FB'
 
 
@@ -179,21 +186,36 @@ class Refusals(unittest.TestCase):
             self.assertEqual(bits(got[0]), bits(expected[0]))
         return expected
 
+    def partial(self, mapping, source, target, values, validity):
+        """msf-character-tools' partial evaluation of one frame as (written, refused, unavailable), as O gives it."""
+        snapshots = [msf.profile_snapshot(self.pack, p).value for p in (source, target)]
+        compiled = msf.compile_mapping(self.pack, *snapshots, mapping, True).value
+        outcome = msf.evaluate_mapping(compiled, [{'timestamp': 0.0, 'values': values, 'validity': validity}],
+                                       partial=True)
+        self.assertTrue(outcome.ok, outcome.report.to_dict())
+        return (dict(outcome.value.samples[0]['values']),
+                {r['output']: sorted((d.code, d.ref) for d in r['diagnostics']) for r in outcome.value.refusals},
+                {r['output']: sorted(r['inputs']) for r in outcome.value.unavailable})
+
     def test_each_refusal_and_the_clamp_match_msf(self):
         c = 'rcef.canonical_expression.'
+        full = {'src.brow_l': 0.25, 'src.brow_r': 0.75, 'src.jaw': 0.25, 'src.eye': 0.5, 'src.tongue': 0.0}
+        valid = dict.fromkeys(full, True)
+        canonical = {c + n: 0.25 for n in ('brow_left', 'brow_right', 'jaw', 'eye', 'cheek')}
         cases = {
-            'cleared flag': ('src_eye.to_rcef', 'src', 'rcef.canonical_expression', {'src.eye': 0.5},
-                             {'src.eye': False}, 'E_INVALID_SAMPLE'),
-            'missing input': ('src_brow.to_rcef', 'src', 'rcef.canonical_expression', {'src.brow_l': 0.5},
+            'cleared flag': (IN, 'src', 'rcef.canonical_expression', {**full, 'src.eye': 0.5},
+                             {**valid, 'src.eye': False}, 'E_INVALID_SAMPLE'),
+            'missing input': (IN, 'src', 'rcef.canonical_expression', {'src.brow_l': 0.5},
                               {'src.brow_l': True}, 'E_MISSING_SAMPLE'),
-            'input above its domain': ('src_jaw.to_rcef', 'src', 'rcef.canonical_expression', {'src.jaw': 1.5},
-                                       {'src.jaw': True}, 'E_DOMAIN'),
-            'output above its domain': ('rcef_jaw.to_tgt', 'rcef.canonical_expression', 'tgt', {c + 'jaw': 0.75},
-                                        {c + 'jaw': True}, 'E_DOMAIN'),
-            'out-of-range input of an out-map': ('rcef_jaw.to_tgt', 'rcef.canonical_expression', 'tgt',
-                                                 {c + 'jaw': 1.5}, {c + 'jaw': True}, 'E_DOMAIN'),
-            'cleared flag and out of range': ('src_eye.to_rcef', 'src', 'rcef.canonical_expression',
-                                              {'src.eye': 1.5}, {'src.eye': False}, 'E_DOMAIN'),
+            'input above its domain': (IN, 'src', 'rcef.canonical_expression', {**full, 'src.jaw': 1.5},
+                                       valid, 'E_DOMAIN'),
+            'output above its domain': (OUT, 'rcef.canonical_expression', 'tgt', {**canonical, c + 'jaw': 0.75},
+                                        dict.fromkeys(canonical, True), 'E_DOMAIN'),
+            'out-of-range input of an out-map': (OUT, 'rcef.canonical_expression', 'tgt',
+                                                 {**canonical, c + 'jaw': 1.5}, dict.fromkeys(canonical, True),
+                                                 'E_DOMAIN'),
+            'cleared flag and out of range': (IN, 'src', 'rcef.canonical_expression', {**full, 'src.eye': 1.5},
+                                              {**valid, 'src.eye': False}, 'E_DOMAIN'),
             'sum overflows': ('src_big.to_tgt', 'src', 'tgt', {'src.brow_l': 1.0, 'src.brow_r': 1.0},
                               {'src.brow_l': True, 'src.brow_r': True}, 'E_NONFINITE'),
         }
@@ -201,6 +223,11 @@ class Refusals(unittest.TestCase):
             with self.subTest(name):
                 _, diagnostics = self.check(mapping, source, target, values, validity)
                 self.assertEqual({d[0] for d in diagnostics}, {code})
+                expected = self.partial(mapping, source, target, values, validity)
+                written, refused, unavailable = self.oracle.partial(mapping, source, target, values, validity)
+                self.assertEqual((bits(written), refused, unavailable), (bits(expected[0]), *expected[1:]))
+                self.assertTrue(refused or unavailable)
+                self.assertTrue(written or mapping == 'src_big.to_tgt')
         # t rounds to 1 on the segment [0.2, 0.88], so ya + t * (yb - ya) is just below yb until it is clamped.
         values, _ = self.check('src_knee.to_tgt', 'src', 'tgt', {'src.jaw': 0.8799999999999999},
                                {'src.jaw': True})
@@ -215,13 +242,72 @@ class Refusals(unittest.TestCase):
         frames = [(base, {**flags, 'isEyeValid': False}), ({k: v for k, v in base.items() if k != 'src.jaw'}, flags),
                   ({**base, 'src.jaw': 1.5}, flags), ({**base, 'src.jaw': 0.75}, flags),
                   ({**base, 'src.eye': 1.5}, {**flags, 'isEyeValid': False})]
+        frames += [({**base, 'src.brow_l': 1.5}, flags),
+                   ({k: v for k, v in base.items() if k != 'src.brow_r'} | {'src.brow_l': 1.5}, flags)]
         results = route.translate([{'time': 0.0, 'values': v, 'flags': f} for v, f in frames])
         for (values, frame_flags), result in zip(frames, results):
             expected = self.oracle.route('src', 'tgt', in_hops, out_hops, values, frame_flags)
             self.assertEqual(result['refused'], expected['refused'])
             self.assertEqual(result['labels'], expected['labels'])
             self.assertEqual(bits(result['values']), bits(expected['values']))
-        self.assertEqual(results[2]['refused'], {'src_jaw.to_rcef': {'codes': ['E_DOMAIN'], 'refs': ['src.jaw']}})
+        self.assertEqual(results[2]['refused'], {IN: {'codes': ['E_DOMAIN'], 'refs': ['src.jaw'],
+                                                      'outputs': ['rcef.canonical_expression.jaw']}})
+        self.assertEqual(results[1]['labels']['tgt.jaw'], rcef_route.NOT_AVAILABLE)
+        self.assertEqual(results[5]['labels']['tgt.brow'], f'refused upstream at {IN}')
+        self.assertEqual(results[6]['labels']['tgt.brow'], rcef_route.NOT_AVAILABLE)
+
+
+class PartialMatchesMsf(unittest.TestCase):
+    """O's partial evaluation against msf-character-tools' on every in-map and out-map of the B pack."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.document = json.loads(B_PACK.read_text(encoding='utf-8'))
+        cls.pack = rcef_translate.load_pack(cls.document)
+        cls.oracle = ab_oracle.Oracle(cls.document)
+        profiles = {p['id']: set(p['signal_ids']) for p in cls.document['profiles']}
+        cls.hops = []
+        for mapping in cls.document['mappings']:
+            if all(r['disposition'] == 'unresolved' for r in mapping['rules']):
+                continue  # a record, such as survey.ambiguous: msf-character-tools never compiles it
+            inputs, outputs = rcef_route.map_ends(mapping['rules'])
+            ends = [next((p for p, members in profiles.items() if p != 'rcef.intermediate' and set(sids) <= members),
+                         None) for sids in (inputs, outputs)]
+            if None not in ends and (VISEME in ends or EXPRESSION in ends) and len(set(ends)) == 2:
+                cls.hops.append((mapping['id'], *ends))
+
+    def test_every_hop_map_on_frames_with_bad_and_missing_inputs(self):
+        self.assertEqual(len(self.hops), 16)
+        seen = {'written': 0, 'refused': 0, 'unavailable': 0}
+        for mapping, source, target in self.hops:
+            snapshots = [msf.profile_snapshot(self.pack, p).value for p in (source, target)]
+            compiled = msf.compile_mapping(self.pack, *snapshots, mapping, True).value
+            required = list(compiled.required_inputs)
+            rng = random.Random(f'partial {mapping}')
+            samples = []
+            for n in range(60):
+                values = {s: rng.choice((0.0, 0.25, 1.0, rng.random(), 1.5, -0.1, 5e-324)) for s in required}
+                validity = {s: rng.random() > 0.1 for s in required}
+                for s in rng.sample(required, min(len(required), n % 4)):
+                    del values[s], validity[s]
+                samples.append({'timestamp': 0.0, 'values': values, 'validity': validity})
+            outcome = msf.evaluate_mapping(compiled, samples, partial=True)
+            self.assertTrue(outcome.ok, outcome.report.to_dict())
+            refusals, unavailable = {}, {}
+            for row in outcome.value.refusals:
+                refusals.setdefault(row['sample'], {})[row['output']] = sorted((d.code, d.ref) for d in row['diagnostics'])
+            for row in outcome.value.unavailable:
+                unavailable.setdefault(row['sample'], {})[row['output']] = sorted(row['inputs'])
+            with self.subTest(mapping=mapping):
+                for n, (sample, written) in enumerate(zip(samples, outcome.value.samples)):
+                    got = self.oracle.partial(mapping, source, target, sample['values'], sample['validity'], n)
+                    self.assertEqual(bits(got[0]), bits(dict(written['values'])), n)
+                    self.assertEqual(got[1], refusals.get(n, {}), n)
+                    self.assertEqual(got[2], unavailable.get(n, {}), n)
+                    seen['written'] += bool(got[0])
+                    seen['refused'] += bool(got[1])
+                    seen['unavailable'] += bool(got[2])
+        self.assertTrue(all(seen.values()), seen)
 
 
 class ImpulseLinks(unittest.TestCase):
