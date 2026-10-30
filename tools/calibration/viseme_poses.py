@@ -11,7 +11,7 @@ were downloaded. This tool makes viseme-poses.rocketbox-features (round 3). The 
 the held-out step loads only the held-out rigs.
 
 Fit (mesh geometry only, no renders):
-- basis: the ARKit shapes that the ARKit in-maps of the groups in GROUPS read (37 shapes); blink, gaze, the
+- basis: the ARKit shapes that the ARKit in-map reads into the groups in GROUPS (37 shapes); blink, gaze, the
   sideways jaw and mouth shifts and tongueOut are left out. Each Left and Right pair shares one weight, so the
   basis has 24 columns (13 pairs and 11 single shapes);
 - region: on each rig, every vertex except the tongue: the vertices that the rig's tongueOut shape moves by more
@@ -22,7 +22,7 @@ Fit (mesh geometry only, no renders):
 - the classes in FEATURES: from there, Gauss-Newton steps (with Levenberg damping) on the sum over training rigs of
   MU e_r(u)^2 plus the squared feature errors, each divided by its tolerance (a range feature: the distance from
   the middle of its range, divided by half its width);
-- the weights are rounded to 3 decimals and go to their canonical signals through the ARKit in-maps (copies).
+- the weights are rounded to 3 decimals and go to their canonical signals through the ARKit in-map (copies).
 
 Features (Geometry.mouth): the signed lip opening on the mid line, the forward movement of the lips, the width
 between the mouth corners as a ratio to the neutral width, the drop of the lower teeth, and the distance from the
@@ -70,7 +70,9 @@ RECORD = ROOT / 'calibration' / f'{RECORD_ID}.cal'
 LEDGER = ROOT / 'calibration' / 'FREEZES'
 PACK = ROOT / 'generated/rcef.pack.json'
 GROUPS = ('face', 'cheek_puff', 'jaw_thrust', 'chin_raise_upper_lip')
-CLASS_MAPS = ('visemes_vowel.to_rcef', 'visemes_consonant.to_rcef', 'visemes_rest.to_rcef')
+# The maps the fit reads: META into the canonical viseme classes, ARKit into and out of the canonical expression set.
+CLASS_MAP, IN_MAP, OUT_MAP = 'visemes.to_rcef_viseme', 'arkit.to_rcef_expression', 'rcef_expression.to_arkit'
+CLASS_GROUPS = ('viseme_vowel', 'viseme_consonant', 'viseme_rest')
 META = ('openxr.visemes.XR_FACE_TRACKING_VISEME_', '_META')
 REST = 'rcef.canonical_viseme.sil'
 TOLERANCE = 1e-13
@@ -268,13 +270,14 @@ def pack_document() -> dict:
 def correspondences(document: dict) -> tuple[dict[str, str], dict[str, list[str]], list[str]]:
     """META viseme -> canonical class; ARKit name -> canonical signals; and the canonical signals in pack order."""
     maps = {m['id']: m['rules'] for m in document['mappings']}
+    group = {s['id']: s.get('metadata', {}).get('group') for s in document['signals']}
     classes, arkit, signals = {}, {}, []
-    for rule in (r for m in CLASS_MAPS for r in maps[m]):
+    for rule in (r for r in maps[CLASS_MAP] if group.get(r['outputs'][0]) in CLASS_GROUPS):
         if rule['operator'] != COPY:
             raise SystemExit(f'{rule["id"]} is not a copy')
         classes[rule['inputs'][0][len(META[0]):-len(META[1])]] = rule['outputs'][0]
-    for group in GROUPS:
-        for rule in maps[f'arkit_{group}.to_rcef']:
+    for name in GROUPS:
+        for rule in (r for r in maps[IN_MAP] if group.get(r['outputs'][0]) == name):
             if rule['operator'] != COPY:
                 raise SystemExit(f'{rule["id"]} is not a copy')
             arkit.setdefault(rule['inputs'][0].split('.', 2)[2], []).append(rule['outputs'][0])
@@ -784,29 +787,28 @@ def freeze(args) -> int:
 
 
 def out_maps(document: dict):
-    """The ARKit out-maps of GROUPS, compiled from the pack."""
+    """The ARKit out-map, compiled from the pack. It also writes the shapes of other groups; they are left out."""
     import msf_character_tools as msf
     from rcef_translate import load_pack
     pack = load_pack(document)
     source = msf.profile_snapshot(pack, 'rcef.canonical_expression').value
     target = msf.profile_snapshot(pack, 'arkit.coefficient').value
-    compiled = []
-    for group in GROUPS:
-        result = msf.compile_mapping(pack, source, target, f'rcef_{group}.to_arkit', True)
-        if not result.ok:
-            raise SystemExit(result.report.to_dict())
-        compiled.append(result.value)
-    return msf, compiled
+    result = msf.compile_mapping(pack, source, target, OUT_MAP, True)
+    if not result.ok:
+        raise SystemExit(result.report.to_dict())
+    return msf, [result.value]
 
 
 def arkit_weights(msf, compiled, values: dict[str, float]) -> dict[str, float]:
+    """The ARKit weights that the given canonical values write; partial evaluation leaves out the outputs that read
+    a canonical value not given."""
     out = {}
     for mapping in compiled:
-        inputs = sorted(mapping.required_inputs)
+        inputs = sorted(s for s in mapping.required_inputs if s in values)
         sample = {'timestamp': 0.0, 'values': {s: values[s] for s in inputs}, 'validity': dict.fromkeys(inputs, True)}
-        result = msf.evaluate_mapping(mapping, [sample])
-        if not result.ok:
-            raise SystemExit(result.report.to_dict())
+        result = msf.evaluate_mapping(mapping, [sample], partial=True)
+        if not result.ok or result.value.refusals:
+            raise SystemExit(result.report.to_dict() if not result.ok else result.value.to_dict())
         out.update({s.split('.', 2)[2]: v for s, v in result.value.samples[0]['values'].items()})
     return out
 
