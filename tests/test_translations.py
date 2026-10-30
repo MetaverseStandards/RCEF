@@ -188,10 +188,16 @@ class Translations(unittest.TestCase):
                             else:
                                 # A gaze split keeps only the larger of two directions, so a halved
                                 # direction shows only on the side where it is the larger one.
-                                splits = set(rcef_route.map_ends(self.rules('rcef_gaze.to_fb2'))[1])
+                                # Each difference is split into a pair of opposing FB2 directions.
+                                net = self.rules('rcef_gaze.to_fb2')
+                                pairs = [sorted(o for r in net if r['inputs'] == d['outputs'] for o in r['outputs'])
+                                         for d in net if d['outputs'][0].startswith('rcef.intermediate.')]
                                 self.assertTrue(failing)
                                 self.assertLessEqual(failing, reached & outputs)
-                                self.assertLessEqual((reached & outputs) - failing, splits)
+                                for pair in pairs:
+                                    if set(pair) <= reached:
+                                        self.assertEqual(len(set(pair) & failing), 1, pair)
+                                self.assertLessEqual((reached & outputs) - failing, {o for p in pairs for o in p})
 
     def test_swapping_every_left_and_right_rule_changes_both_outputs(self):
         def side_free(sid):
@@ -222,6 +228,32 @@ class Translations(unittest.TestCase):
                 self.assertTrue(swapped)
                 matches = self.check_whole_frames(kind, self.changed_copy(kind, swap))
                 self.assertEqual(sorted(o for o in swapped if matches[o]), [])
+
+    def test_swapping_every_left_and_right_in_map_rule_changes_what_is_computed_from_it(self):
+        # From ARKit, the in-maps copy each sided coefficient to its canonical side; swapping the inputs of each
+        # left/right pair must change every target output computed from a swapped canonical signal, and no other.
+        def swap(rules):
+            pairs = {}
+            for rule in rules:
+                pairs.setdefault(re.sub(r'_(left|right)$', '#', rule['outputs'][0]), []).append(rule)
+            for pair in pairs.values():
+                if len(pair) == 2:
+                    pair[0]['inputs'], pair[1]['inputs'] = pair[1]['inputs'], pair[0]['inputs']
+        for kind in ('arkit_to_fb2', 'arkit_to_ue'):
+            with self.subTest(kind):
+                swapped = set()
+                for mapping in self.hop(kind, 'in'):
+                    pairs = {}
+                    for rule in self.rules(mapping):
+                        pairs.setdefault(re.sub(r'_(left|right)$', '#', rule['outputs'][0]), []).append(rule)
+                    # A fan-out feeds both sides from one coefficient; swapping changes nothing there.
+                    swapped |= {r['outputs'][0] for pair in pairs.values() if len(pair) == 2
+                                and pair[0]['inputs'] != pair[1]['inputs'] for r in pair}
+                self.assertTrue(swapped)
+                expected = {o for m in self.hop(kind, 'out') for c in swapped
+                            for o in rcef_route.reaches(self.rules(m), c)} & self.outputs(kind)
+                matches = self.check_whole_frames(kind, self.changed_copy(kind, swap, 'in'))
+                self.assertEqual(sorted(o for o, ok in matches.items() if not ok), sorted(expected))
 
     def test_fb2_to_arkit_after_arkit_to_fb2_returns_every_coefficient(self):
         for frame in self.whole_frames('arkit_to_fb2'):
