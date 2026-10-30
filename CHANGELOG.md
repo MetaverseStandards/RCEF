@@ -2,12 +2,75 @@
 
 Original documentation: CC-BY-SA-4.0.
 
-## Data 0.5.0 — unreleased
+## Data 0.5.0 — 2026-10-30
 
 The draft canonical expression set and the draft canonical viseme set join
 the data, with maps into them and out of them. A translation can now run
 from a source set through a canonical set to a target set, and the direct
-maps are retired.
+maps are retired. Data 0.4.0 was not released, so this release also holds
+its changes (the section below it).
+
+In short, since data 0.3.0:
+
+- The draft canonical expression set (72 signals in 13 groups) and the
+  draft canonical viseme set (16 signals: 15 classes built from the IPA
+  chart, and `alveolar_floor`). Both have `vocabulary_status = "draft"`:
+  the working group has not reviewed their meaning yet.
+- In-maps and out-maps for ARKit, FB2, FACS codes, VRCFaceTracking eye data,
+  VRM blinks and vowels and META visemes, and out-maps to Unified
+  Expressions: 484 mappings in 84 maps. The README's Routes table lists the
+  37 routes.
+- The 10 FB2-only signals (cheek suck, lip tighten, tongue positions), the
+  VRCFaceTracking eye blink and pupil hops, and the VRM blink hops.
+- FACS codes as a draft expression set, `facs.code`, with an example codec.
+- The viseme pose bridge from visemes to expressions, from a frozen
+  software calibration record, and the perceptual gate in `check.py`.
+- `examples/rcef_route.py` (`Route`), which every example now uses.
+- The registered A/B comparison of the routes with the direct maps
+  (`ab/`): `ab.pivot` v1 and v2 pass every gate.
+- The direct maps and the old 21-signal set `rcef.canonical` are retired,
+  with a tombstone for each ID.
+- Operators 1.1 and the msf-character-tools 0.5.0 lock (from data 0.4.0).
+
+**A/B comparison.** `ab/` holds the pre-registered comparison of the route
+through the canonical sets (arm B) with the direct maps (arm A1, run from
+the frozen baseline pack at `dea1713`), two direct maps in turn (A2), the
+expression library's FACS table (A3) and a pure-Python oracle (O).
+`ab.pivot` v1 (`first`) ran before the direct maps were retired, and v2
+(`reproduce`) after; v2 gives the same result files as v1, byte for byte,
+apart from the manifest, its line in `SHA256SUMS` and the timings. Both pass every gate: on every frame
+of the 37 routes, B gives the oracle's values, and on the 5 routes of the
+direct maps B gives the same values and refuses the same frames as A1.
+`ab/README.md` gives the ledger, the freeze kinds and the metrics.
+`scripts/ab_compare.py check` checks the folder.
+
+**Release checks and documents.**
+
+- The README states that RCEF is a pivot, not a set that everyone must
+  adopt, and has a Routes table. `tests/test_readme_sources.py` checks
+  both.
+- New figures, written by `scripts/export_figures.py` and checked by
+  `tests/test_figures.py`: `docs/routes.svg` (which canonical groups each
+  set fills) and `docs/ab-coverage.svg` (the A/B result for each route).
+- New checks: `tests/test_unresolved_claims.py` (no document states as fact
+  what the definitions audit leaves `unresolved`; naming a loss key is not
+  enough), `tests/test_public_sources.py` (no path under a home directory, no
+  local or private address and no internal host; every GitHub file link and every
+  evidence record is pinned, and a record's revision is the commit in its
+  URL) and `scripts/check_visibility.py` (no document claims public access
+  that does not exist; the test runs its claim scan offline).
+- `scripts/ci_local.sh` finds the venvs in `$RCEF_VENVS` (by default
+  `rcef/venvs` in the XDG data directory) instead of a personal workspace
+  path.
+- The README, the contributing guide, the governance page and the
+  architecture guide no longer state the visibility of the repositories.
+  The README gives a download with a GitHub login until the release is
+  public.
+- `docs/facs-intensity.md` says that reading `L30` and `R30` as directions
+  is an assumption.
+- The notices credit the Godot XR contributors (`godot_vendors_fb2`) and
+  the Khronos copyright of the META viseme reference images, and give the
+  glTF specification licence.
 
 **Breaking: the direct maps are retired.** No deprecation period and no
 replacement maps: every translation runs through the canonical sets
@@ -117,7 +180,10 @@ ID, so the new `docs/retired-ids.csv` has one line per ID (249 lines), and
 - Evidence status: every canonical expression signal and every new mapping
   is `proposed` and `approximate`, except the 2 canonical pupils and the 4
   pupil copies, which are `verified_current` (the copies `exact`). The
-  identity maps into `rcef.canonical` stay `verified_current`.
+  identity maps into `rcef.canonical` were `verified_current` and `exact`.
+  They are retired (above), so 19 mappings are downgraded: their signals
+  now go through proposed, approximate hops. Only the 2 pupil diameters
+  keep exact, `verified_current` copies.
 - Losses added by the definitions audit, on the hops that the audit names:
   the ARKit `mouthClose` jaw relation (`arkit_mouthclose_jaw_unresolved`),
   the ARKit definitions that differ from the canonical ones, the VRM blink
@@ -254,12 +320,13 @@ exclusive, and the data now builds this in.
   msf-character-tools 0.5.0, which behaves the same as msf-tools 0.4.0.
   The import package is `msf_character_tools`. `check.py`, the tests, the
   examples and the calibration tools use the new names.
-- RCEF is now at https://github.com/MetaverseStandards/RCEF, and
-  msf-character-tools is at
-  https://github.com/MetaverseStandards/msf_character_tools. Both are
-  public.
-- The GitHub workflow downloads the public release wheel with `curl`. It
-  needs no token. It still installs the wheel by hash.
+- RCEF moves to https://github.com/MetaverseStandards/RCEF, and
+  msf-character-tools to
+  https://github.com/MetaverseStandards/msf_character_tools. Both
+  repositories are in the Metaverse Standards Forum organization on GitHub.
+- The GitHub workflow downloads the release wheel with `curl`, with no
+  token, so it works once the release is public. It still installs the
+  wheel by hash.
 - The licence and notice files name the Metaverse Standards Forum as the
   copyright holder. The licences do not change. Attribution and the
   `authorship` fields still name RCEF contributors (2026), so the generated
@@ -288,7 +355,7 @@ exclusive, and the data now builds this in.
 - The pack and the generated files do not change, so the data version
   stays 0.4.0.
 
-## Calibration and examples — unreleased
+## Calibration and examples — 2026-10-30, with data 0.5.0
 
 - The examples, the face and viseme pipelines and `scripts/compare_godot.py`
   translate through the canonical sets (source → canonical → target), with

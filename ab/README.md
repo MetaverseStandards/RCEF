@@ -97,6 +97,10 @@ The seeded families mix full-mantissa binary64 values with 6-decimal values. Eac
 - `SHA256SUMS`: the hash of each result file and of each generated frame file;
 - `timings.json`, which no hash covers.
 
+Two registered runs have passed: `ab.pivot` v1 (`first`) and v2 (`reproduce`, after the direct maps were retired). Every gate of both passes. [docs/ab-coverage.svg](../docs/ab-coverage.svg) shows the latest run route by route: the external reference, the frames and the frames that B refuses. `scripts/export_figures.py` writes it from `results/v<N>/`, and `tests/test_figures.py` checks that it is current.
+
+![A/B result for each route](../docs/ab-coverage.svg)
+
 Freeze ids, hashes and paths are only in `manifest.json`. So a `reproduce` run can match the results of the freeze it reproduces byte for byte, apart from `manifest.json`, its line in `SHA256SUMS`, and `timings.json`, which has no line there.
 
 ## Frozen lists
