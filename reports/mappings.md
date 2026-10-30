@@ -2,7 +2,7 @@
 
 Pack: rcef.parity; data version: 0.5.0.
 
-Generated from rcef.pack.json; SHA-256: f7fcd1ab4cbb4338042d1e10756eff14c0d6f3b102d91479f673b11c38ae2684.
+Generated from rcef.pack.json; SHA-256: 7e13c2369593e24215a3eadeb53a1fcd87fbaab7bb010f9c59be183fb91ee9b0.
 
 Original RCEF data and arrangement: RCEF contributors (2026), CC-BY-SA-4.0. Provider attribution and source terms are in ../THIRD_PARTY_NOTICES.md.
 
@@ -258,6 +258,108 @@ Proposed mappings translate between providers. Each formula assumes the calibrat
 | rcef_gaze.to_arkit | rcef_arkit.eyeLookUpLeft | rcef.canonical_expression → arkit.coefficient | eyeLookUpLeft = 1·gaze_up_left | ARKit gain and full-activation pose not published; arkit_gaze_eyelid: source describes eyelid movement consistent with the gaze | proposed |
 | rcef_gaze.to_arkit | rcef_arkit.eyeLookUpRight | rcef.canonical_expression → arkit.coefficient | eyeLookUpRight = 1·gaze_up_right | ARKit gain and full-activation pose not published; arkit_gaze_eyelid: source describes eyelid movement consistent with the gaze | proposed |
 | rcef_tongue_out.to_arkit | rcef_arkit.tongueOut | rcef.canonical_expression → arkit.coefficient | tongueOut = 1·tongue_out | ARKit gain and full-activation pose not published; the tongue extension has no stated length | proposed |
+| facs_face.to_rcef | facs_rcef.brow_inner_raise_left | facs.code → rcef.canonical_expression | brow_inner_raise_left = 1·L1 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.brow_inner_raise_right | facs.code → rcef.canonical_expression | brow_inner_raise_right = 1·R1 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.brow_outer_raise_left | facs.code → rcef.canonical_expression | brow_outer_raise_left = 1·L2 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.brow_outer_raise_right | facs.code → rcef.canonical_expression | brow_outer_raise_right = 1·R2 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.brow_lower_left | facs.code → rcef.canonical_expression | brow_lower_left = 1·L4 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.brow_lower_right | facs.code → rcef.canonical_expression | brow_lower_right = 1·R4 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lid_tighten_left | facs.code → rcef.canonical_expression | lid_tighten_left = 1·L7 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lid_tighten_right | facs.code → rcef.canonical_expression | lid_tighten_right = 1·R7 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.upper_lid_raise_left | facs.code → rcef.canonical_expression | upper_lid_raise_left = 1·L5 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.upper_lid_raise_right | facs.code → rcef.canonical_expression | upper_lid_raise_right = 1·R5 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.cheek_raise_left | facs.code → rcef.canonical_expression | cheek_raise_left = 1·L6 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.cheek_raise_right | facs.code → rcef.canonical_expression | cheek_raise_right = 1·R6 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.nose_wrinkle_left | facs.code → rcef.canonical_expression | nose_wrinkle_left = 1·L9 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.nose_wrinkle_right | facs.code → rcef.canonical_expression | nose_wrinkle_right = 1·R9 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.jaw_drop | facs.code → rcef.canonical_expression | jaw_drop = 1·26 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_mouth_opening_split: from FACS, 27 is read as 26 and 25 is not read; toward FACS all opening is written as 26 | proposed |
+| facs_face.to_rcef | facs_rcef.lip_corner_pull_left | facs.code → rcef.canonical_expression | lip_corner_pull_left = 1·L12 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_corner_pull_right | facs.code → rcef.canonical_expression | lip_corner_pull_right = 1·R12 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_corner_depress_left | facs.code → rcef.canonical_expression | lip_corner_depress_left = 1·L15 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_corner_depress_right | facs.code → rcef.canonical_expression | lip_corner_depress_right = 1·R15 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.dimple_left | facs.code → rcef.canonical_expression | dimple_left = 1·L14 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.dimple_right | facs.code → rcef.canonical_expression | dimple_right = 1·R14 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_stretch_left | facs.code → rcef.canonical_expression | lip_stretch_left = 1·L20 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_stretch_right | facs.code → rcef.canonical_expression | lip_stretch_right = 1·R20 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.chin_raise | facs.code → rcef.canonical_expression | chin_raise = 1·17 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_au17_no_split: FACS AU17 is the whole chin raise; the induced upper-lip push is not written from FACS and is dropped toward FACS | proposed |
+| facs_face.to_rcef | facs_rcef.lip_funnel_upper_left | facs.code → rcef.canonical_expression | lip_funnel_upper_left = 1·L22 | asymmetry unknown: symmetry is invented; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_funnel_upper_right | facs.code → rcef.canonical_expression | lip_funnel_upper_right = 1·R22 | asymmetry unknown: symmetry is invented; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_funnel_lower_left | facs.code → rcef.canonical_expression | lip_funnel_lower_left = 1·L22 | asymmetry unknown: symmetry is invented; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_funnel_lower_right | facs.code → rcef.canonical_expression | lip_funnel_lower_right = 1·R22 | asymmetry unknown: symmetry is invented; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_pucker_left | facs.code → rcef.canonical_expression | lip_pucker_left = 1·L18 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_pucker_right | facs.code → rcef.canonical_expression | lip_pucker_right = 1·R18 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_suck_upper_left | facs.code → rcef.canonical_expression | lip_suck_upper_left = 1·L28 | asymmetry unknown: symmetry is invented; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_suck_upper_right | facs.code → rcef.canonical_expression | lip_suck_upper_right = 1·R28 | asymmetry unknown: symmetry is invented; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_suck_lower_left | facs.code → rcef.canonical_expression | lip_suck_lower_left = 1·L28 | asymmetry unknown: symmetry is invented; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_suck_lower_right | facs.code → rcef.canonical_expression | lip_suck_lower_right = 1·R28 | asymmetry unknown: symmetry is invented; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_press_left | facs.code → rcef.canonical_expression | lip_press_left = 1·L24 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lip_press_right | facs.code → rcef.canonical_expression | lip_press_right = 1·R24 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lips_toward | facs.code → rcef.canonical_expression | lips_toward = 1·8 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured | proposed |
+| facs_face.to_rcef | facs_rcef.upper_lip_raise_left | facs.code → rcef.canonical_expression | upper_lip_raise_left = 1·L10 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.upper_lip_raise_right | facs.code → rcef.canonical_expression | upper_lip_raise_right = 1·R10 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lower_lip_depress_left | facs.code → rcef.canonical_expression | lower_lip_depress_left = 1·L16 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_face.to_rcef | facs_rcef.lower_lip_depress_right | facs.code → rcef.canonical_expression | lower_lip_depress_right = 1·R16 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_cheek_puff.to_rcef | facs_rcef.cheek_puff_left | facs.code → rcef.canonical_expression | cheek_puff_left = 1·L34 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| facs_cheek_puff.to_rcef | facs_rcef.cheek_puff_right | facs.code → rcef.canonical_expression | cheek_puff_right = 1·R34 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| facs_jaw_thrust.to_rcef | facs_rcef.jaw_thrust | facs.code → rcef.canonical_expression | jaw_thrust = 1·29 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| facs_jaw_sideways.to_rcef | facs_rcef.jaw_sideways_left | facs.code → rcef.canonical_expression | jaw_sideways_left = 1·L30 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_au30_direction_unresolved: FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| facs_jaw_sideways.to_rcef | facs_rcef.jaw_sideways_right | facs.code → rcef.canonical_expression | jaw_sideways_right = 1·R30 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_au30_direction_unresolved: FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| facs_blink.to_rcef | facs_rcef.eye_close_left | facs.code → rcef.canonical_expression | eye_close_left = 1·L43 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_eyelid_events: FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| facs_blink.to_rcef | facs_rcef.eye_close_right | facs.code → rcef.canonical_expression | eye_close_right = 1·R43 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_eyelid_events: FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| facs_tongue_out.to_rcef | facs_rcef.tongue_out | facs.code → rcef.canonical_expression | tongue_out = 1·19 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; the tongue extension has no stated length | proposed |
+| facs_cheek_suck.to_rcef | facs_rcef.cheek_suck_left | facs.code → rcef.canonical_expression | cheek_suck_left = 1·L35 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| facs_cheek_suck.to_rcef | facs_rcef.cheek_suck_right | facs.code → rcef.canonical_expression | cheek_suck_right = 1·R35 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| facs_lip_tighten.to_rcef | facs_rcef.lip_tighten_left | facs.code → rcef.canonical_expression | lip_tighten_left = 1·L23 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| facs_lip_tighten.to_rcef | facs_rcef.lip_tighten_right | facs.code → rcef.canonical_expression | lip_tighten_right = 1·R23 | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au01_left | rcef.canonical_expression → facs.code | L1 = 1·brow_inner_raise_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au01_right | rcef.canonical_expression → facs.code | R1 = 1·brow_inner_raise_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au02_left | rcef.canonical_expression → facs.code | L2 = 1·brow_outer_raise_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au02_right | rcef.canonical_expression → facs.code | R2 = 1·brow_outer_raise_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au04_left | rcef.canonical_expression → facs.code | L4 = 1·brow_lower_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au04_right | rcef.canonical_expression → facs.code | R4 = 1·brow_lower_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au05_left | rcef.canonical_expression → facs.code | L5 = 1·upper_lid_raise_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au05_right | rcef.canonical_expression → facs.code | R5 = 1·upper_lid_raise_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au06_left | rcef.canonical_expression → facs.code | L6 = 1·cheek_raise_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au06_right | rcef.canonical_expression → facs.code | R6 = 1·cheek_raise_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au07_left | rcef.canonical_expression → facs.code | L7 = 1·lid_tighten_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au07_right | rcef.canonical_expression → facs.code | R7 = 1·lid_tighten_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au08 | rcef.canonical_expression → facs.code | 8 = 1·lips_toward | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured | proposed |
+| rcef_face.to_facs | rcef_facs.au09_left | rcef.canonical_expression → facs.code | L9 = 1·nose_wrinkle_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au09_right | rcef.canonical_expression → facs.code | R9 = 1·nose_wrinkle_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au10_left | rcef.canonical_expression → facs.code | L10 = 1·upper_lip_raise_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au10_right | rcef.canonical_expression → facs.code | R10 = 1·upper_lip_raise_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au12_left | rcef.canonical_expression → facs.code | L12 = 1·lip_corner_pull_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au12_right | rcef.canonical_expression → facs.code | R12 = 1·lip_corner_pull_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au14_left | rcef.canonical_expression → facs.code | L14 = 1·dimple_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au14_right | rcef.canonical_expression → facs.code | R14 = 1·dimple_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au15_left | rcef.canonical_expression → facs.code | L15 = 1·lip_corner_depress_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au15_right | rcef.canonical_expression → facs.code | R15 = 1·lip_corner_depress_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au16_left | rcef.canonical_expression → facs.code | L16 = 1·lower_lip_depress_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au16_right | rcef.canonical_expression → facs.code | R16 = 1·lower_lip_depress_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au17 | rcef.canonical_expression → facs.code | 17 = 1·chin_raise | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_au17_no_split: FACS AU17 is the whole chin raise; the induced upper-lip push is not written from FACS and is dropped toward FACS | proposed |
+| rcef_face.to_facs | rcef_facs.au18_left | rcef.canonical_expression → facs.code | L18 = 1·lip_pucker_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au18_right | rcef.canonical_expression → facs.code | R18 = 1·lip_pucker_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au20_left | rcef.canonical_expression → facs.code | L20 = 1·lip_stretch_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au20_right | rcef.canonical_expression → facs.code | R20 = 1·lip_stretch_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au22_left | rcef.canonical_expression → facs.code | L22 = 0.5·lip_funnel_upper_left + 0.5·lip_funnel_lower_left | asymmetry irrecoverable; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au22_right | rcef.canonical_expression → facs.code | R22 = 0.5·lip_funnel_upper_right + 0.5·lip_funnel_lower_right | asymmetry irrecoverable; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au24_left | rcef.canonical_expression → facs.code | L24 = 1·lip_press_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au24_right | rcef.canonical_expression → facs.code | R24 = 1·lip_press_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au26 | rcef.canonical_expression → facs.code | 26 = 1·jaw_drop | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_mouth_opening_split: from FACS, 27 is read as 26 and 25 is not read; toward FACS all opening is written as 26 | proposed |
+| rcef_face.to_facs | rcef_facs.au28_left | rcef.canonical_expression → facs.code | L28 = 0.5·lip_suck_upper_left + 0.5·lip_suck_lower_left | asymmetry irrecoverable; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_face.to_facs | rcef_facs.au28_right | rcef.canonical_expression → facs.code | R28 = 0.5·lip_suck_upper_right + 0.5·lip_suck_lower_right | asymmetry irrecoverable; facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_cheek_puff.to_facs | rcef_facs.au34_left | rcef.canonical_expression → facs.code | L34 = 1·cheek_puff_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| rcef_cheek_puff.to_facs | rcef_facs.au34_right | rcef.canonical_expression → facs.code | R34 = 1·cheek_puff_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| rcef_jaw_thrust.to_facs | rcef_facs.au29 | rcef.canonical_expression → facs.code | 29 = 1·jaw_thrust | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| rcef_jaw_sideways.to_facs | rcef_facs.au30_left | rcef.canonical_expression → facs.code | L30 = 1·jaw_sideways_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_au30_direction_unresolved: FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| rcef_jaw_sideways.to_facs | rcef_facs.au30_right | rcef.canonical_expression → facs.code | R30 = 1·jaw_sideways_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_au30_direction_unresolved: FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| rcef_blink.to_facs | rcef_facs.au43_left | rcef.canonical_expression → facs.code | L43 = 1·eye_close_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_eyelid_events: FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| rcef_blink.to_facs | rcef_facs.au43_right | rcef.canonical_expression → facs.code | R43 = 1·eye_close_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_eyelid_events: FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| rcef_tongue_out.to_facs | rcef_facs.au19 | rcef.canonical_expression → facs.code | 19 = 1·tongue_out | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; the tongue extension has no stated length | proposed |
+| rcef_cheek_suck.to_facs | rcef_facs.au35_left | rcef.canonical_expression → facs.code | L35 = 1·cheek_suck_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| rcef_cheek_suck.to_facs | rcef_facs.au35_right | rcef.canonical_expression → facs.code | R35 = 1·cheek_suck_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own; facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption | proposed |
+| rcef_lip_tighten.to_facs | rcef_facs.au23_left | rcef.canonical_expression → facs.code | L23 = 1·lip_tighten_left | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
+| rcef_lip_tighten.to_facs | rcef_facs.au23_right | rcef.canonical_expression → facs.code | R23 = 1·lip_tighten_right | facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured; facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own | proposed |
 | fb2_face.to_rcef | fb2_rcef.brow_inner_raise_left | openxr.fb2 → rcef.canonical_expression | brow_inner_raise_left = 1·XR_FACE_EXPRESSION2_INNER_BROW_RAISER_L_FB | FB2 gain and full-activation pose not published | proposed |
 | fb2_face.to_rcef | fb2_rcef.brow_inner_raise_right | openxr.fb2 → rcef.canonical_expression | brow_inner_raise_right = 1·XR_FACE_EXPRESSION2_INNER_BROW_RAISER_R_FB | FB2 gain and full-activation pose not published | proposed |
 | fb2_face.to_rcef | fb2_rcef.brow_outer_raise_left | openxr.fb2 → rcef.canonical_expression | brow_outer_raise_left = 1·XR_FACE_EXPRESSION2_OUTER_BROW_RAISER_L_FB | FB2 gain and full-activation pose not published | proposed |
@@ -4981,6 +5083,1568 @@ Assumptions:
 Loss annotations: [{"category":"signal","effect":"approximated","reason":"ARKit gain and full-activation pose not published","refs":["rcef.canonical_expression.tongue_out","arkit.coefficient.tongueOut"],"units":"1"},{"category":"signal","effect":"approximated","reason":"the tongue extension has no stated length","refs":["rcef.canonical_expression.tongue_out","arkit.coefficient.tongueOut"],"units":"1"}]
 
 Evidence: apple_blendshapes, godot_vendors_fb2, godot_face_modifier, vrcft_docs_arkit, vrcft_docs_movement, rcef_canonical_v1
+
+## facs_face.to_rcef
+
+### facs_rcef.brow_inner_raise_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au01_left | rcef.canonical_expression.brow_inner_raise_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L1 corresponds to canonical brow_inner_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au01_left","rcef.canonical_expression.brow_inner_raise_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au01_left","rcef.canonical_expression.brow_inner_raise_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.brow_inner_raise_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au01_right | rcef.canonical_expression.brow_inner_raise_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R1 corresponds to canonical brow_inner_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au01_right","rcef.canonical_expression.brow_inner_raise_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au01_right","rcef.canonical_expression.brow_inner_raise_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.brow_outer_raise_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au02_left | rcef.canonical_expression.brow_outer_raise_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L2 corresponds to canonical brow_outer_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au02_left","rcef.canonical_expression.brow_outer_raise_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au02_left","rcef.canonical_expression.brow_outer_raise_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.brow_outer_raise_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au02_right | rcef.canonical_expression.brow_outer_raise_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R2 corresponds to canonical brow_outer_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au02_right","rcef.canonical_expression.brow_outer_raise_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au02_right","rcef.canonical_expression.brow_outer_raise_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.brow_lower_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au04_left | rcef.canonical_expression.brow_lower_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L4 corresponds to canonical brow_lower_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au04_left","rcef.canonical_expression.brow_lower_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au04_left","rcef.canonical_expression.brow_lower_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.brow_lower_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au04_right | rcef.canonical_expression.brow_lower_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R4 corresponds to canonical brow_lower_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au04_right","rcef.canonical_expression.brow_lower_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au04_right","rcef.canonical_expression.brow_lower_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lid_tighten_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au07_left | rcef.canonical_expression.lid_tighten_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L7 corresponds to canonical lid_tighten_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au07_left","rcef.canonical_expression.lid_tighten_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au07_left","rcef.canonical_expression.lid_tighten_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lid_tighten_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au07_right | rcef.canonical_expression.lid_tighten_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R7 corresponds to canonical lid_tighten_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au07_right","rcef.canonical_expression.lid_tighten_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au07_right","rcef.canonical_expression.lid_tighten_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.upper_lid_raise_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au05_left | rcef.canonical_expression.upper_lid_raise_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L5 corresponds to canonical upper_lid_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au05_left","rcef.canonical_expression.upper_lid_raise_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au05_left","rcef.canonical_expression.upper_lid_raise_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.upper_lid_raise_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au05_right | rcef.canonical_expression.upper_lid_raise_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R5 corresponds to canonical upper_lid_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au05_right","rcef.canonical_expression.upper_lid_raise_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au05_right","rcef.canonical_expression.upper_lid_raise_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.cheek_raise_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au06_left | rcef.canonical_expression.cheek_raise_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L6 corresponds to canonical cheek_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au06_left","rcef.canonical_expression.cheek_raise_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au06_left","rcef.canonical_expression.cheek_raise_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.cheek_raise_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au06_right | rcef.canonical_expression.cheek_raise_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R6 corresponds to canonical cheek_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au06_right","rcef.canonical_expression.cheek_raise_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au06_right","rcef.canonical_expression.cheek_raise_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.nose_wrinkle_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au09_left | rcef.canonical_expression.nose_wrinkle_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L9 corresponds to canonical nose_wrinkle_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au09_left","rcef.canonical_expression.nose_wrinkle_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au09_left","rcef.canonical_expression.nose_wrinkle_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.nose_wrinkle_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au09_right | rcef.canonical_expression.nose_wrinkle_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R9 corresponds to canonical nose_wrinkle_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au09_right","rcef.canonical_expression.nose_wrinkle_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au09_right","rcef.canonical_expression.nose_wrinkle_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.jaw_drop
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au26 | rcef.canonical_expression.jaw_drop | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 26 corresponds to canonical jaw_drop.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss facs_mouth_opening_split.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au26","rcef.canonical_expression.jaw_drop"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_mouth_opening_split: from FACS, 27 is read as 26 and 25 is not read; toward FACS all opening is written as 26","refs":["facs.code.au26","rcef.canonical_expression.jaw_drop"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_corner_pull_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au12_left | rcef.canonical_expression.lip_corner_pull_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L12 corresponds to canonical lip_corner_pull_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au12_left","rcef.canonical_expression.lip_corner_pull_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au12_left","rcef.canonical_expression.lip_corner_pull_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_corner_pull_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au12_right | rcef.canonical_expression.lip_corner_pull_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R12 corresponds to canonical lip_corner_pull_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au12_right","rcef.canonical_expression.lip_corner_pull_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au12_right","rcef.canonical_expression.lip_corner_pull_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_corner_depress_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au15_left | rcef.canonical_expression.lip_corner_depress_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L15 corresponds to canonical lip_corner_depress_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au15_left","rcef.canonical_expression.lip_corner_depress_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au15_left","rcef.canonical_expression.lip_corner_depress_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_corner_depress_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au15_right | rcef.canonical_expression.lip_corner_depress_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R15 corresponds to canonical lip_corner_depress_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au15_right","rcef.canonical_expression.lip_corner_depress_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au15_right","rcef.canonical_expression.lip_corner_depress_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.dimple_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au14_left | rcef.canonical_expression.dimple_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L14 corresponds to canonical dimple_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au14_left","rcef.canonical_expression.dimple_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au14_left","rcef.canonical_expression.dimple_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.dimple_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au14_right | rcef.canonical_expression.dimple_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R14 corresponds to canonical dimple_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au14_right","rcef.canonical_expression.dimple_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au14_right","rcef.canonical_expression.dimple_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_stretch_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au20_left | rcef.canonical_expression.lip_stretch_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L20 corresponds to canonical lip_stretch_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au20_left","rcef.canonical_expression.lip_stretch_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au20_left","rcef.canonical_expression.lip_stretch_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_stretch_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au20_right | rcef.canonical_expression.lip_stretch_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R20 corresponds to canonical lip_stretch_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au20_right","rcef.canonical_expression.lip_stretch_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au20_right","rcef.canonical_expression.lip_stretch_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.chin_raise
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au17 | rcef.canonical_expression.chin_raise | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 17 corresponds to canonical chin_raise.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss facs_au17_no_split.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au17","rcef.canonical_expression.chin_raise"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_au17_no_split: FACS AU17 is the whole chin raise; the induced upper-lip push is not written from FACS and is dropped toward FACS","refs":["facs.code.au17","rcef.canonical_expression.chin_raise"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_funnel_upper_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au22_left | rcef.canonical_expression.lip_funnel_upper_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L22 is one value for canonical lip_funnel_upper_left and lip_funnel_lower_left; this mapping writes lip_funnel_upper_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one FACS side value is copied into the upper and the lower part.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry unknown: symmetry is invented","refs":["facs.code.au22_left","rcef.canonical_expression.lip_funnel_upper_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au22_left","rcef.canonical_expression.lip_funnel_upper_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au22_left","rcef.canonical_expression.lip_funnel_upper_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_funnel_upper_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au22_right | rcef.canonical_expression.lip_funnel_upper_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R22 is one value for canonical lip_funnel_upper_right and lip_funnel_lower_right; this mapping writes lip_funnel_upper_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one FACS side value is copied into the upper and the lower part.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry unknown: symmetry is invented","refs":["facs.code.au22_right","rcef.canonical_expression.lip_funnel_upper_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au22_right","rcef.canonical_expression.lip_funnel_upper_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au22_right","rcef.canonical_expression.lip_funnel_upper_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_funnel_lower_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au22_left | rcef.canonical_expression.lip_funnel_lower_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L22 is one value for canonical lip_funnel_upper_left and lip_funnel_lower_left; this mapping writes lip_funnel_lower_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one FACS side value is copied into the upper and the lower part.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry unknown: symmetry is invented","refs":["facs.code.au22_left","rcef.canonical_expression.lip_funnel_lower_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au22_left","rcef.canonical_expression.lip_funnel_lower_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au22_left","rcef.canonical_expression.lip_funnel_lower_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_funnel_lower_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au22_right | rcef.canonical_expression.lip_funnel_lower_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R22 is one value for canonical lip_funnel_upper_right and lip_funnel_lower_right; this mapping writes lip_funnel_lower_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one FACS side value is copied into the upper and the lower part.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry unknown: symmetry is invented","refs":["facs.code.au22_right","rcef.canonical_expression.lip_funnel_lower_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au22_right","rcef.canonical_expression.lip_funnel_lower_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au22_right","rcef.canonical_expression.lip_funnel_lower_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_pucker_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au18_left | rcef.canonical_expression.lip_pucker_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L18 corresponds to canonical lip_pucker_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au18_left","rcef.canonical_expression.lip_pucker_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au18_left","rcef.canonical_expression.lip_pucker_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_pucker_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au18_right | rcef.canonical_expression.lip_pucker_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R18 corresponds to canonical lip_pucker_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au18_right","rcef.canonical_expression.lip_pucker_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au18_right","rcef.canonical_expression.lip_pucker_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_suck_upper_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au28_left | rcef.canonical_expression.lip_suck_upper_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L28 is one value for canonical lip_suck_upper_left and lip_suck_lower_left; this mapping writes lip_suck_upper_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one FACS side value is copied into the upper and the lower part.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry unknown: symmetry is invented","refs":["facs.code.au28_left","rcef.canonical_expression.lip_suck_upper_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au28_left","rcef.canonical_expression.lip_suck_upper_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au28_left","rcef.canonical_expression.lip_suck_upper_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_suck_upper_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au28_right | rcef.canonical_expression.lip_suck_upper_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R28 is one value for canonical lip_suck_upper_right and lip_suck_lower_right; this mapping writes lip_suck_upper_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one FACS side value is copied into the upper and the lower part.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry unknown: symmetry is invented","refs":["facs.code.au28_right","rcef.canonical_expression.lip_suck_upper_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au28_right","rcef.canonical_expression.lip_suck_upper_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au28_right","rcef.canonical_expression.lip_suck_upper_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_suck_lower_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au28_left | rcef.canonical_expression.lip_suck_lower_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L28 is one value for canonical lip_suck_upper_left and lip_suck_lower_left; this mapping writes lip_suck_lower_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one FACS side value is copied into the upper and the lower part.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry unknown: symmetry is invented","refs":["facs.code.au28_left","rcef.canonical_expression.lip_suck_lower_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au28_left","rcef.canonical_expression.lip_suck_lower_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au28_left","rcef.canonical_expression.lip_suck_lower_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_suck_lower_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au28_right | rcef.canonical_expression.lip_suck_lower_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R28 is one value for canonical lip_suck_upper_right and lip_suck_lower_right; this mapping writes lip_suck_lower_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the one FACS side value is copied into the upper and the lower part.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry unknown: symmetry is invented","refs":["facs.code.au28_right","rcef.canonical_expression.lip_suck_lower_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au28_right","rcef.canonical_expression.lip_suck_lower_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au28_right","rcef.canonical_expression.lip_suck_lower_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_press_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au24_left | rcef.canonical_expression.lip_press_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L24 corresponds to canonical lip_press_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au24_left","rcef.canonical_expression.lip_press_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au24_left","rcef.canonical_expression.lip_press_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_press_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au24_right | rcef.canonical_expression.lip_press_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R24 corresponds to canonical lip_press_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au24_right","rcef.canonical_expression.lip_press_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au24_right","rcef.canonical_expression.lip_press_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lips_toward
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au08 | rcef.canonical_expression.lips_toward | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 8 corresponds to canonical lips_toward.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au08","rcef.canonical_expression.lips_toward"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.upper_lip_raise_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au10_left | rcef.canonical_expression.upper_lip_raise_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L10 corresponds to canonical upper_lip_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au10_left","rcef.canonical_expression.upper_lip_raise_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au10_left","rcef.canonical_expression.upper_lip_raise_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.upper_lip_raise_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au10_right | rcef.canonical_expression.upper_lip_raise_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R10 corresponds to canonical upper_lip_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au10_right","rcef.canonical_expression.upper_lip_raise_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au10_right","rcef.canonical_expression.upper_lip_raise_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lower_lip_depress_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au16_left | rcef.canonical_expression.lower_lip_depress_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L16 corresponds to canonical lower_lip_depress_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au16_left","rcef.canonical_expression.lower_lip_depress_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au16_left","rcef.canonical_expression.lower_lip_depress_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lower_lip_depress_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au16_right | rcef.canonical_expression.lower_lip_depress_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R16 corresponds to canonical lower_lip_depress_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au16_right","rcef.canonical_expression.lower_lip_depress_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au16_right","rcef.canonical_expression.lower_lip_depress_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## facs_cheek_puff.to_rcef
+
+### facs_rcef.cheek_puff_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au34_left | rcef.canonical_expression.cheek_puff_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L34 corresponds to canonical cheek_puff_left.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au34_left","rcef.canonical_expression.cheek_puff_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au34_left","rcef.canonical_expression.cheek_puff_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["facs.code.au34_left","rcef.canonical_expression.cheek_puff_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.cheek_puff_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au34_right | rcef.canonical_expression.cheek_puff_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R34 corresponds to canonical cheek_puff_right.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au34_right","rcef.canonical_expression.cheek_puff_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au34_right","rcef.canonical_expression.cheek_puff_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["facs.code.au34_right","rcef.canonical_expression.cheek_puff_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## facs_jaw_thrust.to_rcef
+
+### facs_rcef.jaw_thrust
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au29 | rcef.canonical_expression.jaw_thrust | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 29 corresponds to canonical jaw_thrust.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au29","rcef.canonical_expression.jaw_thrust"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["facs.code.au29","rcef.canonical_expression.jaw_thrust"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## facs_jaw_sideways.to_rcef
+
+### facs_rcef.jaw_sideways_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au30_left | rcef.canonical_expression.jaw_sideways_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L30 corresponds to canonical jaw_sideways_left.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss facs_au30_direction_unresolved.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au30_left","rcef.canonical_expression.jaw_sideways_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au30_left","rcef.canonical_expression.jaw_sideways_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_au30_direction_unresolved: FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left","refs":["facs.code.au30_left","rcef.canonical_expression.jaw_sideways_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["facs.code.au30_left","rcef.canonical_expression.jaw_sideways_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.jaw_sideways_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au30_right | rcef.canonical_expression.jaw_sideways_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R30 corresponds to canonical jaw_sideways_right.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss facs_au30_direction_unresolved.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au30_right","rcef.canonical_expression.jaw_sideways_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au30_right","rcef.canonical_expression.jaw_sideways_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_au30_direction_unresolved: FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left","refs":["facs.code.au30_right","rcef.canonical_expression.jaw_sideways_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["facs.code.au30_right","rcef.canonical_expression.jaw_sideways_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## facs_blink.to_rcef
+
+### facs_rcef.eye_close_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au43_left | rcef.canonical_expression.eye_close_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L43 corresponds to canonical eye_close_left.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au43_left","rcef.canonical_expression.eye_close_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au43_left","rcef.canonical_expression.eye_close_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_eyelid_events: FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43","refs":["facs.code.au43_left","rcef.canonical_expression.eye_close_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["facs.code.au43_left","rcef.canonical_expression.eye_close_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, facs_hager_2002, rcef_canonical_v1
+
+### facs_rcef.eye_close_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au43_right | rcef.canonical_expression.eye_close_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R43 corresponds to canonical eye_close_right.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au43_right","rcef.canonical_expression.eye_close_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au43_right","rcef.canonical_expression.eye_close_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_eyelid_events: FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43","refs":["facs.code.au43_right","rcef.canonical_expression.eye_close_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["facs.code.au43_right","rcef.canonical_expression.eye_close_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, facs_hager_2002, rcef_canonical_v1
+
+## facs_tongue_out.to_rcef
+
+### facs_rcef.tongue_out
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au19 | rcef.canonical_expression.tongue_out | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 19 corresponds to canonical tongue_out.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au19","rcef.canonical_expression.tongue_out"],"units":"1"},{"category":"signal","effect":"approximated","reason":"the tongue extension has no stated length","refs":["facs.code.au19","rcef.canonical_expression.tongue_out"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## facs_cheek_suck.to_rcef
+
+### facs_rcef.cheek_suck_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au35_left | rcef.canonical_expression.cheek_suck_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L35 corresponds to canonical cheek_suck_left.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au35_left","rcef.canonical_expression.cheek_suck_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au35_left","rcef.canonical_expression.cheek_suck_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["facs.code.au35_left","rcef.canonical_expression.cheek_suck_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.cheek_suck_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au35_right | rcef.canonical_expression.cheek_suck_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R35 corresponds to canonical cheek_suck_right.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au35_right","rcef.canonical_expression.cheek_suck_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au35_right","rcef.canonical_expression.cheek_suck_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["facs.code.au35_right","rcef.canonical_expression.cheek_suck_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## facs_lip_tighten.to_rcef
+
+### facs_rcef.lip_tighten_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au23_left | rcef.canonical_expression.lip_tighten_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L23 corresponds to canonical lip_tighten_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au23_left","rcef.canonical_expression.lip_tighten_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au23_left","rcef.canonical_expression.lip_tighten_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### facs_rcef.lip_tighten_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| facs.code.au23_right | rcef.canonical_expression.lip_tighten_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R23 corresponds to canonical lip_tighten_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["facs.code.au23_right","rcef.canonical_expression.lip_tighten_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["facs.code.au23_right","rcef.canonical_expression.lip_tighten_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## rcef_face.to_facs
+
+### rcef_facs.au01_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.brow_inner_raise_left | facs.code.au01_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L1 corresponds to canonical brow_inner_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.brow_inner_raise_left","facs.code.au01_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.brow_inner_raise_left","facs.code.au01_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au01_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.brow_inner_raise_right | facs.code.au01_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R1 corresponds to canonical brow_inner_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.brow_inner_raise_right","facs.code.au01_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.brow_inner_raise_right","facs.code.au01_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au02_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.brow_outer_raise_left | facs.code.au02_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L2 corresponds to canonical brow_outer_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.brow_outer_raise_left","facs.code.au02_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.brow_outer_raise_left","facs.code.au02_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au02_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.brow_outer_raise_right | facs.code.au02_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R2 corresponds to canonical brow_outer_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.brow_outer_raise_right","facs.code.au02_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.brow_outer_raise_right","facs.code.au02_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au04_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.brow_lower_left | facs.code.au04_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L4 corresponds to canonical brow_lower_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.brow_lower_left","facs.code.au04_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.brow_lower_left","facs.code.au04_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au04_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.brow_lower_right | facs.code.au04_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R4 corresponds to canonical brow_lower_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.brow_lower_right","facs.code.au04_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.brow_lower_right","facs.code.au04_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au05_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.upper_lid_raise_left | facs.code.au05_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L5 corresponds to canonical upper_lid_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.upper_lid_raise_left","facs.code.au05_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.upper_lid_raise_left","facs.code.au05_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au05_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.upper_lid_raise_right | facs.code.au05_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R5 corresponds to canonical upper_lid_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.upper_lid_raise_right","facs.code.au05_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.upper_lid_raise_right","facs.code.au05_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au06_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.cheek_raise_left | facs.code.au06_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L6 corresponds to canonical cheek_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.cheek_raise_left","facs.code.au06_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.cheek_raise_left","facs.code.au06_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au06_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.cheek_raise_right | facs.code.au06_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R6 corresponds to canonical cheek_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.cheek_raise_right","facs.code.au06_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.cheek_raise_right","facs.code.au06_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au07_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lid_tighten_left | facs.code.au07_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L7 corresponds to canonical lid_tighten_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lid_tighten_left","facs.code.au07_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lid_tighten_left","facs.code.au07_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au07_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lid_tighten_right | facs.code.au07_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R7 corresponds to canonical lid_tighten_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lid_tighten_right","facs.code.au07_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lid_tighten_right","facs.code.au07_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au08
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lips_toward | facs.code.au08 | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 8 corresponds to canonical lips_toward.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lips_toward","facs.code.au08"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au09_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.nose_wrinkle_left | facs.code.au09_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L9 corresponds to canonical nose_wrinkle_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.nose_wrinkle_left","facs.code.au09_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.nose_wrinkle_left","facs.code.au09_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au09_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.nose_wrinkle_right | facs.code.au09_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R9 corresponds to canonical nose_wrinkle_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.nose_wrinkle_right","facs.code.au09_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.nose_wrinkle_right","facs.code.au09_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au10_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.upper_lip_raise_left | facs.code.au10_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L10 corresponds to canonical upper_lip_raise_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.upper_lip_raise_left","facs.code.au10_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.upper_lip_raise_left","facs.code.au10_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au10_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.upper_lip_raise_right | facs.code.au10_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R10 corresponds to canonical upper_lip_raise_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.upper_lip_raise_right","facs.code.au10_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.upper_lip_raise_right","facs.code.au10_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au12_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_corner_pull_left | facs.code.au12_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L12 corresponds to canonical lip_corner_pull_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_corner_pull_left","facs.code.au12_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_corner_pull_left","facs.code.au12_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au12_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_corner_pull_right | facs.code.au12_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R12 corresponds to canonical lip_corner_pull_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_corner_pull_right","facs.code.au12_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_corner_pull_right","facs.code.au12_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au14_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.dimple_left | facs.code.au14_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L14 corresponds to canonical dimple_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.dimple_left","facs.code.au14_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.dimple_left","facs.code.au14_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au14_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.dimple_right | facs.code.au14_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R14 corresponds to canonical dimple_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.dimple_right","facs.code.au14_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.dimple_right","facs.code.au14_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au15_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_corner_depress_left | facs.code.au15_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L15 corresponds to canonical lip_corner_depress_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_corner_depress_left","facs.code.au15_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_corner_depress_left","facs.code.au15_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au15_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_corner_depress_right | facs.code.au15_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R15 corresponds to canonical lip_corner_depress_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_corner_depress_right","facs.code.au15_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_corner_depress_right","facs.code.au15_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au16_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lower_lip_depress_left | facs.code.au16_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L16 corresponds to canonical lower_lip_depress_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lower_lip_depress_left","facs.code.au16_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lower_lip_depress_left","facs.code.au16_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au16_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lower_lip_depress_right | facs.code.au16_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R16 corresponds to canonical lower_lip_depress_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lower_lip_depress_right","facs.code.au16_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lower_lip_depress_right","facs.code.au16_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au17
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.chin_raise | facs.code.au17 | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 17 corresponds to canonical chin_raise.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss facs_au17_no_split.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.chin_raise","facs.code.au17"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_au17_no_split: FACS AU17 is the whole chin raise; the induced upper-lip push is not written from FACS and is dropped toward FACS","refs":["rcef.canonical_expression.chin_raise","facs.code.au17"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au18_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_pucker_left | facs.code.au18_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L18 corresponds to canonical lip_pucker_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_pucker_left","facs.code.au18_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_pucker_left","facs.code.au18_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au18_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_pucker_right | facs.code.au18_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R18 corresponds to canonical lip_pucker_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_pucker_right","facs.code.au18_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_pucker_right","facs.code.au18_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au20_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_stretch_left | facs.code.au20_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L20 corresponds to canonical lip_stretch_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_stretch_left","facs.code.au20_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_stretch_left","facs.code.au20_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au20_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_stretch_right | facs.code.au20_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R20 corresponds to canonical lip_stretch_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_stretch_right","facs.code.au20_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_stretch_right","facs.code.au20_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au22_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_funnel_upper_left, rcef.canonical_expression.lip_funnel_lower_left | facs.code.au22_left | {"id":"weighted_sum","weights":[0.5,0.5]} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L22 corresponds to canonical lip_funnel_upper_left and lip_funnel_lower_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the FACS side value is the mean of the upper and lower canonical parts.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry irrecoverable","refs":["rcef.canonical_expression.lip_funnel_upper_left","rcef.canonical_expression.lip_funnel_lower_left","facs.code.au22_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_funnel_upper_left","rcef.canonical_expression.lip_funnel_lower_left","facs.code.au22_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_funnel_upper_left","rcef.canonical_expression.lip_funnel_lower_left","facs.code.au22_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au22_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_funnel_upper_right, rcef.canonical_expression.lip_funnel_lower_right | facs.code.au22_right | {"id":"weighted_sum","weights":[0.5,0.5]} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R22 corresponds to canonical lip_funnel_upper_right and lip_funnel_lower_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the FACS side value is the mean of the upper and lower canonical parts.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry irrecoverable","refs":["rcef.canonical_expression.lip_funnel_upper_right","rcef.canonical_expression.lip_funnel_lower_right","facs.code.au22_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_funnel_upper_right","rcef.canonical_expression.lip_funnel_lower_right","facs.code.au22_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_funnel_upper_right","rcef.canonical_expression.lip_funnel_lower_right","facs.code.au22_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au24_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_press_left | facs.code.au24_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L24 corresponds to canonical lip_press_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_press_left","facs.code.au24_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_press_left","facs.code.au24_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au24_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_press_right | facs.code.au24_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R24 corresponds to canonical lip_press_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_press_right","facs.code.au24_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_press_right","facs.code.au24_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au26
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.jaw_drop | facs.code.au26 | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 26 corresponds to canonical jaw_drop.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss facs_mouth_opening_split.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.jaw_drop","facs.code.au26"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_mouth_opening_split: from FACS, 27 is read as 26 and 25 is not read; toward FACS all opening is written as 26","refs":["rcef.canonical_expression.jaw_drop","facs.code.au26"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au28_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_suck_upper_left, rcef.canonical_expression.lip_suck_lower_left | facs.code.au28_left | {"id":"weighted_sum","weights":[0.5,0.5]} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L28 corresponds to canonical lip_suck_upper_left and lip_suck_lower_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the FACS side value is the mean of the upper and lower canonical parts.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry irrecoverable","refs":["rcef.canonical_expression.lip_suck_upper_left","rcef.canonical_expression.lip_suck_lower_left","facs.code.au28_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_suck_upper_left","rcef.canonical_expression.lip_suck_lower_left","facs.code.au28_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_suck_upper_left","rcef.canonical_expression.lip_suck_lower_left","facs.code.au28_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au28_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_suck_upper_right, rcef.canonical_expression.lip_suck_lower_right | facs.code.au28_right | {"id":"weighted_sum","weights":[0.5,0.5]} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R28 corresponds to canonical lip_suck_upper_right and lip_suck_lower_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the FACS side value is the mean of the upper and lower canonical parts.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"asymmetry irrecoverable","refs":["rcef.canonical_expression.lip_suck_upper_right","rcef.canonical_expression.lip_suck_lower_right","facs.code.au28_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_suck_upper_right","rcef.canonical_expression.lip_suck_lower_right","facs.code.au28_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_suck_upper_right","rcef.canonical_expression.lip_suck_lower_right","facs.code.au28_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## rcef_cheek_puff.to_facs
+
+### rcef_facs.au34_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.cheek_puff_left | facs.code.au34_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L34 corresponds to canonical cheek_puff_left.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.cheek_puff_left","facs.code.au34_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.cheek_puff_left","facs.code.au34_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["rcef.canonical_expression.cheek_puff_left","facs.code.au34_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au34_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.cheek_puff_right | facs.code.au34_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R34 corresponds to canonical cheek_puff_right.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.cheek_puff_right","facs.code.au34_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.cheek_puff_right","facs.code.au34_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["rcef.canonical_expression.cheek_puff_right","facs.code.au34_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## rcef_jaw_thrust.to_facs
+
+### rcef_facs.au29
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.jaw_thrust | facs.code.au29 | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 29 corresponds to canonical jaw_thrust.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.jaw_thrust","facs.code.au29"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["rcef.canonical_expression.jaw_thrust","facs.code.au29"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## rcef_jaw_sideways.to_facs
+
+### rcef_facs.au30_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.jaw_sideways_left | facs.code.au30_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L30 corresponds to canonical jaw_sideways_left.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss facs_au30_direction_unresolved.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.jaw_sideways_left","facs.code.au30_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.jaw_sideways_left","facs.code.au30_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_au30_direction_unresolved: FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left","refs":["rcef.canonical_expression.jaw_sideways_left","facs.code.au30_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["rcef.canonical_expression.jaw_sideways_left","facs.code.au30_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au30_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.jaw_sideways_right | facs.code.au30_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R30 corresponds to canonical jaw_sideways_right.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged; the endpoints are assumed equal although the defined actions differ or are unresolved; see loss facs_au30_direction_unresolved.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.jaw_sideways_right","facs.code.au30_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.jaw_sideways_right","facs.code.au30_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_au30_direction_unresolved: FACS L30 and R30 are read as directions toward the subject's own left and right; the source does not say whose left","refs":["rcef.canonical_expression.jaw_sideways_right","facs.code.au30_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["rcef.canonical_expression.jaw_sideways_right","facs.code.au30_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## rcef_blink.to_facs
+
+### rcef_facs.au43_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.eye_close_left | facs.code.au43_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L43 corresponds to canonical eye_close_left.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.eye_close_left","facs.code.au43_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.eye_close_left","facs.code.au43_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_eyelid_events: FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43","refs":["rcef.canonical_expression.eye_close_left","facs.code.au43_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["rcef.canonical_expression.eye_close_left","facs.code.au43_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, facs_hager_2002, rcef_canonical_v1
+
+### rcef_facs.au43_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.eye_close_right | facs.code.au43_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R43 corresponds to canonical eye_close_right.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.eye_close_right","facs.code.au43_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.eye_close_right","facs.code.au43_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_eyelid_events: FACS blink and wink are events apart from 43; from FACS, 45 and 46 are read as 43; toward FACS all closure is written as 43","refs":["rcef.canonical_expression.eye_close_right","facs.code.au43_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["rcef.canonical_expression.eye_close_right","facs.code.au43_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, facs_hager_2002, rcef_canonical_v1
+
+## rcef_tongue_out.to_facs
+
+### rcef_facs.au19
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.tongue_out | facs.code.au19 | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS 19 corresponds to canonical tongue_out.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.tongue_out","facs.code.au19"],"units":"1"},{"category":"signal","effect":"approximated","reason":"the tongue extension has no stated length","refs":["rcef.canonical_expression.tongue_out","facs.code.au19"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## rcef_cheek_suck.to_facs
+
+### rcef_facs.au35_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.cheek_suck_left | facs.code.au35_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L35 corresponds to canonical cheek_suck_left.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.cheek_suck_left","facs.code.au35_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.cheek_suck_left","facs.code.au35_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["rcef.canonical_expression.cheek_suck_left","facs.code.au35_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au35_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.cheek_suck_right | facs.code.au35_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R35 corresponds to canonical cheek_suck_right.
+- endpoints: the action at its fullest, as RCEF assumes, is canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; the source gives no intensity scale for gross behaviour codes; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.cheek_suck_right","facs.code.au35_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.cheek_suck_right","facs.code.au35_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_gross_code_no_intensity: the source gives no intensity scale for gross behaviour codes; 1 is RCEF's assumption","refs":["rcef.canonical_expression.cheek_suck_right","facs.code.au35_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+## rcef_lip_tighten.to_facs
+
+### rcef_facs.au23_left
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_tighten_left | facs.code.au23_left | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS L23 corresponds to canonical lip_tighten_left.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_tighten_left","facs.code.au23_left"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_tighten_left","facs.code.au23_left"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
+
+### rcef_facs.au23_right
+
+| Inputs | Outputs | Operator | Status | Quality |
+| --- | --- | --- | --- | --- |
+| rcef.canonical_expression.lip_tighten_right | facs.code.au23_right | {"id":"affine","offset":0.0,"scale":1.0} | mapped | approximate |
+
+Assumptions:
+
+- correspondence: FACS R23 corresponds to canonical lip_tighten_right.
+- endpoints: FACS intensity E, the maximum for the person, is assumed to be canonical 1, and 'absent' (a scored frame does not list the code) is assumed to be canonical 0; FACS defines only the ordered letters A-E, so values between are RCEF's encoding (docs/facs-intensity.md) and correspond as the operator passes them; no evidence supports this, and no response curve is measured; the value is carried over unchanged.
+
+Loss annotations: [{"category":"signal","effect":"approximated","reason":"facs_ordinal_intensity: FACS intensity is ordinal (letters A-E, E the person's maximum); the numeric value is an RCEF encoding; equal steps are not claimed; no gain is measured","refs":["rcef.canonical_expression.lip_tighten_right","facs.code.au23_right"],"units":"1"},{"category":"signal","effect":"approximated","reason":"facs_side_frame_unresolved: FACS names L and R without saying whose side; RCEF reads them as the subject's own","refs":["rcef.canonical_expression.lip_tighten_right","facs.code.au23_right"],"units":"1"}]
+
+Evidence: facs_wikipedia, rcef_canonical_v1
 
 ## fb2_face.to_rcef
 

@@ -45,12 +45,15 @@ CANONICAL = (PREFIX, VISEME)
 INTERMEDIATE = 'rcef.intermediate.'
 SUM = build_canonical.INTERMEDIATE_SUM
 PROFILES = {'arkit': 'arkit.coefficient', 'fb2': 'openxr.fb2', 'vrcft_artist': 'vrcft.artist.base', 'vrm': 'vrm.preset',
-            'visemes': 'openxr.visemes'}
-IN_MAP = re.compile(r'^(arkit|fb2|vrcft_artist|vrm|visemes)_([a-z_]+)\.to_rcef$')
-OUT_MAP = re.compile(r'^rcef_([a-z_]+)\.to_(arkit|fb2|vrcft_artist|vrm|visemes)$')
+            'visemes': 'openxr.visemes', 'facs': 'facs.code'}
+IN_MAP = re.compile(r'^(arkit|fb2|vrcft_artist|vrm|visemes|facs)_([a-z_]+)\.to_rcef$')
+OUT_MAP = re.compile(r'^rcef_([a-z_]+)\.to_(arkit|fb2|vrcft_artist|vrm|visemes|facs)$')
 # Mappings per set: (in-maps, out-maps). The FB2 gaze out-map has 4 internal steps, the META aggregate in-map 1.
-COUNTS = {'arkit': (60, 52), 'fb2': (70, 74), 'vrcft_artist': (0, 72), 'vrm': (5, 7), 'visemes': (17, 15)}
-MAPS = 63
+COUNTS = {'arkit': (60, 52), 'fb2': (70, 74), 'vrcft_artist': (0, 72), 'vrm': (5, 7), 'visemes': (17, 15),
+          'facs': (53, 49)}
+MAPS = 79
+# FACS hop keys that come from the code, not from an audit row: every hop, the side letters, AU43 and the gross codes.
+FACS_GROSS = ('29', '30', '34', '35', '43')
 # Pairs of a rule's two ends whose sides may differ although neither is shared. None today.
 SIDE_EXCEPTIONS = []
 # Operators allowed on a hop: today's operator census, with power-of-two weights.
@@ -195,7 +198,9 @@ class PivotStructure(unittest.TestCase):
                 cls.hops.append((mapping['id'], 'out', m.group(2), m.group(1), mapping['rules']))
         cls.sum_target = next(r['outputs'][0] for m in cls.pack['mappings'] for r in m['rules'] if r['inputs'] == [SUM])
         cls.pairs = ab_compare.b_pairs(cls.pack)
-        cls.aligned = build_canonical.Builder(ROOT).aligned
+        builder = build_canonical.Builder(ROOT)
+        cls.aligned = builder.aligned
+        cls.facs = build_canonical.FacsBuilder(ROOT, builder)
         cls.groups = next(p['metadata']['groups'] for p in cls.pack['profiles'] if p['id'] == 'rcef.canonical_expression')
 
     def hop_rules(self):
@@ -217,10 +222,14 @@ class PivotStructure(unittest.TestCase):
 
     def spec(self, key, rule):
         """The generator's description of the set at the far end of a hop."""
+        if key == 'facs':
+            return build_canonical.FACS_SPEC
         viseme = any(c.startswith(VISEME) for c in self.canonical(rule))
         return (build_canonical.VISEME_PROVIDERS if viseme else build_canonical.PROVIDERS)[key]
 
     def audit_row(self, key, canonical):
+        if key == 'facs':
+            return self.facs.audit[canonical[len(PREFIX):]]
         if canonical.startswith(VISEME):
             return self.visemes.audit[key].get(canonical[len(VISEME):], {'verdict': 'same', 'keys': []})
         return self.docs['audit'][key][canonical[len(PREFIX):]]
@@ -345,7 +354,11 @@ class PivotStructure(unittest.TestCase):
                     self.assertEqual(len(endpoints), 1)
                     text = endpoints[0]
                     opening = build_canonical.OPENING.format(build_canonical.possessive(name))
-                    if kind in ('sum_step', 'in_sum'):
+                    if key == 'facs':
+                        signal = self.signals[self.provider(key, rule)[0]]
+                        opening = self.facs.opening[signal['metadata']['facs_table']]
+                        clause = build_canonical.FACS_CLAUSES[kind]
+                    elif kind in ('sum_step', 'in_sum'):
                         step = next(r for r in rules if r['outputs'] == [SUM])
                         names = [s.rsplit('_', 2)[-2] for s in step['inputs']]
                         clause = build_canonical.SUM_CLAUSE.format(build_canonical.join(names))
@@ -370,6 +383,13 @@ class PivotStructure(unittest.TestCase):
                 # The audit's META viseme scope row owns every META copy hop.
                 if key == 'visemes' and self.kind(direction, key, rule, rules).endswith('_copy'):
                     expected.add(build_canonical.VISEME_SCOPE_KEY)
+                if key == 'facs':
+                    signal = self.signals[self.provider(key, rule)[0]]
+                    code = signal['metadata']['facs_code']
+                    expected |= {'facs_ordinal_intensity'} | ({'facs_gross_code_no_intensity'} if code in FACS_GROSS
+                                                              else set())
+                    expected |= {'facs_side_frame_unresolved'} if signal['native_id'][0] in 'LR' else set()
+                    expected |= {'facs_eyelid_events'} if code == '43' else set()
                 self.assertEqual(loss_keys(rule, self.docs['keys']), expected, rule['id'])
 
     def test_hop_loss_keys_are_the_ones_the_audit_gives_a_whole_hop(self):

@@ -444,6 +444,50 @@ FACS code numbers, short names, table membership, intensity letters, modifier le
 - License or terms: CC-BY-SA-4.0
 - Locator: raw wikitext lines 69-75 (intensity letters), 78 (side modifiers), 82-142 (main codes), 144-176 (head movement codes), 178-204 (eye movement codes), 206-221 (visibility codes) and 223-284 (gross behavior codes)
 
+## facs_hager_2002
+
+The FACS publisher's page on the 2002 manual lists the re-assignment of the old 41, 42 and 44 scores to intensities of AU 43, and revised scoring for AUs 25, 26 and 27 with intensities; it gives no letters. Another public page, at Carnegie Mellon, names 41, 42 and 43 instead and does not name 44; RCEF takes no value from either.
+
+- Source: [facs_hager_2002](https://web.archive.org/web/20081218070149id_/http://www.face-and-emotion.com:80/dataface/facs/new_version.jsp)
+- Revision: `Internet Archive capture 20081218070149, original bytes (id_)`
+- Retrieved: 2026-10-29
+- SHA-256: `12d6e115d6dcde65097df99005a938b25170d842e7597b1db1ab2da5946e5b1f`
+- License or terms: reference only; source prose not redistributed
+- Locator: lines 204-205 (list of features of the 2002 manual)
+
+## rocketbox_avatars
+
+The Microsoft Rocketbox avatars have facial blendshapes, 48 of them FACS shapes, and the README credits Matias Volonte with creating the blendshapes. The 48 AU_* shape names (code number, optional side letter, name) are read as facts from the facial FBX files that examples/rigs.py pins (Female_Adult_01 and Male_Adult_01, which have the same 48 names).
+
+- Source: [rocketbox_avatars](https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/README.md)
+- Revision: `0943055db6ec570bcef9f2c8b41c9e5467c808f9`
+- Retrieved: 2026-10-29
+- SHA-256: `bcf8013e3d5817a5dee5d1770b9943278189cd76b2d9b2abc243db99b703ecd6`
+- License or terms: MIT
+- Locator: README lines 21 (48 FACS) and 55 (blendshape credit); the shape names from the pinned facial FBX files
+
+## pyfeat_au_reference
+
+Py-Feat's action-unit reference relates FACS codes to muscles and, approximately by its own statement, to ARKit shapes; cited in audit notes only, not on any hop.
+
+- Source: [pyfeat_au_reference](https://raw.githubusercontent.com/cosanlab/py-feat/4ebb4ecade769d02e962d18c5e6704f01045d931/docs/pages/au_reference.md)
+- Revision: `4ebb4ecade769d02e962d18c5e6704f01045d931`
+- Retrieved: 2026-10-29
+- SHA-256: `c8d6281bae16c154b39e1cdf3df810f46ebc0af065d9ec0920154223d96ed35b`
+- License or terms: MIT
+- Locator: lines 13 (the ARKit column is approximate), 74, 87-91, 100, 106-109 and 118
+
+## ozel_arkit_facs
+
+Melinda Ozel's ARKit to FACS cheat sheet relates ARKit shapes to FACS codes, with notes on mouthShrugUpper and on eye-look pairs; cited in audit notes only, paraphrased, not on any hop.
+
+- Source: [ozel_arkit_facs](https://web.archive.org/web/20261010185714id_/https://melindaozel.com/ARKit-to-FACS-cheat-sheet/)
+- Revision: `Internet Archive capture 20261010185714, original bytes (id_); page modified 2026-02-19`
+- Retrieved: 2026-10-29
+- SHA-256: `2139bc1752ac8074f1d23a40f65ff79dc4850d367a9eeaca929f1366b9e479b1`
+- License or terms: reference only; (c) 2020-2026 Melinda Ozel, all rights reserved; source prose not redistributed
+- Locator: HTML lines 698-704 (eyeBlink), 788 (eye-look pairs), 1048-1076 (mouthShrugUpper) and 1320-1326 (jawOpen)
+
 ## rcsf_proposal
 
 RCSF design aims: coverage of most distinct joints across the analysed standards, format neutrality, and neutral territory for standards organizations; cited for RCEF's aims and its stated departures, not copied.
