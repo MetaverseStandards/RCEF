@@ -66,7 +66,7 @@ The codec returns no frame, and names each problem with its codes, when the inpu
 
 Some codes have no canonical signal. Where a coder scores such a code *instead of* a mapped code, the mapped code's absence says nothing. So the codec reads the code as that mapped code, or it leaves the mapped code's signals out. Where a coder would score both codes, "absent" still holds, and the codec does not read the other code.
 
-A signal that is left out is never 0. A left-out signal wins over any value that another code gives it. msf-character-tools then refuses the in-map that reads it (`E_MISSING_SAMPLE`), and the route labels those outputs "refused upstream".
+A signal that is left out is never 0. A left-out signal wins over any value that another code gives it. In a route, msf-character-tools leaves out every output that reads it, and the route labels those outputs "not available from source".
 
 | Codes (Wikipedia name) | Rule | Side letter | Reason and record |
 |---|---|---|---|
