@@ -75,7 +75,7 @@ Each mapping (and each signal) has an `evidence_status` field. It says how well 
 - The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass. In `viseme-poses.rocketbox-features`, 11 of 15 viseme classes pass on all 4 held-out rigs: 7 by their shape and 4 by a perceptual gate of visible mouth features. The viseme pose bridge reads only those. The earlier `viseme-poses.rocketbox-female` and `viseme-poses.rocketbox-multi` stay as history; no mapping cites them.
 - The viseme pose bridge lets META visemes and VRM vowels drive ARKit, FB2 and Unified Expressions faces, and FACS values. Its poses are fitted to the viseme shapes of 18 Rocketbox rigs, in their own ARKit units. The 4 classes that fail (`labiodental`, `postalveolar`, `coronal_nasal_lateral` and `rhotic`) move nothing. There is no map from expressions back to visemes.
 - The VRM maps come from specification texts only. No published table maps META visemes to VRM; the VRM vowel hops are a phoneme-label correspondence.
-- The README lists what is [not translated yet](README.md#mappings), and why.
+- The README lists what is [not translated yet](README.md#not-translated-yet), and why.
 
 ## Part 2: Contributing
 
@@ -103,7 +103,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/architecture.md](docs/architec
 
 ### Commands
 
-Install the locked msf-character-tools wheel by hash as the README's [Getting started](README.md#getting-started) shows. Run every command from the checkout.
+Install the locked msf-character-tools wheel by hash as [Getting started](docs/getting-started.md#install-the-wheel-by-hash) shows. Run every command from the checkout.
 
 ```sh
 python3 -B check.py                          # check msf-character-tools, calibration, outputs; writes nothing
@@ -146,7 +146,7 @@ Without `--write`, each script checks its output and exits non-zero if the outpu
 | Each data change has an entry in [CHANGELOG.md](CHANGELOG.md). | Reviewers. Data 0.5.0 is a release candidate: its section has its date, and only the project's release owners tag it. Until it is tagged, a data change folds into that section, keeps `data_version` 0.5.0 and sets the date again (Releases, below). After the tag, a data change opens a new top section, `Data X.Y.Z — unreleased`, with the next `data_version`, and adds its entries there. Calibration records have their own ledger, so their entries go in a separate `Calibration and examples` section below the data section of the same release. `tests/test_metadata.py` checks that `data_version` in `pack.toml` equals the pack's and has the form `X.Y.Z`. |
 | Code is MIT. Data and documentation are CC-BY-SA-4.0. Third-party facts are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Do not copy provider prose that has no open licence: write your own summary and cite the source. | Reviewers. Start each new file with a licence line, as the existing files do. |
 
-To adopt a new msf-character-tools release: install its wheel by hash, then run `python3 -B check.py --update-lock --wheel PATH/TO/WHEEL`. Do this once from each Python and platform whose wheel tag you support. If the lock has the same commit and the same version, the new tag's entry is merged into it. If the commit or the version is different, the old lock moves to `tooling.lock.previous.json` and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`, and the README's install-by-hash steps then fail for that tag. pip records the hash, so after a pip install `--wheel` is optional.
+To adopt a new msf-character-tools release: install its wheel by hash, then run `python3 -B check.py --update-lock --wheel PATH/TO/WHEEL`. Do this once from each Python and platform whose wheel tag you support. If the lock has the same commit and the same version, the new tag's entry is merged into it. If the commit or the version is different, the old lock moves to `tooling.lock.previous.json` and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`. Then the install-by-hash steps in [Getting started](docs/getting-started.md#install-the-wheel-by-hash) fail for that tag. pip records the hash, so after a pip install `--wheel` is optional.
 
 ### Known traps
 

@@ -13,7 +13,7 @@ python3 -m venv .venv
 . .venv/bin/activate
 ```
 
-Install the locked msf-character-tools release wheel into it by hash, as [Getting started](../README.md#getting-started) shows. With this venv's pip, the last step is `python -m pip install --require-hashes -r "$DIR/msf-character-tools.txt"`. Then check the install:
+Install the locked msf-character-tools release wheel into it by hash, as [Getting started](../docs/getting-started.md#install-the-wheel-by-hash) shows. With this venv's pip, the last step is `python -m pip install --require-hashes -r "$DIR/msf-character-tools.txt"`. Then check the install:
 
 ```sh
 python -B check.py

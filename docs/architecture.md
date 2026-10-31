@@ -51,20 +51,20 @@ flowchart TD
 | MSF Character Tools | Authoring discovery and validation, `compile_pack`, `profile_snapshot`, `compile_mapping`, `evaluate_mapping`; asset inspection and sidecar binding | Implements the reviewed wire and operator contracts and their refusals. |
 | Independent reviewer or consumer | Review changed bytes and meaning; run the drift check and tests with the locked msf-character-tools | Executable correctness alone does not show visual, anatomical, cross-provider or physiological equivalence. |
 
-Sources: [RCEF launcher](../check.py), [MSF authoring](../../msf_character_tools/msf_character_tools/authoring.py), [pack compiler](../../msf_character_tools/msf_character_tools/pack.py), [mapping compiler and evaluator](../../msf_character_tools/msf_character_tools/mapping.py), the [C++ core](../../msf_character_tools/core/src) behind them, [report exporter](../scripts/export_reports.py), [calibration tools](../tools/calibration/README.md), [tests](../tests/).
+Sources: [RCEF launcher](../check.py), [MSF authoring](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/msf_character_tools/authoring.py), [pack compiler](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/msf_character_tools/pack.py), [mapping compiler and evaluator](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/msf_character_tools/mapping.py), the [C++ core](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/core/src) behind them, [report exporter](../scripts/export_reports.py), [calibration tools](../tools/calibration/README.md), [tests](../tests/).
 
 ## 2. What check.py does
 
 `check.py` runs these steps in order and stops at the first failure.
 
-1. **Locked msf-character-tools.** It checks the installed `msf_character_tools` package against [tooling.lock.json](../evidence/tooling.lock.json). If anything is different, it lists the problems, prints `Refusing to check` and exits 2. [The msf-character-tools lock](#the-msf-character-tools-lock) gives the rules.
-2. **Calibration records.** It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. Any mapping that cites a record (evidence id `calibration.<id>`) must use `piecewise_linear` with exactly the record's frozen knots, or be a `weighted_sum` pose sum whose weights are exactly the record's frozen poses, and every held-out cell of each channel it reads must pass. This step does not use msf-character-tools. In data 0.5.0 the 45 weighted sums of the viseme pose bridge cite `viseme-poses.rocketbox-features`.
-3. **Shared outputs.** It runs `python -B -P -m msf_character_tools check AUTHORING --pack PATH --csv PATH [--write]` on the checkout, with an empty bytecode cache, so that the subprocess imports the verified package. With `--write` it regenerates the pack, the CSV, coverage and checksums. Without it, it checks that they have not drifted.
-4. **Readable reports.** If step 3 passes, it runs [export_reports.py](../scripts/export_reports.py) with the same write or check choice.
+1. Locked msf-character-tools. It checks the installed `msf_character_tools` package against [tooling.lock.json](../evidence/tooling.lock.json). If anything is different, it lists the problems, prints `Refusing to check` and exits 2. [The msf-character-tools lock](#the-msf-character-tools-lock) gives the rules.
+2. Calibration records. It reads every `*.cal` record in [calibration/](../calibration/README.md) and the freeze ledger `calibration/FREEZES`. Each record must match the record format, and its frozen hash must be the latest one in the ledger for its id. A mapping that cites a record (evidence id `calibration.<id>`) must meet two conditions. It must use `piecewise_linear` with exactly the record's frozen knots, or be a `weighted_sum` pose sum with exactly the record's frozen poses as weights. Every held-out cell of each channel that it reads must pass. This step does not use msf-character-tools. In data 0.5.0 the 45 weighted sums of the viseme pose bridge cite `viseme-poses.rocketbox-features`.
+3. Shared outputs. It runs `python -B -P -m msf_character_tools check AUTHORING --pack PATH --csv PATH [--write]` on the checkout, with an empty bytecode cache, so that the subprocess imports the verified package. With `--write` it regenerates the pack, the CSV, coverage and checksums. Without it, it checks that they have not drifted.
+4. Readable reports. If step 3 passes, it runs [export_reports.py](../scripts/export_reports.py) with the same write or check choice.
 
 ### The msf-character-tools lock
 
-The lock is format 2. It records the msf-character-tools commit and version, and one entry per wheel tag. Each entry has the wheel's SHA-256, when known, and a SHA-256 for every file in the installed `msf_character_tools` package, of any type, not only the Python files. The lock's `source` URL is for information only.
+The lock is format 2. It records the msf-character-tools commit and version, and one entry per wheel tag. Each entry has the wheel's SHA-256, when known. It also has a SHA-256 for every file of any type in the installed `msf_character_tools` package. The lock's `source` URL is for information only.
 
 One lock serves several Pythons. `check.py` reads the wheel tag of the install from its `WHEEL` file, and checks the install against the entry for that tag.
 
@@ -75,23 +75,23 @@ Before it does anything else, `check.py` checks all of these:
 - Every file in the package directory, of any type, matches both its `RECORD` entry and the lock. Bytecode caches are ignored.
 - `msf_character_tools` is imported from that installed distribution, and not from somewhere else (for example through `PYTHONPATH`).
 
-`check.py` compares the wheel hash after installation only if the installer recorded it. uv does not record it, so for uv installs `--require-hashes` checks the hash at install time. The commit and the file hashes identify the package, so `check.py` accepts local `file://` installs. Checking never clones or downloads anything.
+`check.py` compares the wheel hash after installation only if the installer recorded it. uv does not record it. For uv installs, `--require-hashes` checks the hash at install time. The commit and the file hashes identify the package, so `check.py` accepts local `file://` installs. Checking never clones or downloads anything.
 
-**Adopt a new release.** Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash, so without `--wheel` the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
+**Adopt a new release.** Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash. Without `--wheel`, the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
 
 **Roll back.** `tooling.lock.previous.json` holds the lock of msf-character-tools 0.5.0, the first release from its repository in the Metaverse Standards Forum organization. To roll back, copy `tooling.lock.previous.json` over `tooling.lock.json`, install msf-character-tools at its commit, and use the `check.py` from the same RCEF commit as that lock.
 
 ### Calibration records and the held-out provenance check
 
-A calibration record is a software-only fit, made from renders or mesh geometry of example rigs. Its frozen part (everything except `cells`) is hashed, and the hash is written to `calibration/FREEZES` and committed before the held-out run. The held-out seeds come from that hash. Five records exist. The three viseme-poses records in the checkout were frozen again as new versions after the history was rewritten for publication; only `version`, `code_commit` and `frozen_sha256` changed in their frozen parts:
+A calibration record is a software-only fit, made from renders or mesh geometry of example rigs. Its frozen part (everything except `cells`) is hashed, and the hash is written to `calibration/FREEZES` and committed before the held-out run. The held-out seeds come from that hash. Five records exist. The three viseme-poses records in the checkout were frozen again as new versions after the history was rewritten for publication. Only `version`, `code_commit` and `frozen_sha256` changed in their frozen parts:
 
 - `mediapipe.ict-response`: a negative result. 25 of MediaPipe's 51 ARKit-named scores could be fitted, and none passed on held-out data.
 - `rig-gains.ict-rocketbox-female`: 3 of 51 ARKit shapes pass; 48 fail and are published as negative results.
 - `viseme-poses.rocketbox-female`: the pose of each canonical viseme class, fitted to Rocketbox Female's viseme shapes in her ARKit shapes, on mesh geometry only. 9 of 15 classes pass on Rocketbox Male. Version 2, in the checkout, is version 1 frozen again, with the same cells. No mapping cites it now.
 - `viseme-poses.rocketbox-multi`: the pose of each canonical viseme class, fitted to the viseme shapes of 10 Rocketbox rigs. Version 2 (Left and Right tied) passes 7 of 15 classes on its 4 held-out rigs. Version 3, in the checkout, is version 2 frozen again, with the same cells. No mapping cites it now.
-- `viseme-poses.rocketbox-features`: the pose of each canonical viseme class, fitted to 18 Rocketbox rigs with Left and Right tied, with a perceptual gate (visible mouth features with frozen tolerances) for 4 classes. 11 of 15 classes pass on all 4 held-out Rocketbox rigs, 7 by their shape and 4 by the perceptual gate; the viseme pose bridge reads only those. Version 2, in the checkout, is version 1 frozen again: its shape cells are the same, 26 of its 48 feature cells moved a little because its held-out conditions come from its new frozen hash, and the same classes pass.
+- `viseme-poses.rocketbox-features`: the pose of each canonical viseme class, fitted to 18 Rocketbox rigs with Left and Right tied. 4 classes use a perceptual gate (visible mouth features with frozen tolerances). 11 of 15 classes pass on all 4 held-out Rocketbox rigs: 7 by their shape and 4 by the perceptual gate. The viseme pose bridge reads only those. Version 2, in the checkout, is version 1 frozen again. Its shape cells are the same, and the same classes pass. 26 of its 48 feature cells moved a little, because its held-out conditions come from its new frozen hash.
 
-The calibration tools in [tools/calibration/](../tools/calibration/README.md) run the held-out step. Before they render anything, [provenance.py](../tools/calibration/provenance.py) checks that the record's `code_commit` is in the checkout's history and that no file the run imports has changed since that commit. The tools also check that every cached input has the SHA-256 the record pins and that the installed msf-character-tools passes the lock check. `k3_heldout.py` also requires the renderer binary that the record names. `check.py` cannot see Git history, so reviewers check that the ledger line was committed before the results.
+The calibration tools in [tools/calibration/](../tools/calibration/README.md) run the held-out step. Before they render anything, [provenance.py](../tools/calibration/provenance.py) checks that the record's `code_commit` is in the checkout's history. It also checks that no file that the run imports has changed since that commit. The tools also check that every cached input has the SHA-256 the record pins and that the installed msf-character-tools passes the lock check. `k3_heldout.py` also requires the renderer binary that the record names. `check.py` cannot see Git history, so reviewers check that the ledger line was committed before the results.
 
 ## 3. How TOML is discovered and read
 
@@ -137,7 +137,7 @@ The merged document needs all five keys and the four arrays. msf-character-tools
 
 Parsing is strict UTF-8 with `tomllib.loads`. TOML syntax errors and duplicate keys are reported before schema checks. The msf-character-tools validator refuses unknown keys, missing keys, invalid enums, duplicate IDs, references to records that do not exist, and invalid numbers or domains. The document must be JSON-compatible: TOML dates and times are not accepted as values, and NaN, infinity and booleans are refused as scalars. The pipeline never executes text from TOML, and it does not infer conversions from provider names.
 
-Sources: `load_authoring`, `authoring_files`, `_read_fragment` and `validate_authoring` in [authoring.py](../../msf_character_tools/msf_character_tools/authoring.py).
+Sources: `load_authoring`, `authoring_files`, `_read_fragment` and `validate_authoring` in [authoring.py](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/msf_character_tools/authoring.py).
 
 ## 4. Authoring field reference
 
@@ -193,7 +193,9 @@ In the schema a map is a `[[mappings]]` record and each mapping in it is one ent
 
 `disposition` says whether the author has admitted the relationship. `evidence_status` describes its evidence. `mapping_quality` describes the quality of an admitted mapping. These are separate fields. The direction is the ordered relationship from `inputs` to `outputs`. A mapping does not imply an inverse.
 
-Source: `validate_authoring` in [authoring.py](../../msf_character_tools/msf_character_tools/authoring.py), which runs the C++ core's checks: `validate_signal`, `validate_rule`, `knots` and `loss_annotation` in [authoring.cpp](../../msf_character_tools/core/src/authoring.cpp).
+For each pair of an expression set and a canonical set, RCEF has at most one map in each direction, called a map set. Its ID is `<from>.to_<to>`. The ID names an expression set by the key that its mapping IDs use, for example `fb2_rcef.*` and `rcef_fb2.*`. The ID names a canonical set `rcef_expression` or `rcef_viseme`. A map changes the values of its source set into values of its target set as one unit. A part of a map is its mappings for one group of the canonical set. The group of each canonical signal is in its metadata.
+
+Source: `validate_authoring` in [authoring.py](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/msf_character_tools/authoring.py), which runs the C++ core's checks: `validate_signal`, `validate_rule`, `knots` and `loss_annotation` in [authoring.cpp](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/core/src/authoring.cpp).
 
 ## 5. Examples of each operator
 
@@ -208,7 +210,7 @@ The arithmetic uses checked binary64 steps. They refuse non-finite results, and 
 
 ### Identity, and the ARKit blink mapping
 
-`identity` gives `y = x`. It compiles only if the input and output have the same units, value type, domain and calibration, and the same presence and value of neutral, side and coupling. No mapped rule uses it, because every hop changes the calibration basis between a provider and a canonical set. The one identity rule is a record: `survey.mediapipe_rcef.blink` in [unresolved.toml](../mappings/unresolved.toml) is unresolved, so it never runs (section 6).
+`identity` gives `y = x`. It compiles only if the input and output have the same units, value type, domain and calibration. They must also have the same presence and value of neutral, side and coupling. No mapped rule uses it, because every hop changes the calibration basis between a provider and a canonical set. The one identity rule is a record: `survey.mediapipe_rcef.blink` in [unresolved.toml](../mappings/unresolved.toml) is unresolved, so it never runs (section 6).
 
 An `affine` rule with scale `1` and offset `0` carries a value over unchanged across such a change of basis. This is the left-blink mapping of `arkit.to_rcef_expression`, written out as nested tables so that it is easier to read. It is abridged: the map's other 59 mappings, three transfer assumptions, one loss annotation and five evidence IDs are left out. The source file stores the rules as inline object arrays.
 
@@ -274,7 +276,7 @@ The gaze part of `rcef_expression.to_fb2` builds FB2's requirement that only one
 
 Each split is exactly zero on its flat side, so the two FB2 directions of a pair are never both non-zero. When both canonical directions are non-zero, only their difference is kept. Each of these mappings declares that as a loss. The intermediate signals are in the `rcef.intermediate` profile, not in the source or target profile, so they stay virtual inside the compiled map. All 12 mappings in this part are proposed and approximate. See [canonical_fb2.toml](../mappings/canonical_fb2.toml) and [intermediate.toml](../data/intermediate.toml).
 
-Sources: operator dispatch and `piecewise` in the C++ core's [mapping.cpp](../../msf_character_tools/core/src/mapping.cpp), and `product`, `add`, `sub` and `divide` in [math3d.cpp](../../msf_character_tools/core/src/math3d.cpp). [math3d.py](../../msf_character_tools/msf_character_tools/math3d.py) exports them as `_product`, `_add`, `_sub` and `_divide`, with `_sum`, which applies `add` in order ([math_module.cpp](../../msf_character_tools/core/python/math_module.cpp)).
+Sources: operator dispatch and `piecewise` in the C++ core's [mapping.cpp](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/core/src/mapping.cpp), and `product`, `add`, `sub` and `divide` in [math3d.cpp](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/core/src/math3d.cpp). [math3d.py](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/msf_character_tools/math3d.py) exports them as `_product`, `_add`, `_sub` and `_divide`, with `_sum`, which applies `add` in order ([math_module.cpp](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/core/python/math_module.cpp)).
 
 ## 6. Runtime admission, validity and asset binding
 
@@ -324,7 +326,7 @@ With source `fixture.source`, target `fixture.target` and map `fixture.affine`, 
 | Any frame has an error, with `partial=True` | Each output that reads a bad input is in `refusals`, with its diagnostics, and each output that reads a missing input is in `unavailable`. The other outputs are written. Route uses this mode. |
 | Valid frames | Output frame order is kept, and each written output has validity `true`. There is no smoothing, resampling or hidden state. |
 
-The signal fields `validity`, `confidence` and `time` describe a provider contract. They are not executable expressions. For example, the FB2 gaze records state `isValid AND isEyeFollowingBlendshapesValid`, upper and lower region confidences with no implied threshold, and `XrTime`, which needs an explicit conversion to seconds. The caller must supply the actual boolean and convert the time. The `opposing_direction_exclusive` coupling on those records is a declaration, not a runtime check. The gaze part of the canonical → FB2 map meets it by construction (section 5). Elsewhere, tests that focus on direction should move one direction at a time.
+The signal fields `validity`, `confidence` and `time` describe a provider contract. They are not executable expressions. For example, the FB2 gaze records state `isValid AND isEyeFollowingBlendshapesValid` and upper and lower region confidences with no implied threshold. They also state `XrTime`, which needs an explicit conversion to seconds. The caller must supply the actual boolean and convert the time. The `opposing_direction_exclusive` coupling on those records is a declaration, not a runtime check. The gaze part of the canonical → FB2 map meets it by construction (section 5). Elsewhere, tests that focus on direction should move one direction at a time.
 
 ### Neutral, native defaults and unresolved quantities
 
@@ -332,7 +334,7 @@ ARKit blink declares neutral `0.0`. VRCFT left and right raw openness instead de
 
 `vrcft.eye.Combined.PupilDiameter_MM` has units `1`, domain `[0,1]`, metadata `actual_quantity = "normalized dilation"`, dynamic extrema, `normalization_execution = "unsupported"`, and disposition unresolved. Do not read its name as millimetres. Combined openness and the combined gaze and state policy are also unresolved. A documented contradiction between the code and the documentation for combined gaze stays visible. This guide does not infer a replacement mapping. See [vrcft.eye.toml](../profiles/vrcft.eye.toml) and the [VRCFT eye hops](../mappings/canonical_vrcft_eye.toml).
 
-The FB2 gaze values are native, direction-specific fractions of an angle whose maximum is not specified, so no radians are inferred, for FB2 or for the canonical gaze signals. "Canonical" does not mean one universal anatomy or one shared calibration.
+The FB2 gaze values are native, direction-specific fractions of an angle with no specified maximum. So RCEF infers no radians, for FB2 or for the canonical gaze signals. "Canonical" does not mean one universal anatomy or one shared calibration.
 
 ### Authoring maps and asset binding
 
@@ -340,7 +342,7 @@ The FB2 gaze values are native, direction-specific fractions of an angle whose m
 
 A sidecar has `schema_version`, `asset_sha256`, `resource_hashes` and `bindings`, and optionally `metadata`. Reuse checks the exact asset hash and the hashes of the resources it reads. Names alone do not bind a target. `annotate_asset` makes a sidecar and does not change the original asset bytes. Asset-based CLI mapping needs explicit sidecars. Profile-based scalar fixtures need no asset.
 
-msf-character-tools 0.6.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way; msf-character-tools 0.6.0 reads FBX with no extra package. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](../../msf_character_tools/msf_character_tools/snapshot.py) and the [shared reference](../../msf_character_tools/docs/reference.md).
+msf-character-tools 0.6.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases `gltf2` and `json`). It also reads the source formats `usd`, `usda`, `usdc`, `usdz` and `fbx` through its source adapters; bindings on those use a `source_locator`. RCEF's face examples load Rocketbox FBX files this way; msf-character-tools 0.6.0 reads FBX with no extra package. The geometry code has its own limited scope: positions, morphs, linear blend skinning and animation. RCEF's inventories for VRM, Roblox and other surfaces do not add loaders for those formats. They do not prove geometry, material or visual equivalence. See [snapshot.py](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/msf_character_tools/snapshot.py) and the [shared reference](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/docs/reference.md).
 
 ## 7. Generated files and readable reports
 
@@ -350,12 +352,12 @@ msf-character-tools 0.6.0 inspects glTF and GLB (`gltf`, `glb`, and the aliases 
 | [generated/rcef_mapping.csv](../generated/rcef_mapping.csv) | msf-character-tools signal and profile membership matrix: one row per distinct signal, one column per profile. Despite its name, it is not a table of executable mappings. |
 | [generated/coverage.json](../generated/coverage.json) | msf-character-tools coverage: dispositions, quality partitions, memberships per profile, evidence and rule uses. It records the pack hash. |
 | [generated/SHA256SUMS](../generated/SHA256SUMS) | Hashes of the pack, the matrix CSV and coverage, in that order. It does not list itself. |
-| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 1170 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. |
+| [reports/inventory.md](../reports/inventory.md), [CSV](../reports/inventory.csv) | RCEF exporter: 1170 membership rows with original names, indices, domains, evidence, neutral and default values, and reasons. It includes excluded, unsupported and unresolved records. Native defaults and calibrated neutral values stay separate. |
 | [reports/mappings.md](../reports/mappings.md), [CSV](../reports/mappings.csv) | RCEF exporter: all 588 authored one-way mappings with their status, operators, assumptions and losses. |
-| [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: the canonical expression and viseme signals against the authored relationships. A dash means no authored mapping. Unresolved relationships stay labeled. |
+| [reports/canonical_correspondence.md](../reports/canonical_correspondence.md), [CSV](../reports/canonical_correspondence.csv) | RCEF exporter: the canonical expression and viseme signals against the authored relationships. A dash means no authored mapping. Unresolved relationships stay labeled. These tables do not show cross-provider or anatomical equivalence. |
 | [reports/SHA256SUMS](../reports/SHA256SUMS) | Hashes of the six report files, sorted by file name. It does not list itself. The Markdown reports record the SHA-256 of the pack they read. |
 
-JSON uses sorted object keys, indent=2, UTF-8 with a final LF, finite numbers and normalized negative zero. Arrays keep the authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All shared output bytes are rendered and validated before any file is written. Each file is replaced atomically on its own. The four generated files and the seven report files are not replaced in one transaction, so after a failure, review all outputs and run the check again.
+JSON uses sorted object keys, indent=2, UTF-8 with a final LF, finite numbers and normalized negative zero. Arrays keep the authoring order. CSV uses UTF-8, LF and minimal standard CSV quoting. All shared output bytes are rendered and validated before any file is written. Each file is replaced atomically on its own. The four generated files and the seven report files are not replaced in one transaction. After a failure, review all outputs and run the check again.
 
 The report exporter uses only the Python standard library, so report generation adds no third-party dependency. `generated/SHA256SUMS` and the generated mapping bytes keep their original contract. The reports keep the CC BY-SA 4.0 licence and attribution of RCEF's data and documentation.
 
@@ -376,7 +378,9 @@ python3 -B check.py
 python3 -B -m unittest discover -s tests
 ```
 
-What the tests show: the provider profiles keep the declared storage and the provider-specific assumptions, and every hop keeps the bytes of the latest passing A/B freeze. The FB2 direction tests move one direction at a time. Raw pupil fields and native defaults do not show a physical measurement, a calibrated neutral or cross-provider equivalence. Provider frame context, devices, capture and physiology are separate gates.
+The tests show two things. The provider profiles keep the declared storage and the provider-specific assumptions. Every hop keeps the bytes of the latest passing A/B freeze. The FB2 direction tests move one direction at a time. Raw pupil fields and native defaults do not show a physical measurement, a calibrated neutral or cross-provider equivalence. Provider frame context, devices, capture and physiology are separate gates.
+
+Scripts make some test inputs from public sources. `scripts/derive_fb2_goldens.py` makes three of the inputs in `tests/fixtures/` from cached public sources. `scripts/derive_capability_sets.py` makes the name lists in `capability_sets.json`. `scripts/derive_rocketbox_au_names.py` reads the 48 Rocketbox FACS shape names from the pinned rig files into `rocketbox_au_names.json`.
 
 Generating matching bytes does not run the tests. On these repositories, `scripts/ci_local.sh` runs `check.py` and the tests on the local Python 3.11 and 3.12 venvs and prints a summary for the pull request.
 
@@ -406,14 +410,67 @@ To change a calibration record or add one, follow [calibration/README.md](../cal
 
 Before you extend or release the inventory, read [CONTRIBUTING](../CONTRIBUTING.md), [GOVERNANCE](../GOVERNANCE.md), [references](../references.md) and the [third-party notices](../THIRD_PARTY_NOTICES.md).
 
+### Common changes step by step
+
+The README section [Common tasks](../README.md#common-tasks) gives a short form of these steps. [Getting started](getting-started.md#update-the-lock) gives the steps to update the msf-character-tools lock.
+
+#### Fix or add a mapping in an existing map
+
+1. Edit or add the mapping in its file in `mappings/`. In the TOML, a mapping is one entry in the map's `rules` array. For a map of a canonical set, change its source documents instead (below).
+2. Give the mapping `id`, `inputs`, `outputs`, `operator`, `disposition`, `assumptions`, `evidence`, `evidence_status` and `loss_annotations`. Add `mapping_quality` when its disposition is `mapped`. See [Maps, mappings and loss annotations](#maps-mappings-and-loss-annotations).
+3. Cite only evidence IDs that are in `evidence/sources.toml`. To add a source, follow the evidence steps for an expression set below.
+4. Run `python3 -B check.py --write` and `python3 -B scripts/export_toml_index.py --write`.
+5. If you changed an FB2 in-map or an ARKit out-map, also run `python3 -B scripts/compare_godot.py --write`.
+6. Run `python3 -B scripts/export_map_sets.py --write` to update the map's page in `docs/map-sets/`.
+7. If the number of mappings changed, update the map's row in the README [Mappings](../README.md#mappings) table. Also update the totals in the README section [What RCEF covers](../README.md#what-rcef-covers), in AGENTS.md and in this guide.
+8. Add a CHANGELOG entry. Run the tests.
+
+Commit these files together: the TOML, `generated/`, `reports/`, `docs/toml-index.csv`, any other changed generated file, the README and the CHANGELOG.
+
+Do not edit `data/canonical_expression.toml`, `data/canonical_viseme.toml`, `profiles/facs.code.toml`, `mappings/canonical_*.toml` or the part of `data/intermediate.toml` below its marker line by hand. `scripts/build_canonical.py --write` writes them from these inputs:
+
+- `docs/canonical-set.md`.
+- Its definitions audit.
+- The IPA chart assignment in `tests/fixtures/ipa_chart_symbols.json`.
+- The retired direct maps as frozen in `tests/fixtures/baseline-dea1713.pack.json`.
+- For the FACS codes, `examples/data/facs_codes.json` and `tests/fixtures/rocketbox_au_names.json`.
+- For the viseme pose bridge, the calibration record `calibration/viseme-poses.rocketbox-features.cal`.
+
+Change the documents. Then run the script.
+
+The latest passing A/B freeze fixes the maps of the canonical sets. `tests/test_pivot_structure.py` fails if one differs from `tests/fixtures/b-maps-ab.pivot-v4.json`. A change that keeps every value needs a "revise" freeze first ([ab/README.md](../ab/README.md)).
+
+#### Add a new map
+
+1. Add a `[[mappings]]` record with a new `id` and its `rules`, in a file in `mappings/`. Mapping IDs must be unique across all maps. The file name must end in lowercase `.toml`.
+2. Regenerate as for a changed mapping. Run `python3 -B scripts/export_map_sets.py --write` to write its page in `docs/map-sets/`.
+3. Add a row for the map set to the README [Mappings](../README.md#mappings) table. Give a link to its page, the source and target sets, the number of mappings and parts, and the evidence status. `tests/test_readme_sources.py` fails until the row agrees with the pack.
+4. Update the counts in this guide and in the hand-made visuals. See [the validation checklist](#9-independent-validation-checklist).
+5. Add a CHANGELOG entry. Run the tests.
+
+A map between an expression set and a canonical set is the one map of that pair and direction, `<from>.to_<to>`. So for a new group, add a part to the existing map. `scripts/build_canonical.py` writes the maps of the canonical sets.
+
+#### Add or update an expression set
+
+1. Add or update its evidence record in `evidence/sources.toml`. [CONTRIBUTING](../CONTRIBUTING.md) lists what a provider entry needs.
+2. Run `python3 -B scripts/export_references.py --write` to update `references.md`.
+3. Add or edit `profiles/<name>.toml`: the `[[signals]]` records, each with a disposition and its evidence, and the `[[profiles]]` record that lists them.
+4. Add or update the file's row in [expression-sets.md](expression-sets.md), and its name in the README [Expression sets](../README.md#expression-sets) table.
+5. Add a new provider to [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
+6. Regenerate as for a changed mapping. Update the counts in the README section What RCEF covers, in AGENTS.md and in this guide.
+7. Optional: check the source bytes with `verify_sources.py` and `audit_inventories.py`, as the optional check of the public sources above shows.
+8. Add a CHANGELOG entry. Run the tests.
+
+Commit these files together: the evidence, `references.md`, the profile, the generated files, the documentation tables and the CHANGELOG.
+
 ## 9. Independent validation checklist
 
 - Recompute the counts from all 36 TOML files, and the uniqueness and reference relationships. Compare the merged data with the current pack. Count memberships separately from distinct signals and from selected-interface metadata.
 - Review the identity checks for calibration, domain, neutral, side and coupling. Check the independent expected values: affine `-1/0/1 → 0/0.5/1`, the ordered bilateral pairs, and the gaze splits. Require the approximation opt-in, and keep every authored loss.
-- Try a missing value or validity, false or non-boolean validity, missing required inputs, extra or non-source channels, non-finite or out-of-domain values, and one failing frame in a batch. Require no Result value on error.
+- Try these errors: a missing value or validity, false or non-boolean validity and missing required inputs. Also try extra or non-source channels, non-finite or out-of-domain values and one failing frame in a batch. Require no Result value on error.
 - Confirm that the unresolved MediaPipe → canonical mapping refuses to run. Keep evidence status, disposition and quality apart. Do not infer inverse or cross-provider mappings from names.
 - Run the no-write drift check and the tests. `check.py` first checks the installed msf-character-tools against `evidence/tooling.lock.json`, and then the calibration records against `calibration/FREEZES`. msf-character-tools has its own tests.
-- When the data changes, update the HTML report, SVG, PNG and TOML index with it. Regenerate the TOML index with `python3 -B scripts/export_toml_index.py --write`; without `--write` it shows a diff and fails if the index does not match the TOML files, and `tests/test_toml_index.py` checks the same. Render the PNG from the SVG at the same size. Review the HTML in offline, narrow-screen and print modes. Tab through the stage and file explorer, operate the selectors and sliders with the keyboard, and test reset and invalid or missing modes. Compare all static and displayed fixture values. Check the content with JavaScript turned off and with a screen reader.
+- When the data changes, update the HTML report, SVG, PNG and TOML index with it. Regenerate the TOML index with `python3 -B scripts/export_toml_index.py --write`. Without `--write`, it shows a diff and fails if the index does not match the TOML files. `tests/test_toml_index.py` checks the same. Render the PNG from the SVG at the same size. Review the HTML in offline, narrow-screen and print modes. Tab through the stage and file explorer, operate the selectors and sliders with the keyboard, and test reset and invalid or missing modes. Compare all static and displayed fixture values. Check the content with JavaScript turned off and with a screen reader.
 - Check relative links with a sibling `msf_character_tools` checkout, and check the MIT notice on inline code and the CC-BY-SA-4.0 attribution on original documentation.
 
 ## Licensing

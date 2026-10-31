@@ -4,7 +4,7 @@ Original documentation: CC-BY-SA-4.0.
 
 Coding agents: read [AGENTS.md](AGENTS.md) first. It lists the commands, the rules that must not break and the known traps.
 
-Edit the TOML authoring files, and run all commands from the RCEF checkout. Install the msf-character-tools release wheel locked in [tooling.lock.json](evidence/tooling.lock.json) into the Python you use for RCEF, by hash, as [Getting started](README.md#getting-started) in the README shows.
+Edit the TOML authoring files, and run all commands from the RCEF checkout. Install the msf-character-tools release wheel locked in [tooling.lock.json](evidence/tooling.lock.json) into the Python you use for RCEF, by hash, as [Getting started](docs/getting-started.md#install-the-wheel-by-hash) shows.
 
 Then regenerate the outputs:
 
@@ -21,7 +21,16 @@ python3 -B -m unittest discover -s tests
 
 Review every generated diff. The tests cover declared storage and arithmetic. Provider frames and physiology need their own separate review. The tests and their subprocesses use the installed msf-character-tools. The shared tooling, which is maintained separately, owns the rendering, validation and evaluation algorithms.
 
-A new or changed provider entry needs all of these: a public primary source; an exact revision, or a retrieval date and content digest; a locator; an original summary; evidence for its units, domain and calibration; and an explicit disposition. A position in a documentation list is an inventory ordinal, unless the source defines a native index. Keep contradictions between sources, and keep unresolved mappings. Names alone do not justify a cross-provider identity.
+A new or changed provider entry needs all of these:
+
+- a public primary source;
+- an exact revision, or a retrieval date and content digest;
+- a locator;
+- an original summary;
+- evidence for its units, domain and calibration;
+- an explicit disposition.
+
+A position in a documentation list is an inventory ordinal, unless the source defines a native index. Keep contradictions between sources, and keep unresolved mappings. Names alone do not justify a cross-provider identity.
 
 Every mapping with disposition `mapped` states its assumptions, quality and losses. Keep native defaults separate from measured neutral values and from invalid data. Test against expected values found independently, and test refusals that matter. Do not copy the shared implementation into a test to check it. Core code is MIT. Original documentation, data and fixtures are CC-BY-SA-4.0. Inherited source terms stay as they are. Put raw source downloads in a cache that you choose, outside the repository.
 
