@@ -7,7 +7,7 @@ This survey describes the public face-expression interfaces that RCEF records. I
 
 Every number comes from the pack, `generated/rcef.pack.json`, or from a document that the text links. The counts describe interfaces. They do not say how well a tracker follows a face. The canonical sets and `facs.code` are drafts, and the cross-provider mappings are proposed approximations.
 
-Read [How RCEF reads each set](#how-rcef-reads-each-set) first. It defines the terms that every family section uses. [Selected scope](#selected-scope) gives one line for each set. Each family section then has the same five parts: technical context, signal structure, values, maps and gaps. The last two sections give the semantics that stay distinct across sets and the limits of general morph weights.
+Read [How RCEF reads each set](#how-rcef-reads-each-set) first. It defines the terms that every family section uses. [Selected scope](#selected-scope) gives one line for each set. Each family section then has the same five parts ([Parts of each family section](#parts-of-each-family-section)). [Comparison across sets](#comparison-across-sets) compares the sets and gives the effect of their shared problems on the canonical design.
 
 Other documents give more detail. The pinned source and licence of each profile file are in [docs/expression-sets.md](docs/expression-sets.md). [docs/canonical-set.md](docs/canonical-set.md) defines the canonical signals, and the [definitions audit](docs/canonical-set-audit.md) compares them with each source. Every signal is in [reports/inventory.md](reports/inventory.md), and every mapping is in [reports/mappings.md](reports/mappings.md).
 
@@ -24,11 +24,19 @@ A set joins the survey only when it meets all of these criteria:
 
 The list of sets in [docs/expression-sets.md](docs/expression-sets.md#planned-expression-sets) has every face, facial, lip and eye expression weight enum in the OpenXR registry at commit `5a82d45` (record `xr_registry`). It also has RCEF's own sets and other sets that the authors knew of. So that list is complete for OpenXR at that commit. It is not a complete list of public sets. This survey covers only the sets that have a profile. [references.md](references.md) lists every evidence record with its URL, revision and digest.
 
+### Provider text and devices
+
+RCEF uses provider names, indices and interface facts as facts, with attribution. It writes its own summary of each source and does not copy provider prose or figures that have no open licence ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)). The family sections name only the sources whose terms add a limit.
+
+RCEF's [physical capture design](docs/calibration/physical-protocol.md) names a device for some sets. Nobody has run it. So no family section says how a tracker responds to a real face.
+
 ### Profiles, rows and selected entries
 
 A profile records one expression set, or one part of a set. Each row of a profile is a signal. A profile can also hold rows outside the public interface: count sentinels, rows that record an absent entry, reserved bytes and state fields. RCEF keeps these rows so that the gaps stay visible.
 
-The selected entries are the names of the public interface itself. The profile metadata field `selected_count` gives their number. In a profile with selected entries, the signal metadata field `selected = false` marks a row outside them. So FB2 has 70 selected entries in 71 rows. The ancillary profiles `arkit.ancillary`, `openxr.ancillary` and `vrcft.parameter.encoding` have no selected entries. `facs.code` and `mediapipe.score` have no `selected_count`. `facs.code` is RCEF's own encoding of public code numbers, and `mediapipe.score` is a second view of the 52 outputs of `mediapipe.label`.
+The selected entries are the names of the public interface itself. The profile metadata field `selected_count` gives their number. In a profile with selected entries, the signal metadata field `selected = false` marks a row outside them. So FB2 has 70 selected entries in 71 rows.
+
+The ancillary profiles `arkit.ancillary`, `openxr.ancillary` and `vrcft.parameter.encoding` have no selected entries. `facs.code` and `mediapipe.score` have no `selected_count`. `facs.code` is RCEF's own encoding of public code numbers, and `mediapipe.score` is a second view of the 52 outputs of `mediapipe.label`.
 
 A native index is an index that the source defines, for example an enum value. An inventory ordinal is a position in a documentation list. RCEF records an inventory ordinal where the source defines no index.
 
@@ -57,15 +65,13 @@ Each signal and each mapping has an `evidence_status`. It describes how much evi
 
 The 484 mappings of the 15 maps into and out of the canonical sets are `proposed` and `approximate`, except 4. The 4 exceptions are the pupil copies between VRCFaceTracking eye data and the canonical expression set, which are `exact` and `verified_current`. The 101 mappings of the viseme pose bridge are `proposed` and `approximate`. All 81 evidence records have the status `verified_current`. That status says only that each cited source is what the record claims.
 
-Data 0.5.0 retired 21 identity mappings into the old 21-signal set `rcef.canonical` ([docs/retired-ids.csv](docs/retired-ids.csv)). From that time, 21 signals still have `mapping_quality = "exact"` in their metadata. For the 2 raw VRCFaceTracking pupil fields, this agrees with their current mappings. The other 19 are 9 ARKit coefficients, the 8 FB2 gaze weights and the 2 VRCFaceTracking `Openness` fields. Their current mappings are `approximate`. Nothing executable reads this field, but it can mislead a reader.
-
 ### Side conventions
 
 A side name, such as `Left` or `_L`, can name the subject's own side or the side that a viewer sees. The definitions audit settles this once for each source ([Frames](docs/canonical-set-audit.md#frames-whose-left)). The same frame applies to the direction words of gaze, jaw and mouth shift. A provider's own text or figure settles a frame. Agreement between implementers settles only which output gets a value.
 
 | Source | Frame | Evidence | Audit verdict |
 |---|---|---|---|
-| ARKit | the face's own side | Apple's text (`apple_blendshapes`), with one exception for `mouthStretchRight` | `same` |
+| ARKit | the subject's own side (Apple calls it the face's own side) | Apple's text (`apple_blendshapes`), with one exception for `mouthStretchRight` | `same` |
 | FB2 | the subject's own side | three FB2 figures (`xr_fb2_fig_*`) and the text | `same` |
 | VRCFaceTracking artist shapes | the subject's own side | three Unified Expressions figures (`vrcft_fig_*`) | `same` |
 | VRCFaceTracking eye data | as the artist shapes | the project computes `v2/EyeClosedLeft` from `Left.Openness` | `same` |
@@ -77,13 +83,15 @@ A side name, such as `Left` or `_L`, can name the subject's own side or the side
 
 Each signal states its units, its domain and its calibration. A calibration string is a declaration, not a measurement. Units `unknown` and an empty domain `{}` keep a gap visible. A `neutral` value is a stated reference. A `native_default` is the value that storage starts with, and it is not a measured neutral.
 
-No provider publishes the gain of its values or its pose at full activation. So every mapping into or out of a canonical set makes the same assumption, except the 4 pupil copies in millimetres. It assumes that the ends of the source range are canonical 0 and 1. It also assumes that the values between correspond as the operator passes them. No evidence supports this, and RCEF has measured no response curve ([canonical-set.md](docs/canonical-set.md#meaning-of-0-1-and-neutral)). Most maps state this as a loss of the form "ARKit gain and full-activation pose not published". The FACS maps state the loss key `facs_ordinal_intensity` instead, and the VRM maps state that an asset-authored weight becomes a canonical value.
+The gain of a signal is how far the face moves for a given value. No provider publishes the gain of its values or its pose at full activation. So every mapping into or out of a canonical set makes the same assumption, except the 4 pupil copies in millimetres. It assumes that the ends of the source range are canonical 0 and 1. It also assumes that the values between correspond as the operator passes them. No evidence supports this, and RCEF has measured no response curve ([canonical-set.md](docs/canonical-set.md#meaning-of-0-1-and-neutral)).
+
+Most maps state this as a loss of the form "ARKit gain and full-activation pose not published". A loss key is a stable name for a loss in the [definitions audit](docs/canonical-set-audit.md#loss-keys). The FACS maps state the loss key `facs_ordinal_intensity` instead. The VRM maps state that an asset-authored weight becomes a canonical value.
 
 The 5 records in [calibration/](calibration/README.md) are software-only. They are fits to renders or mesh geometry of example rigs. None of them measures a tracker. Each family section names the records that read the values of its set.
 
 ### Maps, parts and routes
 
-RCEF has at most one map for each pair of an expression set and a canonical set, in each direction. The ID has the form `<from>.to_<to>`, for example `fb2.to_rcef_expression` (the FB2 in-map) and `rcef_expression.to_fb2` (the FB2 out-map). A part of a map is its mappings for one canonical group. The canonical expression set has 72 signals in 13 groups. The canonical viseme set has 16 signals in 4 groups. Each map set has a page in [docs/map-sets/](docs/map-sets/).
+RCEF has at most one map for each pair of an expression set and a canonical set, in each direction. The ID has the form `<from>.to_<to>`, for example `fb2.to_rcef_expression` (the FB2 in-map) and `rcef_expression.to_fb2` (the FB2 out-map). A part of a map is its mappings for one canonical group. The canonical expression set has 72 signals in 13 groups. The canonical viseme set has 16 signals in 4 groups. Each map has a page in [docs/map-sets/](docs/map-sets/).
 
 A route runs from a source set through a canonical set to a target set ([README.md](README.md#routes)). It writes only the target signals of the groups that both sets fill. It labels the other target outputs "not available from source", and it lists as dropped each non-zero source input that it does not use. Data 0.5.0 retired the direct maps between providers, so every route goes through a canonical set.
 
@@ -116,36 +124,36 @@ New sets join after data 0.5.0, so they do not change the frozen A/B comparison 
 
 | Surface | Selected entries | Calibration and execution boundary |
 |---|---:|---|
-| ARKit coefficient | 52 | Native 0 to 1, face-relative sides. Proposed approximate copies and means read and write all 52. Eye transforms stay separate. |
+| ARKit coefficient | 52 | Native 0 to 1. Sides are the subject's own side (Apple calls it the face's own side). Proposed approximate copies and means read and write all 52. Eye transforms stay separate. |
 | MediaPipe label | 52 | 51 names shared with ARKit, plus `_neutral`; no `tongueOut`. Model calibration unresolved. `_neutral` is `excluded`. |
 | OpenXR FB | 63 | RCEF keeps validity, eye-following validity, confidence and time. The pinned extension text gives no explicit numeric range. No tongue entries. |
 | OpenXR FB2 | 70 | Native 0 to 1. Seven tongue entries, a choice of visual or audio data source, and eight native gaze fractions, one for each direction of each eye. Maximum angles unresolved. |
 | Optional META visemes | 15 | Needs FB2. Probabilities with a valid sum of 1 and a separate validity flag. Valid silence differs from invalid all-zero data. |
-| VRCFT transport | 88 | The active enum, kept apart from the eye data and the artist vocabulary. The byte transport clamps and truncates. RCEF records these losses as inventory, and no map runs them. |
-| VRCFT eye | 12 scalar components | Gaze x and y, openness and pupil diameter, for left, right and combined. The four raw openness and diameter fields are `mapped`. The combined computation is unresolved. |
-| VRCFT artist base/blended | 102 / 42 | RCEF keeps the artist components and the 4 footnoted `unsupported` shapes. The component lists define no weights and no executable operators. |
-| VRCFT avatar numeric/flags | 124 / 3 | Floats from the public list, optional prefixes and status flags. A separate profile records the binary encoding. RCEF does not guess expanded avatar-specific names. |
+| VRCFaceTracking transport | 88 | The active enum, kept apart from the eye data and the artist vocabulary. The byte transport clamps and truncates. RCEF records these losses as inventory, and no map runs them. |
+| VRCFaceTracking eye | 12 scalar components | Gaze x and y, openness and pupil diameter, for left, right and combined. The four raw openness and diameter fields are `mapped`. The combined computation is unresolved. |
+| VRCFaceTracking artist base/blended | 102 / 42 | RCEF keeps the artist components and the 4 footnoted `unsupported` shapes. The component lists define no weights and no executable operators. |
+| VRCFaceTracking avatar numeric/flags | 124 / 3 | Floats from the public list, optional prefixes and status flags. A separate profile records the binary encoding. RCEF does not guess expanded avatar-specific names. |
 | Godot base/blended | 102 / 41 | RCEF keeps the spelling `FT_TONGUE_BLEND_DOWN`. The setters store floats with no clamp. The initial zero of the array is initialization. RCEF infers no device availability. |
 | VRM 1.0 presets | 18 | All optional and authored for each asset. RCEF keeps the morph, material and texture bindings, the thresholds, the overrides and the LookAt metadata. |
 | Roblox FaceControls | 50 | Native 0 to 1, but the joint poses and correctives are specific to each asset. RCEF keeps the neutral Frame 0 and the conflict between the required pose lists. |
 | FACS codes | 92 rows (70 code numbers) | RCEF's own numeric encoding of public code numbers. The values are not FACS scores. Draft. 49 rows `mapped`. |
 
-[sources.toml](evidence/sources.toml) gives the sources and their exact digests. The generated coverage groups every signal by disposition and every mapping with disposition `mapped` by quality. The profile and signal metadata separate the selected entries from the ancillary records. Every evidence source appears in coverage, even if it supports only unresolved or excluded records.
+[sources.toml](evidence/sources.toml) gives the digests. The coverage report, `generated/coverage.json`, counts the signals of each disposition.
 
 ## ARKit
 
 ### Technical context
 
-Apple publishes ARKit, its augmented reality framework. In face tracking, ARKit gives a face anchor, `ARFaceAnchor`, which reports 52 blend-shape coefficients. Each coefficient is one value for one named movement of the face. RCEF's physical capture design names an iPhone with a TrueDepth camera as the ARKit device ([docs/calibration/physical-protocol.md](docs/calibration/physical-protocol.md)). RCEF has not run that design.
+Apple publishes ARKit, its augmented reality framework. In face tracking, ARKit gives a face anchor, `ARFaceAnchor`, which reports 52 blend-shape coefficients. Each coefficient is one value for one named movement of the face. RCEF's physical capture design names an iPhone with a TrueDepth camera as the ARKit device.
 
 Other software, for example Live Link Face and Unity AR Foundation, gives the same 52 values without change. So RCEF gives them no profile of their own ([docs/expression-sets.md](docs/expression-sets.md#planned-expression-sets)). Avatar rigs with ARKit-named shapes read the values. The RCEF examples and calibration records use rigs from two such libraries: ICT-FaceKit and Microsoft Rocketbox.
 
 | Evidence record | What RCEF takes from it | Retrieved | Licence or terms, as RCEF records them |
 |---|---|---|---|
-| [`apple_blendshapes`](references.md#apple_blendshapes) | the 52 coefficient names, the native range 0 to 1, and the face-relative sides | 2026-10-26 | reference only; source prose not redistributed |
+| [`apple_blendshapes`](references.md#apple_blendshapes) | the 52 coefficient names, the native range 0 to 1, and the sides: the subject's own side (Apple calls it the face's own side) | 2026-10-26 | reference only; source prose not redistributed |
 | [`apple_eye`](references.md#apple_eye) | the eye pose is a transform, separate from the eyelid coefficients | 2026-10-26 | reference only; source prose not redistributed |
 
-Apple's documentation pages build their content with JavaScript. So each record pins Apple's JSON data for the page by its SHA-256, and has no revision ID. RCEF uses the names, the native range and the transform distinction as facts. It does not copy Apple's prose or figures ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)). The definitions audit gives an RCEF paraphrase of each Apple definition.
+Apple's documentation pages build their content with JavaScript. So each record pins Apple's JSON data for the page by its SHA-256, and has no revision ID. The definitions audit gives an RCEF paraphrase of each Apple definition.
 
 ### Signal structure
 
@@ -167,7 +175,7 @@ Each name is in lower camel case. It starts with a region word, then names a mov
 | mouth | 23 | `mouthClose`, `mouthFunnel`, `mouthPucker`, `mouthLeft`, `mouthRight`, `mouthRollLower`, `mouthRollUpper`, `mouthShrugLower`, `mouthShrugUpper`, and the `Left` and `Right` forms of `mouthSmile`, `mouthFrown`, `mouthDimple`, `mouthStretch`, `mouthPress`, `mouthLowerDown` and `mouthUpperUp` |
 | tongue | 1 | `tongueOut` |
 
-The profile has 20 left, 20 right and 12 shared signals. Apple's text says that the side in a name is the face's own side, so `eyeBlinkRight` is the face's own right eye. The direction words of `jawLeft`, `jawRight`, `mouthLeft` and `mouthRight` use the same frame.
+The profile has 20 left, 20 right and 12 shared signals. In Apple's text, the side in a name is the subject's own side (Apple calls it the face's own side). So `eyeBlinkRight` is the subject's own right eye. The direction words of `jawLeft`, `jawRight`, `mouthLeft` and `mouthRight` use the same frame.
 
 Some ARKit signals are one value where other sets have two or four. `browInnerUp` and `cheekPuff` have the coupling `bilateral_shared`: one value for both sides. `mouthFunnel`, `mouthPucker`, `mouthRollUpper` and `mouthRollLower` are also single values, and the canonical set splits each of them.
 
@@ -194,7 +202,7 @@ The software-only record [`rig-gains.ict-rocketbox-female`](calibration/README.m
 
 ### Mapping to the canonical sets
 
-| Map set | Direction | Mappings | Parts | Operators | Evidence status |
+| Map | Direction | Mappings | Parts | Operators | Evidence status |
 |---|---|---:|---:|---|---|
 | [`arkit.to_rcef_expression`](docs/map-sets/arkit.to_rcef_expression.md) | `arkit.coefficient` → `rcef.canonical_expression` | 60 | 9 | 60 copies (affine 1, 0) | `proposed` (60) |
 | [`rcef_expression.to_arkit`](docs/map-sets/rcef_expression.to_arkit.md) | `rcef.canonical_expression` → `arkit.coefficient` | 52 | 9 | 46 copies, 6 means (`weighted_sum`) | `proposed` (52) |
@@ -216,7 +224,7 @@ The in-map reads all 52 coefficients and writes 60 canonical signals. Five coeff
 
 ARKit fills 9 of the 13 groups. The ARKit section of the audit names no ARKit signal for `cheek_suck`, `lip_tighten`, `tongue_place` or `pupil_mm`.
 
-Every mapping cites `apple_blendshapes`. The correspondence between ARKit names and canonical signals comes from crosswalk records of other projects. On the in-map, `godot_face_modifier` supports 60 mappings, `vrcft_docs_arkit` and `godot_vendors_fb2` 58 each, and `vrcft_docs_movement` and `ict_facekit` 49 each. The assumptions of each mapping say which crosswalks apply to the canonical signal and which do not.
+Every mapping cites `apple_blendshapes`. The correspondence between ARKit names and canonical signals comes from crosswalks. A crosswalk is a public table of another project that pairs the names of two sets. On the in-map, every mapping cites at least three crosswalks, and 36 of the 60 cite five. The [map page](docs/map-sets/arkit.to_rcef_expression.md) lists the count for each record. The assumptions of each mapping say which crosswalks apply to the canonical signal.
 
 The audit has 60 ARKit rows: 36 `same`, 22 `differs` and 2 `unresolved`.
 
@@ -245,7 +253,6 @@ ARKit is the source of 6 routes and the target of 7 routes ([README.md](README.m
 | No gain and no full-activation pose. | every ARKit mapping | Measured intensities. |
 | No maximum gaze angle, and eye transforms are not executed. | `apple_eye`; `arkit_gaze_eyelid` | Gaze as an angle, and any identity with the gaze of another provider. |
 | Only Godot names ARKit `mouthLeft` and `mouthRight` for the `mouth_shift` signals. | assumption `evidence.godot_only_mouth_shift` | A correspondence for that part from a second source. |
-| RCEF has not run the physical capture design. | [docs/calibration/physical-protocol.md](docs/calibration/physical-protocol.md) | Any statement on how ARKit responds to a real face. |
 
 ## MediaPipe
 
@@ -261,7 +268,7 @@ To run the model, a user needs the `mediapipe` Python package. RCEF uses the mod
 | [`mediapipe_blendshape_card`](references.md#mediapipe_blendshape_card) | Blendshape V2 model card (PDF) | 52 coefficients in [0, 1] from 146 landmarks; the licence; how the training data was made | 2026-10-27 | Apache-2.0 |
 | [`mediapipe_face_landmarker`](references.md#mediapipe_face_landmarker) | `face_landmarker.task`, float16, version 1 | the blendshape model that the calibration record uses to score renders | 2026-10-27 | Apache-2.0 |
 
-RCEF uses the label names as facts and does not copy MediaPipe code ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)). The model bundle has no licence file. The licence comes from the model cards, which each state Apache License 2.0. RCEF's licence check concluded, within its limits, that the licence lets RCEF score renders of its example rigs. It also lets RCEF publish curves fitted to those scores under CC-BY-SA-4.0. The check is not legal advice.
+The model bundle has no licence file. The licence comes from the model cards, which each state Apache License 2.0. RCEF's licence check concluded, within its limits, that the licence lets RCEF score renders of its example rigs. It also lets RCEF publish curves fitted to those scores under CC-BY-SA-4.0. The check is not legal advice.
 
 The card says that the training samples come from multi-view lab captures of people. An automatic process moved the 52 blendshapes from a base mesh that an artist designed.
 
@@ -276,7 +283,7 @@ RCEF records MediaPipe in two profiles. Both are inventory only.
 
 The list starts with `_neutral`. The other 51 labels follow in alphabetical order, and each one is an ARKit coefficient name. The ARKit name `tongueOut` is not in the list. RCEF keeps the list position as the inventory ordinal.
 
-Each of the 51 labels has the region and the side of the ARKit coefficient with the same name. So the profile has 20 left, 20 right and 11 shared expression labels, and `_neutral` is shared. RCEF takes the side from the name. The audit has no MediaPipe row, so RCEF does not record whether the sides are face-relative or viewer-relative.
+Each of the 51 labels has the region and the side of the ARKit coefficient with the same name. So the profile has 20 left, 20 right and 11 shared expression labels, and `_neutral` is shared. RCEF takes the side from the name. The audit has no MediaPipe row, so RCEF does not record whether the sides are the subject's own or the viewer's.
 
 Special entries:
 
@@ -326,9 +333,9 @@ A MediaPipe map can come only from a calibration record ([calibration/README.md]
 | The model card lists 52 names, with `tongueOut` and `cheekPuff`. The runtime list returns `_neutral` and 51 ARKit names, without `tongueOut`. RCEF follows the runtime list. | `mediapipe_blendshape_card`, `mediapipe` | A `tongueOut` signal. |
 | No source relates a MediaPipe score to an ARKit coefficient, apart from the name. | [docs/calibration/mediapipe-licence.md](docs/calibration/mediapipe-licence.md) | A copy from a label to an ARKit or canonical signal. |
 | The software-only calibration failed on every held-out cell. | `mediapipe.ict-response` | A calibrated in-map under the current rule. |
-| The fitted curves include `eyeLookInRight` and `eyeLookOutLeft`, but not `eyeLookInLeft` or `eyeLookOutRight`. RCEF records no explanation. | `calibration/mediapipe.ict-response.cal` | Nothing directly. It is an open question for the gaze scores. |
+| The fitted curves include `eyeLookInRight` and `eyeLookOutLeft`, but not `eyeLookInLeft` or `eyeLookOutRight`. The last limitation of the record gives the reason: in training, their median scores rose only 0.064 and 0.050, too little to fit a curve. RCEF records no reason why the left and right eyes differ. | `calibration/mediapipe.ict-response.cal` | Nothing directly. It is an open question for the gaze scores. |
 | No evidence for the side frame of the label names. | no audit row | Side assignment in any future in-map. |
-| The physical capture design would record ARKit and MediaPipe from the same iPhone frames. RCEF has not run it. It needs a named owner, an ethics and legal review, and approval from the project's release owners. | [docs/calibration/physical-protocol.md](docs/calibration/physical-protocol.md) | Any statement on how MediaPipe responds to a real face. |
+| The physical capture design would record ARKit and MediaPipe from the same iPhone frames. Before any part of it runs, it needs a named owner, an ethics and legal review, and approval from the project's release owners. | [docs/calibration/physical-protocol.md](docs/calibration/physical-protocol.md) | Any statement on how MediaPipe responds to a real face. |
 
 ## OpenXR FB (`XR_FB_face_tracking`)
 
@@ -359,7 +366,7 @@ Each name has the form `XR_FACE_EXPRESSION_<ACTION>_FB`. The action part names a
 | `tongue.absent`, a row that records that the enum has no tongue entry | 1 | `unsupported` |
 | Total | 65 | |
 
-The profile `openxr.ancillary` holds the configuration enums of FB and FB2, all `excluded`, with the reason "not an expression amplitude". Four of its 10 rows belong to FB: `XR_FACE_CONFIDENCE_LOWER_FACE_FB`, `XR_FACE_CONFIDENCE_UPPER_FACE_FB`, `XR_FACE_CONFIDENCE_COUNT_FB` and `XR_FACE_EXPRESSION_SET_DEFAULT_FB`.
+The profile `openxr.ancillary` holds the configuration enums of FB and FB2. All are `excluded`. Their reason is "Configuration/confidence region enum; not an expression amplitude." Four of its 10 rows belong to FB: `XR_FACE_CONFIDENCE_LOWER_FACE_FB`, `XR_FACE_CONFIDENCE_UPPER_FACE_FB`, `XR_FACE_CONFIDENCE_COUNT_FB` and `XR_FACE_EXPRESSION_SET_DEFAULT_FB`.
 
 | Region | Selected rows | Examples |
 |---|---:|---|
@@ -424,7 +431,7 @@ RCEF records no conflict inside the FB sources.
 | Licence | CC-BY-4.0 for the extension text and the figures; Apache-2.0 OR MIT for `xr.xml` |
 | Role in maps | source and target |
 
-RCEF's physical capture design names a Quest Pro as the FB2 device ([docs/calibration/physical-protocol.md](docs/calibration/physical-protocol.md)). RCEF has not run that design. RCEF records two pieces of public software that read FB2 values. The Godot OpenXR vendors plugin copies each FB2 weight to a Godot shape (record `godot_vendors_fb2`). The VRCFaceTracking documentation pairs each Unified Expressions shape with an FB2 name in its Movement table (record `vrcft_docs_movement`). RCEF cites both as crosswalk evidence, and neither one sets the meaning of an FB2 name.
+RCEF's physical capture design names a Quest Pro as the FB2 device. RCEF records two pieces of public software that read FB2 values. The Godot OpenXR vendors plugin copies each FB2 weight to a Godot shape (record `godot_vendors_fb2`). The VRCFaceTracking documentation pairs each Unified Expressions shape with an FB2 name in its Movement table (record `vrcft_docs_movement`). RCEF cites both as crosswalk evidence, and neither one sets the meaning of an FB2 name.
 
 The examples translate synthetic FB2 face frames to ARKit through the canonical expression set ([examples/README.md](examples/README.md)). `scripts/derive_fb2_goldens.py` writes the FB2 test goldens from cached source bytes and never reads RCEF's maps.
 
@@ -482,7 +489,7 @@ Every FB2 mapping that reads or writes an FB2 weight states the loss "FB2 gain a
 
 ### Mapping to the canonical sets
 
-| Map set | Direction | Mappings | Parts | Operators | Evidence status |
+| Map | Direction | Mappings | Parts | Operators | Evidence status |
 |---|---|---:|---:|---|---|
 | [`fb2.to_rcef_expression`](docs/map-sets/fb2.to_rcef_expression.md) | `openxr.fb2` → `rcef.canonical_expression` | 70 | 12 | 70 copies (affine 1, 0) | `proposed` (70) |
 | [`rcef_expression.to_fb2`](docs/map-sets/rcef_expression.to_fb2.md) | `rcef.canonical_expression` → `openxr.fb2` | 74 | 12 | 62 copies, 4 `weighted_sum`, 8 `piecewise_linear` | `proposed` (74) |
@@ -510,7 +517,7 @@ FB2 fills 12 of the 13 groups. The audit names no FB2 signal for the two pupil d
 | rounding of up to 2⁻⁵⁴ on the negative knot segment | 0 | 4 |
 | the tongue extension has no stated length | 1 | 1 |
 
-The crosswalk evidence is different for each mapping. In each direction, 36 mappings apply an ARKit and FB2 correspondence to the canonical signal, because the audit finds the ARKit definition `same`. In 24 mappings the correspondence does not apply, because the ARKit definition differs (22) or is unresolved (2). The 4 mappings of `cheek_suck_*` and `lip_tighten_*` use the VRCFaceTracking Movement table and a crosswalk in two steps through Godot ([audit](docs/canonical-set-audit.md#crosswalks-of-the-fb2-only-signals)). The 6 `tongue_place` mappings cite no crosswalk. The [FB2 map set page](docs/map-sets/fb2.to_rcef_expression.md) lists how many mappings cite each evidence record.
+The crosswalk evidence is different for each mapping. In each direction, 36 mappings apply an ARKit and FB2 correspondence to the canonical signal, because the audit finds the ARKit definition `same`. In 24 mappings the correspondence does not apply, because the ARKit definition differs (22) or is unresolved (2). The 4 mappings of `cheek_suck_*` and `lip_tighten_*` use the VRCFaceTracking Movement table and a crosswalk in two steps through Godot ([audit](docs/canonical-set-audit.md#crosswalks-of-the-fb2-only-signals)). The 6 `tongue_place` mappings cite no crosswalk. The [FB2 map page](docs/map-sets/fb2.to_rcef_expression.md) lists how many mappings cite each evidence record.
 
 From FB2, a route can reach `arkit.coefficient`, `facs.code`, `openxr.fb2`, `vrcft.artist.base`, `vrcft.eye` and `vrm.preset` ([README.md](README.md#routes)). FB2 is a target of every source of the canonical expression set. META visemes and the VRM vowels also reach FB2 through the viseme pose bridge, which writes only the groups `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip`.
 
@@ -588,7 +595,7 @@ Every META mapping states the loss "META gain and full-activation pose not publi
 
 ### Mapping to the canonical sets
 
-| Map set | Direction | Mappings | Parts | Evidence status |
+| Map | Direction | Mappings | Parts | Evidence status |
 |---|---|---:|---:|---|
 | [`visemes.to_rcef_viseme`](docs/map-sets/visemes.to_rcef_viseme.md) | `openxr.visemes` → `rcef.canonical_viseme` | 17 | 4 | `proposed` (17) |
 | [`rcef_viseme.to_visemes`](docs/map-sets/rcef_viseme.to_visemes.md) | `rcef.canonical_viseme` → `openxr.visemes` | 15 | 3 | `proposed` (15) |
@@ -651,7 +658,9 @@ RCEF records VRCFaceTracking in seven profiles. RCEF pins the code at commit `64
 | `vrcft.parameter.flags` | tracking activity flags | 3 | 3 | [`vrcft_parameters`](references.md#vrcft_parameters), [`vrcft_float`](references.md#vrcft_float) | as above |
 | `vrcft.parameter.encoding` | the binary parameter encoding | 7 | 0 | [`vrcft_binary`](references.md#vrcft_binary) | as above |
 
-The maps also cite four documentation tables at docs commit `3036f46`, retrieved 2026-10-26. They are the shape descriptions (`vrcft_docs_shapes`) and an overview table (`vrcft_docs_overview`). The other two relate the names to ARKit (`vrcft_docs_arkit`) and to Meta Movement, which is FB2 (`vrcft_docs_movement`). These records are reference only. Two more code records at `6432e6a` give weights: `vrcft_code_parameters` and `vrcft_simple_expressions`. Three figure records (`vrcft_fig_eyeclosedleft`, `vrcft_fig_eyelookoutleft`, `vrcft_fig_mouthupperleft`) settle the side frame. RCEF writes its own summary of every documentation row and copies no prose or figures ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)).
+The maps also cite four documentation tables at docs commit `3036f46`, retrieved 2026-10-26. They are the shape descriptions (`vrcft_docs_shapes`) and an overview table (`vrcft_docs_overview`). The other two relate the names to ARKit (`vrcft_docs_arkit`) and to Meta Movement, which is FB2 (`vrcft_docs_movement`). These records are reference only.
+
+Two more code records at `6432e6a` give weights: `vrcft_code_parameters` and `vrcft_simple_expressions`. Three figure records (`vrcft_fig_eyeclosedleft`, `vrcft_fig_eyelookoutleft`, `vrcft_fig_mouthupperleft`) settle the side frame.
 
 ### Signal structure
 
@@ -677,7 +686,7 @@ The 124 numeric parameters come from 15 tables of the parameter page, and the 3 
 
 The 7 encoding rows are `ParameterNegative`, the bit parameters `Parameter1`, `Parameter2`, `Parameter4` and `Parameter8`, the placeholder `Parameterx` and the page's example `JawForward1`. They describe bit and sign operations on booleans. The scalar pack cannot hold these, so they are `excluded`.
 
-The Unified Expressions figures show the subject's own side: `EyeClosedLeft` closes the eye on the viewer's right ([audit](docs/canonical-set-audit.md#frames-whose-left)). So the artist shapes are face-relative. The eye data takes the same frame, because the project computes `v2/EyeClosedLeft` as 1 − `Left.Openness` (`vrcft_code_parameters` line 40). The audit has no frame row for the transport enum or the avatar parameters, so RCEF takes their side from the name.
+The Unified Expressions figures show the subject's own side: `EyeClosedLeft` closes the eye on the viewer's right ([audit](docs/canonical-set-audit.md#frames-whose-left)). So the artist shapes use the subject's own side. The eye data takes the same frame, because the project computes `v2/EyeClosedLeft` as 1 − `Left.Openness` (`vrcft_code_parameters` line 40). The audit has no frame row for the transport enum or the avatar parameters, so RCEF takes their side from the name.
 
 ### Values, neutral and calibration
 
@@ -701,7 +710,7 @@ On the three `v2/EyeLid*` parameters, RCEF records the value 0.75 as `openness_w
 
 ### Mapping to the canonical sets
 
-| Map set | Direction | Mappings | Parts | Evidence status |
+| Map | Direction | Mappings | Parts | Evidence status |
 |---|---|---:|---:|---|
 | [`vrcft_eye.to_rcef_expression`](docs/map-sets/vrcft_eye.to_rcef_expression.md) | `vrcft.eye` → `rcef.canonical_expression` | 4 | 2 | 2 `proposed`, 2 `verified_current` |
 | [`rcef_expression.to_vrcft_eye`](docs/map-sets/rcef_expression.to_vrcft_eye.md) | `rcef.canonical_expression` → `vrcft.eye` | 4 | 2 | 2 `proposed`, 2 `verified_current` |
@@ -742,7 +751,7 @@ The audit has 64 Unified Expressions rows: 39 `same`, 23 `differs` and 2 `unreso
 
 RCEF has no in-map from Unified Expressions yet. The plan puts the in-maps in phase 2 ([docs/expression-sets.md](docs/expression-sets.md#planned-expression-sets)). They need new IDs for the split shapes and weights for the blended shapes.
 
-Data 0.5.0 retired the direct map `arkit.to_vrcft_artist`. On the pairs that it translated, the route through the canonical expression set gives the same weights (A/B metric M1, [ab/README.md](ab/README.md)). The A/B report M8 R3 compares FB2 → Unified Expressions with the Godot route ([Godot](#godot)).
+Data 0.5.0 retired the direct map `arkit.to_vrcft_artist`. On the pair that it translated, the route through the canonical expression set gives the same weights (A/B metric M1, [ab/README.md](ab/README.md)). The A/B report M8 R3 compares FB2 → Unified Expressions with the Godot route ([Godot](#godot)).
 
 ### Gaps and conflicts
 
@@ -775,7 +784,7 @@ Godot is an open-source engine under the MIT licence. Its `XRFaceTracker` class 
 | [`godot_face_modifier`](references.md#godot_face_modifier) | `scene/3d/xr/xr_face_modifier_3d.cpp` | Godot `e7b12e7` | the name table against other sets | MIT |
 | [`godot_vendors_fb2`](references.md#godot_vendors_fb2) | `openxr_fb_face_tracking_extension.cpp` | godot_openxr_vendors `b0654f1` | how each FB2 weight sets a Godot shape | MIT |
 
-RCEF uses the enum names, the indices and the setter facts. It copies no source descriptions and no setter code ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)). An enum entry does not show that a device supports it, so RCEF infers no device for any value.
+An enum entry does not show that a device supports it, so RCEF infers no device for any value.
 
 ### Signal structure
 
@@ -851,7 +860,7 @@ RCEF reads VRM values as asset weights, not as tracker output. RCEF records no p
 | Licence or terms | reference only; source prose not redistributed; permission to redistribute the specification prose is unresolved |
 | Role in maps | source and target |
 
-RCEF records the preset names and the interface facts. It links to the specification and writes its own summary. It does not copy the prose, code examples or figures ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)). The record `vrm_expressions` states that all 18 presets are optional, and that the specification also allows custom expression names. RCEF records the presets only.
+Permission to redistribute the specification prose is unresolved. So RCEF links to the specification and does not copy its prose, code examples or figures. The record `vrm_expressions` states that all 18 presets are optional, and that the specification also allows custom expression names. RCEF records the presets only.
 
 ### Signal structure
 
@@ -903,7 +912,7 @@ No source states how a VRM weight compares with a tracker weight. The VRM maps r
 
 VRM has four maps, two into and two out of the canonical sets. Every mapping is a copy (affine 1, 0) with the evidence status `proposed`.
 
-| Map set | Direction | Mappings | Part |
+| Map | Direction | Mappings | Part |
 |---|---|---:|---|
 | [`vrm.to_rcef_expression`](docs/map-sets/vrm.to_rcef_expression.md) | `vrm.preset` → `rcef.canonical_expression` | 2 | `blink` |
 | [`rcef_expression.to_vrm`](docs/map-sets/rcef_expression.to_vrm.md) | `rcef.canonical_expression` → `vrm.preset` | 2 | `blink` |
@@ -933,7 +942,7 @@ VRM has no consonant classes and no `sil`, so it does not fill `viseme_consonant
 | `vrm_ih_vowel_quality`: META IH and VRM `ih` are different vowels in one shape class | both vowel maps (1 mapping each) |
 | consonant and rest classes are dropped, so the outputs no longer sum to 1 | `rcef_viseme.to_vrm` |
 
-The mappings also state these assumptions. The blink correspondence is definitional only: the definitions agree, but no published table maps another set to VRM. The vowel correspondence rests on phoneme labels only. `isBinary` and the overrides act in the VRM runtime, and RCEF does not model them.
+The 4 blink mappings also state that the correspondence is definitional only: the definitions agree, but no published table maps another set to VRM (`vrm.definitional_only`). Only the 5 mappings of `rcef_viseme.to_vrm` state that the vowel correspondence rests on phoneme labels only (`vrm.phoneme_label_only`). The two out-maps state that `isBinary` and the overrides act in the VRM runtime, and RCEF does not model them (`vrm.downstream_effects`).
 
 VRM appears in three rows of the [Routes](README.md#routes) table. Its blinks go through the canonical expression set to six targets. Its vowels go through the canonical viseme set to META visemes and VRM. Through the viseme pose bridge, its vowels also reach ARKit, FACS codes, FB2 and Unified Expressions.
 
@@ -977,7 +986,7 @@ All five records are at creator-docs commit `a0fce04`, retrieved on 2026-10-07, 
 | [`roblox_poses`](references.md#roblox_poses) | FACS poses reference | 50 pose headings that cross-check the control names, with list B notices |
 | [`roblox_license`](references.md#roblox_license) | `LICENSE` | the CC-BY-4.0 licence of the documentation |
 
-RCEF uses the names, the list memberships and the authoring facts. It does not copy Roblox prose, videos or models ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)). On 2026-10-26, `create.roblox.com` returned HTTP 502 to scripted checks. The same reference is in the creator-docs repository, which RCEF pins.
+On 2026-10-26, `create.roblox.com` returned HTTP 502 to scripted checks. The same reference is in the creator-docs repository, which RCEF pins.
 
 ### Signal structure
 
@@ -1104,7 +1113,7 @@ The calibration is unresolved in four ways:
 
 ### Mapping to the canonical sets
 
-| Map set | Direction | Mappings | Parts | Evidence status |
+| Map | Direction | Mappings | Parts | Evidence status |
 |---|---|---:|---:|---|
 | [`facs.to_rcef_expression`](docs/map-sets/facs.to_rcef_expression.md) | `facs.code` → `rcef.canonical_expression` | 53 | 8 | `proposed` (53) |
 | [`rcef_expression.to_facs`](docs/map-sets/rcef_expression.to_facs.md) | `rcef.canonical_expression` → `facs.code` | 49 | 8 | `proposed` (49) |
@@ -1120,7 +1129,9 @@ The calibration is unresolved in four ways:
 | `cheek_suck` | 2 of 2 | 2 | 2 | 35 |
 | `lip_tighten` | 2 of 2 | 2 | 2 | 23 |
 
-The in-map has 38 sided copies, 8 fan-outs, 5 shared copies and the 2 rows of AU 30. FACS has no upper and lower split for AU 22 and AU 28. So the fan-outs copy each side into the upper and the lower canonical signal. The out-map has 38 sided copies and 5 shared copies. It also has 4 means of two for AU 22 and AU 28, and the 2 rows of AU 30. The operators are `affine(1,0)` and `weighted_sum [0.5, 0.5]`. An identity is not possible, because the FACS calibration string differs from the canonical one ([docs/canonical-set.md](docs/canonical-set.md#facs)).
+The in-map has 38 sided copies, 8 fan-outs, 5 shared copies and the 2 rows of AU 30. FACS has no upper and lower split for AU 22 and AU 28. So the fan-outs copy each side into the upper and the lower canonical signal.
+
+The out-map has 38 sided copies and 5 shared copies. It also has 4 means of two for AU 22 and AU 28, and the 2 rows of AU 30. The operators are `affine(1,0)` and `weighted_sum [0.5, 0.5]`. An identity is not possible, because the FACS calibration string differs from the canonical one ([docs/canonical-set.md](docs/canonical-set.md#facs)).
 
 FACS fills 8 of the 13 groups of the canonical expression set.
 
@@ -1164,22 +1175,59 @@ A signal that the codec leaves out is never 0. It has no value, so the in-map wr
 
 The plan adds the eye movement codes 61 to 64 in phase 1b, with the loss key `facs_side_frame_unresolved`. Phase 2 adds signals that only FACS has and that action unit detectors need, for example `lips_part` (25), under reserved names ([docs/expression-sets.md](docs/expression-sets.md#planned-expression-sets)).
 
-## Semantics that remain distinct
+## Comparison across sets
 
-`mapped`, `unsupported`, `unresolved` and `excluded` are dispositions. Only mappings with disposition `mapped` have a mapping quality. Evidence status describes verification. It does not describe execution. A verified native identifier can still have an unresolved canonical mapping.
+### Canonical groups that each set fills
 
-A tracking validity flag is not a neutral coefficient. VRCFaceTracking openness starts at 1, but that is not a measured neutral. The raw `PupilDiameter_MM` fields hold millimetres. The combined method puts normalized dilation in a field with the same name, and it replaces NaN with 0.5. The pinned implementation always averages combined gaze, although the documentation describes behaviour that depends on validity. No scalar identity implements behaviour with state like this.
+This table shows which groups of the canonical sets each set fills through its maps. "In" means that the in-map writes the group, and "out" means that the out-map reads it. The table counts the parts of each map from the pack. MediaPipe, OpenXR FB, Godot and Roblox have no maps, so they fill no group.
 
-ARKit eye-look coefficients, ARKit eye transforms, FB2 direction fractions and VRCFaceTracking normalized Cartesian avatar parameters are separate bases. The maximum angles and the model calibration are unknown, so no cross-provider identity is possible. Physical diameter and normalized dilation are different quantities.
+| Canonical group | ARKit | FB2 | FACS codes | VRCFaceTracking eye | Unified Expressions | VRM | META visemes |
+|---|---|---|---|---|---|---|---|
+| `face` | in and out | in and out | in and out | no | out | no | no |
+| `blink` | in and out | in and out | in and out | in and out | out | in and out | no |
+| `gaze` | in and out | in and out | no | no | out | no | no |
+| `cheek_puff` | in and out | in and out | in and out | no | out | no | no |
+| `cheek_suck` | no | in and out | in and out | no | out | no | no |
+| `jaw_thrust` | in and out | in and out | in and out | no | out | no | no |
+| `jaw_sideways` | in and out | in and out | in and out | no | out | no | no |
+| `mouth_shift` | in and out | in and out | no | no | out | no | no |
+| `chin_raise_upper_lip` | in and out | in and out | no | no | out | no | no |
+| `lip_tighten` | no | in and out | in and out | no | out | no | no |
+| `tongue_out` | in and out | in and out | in and out | no | out | no | no |
+| `tongue_place` | no | in and out | no | no | no | no | no |
+| `pupil_mm` | no | no | no | in and out | no | no | no |
+| `viseme_rest` | no | no | no | no | no | no | in and out |
+| `viseme_consonant` | no | no | no | no | no | no | in and out |
+| `viseme_vowel` | no | no | no | no | no | in and out | in and out |
+| `viseme_aggregate` | no | no | no | no | no | no | in |
 
-VRM binary metadata records `0.49 → 0`, `0.5 → 0`, `0.51 → 1`, because the comparison is strictly `> 0.5`. Where overrides apply, they act after that binary decision. LookAt describes one shared direction and range maps specific to each model. It cannot express two eyes that point in different directions. RCEF leaves the execution of bindings, materials and overrides for later.
+The viseme pose bridge reads `viseme_rest`, `viseme_consonant` and `viseme_vowel`. It writes `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip`. [docs/routes.svg](docs/routes.svg) shows the same groups as a figure.
 
-At the same pinned revision, Roblox's FaceControls documentation and its dynamic-head specifications each list 17 required poses, but the lists differ. RCEF records both lists and which list each control is in. Frame 0 is the neutral joint pose. A combination corrective stores a difference from the combined base poses. Certification and the execution of correctives are still unresolved.
+### Problems that every set shares
 
-VRCFaceTracking's artist lower-lip names conflict with their direction wording. The sad-side wording conflicts with the names and components. The public parameter wording for nasal constriction swaps the sides. The binary page describes both a `2^N-1` range and `1/2^N` bit values. These conflicts block derived mappings.
+| Problem | Where it occurs | Effect on the canonical design |
+|---|---|---|
+| No published gain | Every set. No source shows that a full activation in one set equals a full activation in another. | Each canonical signal has a declared meaning and no measured gain. Every in-map and out-map assumes that the source's 0 and 1 are canonical 0 and 1. So every cross-provider mapping is `proposed`. |
+| Side frames | ARKit, FB2 and Unified Expressions settle their frame with their own text or figures. VRM and the FACS source do not state it. RCEF has not checked the frame of the sets with no map. | The canonical set names sides from the subject's own face. Where a source does not state its frame, RCEF reads the subject's own side as an assumption and states a loss key, for example `vrm_blink_side_unresolved`. |
+| Different gaze bases | ARKit describes eyelid movement. FB2 gives fractions of a maximum angle that it does not state. VRM uses angles in degrees. The VRCFaceTracking raw gaze units are unresolved. | Canonical gaze is a fraction of the source's maximum gaze in one direction, with no angle. The ARKit and FB2 maps state the difference as a loss. No map reads the VRM `look*` presets or the VRCFaceTracking raw gaze. |
+| Asset-authored weights | A VRM preset drives the binds that each model author sets. A Roblox control drives a joint pose that the creator of each head authors. | The meaning of 1 depends on the model. The canonical set defines each signal by a face action, and the binds of a model are outside the set. The VRM maps state this as a loss, and Roblox has no maps. |
 
-Four artist footnotes mark their shapes as unused by all interfaces. That is source evidence at the retrieval date. It does not say that nobody can use the shapes.
+### Semantics that remain distinct
 
-## General morph weights
+RCEF never treats these quantities as the same, even when their names are alike:
+
+- `disposition`, `evidence_status` and `mapping_quality` are separate fields. A verified native name can still have an unresolved mapping.
+- A validity flag, a `neutral` value and a `native_default` are different things. VRCFaceTracking `Openness` starts at 1, and its source does not state that this start value is a neutral.
+- ARKit eye-look coefficients, ARKit eye transforms, FB2 direction fractions and VRCFaceTracking normalized avatar parameters are separate gaze bases. The maximum angles and the model calibration are unknown, so no cross-provider identity is possible.
+- A raw pupil diameter in millimetres, a combined normalized dilation and a parameter in centimetres are different quantities.
+- An asset-authored weight and a tracker weight are different quantities.
+
+### General morph weights
 
 The [pinned glTF source](references.md#gltf_morph) allows morph coefficients outside 0 to 1. The domains of tracked signals do not set a domain for every morph. Signed geometric weights or weights above one, bind and rest transforms, and asset hashes belong to the shared tooling and to later asset tests. Host execution also belongs there. RCEF does not make geometry.
+
+## Data notes
+
+Data 0.5.0 retired 21 identity mappings into the old 21-signal set `rcef.canonical` ([docs/retired-ids.csv](docs/retired-ids.csv)). From that time, 21 signals still have `mapping_quality = "exact"` in their metadata. For the 2 raw VRCFaceTracking pupil fields, this agrees with their current mappings. The other 19 are 9 ARKit coefficients, the 8 FB2 gaze weights and the 2 VRCFaceTracking `Openness` fields. Their current mappings are `approximate`.
+
+Nothing executable reads this field. The latest A/B freeze holds a hash of the signal metadata, so a change to the field needs a new freeze.
