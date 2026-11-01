@@ -79,7 +79,9 @@ Before it does anything else, `check.py` checks all of these:
 
 #### Adopt a new release
 
-Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash. Without `--wheel`, the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
+Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support.
+
+Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash. Without `--wheel`, the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
 
 #### Roll back
 
@@ -197,7 +199,9 @@ In the schema a map is a `[[mappings]]` record and each mapping in it is one ent
 
 `disposition` says whether the author has admitted the relationship. `evidence_status` describes its evidence. `mapping_quality` describes the quality of an admitted mapping. These are separate fields. The direction is the ordered relationship from `inputs` to `outputs`. A mapping does not imply an inverse.
 
-For each pair of an expression set and a canonical set, RCEF has at most one map in each direction. Its ID is `<from>.to_<to>`. The ID names an expression set by the key that its mapping IDs use, for example `fb2_rcef.*` and `rcef_fb2.*`. The ID names a canonical set `rcef_expression` or `rcef_viseme`. A map changes the values of its source set into values of its target set as one unit. A part of a map is its mappings for one group of the canonical set. The group of each canonical signal is in its metadata.
+For each pair of an expression set and a canonical set, RCEF has at most one map in each direction. Its ID is `<from>.to_<to>`. The ID names an expression set by the key that its mapping IDs use, for example `fb2_rcef.*` and `rcef_fb2.*`. The ID names a canonical set `rcef_expression` or `rcef_viseme`. A map changes the values of its source set into values of its target set as one unit.
+
+A part of a map is its mappings for one group of the canonical set. The group of each canonical signal is in its metadata.
 
 Source: `validate_authoring` in [authoring.py](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/msf_character_tools/authoring.py), which runs the C++ core's checks: `validate_signal`, `validate_rule`, `knots` and `loss_annotation` in [authoring.cpp](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/core/src/authoring.cpp).
 

@@ -123,7 +123,9 @@ This section is a plan, not data. It goes with the draft [canonical expression s
 
 ### Rule for every new set
 
-A set joins only with a pinned public source and a known licence. It gets a profile, evidence records, rows in the [definitions audit](canonical-set-audit.md), and in-maps or out-maps. It also gets a row in the test that checks which canonical groups each set can fill. A new copyright holder of CC-BY-4.0 text gets a row in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). A product name in a profile ID gets a trademark check. New sets join after data 0.5.0, so they do not change the frozen A/B comparison ([ab/README.md](../ab/README.md)). Their routes have no direct map to compare with, so each is labelled "no external reference" unless a public route exists.
+A set joins only with a pinned public source and a known licence. It gets a profile, evidence records, rows in the [definitions audit](canonical-set-audit.md), and in-maps or out-maps. It also gets a row in the test that checks which canonical groups each set can fill. A new copyright holder of CC-BY-4.0 text gets a row in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). A product name in a profile ID gets a trademark check.
+
+New sets join after data 0.5.0, so they do not change the frozen A/B comparison ([ab/README.md](../ab/README.md)). Their routes have no direct map to compare with, so each is labelled "no external reference" unless a public route exists.
 
 ### How the list was made
 
