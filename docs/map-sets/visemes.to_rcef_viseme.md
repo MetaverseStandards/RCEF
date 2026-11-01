@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 <!-- Written by scripts/export_map_sets.py from generated/rcef.pack.json. Do not edit. -->
 
-# Map set `visemes.to_rcef_viseme`
+# Map `visemes.to_rcef_viseme`
 
 One map into the canonical viseme set (`rcef.canonical_viseme`): from `openxr.visemes` to `rcef.canonical_viseme`.
 
@@ -49,8 +49,8 @@ Loss keys of the [definitions audit](../canonical-set-audit.md#loss-keys) that i
 
 None: the map writes every group of the canonical viseme set.
 
-## Other map sets into the canonical viseme set
+## Other maps into the canonical viseme set
 
-| Map set | Parts | Mappings |
+| Map | Parts | Mappings |
 |---|---|---|
 | [`vrm.to_rcef_viseme`](vrm.to_rcef_viseme.md) | 1 | 5 |

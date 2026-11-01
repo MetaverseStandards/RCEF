@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 <!-- Written by scripts/export_map_sets.py from generated/rcef.pack.json. Do not edit. -->
 
-# Map set `fb2.to_rcef_expression`
+# Map `fb2.to_rcef_expression`
 
 One map into the canonical expression set (`rcef.canonical_expression`): from `openxr.fb2` to `rcef.canonical_expression`.
 
@@ -72,9 +72,9 @@ The [FB2 section](../canonical-set-audit.md#fb2) of the definitions audit names 
 
 - `pupil_mm` (2): `pupil_diameter_mm_left`, `pupil_diameter_mm_right`
 
-## Other map sets into the canonical expression set
+## Other maps into the canonical expression set
 
-| Map set | Parts | Mappings |
+| Map | Parts | Mappings |
 |---|---|---|
 | [`arkit.to_rcef_expression`](arkit.to_rcef_expression.md) | 9 | 60 |
 | [`facs.to_rcef_expression`](facs.to_rcef_expression.md) | 8 | 53 |

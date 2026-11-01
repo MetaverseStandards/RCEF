@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 <!-- Written by scripts/export_map_sets.py from generated/rcef.pack.json. Do not edit. -->
 
-# Map set `rcef_expression.to_vrcft_eye`
+# Map `rcef_expression.to_vrcft_eye`
 
 One map out of the canonical expression set (`rcef.canonical_expression`): from `rcef.canonical_expression` to `vrcft.eye`.
 
@@ -52,9 +52,9 @@ The [VRCFaceTracking eye section](../canonical-set-audit.md#vrcfacetracking-eye)
 - `lip_tighten` (2): `lip_tighten_left`, `lip_tighten_right`
 - `tongue_place` (6): `tongue_retreat`, `tongue_tip_interdental`, `tongue_tip_alveolar`, `tongue_front_dorsal_palate`, `tongue_mid_dorsal_palate`, `tongue_back_dorsal_velar`
 
-## Other map sets out of the canonical expression set
+## Other maps out of the canonical expression set
 
-| Map set | Parts | Mappings |
+| Map | Parts | Mappings |
 |---|---|---|
 | [`rcef_expression.to_arkit`](rcef_expression.to_arkit.md) | 9 | 52 |
 | [`rcef_expression.to_facs`](rcef_expression.to_facs.md) | 8 | 49 |

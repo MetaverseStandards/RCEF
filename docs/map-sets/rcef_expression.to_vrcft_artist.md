@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 <!-- Written by scripts/export_map_sets.py from generated/rcef.pack.json. Do not edit. -->
 
-# Map set `rcef_expression.to_vrcft_artist`
+# Map `rcef_expression.to_vrcft_artist`
 
 One map out of the canonical expression set (`rcef.canonical_expression`): from `rcef.canonical_expression` to `vrcft.artist.base`.
 
@@ -75,9 +75,9 @@ The [VRCFaceTracking Unified Expressions section](../canonical-set-audit.md#vrcf
 - `tongue_place` (6): `tongue_retreat`, `tongue_tip_interdental`, `tongue_tip_alveolar`, `tongue_front_dorsal_palate`, `tongue_mid_dorsal_palate`, `tongue_back_dorsal_velar`
 - `pupil_mm` (2): `pupil_diameter_mm_left`, `pupil_diameter_mm_right`
 
-## Other map sets out of the canonical expression set
+## Other maps out of the canonical expression set
 
-| Map set | Parts | Mappings |
+| Map | Parts | Mappings |
 |---|---|---|
 | [`rcef_expression.to_arkit`](rcef_expression.to_arkit.md) | 9 | 52 |
 | [`rcef_expression.to_facs`](rcef_expression.to_facs.md) | 8 | 49 |

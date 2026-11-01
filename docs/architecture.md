@@ -77,13 +77,17 @@ Before it does anything else, `check.py` checks all of these:
 
 `check.py` compares the wheel hash after installation only if the installer recorded it. uv does not record it. For uv installs, `--require-hashes` checks the hash at install time. The commit and the file hashes identify the package, so `check.py` accepts local `file://` installs. Checking never clones or downloads anything.
 
-**Adopt a new release.** Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash. Without `--wheel`, the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
+#### Adopt a new release
 
-**Roll back.** `tooling.lock.previous.json` holds the lock of msf-character-tools 0.5.0, the first release from its repository in the Metaverse Standards Forum organization. To roll back, copy `tooling.lock.previous.json` over `tooling.lock.json`, install msf-character-tools at its commit, and use the `check.py` from the same RCEF commit as that lock.
+Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support. Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash. Without `--wheel`, the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
+
+#### Roll back
+
+`tooling.lock.previous.json` holds the lock of msf-character-tools 0.5.0, the first release from its repository in the Metaverse Standards Forum organization. To roll back, copy `tooling.lock.previous.json` over `tooling.lock.json`, install msf-character-tools at its commit, and use the `check.py` from the same RCEF commit as that lock.
 
 ### Calibration records and the held-out provenance check
 
-A calibration record is a software-only fit, made from renders or mesh geometry of example rigs. Its frozen part (everything except `cells`) is hashed, and the hash is written to `calibration/FREEZES` and committed before the held-out run. The held-out seeds come from that hash. Five records exist. The three viseme-poses records in the checkout were frozen again as new versions after the history was rewritten for publication. Only `version`, `code_commit` and `frozen_sha256` changed in their frozen parts:
+A calibration record is a software-only fit, made from renders or mesh geometry of example rigs. RCEF hashes its frozen part (everything except `cells`), writes the hash to `calibration/FREEZES` and commits that line before the held-out run. The held-out seeds come from that hash. Five records exist. After RCEF rewrote its history for publication, it froze the three viseme-poses records in the checkout again as new versions. Only `version`, `code_commit` and `frozen_sha256` changed in their frozen parts:
 
 - `mediapipe.ict-response`: a negative result. 25 of MediaPipe's 51 ARKit-named scores could be fitted, and none passed on held-out data.
 - `rig-gains.ict-rocketbox-female`: 3 of 51 ARKit shapes pass; 48 fail and are published as negative results.
@@ -99,7 +103,7 @@ The calibration tools in [tools/calibration/](../tools/calibration/README.md) ru
 
 Directory discovery walks the tree and includes every file name that ends in lowercase `.toml`. It skips directories and files whose names begin with `.`, and directories named `generated`. It refuses symlinks in the authoring tree, and it sorts all file paths before it merges them. It also refuses paths that differ only in letter case and reserved file names such as `CON` or `NUL`. Each fragment must be a regular file.
 
-**Folder names do not choose a schema.** `profiles/`, `mappings/`, `data/` and `evidence/` only organize the repository. The top-level keys in each parsed file decide what is added. Any new TOML file in the discovered tree is read, including a TOML example placed under `docs/`. Keep standalone authoring examples outside the tree or inside Markdown code fences. For this reason, calibration records are named `*.cal` and `tools/calibration/results/mediapipe_arkit.rules` is not named `.toml`.
+Folder names do not choose a schema. `profiles/`, `mappings/`, `data/` and `evidence/` only organize the repository. The top-level keys in each parsed file decide what is added. Any new TOML file in the discovered tree is read, including a TOML example placed under `docs/`. Keep standalone authoring examples outside the tree or inside Markdown code fences. For this reason, calibration records are named `*.cal` and `tools/calibration/results/mediapipe_arkit.rules` is not named `.toml`.
 
 | Location | Role | Files | Signals | Profiles | Memberships | Maps / mappings | Evidence |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -193,7 +197,7 @@ In the schema a map is a `[[mappings]]` record and each mapping in it is one ent
 
 `disposition` says whether the author has admitted the relationship. `evidence_status` describes its evidence. `mapping_quality` describes the quality of an admitted mapping. These are separate fields. The direction is the ordered relationship from `inputs` to `outputs`. A mapping does not imply an inverse.
 
-For each pair of an expression set and a canonical set, RCEF has at most one map in each direction, called a map set. Its ID is `<from>.to_<to>`. The ID names an expression set by the key that its mapping IDs use, for example `fb2_rcef.*` and `rcef_fb2.*`. The ID names a canonical set `rcef_expression` or `rcef_viseme`. A map changes the values of its source set into values of its target set as one unit. A part of a map is its mappings for one group of the canonical set. The group of each canonical signal is in its metadata.
+For each pair of an expression set and a canonical set, RCEF has at most one map in each direction. Its ID is `<from>.to_<to>`. The ID names an expression set by the key that its mapping IDs use, for example `fb2_rcef.*` and `rcef_fb2.*`. The ID names a canonical set `rcef_expression` or `rcef_viseme`. A map changes the values of its source set into values of its target set as one unit. A part of a map is its mappings for one group of the canonical set. The group of each canonical signal is in its metadata.
 
 Source: `validate_authoring` in [authoring.py](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/msf_character_tools/authoring.py), which runs the C++ core's checks: `validate_signal`, `validate_rule`, `knots` and `loss_annotation` in [authoring.cpp](https://github.com/MetaverseStandards/msf_character_tools/blob/913403db7614f20d87f210ba21009cbfa88fe60d/core/src/authoring.cpp).
 

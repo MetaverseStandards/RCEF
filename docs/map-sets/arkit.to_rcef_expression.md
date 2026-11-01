@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 <!-- Written by scripts/export_map_sets.py from generated/rcef.pack.json. Do not edit. -->
 
-# Map set `arkit.to_rcef_expression`
+# Map `arkit.to_rcef_expression`
 
 One map into the canonical expression set (`rcef.canonical_expression`): from `arkit.coefficient` to `rcef.canonical_expression`.
 
@@ -79,9 +79,9 @@ The [ARKit section](../canonical-set-audit.md#arkit) of the definitions audit na
 - `tongue_place` (6): `tongue_retreat`, `tongue_tip_interdental`, `tongue_tip_alveolar`, `tongue_front_dorsal_palate`, `tongue_mid_dorsal_palate`, `tongue_back_dorsal_velar`
 - `pupil_mm` (2): `pupil_diameter_mm_left`, `pupil_diameter_mm_right`
 
-## Other map sets into the canonical expression set
+## Other maps into the canonical expression set
 
-| Map set | Parts | Mappings |
+| Map | Parts | Mappings |
 |---|---|---|
 | [`facs.to_rcef_expression`](facs.to_rcef_expression.md) | 8 | 53 |
 | [`fb2.to_rcef_expression`](fb2.to_rcef_expression.md) | 12 | 70 |

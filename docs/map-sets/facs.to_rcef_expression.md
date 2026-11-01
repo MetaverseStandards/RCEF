@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 <!-- Written by scripts/export_map_sets.py from generated/rcef.pack.json. Do not edit. -->
 
-# Map set `facs.to_rcef_expression`
+# Map `facs.to_rcef_expression`
 
 One map into the canonical expression set (`rcef.canonical_expression`): from `facs.code` to `rcef.canonical_expression`.
 
@@ -65,9 +65,9 @@ The [FACS section](../canonical-set-audit.md#facs) of the definitions audit name
 - `tongue_place` (6): `tongue_retreat`, `tongue_tip_interdental`, `tongue_tip_alveolar`, `tongue_front_dorsal_palate`, `tongue_mid_dorsal_palate`, `tongue_back_dorsal_velar`
 - `pupil_mm` (2): `pupil_diameter_mm_left`, `pupil_diameter_mm_right`
 
-## Other map sets into the canonical expression set
+## Other maps into the canonical expression set
 
-| Map set | Parts | Mappings |
+| Map | Parts | Mappings |
 |---|---|---|
 | [`arkit.to_rcef_expression`](arkit.to_rcef_expression.md) | 9 | 60 |
 | [`fb2.to_rcef_expression`](fb2.to_rcef_expression.md) | 12 | 70 |

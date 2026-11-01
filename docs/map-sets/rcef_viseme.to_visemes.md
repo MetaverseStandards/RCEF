@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 <!-- Written by scripts/export_map_sets.py from generated/rcef.pack.json. Do not edit. -->
 
-# Map set `rcef_viseme.to_visemes`
+# Map `rcef_viseme.to_visemes`
 
 One map out of the canonical viseme set (`rcef.canonical_viseme`): from `rcef.canonical_viseme` to `openxr.visemes`.
 
@@ -46,8 +46,8 @@ The [META visemes section](../canonical-set-audit.md#meta-visemes) of the defini
 
 - `viseme_aggregate` (1): `alveolar_floor`
 
-## Other map sets out of the canonical viseme set
+## Other maps out of the canonical viseme set
 
-| Map set | Parts | Mappings |
+| Map | Parts | Mappings |
 |---|---|---|
 | [`rcef_viseme.to_vrm`](rcef_viseme.to_vrm.md) | 1 | 5 |

@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 <!-- Written by scripts/export_map_sets.py from generated/rcef.pack.json. Do not edit. -->
 
-# Map set `rcef_viseme.to_vrm`
+# Map `rcef_viseme.to_vrm`
 
 One map out of the canonical viseme set (`rcef.canonical_viseme`): from `rcef.canonical_viseme` to `vrm.preset`.
 
@@ -44,8 +44,8 @@ The [VRM section](../canonical-set-audit.md#vrm) of the definitions audit names 
 - `viseme_rest` (1): `sil`
 - `viseme_aggregate` (1): `alveolar_floor`
 
-## Other map sets out of the canonical viseme set
+## Other maps out of the canonical viseme set
 
-| Map set | Parts | Mappings |
+| Map | Parts | Mappings |
 |---|---|---|
 | [`rcef_viseme.to_visemes`](rcef_viseme.to_visemes.md) | 3 | 15 |

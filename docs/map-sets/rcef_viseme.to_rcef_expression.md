@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 <!-- Written by scripts/export_map_sets.py from generated/rcef.pack.json. Do not edit. -->
 
-# Map set `rcef_viseme.to_rcef_expression`
+# Map `rcef_viseme.to_rcef_expression`
 
 The viseme pose bridge: one map from the canonical viseme set (`rcef.canonical_viseme`) to the canonical expression set (`rcef.canonical_expression`).
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Write one page per map set, docs/map-sets/<map id>.md, from the pack, or by default check that they are current.
+"""Write one page per map, docs/map-sets/<map id>.md, from the pack, or by default check that they are current.
 
-A map set is one map between an expression set and a canonical set, in one direction, or the viseme pose bridge
-between the two canonical sets. Its page shows the map's parts (its mappings split by the canonical group they read
-or write), the mappings, operators, evidence and loss keys of each part, and the groups of the canonical set that
-the map does not have, with the reason. It reads only generated/rcef.pack.json.
+Each page covers one map between an expression set and a canonical set, in one direction, or the viseme pose
+bridge between the two canonical sets. The page shows the map's parts (its mappings split by the canonical group
+they read or write), the mappings, operators, evidence and loss keys of each part, and the groups of the canonical
+set that the map does not have, with the reason. It reads only generated/rcef.pack.json.
 """
 from __future__ import annotations
 import argparse
@@ -42,7 +42,7 @@ def ends(rules: list[dict]) -> tuple[list[str], list[str]]:
 
 
 def map_sets(document: dict) -> list[dict]:
-    """Every map set of the pack: {id, source, target, rules}, in pack order."""
+    """Every map of an expression set and a canonical set, and the bridge: {id, source, target, rules}."""
     profiles = {p['id']: set(p['signal_ids']) for p in document['profiles']}
 
     def home(sids):
@@ -124,7 +124,7 @@ def page(entry: dict, document: dict, keys: set[str], siblings: list[dict]) -> s
     rules, found = entry['rules'], parts(entry['rules'], groups)
     statuses = counted(r['evidence_status'] for r in rules)
     prefix = ', '.join(sorted({r['id'].split('.', 1)[0] for r in rules}))
-    lines = [HEADER, f'# Map set `{entry["id"]}`', '']
+    lines = [HEADER, f'# Map `{entry["id"]}`', '']
     direction = 'into' if entry['target'] in CANONICAL and not bridge else 'out of'
     if bridge:
         lines.append(f'The viseme pose bridge: one map from the {CANONICAL[entry["source"]]} (`{entry["source"]}`) '
@@ -204,8 +204,8 @@ def page(entry: dict, document: dict, keys: set[str], siblings: list[dict]) -> s
             members = [s.rsplit('.', 1)[1] for s in profiles[canonical]['signal_ids'] if groups[s] == group]
             lines.append(f'- `{group}` ({len(members)}): ' + ', '.join(f'`{m}`' for m in members))
     if siblings:
-        lines += ['', f'## Other map sets {direction} the {CANONICAL[canonical]}', '',
-                  '| Map set | Parts | Mappings |', '|---|---|---|']
+        lines += ['', f'## Other maps {direction} the {CANONICAL[canonical]}', '',
+                  '| Map | Parts | Mappings |', '|---|---|---|']
         for other in siblings:
             lines.append(f'| [`{other["id"]}`]({other["id"]}.md) | {len(parts(other["rules"], groups))} | '
                          f'{len(other["rules"])} |')
