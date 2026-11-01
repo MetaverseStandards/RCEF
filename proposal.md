@@ -21,7 +21,7 @@ The Reference Canonical Expression Framework (RCEF) records public expression in
 
 RCEF defines two draft canonical sets: an expression set of 72 signals and a viseme set of 16 signals. A translation runs from a source set, through a canonical set, to a target set. A map is a set of one-way scalar mappings, and each mapping states its assumptions and its losses. Each map in a route is one hop.
 
-Data 0.5.0 holds 1165 signals in 26 profiles, 588 mappings in 19 maps and 81 evidence records. Of the 19 maps, 3 are test and record maps. The other 16 maps translate 37 pairs of source set and target set. On the 5 pairs that the retired direct maps translated, the routes give the same weights on every output that both write. A registered A/B comparison shows this. 28 of the 37 pairs have no external reference.
+Data 0.5.0 holds 1165 signals in 26 profiles, 588 mappings in 19 maps and 81 evidence records. Of the 19 maps, 3 are test and record maps. The other 16 maps translate 37 pairs of source set and target set. On the 5 pairs that the retired direct maps translated, the routes give the same weights on every output that both write. A registered A/B comparison shows this. For 28 of the 37 pairs, no external reference exists: only RCEF's routes and an independent re-computation run them.
 
 The current data has these limits. The canonical sets are drafts that the working group has not reviewed. All cross-provider mappings are proposed approximations: only the 4 pupil copies are exact. RCEF does not claim visual equivalence, a measured gain or tracker accuracy. The gain of a signal is how far the face moves for a given value.
 
@@ -305,12 +305,12 @@ These are the effects of the current data. They are not promises about later dat
 - A new universal blendshape set. "Canonical" does not mean one universal anatomy or one shared calibration.
 - Any claim of visual equivalence. The cross-provider mappings are proposed approximations.
 - The look of a stylized character. RCEF describes what a signal means. Stylization is a separate layer.
-- Translations that need state, time or classification. Examples are VRM emotion presets, the combined VRCFaceTracking eye data and the effect of neighbouring sounds on a viseme.
+- Translations that need state, time, classification or an operator for angles. Examples are the VRM emotion and `look*` presets, the combined VRCFaceTracking eye data and the effect of neighbouring sounds on a viseme.
 - Geometry. RCEF does not make or deform meshes. msf-character-tools has its own geometry scope.
 
 ### Not translated yet
 
-The README lists each translation that is [not translated yet](README.md#not-translated-yet-planned) or [out of scope](README.md#out-of-scope), with the reason.
+The README lists the translations that RCEF does not make [yet](README.md#not-translated-yet-planned), and the translations that are [out of scope](README.md#out-of-scope), with the reason for each.
 
 ## Requests to the Forum
 

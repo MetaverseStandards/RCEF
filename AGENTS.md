@@ -115,7 +115,7 @@ python3 -B scripts/compare_godot.py --write       # docs/godot_comparison.md
 python3 -B scripts/export_toml_index.py --write   # docs/toml-index.csv
 python3 -B scripts/build_canonical.py --write     # data/canonical_expression.toml, data/canonical_viseme.toml, profiles/facs.code.toml, mappings/canonical_*.toml
 python3 -B scripts/export_figures.py --write      # docs/routes.svg, docs/ab-coverage.svg
-python3 -B scripts/export_map_sets.py --write     # docs/map-sets/<map-id>.md, one page per map set
+python3 -B scripts/export_map_sets.py --write     # docs/map-sets/<map-id>.md, one page per map
 python3 -B scripts/ab_compare.py check            # the ab/ folder: ledger, registrations, results
 sh scripts/ci_local.sh                       # check.py and tests on Python 3.11 and 3.12
 ```
@@ -158,7 +158,7 @@ To adopt a new msf-character-tools release: install its wheel by hash, then run 
 - Retired IDs are never reused. `tests/test_retired_ids.py` checks that every ID of the A/B baseline that is not in the pack has one line in [docs/retired-ids.csv](docs/retired-ids.csv).
 - msf-character-tools reads every `*.toml` file in the tree as pack data, wherever it is (only hidden names and `generated/` are skipped). That is why calibration records are named `.cal`. Do not add other TOML files.
 - `docs/architecture.html`, `.svg` and `.png` are made by hand, and no test checks them. When the data changes, update them and the counts in `docs/architecture.md`, and render the PNG from the SVG at the same size (1160 × 560). See the checklist in [docs/architecture.md](docs/architecture.md#9-independent-validation-checklist).
-- `docs/map-sets/*.md` are not made by hand: `scripts/export_map_sets.py --write` writes one page per map set from the pack, and `tests/test_map_sets.py` fails when they are out of date.
+- `docs/map-sets/*.md` are not made by hand: `scripts/export_map_sets.py --write` writes one page per map from the pack, and `tests/test_map_sets.py` fails when they are out of date.
 - `docs/routes.svg` and `docs/ab-coverage.svg` are not made by hand: `scripts/export_figures.py --write` writes them from the pack and the latest A/B results, and `tests/test_figures.py` fails when they are out of date. A new A/B run or a map change needs the script.
 - The face and viseme pipelines download rigs on first use and check their hashes (`--cache DIR` for rig files, `--out DIR` for outputs; the defaults are under `~/.cache`). The slow tests skip unless their variables are set. See [examples/README.md](examples/README.md).
   - `tests/test_examples_slow.py`: `RCEF_SLOW_TESTS=1`, plus `RCEF_ICT_CACHE` for the ICT tests and `RCEF_RIG_CACHE` for the Rocketbox and VRM tests.

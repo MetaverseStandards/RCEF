@@ -81,7 +81,7 @@ Before it does anything else, `check.py` checks all of these:
 
 Install the reviewed wheel by hash, then run `python3 -B check.py --update-lock`. Add `--wheel PATH` to record the SHA-256 of the wheel file you installed; `check.py` first confirms that the wheel holds the installed files. Run the command once from each Python whose tag you support.
 
-Entries for the same commit and version are merged. When the commit or the version changes, the old lock is kept as `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash. Without `--wheel`, the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
+`check.py` merges entries for the same commit and version. When the commit or the version changes, it moves the old lock to `evidence/tooling.lock.previous.json`, and the new lock has only the new tag. Always give `--wheel` after a uv install. uv does not record the wheel's hash. Without `--wheel`, the tag's `sha256` becomes `null`, and installs by hash then fail for that tag.
 
 #### Roll back
 
@@ -452,7 +452,7 @@ The latest passing A/B freeze fixes the maps of the canonical sets. `tests/test_
 
 1. Add a `[[mappings]]` record with a new `id` and its `rules`, in a file in `mappings/`. Mapping IDs must be unique across all maps. The file name must end in lowercase `.toml`.
 2. Regenerate as for a changed mapping. Run `python3 -B scripts/export_map_sets.py --write` to write its page in `docs/map-sets/`.
-3. Add a row for the map set to the README [Mappings](../README.md#mappings) table. Give a link to its page, the source and target sets, the number of mappings and parts, and the evidence status. `tests/test_readme_sources.py` fails until the row agrees with the pack.
+3. Add a row for the map to the README [Mappings](../README.md#mappings) table. Give a link to its page, the source and target sets, the number of mappings and parts, and the evidence status. `tests/test_readme_sources.py` fails until the row agrees with the pack.
 4. Update the counts in this guide and in the hand-made visuals. See [the validation checklist](#9-independent-validation-checklist).
 5. Add a CHANGELOG entry. Run the tests.
 

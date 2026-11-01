@@ -1203,11 +1203,11 @@ This table shows which groups of the canonical sets each set fills through its m
 
 The viseme pose bridge reads `viseme_rest`, `viseme_consonant` and `viseme_vowel`. It writes `face`, `cheek_puff`, `jaw_thrust` and `chin_raise_upper_lip`. [docs/routes.svg](docs/routes.svg) shows the same groups as a figure.
 
-### Problems that every set shares
+### Problems that several sets share
 
 | Problem | Where it occurs | Effect on the canonical design |
 |---|---|---|
-| No published gain | Every set. No source shows that a full activation in one set equals a full activation in another. | Each canonical signal has a declared meaning and no measured gain. Every in-map and out-map assumes that the source's 0 and 1 are canonical 0 and 1. So every cross-provider mapping is `proposed`. |
+| No published gain | Every set. No source shows that a full activation in one set equals a full activation in another. | Each canonical signal has a declared meaning and no measured gain. Every in-map and out-map assumes that the source's 0 and 1 are canonical 0 and 1, except the 4 pupil copies in millimetres. So all other mappings are `proposed`. |
 | Side frames | ARKit, FB2 and Unified Expressions settle their frame with their own text or figures. VRM and the FACS source do not state it. RCEF has not checked the frame of the sets with no map. | The canonical set names sides from the subject's own face. Where a source does not state its frame, RCEF reads the subject's own side as an assumption and states a loss key, for example `vrm_blink_side_unresolved`. |
 | Different gaze bases | ARKit describes eyelid movement. FB2 gives fractions of a maximum angle that it does not state. VRM uses angles in degrees. The VRCFaceTracking raw gaze units are unresolved. | Canonical gaze is a fraction of the source's maximum gaze in one direction, with no angle. The ARKit and FB2 maps state the difference as a loss. No map reads the VRM `look*` presets or the VRCFaceTracking raw gaze. |
 | Asset-authored weights | A VRM preset drives the binds that each model author sets. A Roblox control drives a joint pose that the creator of each head authors. | The meaning of 1 depends on the model. The canonical set defines each signal by a face action, and the binds of a model are outside the set. The VRM maps state this as a loss, and Roblox has no maps. |
@@ -1224,7 +1224,7 @@ RCEF never treats these quantities as the same, even when their names are alike:
 
 ### General morph weights
 
-The [pinned glTF source](references.md#gltf_morph) allows morph coefficients outside 0 to 1. The domains of tracked signals do not set a domain for every morph. Signed geometric weights or weights above one, bind and rest transforms, and asset hashes belong to the shared tooling and to later asset tests. Host execution also belongs there. RCEF does not make geometry.
+Avatar meshes store expression shapes as glTF morph targets. The [pinned glTF source](references.md#gltf_morph) allows morph coefficients outside 0 to 1. The domains of tracked signals do not set a domain for every morph. Signed geometric weights or weights above one, bind and rest transforms, and asset hashes belong to the shared tooling and to later asset tests. Host execution also belongs there. RCEF does not make geometry.
 
 ## Data notes
 

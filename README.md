@@ -63,7 +63,7 @@ RCEF records the public expression sets in this list. Each number is the count o
 - Roblox: 50 face controls.
 - FACS: 92 rows for 70 code numbers from a public list (some codes split by side). 49 rows are mapped. RCEF uses its own numeric encoding, not a FACS interface.
 
-RCEF's two canonical sets are between these sets. A map turns the values of one set into the values of another set, and each rule in a map is one mapping. Each mapping has an evidence status. `verified_current` means that the mapping copies a verified provider value exactly. `proposed` means an approximate cross-provider translation that sources support. A proposed mapping compiles only with the approximation opt-in.
+A translation goes from one of these sets, through one of RCEF's two canonical sets, to another set. A map turns the values of one set into the values of another set, and each rule in a map is one mapping. Each mapping has an evidence status. `verified_current` means that the mapping copies a verified provider value exactly. `proposed` means an approximate cross-provider translation that sources support. A proposed mapping compiles only with the approximation opt-in.
 
 These numbers describe the canonical sets and their maps:
 
@@ -244,7 +244,7 @@ All 5 records in [calibration/](calibration/README.md) are software-only. They a
 
 ### Out of scope
 
-RCEF does not plan these translations. They need state, time, classification or an operator for angles, and the current operators have none of these.
+RCEF does not plan these translations. The current operators cannot express them, or the source values do not hold the information.
 
 - VRM emotions (happy, angry, sad, relaxed, surprised). A classification turns muscle movements into an emotion label. A linear calculation cannot do this. Also, each model authors its own binds.
 - VRM `lookUp`, `lookDown`, `lookLeft` and `lookRight`. VRM drives gaze by angle, through range maps whose input is in degrees. FB2 and ARKit publish no maximum angle. A translation needs an operator for angles and curves.

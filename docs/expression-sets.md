@@ -129,7 +129,7 @@ New sets join after data 0.5.0, so they do not change the frozen A/B comparison 
 
 ### How the list was made
 
-It has RCEF's own profiles and other sets that the authors knew of. It also has every face, facial, lip and eye-expression weight enum in the OpenXR registry at `5a82d45` (`xr_registry`). So it is complete for OpenXR at that commit. It is not a complete list of public sets.
+The list has RCEF's own profiles and other sets that the authors knew of. It also has every face, facial, lip and eye-expression weight enum in the OpenXR registry at `5a82d45` (`xr_registry`). So it is complete for OpenXR at that commit. It is not a complete list of public sets.
 
 ### Sets that already have a profile
 
