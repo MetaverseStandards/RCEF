@@ -75,7 +75,7 @@ Each mapping (and each signal) has an `evidence_status` field. It says how well 
 - The only calibration data is the published calibration records. They are software-only. In `rig-gains.ict-rocketbox-female`, 3 of 51 shapes pass. In `viseme-poses.rocketbox-features`, 11 of 15 viseme classes pass on all 4 held-out rigs: 7 by their shape and 4 by a perceptual gate of visible mouth features. The viseme pose bridge reads only those. The earlier `viseme-poses.rocketbox-female` and `viseme-poses.rocketbox-multi` stay as history; no mapping cites them.
 - The viseme pose bridge lets META visemes and VRM vowels drive ARKit, FB2 and Unified Expressions faces, and FACS values. Its poses are fitted to the viseme shapes of 18 Rocketbox rigs, in their own ARKit units. The 4 classes that fail (`labiodental`, `postalveolar`, `coronal_nasal_lateral` and `rhotic`) move nothing. There is no map from expressions back to visemes.
 - The VRM maps come from specification texts only. No published table maps META visemes to VRM; the VRM vowel hops are a phoneme-label correspondence.
-- The README lists what is [not translated yet](README.md#not-translated-yet), and why.
+- The README lists what is [not translated yet](README.md#not-translated-yet-planned) and what is [out of scope](README.md#out-of-scope), and why.
 
 ## Part 2: Contributing
 

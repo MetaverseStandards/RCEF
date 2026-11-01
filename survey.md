@@ -760,7 +760,7 @@ Data 0.5.0 retired the direct map `arkit.to_vrcft_artist`. On the pairs that it 
 | The source defines `MouthClosed` relative to `JawOpen`. | loss key `vrcft_ue_mouthclosed_jaw_relative` | A `same` verdict for `lips_toward`. |
 | The source publishes no gain and no full-activation pose. | every Unified Expressions mapping | Calibrated values. |
 
-The footnote says that no interface used the four shapes at the retrieval date. This is a fact about the source at that date. It does not say that nobody can use the shapes. The shapes with no FB2 counterpart, for example pupil dilation, the tongue directions and `TongueFlat`, have no map yet ([README.md](README.md#not-translated-yet)).
+The footnote says that no interface used the four shapes at the retrieval date. This is a fact about the source at that date. It does not say that nobody can use the shapes. The shapes with no FB2 counterpart, for example pupil dilation, the tongue directions and `TongueFlat`, have no map yet ([README.md](README.md#not-translated-yet-planned)).
 
 ## Godot
 

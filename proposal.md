@@ -333,7 +333,7 @@ Each request comes from an open item in the [README](README.md#open-questions), 
 
 ### Not translated yet
 
-The README lists each pair that is [not translated yet](README.md#not-translated-yet), with the reason. This list gives the reasons:
+The README lists each pair that is [not translated yet](README.md#not-translated-yet-planned), with the reason. This list gives the reasons:
 
 - VRM gaze presets need an operator for angles, and FB2 and ARKit publish no maximum angle.
 - MediaPipe to ARKit has one independent implementation, and RCEF has not reviewed the model card.

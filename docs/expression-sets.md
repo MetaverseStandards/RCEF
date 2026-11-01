@@ -121,11 +121,15 @@ Two original fixtures, one affine and one lossy bilateral, show the shared runti
 
 This section is a plan, not data. It goes with the draft [canonical expression set](canonical-set.md), through which every translation is to run. Phase 1 is data 0.5.0, the first release of the draft canonical sets. Its sources are ARKit, FB2, META visemes, VRM (blinks and vowels), VRCFaceTracking eye data and FACS codes (`facs.code`); Unified Expressions is a target only. The README's [Routes](../README.md#routes) table lists its 37 routes. The meaning of the canonical signals still needs review by the working group: until then, both canonical sets have `vocabulary_status = "draft"`.
 
-**Rule for every new set.** A set joins only with a pinned public source and a known licence. It gets a profile, evidence records, rows in the [definitions audit](canonical-set-audit.md), and in-maps or out-maps. It also gets a row in the test that checks which canonical groups each set can fill. A new copyright holder of CC-BY-4.0 text gets a row in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). A product name in a profile ID gets a trademark check. New sets join after data 0.5.0, so they do not change the frozen A/B comparison ([ab/README.md](../ab/README.md)). Their routes have no direct map to compare with, so each is labelled "no external reference" unless a public route exists.
+### Rule for every new set
 
-**How the list was made.** It has RCEF's own profiles and other sets that the authors knew of. It also has every face, facial, lip and eye-expression weight enum in the OpenXR registry at `5a82d45` (`xr_registry`). So it is complete for OpenXR at that commit. It is not a complete list of public sets.
+A set joins only with a pinned public source and a known licence. It gets a profile, evidence records, rows in the [definitions audit](canonical-set-audit.md), and in-maps or out-maps. It also gets a row in the test that checks which canonical groups each set can fill. A new copyright holder of CC-BY-4.0 text gets a row in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). A product name in a profile ID gets a trademark check. New sets join after data 0.5.0, so they do not change the frozen A/B comparison ([ab/README.md](../ab/README.md)). Their routes have no direct map to compare with, so each is labelled "no external reference" unless a public route exists.
 
-**Sets that already have a profile:**
+### How the list was made
+
+It has RCEF's own profiles and other sets that the authors knew of. It also has every face, facial, lip and eye-expression weight enum in the OpenXR registry at `5a82d45` (`xr_registry`). So it is complete for OpenXR at that commit. It is not a complete list of public sets.
+
+### Sets that already have a profile
 
 | Set | Public source | Licence or terms | Signals | Phase | Notes |
 |---|---|---|---:|---|---|
@@ -134,9 +138,9 @@ This section is a plan, not data. It goes with the draft [canonical expression s
 | Godot `XRFaceTracker` | `godot_enum` at `e7b12e7` | MIT | 102 base and 41 blended | out-maps 2; in-maps 3 | the names follow Unified Expressions (`godot_enum` lines 38-40) |
 | MediaPipe | `mediapipe` at `f6988c4` | Apache-2.0 | 52 | 2, if the project decides to map it | a passing calibration record becomes part of an in-map ([calibration/README.md](../calibration/README.md#mappings-that-cite-a-record)) |
 | Roblox `FaceControls` | `roblox_*` records at `a0fce04` | CC-BY-4.0 | 50, all `unresolved` today | 3 | joint poses with FACS-style names but no code numbers; side convention not checked |
-| VRM emotions and `look*` presets | `vrm_*` records | reference only | not counted | not planned | out of scope ([README](../README.md#not-translated-yet)) |
+| VRM emotions and `look*` presets | `vrm_*` records | reference only | not counted | not planned | out of scope ([README](../README.md#out-of-scope)) |
 
-**New public sets:**
+### New public sets
 
 | Set | Public source | Licence or terms | Signals | Phase | Notes |
 |---|---|---|---:|---|---|
@@ -151,4 +155,4 @@ This section is a plan, not data. It goes with the draft [canonical expression s
 | Live Link Face; Unity AR Foundation | Epic and Unity documentation | not checked | ARKit's 52 | no new set | these pass ARKit values through; use the ARKit profile |
 | FACS emotion presets (EMFACS) | `facs_wikipedia` raw lines 36-53 | CC-BY-SA-4.0 article text | 7 emotions | examples only | stay in `examples/data/expressions.json`, not pack data |
 
-**Phase 1b** also adds the FACS gaze codes 61-64, with the loss key `facs_side_frame_unresolved`. **Phase 2** adds the FACS-only signals that the action unit detectors need, such as `lips_part` (25), as version 1.1 signals ([reserved names](canonical-set.md#reserved-names)).
+Phase 1b also adds the FACS gaze codes 61-64, with the loss key `facs_side_frame_unresolved`. Phase 2 adds the FACS-only signals that the action unit detectors need, such as `lips_part` (25), as version 1.1 signals ([reserved names](canonical-set.md#reserved-names)).
