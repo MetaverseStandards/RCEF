@@ -4,6 +4,8 @@
 | Item | Value |
 |---|---|
 | Submitted to | Metaverse Standards Forum |
+| Submitted by | RCEF contributors |
+| Date | 2026-10-31 |
 | Status | Draft for review. The canonical sets and `facs.code` are drafts. |
 | Data version | 0.5.0, a release candidate. Only the project's release owners tag a release. |
 | Checked with | msf-character-tools 0.6.0, locked in [evidence/tooling.lock.json](evidence/tooling.lock.json) |
@@ -17,13 +19,13 @@ Face trackers and avatar systems each publish their own set of face expression s
 
 The Reference Canonical Expression Framework (RCEF) records public expression interfaces as data. It covers seven providers (Apple ARKit, OpenXR, MediaPipe, VRCFaceTracking, Godot, VRM and Roblox) and a public list of FACS code numbers. Each provider fact cites a pinned public source with a SHA-256 digest.
 
-RCEF defines two draft canonical sets: an expression set of 72 signals and a viseme set of 16 signals. A translation runs from a source set, through a canonical set, to a target set. Each step is a map of one-way scalar mappings, and each mapping states its assumptions and its losses.
+RCEF defines two draft canonical sets: an expression set of 72 signals and a viseme set of 16 signals. A translation runs from a source set, through a canonical set, to a target set. A map is a set of one-way scalar mappings, and each mapping states its assumptions and its losses. Each map in a route is one hop.
 
-Data 0.5.0 holds 1165 signals in 26 profiles, 588 mappings in 19 maps and 81 evidence records. With 16 maps, it translates 37 pairs of source set and target set. A registered A/B comparison shows that these routes give the same weights as the retired direct maps, on every output that both write.
+Data 0.5.0 holds 1165 signals in 26 profiles, 588 mappings in 19 maps and 81 evidence records. Of the 19 maps, 3 are test and record maps. The other 16 maps translate 37 pairs of source set and target set. On the 5 pairs that the retired direct maps translated, the routes give the same weights on every output that both write. A registered A/B comparison shows this. 28 of the 37 pairs have no external reference.
 
-The current data has these limits. The canonical sets are drafts that the working group has not reviewed. All cross-provider mappings are proposed approximations: only the 4 pupil copies are exact. RCEF does not claim visual equivalence, a measured gain or tracker accuracy.
+The current data has these limits. The canonical sets are drafts that the working group has not reviewed. All cross-provider mappings are proposed approximations: only the 4 pupil copies are exact. RCEF does not claim visual equivalence, a measured gain or tracker accuracy. The gain of a signal is how far the face moves for a given value.
 
-This proposal asks the Forum for seven actions. The first is a review of the meaning of the draft sets. [What the Forum is asked to do](#what-the-forum-is-asked-to-do) gives the full list.
+This proposal asks the Forum for seven actions. The first is a review of the meaning of the draft sets. [Requests to the Forum](#requests-to-the-forum) gives the full list.
 
 ## Problem
 
@@ -54,7 +56,7 @@ Metaverse platforms use these signals in ways that make the problem larger. This
 |---|---|---|
 | Live tracking into avatars: a tracker sends values frame by frame, and the avatar shows them as they arrive. | Keep the rest of the face when one channel is invalid. | Partial evaluation refuses only the outputs that read a bad input. |
 | Mixed trackers and avatars: an avatar made for one expression set meets a tracker that reports another set. | Translate each pair of sets, for example FB2 to Unified Expressions. | Routes through a canonical set join 37 pairs of sets. |
-| Speech without a face tracker: a runtime drives the mouth from visemes. | Turn viseme classes into face shapes. | The viseme pose bridge lets META visemes and VRM vowels drive ARKit, FB2 and Unified Expressions faces. |
+| Speech without a face tracker: a runtime drives the mouth from visemes. | Turn viseme classes into face shapes. | The viseme pose bridge lets META visemes and VRM vowels drive ARKit, FB2 and Unified Expressions faces. It covers 11 of 15 classes, with poses fitted to Rocketbox rigs. |
 | Partial loss of tracking: eye tracking stops while face tracking continues. | Keep the face values and refuse only the gaze values. | FB2 has a separate validity flag for eye following, and the FB2 in-map refuses only its 8 gaze outputs. |
 | Avatars that move between platforms. | Tell the receiving platform what the translation did not carry. | Each frame lists the dropped inputs. Each output that a route does not write has a label with the cause. |
 | Provenance and licences. | Show where each fact comes from and under what terms. | Each provider fact cites a pinned source. RCEF does not copy provider prose that has no open licence. |
@@ -76,12 +78,12 @@ RCEF selected the public inventories in this table. The numbers describe interfa
 | Godot | 102 base and 41 blended shapes | Inventory only |
 | VRM 1.0 | 18 presets | Blinks and vowels: source and target |
 | Roblox | 50 face controls | Inventory only |
-| FACS | 92 code numbers from a public list, in RCEF's own numeric encoding | Source and target (49 codes mapped) |
+| FACS | 92 rows for 70 code numbers from a public list, in RCEF's own numeric encoding | Source and target (49 rows mapped) |
 
 The survey gives these results:
 
-- Most of the inventory is not translated yet. The 20 profiles of public sets and `facs.code` hold 1011 signals. Of these, 269 are mapped, 682 unresolved, 54 excluded and 6 unsupported.
-- Similar names often define different actions. The definitions audit compares each canonical signal with each source that maps it. Of its 339 rows, 258 are `same`, 68 `differs` and 13 `unresolved`. For ARKit, 22 of 60 rows differ.
+- Most of the inventory is not translated yet. The 19 profiles of public sets and `facs.code` hold 1011 signals. Of these, 269 are mapped, 682 unresolved, 54 excluded and 6 unsupported.
+- Similar names often define different actions. The definitions audit has 339 rows, and 315 of them compare a canonical signal with the definition of a source that maps it. Of all 339 rows, 258 are `same`, 68 `differs` and 13 `unresolved`. For ARKit, 22 of 60 rows differ. [Appendix B](#definitions-audit) gives the rows of each source.
 - Calibration is not published. No provider publishes its gain. FB2 does not give its maximum gaze angles. The MediaPipe model calibration is not stated in the reviewed sources.
 - The sources contradict themselves in places. RCEF keeps each contradiction as unresolved data. It does not choose one reading by guessing.
 - The same name renders differently on different rigs. In the calibration record `rig-gains.ict-rocketbox-female`, only 3 of 51 ARKit shapes render with matching strength on two example rigs.
@@ -89,7 +91,7 @@ The survey gives these results:
 
 ### Why direct maps do not scale
 
-Before data 0.5.0, RCEF mapped one provider straight to another. Seven direct maps with 187 cross-provider mappings and 4 internal gaze steps covered 5 pairs of source set and target set. Each new pair needed a new map. Where no map existed, the only route was two direct maps in turn.
+Before data 0.5.0, RCEF mapped one provider straight to another. Seven direct maps covered 5 pairs of source set and target set. They had 187 cross-provider mappings and 4 internal gaze steps. Each internal step was a weighted sum that wrote a helper value: the difference of two opposite gaze directions. Each new pair needed a new map. Where no map existed, the only route was two direct maps in turn.
 
 A direct design needs one map for each ordered pair of sets. With N sets, that is N × (N − 1) maps. A pivot design needs at most two maps for each set: one into the canonical set and one out of it. That is at most 2 × N maps.
 
@@ -111,14 +113,14 @@ The pivot has other effects:
 The pivot also has costs, and RCEF states them:
 
 - A route has two hops, or three through the viseme pose bridge, and each hop is a proposed approximation.
-- Each canonical signal has a meaning that RCEF declares. So the 21 exact identity mappings of the retired set `rcef.canonical` became hops through the canonical set. Data 0.5.0 makes 19 of them proposed. Only the 2 pupil diameters keep exact copies.
+- Before data 0.5.0, a 21-signal set, `rcef.canonical`, copied 21 provider values exactly. Now each canonical signal has a meaning that RCEF declares, and it is not the provider's meaning. So 19 of those copies are now proposed approximations. Only the copies of the 2 pupil diameters stay exact.
 - A route writes only the groups that both sets fill. A quantity that the canonical set does not hold cannot pass through it. For example, the Unified Expressions part shapes with no FB2 counterpart have no map yet.
 
 ### The A/B result
 
-RCEF registered a comparison of the pivot routes with the retired direct maps before it retired them. RCEF registers each run and commits its ledger line before the run starts. The thresholds do not change inside a registration. [ab/README.md](ab/README.md) gives the method.
+RCEF registered a comparison of the pivot routes with the retired direct maps before it retired them. Before each run, RCEF commits the method and the pass limits in a registration and a ledger line. The limits do not change after that. A gate is one check of a registration with its pass limit. [ab/README.md](ab/README.md) gives the method.
 
-The comparison has these arms:
+An arm is one way to compute the target values from the same source frames. The comparison has these arms:
 
 | Arm | What it runs |
 |---|---|
@@ -133,7 +135,7 @@ Four registered runs have passed every gate. The latest run, `ab.pivot` v4, give
 - B gives the same values as the oracle on all 272,872 frames of all 37 pairs, with no difference.
 - On the 5 pairs that the direct maps translated, B gives the same value as A1 on every output that both write. The run compares 1,858,422 output values, and none differs in value or in the sign of zero.
 - An exact rational composition of the B hops equals A1 on every linear A1 output.
-- 129 of 129 goldens from public sources come through B exactly.
+- 129 of 129 goldens come through B exactly. A golden is an expected output that a script derives from a public source, without reading RCEF's maps.
 
 A separate comparison checks FB2 to ARKit against the routes in Godot's public sources. RCEF translates 52 ARKit coefficients from FB2, with 0 weight disagreements and 1 coefficient that Godot does not route ([docs/godot_comparison.md](docs/godot_comparison.md)).
 
@@ -141,7 +143,7 @@ These results show that the pivot keeps the arithmetic of the retired maps. They
 
 ## Architecture
 
-RCEF is data. msf-character-tools is a separate project. It reads the data, checks it, builds the pack and runs the maps. [docs/architecture.md](docs/architecture.md) gives the full design.
+RCEF is data. msf-character-tools is a separate project. It reads the data, checks it, builds the pack and runs the maps. `check.py` first checks that msf-character-tools is a locked release, and the tests check the outputs against the data ([Appendix A](#check-tooling-and-the-lock)). [docs/architecture.md](docs/architecture.md) gives the full design.
 
 | Part | What it holds | Where |
 |---|---|---|
@@ -217,7 +219,7 @@ A route writes only the target signals of the groups that both sets fill. It lab
 
 The bridge `rcef_viseme.to_rcef_expression` writes canonical expression values from canonical viseme values. For each expression signal j, it computes the sum of pose[c][j] × viseme_c over the classes c, clamped to the range 0 to 1. Here pose[c][j] is the value that class c at weight 1 gives to signal j.
 
-The poses come from the calibration record `viseme-poses.rocketbox-features`. The fit uses the viseme shapes of 18 Rocketbox rigs, measured in their own ARKit shapes, with each left and right pair tied. The fit held out four other rigs. A class passes by its whole-face shape or by a perceptual gate of visible mouth features.
+The poses come from the calibration record `viseme-poses.rocketbox-features`. The fit uses the viseme shapes of 18 Rocketbox rigs, measured in their own ARKit shapes, with each left and right pair tied. RCEF tests each fit on held-out rigs, which are rigs that the fit did not use. This fit has four held-out rigs. A class passes by its whole-face shape or by a perceptual gate of visible mouth features.
 
 11 of the 15 classes pass on all 4 held-out rigs: 7 by their shape and 4 by the perceptual gate. The bridge reads only those 11 classes. `labiodental`, `postalveolar`, `coronal_nasal_lateral` and `rhotic` fail, and they move nothing.
 
@@ -250,30 +252,17 @@ The status of a record is `calibrated_software`. Pack schema 1.0 does not have t
 
 ### Assumptions and loss annotations
 
-Every mapping lists its assumptions as text. Each output mapping of an in-map or out-map has a standard assumption: the provider's 0 and 1 are canonical 0 and 1. No evidence and no measured response curve support this assumption. The FACS hops use their own form of this assumption, based on the intensity letters. The assumption ends with a clause for the operator, for example "the ARKit value is the mean of the canonical parts". The bridge states its own assumptions about the poses.
+Every mapping lists its assumptions as text. Each output mapping of an in-map or out-map has a standard assumption: the provider's 0 and 1 are canonical 0 and 1. No evidence and no measured response curve support this assumption. The FACS maps use their own form of this assumption, based on the intensity letters. The assumption ends with a clause for the operator, for example "the ARKit value is the mean of the canonical parts". The bridge states its own assumptions about the poses.
 
-A loss annotation records what a mapping does not carry. It has a category, an effect, a reason and the signals that it refers to. The pack holds 1248 loss annotations: 1247 approximated signal losses and 1 unknown geometry loss. Where the audit marks a row `differs` or `unresolved`, the hop's assumption names a stable loss key from the audit, for example `vrm_blink_side_unresolved`.
+A loss annotation records what a mapping does not carry. It has a category, an effect, a reason and the signals that it refers to. The pack holds 1248 loss annotations: 1247 approximated signal losses and 1 unknown geometry loss from `fixture.bilateral`. Where the audit marks a row `differs` or `unresolved`, the assumption of each mapping names a stable loss key from the audit, for example `vrm_blink_side_unresolved`.
 
-### Check tooling and the lock
-
-`check.py` runs four steps in order and stops at the first failure:
-
-1. It checks that the installed msf-character-tools is exactly a locked release wheel. If not, it exits with code 2 before it reads any data.
-2. It checks the calibration records, the ledger and the mappings that cite them. This step does not use msf-character-tools.
-3. It runs msf-character-tools to build the pack, the matrix, coverage and checksums. Without `--write`, it checks that these files have not changed.
-4. It writes or checks the readable reports in the same way.
-
-The lock records the msf-character-tools commit and version, and one entry for each wheel tag. Each entry has the SHA-256 of every file in the installed package. Checking never clones or downloads anything.
-
-The tests check the generated files, the README tables, the reference list and the figures against the data. They also check that the maps of the canonical sets keep the values of the latest passing A/B freeze. Separate scripts check the source digests, the selected names and indices, and the visibility claims. These scripts need network access, so the tests do not run them. `scripts/ci_local.sh` runs `check.py` and the tests on Python 3.11 and 3.12.
-
-## What each group gets
+## What each audience gets
 
 These are the effects of the current data. They are not promises about later data.
 
 ### Content creators
 
-- An avatar author can see, for each group of the canonical set, which trackers can drive the shapes of the avatar. The map-set pages give the reason for each group that a set does not fill.
+- An avatar author can see, for each group of the canonical set, which trackers can drive the shapes of the avatar. The map pages give the reason for each group that a set does not fill.
 - An author can make shapes for one set, for example the 52 ARKit coefficients. RCEF routes FB2, FACS codes, VRCFaceTracking eye data and VRM blinks to those shapes. It routes META visemes and VRM vowels to them through the bridge.
 - Each empty output has a label that gives the cause: "not available from source" or "refused upstream at" a named map. Each frame lists its dropped inputs.
 - The losses are visible before use. For example, toward ARKit the left and right inner brow become one mean value.
@@ -283,7 +272,7 @@ These are the effects of the current data. They are not promises about later dat
 
 - A developer loads one file, `generated/rcef.pack.json`, and checks it with its SHA-256. The same shared APIs run every map, so there is no code for each pair.
 - A new set gives routes to every set that fills at least one of its groups.
-- The arithmetic uses checked binary64 steps. It has no hidden clamp, hidden state or smoothing. The same inputs give the same outputs on Python 3.11 and 3.12.
+- The arithmetic uses checked binary64 steps, the 64-bit floating-point numbers of IEEE 754. It has no hidden clamp, hidden state or smoothing. The same inputs give the same outputs on Python 3.11 and 3.12.
 - Partial evaluation keeps the face when one part of the input fails. For example, when FB2 loses eye following, the FB2 in-map refuses only its 8 gaze outputs.
 - `examples/` holds complete runs from CSV frames to translated weights, and onto face meshes.
 
@@ -291,28 +280,16 @@ These are the effects of the current data. They are not promises about later dat
 
 - RCEF records the published interface of a vendor with its native names, indices, ranges and validity contract. Each fact has a pinned source and a locator.
 - RCEF records contradictions and gaps in the sources as unresolved data. A vendor can resolve one by publishing a source that RCEF can cite.
-- Published facts that RCEF does not have yet would let it state more exact hops. Examples are the FB2 maximum gaze angles and the MediaPipe model calibration.
+- Published facts that RCEF does not have yet would let it state more exact mappings. Examples are the FB2 maximum gaze angles and the MediaPipe model calibration.
 - A new interface joins with one in-map and, if needed, one out-map. For example, the planned set OpenXR `XR_ANDROID_face_tracking` has 68 names, and 64 of them are FB2 names.
 
-### Standards groups
+### Standards bodies
 
 - RCEF is a pivot. It does not ask any provider to change its interface or adopt a new one.
-- The definitions audit gives 339 comparisons of canonical signals with source definitions. Each row cites a record and a locator. This is a base for a review of meaning.
-- The governance rules keep IDs stable. An ID stays the same when its label changes, a retired ID gets a tombstone, and a change of meaning needs a new ID. Until a draft vocabulary is first accepted or released, its IDs can change without a tombstone ([GOVERNANCE.md](GOVERNANCE.md)).
+- The definitions audit has 315 rows that compare canonical signals with source definitions. Each row cites a record and a locator. This is a base for a review of meaning.
+- The governance rules keep IDs stable. An ID stays the same when its label changes, and a change of meaning needs a new ID. A retired ID gets a tombstone: a line in [docs/retired-ids.csv](docs/retired-ids.csv) that records the retirement. Until a draft vocabulary is first accepted or released, its IDs can change without a tombstone ([GOVERNANCE.md](GOVERNANCE.md)).
 - The A/B ledger and the calibration ledger record each test before its run. A reviewer can check the order of the commits.
 - RCSF, the Reference Canonical Skeletal Framework, does a similar job for skeletons in the same Forum organization ([references.md](references.md#rcsf_readme)).
-
-## What the Forum is asked to do
-
-Each request comes from an open item in the [README](README.md#open-questions), [GOVERNANCE.md](GOVERNANCE.md) or the [canonical set](docs/canonical-set.md#open-questions).
-
-1. Review the meaning of the draft sets. This covers the canonical expression set, the canonical viseme set and `facs.code`. Name the reviewers of meaning. State how long the review takes. Acceptance changes only `vocabulary_status` from `draft` to `accepted`. It does not change IDs, calibration strings or maps.
-2. Answer the open questions of definition. The canonical set lists them. Examples are the side shown by the FB2 and Unified Expressions sideways jaw figures, and the direction of Unified Expressions `MouthLowerDown`. Another is whose left the FACS L and R modifiers mean.
-3. Help find the missing evidence. RCEF has no evidence yet for the items in [Release limits and remaining evidence](#release-limits-and-remaining-evidence). Members that publish these interfaces can supply a citable source.
-4. Decide on physical calibration. [docs/calibration/physical-protocol.md](docs/calibration/physical-protocol.md) designs a capture with real trackers and real faces. It has not been run. Before any part of it runs, it needs a named owner, an ethics and legal review, and approval from the project's release owners.
-5. Set the order of new expression sets. [docs/expression-sets.md](docs/expression-sets.md#planned-expression-sets) lists the planned sets and their phases. Each new set needs a pinned public source and a known licence.
-6. Review the release gates. GOVERNANCE.md lists what a data release needs. Device support, rig deformation, VRM composition, Roblox certification and standards adoption each need their own measured acceptance.
-7. Agree conventions with RCSF. RCEF departs from two RCSF conventions, each with a stated reason: snake_case IDs, and three named markers in place of "-" for a missing value. RCEF asks the RCSF maintainers to agree on these conventions.
 
 ## Scope and limits
 
@@ -333,13 +310,21 @@ Each request comes from an open item in the [README](README.md#open-questions), 
 
 ### Not translated yet
 
-The README lists each pair that is [not translated yet](README.md#not-translated-yet-planned), with the reason. This list gives the reasons:
+The README lists each translation that is [not translated yet](README.md#not-translated-yet-planned) or [out of scope](README.md#out-of-scope), with the reason.
 
-- VRM gaze presets need an operator for angles, and FB2 and ARKit publish no maximum angle.
-- MediaPipe to ARKit has one independent implementation, and RCEF has not reviewed the model card.
-- Unified Expressions has no in-map yet, and its shapes with no FB2 counterpart have no map.
-- FACS gaze codes 61 to 64 have no map, because the source does not say whose left they mean.
-- Viseme sets other than META and the VRM vowels each need an audit first.
+## Requests to the Forum
+
+Each request comes from an open item in the [README](README.md#open-questions), [GOVERNANCE.md](GOVERNANCE.md) or the [canonical set](docs/canonical-set.md#open-questions).
+
+1. Review the meaning of the draft sets. This covers the canonical expression set, the canonical viseme set and `facs.code`. Name the reviewers of meaning. State how long the review takes. Acceptance changes only `vocabulary_status` from `draft` to `accepted`. It does not change IDs, calibration strings or maps.
+2. Answer the open questions of definition. The canonical set lists them. Examples are the side shown by the FB2 and Unified Expressions sideways jaw figures, and the direction of Unified Expressions `MouthLowerDown`. Another is whose left the FACS L and R modifiers mean.
+3. Help find the missing evidence. RCEF has no evidence yet for the items in [Release limits and remaining evidence](#release-limits-and-remaining-evidence). Members that publish these interfaces can supply a citable source.
+4. Decide on physical calibration. [docs/calibration/physical-protocol.md](docs/calibration/physical-protocol.md) designs a capture with real trackers and real faces. Nobody has run it. Before any part of it runs, it needs a named owner, an ethics and legal review, and approval from the project's release owners.
+5. Set the order of new expression sets. [docs/expression-sets.md](docs/expression-sets.md#planned-expression-sets) lists the planned sets and their phases. Each new set needs a pinned public source and a known licence.
+6. Review the release gates. GOVERNANCE.md lists what a data release needs. Device support, rig deformation, VRM composition, Roblox certification and standards adoption each need their own measured acceptance.
+7. Agree conventions with RCSF. RCEF departs from two RCSF conventions ([docs/canonical-set.md](docs/canonical-set.md#format-neutrality)). It uses snake_case IDs, because the providers use different letter cases and snake_case favours none of them. For a missing value, RCEF shows one of three markers in place of "-": `unsupported`, `unresolved` or `excluded`. A "-" cannot say why a value is missing ([No equivalent](docs/canonical-set.md#no-equivalent)). RCEF asks the RCSF maintainers to agree on these conventions.
+
+To reply, open an issue in the RCEF repository or raise the point in the Forum's 3D Assets working group ([GOVERNANCE.md](GOVERNANCE.md)).
 
 ---
 
@@ -424,12 +409,14 @@ There are four operators. Each has one output.
 
 The operators follow these rules:
 
-- `identity` compiles only if the input and output have the same units, value type, domain and calibration. They must also have the same neutral, side and coupling. Every hop in RCEF changes the calibration basis, so no mapped rule uses `identity`. The one identity rule is in the unresolved record `survey.ambiguous`.
+- `identity` compiles only if the input and output have the same units, value type, domain and calibration. They must also have the same neutral, side and coupling. Every map in RCEF changes the calibration basis, so no mapped rule uses `identity`. The one identity rule is in the unresolved record `survey.ambiguous`.
 - `affine` makes the multiplication and the addition as two separate binary64 steps. It does not use a fused multiply-add. RCEF uses scale 1 and offset 0 to carry a value unchanged across a change of basis.
 - `weighted_sum` starts at 0.0 and adds each weighted input in input order. It does not use compensated summation, and it does not normalize the weights.
 - `piecewise_linear` needs x values that increase strictly and y values that are monotone. The first and last x must be the bounds of the input's domain, so msf-character-tools never extrapolates the curve. The result stays between the two y values of its segment.
 
 The arithmetic uses checked binary64 steps. msf-character-tools refuses a step that gives a non-finite result. It also refuses a non-zero product or quotient that underflows to zero. It checks the domains before and after each operator. There is no clamp unless a mapping authors one with `piecewise_linear` knots.
+
+msf-character-tools adds no hidden inverse, merge of left and right, or synthesized value. Each merge of two sides is an authored `weighted_sum` that declares its loss.
 
 Data 0.5.0 uses 472 `affine`, 61 `weighted_sum`, 54 `piecewise_linear` and 1 `identity` mappings. The 54 `piecewise_linear` mappings are the 8 gaze splits of the FB2 out-map, the clamp of `alveolar_floor` and the 45 clamps of the bridge.
 
@@ -448,7 +435,7 @@ The approximation opt-in does not bypass the other rules. `compile_mapping` refu
 
 ## Shared APIs
 
-Each shared API returns a typed `Result(value, report)`. When the report has errors, the value is `None`. Callers must check `.ok` and the diagnostics.
+Each shared API returns a typed `Result(value, report)`. When the report has errors, the value is `None`. Callers must check `.ok` and the diagnostics. A sidecar is a separate record that binds signals to an asset, with structural indices and hashes. It does not change the asset bytes.
 
 | API | Use |
 |---|---|
@@ -487,7 +474,7 @@ The caller computes the validity of each input from the provider flags. For FB2 
 | A non-finite, boolean or out-of-domain value | A numeric or domain error, for example `E_DOMAIN`. msf-character-tools does not clamp the value. |
 | Valid frames | msf-character-tools writes each output with validity `true`, in frame order. There is no smoothing, resampling or hidden state. |
 
-Without `partial=True`, every input in `required_inputs` must be present and valid. One bad input refuses the whole frame. If one frame in a call is refused, the call returns no values for any frame. Each error has a `ref` that begins with `/samples/<n>`, so the caller can find the refused frames.
+Without `partial=True`, every input in `required_inputs` must be present and valid. One bad input refuses the whole frame. If msf-character-tools refuses one frame in a call, the call returns no values for any frame. Each error has a `ref` that begins with `/samples/<n>`, so the caller can find the refused frames.
 
 ## Partial evaluation
 
@@ -563,6 +550,19 @@ The synthetic fixtures show the operators with numbers that are exact in binary6
 
 Profile snapshots do not bind to physical assets. To use a mapping with an asset, a sidecar must give the structural indices and the hashes of the asset and its resources.
 
+## Check tooling and the lock
+
+`check.py` runs four steps in order and stops at the first failure:
+
+1. It checks that the installed msf-character-tools is exactly a locked release wheel. If not, it exits with code 2 before it reads any data.
+2. It checks the calibration records, the ledger and the mappings that cite them. This step does not use msf-character-tools.
+3. It runs msf-character-tools to build the pack, the matrix, coverage and checksums. Without `--write`, it checks that these files have not changed.
+4. It writes or checks the readable reports in the same way.
+
+The lock records the msf-character-tools commit and version, and one entry for each wheel tag. Each entry has the SHA-256 of every file in the installed package. Checking never clones or downloads anything.
+
+The tests check the generated files, the README tables, the reference list and the figures against the data. They also check that the maps of the canonical sets keep the values of the latest passing A/B freeze. Separate scripts check the source digests, the selected names and indices, and the visibility claims. These scripts need network access, so the tests do not run them. `scripts/ci_local.sh` runs `check.py` and the tests on Python 3.11 and 3.12.
+
 ## Release limits and remaining evidence
 
 Full parity of the selected inventories is a data gate. It does not depend on calibration between providers. Each of these later gates needs its own measured acceptance:
@@ -581,7 +581,7 @@ RCEF has no evidence yet for these items:
 
 | Missing evidence | State today |
 |---|---|
-| MediaPipe model calibration and provenance | No executable MediaPipe map. `survey.ambiguous` stays unresolved. |
+| MediaPipe model calibration and provenance | No executable MediaPipe map. `survey.ambiguous` stays unresolved. The licence check read the model card and found no statement that relates the scores to ARKit, apart from the shared names. The calibration record found no passing score. |
 | FB1 numeric bounds | The numeric range of the FB weights stays unresolved. The FB profile is inventory only. |
 | FB2 maximum angles for each direction | Gaze stays a fraction with no angle. No map to VRM gaze presets. |
 | VRCFaceTracking raw gaze units, and the contradictions in its sources | The affected signals stay unresolved. |
@@ -683,6 +683,21 @@ The [definitions audit](docs/canonical-set-audit.md) compares each canonical sig
 | `same` | The source's own text or figure names the action that the canonical definition describes. | 258 |
 | `differs` | The source defines a different or wider action. The row gives a stable loss key. | 68 |
 | `unresolved` | The evidence is missing or conflicts. The row gives a stable loss key. | 13 |
+
+315 rows compare a canonical signal with the definition of a source:
+
+| Source | Rows |
+|---|---:|
+| FB2 | 70 |
+| ARKit | 60 |
+| Unified Expressions | 64 |
+| VRCFaceTracking eye data | 4 |
+| VRM | 7 |
+| META visemes | 16 |
+| FACS codes | 53 |
+| ICT-FaceKit crosswalk | 41 |
+
+The other 24 rows are 14 IPA reference rows, 6 side-frame rows, 3 FACS encoding rows and 1 row for the scope of META's classes.
 
 The audit uses one evidence rule. A provider's own text or figure settles a meaning or a side. Agreement between implementers settles only which output gets a value. When the provider's text and RCEF's records conflict, the verdict is `unresolved`.
 
