@@ -3,8 +3,6 @@
 
 Original documentation: CC-BY-SA-4.0. Copyright (c) 2026 Metaverse Standards Forum.
 
-**Author affiliation: to be added by the release owners before this document goes to the working group.**
-
 **Status:** a draft proposal for review. Vocabulary version `1.0`, status `draft`. Data 0.5.0 holds the expression part: the profile `rcef.canonical_expression` with its 72 signals, and the maps of ARKit, FB2, Unified Expressions, VRCFaceTracking eye data, VRM blinks and FACS codes, with the [FACS](#facs) profile `facs.code`. It also holds the viseme part: the profile `rcef.canonical_viseme` with its 16 signals and the maps of META and VRM vowels, and the [viseme pose bridge](#viseme-pose-bridge) from the viseme set to the expression set. Data 0.5.0 retires the direct maps and the older `rcef.canonical` set of 21 signals, with tombstones in [retired-ids.csv](retired-ids.csv). In this document, "today's maps" are those retired direct maps. They stay frozen in `tests/fixtures/baseline-dea1713.pack.json` for the [A/B comparison](../ab/README.md).
 
 This document uses the proposal form of [GOVERNANCE.md](../GOVERNANCE.md): the problem, the proposal, the public evidence, the effect on compatibility, the alternatives, the tests and the open questions. Two documents go with it:
