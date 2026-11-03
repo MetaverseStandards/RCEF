@@ -32,7 +32,7 @@ echo "msf-character-tools @ file://$DIR/$WHEEL --hash=sha256:$SHA" > "$DIR/msf-c
 uv pip install --python PATH/TO/python --require-hashes -r "$DIR/msf-character-tools.txt"
 ```
 
-When the release is public, the download needs no login or token. Until then, download the wheel with a GitHub account that can read the repository. For example, use `gh release download v0.6.0 --repo MetaverseStandards/msf_character_tools --pattern "$WHEEL" --dir "$DIR"` instead of `curl`. Without uv, `python3 -m pip install --require-hashes -r "$DIR/msf-character-tools.txt"` does the same.
+When the release is public, the download needs no login or token. Without uv, `python3 -m pip install --require-hashes -r "$DIR/msf-character-tools.txt"` does the same.
 
 ## Build the wheels yourself
 
