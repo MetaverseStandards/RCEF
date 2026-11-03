@@ -63,6 +63,7 @@ def routes_figure(pack: dict) -> str:
         for sid in profile['signal_ids']:
             homes[sid].add(profile['id'])
     group = {s['id']: s['metadata']['group'] for s in pack['signals'] if s['id'].startswith('rcef.canonical_')}
+    size = collections.Counter((sid.split('.')[1], g) for sid, g in group.items())  # signals per group
     order = []
     for s in pack['signals']:
         if s['id'] in group and (s['id'].split('.')[1], group[s['id']]) not in order:
@@ -91,11 +92,12 @@ def routes_figure(pack: dict) -> str:
                 for g in in_groups:
                     fills[g, profile].add('out')
     columns = [*SETS, ('bridge', 'Pose bridge')]
-    cw, ch, x0, top = 92, 24, 190, 104
+    cw, ch, x0, top = 92, 24, 214, 104
     width = x0 + cw * len(columns) + 24
     height = top + ch * (len(order) + 2) + 74
     svg = Svg(width, height, 'Which canonical groups each expression set fills',
-              'One row per group of the canonical expression and viseme sets, one column per expression set. '
+              'One row per group of the canonical expression and viseme sets, with its number of signals, one column '
+              'per expression set. '
               '"in" means an in-map writes the group from the set; "out" means an out-map writes the set from '
               'the group. The last column shows the groups that the viseme pose bridge reads and writes.')
     svg.text(24, 32, 'Which canonical groups each expression set fills', size=17, weight='600')
@@ -109,10 +111,11 @@ def routes_figure(pack: dict) -> str:
     for profile, g in order:
         if profile != current:
             current = profile
-            svg.text(24, y + 17, 'Canonical expression set' if profile == 'canonical_expression'
-                     else 'Canonical viseme set', size=12, fill=MUTED, weight='600')
+            total = sum(n for (p, _), n in size.items() if p == profile)
+            name = 'Canonical expression set' if profile == 'canonical_expression' else 'Canonical viseme set'
+            svg.text(24, y + 17, f'{name} ({total} signals)', size=12, fill=MUTED, weight='600')
             y += ch
-        svg.text(36, y + 16, g.replace('_', ' '))
+        svg.text(36, y + 16, f"{g.replace('_', ' ')} ({size[profile, g]})")
         for j, (column, _) in enumerate(columns):
             state = fills.get((g, column), set())
             x = x0 + j * cw
